@@ -52,7 +52,7 @@ class LibResponseContext
   /**
    * @param LibResponseAdapter $response
    */
-  public function __construct($response )
+  public function __construct($response)
   {
     $this->response = $response;
   }//end public function __construct */
@@ -64,22 +64,22 @@ class LibResponseContext
   /**
    * @param string $message
    */
-  public function addMessage($message )
+  public function addMessage($message)
   {
 
     ++$this->hasNotice;
-    $this->response->addMessage($message );
+    $this->response->addMessage($message);
 
   }//end public function addMessage */
 
   /**
    * @param string $warning
    */
-  public function addWarning($warning )
+  public function addWarning($warning)
   {
 
     ++$this->hasWarning;
-    $this->response->addWarning($warning );
+    $this->response->addWarning($warning);
 
   }//end public function addWarning */
 
@@ -87,11 +87,11 @@ class LibResponseContext
    * @param string $error
    *
    */
-  public function addError($error )
+  public function addError($error)
   {
 
     ++$this->hasError;
-    $this->response->addError($error );
+    $this->response->addError($error);
 
   }//end public function addError */
 
@@ -100,12 +100,12 @@ class LibResponseContext
    * @param string $warning
    * @param var $value
    */
-  public function addWarningIfNull($warning, $value )
+  public function addWarningIfNull($warning, $value)
   {
 
-    if (is_null($value ) ) {
+    if (is_null($value)) {
       ++$this->hasWarning;
-      $this->response->addWarning($warning );
+      $this->response->addWarning($warning);
     }
 
   }//end public function addWarningIfNull */
@@ -115,12 +115,12 @@ class LibResponseContext
    * @param string $warning
    * @param var $value
    */
-  public function addErrorIfNull($error, $value )
+  public function addErrorIfNull($error, $value)
   {
 
-    if (is_null($value ) ) {
+    if (is_null($value)) {
       ++$this->hasError;
-      $this->response->addError($error );
+      $this->response->addError($error);
     }
 
   }//end public function addErrorIfNull */
@@ -130,12 +130,12 @@ class LibResponseContext
    * @param string $warning
    * @param var $value
    */
-  public function assertNull($error, $value )
+  public function assertNull($error, $value)
   {
 
-    if (!is_null($value ) ) {
+    if (!is_null($value)) {
       ++$this->hasError;
-      $this->response->addError($error );
+      $this->response->addError($error);
     }
 
   }//end public function assertNull */
@@ -145,12 +145,12 @@ class LibResponseContext
    * @param string $warning
    * @param var $value
    */
-  public function assertNotNull($error, $value )
+  public function assertNotNull($error, $value)
   {
 
-    if (is_null($value ) ) {
+    if (is_null($value)) {
       ++$this->hasError;
-      $this->response->addError($error );
+      $this->response->addError($error);
     }
 
   }//end public function assertNotNull */
@@ -163,12 +163,12 @@ class LibResponseContext
    * @param string $warning
    * @param var $value
    */
-  public function assertInt($error, $value, $signed = false )
+  public function assertInt($error, $value, $signed = false)
   {
 
-    if (!ctype_digit($value ) ) {
+    if (!ctype_digit($value)) {
       ++$this->hasError;
-      $this->response->addError($error );
+      $this->response->addError($error);
     }
 
   }//end public function assertInt */
@@ -178,12 +178,12 @@ class LibResponseContext
    * @param string $warning
    * @param var $value
    */
-  public function assertEmpty($error, $value )
+  public function assertEmpty($error, $value)
   {
 
-    if ( '' != trim($value ) ) {
+    if ('' != trim($value)) {
       ++$this->hasError;
-      $this->response->addError($error );
+      $this->response->addError($error);
     }
 
   }//end public function assertEmpty */
@@ -193,18 +193,18 @@ class LibResponseContext
    * @param string $warning
    * @param var $value
    */
-  public function assertNotEmpty($error, $value )
+  public function assertNotEmpty($error, $value)
   {
 
-    if ( is_array($value ) ) {
-      if ( empty($value ) ) {
+    if (is_array($value)) {
+      if (empty($value)) {
         ++$this->hasError;
-        $this->response->addError($error );
+        $this->response->addError($error);
       }
     } else {
-      if ( '' == trim($value ) ) {
+      if ('' == trim($value)) {
         ++$this->hasError;
-        $this->response->addError($error );
+        $this->response->addError($error);
       }
     }
 
@@ -216,12 +216,12 @@ class LibResponseContext
    * @param var $value
    * @param var $refValue
    */
-  public function assertBigger($error, $value, $refValue )
+  public function assertBigger($error, $value, $refValue)
   {
 
-    if (!is_null($value ) &&  ((int) $value < (int) $refValue) ) {
+    if (!is_null($value) &&  ((int) $value < (int) $refValue)) {
       ++$this->hasError;
-      $this->response->addError($error );
+      $this->response->addError($error);
     }
 
   }//end public function assertBigger */
@@ -232,12 +232,12 @@ class LibResponseContext
    * @param var $value
    * @param var $refValue
    */
-  public function assertSmaller($error, $value, $refValue )
+  public function assertSmaller($error, $value, $refValue)
   {
 
-    if (!is_null($value ) &&  ((int) $value > (int) $refValue) ) {
+    if (!is_null($value) &&  ((int) $value > (int) $refValue)) {
       ++$this->hasError;
-      $this->response->addError($error );
+      $this->response->addError($error);
     }
 
   }//end public function assertSmaller */
@@ -248,12 +248,12 @@ class LibResponseContext
    * @param var $value
    * @param var $refValue
    */
-  public function assertEquals($error, $value, $refValue )
+  public function assertEquals($error, $value, $refValue)
   {
 
     if ($value !== $refValue) {
       ++$this->hasError;
-      $this->response->addError($error );
+      $this->response->addError($error);
     }
 
   }//end public function assertEquals */

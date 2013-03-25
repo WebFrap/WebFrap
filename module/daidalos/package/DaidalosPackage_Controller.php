@@ -48,33 +48,33 @@ class DaidalosPackage_Controller extends Controller
   (
     'workspace' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
     'syncpackagefiles' => array
     (
-      'method'    => array( 'PUT' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
     ),
     'edit' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
     'build' => array
     (
-      'method'    => array( 'PUT' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
     ),
     'listpackages' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'modal' )
+      'method'    => array('GET'),
+      'views'      => array('modal')
     ),
     'deletepackage' => array
     (
-      'method'    => array( 'DELETE' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('DELETE'),
+      'views'      => array('ajax')
     ),
   );
 
@@ -87,7 +87,7 @@ class DaidalosPackage_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_workspace($request, $response )
+  public function service_workspace($request, $response)
   {
 
     ///@throws InvalidRequest_Exception
@@ -103,10 +103,10 @@ class DaidalosPackage_Controller extends Controller
 
     $params = $this->getFlags($request);
 
-    $model = $this->loadModel( 'DaidalosPackage' );
+    $model = $this->loadModel('DaidalosPackage');
 
-    $view->setModel($model );
-    $view->displayWorkspace($params );
+    $view->setModel($model);
+    $view->displayWorkspace($params);
 
   }//end public function service_workspace */
 
@@ -115,13 +115,13 @@ class DaidalosPackage_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_syncPackageFiles($request, $response )
+  public function service_syncPackageFiles($request, $response)
   {
 
     $params = $this->getFlags($request);
 
-    $key   = $request->param('package', Validator::CKEY );
-    $type  = $request->param('type', Validator::CKEY );
+    $key   = $request->param('package', Validator::CKEY);
+    $type  = $request->param('type', Validator::CKEY);
 
     if (!$key || !$type) {
       throw new InvalidParam_Exception('Missing required parameters');
@@ -140,13 +140,13 @@ class DaidalosPackage_Controller extends Controller
     );
     /* @var $view DaidalosPackage_Workspace_Maintab_View */
 
-    $model = $this->loadModel( 'DaidalosPackage' );
+    $model = $this->loadModel('DaidalosPackage');
     /* @var $model DaidalosPackage_Model */
 
-    $numFiles = $model->syncPackageFiles($key );
+    $numFiles = $model->syncPackageFiles($key);
 
-    $view->setModel($model );
-    $view->displayFileSync($numFiles, $params );
+    $view->setModel($model);
+    $view->displayFileSync($numFiles, $params);
 
   }//end public function service_syncPackageFiles */
 
@@ -155,11 +155,11 @@ class DaidalosPackage_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_edit($request, $response )
+  public function service_edit($request, $response)
   {
 
-    $key   = $request->param('package', Validator::CKEY );
-    $type  = $request->param('type', Validator::CKEY );
+    $key   = $request->param('package', Validator::CKEY);
+    $type  = $request->param('type', Validator::CKEY);
 
     if (!$key || !$type) {
       throw new InvalidParam_Exception('Missing required parameters');
@@ -180,11 +180,11 @@ class DaidalosPackage_Controller extends Controller
     $params->key  = $key;
     $params->type = $type;
 
-    $model = $this->loadModel( 'DaidalosPackage' );
+    $model = $this->loadModel('DaidalosPackage');
     /* @var $model DaidalosPackage_Model */
 
-    $view->setModel($model );
-    $view->displayEditor($key, $params );
+    $view->setModel($model);
+    $view->displayEditor($key, $params);
 
   }//end public function service_edit */
 
@@ -194,14 +194,14 @@ class DaidalosPackage_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_build($request, $response )
+  public function service_build($request, $response)
   {
 
     $params = $this->getFlags($request);
 
-    $packageKey = $request->param('package', Validator::CKEY );
-    $buildKey   = $request->data( 'key', Validator::CKEY );
-    $type       = $request->param('type', Validator::CKEY );
+    $packageKey = $request->param('package', Validator::CKEY);
+    $buildKey   = $request->data('key', Validator::CKEY);
+    $type       = $request->param('type', Validator::CKEY);
 
     if (!$packageKey || !$buildKey || !$type) {
       throw new InvalidParam_Exception('Missing required parameters');
@@ -220,13 +220,13 @@ class DaidalosPackage_Controller extends Controller
     );
     /* @var $view DaidalosPackage_Builder_Ajax_View */
 
-    $model = $this->loadModel( 'DaidalosPackage' );
+    $model = $this->loadModel('DaidalosPackage');
     /* @var $model DaidalosPackage_Model */
 
-    $model->buildPackage($packageKey, $buildKey, $type );
+    $model->buildPackage($packageKey, $buildKey, $type);
 
-    $view->setModel($model );
-    $view->displayBuild($packageKey, $packageKey.'-'.$buildKey.'.package',  $params );
+    $view->setModel($model);
+    $view->displayBuild($packageKey, $packageKey.'-'.$buildKey.'.package',  $params);
 
   }//end public function service_build */
 
@@ -236,13 +236,13 @@ class DaidalosPackage_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_listPackages($request, $response )
+  public function service_listPackages($request, $response)
   {
 
     $params = $this->getFlags($request);
 
-    $packageKey = $request->param('package', Validator::CKEY );
-    $type       = $request->param('type', Validator::CKEY );
+    $packageKey = $request->param('package', Validator::CKEY);
+    $type       = $request->param('type', Validator::CKEY);
 
     if (!$packageKey || !$type) {
       throw new InvalidParam_Exception('Missing required parameters');
@@ -261,11 +261,11 @@ class DaidalosPackage_Controller extends Controller
     );
     /* @var $view DaidalosPackage_Builder_Modal_View */
 
-    $model = $this->loadModel( 'DaidalosPackage' );
+    $model = $this->loadModel('DaidalosPackage');
     /* @var $model DaidalosPackage_Model */
 
-    $view->setModel($model );
-    $view->displayPackageList($packageKey, $params );
+    $view->setModel($model);
+    $view->displayPackageList($packageKey, $params);
 
   }//end public function service_listPackages */
 
@@ -275,14 +275,14 @@ class DaidalosPackage_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_deletePackage($request, $response )
+  public function service_deletePackage($request, $response)
   {
 
     $params = $this->getFlags($request);
 
-    $packageKey = $request->param('package', Validator::CKEY );
-    $toDelete   = $request->param('file', Validator::FILENAME );
-    $type       = $request->param('type', Validator::CKEY );
+    $packageKey = $request->param('package', Validator::CKEY);
+    $toDelete   = $request->param('file', Validator::FILENAME);
+    $type       = $request->param('type', Validator::CKEY);
 
     $params->type = $type;
 
@@ -301,12 +301,12 @@ class DaidalosPackage_Controller extends Controller
     );
     /* @var $view DaidalosPackage_Builder_Ajax_View */
 
-    $model = $this->loadModel( 'DaidalosPackage' );
+    $model = $this->loadModel('DaidalosPackage');
     /* @var $model DaidalosPackage_Model */
-    $model->deletePackage($packageKey, $toDelete, $type );
+    $model->deletePackage($packageKey, $toDelete, $type);
 
-    $view->setModel($model );
-    $view->displayDelete($packageKey, $toDelete, $params );
+    $view->setModel($model);
+    $view->displayDelete($packageKey, $toDelete, $params);
 
   }//end public function service_deletePackage */
 

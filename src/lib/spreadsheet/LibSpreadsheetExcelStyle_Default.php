@@ -40,8 +40,8 @@ class LibSpreadsheetExcelStyle_Default extends LibSpreadsheetExcelStyle
   public $rowColorScheme = array
   (
     //key       font        bg color
-    1 => array( '00000000', 'FFDBE5F1' ),
-    2 => array( '00000000', 'FFB8CCE4' ),
+    1 => array('00000000', 'FFDBE5F1'),
+    2 => array('00000000', 'FFB8CCE4'),
   );
 
   /**
@@ -53,15 +53,15 @@ class LibSpreadsheetExcelStyle_Default extends LibSpreadsheetExcelStyle
    * @param int $key
    * @return array
    */
-  public function getRowStyle($key )
+  public function getRowStyle($key)
   {
 
-    if ( isset($this->rowColorScheme[$key] ) )
+    if (isset($this->rowColorScheme[$key]))
       $color = $this->rowColorScheme[$key];
     else
       $color = $this->rowColorScheme[1];
 
-    return $this->styleArray($color[1], $color[0], false, 'right' );
+    return $this->styleArray($color[1], $color[0], false, 'right');
 
   }//end public function getRowStyle */
 

@@ -80,7 +80,7 @@ class LibMessageEnvelop
   /**
    * @param LibMessageStack $msgStack
    */
-  public function __construct( $msgStack, $receiver )
+  public function __construct($msgStack, $receiver)
   {
 
     $this->stack = $msgStack;

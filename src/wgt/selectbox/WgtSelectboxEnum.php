@@ -51,13 +51,13 @@ class WgtSelectboxEnum extends WgtSelectbox
    *
    * @param string $name
    */
-  public function __construct($name = null )
+  public function __construct($name = null)
   {
-    parent::__construct($name );
 
+    parent::__construct($name);
     $this->init();
 
-  }//end public function __construct($name )
+  }//end public function __construct($name)
 
   /**
    * Enter description here...
@@ -75,26 +75,26 @@ class WgtSelectboxEnum extends WgtSelectbox
    *   @default null only for compatibility to <class>WgtInput</class>
    * }
    */
-  public function getData($key = null )
+  public function getData($key = null)
   {
 
-    if (!isset($this->data[$key]) ) {
+    if (!isset($this->data[$key])) {
       return null;
     }
 
     return $this->data[$key];
 
-  }//end public function getData($key = null )
+  }//end public function getData($key = null)
 
   /**
    * Checken ob für den Status ein Icon hinterlegt wurde
    * @param string $key
    * @return string
    */
-  public function getIcon($key = null )
+  public function getIcon($key = null)
   {
 
-    if (!isset($this->layouts[$key]['icon']) ) {
+    if (!isset($this->layouts[$key]['icon'])) {
       return null;
     }
 
@@ -107,10 +107,10 @@ class WgtSelectboxEnum extends WgtSelectbox
    * @param string $key
    * @return string
    */
-  public function getBg($key = null )
+  public function getBg($key = null)
   {
 
-    if (!isset($this->layouts[$key]['bg']) ) {
+    if (!isset($this->layouts[$key]['bg'])) {
       return null;
     }
 
@@ -123,10 +123,10 @@ class WgtSelectboxEnum extends WgtSelectbox
    * @param string $key
    * @return string
    */
-  public function getLabel($key = null )
+  public function getLabel($key = null)
   {
 
-    if (!isset($this->data[$key]) ) {
+    if (!isset($this->data[$key])) {
       return null;
     }
 
@@ -146,24 +146,24 @@ class WgtSelectboxEnum extends WgtSelectbox
    * (non-PHPdoc)
    * @see wgt/WgtInput#build($attributes)
    */
-  public function build($attributes = array() )
+  public function build($attributes = array())
   {
 
     $id   = $this->attributes['id'];
 
     if ($this->redirect) {
-      if (!isset($this->attributes['id']) ) {
-        throw new Wgt_Exception( 'Missing required ID in Selectbox '.$this->debugData() );
+      if (!isset($this->attributes['id'])) {
+        throw new Wgt_Exception('Missing required ID in Selectbox '.$this->debugData());
       } else {
         $id   = $this->attributes['id'];
         $url  = $this->redirect;
 
-        $this->attributes['onChange'] = "redirectFromSelectbox( '$url', '$id' )";
+        $this->attributes['onChange'] = "redirectFromSelectbox('$url', '$id')";
       }
     }
 
     if ($this->semanticClass) {
-      if ( isset($this->attributes['class'] ) ) {
+      if (isset($this->attributes['class'])) {
         $this->attributes['class'] .= ' '.$this->semanticClass;
       } else {
         $this->attributes['class'] = $this->semanticClass;
@@ -175,12 +175,12 @@ class WgtSelectboxEnum extends WgtSelectbox
 
     $select = '<select '.$attributes.' >'.NL;
 
-    if ($this->firstFree )
+    if ($this->firstFree)
       $select .= '<option value=" " >'.$this->firstFree.'</option>'.NL;
 
-    $helpIcon = $this->renderDocu($id );
+    $helpIcon = $this->renderDocu($id);
 
-    if ( is_array($this->activ )  ) {
+    if (is_array($this->activ)  ) {
       foreach ($this->data as $id => $value) {
 
         $optClass  = '';
@@ -192,29 +192,31 @@ class WgtSelectboxEnum extends WgtSelectbox
         $selected = '';
 
         if ($this->activ) {
-          $selected = ( in_array($id , $this->activ ) ) ? 'selected="selected"' : '';
+          $selected = (in_array($id , $this->activ)) ? 'selected="selected"' : '';
         }
 
-        if ($this->checkIcons && isset($this->layouts[$id] ) ) {
+        if ($this->checkIcons && isset($this->layouts[$id])) {
           $optClass = ' class="'.$this->layouts[$id]['class'].'" ';
         }
 
         $select .= '<option '.$selected.$optClass.' value="'.$id.'" >'.$value.'</option>'.NL;
       }
+      
     } else {
+      
       foreach ($this->data as $id => $value) {
 
         $optClass  = '';
 
         if ($this->activ) {
-          $selected = ($this->activ == $id )
+          $selected = ($this->activ == $id)
             ? 'selected="selected"'
             : '';
         } else {
           $selected = '';
         }
 
-        if ($this->checkIcons && isset( static::$layouts[$id] ) ) {
+        if ($this->checkIcons && isset(static::$layouts[$id])) {
           $optClass = ' class="'.static::$layouts[$id]['class'].'" ';
         }
 
@@ -240,8 +242,8 @@ class WgtSelectboxEnum extends WgtSelectbox
   {
 
     if ($this->redirect) {
-      if (!isset($this->attributes['id'] ) ) {
-        throw new Wgt_Exception( 'Missing required ID in Selectbox '.$this->debugData() );
+      if (!isset($this->attributes['id'])) {
+        throw new Wgt_Exception('Missing required ID in Selectbox '.$this->debugData());
       } else {
         $id   = $this->attributes['id'];
         $url  = $this->redirect;
@@ -251,7 +253,7 @@ class WgtSelectboxEnum extends WgtSelectbox
     }
 
     if ($this->semanticClass) {
-      if ( isset($this->attributes['class'] ) ) {
+      if (isset($this->attributes['class'])) {
         $this->attributes['class'] .= ' '.$this->semanticClass;
       } else {
         $this->attributes['class'] = $this->semanticClass;
@@ -263,39 +265,43 @@ class WgtSelectboxEnum extends WgtSelectbox
 
     $select = '<select '.$attributes.' >'.NL;
 
-    if ($this->firstFree )
+    if ($this->firstFree)
       $select .= '<option value=" " >'.$this->firstFree.'</option>'.NL;
 
-    if ( is_array($this->activ )  ) {
+     $selected = '';
+      
+    if (is_array($this->activ) ) {
+      
       foreach ($this->data as $id => $value) {
 
         $optClass  = '';
 
-        $selected = '';
         if ($this->activ) {
-          $selected = ( in_array($id , $this->activ ) )
+          $selected = (in_array($id , $this->activ))
             ? 'selected="selected"'
             : '';
         }
 
-        if ($this->checkIcons && isset($this->layouts[$id] ) ) {
+        if ($this->checkIcons && isset($this->layouts[$id])) {
           $optClass = ' class="'.$this->layouts[$id]['class'].'" ';
         }
 
         $select .= '<option '.$selected.$optClass.' value="'.$id.'" >'.$value.'</option>'.NL;
       }
+    
     } else {
+      
       foreach ($this->data as $id => $value) {
 
         $optClass = '';
 
         if ($this->activ) {
-          $selected = ($this->activ == $id )
+          $selected = ($this->activ == $id)
             ? 'selected="selected"'
             : '';
         }
 
-        if ($this->checkIcons && isset($this->layouts[$id] ) ) {
+        if ($this->checkIcons && isset($this->layouts[$id])) {
           $optClass = ' class="'.$this->layouts[$id]['class'].'" ';
         }
 

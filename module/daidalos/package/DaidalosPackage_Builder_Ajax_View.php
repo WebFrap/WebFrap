@@ -34,18 +34,18 @@ class DaidalosPackage_Builder_Ajax_View extends LibTemplateAjaxView
    * @param TFlag $params
    * @return void
    */
-  public function displayDelete(  $package, $fileName, $params )
+  public function displayDelete( $package, $fileName, $params)
   {
 
     $fHash = md5($fileName);
 
-    $this->setAreaContent( 'childNode', <<<XML
+    $this->setAreaContent('childNode', <<<XML
 <htmlArea selector="tr#wgt-row-daidalos-package-{$package}-{$fHash}" action="remove" />
 XML
     );
 
     $response = $this->getResponse();
-    $response->addMessage( 'Successfully deleted package: '.$fileName );
+    $response->addMessage('Successfully deleted package: '.$fileName);
 
   }//end public function displayDelete */
 
@@ -55,19 +55,19 @@ XML
    * @param TFlag $params
    * @return void
    */
-  public function displayBuild($package, $fileName, $params )
+  public function displayBuild($package, $fileName, $params)
   {
 
-    $iconDel = Wgt::icon( 'control/delete.png' );
+    $iconDel = Wgt::icon('control/delete.png');
 
-    $file    = new IoFile( PATH_GW."data/package/{$params->type}/{$package}/{$fileName}" );
+    $file    = new IoFile(PATH_GW."data/package/{$params->type}/{$package}/{$fileName}");
 
-    $fDate   = date( 'Y-m-d H:i:s', $file->getTimeCreated() );
-    $fSize   = $file->getSize( 'mb' );
+    $fDate   = date('Y-m-d H:i:s', $file->getTimeCreated());
+    $fSize   = $file->getSize('mb');
 
     $fHash = md5($fileName);
 
-    $this->setAreaContent( 'childNode', <<<XML
+    $this->setAreaContent('childNode', <<<XML
 <htmlArea selector="table#wgt-table-daidalos-package-{$package}-packages>tbody" action="append" ><![CDATA[
   <tr id="wgt-row-daidalos-package-{$package}-{$fHash}" >
     <td></td>
@@ -83,7 +83,7 @@ XML
     );
 
     $response = $this->getResponse();
-    $response->addMessage( 'Successfully created package: '.$fileName );
+    $response->addMessage('Successfully created package: '.$fileName);
 
   }//end public function displayBuild */
 

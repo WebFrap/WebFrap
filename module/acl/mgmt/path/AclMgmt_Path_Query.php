@@ -39,7 +39,7 @@ class AclMgmt_Path_Query extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetchAreaGroups($areaId, $params = null )
+  public function fetchAreaGroups($areaId, $params = null)
   {
 
     if (!$params)
@@ -64,13 +64,13 @@ class AclMgmt_Path_Query extends LibSqlQuery
   WHERE
     wbfsys_security_access.id_area = {$areaId}
     AND
-      ( wbfsys_security_access.partial = 0 or wbfsys_security_access.partial is null )
+      (wbfsys_security_access.partial = 0 or wbfsys_security_access.partial is null)
   ORDER BY
     wbfsys_role_group.name ;
 
 SQL;
 
-    $this->result = $db->select($sql );
+    $this->result = $db->select($sql);
 
   }//end public function fetchAreaGroups */
 
@@ -83,10 +83,10 @@ SQL;
    *
    * @throws LibDb_Exception
    */
-  public function fetchAccessTree($areaKey, $idGroup, $params = null )
+  public function fetchAccessTree($areaKey, $idGroup, $params = null)
   {
 
-    if (!$params )
+    if (!$params)
       $params = new TFlag();
 
     $this->sourceSize  = null;
@@ -101,7 +101,7 @@ SELECT
       AND (partial = 0 OR partial is null);
 SQL;
 
-    $areaLevel = $db->select($sql )->getField('access_level');
+    $areaLevel = $db->select($sql)->getField('access_level');
 
     /*
     Beschreibung der Felder in der Rekursion:
@@ -111,11 +111,11 @@ SQL;
 
       child.rowid
         Die rowid des Security-Area Zielknotens vom Pfad
-        ( wird benötigt um den Graph zu erstellen )
+        (wird benötigt um den Graph zu erstellen)
 
       child.label
         Das Label des Security-Area Zielknotens vom Pfad
-        ( wird benötigt um den Graph zu erstellen )
+        (wird benötigt um den Graph zu erstellen)
 
       child.access_key
         Der Access Key des Security-Area Zielknotens vom Pfad
@@ -128,11 +128,11 @@ SQL;
 
       path.access_level as access_level
         Die Berechtigung welche der Pfad dem Benutzer auf den Zielknoten zuweist
-        ( Wird im Pfad Form angezeigt und ist editierbar )
+        (Wird im Pfad Form angezeigt und ist editierbar)
 
       path.rowid as assign_id
         Rowid des Pfades, wir benötigt um den Pfad direkt zu adressieren
-        ( Wird zum updaten und löschen des Pfades benötigt )
+        (Wird zum updaten und löschen des Pfades benötigt)
 
       child.id_target as target
         Die Ziel Security Area der Referenz Security Area
@@ -145,7 +145,7 @@ SQL;
 
       path.description as description
         Beschreibung des Pfades
-        ( Wird im Pfad Form angezeigt und ist editierbar )
+        (Wird im Pfad Form angezeigt und ist editierbar)
      */
 
      // diese Query trägt den schönen namen Ilse, weil keiner willse...
@@ -209,12 +209,12 @@ AS
 
   JOIN
     sec_tree tree
-      ON child.m_parent in( tree.path_area, tree.real_parent )
+      ON child.m_parent in(tree.path_area, tree.real_parent)
 
   JOIN
     wbfsys_security_area_type
       ON wbfsys_security_area_type.rowid = child.id_type
-        and upper(wbfsys_security_area_type.access_key) IN( upper('mgmt_reference'), upper('mgmt_element') )
+        and upper(wbfsys_security_area_type.access_key) IN(upper('mgmt_reference'), upper('mgmt_element'))
 
   LEFT JOIN
     wbfsys_security_path path
@@ -224,7 +224,7 @@ AS
         AND path.id_root = {$areaKey}
 
     WHERE depth < 10
- )
+)
 
   SELECT
     rowid,
@@ -244,7 +244,7 @@ AS
 
 SQL;
 
-    $this->result = $db->select($sql );
+    $this->result = $db->select($sql);
 
   }//end public function fetchAccessTree */
 

@@ -34,17 +34,17 @@ class ExampleQuery_Maintab_View extends WgtMaintab
   * @param TFlag $params
   * @return null
   */
-  public function displayQuery($request, $response, $params )
+  public function displayQuery($request, $response, $params)
   {
 
     // set the window title
-    $this->setTitle( 'Simple Query' );
-    $this->setLabel( 'Simple Query' );
+    $this->setTitle('Simple Query');
+    $this->setLabel('Simple Query');
 
     // set the form template
-    $this->setTemplate( 'example/query/simple' );
+    $this->setTemplate('example/query/simple');
 
-    $this->addVar( 'data', $this->model->runQuery() );
+    $this->addVar('data', $this->model->runQuery());
 
     return null;
 

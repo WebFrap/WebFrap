@@ -27,7 +27,7 @@ class WebfrapSetup_Html_View extends LibTemplatePlain
   /**
    *
    */
-  public function displayStart($params )
+  public function displayStart($params)
   {
     $this->setIndex('setup');
     $this->setTemplate('webfrap/setup/maintab/start');

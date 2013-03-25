@@ -44,10 +44,10 @@ class WebfrapPing_Controller extends Controller
   /**
    * @return void
    */
-  public function ping( )
+  public function ping()
   {
 
-    Message::addMessage( 'Pong '.time() );
+    Message::addMessage('Pong '.time());
 
   }//end public function pong */
 

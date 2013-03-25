@@ -54,25 +54,25 @@ class ProcessBase_Modal_View extends WgtModal
   *
   * @return null|Error im Fehlerfall
   */
-  public function displayHistory($process, $params )
+  public function displayHistory($process, $params)
   {
 
     $request = $this->getRequest();
 
     // set the window title
-    $this->setTitle( 'Process History' );
+    $this->setTitle('Process History');
 
     // set the window status text
-    $this->setStatus( 'Process History' );
+    $this->setStatus('Process History');
 
     // set the from template
-    $this->setTemplate( 'process/history' );
+    $this->setTemplate('process/history');
 
-    $table = $this->createElement( 'historyTable'  , 'ProcessBase_Table' );
-    $table->setData($this->model->getProcessEdges($process ) );
+    $table = $this->createElement('historyTable'  , 'ProcessBase_Table');
+    $table->setData($this->model->getProcessEdges($process));
     $table->buildHtml();
 
-    $this->addVar( 'entity', $this->model->getEntity() );
+    $this->addVar('entity', $this->model->getEntity());
 
     return null;
 
@@ -87,7 +87,7 @@ class ProcessBase_Modal_View extends WgtModal
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu($objid, $params )
+  public function addMenu($objid, $params)
   {
 
     $menu = $this->newMenu
@@ -96,7 +96,7 @@ class ProcessBase_Modal_View extends WgtModal
       'ProcessBase'
     );
     $menu->id = $this->id.'_dropmenu';
-    $menu->buildMenu($objid, $params );
+    $menu->buildMenu($objid, $params);
 
     return true;
 
@@ -111,7 +111,7 @@ class ProcessBase_Modal_View extends WgtModal
    *   string formId: the id of the form;
    * }
    */
-  public function addActions($objid, $params )
+  public function addActions($objid, $params)
   {
 
     // add the button action for save in the window

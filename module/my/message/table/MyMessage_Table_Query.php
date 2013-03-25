@@ -45,11 +45,11 @@ class MyMessage_Table_Query extends LibSqlQuery
    * @param TFlag $params
    * @return void
    */
-  public function setCalcQuery($criteria, $params )
+  public function setCalcQuery($criteria, $params)
   {
 
     if ($params->loadFullSize)
-      $this->calcQuery = $criteria->count( 'count(wbfsys_message.'.Db::PK.') as '.Db::Q_SIZE );
+      $this->calcQuery = $criteria->count('count(wbfsys_message.'.Db::PK.') as '.Db::Q_SIZE);
 
   }//end public function setCalcQuery */
 
@@ -69,10 +69,10 @@ class MyMessage_Table_Query extends LibSqlQuery
    * @throws LibDb_Exception bei technischen Problemen wie zB. keine Verbindung
    *   zum Datenbank server, aber auch fehlerhafte sql queries
    */
-  public function fetch($condition = null, $params = null )
+  public function fetch($condition = null, $params = null)
   {
 
-    if (!$params )
+    if (!$params)
       $params = new TFlag();
 
     $this->sourceSize  = null;
@@ -85,19 +85,19 @@ class MyMessage_Table_Query extends LibSqlQuery
     }
 
     if (!$criteria->cols) {
-      $this->setCols($criteria );
+      $this->setCols($criteria);
     }
 
-    $this->setTables($criteria );
+    $this->setTables($criteria);
     $this->appendConditions($criteria, $condition, $params  );
-    $this->checkLimitAndOrder($criteria, $params );
-    $this->appendFilter($criteria, $condition, $params );
+    $this->checkLimitAndOrder($criteria, $params);
+    $this->appendFilter($criteria, $condition, $params);
 
     // Run Query und save the result
-    $this->result    = $db->orm->select($criteria );
+    $this->result    = $db->orm->select($criteria);
 
-    if ($params->loadFullSize )
-      $this->calcQuery = $criteria->count( 'count(wbfsys_message.'.Db::PK.' ) as '.Db::Q_SIZE );
+    if ($params->loadFullSize)
+      $this->calcQuery = $criteria->count('count(wbfsys_message.'.Db::PK.') as '.Db::Q_SIZE);
 
   }//end public function fetch */
 
@@ -117,10 +117,10 @@ class MyMessage_Table_Query extends LibSqlQuery
    *  wenn bei der Abfragen technische Problemen auftreten, zb server nicht
    *  ereichbar, invalides sql... etc.
    */
-  public function fetchInAcls( array $inKeys, $params = null )
+  public function fetchInAcls(array $inKeys, $params = null)
   {
 
-    if (!$params )
+    if (!$params)
       $params = new TFlag();
 
     $db                = $this->getDb();
@@ -134,16 +134,16 @@ class MyMessage_Table_Query extends LibSqlQuery
 
     $criteria          = $db->orm->newCriteria();
 
-    $this->setCols($criteria );
-    $this->setTables($criteria );
+    $this->setCols($criteria);
+    $this->setTables($criteria);
 
     $criteria->where
     (
-      " wbfsys_message.rowid  IN( ". implode( ', ', array_keys($inKeys) ) ." )"
+      " wbfsys_message.rowid  IN(". implode(', ', array_keys($inKeys)) .")"
     );
 
     // Run Query und save the result
-    $result    = $db->orm->select($criteria );
+    $result    = $db->orm->select($criteria);
 
     $this->data = array();
 
@@ -159,14 +159,14 @@ class MyMessage_Table_Query extends LibSqlQuery
    * Wenn bereits Colums vorhanden waren werden diese komplett
    * überschrieben
    * Wenn Columns ergänzt werden sollen, dann können diese mit
-   * $criteria->selectAlso( 'additional.column' );
+   * $criteria->selectAlso('additional.column');
    * übergeben werden
    *
    * @param LibSqlCriteria $criteria
    *
    * @return void
    */
-  public function setCols($criteria )
+  public function setCols($criteria)
   {
 
     $cols = array
@@ -177,7 +177,7 @@ class MyMessage_Table_Query extends LibSqlQuery
       'wbfsys_message.title as "wbfsys_message_title"', // variant: def-by-context
     );
 
-    $criteria->select($cols );
+    $criteria->select($cols);
 
   }//end public function setCols */
 
@@ -197,7 +197,7 @@ class MyMessage_Table_Query extends LibSqlQuery
   public function setTables($criteria   )
   {
 
-    $criteria->from( 'wbfsys_message' );
+    $criteria->from('wbfsys_message');
 
     $criteria->joinOn
     (
@@ -219,21 +219,21 @@ class MyMessage_Table_Query extends LibSqlQuery
    * @param TFlag $params
    * @return void
    */
-  public function appendConditions($criteria, $condition, $params )
+  public function appendConditions($criteria, $condition, $params)
   {
 
     // append codition if the query has a default filter
     if ($this->condition) {
 
-      if ( is_string($this->condition ) ) {
+      if (is_string($this->condition)) {
 
-        if ( ctype_digit($this->condition ) ) {
-          $criteria->where( 'wbfsys_message.rowid = '.$this->condition );
+        if (ctype_digit($this->condition)) {
+          $criteria->where('wbfsys_message.rowid = '.$this->condition);
         } else {
-          $criteria->where($this->condition );
+          $criteria->where($this->condition);
         }
 
-      } elseif ( is_array($this->condition ) ) {
+      } elseif (is_array($this->condition)) {
         $this->checkConditions($criteria, $this->condition  );
       }
 
@@ -241,19 +241,19 @@ class MyMessage_Table_Query extends LibSqlQuery
 
     if ($condition) {
 
-      if ( is_string($condition) ) {
-        if ( ctype_digit($condition ) ) {
-          $criteria->where( 'wbfsys_message.rowid = '.$condition );
+      if (is_string($condition)) {
+        if (ctype_digit($condition)) {
+          $criteria->where('wbfsys_message.rowid = '.$condition);
         } else {
-          $criteria->where($condition );
+          $criteria->where($condition);
         }
-      } elseif ( is_array($condition ) ) {
+      } elseif (is_array($condition)) {
         $this->checkConditions($criteria, $condition  );
       }
     }
 
     if ($params->begin) {
-      $this->checkCharBegin($criteria, $params );
+      $this->checkCharBegin($criteria, $params);
     }
 
   }//end public function appendConditions */
@@ -265,12 +265,12 @@ class MyMessage_Table_Query extends LibSqlQuery
    *
    * @return void
    */
-  public function checkConditions($criteria, array $condition )
+  public function checkConditions($criteria, array $condition)
   {
 
-      if ( isset($condition['free']) && trim($condition['free'] ) != ''  ) {
+      if (isset($condition['free']) && trim($condition['free']) != ''  ) {
 
-         if ( ctype_digit($condition['free'] ) ) {
+         if (ctype_digit($condition['free'])) {
 
             $part = $condition['free'];
 
@@ -285,41 +285,41 @@ class MyMessage_Table_Query extends LibSqlQuery
       }//end if
 
       // search conditions for  wbfsys_message
-      if ( isset($condition['wbfsys_message'] ) ) {
+      if (isset($condition['wbfsys_message'])) {
         $whereCond = $condition['wbfsys_message'];
 
-        if ( isset($whereCond['id_status']) && count($whereCond['id_status'] ) )
-          $criteria->where( " wbfsys_message.id_status IN( '".implode("','",$whereCond['id_status'])."' ) " );
+        if (isset($whereCond['id_status']) && count($whereCond['id_status']))
+          $criteria->where(" wbfsys_message.id_status IN('".implode("','",$whereCond['id_status'])."') ");
 
-        if ( isset($whereCond['title']) && trim($whereCond['title'] ) != ''  )
-          $criteria->where( ' wbfsys_message.title = \''.$whereCond['title'].'\' ');
+        if (isset($whereCond['title']) && trim($whereCond['title']) != ''  )
+          $criteria->where(' wbfsys_message.title = \''.$whereCond['title'].'\' ');
 
         // append meta information
-        if ( isset($whereCond['m_role_create']) && trim($whereCond['m_role_create']) != ''  )
-          $criteria->where( ' wbfsys_message.m_role_create = '.$whereCond['m_role_create'].' ');
+        if (isset($whereCond['m_role_create']) && trim($whereCond['m_role_create']) != ''  )
+          $criteria->where(' wbfsys_message.m_role_create = '.$whereCond['m_role_create'].' ');
 
-        if ( isset($whereCond['m_role_change']) && trim($whereCond['m_role_change']) != ''  )
-          $criteria->where( ' wbfsys_message.m_role_change = '.$whereCond['m_role_change'].' ');
+        if (isset($whereCond['m_role_change']) && trim($whereCond['m_role_change']) != ''  )
+          $criteria->where(' wbfsys_message.m_role_change = '.$whereCond['m_role_change'].' ');
 
-        if ( isset($whereCond['m_time_created_before']) && trim($whereCond['m_time_created_before']) != ''  )
-          $criteria->where( ' wbfsys_message.m_time_created <= \''.$whereCond['m_time_created_before'].'\' ');
+        if (isset($whereCond['m_time_created_before']) && trim($whereCond['m_time_created_before']) != ''  )
+          $criteria->where(' wbfsys_message.m_time_created <= \''.$whereCond['m_time_created_before'].'\' ');
 
-        if ( isset($whereCond['m_time_created_after']) && trim($whereCond['m_time_created_after']) != ''  )
-          $criteria->where( ' wbfsys_message.m_time_created >= \''.$whereCond['m_time_created_after'].'\' ');
+        if (isset($whereCond['m_time_created_after']) && trim($whereCond['m_time_created_after']) != ''  )
+          $criteria->where(' wbfsys_message.m_time_created >= \''.$whereCond['m_time_created_after'].'\' ');
 
-        if ( isset($whereCond['m_time_changed_before']) && trim($whereCond['m_time_changed_before']) != ''  )
-          $criteria->where( ' wbfsys_message.m_time_changed <= \''.$whereCond['m_time_changed_before'].'\' ');
+        if (isset($whereCond['m_time_changed_before']) && trim($whereCond['m_time_changed_before']) != ''  )
+          $criteria->where(' wbfsys_message.m_time_changed <= \''.$whereCond['m_time_changed_before'].'\' ');
 
-        if ( isset($whereCond['m_time_changed_after']) && trim($whereCond['m_time_changed_after']) != ''  )
-          $criteria->where( ' wbfsys_message.m_time_changed >= \''.$whereCond['m_time_changed_after'].'\' ');
+        if (isset($whereCond['m_time_changed_after']) && trim($whereCond['m_time_changed_after']) != ''  )
+          $criteria->where(' wbfsys_message.m_time_changed >= \''.$whereCond['m_time_changed_after'].'\' ');
 
-        if ( isset($whereCond['m_rowid']) && trim($whereCond['m_rowid']) != ''  )
-          $criteria->where( ' wbfsys_message.rowid >= \''.$whereCond['m_rowid'].'\' ');
+        if (isset($whereCond['m_rowid']) && trim($whereCond['m_rowid']) != ''  )
+          $criteria->where(' wbfsys_message.rowid >= \''.$whereCond['m_rowid'].'\' ');
 
-        if ( isset($whereCond['m_uuid']) && trim($whereCond['m_uuid']) != ''  )
-          $criteria->where( ' wbfsys_message.m_uuid >= \''.$whereCond['m_uuid'].'\' ');
+        if (isset($whereCond['m_uuid']) && trim($whereCond['m_uuid']) != ''  )
+          $criteria->where(' wbfsys_message.m_uuid >= \''.$whereCond['m_uuid'].'\' ');
 
-      }//end if ( isset ($condition['wbfsys_message']) )
+      }//end if (isset ($condition['wbfsys_message']))
 
   }//end public function checkConditions */
 
@@ -331,16 +331,16 @@ class MyMessage_Table_Query extends LibSqlQuery
    *
    * @return void
    */
-  public function checkCharBegin($criteria, $params )
+  public function checkCharBegin($criteria, $params)
   {
 
       // filter for a beginning char
       if ($params->begin) {
 
         if ('?' == $params->begin) {
-          $criteria->where( "wbfsys_message.id_sender ~* '^[^a-zA-Z]'" );
+          $criteria->where("wbfsys_message.id_sender ~* '^[^a-zA-Z]'");
         } else {
-          $criteria->where( "upper(substr(wbfsys_message.id_sender,1,1)) = '".strtoupper($params->begin)."'" );
+          $criteria->where("upper(substr(wbfsys_message.id_sender,1,1)) = '".strtoupper($params->begin)."'");
         }
 
       }
@@ -360,21 +360,21 @@ class MyMessage_Table_Query extends LibSqlQuery
 
     // check if there is a given order
     if ($params->order) {
-      $criteria->orderBy($params->order );
+      $criteria->orderBy($params->order);
 
     } else { // if not use the default
-      $criteria->orderBy( 'wbfsys_message.rowid' );
+      $criteria->orderBy('wbfsys_message.rowid');
 
     }
 
     // Check the offset
     if ($params->start) {
-      if ($params->start < 0 )
+      if ($params->start < 0)
         $params->start = 0;
     } else {
       $params->start = null;
     }
-    $criteria->offset($params->start );
+    $criteria->offset($params->start);
 
     // Check the limit
     if (-1 == $params->qsize) {
@@ -382,14 +382,14 @@ class MyMessage_Table_Query extends LibSqlQuery
       $params->qsize = null;
     } elseif ($params->qsize) {
       // limit must not be bigger than max, for no limit use -1
-      if ($params->qsize > Wgt::$maxListSize )
+      if ($params->qsize > Wgt::$maxListSize)
         $params->qsize = Wgt::$maxListSize;
     } else {
       // if limit 0 or null use the default limit
       $params->qsize = Wgt::$defListSize;
     }
 
-    $criteria->limit($params->qsize );
+    $criteria->limit($params->qsize);
 
   }//end public function checkLimitAndOrder */
 
@@ -406,10 +406,10 @@ class MyMessage_Table_Query extends LibSqlQuery
 
     // check if there is a given order
     if ($params->order) {
-      $criteria->orderBy($params->order );
+      $criteria->orderBy($params->order);
 
     } else { // if not use the default
-      $criteria->orderBy( 'wbfsys_message.rowid' );
+      $criteria->orderBy('wbfsys_message.rowid');
 
     }
 

@@ -25,7 +25,7 @@ class SFormatFormdata
  /** Checkbox für Datenbank aufbereiten
   * @returns string
   */
-  public static function checktoDb($vorhanden )
+  public static function checktoDb($vorhanden)
   {
     $vorhanden = (bool) $vorhanden;
 
@@ -35,7 +35,7 @@ class SFormatFormdata
  /** Datenbank in Checkbox umbauen
   * @returns string
   */
-  public static function dbtoCheck($Num )
+  public static function dbtoCheck($Num)
   {
     $Num = (bool) $Num;
 

@@ -68,7 +68,7 @@ class DaidalosDbView_Model extends Model
    * @param string $dbName
    * @return array liste der Views
    */
-  public function getViews($schema )
+  public function getViews($schema)
   {
 
     $db = $this->getDb();
@@ -89,7 +89,7 @@ pg_get_viewdef(c.oid, true) AS definition
  WHERE ((c.relhasrules AND (EXISTS (
            SELECT r.rulename FROM pg_rewrite r
             WHERE ((r.ev_class = c.oid)
-              AND (bpchar(r.ev_type) = '1'::bpchar)) ))) OR (c.relkind = 'v'::char))
+              AND (bpchar(r.ev_type) = '1'::bpchar))))) OR (c.relkind = 'v'::char))
    AND na.nspname = '{$schema}'
  ORDER BY relname
 
@@ -97,7 +97,7 @@ SQL;
 
     $sql .= ";";
 
-    return $db->select($sql )->getAll();
+    return $db->select($sql)->getAll();
 
   }//end public function getViews */
 
@@ -105,7 +105,7 @@ SQL;
    * @param string $dbName
    * @return Details der View
    */
-  public function getViewDetails($schema, $viewName )
+  public function getViewDetails($schema, $viewName)
   {
 
     $db = $this->getDb();
@@ -129,7 +129,7 @@ SELECT
   (
     SELECT count(1) FROM pg_type t2 WHERE t2.typname=ty.typname) > 1 AS isdup, indkey,
       CASE
-        WHEN EXISTS( SELECT inhparent FROM pg_inherits WHERE inhrelid=att.attrelid )
+        WHEN EXISTS(SELECT inhparent FROM pg_inherits WHERE inhrelid=att.attrelid)
         THEN att.attrelid::regclass
          ELSE NULL
       END
@@ -167,15 +167,15 @@ SQL;
    * Löschen aller Wbf Views
    * @param string $schema
    */
-  public function dropWbfViews($schema )
+  public function dropWbfViews($schema)
   {
 
     $dbAdmin = $this->getDb()->getManager();
 
     foreach ($this->wbfViews as $viewName) {
 
-      if ($dbAdmin->viewExists($viewName ) )
-        $dbAdmin->dropView($viewName );
+      if ($dbAdmin->viewExists($viewName))
+        $dbAdmin->dropView($viewName);
     }
 
   }//end public function dropWbfViews */
@@ -184,13 +184,13 @@ SQL;
    * Löschen aller Wbf Views
    * @param string $schema
    */
-  public function createWbfViews($schema )
+  public function createWbfViews($schema)
   {
 
     $db = $this->getDb();
 
-    $db->exec( file_get_contents( PATH_FW.'data/ddl/postgresql/acl.views.sql' ) );
-    $db->exec( file_get_contents( PATH_FW.'data/ddl/postgresql/sys.views.sql' ) );
+    $db->exec(file_get_contents(PATH_FW.'data/ddl/postgresql/acl.views.sql'));
+    $db->exec(file_get_contents(PATH_FW.'data/ddl/postgresql/sys.views.sql'));
 
   }//end public function createWbfViews */
 

@@ -34,23 +34,23 @@ class WebfrapTag_Controller extends Controller
   (
     'overlaydset' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('GET'),
+      'views'      => array('ajax')
     ),
     'add' => array
     (
-      'method'    => array( 'PUT' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
     ),
     'autocomplete' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('GET'),
+      'views'      => array('ajax')
     ),
     'disconnect' => array
     (
-      'method'    => array( 'DELETE' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('DELETE'),
+      'views'      => array('ajax')
     ),
   );
 
@@ -63,12 +63,12 @@ class WebfrapTag_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_overlayDset($request, $response )
+  public function service_overlayDset($request, $response)
   {
 
-    $element  = $request->param('element', Validator::EID );
-    $dKey     = $request->param('dkey', Validator::TEXT );
-    $objid    = $request->param('objid', Validator::EID );
+    $element  = $request->param('element', Validator::EID);
+    $dKey     = $request->param('dkey', Validator::TEXT);
+    $objid    = $request->param('objid', Validator::EID);
 
     /* @var $view WebfrapHistory_Ajax_View  */
     $view = $response->loadView
@@ -79,10 +79,10 @@ class WebfrapTag_Controller extends Controller
     );
 
     /* @var $model WebfrapTag_Model */
-    $model = $this->loadModel( 'WebfrapTag' );
+    $model = $this->loadModel('WebfrapTag');
 
-    $view->setModel($model );
-    $view->displayOverlay($element, $dKey, $objid );
+    $view->setModel($model);
+    $view->displayOverlay($element, $dKey, $objid);
 
   }//end public function service_overlayDset */
 
@@ -91,23 +91,23 @@ class WebfrapTag_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_add($request, $response )
+  public function service_add($request, $response)
   {
 
     /* @var $model WebfrapTag_Model */
-    $model = $this->loadModel( 'WebfrapTag' );
+    $model = $this->loadModel('WebfrapTag');
 
-    $name   = $request->data( 'name', Validator::TEXT );
+    $name   = $request->data('name', Validator::TEXT);
 
     // gehen wir mal davon aus, dass die per autocomplete kam und wohl korrekt ist
-    $id     = $request->data( 'tag_id', Validator::EID );
+    $id     = $request->data('tag_id', Validator::EID);
 
     // die sollte entweder per autocomplete kommen oder statisch im widget
     // vorhanden sein
-    $refId  = $request->data( 'refid', Validator::EID );
+    $refId  = $request->data('refid', Validator::EID);
 
     // sicher stellen, dass alle benötigten Informationen vorhanden sind
-    if (!$refId || ( !$name && !$id ) ) {
+    if (!$refId || (!$name && !$id)) {
       throw new InvalidRequest_Exception
       (
         Error::INVALID_REQUEST_MSG,
@@ -118,10 +118,10 @@ class WebfrapTag_Controller extends Controller
     if ($id) {
       $tagNode = $id;
     } else {
-      $tagNode = $model->addTag($name );
+      $tagNode = $model->addTag($name);
     }
 
-    $conEntity = $model->addConnection($tagNode, $refId );
+    $conEntity = $model->addConnection($tagNode, $refId);
 
     $view = $this->getTplEngine();
     $view->setRawJsonData(array
@@ -138,17 +138,17 @@ class WebfrapTag_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_autocomplete($request, $response )
+  public function service_autocomplete($request, $response)
   {
 
     /* @var $model WebfrapTag_Model */
-    $model = $this->loadModel( 'WebfrapTag' );
+    $model = $this->loadModel('WebfrapTag');
 
-    $key   = $request->param('key', Validator::TEXT );
+    $key   = $request->param('key', Validator::TEXT);
 
     // die sollte entweder per autocomplete kommen oder statisch im widget
     // vorhanden sein
-    $refId  = $request->param('refid', Validator::EID );
+    $refId  = $request->param('refid', Validator::EID);
 
       // sicher stellen, dass alle benötigten Informationen vorhanden sind
     if (!$key || !$refId) {
@@ -160,7 +160,7 @@ class WebfrapTag_Controller extends Controller
     }
 
     $view = $this->getTplEngine();
-    $view->setRawJsonData($model->autocompleteByName($key, $refId ) );
+    $view->setRawJsonData($model->autocompleteByName($key, $refId));
 
   }//end public function service_autocomplete */
 
@@ -169,13 +169,13 @@ class WebfrapTag_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_disconnect($request, $response )
+  public function service_disconnect($request, $response)
   {
 
-    $id   = $request->param('objid', Validator::EID );
+    $id   = $request->param('objid', Validator::EID);
 
     /* @var $model WebfrapTag_Model */
-    $model = $this->loadModel( 'WebfrapTag' );
+    $model = $this->loadModel('WebfrapTag');
 
     $model->disconnect($id);
 

@@ -20,31 +20,31 @@ try {
   include './conf/bootstrap.php';
 
   // Buffer Output
-  if ( BUFFER_OUTPUT )
+  if (BUFFER_OUTPUT)
     ob_start();
 
   $errors = '';
 
   $webfrap = Webfrap::init();
   $request = Webfrap::$env->getRequest();
-  $graphKey = $request->param('graph', Validator::CKEY );
+  $graphKey = $request->param('graph', Validator::CKEY);
 
-  $graphClass = SParserString::subToCamelCase($graphKey ).'_Graph';
+  $graphClass = SParserString::subToCamelCase($graphKey).'_Graph';
 
-  if ( Webfrap::loadable($graphClass ) ) {
+  if (Webfrap::loadable($graphClass)) {
 
     try {
 
-      $graph = new $graphClass( Webfrap::$env );
+      $graph = new $graphClass(Webfrap::$env);
       $graph->prepare();
       $graph->render();
       $errors = Response::getOutput();
 
-      if ( '' != trim($errors)  )
+      if ('' != trim($errors)  )
         echo 'ERROR: '.$errors;
       else
         $graph->out();
-    } catch ( Exception $e ) {
+    } catch (Exception $e) {
       $errors = Response::getOutput();
       echo $e;
     }
@@ -56,7 +56,7 @@ try {
   }
 
 } // ENDE TRY
-catch( Exception $exception ) {
+catch(Exception $exception) {
   $extType = get_class($exception);
 
   Error::addError
@@ -72,8 +72,8 @@ catch( Exception $exception ) {
   }
 
   if (!DEBUG) {
-    if ( isset($view) and is_object($view) ) {
-      $view->publishError($exception->getMessage() , $errors );
+    if (isset($view) and is_object($view)) {
+      $view->publishError($exception->getMessage() , $errors);
     } else {
       View::printErrorPage
       (

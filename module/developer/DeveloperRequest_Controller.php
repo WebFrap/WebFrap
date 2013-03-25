@@ -44,7 +44,7 @@ class DeveloperRequest_Controller extends Controller
   /**
    * @return void
    */
-  public function ajaxPing( )
+  public function ajaxPing()
   {
 
     Message::addMessage('ping was sucessfull');

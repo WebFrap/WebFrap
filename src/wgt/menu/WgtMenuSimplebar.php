@@ -28,7 +28,7 @@ class WgtMenuSimplebar extends WgtMenu
   /**
    * @return string
    */
-  public function build(  )
+  public function build()
   {
 
     /*
@@ -46,7 +46,7 @@ class WgtMenuSimplebar extends WgtMenu
   /**
    * @return string
    */
-  public function body(  )
+  public function body()
   {
 
     $html = '';

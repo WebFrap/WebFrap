@@ -55,14 +55,14 @@ abstract class WgtDesktopNavigation extends WgtDesktopElement
    * request the default action of the ControllerClass
    * @return Model
    */
-  protected function loadModel($modelName , $key = null )
+  protected function loadModel($modelName , $key = null)
   {
 
     if (!$key)
       $key = $modelName;
 
     $modelName = 'Model'.$modelName;
-    if (!isset($this->models[$key]  ) ) {
+    if (!isset($this->models[$key]  )) {
       if (Webfrap::classLoadable($modelName)) {
         $this->models[$key] = new $modelName();
       } else {
@@ -79,10 +79,10 @@ abstract class WgtDesktopNavigation extends WgtDesktopElement
    * @param $key
    * @return Model
    */
-  protected function getModel($key )
+  protected function getModel($key)
   {
 
-    if ( isset($this->models[$key] ) )
+    if (isset($this->models[$key]))
       return $this->models[$key];
     else
       return null;
@@ -100,7 +100,7 @@ abstract class WgtDesktopNavigation extends WgtDesktopElement
       'name'  =>'switch_profile',
       'id'    => 'wgt_switch_profile',
       'class' => 'medium',
-      'onchange'  => '$R.redirect( \'index.php\',{c:\'Webfrap.Profile.change\',profile:$S(\'#wgt_switch_profile\').val()} );'
+      'onchange'  => '$R.redirect(\'index.php\',{c:\'Webfrap.Profile.change\',profile:$S(\'#wgt_switch_profile\').val()});'
     ));
 
     return $selectboxProfile;

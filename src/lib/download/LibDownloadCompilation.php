@@ -30,8 +30,8 @@ class LibDownloadCompilation extends LibDownloadAdapter
 
     $request = Request::getActive();
 
-    if (!$fileName = $request->param('file' , 'Filename' ) ) {
-      throw new Io_Exception('Invalid File Requested :'. urlencode($fileName) );
+    if (!$fileName = $request->param('file' , 'Filename')) {
+      throw new Io_Exception('Invalid File Requested :'. urlencode($fileName));
     }
 
     $this->fileName = $fileName;
@@ -45,8 +45,8 @@ class LibDownloadCompilation extends LibDownloadAdapter
   public function download()
   {
 
-    if (file_exists($this->fullpath )) {
-      $this->setHeaderForceDownload($this->fileName );
+    if (file_exists($this->fullpath)) {
+      $this->setHeaderForceDownload($this->fileName);
       $this->stream($this->fullpath);
     } else {
       $this->setHeaderFileNotFound();

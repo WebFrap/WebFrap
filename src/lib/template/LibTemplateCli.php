@@ -87,7 +87,7 @@ class LibTemplateCli extends Pbase
    * the contstructor
    * @param array $conf the configuration loaded from the conf
    */
-  public function __construct($conf = array() )
+  public function __construct($conf = array())
   {
 
     $this->var     = new TDataObject();
@@ -112,7 +112,7 @@ class LibTemplateCli extends Pbase
   /**
    * @return string
    */
-  public function getType( )
+  public function getType()
   {
     return $this->type;
 
@@ -121,7 +121,7 @@ class LibTemplateCli extends Pbase
   /**
    * @param Model $model
    */
-  public function setModel($model )
+  public function setModel($model)
   {
     $this->model = $model;
   }//end public function setModel */
@@ -129,20 +129,20 @@ class LibTemplateCli extends Pbase
   /**
    * @param string $key
    */
-  public function loadView($key )
+  public function loadView($key)
   {
 
     $className = $key.'_View';
 
-    if (!Webfrap::loadable($className) )
-      throw new LibTemplate_Exception('Requested nonexisting View '.$key );
+    if (!Webfrap::loadable($className))
+      throw new LibTemplate_Exception('Requested nonexisting View '.$key);
 
     $this->subView  = new $className();
 
-    $this->subView->setI18n($this->i18n );
-    $this->subView->setUser($this->user );
-    $this->subView->setTplEngine($this );
-    $this->subView->setView($this );
+    $this->subView->setI18n($this->i18n);
+    $this->subView->setUser($this->user);
+    $this->subView->setTplEngine($this);
+    $this->subView->setView($this);
 
     return $this->subView;
 
@@ -155,13 +155,13 @@ class LibTemplateCli extends Pbase
    * @param string $data Die Daten für ein bestimmtes Feld
    * @return void
    */
-  public function addVar($key, $data = null )
+  public function addVar($key, $data = null)
   {
 
-    if ( is_scalar($key) ) {
+    if (is_scalar($key)) {
       $this->var->content[$key] = $data;
-    } elseif ( is_array($key) ) {
-      $this->var->content = array_merge($this->var->content, $key );
+    } elseif (is_array($key)) {
+      $this->var->content = array_merge($this->var->content, $key);
     }
 
   } // end public function addVar  */
@@ -176,9 +176,9 @@ class LibTemplateCli extends Pbase
   public function newItem($key, $type  )
   {
 
-    if ( isset($this->object->content[$key]) ) {
+    if (isset($this->object->content[$key])) {
       return $this->object->content[$key];
-    } elseif ( is_object($type) ) {
+    } elseif (is_object($type)) {
       $this->object->content[$key] = $type;
 
       return $type;
@@ -186,8 +186,8 @@ class LibTemplateCli extends Pbase
 
       $className     = $type;
 
-      if (!WebFrap::loadable($className) )
-        throw new WgtItemNotFound_Exception( 'Item '.$className.' is not loadable' );
+      if (!WebFrap::loadable($className))
+        throw new WgtItemNotFound_Exception('Item '.$className.' is not loadable');
 
       $object        = new $className($key);
       $object->view  = $this; // add back reference to the owning view
@@ -196,7 +196,7 @@ class LibTemplateCli extends Pbase
       $this->object->content[$key] = $object;
 
       if (DEBUG)
-        Debug::console('Created Item: '.$className .' key: '.$key );
+        Debug::console('Created Item: '.$className .' key: '.$key);
 
       return $object;
 
@@ -210,20 +210,20 @@ class LibTemplateCli extends Pbase
    * @param string $type
    * @return WgtInput
    */
-  public function newInput($key, $type )
+  public function newInput($key, $type)
   {
 
-    if ( isset($this->object->content[$key]) ) {
+    if (isset($this->object->content[$key])) {
       return $this->object->content[$key];
-    } elseif ( is_object($type) ) {
+    } elseif (is_object($type)) {
       $this->object->content[$key] = $type;
 
       return $type;
     } else {
       $className = 'WgtInput'.ucfirst($type);
 
-      if (!WebFrap::loadable($className) ) {
-        throw new WgtItemNotFound_Exception( 'Class '.$className.' was not found' );
+      if (!WebFrap::loadable($className)) {
+        throw new WgtItemNotFound_Exception('Class '.$className.' was not found');
       } else {
         $object = new $className($key);
         $this->object->content[$key] = $object;
@@ -245,7 +245,7 @@ class LibTemplateCli extends Pbase
    * write
    * @param string $content
    */
-  public function write($content )
+  public function write($content)
   {
     $this->response->write($content);
   }//end public function write */
@@ -253,7 +253,7 @@ class LibTemplateCli extends Pbase
   /**
    * @param string $content
    */
-  public function writeLn($content )
+  public function writeLn($content)
   {
     $this->response->writeLn($content);
   }//end public function writeLn */
@@ -261,7 +261,7 @@ class LibTemplateCli extends Pbase
   /**
    * @param string $content
    */
-  public function writeErr($content )
+  public function writeErr($content)
   {
     $this->response->writeErr($content);
   }//end public function writeErr */
@@ -269,7 +269,7 @@ class LibTemplateCli extends Pbase
   /**
    * @param string $content
    */
-  public function writeErrLn($content )
+  public function writeErrLn($content)
   {
     $this->response->writeErrLn($content);
   }//end public function writeErr */
@@ -286,7 +286,7 @@ class LibTemplateCli extends Pbase
   * @param string $message
   * @param mixed $dump
    */
-  public static function printErrorPage($message, $dump )
+  public static function printErrorPage($message, $dump)
   {
 
     $this->response->writeLn($message);
@@ -296,10 +296,10 @@ class LibTemplateCli extends Pbase
   /**
    * @param string $content
    */
-  public function setTitle($content )
+  public function setTitle($content)
   {
     $response = $this->getResponse();
-    $response->writeLn($content );
+    $response->writeLn($content);
   }//end public function setTitle */
 
  /**
@@ -327,10 +327,10 @@ class LibTemplateCli extends Pbase
   public function isType($type  )
   {
 
-    if ( is_array($type ) ) {
+    if (is_array($type)) {
 
       foreach ($type as $key) {
-        if ($this->type === $key )
+        if ($this->type === $key)
           return true;
       }
 

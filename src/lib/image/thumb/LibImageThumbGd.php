@@ -28,19 +28,19 @@ class LibImageThumbGd extends LibImageThumbAdapter
    * Enter description here...
    *
    */
-  public function genThumb( )
+  public function genThumb()
   {
 
     $errorpic = View::$themeWeb."/images/wgt/not_available.png";
 
-    if ( file_exists($this->origName ) ) {
+    if (file_exists($this->origName)) {
       $pic = $this->origName;
     } else {
       $pic = $errorpic;
     }
 
     try {
-      $imgdata      = getimagesize ($pic );
+      $imgdata      = getimagesize ($pic);
       $org_width    = $imgdata[0];
       $org_height   = $imgdata[1];
       $type         = $imgdata[2];
@@ -48,7 +48,7 @@ class LibImageThumbGd extends LibImageThumbAdapter
       switch ($type) {
         case 1 :
         {
-          if (!$im = ImageCreateFromGIF($pic)) {
+          if (!$im = ImageCreateFromGif ($pic)) {
             throw new LibImage_Exception("Konnte das Bild nicht erstellen");
           }
           break;
@@ -89,15 +89,15 @@ class LibImageThumbGd extends LibImageThumbAdapter
       if ($org_width > $org_height) {
         $verhaltnis = $org_width / $org_height;
         $new_width = $this->maxWidth;
-        $new_height = round( ($new_width / $verhaltnis)  ) ;
+        $new_height = round(($new_width / $verhaltnis)  ) ;
       } else {
         $verhaltnis = $org_height / $org_width ;
         $new_height = $this->maxHeight;
-        $new_width = round( ($new_height / $verhaltnis)  ) ;
+        $new_width = round(($new_height / $verhaltnis)  ) ;
       }
 
       // neugenerieren des THUMBS
-      $thumb = imagecreatetruecolor($new_width, $new_height );
+      $thumb = imagecreatetruecolor($new_width, $new_height);
 
       imagecopyresampled
       (
@@ -107,13 +107,13 @@ class LibImageThumbGd extends LibImageThumbAdapter
       $new_width,$new_height,$org_width,$org_height
       );
 
-      if (!imagejpeg($thumb, $this->thumbName , 95 )) {
+      if (!imagejpeg($thumb, $this->thumbName , 95)) {
         throw new LibImage_Exception('Failed to create '.$this->thumbName);
       }
 
       return true;
 
-    } catch ( LibImage_Exception $e ) {
+    } catch (LibImage_Exception $e) {
       return false;
     }
 

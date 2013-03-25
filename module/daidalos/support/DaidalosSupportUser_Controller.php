@@ -46,8 +46,8 @@ class DaidalosSupportUser_Controller extends Controller
   (
     'overview' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab'  )
+      'method'    => array('GET'),
+      'views'      => array('maintab'  )
     ),
   );
 
@@ -60,7 +60,7 @@ class DaidalosSupportUser_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_overview($request, $response )
+  public function service_overview($request, $response)
   {
 
     $params = $this->getFlags($request);
@@ -73,10 +73,10 @@ class DaidalosSupportUser_Controller extends Controller
       View::MAINTAB
     );
 
-    $model  = $this->loadModel( 'DaidalosSupportUser' );
-    $view->setModel($model );
+    $model  = $this->loadModel('DaidalosSupportUser');
+    $view->setModel($model);
 
-    $view->display($request, $response, $params );
+    $view->display($request, $response, $params);
 
   }//end public function service_overview */
 

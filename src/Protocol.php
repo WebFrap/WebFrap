@@ -34,8 +34,8 @@ class Protocol extends BaseChild
   {
 
     if (!self::$default) {
-      self::$default = new Protocol( );
-      self::$default->setEnv( Webfrap::$env  );
+      self::$default = new Protocol();
+      self::$default->setEnv(Webfrap::$env  );
     }
 
     return self::$default;
@@ -53,10 +53,10 @@ class Protocol extends BaseChild
     $orm  = $db->orm;
     $user = $this->getUser();
 
-    if ( is_array($entity) ) {
+    if (is_array($entity)) {
       $resourceId = $orm->getResourceId($entity[0]);
       $entityId   = $entity[1];
-    } elseif ( is_string($entity) ) {
+    } elseif (is_string($entity)) {
       $resourceId = $orm->getResourceId($entity);
       $entityId   = null;
     } else {
@@ -65,8 +65,8 @@ class Protocol extends BaseChild
     }
 
     if (!$resourceId) {
-      Debug::console( "Got no Resource ID, this means the datamodell is not yet synced." );
-      Log::warn( "Got no Resource ID, this means the datamodell is not yet synced." );
+      Debug::console("Got no Resource ID, this means the datamodell is not yet synced.");
+      Log::warn("Got no Resource ID, this means the datamodell is not yet synced.");
 
       return;
     }
@@ -79,11 +79,11 @@ class Protocol extends BaseChild
       $valVid  = "NULL";
     }
 
-    $maskId = $this->getMaskId($mask );
+    $maskId = $this->getMaskId($mask);
 
     $createDate = date("Y-m-d H:i:s");
 
-    $label = $db->addSlashes($label );
+    $label = $db->addSlashes($label);
 
     $sql = <<<SQL
 
@@ -100,9 +100,9 @@ WHERE
 
 SQL;
 
-    $db->exec($sql );
+    $db->exec($sql);
 
-    if (!$db->getAffectedRows() ) {
+    if (!$db->getAffectedRows()) {
       $sql = <<<SQL
 
 INSERT INTO wbfsys_protocol_access
@@ -128,7 +128,7 @@ VALUES
 
 SQL;
 
-      $db->exec($sql );
+      $db->exec($sql);
     }
 
   }//end public function updateLastVisited */
@@ -137,7 +137,7 @@ SQL;
    * @param string $maskKey
    * @return int
    */
-  public function getMaskId($maskKey )
+  public function getMaskId($maskKey)
   {
 
     $orm   = $this->getOrm();
@@ -146,31 +146,31 @@ SQL;
     $cache = $this->getL1Cache();
 
     if ($cache) {
-      $mId = $cache->get( 'wbfmask-'.$maskKey );
+      $mId = $cache->get('wbfmask-'.$maskKey);
 
       if ($mId)
         return $mId;
     }
 
-    $id = $orm->getIdByKey( 'WbfsysMask', $maskKey );
+    $id = $orm->getIdByKey('WbfsysMask', $maskKey);
 
     if ($id) {
 
       if ($cache) {
-        $cache->add( 'wbfmask-'.$maskKey, $id );
+        $cache->add('wbfmask-'.$maskKey, $id);
       }
 
       return $id;
     }
 
-    $mask = $orm->newEntity( 'WbfsysMask' );
+    $mask = $orm->newEntity('WbfsysMask');
     $mask->access_key = $maskKey;
     $mask->name = SParserString::subToName($maskKey);
-    $orm->insert($mask );
+    $orm->insert($mask);
 
     $id = $mask->getId();
     if ($cache) {
-      $cache->add( 'wbfmask-'.$maskKey, $id );
+      $cache->add('wbfmask-'.$maskKey, $id);
     }
 
     return $id;

@@ -36,10 +36,10 @@ class WebfrapDataConnector_Ajax_View extends LibTemplateAjaxView
    * @param WebfrapDataConnector_Search_Request $searchReq
    * @return void
    */
-  public function displaySearch( $searchReq  )
+  public function displaySearch($searchReq  )
   {
 
-    $result = $this->model->search( $searchReq );
+    $result = $this->model->search($searchReq);
     
     $menuBuilder = new WgtMenuBuilder_SplitButton($this);
     $menuBuilder->actions = array('connect');
@@ -74,7 +74,7 @@ XML;
       ++$pos;
     }
 
-    $this->setAreaContent( 'searchResult', <<<XML
+    $this->setAreaContent('searchResult', <<<XML
 <htmlArea selector="table#{$searchReq->elid}>tbody" action="html" ><![CDATA[
 {$html}
 ]]></htmlArea>

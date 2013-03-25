@@ -33,14 +33,14 @@ class MaintenanceBase_Maintab_Menu extends WgtDropmenu
    * build the window menu
    * @param TArray $params
    */
-  public function buildMenu($params )
+  public function buildMenu($params)
   {
 
-    $iconMenu         = $this->view->icon( 'control/menu.png'   , 'Menu'    );
-    $iconMisc         = $this->view->icon( 'control/misc.png'   , 'Misc'    );
-    $iconClose        = $this->view->icon( 'control/close.png'  , 'Close'   );
-    $iconEntity       = $this->view->icon( 'control/entity.png' , 'Entity'  );
-    $iconSearch       = $this->view->icon( 'control/search.png' , 'Search'  );
+    $iconMenu         = $this->view->icon('control/menu.png'   , 'Menu'    );
+    $iconMisc         = $this->view->icon('control/misc.png'   , 'Misc'    );
+    $iconClose        = $this->view->icon('control/close.png'  , 'Close'   );
+    $iconEntity       = $this->view->icon('control/entity.png' , 'Entity'  );
+    $iconSearch       = $this->view->icon('control/search.png' , 'Search'  );
 
     $entries = new TArray();
 
@@ -57,7 +57,7 @@ class MaintenanceBase_Maintab_Menu extends WgtDropmenu
   <div class="wgt-dropdownbox" id="{$this->id}" >
     <ul>
       <li>
-        <a class="wgtac_close" >{$iconClose} {$this->view->i18n->l( 'Close', 'wbf.label' )}</a>
+        <a class="wgtac_close" >{$iconClose} {$this->view->i18n->l('Close', 'wbf.label')}</a>
       </li>
     </ul>
   </div>
@@ -100,7 +100,7 @@ HTML;
    *   string formId: the id of the form;
    * }
    */
-  public function addActions(  $params )
+  public function addActions( $params)
   {
 
     // add the button action for save in the window

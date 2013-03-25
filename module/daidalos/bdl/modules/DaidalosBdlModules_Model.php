@@ -49,13 +49,13 @@ class DaidalosBdlModules_Model extends Model
 
     $conf = $this->getConf();
 
-    $repos = $conf->getResource( 'bdl', 'core_repos' );
+    $repos = $conf->getResource('bdl', 'core_repos');
 
     $repoPath = $repos[$this->key]['path'];
 
-    $repoIterator = new LibFilesystemFolder($repoPath );
+    $repoIterator = new LibFilesystemFolder($repoPath);
 
-    return $repoIterator->getPlainFolders( true );
+    return $repoIterator->getPlainFolders(true);
 
   }//end public function getModules */
 
@@ -67,7 +67,7 @@ class DaidalosBdlModules_Model extends Model
 
     $conf = $this->getConf();
 
-    $repos = $conf->getResource( 'bdl', 'core_repos' );
+    $repos = $conf->getResource('bdl', 'core_repos');
 
     $repoPath = $repos[$this->key]['path'];
 
@@ -78,24 +78,24 @@ class DaidalosBdlModules_Model extends Model
   /**
    * @return array
    */
-  public function getSubModuleFolders($folders )
+  public function getSubModuleFolders($folders)
   {
 
-    $repoIterator = new LibFilesystemFolder($folders );
+    $repoIterator = new LibFilesystemFolder($folders);
 
-    return $repoIterator->getPlainFolders( true );
+    return $repoIterator->getPlainFolders(true);
 
   }//end public function getSubModuleFolders */
 
   /**
    * @return array
    */
-  public function getSubModuleFiles($folders )
+  public function getSubModuleFiles($folders)
   {
 
-    $repoIterator = new LibFilesystemFolder($folders );
+    $repoIterator = new LibFilesystemFolder($folders);
 
-    return $repoIterator->getPlainFiles( true );
+    return $repoIterator->getPlainFiles(true);
 
   }//end public function getSubModuleFiles */
 

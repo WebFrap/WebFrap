@@ -37,23 +37,23 @@ class DaidalosBdlNode_ProfilePermissionRef_Create_Maintab_View extends WgtMainta
    * @param TFlag $params
    * @return void
    */
-  public function displayCreate($path, $params )
+  public function displayCreate($path, $params)
   {
 
-    $this->setLabel( 'Create Permission Reference' );
-    $this->setTitle( 'Create Permission Reference' );
+    $this->setLabel('Create Permission Reference');
+    $this->setTitle('Create Permission Reference');
 
-    $this->addVar( 'key', $this->model->modeller->key );
-    $this->addVar( 'bdlFile', $this->model->modeller->bdlFileName );
-    $this->addVar( 'path', $path );
-    $this->addVar( 'params', $params );
+    $this->addVar('key', $this->model->modeller->key);
+    $this->addVar('bdlFile', $this->model->modeller->bdlFileName);
+    $this->addVar('path', $path);
+    $this->addVar('params', $params);
 
-    $this->setTabId( 'wgt-tab-daidalos-bdl_profile-create-permission-ref' );
+    $this->setTabId('wgt-tab-daidalos-bdl_profile-create-permission-ref');
 
-    $this->setTemplate( 'daidalos/bdl/node/profile/permission_ref/maintab/create' );
+    $this->setTemplate('daidalos/bdl/node/profile/permission_ref/maintab/create');
 
     $params = new TArray();
-    $this->addMenu($params );
+    $this->addMenu($params);
 
   }//end public function displayCreate */
 
@@ -66,7 +66,7 @@ class DaidalosBdlNode_ProfilePermissionRef_Create_Maintab_View extends WgtMainta
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu($params )
+  public function addMenu($params)
   {
 
     $menu     = $this->newMenu
@@ -76,9 +76,9 @@ class DaidalosBdlNode_ProfilePermissionRef_Create_Maintab_View extends WgtMainta
     );
 
     $menu->id = $this->id.'_dropmenu';
-    $menu->buildMenu(  $params );
+    $menu->buildMenu( $params);
 
-    $menu->injectActions($this, $params );
+    $menu->injectActions($this, $params);
 
   }//end public function addMenu */
 

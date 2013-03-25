@@ -59,7 +59,7 @@ class DeveloperSearch_Model extends Model
   public function getProjects()
   {
 
-    $xml = simplexml_load_file( PATH_GW.'/data/bdl/workspace/projects.xml' );
+    $xml = simplexml_load_file(PATH_GW.'/data/bdl/workspace/projects.xml');
 
     $projects = array();
 

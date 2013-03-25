@@ -46,13 +46,13 @@ class CmsMedia_Controller extends Controller
   (
     'dev' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
     'open' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'modal', 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('modal', 'maintab')
     ),
   );
 
@@ -79,10 +79,10 @@ class CmsMedia_Controller extends Controller
       true
     );
 
-    $view->setModel($model );
+    $view->setModel($model);
 
     // call the create form on the view
-    if (!$view->displayMediatheke($key, $params ) ) {
+    if (!$view->displayMediatheke($key, $params)) {
       // if display fails show the error page
       $this->errorPage
       (
@@ -115,7 +115,7 @@ class CmsMedia_Controller extends Controller
 
     $model    = $this->loadModel('CmsMedia');
 
-    $key = $request->param('key', Validator::CKEY );
+    $key = $request->param('key', Validator::CKEY);
 
     $view     = $response->loadView
     (
@@ -126,10 +126,10 @@ class CmsMedia_Controller extends Controller
       true
     );
 
-    $view->setModel($model );
+    $view->setModel($model);
 
     // call the create form on the view
-    $view->displayMediatheke($key, $params );
+    $view->displayMediatheke($key, $params);
 
   }//end public function service_open */
 

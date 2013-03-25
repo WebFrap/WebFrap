@@ -86,7 +86,7 @@ class WebfrapDataConnector_Controller extends Controller
     
     $searchReq = new WebfrapDataConnector_Search_Request($request);
 
-    $view->displaySelection( $searchReq );
+    $view->displaySelection($searchReq);
 
   }//end public function service_selection */
   
@@ -111,7 +111,7 @@ class WebfrapDataConnector_Controller extends Controller
     /* @var $model WebfrapDataConnector_Model */
     $model = $this->loadModel('WebfrapDataConnector');
     $view->setModel($model);
-    $view->displaySearch( $searchReq );
+    $view->displaySearch($searchReq);
 
   }//end public function service_search */
 

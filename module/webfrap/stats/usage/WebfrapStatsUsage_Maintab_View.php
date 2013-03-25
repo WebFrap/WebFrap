@@ -32,7 +32,7 @@ class WebfrapStatsUsage_Maintab_View extends WgtMaintab
    * @param int $containerId
    * @return void
    */
-  public function displayStats( )
+  public function displayStats()
   {
 
     /* @var $model WebfrapStatsUsage_Model */
@@ -40,10 +40,10 @@ class WebfrapStatsUsage_Maintab_View extends WgtMaintab
 
     $activeNode = $model->getActiveNode();
 
-    $this->setLabel( 'Usage Stats' );
-    $this->setTitle( 'Usage Stats' );
+    $this->setLabel('Usage Stats');
+    $this->setTitle('Usage Stats');
 
-    $this->setTemplate( 'webfrap/stats/maintab/usage' );
+    $this->setTemplate('webfrap/stats/maintab/usage');
 
     $this->addMenu();
 
@@ -58,21 +58,21 @@ class WebfrapStatsUsage_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu(  )
+  public function addMenu()
   {
 
     $iconMenu          = '<i class="icon-reorder" ></i>';
-    $iconClose         = $this->icon( 'control/close.png'    ,'Close'   );
-    $iconSearch        = $this->icon( 'control/search.png'   ,'Search'  );
-    $iconBookmark      = $this->icon( 'control/bookmark.png' ,'Bookmark');
-    $iconRefresh       = $this->icon( 'control/refresh.png' ,'Refresh' );
+    $iconClose         = $this->icon('control/close.png'    ,'Close'   );
+    $iconSearch        = $this->icon('control/search.png'   ,'Search'  );
+    $iconBookmark      = $this->icon('control/bookmark.png' ,'Bookmark');
+    $iconRefresh       = $this->icon('control/refresh.png' ,'Refresh');
 
-    $iconSupport   = $this->icon( 'control/support.png'  ,'Support' );
-    $iconBug       = $this->icon( 'control/bug.png'      ,'Bug' );
-    $iconFaq       = $this->icon( 'control/faq.png'      ,'Faq' );
-    $iconHelp      = $this->icon( 'control/help.png'     ,'Help' );
+    $iconSupport   = $this->icon('control/support.png'  ,'Support');
+    $iconBug       = $this->icon('control/bug.png'      ,'Bug');
+    $iconFaq       = $this->icon('control/faq.png'      ,'Faq');
+    $iconHelp      = $this->icon('control/help.png'     ,'Help');
 
-    $menu     = $this->newMenu($this->id.'_dropmenu' );
+    $menu     = $this->newMenu($this->id.'_dropmenu');
 
     $menu->id = $this->id.'_dropmenu';
 
@@ -114,7 +114,7 @@ class WebfrapStatsUsage_Maintab_View extends WgtMaintab
 
 HTML;
 
-    $this->injectActions($menu );
+    $this->injectActions($menu);
 
   }//end public function addMenu */
 
@@ -131,7 +131,7 @@ HTML;
    *     services
    * }
    */
-  public function injectActions($menu )
+  public function injectActions($menu)
   {
 
     // add the button action for save in the window
@@ -148,7 +148,7 @@ HTML;
 
 BUTTONJS;
 
-    $this->addJsCode($code );
+    $this->addJsCode($code);
 
   }//end public function injectActions */
 

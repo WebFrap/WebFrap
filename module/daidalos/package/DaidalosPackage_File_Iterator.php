@@ -60,14 +60,14 @@ class DaidalosPackage_File_Iterator extends IoFileIterator
     $this->recursive  = $recursive;
     $this->targetFolder = $targetFolder;
 
-    if ($filter )
-      $this->filter     = explode( ',', $filter );
+    if ($filter)
+      $this->filter     = explode(',', $filter);
 
-    if ( is_dir($folder) ) {
-      $this->fRes = opendir($folder );
+    if (is_dir($folder)) {
+      $this->fRes = opendir($folder);
       $this->next();
     } else {
-      Debug::console( 'Tried to open nonexisting Folder: '.$folder );
+      Debug::console('Tried to open nonexisting Folder: '.$folder);
     }
 
   }// public function __construct
@@ -105,19 +105,19 @@ class DaidalosPackage_File_Iterator extends IoFileIterator
         }
       }
 
-      $current = readdir($this->fRes );
+      $current = readdir($this->fRes);
 
       // dirty.... so what?
-      if ( '.' == $current  )
+      if ('.' == $current  )
         continue;
 
-      if ( '..' == $current )
+      if ('..' == $current)
         continue;
 
       if ($current) {
-        if ( is_dir($this->folder.'/'.$current )  ) {
+        if (is_dir($this->folder.'/'.$current)  ) {
 
-          if (!$this->recursive )
+          if (!$this->recursive)
             continue;
 
           // wenn current ein ordner ist wird ers über ihn iteriert bevor
@@ -151,16 +151,16 @@ class DaidalosPackage_File_Iterator extends IoFileIterator
           // auf eine dateiendung prüfen
           if ($this->filter) {
 
-            $info = pathinfo(str_replace( '//', '/', $this->folder.'/'.$current ));
+            $info = pathinfo(str_replace('//', '/', $this->folder.'/'.$current));
 
-            if (!in_array( strtolower('.'.$info['extension']), $this->filter  )  )
+            if (!in_array(strtolower('.'.$info['extension']), $this->filter  )  )
               continue;
 
           }
 
           // den rückgabe modus auswerten
-          if ($this->fileMode != IoFileIterator::FILE_ONLY )
-            $current = str_replace( '//', '/', $this->folder.'/'.$current );
+          if ($this->fileMode != IoFileIterator::FILE_ONLY)
+            $current = str_replace('//', '/', $this->folder.'/'.$current);
 
         }
 
@@ -174,12 +174,12 @@ class DaidalosPackage_File_Iterator extends IoFileIterator
     }
 
     // sicher stellen, dass die pfade korrekt sind
-    if ($current )
+    if ($current)
       $this->current = $current;
     else
       $this->current = null;
 
-    $this->key = $this->targetFolder.'/'.SParserString::shiftXTokens(str_replace( array('../','//'), array('/','/'), $current ), '/', 2);
+    $this->key = $this->targetFolder.'/'.SParserString::shiftXTokens(str_replace(array('../','//'), array('/','/'), $current), '/', 2);
 
     return $this->current;
 

@@ -67,8 +67,7 @@ class ETaskStatus
   /**
    * @var array
    */
-  public static $labels = array
-  (
+  public static $labels = array(
     self::OPEN      => 'Open',
     self::RUNNING   => 'Running',
     self::WAITING   => 'Waiting',
@@ -82,9 +81,9 @@ class ETaskStatus
    * @param string $key
    * @return string
    */
-  public static function label($key )
+  public static function label($key)
   {
-    return isset( self::$labels[$key] )
+    return isset(self::$labels[$key])
       ? self::$labels[$key]
       : self::$labels[self::OPEN]; // no status? so it's open
 

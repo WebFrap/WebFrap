@@ -29,18 +29,18 @@ class SFolders
    * @throws Webfrap_Exception
    * @return array
    */
-  public static function move($oldPos, $newPos )
+  public static function move($oldPos, $newPos)
   {
     $sys = Webfrap::getActive();
-    $os = substr( 0 , 3 , $sys->getSysStatus('serveros'));
+    $os = substr(0 , 3 , $sys->getSysStatus('serveros'));
 
     $cname = IncFolders.$os;
 
-    if ( WebFrap::loadable($cname) ) {
+    if (WebFrap::loadable($cname)) {
 
-      call_user_func( array($cname , 'move' ) , $oldPos , $newPos  );
+      call_user_func(array($cname , 'move') , $oldPos , $newPos  );
 
-      //  call_user_func ( "$cname::Move" , $oldPos , $newPos );
+      //  call_user_func ("$cname::Move" , $oldPos , $newPos);
       //  $cname::Move($oldPos , $newPos  );
       //  IncFoldersLin::move($oldPos , $newPos  );
 
@@ -58,16 +58,16 @@ class SFolders
    * @throws Webfrap_Exception
    * @return array
    */
-  public static function copy($oldPos, $newPos )
+  public static function copy($oldPos, $newPos)
   {
 
     $sys = Webfrap::getActive();
-    $os = substr( 0 , 3 , $sys->getSysStatus('serveros'));
+    $os = substr(0 , 3 , $sys->getSysStatus('serveros'));
 
     $cname = IncFolders.$os;
 
-    if ( class_exists($cname) ) {
-      call_user_func ( array($cname  , 'copy' ) , $oldPos , $newPos );
+    if (class_exists($cname)) {
+      call_user_func (array($cname  , 'copy') , $oldPos , $newPos);
     } else {
       throw new WebfrapSys_Exception('Diese Aktion wird für '.
         'dieser Betriebsystem nicht unterstützt!');
@@ -81,7 +81,7 @@ class SFolders
    * @throws Webfrap_Exception
    * @return array
    */
-  public static function delete($todel )
+  public static function delete($todel)
   {
 
     SFilesystem::delete($todel);
@@ -107,21 +107,21 @@ class SFolders
 
     // auslesen und auswerten
     if ($dh = opendir($Folder)) {
-        while ( ($PotFolder = readdir($dh) ) !== false ) {
+        while (($PotFolder = readdir($dh)) !== false) {
 
             if ($PotFolder != "." and $PotFolder != "..") {
 
               $FullPath = $Folder."/".$PotFolder ;
 
-              if ( is_file($FullPath ) ) {
-                if ( SFiles::hasEnding($PotFolder , $Ending )   ) {
-                  SFiles::replaceInFile(  $FullPath ,
+              if (is_file($FullPath)) {
+                if (SFiles::hasEnding($PotFolder , $Ending)   ) {
+                  SFiles::replaceInFile( $FullPath ,
                                             $OldString ,
                                             $NewString
                                          );
                 }// Ende if
               }// Ende if
-              if ( is_dir($FullPath ) ) {
+              if (is_dir($FullPath)) {
 
                 $Folders[] = $FullPath;
               }
@@ -133,7 +133,7 @@ class SFolders
     // Seperate rekursion, dass nicht 2000 Ordner aufeinmal offen sind sondern
     // immer nur einer
     foreach ($Folders as $Folder) {
-      self::rekReplaceStrings(  $Folder ,
+      self::rekReplaceStrings( $Folder ,
                                 $OldString,
                                 $NewString,
                                 $Ending
@@ -152,14 +152,14 @@ class SFolders
    * @param boolean $hidden show also hidden files
    * @return array
    */
-  public static function getContent($folder, $fullPath = true, $type = 'a', $exclude = array(), $hidden = false )
+  public static function getContent($folder, $fullPath = true, $type = 'a', $exclude = array(), $hidden = false)
   {
 
-    if (!is_dir($folder ) ) {
+    if (!is_dir($folder)) {
       throw new Io_Exception($folder.' ist kein existierender Ordner');
     }
 
-    if (!is_readable($folder )) {
+    if (!is_readable($folder)) {
       throw new Io_Exception($folder.' kann nicht zum lesen geöffnet werden');
     }
 
@@ -176,7 +176,7 @@ class SFolders
       }
 
     } else {
-      return self::getFolderContent(  $folder, $fullPath, $type, $hidden );
+      return self::getFolderContent( $folder, $fullPath, $type, $hidden);
     }
 
   } // end public static function getFoldercontent($folder , $hidden = false , $exclude = false  )
@@ -189,47 +189,47 @@ class SFolders
    * @param string $type
    * @return array
    */
-  public static function getFolderContent($folder, $fullPath, $type , $hidden = false )
+  public static function getFolderContent($folder, $fullPath, $type , $hidden = false)
   {
 
     $files = array();
 
     if ($hidden) {
       if ($dh = opendir($folder)) {
-        while ( ($file = readdir($dh) ) !== false ) {
+        while (($file = readdir($dh)) !== false) {
           if ($file != '.' and  $file != '..') {
             if ($type=='a') {
                $files[] = $fullPath.$file;
-            } elseif ($type=='f' and is_file($folder.'/'.$file) ) {
+            } elseif ($type=='f' and is_file($folder.'/'.$file)) {
               $files[] = $fullPath.$file;
-            } elseif ($type=='d' and is_dir($folder.'/'.$file) ) {
+            } elseif ($type=='d' and is_dir($folder.'/'.$file)) {
               $files[] = $fullPath.$file;
             }
           }
-        }//end while ( ($file = readdir($dh) ) !== false )
+        }//end while (($file = readdir($dh)) !== false)
         closedir($dh);
       }//end if ($dh = opendir($folder))
     }//end if ($hidden)
     else {
       if ($dh = opendir($folder)) {
-        while ( ($file = readdir($dh) ) !== false ) {
+        while (($file = readdir($dh)) !== false) {
           if ($file[0] != '.') {
             if ($type=='a') {
                $files[] = $fullPath.$file;
-            } elseif ($type=='f' and is_file($folder.'/'.$file) ) {
+            } elseif ($type=='f' and is_file($folder.'/'.$file)) {
               $files[] = $fullPath.$file;
-            } elseif ($type=='d' and is_dir($folder.'/'.$file) ) {
+            } elseif ($type=='d' and is_dir($folder.'/'.$file)) {
               $files[] = $fullPath.$file;
             }
           }
-        }//end while ( ($file = readdir($dh) ) !== false )
+        }//end while (($file = readdir($dh)) !== false)
         closedir($dh);
       }//end if ($dh = opendir($folder))
     }//end else($hidden)
 
     return $files;
 
-  } // end public static function getFoldercontentNohidden($folder )
+  } // end public static function getFoldercontentNohidden($folder)
 
   /**
    * Enter description here...
@@ -240,13 +240,13 @@ class SFolders
    * @param unknown_type $excludes
    * @return unknown
    */
-  public static function getFolderContentExclude($folder , $fullPath, $type , $excludes )
+  public static function getFolderContentExclude($folder , $fullPath, $type , $excludes)
   {
 
     $files = array();
 
     if ($dh = opendir($folder)) {
-      while ( ($file = readdir($dh) ) !== false ) {
+      while (($file = readdir($dh)) !== false) {
         $break = false;
 
         if ($file != '.' and $file != '..') {
@@ -262,18 +262,18 @@ class SFolders
             $key = $data[0];
             $value = $data[1];
 
-            switch ( strtolower($key) ) {
+            switch (strtolower($key)) {
               case 'begin':
               {
                 // Sind Anfang und Exclude identisch?
-                if ( substr(  $file  , 0 , strlen($value) ==  $value )) {
+                if (substr( $file  , 0 , strlen($value) ==  $value)) {
                   $break = true;
                 }
                 break;
               }// Ende Case
               case 'contains':
               {
-                if ( stripos($file , $value ) ) {
+                if (stripos($file , $value)) {
                   $break = true;
                 }
                 break;
@@ -282,7 +282,7 @@ class SFolders
               {
                 // Sind Ende und Exclude identisch?
                 $length = strlen($value);
-                if ( substr(  $file  ,(0-$length) ,$length ) ==  $value ) {
+                if (substr( $file  ,(0-$length) ,$length) ==  $value) {
                   $break = true;
                 }
                 break;
@@ -298,20 +298,20 @@ class SFolders
           if ((!$break and !$negator) or ($break and $negator)) {
             if ($type=='a') {
                $files[] = $fullPath.$file;
-            } elseif ($type=='f' and is_file($folder.'/'.$file) ) {
+            } elseif ($type=='f' and is_file($folder.'/'.$file)) {
               $files[] = $fullPath.$file;
-            } elseif ($type=='d' and is_dir($folder.'/'.$file) ) {
+            } elseif ($type=='d' and is_dir($folder.'/'.$file)) {
               $files[] = $fullPath.$file;
             }
           }//end if (!$break)
-        }//en if ($file != '.' and $file != '..' )
-      }//end while ( ($file = readdir($dh) ) !== false )
+        }//en if ($file != '.' and $file != '..')
+      }//end while (($file = readdir($dh)) !== false)
       closedir($dh);
     }
 
     return $files;
 
-  } // end public static function getFoldercontentExclude($folder , $excludes )
+  } // end public static function getFoldercontentExclude($folder , $excludes)
 
   /**
    * Enter description here...
@@ -322,7 +322,7 @@ class SFolders
    * @param unknown_type $excludes
    * @return array
    */
-  public static function getFolderContentNohiddenExclude($folder, $fullPath, $type, $excludes )
+  public static function getFolderContentNohiddenExclude($folder, $fullPath, $type, $excludes)
   {
     if (Log::$levelDebug)
       Log::start(__file__,__line__,__method__,array($folder, $fullPath, $type, $excludes));
@@ -330,7 +330,7 @@ class SFolders
     $files = array();
 
     if ($dh = opendir($folder)) {
-      while ( ($file = readdir($dh) ) !== false ) {
+      while (($file = readdir($dh)) !== false) {
 
         $break = false;
 
@@ -348,11 +348,11 @@ class SFolders
             $key = $data[0];
             $value = $data[1];
 
-            switch ( strtolower($key) ) {
+            switch (strtolower($key)) {
               case 'begin':
               {
                 // Sind Anfang und Exclude identisch?
-                if ( substr($file,0,strlen($value) )==  $value ) {
+                if (substr($file,0,strlen($value))==  $value) {
                   $break = true;
                 }
                 break;
@@ -361,7 +361,7 @@ class SFolders
               case 'contains':
               {
                 $string = $value;
-                if ( stripos($file , $value ) ) {
+                if (stripos($file , $value)) {
                   $break = true;
                 }
                 break;
@@ -372,7 +372,7 @@ class SFolders
                 // Sind Ende und Exclude identisch?
                 $length = strlen($value);
                 $start = strlen($file) - $length;
-                if ( substr($file,$start,$length) ==  $value ) {
+                if (substr($file,$start,$length) ==  $value) {
                   $break = true;
                 }
                 break;
@@ -386,20 +386,20 @@ class SFolders
 
           }// Ende Foreach
 
-          if ((!$break and !$negator) or ($break and $negator) ) {
+          if ((!$break and !$negator) or ($break and $negator)) {
             if ($type=='a') {
                $files[] = $fullPath.$file;
-            } elseif ($type=='f' and is_file($folder.'/'.$file) ) {
+            } elseif ($type=='f' and is_file($folder.'/'.$file)) {
               $files[] = $fullPath.$file;
-            } elseif ($type=='d' and is_dir($folder.'/'.$file) ) {
+            } elseif ($type=='d' and is_dir($folder.'/'.$file)) {
               $files[] = $fullPath.$file;
             }
 
           }//end if (!$break)
 
-        }//end if ($file[0] != '.' )
+        }//end if ($file[0] != '.')
 
-      }//end while ( ($file = readdir($dh) ) !== false )
+      }//end while (($file = readdir($dh)) !== false)
 
       closedir($dh);
 
@@ -407,6 +407,6 @@ class SFolders
 
     return $files;
 
-  } // end public static function getFoldercontentNohiddenExclude($folder , $excludes )
+  } // end public static function getFoldercontentNohiddenExclude($folder , $excludes)
 
 } // end class SFolders

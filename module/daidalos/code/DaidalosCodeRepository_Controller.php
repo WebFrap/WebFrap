@@ -46,8 +46,8 @@ class DaidalosCodeRepository_Controller extends Controller
   (
     'archive' => array
     (
-      'method'    => array( 'PUT' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
     ),
   );
 
@@ -58,43 +58,43 @@ class DaidalosCodeRepository_Controller extends Controller
   /**
    * @return void
    */
-  public function service_listing($request, $response )
+  public function service_listing($request, $response)
   {
 
-    if ($this->tplEngine->isType( View::WINDOW ) ) {
-      $view = $this->tplEngine->newWindow( 'DaidalosCodeRepository', 'DaidalosCodeRepository' );
+    if ($this->tplEngine->isType(View::WINDOW)) {
+      $view = $this->tplEngine->newWindow('DaidalosCodeRepository', 'DaidalosCodeRepository');
     } else {
       $view = $this->tplEngine;
     }
 
-    $model = $this->loadModel( 'DaidalosCodeRepository' );
-    $view->setModel($model );
+    $model = $this->loadModel('DaidalosCodeRepository');
+    $view->setModel($model);
 
-    $params = $this->getFlags($this->getRequest() );
+    $params = $this->getFlags($this->getRequest());
 
-    $view->displayListing($params );
+    $view->displayListing($params);
 
   } // end public function listing
 
   /**
    * @return void
    */
-  public function service_syncAll( )
+  public function service_syncAll()
   {
 
-    $model = $this->loadModel( 'DaidalosProjects' );
-    $params = $this->getFlags($this->getRequest() );
+    $model = $this->loadModel('DaidalosProjects');
+    $params = $this->getFlags($this->getRequest());
 
   } // end public function sync
 
   /**
    * @return void
    */
-  public function service_sync( )
+  public function service_sync()
   {
 
-    $model = $this->loadModel( 'DaidalosProjects' );
-    $params = $this->getFlags($this->getRequest() );
+    $model = $this->loadModel('DaidalosProjects');
+    $params = $this->getFlags($this->getRequest());
 
   } // end public function sync
 

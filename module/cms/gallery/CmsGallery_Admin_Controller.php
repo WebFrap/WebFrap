@@ -46,8 +46,8 @@ class CmsGallery_Admin_Controller extends Controller
   (
     'show' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'modal', 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('modal', 'maintab')
     ),
   );
 
@@ -73,10 +73,10 @@ class CmsGallery_Admin_Controller extends Controller
       true
     );
 
-    $view->setModel($model );
+    $view->setModel($model);
 
     // call the create form on the view
-    if (!$view->displayGallery($key, $params ) ) {
+    if (!$view->displayGallery($key, $params)) {
       // if display fails show the error page
       $this->errorPage
       (

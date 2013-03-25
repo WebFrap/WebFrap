@@ -40,10 +40,10 @@ class WgtStyle
    *
    * @return WgtStyleNode
    */
-  public function __get($type )
+  public function __get($type)
   {
 
-    if (!isset($this->styles[$type] )) {
+    if (!isset($this->styles[$type])) {
       $styleClass = 'WgtStyle'.ucfirst($type);
       $this->styles[$type] = new $styleClass();
     }

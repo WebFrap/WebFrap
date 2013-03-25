@@ -29,7 +29,7 @@ class WgtInputButton extends WgtInput
    *
    * @return string
    */
-  public function build($attributes = array() )
+  public function build($attributes = array())
   {
 
     if ($attributes)
@@ -46,7 +46,7 @@ class WgtInputButton extends WgtInput
 
     return $html;
 
-  } // end public function build( )
+  } // end public function build()
 
 } // end class WgtItemButton
 

@@ -36,7 +36,7 @@ class ProcessBase_Table_Element extends WgtTable
   /**
    * @var array
    */
-  public $classes  = array( 'full' );
+  public $classes  = array('full');
 
   /**
    * the most likley class of a given query object
@@ -76,7 +76,7 @@ class ProcessBase_Table_Element extends WgtTable
    * create the head for the table
    * @return string
    */
-  public function buildThead( )
+  public function buildThead()
   {
 
     $this->numCols = 4;
@@ -96,8 +96,8 @@ class ProcessBase_Table_Element extends WgtTable
 
     // the default navigation col
     /*
-    if ($this->enableNav )
-      $html .= '<th style="width:70px;">'.$this->i18n->l( 'Nav.', 'wbf.label'  ).'</th>'.NL;
+    if ($this->enableNav)
+      $html .= '<th style="width:70px;">'.$this->i18n->l('Nav.', 'wbf.label'  ).'</th>'.NL;
     */
 
     $html .= '</tr>'.NL;
@@ -111,7 +111,7 @@ class ProcessBase_Table_Element extends WgtTable
    * create the body for the table
    * @return string
    */
-  public function buildTbody( )
+  public function buildTbody()
   {
 
     $body = '<tbody>'.NL;
@@ -126,17 +126,17 @@ class ProcessBase_Table_Element extends WgtTable
 
       $body .= '<tr class="row'.$num.'" id="'.$rowid.'" >'.NL;
       $body .= '<td valign="top" class="pos" >'.$pos.'</td>'.NL;
-      $body .= '<td valign="top" >( '.$row['wbfsys_role_user_name'].' ) '.$row['core_person_lastname'].', '.$row['core_person_firstname'].' </td>'.NL;
+      $body .= '<td valign="top" >('.$row['wbfsys_role_user_name'].') '.$row['core_person_lastname'].', '.$row['core_person_firstname'].' </td>'.NL;
       $body .= '<td valign="top" >'.(!is_null($row['m_time_created'])?$this->view->i18n->timestamp($row['m_time_created']):'').'</td>'.NL;
       $body .= '<td valign="top" >'.$row['node_from_name'].'<br /> =&gt; <br />'.$row['node_to_name'].'</td>'.NL;
-      $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['comment'] ).'</td>'.NL;
+      $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['comment']).'</td>'.NL;
       $body .= '<td valign="top" >'.$row['rate'].'</td>'.NL;
 
       $body .= '</tr>'.NL;
 
       $pos ++;
       $num ++;
-      if ($num > $this->numOfColors )
+      if ($num > $this->numOfColors)
         $num = 1;
 
     } //end foreach

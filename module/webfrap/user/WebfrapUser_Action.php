@@ -30,21 +30,21 @@ class WebfrapUser_Action extends Action
    * @param Context $params
    * @param Base $env
    */
-  public function setupAdressItems($entity, $params, $env )
+  public function setupAdressItems($entity, $params, $env)
   {
 
     $orm = $env->getOrm();
 
-    $addrItem = $orm->newEntity( 'WbfsysAddressItem' );
+    $addrItem = $orm->newEntity('WbfsysAddressItem');
     $addrItem->address_value = $entity->getId();
     $addrItem->id_user = $entity->getId();
     $addrItem->vid = $entity->getId();
     $addrItem->flag_private = false;
     $addrItem->use_for_contact = true;
     $addrItem->name = "User ID";
-    $addrItem->id_type = $orm->getByKey( 'WbfsysAddressItemType', 'message' );
+    $addrItem->id_type = $orm->getByKey('WbfsysAddressItemType', 'message');
 
-    $orm->insert($addrItem );
+    $orm->insert($addrItem);
 
   }//end public function setupAdressItems */
 

@@ -43,7 +43,7 @@ class LibMessageRendererMessage extends LibTemplateHtml
    * @param LibMessageSender $sender
    * @return string the assembled page
    */
-  public function renderHtml($message, $receiver, $sender )
+  public function renderHtml($message, $receiver, $sender)
   {
 
     $CONTENT = null;
@@ -69,11 +69,11 @@ class LibMessageRendererMessage extends LibTemplateHtml
       $masterTpl = $message->htmlTemplate;
       $TEMPLATE  = null;
     } else {
-      throw new LibMessage_Exception( 'Message has no html content' );
+      throw new LibMessage_Exception('Message has no html content');
     }
 
-    if (!$filename = $this->templatePath($masterTpl, 'messages' ) ) {
-      throw new LibMessage_Exception( 'Template '.$masterTpl.' not exists ' );
+    if (!$filename = $this->templatePath($masterTpl, 'messages')) {
+      throw new LibMessage_Exception('Template '.$masterTpl.' not exists ');
     }
 
     $VAR       = $this->var;
@@ -100,7 +100,7 @@ class LibMessageRendererMessage extends LibTemplateHtml
    * @param LibMessageSender $sender
    * @return string the assembled page
    */
-  public function renderPlain($message, $receiver, $sender )
+  public function renderPlain($message, $receiver, $sender)
   {
 
     $CONTENT  = null;
@@ -127,11 +127,11 @@ class LibMessageRendererMessage extends LibTemplateHtml
       $masterTpl = $message->plainTemplate;
       $TEMPLATE  = null;
     } else {
-      throw new LibMessage_Exception( 'Message has no plain content' );
+      throw new LibMessage_Exception('Message has no plain content');
     }
 
-    if (!$filename = $this->templatePath($masterTpl, 'messages' ) ) {
-      throw new LibMessage_Exception( 'Template '.$masterTpl.' not exists ' );
+    if (!$filename = $this->templatePath($masterTpl, 'messages')) {
+      throw new LibMessage_Exception('Template '.$masterTpl.' not exists ');
     }
 
     $VAR       = $this->var;
@@ -156,7 +156,7 @@ class LibMessageRendererMessage extends LibTemplateHtml
    * @param string $path
    * @return string the assembled page
    */
-  public function renderEmbeddedSrc($key, $image, $path )
+  public function renderEmbeddedSrc($key, $image, $path)
   {
     return 'cid:'.$key.'@'.$image;
 

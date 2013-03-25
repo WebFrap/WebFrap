@@ -33,7 +33,7 @@ class WgtControlMaskSwitcher
    * @param Entity $entity
    * @param string $maskName
    */
-  public function renderMenu($view, $menu, $context, $entity, $maskName )
+  public function renderMenu($view, $menu, $context, $entity, $maskName)
   {
 
   }//end public function renderMenu */
@@ -43,12 +43,12 @@ class WgtControlMaskSwitcher
    * @param WgtMaintab $view
    * @param WgtDropmenu $menu
    */
-  public function renderActions($view,  $menu )
+  public function renderActions($view,  $menu)
   {
 
     $html = <<<HTML
 
-    self.getObject().find('.{$menu->id}-maskswitcher').change( function(){
+    self.getObject().find('.{$menu->id}-maskswitcher').change(function(){
       \$R.get(\$S(this).val());
     });
 

@@ -57,11 +57,11 @@ class LibSettings
    *
    * @return LibSettingsNode
    */
-  public function getSetting( $key )
+  public function getSetting($key)
   {
 
 
-    if(!isset($this->settings[$key])){
+    if (!isset($this->settings[$key])){
 
       $className = EUserSettingType::getClass($key);
 
@@ -70,7 +70,7 @@ class LibSettings
 SELECT rowid, jdata from wbfsys_user_setting where type = {$key}
 SQL;
 
-      if( $userId ){
+      if ($userId){
 
         $sql .= " AND id_user = {$userId}; ";
 
@@ -81,7 +81,7 @@ SQL;
 
       $data = $this->db->select($sql)->get();
 
-      if($data)
+      if ($data)
         $setting = new $className($data['jdata'],$data['rowid']);
       else
         $setting = new $className();
@@ -100,17 +100,17 @@ SQL;
    * @param int $key
    * @param TArray $data
    */
-  public function saveSetting( $key, $data )
+  public function saveSetting($key, $data)
   {
 
     $this->settings[$key] = $data;
 
     $jsonString = $this->db->addSlashes($data->toJson());
 
-    if( $data->id ){
-      $this->db->orm()->update( 'WbfsysUserSetting', $data->id, array('jdata',$jsonString) );
+    if ($data->id){
+      $this->db->orm()->update('WbfsysUserSetting', $data->id, array('jdata',$jsonString));
     } else {
-      $this->db->orm()->insert( 'WbfsysUserSetting', array('jdata',$jsonString) );
+      $this->db->orm()->insert('WbfsysUserSetting', array('jdata',$jsonString));
     }
 
   }//end public function saveSetting */

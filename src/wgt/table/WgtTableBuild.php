@@ -31,18 +31,18 @@ class WgtTableBuild extends WgtTable
    *
    * @return void
    */
-  public function load(  )
+  public function load()
   {
 
     /*
-    $folder = new LibFilesystemFolder( PATH_GW.'data/bdl/' );
+    $folder = new LibFilesystemFolder(PATH_GW.'data/bdl/');
     $files = $folder->getPlainFiles();
 
     $this->data = array();
 
     // Load als xmi Files
-    foreach($files as $file )
-      if ( substr($file, -3 , strlen($file) ) == "xml" )
+    foreach($files as $file)
+      if (substr($file, -3 , strlen($file)) == "xml")
         $this->data[] = $file;
     */
 
@@ -62,7 +62,7 @@ class WgtTableBuild extends WgtTable
    * @param string $Class Der Datenbanktype
    * @return
    */
-  public function buildTable( )
+  public function buildTable()
   {
 
     $view = View::getActive();
@@ -91,7 +91,7 @@ class WgtTableBuild extends WgtTable
 
       $urlGenerate = 'index.php?c=Build.Base.build&amp;objid='.urlencode($key);
       $linkGenerate = '<a title="Projekt bauen"  class="wcm wcm_req_ajax wgt_info" href="'.$urlGenerate.'">'
-        .Wgt::icon('daidalos/buildr.png' , 'xsmall' , 'build' ).'</a>';
+        .Wgt::icon('daidalos/buildr.png' , 'xsmall' , 'build').'</a>';
 
       $body .= '<td valign="top" >'.$row[0].'</td>'.NL;
       //$body .= '<td valign="top" >'.$row[1].'</td>'.NL;
@@ -101,7 +101,7 @@ class WgtTableBuild extends WgtTable
       $body .= '</tr>'.NL;
 
       $num ++;
-      if ($num > $this->numOfColors )
+      if ($num > $this->numOfColors)
         $num = 1;
 
     }// ENDE FOREACH
@@ -123,11 +123,11 @@ class WgtTableBuild extends WgtTable
    *
    * @return string
    */
-  public function build( )
+  public function build()
   {
 
     $this->load();
-    $this->html = $this->buildTable( ) ;
+    $this->html = $this->buildTable() ;
 
     return $this->html;
 

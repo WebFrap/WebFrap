@@ -39,7 +39,7 @@ class WebfrapInfo
   public static function getDefault()
   {
 
-    if (!self::$defaultInstance )
+    if (!self::$defaultInstance)
       self::$defaultInstance = new WebfrapInfo();
 
     return self::$defaultInstance;
@@ -67,17 +67,17 @@ class WebfrapInfo
 
   public function getSystemName()
   {
-    return $this->conf->getStatus( 'sys.name' );
+    return $this->conf->getStatus('sys.name');
   }//end public function getSystemName */
 
   public function getGatewayName()
   {
-    return $this->conf->getStatus( 'gateway.name' );
+    return $this->conf->getStatus('gateway.name');
   }//end public function getGatewayName */
 
   public function getAppName()
   {
-    return $this->conf->getStatus( 'app.name' );
+    return $this->conf->getStatus('app.name');
   }//end public function getAppName */
 
 }//end class WebfrapInfo

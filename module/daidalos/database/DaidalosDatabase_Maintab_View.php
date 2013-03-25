@@ -31,18 +31,18 @@ class DaidalosDatabase_Maintab_View extends WgtMaintabCustom
    * @param TFlowFlag $params
    * @return void
    */
-  public function displayList($params )
+  public function displayList($params)
   {
 
     $this->setLabel('Daidalos');
     $this->setTitle('Daidalos');
 
-    $table = new DaidalosDatabase_Connection_Table_Element( 'connections', $this );
-    $table->setData($this->model->getConnections() );
+    $table = new DaidalosDatabase_Connection_Table_Element('connections', $this);
+    $table->setData($this->model->getConnections());
 
-    $this->setTemplate( 'daidalos/database/list_connections' );
+    $this->setTemplate('daidalos/database/list_connections');
 
-    $this->addMenuMenu($params );
+    $this->addMenuMenu($params);
 
   }//end public function displayList */
 
@@ -55,7 +55,7 @@ class DaidalosDatabase_Maintab_View extends WgtMaintabCustom
    *   string formId: the id of the form;
    * }
    */
-  public function addMenuMenu($params )
+  public function addMenuMenu($params)
   {
 
     $menu     = $this->newMenu
@@ -65,7 +65,7 @@ class DaidalosDatabase_Maintab_View extends WgtMaintabCustom
     );
 
     $menu->id = $this->id.'_dropmenu';
-    $menu->buildMenu($params );
+    $menu->buildMenu($params);
 
   }//end public function addMenuMenu */
 

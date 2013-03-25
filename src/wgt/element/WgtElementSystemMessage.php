@@ -30,7 +30,7 @@ class WgtElementSystemMessage extends WgtAbstract
   public function render($params = null)
   {
 
-    if( !$this->data )
+    if (!$this->data)
       return '';
 
     $id = $this->getId();
@@ -69,7 +69,7 @@ HTML;
    *
    * @return string
    */
-  public function buildJsCode( )
+  public function buildJsCode()
   {
 
     return '';
@@ -78,7 +78,7 @@ HTML;
 
     $this->jsCode = <<<JCODE
 \$S('#{$id} .wgac_remove').each(function(){
-	\$S(this).bind( 'click', function(){
+	\$S(this).bind('click', function(){
 		var eid = \$S(this).attr('wgt_eid');
 		\$R.del('ajax.php?c=Webfrap.Announcement.archiveEntry&objid='+eid,{'success':function(){
 			\$S('#{$id}').html('').hide();

@@ -36,18 +36,18 @@ class WebfrapDesktop_Controller extends Controller
   (
     'display' => array
     (
-      'method'    => array( 'GET', 'POST' ),
-      'views'      => array( 'html' )
+      'method'    => array('GET', 'POST'),
+      'views'      => array('html')
     ),
     'displaysimple' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'html' )
+      'method'    => array('GET'),
+      'views'      => array('html')
     ),
     'dropmenu' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'html' )
+      'method'    => array('GET'),
+      'views'      => array('html')
     ),
   );
 
@@ -59,20 +59,20 @@ class WebfrapDesktop_Controller extends Controller
    * default method for creating the desktop
    * @return void
    */
-  public function service_display($request, $response )
+  public function service_display($request, $response)
   {
 
     $view = $this->getView();
     $view->setTitle('Desktop');
 
     $conf = Conf::get('view');
-    $view->setHtmlHead($conf['head.user'] );
+    $view->setHtmlHead($conf['head.user']);
 
     $profile = $this->getUser()->getProfile();
 
     $view->menu = $profile->getNavigation();
 
-    $profile->getDesktop()->display($view );
+    $profile->getDesktop()->display($view);
 
   } // end public function service_display */
 
@@ -80,30 +80,30 @@ class WebfrapDesktop_Controller extends Controller
    * default method for creating the desktop
    * @return void
    */
-  public function service_refresh($request, $response )
+  public function service_refresh($request, $response)
   {
 
     $user = $this->getUser();
 
     $tpl = $this->getTpl();
-    $tpl->setTitle( 'Desktop' );
+    $tpl->setTitle('Desktop');
 
-    $area = $tpl->newArea( 'wgt-ui-desktop' );
+    $area = $tpl->newArea('wgt-ui-desktop');
     $area->position = '#wgt-ui-desktop';
     $area->action = 'html';
 
     $profile = $this->getUser()->getProfile();
-    $profile->getDesktop()->display($area );
+    $profile->getDesktop()->display($area);
 
     /* @var $modelMsg WebfrapMessage_Model
-    $modelMsg = $this->loadModel( 'WebfrapMessage' );
-    $areaMsg = $tpl->newArea( 'desktop-panel-message' );
+    $modelMsg = $this->loadModel('WebfrapMessage');
+    $areaMsg = $tpl->newArea('desktop-panel-message');
     $areaMsg->position = '#desktop-panel-message>span';
     $areaMsg->action = 'html';
-    $areaMsg->setContent($modelMsg->countNewMessages($user ) );
+    $areaMsg->setContent($modelMsg->countNewMessages($user));
     */
 
-    $tpl->setJsonData( time() );
+    $tpl->setJsonData(time());
 
   } // end public function service_refresh */
 
@@ -111,20 +111,20 @@ class WebfrapDesktop_Controller extends Controller
    * default method for creating the desktop
    * @return void
    */
-  public function service_dropmenu($request, $response )
+  public function service_dropmenu($request, $response)
   {
 
     $view = $this->getView();
     $view->setTitle('Desktop');
 
     $conf = Conf::get('view');
-    $view->setHtmlHead($conf['head.user'] );
+    $view->setHtmlHead($conf['head.user']);
 
     $profile = $this->getUser()->getProfile();
 
     $view->menu = $profile->getNavigation();
 
-    $profile->getDesktop()->display($view );
+    $profile->getDesktop()->display($view);
 
   } // end public function service_dropmenu */
 
@@ -132,7 +132,7 @@ class WebfrapDesktop_Controller extends Controller
    * default method for creating the desktop
    * @return void
    */
-  public function service_displaySimple(  $request, $response  )
+  public function service_displaySimple( $request, $response  )
   {
 
     if (!$view) {
@@ -140,7 +140,7 @@ class WebfrapDesktop_Controller extends Controller
     }
 
     $view->setTitle('Desktop');
-    $view->setTemplate( 'webfrap/desktop_simple'  );
+    $view->setTemplate('webfrap/desktop_simple'  );
 
   } // end public function service_displaySimple */
 

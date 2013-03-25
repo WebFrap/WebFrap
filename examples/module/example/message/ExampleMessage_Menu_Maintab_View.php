@@ -32,23 +32,23 @@ class ExampleMessage_Menu_Maintab_View extends WgtMaintab
   * @param TFlag $params
   * @return null
   */
-  public function displayMenu($params )
+  public function displayMenu($params)
   {
 
     // set the window title
-    $this->setTitle( 'Example Message Menu' );
-    $this->setLabel( 'Example Message Menu' );
+    $this->setTitle('Example Message Menu');
+    $this->setLabel('Example Message Menu');
 
     // set the form template
-    $this->setTemplate( 'example/message/menu' );
+    $this->setTemplate('example/message/menu');
 
-    $this->addVar( 'entries', array(
+    $this->addVar('entries', array(
       'helloworld' => 'Hello World Message',
       'sendUser'   => 'Send User',
       'sendGroup'  => 'Send Group',
       'sendGroupArea'  => 'Send Group Area',
       'sendGroupDataset'  => 'Send Group Dataset',
-    ) );
+    ));
 
     return null;
 

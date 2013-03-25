@@ -28,7 +28,7 @@ class WebfrapMenu_Model extends Model
    * @param LibTemplate $view
    * @return void
    */
-  public function getMainMenu(  )
+  public function getMainMenu()
   {
     return DaoFoldermenu::get('webfrap/root',true);
 
@@ -37,7 +37,7 @@ class WebfrapMenu_Model extends Model
   /**
    * @return void
    */
-  public function getStartMenu(   )
+  public function getStartMenu(  )
   {
 
     $db     = $this->getDb();
@@ -48,12 +48,12 @@ class WebfrapMenu_Model extends Model
     if (!$appKey)
       return array();
 
-    $app = $db->orm->getBeyKey( 'WbfsysApp', "{$appKey}" );
+    $app = $db->orm->getBeyKey('WbfsysApp', "{$appKey}");
 
     $query = $db->newQuery('WebfrapMenu');
 
     if (!$app->id_main_menu) {
-      return $query->fetchMenuEntries($app->id_main_menu );
+      return $query->fetchMenuEntries($app->id_main_menu);
     } else {
       return array();
     }

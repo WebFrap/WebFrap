@@ -40,7 +40,7 @@ abstract class LibBuildAction
   /**
    * @param array
    */
-  public function __construct($args )
+  public function __construct($args)
   {
     $this->args = $args;
   }//end public function __construct */
@@ -48,7 +48,7 @@ abstract class LibBuildAction
   /**
    * @return boolean
    */
-  //abstract public function execute(  );
+  //abstract public function execute();
 
 } // end abstract class LibBuildAction
 

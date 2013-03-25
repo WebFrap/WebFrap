@@ -48,28 +48,28 @@ class DaidalosBdlProject_Controller extends Controller
   (
     'create' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
     'edit' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
     'insert' => array
     (
-      'method'    => array( 'POST' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('POST'),
+      'views'      => array('ajax')
     ),
     'update' => array
     (
-      'method'    => array( 'PUT' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
     ),
     'delete' => array
     (
-      'method'    => array( 'DELETE' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('DELETE'),
+      'views'      => array('ajax')
     ),
   );
 
@@ -82,12 +82,12 @@ class DaidalosBdlProject_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_edit($request, $response )
+  public function service_edit($request, $response)
   {
 
     $params = $this->getFlags($request);
 
-    $key = $request->param('key', Validator::CKEY );
+    $key = $request->param('key', Validator::CKEY);
 
     $view   = $response->loadView
     (
@@ -97,11 +97,11 @@ class DaidalosBdlProject_Controller extends Controller
       View::MAINTAB
     );
 
-    $model  = $this->loadModel( 'DaidalosBdlProject' );
-    $model->setKey($key );
-    $view->setModel($model );
+    $model  = $this->loadModel('DaidalosBdlProject');
+    $model->setKey($key);
+    $view->setModel($model);
 
-    $view->displayFormEdit($params );
+    $view->displayFormEdit($params);
 
   }//end public function service_formBackup */
 

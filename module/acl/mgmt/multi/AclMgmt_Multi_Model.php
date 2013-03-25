@@ -52,7 +52,7 @@ class AclMgmt_Multi_Model extends Model
       $db->begin();
 
       // for insert there has to be a list of values that have to be saved
-      if (!$listWbfsysSecurityAccess = $this->getRegisterd( 'listRefWbfsysSecurityAccess' ) ) {
+      if (!$listWbfsysSecurityAccess = $this->getRegisterd('listRefWbfsysSecurityAccess')) {
         throw new WebfrapSys_Exception
         (
           'Internal Error',
@@ -63,7 +63,7 @@ class AclMgmt_Multi_Model extends Model
       $entityTexts = array();
 
       foreach ($listWbfsysSecurityAccess as $entityWbfsysSecurityAccess) {
-        if (!$orm->update($entityWbfsysSecurityAccess ) ) {
+        if (!$orm->update($entityWbfsysSecurityAccess)) {
           $entityText = $entityWbfsysSecurityAccess->text();
           $this->getResponse()->addError
           (
@@ -86,17 +86,17 @@ class AclMgmt_Multi_Model extends Model
         (
           'Successfully saved Area: '.$textSaved,
           'wbf.message',
-          array($textSaved )
+          array($textSaved)
         )
       );
 
       // everything ok
       $db->commit();
 
-    } catch ( LibDb_Exception $e ) {
+    } catch (LibDb_Exception $e) {
       $this->getResponse()->addError($e->getMessage());
       $db->rollback();
-    } catch ( WebfrapSys_Exception $e ) {
+    } catch (WebfrapSys_Exception $e) {
       $this->getResponse()->addError($e->getMessage());
     }
 
@@ -132,7 +132,7 @@ class AclMgmt_Multi_Model extends Model
 
       return true;
 
-    } catch ( InvalidInput_Exception $e ) {
+    } catch (InvalidInput_Exception $e) {
 
       return false;
     }

@@ -64,14 +64,14 @@ class WgtElementProtocol extends WgtAbstract
    * @param string $name
    * @param LibTemplate $view
    */
-  public function __construct($name = null, $view = null )
+  public function __construct($name = null, $view = null)
   {
 
     $this->name   = $name;
     $this->init();
 
     if ($view) {
-      $view->addElement($name, $this );
+      $view->addElement($name, $this);
       $this->view = $view;
     } else {
       $this->view = Webfrap::$env->getView();
@@ -83,18 +83,18 @@ class WgtElementProtocol extends WgtAbstract
    * @param TFlag $params
    * @return string
    */
-  public function render($params = null )
+  public function render($params = null)
   {
 
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
-    $this->name = $this->getId( );
+    $this->name = $this->getId();
 
     $codeEntries = '';
 
     foreach ($this->data as $entry) {
-      $codeEntries .= $this->renderEntry($entry );
+      $codeEntries .= $this->renderEntry($entry);
     }
 
     $html = <<<HTML
@@ -116,10 +116,10 @@ HTML;
    * @param array $entry
    * @return string
    */
-  public function renderEntry($entry )
+  public function renderEntry($entry)
   {
 
-    $date = $this->view->i18n->timestamp($entry['m_time_created'] );
+    $date = $this->view->i18n->timestamp($entry['m_time_created']);
 
     $html = <<<HTML
       <li class="entry" >

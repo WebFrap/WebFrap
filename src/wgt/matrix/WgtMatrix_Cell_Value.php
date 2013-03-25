@@ -57,7 +57,7 @@ class WgtMatrix_Cell_Value
   /**
    * @param array $data
    */
-  public function render($dataList )
+  public function render($dataList)
   {
 
     $html = array();

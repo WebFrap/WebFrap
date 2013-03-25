@@ -150,7 +150,7 @@ class WgtElementMediathek extends WgtAbstract
    *
    * @param int $name the name of the wgt object
    */
-  public function __construct($name = null, $view = null )
+  public function __construct($name = null, $view = null)
   {
 
     $this->texts  = new TArray();
@@ -158,55 +158,55 @@ class WgtElementMediathek extends WgtAbstract
     $this->name   = $name;
     $this->init();
 
-    if ($view )
-      $view->addElement($name, $this );
+    if ($view)
+      $view->addElement($name, $this);
 
     // setup der icons
-    $this->icons['delete'] = $this->icon( 'control/delete.png', 'Delete' );
-    $this->icons['add']    = $this->icon( 'control/add.png', 'Add' );
-    $this->icons['search'] = $this->icon( 'control/search.png', 'Search' );
+    $this->icons['delete'] = $this->icon('control/delete.png', 'Delete');
+    $this->icons['add']    = $this->icon('control/add.png', 'Add');
+    $this->icons['search'] = $this->icon('control/search.png', 'Search');
 
     $this->icons['level_public'] = $this->icon
     (
       'confidentiality/public.png',
       'Public',
       'xsmall',
-      array( 'class' => 'wcm wcm_ui_tip', 'tooltip'=>"Confidentiality Level Public" )
+      array('class' => 'wcm wcm_ui_tip', 'tooltip'=>"Confidentiality Level Public")
     );
     $this->icons['level_customer'] = $this->icon
     (
       'confidentiality/customer.png',
       'Customer',
       'xsmall',
-      array( 'class' => 'wcm wcm_ui_tip', 'tooltip'=>"Public" )
+      array('class' => 'wcm wcm_ui_tip', 'tooltip'=>"Public")
      );
     $this->icons['level_restricted'] = $this->icon
     (
       'confidentiality/restricted.png',
       'Restricted',
       'xsmall',
-      array( 'class' => 'wcm wcm_ui_tip', 'tooltip'=>"Restricted" )
+      array('class' => 'wcm wcm_ui_tip', 'tooltip'=>"Restricted")
      );
     $this->icons['level_confidential'] = $this->icon
     (
       'confidentiality/confidential.png',
       'Confidential',
       'xsmall',
-      array( 'class' => 'wcm wcm_ui_tip', 'tooltip'=>"Confidential" )
+      array('class' => 'wcm wcm_ui_tip', 'tooltip'=>"Confidential")
      );
     $this->icons['level_secret'] = $this->icon
     (
       'confidentiality/secret.png',
       'Secret',
       'xsmall',
-      array( 'class' => 'wcm wcm_ui_tip', 'tooltip'=>"Secret" )
+      array('class' => 'wcm wcm_ui_tip', 'tooltip'=>"Secret")
      );
     $this->icons['level_top_secret'] = $this->icon
     (
       'confidentiality/top_secret.png',
       'Top Secret',
       'xsmall',
-      array( 'class' => 'wcm wcm_ui_tip', 'tooltip'=>"Top Secret" )
+      array('class' => 'wcm wcm_ui_tip', 'tooltip'=>"Top Secret")
      );
 
   }//end public function __construct */
@@ -221,7 +221,7 @@ class WgtElementMediathek extends WgtAbstract
   public function getIdKey()
   {
 
-    if (is_null($this->idKey ) )
+    if (is_null($this->idKey))
       $this->idKey = Webfrap::uniqKey();
 
     return $this->idKey;
@@ -231,7 +231,7 @@ class WgtElementMediathek extends WgtAbstract
   /**
    * @param string $idKey
    */
-  public function setIdKey($idKey )
+  public function setIdKey($idKey)
   {
     $this->idKey = $idKey;
   }//end public function setIdKey */
@@ -240,7 +240,7 @@ class WgtElementMediathek extends WgtAbstract
    * (non-PHPdoc)
    * @see WgtAbstract::setId()
    */
-  public function setId($id )
+  public function setId($id)
   {
     $this->idKey = $id;
   }//end public function setId */
@@ -248,7 +248,7 @@ class WgtElementMediathek extends WgtAbstract
   /**
    * @param WbfsysMedia_Entity $mediaNode
    */
-  public function setMediaNode($mediaNode )
+  public function setMediaNode($mediaNode)
   {
 
     $this->mediaNode = $mediaNode;
@@ -264,26 +264,26 @@ class WgtElementMediathek extends WgtAbstract
    * @param TFlag $params
    * @return string
    */
-  public function render($params = null )
+  public function render($params = null)
   {
 
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
     $idKey    = $this->getIdKey();
 
     $htmlImgTab = '';
 
-    if ($this->mediaTypes['image'] )
-     $htmlImgTab = $this->renderImageTab($idKey );
+    if ($this->mediaTypes['image'])
+     $htmlImgTab = $this->renderImageTab($idKey);
 
-    if ($this->mediaTypes['file'] )
-     $htmlFileTab = $this->renderFileTab($idKey );
+    if ($this->mediaTypes['file'])
+     $htmlFileTab = $this->renderFileTab($idKey);
 
-    if ($this->mediaTypes['document'] )
-     $htmlDocumentTab = $this->renderDocumentTab($idKey );
+    if ($this->mediaTypes['document'])
+     $htmlDocumentTab = $this->renderDocumentTab($idKey);
 
-    $htmlHead = $this->renderMediathekHead($idKey );
+    $htmlHead = $this->renderMediathekHead($idKey);
 
     $html = <<<HTML
 
@@ -314,7 +314,7 @@ HTML;
    * @param string $idKey
    * @return string
    */
-  public function renderMediathekHead($idKey )
+  public function renderMediathekHead($idKey)
   {
 
     $htmlSearch   = '';
@@ -526,7 +526,7 @@ HTML;
    * @param string $idKey
    * @return string
    */
-  protected function renderImageTab($idKey )
+  protected function renderImageTab($idKey)
   {
 
     /**
@@ -538,13 +538,13 @@ HTML;
     if ($this->dataImage) {
       foreach ($this->dataImage as $entry) {
 
-        $codeEntr .= $this->renderImageEntry($this->idKey, $entry, $counter );
+        $codeEntr .= $this->renderImageEntry($this->idKey, $entry, $counter);
         ++$counter;
 
       }
     }
 
-    $dataSize = count($this->dataImage );
+    $dataSize = count($this->dataImage);
 
     $html = <<<HTML
     <div class="container" wgt_key="image" id="wgt-tab-mediathek-{$idKey}-content-image" >
@@ -616,13 +616,13 @@ HTML;
    * @param int $counter
    * @return string
    */
-  public function renderImageEntry($elemId, $entry, $counter = null )
+  public function renderImageEntry($elemId, $entry, $counter = null)
   {
 
     $fileSize    = '';
 
-    $fileName = trim($entry['img_file'] );
-    $fileSize = SFormatNumber::formatFileSize($entry['img_size'] );
+    $fileName = trim($entry['img_file']);
+    $fileSize = SFormatNumber::formatFileSize($entry['img_size']);
     $b64Name  = base64_encode($fileName);
     $link = "<a href=\"image.php?f=wbfsys_image-file-{$entry['img_id']}&amp;s=medium&amp;n={$b64Name}&amp;version={$entry['img_version']}\" target=\"wgt_dms\" rel=\"nofollow\" >"
         ."<img style=\"max-width:100px;max-height:100px;\" src=\"thumb.php?f=wbfsys_image-file-{$entry['img_id']}&amp;s=medium&amp;n={$b64Name}&amp;version={$entry['img_version']}\" alt=\"{$fileName}\" />"
@@ -631,10 +631,10 @@ HTML;
     $linkDownload = "<a href=\"image.php?f=wbfsys_image-file-{$entry['img_id']}&amp;s=medium&amp;n={$b64Name}&amp;version={$entry['img_version']}\" target=\"wgt_dms\" rel=\"nofollow\" >"
       .$fileName." (download)"."</a>";
 
-    $timeCreated  = date( 'Y-m-d - H:i',  strtotime($entry['img_created'])  );
-    $menuCode     = $this->renderImageMenu($entry );
+    $timeCreated  = date('Y-m-d - H:i',  strtotime($entry['img_created'])  );
+    $menuCode     = $this->renderImageMenu($entry);
 
-    if ($counter )
+    if ($counter)
       $rowClass = 'row_'.($counter%2);
     else {
       $rowClass = 'row_1';
@@ -698,10 +698,10 @@ HTML;
    * @param array $data
    * @return string
    */
-  public function renderImageSearch($elementId, $data )
+  public function renderImageSearch($elementId, $data)
   {
 
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
     $counter = 1;
@@ -710,7 +710,7 @@ HTML;
 
     if ($this->dataImage) {
       foreach ($this->dataImage as $entry) {
-        $html .= $this->renderImageEntry($this->idKey, $entry, $counter );
+        $html .= $this->renderImageEntry($this->idKey, $entry, $counter);
         ++$counter;
       }
     }
@@ -725,7 +725,7 @@ HTML;
    * @param array $entry
    * @return string
    */
-  protected function renderImageMenu($entry )
+  protected function renderImageMenu($entry)
   {
 
     $html = <<<CODE
@@ -749,7 +749,7 @@ CODE;
    * @param string $idKey
    * @return string
    */
-  protected function renderFileTab($idKey )
+  protected function renderFileTab($idKey)
   {
 
     /**
@@ -761,13 +761,13 @@ CODE;
     if ($this->dataFile) {
       foreach ($this->dataFile as $entry) {
 
-        $codeEntr .= $this->renderFileEntry($this->idKey, $entry, $counter );
+        $codeEntr .= $this->renderFileEntry($this->idKey, $entry, $counter);
         ++$counter;
 
       }
     }
 
-    $dataSize = count($this->dataFile );
+    $dataSize = count($this->dataFile);
 
     $html = <<<HTML
     <div class="container" wgt_key="file" id="wgt-tab-mediathek-{$idKey}-content-file" >
@@ -839,7 +839,7 @@ HTML;
    * @param int $counter
    * @return string
    */
-  public function renderFileEntry($elemId, $entry, $counter = null )
+  public function renderFileEntry($elemId, $entry, $counter = null)
   {
 
     $fileSize    = '';
@@ -849,15 +849,15 @@ HTML;
     $keyType  = 'application/octet-stream';
 
     if ($entry['file_mimetype']) {
-      $iconType = str_replace( '/', '-', $entry['file_mimetype'] );
+      $iconType = str_replace('/', '-', $entry['file_mimetype']);
       $keyType  = $entry['file_mimetype'];
     }
 
-    $entryIcon = $this->icon( 'mimetype/'.$iconType.'.png', $keyType, 'medium' );
+    $entryIcon = $this->icon('mimetype/'.$iconType.'.png', $keyType, 'medium');
 
-    $fileName = trim($entry['file_name'] );
-    $fileSize = SFormatNumber::formatFileSize($entry['file_size'] );
-    $b64Name  = base64_encode($fileName );
+    $fileName = trim($entry['file_name']);
+    $fileSize = SFormatNumber::formatFileSize($entry['file_size']);
+    $b64Name  = base64_encode($fileName);
 
     $link = "<a href=\"file.php?f=wbfsys_file-file-{$entry['file_id']}&amp;n={$b64Name}&amp;version={$entry['file_version']}\" target=\"wgt_dms\" rel=\"nofollow\" >"
         .$entryIcon
@@ -866,10 +866,10 @@ HTML;
     $linkDownload = "<a href=\"file.php?f=wbfsys_image-file-{$entry['file_id']}&amp;n={$b64Name}&amp;version={$entry['file_version']}\" target=\"wgt_dms\" rel=\"nofollow\" >"
       .$fileName.""."</a>";
 
-    $timeCreated  = date( 'Y-m-d - H:i',  strtotime($entry['file_created'])  );
-    $menuCode     = $this->renderFileMenu($entry );
+    $timeCreated  = date('Y-m-d - H:i',  strtotime($entry['file_created'])  );
+    $menuCode     = $this->renderFileMenu($entry);
 
-    if ($counter )
+    if ($counter)
       $rowClass = 'row_'.($counter%2);
     else {
       $rowClass = 'row_1';
@@ -926,10 +926,10 @@ HTML;
    * @param array $data
    * @return string
    */
-  public function renderFileSearch($elementId )
+  public function renderFileSearch($elementId)
   {
 
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
     $counter = 1;
@@ -938,7 +938,7 @@ HTML;
 
     if ($this->dataFile) {
       foreach ($this->dataFile as $entry) {
-        $html .= $this->renderFileEntry($this->idKey, $entry, $counter );
+        $html .= $this->renderFileEntry($this->idKey, $entry, $counter);
         ++$counter;
       }
     }
@@ -953,7 +953,7 @@ HTML;
    * @param array $entry
    * @return string
    */
-  protected function renderFileMenu($entry )
+  protected function renderFileMenu($entry)
   {
 
     $html = <<<CODE
@@ -976,7 +976,7 @@ CODE;
    * @param string $idKey
    * @return string
    */
-  protected function renderDocumentTab($idKey )
+  protected function renderDocumentTab($idKey)
   {
 
     /**
@@ -988,13 +988,13 @@ CODE;
     if ($this->dataDocument) {
       foreach ($this->dataDocument as $entry) {
 
-        $codeEntr .= $this->renderDocumentEntry($this->idKey, $entry, $counter );
+        $codeEntr .= $this->renderDocumentEntry($this->idKey, $entry, $counter);
         ++$counter;
 
       }
     }
 
-    $dataSize = count($this->dataDocument );
+    $dataSize = count($this->dataDocument);
 
     $html = <<<HTML
     <div class="container" wgt_key="image" id="wgt-tab-mediathek-{$idKey}-content-document" >
@@ -1066,25 +1066,25 @@ HTML;
    * @param int $counter
    * @return string
    */
-  public function renderDocumentEntry($elemId, $entry, $counter = null )
+  public function renderDocumentEntry($elemId, $entry, $counter = null)
   {
 
     $fileSize    = '';
 
-    $fileName = trim($entry['doc_file'] );
-    $fileSize = SFormatNumber::formatFileSize($entry['doc_size'] );
-    $b64Name  = base64_encode($fileName );
+    $fileName = trim($entry['doc_file']);
+    $fileSize = SFormatNumber::formatFileSize($entry['doc_size']);
+    $b64Name  = base64_encode($fileName);
 
     //application-octet-stream
     $iconType = 'application-octet-stream';
     $keyType  = 'application/octet-stream';
 
     if ($entry['file_mimetype']) {
-      $iconType = str_replace( '/', '-', $entry['file_mimetype'] );
+      $iconType = str_replace('/', '-', $entry['file_mimetype']);
       $keyType  = $entry['file_mimetype'];
     }
 
-    $entryIcon = $this->icon( 'mimetype/'.$iconType.'.png', $keyType, 'medium' );
+    $entryIcon = $this->icon('mimetype/'.$iconType.'.png', $keyType, 'medium');
 
     $link = "<a href=\"file.php?f=wbfsys_document-file-{$entry['doc_id']}&amp;n={$b64Name}&amp;version={$entry['doc_version']}\" target=\"wgt_dms\" rel=\"nofollow\" >"
       .$entryIcon
@@ -1093,10 +1093,10 @@ HTML;
     $linkDownload = "<a href=\"file.php?f=wbfsys_image-file-{$entry['doc_id']}&amp;s=medium&amp;n={$b64Name}&amp;version={$entry['doc_version']}\" target=\"wgt_dms\" rel=\"nofollow\" >"
       .$fileName."</a>";
 
-    $timeCreated  = date( 'Y-m-d - H:i',  strtotime($entry['doc_created'])  );
-    $menuCode     = $this->renderDocumentMenu($entry );
+    $timeCreated  = date('Y-m-d - H:i',  strtotime($entry['doc_created'])  );
+    $menuCode     = $this->renderDocumentMenu($entry);
 
-    if ($counter )
+    if ($counter)
       $rowClass = 'row_'.($counter%2);
     else {
       $rowClass = 'row_1';
@@ -1153,10 +1153,10 @@ HTML;
    * @param array $data
    * @return string
    */
-  public function renderDocumentSearch($elementId, $data )
+  public function renderDocumentSearch($elementId, $data)
   {
 
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
     $counter = 1;
@@ -1165,7 +1165,7 @@ HTML;
 
     if ($this->dataImage) {
       foreach ($this->dataImage as $entry) {
-        $html .= $this->renderDocumentEntry($this->idKey, $entry, $counter );
+        $html .= $this->renderDocumentEntry($this->idKey, $entry, $counter);
         ++$counter;
       }
     }
@@ -1180,7 +1180,7 @@ HTML;
    * @param array $entry
    * @return string
    */
-  protected function renderDocumentMenu($entry )
+  protected function renderDocumentMenu($entry)
   {
 
     $html = <<<CODE

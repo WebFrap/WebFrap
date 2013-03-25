@@ -40,7 +40,7 @@ class WgtControlCrumb
    * (non-PHPdoc)
    * @see src/wgt/WgtMenu#setData()
    */
-  public function setData($data )
+  public function setData($data)
   {
     $this->data = $data;
   }//end public function setData */
@@ -49,7 +49,7 @@ class WgtControlCrumb
    * @param array $paths
    * @param string $url
    */
-  public function setPathCrumb($paths, $url )
+  public function setPathCrumb($paths, $url)
   {
 
     $this->data = array();
@@ -86,7 +86,7 @@ class WgtControlCrumb
       $src  = $crumb[2];
       $icon = '';
 
-      if ( '' != trim($src) ) {
+      if ('' != trim($src)) {
         $icon = '<img class="icon xsmall" '.
         ' src="'.$baseFolder.$src.'" '.
         ' alt="'.$text.'"  /> ';

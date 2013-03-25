@@ -44,7 +44,7 @@ class LibMessageAddressloader extends PBase
 
     if (!$this->addressLoader) {
       $db                 = $this->getDb();
-      $this->addressLoader  = $db->newQuery( 'LibMessageAddressloader' );
+      $this->addressLoader  = $db->newQuery('LibMessageAddressloader');
     }
 
     return $this->addressLoader;
@@ -62,7 +62,7 @@ class LibMessageAddressloader extends PBase
    *
    * @return [LibMessageReceiver]
    */
-  public function getReceivers($receivers, $type )
+  public function getReceivers($receivers, $type)
   {
 
     //$receivers    = $message->getReceivers();
@@ -75,27 +75,27 @@ class LibMessageAddressloader extends PBase
 
           case 'address':
           {
-            $contacts = $this->loadAddress($receiver, $type, $contacts );
+            $contacts = $this->loadAddress($receiver, $type, $contacts);
             break;
           }
           case 'contact':
           {
-            $contacts = $this->loadContact($receiver, $type, $contacts );
+            $contacts = $this->loadContact($receiver, $type, $contacts);
             break;
           }
           case 'group':
           {
-            $contacts = $this->loadGroup($receiver, $type, $contacts );
+            $contacts = $this->loadGroup($receiver, $type, $contacts);
             break;
           }
           case 'user':
           {
-            $contacts = $this->loadUser($receiver, $type, $contacts );
+            $contacts = $this->loadUser($receiver, $type, $contacts);
             break;
           }
 
         }
-      } catch ( LibMessage_Exception $exc ) {
+      } catch (LibMessage_Exception $exc) {
 
       }
 
@@ -114,29 +114,29 @@ class LibMessageAddressloader extends PBase
    *
    * @return array<IReceiver>
    */
-  public function getReceiver($receiver, $type, $contacts )
+  public function getReceiver($receiver, $type, $contacts)
   {
 
     switch ($receiver->type) {
 
       case 'address':
       {
-        $contacts = $this->loadAddress($receiver, $type, $contacts );
+        $contacts = $this->loadAddress($receiver, $type, $contacts);
         break;
       }
       case 'contact':
       {
-        $contacts = $this->loadContact($receiver, $type, $contacts );
+        $contacts = $this->loadContact($receiver, $type, $contacts);
         break;
       }
       case 'group':
       {
-        $contacts = $this->loadGroup($receiver, $type, $contacts );
+        $contacts = $this->loadGroup($receiver, $type, $contacts);
         break;
       }
       case 'user':
       {
-        $contacts = $this->loadUser($receiver, $type, $contacts );
+        $contacts = $this->loadUser($receiver, $type, $contacts);
         break;
       }
 
@@ -152,9 +152,9 @@ class LibMessageAddressloader extends PBase
    * @param string $type
    *
    */
-  public function getGroupUsers($receiver, $type = null, $direct = false )
+  public function getGroupUsers($receiver, $type = null, $direct = false)
   {
-    return $this->loadGroup($receiver, $type, array(), $direct );
+    return $this->loadGroup($receiver, $type, array(), $direct);
 
   }//end public function getGroupUsers */
 
@@ -165,14 +165,14 @@ class LibMessageAddressloader extends PBase
    *
    * @return array
    */
-  public function loadAddress($receiver, $type, $contacts )
+  public function loadAddress($receiver, $type, $contacts)
   {
 
-    if (!isset($receiver->address[$type] ) ) {
+    if (!isset($receiver->address[$type])) {
       return $contacts;
     }
 
-    if ( isset($contacts[$receiver->address[$type]] ) ) {
+    if (isset($contacts[$receiver->address[$type]])) {
       return $contacts;
     }
 
@@ -190,12 +190,12 @@ class LibMessageAddressloader extends PBase
    *
    * @return array
    */
-  public function loadContact($receiver, $type, $contacts )
+  public function loadContact($receiver, $type, $contacts)
   {
 
     $addressLoader = $this->getAddressLoader();
 
-    if (!$users = $addressLoader->fetchContacts($receiver, $type ) ) {
+    if (!$users = $addressLoader->fetchContacts($receiver, $type)) {
       if ($receiver->else) {
         foreach ($receiver->else as $elseReceiver) {
           $contacts = $this->getReceiver($receiver, $type, $contacts);
@@ -206,7 +206,7 @@ class LibMessageAddressloader extends PBase
     }
 
     foreach ($users as $userData) {
-      $contact = new LibMessageReceiver($userData );
+      $contact = new LibMessageReceiver($userData);
       $contacts[$contact->address] = $contact;
     }
 
@@ -221,16 +221,16 @@ class LibMessageAddressloader extends PBase
    *
    * @return [LibMessageReceiver]
    */
-  public function loadGroup($receiver, $type, $contacts, $direct = false )
+  public function loadGroup($receiver, $type, $contacts, $direct = false)
   {
 
     $addressLoader = $this->getAddressLoader();
 
-    if (!$users = $addressLoader->fetchGroups($receiver, $type, $direct ) ) {
+    if (!$users = $addressLoader->fetchGroups($receiver, $type, $direct)) {
 
       if ($receiver->else) {
         foreach ($receiver->else as $elseReceiver) {
-          $contacts = $this->getReceiver($elseReceiver, $type, $contacts );
+          $contacts = $this->getReceiver($elseReceiver, $type, $contacts);
         }
       }
 
@@ -238,7 +238,7 @@ class LibMessageAddressloader extends PBase
     }
 
     foreach ($users as $userData) {
-      $contact = new LibMessageReceiver($userData );
+      $contact = new LibMessageReceiver($userData);
 
       // jede adresse nur einmal zulassen, doppelte werden einfach
       // überschrieben
@@ -256,12 +256,12 @@ class LibMessageAddressloader extends PBase
    *
    * @return array
    */
-  public function loadUser($receiver, $type, $contacts )
+  public function loadUser($receiver, $type, $contacts)
   {
 
     $addressLoader = $this->getAddressLoader();
 
-    if (!$userData = $addressLoader->fetchUser($receiver, $type ) ) {
+    if (!$userData = $addressLoader->fetchUser($receiver, $type)) {
       if ($receiver->else) {
         foreach ($receiver->else as $elseReceiver) {
           $contacts = $this->getReceiver($receiver, $type, $contacts);
@@ -271,7 +271,7 @@ class LibMessageAddressloader extends PBase
       return $contacts;
     }
 
-    $contact = new LibMessageReceiver($userData );
+    $contact = new LibMessageReceiver($userData);
     $contacts[$contact->address] = $contact;
 
     return $contacts;

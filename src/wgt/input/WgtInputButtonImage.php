@@ -51,13 +51,13 @@ class WgtInputButtonImage extends WgtInput
    * @param string $icon
    * @param string $size
    */
-  public function setIcon($icon  , $size = 'xsmall' )
+  public function setIcon($icon  , $size = 'xsmall')
   {
 
     $this->icon = $icon;
     $this->size = $size;
 
-  }//end public function setIcon($icon )
+  }//end public function setIcon($icon)
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic
@@ -68,13 +68,13 @@ class WgtInputButtonImage extends WgtInput
    * @param array $attributes
    * @return String
    */
-  public function build($attributes = array() )
+  public function build($attributes = array())
   {
 
-    if ($attributes )
-      $this->attributes = array_merge($this->attributes, $attributes );
+    if ($attributes)
+      $this->attributes = array_merge($this->attributes, $attributes);
 
-    if ( isset($this->attributes['type'] ) ) {
+    if (isset($this->attributes['type'])) {
       unset($this->attributes['type']);
     }
 

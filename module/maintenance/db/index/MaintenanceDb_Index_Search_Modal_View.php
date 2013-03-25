@@ -76,7 +76,7 @@ class MaintenanceDb_Index_Search_Modal_View extends WgtModal
     $this->setLabel($i18nLabel);
 
     // set the form template
-    $this->setTemplate( 'maintenance/db/index/modal/search_form', true );
+    $this->setTemplate('maintenance/db/index/modal/search_form', true);
 
     // kein fehler aufgetreten? bestens also geben wir auch keinen zurück
     return null;

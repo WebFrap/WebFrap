@@ -40,7 +40,7 @@ class LibConsistencyPostgresql
    * @param LibDbConnection $db
    * @param LibResponseHttp $response
    */
-  public function __construct($db, $response )
+  public function __construct($db, $response)
   {
 
     $this->db = $db;

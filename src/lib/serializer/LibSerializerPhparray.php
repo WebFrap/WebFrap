@@ -35,10 +35,10 @@ class LibSerializerPhparray extends LibSerializerAbstract
   /**
    *
    */
-  public function __construct($toSerialize = null , $varName = null )
+  public function __construct($toSerialize = null , $varName = null)
   {
     if (Log::$levelVerbose)
-      Log::create( get_class($this) );
+      Log::create(get_class($this));
 
     $this->toSerialize = $toSerialize;
     $this->varName = $varName;
@@ -67,17 +67,17 @@ class LibSerializerPhparray extends LibSerializerAbstract
    * Enter description here...
    *
    */
-  protected function subParser($data , $pre )
+  protected function subParser($data , $pre)
   {
    if (Log::$levelDebug)
-      Log::start( __file__ , __line__ , __method__ , array($data) );
+      Log::start(__file__ , __line__ , __method__ , array($data));
 
     $assembled = NL.$pre.'array('.NL;
 
     foreach ($data as $key => $value) {
-      if ( is_array($value) ) {
-        $assembled .= $pre."'".$key.'\' => '.$this->subParser($value , $pre.'  ' );
-      } elseif ( is_object($value) ) {
+      if (is_array($value)) {
+        $assembled .= $pre."'".$key.'\' => '.$this->subParser($value , $pre.'  ');
+      } elseif (is_object($value)) {
         throw new LibSerializerException('Invalid data to Serialize');
       } else {
         $assembled .= $pre."'".$key.'\' => \''.SParserString::quoteForSingleQuotes($value)."',".NL;
@@ -87,7 +87,7 @@ class LibSerializerPhparray extends LibSerializerAbstract
 
     return $assembled;
 
-  }//end public function subParser($data )
+  }//end public function subParser($data)
 
   /**
    * Enter description here...
@@ -95,17 +95,17 @@ class LibSerializerPhparray extends LibSerializerAbstract
    * @param array $data
    * @return string
    */
-  protected function serializeArray($data )
+  protected function serializeArray($data)
   {
    if (Log::$levelDebug)
-      Log::start( __file__ , __line__ , __method__ , array($data) );
+      Log::start(__file__ , __line__ , __method__ , array($data));
 
     $assembled = $this->varName.' = array('.NL;
 
     foreach ($data as $key => $value) {
-      if ( is_array($value) ) {
+      if (is_array($value)) {
         $assembled .= "'".$key.'\' => '.$this->subParser($value , '  ');
-      } elseif ( is_object($value) ) {
+      } elseif (is_object($value)) {
         throw new LibSerializerException('Invalid data to Serialize');
       } else {
         $assembled .= "'".$key.'\' => \''.SParserString::quoteForSingleQuotes($value)."',".NL;
@@ -115,7 +115,7 @@ class LibSerializerPhparray extends LibSerializerAbstract
     $assembled .=  ');'.NL;
 
     $this->serialized = $assembled;
-  }//end public function serializeArray($data )
+  }//end public function serializeArray($data)
 
   /**
    * serializer method
@@ -126,13 +126,13 @@ class LibSerializerPhparray extends LibSerializerAbstract
   public function serialize($data = null)
   {
    if (Log::$levelDebug)
-      Log::start( __file__ , __line__ , __method__ );
+      Log::start(__file__ , __line__ , __method__);
 
-    if (!is_null($data )) {
+    if (!is_null($data)) {
       $this->toSerialize = $data;
     }
 
-    if (!is_array($this->toSerialize ) ) {
+    if (!is_array($this->toSerialize)) {
       throw new LibSerializerException('Invalid data to Serialize');
     }
 

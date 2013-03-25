@@ -37,12 +37,12 @@ class DaidalosDbSchema_Backup_Ajax_View extends LibTemplateAjaxView
    * @param TFlag $params
    * @return void
    */
-  public function displayRestore(  $params )
+  public function displayRestore( $params)
   {
 
     $response = $this->getResponse();
 
-    $response->addMessage( 'Sucessfully restored dump' );
+    $response->addMessage('Sucessfully restored dump');
 
   }//end public function displayRestore */
 
@@ -53,12 +53,12 @@ class DaidalosDbSchema_Backup_Ajax_View extends LibTemplateAjaxView
    * @param TFlag $params
    * @return void
    */
-  public function displayDelete(  $dbKey, $schemaKey, $dumpKey, $params )
+  public function displayDelete( $dbKey, $schemaKey, $dumpKey, $params)
   {
 
     $fHash = md5($dumpKey);
 
-    $this->setAreaContent( 'childNode', <<<XML
+    $this->setAreaContent('childNode', <<<XML
 <htmlArea selector="tr#wgt-row-{$dbKey}-{$schemaKey}-{$fHash}" action="remove" />
 XML
     );
@@ -73,22 +73,22 @@ XML
    * @param TFlag $params
    * @return void
    */
-  public function displayUpload($uplDump, $dbKey, $schemaKey, $params )
+  public function displayUpload($uplDump, $dbKey, $schemaKey, $params)
   {
 
-    $iconRestore = Wgt::icon( 'control/restore.png' );
-    $iconDel     = Wgt::icon( 'control/delete.png' );
+    $iconRestore = Wgt::icon('control/restore.png');
+    $iconDel     = Wgt::icon('control/delete.png');
 
-    $file = new IoFile( PATH_GW."data/backups/db/{$dbKey}/schemas/{$schemaKey}/".$uplDump->getOldname() );
+    $file = new IoFile(PATH_GW."data/backups/db/{$dbKey}/schemas/{$schemaKey}/".$uplDump->getOldname());
 
     $fileName = $uplDump->getOldname();
 
-    $fDate = date( 'Y-m-d H:i:s', $file->getTimeCreated() );
-    $fSize = $file->getSize( 'mb' );
+    $fDate = date('Y-m-d H:i:s', $file->getTimeCreated());
+    $fSize = $file->getSize('mb');
 
     $fHash = md5($fileName);
 
-    $this->setAreaContent( 'childNode', <<<XML
+    $this->setAreaContent('childNode', <<<XML
 <htmlArea selector="table#wgt-table-db_dumps-{$dbKey}-{$schemaKey}>tbody" action="append" ><![CDATA[
 <tr id="wgt-row-{$dbKey}-{$schemaKey}-{$fHash}" >
   <td></td>

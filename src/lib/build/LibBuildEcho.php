@@ -30,7 +30,7 @@ class LibBuildEcho extends LibBuildAction
   /**
    * @see LibBuildAction::execute()
    */
-  public function execute( )
+  public function execute()
   {
 
     Message::addMessage($this->args[0]);

@@ -71,7 +71,7 @@ class DaidalosCodeRepository_Model extends Model
     $galaxies = array();
 
     foreach ($xml->body->galaxies->galaxy as $galaxy) {
-      $galaxies[] = array( 'id'=>trim($galaxy['name']),'value'=>trim($galaxy['name']) ) ;
+      $galaxies[] = array('id'=>trim($galaxy['name']),'value'=>trim($galaxy['name'])) ;
     }
 
     return $galaxies;
@@ -103,7 +103,7 @@ class DaidalosCodeRepository_Model extends Model
   {
 
     if (!$this->dataSource)
-      $this->dataSource = simplexml_load_file( PATH_GW.'/data/bdl/repositories/index.xml' );
+      $this->dataSource = simplexml_load_file(PATH_GW.'/data/bdl/repositories/index.xml');
 
     return $this->dataSource;
 

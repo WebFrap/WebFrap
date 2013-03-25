@@ -41,16 +41,16 @@ class WgtSelectboxDeveloperDbms extends WgtSelectboxHardcoded
    */
   protected $data = array
   (
-    'Db2'         =>  array( 'value' => 'DB2' ),
-    'Firebird'    =>  array( 'value' => 'Firebird' ),
-    'Informix'    =>  array( 'value' => 'Informix' ),
-    'Ingres'      =>  array( 'value' => 'Ingres' ),
-    'Maxdb'       =>  array( 'value' => 'MaxDB' ),
-    'Mysql'       =>  array( 'value' => 'Mysql' ),
-    'Mssql'       =>  array( 'value' => 'Mssql' ),
-    'Oracle'      =>  array( 'value' => 'Oracle' ),
-    'Postgresql'  =>  array( 'value' => 'Postgresql' ),
-    'Sybase'      =>  array( 'value' => 'Sybase' ),
+    'Db2'         =>  array('value' => 'DB2'),
+    'Firebird'    =>  array('value' => 'Firebird'),
+    'Informix'    =>  array('value' => 'Informix'),
+    'Ingres'      =>  array('value' => 'Ingres'),
+    'Maxdb'       =>  array('value' => 'MaxDB'),
+    'Mysql'       =>  array('value' => 'Mysql'),
+    'Mssql'       =>  array('value' => 'Mssql'),
+    'Oracle'      =>  array('value' => 'Oracle'),
+    'Postgresql'  =>  array('value' => 'Postgresql'),
+    'Sybase'      =>  array('value' => 'Sybase'),
   );
 
 } // end class WgtSelectboxDeveloperDbms

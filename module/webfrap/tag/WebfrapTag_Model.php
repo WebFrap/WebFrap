@@ -28,12 +28,12 @@ class WebfrapTag_Model extends Model
    * @param int $tagId
    * @return WbfsysTag_Entity
    */
-  public function getTag($tagId )
+  public function getTag($tagId)
   {
 
     $orm = $this->getOrm();
 
-    return $orm->get( "WbfsysTag",  $tagId );
+    return $orm->get("WbfsysTag",  $tagId);
 
   }//end public function getTag */
 
@@ -41,19 +41,19 @@ class WebfrapTag_Model extends Model
    * @param string $tagName
    * @return WbfsysTag_Entity
    */
-  public function addTag($tagName )
+  public function addTag($tagName)
   {
 
     $orm     = $this->getOrm();
-    $tagNode = $orm->getWhere( "WbfsysTag",  "name ilike '".$orm->escape($tagName)."' " );
+    $tagNode = $orm->getWhere("WbfsysTag",  "name ilike '".$orm->escape($tagName)."' ");
 
     if ($tagNode) {
       return $tagNode;
     } else {
-      $tagNode = $orm->newEntity( "WbfsysTag" );
+      $tagNode = $orm->newEntity("WbfsysTag");
       $tagNode->name = $tagName;
       $tagNode->access_key  = SFormatStrings::nameToAccessKey($tagName);
-      $tagNode = $orm->insertIfNotExists($tagNode, array( 'name' ) );
+      $tagNode = $orm->insertIfNotExists($tagNode, array('name'));
 
       return $tagNode;
     }
@@ -66,20 +66,20 @@ class WebfrapTag_Model extends Model
    *
    * @return WbfsysTagReference_Entity | null gibt null zurück wenn die Verbindung bereits existiert
    */
-  public function addConnection($tagId, $objid )
+  public function addConnection($tagId, $objid)
   {
 
-    $orm    = $this->getOrm(  );
-    $tagRef = $orm->newEntity( 'WbfsysTagReference' );
+    $orm    = $this->getOrm();
+    $tagRef = $orm->newEntity('WbfsysTagReference');
 
     $tagRef->id_tag  = (string) $tagId;
     $tagRef->vid     = $objid;
 
     if (!$tagRef->id_tag) {
-      throw new LibDb_Exception( "FUUU" );
+      throw new LibDb_Exception("FUUU");
     }
 
-    return $orm->insertIfNotExists($tagRef, array( 'id_tag', 'vid' ) );
+    return $orm->insertIfNotExists($tagRef, array('id_tag', 'vid'));
 
   }//end public function addConnection */
 
@@ -87,11 +87,11 @@ class WebfrapTag_Model extends Model
    * @param int $objid
    * @return int
    */
-  public function cleanDsetTags($objid )
+  public function cleanDsetTags($objid)
   {
 
-    $orm    = $this->getOrm(  );
-    $orm->deleteWhere( 'WbfsysTagReference', "vid=".$objid );
+    $orm    = $this->getOrm();
+    $orm->deleteWhere('WbfsysTagReference', "vid=".$objid);
 
   }//end public function cleanDsetTags */
 
@@ -99,11 +99,11 @@ class WebfrapTag_Model extends Model
    * @param int $objid
    * @return int
    */
-  public function disconnect($objid )
+  public function disconnect($objid)
   {
 
-    $orm    = $this->getOrm(  );
-    $orm->delete( 'WbfsysTagReference', $objid );
+    $orm    = $this->getOrm();
+    $orm->delete('WbfsysTagReference', $objid);
 
   }//end public function disconnect */
 
@@ -126,14 +126,14 @@ SELECT
 FROM
   wbfsys_tag tag
 WHERE
-  NOT tag.rowid IN( select ref.id_tag from wbfsys_tag_reference ref where ref.vid = {$refId} )
-  AND upper( tag.name ) like upper( '{$db->addSlashes($key)}%' )
+  NOT tag.rowid IN(select ref.id_tag from wbfsys_tag_reference ref where ref.vid = {$refId})
+  AND upper(tag.name) like upper('{$db->addSlashes($key)}%')
 ORDER BY
   tag.name
 LIMIT 10;
 SQL;
 
-    return $db->select($sql )->getAll();
+    return $db->select($sql)->getAll();
 
   }//end public function autocompleteByName */
 
@@ -164,7 +164,7 @@ ORDER BY
   tag.name;
 SQL;
 
-    return $db->select($sql )->getAll();
+    return $db->select($sql)->getAll();
 
   }//end public function getDatasetTaglist */
 

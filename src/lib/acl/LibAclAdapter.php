@@ -95,7 +95,7 @@ class LibAclAdapter extends BaseChild
 
     $this->levels = Acl::$accessLevels;
 
-    if (!$env )
+    if (!$env)
       $env = Webfrap::getActive();
 
     $this->env    = $env;
@@ -110,7 +110,7 @@ class LibAclAdapter extends BaseChild
    * setter class for the user object
    * @param boolean $disabled
    */
-  public function setDisabled($disabled )
+  public function setDisabled($disabled)
   {
     $this->disabled = $disabled;
   }//end public function setDisabled */

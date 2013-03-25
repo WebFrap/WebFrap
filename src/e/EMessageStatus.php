@@ -48,8 +48,7 @@ class EMessageStatus
   /**
    * @var array
    */
-  public static $labels = array
-  (
+  public static $labels = array(
     self::IS_NEW   => 'New',
     self::OPEN     => 'Opened',
     self::UPDATED  => 'Updated',
@@ -60,9 +59,9 @@ class EMessageStatus
    * @param string $key
    * @return string
    */
-  public static function label($key )
+  public static function label($key)
   {
-    return isset( self::$labels[$key] )
+    return isset(self::$labels[$key])
       ? self::$labels[$key]
       : 'New';
 

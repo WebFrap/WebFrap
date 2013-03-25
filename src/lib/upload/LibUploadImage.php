@@ -47,7 +47,7 @@ class LibUploadImage extends LibUploadAdapter
    * Enter description here...
    *
    */
-  public function setThumbPath($thumbPath )
+  public function setThumbPath($thumbPath)
   {
     $this->thumbPath = $thumbPath;
   }//end public function setThumbPath
@@ -56,7 +56,7 @@ class LibUploadImage extends LibUploadAdapter
    * Enter description here...
    *
    */
-  public function setThumbName($thumbName )
+  public function setThumbName($thumbName)
   {
     $this->thumbName = $thumbName;
   }//end public function setThumbPath
@@ -69,7 +69,7 @@ class LibUploadImage extends LibUploadAdapter
    * Enter description here...
    *
    */
-  public function thumb($newName = null , $thumbPath = null , $x = 100, $y = 100 )
+  public function thumb($newName = null , $thumbPath = null , $x = 100, $y = 100)
   {
 
     if ($thumbPath) {
@@ -83,9 +83,9 @@ class LibUploadImage extends LibUploadAdapter
       $this->thumbName = $newName;
     }
 
-    return $this->convert($this->thumbName, $this->thumbPath , $x, $y );
+    return $this->convert($this->thumbName, $this->thumbPath , $x, $y);
 
-  }//end public function copyThumb($newName = null )
+  }//end public function copyThumb($newName = null)
 
   /**
    * Enter description here...
@@ -96,10 +96,10 @@ class LibUploadImage extends LibUploadAdapter
    * @param unknown_type $y
    * @return unknown
    */
-  public function convert($newname = null , $newpath = null , $x = 640, $y = 480 )
+  public function convert($newname = null , $newpath = null , $x = 640, $y = 480)
   {
     if (Log::$levelDebug)
-      Log::start( __file__ , __line__ , __method__ , array($newname, $newpath, $x, $y)  );
+      Log::start(__file__ , __line__ , __method__ , array($newname, $newpath, $x, $y)  );
 
     if ($newpath) {
       $this->newpath = $newpath;
@@ -113,14 +113,14 @@ class LibUploadImage extends LibUploadAdapter
       $this->newpath = PATH_FILES.'files/images/';
     }
 
-    if (is_null($this->newname ) ) {
+    if (is_null($this->newname)) {
       $newname = $this->newpath.'/'.$this->oldname;
     } else {
       $newname = $this->newpath.'/'.$this->newname;
     }
 
     // Wenn der Ordner nicht existiert, einfach versuchen zu erstellen
-    if (!is_dir($this->newpath) ) {
+    if (!is_dir($this->newpath)) {
       if (!SFilesystem::createFolder($this->newpath)) {
         Error::addError
         (
@@ -131,7 +131,7 @@ class LibUploadImage extends LibUploadAdapter
     }
 
     // Falls der Ordner nicht beschreibbar ist Fehler werfen
-    if (!is_writeable($this->newpath )  ) {
+    if (!is_writeable($this->newpath)  ) {
       Error::addError
       (
       'Target Folder :  '.$this->newpath.' is not writeable',
@@ -139,15 +139,15 @@ class LibUploadImage extends LibUploadAdapter
       );
     }
 
-    $thumb = LibImageThumbFactory::getThumb($this->tmpname , $newname , $x , $y );
+    $thumb = LibImageThumbFactory::getThumb($this->tmpname , $newname , $x , $y);
 
-    $thumb->genThumb( );
+    $thumb->genThumb();
 
     $this->copies[] = $newname;
 
     return $newname;
 
-  }//end public function convert($newname = null )
+  }//end public function convert($newname = null)
 
 } // end class LibUploadImage
 

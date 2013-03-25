@@ -84,12 +84,12 @@ class LibDbPdoPostgresql
 
     ++$this->counter ;
 
-    if ( is_object($sql)  ) {
-      if (!$sqlstring = $this->sqlBuilder->buildSelect($sql) ) {
+    if (is_object($sql)  ) {
+      if (!$sqlstring = $this->sqlBuilder->buildSelect($sql)) {
         // Fehlermeldung raus und gleich mal nen Trace laufen lassen
-        throw new LibDb_Exception( I18n::s('wbf.log.dbFailedToParseSql') );
+        throw new LibDb_Exception(I18n::s('wbf.log.dbFailedToParseSql'));
       }
-    } elseif ( is_string($sql) ) {
+    } elseif (is_string($sql)) {
       $sqlstring = $sql;
     } else {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
@@ -103,9 +103,9 @@ class LibDbPdoPostgresql
     }
 
     if (Log::$levelDebug)
-      Log::debug( __file__ , __line__ , 'Select Query: '. $sqlstring );
+      Log::debug(__file__ , __line__ , 'Select Query: '. $sqlstring);
 
-    if (!$result = $this->connection->query($sqlstring )  ) {
+    if (!$result = $this->connection->query($sqlstring)  ) {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       Error::addError
       (
@@ -127,19 +127,19 @@ class LibDbPdoPostgresql
    * @return int
    * @throws LibDb_Exception
    */
-  public function insert($sql , $tableName = null, $tablePk = null )
+  public function insert($sql , $tableName = null, $tablePk = null)
   {
     if (Log::$levelDebug)
       Log::start(__file__,__line__,__method__,array($sql , $tableName , $tablePk));
 
     ++$this->counter ;
 
-    if ( is_object($sql ) ) {
+    if (is_object($sql)) {
 
       $this->activObject = $sql;
 
-      if (!$sqlstring = $this->activObject->getSql() ) {
-        if (!$sqlstring = $this->activObject->buildInsert() ) {
+      if (!$sqlstring = $this->activObject->getSql()) {
+        if (!$sqlstring = $this->activObject->buildInsert()) {
           $args = func_get_args();
           Error::addError
           (
@@ -150,7 +150,7 @@ class LibDbPdoPostgresql
         }
       }
 
-    } elseif ( is_string($sql) and STestSql::isInsertQuery($sql) ) {
+    } elseif (is_string($sql) and STestSql::isInsertQuery($sql)) {
       $sqlstring = $sql;
     } else {
         $args = func_get_args();
@@ -165,7 +165,7 @@ class LibDbPdoPostgresql
     $this->lastQuery = $sqlstring;
 
     if (Log::$levelDebug)
-      Log::debug(__file__ , __line__ ,'SQL: '.$sqlstring );
+      Log::debug(__file__ , __line__ ,'SQL: '.$sqlstring);
 
     $this->affectedRows = $this->connection->exec($sqlstring);
 
@@ -173,7 +173,7 @@ class LibDbPdoPostgresql
       $args = func_get_args();
       Error::addError
       (
-      'Query Error: '.$this->extractPdoError($this->connection->errorInfo() ),
+      'Query Error: '.$this->extractPdoError($this->connection->errorInfo()),
       'LibDb_Exception',
       $args
       );
@@ -183,11 +183,11 @@ class LibDbPdoPostgresql
     $id = $this->connection->lastInsertId($tableName.'_'.$tablePk.'_seq'  );
 
     if (Log::$levelDebug)
-      Log::debug(__file__,__line__,'GOT ID : '.$id );
+      Log::debug(__file__,__line__,'GOT ID : '.$id);
 
     return $id ;
 
-  } // end  public function insert($sql , $tableName = null, $tablePk = null )
+  } // end  public function insert($sql , $tableName = null, $tablePk = null)
 
   /**
    * set the activ schema
@@ -195,13 +195,13 @@ class LibDbPdoPostgresql
    * @param string Schema Das aktive Schema
    * @return bool
    */
-  public function setSearchPath($schema )
+  public function setSearchPath($schema)
   {
 
     $this->schema = $schema;
     $sqlstring = 'SET search_path = "'.$schema.'", pg_catalog';
 
-    $back = $this->connection->exec($sqlstring );
+    $back = $this->connection->exec($sqlstring);
 
     if ($back === false) {
 
@@ -218,7 +218,7 @@ class LibDbPdoPostgresql
     Log::debug('Changed search path');
 
     return true;
-  } // end public function setSearchPath($schema )
+  } // end public function setSearchPath($schema)
 
   /**
    * execute a sql
@@ -234,7 +234,7 @@ class LibDbPdoPostgresql
 
     $this->result = null;
 
-    $this->affectedRows = $this->connection->exec($sql );
+    $this->affectedRows = $this->connection->exec($sql);
 
     if ($this->affectedRows === false) {
       Error::addError
@@ -246,7 +246,7 @@ class LibDbPdoPostgresql
     }
 
     if ($insertId) {
-      return $this->connection->lastInsertId($table.'_'.$insertId.'_seq' );
+      return $this->connection->lastInsertId($table.'_'.$insertId.'_seq');
     } else {
       return $this->affectedRows;
     }
@@ -260,12 +260,12 @@ class LibDbPdoPostgresql
    * @param   array Values Ein Array mit den Daten
    * @throws  LibDb_Exception
    */
-  public function executeAction($name,  $values = null, $getNewId = null )
+  public function executeAction($name,  $values = null, $getNewId = null)
   {
     if (Log::$levelDebug)
       Log::start(__file__,__line__,__method__,array($name, $values, $getNewId));
 
-    if (!isset($this->prepares[$name] ) ) {
+    if (!isset($this->prepares[$name])) {
       Error::addError
       (
       I18n::s('wbf.error.foundNoPrepare',array($name)),
@@ -289,7 +289,7 @@ class LibDbPdoPostgresql
       $args = func_get_args();
       Error::addError
       (
-       'Query Error: '.$this->extractPdoError($this->connection->errorInfo() ),
+       'Query Error: '.$this->extractPdoError($this->connection->errorInfo()),
       'LibDb_Exception',
       $args
       );
@@ -319,7 +319,7 @@ class LibDbPdoPostgresql
         $this->conf['dbuser'],
         $this->conf['dbpwd']
       );
-    } catch ( PDOException $e ) {
+    } catch (PDOException $e) {
 
       throw new LibDb_Exception
       (
@@ -329,9 +329,9 @@ class LibDbPdoPostgresql
 
     }
 
-    if ( isset($this->conf['dbschema'] ) ) {
+    if (isset($this->conf['dbschema'])) {
 
-      $this->setSearchPath($this->conf['dbschema'] );
+      $this->setSearchPath($this->conf['dbschema']);
     }
 
     $this->databaseName = $this->conf['dbname'];

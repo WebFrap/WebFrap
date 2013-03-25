@@ -6,7 +6,7 @@ $this->crumbs = array(
   array('Example',$this->interface.'?c=Example.Base.menu','control/folder.png'),
 );
 
-if ($acl->hasRole('developer') ) {
+if ($acl->hasRole('developer')) {
 
   $this->firstEntry = array
   (

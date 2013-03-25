@@ -291,7 +291,7 @@ class Wgt
   {
     $className = 'Wgt'.ucfirst($type);
 
-    if (!WebFrap::loadable($className) ) {
+    if (!WebFrap::loadable($className)) {
       Error::addError
       (
         'Class '.$className.' was not found',
@@ -310,23 +310,23 @@ class Wgt
    * @param array $attributes
    * @param string $class
    */
-  public static function icon($name, $size = 'xsmall', $attributes = array(), $class = 'icon' )
+  public static function icon($name, $size = 'xsmall', $attributes = array(), $class = 'icon')
   {
     
     // wenn es mit icon- anfängt und kein Punkt vorhanden ist, dann ist es sehr
     // sicher eine icon klasse und kein url auf ein icon, dass zumindest einen punkt
     // bei der endung haben sollte
-    if( 'icon-' === substr($name, 0, 5) && !strpos($name, '.') ){
+    if ('icon-' === substr($name, 0, 5) && !strpos($name, '.')){
       if (!is_numeric($size)){
         return '<i class="'.$name.'" ></i>';
       } else {
-        return '<i class="'.$name.' icon-'.str_replace( '.', '_', $size ).'x" ></i>';
+        return '<i class="'.$name.' icon-'.str_replace('.', '_', $size).'x" ></i>';
       }
     }
 
     if ($attributes) {
-      if ( is_array($attributes) ) {
-        $attr = self::asmAttributes($attributes );
+      if (is_array($attributes)) {
+        $attr = self::asmAttributes($attributes);
       } else {
         $attr = ' alt="'.$attributes.'" ';
       }
@@ -346,7 +346,7 @@ class Wgt
    * @param string $name
    * @param string $size
    */
-  public static function iconUrl($name, $size = 'xsmall' )
+  public static function iconUrl($name, $size = 'xsmall')
   {
     return View::$iconsWeb.$size.'/'.$name;;
 
@@ -356,19 +356,19 @@ class Wgt
    * @param string $src
    * @param array $attributes
    */
-  public static function image($src , $attributes = array() , $tempPath = false )
+  public static function image($src , $attributes = array() , $tempPath = false)
   {
     if (!isset($attributes['alt'])) {
       $attributes['alt'] = 'nondescriped image';
     }
 
     if ($attributes) {
-      $attr = self::asmAttributes($attributes );
+      $attr = self::asmAttributes($attributes);
     } else {
       $attr = '';
     }
 
-    if ($tempPath )
+    if ($tempPath)
       $src = View::$themeWeb.'images/'.$src;
 
     $html = '<img src="'.$src.'" '.$attr.' />'.NL;
@@ -393,12 +393,12 @@ class Wgt
    * @param $attributes
    * @return unknown_type
    */
-  public static function idImage($id, $path, $thumb = true, $attributes = array() )
+  public static function idImage($id, $path, $thumb = true, $attributes = array())
   {
 
     $idPath = SParserString::getCachePath($id);
 
-    if ($thumb )
+    if ($thumb)
       $thumb = '/thumb';
 
     else
@@ -415,7 +415,7 @@ class Wgt
       $attributes['alt'] = 'nondescriped image';
 
     if ($attributes) {
-      $attr = self::asmAttributes($attributes );
+      $attr = self::asmAttributes($attributes);
     } else {
       $attr = '';
     }
@@ -453,16 +453,16 @@ class Wgt
    *
    * @return string $html
    */
-  public static function urlTag($url , $text = null, $attribues = array() ,  $target = null )
+  public static function urlTag($url , $text = null, $attribues = array() ,  $target = null)
   {
     $target = $target?'target="'.$target.'"':'';
 
-    if ( is_string($attribues) )
+    if (is_string($attribues))
       $attribues = $attribues?'class="'.$attribues.'"':'';
     else
       $attribues = $attribues?self::asmAttributes($attribues):'';
 
-    if (trim($url) == '' ) {
+    if (trim($url) == '') {
       return '';
     } else {
 
@@ -480,9 +480,9 @@ class Wgt
    * @param string $text
    * @return string $html
    */
-  public static function mailTag($url, $text = null )
+  public static function mailTag($url, $text = null)
   {
-    if (trim($url) == '' ) {
+    if (trim($url) == '') {
       return '';
     } else {
 
@@ -497,7 +497,7 @@ class Wgt
    * @param string $data
    * @return string
    */
-  public static function cdata($data )
+  public static function cdata($data)
   {
     return '<![CDATA['.$data.']]>';
   }//end public static function cdata */
@@ -508,7 +508,7 @@ class Wgt
    * @param string $data
    * @return string
    */
-  public static function tag($data , $tagName )
+  public static function tag($data , $tagName)
   {
     return '<'.$tagName.'>'.$data.'</'.$tagName.'>';
   }//end public static function tag */
@@ -519,12 +519,12 @@ class Wgt
    * @param string $name
    * @return WgtSelectboxHardcoded
    */
-  public static function getSelectbox($name )
+  public static function getSelectbox($name)
   {
 
     $className = 'WgtSelectbox'.$name;
 
-    if (!Webfrap::classLoadable($className )) {
+    if (!Webfrap::classLoadable($className)) {
       Error::addError
       (
       'Class '.$className.' is not loadable'
@@ -533,7 +533,7 @@ class Wgt
       return null;
     }
 
-    if ( isset( self::$wgt[$className] ) ) {
+    if (isset(self::$wgt[$className])) {
       return self::$wgt[$className];
     } else {
       $select = new $className('global');
@@ -549,7 +549,7 @@ class Wgt
    * Get a Template Area
    * @return LibTemplateAreaView
    */
-  public static function getTemplateArea($name = null )
+  public static function getTemplateArea($name = null)
   {
 
     $area = new LibTemplateAreaView();
@@ -562,28 +562,28 @@ class Wgt
    * Get a Template Area
    * @return string
    */
-  public static function getTemplate($file, $type = 'content' )
+  public static function getTemplate($file, $type = 'content')
   {
 
     // Zuerst den Standard Pfad checken
-    if ( file_exists( View::$themePath.'/'.$type.'/'.$file.'.tpl' ) )
+    if (file_exists(View::$themePath.'/'.$type.'/'.$file.'.tpl'))
       return View::$themePath.'/'.$type.'/'.$file.'.tpl';
 
     foreach (View::$searchPathTemplate as $path) {
 
       $checkPath = $path.$type.'/'.$file.'.tpl';
 
-      if ( file_exists($checkPath ) ) {
+      if (file_exists($checkPath)) {
         if (Log::$levelDebug)
-          Log::debug(__file__,__line__,"found Template: ". $checkPath );
+          Log::debug(__file__,__line__,"found Template: ". $checkPath);
 
-        if ( Log::$levelDebug )
-          Debug::console('Found Static Template: '.$checkPath );
+        if (Log::$levelDebug)
+          Debug::console('Found Static Template: '.$checkPath);
 
         return $path.$type.'/'.$file.'.tpl';
       } else {
-        if ( Log::$levelDebug )
-          Debug::console('Not found Static Template: '.$checkPath );
+        if (Log::$levelDebug)
+          Debug::console('Not found Static Template: '.$checkPath);
       }
     }
 
@@ -595,10 +595,10 @@ class Wgt
    * Get a Template Area
    * @return string
    */
-  public static function getTemplateContent($file, $type = 'content' )
+  public static function getTemplateContent($file, $type = 'content')
   {
 
-    if (! $path = self::getTemplate($file, $type ))
+    if (! $path = self::getTemplate($file, $type))
       return null;
 
     ob_start();
@@ -613,7 +613,7 @@ class Wgt
   /**
    * @param string $string
    */
-  public static function clean($string )
+  public static function clean($string)
   {
     return htmlspecialchars(stripslashes($string),ENT_QUOTES,'UTF-8');
   }//end public static function clean */
@@ -621,7 +621,7 @@ class Wgt
   /**
    * @param string $string
    */
-  public static function out($string )
+  public static function out($string)
   {
     echo nl2br(htmlspecialchars(stripslashes($string),ENT_QUOTES,'UTF-8'));
   }//end public static function out */
@@ -629,13 +629,13 @@ class Wgt
   /**
    * @param string $url
    */
-  public static function renderUrl($url )
+  public static function renderUrl($url)
   {
 
-    $start = mb_substr($url, 0, 2 );
+    $start = mb_substr($url, 0, 2);
 
-    if ($start === '\\\\' )
-      return 'file://///'.str_replace('\\\\', '\\', substr($url, 4 ));
+    if ($start === '\\\\')
+      return 'file://///'.str_replace('\\\\', '\\', substr($url, 4));
     else
       return $url;
 
@@ -650,7 +650,7 @@ class Wgt
    *
    * @param string $html
    */
-  public static function checked($cond , $status )
+  public static function checked($cond , $status)
   {
     return $cond == $status ? 'checked="checked"':'';
   }//end public static function checked  */
@@ -660,7 +660,7 @@ class Wgt
    *
    * @param string $html
    */
-  public static function isHidden($cond , $status )
+  public static function isHidden($cond , $status)
   {
     return $cond == $status ? '':' hidden ';
   }//end public static function isHidden  */
@@ -670,7 +670,7 @@ class Wgt
    *
    * @param string $html
    */
-  public static function isDisabled($cond )
+  public static function isDisabled($cond)
   {
     return $cond ? ' disabled="disabled" ':'';
   }//end public static function isDisabled  */
@@ -680,7 +680,7 @@ class Wgt
    *
    * @param string $html
    */
-  public static function isChecked($cond )
+  public static function isChecked($cond)
   {
     return $cond ? ' checked="checked" ':'';
   }//end public static function isChecked  */
@@ -694,12 +694,12 @@ class Wgt
    * @param array $attributes
    * @return String
    */
-  public static function asmAttributes($attributes )
+  public static function asmAttributes($attributes)
   {
 
     $html = '';
 
-    foreach($attributes as $key => $value )
+    foreach($attributes as $key => $value)
       $html .= $key.'="'.$value.'" ';
 
     return $html;
@@ -713,13 +713,13 @@ class Wgt
   /**
    * @param string $data
    */
-  public static function parsteToTabledata($data )
+  public static function parsteToTabledata($data)
   {
     $tabData = array();
     foreach ($data as $tabName => $ent) {
       $tabData[$tabName.'_'.DB::KEY] = $ent->getId();
 
-      foreach($ent->getData() as $key => $col )
+      foreach($ent->getData() as $key => $col)
         $tabData[$tabName.'_'.$key] = $col;
     }
 

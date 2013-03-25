@@ -48,18 +48,18 @@ class WebfrapMaintenance_Metadata_Controller extends Controller
   (
     'stats' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'modal' )
+      'method'    => array('GET'),
+      'views'      => array('modal')
     ),
     'cleansource' => array
     (
-      'method'    => array( 'DELETE' ),
-      'views'      => array( 'modal' )
+      'method'    => array('DELETE'),
+      'views'      => array('modal')
     ),
     'cleanall' => array
     (
-      'method'    => array( 'DELETE' ),
-      'views'      => array( 'modal' )
+      'method'    => array('DELETE'),
+      'views'      => array('modal')
     )
   );
 
@@ -72,7 +72,7 @@ class WebfrapMaintenance_Metadata_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_stats($request, $response )
+  public function service_stats($request, $response)
   {
 
     /* @var $view WebfrapMaintenance_Metadata_Modal_View  */
@@ -83,10 +83,10 @@ class WebfrapMaintenance_Metadata_Controller extends Controller
       'displayStats'
     );
 
-    $model = $this->loadModel( 'WebfrapMaintenance_Metadata' );
+    $model = $this->loadModel('WebfrapMaintenance_Metadata');
 
-    $view->setModel($model );
-    $view->displayStats( );
+    $view->setModel($model);
+    $view->displayStats();
 
   }//end public function service_stats */
 
@@ -95,14 +95,14 @@ class WebfrapMaintenance_Metadata_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_cleanAll($request, $response )
+  public function service_cleanAll($request, $response)
   {
 
     /* @var $model WebfrapMaintenance_Metadata_Model */
-    $model = $this->loadModel( 'WebfrapMaintenance_Metadata' );
+    $model = $this->loadModel('WebfrapMaintenance_Metadata');
     $model->cleanAllMetadata();
 
-    $response->addMessage( "Cleaned Metadata" );
+    $response->addMessage("Cleaned Metadata");
 
     /* @var $view WebfrapMaintenance_Metadata_Log_Modal_View  */
     $view = $response->loadView
@@ -112,8 +112,8 @@ class WebfrapMaintenance_Metadata_Controller extends Controller
       'displayLog'
     );
 
-    $view->setModel($model );
-    $view->displayLog( );
+    $view->setModel($model);
+    $view->displayLog();
 
   }//end public function service_cleanAll */
 

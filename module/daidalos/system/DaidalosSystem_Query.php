@@ -30,7 +30,7 @@ class DaidalosSystem_Query extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetchUsersByKey($key, $params = null )
+  public function fetchUsersByKey($key, $params = null)
   {
 
     if (!$params)
@@ -54,8 +54,8 @@ class DaidalosSystem_Query extends LibSqlQuery
     $sql = <<<SQL
   SELECT
     wbfsys_role_user.name as id,
-    COALESCE ( '('||wbfsys_role_user.name||') ', '' ) || COALESCE ( core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '' ) as value,
-    COALESCE ( '('||wbfsys_role_user.name||') ', '' ) || COALESCE ( core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '' ) as label
+    COALESCE ('('||wbfsys_role_user.name||') ', '') || COALESCE (core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '') as value,
+    COALESCE ('('||wbfsys_role_user.name||') ', '') || COALESCE (core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '') as label
   FROM
     wbfsys_role_user
   JOIN
@@ -67,7 +67,7 @@ class DaidalosSystem_Query extends LibSqlQuery
   LIMIT 10;
 SQL;
 
-    $this->result = $db->select($sql );
+    $this->result = $db->select($sql);
 
   }//end public function fetchUsersByKey */
 

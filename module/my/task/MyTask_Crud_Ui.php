@@ -84,7 +84,7 @@ class MyTask_Crud_Ui extends MvcUi
    * @param TFlag $params named parameters
    * @return null / Error im Fehlerfall
    */
-  public function createForm($params )
+  public function createForm($params)
   {
 
     $view  = $this->getView();
@@ -125,12 +125,12 @@ class MyTask_Crud_Ui extends MvcUi
    * @param TFlag $params named parameters
    * @return void
    */
-  public function editForm(  $objid, $params )
+  public function editForm( $objid, $params)
   {
 
     $view = $this->getView();
 
-    $entityMyTask = $this->model->getEntityWbfsysTask($objid );
+    $entityMyTask = $this->model->getEntityWbfsysTask($objid);
 
     $fields = $this->model->getEditFields();
 
@@ -178,11 +178,11 @@ class MyTask_Crud_Ui extends MvcUi
     // the ajax view should send the inputs as adressed values
     $params->refresh  = true;
 
-    if (!$params->categories )
+    if (!$params->categories)
       $params->categories = array();
 
-    if (!$params->fieldsMyTask )
-      $params->fieldsMyTask = $entityMyTask->getCols($params->categories );
+    if (!$params->fieldsMyTask)
+      $params->fieldsMyTask = $entityMyTask->getCols($params->categories);
 
     $formMyTask = $view->newForm('WbfsysTask');
 
@@ -218,14 +218,14 @@ class MyTask_Crud_Ui extends MvcUi
    * @param TFlag $params named parameters
    * @return void
    */
-  public function textByKey($entityMyTask, $params )
+  public function textByKey($entityMyTask, $params)
   {
 
     // laden der benötigten resourcen
     $view = $this->getView();
 
     // push the to string information to the text field
-    $replaceItemText = $view->newInput( 'textWbfsysTask', 'Text' );
+    $replaceItemText = $view->newInput('textWbfsysTask', 'Text');
     $replaceItemText->addAttributes(array
     (
       'id'    => 'wgt-input-'.$params->input.'-tostring',
@@ -236,7 +236,7 @@ class MyTask_Crud_Ui extends MvcUi
     // and not the complete ui element
     $replaceItemText->refresh = 'value';
 
-    $replaceItem = $view->newInput( 'idWbfsysTask', 'Text' );
+    $replaceItem = $view->newInput('idWbfsysTask', 'Text');
     $replaceItem->addAttributes(array
     (
       'id'    => 'wgt-input-'.$params->input,
@@ -256,7 +256,7 @@ class MyTask_Crud_Ui extends MvcUi
    * @param TFlag $params named parameters
    * @return void
    */
-  public function item($view, $field, $params )
+  public function item($view, $field, $params)
   {
 
     $entityMyTask = new WbfsysTask_Entity();

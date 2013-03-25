@@ -39,7 +39,7 @@ class WebfrapCache_Model extends Model
   public function getCaches()
   {
 
-    if ($this->cacheDirs )
+    if ($this->cacheDirs)
       return $this->cacheDirs;
 
     // can be done native with php 5.4
@@ -168,7 +168,7 @@ class WebfrapCache_Model extends Model
 
 JSON;
 
-    $this->cacheDirs = json_decode($caches );
+    $this->cacheDirs = json_decode($caches);
 
     return $this->cacheDirs;
 
@@ -190,19 +190,19 @@ JSON;
     );
 
     foreach ($toClean as $name => $folder) {
-      if ( SFilesystem::cleanFolder($folder) ) {
+      if (SFilesystem::cleanFolder($folder)) {
         $response->addMessage($response->i18n->l
         (
           'Successfully cleaned {@name@}',
           'wbf.message',
-          array( 'name' => $name )
+          array('name' => $name)
         ));
       } else {
         $response->addError($response->i18n->l
         (
           'Failed to cleane {@name@}',
           'wbf.message',
-          array( 'name' => $name )
+          array('name' => $name)
         ));
       }
     }
@@ -211,51 +211,51 @@ JSON;
   /**
    * neu bauen des JS Caches
    */
-  public function rebuildJs($key )
+  public function rebuildJs($key)
   {
 
     $cache    = new LibCacheRequestJavascript();
-    $cache->rebuildList($key );
+    $cache->rebuildList($key);
 
   }//end public function rebuildJs */
 
   /**
    * neu bauen des JS Caches
    */
-  public function rebuildCss($key )
+  public function rebuildCss($key)
   {
 
     $cache    = new LibCacheRequestCss();
-    $cache->rebuildList($key );
+    $cache->rebuildList($key);
 
   }//end public function rebuildCss */
 
   /**
    * neu bauen des Theme Caches
    */
-  public function rebuildWebTheme($key )
+  public function rebuildWebTheme($key)
   {
 
     $cache    = new LibCacheRequestWebTheme();
-    $cache->rebuildList($key );
+    $cache->rebuildList($key);
 
   }//end public function rebuildTheme */
 
   /**
    * neu bauen des Theme Caches
    */
-  public function rebuildAppTheme($key )
+  public function rebuildAppTheme($key)
   {
 
     $cache    = new LibCacheRequestAppTheme();
-    $cache->rebuildList($key );
+    $cache->rebuildList($key);
 
   }//end public function rebuildAppTheme */
 
   /**
    * neu bauen des JS Caches
    */
-  public function rebuildAllJs( )
+  public function rebuildAllJs()
   {
 
     $response = $this->getResponse();
@@ -269,12 +269,12 @@ JSON;
     );
 
     foreach ($folderIterator as $fileName) {
-      $key = str_replace('.list.php', '', basename($fileName) );
+      $key = str_replace('.list.php', '', basename($fileName));
       try {
-        $cache->rebuildList($key );
-        $response->addMessage( "Successfully rebuild list: ".$key  );
-      } catch ( Webfrap_Exception $e ) {
-        $response->addError( "Failed to render js: ".$key." ".$e->getMessage()  );
+        $cache->rebuildList($key);
+        $response->addMessage("Successfully rebuild list: ".$key  );
+      } catch (Webfrap_Exception $e) {
+        $response->addError("Failed to render js: ".$key." ".$e->getMessage()  );
       }
     }
 
@@ -283,7 +283,7 @@ JSON;
   /**
    * neu bauen des JS Caches
    */
-  public function rebuildAllCss( )
+  public function rebuildAllCss()
   {
 
     $response = $this->getResponse();
@@ -296,12 +296,12 @@ JSON;
     );
 
     foreach ($folderIterator as $fileName) {
-      $key = str_replace('.list.php', '', basename($fileName) );
+      $key = str_replace('.list.php', '', basename($fileName));
       try {
-        $cache->rebuildList($key );
-        $response->addMessage( "Successfully rebuild CSS: ".$key  );
-      } catch ( Webfrap_Exception $e ) {
-        $response->addError( "Failed to render CSS: ".$key." ".$e->getMessage()  );
+        $cache->rebuildList($key);
+        $response->addMessage("Successfully rebuild CSS: ".$key  );
+      } catch (Webfrap_Exception $e) {
+        $response->addError("Failed to render CSS: ".$key." ".$e->getMessage()  );
       }
     }
 
@@ -310,7 +310,7 @@ JSON;
   /**
    * neu bauen des Theme Caches
    */
-  public function rebuildAllWebTheme( )
+  public function rebuildAllWebTheme()
   {
 
     $response = $this->getResponse();
@@ -324,12 +324,12 @@ JSON;
     );
 
     foreach ($folderIterator as $fileName) {
-      $key = str_replace('.list.php', '', basename($fileName) );
+      $key = str_replace('.list.php', '', basename($fileName));
       try {
-        $cache->rebuildList($key );
-        $response->addMessage( "Successfully rebuild theme: ".$key  );
-      } catch ( Webfrap_Exception $e ) {
-        $response->addError( "Failed to render theme: ".$key." ".$e->getMessage()  );
+        $cache->rebuildList($key);
+        $response->addMessage("Successfully rebuild theme: ".$key  );
+      } catch (Webfrap_Exception $e) {
+        $response->addError("Failed to render theme: ".$key." ".$e->getMessage()  );
       }
     }
 
@@ -338,7 +338,7 @@ JSON;
   /**
    * neu bauen des Theme Caches
    */
-  public function rebuildAllAppTheme( )
+  public function rebuildAllAppTheme()
   {
 
     $response = $this->getResponse();
@@ -352,12 +352,12 @@ JSON;
     );
 
     foreach ($folderIterator as $fileName) {
-      $key = str_replace('.list.php', '', basename($fileName) );
+      $key = str_replace('.list.php', '', basename($fileName));
       try {
-        $cache->rebuildList($key );
-        $response->addMessage( "Successfully rebuild theme: ".$key  );
-      } catch ( Webfrap_Exception $e ) {
-        $response->addError( "Failed to render theme: ".$key." ".$e->getMessage()  );
+        $cache->rebuildList($key);
+        $response->addMessage("Successfully rebuild theme: ".$key  );
+      } catch (Webfrap_Exception $e) {
+        $response->addError("Failed to render theme: ".$key." ".$e->getMessage()  );
       }
     }
 
@@ -367,25 +367,25 @@ JSON;
    * leeren des cache folders
    * @return void
    */
-  public function clean($toClean )
+  public function clean($toClean)
   {
 
     $response = $this->getResponse();
 
     foreach ($toClean as $name => $folder) {
-      if ( SFilesystem::cleanFolder($folder) ) {
+      if (SFilesystem::cleanFolder($folder)) {
         $response->addMessage($response->i18n->l
         (
           'Successfully cleaned {@name@}',
           'wbf.message',
-          array( 'name' => $name )
+          array('name' => $name)
         ));
       } else {
         $response->addError($response->i18n->l
         (
           'Failed to cleane {@name@}',
           'wbf.message',
-          array( 'name' => $name )
+          array('name' => $name)
         ));
       }
     }

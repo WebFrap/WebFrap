@@ -33,7 +33,7 @@ class LibWbfTaskEngine
   /**
    *
    */
-  public static function getEngine( )
+  public static function getEngine()
   {
 
     if (!self::$instance)

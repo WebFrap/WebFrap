@@ -23,7 +23,7 @@
 class Error_Cli_View extends LibTemplateCli
 {
 
-  public function displayException($exception )
+  public function displayException($exception)
   {
 
     $out = $this->getResponse();
@@ -36,7 +36,7 @@ class Error_Cli_View extends LibTemplateCli
 
   }
 
-  public function displayEnduserError($exception )
+  public function displayEnduserError($exception)
   {
 
     $out = $this->getResponse();

@@ -50,7 +50,7 @@ class WgtRenderBlockMenu extends WgtRenderHtml
   /**
    * @return string
    */
-  public function buildCrumbs($data )
+  public function buildCrumbs($data)
   {
     $crumbs = $data->crumbs;
 
@@ -74,7 +74,7 @@ class WgtRenderBlockMenu extends WgtRenderHtml
       $src  = $crumb[2];
       $icon = '';
 
-      if ( '' != trim($src) ) {
+      if ('' != trim($src)) {
         $icon = '<img class="icon xsmall" '.
         ' src="'.$baseFolder.$src.'" '.
         ' alt="'.$text.'"  /> ';
@@ -96,7 +96,7 @@ class WgtRenderBlockMenu extends WgtRenderHtml
    *
    * @return string
    */
-  public function render($data )
+  public function render($data)
   {
 
     $this->baseFolder = View::$iconsWeb.'/large/';
@@ -106,14 +106,14 @@ class WgtRenderBlockMenu extends WgtRenderHtml
       $folders  = array();
       $files    = array();
 
-      if ( isset($data->folders) && $data->folders ) {
+      if (isset($data->folders) && $data->folders) {
         foreach ($data->folders as $entry) {
           $folders[$entry[2]] = $entry;
         }
         ksort($folders);
       }
 
-      if ( isset($data->files) && $data->files ) {
+      if (isset($data->files) && $data->files) {
         foreach ($data->files as $entry) {
           $files[$entry[2]] = $entry;
         }
@@ -128,18 +128,18 @@ class WgtRenderBlockMenu extends WgtRenderHtml
     $html = '<div class="wgt-menu folder" >'.NL;
 
     if ($data->firstEntry) {
-      $html .= $this->renderListEntry($data->firstEntry );
+      $html .= $this->renderListEntry($data->firstEntry);
     }
 
     $pos = 0;
 
     // Generieren der Rows
     foreach ($folders as $entry) {
-      $html .= $this->renderListEntry($entry );
+      $html .= $this->renderListEntry($entry);
     }
 
     foreach ($files as $entry) {
-      $html .= $this->renderListEntry($entry );
+      $html .= $this->renderListEntry($entry);
     }
 
     $html .= '</div>'.NL;
@@ -154,12 +154,12 @@ class WgtRenderBlockMenu extends WgtRenderHtml
    *
    * @return
    */
-  protected function renderListEntry($pic )
+  protected function renderListEntry($pic)
   {
 
-    if ($pic[WgtMenu::ICON] != '' || trim($pic[WgtMenu::TEXT]) != '' ) {
+    if ($pic[WgtMenu::ICON] != '' || trim($pic[WgtMenu::TEXT]) != '') {
 
-      $text = trim($pic[WgtMenu::TEXT] ) != '' ? $pic[WgtMenu::TEXT].'<br />' : '';
+      $text = trim($pic[WgtMenu::TEXT]) != '' ? $pic[WgtMenu::TEXT].'<br />' : '';
 
       if (Wgt::ACTION == $pic[WgtMenu::TYPE]) {
         $link = $text.'<img class="icon large cursor" '.

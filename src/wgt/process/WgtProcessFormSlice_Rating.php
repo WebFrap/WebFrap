@@ -47,10 +47,10 @@ class WgtProcessFormSlice_Rating extends WgtProcessFormSlice
    * @param TFlag $params
    * @return string
    */
-  public function render($params = null )
+  public function render($params = null)
   {
 
-    if ($params )
+    if ($params)
       $this->params = $params;
 
     $this->processForm = $params->formId;
@@ -58,15 +58,15 @@ class WgtProcessFormSlice_Rating extends WgtProcessFormSlice
 
     $statusData = $this->process->getActiveNode();
 
-    $iconStatus   = $this->icon($statusData->icon , $statusData->label );
-    $iconHistory  = $this->icon( 'process/history.png', 'History' );
-    $iconDetails  = $this->icon( 'control/mask.png', 'Details' );
+    $iconStatus   = $this->icon($statusData->icon , $statusData->label);
+    $iconHistory  = $this->icon('process/history.png', 'History');
+    $iconDetails  = $this->icon('control/mask.png', 'Details');
 
-    $edges        = $this->process->getActiveEdges( );
-    $responsibles = $this->process->getActiveResponsibles( );
+    $edges        = $this->process->getActiveEdges();
+    $responsibles = $this->process->getActiveResponsibles();
 
-    $actionHtml       = $this->renderEdgeActions($edges, $params );
-    $descriptionHtml  = $this->renderEdgeDescriptions($edges, $params );
+    $actionHtml       = $this->renderEdgeActions($edges, $params);
+    $descriptionHtml  = $this->renderEdgeDescriptions($edges, $params);
 
     $responsibleHtml  = '';
 
@@ -167,25 +167,25 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  public function renderListForm($params )
+  public function renderListForm($params)
   {
 
     $this->formId = $params->formId;
     $i18n         = $this->getI18n();
 
-    Debug::console( "RENDER PROCESS", $this->process );
+    Debug::console("RENDER PROCESS", $this->process);
 
     if (!$this->process) {
-      Debug::console( 'MISSING PROCESS' );
+      Debug::console('MISSING PROCESS');
 
       return '';
     }
 
     $statusData = $this->process->getActiveNode();
 
-    $iconStatus   = $this->icon($statusData->icon , $statusData->label );
-    $iconHistory  = $this->icon( 'process/history.png', 'History' );
-    $iconDetails  = $this->icon( 'control/mask.png', 'Details' );
+    $iconStatus   = $this->icon($statusData->icon , $statusData->label);
+    $iconHistory  = $this->icon('process/history.png', 'History');
+    $iconDetails  = $this->icon('control/mask.png', 'Details');
 
     /*
     <div class="wgt-panel" >
@@ -194,11 +194,11 @@ HTML;
     </div>
      */
 
-    $edges        = $this->process->getActiveEdges( );
-    $responsibles = $this->process->getActiveResponsibles( );
+    $edges        = $this->process->getActiveEdges();
+    $responsibles = $this->process->getActiveResponsibles();
 
-    $actionHtml       = $this->renderListFormEdgeActions($edges, $params );
-    $descriptionHtml  = $this->renderEdgeDescriptions($edges, $params );
+    $actionHtml       = $this->renderListFormEdgeActions($edges, $params);
+    $descriptionHtml  = $this->renderEdgeDescriptions($edges, $params);
 
     $responsibleHtml  = '';
 
@@ -314,7 +314,7 @@ HTML;
 
 HTML;
 
-    $html .= $this->renderListFormActionJs($params );
+    $html .= $this->renderListFormActionJs($params);
 
     return $html;
 
@@ -323,11 +323,11 @@ HTML;
   /**
    * @return string
    */
-  public function renderTemplate($view )
+  public function renderTemplate($view)
   {
 
     if (!$this->process) {
-      Debug::console( 'MISSING PROCESS' );
+      Debug::console('MISSING PROCESS');
 
       return 'Missing Process';
     }
@@ -339,8 +339,8 @@ HTML;
 
     $statusData = $this->process->getActiveNode();
 
-    $iconStatus   = $this->icon($statusData->icon , $statusData->label );
-    $iconHistory  = $this->icon( 'process/history.png', 'History' );
+    $iconStatus   = $this->icon($statusData->icon , $statusData->label);
+    $iconHistory  = $this->icon('process/history.png', 'History');
 
     /*
     <div class="wgt-panel" >
@@ -349,11 +349,11 @@ HTML;
     </div>
      */
 
-    $edges        = $this->process->getActiveEdges( );
-    $responsibles = $this->process->getActiveResponsibles( );
+    $edges        = $this->process->getActiveEdges();
+    $responsibles = $this->process->getActiveResponsibles();
 
-    $actionHtml       = $this->renderTemplateEdgeActions($edges, $params );
-    $descriptionHtml  = $this->renderEdgeDescriptions($edges, $params );
+    $actionHtml       = $this->renderTemplateEdgeActions($edges, $params);
+    $descriptionHtml  = $this->renderEdgeDescriptions($edges, $params);
 
     $responsibleHtml  = '';
 
@@ -389,7 +389,7 @@ HTML;
       action="maintab.php?c={$this->process->processUrl}.switchStatus&amp;view_id={$view->id}&amp;objid={$this->process->activStatus}" ></form>
 
     <div class="half-b left" >
-      <h3>{$i18n->l( 'Description', 'wbf.label' )}</h3>
+      <h3>{$i18n->l('Description', 'wbf.label')}</h3>
       <div class="description-active" >
         {$statusData->description}
       </div>
@@ -397,7 +397,7 @@ HTML;
     </div>
 
     <div class="half-b right" >
-      <h3>{$i18n->l( 'Action', 'wbf.label' )}</h3>
+      <h3>{$i18n->l('Action', 'wbf.label')}</h3>
       <ul class="actions" >
         {$actionHtml}
       </ul>
@@ -407,7 +407,7 @@ HTML;
     <div class="wgt-clear medium" ></div>
 
     <div class="forcefull" >
-      <h3>{$i18n->l( 'Comment', 'wbf.label' )} <span class="wgt-required wcm wcm_ui_tip" title="{$i18n->l( 'Is Required', 'wbf.label' )}" >*</span></h3>
+      <h3>{$i18n->l('Comment', 'wbf.label')} <span class="wgt-required wcm wcm_ui_tip" title="{$i18n->l('Is Required', 'wbf.label')}" >*</span></h3>
       <div>
         <textarea
           class="full large-height asgd-{$this->formId}"
@@ -435,17 +435,17 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  protected function renderEdgeActions($edges, $params )
+  protected function renderEdgeActions($edges, $params)
   {
 
     $html = '';
     $entity = $this->process->getEntity();
 
-    $iconInfo = $this->icon( 'control/info.png' , 'Info' );
+    $iconInfo = $this->icon('control/info.png' , 'Info');
 
     foreach ($edges as $edge) {
 
-      $iconNode = $this->icon($edge->icon , $edge->label );
+      $iconNode = $this->icon($edge->icon , $edge->label);
 
       $html .=<<<HTML
 
@@ -481,17 +481,17 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  protected function renderListFormEdgeActions($edges, $params )
+  protected function renderListFormEdgeActions($edges, $params)
   {
 
     $html = '';
     $entity = $this->process->getEntity();
 
-    $iconInfo = $this->icon( 'control/info.png' , 'Info' );
+    $iconInfo = $this->icon('control/info.png' , 'Info');
 
     foreach ($edges as $edge) {
 
-      $iconNode = $this->icon($edge->icon , $edge->label );
+      $iconNode = $this->icon($edge->icon , $edge->label);
 
       $html .=<<<HTML
 
@@ -526,17 +526,17 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  protected function renderTemplateEdgeActions($edges, $params )
+  protected function renderTemplateEdgeActions($edges, $params)
   {
 
     $html = '';
     $entity = $this->process->getEntity();
 
-    $iconInfo = $this->icon( 'control/info.png' , 'Info' );
+    $iconInfo = $this->icon('control/info.png' , 'Info');
 
     foreach ($edges as $edge) {
 
-      $iconNode = $this->icon($edge->icon , $edge->label );
+      $iconNode = $this->icon($edge->icon , $edge->label);
 
       $html .=<<<HTML
 
@@ -573,7 +573,7 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  protected function renderEdgeDescriptions($edges, $params )
+  protected function renderEdgeDescriptions($edges, $params)
   {
 
     $html = '';
@@ -598,14 +598,14 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  public function buildEdgeActionJs($params )
+  public function buildEdgeActionJs($params)
   {
 
     if (!$this->process) {
       return '';
     }
 
-    $edges  = $this->process->getActiveEdges( );
+    $edges  = $this->process->getActiveEdges();
     $entity = $this->process->getEntity();
 
     $html = <<<HTML
@@ -613,15 +613,15 @@ HTML;
     var process = self.getObject().find("#wgt-process-{$this->process->name}-{$params->contextKey}").not('flag-touch');
 
     if (process) {
-      process.addClass( 'flag-touch' );
+      process.addClass('flag-touch');
 
-      process.data( 'paction-history-{$this->process->name}', function(){
+      process.data('paction-history-{$this->process->name}', function(){
         \$R.get('modal.php?c=Process.Base.showHistory&amp;process={$this->process->activStatus}&amp;objid={$entity}&amp;entity={$entity->getTable()}');
         \$S.fn.miniMenu.close();
       });
 
-      process.data( 'paction-details-{$this->process->name}', function(){
-        \$R.get( 'maintab.php?c={$this->process->processUrl}.form&amp;objid={$this->process->activStatus}' );
+      process.data('paction-details-{$this->process->name}', function(){
+        \$R.get('maintab.php?c={$this->process->processUrl}.form&amp;objid={$this->process->activStatus}');
         \$S.fn.miniMenu.close();
       });
 
@@ -634,8 +634,8 @@ HTML;
       $html .= <<<HTML
 
     if (process) {
-      process.data( 'paction-{$this->process->name}-{$edge->key}', function(){
-        self.setChanged( false );
+      process.data('paction-{$this->process->name}-{$edge->key}', function(){
+        self.setChanged(false);
         \$R.form('{$params->formId}','&amp;process_edge={$edge->key}&amp;reload=true',{append:true});
       });
     }
@@ -652,14 +652,14 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  public function renderListFormActionJs($params )
+  public function renderListFormActionJs($params)
   {
 
     if (!$this->process) {
       return '';
     }
 
-    $edges  = $this->process->getActiveEdges( );
+    $edges  = $this->process->getActiveEdges();
     $entity = $this->process->getEntity();
 
     $html = <<<HTML
@@ -667,15 +667,15 @@ HTML;
     var process = \$S("#{$params->inputId}").not('flag-touch');
 
     if (process) {
-      process.addClass( 'flag-touch' );
+      process.addClass('flag-touch');
 
-      process.data( 'paction-history-{$this->process->name}', function(){
+      process.data('paction-history-{$this->process->name}', function(){
         \$R.get('modal.php?c=Process.Base.showHistory&amp;process={$this->process->activStatus}&amp;objid={$entity}&amp;entity={$entity->getTable()}');
         \$S.fn.miniMenu.close();
       });
 
-      process.data( 'paction-details-{$this->process->name}', function(){
-        \$R.get( 'maintab.php?c={$this->process->processUrl}.form&amp;objid={$this->process->activStatus}' );
+      process.data('paction-details-{$this->process->name}', function(){
+        \$R.get('maintab.php?c={$this->process->processUrl}.form&amp;objid={$this->process->activStatus}');
         \$S.fn.miniMenu.close();
       });
 
@@ -688,7 +688,7 @@ HTML;
       $html .= <<<HTML
 
     if (process) {
-      process.data( 'paction-{$this->process->name}-{$edge->key}', function(){
+      process.data('paction-{$this->process->name}-{$edge->key}', function(){
         \$R.form('{$params->formId}','&status={$edge->key}&reload=true',{append:true});
       });
     }
@@ -706,14 +706,14 @@ HTML;
    * @param TFlag $params
    * @return string
    */
-  public function buildTemplateEdgeActionJs($params )
+  public function buildTemplateEdgeActionJs($params)
   {
 
     if (!$this->process) {
       return '';
     }
 
-    $edges  = $this->process->getActiveEdges( );
+    $edges  = $this->process->getActiveEdges();
     $entity = $this->process->getEntity();
 
     $html = <<<HTML
@@ -721,14 +721,14 @@ HTML;
     var process = self.getObject().find("#wgt-process-{$this->process->name}-{$params->contextKey}").not('flag-touch');
 
     if (process) {
-      process.addClass( 'flag-touch' );
+      process.addClass('flag-touch');
 
-      process.data( 'paction-history-{$this->process->name}', function(){
+      process.data('paction-history-{$this->process->name}', function(){
         \$R.get('modal.php?c=Process.Base.showHistory&amp;process={$this->process->activStatus}&amp;objid={$entity}&amp;entity={$entity->getTable()}');
       });
 
-      process.data( 'paction-details-{$this->process->name}', function(){
-        \$R.get( 'maintab.php?c={$this->process->processUrl}.form&amp;objid={$this->process->activStatus}' );
+      process.data('paction-details-{$this->process->name}', function(){
+        \$R.get('maintab.php?c={$this->process->processUrl}.form&amp;objid={$this->process->activStatus}');
       });
 
     }
@@ -740,7 +740,7 @@ HTML;
       $html .= <<<HTML
 
     if (process) {
-      \$S('#wgt-button-{$this->process->name}-{$params->contextKey}-{$edge->key}').click( function(){
+      \$S('#wgt-button-{$this->process->name}-{$params->contextKey}-{$edge->key}').click(function(){
         \$R.form('{$params->formId}','&amp;process_edge={$edge->key}',{append:true});
       });
     }

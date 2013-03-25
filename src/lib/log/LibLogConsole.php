@@ -28,7 +28,7 @@ class LibLogConsole
    * (non-PHPdoc)
    * @see src/i/ILogAppender#logline()
    */
-  public function logline($time,  $level,  $file,  $line, $message, $exception )
+  public function logline($time,  $level,  $file,  $line, $message, $exception)
   {
 
     $logMessage = 'Log '.$level.': '.$message.' '.$time." ".$file." ".$line;

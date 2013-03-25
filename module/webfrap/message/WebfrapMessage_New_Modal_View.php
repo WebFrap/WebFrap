@@ -44,7 +44,7 @@ class WebfrapMessage_New_Modal_View extends WgtModal
     $this->setStatus('New Message');
     $this->setTitle('New Message');
 
-    $this->setTemplate( 'webfrap/message/modal/create_form', true  );
+    $this->setTemplate('webfrap/message/modal/create_form', true  );
 
   }//end public function displayNew */
 

@@ -55,14 +55,14 @@ class LibTemplatePage extends LibTemplateHtml
    * the contstructor
    * @param array $conf the configuration loaded from the conf
    */
-  public function __construct($view, $conf = array() )
+  public function __construct($view, $conf = array())
   {
 
     $this->menus = new TDataObject();
     $this->texts = new TDataObject();
     $this->areas = new TDataObject();
 
-    parent::__construct(  );
+    parent::__construct();
 
   }// end public function __construct */
 

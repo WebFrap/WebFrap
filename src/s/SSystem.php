@@ -30,7 +30,7 @@ final class SSystem
    * @param string $command
    * @return string
    */
-  public static function call($command )
+  public static function call($command)
   {
 
     $result = '';

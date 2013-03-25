@@ -56,7 +56,7 @@ abstract class LibTemplatePresenter extends LibTemplate
    * @param string $active
    * @param string $value
    */
-  public function isChecked($active , $value )
+  public function isChecked($active , $value)
   {
     return $active == $value? ' checked="checked" ':'';
   }
@@ -66,7 +66,7 @@ abstract class LibTemplatePresenter extends LibTemplate
    * @param string $active
    * @param string $value
    */
-  public function isSelected($active , $value )
+  public function isSelected($active , $value)
   {
     return $active == $value? ' selected="selected" ':'';
   }
@@ -76,7 +76,7 @@ abstract class LibTemplatePresenter extends LibTemplate
    * @param string $active
    * @param string $value
    */
-  public function isActive($active, $value )
+  public function isActive($active, $value)
   {
     return $active === $value ? ' ui-state-active ':'';
   }

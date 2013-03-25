@@ -33,21 +33,21 @@ class MyMessage_Widget_Table_Panel extends WgtPanelTable
    *
    * @return string
    */
-  public function setUp( )
+  public function setUp()
   {
 
     $user   = $this->getUser();
     $acl    = $this->getAcl();
     $i18n   = $this->getI18n();
 
-    $this->title = $i18n->l( 'My Messages', 'my.message.label' );
+    $this->title = $i18n->l('My Messages', 'my.message.label');
     $this->searchKey = 'my_message';
 
     $buttonArchive = <<<HTML
 
 
     <div class="inline wgt-border-light wgt-bg-light" style="padding:2px;margin-top:-2px;margin-right:3px;" >
-    <span>{$i18n->l( 'In/Out', 'project.plan.label' )}: </span>
+    <span>{$i18n->l('In/Out', 'project.plan.label')}: </span>
     <span>&nbsp;&nbsp;Both </span>
     <input
       type="radio"
@@ -75,7 +75,7 @@ class MyMessage_Widget_Table_Panel extends WgtPanelTable
     </div>
 
     <div class="inline wgt-border-light wgt-bg-light" style="padding:2px;margin-top:-2px;margin-right:3px;" >
-      <span>{$i18n->l( 'Archive', 'project.plan.label' )}: </span>
+      <span>{$i18n->l('Archive', 'project.plan.label')}: </span>
       <input
         type="checkbox"
         id="wgt-filter-project_plan-activ_projects"

@@ -46,16 +46,16 @@ class DaidalosBdlDocu_Page_Wbf extends DaidalosBdlDocu_Page
   /**
    * @param int $lang
    */
-  public function sync($langKey )
+  public function sync($langKey)
   {
 
-    if (!isset($this->langData[$langKey] ) )
+    if (!isset($this->langData[$langKey]))
       return;
 
-    $langNode = $this->orm->getByKey( 'WbfsysLanguage', $langKey );
+    $langNode = $this->orm->getByKey('WbfsysLanguage', $langKey);
 
     // profil erstellen
-    $page = $this->orm->get( 'WbfsysDocuTree', "access_key = 'wbf' AND id_lang=".$langNode->getId() );
+    $page = $this->orm->get('WbfsysDocuTree', "access_key = 'wbf' AND id_lang=".$langNode->getId());
 
     if (!$page) {
       $page = new WbfsysDocuTree_Entity();
@@ -74,7 +74,7 @@ CODE;
 {$this->langData[$langKey]['content']}
 CODE;
 
-    $this->orm->save($page );
+    $this->orm->save($page);
 
   }//end public function sync */
 

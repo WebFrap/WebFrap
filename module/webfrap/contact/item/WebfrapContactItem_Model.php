@@ -34,12 +34,12 @@ class WebfrapContactItem_Model extends Model
    *
    * @return WbfsysAddressItem_Entity
    */
-  public function insertItem($userId, $data )
+  public function insertItem($userId, $data)
   {
 
     $orm = $this->getOrm();
 
-    $itemNode = $orm->newEntity( "WbfsysAddressItem" );
+    $itemNode = $orm->newEntity("WbfsysAddressItem");
 
     $itemNode->vid = $userId;
 
@@ -50,7 +50,7 @@ class WebfrapContactItem_Model extends Model
     $itemNode->id_type = $data->id_type;
     $itemNode->description = $data->description;
 
-    $itemNode = $orm->insert($itemNode );
+    $itemNode = $orm->insert($itemNode);
 
     return $itemNode;
 
@@ -62,12 +62,12 @@ class WebfrapContactItem_Model extends Model
    *
    * @return WbfsysAddressItem_Entity
    */
-  public function updateItem($objid, $data )
+  public function updateItem($objid, $data)
   {
 
     $orm = $this->getOrm();
 
-    $itemNode = $orm->get( "WbfsysAddressItem", $objid );
+    $itemNode = $orm->get("WbfsysAddressItem", $objid);
 
     $itemNode->use_for_contact = $data->use_for_contact;
     $itemNode->flag_private = $data->flag_private;
@@ -76,7 +76,7 @@ class WebfrapContactItem_Model extends Model
     $itemNode->id_type = $data->id_type;
     $itemNode->description = $data->description;
 
-    $orm->update($itemNode );
+    $orm->update($itemNode);
 
   }//end public function updateItem */
 
@@ -84,12 +84,12 @@ class WebfrapContactItem_Model extends Model
    * @param int $itemId
    * @return WbfsysAddressItem_Entity
    */
-  public function loadItem($itemId )
+  public function loadItem($itemId)
   {
 
     $orm = $this->getOrm();
 
-    return $orm->get( "WbfsysAddressItem", $itemId );
+    return $orm->get("WbfsysAddressItem", $itemId);
 
   }//end public function loadItem */
 
@@ -97,13 +97,13 @@ class WebfrapContactItem_Model extends Model
    * @param int $itemId
    * @return int
    */
-  public function deleteItem($itemId )
+  public function deleteItem($itemId)
   {
 
     $orm = $this->getOrm();
 
     // andere attachments löschen
-    $orm->delete( 'WbfsysAddressItem', $itemId );
+    $orm->delete('WbfsysAddressItem', $itemId);
 
   }//end public function deleteItem */
 
@@ -160,9 +160,9 @@ ORDER BY
 SQL;
 
     if ($entryId) {
-      return $db->select($sql )->get();
+      return $db->select($sql)->get();
     } else {
-      return $db->select($sql )->getAll();
+      return $db->select($sql)->getAll();
     }
 
   }//end public function getItemList */
@@ -170,7 +170,7 @@ SQL;
   /**
    * @return LibDbPostgresqlResult
    */
-  public function getItemTypeList(  )
+  public function getItemTypeList()
   {
 
     $db = $this->getDb();
@@ -189,7 +189,7 @@ ORDER BY
 
 SQL;
 
-    return $db->select($sql )->getAll();
+    return $db->select($sql)->getAll();
 
   }//end public function getItemTypeList */
 
@@ -202,7 +202,7 @@ SQL;
    * @param int $storageId
    * @return WbfsysFileAddress_Entity
    */
-  public function loadAddress($storageId )
+  public function loadAddress($storageId)
   {
 
     $orm = $this->getOrm();
@@ -229,25 +229,25 @@ SQL;
    *
    * @return WbfsysEntityAttachment_Entity
    */
-  public function addAddress($refId, $name, $link, $type, $confidentiality, $description )
+  public function addAddress($refId, $name, $link, $type, $confidentiality, $description)
   {
 
     $orm = $this->getOrm();
 
-    $storageNode = $orm->newEntity( "WbfsysFileAddress" );
+    $storageNode = $orm->newEntity("WbfsysFileAddress");
     $storageNode->name = $name;
     $storageNode->link = $link;
     $storageNode->id_type = $type;
     $storageNode->id_confidentiality = $confidentiality;
     $storageNode->description = $description;
-    $storageNode = $orm->insert($storageNode );
+    $storageNode = $orm->insert($storageNode);
 
 
-    $refNode = $orm->newEntity( "WbfsysEntityFileAddress" );
+    $refNode = $orm->newEntity("WbfsysEntityFileAddress");
     $refNode->vid = $refId;
     $refNode->id_storage = $storageNode;
 
-    $refNode = $orm->insert($refNode );
+    $refNode = $orm->insert($refNode);
 
     return $storageNode;
 
@@ -263,19 +263,19 @@ SQL;
    *
    * @return WbfsysEntityAttachment_Entity
    */
-  public function saveAddress($objid, $name, $link, $type, $confidentiality, $description )
+  public function saveAddress($objid, $name, $link, $type, $confidentiality, $description)
   {
 
     $orm = $this->getOrm();
 
-    $storageNode = $orm->get( "WbfsysFileAddress", $objid );
+    $storageNode = $orm->get("WbfsysFileAddress", $objid);
     $storageNode->name = $name;
     $storageNode->link = $link;
     $storageNode->id_type = $type;
     $storageNode->description = $description;
     $storageNode->id_confidentiality = $confidentiality;
 
-    $orm->update($storageNode );
+    $orm->update($storageNode);
 
   }//end public function saveAddress */
 
@@ -283,15 +283,15 @@ SQL;
    * @param int $itemId
    * @return int
    */
-  public function deleteAddress($storageId )
+  public function deleteAddress($storageId)
   {
 
-    $orm    = $this->getOrm(  );
+    $orm    = $this->getOrm();
 
-    $orm->delete( 'WbfsysFileAddress', $storageId );
+    $orm->delete('WbfsysFileAddress', $storageId);
 
     // andere attachments löschen
-    $orm->deleteWhere( 'WbfsysEntityFileAddress', "id_storage=".$storageId );
+    $orm->deleteWhere('WbfsysEntityFileAddress', "id_storage=".$storageId);
 
   }//end public function deleteAddress */
 
@@ -303,7 +303,7 @@ SQL;
    *
    * @return LibDbPostgresqlResult
    */
-  public function getAddressList($refId = null, $entryId = null, $searchString = null )
+  public function getAddressList($refId = null, $entryId = null, $searchString = null)
   {
 
     $db = $this->getDb();
@@ -366,9 +366,9 @@ ORDER BY
 SQL;
 
     if ($entryId) {
-      return $db->select($sql )->get();
+      return $db->select($sql)->get();
     } else {
-      return $db->select($sql )->getAll();
+      return $db->select($sql)->getAll();
     }
 
   }//end public function getAddressList */

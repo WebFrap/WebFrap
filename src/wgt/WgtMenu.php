@@ -128,7 +128,7 @@ abstract class WgtMenu
    * @param string $source
    * @return string
    */
-  public function __construct($name , $source = null )
+  public function __construct($name , $source = null)
   {
     $this->name = $name;
 
@@ -158,7 +158,7 @@ abstract class WgtMenu
    *
    * @param string $id
    */
-  public function setId($id )
+  public function setId($id)
   {
     $this->menuId = $id;
   }//end public function setId */
@@ -166,7 +166,7 @@ abstract class WgtMenu
   /**
    * @param array $data
    */
-  public function setData($data )
+  public function setData($data)
   {
     $this->data = $data;
   }//end public function setData */
@@ -180,7 +180,7 @@ abstract class WgtMenu
     if ($this->assembled) {
       return $this->html;
     } else {
-      return $this->build( );
+      return $this->build();
     }
   }//end public function toHtml */
 
@@ -190,7 +190,7 @@ abstract class WgtMenu
    * @param boolean $loadAll
    * @return void
    */
-  public function setSource($source, $loadAll = false )
+  public function setSource($source, $loadAll = false)
   {
     $this->source   = $source;
     $this->loadAll  = $loadAll;
@@ -200,10 +200,10 @@ abstract class WgtMenu
    * Enter description here...
    *
    */
-  public function load( )
+  public function load()
   {
 
-    if (!$this->source )
+    if (!$this->source)
       $name = $this->name;
     else
       $name = $this->source;
@@ -215,13 +215,13 @@ abstract class WgtMenu
       if (!file_exists($menuPath))
         continue;
 
-      $folder = new LibFilesystemFolder($menuPath );
+      $folder = new LibFilesystemFolder($menuPath);
 
       $files = $folder->getFiles();
 
-      Debug::console( 'files' , $files );
+      Debug::console('files' , $files);
 
-      foreach($files as $file )
+      foreach($files as $file)
         include $file->getName(true);
 
        // break after found data

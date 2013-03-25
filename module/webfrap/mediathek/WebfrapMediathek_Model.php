@@ -48,7 +48,7 @@ class WebfrapMediathek_Model extends Model
    * @param DomainNode $domainNode
    * @param Entity $dataNode
    */
-  public function autoSetupMediathek($domainNode, $dataNode = null )
+  public function autoSetupMediathek($domainNode, $dataNode = null)
   {
 
     $orm = $this->getOrm();
@@ -61,17 +61,17 @@ class WebfrapMediathek_Model extends Model
       $appendKey   = '-'.$dataNode->getId();
     }
 
-    $mediathek = $orm->newEntity( 'WbfsysMediathek' );
+    $mediathek = $orm->newEntity('WbfsysMediathek');
     $mediathek->name      = $domainNode->label.$appendLabel;
     $mediathek->access_key = $domainNode->domainName.$appendKey;
 
-    if ($dataNode )
+    if ($dataNode)
       $mediathek->vid = $dataNode->getId();
 
-    $mediathek->id_vid_entity = $orm->getResourceId($domainNode->srcKey );
+    $mediathek->id_vid_entity = $orm->getResourceId($domainNode->srcKey);
     $mediathek->flag_system = true;
 
-    $mediathek = $orm->insert($mediathek );
+    $mediathek = $orm->insert($mediathek);
 
     $this->nodeMediathek = $mediathek;
     $this->mediaId      = $mediathek->getId();
@@ -83,7 +83,7 @@ class WebfrapMediathek_Model extends Model
   /**
    * @param stdObject $data
    */
-  public function setupMediathek($data )
+  public function setupMediathek($data)
   {
 
   }//end public function setupMediathek */
@@ -92,7 +92,7 @@ class WebfrapMediathek_Model extends Model
    * @param DomainNode $domainNode
    * @param Entity $dataNode
    */
-  public function loadMediathek($domainNode, $dataNode = null )
+  public function loadMediathek($domainNode, $dataNode = null)
   {
 
     $orm = $this->getOrm();
@@ -103,10 +103,10 @@ class WebfrapMediathek_Model extends Model
       $key .= '-'.$dataNode->getId();
     }
 
-    $mediathek = $orm->getByKey( 'WbfsysMediathek', $key );
+    $mediathek = $orm->getByKey('WbfsysMediathek', $key);
 
-    if (is_null($mediathek ) ) {
-      $mediathek = $this->autoSetupMediathek($domainNode, $dataNode );
+    if (is_null($mediathek)) {
+      $mediathek = $this->autoSetupMediathek($domainNode, $dataNode);
     } else {
       $this->mediaId       = $mediathek->getId();
       $this->nodeMediathek  = $mediathek;
@@ -119,14 +119,14 @@ class WebfrapMediathek_Model extends Model
   /**
    * @param int $mediaId
    */
-  public function loadMediathekById($mediaId )
+  public function loadMediathekById($mediaId)
   {
 
     $orm = $this->getOrm();
 
-    $mediathek = $orm->get( 'WbfsysMediathek', $mediaId );
+    $mediathek = $orm->get('WbfsysMediathek', $mediaId);
 
-    if (is_null($mediathek) )
+    if (is_null($mediathek))
       return $mediathek;
 
     $this->mediaId       = $mediathek->getId();
@@ -224,9 +224,9 @@ SQL;
 
 
     if ($entryId) {
-      return $db->select($sql )->get();
+      return $db->select($sql)->get();
     } else {
-      return $db->select($sql )->getAll();
+      return $db->select($sql)->getAll();
     }
 
   }//end public function getImageList */
@@ -311,9 +311,9 @@ SQL;
 
 
     if ($entryId) {
-      return $db->select($sql )->get();
+      return $db->select($sql)->get();
     } else {
-      return $db->select($sql )->getAll();
+      return $db->select($sql)->getAll();
     }
 
   }//end public function getVideoList */
@@ -396,9 +396,9 @@ SQL;
 
 
     if ($entryId) {
-      return $db->select($sql )->get();
+      return $db->select($sql)->get();
     } else {
-      return $db->select($sql )->getAll();
+      return $db->select($sql)->getAll();
     }
 
   }//end public function getAudioList */
@@ -480,9 +480,9 @@ SQL;
 
 
     if ($entryId) {
-      return $db->select($sql )->get();
+      return $db->select($sql)->get();
     } else {
-      return $db->select($sql )->getAll();
+      return $db->select($sql)->getAll();
     }
 
   }//end public function getDocumentList */
@@ -568,9 +568,9 @@ ORDER BY
 SQL;
 
     if ($entryId) {
-      return $db->select($sql )->get();
+      return $db->select($sql)->get();
     } else {
-      return $db->select($sql )->getAll();
+      return $db->select($sql)->getAll();
     }
 
   }//end public function getFileList */

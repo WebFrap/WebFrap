@@ -31,8 +31,8 @@ class Wbfpage_Module extends Module
   public function main()
   {
 
-    $this->tplEngine->setHtmlHead( 'public' );
-    $this->tplEngine->setIndex( 'public/default' );
+    $this->tplEngine->setHtmlHead('public');
+    $this->tplEngine->setIndex('public/default');
 
     $this->runController();
 
@@ -43,37 +43,37 @@ class Wbfpage_Module extends Module
    *
    * @return void
    */
-  protected function runController( )
+  protected function runController()
   {
 
     try {
 
       $request = $this->getRequest();
 
-      if (!$this->initModul() )
-        throw new WebfrapSys_Exception( 'Failed to initialize Modul' );
+      if (!$this->initModul())
+        throw new WebfrapSys_Exception('Failed to initialize Modul');
 
       // Initialisieren der Extention
-      if (!$this->controller || !$this->controller->initController( ))
-        throw new WebfrapSys_Exception( 'Failed to initialize Controller' );
+      if (!$this->controller || !$this->controller->initController())
+        throw new WebfrapSys_Exception('Failed to initialize Controller');
 
       // Run the mainpart
 
       $method = 'page'.ucfirst($request->get('do',Validator::CNAME));
 
-      if ( method_exists($this->controller, $method) ) {
-        if (!$this->controller->$method( )) {
-          $this->controller->errorPage( 'Error 500' , 'something went wrong' );
+      if (method_exists($this->controller, $method)) {
+        if (!$this->controller->$method()) {
+          $this->controller->errorPage('Error 500' , 'something went wrong');
         }
       } else {
-        $this->controller->errorPage( 'Error 404' , 'requested page not exists' );
+        $this->controller->errorPage('Error 404' , 'requested page not exists');
       }
 
       // shout down the extension
-      $this->controller->shutdownController( );
+      $this->controller->shutdownController();
       $this->shutdownModul();
 
-    } catch ( Exception $exc ) {
+    } catch (Exception $exc) {
 
       if (DEBUG) {
         $this->modulErrorPage
@@ -98,7 +98,7 @@ class Wbfpage_Module extends Module
    *
    * @return void
    */
-  protected function setController($name = null )
+  protected function setController($name = null)
   {
 
     $request = $this->getRequest();
@@ -112,9 +112,9 @@ class Wbfpage_Module extends Module
        $classname = 'Page'.ucfirst($name);
 
     if (DEBUG)
-      Debug::console('Page: '.$classname );
+      Debug::console('Page: '.$classname);
 
-    if ( WebFrap::loadable($classname) ) {
+    if (WebFrap::loadable($classname)) {
       $this->controller     = new $classname();
       $this->controllerName = $classname;
       //$this->controllerBase = $name;
@@ -129,7 +129,7 @@ class Wbfpage_Module extends Module
       $this->modulErrorPage
       (
         'Modul Error',
-        I18n::s( 'The requested resource not exists' , 'wbf.message' )
+        I18n::s('The requested resource not exists' , 'wbf.message')
       );
       //\ Create a Error Page
 

@@ -46,13 +46,13 @@ class AclMgmt_Qfdu_TreetableGroup_Query_Test extends LibTestUnit
   public function setUp()
   {
 
-    $this->db   = Db::connection( 'test' );
-    $this->acl  = new LibAclDb( Webfrap::getActive(), $this->db );
-    $this->acl->setDb($this->db );
+    $this->db   = Db::connection('test');
+    $this->acl  = new LibAclDb(Webfrap::getActive(), $this->db);
+    $this->acl->setDb($this->db);
 
     $this->user = User_Stub::getStubObject();
-    $this->user->setDb($this->db );
-    $this->acl->setUser($this->user );
+    $this->user->setDb($this->db);
+    $this->acl->setUser($this->user);
 
     $this->populateDatabase();
 
@@ -72,71 +72,71 @@ class AclMgmt_Qfdu_TreetableGroup_Query_Test extends LibTestUnit
 
     // first clean the database to make shure to have no interferences
     // from existing data
-    $orm->cleanResource( 'WbfsysText' );
-    $orm->cleanResource( 'WbfsysRoleGroup' );
-    $orm->cleanResource( 'WbfsysRoleUser' );
-    $orm->cleanResource( 'WbfsysSecurityArea' );
-    $orm->cleanResource( 'WbfsysSecurityAccess' );
-    $orm->cleanResource( 'WbfsysGroupUsers' );
+    $orm->cleanResource('WbfsysText');
+    $orm->cleanResource('WbfsysRoleGroup');
+    $orm->cleanResource('WbfsysRoleUser');
+    $orm->cleanResource('WbfsysSecurityArea');
+    $orm->cleanResource('WbfsysSecurityAccess');
+    $orm->cleanResource('WbfsysGroupUsers');
 
     // clear the cache
     $orm->clearCache();
 
     // Ein paar daten in der Datenbank
-    $textPublic = $orm->newEntity( 'WbfsysText' );
+    $textPublic = $orm->newEntity('WbfsysText');
     $textPublic->access_key = 'text_public';
-    $orm->insert($textPublic );
+    $orm->insert($textPublic);
 
-    $textAccess = $orm->newEntity( 'WbfsysText' );
+    $textAccess = $orm->newEntity('WbfsysText');
     $textAccess->access_key = 'text_access';
-    $orm->insert($textAccess );
+    $orm->insert($textAccess);
 
-    $textNoAccess = $orm->newEntity( 'WbfsysText' );
+    $textNoAccess = $orm->newEntity('WbfsysText');
     $textNoAccess->access_key = 'text_no_access';
-    $orm->insert($textNoAccess );
+    $orm->insert($textNoAccess);
 
     // Gruppen Rollen
-    $groupUnrelated = $orm->newEntity( 'WbfsysRoleGroup' );
+    $groupUnrelated = $orm->newEntity('WbfsysRoleGroup');
     $groupUnrelated->name       = 'Unrelated';
     $groupUnrelated->access_key = 'unrelated';
     $groupUnrelated->level      = Acl::DENIED;
-    $orm->insert($groupUnrelated );
+    $orm->insert($groupUnrelated);
 
-    $groupHasAccess = $orm->newEntity( 'WbfsysRoleGroup' );
+    $groupHasAccess = $orm->newEntity('WbfsysRoleGroup');
     $groupHasAccess->name       = 'Has Access';
     $groupHasAccess->access_key = 'has_access';
     $groupHasAccess->level      = Acl::DENIED;
-    $orm->insert($groupHasAccess );
+    $orm->insert($groupHasAccess);
 
-    $groupHasNoAccess = $orm->newEntity( 'WbfsysRoleGroup' );
+    $groupHasNoAccess = $orm->newEntity('WbfsysRoleGroup');
     $groupHasNoAccess->name       = 'Has no Access';
     $groupHasNoAccess->access_key = 'has_no_access';
     $groupHasNoAccess->level      = Acl::DENIED;
-    $orm->insert($groupHasNoAccess );
+    $orm->insert($groupHasNoAccess);
 
     // user roles
-    $userAnon = $orm->newEntity( 'WbfsysRoleUser' );
+    $userAnon = $orm->newEntity('WbfsysRoleUser');
     $userAnon->name  = 'annon';
     $userAnon->level = Acl::DENIED;
-    $orm->insert($userAnon );
+    $orm->insert($userAnon);
 
-    $userHasAccess = $orm->newEntity( 'WbfsysRoleUser' );
+    $userHasAccess = $orm->newEntity('WbfsysRoleUser');
     $userHasAccess->name  = 'has_access';
     $userHasAccess->level = Acl::DENIED;
-    $orm->insert($userHasAccess );
+    $orm->insert($userHasAccess);
 
-    $userHasDAccess = $orm->newEntity( 'WbfsysRoleUser' );
+    $userHasDAccess = $orm->newEntity('WbfsysRoleUser');
     $userHasDAccess->name  = 'has_dataset_access';
     $userHasDAccess->level = Acl::DENIED;
-    $orm->insert($userHasDAccess );
+    $orm->insert($userHasDAccess);
 
-    $userHasNoAccess = $orm->newEntity( 'WbfsysRoleUser' );
+    $userHasNoAccess = $orm->newEntity('WbfsysRoleUser');
     $userHasNoAccess->name  = 'has_no_access';
     $userHasNoAccess->level = Acl::DENIED;
-    $orm->insert($userHasNoAccess );
+    $orm->insert($userHasNoAccess);
 
     // security areas
-    $areaModPublic = $orm->newEntity( 'WbfsysSecurityArea' );
+    $areaModPublic = $orm->newEntity('WbfsysSecurityArea');
     $areaModPublic->access_key       = 'mod-public';
     $areaModPublic->id_level_listing = User::LEVEL_SUPERADMIN;
     $areaModPublic->id_level_access  = User::LEVEL_SUPERADMIN;
@@ -150,9 +150,9 @@ class AclMgmt_Qfdu_TreetableGroup_Query_Test extends LibTestUnit
     $areaModPublic->id_ref_update  = User::LEVEL_SUPERADMIN;
     $areaModPublic->id_ref_delete  = User::LEVEL_SUPERADMIN;
     $areaModPublic->id_ref_admin   = User::LEVEL_SUPERADMIN;
-    $orm->insert($areaModPublic );
+    $orm->insert($areaModPublic);
 
-    $areaModAccess = $orm->newEntity( 'WbfsysSecurityArea' );
+    $areaModAccess = $orm->newEntity('WbfsysSecurityArea');
     $areaModAccess->access_key       = 'mod-has_access';
     $areaModAccess->id_level_listing = User::LEVEL_SUPERADMIN;
     $areaModAccess->id_level_access  = User::LEVEL_SUPERADMIN;
@@ -166,9 +166,9 @@ class AclMgmt_Qfdu_TreetableGroup_Query_Test extends LibTestUnit
     $areaModAccess->id_ref_update  = User::LEVEL_SUPERADMIN;
     $areaModAccess->id_ref_delete  = User::LEVEL_SUPERADMIN;
     $areaModAccess->id_ref_admin   = User::LEVEL_SUPERADMIN;
-    $orm->insert($areaModAccess );
+    $orm->insert($areaModAccess);
 
-    $areaModNoAccess = $orm->newEntity( 'WbfsysSecurityArea' );
+    $areaModNoAccess = $orm->newEntity('WbfsysSecurityArea');
     $areaModNoAccess->access_key       = 'mod-no_access';
     $areaModNoAccess->id_level_listing = User::LEVEL_SUPERADMIN;
     $areaModNoAccess->id_level_access  = User::LEVEL_SUPERADMIN;
@@ -182,28 +182,28 @@ class AclMgmt_Qfdu_TreetableGroup_Query_Test extends LibTestUnit
     $areaModNoAccess->id_ref_update  = User::LEVEL_SUPERADMIN;
     $areaModNoAccess->id_ref_delete  = User::LEVEL_SUPERADMIN;
     $areaModNoAccess->id_ref_admin   = User::LEVEL_SUPERADMIN;
-    $orm->insert($areaModNoAccess );
+    $orm->insert($areaModNoAccess);
 
     // access
-    $access1 = $orm->newEntity( 'WbfsysSecurityAccess' );
+    $access1 = $orm->newEntity('WbfsysSecurityAccess');
     $access1->id_group      = $groupHasAccess;
     $access1->id_area       = $areaModAccess;
     $access1->access_level  = Acl::LISTING;
     $this->acl->createAreaAssignment($access1,array(),true);
 
     // user role assignments
-    $entityGUser = $orm->newEntity( 'WbfsysGroupUsers' );
+    $entityGUser = $orm->newEntity('WbfsysGroupUsers');
     $entityGUser->id_user  = $userHasAccess;
     $entityGUser->id_group = $groupHasAccess;
     $entityGUser->id_area  = $areaModAccess;
-    $this->acl->createGroupAssignment($entityGUser );
+    $this->acl->createGroupAssignment($entityGUser);
 
-    $entityGUser = $orm->newEntity( 'WbfsysGroupUsers' );
+    $entityGUser = $orm->newEntity('WbfsysGroupUsers');
     $entityGUser->id_user  = $userHasDAccess;
     $entityGUser->id_group = $groupHasAccess;
     $entityGUser->id_area  = $areaModAccess;
     $entityGUser->vid      = $textAccess;
-    $this->acl->createGroupAssignment($entityGUser );
+    $this->acl->createGroupAssignment($entityGUser);
 
   }//end protected function populateDatabase */
 
@@ -217,48 +217,48 @@ class AclMgmt_Qfdu_TreetableGroup_Query_Test extends LibTestUnit
   public function test_hasAcccess_UserAccess_RelationToArea()
   {
 
-    $this->user->switchUser( 'has_access' );
+    $this->user->switchUser('has_access');
 
-    $textAccess   = $this->db->orm->getByKey( 'WbfsysText', 'text_access' );
-    $textNoAccess = $this->db->orm->getByKey( 'WbfsysText', 'text_no_access' );
-
-    // prüfen auf globale mitgliedschaft bei nur relativer mitgliedschaft
-    $res = $this->acl->access( 'mod-has_access:listing' );
-    $this->assertTrue( 'role has_access area: mod-has_access level: listing returned false', $res );
-
-    $res = $this->acl->access( 'mod-has_access:access' );
-    $this->assertFalse( 'role has_access area: mod-has_access level: access returned true', $res );
-
-    $res = $this->acl->access( 'mod-has_access:admin' );
-    $this->assertFalse( 'role has_access area: mod-has_access level: admin returned true', $res );
-
-    $res = $this->acl->access( 'mod-no_access:listing' );
-    $this->assertFalse( 'role has_access area: mod-no_access level: listing returned true', $res );
-
-    $res = $this->acl->access( 'mod-no_access:access' );
-    $this->assertFalse( 'role has_access area: mod-no_access level: access returned true', $res );
-
-    $res = $this->acl->access( 'mod-no_access:admin' );
-    $this->assertFalse( 'role has_access area: mod-no_access level: admin returned true', $res );
+    $textAccess   = $this->db->orm->getByKey('WbfsysText', 'text_access');
+    $textNoAccess = $this->db->orm->getByKey('WbfsysText', 'text_no_access');
 
     // prüfen auf globale mitgliedschaft bei nur relativer mitgliedschaft
-    $res = $this->acl->access( 'mod-has_access:listing', null, true );
-    $this->assertTrue( 'role has_access area: mod-has_access, level: listing, check partial returned false', $res );
+    $res = $this->acl->access('mod-has_access:listing');
+    $this->assertTrue('role has_access area: mod-has_access level: listing returned false', $res);
 
-    $res = $this->acl->access( 'mod-has_access:access', null, true );
-    $this->assertFalse( 'role has_access area: mod-has_access, level: access, check partial returned true', $res );
+    $res = $this->acl->access('mod-has_access:access');
+    $this->assertFalse('role has_access area: mod-has_access level: access returned true', $res);
 
-    $res = $this->acl->access( 'mod-has_access:admin', null, true );
-    $this->assertFalse( 'role has_access area: mod-has_access, level: admin, check partial returned true', $res );
+    $res = $this->acl->access('mod-has_access:admin');
+    $this->assertFalse('role has_access area: mod-has_access level: admin returned true', $res);
 
-    $res = $this->acl->access( 'mod-no_access:listing', null, true );
-    $this->assertFalse( 'role has_access area: mod-no_access, level: listing, check partial returned true', $res );
+    $res = $this->acl->access('mod-no_access:listing');
+    $this->assertFalse('role has_access area: mod-no_access level: listing returned true', $res);
 
-    $res = $this->acl->access( 'mod-no_access:access', null, true );
-    $this->assertFalse( 'role has_access area: mod-no_access, level: access, check partial returned true', $res );
+    $res = $this->acl->access('mod-no_access:access');
+    $this->assertFalse('role has_access area: mod-no_access level: access returned true', $res);
 
-    $res = $this->acl->access( 'mod-no_access:admin', null, true );
-    $this->assertFalse( 'role has_access area: mod-no_access, level: admin, check partial returned true', $res );
+    $res = $this->acl->access('mod-no_access:admin');
+    $this->assertFalse('role has_access area: mod-no_access level: admin returned true', $res);
+
+    // prüfen auf globale mitgliedschaft bei nur relativer mitgliedschaft
+    $res = $this->acl->access('mod-has_access:listing', null, true);
+    $this->assertTrue('role has_access area: mod-has_access, level: listing, check partial returned false', $res);
+
+    $res = $this->acl->access('mod-has_access:access', null, true);
+    $this->assertFalse('role has_access area: mod-has_access, level: access, check partial returned true', $res);
+
+    $res = $this->acl->access('mod-has_access:admin', null, true);
+    $this->assertFalse('role has_access area: mod-has_access, level: admin, check partial returned true', $res);
+
+    $res = $this->acl->access('mod-no_access:listing', null, true);
+    $this->assertFalse('role has_access area: mod-no_access, level: listing, check partial returned true', $res);
+
+    $res = $this->acl->access('mod-no_access:access', null, true);
+    $this->assertFalse('role has_access area: mod-no_access, level: access, check partial returned true', $res);
+
+    $res = $this->acl->access('mod-no_access:admin', null, true);
+    $this->assertFalse('role has_access area: mod-no_access, level: admin, check partial returned true', $res);
 
   }//end public function test_hasAcccess_UserAccess_RelationToArea */
 

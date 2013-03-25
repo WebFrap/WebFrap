@@ -81,10 +81,10 @@ class WgtTableWebfrapBookmark extends WgtTable
    *
    * @return String
    */
-  public function build( )
+  public function build()
   {
 
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
     $this->numCols = 2;
@@ -92,9 +92,9 @@ class WgtTableWebfrapBookmark extends WgtTable
     // Creating the Head
     $head = '<thead>'.NL;
     $head .= '<tr>'.NL;
-    $head .= '<th>'.I18n::s( 'title', 'wbf.text.tableNav'  ).'</th>'.NL;
-    $head .= '<th>'.I18n::s( 'bookmark', 'wbf.text.tableNav'  ).'</th>'.NL;
-    $head .= '<th style="width:70px;">'.I18n::s( 'nav', 'wbf.text.tableNav'  ).'</th>'.NL;
+    $head .= '<th>'.I18n::s('title', 'wbf.text.tableNav'  ).'</th>'.NL;
+    $head .= '<th>'.I18n::s('bookmark', 'wbf.text.tableNav'  ).'</th>'.NL;
+    $head .= '<th style="width:70px;">'.I18n::s('nav', 'wbf.text.tableNav'  ).'</th>'.NL;
 
     $head .= '</tr>'.NL;
     $head .= '</thead>'.NL;
@@ -110,7 +110,7 @@ class WgtTableWebfrapBookmark extends WgtTable
       $objid  = $row['wbfsys_bookmark_'.Db::PK];
 
       $rowid = $this->id.'_row_'.$objid;
-      $navigation = $this->rowMenu($objid, $row );
+      $navigation = $this->rowMenu($objid, $row);
 
       $url = urldecode($row['wbfsys_bookmark_url']);
 
@@ -121,7 +121,7 @@ class WgtTableWebfrapBookmark extends WgtTable
       $body .= '</tr>'.NL;
 
       $num ++;
-      if ($num > $this->numOfColors )
+      if ($num > $this->numOfColors)
         $num = 1;
 
     } // ENDE FOREACH
@@ -129,7 +129,7 @@ class WgtTableWebfrapBookmark extends WgtTable
     $body .= '</tbody>'.NL;
     //\ Create the table body
 
-    if (!$this->replace )
+    if (!$this->replace)
       $this->html .= '<div id="'.$this->id.'" >'.NL;
 
     $this->html .= '<table id="'.$this->id.'_table" class="wgt-table" >'.NL;
@@ -163,10 +163,10 @@ class WgtTableWebfrapBookmark extends WgtTable
    *
    * @return String
    */
-  public function buildAjaxRows( )
+  public function buildAjaxRows()
   {
 
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
     $body = '';
@@ -176,9 +176,9 @@ class WgtTableWebfrapBookmark extends WgtTable
       $objid = $row['wbfsys_bookmark_'.Db::PK];
 
       $rowid       = $this->id.'_row_'.$objid;
-      $navigation  = $this->rowMenu($objid, $row );
+      $navigation  = $this->rowMenu($objid, $row);
 
-      if ($this->ajaxInsert )
+      if ($this->ajaxInsert)
         $body .= '<htmlArea selector="table#'.$this->id.'_table>tbody:first" action="append" ><![CDATA[<tr id="'.$rowid.'" >'.NL;
       else
         $body .= '<htmlArea selector="tr#'.$rowid.'" action="html" ><![CDATA[';
@@ -187,7 +187,7 @@ class WgtTableWebfrapBookmark extends WgtTable
 
       $body .= '<td valign="top" class="ignore" style="text-align:center;" >'.$navigation.'</td>'.NL;
 
-      if ($this->ajaxInsert )
+      if ($this->ajaxInsert)
         $body .= '</tr>]]></htmlArea>'.NL;
       else
         $body .= ']]></htmlArea>'.NL;

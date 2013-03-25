@@ -37,8 +37,8 @@ class Example_Controller extends Controller
   (
     'autocomplete' => array
     (
-      'method'    => array( 'GET', 'POST' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('GET', 'POST'),
+      'views'      => array('ajax')
     ),
 
   );
@@ -57,7 +57,7 @@ class Example_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_autocomplete($request, $response )
+  public function service_autocomplete($request, $response)
   {
 
     // resource laden
@@ -65,7 +65,7 @@ class Example_Controller extends Controller
     $acl      = $this->getAcl();
 
     // check the permissions
-    if (!$acl->access( 'mod-project>mgmt-autocomplete:listing'  ) ) {
+    if (!$acl->access('mod-project>mgmt-autocomplete:listing'  )) {
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
       (
@@ -75,7 +75,7 @@ class Example_Controller extends Controller
           'wbf.message',
           array
           (
-            'service' => $response->i18n->l( 'Autocomplete', 'wbf.label' )
+            'service' => $response->i18n->l('Autocomplete', 'wbf.label')
           )
         ),
         Response::FORBIDDEN
@@ -98,13 +98,13 @@ class Example_Controller extends Controller
       View::AJAX
     );
     /* @var $model Example_Model */
-    $model  = $this->loadModel( 'Example' );
-    //$model->setAccess($access );
-    $view->setModel($model );
+    $model  = $this->loadModel('Example');
+    //$model->setAccess($access);
+    $view->setModel($model);
 
-    $searchKey  = $this->request->param('key', Validator::TEXT );
+    $searchKey  = $this->request->param('key', Validator::TEXT);
 
-    $error = $view->displayAutocomplete($searchKey, $params );
+    $error = $view->displayAutocomplete($searchKey, $params);
 
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
     // ist der so schwer war, dass die View den Job abbrechen musste
@@ -117,7 +117,7 @@ class Example_Controller extends Controller
       return $error;
     }
 
-    $response->setStatus( Response::OK );
+    $response->setStatus(Response::OK);
     // wunderbar, kein fehler also melden wir einen Erfolg zurück
     return null;
 

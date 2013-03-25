@@ -75,11 +75,11 @@ class AclMgmt_Qfdu_User_Ui extends MvcUi
     $listObj->domainNode = $this->domainNode;
 
     // use the query as datasource for the table
-    $listObj->setUserData($data, true );
+    $listObj->setUserData($data, true);
 
     // den access container dem listenelement übergeben
-    $listObj->setAccess($access );
-    $listObj->setAccessPath($params, $params->aclKey, $params->aclNode );
+    $listObj->setAccess($access);
+    $listObj->setAccessPath($params, $params->aclKey, $params->aclNode);
 
     // set the offset to set the paging menu correct
     $listObj->start    = $params->start;
@@ -88,26 +88,26 @@ class AclMgmt_Qfdu_User_Ui extends MvcUi
     $listObj->stepSize = $params->qsize;
 
     // check if there is a filter for the first char
-    if ($params->begin )
+    if ($params->begin)
       $listObj->begin  = $params->begin;
 
     // if there is a given tableId for the html id of the the table replace
     // the default id with it
-    if ($params->targetId )
-      $listObj->setId($params->targetId );
+    if ($params->targetId)
+      $listObj->setId($params->targetId);
 
     // for paging use the default search form, to enshure to keep the order
     // and to page in search results if there was any search
-    if (!$params->searchFormId )
+    if (!$params->searchFormId)
       $params->searchFormId = 'wgt-form-table-'.$this->domainNode->domainName.'-acl-tuser-search';
 
-    $listObj->setPagingId($params->searchFormId );
+    $listObj->setPagingId($params->searchFormId);
 
     // add the id to the form
-    if (!$params->formId )
+    if (!$params->formId)
       $params->formId = 'wgt-form-'.$this->domainNode->domainName.'-acl-tuser-update';
 
-    $listObj->setSaveForm($params->formId );
+    $listObj->setSaveForm($params->formId);
 
 
     if ($params->ajax) {
@@ -119,7 +119,7 @@ class AclMgmt_Qfdu_User_Ui extends MvcUi
       $listObj->insertMode = false;
     } else {
       // create the panel
-      $tabPanel = new WgtPanelTable($listObj );
+      $tabPanel = new WgtPanelTable($listObj);
 
       $tabPanel->title      = $this->view->i18n->l
       (
@@ -144,7 +144,7 @@ class AclMgmt_Qfdu_User_Ui extends MvcUi
 
 WGTJS;
 
-      $this->view->addJsCode($jsCode );
+      $this->view->addJsCode($jsCode);
 
     } else {
       // if this is an ajax request and we replace the body, we need also
@@ -156,7 +156,7 @@ WGTJS;
 
 WGTJS;
 
-        $this->view->addJsCode($jsCode );
+        $this->view->addJsCode($jsCode);
 
       }
 
@@ -176,7 +176,7 @@ WGTJS;
    * @param boolean $insert
    * @return void
    */
-  public function listBlockGroups($userId, $dsetId, $context )
+  public function listBlockGroups($userId, $dsetId, $context)
   {
 
     //$className = $this->domainNode->domainAclMask.'_Qfdu_Treetable_Element';
@@ -190,27 +190,27 @@ WGTJS;
     );
 
     // den access container dem listenelement übergeben
-    $table->setAccess($context->access );
-    $table->setAccessPath($context, $context->aclKey, $context->aclNode );
+    $table->setAccess($context->access);
+    $table->setAccessPath($context, $context->aclKey, $context->aclNode);
 
     $table->areaId = $context->areaId;
     $table->domainNode = $this->domainNode;
 
-    $table->setGroupData($this->model->loadListByUser_Groups($userId, $dsetId, $context ) );
+    $table->setGroupData($this->model->loadListByUser_Groups($userId, $dsetId, $context));
 
     // if a table id is given use it for the table
-    if ($context->targetId )
+    if ($context->targetId)
       $table->id = $context->targetId;
 
-    $table->setPagingId($context->searchFormId );
+    $table->setPagingId($context->searchFormId);
 
     // add the id to the form
-    if (!$context->formId )
+    if (!$context->formId)
       $context->formId = 'wgt-form-'.$this->domainNode->domainName.'-acl-tuser-update';
 
-    $table->setSaveForm($context->formId );
+    $table->setSaveForm($context->formId);
 
-    $this->view->setPageFragment( 'groupUsersEntry', $table->renderGroupBlock($userId, $dsetId, $context ) );
+    $this->view->setPageFragment('groupUsersEntry', $table->renderGroupBlock($userId, $dsetId, $context));
 
     $jsCode = <<<WGTJS
 
@@ -218,7 +218,7 @@ WGTJS;
 
 WGTJS;
 
-    $this->view->addJsCode($jsCode );
+    $this->view->addJsCode($jsCode);
 
 
   }//end public function listBlockGroups */
@@ -231,7 +231,7 @@ WGTJS;
    * @param boolean $insert
    * @return void
    */
-  public function listBlockDsets($userId, $context )
+  public function listBlockDsets($userId, $context)
   {
 
     //$className = $this->domainNode->domainAclMask.'_Qfdu_Treetable_Element';
@@ -244,27 +244,27 @@ WGTJS;
     );
 
     // den access container dem listenelement übergeben
-    $table->setAccess($context->access );
-    $table->setAccessPath($context, $context->aclKey, $context->aclNode );
+    $table->setAccess($context->access);
+    $table->setAccessPath($context, $context->aclKey, $context->aclNode);
 
     $table->areaId = $context->areaId;
     $table->domainNode = $this->domainNode;
 
-    $table->setDsetData($this->model->loadListByUser_Dset($userId, $context ) );
+    $table->setDsetData($this->model->loadListByUser_Dset($userId, $context));
 
     // if a table id is given use it for the table
-    if ($context->targetId )
+    if ($context->targetId)
       $table->id = $context->targetId;
 
-    $table->setPagingId($context->searchFormId );
+    $table->setPagingId($context->searchFormId);
 
     // add the id to the form
-    if (!$context->formId )
+    if (!$context->formId)
       $context->formId = 'wgt-form-'.$this->domainNode->domainName.'-acl-tuser-update';
 
-    $table->setSaveForm($context->formId );
+    $table->setSaveForm($context->formId);
 
-    $this->view->setPageFragment( 'groupUsersEntry', $table->renderDsetBlock($userId, $context ) );
+    $this->view->setPageFragment('groupUsersEntry', $table->renderDsetBlock($userId, $context));
 
     $jsCode = <<<WGTJS
 
@@ -272,7 +272,7 @@ WGTJS;
 
 WGTJS;
 
-    $this->view->addJsCode($jsCode );
+    $this->view->addJsCode($jsCode);
 
 
   }//end public function listBlockUsers */
@@ -286,7 +286,7 @@ WGTJS;
    * @param boolean $insert
    * @return void
    */
-  public function listEntry($areaId, $access, $params, $insert )
+  public function listEntry($areaId, $access, $params, $insert)
   {
 
     $className = $this->domainNode->domainAclMask.'_Qfdu_Treetable_Element';
@@ -299,30 +299,30 @@ WGTJS;
     );
 
     // den access container dem listenelement übergeben
-    $table->setAccess($access );
-    $table->setAccessPath($params, $params->aclKey, $params->aclNode );
+    $table->setAccess($access);
+    $table->setAccessPath($params, $params->aclKey, $params->aclNode);
 
     $table->areaId = $areaId;
 
     $assignEntity = $this->model->getEntityWbfsysGroupUsers();
 
-    $data = $this->model->getEntryWbfsysGroupUsers(  $params );
+    $data = $this->model->getEntryWbfsysGroupUsers( $params);
 
-    $table->setData($data );
+    $table->setData($data);
 
     // if a table id is given use it for the table
-    if ($params->targetId )
+    if ($params->targetId)
       $table->id = $params->targetId;
 
-    $table->setPagingId($params->searchFormId );
+    $table->setPagingId($params->searchFormId);
 
     // add the id to the form
-    if (!$params->formId )
+    if (!$params->formId)
       $params->formId = 'wgt-form-'.$this->domainNode->domainName.'-acl-update';
 
-    $table->setSaveForm($params->formId );
+    $table->setSaveForm($params->formId);
 
-    $this->view->setPageFragment( 'groupUsersEntry', $table->buildAjaxEntry( ) );
+    $this->view->setPageFragment('groupUsersEntry', $table->buildAjaxEntry());
 
     if ($insert) {
 
@@ -342,7 +342,7 @@ WGTJS;
 
     }
 
-    $this->view->addJsCode($jsCode );
+    $this->view->addJsCode($jsCode);
 
     return $table;
 
@@ -359,7 +359,7 @@ WGTJS;
    * @param string $itemId
    * @return void
    */
-  public function removeGroupEntry($key, $itemId )
+  public function removeGroupEntry($key, $itemId)
   {
     $view = $this->getView();
 
@@ -399,7 +399,7 @@ JSCODE;
 
 JSCODE;
 
-    $this->view->addJsCode($code );
+    $this->view->addJsCode($code);
 
   }//end public function cleanUserEntry */
 

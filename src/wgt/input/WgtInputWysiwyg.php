@@ -42,13 +42,13 @@ class WgtInputWysiwyg extends WgtInput
    * @param string $name
    * @return string
    */
-  public function __construct($name )
+  public function __construct($name)
   {
-    parent::__construct($name );
+    parent::__construct($name);
 
-    $this->attributes = array( 'cols' => '' , 'rows' => '' );
+    $this->attributes = array('cols' => '' , 'rows' => '');
 
-  }//end public function __construct($name )
+  }//end public function __construct($name)
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
@@ -61,7 +61,7 @@ class WgtInputWysiwyg extends WgtInput
   public function setData($data , $value = null  )
   {
     $this->data = $data;
-  }// end public function setData($data )
+  }// end public function setData($data)
 
   /**
    * (non-PHPdoc)
@@ -70,7 +70,7 @@ class WgtInputWysiwyg extends WgtInput
   public function addData($data , $value = null  )
   {
     $this->data = $data;
-  }//end public function addData($data )
+  }//end public function addData($data)
 
   /**
    * (non-PHPdoc)
@@ -79,7 +79,7 @@ class WgtInputWysiwyg extends WgtInput
   public function getData($key = null  )
   {
     return $this->data;
-  }//end public function getData($data )
+  }//end public function getData($data)
 
   /**
    * @param string $mode
@@ -96,10 +96,10 @@ class WgtInputWysiwyg extends WgtInput
   /**
    * @return array
    */
-  public function build($attributes = array() )
+  public function build($attributes = array())
   {
 
-    if ($attributes )
+    if ($attributes)
       $this->attributes = array_merge($this->attributes,$attributes);
 
     if ($this->full) {
@@ -145,7 +145,7 @@ class WgtInputWysiwyg extends WgtInput
    * (non-PHPdoc)
    * @see src/wgt/WgtAbstract#buildAjax()
    */
-  public function buildAjax( )
+  public function buildAjax()
   {
 
     if (isset($this->attributes['class'])) {
@@ -166,7 +166,7 @@ class WgtInputWysiwyg extends WgtInput
    * (non-PHPdoc)
    * @see src/wgt/WgtAbstract#buildAjax()
    */
-  public function element( )
+  public function element()
   {
 
     if (isset($this->attributes['class']))

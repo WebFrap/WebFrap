@@ -57,10 +57,10 @@ class AclMgmt_Qfdu_Treetable_Query extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetch($areaId, $condition = null, $params = null )
+  public function fetch($areaId, $condition = null, $params = null)
   {
 
-    if (!$params )
+    if (!$params)
       $params = new TFlag();
 
     $params->qsize = -1;
@@ -74,15 +74,15 @@ class AclMgmt_Qfdu_Treetable_Query extends LibSqlQuery
       $criteria = $this->criteria;
     }
 
-    $this->setCols($criteria );
-    $this->setTables($criteria );
+    $this->setCols($criteria);
+    $this->setTables($criteria);
     $this->appendConditions($criteria, $condition, $areaId, $params  );
-    $this->checkLimitAndOrder($criteria, $params );
+    $this->checkLimitAndOrder($criteria, $params);
 
 
     // Run Query und save the result
-    $result           = $db->orm->select($criteria );
-    $this->calcQuery  = $criteria->count( 'count(DISTINCT group_users.rowid) as '.Db::Q_SIZE );
+    $result           = $db->orm->select($criteria);
+    $this->calcQuery  = $criteria->count('count(DISTINCT group_users.rowid) as '.Db::Q_SIZE);
 
     $this->data       = array();
     $this->users      = array();
@@ -90,13 +90,13 @@ class AclMgmt_Qfdu_Treetable_Query extends LibSqlQuery
     foreach ($result as $row) {
       $this->data[(int) $row['role_group_rowid']] = $row;
 
-      if (!is_null($row['group_users_vid']) ) {
+      if (!is_null($row['group_users_vid'])) {
         $this->datasets[(int) $row['role_group_rowid']][(int) $row['role_user_rowid']][]  = $row;
       } else {
         $this->users[(int) $row['role_group_rowid']][(int) $row['role_user_rowid']]  = $row;
       }
 
-      if (!isset($this->users[(int) $row['role_group_rowid']][(int) $row['role_user_rowid']]) ) {
+      if (!isset($this->users[(int) $row['role_group_rowid']][(int) $row['role_user_rowid']])) {
         $this->users[(int) $row['role_group_rowid']][(int) $row['role_user_rowid']] = array
         (
           'name' => $row['user'],
@@ -118,7 +118,7 @@ class AclMgmt_Qfdu_Treetable_Query extends LibSqlQuery
    * @param LibSqlCriteria $criteria
    * @return void
    */
-  public function setCols($criteria )
+  public function setCols($criteria)
   {
 
     $cols = array
@@ -148,7 +148,7 @@ class AclMgmt_Qfdu_Treetable_Query extends LibSqlQuery
 
     );
 
-    $criteria->select($cols );
+    $criteria->select($cols);
 
   }//end public function setCols */
 
@@ -160,10 +160,10 @@ class AclMgmt_Qfdu_Treetable_Query extends LibSqlQuery
    * @param LibSqlCriteria $criteria
    * @return void
    */
-  public function setTables($criteria )
+  public function setTables($criteria)
   {
 
-    $criteria->from( 'wbfsys_group_users group_users', 'group_users' );
+    $criteria->from('wbfsys_group_users group_users', 'group_users');
 
     $criteria->join
     (
@@ -206,40 +206,40 @@ class AclMgmt_Qfdu_Treetable_Query extends LibSqlQuery
    * @param TFlag $params
    * @return void
    */
-  public function appendConditions($criteria, $condition, $areaId, $params )
+  public function appendConditions($criteria, $condition, $areaId, $params)
   {
 
-    if ( isset($condition['free'] ) && trim($condition['free'] ) != ''  ) {
+    if (isset($condition['free']) && trim($condition['free']) != ''  ) {
 
-      if ( ctype_digit($condition['free'] ) ) {
+      if (ctype_digit($condition['free'])) {
         $criteria->where
         (
-          '(  group_users.rowid = \''.$condition['free'].'\' )'
+          '( group_users.rowid = \''.$condition['free'].'\')'
         );
       } else {
 
-        if ( strpos($condition['free'], ',' ) ) {
+        if (strpos($condition['free'], ',')) {
 
-          $parts = explode( ',', $condition['free'] );
+          $parts = explode(',', $condition['free']);
 
           foreach ($parts as $part) {
 
-            $part = trim($part );
+            $part = trim($part);
 
             // prüfen, dass der string nicht leer ist
-            if ( '' == trim($part ) )
+            if ('' == trim($part))
               continue;
 
             $criteria->where
             (
               '(
-                (  upper(role_group.name) like upper(\''.$part.'%\') )
+                ( upper(role_group.name) like upper(\''.$part.'%\'))
                 OR
-                (  upper(role_user.name) like upper(\''.$part.'%\') )
+                ( upper(role_user.name) like upper(\''.$part.'%\'))
                 OR
-                (  upper(person.firstname) like upper(\''.$part.'%\') )
+                ( upper(person.firstname) like upper(\''.$part.'%\'))
                 OR
-                (  upper(person.lastname) like upper(\''.$part.'%\') )
+                ( upper(person.lastname) like upper(\''.$part.'%\'))
                 OR
 
                )
@@ -255,13 +255,13 @@ class AclMgmt_Qfdu_Treetable_Query extends LibSqlQuery
           $criteria->where
           (
             '(
-              (  upper(role_group.name) like upper(\''.$part.'%\') )
+              ( upper(role_group.name) like upper(\''.$part.'%\'))
               OR
-              (  upper(role_user.name) like upper(\''.$part.'%\') )
+              ( upper(role_user.name) like upper(\''.$part.'%\'))
               OR
-              (  upper(person.firstname) like upper(\''.$part.'%\') )
+              ( upper(person.firstname) like upper(\''.$part.'%\'))
               OR
-              (  upper(person.lastname) like upper(\''.$part.'%\') )
+              ( upper(person.lastname) like upper(\''.$part.'%\'))
               OR
 
              )
@@ -275,13 +275,13 @@ class AclMgmt_Qfdu_Treetable_Query extends LibSqlQuery
     }//end if
 
     if ($params->begin) {
-      $this->checkCharBegin($criteria, $params );
+      $this->checkCharBegin($criteria, $params);
     }
 
     $criteria->where
     (
       "group_users.id_area={$areaId}
-        and ( group_users.partial = 0 or group_users.partial is null ) "
+        and (group_users.partial = 0 or group_users.partial is null) "
     );
 
     // and NOT group_users.vid IS NULL
@@ -294,16 +294,16 @@ class AclMgmt_Qfdu_Treetable_Query extends LibSqlQuery
    * @param TFlag $params
    * @return void
    */
-  public function checkCharBegin($criteria, $params )
+  public function checkCharBegin($criteria, $params)
   {
 
     // filter for a beginning char
     if ($params->begin) {
 
       if ('?' == $params->begin) {
-        $criteria->where( "role_group.name ~* '^[^a-zA-Z]'" );
+        $criteria->where("role_group.name ~* '^[^a-zA-Z]'");
       } else {
-        $criteria->where( "upper(substr(role_group.name,1,1)) = '".strtoupper($params->begin)."'" );
+        $criteria->where("upper(substr(role_group.name,1,1)) = '".strtoupper($params->begin)."'");
       }
 
     }
@@ -327,19 +327,19 @@ class AclMgmt_Qfdu_Treetable_Query extends LibSqlQuery
 
     // check if there is a given order
     if ($params->order) {
-      $criteria->orderBy($params->order );
+      $criteria->orderBy($params->order);
     } else { // if not use the default
-      $criteria->orderBy( 'role_group.name' );
+      $criteria->orderBy('role_group.name');
     }
 
     // Check the offset
     if ($params->start) {
-      if ($params->start < 0 )
+      if ($params->start < 0)
         $params->start = 0;
     } else {
       $params->start = null;
     }
-    $criteria->offset($params->start );
+    $criteria->offset($params->start);
 
     // Check the limit
     if (-1 == $params->qsize) {
@@ -347,14 +347,14 @@ class AclMgmt_Qfdu_Treetable_Query extends LibSqlQuery
       $params->qsize = null;
     } elseif ($params->qsize) {
       // limit must not be bigger than max, for no limit use -1
-      if ($params->qsize > Wgt::$maxListSize )
+      if ($params->qsize > Wgt::$maxListSize)
         $params->qsize = Wgt::$maxListSize;
     } else {
       // if limit 0 or null use the default limit
       $params->qsize = Wgt::$defListSize;
     }
 
-    $criteria->limit($params->qsize );
+    $criteria->limit($params->qsize);
 
   }//end public function checkLimitAndOrder */
 

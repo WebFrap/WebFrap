@@ -46,7 +46,7 @@ class LibMessageChannelConsole extends LibMessageChannel
   /* (non-PHPdoc)
    * @see LibMessageChannel::send()
    */
-  public function send($message, $receivers )
+  public function send($message, $receivers)
   {
     // TODO Auto-generated method stub
 

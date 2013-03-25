@@ -24,7 +24,7 @@
  * set content direct
  * <code>
  * // create new area from the active view
- * $area = $view->newArea( 'keyToIdentifyAreaInTheTpl' );
+ * $area = $view->newArea('keyToIdentifyAreaInTheTpl');
  * $area->action = 'html';
  * $area->position = '#jueryId';
  * $area->setContent('<p>new content if the node with the id: jueryId</p>');
@@ -34,7 +34,7 @@
  * use as template container
  * <code>
  * // create new area from the active view
- * $area = $view->newArea( 'keyToIdentifyAreaInTheTpl' );
+ * $area = $view->newArea('keyToIdentifyAreaInTheTpl');
  * $area->action = 'html';
  * $area->position = '#jueryId';
  *

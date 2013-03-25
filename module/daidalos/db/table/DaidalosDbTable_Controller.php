@@ -46,38 +46,38 @@ class DaidalosDbTable_Controller extends Controller
   (
     'listing' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab'  )
+      'method'    => array('GET'),
+      'views'      => array('maintab'  )
     ),
     'props' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab'  )
+      'method'    => array('GET'),
+      'views'      => array('maintab'  )
     ),
     'rights' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab'  )
+      'method'    => array('GET'),
+      'views'      => array('maintab'  )
     ),
     'delete' => array
     (
-      'method'    => array( 'DELETE' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('DELETE'),
+      'views'      => array('ajax')
     ),
     'deletewbfviews' => array
     (
-      'method'    => array( 'DELETE' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('DELETE'),
+      'views'      => array('ajax')
     ),
     'createwbfsviews' => array
     (
-      'method'    => array( 'PUT' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
     ),
     'recreatewbfviews' => array
     (
-      'method'    => array( 'PUT' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
     ),
   );
 
@@ -90,13 +90,13 @@ class DaidalosDbTable_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_listing($request, $response )
+  public function service_listing($request, $response)
   {
 
     $params = $this->getFlags($request);
 
-    $dbName     = $request->param( "db", Validator::CNAME );
-    $schemaName = $request->param( "schema", Validator::CNAME );
+    $dbName     = $request->param("db", Validator::CNAME);
+    $schemaName = $request->param("schema", Validator::CNAME);
 
     $view   = $response->loadView
     (
@@ -107,15 +107,15 @@ class DaidalosDbTable_Controller extends Controller
       true
     );
 
-    $model  = $this->loadModel( 'DaidalosDbView' );
+    $model  = $this->loadModel('DaidalosDbView');
     $model->dbName     = $dbName;
     $model->schemaName = $schemaName;
     $params->dbName     = $dbName;
     $params->schemaName = $schemaName;
 
-    $view->setModel($model );
+    $view->setModel($model);
 
-    $view->displayListing($params );
+    $view->displayListing($params);
 
   }//end public function listing */
 
@@ -124,12 +124,12 @@ class DaidalosDbTable_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_delete($request, $response )
+  public function service_delete($request, $response)
   {
 
     $params = $this->getFlags($request);
 
-    $model  = $this->loadModel( 'DaidalosDb' );
+    $model  = $this->loadModel('DaidalosDb');
 
   }//end public function service_restore */
 
@@ -142,19 +142,19 @@ class DaidalosDbTable_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_deleteWbfViews($request, $response )
+  public function service_deleteWbfViews($request, $response)
   {
 
     $params = $this->getFlags($request);
 
-    $dbName     = $request->param( "db", Validator::CNAME );
-    $schemaName = $request->param( "schema", Validator::CNAME );
+    $dbName     = $request->param("db", Validator::CNAME);
+    $schemaName = $request->param("schema", Validator::CNAME);
 
-    $model  = $this->loadModel( 'DaidalosDbView' );
+    $model  = $this->loadModel('DaidalosDbView');
 
-    $model->dropWbfViews($schemaName );
+    $model->dropWbfViews($schemaName);
 
-    $response->addMessage( "Dropped WBF Views" );
+    $response->addMessage("Dropped WBF Views");
 
   }//end public function service_deleteWbfViews */
 
@@ -163,17 +163,17 @@ class DaidalosDbTable_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_createWbfViews($request, $response )
+  public function service_createWbfViews($request, $response)
   {
 
     $params = $this->getFlags($request);
 
-    $dbName     = $request->param( "db", Validator::CNAME );
-    $schemaName = $request->param( "schema", Validator::CNAME );
+    $dbName     = $request->param("db", Validator::CNAME);
+    $schemaName = $request->param("schema", Validator::CNAME);
 
-    $model  = $this->loadModel( 'DaidalosDbView' );
+    $model  = $this->loadModel('DaidalosDbView');
 
-    $model->createWbfViews($schemaName );
+    $model->createWbfViews($schemaName);
 
   }//end public function service_createWbfViews */
 
@@ -182,18 +182,18 @@ class DaidalosDbTable_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_reCreateWbfViews($request, $response )
+  public function service_reCreateWbfViews($request, $response)
   {
 
     $params = $this->getFlags($request);
 
-    $dbName     = $request->param( "db", Validator::CNAME );
-    $schemaName = $request->param( "schema", Validator::CNAME );
+    $dbName     = $request->param("db", Validator::CNAME);
+    $schemaName = $request->param("schema", Validator::CNAME);
 
-    $model  = $this->loadModel( 'DaidalosDbView' );
+    $model  = $this->loadModel('DaidalosDbView');
 
-    $model->dropWbfViews($schemaName );
-    $model->createWbfViews($schemaName );
+    $model->dropWbfViews($schemaName);
+    $model->createWbfViews($schemaName);
 
   }//end public function service_reCreateWbfViews */
 

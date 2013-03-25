@@ -36,15 +36,15 @@ class WebfrapDocu_Page_Maintab_Menu extends WgtDropmenu
    *   string formId: the id of the form;
    * }
    */
-  public function buildMenu($key, $params )
+  public function buildMenu($key, $params)
   {
 
-    $iconMenu          = $this->view->icon( 'control/menu.png'     ,'Menu'   );
-    $iconClose         = $this->view->icon( 'control/close.png'    ,'Close'   );
-    $iconSearch        = $this->view->icon( 'control/search.png'   ,'Search'  );
-    $iconBookmark      = $this->view->icon( 'control/bookmark.png' ,'Bookmark');
-    $iconSave          = $this->view->icon( 'control/save.png' ,'Save' );
-    $iconRefresh       = $this->view->icon( 'control/refresh.png' ,'Refresh' );
+    $iconMenu          = $this->view->icon('control/menu.png'     ,'Menu'   );
+    $iconClose         = $this->view->icon('control/close.png'    ,'Close'   );
+    $iconSearch        = $this->view->icon('control/search.png'   ,'Search'  );
+    $iconBookmark      = $this->view->icon('control/bookmark.png' ,'Bookmark');
+    $iconSave          = $this->view->icon('control/save.png' ,'Save');
+    $iconRefresh       = $this->view->icon('control/refresh.png' ,'Refresh');
 
     $entries = new TArray();
 
@@ -54,11 +54,11 @@ class WebfrapDocu_Page_Maintab_Menu extends WgtDropmenu
     $path   = array();
     foreach ($tmp as $cData) {
       $path[] = $cData;
-      $crumbs[implode('-',$path)] = SParserString::subToName($cData );
+      $crumbs[implode('-',$path)] = SParserString::subToName($cData);
     }
 
     $crumbMenu = new WgtControlCrumb();
-    $crumbMenu->setPathCrumb($crumbs, 'maintab.php?c=Webfrap.Docu.page&page=' );
+    $crumbMenu->setPathCrumb($crumbs, 'maintab.php?c=Webfrap.Docu.page&page=');
 
     $this->content = <<<HTML
 
@@ -101,7 +101,7 @@ HTML;
    *     services
    * }
    */
-  public function injectActions($view, $params )
+  public function injectActions($view, $params)
   {
 
     // add the button action for save in the window
@@ -116,7 +116,7 @@ HTML;
 
 BUTTONJS;
 
-    $view->addJsCode($code );
+    $view->addJsCode($code);
 
   }//end public function injectActions */
 

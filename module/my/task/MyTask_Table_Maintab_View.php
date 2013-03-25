@@ -51,7 +51,7 @@ class MyTask_Table_Maintab_View extends WgtMaintab
      * @setter self::crudModel
      * @param MyTask_Crud_Model $crudModel
      */
-    public function setModelCrud($crudModel )
+    public function setModelCrud($crudModel)
     {
 
       $this->crudModel = $crudModel;
@@ -62,7 +62,7 @@ class MyTask_Table_Maintab_View extends WgtMaintab
      * @getter self::crudModel
      * @return MyTask_Crud_Model
      */
-    public function getModelCrud( )
+    public function getModelCrud()
     {
       return $this->crudModel;
 
@@ -80,14 +80,14 @@ class MyTask_Table_Maintab_View extends WgtMaintab
   * @param TFlag $params benamte parameter
   * @return boolean
   */
-  public function displayListing($params )
+  public function displayListing($params)
   {
 
     // laden der benötigten resourcen
     $request = $this->getRequest();
 
     // setzen des templates
-    $this->setTemplate( 'my/task/maintab/listing' );
+    $this->setTemplate('my/task/maintab/listing');
 
     // fetch the i18n text only one time
     $i18nText = $this->i18n->l
@@ -103,20 +103,20 @@ class MyTask_Table_Maintab_View extends WgtMaintab
     // such formular ID und Aktion müssen gesetzt werden
     // sie können von auserhalb übergeben werden, wenn nicht vorhanden
     // muss eine standard action sowie eine standard id gesetzt werden
-    if (!$params->searchFormAction )
+    if (!$params->searchFormAction)
       $params->searchFormAction = 'index.php?c=Project.Project.search';
 
-    if (!$params->searchFormId )
+    if (!$params->searchFormId)
       $params->searchFormId = 'wgt-form-table-project_project-search';
 
     // set search form erweitert die Action anhand der in params mit
     // übergebene flags und schiebt formAction und formId in den VAR index
     // der aktuellen view
-    $this->setSearchFormData($params );
+    $this->setSearchFormData($params);
 
     /// addMenu erstellt das dropdown menü und schiebt es dann in die view
-    $this->addMenuListing($params );
-    $this->addActionsListing($params );
+    $this->addMenuListing($params);
+    $this->addActionsListing($params);
 
     // über publish kann definiert werden, dass mit dem schliesen des listen
     // elements der inhalt eines bestimmten UI-Elements neu geladen werden muss
@@ -132,15 +132,15 @@ class MyTask_Table_Maintab_View extends WgtMaintab
 BUTTONJS;
 
       // on close the calling selectbox has to be updated
-      $this->addEvent( 'onclose' , 'refreshSelectbox' , $onClose );
+      $this->addEvent('onclose' , 'refreshSelectbox' , $onClose);
 
       // clean the targetId to no affect the id of the table
       $params->targetId = null;
     }
 
     $crudUi = $this->loadUi('MyTask_Crud');
-    $crudUi->setModel($this->crudModel );
-    $crudUi->createForm($params );
+    $crudUi->setModel($this->crudModel);
+    $crudUi->createForm($params);
 
 
     $ui = $this->loadUi('MyTask_Table');
@@ -149,7 +149,7 @@ BUTTONJS;
     // ACLs werden im Model weiter ausgewertet
     $ui->createListItem
     (
-      $this->model->search($params ),
+      $this->model->search($params),
       $params
     );
 /*
@@ -178,7 +178,7 @@ BUTTONJS;
    *
    * @param TFlag $params benamte parameter
    */
-  public function addMenuListing($params )
+  public function addMenuListing($params)
   {
 
     $menu     = $this->newMenu
@@ -189,7 +189,7 @@ BUTTONJS;
 
     // wir übernehmen einfach die ID des Maintabs und hängen dropmenu dran
     $menu->id = $this->id.'_dropmenu';
-    $menu->buildMenu($params );
+    $menu->buildMenu($params);
 
     return true;
 
@@ -208,7 +208,7 @@ BUTTONJS;
    *   LibAclContainer access: Container mit den aktiven ACL Informationen
    * }
    */
-  public function addActionsListing($params )
+  public function addActionsListing($params)
   {
 
     // en:
@@ -245,7 +245,7 @@ BUTTONJS;
     });
 
     self.getObject().find(".wgtac_create").click(function(){
-      \$R.form( '{$params->formId}' );
+      \$R.form('{$params->formId}');
       \$S('#wgt-form-my_task-table-crud').hide();
     });
 

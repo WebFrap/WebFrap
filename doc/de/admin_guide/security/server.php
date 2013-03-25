@@ -23,7 +23,7 @@ dazu in Anspruch zu nehmen.
 
 <p>
 <strong>Unterbleibt eine kompetente Wartung</strong> der Server, aus welchen Gründen auch immer,
-( sind wir ehrlich es sind praktisch immer die Kosten ) so wird diese
+(sind wir ehrlich es sind praktisch immer die Kosten) so wird diese
 Ersparnis (von was auch immer) durch das <strong>Risiko eines Komplettverlustes der Daten</strong>
 und in der Regel damit auch ein <strong>Verlust der Geschäftsgrundlage</strong>, oder einem nur schwer wieder
 gut zu machenden <strong>Image Schaden</strong>.

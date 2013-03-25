@@ -33,10 +33,10 @@ class DaoModuleLoader extends Dao
    * @param string $mapName
    * @return []
    */
-  public static function getModList($mapName, $modName )
+  public static function getModList($mapName, $modName)
   {
 
-    if ( isset(self::$pool[$mapName.'/'.$modName]) )
+    if (isset(self::$pool[$mapName.'/'.$modName]))
       return self::$pool[$mapName.'/'.$modName];
     else
       return DaoModuleLoader::load($mapName, $modName);
@@ -47,13 +47,13 @@ class DaoModuleLoader extends Dao
    * @param string $mapName
    * @return []
    */
-  public static function get($mapName, $modName )
+  public static function get($mapName, $modName)
   {
 
-    if ( isset(self::$pool[$mapName.'/'.$modName]) )
+    if (isset(self::$pool[$mapName.'/'.$modName]))
       return self::$pool[$mapName.'/'.$modName];
     else
-      return DaoModuleLoader::load($mapName, $modName );
+      return DaoModuleLoader::load($mapName, $modName);
 
   }//end public static function get
 
@@ -62,19 +62,19 @@ class DaoModuleLoader extends Dao
    * @param string $modName
    * @return array
    */
-  public static function load($mapName, $modName )
+  public static function load($mapName, $modName)
   {
 
     $subModules  = array();
     $modules     = array();
 
     ///TODO find a solution how to add a hirachie
-    if ( is_dir( PATH_GW.'conf/include/'.$mapName )  ) {
-      $dModules = opendir( PATH_GW.'conf/include/'.$mapName );
+    if (is_dir(PATH_GW.'conf/include/'.$mapName)  ) {
+      $dModules = opendir(PATH_GW.'conf/include/'.$mapName);
 
       if ($dModules) {
-         while ($mod = readdir($dModules) ) {
-            if ($mod[0] == '.' )
+         while ($mod = readdir($dModules)) {
+            if ($mod[0] == '.')
               continue;
 
             $subModules[] =  $mod;
@@ -86,17 +86,17 @@ class DaoModuleLoader extends Dao
     }
 
     foreach ($subModules as $subMod) {
-      if ( is_dir( PATH_ROOT.$subMod.'/conf/include/'.$modName ) ) {
-        $dModules = opendir( PATH_ROOT.$subMod.'/conf/include/'.$modName  );
+      if (is_dir(PATH_ROOT.$subMod.'/conf/include/'.$modName)) {
+        $dModules = opendir(PATH_ROOT.$subMod.'/conf/include/'.$modName  );
 
-        Debug::console( 'MOD '.PATH_ROOT.$subMod.'/conf/include/'.$modName );
+        Debug::console('MOD '.PATH_ROOT.$subMod.'/conf/include/'.$modName);
 
         if ($dModules) {
-           while ($mod = readdir($dModules) ) {
-              if ($mod[0] == '.' )
+           while ($mod = readdir($dModules)) {
+              if ($mod[0] == '.')
                 continue;
 
-              Debug::console( 'MOD '.$mod );
+              Debug::console('MOD '.$mod);
 
               $modules[] =  $mod;
            }

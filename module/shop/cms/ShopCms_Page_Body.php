@@ -33,15 +33,15 @@ class ShopCms_Page_Body extends WgtTemplate
    *
    * @return string
    */
-  public function render(  )
+  public function render()
   {
 
-    $pageEntity = $this->model->getPage($this->pageKey );
+    $pageEntity = $this->model->getPage($this->pageKey);
 
-    if (!$pageEntity )
-      $pageEntity = $this->model->getPage( 'error_404' );
+    if (!$pageEntity)
+      $pageEntity = $this->model->getPage('error_404');
 
-    $this->view->setTitle($pageEntity->title );
+    $this->view->setTitle($pageEntity->title);
 
     if ($pageEntity->template) {
       $template = $pageEntity->template;
@@ -49,9 +49,9 @@ class ShopCms_Page_Body extends WgtTemplate
       $template = 'shop/page' ;
     }
 
-    $this->addVar( 'body', $pageEntity->page_content );
+    $this->addVar('body', $pageEntity->page_content);
 
-    return $this->renderTemplate($template );
+    return $this->renderTemplate($template);
 
   }//end public function render */
 

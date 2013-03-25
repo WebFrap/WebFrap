@@ -32,7 +32,7 @@ class WgtSelectboxIconThemeSwitcher extends WgtSelectboxHardcoded
 
     $this->data = array
     (
-      'default' => array( 'value' => 'Default' )
+      'default' => array('value' => 'Default')
     );
 
     $this->activ = 'default';

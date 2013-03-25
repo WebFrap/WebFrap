@@ -27,55 +27,55 @@ class SFormatDates
   */
   public static function getLogdate()
   {
-    return date( "Y-m-d H:i:s" );
+    return date("Y-m-d H:i:s");
   } // Ende Memberfunction GetLogdate
 
  /** Formatieren eines Datums zur Ausgabe in der aktuellen Systemsprache
   * @returns string
   */
-  public static function formDate($Date )
+  public static function formDate($Date)
   {
-    if (trim($Date) == "" ) {
+    if (trim($Date) == "") {
       return "";
     }
-    $Date = strtotime($Date );
+    $Date = strtotime($Date);
 
-    return date ( "d.m.Y" , $Date );
+    return date ("d.m.Y" , $Date);
   }
 
  /** Formatieren einer Zeit zur Ausgabe in der aktuellen Systemsprache
   * @returns string
   */
-  public static function formTime($Time )
+  public static function formTime($Time)
   {
-    if (trim($Time) == "" ) {
+    if (trim($Time) == "") {
       return "";
     }
-    $Time = strtotime($Time );
+    $Time = strtotime($Time);
 
-    return date ( "G.i.s" , $Time );
+    return date ("G.i.s" , $Time);
   }
 
  /** Formatieren eines Timestamps zur Ausgabe in der aktuellen Systemsprache
   * @returns string
   */
-  public static function formTimestamp($Time )
+  public static function formTimestamp($Time)
   {
-    if (trim($Time) == "" ) {
+    if (trim($Time) == "") {
       return "";
     }
-    $Time = strtotime($Time );
+    $Time = strtotime($Time);
 
-    return date ( "d.m.Y G.i.s" , $Time );
+    return date ("d.m.Y G.i.s" , $Time);
   }
 
  /** Einen Formatierten Datumsstring mit dem aktuellen Datum
   * @returns string
   */
-  public static function dateToDb($Date )
+  public static function dateToDb($Date)
   {
-    if (trim($Date ) != ""  ) {
-      $parts = explode( "." , $Date  );
+    if (trim($Date) != ""  ) {
+      $parts = explode("." , $Date  );
       $Date = $parts[2]."-".$parts[1]."-".$parts[0];
     }
 
@@ -85,17 +85,17 @@ class SFormatDates
  /** Einen Formatierten Datumsstring mit dem aktuellen Datum
   * @returns string
   */
-  public function timestampToDate($Date )
+  public function timestampToDate($Date)
   {
-    $parts = explode( " " , $Date  );
+    $parts = explode(" " , $Date  );
 
     $Date = $parts[0];
     $Time = $parts[1];
 
-    $parts = explode( "-" , $Date );
+    $parts = explode("-" , $Date);
     $Date = $parts[2].".".$parts[1].".".$parts[0];
 
-//     $parts = explode( ":" , $Time );
+//     $parts = explode(":" , $Time);
 //     $Time = $parts[2].":".$parts[1].".".$parts[0];
     return "$Time $Date";
   }

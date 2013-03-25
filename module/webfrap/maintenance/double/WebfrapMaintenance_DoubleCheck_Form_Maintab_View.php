@@ -45,7 +45,7 @@ class WebfrapMaintenance_DoubleCheck_Maintab_View extends WgtMaintabCustom
   * @param TFlag $params
   * @return Error im Fehlerfall sonst null
   */
-  public function displayShow( )
+  public function displayShow()
   {
 
     $i18nLabel = $this->i18n->l
@@ -55,15 +55,15 @@ class WebfrapMaintenance_DoubleCheck_Maintab_View extends WgtMaintabCustom
     );
 
     // Setzen des Labels und des Titles, sowie diverser Steuerinformationen
-    $this->setTitle($i18nLabel );
-    $this->setLabel($i18nLabel );
+    $this->setTitle($i18nLabel);
+    $this->setLabel($i18nLabel);
 
     // set the form template
-    $this->setTemplate( 'webfrap/double_check/form' );
+    $this->setTemplate('webfrap/double_check/form');
 
     // Menü und Javascript Logik erstellen
-    $this->addMenu( );
-    $this->addActions( );
+    $this->addMenu();
+    $this->addActions();
 
     // kein fehler aufgetreten? bestens also geben wir auch keinen zurück
     return null;
@@ -79,24 +79,24 @@ class WebfrapMaintenance_DoubleCheck_Maintab_View extends WgtMaintabCustom
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu(  )
+  public function addMenu()
   {
 
     // benötigte resourcen laden
     $acl    = $this->getAcl();
 
-    $menu  = $this->newMenu($this->id.'_dropmenu' );
+    $menu  = $this->newMenu($this->id.'_dropmenu');
     $menu->id = $this->id.'_dropmenu';
-    $menu->setAcl($acl );
-    $menu->setModel($this->model );
+    $menu->setAcl($acl);
+    $menu->setModel($this->model);
 
-    $iconMenu      = $view->icon(  'control/menu.png',  'Menu');
-    $iconRebuild   = $view->icon(  'maintenance/rebuild_index.png', 'Rebuild Index');
-    $iconBookmark  = $view->icon(  'control/bookmark.png', 'Bookmark');
-    $iconClose     = $view->icon(  'control/close.png', 'Close');
+    $iconMenu      = $view->icon( 'control/menu.png',  'Menu');
+    $iconRebuild   = $view->icon( 'maintenance/rebuild_index.png', 'Rebuild Index');
+    $iconBookmark  = $view->icon( 'control/bookmark.png', 'Bookmark');
+    $iconClose     = $view->icon( 'control/close.png', 'Close');
 
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport(  $menu );
+    $entries->support  = $this->entriesSupport( $menu);
 
     $menu->content = <<<HTML
 
@@ -116,7 +116,7 @@ class WebfrapMaintenance_DoubleCheck_Maintab_View extends WgtMaintabCustom
       </li>
     {$entries->support}
       <li>
-        <a class="wgtac_close" >{$iconClose} {$i18n->l( 'Close', 'wbf.label' )}</a>
+        <a class="wgtac_close" >{$iconClose} {$i18n->l('Close', 'wbf.label')}</a>
       </li>
     </ul>
   </div>
@@ -133,7 +133,7 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport($menu )
+  protected function entriesSupport($menu)
   {
 
     $iconSupport    = $this->icon('control/support.png'  ,'Support');
@@ -177,7 +177,7 @@ HTML;
    *   string formId: the id of the form;
    * }
    */
-  public function addActions(  )
+  public function addActions()
   {
 
     // add the button actions for create in the window
@@ -193,7 +193,7 @@ self.getObject().find(".wgtac_close").click(function(){
 
 BUTTONJS;
 
-    $this->addJsCode($code );
+    $this->addJsCode($code);
 
   }//end public function addActions */
 

@@ -31,12 +31,12 @@ class LibBuildCreateFile extends LibBuildAction
    *
    * @return boolean
    */
-  public function execute(  )
+  public function execute()
   {
 
     $name = $this->args[1];
 
-    return SFilesystem::createFolder($name, true, true );
+    return SFilesystem::createFolder($name, true, true);
 
   }//end public function execute */
 

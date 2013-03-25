@@ -34,7 +34,7 @@ class ExampleValid_Maintab_View extends WgtMaintab
    *
    * @param TFlag $params
    */
-  public function displayForm($params )
+  public function displayForm($params)
   {
 
     // das Label das im Tab angezeigt wird

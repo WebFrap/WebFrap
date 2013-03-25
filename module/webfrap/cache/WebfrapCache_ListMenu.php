@@ -27,45 +27,45 @@ class WebfrapCache_ListMenu
   /**
    * @param array $cDir
    */
-  public function renderDisplay($cDir )
+  public function renderDisplay($cDir)
   {
 
     $code = array();
 
-    if ( isset($cDir->display ) ) {
+    if (isset($cDir->display)) {
       foreach ($cDir->display as $action) {
         switch ($action) {
           case 'created':
           {
-            $code[] = "Updated: ".SFilesystem::timeChanged( PATH_GW.'cache/'.$cDir->dir );
+            $code[] = "Updated: ".SFilesystem::timeChanged(PATH_GW.'cache/'.$cDir->dir);
             break;
           }
           case 'size':
           {
-            $code[] = "Size: ".SFilesystem::getFolderSize( PATH_GW.'cache/'.$cDir->dir );
+            $code[] = "Size: ".SFilesystem::getFolderSize(PATH_GW.'cache/'.$cDir->dir);
             break;
           }
           case 'num_files':
           {
-            $code[] = "Files: ".SFilesystem::countFiles( PATH_GW.'cache/'.$cDir->dir );
+            $code[] = "Files: ".SFilesystem::countFiles(PATH_GW.'cache/'.$cDir->dir);
             break;
           }
         }
       }
     }
 
-    return implode( '<br />', $code );
+    return implode('<br />', $code);
   }
 
   /**
    * @param array $cDir
    */
-  public function renderActions($cDir )
+  public function renderActions($cDir)
   {
 
     $code = array();
 
-    if ( isset($cDir->actions ) ) {
+    if (isset($cDir->actions)) {
       foreach ($cDir->actions as $action) {
         switch ($action->type) {
           case 'request':
@@ -83,7 +83,7 @@ CODE;
       }
     }
 
-    return implode( '<br />', $code );
+    return implode('<br />', $code);
 
   }//end public renderActions */
 

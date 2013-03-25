@@ -31,14 +31,14 @@ class LibDbAdminMysql
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
 
-  public function __construct($db )
+  public function __construct($db)
   {
     $this->db = $db;
   }
 
   /**
    */
-  public function getDatabases( )
+  public function getDatabases()
   {
 
     $sql = <<<SQL
@@ -101,7 +101,7 @@ SQL;
 
     $meta = array();
 
-    foreach($results as $row )
+    foreach($results as $row)
       $meta[$row['name']] = $quotes[$row['type']];
 
     return $meta;

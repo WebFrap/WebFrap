@@ -715,7 +715,7 @@ class LibDbPostgresql extends LibDbConnection
 
       if (!$ergebnis = pg_fetch_all($this->result)) {
         if (Log::$levelDebug)
-          Log::debug( 'Got no Result'  );
+          Log::debug('Got no Result'  );
 
         return array();
       }
@@ -1271,10 +1271,10 @@ class LibDbPostgresql extends LibDbConnection
    */
   protected function dissconnect()
   {
-    if (is_resource( $this->connectionRead))
+    if (is_resource($this->connectionRead))
       pg_close($this->connectionRead);
 
-    if (is_resource( $this->connectionWrite))
+    if (is_resource($this->connectionWrite))
       pg_close($this->connectionWrite);
 
   } // end protected function dissconnect */

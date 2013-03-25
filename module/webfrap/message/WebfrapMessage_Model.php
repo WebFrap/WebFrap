@@ -358,13 +358,13 @@ SQL;
    * @param WebfrapMessage_Save_Request $rqtData
    * @throws Per
    */
-  public function saveMessage( $messageId, $rqtData )
+  public function saveMessage($messageId, $rqtData)
   {
 
     $orm = $this->getOrm();
     $user = $this->getUser();
     
-    foreach( $rqtData->aspects as $aspect ){
+    foreach($rqtData->aspects as $aspect){
       $msgAspect = $orm->newEntity('WbfsysMessageAspect');
       $msgAspect->id_receiver = $user->getId();
       $msgAspect->id_message = $messageId;
@@ -386,7 +386,7 @@ SQL;
    * @param int $messageId
    * @throws Per
    */
-  public function deleteMessage( $messageId )
+  public function deleteMessage($messageId)
   {
 
     $orm = $this->getOrm();

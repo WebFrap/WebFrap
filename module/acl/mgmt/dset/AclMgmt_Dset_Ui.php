@@ -72,11 +72,11 @@ class AclMgmt_Dset_Ui extends MvcUi
     $listObj->areaId = $areaId;
 
     // use the query as datasource for the table
-    $listObj->setData($data );
+    $listObj->setData($data);
 
     // den access container dem listenelement übergeben
-    $listObj->setAccess($access );
-    $listObj->setAccessPath($params, $params->aclKey, $params->aclNode );
+    $listObj->setAccess($access);
+    $listObj->setAccessPath($params, $params->aclKey, $params->aclNode);
 
     // set the offset to set the paging menu correct
     $listObj->start    = $params->start;
@@ -85,26 +85,26 @@ class AclMgmt_Dset_Ui extends MvcUi
     $listObj->stepSize = $params->qsize;
 
     // check if there is a filter for the first char
-    if ($params->begin )
+    if ($params->begin)
       $listObj->begin  = $params->begin;
 
     // if there is a given tableId for the html id of the the table replace
     // the default id with it
-    $listObj->setId( 'wgt-treetable-'.$this->domainNode->aclDomainKey.'-acl-dset' );
+    $listObj->setId('wgt-treetable-'.$this->domainNode->aclDomainKey.'-acl-dset');
 
 
     // for paging use the default search form, to enshure to keep the order
     // and to page in search results if there was any search
-    if (!$params->searchFormId )
+    if (!$params->searchFormId)
       $params->searchFormId = 'wgt-form-table-'.$this->domainNode->aclDomainKey.'-acl-dset-search';
 
-    $listObj->setPagingId($params->searchFormId );
+    $listObj->setPagingId($params->searchFormId);
 
     // add the id to the form
-    if (!$params->formId )
+    if (!$params->formId)
       $params->formId = 'wgt-form-'.$this->domainNode->aclDomainKey.'-acl-dset-update';
 
-    $listObj->setSaveForm($params->formId );
+    $listObj->setSaveForm($params->formId);
 
 
     if ($params->ajax) {
@@ -116,7 +116,7 @@ class AclMgmt_Dset_Ui extends MvcUi
       $listObj->insertMode = false;
     } else {
       // create the panel
-      $tabPanel = new WgtPanelTable($listObj );
+      $tabPanel = new WgtPanelTable($listObj);
 
       $tabPanel->title      = $this->view->i18n->l
       (
@@ -140,7 +140,7 @@ class AclMgmt_Dset_Ui extends MvcUi
 
 WGTJS;
 
-      $this->view->addJsCode($jsCode );
+      $this->view->addJsCode($jsCode);
 
     } else {
       // if this is an ajax request and we replace the body, we need also
@@ -152,7 +152,7 @@ WGTJS;
 
 WGTJS;
 
-        $this->view->addJsCode($jsCode );
+        $this->view->addJsCode($jsCode);
 
       }
 
@@ -171,7 +171,7 @@ WGTJS;
    *
    * @return AclMgmt_Dset_Treetable_Element
    */
-  public function listEntry($access, $params,  $insert )
+  public function listEntry($access, $params,  $insert)
   {
 
     $table = new AclMgmt_Dset_Treetable_Element
@@ -182,14 +182,14 @@ WGTJS;
     );
 
     // den access container dem listenelement übergeben
-    $table->setAccess($access );
-    $table->setAccessPath($params, $params->aclKey, $params->aclNode );
+    $table->setAccess($access);
+    $table->setAccessPath($params, $params->aclKey, $params->aclNode);
 
     $assignEntity = $this->model->getEntityWbfsysGroupUsers();
 
-    $data = $this->model->getEntryWbfsysGroupUsers($params );
+    $data = $this->model->getEntryWbfsysGroupUsers($params);
 
-    $table->setData( array($data['group_users_id_group'] => $data ) );
+    $table->setData(array($data['group_users_id_group'] => $data));
 
     $table->dataUser[$data['group_users_id_group']][$data['group_users_id_user']] = $data;
 
@@ -197,15 +197,15 @@ WGTJS;
     if ($params->targetId  )
       $table->id = $params->targetId;
 
-    $table->setPagingId($params->searchFormId );
+    $table->setPagingId($params->searchFormId);
 
     // add the id to the form
-    if (!$params->formId )
+    if (!$params->formId)
       $params->formId = 'wgt-form-'.$this->domainNode->aclDomainKey.'-acl-dset-update';
 
-    $table->setSaveForm($params->formId );
+    $table->setSaveForm($params->formId);
 
-    $this->view->setPageFragment( 'groupUsersEntry', $table->buildAjaxEntry( ) );
+    $this->view->setPageFragment('groupUsersEntry', $table->buildAjaxEntry());
 
     if ($insert) {
 
@@ -226,7 +226,7 @@ WGTJS;
 
     }
 
-    $this->view->addJsCode($jsCode );
+    $this->view->addJsCode($jsCode);
 
     return $table;
 
@@ -298,7 +298,7 @@ JSCODE;
    *
    * @return void
    */
-  public function removeUserEntry($groupId, $userId, $itemId )
+  public function removeUserEntry($groupId, $userId, $itemId)
   {
 
     // remove user entry and children
@@ -310,7 +310,7 @@ JSCODE;
 
 JSCODE;
 
-    $this->view->addJsCode($code );
+    $this->view->addJsCode($code);
 
   }//end public function removeUserEntry */
 

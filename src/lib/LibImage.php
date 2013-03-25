@@ -38,10 +38,10 @@ class LibImage
   /**
    * @return LibImageAdapter
    */
-  public static function getAdapter(  )
+  public static function getAdapter()
   {
 
-    if (!self::$defAdapter )
+    if (!self::$defAdapter)
       self::$defAdapter = new LibImage_Gd();
 
     return self::$defAdapter;
@@ -51,7 +51,7 @@ class LibImage
   /**
    * @return LibImageAdapter
    */
-  public static function newAdapter(  )
+  public static function newAdapter()
   {
     return new LibImage_Gd();
 

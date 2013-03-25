@@ -20,14 +20,14 @@
 * Changes:
 *
 *******************************************************************************/
-<?php display_highlight( 'php' ); ?>
+<?php display_highlight('php'); ?>
 
 
 <?php start_highlight();  ?>
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
 ////////////////////////////////////////////////////////////////////////////////
-<?php display_highlight( 'php' ); ?>
+<?php display_highlight('php'); ?>
 
 
 
@@ -52,4 +52,4 @@ class Fubar
 
 }
 
-<?php display_highlight( 'php' ); ?>
+<?php display_highlight('php'); ?>

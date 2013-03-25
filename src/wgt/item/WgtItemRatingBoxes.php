@@ -43,16 +43,16 @@ class WgtItemRatingBoxes extends WgtItemAbstract
   /**
    *
    */
-  public function build( )
+  public function build()
   {
 
     // Deliverd in Time
-    $radio = new WgtItemRadiobox( 'temp'.$this->name );
-    $radio->setActive($this->activ );
-    $radio->addAttributes($this->attributes );
+    $radio = new WgtItemRadiobox('temp'.$this->name);
+    $radio->setActive($this->activ);
+    $radio->addAttributes($this->attributes);
 
     $radioN = $radio->addRadio();
-    $radioN->addTdAttributes( 'class' , 'wgtRadionNotRated' );
+    $radioN->addTdAttributes('class' , 'wgtRadionNotRated');
     $radioN->addAttributes
     (
     array
@@ -65,7 +65,7 @@ class WgtItemRatingBoxes extends WgtItemAbstract
     );
 
     $radioG = $radio->addRadio();
-    $radioG->addTdAttributes('class' , 'wgtRadionGodRated' );
+    $radioG->addTdAttributes('class' , 'wgtRadionGodRated');
     $radioG->addAttributes
     (
     array
@@ -78,7 +78,7 @@ class WgtItemRatingBoxes extends WgtItemAbstract
     );
 
     $radioA = $radio->addRadio();
-    $radioA->addTdAttributes('class' , 'wgtRadionAverageRated' );
+    $radioA->addTdAttributes('class' , 'wgtRadionAverageRated');
     $radioA->addAttributes
     (
     array
@@ -91,7 +91,7 @@ class WgtItemRatingBoxes extends WgtItemAbstract
     );
 
     $radioB = $radio->addRadio();
-    $radioB->addTdAttributes('class' , 'wgtRadionBadRated' );
+    $radioB->addTdAttributes('class' , 'wgtRadionBadRated');
     $radioB->addAttributes
     (
     array
@@ -105,7 +105,7 @@ class WgtItemRatingBoxes extends WgtItemAbstract
 
     return $radio->toHtml();
 
-  }//end public function build( )
+  }//end public function build()
 
 }//end class WgtItemRatingBoxes
 

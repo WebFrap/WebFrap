@@ -86,7 +86,7 @@ class LibCodePackerPhp
    * @param filename $fileName
    * @param files $files
    */
-  public function pack($fileName = null, $files = array() )
+  public function pack($fileName = null, $files = array())
   {
     //return;
 
@@ -98,17 +98,17 @@ class LibCodePackerPhp
       $files = $this->files;
     }
 
-    $this->writer = fopen($fileName , 'w' );
+    $this->writer = fopen($fileName , 'w');
 
-    fwrite($this->writer , '<?php'.NL , strlen('<?php'.NL) );
+    fwrite($this->writer , '<?php'.NL , strlen('<?php'.NL));
 
     foreach ($files as $file) {
-      $this->packFromFile($file );
-      fwrite($this->writer , NL , strlen(NL) );
+      $this->packFromFile($file);
+      fwrite($this->writer , NL , strlen(NL));
     }
 
-    fwrite($this->writer , '?>'.NL , strlen('?>'.NL) );
-    fclose($this->writer );
+    fwrite($this->writer , '?>'.NL , strlen('?>'.NL));
+    fclose($this->writer);
 
   }//end public function pack */
 
@@ -117,7 +117,7 @@ class LibCodePackerPhp
    *
    * @param string $files
    */
-  public function setFilesAsClasses($files )
+  public function setFilesAsClasses($files)
   {
 
     $classIndex = array();
@@ -132,22 +132,22 @@ class LibCodePackerPhp
       $reflector = new LibReflectorClass($class);
       $classIndex[$class] =  $reflector->getFilename();
 
-      if ($reflector->isInterface() ) {
+      if ($reflector->isInterface()) {
         $interfaces[] =  $reflector->getFileName();
-      } elseif ($parentClass = $reflector->getParentClass() ) {
+      } elseif ($parentClass = $reflector->getParentClass()) {
         $childClasses[$class] =  $reflector->getFilename();
-        $dependecies[] = array($class , $parentClass->getName() );
+        $dependecies[] = array($class , $parentClass->getName());
       } else {
         $plainClasses[] =  $reflector->getFilename();
       }
 
     }
 
-    $resolver = new LibDependency($dependecies );
+    $resolver = new LibDependency($dependecies);
     $resolver->solveDependencies();
 
     $resolvedDeps = array();
-    foreach ($resolver->getCombined() as $dep ) {
+    foreach ($resolver->getCombined() as $dep) {
       $resolvedDeps[] = $classIndex[$dep];
     }
 
@@ -162,7 +162,7 @@ class LibCodePackerPhp
     }
 
     foreach ($resolvedDeps as $file) {
-      if (!in_array($file , $fileIndex  ) ) {
+      if (!in_array($file , $fileIndex  )) {
         $fileIndex[] = $file;
       }
     }
@@ -176,30 +176,30 @@ class LibCodePackerPhp
    *
    * @param string $filename
    */
-  protected function packFromFile($filename )
+  protected function packFromFile($filename)
   {
 
     if (!$read = fopen($filename , 'r'  )) {
-      Controller::addWarning( 'Failed to open: '.$filename );
+      Controller::addWarning('Failed to open: '.$filename);
 
       return;
     }
 
     $rows = array();
 
-    while ( !feof($read) ) {
+    while (!feof($read)) {
       $row = fgets($read, 4096);
-      if (!$this->isComment($row) ) {
-        if (!$this->ignore($row ) ) {
+      if (!$this->isComment($row)) {
+        if (!$this->ignore($row)) {
           $rows[] = $row;
         }
       }
     }
 
     /*
-    while ( !feof($read) ) {
+    while (!feof($read)) {
       $row = fgets($read, 4096);
-      if (!$this->isComment($row) ) {
+      if (!$this->isComment($row)) {
         $rows[] = $row;
       }
     }*/
@@ -209,7 +209,7 @@ class LibCodePackerPhp
     array_shift($rows);
 
     foreach ($rows as $row) {
-      fwrite($this->writer , $row , strlen($row) );
+      fwrite($this->writer , $row , strlen($row));
     }
 
     fclose($read);
@@ -219,14 +219,14 @@ class LibCodePackerPhp
   /**
    *
    */
-  protected function isComment($row )
+  protected function isComment($row)
   {
 
     $row = trim($row);
     $lenght = strlen($row);
 
     if ($this->commentOpen) {
-      if (  substr($row , -2  ) == '*/' ) {
+      if ( substr($row , -2  ) == '*/') {
         $this->commentOpen = false;
       }
 
@@ -234,10 +234,10 @@ class LibCodePackerPhp
     } elseif ($lenght == 0) {
       // ignore whitespace
       return true;
-    } elseif ($row[0] ==  '#' || $row[0] ==  '*' || substr($row , 0 , 2  ) == '//' ) {
+    } elseif ($row[0] ==  '#' || $row[0] ==  '*' || substr($row , 0 , 2  ) == '//') {
       // must be a comment
       return true;
-    } elseif ( substr($row , 0 , 2  ) == '/*' ) {
+    } elseif (substr($row , 0 , 2  ) == '/*') {
       // start a multiline comment
       $this->commentOpen = true;
 
@@ -255,12 +255,12 @@ class LibCodePackerPhp
    * @param unknown_type $row
    * @return unknown
    */
-  protected function ignore($row )
+  protected function ignore($row)
   {
 
-    $row = str_replace( ' ' , '', trim($row) );
+    $row = str_replace(' ' , '', trim($row));
 
-    if ($row == 'Debug::addLoc(__line__+1);' || $row == 'Debug::addLoc(__line__+1);' ) {
+    if ($row == 'Debug::addLoc(__line__+1);' || $row == 'Debug::addLoc(__line__+1);') {
       return true;
     }
 

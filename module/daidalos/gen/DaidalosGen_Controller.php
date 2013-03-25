@@ -46,7 +46,7 @@ class DaidalosGen_Controller extends Controller
   (
     'custom' => array
     (
-      //'views'      => array( View::CLI  )
+      //'views'      => array(View::CLI  )
     ),
   );
 
@@ -59,7 +59,7 @@ class DaidalosGen_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_custom($request, $response )
+  public function service_custom($request, $response)
   {
 
     $params = $this->getFlags($request);
@@ -73,21 +73,21 @@ class DaidalosGen_Controller extends Controller
     );
 
     /* @var $model DaidalosGen_Model  */
-    $model  = $this->loadModel( 'DaidalosGen' );
+    $model  = $this->loadModel('DaidalosGen');
 
     // das Repository in welches generiert werden soll
-    $target = $request->param('target', Validator::TEXT );
+    $target = $request->param('target', Validator::TEXT);
 
     // der Pfad in welchem sich die BDL Dateien befinden
-    $bdlPath = $request->param('bdl_path', Validator::TEXT );
+    $bdlPath = $request->param('bdl_path', Validator::TEXT);
 
     // existierenden Code einfach überschreiben
-    $forceOverwrite = 'true' === $request->param('force', Validator::TEXT )?true:false;
+    $forceOverwrite = 'true' === $request->param('force', Validator::TEXT)?true:false;
 
     // Die Project BDL welche verwendet werden soll
-    $bdlProject = $request->param('project', Validator::TEXT );
+    $bdlProject = $request->param('project', Validator::TEXT);
 
-    if (!$bdlProject )
+    if (!$bdlProject)
       $bdlProject = PATH_GW.'data/daidalos/structure_project.bdl';
 
     $resContext = $response->createContext();
@@ -104,20 +104,20 @@ class DaidalosGen_Controller extends Controller
       $bdlPath
     );
 
-    if ($resContext->hasError )
+    if ($resContext->hasError)
       return;
 
-    $bdlPaths = explode( ';', $bdlPath  );
+    $bdlPaths = explode(';', $bdlPath  );
 
     $model->forceOverwrite = $forceOverwrite;
-    $model->loadProject($bdlProject, $bdlPaths, $target );
+    $model->loadProject($bdlProject, $bdlPaths, $target);
     $model->targetPath = $target;
 
-    $model->buildSkeleton($bdlPaths, $target );
+    $model->buildSkeleton($bdlPaths, $target);
 
-    $view->setModel($model );
+    $view->setModel($model);
 
-    $view->displayGen($params );
+    $view->displayGen($params);
 
   }//end public function service_custom */
 

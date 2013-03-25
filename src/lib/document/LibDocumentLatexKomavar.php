@@ -179,12 +179,12 @@ abstract class LibDocumentLatexKomavar
    * @param string $defVaule
    * @return null
    */
-  public function display($varName , $defVaule = null )
+  public function display($varName , $defVaule = null)
   {
 
-    if ( isset($this->{$varName} ) && !is_null($this->{$varName}) ) {
+    if (isset($this->{$varName}) && !is_null($this->{$varName})) {
       return '\\setkomavar{'.$varName.'}{'.$this->{$varName}.'}'.NL;
-    } elseif (!is_null($defVaule) ) {
+    } elseif (!is_null($defVaule)) {
       return '\\setkomavar{'.$varName.'}{'.$defVaule.'}'.NL;
     } else {
       return null;

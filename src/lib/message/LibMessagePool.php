@@ -79,10 +79,10 @@ class LibMessagePool
   /**
    * @param Base $env
    */
-  public function __construct($env = null )
+  public function __construct($env = null)
   {
 
-    if ($env )
+    if ($env)
       $this->env = $env;
     else
       $this->env = Webfrap::$env;
@@ -99,7 +99,7 @@ class LibMessagePool
   public function getDb()
   {
 
-    if (!$this->db )
+    if (!$this->db)
       $this->db = $this->env->getDb();
 
     return $this->db;
@@ -109,7 +109,7 @@ class LibMessagePool
   /**
    * @param LibDbConnection $db
    */
-  public function setDb($db )
+  public function setDb($db)
   {
     $this->db = $db;
   }//end public function setDb */
@@ -122,36 +122,36 @@ class LibMessagePool
    * @param string $error
    * @param string $stream
    */
-  public function addError($error, $stream = 'stdout' )
+  public function addError($error, $stream = 'stdout')
   {
 
-    if (!isset($this->errors[$stream] ) ) {
+    if (!isset($this->errors[$stream])) {
       $this->errors[$stream] = array();
       $this->errorDblCheck[$stream] = array();
     }
 
     if (DEBUG) {
-      if ( is_array($error) )
-        Debug::console( "ERROR: ".implode(NL, $error) );
+      if (is_array($error))
+        Debug::console("ERROR: ".implode(NL, $error));
       else
-        Debug::console( "ERROR: ".$error );
+        Debug::console("ERROR: ".$error);
     }
 
     ///TODO implement also for arrays
-    if (!is_array($error) && isset($this->errorDblCheck[$stream][$error]) ) {
-      Debug::console( "Redundant error: ".$error,null, true );
+    if (!is_array($error) && isset($this->errorDblCheck[$stream][$error])) {
+      Debug::console("Redundant error: ".$error,null, true);
 
       return;
     } else {
-      Debug::console( "GOT error: ".$error,null, true );
+      Debug::console("GOT error: ".$error,null, true);
     }
 
-    if ( is_array($error ) ) {
+    if (is_array($error)) {
 
       foreach ($error as $errorMsg) {
 
         $errorMsgKey = md5(trim($errorMsg));
-        if (!isset($this->errorDblCheck[$stream][$errorMsgKey]) ) {
+        if (!isset($this->errorDblCheck[$stream][$errorMsgKey])) {
           $this->errorDblCheck[$stream][$errorMsgKey] = true;
           $this->errors[$stream][] = $errorMsg;
         }
@@ -160,7 +160,7 @@ class LibMessagePool
     } else {
 
       $errorMsgKey = md5(trim($error));
-      if (!isset($this->errorDblCheck[$stream][$errorMsgKey]) ) {
+      if (!isset($this->errorDblCheck[$stream][$errorMsgKey])) {
         $this->errorDblCheck[$stream][$errorMsgKey] = true;
         $this->errors[$stream][] = $error;
       }
@@ -171,7 +171,7 @@ class LibMessagePool
   /**
    * @param string $stream
    */
-  public function resetErrors($stream = 'stdout' )
+  public function resetErrors($stream = 'stdout')
   {
     unset($this->errors[$stream]);
   }//end public function resetErrors */
@@ -180,7 +180,7 @@ class LibMessagePool
    * @param string $stream
    * @return boolean
    */
-  public function hasErrors($stream = 'stdout' )
+  public function hasErrors($stream = 'stdout')
   {
     return (isset($this->errors[$stream])) ?true:false;
   }//end public function resetErrors */
@@ -201,8 +201,8 @@ class LibMessagePool
   public function cleanErrors($stream = 'stdout')
   {
 
-    if ( isset($this->errors[$stream] ) )
-      unset($this->errors[$stream] );
+    if (isset($this->errors[$stream]))
+      unset($this->errors[$stream]);
 
   }//end public function cleanErrors */
 
@@ -210,13 +210,13 @@ class LibMessagePool
    * @param string $warning
    * @param string $stream
    */
-  public function addWarning($warning  , $stream = 'stdout' )
+  public function addWarning($warning  , $stream = 'stdout')
   {
-    if (!isset($this->warnings[$stream] ) )
+    if (!isset($this->warnings[$stream]))
       $this->warnings[$stream] = array();
 
-    if (is_array($warning )) {
-      $this->warnings[$stream] = array_merge($this->warnings[$stream], $warning );
+    if (is_array($warning)) {
+      $this->warnings[$stream] = array_merge($this->warnings[$stream], $warning);
     } else {
       $this->warnings[$stream][] = $warning;
     }
@@ -226,7 +226,7 @@ class LibMessagePool
   /**
    * @param string $stream
    */
-  public function resetWarnings($stream = 'stdout' )
+  public function resetWarnings($stream = 'stdout')
   {
     unset($this->warnings[$stream]);
   }//end public function resetWarnings */
@@ -235,7 +235,7 @@ class LibMessagePool
    * @param string $stream
    * @return boolean
    */
-  public function hasWarnings($stream = 'stdout' )
+  public function hasWarnings($stream = 'stdout')
   {
     return isset($this->warnings[$stream]) ?true:false;
 
@@ -255,14 +255,14 @@ class LibMessagePool
    * @param string $message
    * @param string $stream
    */
-  public function addMessage($message, $stream = 'stdout' )
+  public function addMessage($message, $stream = 'stdout')
   {
 
     if (!isset($this->messages[$stream]))
       $this->messages[$stream] = array();
 
-    if (is_array($message )) {
-      $this->messages[$stream] = array_merge($this->messages[$stream], $message );
+    if (is_array($message)) {
+      $this->messages[$stream] = array_merge($this->messages[$stream], $message);
     } else {
       $this->messages[$stream][] = $message;
     }
@@ -272,7 +272,7 @@ class LibMessagePool
   /**
    * @param string $stream
    */
-  public function resetMessages($stream = 'stdout' )
+  public function resetMessages($stream = 'stdout')
   {
 
     unset($this->messages[$stream]);
@@ -284,7 +284,7 @@ class LibMessagePool
    * @param string $stream
    * @return boolean
    */
-  public function hasMessages($stream = 'stdout' )
+  public function hasMessages($stream = 'stdout')
   {
     return isset($this->messages[$stream]) ?true:false;
 
@@ -295,7 +295,7 @@ class LibMessagePool
    * @param string $stream
    * @return array
    */
-  public function getMessages($stream = 'stdout' )
+  public function getMessages($stream = 'stdout')
   {
     return isset($this->messages[$stream]) ?$this->messages[$stream]:array();
 
@@ -311,17 +311,17 @@ class LibMessagePool
    *
    * @param State $state
    */
-  public function handleState($state )
+  public function handleState($state)
   {
 
-    if ($state->errors )
-      $this->addError($state->errors );
+    if ($state->errors)
+      $this->addError($state->errors);
 
-    if ($state->warnings )
-      $this->addWarning($state->warnings );
+    if ($state->warnings)
+      $this->addWarning($state->warnings);
 
-    if ($state->messages )
-      $this->addMessage($state->messages );
+    if ($state->messages)
+      $this->addMessage($state->messages);
 
   }//end public function handleState */
 
@@ -342,10 +342,10 @@ class LibMessagePool
     $orm = $this->getDb()->getOrm();
 
     if ($entity) {
-      if ( is_array($entity) ) {
+      if (is_array($entity)) {
         $resourceId = $orm->getResourceId($entity[0]);
         $entityId   = $entity[1];
-      } elseif ( is_string($entity) ) {
+      } elseif (is_string($entity)) {
         $resourceId = $orm->getResourceId($entity);
         $entityId   = null;
       } else {
@@ -365,7 +365,7 @@ class LibMessagePool
     $protocol->id_vid_entity  = $resourceId;
     $protocol->mask = $mask;
 
-    $orm->send($protocol );
+    $orm->send($protocol);
 
   }//end public function protocol */
 
@@ -386,7 +386,7 @@ class LibMessagePool
     $addressModel  = $this->getAddressModel();
 
     // die addresierten Channel laden
-    $channels      = $this->getMessageChannels($message );
+    $channels      = $this->getMessageChannels($message);
 
     foreach ($channels as $channel) {
       // adressen laden
@@ -402,7 +402,7 @@ class LibMessagePool
   public function getAddressModel()
   {
 
-    if (!$this->addressModel )
+    if (!$this->addressModel)
       $this->addressModel = new LibMessageAddressloader();
 
     return $this->addressModel;
@@ -417,10 +417,10 @@ class LibMessagePool
    *
    * @return array<LibMessageReceiver>
    */
-  public function getGroupUsers($groups, $type, $area = null, $entity = null, $direct = false )
+  public function getGroupUsers($groups, $type, $area = null, $entity = null, $direct = false)
   {
 
-    if (!$this->addressModel )
+    if (!$this->addressModel)
       $this->addressModel = new LibMessageAddressloader();
 
     $receiver = new LibMessage_Receiver_Group(
@@ -429,7 +429,7 @@ class LibMessagePool
       $entity
     );
 
-    return $this->addressModel->getGroupUsers($receiver, $type, $direct );
+    return $this->addressModel->getGroupUsers($receiver, $type, $direct);
 
   }//end public function getGroupUsers */
 
@@ -441,10 +441,10 @@ class LibMessagePool
    *
    * @return array<LibMessageReceiver>
    */
-  public function getDsetUsers($entity, $type, $area = null )
+  public function getDsetUsers($entity, $type, $area = null)
   {
 
-    if (!$this->addressModel )
+    if (!$this->addressModel)
       $this->addressModel = new LibMessageAddressloader();
 
     $receiver = new LibMessage_Receiver_Group(
@@ -453,7 +453,7 @@ class LibMessagePool
       $entity
     );
 
-    return $this->addressModel->getGroupUsers($receiver, $type );
+    return $this->addressModel->getGroupUsers($receiver, $type);
 
   }//end public function getDsetUsers */
 
@@ -463,7 +463,7 @@ class LibMessagePool
    *
    * @return array<LibMessageReceiver>
    */
-  public function getReceivers($receivers, $type = Message::CHANNEL_MAIL )
+  public function getReceivers($receivers, $type = Message::CHANNEL_MAIL)
   {
 
     if (!$this->addressModel)
@@ -483,7 +483,7 @@ class LibMessagePool
    *
    * @throws LibMessage_Exception wenn einer der angefragten Message Channel nicht existiert
    */
-  public function getMessageChannels($message )
+  public function getMessageChannels($message)
   {
 
     $channelObjects = array();
@@ -491,12 +491,12 @@ class LibMessagePool
     $channelKeys = $message->getChannels();
 
     foreach ($channelKeys as $key) {
-      $chan = Webfrap::newObject( "LibMessageChannel".ucfirst($key) );
+      $chan = Webfrap::newObject("LibMessageChannel".ucfirst($key));
 
       if ($chan) {
         $channelObjects[$key] = $chan;
       } else {
-        throw new LibMessage_Exception( "The requested Message Channel ".ucfirst($key).' not exists!' );
+        throw new LibMessage_Exception("The requested Message Channel ".ucfirst($key).' not exists!');
       }
 
     }

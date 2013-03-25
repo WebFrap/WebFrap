@@ -73,11 +73,11 @@ class TStack
    * @param int $size
    * @return unknown_type
    */
-  public function __construct($size )
+  public function __construct($size)
   {
 
     // if size is an array we have named stacks else simple numerized stacks
-    if ( is_array($size )) {
+    if (is_array($size)) {
       foreach ($size as $stackName) {
          $this->stacks[$stackName] = array();
       }
@@ -96,7 +96,7 @@ class TStack
   /**
    * @param string/int $position
    */
-  public function getStack($position )
+  public function getStack($position)
   {
     return $this->stacks[$position];
   }//end public function getStack */
@@ -107,7 +107,7 @@ class TStack
    * @param typeless $value
    * @return void
    */
-  public function append($position , $value )
+  public function append($position , $value)
   {
     /// TODO error handling
     $this->stacks[$position] = $value;
@@ -117,7 +117,7 @@ class TStack
   /**
    * @param string/int $position
    */
-  public function shift($position )
+  public function shift($position)
   {
     /// TODO error handling
     return array_shift($this->stacks[$position]);
@@ -126,7 +126,7 @@ class TStack
   /**
    * @param string/int $position
    */
-  public function pop($position )
+  public function pop($position)
   {
     /// TODO error handling
     return array_pop($this->stacks[$position]);
@@ -137,7 +137,7 @@ class TStack
    * @param typeless $entry
    * @return void
    */
-  public function appendSmallest($entry )
+  public function appendSmallest($entry)
   {
 
     $this->stacks[$this->pointerSmallest][] = array();
@@ -187,7 +187,7 @@ class TStack
         $this->next = $size;
       }
 
-    }//end foreach($autoLayout as $layout )
+    }//end foreach($autoLayout as $layout)
 
     // fillup the list for the smallest nodes
     foreach ($this->stacks as $stackName => $stack) {

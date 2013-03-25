@@ -32,7 +32,7 @@ function WgtConf()
 
   this.fn               = WgtConf.prototype;
 
-  //this.DEBUG = <?php echo PHP_TAG ?> if( DEBUG ) echo 'true'; else echo 'false'; ?>;
+  //this.DEBUG = <?php echo PHP_TAG ?> if (DEBUG) echo 'true'; else echo 'false'; ?>;
   this.DEBUG = {
     WCM: {
       ACTION : false,
@@ -144,5 +144,5 @@ function WgtConf()
 }
 
 window.$C = new WgtConf();
-<?php display_highlight( 'javascript' ); ?>
+<?php display_highlight('javascript'); ?>
 

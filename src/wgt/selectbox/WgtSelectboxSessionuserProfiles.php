@@ -39,7 +39,7 @@ class WgtSelectboxSessionuserProfiles extends WgtSelectboxHardcoded
     $this->data =  array();
 
     foreach ($profiles as $key => $profile) {
-      $this->data[$key] = array( 'value' => ucfirst($profile) );
+      $this->data[$key] = array('value' => ucfirst($profile));
     }
 
     $this->activ = $user->getProfileName();

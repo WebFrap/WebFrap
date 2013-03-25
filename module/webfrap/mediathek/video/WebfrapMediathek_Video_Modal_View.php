@@ -51,19 +51,19 @@ class WebfrapMediathek_Video_Modal_View extends WgtModal
   * @param TFlag $params
   * @return void
   */
-  public function displayForm($refId, $elementId, $params = null )
+  public function displayForm($refId, $elementId, $params = null)
   {
 
     // fetch the i18n text for title, status and bookmark
     $i18nText = 'Upload Files';
 
     // set the window title
-    $this->setTitle($i18nText );
+    $this->setTitle($i18nText);
 
     // set the from template
-    $this->setTemplate( 'webfrap/attachment/modal/form_upload_files' );
+    $this->setTemplate('webfrap/attachment/modal/form_upload_files');
 
-    $this->addVars( array(
+    $this->addVars(array(
       'refId' => $refId,
       'elementKey' => $elementId,
     ));
@@ -78,19 +78,19 @@ class WebfrapMediathek_Video_Modal_View extends WgtModal
   * @param string $elementId
   * @return void
   */
-  public function displayEdit($attachId, $refId, $fileNode, $elementId )
+  public function displayEdit($attachId, $refId, $fileNode, $elementId)
   {
 
     // fetch the i18n text for title, status and bookmark
     $i18nText = 'Edit File';
 
     // set the window title
-    $this->setTitle($i18nText );
+    $this->setTitle($i18nText);
 
     // set the from template
-    $this->setTemplate( 'webfrap/attachment/modal/form_edit_file' );
+    $this->setTemplate('webfrap/attachment/modal/form_edit_file');
 
-    $this->addVars( array(
+    $this->addVars(array(
       'attachmentId'   => $attachId,
       'refId'      => $refId,
       'file'       => $fileNode,

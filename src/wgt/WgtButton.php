@@ -125,7 +125,7 @@ class WgtButton
   /**
    * @return string
    */
-  public function buildMaintab( )
+  public function buildMaintab()
   {
 
     $class = $this->class
@@ -143,7 +143,7 @@ class WgtButton
   /**
    * @return string
    */
-  public function buildAction( )
+  public function buildAction()
   {
 
     $class = $this->class

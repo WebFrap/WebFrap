@@ -29,7 +29,7 @@ class MaintenanceEntity_Dataset_Access extends LibAclPermission
    * @param TFlag $params
    * @param EnterpriseCompany_Entity $entity
    */
-  public function loadDefault($params, $entity = null )
+  public function loadDefault($params, $entity = null)
   {
 
     // laden der benötigten Resource Objekte

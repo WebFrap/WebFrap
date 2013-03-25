@@ -51,15 +51,15 @@ class Item extends BaseChild
    * @param string $name
    * @param LibTemplateHtml $view
    */
-  public function __construct($name, $view )
+  public function __construct($name, $view)
   {
 
     $this->env = $view;
-    $this->setView($view );
+    $this->setView($view);
 
     $this->itemName = $name;
 
-    //$view->addItem($name, $this );
+    //$view->addItem($name, $this);
 
   }//end public function __construct */
 
@@ -70,7 +70,7 @@ class Item extends BaseChild
   /**
    * @param Model $model
    */
-  public function setModel($model )
+  public function setModel($model)
   {
     $this->model = $model;
   }//end public function setModel */
@@ -87,14 +87,14 @@ class Item extends BaseChild
   public function loadModel($modelName , $key = null)
   {
 
-    if (!$key )
+    if (!$key)
       $key = $modelName;
 
     $modelClass    = $modelName.'_Model';
 
-    if (!isset($this->models[$key]  ) ) {
-      if ( Webfrap::classLoadable($modelClass ) ) {
-        $model = new $modelClass($this );
+    if (!isset($this->models[$key]  )) {
+      if (Webfrap::classLoadable($modelClass)) {
+        $model = new $modelClass($this);
         $this->models[$key] = $model;
       } else {
         throw new WebfrapSys_Exception
@@ -129,15 +129,15 @@ class Item extends BaseChild
    * @return Ui ein UI Container
    * @throws WebfrapSys_Exception
    */
-  public function loadUi($uiName )
+  public function loadUi($uiName)
   {
 
-    $uiName       = ucfirst($uiName );
+    $uiName       = ucfirst($uiName);
     $className    = $uiName.'_Ui';
 
-    if ( Webfrap::classLoadable($className ) ) {
-      $ui = new $className($this );
-      $ui->setView($this->getView() );
+    if (Webfrap::classLoadable($className)) {
+      $ui = new $className($this);
+      $ui->setView($this->getView());
 
       return $ui;
     } else {
@@ -166,14 +166,14 @@ class Item extends BaseChild
     $className    = $type.'_Form';
     $classNameOld = 'WgtForm'.$type;
 
-    if (!WebFrap::classLoadable($className) ) {
+    if (!WebFrap::classLoadable($className)) {
       // fall back to old name convention
       $className = $classNameOld;
-      if (!WebFrap::classLoadable($className) )
+      if (!WebFrap::classLoadable($className))
         throw new LibTemplate_Exception('Requested noexisting form '.$type);
     }
 
-    $form = new $className($this->getView() );
+    $form = new $className($this->getView());
 
     return $form;
 

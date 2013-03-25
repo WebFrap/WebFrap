@@ -32,14 +32,14 @@ class ProjectMilestone_Crud_Access_Edit
    * @param TFlag $rqtContext
    * @param ProjectMilestone_Entity $entity
    */
-  public function loadDefault( $rqtContext, $entity = null )
+  public function loadDefault($rqtContext, $entity = null)
   {
 
     // laden der benötigten Resource Objekte
     $acl = $this->getAcl();
 
     $entityId = null;
-    if( is_object( $entity ) )
+    if (is_object($entity))
       $entityId = $entity->getId();
     else
       $entityId = $entity;
@@ -48,7 +48,7 @@ class ProjectMilestone_Crud_Access_Edit
     // dann befinden wir uns im root und brauchen keine pfadafrage
     // um potentielle fehler abzufangen wird auch direkt der richtige Root gesetzt
     // nicht das hier einer einen falschen pfad injected
-    if ( is_null($rqtContext->aclRoot) || 1 == $rqtContext->aclLevel ) {
+    if (is_null($rqtContext->aclRoot) || 1 == $rqtContext->aclLevel) {
       $rqtContext->isAclRoot     = true;
       $rqtContext->aclRoot       = 'mgmt-project_milestone';
       $rqtContext->aclRootId     = $entityId; // die aktive entity ist der root
@@ -89,4 +89,4 @@ class ProjectMilestone_Crud_Access_Edit
   }//end public function loadDefault */
 
 }//end class ProjectMilestone_Crud_Access_Edit
-<?php display_highlight( 'php' ); ?>
+<?php display_highlight('php'); ?>

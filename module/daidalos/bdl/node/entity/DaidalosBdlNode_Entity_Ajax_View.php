@@ -30,12 +30,12 @@ class DaidalosBdlNode_Entity_Ajax_View extends LibTemplateAjaxView
   /**
    * @param $attribute BdlNodeEntityAttribute
    */
-  public function displayInsertAttribute($attribute )
+  public function displayInsertAttribute($attribute)
   {
 
-    $checkBoxPk = WgtForm::checkbox('Pk', 'is_pk', $attribute->getPk(), array('readonly'=>'readonly'),null,true );
+    $checkBoxPk = WgtForm::checkbox('Pk', 'is_pk', $attribute->getPk(), array('readonly'=>'readonly'),null,true);
 
-    $this->setAreaContent( 'childNode', <<<XML
+    $this->setAreaContent('childNode', <<<XML
 <htmlArea selector="table#wgt-grid-entity-attributes-table>tbody" action="append" ><![CDATA[
 <tr>
   <td class="pos" >1</td>
@@ -54,7 +54,7 @@ class DaidalosBdlNode_Entity_Ajax_View extends LibTemplateAjaxView
 XML
     );
 
-    //$this->addJsCode( "\$S('#wgt-grid-entity-attributes-table').grid('');" );
+    //$this->addJsCode("\$S('#wgt-grid-entity-attributes-table').grid('');");
 
   }//end public function displayInsertAttribute */
 

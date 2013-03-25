@@ -23,50 +23,50 @@
  * ROOT Path of the Gateway
  * @var
  */
-if (!defined('PATH_GW') )
-  define( 'PATH_GW'     , './' );
+if (!defined('PATH_GW'))
+  define('PATH_GW'     , './');
 
 /**
  * ROOT Path for all Modules, Libs and Gateways
  * @var
  */
-define( 'PATH_ROOT'     , '../../' );
+define('PATH_ROOT'     , '../../');
 
 /**
  * Root Path of the WebFrap Framework
  * @var
  */
-define( 'PATH_FW'       , PATH_ROOT.'WebFrap/' );
+define('PATH_FW'       , PATH_ROOT.'WebFrap/');
 
 /**
  * Path for all files
  * @var
  */
-define( 'PATH_FILES'    , PATH_GW );
+define('PATH_FILES'    , PATH_GW);
 
 /**
  * Source Path to the style
  * @var
  */
-define( 'PATH_STYLE'    , PATH_ROOT.'WebFrap_Wgt/'  );
+define('PATH_STYLE'    , PATH_ROOT.'WebFrap_Wgt/'  );
 
 /**
  * Source Path to the style
  * @var
  */
-define( 'PATH_THEME'    , PATH_ROOT.'WebFrap_Wgt/'  );
+define('PATH_THEME'    , PATH_ROOT.'WebFrap_Wgt/'  );
 
 /**
  * Source Path to the style
  * @var
  */
-define( 'PATH_ICONS'    , PATH_ROOT.'WebFrap_Wgt/'  );
+define('PATH_ICONS'    , PATH_ROOT.'WebFrap_Wgt/'  );
 
 /**
  * Source path to the webfrap wgt
  * @var
  */
-define( 'PATH_WGT'      , PATH_ROOT.'WebFrap_Wgt/' );
+define('PATH_WGT'      , PATH_ROOT.'WebFrap_Wgt/');
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Web Pfade
@@ -77,45 +77,45 @@ define( 'PATH_WGT'      , PATH_ROOT.'WebFrap_Wgt/' );
  * Constant
  * @var
  */
-define( 'WEB_ROOT'      , PATH_ROOT );
+define('WEB_ROOT'      , PATH_ROOT);
 
 /**
  * Root for The WebBrowser, all static files should be placed relativ to this
  * Constant
  * @var
  */
-define( 'WEB_GW'        , PATH_GW );
+define('WEB_GW'        , PATH_GW);
 
 /**
  * Root for The WebBrowser, all static files should be placed relativ to this
  * Constant
  * @var
  */
-define( 'WEB_FILES'     , WEB_GW );
+define('WEB_FILES'     , WEB_GW);
 
 /**
  * Root from the activ Style Project
  * @var
  */
-define( 'WEB_STYLE'     , WEB_ROOT.'WebFrap_Wgt/' );
+define('WEB_STYLE'     , WEB_ROOT.'WebFrap_Wgt/');
 
 /**
  * Root from the activ Style Project
  * @var
  */
-define( 'WEB_THEME'     , WEB_ROOT.'WebFrap_Wgt/' );
+define('WEB_THEME'     , WEB_ROOT.'WebFrap_Wgt/');
 
 /**
  * Root from the activ Style Project
  * @var
  */
-define( 'WEB_ICONS'     , WEB_ROOT.'WebFrap_Wgt/' );
+define('WEB_ICONS'     , WEB_ROOT.'WebFrap_Wgt/');
 
 /**
  * ROOT path for the WebFrap Famework
  * @var
  */
-define( 'WEB_WGT'       , WEB_ROOT.'WebFrap_Wgt/' );
+define('WEB_WGT'       , WEB_ROOT.'WebFrap_Wgt/');
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Wbf Config
@@ -125,43 +125,43 @@ define( 'WEB_WGT'       , WEB_ROOT.'WebFrap_Wgt/' );
  * Which Systemcontroller Should be used
  * @var string
  */
-define( 'WBF_CONTROLLER' , 'Cli' );
+define('WBF_CONTROLLER' , 'Cli');
 
 /**
  * Enter description here ...
  * @var string
  */
-define( 'WBF_REQUEST_ADAPTER', 'Cli' );
+define('WBF_REQUEST_ADAPTER', 'Cli');
 
 /**
  * Enter description here ...
  * @var string
  */
-define( 'WBF_RESPONSE_ADAPTER', 'Cli' );
+define('WBF_RESPONSE_ADAPTER', 'Cli');
 
 /**
  * @var string
  */
-define( 'WBF_MESSAGE_ADAPTER', 'Cli' );
+define('WBF_MESSAGE_ADAPTER', 'Cli');
 
 /**
  * Which Systemcontroller Should be used
  * @var
  */
-define( 'WBF_ACL_ADAPTER' , 'Db' );
+define('WBF_ACL_ADAPTER' , 'Db');
 
 /**
  * The Name of the Masterkey for Database entries
  * @var string
  */
-define( 'WBF_DB_KEY' , 'rowid' );
+define('WBF_DB_KEY' , 'rowid');
 
 /**
  *
  * Enter description here ...
  * @var string
  */
-define( 'CONF_KEY' , 'cli' );
+define('CONF_KEY' , 'cli');
 
 /*//////////////////////////////////////////////////////////////////////////////
 // constants
@@ -170,22 +170,22 @@ define( 'CONF_KEY' , 'cli' );
 /**
  * @var
  */
-define( 'NL' , "\n" );
+define('NL' , "\n");
 
 /**
  * @var
  */
-define( 'TEMP_SEP' , "~#&~" );
+define('TEMP_SEP' , "~#&~");
 
 /**
  * @var
  */
-define( 'P_S' , PATH_SEPARATOR );
+define('P_S' , PATH_SEPARATOR);
 
 /**
  * @var
  */
-define( 'D_S' , '/' );
+define('D_S' , '/');
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Debug Constantes
@@ -194,26 +194,26 @@ define( 'D_S' , '/' );
 /**
  * @var boolean
  */
-define( 'DEBUG' ,           FALSE  );
+define('DEBUG' ,           TRUE  );
 
 /**
  * @var boolean
  */
-define( 'DEBUG_CONSOLE' ,   FALSE  );
+define('DEBUG_CONSOLE' ,   TRUE  );
 
 /**
  * @var boolean
  */
-define( 'BUFFER_OUTPUT' ,   false  );
+define('BUFFER_OUTPUT' ,   false  );
 
 /**
  * @var boolean
  */
-define( 'WBF_NO_LOGIN' , true );
+define('WBF_NO_LOGIN' , true);
 
 /**
  *
  * @var boolean
  */
-define( 'WBF_NO_ACL' , true );
+define('WBF_NO_ACL' , true);
 

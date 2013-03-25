@@ -31,6 +31,13 @@ class WgtFormBuilder
    * @var string $keyName
    */
   public $id   = null;
+  
+
+  /**
+   * Data Key
+   * @var string $dKey
+   */
+  public $dKey   = null;
 
   /**
    * Die Action des Formulars
@@ -77,10 +84,9 @@ class WgtFormBuilder
    * Liste der I18n Languages
    * @var array
    */
-  public $i18nLanguages = array
-  (
-    array( 'id' => 'de', 'value' => 'german' ),
-    array( 'id' => 'en', 'value' => 'english'  )
+  public $i18nLanguages = array(
+    array('id' => 'de', 'value' => 'german'),
+    array('id' => 'en', 'value' => 'english'  )
   );
 
   /**
@@ -93,16 +99,19 @@ class WgtFormBuilder
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
+   * @param string $view
    * @param string $action
-   * @param string $id
+   * @param string $domainKey
    * @param string $method
+   * @param boolean $cout
    */
-  public function __construct($view, $action, $domainKey, $method = 'post', $cout = true )
+  public function __construct($view, $action, $domainKey, $method = 'post', $cout = true)
   {
 
     $this->view   = $view;
     $this->action = $action;
     $this->id       = 'wgt-form-'.$domainKey;
+    $this->dKey     = 'asgd-wgt-form-'.$domainKey;
     $this->domainKey = $domainKey;
     $this->method    = $method;
     $this->cout     = $cout;
@@ -123,10 +132,10 @@ class WgtFormBuilder
   /**
    * @param string $code
    */
-  public function out($code )
+  public function out($code)
   {
 
-    if ($this->cout )
+    if ($this->cout)
       echo $code;
 
     return $code;
@@ -137,13 +146,13 @@ class WgtFormBuilder
    * @param string $key
    * @return LibSqlQuery
    */
-  public function loadQuery($key )
+  public function loadQuery($key)
   {
 
-    if (!$this->db )
+    if (!$this->db)
       $this->db = Webfrap::$env->getDb();
 
-    return $this->db->newQuery($key );
+    return $this->db->newQuery($key);
 
   }//end public function loadQuery */
 
@@ -152,28 +161,29 @@ class WgtFormBuilder
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   *
+   * @return string
    */
-  public function form(  )
+  public function form()
   {
 
     $code = <<<CODE
 <form method="{$this->method}" action="{$this->action}" id="{$this->id}" accept-charset="utf-8" >
 CODE;
 
-    if ($this->ajax )
+    if ($this->ajax)
       $code .= '</form>';
 
-    return $this->out($code );
+    return $this->out($code);
 
   }//end public static function form */
 
   /**
    * @return string
    */
-  public function close(  )
+  public function close()
   {
-    return $this->out( '</form>' );
+    
+    return $this->out('</form>');
 
   }//end public static function close */
 
@@ -200,19 +210,18 @@ CODE;
     $value = null,
     $attributes = array(),
     $params = null
-  )
-  {
+  ) {
 
-    $pNode = $this->prepareParams($params );
+    $pNode = $this->prepareParams($params);
 
-    if ( isset($attributes['id']) ) {
+    if (isset($attributes['id'])) {
       $id      = $attributes['id'];
       $inpName = $name;
     } else {
 
       $tmp = explode(',', $name);
 
-      if (count($tmp) > 1 ) {
+      if (count($tmp) > 1) {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
       } else {
@@ -225,23 +234,23 @@ CODE;
 
     $attributes['type']   = 'text';
 
-    if (!isset($attributes['class']) )
+    if (!isset($attributes['class']))
       $attributes['class']  = $pNode->size;
 
-    if ($this->id )
+    if ($this->id)
       $attributes['class']  .= ' asgd-'.$this->id;
 
-    if (!isset($attributes['name']) )
+    if (!isset($attributes['name']))
       $attributes['name']   = $inpName;
 
     $attributes['value']  = str_replace('"', '\"', $value);
 
-    $codeAttr = Wgt::asmAttributes($attributes );
+    $codeAttr = Wgt::asmAttributes($attributes);
 
     $helpIcon = '';
     $helpText = '';
     if ($pNode->helpText) {
-       $helpIcon = '<span onclick="$S(\'#wgt-input-help-'.$id.'\').modal();" >'.Wgt::icon( 'control/help.png', 'xsmall' ).'</span> ';
+       $helpIcon = '<span onclick="$S(\'#wgt-input-help-'.$id.'\').modal();" >'.Wgt::icon('control/help.png', 'xsmall').'</span> ';
        $helpText = '<div id="wgt-input-help-'.$id.'" class="template" >'.$pNode->helpText.'</div>';
     }
 
@@ -267,7 +276,7 @@ CODE;
 CODE;
     }
 
-    return $this->out($html );
+    return $this->out($html);
 
   }//end public function input */
 
@@ -289,16 +298,16 @@ CODE;
   )
   {
 
-    $pNode = $this->prepareParams($params );
+    $pNode = $this->prepareParams($params);
 
-    if ( isset($attributes['id']) ) {
+    if (isset($attributes['id'])) {
       $id      = $attributes['id'];
       $inpName = $name;
     } else {
 
       $tmp = explode(',', $name);
 
-      if (count($tmp) > 1 ) {
+      if (count($tmp) > 1) {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
       } else {
@@ -311,30 +320,30 @@ CODE;
 
     $attributes['type']   = 'text';
 
-    if (!isset($attributes['class']) )
+    if (!isset($attributes['class']))
       $attributes['class'] = 'wcm wcm_ui_'.$type;
 
     $attributes['class']  .= ' '.$pNode->size;
 
-    if ($this->id )
+    if ($this->id)
       $attributes['class']  .= ' asgd-'.$this->id;
 
-    if (!isset($attributes['name']) )
+    if (!isset($attributes['name']))
       $attributes['name']   = $inpName;
 
     $attributes['value']  = str_replace('"', '\"', $value);
 
-    $codeAttr = Wgt::asmAttributes($attributes );
+    $codeAttr = Wgt::asmAttributes($attributes);
 
     $helpIcon = '';
     $helpText = '';
     if ($pNode->helpText) {
-       $helpIcon = '<span onclick="$S(\'#wgt-input-help-'.$id.'\').modal();" >'.$this->view->icon( 'control/help.png', 'Help' ).'</span> ';
+       $helpIcon = '<span onclick="$S(\'#wgt-input-help-'.$id.'\').modal();" >'.$this->view->icon('control/help.png', 'Help').'</span> ';
        $helpText = '<div id="wgt-input-help-'.$id.'" class="template" >'.$pNode->helpText.'</div>';
     }
 
     $appendButton = '';
-    if ( isset($params['button'] ) ) {
+    if (isset($params['button'])) {
 
       $appendButton = <<<BUTTON
 
@@ -343,7 +352,7 @@ CODE;
     id="wgt-input-{$id}-ap-button"
     class="wgt-button append"
     tabindex="-1"  >
-      {$this->view->icon($params['button'], $label )}
+      {$this->view->icon($params['button'], $label)}
   </button>
 
 BUTTON;
@@ -391,16 +400,16 @@ CODE;
   )
   {
 
-    $pNode = $this->prepareParams($params );
+    $pNode = $this->prepareParams($params);
 
-    if ( isset($attributes['id']) ) {
+    if (isset($attributes['id'])) {
       $id      = $attributes['id'];
       $inpName = $name;
     } else {
 
       $tmp = explode(',', $name);
 
-      if (count($tmp) > 1 ) {
+      if (count($tmp) > 1) {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
       } else {
@@ -413,15 +422,15 @@ CODE;
 
     $attributes['type'] = 'hidden';
 
-    if ($this->id )
+    if ($this->id)
       $attributes['class'] = ' asgd-'.$this->id;
 
-    if (!isset($attributes['name']) )
+    if (!isset($attributes['name']))
       $attributes['name'] = $inpName;
 
     $attributes['value'] = str_replace('"', '\"', $value);
 
-    $codeAttr = Wgt::asmAttributes($attributes );
+    $codeAttr = Wgt::asmAttributes($attributes);
 
     $html = <<<CODE
 
@@ -429,7 +438,7 @@ CODE;
 
 CODE;
 
-    return $this->out($html );
+    return $this->out($html);
 
   }//end public function hidden */
 
@@ -452,16 +461,16 @@ CODE;
   )
   {
 
-    $pNode = $this->prepareParams($params );
+    $pNode = $this->prepareParams($params);
 
-    if ( isset($attributes['id']) ) {
+    if (isset($attributes['id'])) {
       $id      = $attributes['id'];
       $inpName = $name;
     } else {
 
       $tmp = explode(',', $name);
 
-      if (count($tmp) > 1 ) {
+      if (count($tmp) > 1) {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
       } else {
@@ -479,30 +488,30 @@ CODE;
     $helpIcon = '';
     $helpText = '';
     if ($pNode->helpText) {
-      $helpIcon = '<span onclick="$S(\'#wgt-input-help-'.$id.'\').modal();" >'.Wgt::icon( 'control/help.png', 'xsmall' ).'</span> ';
+      $helpIcon = '<span onclick="$S(\'#wgt-input-help-'.$id.'\').modal();" >'.Wgt::icon('control/help.png', 'xsmall').'</span> ';
       $helpText = '<div id="wgt-input-help-'.$id.'" class="template" >'.$pNode->helpText.'</div>';
     }
 
     if ($pNode->entityMode) {
 
-      if (!isset($attributes['class']) )
+      if (!isset($attributes['class']))
         $class  = 'wcm wcm_ui_autocomplete wgt-ignore '.$pNode->size;
       else
         $class  = 'wcm wcm_ui_autocomplete wgt-ignore '.$pNode->size.' '.$attributes['class'];
 
-      if ($this->id )
+      if ($this->id)
         $attributes['class']  = 'asgd-'.$this->id;
       else
         $attributes['class'] = '';
 
-      if (!isset($attributes['name']) )
+      if (!isset($attributes['name']))
         $attributes['name']   = $inpName;
 
       //$attributes['value']  = str_replace('"', '\"', $value);
 
       $attributes['type'] = 'hidden';
 
-      $hidenAttr = Wgt::asmAttributes($attributes );
+      $hidenAttr = Wgt::asmAttributes($attributes);
 
 
       $attributes['class']  = $class;
@@ -510,7 +519,7 @@ CODE;
       $attributes['id']     =  $attributes['id'].'-tostring';
       $attributes['name']   =  'tostring-'.$attributes['name'];
 
-      $stringAttributes = Wgt::asmAttributes($attributes );
+      $stringAttributes = Wgt::asmAttributes($attributes);
 
 
 
@@ -532,20 +541,20 @@ CODE;
 
       $attributes['type']   = 'text';
 
-      if (!isset($attributes['class']) )
+      if (!isset($attributes['class']))
         $attributes['class']  = 'wcm wcm_ui_autocomplete '.$pNode->size;
       else
         $attributes['class']  = 'wcm wcm_ui_autocomplete '.$pNode->size.' '.$attributes['class'];
 
-      if ($this->id )
+      if ($this->id)
         $attributes['class']  .= ' asgd-'.$this->id;
 
-      if (!isset($attributes['name']) )
+      if (!isset($attributes['name']))
         $attributes['name']   = $inpName;
 
       $attributes['value']  = str_replace('"', '\"', $value);
 
-      $codeAttr = Wgt::asmAttributes($attributes );
+      $codeAttr = Wgt::asmAttributes($attributes);
 
       $html = <<<CODE
 
@@ -561,7 +570,7 @@ CODE;
 CODE;
     }
 
-    return $this->out($html );
+    return $this->out($html);
 
   }//end public function autocomplete */
 
@@ -583,7 +592,7 @@ CODE;
   )
   {
 
-    $pNode = $this->prepareParams($params );
+    $pNode = $this->prepareParams($params);
 
     $html = <<<CODE
 
@@ -598,7 +607,7 @@ CODE;
 
 CODE;
 
-    return $this->out($html );
+    return $this->out($html);
 
   }//end public function decorateInput */
 
@@ -620,16 +629,16 @@ CODE;
   )
   {
 
-    $pNode = $this->prepareParams($params );
+    $pNode = $this->prepareParams($params);
 
-    if ( isset($attributes['id']) ) {
+    if (isset($attributes['id'])) {
       $id      = $attributes['id'];
       $inpName = $name;
     } else {
 
       $tmp = explode(',', $name);
 
-      if (count($tmp) > 1 ) {
+      if (count($tmp) > 1) {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
       } else {
@@ -642,18 +651,18 @@ CODE;
 
     $attributes['class']  = 'wcm wcm_ui_wysiwyg '.$pNode->size;
 
-    if ($this->id )
+    if ($this->id)
       $attributes['class']  .= ' asgd-'.$this->id;
 
-    if (!isset($attributes['name']) )
+    if (!isset($attributes['name']))
       $attributes['name']   = $inpName;
 
-    $codeAttr = Wgt::asmAttributes($attributes );
+    $codeAttr = Wgt::asmAttributes($attributes);
 
     $helpIcon = '';
     $helpText = '';
     if ($pNode->helpText) {
-       $helpIcon = '<span onclick="$S(\'#wgt-input-help-'.$id.'\').modal();" >'.Wgt::icon( 'control/help.png', 'xsmall' ).'</span> ';
+       $helpIcon = '<span onclick="$S(\'#wgt-input-help-'.$id.'\').modal();" >'.Wgt::icon('control/help.png', 'xsmall').'</span> ';
        $helpText = '<div id="wgt-input-help-'.$id.'" class="template" >'.$pNode->helpText.'</div>';
     }
 
@@ -664,7 +673,7 @@ CODE;
 
 CODE;
 
-      return $this->out($html );
+      return $this->out($html);
     }
 
     $html = <<<CODE
@@ -682,7 +691,7 @@ CODE;
 CODE;
 
   //<var id="{$id}-cfg-wysiwyg" >{"mode":"{$mode}"}</var>"
-    return $this->out($html );
+    return $this->out($html);
 
   }//end public function wysiwyg */
 
@@ -704,16 +713,16 @@ CODE;
   )
   {
 
-    $pNode = $this->prepareParams($params );
+    $pNode = $this->prepareParams($params);
 
-    if ( isset($attributes['id']) ) {
+    if (isset($attributes['id'])) {
       $id      = $attributes['id'];
       $inpName = $name;
     } else {
 
       $tmp = explode(',', $name);
 
-      if (count($tmp) > 1 ) {
+      if (count($tmp) > 1) {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
       } else {
@@ -726,18 +735,18 @@ CODE;
 
     $attributes['class']  = ''.$pNode->size;
 
-    if ($this->id )
+    if ($this->id)
       $attributes['class']  .= ' asgd-'.$this->id;
 
-    if (!isset($attributes['name']) )
+    if (!isset($attributes['name']))
       $attributes['name']   = $inpName;
 
-    $codeAttr = Wgt::asmAttributes($attributes );
+    $codeAttr = Wgt::asmAttributes($attributes);
 
     $helpIcon = '';
     $helpText = '';
     if ($pNode->helpText) {
-       $helpIcon = '<span onclick="$S(\'#wgt-input-help-'.$id.'\').modal();" >'.Wgt::icon( 'control/help.png', 'xsmall' ).'</span> ';
+       $helpIcon = '<span onclick="$S(\'#wgt-input-help-'.$id.'\').modal();" >'.Wgt::icon('control/help.png', 'xsmall').'</span> ';
        $helpText = '<div id="wgt-input-help-'.$id.'" class="template" >'.$pNode->helpText.'</div>';
     }
 
@@ -763,7 +772,7 @@ CODE;
 CODE;
 
   //<var id="{$id}-cfg-wysiwyg" >{"mode":"{$mode}"}</var>"
-    return $this->out($html );
+    return $this->out($html);
 
   }//end public function textarea */
 
@@ -784,16 +793,16 @@ CODE;
   )
   {
 
-    $pNode = $this->prepareParams($params );
+    $pNode = $this->prepareParams($params);
 
-    if ( isset($attributes['id']) ) {
+    if (isset($attributes['id'])) {
       $id      = $attributes['id'];
       $inpName = $name;
     } else {
 
       $tmp = explode(',', $name);
 
-      if (count($tmp) > 1 ) {
+      if (count($tmp) > 1) {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
       } else {
@@ -806,24 +815,24 @@ CODE;
 
     $attributes['type']     = 'file';
 
-    if (!isset($attributes['class']) )
+    if (!isset($attributes['class']))
       $attributes['class'] = $pNode->size;
 
     $attributes['class']    .= ' wgt-behind';
 
-    if ($this->id )
+    if ($this->id)
       $attributes['class']  .= ' asgd-'.$this->id;
 
     $attributes['name']   = $inpName;
 
     $attributes['onchange']   = "\$S('input#wgt-input-{$id}-display').val(\$S(this).val());\$S(this).attr('title',\$S(this).val());";
 
-    $codeAttr = Wgt::asmAttributes($attributes );
+    $codeAttr = Wgt::asmAttributes($attributes);
 
 
     $value  = str_replace('"', '\"', $value);
 
-    $icon = Wgt::icon( 'control/upload_image.png', 'xsmall', array('alt'=>"Upload Image") );
+    $icon = Wgt::icon('control/upload_image.png', 'xsmall', array('alt'=>"Upload Image"));
 
     if ($pNode->clean) {
       return <<<CODE
@@ -868,7 +877,7 @@ CODE;
 
 CODE;
 
-    return $this->out($html );
+    return $this->out($html);
 
   }//end public function upload */
 
@@ -889,16 +898,16 @@ CODE;
   )
   {
 
-    $pNode = $this->prepareParams($params );
+    $pNode = $this->prepareParams($params);
 
-    if ( isset($attributes['id']) ) {
+    if (isset($attributes['id'])) {
       $id      = $attributes['id'];
       $inpName = $name;
     } else {
 
       $tmp = explode(',', $name);
 
-      if (count($tmp) > 1 ) {
+      if (count($tmp) > 1) {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
       } else {
@@ -911,21 +920,21 @@ CODE;
 
     $attributes['type']   = 'checkbox';
 
-    if ($checked && !( 'false' === $checked || 'f' === $checked ) )
+    if ($checked && !('false' === $checked || 'f' === $checked))
       $attributes['checked']  = 'checked';
 
-    if (!isset($attributes['class']) )
+    if (!isset($attributes['class']))
       $attributes['class'] = '';
 
-    if ($this->id )
+    if ($this->id)
       $attributes['class']  .= ' asgd-'.$this->id;
 
-    if (!isset($attributes['name'] ) )
+    if (!isset($attributes['name']))
       $attributes['name']   = $inpName;
 
-    $codeAttr = Wgt::asmAttributes($attributes );
+    $codeAttr = Wgt::asmAttributes($attributes);
 
-    if ($pNode->plain )
+    if ($pNode->plain)
       return "<input {$codeAttr} />";
 
     $html = <<<CODE
@@ -939,7 +948,7 @@ CODE;
 
 CODE;
 
-    return $this->out($html );
+    return $this->out($html);
 
   }//end public function checkbox */
 
@@ -963,7 +972,7 @@ CODE;
   )
   {
 
-    $pNode = $this->prepareParams($params );
+    $pNode = $this->prepareParams($params);
 
     if (!$data) {
       $data = array
@@ -981,17 +990,17 @@ CODE;
       );
     }
 
-    if (!$pNode->starParts )
+    if (!$pNode->starParts)
       $pNode->starParts = 2;
 
-    if ( isset($attributes['id']) ) {
+    if (isset($attributes['id'])) {
       $id      = $attributes['id'];
       $inpName = $name;
     } else {
 
       $tmp = explode(',', $name);
 
-      if (count($tmp) > 1 ) {
+      if (count($tmp) > 1) {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
       } else {
@@ -1004,18 +1013,18 @@ CODE;
 
     $attributes['type']   = 'checkbox';
 
-    if (!isset($attributes['name'] ) )
+    if (!isset($attributes['name']))
       $attributes['name']   = $inpName;
 
-    if (!isset($attributes['class'] ) )
+    if (!isset($attributes['class']))
       $attributes['class']   = '';
 
-    $codeAttr = Wgt::asmAttributes($attributes );
+    $codeAttr = Wgt::asmAttributes($attributes);
 
     $helpIcon = '';
     $helpText = '';
     if ($pNode->helpText) {
-       $helpIcon = '<span onclick="$S(\'#wgt-input-help-'.$id.'\').modal();" >'.Wgt::icon( 'control/help.png', 'xsmall' ).'</span> ';
+       $helpIcon = '<span onclick="$S(\'#wgt-input-help-'.$id.'\').modal();" >'.Wgt::icon('control/help.png', 'xsmall').'</span> ';
        $helpText = '<div id="wgt-input-help-'.$id.'" class="template" >'.$pNode->helpText.'</div>';
     }
 
@@ -1031,7 +1040,7 @@ HTML;
 
     $splitClass = '';
     $splitKey   = 'false';
-    if ( 1 < (int) $pNode->starParts ) {
+    if (1 < (int) $pNode->starParts) {
       $splitClass = "{split:{$pNode->starParts}}";
       $splitKey = "true";
     }
@@ -1064,7 +1073,7 @@ HTML;
 
 HTML;
 
-    return $this->out($html );
+    return $this->out($html);
 
   }//end public function ratingbar */
 
@@ -1089,21 +1098,21 @@ HTML;
   {
 
 
-    $pNode = $this->prepareParams($params );
+    $pNode = $this->prepareParams($params);
 
-    if ( is_string($attributes) ) {
+    if (is_string($attributes)) {
       $size = $attributes;
       $attributes = array();
     }
 
 
-    if ( isset($attributes['id']) ) {
+    if (isset($attributes['id'])) {
       $id      = $attributes['id'];
       $inpName = $name;
 
-      $tmp = explode( '[', $inpName, 2 );
+      $tmp = explode('[', $inpName, 2);
 
-      if ( 1 == count($tmp) )
+      if (1 == count($tmp))
         $inpNameCheck = $inpName.'_check';
       else
         $inpNameCheck = $tmp[0].'_check['.$tmp[1];
@@ -1112,7 +1121,7 @@ HTML;
 
       $tmp = explode(',', $name);
 
-      if (count($tmp) > 1 ) {
+      if (count($tmp) > 1) {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
         $inpNameCheck = $tmp[0]."-check[{$tmp[1]}]";
@@ -1120,9 +1129,9 @@ HTML;
         $id      = $tmp[0];
         $inpName = $tmp[0];
 
-        $tmp2 = explode( '[', $inpName, 2 );
+        $tmp2 = explode('[', $inpName, 2);
 
-        if ( 1 == count($tmp2) )
+        if (1 == count($tmp2))
           $inpNameCheck = $inpName.'_check';
         else
           $inpNameCheck = $tmp2[0].'_check['.$tmp2[1];
@@ -1133,29 +1142,29 @@ HTML;
 
     $attributes['type']   = 'password';
 
-    if (!isset($attributes['class']) )
+    if (!isset($attributes['class']))
       $attributes['class']  = $size;
 
-    if ($this->id )
+    if ($this->id)
       $attributes['class']  .= ' asgd-'.$this->id;
 
-    if (!isset($attributes['name']) )
+    if (!isset($attributes['name']))
       $attributes['name']   = $inpName;
 
     $attrCheck       = $attributes;
     $attrCheck['id'] = $attributes['id'].'-check';
     $attrCheck['name'] = $inpNameCheck;
 
-    $codeAttrCheck = Wgt::asmAttributes($attrCheck );
+    $codeAttrCheck = Wgt::asmAttributes($attrCheck);
 
     $attributes['value']  = str_replace('"', '\"', $value);
 
-    $codeAttr = Wgt::asmAttributes($attributes );
+    $codeAttr = Wgt::asmAttributes($attributes);
 
     $helpIcon = '';
     $helpText = '';
-    if ( is_array($label )) {
-       $helpIcon = '<span onclick="$S(\'#wgt-input-help-'.$id.'\').modal();" >'.Wgt::icon( 'control/help.png', 'xsmall' ).'</span> ';
+    if (is_array($label)) {
+       $helpIcon = '<span onclick="$S(\'#wgt-input-help-'.$id.'\').modal();" >'.Wgt::icon('control/help.png', 'xsmall').'</span> ';
        $helpText = '<div id="wgt-input-help-'.$id.'" class="template" >'.$label[1].'</div>';
        $label = $label[0];
     }
@@ -1210,16 +1219,16 @@ CODE;
   )
   {
 
-    $pNode = $this->prepareParams($params );
+    $pNode = $this->prepareParams($params);
 
-    if ( isset($attributes['id']) ) {
+    if (isset($attributes['id'])) {
       $id      = $attributes['id'];
       $inpName = $name;
     } else {
 
       $tmp = explode(',', $name);
 
-      if (count($tmp) > 1 ) {
+      if (count($tmp) > 1) {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
       } else {
@@ -1232,23 +1241,23 @@ CODE;
 
     $attributes['type']   = 'text';
 
-    if (!isset($attributes['class']) )
+    if (!isset($attributes['class']))
       $attributes['class']  = $pNode->size;
 
-    if ($this->id )
+    if ($this->id)
       $attributes['class']  .= ' asgd-'.$this->id;
 
-    if (!isset($attributes['name']) )
+    if (!isset($attributes['name']))
       $attributes['name']   = $inpName;
 
     $attributes['value']  = str_replace('"', '\"', $value);
 
-    $codeAttr = Wgt::asmAttributes($attributes );
+    $codeAttr = Wgt::asmAttributes($attributes);
 
     $helpIcon = '';
     $helpText = '';
     if ($pNode->helpText) {
-      $helpIcon = '<span onclick="$S(\'#wgt-input-help-'.$id.'\').modal();" >'.Wgt::icon( 'control/help.png', 'xsmall' ).'</span> ';
+      $helpIcon = '<span onclick="$S(\'#wgt-input-help-'.$id.'\').modal();" >'.Wgt::icon('control/help.png', 'xsmall').'</span> ';
       $helpText = '<div id="wgt-input-help-'.$id.'" class="template" >'.$pNode->helpText.'</div>';
     }
 
@@ -1292,16 +1301,16 @@ CODE;
   )
   {
 
-    $pNode = $this->prepareParams($params );
+    $pNode = $this->prepareParams($params);
 
-    if ( isset($attributes['id']) ) {
+    if (isset($attributes['id'])) {
       $id      = $attributes['id'];
       $inpName = $name;
     } else {
 
       $tmp = explode(',', $name);
 
-      if (count($tmp) > 1 ) {
+      if (count($tmp) > 1) {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
       } else {
@@ -1312,7 +1321,7 @@ CODE;
       $attributes['id']     = "wgt-input-{$id}";
     }
 
-    if (!Webfrap::classLoadable($elementKey) )
+    if (!Webfrap::classLoadable($elementKey))
       return '<!-- Missing '.$elementKey.' -->';
 
     $selectBoxNode = new $elementKey();
@@ -1326,24 +1335,24 @@ CODE;
         'class'     => 'asgd-'.$this->id,
       )
     );
-    $selectBoxNode->setWidth( 'medium' );
+    $selectBoxNode->setWidth('medium');
 
     $selectBoxNode->assignedForm = $this->id;
 
-    $selectBoxNode->setActive($value );
+    $selectBoxNode->setActive($value);
 
-    $selectBoxNode->setReadonly($pNode->readonly );
-    $selectBoxNode->setRequired($pNode->required );
+    $selectBoxNode->setReadonly($pNode->readonly);
+    $selectBoxNode->setRequired($pNode->required);
 
-    $selectBoxNode->setData($data );
+    $selectBoxNode->setData($data);
 
-    $selectBoxNode->setLabel($label );
+    $selectBoxNode->setLabel($label);
 
     // set an empty first entry
-    if (!is_null($pNode->firstFree) )
-      $selectBoxNode->setFirstFree($pNode->firstFree );
+    if (!is_null($pNode->firstFree))
+      $selectBoxNode->setFirstFree($pNode->firstFree);
 
-    return $this->out($selectBoxNode->build() );
+    return $this->out($selectBoxNode->build());
 
   }//end public function selectboxByKey */
 
@@ -1368,19 +1377,19 @@ CODE;
   )
   {
 
-    $pNode = $this->prepareParams($params );
+    $pNode = $this->prepareParams($params);
 
-    if (!$pNode->exists('firstFree') )
+    if (!$pNode->exists('firstFree'))
       $pNode->firstFree = ' ';
 
-    if ( isset($attributes['id']) ) {
+    if (isset($attributes['id'])) {
       $id      = $attributes['id'];
       $inpName = $name;
     } else {
 
       $tmp = explode(',', $name);
 
-      if (count($tmp) > 1 ) {
+      if (count($tmp) > 1) {
         $id      = $tmp[0]."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
       } else {
@@ -1391,7 +1400,7 @@ CODE;
       $attributes['id']     = "wgt-input-{$id}";
     }
 
-    if (!Webfrap::classLoadable($elementKey) )
+    if (!Webfrap::classLoadable($elementKey))
       return '<!-- Missing '.$elementKey.' -->';
 
     $selectBoxNode = new $elementKey();
@@ -1405,22 +1414,22 @@ CODE;
         'class'     => 'asgd-'.$this->id,
       )
     );
-    $selectBoxNode->setWidth( 'small' );
+    $selectBoxNode->setWidth('small');
 
     $selectBoxNode->assignedForm = $this->id;
 
-    $selectBoxNode->setActive($value );
+    $selectBoxNode->setActive($value);
 
-    //$selectBoxNode->setReadonly($readOnly );
-    //$selectBoxNode->setRequired($required );
+    //$selectBoxNode->setReadonly($readOnly);
+    //$selectBoxNode->setRequired($required);
 
-    $selectBoxNode->setData($data );
-    $selectBoxNode->setLabel($label );
+    $selectBoxNode->setData($data);
+    $selectBoxNode->setLabel($label);
 
     // set an empty first entry
-    //if (!is_null($firstFree) )
-      //$selectBoxNode->setFirstFree($firstFree );
-    return $this->out($selectBoxNode->build() );
+    //if (!is_null($firstFree))
+      //$selectBoxNode->setFirstFree($firstFree);
+    return $this->out($selectBoxNode->build());
 
   }//end public function multiSelectByKey */
 
@@ -1434,11 +1443,11 @@ CODE;
    * @param string $nodeKey
    * @param array $labels
    */
-  public function i18nLabel($label, $nodeKey, $labels )
+  public function i18nLabel($label, $nodeKey, $labels)
   {
 
-    $iconAdd = $this->icon( 'control/add.png', 'Add' );
-    $iconDel = $this->icon( 'control/delete.png', 'Delete' );
+    $iconAdd = $this->icon('control/add.png', 'Add');
+    $iconDel = $this->icon('control/delete.png', 'Delete');
 
     $addInput = WgtForm::input
     (
@@ -1473,7 +1482,7 @@ HTML
     foreach ($labels as $lang => $label) {
       $listLabels .= '<li class="lang-'.$lang.'" >'. WgtForm::input
       (
-        'Lang '.Wgt::icon( 'flags/'.$lang.'.png', 'xsmall', array(), '' ),
+        'Lang '.Wgt::icon('flags/'.$lang.'.png', 'xsmall', array(), ''),
         $idPrefix.'-label-'.$lang,
         $label, array
         (
@@ -1526,11 +1535,11 @@ CODE;
    * @param string $nodeKey
    * @param array $labels
    */
-  public function i18nText($label, $nodeKey, $texts )
+  public function i18nText($label, $nodeKey, $texts)
   {
 
-    $iconAdd = $this->icon( 'control/add.png', 'Add' );
-    $iconDel = $this->icon( 'control/delete.png', 'Delete' );
+    $iconAdd = $this->icon('control/add.png', 'Add');
+    $iconDel = $this->icon('control/delete.png', 'Delete');
 
     $i18nTexts = '';
 
@@ -1624,7 +1633,7 @@ CODE;
   public function i18nSelectSrc()
   {
 
-    $langCode = array( '{"i":"0","v":"Select a language"}' );
+    $langCode = array('{"i":"0","v":"Select a language"}');
 
     if ($this->i18nLanguages) {
       foreach ($this->i18nLanguages as $lang) {
@@ -1632,7 +1641,7 @@ CODE;
       }
     }
 
-    $langCode = implode( ','.NL, $langCode  );
+    $langCode = implode(','.NL, $langCode  );
 
     $html = <<<HTML
     <var id="select_src-{$this->domainKey}-lang" >
@@ -1654,13 +1663,13 @@ HTML;
    * @param string $label
    * @return string
    */
-  public function submit($label, $appendCode = null, $icon = null )
+  public function submit($label, $appendCode = null, $icon = null)
   {
 
     $codeIcon = '';
 
-    if ($icon )
-      $codeIcon = $this->view->icon($icon, $label ).' ';
+    if ($icon)
+      $codeIcon = $this->view->icon($icon, $label).' ';
 
     $html = <<<CODE
 
@@ -1685,21 +1694,21 @@ CODE;
   )
   {
 
-    if ( is_array($params ) ) {
-      $pNode = new TFlag($params );
-    } elseif ( is_object($params ) ) {
+    if (is_array($params)) {
+      $pNode = new TFlag($params);
+    } elseif (is_object($params)) {
       $pNode = $params;
     } else {
       $pNode = clone $this->defParams;
     }
 
-    if (!$pNode->size )
+    if (!$pNode->size)
       $pNode->size = $size;
 
-    if ($pNode->required )
+    if ($pNode->required)
       $pNode->requiredText = ' <span class="wgt-required" >*</span>';
 
-    if (!$pNode->appendText )
+    if (!$pNode->appendText)
       $pNode->appendText = $appendText;
 
     return $pNode;

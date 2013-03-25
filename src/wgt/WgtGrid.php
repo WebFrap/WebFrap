@@ -40,7 +40,7 @@ class WgtGrid extends WgtList
    *
    * @return string
    */
-  public function build( )
+  public function build()
   {
 
     $this->baseFolder = View::$iconsWeb.'large/';
@@ -49,7 +49,7 @@ class WgtGrid extends WgtList
 
     // Generieren der Rows
     foreach ($this->data as $entry) {
-      $html .= $this->renderListEntry($entry );
+      $html .= $this->renderListEntry($entry);
     }
     $html .= '</div>'.NL;
 
@@ -63,12 +63,12 @@ class WgtGrid extends WgtList
    * @param $pic
    * @return
    */
-  protected function renderListEntry($pic )
+  protected function renderListEntry($pic)
   {
 
-    if ($pic[WgtMenu::ICON] != '' || trim($pic[WgtMenu::TEXT]) != '' ) {
+    if ($pic[WgtMenu::ICON] != '' || trim($pic[WgtMenu::TEXT]) != '') {
 
-      $text = trim($pic[WgtMenu::TEXT] ) != '' ? $pic[WgtMenu::TEXT].'<br />' : '';
+      $text = trim($pic[WgtMenu::TEXT]) != '' ? $pic[WgtMenu::TEXT].'<br />' : '';
 
       if (Wgt::ACTION == $pic[WgtMenu::TYPE]) {
         $link = $text.'<img class="icon large cursor" '.

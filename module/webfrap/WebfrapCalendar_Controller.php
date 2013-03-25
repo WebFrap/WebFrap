@@ -51,17 +51,17 @@ class WebfrapCalendar_Controller extends Controller
   /**
    * @return void
    */
-  public function display( )
+  public function display()
   {
 
-    if (!$this->view->isType( View::SUBWINDOW )) {
+    if (!$this->view->isType(View::SUBWINDOW)) {
       $this->errorPage('Invalid Request');
     }
 
     $view = $this->view->newWindow('WebfrapMainMenu', 'Default');
     //$view->setTitle('Calendar');
 
-    $view->setTemplate( 'base/calendar' );
+    $view->setTemplate('base/calendar');
 
   }//end public function display */
 

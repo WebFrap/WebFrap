@@ -33,7 +33,7 @@ Soll die neue Rolle Datenbanken erzeugen dürfen? (j/n) n
 Soll die neue Rolle weitere neue Rollen erzeugen dürfen? (j/n) n
 
 postgres@yourdesk:/home/you$ createdb db_name -E "utf-8" -O createuser
-<?php display_highlight( 'bash' ); ?>
+<?php display_highlight('bash'); ?>
 
 
 <label>Version 2: SQL</label>
@@ -48,7 +48,7 @@ you@yourdesk:~$ sudo su postgres
 postgres@yourdesk:/home/you$ psql postgres
 psql (version)
 Type "help" for help.
-<?php display_highlight( 'bash' ); ?>
+<?php display_highlight('bash'); ?>
 
 <p>
 Jetzt können wir die User und die Datenbank anlegen.
@@ -62,7 +62,7 @@ CREATE USER app_user with password '53cr37P455w0r6';
 
 -- datenbank anlegen
 CREATE DATABASE db_name with owner app_user encoding 'utf-8';
-<?php display_highlight( 'sql' ); ?>
+<?php display_highlight('sql'); ?>
 
 
 <h2>pg_hba.conf Konfiguration für den Zugriff auf die Datenbank</h2>
@@ -158,7 +158,7 @@ local   all         all                               ident
 host    all         all         127.0.0.1/32          md5
 # IPv6 local connections:
 host    all         all         ::1/128               md5
-<?php display_highlight( 'ini' ); ?>
+<?php display_highlight('ini'); ?>
 
 
 <h2>postgresql.conf Postgresql Konfiguration</h2>
@@ -726,4 +726,4 @@ default_text_search_config = 'pg_catalog.german'
 #------------------------------------------------------------------------------
 
 #custom_variable_classes = ''    # list of custom variable class names
-<?php display_highlight( 'ini' ); ?>
+<?php display_highlight('ini'); ?>

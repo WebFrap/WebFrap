@@ -31,12 +31,12 @@ class WebfrapMessage_Html_View extends LibTemplatePlain
   /**
    * Render des Suchergebnisses und übergabe in die ajax response
    */
-  public function displayContent(  )
+  public function displayContent()
   {
 
     $tpl = $this->getTplEngine();
-    $tpl->setTemplate( 'webfrap/message/html/msg_content', true );
-    $tpl->addVar( 'msgNode', $this->model->getMessageNode() );
+    $tpl->setTemplate('webfrap/message/html/msg_content', true);
+    $tpl->addVar('msgNode', $this->model->getMessageNode());
 
   }//end public function displayContent */
 

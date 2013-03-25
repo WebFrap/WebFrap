@@ -105,7 +105,7 @@ class Context
    *
    * @param LibRequestHttp $request
    */
-  public function __construct($request = null )
+  public function __construct($request = null)
   {
 
     if ($request)
@@ -120,7 +120,7 @@ class Context
    * @param string $key
    * @param string $value
    */
-  public function __set($key , $value )
+  public function __set($key , $value)
   {
     $this->content[$key] = $value;
   }// end public function __set */
@@ -132,7 +132,7 @@ class Context
    * @param string $key
    * @return string
    */
-  public function __get($key )
+  public function __get($key)
   {
     return isset($this->content[$key])
       ? $this->content[$key]
@@ -180,7 +180,7 @@ class Context
   /**
    * @param Context $context
    */
-  public function importAcl($context )
+  public function importAcl($context)
   {
 
     // startpunkt des pfades für die acls
@@ -198,22 +198,22 @@ class Context
   public function toUrlExt()
   {
 
-    if ($this->urlExt )
+    if ($this->urlExt)
       return $this->urlExt;
 
-    if ($this->aclRoot )
+    if ($this->aclRoot)
       $this->urlExt .= '&amp;a_root='.$this->aclRoot;
 
-    if ($this->aclRootId )
+    if ($this->aclRootId)
       $this->urlExt .= '&amp;a_root_id='.$this->aclRootId;
 
-    if ($this->aclKey )
+    if ($this->aclKey)
       $this->urlExt .= '&amp;a_key='.$this->aclKey;
 
-    if ($this->aclNode )
+    if ($this->aclNode)
       $this->urlExt .= '&amp;a_node='.$this->aclNode;
 
-    if ($this->aclLevel )
+    if ($this->aclLevel)
       $this->urlExt .= '&amp;a_level='.$this->aclLevel;
 
     return $this->urlExt;
@@ -226,22 +226,22 @@ class Context
   public function toActionExt()
   {
 
-    if ($this->actionExt )
+    if ($this->actionExt)
       return $this->actionExt;
 
-    if ($this->aclRoot )
+    if ($this->aclRoot)
       $this->actionExt .= '&a_root='.$this->aclRoot;
 
-    if ($this->aclRootId )
+    if ($this->aclRootId)
       $this->actionExt .= '&a_root_id='.$this->aclRootId;
 
-    if ($this->aclKey )
+    if ($this->aclKey)
       $this->actionExt .= '&a_key='.$this->aclKey;
 
-    if ($this->aclNode )
+    if ($this->aclNode)
       $this->actionExt .= '&a_node='.$this->aclNode;
 
-    if ($this->aclLevel )
+    if ($this->aclLevel)
       $this->actionExt .= '&a_level='.$this->aclLevel;
 
     return $this->actionExt;
@@ -256,19 +256,19 @@ class Context
    *
    *   @example
    *   <code>
-   *   if ($params->existingButNull )
+   *   if ($params->existingButNull)
    *     echo "will not be reached when key exists but ist null" // false;
    *
-   *   if ($params->exists('existingButNull') )
+   *   if ($params->exists('existingButNull'))
    *      echo "will be reached when key exists but ist null" // true;
    *
    *   </code>
    * }
    * @param string $key
    */
-  public function exists($key )
+  public function exists($key)
   {
-    return array_key_exists($key , $this->content );
+    return array_key_exists($key , $this->content);
   }//end public function exists */
 
 } // end class Context

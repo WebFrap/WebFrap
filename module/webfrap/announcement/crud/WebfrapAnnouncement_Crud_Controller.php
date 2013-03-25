@@ -50,7 +50,7 @@ class WebfrapAnnouncement_Crud_Controller extends ControllerCrud
   *   @return boolean im fehler false
   * }
   */
-  public function service_create($request, $response )
+  public function service_create($request, $response)
   {
 
     // resource laden
@@ -63,8 +63,8 @@ class WebfrapAnnouncement_Crud_Controller extends ControllerCrud
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
     $params->contextKey = 'my_message-create';
 
-    $access = new WbfsysMessage_Crud_Access_Create( null, null, $this );
-    $access->load($user->getProfileName(), $params );
+    $access = new WbfsysMessage_Crud_Access_Create(null, null, $this);
+    $access->load($user->getProfileName(), $params);
 
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
@@ -113,11 +113,11 @@ class WebfrapAnnouncement_Crud_Controller extends ControllerCrud
     }
 
     // laden des models und direkt übergabe in die view
-    $model = $this->loadModel( 'MyMessage_Crud' );
-    $view->setModel($model );
+    $model = $this->loadModel('MyMessage_Crud');
+    $view->setModel($model);
 
     // die view zum baue des formulars veranlassen
-    $error = $view->displayForm($params );
+    $error = $view->displayForm($params);
 
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
     // ist der so schwer war, dass die View den Job abbrechen musste
@@ -175,7 +175,7 @@ class WebfrapAnnouncement_Crud_Controller extends ControllerCrud
   *
   * @return boolean im fehler false
   */
-  public function service_send($request, $response )
+  public function service_send($request, $response)
   {
 
     // resource laden
@@ -188,8 +188,8 @@ class WebfrapAnnouncement_Crud_Controller extends ControllerCrud
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
     $params->contextKey = 'wbfsys_message-send';
 
-    $access = new WbfsysMessage_Crud_Access_Insert( null, null, $this );
-    $access->load($user->getProfileName(),  $params );
+    $access = new WbfsysMessage_Crud_Access_Insert(null, null, $this);
+    $access->load($user->getProfileName(),  $params);
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
     if (!$access->insert) {
@@ -218,11 +218,11 @@ class WebfrapAnnouncement_Crud_Controller extends ControllerCrud
 
     // das crud model wird zum validieren des requests und zum erstellen
     // des neuen datensatzes benötigt
-    $model = $this->loadModel( 'MyMessage_Crud' );
+    $model = $this->loadModel('MyMessage_Crud');
 
     // die genauen fehlermeldungen werden direkt vom validator in die
     // message queue gepackt
-    if ($error = $model->fetchInsertData($params ) ) {
+    if ($error = $model->fetchInsertData($params)) {
       // wenn die daten nicht valide sind, dann war es eine ungültige anfrage
       throw new InvalidRequest_Exception
       (
@@ -232,7 +232,7 @@ class WebfrapAnnouncement_Crud_Controller extends ControllerCrud
           'wbf.message',
           array
           (
-            'resource' => $response->i18n->l( 'Message', 'wbfsys.message.label' )
+            'resource' => $response->i18n->l('Message', 'wbfsys.message.label')
           )
         ),
         Response::BAD_REQUEST
@@ -242,7 +242,7 @@ class WebfrapAnnouncement_Crud_Controller extends ControllerCrud
     // die daten in die datenbank persistieren
     // das modell hat die entity bereits in sich, daher müssen wir hier
     // nur noch die anweisung zum speichern geben
-    if ($error = $model->send($params ) ) {
+    if ($error = $model->send($params)) {
 
       // hm ok irgendwas ist gerade ziemlich schief gelaufen
       throw new InvalidRequest_Exception
@@ -254,16 +254,16 @@ class WebfrapAnnouncement_Crud_Controller extends ControllerCrud
 
       /*
 
-        if (!$params->ltype )
+        if (!$params->ltype)
           $params->ltype = 'table';
 
-        if (!$params->viewType )
+        if (!$params->viewType)
           $params->viewType = 'maintab';
 
-        $listType = ucfirst($params->ltype );
+        $listType = ucfirst($params->ltype);
 
         // die Maske über welche der neue Liste Eintrag gerendert werden soll
-        if (!$params->mask )
+        if (!$params->mask)
           $params->mask = 'WbfsysMessage';
 
         // laden der angeforderten view
@@ -289,9 +289,9 @@ class WebfrapAnnouncement_Crud_Controller extends ControllerCrud
       }
 
       // model wird benötigt
-      $view->setModel($this->loadModel($params->mask.'_'.$listType ) );
+      $view->setModel($this->loadModel($params->mask.'_'.$listType));
 
-      $error = $view->displayInsert($params );
+      $error = $view->displayInsert($params);
 
       // im Fehlerfall jedoch bekommen wir eine Error Objekt das wird noch kurz
       // behandeln sollten
@@ -319,7 +319,7 @@ class WebfrapAnnouncement_Crud_Controller extends ControllerCrud
   * @param LibResponseHttp $response
   * @return boolean success flag
   */
-  public function service_delete($request, $response )
+  public function service_delete($request, $response)
   {
 
     // resource laden
@@ -327,7 +327,7 @@ class WebfrapAnnouncement_Crud_Controller extends ControllerCrud
 
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if (!($request->method( Request::DELETE ) ) ) {
+    if (!($request->method(Request::DELETE))) {
 
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
@@ -348,7 +348,7 @@ class WebfrapAnnouncement_Crud_Controller extends ControllerCrud
     }
 
     // prüfen ob eine valide id mit übergeben wurde
-    if (!$objid = $this->getOID( ) ) {
+    if (!$objid = $this->getOID()) {
       // wenn nicht ist die anfrage per definition invalide
       throw new InvalidRequest_Exception
       (
@@ -358,7 +358,7 @@ class WebfrapAnnouncement_Crud_Controller extends ControllerCrud
           'wbf.message',
           array
           (
-            'resource' => $response->i18n->l( 'Announcement', 'wbfsys.announcement.label' )
+            'resource' => $response->i18n->l('Announcement', 'wbfsys.announcement.label')
           )
         ),
         Response::BAD_REQUEST
@@ -366,10 +366,10 @@ class WebfrapAnnouncement_Crud_Controller extends ControllerCrud
     }
 
     // erst mal brauchen wir das passende model
-    $model = $this->loadModel( 'WebfrapAnnouncement_Crud' );
+    $model = $this->loadModel('WebfrapAnnouncement_Crud');
 
     // dann das passende entitiy objekt für den datensatz
-    $entityWebfrapAnnouncement = $model->getEntityWebfrapAnnouncement($objid );
+    $entityWebfrapAnnouncement = $model->getEntityWebfrapAnnouncement($objid);
 
     // wenn null zurückgegeben wurde existiert der datensatz nicht
     // daher muss das System eine 404 Meldung zurückgeben
@@ -383,7 +383,7 @@ class WebfrapAnnouncement_Crud_Controller extends ControllerCrud
           'wbf.message',
           array
           (
-            'resource'  => $response->i18n->l( 'Announcement', 'wbfsys.announcement.label' ),
+            'resource'  => $response->i18n->l('Announcement', 'wbfsys.announcement.label'),
             'id'        => $objid
           )
         ),
@@ -398,8 +398,8 @@ class WebfrapAnnouncement_Crud_Controller extends ControllerCrud
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
     $params->contextKey = 'wbfsys_announcement-delete-'.$objid;
 
-    $access = new WebfrapAnnouncement_Crud_Access_Edit( null, null, $this );
-    $access->load($user->getProfileName(), $params, $entityWebfrapAnnouncement );
+    $access = new WebfrapAnnouncement_Crud_Access_Edit(null, null, $this);
+    $access->load($user->getProfileName(), $params, $entityWebfrapAnnouncement);
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
     if (!$access->update) {
@@ -412,7 +412,7 @@ class WebfrapAnnouncement_Crud_Controller extends ControllerCrud
           'wbf.message',
           array
           (
-            'resource'  => $response->i18n->l( 'Announcement', 'wbfsys.announcement.label' ),
+            'resource'  => $response->i18n->l('Announcement', 'wbfsys.announcement.label'),
             'id'        => $objid
           )
         ),
@@ -423,15 +423,15 @@ class WebfrapAnnouncement_Crud_Controller extends ControllerCrud
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
 
-    if (!$params->ltype )
+    if (!$params->ltype)
       $params->ltype = 'table';
 
-    if (!$params->mask )
+    if (!$params->mask)
       $params->mask = 'WebfrapAnnouncement';
 
-    $listType = ucfirst($params->ltype );
+    $listType = ucfirst($params->ltype);
 
-    $error = $model->archive($entityWebfrapAnnouncement, $params );
+    $error = $model->archive($entityWebfrapAnnouncement, $params);
 
     // try to delete the dataset
     if ($error) {
@@ -455,16 +455,16 @@ class WebfrapAnnouncement_Crud_Controller extends ControllerCrud
         (
           'The requested Outputformat is not implemented for {@service@}.',
           'wbf.message',
-          array( 'service' => 'delete' )
+          array('service' => 'delete')
         ),
         Response::NOT_IMPLEMENTED
       );
     }
 
     // model wird benötigt
-    $view->setModel($this->loadModel($params->mask.'_'.$listType ) );
+    $view->setModel($this->loadModel($params->mask.'_'.$listType));
 
-    $error = $view->displayArchive($entityWebfrapAnnouncement, $params );
+    $error = $view->displayArchive($entityWebfrapAnnouncement, $params);
 
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
     // ist der so schwer war, dass die View den Job abbrechen musste

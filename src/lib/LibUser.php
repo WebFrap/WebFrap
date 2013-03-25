@@ -36,8 +36,8 @@ class LibUser extends BaseChild
   public static function getDefault()
   {
 
-    if (!self::$default )
-      self::$default = new LibUser( Webfrap::$env );
+    if (!self::$default)
+      self::$default = new LibUser(Webfrap::$env);
 
     return self::$default;
 
@@ -50,7 +50,7 @@ class LibUser extends BaseChild
   /**
    * @param BaseChild $env
    */
-  public function __construct($env )
+  public function __construct($env)
   {
     $this->env = $env;
   }//end public function __construct */
@@ -58,26 +58,26 @@ class LibUser extends BaseChild
   /**
    * @param LibEnvelopUser $user
    */
-  public function createUser($user )
+  public function createUser($user)
   {
 
     $orm = $this->getOrm();
 
-    $userObj = $orm->get( 'WbfsysRoleUser', "UPPER(name)=UPPER('{$user->userName}')" );
+    $userObj = $orm->get('WbfsysRoleUser', "UPPER(name)=UPPER('{$user->userName}')");
 
     if ($userObj) {
       return null;
     }
 
-    $userObj     = $orm->newEntity( 'WbfsysRoleUser' );
-    $personObj   = $orm->newEntity( 'CorePerson' );
+    $userObj     = $orm->newEntity('WbfsysRoleUser');
+    $personObj   = $orm->newEntity('CorePerson');
     $userObj->id_person = $personObj;
 
     $personObj->firstname = $user->firstName;
     $personObj->lastname  = $user->lastName;
 
     $userObj->name      = $user->userName;
-    $userObj->password  = SEncrypt::passwordHash($user->passwd );
+    $userObj->password  = SEncrypt::passwordHash($user->passwd);
     $userObj->profile   = $user->profile;
     $userObj->level     = $user->level;
 
@@ -85,22 +85,22 @@ class LibUser extends BaseChild
     $userObj->inactive        = $user->inactive;
     $userObj->description     = $user->description;
 
-    $orm->save($userObj );
+    $orm->save($userObj);
 
     // groups
     foreach ($user->roles as $role) {
 
-      $group    = $orm->getByKey( 'WbfsysRoleGroup', $role );
-      if (!$group )
+      $group    = $orm->getByKey('WbfsysRoleGroup', $role);
+      if (!$group)
         continue;
 
-      $userGroupObj  = $orm->newEntity( 'WbfsysGroupUsers', "id_user={$userObj} and id_group={$group}" );
+      $userGroupObj  = $orm->newEntity('WbfsysGroupUsers', "id_user={$userObj} and id_group={$group}");
       if (!$userGroupObj) {
-        $userGroupObj = $orm->newEntity( 'WbfsysGroupUsers' );
+        $userGroupObj = $orm->newEntity('WbfsysGroupUsers');
         $userGroupObj->id_user = $userObj;
         $userGroupObj->id_group = $group;
         $userGroupObj->partial = 0;
-        $orm->save($userGroupObj );
+        $orm->save($userGroupObj);
       }
 
     }
@@ -108,16 +108,16 @@ class LibUser extends BaseChild
     // profiles
     foreach ($user->profiles as $profile) {
 
-      $profileNode    = $orm->getByKey( 'WbfsysProfile', $profile );
-      if (!$profileNode )
+      $profileNode    = $orm->getByKey('WbfsysProfile', $profile);
+      if (!$profileNode)
         continue;
 
-      $userGroupProfile  = $orm->newEntity( 'WbfsysUserProfiles', "id_user={$userObj} and id_profile={$profile}" );
+      $userGroupProfile  = $orm->newEntity('WbfsysUserProfiles', "id_user={$userObj} and id_profile={$profile}");
       if (!$userGroupProfile) {
-        $userGroupProfile = $orm->newEntity( 'WbfsysUserProfiles' );
+        $userGroupProfile = $orm->newEntity('WbfsysUserProfiles');
         $userGroupProfile->id_user = $userObj;
         $userGroupProfile->id_profile = $profile;
-        $orm->save($userGroupProfile );
+        $orm->save($userGroupProfile);
       }
 
     }
@@ -125,33 +125,33 @@ class LibUser extends BaseChild
     // address items
     foreach ($user->addressItems as $addressItem) {
 
-      $type = $orm->getByKey( 'WbfsysAddressItemType', $addressItem[0] );
+      $type = $orm->getByKey('WbfsysAddressItemType', $addressItem[0]);
 
-      if (!$type )
+      if (!$type)
         continue;
 
-      $addrItem  = $orm->newEntity( 'WbfsysAddressItem', "id_user={$userObj} and id_type={$type}" );
+      $addrItem  = $orm->newEntity('WbfsysAddressItem', "id_user={$userObj} and id_type={$type}");
       if (!$addrItem) {
-        $addrItem = $orm->newEntity( 'WbfsysAddressItem' );
+        $addrItem = $orm->newEntity('WbfsysAddressItem');
         $addrItem->id_user = $userObj;
         $addrItem->id_profile = $type;
         $addrItem->address_value = $addressItem[1];
-        $orm->save($addrItem );
+        $orm->save($addrItem);
       }
 
     }
 
     // msg type
-    $type = $orm->getByKey( 'WbfsysAddressItemType', 'message' );
+    $type = $orm->getByKey('WbfsysAddressItemType', 'message');
 
     if (!$type) {
-      $addrItem  = $orm->newEntity( 'WbfsysAddressItem', "id_user={$userObj} and id_type={$type}" );
+      $addrItem  = $orm->newEntity('WbfsysAddressItem', "id_user={$userObj} and id_type={$type}");
       if (!$addrItem) {
-        $addrItem = $orm->newEntity( 'WbfsysAddressItem' );
+        $addrItem = $orm->newEntity('WbfsysAddressItem');
         $addrItem->id_user = $userObj;
         $addrItem->id_profile = $type;
         $addrItem->address_value = $userObj->getId();
-        $orm->save($addrItem );
+        $orm->save($addrItem);
       }
     }
 
@@ -161,18 +161,18 @@ class LibUser extends BaseChild
    * @param int $id
    * @return LibEnvelopUser
    */
-  public function getUserData($id )
+  public function getUserData($id)
   {
 
     $orm      = $this->getOrm();
 
     $envelop  = new LibEnvelopUser();
-    $userObj  = $orm->get( 'WbfsysRoleUser', $id );
+    $userObj  = $orm->get('WbfsysRoleUser', $id);
 
-    if (!$userObj )
+    if (!$userObj)
       return null;
 
-    $personObj  = $userObj->followLink( 'id_person' );
+    $personObj  = $userObj->followLink('id_person');
 
     $envelop->fullName   = "({$userObj->name}) {$personObj->lastname}, {$personObj->firstname}";
     $envelop->id_user    = $userObj->getId();

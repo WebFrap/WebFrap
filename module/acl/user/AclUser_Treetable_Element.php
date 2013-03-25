@@ -87,7 +87,7 @@ class AclUser_Treetable_Element extends WgtTreetable
    * @param string $name the name of the wgt object
    * @param LibTemplate $view
    */
-  public function __construct($domainNode, $name = null, $view = null )
+  public function __construct($domainNode, $name = null, $view = null)
   {
 
     $this->domainNode = $domainNode;
@@ -100,11 +100,11 @@ class AclUser_Treetable_Element extends WgtTreetable
       $this->view = $view;
       $this->i18n = $view->getI18n();
 
-      if ($view->access )
+      if ($view->access)
         $this->access = $view->access;
 
-      if ($name )
-        $view->addElement($name, $this );
+      if ($name)
+        $view->addElement($name, $this);
     } else {
       $this->i18n     = I18n::getActive();
     }
@@ -149,7 +149,7 @@ class AclUser_Treetable_Element extends WgtTreetable
       ),
 
     );
-    $this->actions['group'] = array( 'inheritance', 'delete' );
+    $this->actions['group'] = array('inheritance', 'delete');
 
     $this->url['user']  = array
     (
@@ -174,7 +174,7 @@ class AclUser_Treetable_Element extends WgtTreetable
         Acl::ADMIN
       ),
     );
-    $this->actions['user'] = array( 'clean', 'delete' );
+    $this->actions['user'] = array('clean', 'delete');
 
     $this->url['dset']  = array
     (
@@ -199,7 +199,7 @@ class AclUser_Treetable_Element extends WgtTreetable
         Acl::ADMIN
       ),
     );
-    $this->actions['dset'] = array( 'dset_mask', 'delete' );
+    $this->actions['dset'] = array('dset_mask', 'delete');
 
   }//end public function loadUrl */
 
@@ -215,13 +215,13 @@ class AclUser_Treetable_Element extends WgtTreetable
    * @param $value
    * @return void
    */
-  public function setData($data , $value = null )
+  public function setData($data , $value = null)
   {
 
-    if (!$data )
+    if (!$data)
       return;
 
-    if ( is_object($data ) ) {
+    if (is_object($data)) {
       $this->data       = $data;
       $this->dataSize   = $data->getSourceSize();
       //$this->dataUser   = $data->users;
@@ -237,13 +237,13 @@ class AclUser_Treetable_Element extends WgtTreetable
    * @param array $data
    * @return void
    */
-  public function setUserData($data, $count = false )
+  public function setUserData($data, $count = false)
   {
 
-    if (!$data )
+    if (!$data)
       return;
 
-    if ( is_object($data ) && $count ) {
+    if (is_object($data) && $count) {
       $this->dataUser   = $data;
       $this->dataSize   = $data->getSourceSize();
       //$this->dataUser   = $data->users;
@@ -259,7 +259,7 @@ class AclUser_Treetable_Element extends WgtTreetable
    * @param array $data
    * @return void
    */
-  public function setDsetData($data )
+  public function setDsetData($data)
   {
 
     $this->dataEntity = $data;
@@ -272,7 +272,7 @@ class AclUser_Treetable_Element extends WgtTreetable
    * @param array $data
    * @return void
    */
-  public function setGroupData($data )
+  public function setGroupData($data)
   {
 
     $this->dataGroup = $data;
@@ -289,18 +289,18 @@ class AclUser_Treetable_Element extends WgtTreetable
    *
    * @return string
    */
-  public function buildHtml( )
+  public function buildHtml()
   {
     // if we have html we can assume that the table was allready assembled
     // so we return just the html and stop here
     // this behaviour enables you to call a specific builder method from outside
     // of the view, but then get the html of the called parse method
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
 
     $icons = array();
-    $icons['closed'] = $this->icon( 'control/closed.png', 'Closed' );
+    $icons['closed'] = $this->icon('control/closed.png', 'Closed');
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
@@ -351,12 +351,12 @@ class AclUser_Treetable_Element extends WgtTreetable
    * create the head for the table
    * @return string
    */
-  public function buildThead( )
+  public function buildThead()
   {
 
     $this->numCols = 3;
 
-    if ($this->enableNav )
+    if ($this->enableNav)
       ++ $this->numCols;
 
     // Creating the Head
@@ -364,28 +364,28 @@ class AclUser_Treetable_Element extends WgtTreetable
     $html .= '<tr>'.NL;
 
     // check for multi selection
-    $html .= '<th style="width:40px;" class="pos" >'.$this->i18n->l( 'Pos:', 'wbf.label'  ).'</th>'.NL;
+    $html .= '<th style="width:40px;" class="pos" >'.$this->i18n->l('Pos:', 'wbf.label'  ).'</th>'.NL;
 
     $html .= '<th style="width:350px" >
       '.$this->view->i18n->l
       (
         'User / {@label@} / Group',
         'wbf.label',
-        array( 'label' => $this->domainNode->label )
+        array('label' => $this->domainNode->label)
       ).'
     </th>'.NL;
 
     $html .= '<th style="width:125px" >
-      '.$this->view->i18n->l( 'Start', 'wbf.label' ).'
+      '.$this->view->i18n->l('Start', 'wbf.label').'
     </th>'.NL;
 
     $html .= '<th style="width:125px" >
-      '.$this->view->i18n->l( 'End', 'wbf.label' ).'
+      '.$this->view->i18n->l('End', 'wbf.label').'
     </th>'.NL;
 
     // the default navigation col
-    if ($this->enableNav )
-      $html .= '<th style="width:55px;">'.$this->view->i18n->l( 'Menu', 'wbf.label'  ).'</th>'.NL;
+    if ($this->enableNav)
+      $html .= '<th style="width:55px;">'.$this->view->i18n->l('Menu', 'wbf.label'  ).'</th>'.NL;
 
     $html .= '</tr>'.NL;
     $html .= '</thead>'.NL;
@@ -398,12 +398,12 @@ class AclUser_Treetable_Element extends WgtTreetable
    * create the body for the table
    * @return string
    */
-  public function buildTbody( )
+  public function buildTbody()
   {
 
     $icons = array();
-    $icons['closed'] = $this->icon( 'control/closed.png', 'Closed' );
-    $icons['user'] = $this->icon( 'control/user.png', 'User' );
+    $icons['closed'] = $this->icon('control/closed.png', 'Closed');
+    $icons['user'] = $this->icon('control/user.png', 'User');
 
     // create the table body
     $body = '<tbody>'.NL;
@@ -449,7 +449,7 @@ class AclUser_Treetable_Element extends WgtTreetable
 HTML;
 
       $num ++;
-      if ($num > $this->numOfColors )
+      if ($num > $this->numOfColors)
         $num = 1;
 
       ++$pos;
@@ -457,7 +457,7 @@ HTML;
     }
 
     /*
-    if ($this->dataSize > ($this->start + $this->stepSize) ) {
+    if ($this->dataSize > ($this->start + $this->stepSize)) {
       $body .= '<tr><td colspan="'.$this->numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  ><var>'.($this->start + $this->stepSize).'</var>Paging to the next '.$this->stepSize.' entries.</td></tr>';
     }
     */
@@ -475,12 +475,12 @@ HTML;
    *
    * @used
    */
-  public function renderDsetBlock($userId, $context )
+  public function renderDsetBlock($userId, $context)
   {
 
     $icons = array();
-    $icons['closed'] = $this->icon( 'control/closed.png', 'Closed' );
-    $icons['dset']   = $this->icon( 'control/dset.png', 'Dset' );
+    $icons['closed'] = $this->icon('control/closed.png', 'Closed');
+    $icons['dset']   = $this->icon('control/dset.png', 'Dset');
 
     $body = '<htmlArea selector="tr#'.$this->id.'_row_'.$userId.'" action="after" ><![CDATA['.NL;
 
@@ -533,7 +533,7 @@ HTML;
 
       $pos ++;
       $num ++;
-      if ($num > $this->numOfColors )
+      if ($num > $this->numOfColors)
         $num = 1;
 
     }
@@ -549,11 +549,11 @@ HTML;
    * @param int $groupId
    * @param ContextListing $context
    */
-  public function renderGroupBlock($userId, $dsetId, $context )
+  public function renderGroupBlock($userId, $dsetId, $context)
   {
 
     $icons = array();
-    $icons['closed'] = $this->icon( 'control/closed.png', 'Closed' );
+    $icons['closed'] = $this->icon('control/closed.png', 'Closed');
 
     $body = '<htmlArea selector="tr#'.$this->id.'_row_'.$userId.'_'.$dsetId.'" action="after" ><![CDATA['.NL;
 
@@ -566,11 +566,11 @@ HTML;
       $rowid      = $this->id.'_row_'.$userId.'_'.$dsetId.'_'.$objid;
       $pRowid     = 'c-'.$this->id.'_row_'.$userId.'_'.$dsetId.' user-'.$userId.' dset-'.$dsetId;
 
-      $dateStart  = '' != trim($row['group_users_date_start'] )
-        ? $this->view->i18n->date($row['group_users_date_start'] )
+      $dateStart  = '' != trim($row['group_users_date_start'])
+        ? $this->view->i18n->date($row['group_users_date_start'])
         : '';
-      $dateEnd    = '' != trim($row['group_users_date_end'] )
-        ? $this->view->i18n->date($row['group_users_date_end'] )
+      $dateEnd    = '' != trim($row['group_users_date_end'])
+        ? $this->view->i18n->date($row['group_users_date_end'])
         : '';
 
       $navigation  = $this->rowMenu
@@ -612,7 +612,7 @@ HTML;
 
 
       $num ++;
-      if ($num > $this->numOfColors )
+      if ($num > $this->numOfColors)
         $num = 1;
 
       ++$pos;
@@ -634,14 +634,14 @@ HTML;
    *
    * @return string
    */
-  public function buildAjax( )
+  public function buildAjax()
   {
 
     // if we have html we can assume that the table was allready assembled
     // so we return just the html and stop here
     // this behaviour enables you to call a specific builder method from outside
     // of the view, but then get the html of the called parse method
-    if ($this->xml )
+    if ($this->xml)
       return $this->xml;
 
     if ($this->appendMode) {
@@ -651,17 +651,17 @@ HTML;
     }
 
     foreach ($this->data as $key => $row) {
-      $body .= $this->buildAjaxTbody($row );
+      $body .= $this->buildAjaxTbody($row);
     }//end foreach
 
     if ($this->appendMode) {
       $numCols = 2;
 
-      if ($this->enableNav )
+      if ($this->enableNav)
         ++ $numCols;
 
 
-      if ($this->dataSize > ($this->start + $this->stepSize) ) {
+      if ($this->dataSize > ($this->start + $this->stepSize)) {
         $body .= '<tr><td colspan="'.$numCols.'" class="wcm wcm_action_appear '
           .$this->searchForm.' '.$this->id.'"  ><var>'
           .($this->start + $this->stepSize)
@@ -684,14 +684,14 @@ HTML;
    *
    * @return string
    */
-  public function buildAjaxEntry( )
+  public function buildAjaxEntry()
   {
 
     // if we have html we can assume that the table was allready assembled
     // so we return just the html and stop here
     // this behaviour enables you to call a specific builder method from outside
     // of the view, but then get the html of the called parse method
-    if ($this->xml )
+    if ($this->xml)
       return $this->xml;
 
     // erst mal kein append mode, gehen wir mal davon aus
@@ -717,7 +717,7 @@ HTML;
 
       $body .= '</tr>]]></htmlArea>'.NL;
 
-      $body .= $this->buildAjaxUserNode($key );
+      $body .= $this->buildAjaxUserNode($key);
 
     }//end foreach
 
@@ -732,7 +732,7 @@ HTML;
    * @param int $groupId
    * @return string
    */
-  public function buildAjaxUserNode($groupId )
+  public function buildAjaxUserNode($groupId)
   {
 
     if (!isset($this->dataUser[$groupId]))
@@ -744,7 +744,7 @@ HTML;
 
     foreach ($childs as $key => $row) {
 
-      if ( isset($row['id']) ) {
+      if (isset($row['id'])) {
         $userId     = $row['id'];
         $objid      = $userId;
         $rowid      = $this->id.'_row_'.$groupId.'_'.$userId;
@@ -793,8 +793,8 @@ HTML;
             name="qfdu[group_users]['.$objid.'][date_start]"
             value="'.
             (
-              '' != trim($row['group_users_date_start'] )
-                ? $this->view->i18n->date($row['group_users_date_start'] )
+              '' != trim($row['group_users_date_start'])
+                ? $this->view->i18n->date($row['group_users_date_start'])
                 : ''
             ).'" /></td>'.NL;
 
@@ -806,8 +806,8 @@ HTML;
             name="qfdu[group_users]['.$objid.'][date_end]"
             value="'.
             (
-              '' != trim($row['group_users_date_end'] )
-                ? $this->view->i18n->date($row['group_users_date_end'] )
+              '' != trim($row['group_users_date_end'])
+                ? $this->view->i18n->date($row['group_users_date_end'])
                 : ''
             ).'" /></td>'.NL;
 
@@ -827,10 +827,10 @@ HTML;
       }
 
       $this->num ++;
-      if ($this->num > $this->numOfColors )
+      if ($this->num > $this->numOfColors)
         $this->num = 1;
 
-      $body .= $this->buildAjaxDatasetNode($groupId, $userId );
+      $body .= $this->buildAjaxDatasetNode($groupId, $userId);
 
     }
 
@@ -845,7 +845,7 @@ HTML;
   public function buildAjaxDatasetNode($groupId, $userId  )
   {
 
-    if (!isset($this->dataEntity[$groupId][$userId] ) )
+    if (!isset($this->dataEntity[$groupId][$userId]))
       return '';
 
     $childs = $this->dataEntity[$groupId][$userId];
@@ -874,8 +874,8 @@ HTML;
             name="qfdu[group_users]['.$objid.'][date_start]"
             value="'
             .(
-               '' != trim($row['group_users_date_start'] )
-                ? $this->view->i18n->date($row['group_users_date_start'] )
+               '' != trim($row['group_users_date_start'])
+                ? $this->view->i18n->date($row['group_users_date_start'])
                 : ''
             ).'" />'
         .'</td>'.NL;
@@ -888,8 +888,8 @@ HTML;
             name="qfdu[group_users]['.$objid.'][date_end]"
             value="'
           .(
-            '' != trim($row['group_users_date_end'] )
-              ? $this->view->i18n->date($row['group_users_date_end'] )
+            '' != trim($row['group_users_date_end'])
+              ? $this->view->i18n->date($row['group_users_date_end'])
               : ''
             ).'" />'
         .'</td>'.NL;
@@ -907,7 +907,7 @@ HTML;
       $body .= '</tr>]]></htmlArea>'.NL;
 
       $this->num ++;
-      if ($this->num > $this->numOfColors )
+      if ($this->num > $this->numOfColors)
         $this->num = 1;
 
     }
@@ -925,7 +925,7 @@ HTML;
    * @param string $active
    * @param int $name
    */
-  protected function selectRights($active, $name )
+  protected function selectRights($active, $name)
   {
 
     $html = '<select name="'.$name.'" class="wcm wcm_ui_color_code prop_key_access full '.$this->editForm.'" >'.NL;
@@ -986,10 +986,10 @@ HTML;
    * @return string
    * @deprecated
    */
-  public function buildUserNode($groupId, $groupPos )
+  public function buildUserNode($groupId, $groupPos)
   {
 
-    if (!isset($this->dataUser[$groupId] ) )
+    if (!isset($this->dataUser[$groupId]))
       return '';
 
     $childs = $this->dataUser[$groupId];
@@ -1000,7 +1000,7 @@ HTML;
 
     foreach ($childs as $userId => $row) {
 
-      if ( isset($row['id']) ) {
+      if (isset($row['id'])) {
         $rowid      = $this->id.'_row_'.$groupId.'_'.$userId;
         $pRowid     = 'child-of-'.$this->id.'_row_'.$groupId.' group-'.$groupId;
 
@@ -1039,8 +1039,8 @@ HTML;
             name="qfdu[group_users]['.$objid.'][date_start]"
             value="'.
             (
-               '' != trim($row['group_users_date_start'] )
-                ?$this->view->i18n->date($row['group_users_date_start'] )
+               '' != trim($row['group_users_date_start'])
+                ?$this->view->i18n->date($row['group_users_date_start'])
                 :''
             ).'" /></td>'.NL;
 
@@ -1052,8 +1052,8 @@ HTML;
             name="qfdu[group_users]['.$objid.'][date_end]"
             value="'.
             (
-              '' != trim($row['group_users_date_end'] )
-                ?$this->view->i18n->date($row['group_users_date_end'] )
+              '' != trim($row['group_users_date_end'])
+                ?$this->view->i18n->date($row['group_users_date_end'])
                 :''
             ).'" /></td>'.NL;
 
@@ -1074,10 +1074,10 @@ HTML;
       }
 
       $this->num ++;
-      if ($this->num > $this->numOfColors )
+      if ($this->num > $this->numOfColors)
         $this->num = 1;
 
-      $body .= $this->buildDatasetNode($groupId, $userId, $groupPos, $pos );
+      $body .= $this->buildDatasetNode($groupId, $userId, $groupPos, $pos);
 
       ++$pos;
 
@@ -1114,7 +1114,7 @@ HTML;
 
       $body .= '<td valign="top" class="pos" >'.$groupPos.'.'.$userPos.'.'.$pos.'</td>'.NL;
 
-      $body .= '<td valign="top" class="ind2" >'.$this->icon( 'control/entity.png', 'Entity' ).' <a href="maintab.php?c=Enterprise.Employee.edit&amp;objid='.$row['enterprise_employee_rowid'].'" class="wcm wcm_req_ajax" >Employee: '.$row['enterprise_employee_rowid'].'</a></td>'.NL;
+      $body .= '<td valign="top" class="ind2" >'.$this->icon('control/entity.png', 'Entity').' <a href="maintab.php?c=Enterprise.Employee.edit&amp;objid='.$row['enterprise_employee_rowid'].'" class="wcm wcm_req_ajax" >Employee: '.$row['enterprise_employee_rowid'].'</a></td>'.NL;
       $body .= '<td valign="top" >'
         .'<input
             type="text"
@@ -1122,8 +1122,8 @@ HTML;
             id="wgt-input-acl-enterprise_employee-qfdu-'.$objid.'-date_start"
             name="qfdu[group_users]['.$objid.'][date_start]" value="'.
             (
-              '' != trim($row['group_users_date_start'] )
-                ?$this->view->i18n->date($row['group_users_date_start'] )
+              '' != trim($row['group_users_date_start'])
+                ?$this->view->i18n->date($row['group_users_date_start'])
                 :''
             ).'" />'
         .'</td>'.NL;
@@ -1136,8 +1136,8 @@ HTML;
           name="qfdu[group_users]['.$objid.'][date_end]"
           value="'.
           (
-            '' != trim($row['group_users_date_end'] )
-              ? $this->view->i18n->date($row['group_users_date_end'] )
+            '' != trim($row['group_users_date_end'])
+              ? $this->view->i18n->date($row['group_users_date_end'])
               : ''
           ).'" />'
         .'</td>'.NL;
@@ -1155,7 +1155,7 @@ HTML;
       $body .= '</tr>'.NL;
 
       $this->num ++;
-      if ($this->num > $this->numOfColors )
+      if ($this->num > $this->numOfColors)
         $this->num = 1;
 
       ++$pos;

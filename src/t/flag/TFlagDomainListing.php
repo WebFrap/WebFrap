@@ -125,7 +125,7 @@ class TFlagListing
 
     $this->filter = new TFlag();
 
-    $filters = $request->param('filter', Validator::BOOLEAN );
+    $filters = $request->param('filter', Validator::BOOLEAN);
 
     if ($filters) {
       foreach ($filters as $key => $value) {
@@ -148,7 +148,7 @@ class TFlagListing
    * @param string $key
    * @param string $value
    */
-  public function __set($key , $value )
+  public function __set($key , $value)
   {
     $this->content[$key] = $value;
   }// end public function __set */
@@ -160,7 +160,7 @@ class TFlagListing
    * @param string $key
    * @return string
    */
-  public function __get($key )
+  public function __get($key)
   {
     return isset($this->content[$key])
       ? $this->content[$key]
@@ -221,14 +221,14 @@ class TFlagListing
 
         // start position of the query and size of the table
     $this->offset
-      = $request->param('offset', Validator::INT );
+      = $request->param('offset', Validator::INT);
 
     // start position of the query and size of the table
     $this->start
-      = $request->param('start', Validator::INT );
+      = $request->param('start', Validator::INT);
 
     if ($this->offset) {
-      if (!$this->start )
+      if (!$this->start)
         $this->start = $this->offset;
     }
 
@@ -238,7 +238,7 @@ class TFlagListing
 
     // order for the multi display element
     $this->order
-      = $request->param('order', Validator::CNAME );
+      = $request->param('order', Validator::CNAME);
 
     // target for a callback function
     $this->target
@@ -249,7 +249,7 @@ class TFlagListing
       = $request->param('target_id', Validator::CKEY  );
 
     // flag for beginning seach filter
-    if ($text = $request->param('begin', Validator::TEXT  ) ) {
+    if ($text = $request->param('begin', Validator::TEXT  )) {
       // whatever is comming... take the first char
       $this->begin = $text[0];
     }
@@ -257,7 +257,7 @@ class TFlagListing
     // the model should add all inputs in the ajax request, not just the text
     // converts per default to false, thats ok here
     $this->fullLoad
-      = $request->param('full_load', Validator::BOOLEAN );
+      = $request->param('full_load', Validator::BOOLEAN);
 
     // exclude whatever
     $this->exclude
@@ -279,22 +279,22 @@ class TFlagListing
   public function toUrlExt()
   {
 
-    if ($this->urlExt )
+    if ($this->urlExt)
       return $this->urlExt;
 
-    if ($this->aclRoot )
+    if ($this->aclRoot)
       $this->urlExt .= '&amp;a_root='.$this->aclRoot;
 
-    if ($this->aclRootId )
+    if ($this->aclRootId)
       $this->urlExt .= '&amp;a_root_id='.$this->aclRootId;
 
-    if ($this->aclKey )
+    if ($this->aclKey)
       $this->urlExt .= '&amp;a_key='.$this->aclKey;
 
-    if ($this->aclNode )
+    if ($this->aclNode)
       $this->urlExt .= '&amp;a_node='.$this->aclNode;
 
-    if ($this->aclLevel )
+    if ($this->aclLevel)
       $this->urlExt .= '&amp;a_level='.$this->aclLevel;
 
     return $this->urlExt;
@@ -307,22 +307,22 @@ class TFlagListing
   public function toActionExt()
   {
 
-    if ($this->actionExt )
+    if ($this->actionExt)
       return $this->actionExt;
 
-    if ($this->aclRoot )
+    if ($this->aclRoot)
       $this->actionExt .= '&a_root='.$this->aclRoot;
 
-    if ($this->aclRootId )
+    if ($this->aclRootId)
       $this->actionExt .= '&a_root_id='.$this->aclRootId;
 
-    if ($this->aclKey )
+    if ($this->aclKey)
       $this->actionExt .= '&a_key='.$this->aclKey;
 
-    if ($this->aclNode )
+    if ($this->aclNode)
       $this->actionExt .= '&a_node='.$this->aclNode;
 
-    if ($this->aclLevel )
+    if ($this->aclLevel)
       $this->actionExt .= '&a_level='.$this->aclLevel;
 
     return $this->actionExt;
@@ -337,19 +337,19 @@ class TFlagListing
    *
    *   @example
    *   <code>
-   *   if ($params->existingButNull )
+   *   if ($params->existingButNull)
    *     echo "will not be reached when key exists but ist null" // false;
    *
-   *   if ($params->exists('existingButNull') )
+   *   if ($params->exists('existingButNull'))
    *      echo "will be reached when key exists but ist null" // true;
    *
    *   </code>
    * }
    * @param string $key
    */
-  public function exists($key )
+  public function exists($key)
   {
-    return array_key_exists($key , $this->content );
+    return array_key_exists($key , $this->content);
   }//end public function exists */
 
 } // end class TFlagListing

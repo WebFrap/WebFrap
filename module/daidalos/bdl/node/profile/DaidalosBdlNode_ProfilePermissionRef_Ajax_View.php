@@ -33,17 +33,17 @@ class DaidalosBdlNode_ProfilePermissionRef_Ajax_View extends LibTemplateAjaxView
    * @param $index int Der neue Index
    * @param $profileName string
    */
-  public function displayInsert($permission, $path, $idx, $profileName )
+  public function displayInsert($permission, $path, $idx, $profileName)
   {
 
-    $iconEdit   = Wgt::icon( 'control/edit.png', 'xsmall' );
-    $iconDelete = Wgt::icon( 'control/delete.png', 'xsmall' );
-    $iconAdd    = Wgt::icon( 'control/add.png', 'xsmall' );
+    $iconEdit   = Wgt::icon('control/edit.png', 'xsmall');
+    $iconDelete = Wgt::icon('control/delete.png', 'xsmall');
+    $iconAdd    = Wgt::icon('control/add.png', 'xsmall');
 
     $pathId = str_replace('.', '-', $path);
 
     // nur anhängen wenn es nicht schon existiert
-    $this->setAreaContent( 'treeNode', <<<XML
+    $this->setAreaContent('treeNode', <<<XML
 <htmlArea
   selector="li#wgt-node-profile-{$profileName}-permission-{$pathId}"
   action="append"
@@ -54,10 +54,10 @@ class DaidalosBdlNode_ProfilePermissionRef_Ajax_View extends LibTemplateAjaxView
 XML
     );
 
-    $this->setAreaContent( 'childNode', <<<XML
+    $this->setAreaContent('childNode', <<<XML
 <htmlArea selector="ul#wgt-list-profile-{$profileName}-permission-{$pathId}" action="append" ><![CDATA[
   <li id="wgt-node-profile-{$profileName}-permission-{$pathId}-{$idx}" >
-    <span>{$permission->getName( true )}</span>
+    <span>{$permission->getName(true)}</span>
     <div class="right" style="width:90px;" >
       <button
         class="wgt-button wgtac_add_permission_ref"
@@ -78,7 +78,7 @@ XML
 XML
     );
 
-    $this->setAreaContent( 'childCode', <<<XML
+    $this->setAreaContent('childCode', <<<XML
 <htmlArea selector="ul#wgt-list-profile-{$profileName}-permission" action="function" ><![CDATA[
 
     self.find(".wgtac_add_permission_ref").click(function(){
@@ -117,12 +117,12 @@ XML
    * @param int $index
    * @param string $profileName
    */
-  public function displayUpdate($ref, $path, $profileName )
+  public function displayUpdate($ref, $path, $profileName)
   {
 
-    $iconEdit   = Wgt::icon( 'control/edit.png', 'xsmall' );
-    $iconDelete = Wgt::icon( 'control/delete.png', 'xsmall' );
-    $iconAdd    = Wgt::icon( 'control/add.png', 'xsmall' );
+    $iconEdit   = Wgt::icon('control/edit.png', 'xsmall');
+    $iconDelete = Wgt::icon('control/delete.png', 'xsmall');
+    $iconAdd    = Wgt::icon('control/add.png', 'xsmall');
 
     // Sub render function
     $renderSubNode = function
@@ -145,7 +145,7 @@ XML
       /* @var $ref BdlNodeProfileAreaPermissionRef */
       $references = $ref->getReferences();
 
-      if (!$references )
+      if (!$references)
         return '';
 
       $code = '<ul id="wgt-list-profile-'.$profileName.'-permission-'.$pathId.'" >';
@@ -154,11 +154,11 @@ XML
 
       foreach ($references as $ref) {
 
-        $subNodes = $subRednerer($ref, "{$path}.{$idx}", $subRednerer );
+        $subNodes = $subRednerer($ref, "{$path}.{$idx}", $subRednerer);
 
         $code .= <<<HTML
   <li id="wgt-node-profile-{$profileName}-permission-{$pathId}" >
-    <span>{$ref->getName( true )}</span>
+    <span>{$ref->getName(true)}</span>
     <div class="right" style="width:90px;" ><button
 
         class="wgt-button wgtac_add_permission_ref"
@@ -188,12 +188,12 @@ HTML;
 
     $pathId = str_replace('.', '-', $path);
 
-    $subNodes = $renderSubNode($ref, $path, $renderSubNode );
+    $subNodes = $renderSubNode($ref, $path, $renderSubNode);
 
-    $this->setAreaContent( 'childNode', <<<XML
+    $this->setAreaContent('childNode', <<<XML
 <htmlArea selector="li#wgt-node-profile-{$profileName}-permission-{$pathId}" action="replace" ><![CDATA[
   <li id="wgt-node-profile-{$profileName}-permission-{$pathId}" >
-    <span>{$ref->getName( true )}</span>
+    <span>{$ref->getName(true)}</span>
     <div class="right" style="width:90px;" >
       <button
         class="wgt-button wgtac_add_permission_ref"
@@ -215,7 +215,7 @@ HTML;
 XML
     );
 
-    $this->setAreaContent( 'childCode', <<<XML
+    $this->setAreaContent('childCode', <<<XML
 <htmlArea selector="ul#wgt-list-profile-{$profileName}-permission" action="function" ><![CDATA[
 
     self.find(".wgtac_add_permission_ref").click(function(){
@@ -253,12 +253,12 @@ XML
    * @param $path string
    * @param $profileName string
    */
-  public function displayDelete($path,  $profileName )
+  public function displayDelete($path,  $profileName)
   {
 
     $pathId = str_replace('.', '-', $path);
 
-    $this->setAreaContent( 'childNode', <<<XML
+    $this->setAreaContent('childNode', <<<XML
 <htmlArea selector="li#wgt-node-profile-{$profileName}-permission-{$pathId}" action="remove" ></htmlArea>
 XML
     );

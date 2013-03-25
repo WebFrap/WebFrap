@@ -42,7 +42,7 @@ class WebfrapStatsBrowser_Graph extends LibGraphEz
     //$request = $this->getRequest();
 
     $this->data = new WebfrapStatsBrowser_Graph_Query();
-    $this->data->fetch( '2012-01-01' );
+    $this->data->fetch('2012-01-01');
 
     $this->width  = 600;
     $this->height = 300;
@@ -52,7 +52,7 @@ class WebfrapStatsBrowser_Graph extends LibGraphEz
   /**
    * @return void
    */
-  public function render(  )
+  public function render()
   {
 
     $this->graph = new ezcGraphLineChart();
@@ -64,7 +64,7 @@ class WebfrapStatsBrowser_Graph extends LibGraphEz
 
     // Add data
     foreach ($this->data as $label => $data) {
-      $this->graph->data[$label] = new ezcGraphArrayDataSet($data );
+      $this->graph->data[$label] = new ezcGraphArrayDataSet($data);
     }
 
   }//end public function render */

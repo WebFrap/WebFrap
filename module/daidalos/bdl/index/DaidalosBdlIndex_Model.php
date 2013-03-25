@@ -61,7 +61,7 @@ class DaidalosBdlIndex_Model extends Model
      */
 
     foreach ($repos as $rep) {
-      $this->syncRepoIndex($rep['path'] );
+      $this->syncRepoIndex($rep['path']);
     }
 
   }//end public function syncIndex */
@@ -70,13 +70,13 @@ class DaidalosBdlIndex_Model extends Model
    * @param string $path
    * @return string
    */
-  protected function syncRepoIndex($path )
+  protected function syncRepoIndex($path)
   {
 
-    $files = $this->getSubModuleFiles($path );
+    $files = $this->getSubModuleFiles($path);
 
     foreach ($files as $file) {
-      $this->syncNodeIndex($file );
+      $this->syncNodeIndex($file);
     }
 
   }//end protected function syncRepoIndex */
@@ -85,32 +85,32 @@ class DaidalosBdlIndex_Model extends Model
    * @param string $path
    * @return string
    */
-  protected function syncNodeIndex($fileName )
+  protected function syncNodeIndex($fileName)
   {
 
-    $bdlFile = new BdlFile($fileName );
+    $bdlFile = new BdlFile($fileName);
 
     $type = $bdlFile->guessType();
 
     if (!$type) {
-      Debug::console( "Failed to guess type for file: ".$fileName );
+      Debug::console("Failed to guess type for file: ".$fileName);
 
       return;
     }
 
-    if ( isset($this->indexers[$type] ) ) {
-      $this->indexers[$type]->syncIndex($bdlFile );
+    if (isset($this->indexers[$type])) {
+      $this->indexers[$type]->syncIndex($bdlFile);
     } else {
 
       $indexClass = 'BdlIndex_'.SParserString::subToCamelCase($type);
-      if (!Webfrap::classLoadable($indexClass) ) {
-        Debug::console( "Tried to sync index for a non supported node type: ".$type );
+      if (!Webfrap::classLoadable($indexClass)) {
+        Debug::console("Tried to sync index for a non supported node type: ".$type);
 
         return;
       }
 
-      $this->indexers[$type] = new $indexClass($this->getDb() );
-      $this->indexers[$type]->syncIndex($bdlFile );
+      $this->indexers[$type] = new $indexClass($this->getDb());
+      $this->indexers[$type]->syncIndex($bdlFile);
 
     }
 
@@ -119,24 +119,24 @@ class DaidalosBdlIndex_Model extends Model
   /**
    * @return array
    */
-  public function getSubModuleFolders($folders )
+  public function getSubModuleFolders($folders)
   {
 
-    $repoIterator = new LibFilesystemFolder($folders );
+    $repoIterator = new LibFilesystemFolder($folders);
 
-    return $repoIterator->getPlainFolders( true );
+    return $repoIterator->getPlainFolders(true);
 
   }//end public function getSubModuleFolders */
 
   /**
    * @return array
    */
-  public function getSubModuleFiles($folders )
+  public function getSubModuleFiles($folders)
   {
 
-    $repoIterator = new LibFilesystemFolder($folders );
+    $repoIterator = new LibFilesystemFolder($folders);
 
-    return $repoIterator->getFilesByEnding( '.bdl', false, true );
+    return $repoIterator->getFilesByEnding('.bdl', false, true);
 
   }//end public function getSubModuleFiles */
 

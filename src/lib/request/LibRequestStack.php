@@ -75,7 +75,7 @@ class LibRequestStack extends LibRequestSubrequest
 
     $this->params['c'] = $target;
 
-    $tmp = explode( '.', $target );
+    $tmp = explode('.', $target);
 
     $map = array
     (
@@ -84,7 +84,7 @@ class LibRequestStack extends LibRequestSubrequest
       Request::RUN  => $tmp[2]
     );
 
-    $this->addParam($map );
+    $this->addParam($map);
 
   }//end public function __construct */
 
@@ -98,9 +98,9 @@ class LibRequestStack extends LibRequestSubrequest
    * @param string Key Name der zu erfragende $this->params Variable
    * @return bool
    */
-  public function paramExists($key, $subkey = null )
+  public function paramExists($key, $subkey = null)
   {
-    return isset($this->params[$key] );
+    return isset($this->params[$key]);
 
   } // end public function paramExists */
 
@@ -111,7 +111,7 @@ class LibRequestStack extends LibRequestSubrequest
   * @param string $validator
   * @return TArray
   */
-  public function paramList($key, $validator )
+  public function paramList($key, $validator)
   {
 
     $response = $this->getResponse();
@@ -121,25 +121,25 @@ class LibRequestStack extends LibRequestSubrequest
 
     $paramList = new TArray();
 
-    if ( isset($this->params[$key] ) ) {
+    if (isset($this->params[$key])) {
       $data = $this->params[$key];
 
-      if (!is_array($data ) ) {
+      if (!is_array($data)) {
         return $paramList;
       }
     } else {
       return $paramList;
     }
 
-    $fMethod = 'add'.ucfirst($validator );
+    $fMethod = 'add'.ucfirst($validator);
 
     // clean only one
     foreach ($data as $key => $value) {
-      $error = $filter->$fMethod($key, $value );
+      $error = $filter->$fMethod($key, $value);
       if (!$error) {
-        $paramList->$key = $filter->getData($key );
+        $paramList->$key = $filter->getData($key);
       } else {
-        $response->addError($error ) ;
+        $response->addError($error) ;
         continue;
       }
     }
@@ -157,7 +157,7 @@ class LibRequestStack extends LibRequestSubrequest
   * @param string $message
   * @return string
   */
-  public function param($key = null, $validator = null, $subkey = null, $message = null )
+  public function param($key = null, $validator = null, $subkey = null, $message = null)
   {
 
     $response = $this->getResponse();
@@ -166,11 +166,11 @@ class LibRequestStack extends LibRequestSubrequest
       $filter = Validator::getActive();
       $filter->clean(); // first clean the filter
 
-      if ( is_string($key ) ) {
+      if (is_string($key)) {
 
         if ($subkey) {
 
-          if ( isset($this->params[$key][$subkey] ) ) {
+          if (isset($this->params[$key][$subkey])) {
             $data = $this->params[$key][$subkey];
           } else {
             return null;
@@ -179,7 +179,7 @@ class LibRequestStack extends LibRequestSubrequest
         }//end if $subkey
         else {
 
-          if ( isset($this->params[$key] ) ) {
+          if (isset($this->params[$key])) {
             $data = $this->params[$key];
           } else {
             return null;
@@ -187,20 +187,20 @@ class LibRequestStack extends LibRequestSubrequest
 
         }
 
-        $fMethod = 'add'.ucfirst($validator );
+        $fMethod = 'add'.ucfirst($validator);
 
-        if ( is_array($data ) ) {
+        if (is_array($data)) {
           // Clean all the same way
           // Good architecture :-)
-          return $this->validateArray($fMethod , $data );
+          return $this->validateArray($fMethod , $data);
 
         } else {
           // clean only one
-          if (!$error = $filter->$fMethod($key, $data ) ) {
-            return $filter->getData($key );
+          if (!$error = $filter->$fMethod($key, $data)) {
+            return $filter->getData($key);
           } else {
 
-            $response->addError( ($message?$message:$error) ) ;
+            $response->addError(($message?$message:$error)) ;
 
             return;
 
@@ -209,18 +209,18 @@ class LibRequestStack extends LibRequestSubrequest
         }
 
       }// end is_string($key)
-      elseif ( is_array($key ) ) {
+      elseif (is_array($key)) {
         $data = array();
 
-        if ( is_array($validator ) ) {
+        if (is_array($validator)) {
           foreach ($key as $id) {
-            $fMethod = 'add'.ucfirst($validator[$id] );
+            $fMethod = 'add'.ucfirst($validator[$id]);
 
-            if ( isset($this->params[$id] ) ) {
-              $filter->$fMethod($id, $this->params[$id] );
-              $data[$id] = $filter->getData($id );
+            if (isset($this->params[$id])) {
+              $filter->$fMethod($id, $this->params[$id]);
+              $data[$id] = $filter->getData($id);
             } else {
-              //$filter->checkRequired($id );
+              //$filter->checkRequired($id);
               //$data[$id] = null;
             }
 
@@ -231,11 +231,11 @@ class LibRequestStack extends LibRequestSubrequest
           foreach ($key as $id) {
             $fMethod = 'add'.ucfirst($validator);
 
-            if ( isset($this->params[$id]) ) {
-              $filter->$fMethod($id, $this->params[$id] );
-              $data[$id] = $filter->getData($id );
+            if (isset($this->params[$id])) {
+              $filter->$fMethod($id, $this->params[$id]);
+              $data[$id] = $filter->getData($id);
             } else {
-              //$filter->checkRequired($id );
+              //$filter->checkRequired($id);
               //$data[$id] = null;
             }
           }
@@ -248,7 +248,7 @@ class LibRequestStack extends LibRequestSubrequest
     }//end if $validator
     else { // else $validator
 
-      if ( is_string($key ) ) {
+      if (is_string($key)) {
 
         if ($subkey) {
           return isset($this->params[$key][$subkey])
@@ -258,19 +258,19 @@ class LibRequestStack extends LibRequestSubrequest
             ?$this->params[$key]:null;
         }
 
-      } elseif ( is_array($key ) ) {
+      } elseif (is_array($key)) {
         $data = array();
 
         foreach ($key as $id) {
 
-          if ( array_key_exists($id, $this->params ) )
+          if (array_key_exists($id, $this->params))
             $data[$id] = $this->params[$id];
 
-          //$data[$id] = isset($_POST[$id] )? $_POST[$id] :null;
+          //$data[$id] = isset($_POST[$id])? $_POST[$id] :null;
         }
 
         return $data;
-      } elseif (is_null($key ) ) {
+      } elseif (is_null($key)) {
         return $this->params;
       } else {
         return null;
@@ -290,7 +290,7 @@ class LibRequestStack extends LibRequestSubrequest
   public function addParam($key, $data = null  )
   {
 
-    if ( is_array($key) ) {
+    if (is_array($key)) {
       $this->params = array_merge($this->params,$key);
     } else {
       $this->params[$key] = $data;
@@ -302,10 +302,10 @@ class LibRequestStack extends LibRequestSubrequest
    * remove some variables from the url
    * @param string $key
    */
-  public function removeParam($key )
+  public function removeParam($key)
   {
 
-    if ( isset($this->params[$key]) ) {
+    if (isset($this->params[$key])) {
       unset($this->params[$key]);
     }
 
@@ -326,7 +326,7 @@ class LibRequestStack extends LibRequestSubrequest
    * @return Validator
    *
    */
-  public function checkSearchInput($values , $messages, $subkey = null )
+  public function checkSearchInput($values , $messages, $subkey = null)
   {
 
     $response = $this->getResponse();
@@ -342,12 +342,12 @@ class LibRequestStack extends LibRequestSubrequest
       foreach ($values as $key => $value) {
         $method = 'add'.$value[0] ;
 
-        if ( isset($this->params[$subkey][$key]) )
+        if (isset($this->params[$subkey][$key]))
           $data = $this->params[$subkey][$key];
         else
           $data = null;
 
-        if ( is_array($data) ) {
+        if (is_array($data)) {
 
           if (!$validator)
             $validator = new LibValidatorBase();
@@ -357,23 +357,23 @@ class LibRequestStack extends LibRequestSubrequest
           $filtered = array();
 
           foreach ($data as $dataValue) {
-            if ($validator->$checkMethod($dataValue, false , $value[2] , $value[3] ) ) {
+            if ($validator->$checkMethod($dataValue, false , $value[2] , $value[3])) {
               $filtered[] = $validator->sanitized;
               $validator->clean();
             }
           }
 
-          if ($filtered )
-            $filter->appendCleanData($key, $filtered );
+          if ($filtered)
+            $filter->appendCleanData($key, $filtered);
 
         } else {
-          if ($error = $filter->$method($key , $data, false , $value[2] , $value[3] ) ) {
-            if ( isset($messages[$key][$error] ) ) {
-              $response->addError($messages[$key][$error] );
-            } elseif ( isset($messages[$key]['default'] ) ) {
-              $response->addError($messages[$key]['default'] );
+          if ($error = $filter->$method($key , $data, false , $value[2] , $value[3])) {
+            if (isset($messages[$key][$error])) {
+              $response->addError($messages[$key][$error]);
+            } elseif (isset($messages[$key]['default'])) {
+              $response->addError($messages[$key]['default']);
             } else {
-              $response->addError( 'Wrong data for '.$key  );
+              $response->addError('Wrong data for '.$key  );
             }
           }
         }
@@ -385,19 +385,19 @@ class LibRequestStack extends LibRequestSubrequest
 
         $method = 'add'.$value[0] ;
 
-        if ( isset($this->params[$key]) )
+        if (isset($this->params[$key]))
           $data = $this->params[$key];
         else
           continue;
 
-        if ($error = $filter->$method($key , $data, false , $value[2] , $value[3] ) ) {
+        if ($error = $filter->$method($key , $data, false , $value[2] , $value[3])) {
 
-          if ( isset($messages[$key][$error] ) ) {
-            $response->addError($messages[$key][$error] );
-          } elseif ( isset($messages[$key]['default'] ) ) {
-            $response->addError($messages[$key]['default'] );
+          if (isset($messages[$key][$error])) {
+            $response->addError($messages[$key][$error]);
+          } elseif (isset($messages[$key]['default'])) {
+            $response->addError($messages[$key]['default']);
           } else {
-            $response->addError( 'Wrong data for '.$key  );
+            $response->addError('Wrong data for '.$key  );
           }
 
         }
@@ -415,16 +415,16 @@ class LibRequestStack extends LibRequestSubrequest
    *
    * @return string
    */
-  public function method($requested = null )
+  public function method($requested = null)
   {
 
     //this should always be uppper, but no risk here
-    if (!$requested )
+    if (!$requested)
       return $this->httpMethod;
     else {
-      if ( is_array($requested ) ) {
+      if (is_array($requested)) {
         foreach ($requested as $reqKey) {
-          if ($this->httpMethod == $reqKey )
+          if ($this->httpMethod == $reqKey)
             return true;
 
         }

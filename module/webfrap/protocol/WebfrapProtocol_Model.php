@@ -33,7 +33,7 @@ class WebfrapProtocol_Model extends Model
    * @param int $objid
    * @return WebfrapProtocol_Overlay_Query
    */
-  public function loadDsetProtocol($dKey, $objid )
+  public function loadDsetProtocol($dKey, $objid)
   {
 
     $db = $this->getDb();
@@ -42,8 +42,8 @@ class WebfrapProtocol_Model extends Model
     $condition['vid'] = $objid;
 
     /* @var $query WebfrapProtocol_Overlay_Query  */
-    $query = $db->newQuery( 'WebfrapProtocol_Overlay' );
-    $query->fetch($condition );
+    $query = $db->newQuery('WebfrapProtocol_Overlay');
+    $query->fetch($condition);
 
     return $query;
 

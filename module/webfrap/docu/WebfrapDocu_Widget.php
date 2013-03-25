@@ -30,7 +30,7 @@ class WebfrapDocu_Widget extends WgtWidget
    *
    * @return void
    */
-  public function asTab($containerId, $tabId, $tabSize = 'medium' )
+  public function asTab($containerId, $tabId, $tabSize = 'medium')
   {
 
     // benötigte resourcen laden
@@ -46,7 +46,7 @@ class WebfrapDocu_Widget extends WgtWidget
 
     $content = '';
 
-    $loader = new ExtensionLoader( 'index', 'data/docu/' );
+    $loader = new ExtensionLoader('index', 'data/docu/');
 
     $html = <<<HTML
     <div id="{$tabId}" class="wgt_tab {$tabSize} {$containerId}" title="Docu"  >
@@ -54,7 +54,7 @@ class WebfrapDocu_Widget extends WgtWidget
 HTML;
 
     foreach ($loader as $file) {
-      $html .= View::includeFile( PATH_GW.'data/docu/index/'.$file, $this ) ;
+      $html .= View::includeFile(PATH_GW.'data/docu/index/'.$file, $this) ;
     }
 
     $html .=<<<HTML
@@ -71,7 +71,7 @@ HTML;
    * @param string $tabSize
    * @return void
    */
-  public function embed($tabId, $tabSize = 'medium' )
+  public function embed($tabId, $tabSize = 'medium')
   {
     // benötigte resourcen laden
     $user     = $this->getUser();
@@ -85,7 +85,7 @@ HTML;
     $params   = new TFlagListing($request);
 
 
-    $loader = new ExtensionLoader( 'index', 'data/docu/' );
+    $loader = new ExtensionLoader('index', 'data/docu/');
 
     $html = <<<HTML
     <div id="{$tabId}" class="wgt_tab {$tabSize} {$containerId}" title="Docu"  >
@@ -93,7 +93,7 @@ HTML;
 HTML;
 
     foreach ($loader as $file) {
-      $html .= View::includeFile( PATH_GW.'data/docu/index/'.$file, $this ) ;
+      $html .= View::includeFile(PATH_GW.'data/docu/index/'.$file, $this) ;
     }
 
     $html .=<<<HTML
@@ -109,17 +109,17 @@ HTML;
    * @param TFlag $params
    * @return TFlag
    */
-  protected function getSearchFlags($params = null )
+  protected function getSearchFlags($params = null)
   {
 
     $request = $this->getRequest();
 
-    if (!$params )
+    if (!$params)
       $params = new TFlagListing($request);
 
     // start position of the query and size of the table
     $params->start
-      = $request->param('start', Validator::INT );
+      = $request->param('start', Validator::INT);
 
     // stepsite for query (limit) and the table
     if (!$params->qsize = $request->param('qsize', Validator::INT))
@@ -127,7 +127,7 @@ HTML;
 
     // order for the multi display element
     $params->order
-      = $request->param('order', Validator::CNAME );
+      = $request->param('order', Validator::CNAME);
 
     // target for a callback function
     $params->target

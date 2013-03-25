@@ -63,7 +63,7 @@ class LibSerializerXml extends LibSerializerAbstract
    *
    * @param mixed $data
    */
-  public function serialize($data = null )
+  public function serialize($data = null)
   {
     if (Log::$levelDebug)
      Log::start(__file__,__line__,__method__,array($data));
@@ -72,7 +72,7 @@ class LibSerializerXml extends LibSerializerAbstract
     $this->serialized .= $this->serializeNode($data);
     $this->serialized .= '</data>'.NL;
 
-  }//end public function serialize($data = null )
+  }//end public function serialize($data = null)
 
   /**
    * Enter description here...
@@ -81,9 +81,9 @@ class LibSerializerXml extends LibSerializerAbstract
   protected function serializeNode($data)
   {
 
-    if ( is_scalar($data) ) {
+    if (is_scalar($data)) {
       return (string) $data;
-    } elseif ( is_array($data) ) {
+    } elseif (is_array($data)) {
       $xml = '<array >'.NL;
 
       foreach ($data as $key => $value) {
@@ -93,7 +93,7 @@ class LibSerializerXml extends LibSerializerAbstract
       $xml .= '</array>'.NL;
 
       return $xml;
-    } elseif ( is_object($data) and $data instanceof ISerializeable  ) {
+    } elseif (is_object($data) and $data instanceof ISerializeable  ) {
 
     } else {
       throw new LibSerializerException

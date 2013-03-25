@@ -37,47 +37,47 @@ class DaidalosBdlNode_EntityAttribute_Create_Maintab_View extends WgtMaintabCust
    * @param TFlag $params
    * @return void
    */
-  public function displayCreate(  $params )
+  public function displayCreate( $params)
   {
 
     $db = $this->model->getDb();
 
-    $this->setLabel( 'Create Attribute' );
-    $this->setTitle( 'Create Attribute' );
+    $this->setLabel('Create Attribute');
+    $this->setTitle('Create Attribute');
 
-    $this->addVar( 'key', $this->model->modeller->key );
-    $this->addVar( 'bdlFile', $this->model->modeller->bdlFileName );
+    $this->addVar('key', $this->model->modeller->key);
+    $this->addVar('bdlFile', $this->model->modeller->bdlFileName);
 
-    $this->setTabId( 'wgt-tab-daidalos-bdl_entity_attribute-create' );
+    $this->setTabId('wgt-tab-daidalos-bdl_entity_attribute-create');
 
-    $this->setTemplate( 'daidalos/bdl/node/entity/attribute/maintab/create' );
+    $this->setTemplate('daidalos/bdl/node/entity/attribute/maintab/create');
 
     //p: Selectbox Type
-    $selectType = $this->newItem( 'selectType', 'BdlAttributeTypeKey_Selectbox' );
-    $selectType->setFirstFree( ' ' );
-    $queryType = $db->newQuery( 'BdlAttributeTypeKey_Selectbox' );
+    $selectType = $this->newItem('selectType', 'BdlAttributeTypeKey_Selectbox');
+    $selectType->setFirstFree(' ');
+    $queryType = $db->newQuery('BdlAttributeTypeKey_Selectbox');
 
     $queryType->fetchSelectbox();
-    $selectType->setData($queryType->getAll() );
+    $selectType->setData($queryType->getAll());
 
     //p: Selectbox Validator
-    $selectValidator = $this->newItem( 'selectValidator', 'BdlAttributeValidatorKey_Selectbox' );
-    $selectValidator->setFirstFree( ' ' );
-    $queryValidator = $db->newQuery( 'BdlAttributeValidatorKey_Selectbox' );
+    $selectValidator = $this->newItem('selectValidator', 'BdlAttributeValidatorKey_Selectbox');
+    $selectValidator->setFirstFree(' ');
+    $queryValidator = $db->newQuery('BdlAttributeValidatorKey_Selectbox');
 
     $queryValidator->fetchSelectbox();
-    $selectValidator->setData($queryValidator->getAll() );
+    $selectValidator->setData($queryValidator->getAll());
 
     //p: Selectbox Definition
-    $selectDefinition = $this->newItem( 'selectDefinition', 'BdlDefinitionKey_Selectbox' );
-    $selectDefinition->setFirstFree( ' ' );
-    $queryDefinition = $db->newQuery( 'BdlDefinitionKey_Selectbox' );
+    $selectDefinition = $this->newItem('selectDefinition', 'BdlDefinitionKey_Selectbox');
+    $selectDefinition->setFirstFree(' ');
+    $queryDefinition = $db->newQuery('BdlDefinitionKey_Selectbox');
 
     $queryValidator->fetchSelectbox();
-    $selectDefinition->setData($queryDefinition->getAll() );
+    $selectDefinition->setData($queryDefinition->getAll());
 
     $params = new TArray();
-    $this->addMenu($params );
+    $this->addMenu($params);
 
   }//end public function displayCreate */
 
@@ -90,7 +90,7 @@ class DaidalosBdlNode_EntityAttribute_Create_Maintab_View extends WgtMaintabCust
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu($params )
+  public function addMenu($params)
   {
 
     $menu     = $this->newMenu
@@ -100,9 +100,9 @@ class DaidalosBdlNode_EntityAttribute_Create_Maintab_View extends WgtMaintabCust
     );
 
     $menu->id = $this->id.'_dropmenu';
-    $menu->buildMenu(  $params );
+    $menu->buildMenu( $params);
 
-    $menu->injectActions($this, $params );
+    $menu->injectActions($this, $params);
 
   }//end public function addMenu */
 

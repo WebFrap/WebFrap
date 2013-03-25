@@ -58,7 +58,7 @@ class ProcessBase_Model extends Model
   /**
    * @param int $processId
    */
-  public function setProcessId($processId )
+  public function setProcessId($processId)
   {
     $this->processId =  $processId;
   }//end public function setProcessId */
@@ -66,7 +66,7 @@ class ProcessBase_Model extends Model
   /**
    * @param string $entityKey
    */
-  public function setEntityKey($entityKey )
+  public function setEntityKey($entityKey)
   {
     $this->entityKey =  $entityKey;
   }//end public function setEntityKey */
@@ -74,7 +74,7 @@ class ProcessBase_Model extends Model
   /**
    * @param int $entityId
    */
-  public function setEntityId($entityId )
+  public function setEntityId($entityId)
   {
     $this->entityId =  $entityId;
   }//end public function setEntityId */
@@ -83,13 +83,13 @@ class ProcessBase_Model extends Model
    * @param string $entityKey
    * @param int $entityId
    */
-  public function loadEntity($entityKey, $entityId )
+  public function loadEntity($entityKey, $entityId)
   {
 
     $this->entityKey =  $entityKey;
     $this->entityId  =  $entityId;
 
-    $entityKey    = SParserString::subToCamelCase($this->entityKey );
+    $entityKey    = SParserString::subToCamelCase($this->entityKey);
     $this->entity = $this->getDb()->getOrm()->get
     (
       $entityKey,
@@ -102,11 +102,11 @@ class ProcessBase_Model extends Model
    * @param int $processId
    * @return ProcessBase_Query
    */
-  public function getProcessEdges($processId )
+  public function getProcessEdges($processId)
   {
 
-    $query = $this->getDb()->newQuery( 'ProcessBase' );
-    $query->fetchProcessEdges($processId );
+    $query = $this->getDb()->newQuery('ProcessBase');
+    $query->fetchProcessEdges($processId);
 
     return $query;
 
@@ -115,12 +115,12 @@ class ProcessBase_Model extends Model
   /**
    * @return Entity
    */
-  public function getEntity(  )
+  public function getEntity()
   {
 
     if (!$this->entity) {
 
-      $entityKey = SParserString::subToCamelCase($this->entityKey );
+      $entityKey = SParserString::subToCamelCase($this->entityKey);
       $this->entity = $this->getDb()->getOrm()->get
       (
         $entityKey,

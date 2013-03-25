@@ -26,24 +26,24 @@ class Error_Maintab_View extends WgtMaintabCustom
   /**
    *
    */
-  public function displayException($exception )
+  public function displayException($exception)
   {
 
     $this->setTemplate('error/display_exception');
 
-    $this->addVar( 'exception', $exception );
+    $this->addVar('exception', $exception);
 
   }//end public function displayException */
 
   /**
    *
    */
-  public function displayEnduserError($exception )
+  public function displayEnduserError($exception)
   {
 
     $this->setTemplate('error/display_exception');
 
-    $this->addVar( 'exception', $exception );
+    $this->addVar('exception', $exception);
 
   }//end public function displayEnduserError */
 

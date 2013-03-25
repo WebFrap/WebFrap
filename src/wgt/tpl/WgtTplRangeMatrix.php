@@ -48,7 +48,7 @@ class WgtTplRangeMatrix
 
       $codeChecked = '';
       $codeActive = '';
-      if ( isset($active->{$entry} ) && $active->{$entry} ) {
+      if (isset($active->{$entry}) && $active->{$entry}) {
         $codeChecked = ' checked="checked" ';
         $codeActive = "ui-state-active";
       }

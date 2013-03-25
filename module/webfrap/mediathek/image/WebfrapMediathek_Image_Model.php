@@ -31,7 +31,7 @@ class WebfrapMediathek_Image_Model extends Model
    * @param object $dataNode
    * @return WbfsysImage_Entity
    */
-  public function insert($mediaId, $file, $dataNode )
+  public function insert($mediaId, $file, $dataNode)
   {
 
     $orm = $this->getOrm();
@@ -40,9 +40,9 @@ class WebfrapMediathek_Image_Model extends Model
     $fileSize = $file->getSize();
 
     $imgAdapter = LibImage::newAdapter();
-    $imgAdapter->open($file->getTempname() );
+    $imgAdapter->open($file->getTempname());
 
-    $imageNode = $orm->newEntity( "WbfsysImage" );
+    $imageNode = $orm->newEntity("WbfsysImage");
     $imageNode->file = $file->getNewname();
     $imageNode->file_hash = $checkSum;
     $imageNode->file_size = $fileSize;
@@ -59,15 +59,15 @@ class WebfrapMediathek_Image_Model extends Model
     $imageNode->id_confidentiality = $dataNode->id_confidentiality;
     $imageNode->description = $dataNode->description;
 
-    $imageNode = $orm->insert($imageNode );
+    $imageNode = $orm->insert($imageNode);
 
-    if (!$imageNode )
-      throw new LibDb_Exception( "Failed to save the image" );
+    if (!$imageNode)
+      throw new LibDb_Exception("Failed to save the image");
 
     $fileId = $imageNode->getId();
 
     $filePath = PATH_GW.'data/uploads/wbfsys_image/file/'.SParserString::idToPath($fileId);
-    $file->copy($fileId, $filePath );
+    $file->copy($fileId, $filePath);
 
     return $imageNode;
 
@@ -80,14 +80,14 @@ class WebfrapMediathek_Image_Model extends Model
    * @param object $dataNode
    * @return void
    */
-  public function update($objid, $mediaId, $file, $dataNode )
+  public function update($objid, $mediaId, $file, $dataNode)
   {
 
     $orm = $this->getOrm();
 
-    $imageNode = $orm->get( "WbfsysImage", $objid );
+    $imageNode = $orm->get("WbfsysImage", $objid);
 
-    if ($file && is_object($file) ) {
+    if ($file && is_object($file)) {
       $checkSum = $file->getChecksum();
       $fileSize = $file->getSize();
 
@@ -96,20 +96,20 @@ class WebfrapMediathek_Image_Model extends Model
       $imageNode->file_size = $fileSize;
 
       $imgAdapter = LibImage::newAdapter();
-      $imgAdapter->open($file->getTempname() );
+      $imgAdapter->open($file->getTempname());
 
       $imageNode->width  = $imgAdapter->width;
       $imageNode->height = $imgAdapter->height;
       $imageNode->mimetype = $imgAdapter->type;
 
       $fileId   = $imageNode->getId();
-      $filePath = SParserString::idToPath($fileId );
+      $filePath = SParserString::idToPath($fileId);
 
       $tumbPath = PATH_GW.'data/thumbs/wbfsys_image/file/'.$filePath.'/'.$fileId.'/';
-      SFilesystem::delete($tumbPath );
+      SFilesystem::delete($tumbPath);
 
       $filePath = PATH_GW.'data/uploads/wbfsys_image/file/'.$filePath;
-      $file->copy($fileId, $filePath );
+      $file->copy($fileId, $filePath);
 
     }
 
@@ -119,7 +119,7 @@ class WebfrapMediathek_Image_Model extends Model
     $imageNode->id_confidentiality = $dataNode->id_confidentiality;
     $imageNode->description = $dataNode->description;
 
-    $imageNode = $orm->update($imageNode );
+    $imageNode = $orm->update($imageNode);
 
     return $imageNode;
 
@@ -129,11 +129,11 @@ class WebfrapMediathek_Image_Model extends Model
    * @param int $imageId
    * @return WbfsysImage_Entity
    */
-  public function loadImage($imageId )
+  public function loadImage($imageId)
   {
 
     $orm = $this->getOrm();
-    $imageNode = $orm->get( 'WbfsysImage', $imageId );
+    $imageNode = $orm->get('WbfsysImage', $imageId);
 
     return $imageNode;
 
@@ -143,7 +143,7 @@ class WebfrapMediathek_Image_Model extends Model
    * @param int $mediaId
    * @return int
    */
-  public function cleanImages($mediaId )
+  public function cleanImages($mediaId)
   {
 
   }//end public function cleanImages */
@@ -152,33 +152,33 @@ class WebfrapMediathek_Image_Model extends Model
    * @param int $imgId
    * @return int
    */
-  public function delete($imgId )
+  public function delete($imgId)
   {
 
-    $orm    = $this->getOrm(  );
+    $orm    = $this->getOrm();
 
     // löschen der varianten
-    $imgVariants = $orm->getListWhere( 'WbfsysImageVariant', "id_image = {$imgId}" );
+    $imgVariants = $orm->getListWhere('WbfsysImageVariant', "id_image = {$imgId}");
 
     foreach ($imgVariants as $variant) {
       $variantId = $variant->getId();
       $filePath  = PATH_GW.'data/uploads/wbfsys_image_variant/file/'.SParserString::idToPath($variantId).$variantId;
 
       // löschen des hochgeladenen files
-      SFilesystem::delete($filePath );
-      $orm->delete($variant );
+      SFilesystem::delete($filePath);
+      $orm->delete($variant);
     }
 
     // datei löschen
-    $orm->delete( 'WbfsysImage', $imgId );
+    $orm->delete('WbfsysImage', $imgId);
 
     $dataPath = SParserString::idToPath($imgId);
 
     $tumbPath = PATH_GW.'data/thumbs/wbfsys_image/file/'.$dataPath.'/'.$imgId.'/';
-    SFilesystem::delete($tumbPath );
+    SFilesystem::delete($tumbPath);
 
     $filePath = PATH_GW.'data/uploads/wbfsys_image/file/'.$dataPath.$imgId;
-    SFilesystem::delete($filePath );
+    SFilesystem::delete($filePath);
 
   }//end public function delete */
 

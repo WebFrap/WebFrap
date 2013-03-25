@@ -34,7 +34,7 @@ class WebfrapSystem_Conf_Maintab_View extends WgtMaintab
  /**
   * @param TFlag $params
   */
-  public function displayOverview(  )
+  public function displayOverview()
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -45,16 +45,16 @@ class WebfrapSystem_Conf_Maintab_View extends WgtMaintab
     );
 
     // set the window title
-    $this->setTitle($i18nText );
+    $this->setTitle($i18nText);
 
     // set the window status text
-    $this->setLabel($i18nText );
+    $this->setLabel($i18nText);
 
     // set the from template
-    $this->setTemplate( 'webfrap/system/conf/maintab/overview', true );
+    $this->setTemplate('webfrap/system/conf/maintab/overview', true);
 
-    $this->addMenu(  );
-    $this->addActions(  );
+    $this->addMenu();
+    $this->addActions();
 
     // kein fehler aufgetreten
     return null;
@@ -74,23 +74,23 @@ class WebfrapSystem_Conf_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu(  )
+  public function addMenu()
   {
 
     $i18n         = $this->getI18n();
 
     $iconMenu     = '<i class="icon-reorder" ></i>';
-    $iconSupport  = $this->icon( 'control/support.png'      ,'Support');
-    $iconHelp     = $this->icon( 'control/help.png'      ,'Help');
-    $iconClose    = $this->icon( 'control/close.png'      ,'Close');
-    $iconEdit     = $this->icon( 'control/edit.png'      ,'Edit');
-    $iconBug      = $this->icon( 'control/bug.png'      ,'Bug');
-    $iconBookmark      = $this->icon( 'control/bookmark.png'      ,'Bookmark');
-    $iconFaq      = $this->icon( 'control/bookmark.png'      ,'Bookmark');
+    $iconSupport  = $this->icon('control/support.png'      ,'Support');
+    $iconHelp     = $this->icon('control/help.png'      ,'Help');
+    $iconClose    = $this->icon('control/close.png'      ,'Close');
+    $iconEdit     = $this->icon('control/edit.png'      ,'Edit');
+    $iconBug      = $this->icon('control/bug.png'      ,'Bug');
+    $iconBookmark      = $this->icon('control/bookmark.png'      ,'Bookmark');
+    $iconFaq      = $this->icon('control/bookmark.png'      ,'Bookmark');
 
-    $iconNew      = $this->icon( 'control/add.png'      ,'Add' );
-    $iconClean    = $this->icon( 'control/clean.png'      ,'Clean' );
-    $iconRefresh  = $this->icon( 'control/refresh.png'      ,'Refresh' );
+    $iconNew      = $this->icon('control/add.png'      ,'Add');
+    $iconClean    = $this->icon('control/clean.png'      ,'Clean');
+    $iconRefresh  = $this->icon('control/refresh.png'      ,'Refresh');
 
     $menu          = $this->newMenu($this->id.'_dropmenu');
     $menu->content = <<<HTML
@@ -147,7 +147,7 @@ HTML;
    *   string formId: the id of the form;
    * }
    */
-  public function addActions(  )
+  public function addActions()
   {
 
     // add the button actions for create in the window
@@ -168,7 +168,7 @@ self.getObject().find(".wgtac_close").click(function(){
 
 BUTTONJS;
 
-    $this->addJsCode($code );
+    $this->addJsCode($code);
 
   }//end public function addActions */
 

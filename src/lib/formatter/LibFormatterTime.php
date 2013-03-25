@@ -57,10 +57,10 @@ class LibFormatterTime
   {
 
     if ($time) {
-      $this->setTime($time );
+      $this->setTime($time);
     }
 
-    $this->setFormat($format );
+    $this->setFormat($format);
     $this->seperator = $separator;
 
   }//end public function __construct
@@ -83,7 +83,7 @@ class LibFormatterTime
   public static function getInstance()
   {
 
-    if (is_null( self::$instance) ) {
+    if (is_null(self::$instance)) {
       self::$instance = new LibFormatterTime();
     }
 
@@ -98,29 +98,29 @@ class LibFormatterTime
   /**
    *
    */
-  public function setFormat($format )
+  public function setFormat($format)
   {
     $length = strlen($format);
 
     $this->format = $format;
     for ($pos = 0 ; $pos < $length ; ++$pos) {
-      if ( ctype_alpha($format[$pos]) ) {
+      if (ctype_alpha($format[$pos])) {
         $this->formatRaw[] =  $format[$pos];
       }
     }
-  }//end public function setFormat($format )
+  }//end public function setFormat($format)
 
-  public function setSeperator($separator )
+  public function setSeperator($separator)
   {
     $this->separator = $separator;
-  }//end public function setSeperator($separator )
+  }//end public function setSeperator($separator)
 
   /**
    *
    */
-  public function setTimeLanguage($time )
+  public function setTimeLanguage($time)
   {
-    if (trim($time) == '' ) {
+    if (trim($time) == '') {
       $this->timeOrigin  = null;
       $this->timeEnglish = null;
 
@@ -128,7 +128,7 @@ class LibFormatterTime
     }
 
     $this->timeOrigin = $time;
-    $raw = explode($this->separator , $time );
+    $raw = explode($this->separator , $time);
 
     foreach ($this->formatRaw as $key => $value) {
       $this->timeRaw[$value] = isset($raw[$key]) ? $raw[$key] : '00'  ;
@@ -136,16 +136,16 @@ class LibFormatterTime
 
     $this->timeEnglish = $this->timeRaw['H'].':'.$this->timeRaw['i'].':'.$this->timeRaw['s'];
 
-  }//end public function setTimeLanguage($time )
+  }//end public function setTimeLanguage($time)
 
-  public function setTimeEnglish($time )
+  public function setTimeEnglish($time)
   {
-    if (trim($time ) != '' ) {
+    if (trim($time) != '') {
       $this->timeEnglish = $time;
     } else {
       $this->timeEnglish = null;
     }
-  }//end public function setTimeEnglish($time )
+  }//end public function setTimeEnglish($time)
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic
@@ -164,12 +164,12 @@ class LibFormatterTime
    */
   public function formatToLanguage()
   {
-    if (trim($this->timeEnglish) == '' ) {
+    if (trim($this->timeEnglish) == '') {
       return null;
     }
 
     //return $this->timeEnglish;
-    return date($this->format , strtotime($this->timeEnglish) );
+    return date($this->format , strtotime($this->timeEnglish));
   }//end public function formatToLanguage()
 
 } // end class LibFormatterTime

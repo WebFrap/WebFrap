@@ -31,7 +31,7 @@ class DaidalosPackage_Maintab_View extends WgtMaintab
  /**
   * @param TFlag $params
   */
-  public function displayWorkspace($params )
+  public function displayWorkspace($params)
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -42,18 +42,18 @@ class DaidalosPackage_Maintab_View extends WgtMaintab
     );
 
     // set the window title
-    $this->setTitle($i18nText );
+    $this->setTitle($i18nText);
 
     // set the window status text
-    $this->setLabel($i18nText );
+    $this->setLabel($i18nText);
 
-    $this->addVar( 'projects', $this->model->getWorkspaceProjects() );
+    $this->addVar('projects', $this->model->getWorkspaceProjects());
 
     // set the from template
-    $this->setTemplate( 'daidalos/package/maintab/workspace' );
+    $this->setTemplate('daidalos/package/maintab/workspace');
 
-    $this->addMenu($params );
-    $this->addActions($params );
+    $this->addMenu($params);
+    $this->addActions($params);
 
     // kein fehler aufgetreten
     return null;
@@ -73,23 +73,23 @@ class DaidalosPackage_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu($params )
+  public function addMenu($params)
   {
 
     $i18n         = $this->getI18n();
 
-    $iconMenu     = $this->icon( 'control/menu.png'      ,'Menu');
-    $iconSupport  = $this->icon( 'control/support.png'      ,'Support');
-    $iconHelp     = $this->icon( 'control/help.png'      ,'Help');
-    $iconClose    = $this->icon( 'control/close.png'      ,'Close');
-    $iconEdit     = $this->icon( 'control/edit.png'      ,'Edit');
+    $iconMenu     = $this->icon('control/menu.png'      ,'Menu');
+    $iconSupport  = $this->icon('control/support.png'      ,'Support');
+    $iconHelp     = $this->icon('control/help.png'      ,'Help');
+    $iconClose    = $this->icon('control/close.png'      ,'Close');
+    $iconEdit     = $this->icon('control/edit.png'      ,'Edit');
 
-    $iconSupport   = $this->icon( 'control/support.png'  ,'Support' );
-    $iconBug       = $this->icon( 'control/bug.png'      ,'Bug' );
-    $iconFaq       = $this->icon( 'control/faq.png'      ,'Faq' );
-    $iconHelp      = $this->icon( 'control/help.png'     ,'Help' );
+    $iconSupport   = $this->icon('control/support.png'  ,'Support');
+    $iconBug       = $this->icon('control/bug.png'      ,'Bug');
+    $iconFaq       = $this->icon('control/faq.png'      ,'Faq');
+    $iconHelp      = $this->icon('control/help.png'     ,'Help');
 
-    $iconRefresh    = $this->icon( 'control/refresh.png'      ,'Refresh');
+    $iconRefresh    = $this->icon('control/refresh.png'      ,'Refresh');
 
     $menu          = $this->newMenu($this->id.'_dropmenu');
     $menu->content = <<<HTML
@@ -139,7 +139,7 @@ HTML;
    *   string formId: the id of the form;
    * }
    */
-  public function addActions($params )
+  public function addActions($params)
   {
 
     // add the button actions for create in the window
@@ -155,7 +155,7 @@ self.getObject().find(".wgtac_close").click(function(){
 
 BUTTONJS;
 
-    $this->addJsCode($code );
+    $this->addJsCode($code);
 
   }//end public function addActions */
 

@@ -68,28 +68,28 @@ class WebfrapSys_Exception extends Webfrap_Exception
     $request  = Webfrap::$env->getRequest();
     $response = Webfrap::$env->getResponse();
 
-    if ( defined( 'DUMP_ERRORS' ) ) {
-      if (!DUMP_ERRORS )
+    if (defined('DUMP_ERRORS')) {
+      if (!DUMP_ERRORS)
         $protocol = false;
     }
 
-    if ( 'Error' === $userMessage )
+    if ('Error' === $userMessage)
       $userMessage = Error::PROGRAM_BUG;
 
     if (DEBUG || WBF_RESPONSE_ADAPTER === 'cli') {
       $userMessage = $debugMessage;
-      parent::__construct($debugMessage );
+      parent::__construct($debugMessage);
     } else {
-      parent::__construct($userMessage );
+      parent::__construct($userMessage);
     }
 
     $this->debugMessage = $debugMessage;
     $this->errorKey     = $errorKey;
 
-    if ( 'cli' === $request->type )
-      $response->writeLn($userMessage );
+    if ('cli' === $request->type)
+      $response->writeLn($userMessage);
 
-    Error::addException($userMessage , $this );
+    Error::addException($userMessage , $this);
 
     if ($protocol) {
       $logger = LibProtocol_SystemError::getDefault();
@@ -132,13 +132,13 @@ class WebfrapSys_Exception extends Webfrap_Exception
   /**
    * @param LibResponseHttp $response
    */
-  public function publish($response )
+  public function publish($response)
   {
 
     if ($this->error) {
-      $this->error->publish($response );
+      $this->error->publish($response);
     } else {
-      $response->addError($this->message );
+      $response->addError($this->message);
     }
 
   }//end public function publish */

@@ -104,7 +104,7 @@ class ContextForm extends Context
       $this->aclNode    = $aclNode;
 
     // request elemet type, bei back to top ist es relevant zu wissen woher der
-    // aufruf kam ( in diesem fall von einem input )
+    // aufruf kam (in diesem fall von einem input)
     // könnte bei referenzen auch interessant werden
     // values: inp | ref
     if ($requestedBy = $request->param('rqtby', Validator::TEXT))

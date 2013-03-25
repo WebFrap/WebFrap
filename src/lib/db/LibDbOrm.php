@@ -604,7 +604,7 @@ class LibDbOrm
   public function getTableCols($entityKey)
   {
 
-    if ( isset($this->tabColsCache[$entityKey])) {
+    if (isset($this->tabColsCache[$entityKey])) {
       return $this->tabColsCache[$entityKey];
     } else {
       $classname    = $entityKey.'_Entity';
@@ -1372,7 +1372,7 @@ SQL;
    *
    * @return array<int>
    */
-  public function getIds( $entityKey,  $where = null)
+  public function getIds($entityKey,  $where = null)
   {
 
     $criteria = $this->newCriteria();
@@ -1392,7 +1392,7 @@ SQL;
    *
    * @return array<int>
    */
-  public function getIdsByKeys( $entityKey, array $keys)
+  public function getIdsByKeys($entityKey, array $keys)
   {
 
     if (!$keys)
@@ -1417,7 +1417,7 @@ SQL;
    *
    * @return array<int>
    */
-  public function getIdByKey( $entityKey, $key)
+  public function getIdByKey($entityKey, $key)
   {
     return $this->getId
     (
@@ -2478,7 +2478,7 @@ SQL;
     foreach ($datas as $data) {
       $id = $data['rowid'];
 
-      $entity = new $entityName( $id, $data, $this);
+      $entity = new $entityName($id, $data, $this);
 
       $this->addToPool($entityName, $id, $entity);
       $pool[$id] = $entity;

@@ -58,15 +58,15 @@ abstract class WgtDesktopMainmenu extends WgtDesktopElement
    * @param string $key
    * @return Model
    */
-  protected function loadModel($modelName , $key = null )
+  protected function loadModel($modelName , $key = null)
   {
 
-    if (!$key )
+    if (!$key)
       $key = $modelName;
 
     $modelName = 'Model'.$modelName;
-    if (!isset($this->models[$key]  ) ) {
-      if ( Webfrap::classLoadable($modelName) ) {
+    if (!isset($this->models[$key]  )) {
+      if (Webfrap::classLoadable($modelName)) {
         $this->models[$key] = new $modelName();
       } else {
         throw new Controller_Exception('Internal Error','Failed to load Submodul: '.$modelName);
@@ -81,10 +81,10 @@ abstract class WgtDesktopMainmenu extends WgtDesktopElement
    * @param string $key
    * @return Model
    */
-  protected function getModel($key )
+  protected function getModel($key)
   {
 
-    if ( isset($this->models[$key] ) )
+    if (isset($this->models[$key]))
       return $this->models[$key];
     else
       return null;
@@ -95,9 +95,9 @@ abstract class WgtDesktopMainmenu extends WgtDesktopElement
    * (non-PHPdoc)
    * @see WgtDesktopElement::image()
    */
-  public function image($name, $param, $flag )
+  public function image($name, $param, $flag)
   {
-    return Wgt::image($name, $param, $flag );
+    return Wgt::image($name, $param, $flag);
 
   }//end public function image */
 

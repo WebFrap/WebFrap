@@ -36,8 +36,8 @@ class WgtSelectboxWebfrapSupportedLangs extends WgtSelectboxHardcoded
    */
   protected $data = array
   (
-  'de'       =>  array( 'value' => 'Deutsch'   ),
-  'en'       =>  array( 'value' => 'English'   ),
+  'de'       =>  array('value' => 'Deutsch'   ),
+  'en'       =>  array('value' => 'English'   ),
   );
 
 } // end class WgtSelectboxWebfrapSupportedLangs

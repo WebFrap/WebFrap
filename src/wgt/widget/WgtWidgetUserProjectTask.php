@@ -30,7 +30,7 @@ class WgtWidgetUserProjectTask extends WgtWidget
    * @param string $tabSize
    * @return void
    */
-  public function asTab($containerId, $tabId, $tabSize = 'medium' )
+  public function asTab($containerId, $tabId, $tabSize = 'medium')
   {
 
     $user     = $this->getUser();
@@ -46,18 +46,18 @@ class WgtWidgetUserProjectTask extends WgtWidget
     /*
     if ($params->exclude) {
 
-      $tmp = explode('-',$params->exclude );
+      $tmp = explode('-',$params->exclude);
 
       $conName   = $tmp[0];
       $srcId     = $tmp[1];
       $targetId  = $tmp[2];
 
       $excludeCond = ' project_task.rowid NOT IN '
-      .'( select '.$targetId .' from '.$conName.' where '.$srcId.' = '.$params->objid.' ) ';
+      .'(select '.$targetId .' from '.$conName.' where '.$srcId.' = '.$params->objid.') ';
 
     }*/
 
-    $query->setCondition( 'project_task_employee.id_employee = '.$employee );
+    $query->setCondition('project_task_employee.id_employee = '.$employee);
 
     $query->fetch();
 
@@ -73,10 +73,10 @@ class WgtWidgetUserProjectTask extends WgtWidget
     */
 
     $actions = array('edit');
-    $table->addActions($actions );
+    $table->addActions($actions);
 
-    $table->setId( 'wgt-table-user_project_task' );
-    $table->setPagingId( 'wgt-form-user_project_task-search' );
+    $table->setId('wgt-table-user_project_task');
+    $table->setPagingId('wgt-form-user_project_task-search');
 
     $table->buildHtml();
 
@@ -103,7 +103,7 @@ HTML;
    * @param string $tabSize
    * @return void
    */
-  public function reload($view, $tabId )
+  public function reload($view, $tabId)
   {
 
     $user     = $this->getUser();
@@ -119,20 +119,20 @@ HTML;
     /*
     if ($params->exclude) {
 
-      $tmp = explode('-',$params->exclude );
+      $tmp = explode('-',$params->exclude);
 
       $conName   = $tmp[0];
       $srcId     = $tmp[1];
       $targetId  = $tmp[2];
 
       $excludeCond = ' project_task.rowid NOT IN '
-      .'( select '.$targetId .' from '.$conName.' where '.$srcId.' = '.$params->objid.' ) ';
+      .'(select '.$targetId .' from '.$conName.' where '.$srcId.' = '.$params->objid.') ';
 
 
 
     }*/
 
-    $query->setCondition( 'project_task_employee.id_employee = '.$employee );
+    $query->setCondition('project_task_employee.id_employee = '.$employee);
 
     $query->fetch
     (
@@ -156,10 +156,10 @@ HTML;
     */
 
     $actions = array('edit');
-    $table->addActions($actions );
+    $table->addActions($actions);
 
-    $table->setId( 'wgt-table-user_project_task' );
-    $table->setPagingId( 'wgt-form-user_project_task-search' );
+    $table->setId('wgt-table-user_project_task');
+    $table->setPagingId('wgt-form-user_project_task-search');
 
 
     $table->buildHtml();

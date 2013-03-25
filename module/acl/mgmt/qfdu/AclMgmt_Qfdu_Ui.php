@@ -56,7 +56,7 @@ class AclMgmt_Qfdu_Ui extends MvcUi
    * @param boolean $insert
    * @return void
    */
-  public function listBlockUsers($groupId, $context )
+  public function listBlockUsers($groupId, $context)
   {
 
     //$className = $this->domainNode->domainAclMask.'_Qfdu_Treetable_Element';
@@ -70,28 +70,28 @@ class AclMgmt_Qfdu_Ui extends MvcUi
     );
 
     // den access container dem listenelement übergeben
-    $table->setAccess($context->access );
-    $table->setAccessPath($context, $context->aclKey, $context->aclNode );
+    $table->setAccess($context->access);
+    $table->setAccessPath($context, $context->aclKey, $context->aclNode);
 
     $table->areaId = $context->areaId;
     $table->domainNode = $this->domainNode;
 
-    $table->setUserData($this->model->loadGridUsers($groupId, $context ) );
+    $table->setUserData($this->model->loadGridUsers($groupId, $context));
 
     // if a table id is given use it for the table
-    if ($context->targetId )
+    if ($context->targetId)
       $table->id = $context->targetId;
 
-    $table->setPagingId($context->searchFormId );
+    $table->setPagingId($context->searchFormId);
 
     // add the id to the form
-    if (!$context->formId )
+    if (!$context->formId)
       $context->formId = 'wgt-form-'.$this->domainNode->domainName.'-acl-tgroup-update';
 
-    $table->setSaveForm($context->formId );
-    //$table->addUserActions( array( 'delete' ) );
+    $table->setSaveForm($context->formId);
+    //$table->addUserActions(array('delete'));
 
-    $this->view->setPageFragment( 'groupUsersEntry', $table->renderUserBlock($groupId, $context ) );
+    $this->view->setPageFragment('groupUsersEntry', $table->renderUserBlock($groupId, $context));
 
     $jsCode = <<<WGTJS
 
@@ -99,7 +99,7 @@ class AclMgmt_Qfdu_Ui extends MvcUi
 
 WGTJS;
 
-    $this->view->addJsCode($jsCode );
+    $this->view->addJsCode($jsCode);
 
 
   }//end public function listBlockUsers */
@@ -113,7 +113,7 @@ WGTJS;
    * @param boolean $insert
    * @return void
    */
-  public function listBlockDsets($groupId, $userId, $context )
+  public function listBlockDsets($groupId, $userId, $context)
   {
 
     //$className = $this->domainNode->domainAclMask.'_Qfdu_Treetable_Element';
@@ -126,28 +126,28 @@ WGTJS;
     );
 
     // den access container dem listenelement übergeben
-    $table->setAccess($context->access );
-    $table->setAccessPath($context, $context->aclKey, $context->aclNode );
+    $table->setAccess($context->access);
+    $table->setAccessPath($context, $context->aclKey, $context->aclNode);
 
     $table->areaId = $context->areaId;
     $table->domainNode = $this->domainNode;
 
-    $table->setDsetData($this->model->loadGridDsets($groupId, $userId, $context ) );
+    $table->setDsetData($this->model->loadGridDsets($groupId, $userId, $context));
 
     // if a table id is given use it for the table
-    if ($context->targetId )
+    if ($context->targetId)
       $table->id = $context->targetId;
 
-    $table->setPagingId($context->searchFormId );
+    $table->setPagingId($context->searchFormId);
 
     // add the id to the form
-    if (!$context->formId )
+    if (!$context->formId)
       $context->formId = 'wgt-form-'.$this->domainNode->domainName.'-acl-tgroup-update';
 
-    $table->setSaveForm($context->formId );
-    //$table->addDatasetActions( array( 'delete' ) );
+    $table->setSaveForm($context->formId);
+    //$table->addDatasetActions(array('delete'));
 
-    $this->view->setPageFragment( 'groupUsersEntry', $table->renderDsetBlock($groupId, $userId, $context ) );
+    $this->view->setPageFragment('groupUsersEntry', $table->renderDsetBlock($groupId, $userId, $context));
 
     $jsCode = <<<WGTJS
 
@@ -155,7 +155,7 @@ WGTJS;
 
 WGTJS;
 
-    $this->view->addJsCode($jsCode );
+    $this->view->addJsCode($jsCode);
 
 
   }//end public function listBlockUsers */
@@ -169,7 +169,7 @@ WGTJS;
    * @param boolean $insert
    * @return void
    */
-  public function listEntry($areaId, $access, $params, $insert )
+  public function listEntry($areaId, $access, $params, $insert)
   {
 
     //$className = $this->domainNode->domainAclMask.'_Qfdu_Treetable_Element';
@@ -182,36 +182,36 @@ WGTJS;
     );
 
     // den access container dem listenelement übergeben
-    $table->setAccess($access );
-    $table->setAccessPath($params, $params->aclKey, $params->aclNode );
+    $table->setAccess($access);
+    $table->setAccessPath($params, $params->aclKey, $params->aclNode);
 
     $table->areaId = $areaId;
 
     $assignEntity = $this->model->getEntityWbfsysGroupUsers();
 
-    $data = $this->model->getEntryWbfsysGroupUsers(  $params );
+    $data = $this->model->getEntryWbfsysGroupUsers( $params);
 
-    $table->setData($data );
+    $table->setData($data);
 
     // if a table id is given use it for the table
-    if ($params->targetId )
+    if ($params->targetId)
       $table->id = $params->targetId;
 
-    $table->setPagingId($params->searchFormId );
+    $table->setPagingId($params->searchFormId);
 
     // add the id to the form
-    if (!$params->formId )
+    if (!$params->formId)
       $params->formId = 'wgt-form-'.$this->domainNode->domainName.'-acl-tgroup-update';
 
-    $table->setSaveForm($params->formId );
+    $table->setSaveForm($params->formId);
 
     /*
-    $table->addActions( array( 'inheritance', 'sep', 'delete' ), 'group' );
-    $table->addActions( array( 'delete' ), 'user' );
-    $table->addActions( array( 'delete' ), 'dset' );
+    $table->addActions(array('inheritance', 'sep', 'delete'), 'group');
+    $table->addActions(array('delete'), 'user');
+    $table->addActions(array('delete'), 'dset');
     */
 
-    $this->view->setPageFragment( 'groupUsersEntry', $table->buildAjaxEntry( ) );
+    $this->view->setPageFragment('groupUsersEntry', $table->buildAjaxEntry());
 
     if ($insert) {
 
@@ -231,7 +231,7 @@ WGTJS;
 
     }
 
-    $this->view->addJsCode($jsCode );
+    $this->view->addJsCode($jsCode);
 
     return $table;
 
@@ -248,7 +248,7 @@ WGTJS;
    * @param string $itemId
    * @return void
    */
-  public function removeGroupEntry($key, $itemId )
+  public function removeGroupEntry($key, $itemId)
   {
     $view = $this->getView();
 
@@ -288,7 +288,7 @@ JSCODE;
 
 JSCODE;
 
-    $this->view->addJsCode($code );
+    $this->view->addJsCode($code);
 
   }//end public function cleanUserEntry */
 

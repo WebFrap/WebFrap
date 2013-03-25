@@ -31,7 +31,7 @@ class MyAnnouncement_Widget_Table_Archive_Filter_Postgresql extends LibSqlFilter
    * @param TFlag $params
    * @return LibSqlCriteria
    */
-  public function inject($criteria, $params )
+  public function inject($criteria, $params)
   {
 
     $criteria->filter

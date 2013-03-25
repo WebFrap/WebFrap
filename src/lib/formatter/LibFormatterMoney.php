@@ -87,7 +87,7 @@ class LibFormatterMoney
       Log::create($this);
 
     if ($money) {
-      $this->setMoneyLanguage($money );
+      $this->setMoneyLanguage($money);
     }
 
     $this->separatorDec = $separatorDec;
@@ -115,7 +115,7 @@ class LibFormatterMoney
   public static function getInstance()
   {
 
-    if (is_null( self::$instance) ) {
+    if (is_null(self::$instance)) {
       self::$instance = new LibFormatterMoney();
     }
 
@@ -129,7 +129,7 @@ class LibFormatterMoney
   public static function getActive()
   {
 
-    if (is_null( self::$instance) ) {
+    if (is_null(self::$instance)) {
       self::$instance = new LibFormatterMoney();
     }
 
@@ -146,7 +146,7 @@ class LibFormatterMoney
    * @param string $separatorTh
    * @param int $size
    */
-  public function setFormat($separatorDec = ',', $separatorTh = '.' , $size = 2 )
+  public function setFormat($separatorDec = ',', $separatorTh = '.' , $size = 2)
   {
     $this->separatorDec = $separatorDec;
     $this->separatorTh  = $separatorTh;
@@ -157,13 +157,13 @@ class LibFormatterMoney
   /**
    * @param int $money
    */
-  public function setMoneyLanguage($money )
+  public function setMoneyLanguage($money)
   {
     $this->moneyLanguage = $money;
-    $rawDec = explode($this->separatorDec , $money );
+    $rawDec = explode($this->separatorDec , $money);
 
     $englishMoney = isset($rawDec[1]) ? '.'.$rawDec[1] : '';
-    $englishMoney = str_replace($this->separatorTh , '' , $rawDec[0] ).$englishMoney;
+    $englishMoney = str_replace($this->separatorTh , '' , $rawDec[0]).$englishMoney;
 
     $this->moneyEnglish = $englishMoney;
 
@@ -172,7 +172,7 @@ class LibFormatterMoney
   /**
    *
    */
-  public function setMoneyEnglish($englishMoney )
+  public function setMoneyEnglish($englishMoney)
   {
     $this->moneyEnglish = $englishMoney;
   }//end public function setMoneyEnglish
@@ -192,7 +192,7 @@ class LibFormatterMoney
   /**
    * @return float
    */
-  public function formatToLanguage($money = null )
+  public function formatToLanguage($money = null)
   {
     if (!$money) {
       $money = $this->moneyEnglish;
@@ -211,7 +211,7 @@ class LibFormatterMoney
   /**
    * @param string $money
    */
-  public static function format($money )
+  public static function format($money)
   {
     if (!self::$instance)
       self::getActive();

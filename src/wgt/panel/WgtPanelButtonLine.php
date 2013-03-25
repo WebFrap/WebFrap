@@ -44,7 +44,7 @@ class WgtPanelButtonLine extends WgtPanelElement
   /**
    * @var Base $env
    */
-  public function __construct($env )
+  public function __construct($env)
   {
     $this->env = $env;
   }//end public function __construct */
@@ -55,7 +55,7 @@ class WgtPanelButtonLine extends WgtPanelElement
   public function render()
   {
 
-    $iconEdit = $this->icon( 'control/edit.png', 'Edit' );
+    $iconEdit = $this->icon('control/edit.png', 'Edit');
 
     $this->setUp();
 

@@ -33,7 +33,7 @@ final class SValid
    * @param TFlowFlag $params
    * @return string
    */
-  public static function text($text )
+  public static function text($text)
   {
     return htmlentities($text,null,'UTF-8');
 

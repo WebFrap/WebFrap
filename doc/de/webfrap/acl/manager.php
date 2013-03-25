@@ -6,4 +6,4 @@ Hier könnte ihre Dokumentation stehen... Wenn sie endlich jemand schreiben wür
 <?php start_highlight(); ?>
 <_..._>
 </_..._>
-<?php display_highlight( 'xml' ); ?>
+<?php display_highlight('xml'); ?>

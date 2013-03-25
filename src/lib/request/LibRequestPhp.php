@@ -211,7 +211,7 @@ class LibRequestPhp
   *
   * @deprecated
   */
-  public function addGet($key, $data = null )
+  public function addGet($key, $data = null)
   {
 
     if (is_array($key)) {
@@ -265,7 +265,7 @@ class LibRequestPhp
         Debug::console("Expexted an array but got a scalar in paramList key: {$validator}");
 
         // nur den array zurück geben
-        if($asArray)
+        if ($asArray)
           return array();
 
         return $paramList;
@@ -274,7 +274,7 @@ class LibRequestPhp
     } else {
 
       // nur den array zurück geben
-      if($asArray)
+      if ($asArray)
         return array();
 
       return $paramList;
@@ -291,7 +291,7 @@ class LibRequestPhp
 
           $tmp = $filter->getData($key);
 
-          if((int)$tmp){
+          if ((int)$tmp){
             $paramList->$key = $tmp;
           }
 
@@ -307,7 +307,7 @@ class LibRequestPhp
     }
 
     // nur den array zurück geben
-    if($asArray)
+    if ($asArray)
       return $paramList->content();
 
     return $paramList;
@@ -906,7 +906,7 @@ class LibRequestPhp
   * @param string Key Name des zu testenden Cookies
   * @return bool
   */
-  public function issetCookie($key )
+  public function issetCookie($key)
   {
     return isset($_COOKIE[$key]);
 
@@ -1027,7 +1027,7 @@ class LibRequestPhp
   * @param string Key Name des zu testenden Cookies
   * @return bool
   */
-  public function serverExists($key )
+  public function serverExists($key)
   {
 
     if (isset($_SERVER[$key])) {
@@ -1077,7 +1077,7 @@ class LibRequestPhp
   * @param string Key Name des zu testenden Cookies
   * @return bool
   */
-  public function envExists($key )
+  public function envExists($key)
   {
     return isset($_ENV[$key]);
   } // end public function envExists */
@@ -1143,7 +1143,7 @@ class LibRequestPhp
    * @return Validator
    *
    */
-  public function checkFormInput($values , $messages, $subkey = null, $required = array(), $state = null )
+  public function checkFormInput($values , $messages, $subkey = null, $required = array(), $state = null)
   {
 
     // get Validator from Factory
@@ -1167,7 +1167,7 @@ class LibRequestPhp
         if (Validator::FILE == $valType || Validator::IMAGE == $valType) {
           if (isset($_FILES[$subkey])) {
             // asume this was just an empty file
-            if ('' == trim($_FILES[$subkey]['name'][$key]) ) {
+            if ('' == trim($_FILES[$subkey]['name'][$key])) {
               continue;
               //$data = null;
             } else {
@@ -1339,7 +1339,7 @@ class LibRequestPhp
               if ($state)
                 $state->addError('Wrong data for '.$key);
               else
-                $response->addError('Wrong data for '.$key );
+                $response->addError('Wrong data for '.$key);
             }
           }
         }
@@ -1371,7 +1371,7 @@ class LibRequestPhp
             if ($state)
               $state->addError('Wrong data for '.$key);
             else
-              $response->addError('Wrong data for '.$key );
+              $response->addError('Wrong data for '.$key);
           }
         }
 
@@ -1406,7 +1406,7 @@ class LibRequestPhp
     $subkey = null,
     $required = array(),
     $state = null
- )
+)
   {
 
     // check if data exists, if not return an empty array
@@ -1454,7 +1454,7 @@ class LibRequestPhp
             if ($state)
               $state->addError('Wrong data for '.$key);
             else
-              $response->addError('Wrong data for '.$key );
+              $response->addError('Wrong data for '.$key);
           }
         }
 
@@ -1487,7 +1487,7 @@ class LibRequestPhp
     $subkey = null,
     $messages = array(),
     $state = null
- )
+)
   {
 
     $post = array();
@@ -1544,7 +1544,7 @@ class LibRequestPhp
             if ($state)
               $state->addError('Wrong data for '.$key);
             else
-              $response->addError('Wrong data for '.$key );
+              $response->addError('Wrong data for '.$key);
           }
         }
 
@@ -1602,7 +1602,7 @@ class LibRequestPhp
           elseif (isset($messages[$key]['default']))
             $response->addError($messages[$key]['default']);
           else
-            $response->addError('Wrong data for '.$key );
+            $response->addError('Wrong data for '.$key);
         }
       }
 
@@ -1677,7 +1677,7 @@ class LibRequestPhp
     $fields = array(),
     $required = array(),
     $state = null
- )
+)
   {
 
     $filter = $this->checkSearchInput
@@ -1797,7 +1797,7 @@ class LibRequestPhp
     $fields = array(),
     $required = array(),
     $state = null
- )
+)
   {
 
     $filter = $this->checkFormInput
@@ -1850,7 +1850,7 @@ class LibRequestPhp
     $fields = array(),
     $required = array(),
     $state = null
- )
+)
   {
 
     $orm      = $this->getOrm();
@@ -2000,7 +2000,7 @@ class LibRequestPhp
   public function getBrowser()
   {
 
-    if (isset($this->browserInfo['name']) )
+    if (isset($this->browserInfo['name']))
       return $this->browserInfo['name'];
 
     $userAgent = strtolower($_SERVER['HTTP_USER_AGENT']);
@@ -2031,7 +2031,7 @@ class LibRequestPhp
    */
   public function getBrowserVersion()
   {
-    if (isset($this->browserInfo['version']) )
+    if (isset($this->browserInfo['version']))
       return $this->browserInfo['version'];
 
     $userAgent = strtolower($_SERVER['HTTP_USER_AGENT']);
@@ -2053,7 +2053,7 @@ class LibRequestPhp
    */
   public function getPlatform()
   {
-    if (isset($this->browserInfo['platform']) )
+    if (isset($this->browserInfo['platform']))
       return $this->browserInfo['platform'];
 
     $userAgent = strtolower($_SERVER['HTTP_USER_AGENT']);
@@ -2088,8 +2088,8 @@ class LibRequestPhp
   {
 
     // den port abhacken wenn vorhanden
-    //$tmp = explode(':', $this->server('REMOTE_ADDR' ));
-    return $this->server('REMOTE_ADDR' );
+    //$tmp = explode(':', $this->server('REMOTE_ADDR'));
+    return $this->server('REMOTE_ADDR');
 
   }//end public function getClientIp */
 

@@ -27,7 +27,7 @@ class WgtMenuTree extends WgtMenu
    * (non-PHPdoc)
    * @see src/wgt/WgtMenu#setData()
    */
-  public function setData($data )
+  public function setData($data)
   {
     $this->data = $data;
   }//end public function setData */
@@ -41,10 +41,10 @@ class WgtMenuTree extends WgtMenu
 
     //$this->load();
 
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
-    if (count($this->data->folders) == 0 && count($this->data->files ) == 0  ) {
+    if (count($this->data->folders) == 0 && count($this->data->files) == 0  ) {
       $this->html .= '<ul id="'.$this->id.'" class="wgt_tree" >'.NL;
       $this->html .= '</ul>'.NL;
 
@@ -58,8 +58,8 @@ class WgtMenuTree extends WgtMenu
     /*
   'menu_category_default'
   Wgt::SUB_WINDOW,
-  I18n::s( 'default', 'accounting.category.text.labelDefault'  ),
-  I18n::s( 'default', 'accounting.category.text.titleDefault'  ),
+  I18n::s('default', 'accounting.category.text.labelDefault'  ),
+  I18n::s('default', 'accounting.category.text.titleDefault'  ),
   'index.php?c=Accounting.base.categoryMenu&amp;category=default',
   'accounting/category/default',
      */
@@ -135,10 +135,10 @@ HTML;
    *
    * @return String
    */
-  public function buildAjaxNode($parentNode )
+  public function buildAjaxNode($parentNode)
   {
 
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
     $html = '';
@@ -204,12 +204,12 @@ HTML;
   /**
    * @param $entry
    */
-  protected function buildMenuEntry($entry )
+  protected function buildMenuEntry($entry)
   {
 
-    if ($entry[WgtMenu::ICON] != '' || trim($entry[WgtMenu::TEXT]) != '' ) {
+    if ($entry[WgtMenu::ICON] != '' || trim($entry[WgtMenu::TEXT]) != '') {
 
-      $text = trim($entry[WgtMenu::TEXT] ) != ''
+      $text = trim($entry[WgtMenu::TEXT]) != ''
         ? $entry[WgtMenu::TEXT].'<br />'
         : '';
 
@@ -217,25 +217,25 @@ HTML;
 
       if (Wgt::ACTION == $entry[WgtMenu::TYPE]) {
         return '<div style="width:200px;" >
-            <img src="'.$iconSrc.'" onclick="tree'.$this->name.'.loadChildren( {id:$id}, this );" class="icon xsmall" alt="'.$entry[WgtMenu::TITLE].'" />
+            <img src="'.$iconSrc.'" onclick="tree'.$this->name.'.loadChildren({id:$id}, this);" class="icon xsmall" alt="'.$entry[WgtMenu::TITLE].'" />
             <span onclick="'.$entry[WgtMenu::ACTION].'" >'.$text.'</span>
           </div>';
 
       } elseif (Wgt::URL == $entry[WgtMenu::TYPE]) {
         return '<div style="width:200px;" >
-            <img src="'.$iconSrc.'" onclick="tree'.$this->name.'.loadChildren( {id:$id}, this );" class="icon xsmall" alt="'.$entry[WgtMenu::TITLE].'" />
+            <img src="'.$iconSrc.'" onclick="tree'.$this->name.'.loadChildren({id:$id}, this);" class="icon xsmall" alt="'.$entry[WgtMenu::TITLE].'" />
             <a style="border:0px;" href="'.$entry[WgtMenu::ACTION].'" >'.$text.'</a>
           </div>';
 
       } elseif (Wgt::AJAX == $entry[WgtMenu::TYPE]) {
         return '<div style="width:200px;" >
-            <img src="'.$iconSrc.'" onclick="tree'.$this->name.'.loadChildren( {id:$id}, this );" class="icon xsmall" alt="'.$entry[WgtMenu::TITLE].'" />
+            <img src="'.$iconSrc.'" onclick="tree'.$this->name.'.loadChildren({id:$id}, this);" class="icon xsmall" alt="'.$entry[WgtMenu::TITLE].'" />
             <a class="wcm wcm_req_ajax" style="border:0px;" href="'.$entry[WgtMenu::ACTION].'" >'.$text.'</a>
           </div>';
 
       } else {
         return '<div style="width:200px;" >
-            <img src="'.$iconSrc.'" onclick="tree'.$this->name.'.loadChildren( {id:$id}, this );" class="icon xsmall" alt="'.$entry[WgtMenu::TITLE].'" />
+            <img src="'.$iconSrc.'" onclick="tree'.$this->name.'.loadChildren({id:$id}, this);" class="icon xsmall" alt="'.$entry[WgtMenu::TITLE].'" />
             <a class="wcm wcm_req_ajax" style="border:0px;" href="'.$entry[WgtMenu::ACTION].'" >'.$text.'</a>
           </div>';
 

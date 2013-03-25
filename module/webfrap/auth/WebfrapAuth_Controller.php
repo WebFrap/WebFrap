@@ -43,48 +43,48 @@ class WebfrapAuth_Controller extends Controller
   (
     'form' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab', 'html' )
+      'method'    => array('GET'),
+      'views'      => array('maintab', 'html')
     ),
     'login' => array
     (
-      'method'    => array( 'POST' ),
-      'views'      => array( 'ajax', 'html' )
+      'method'    => array('POST'),
+      'views'      => array('ajax', 'html')
     ),
     'logout' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'ajax', 'maintab', 'html' )
+      'method'    => array('GET'),
+      'views'      => array('ajax', 'maintab', 'html')
     ),
     'formresetpasswd' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab', 'html' )
+      'method'    => array('GET'),
+      'views'      => array('maintab', 'html')
     ),
     'resetpasswd' => array
     (
-      'method'    => array( 'PUT', 'POST' ),
-      'views'      => array( 'ajax', 'html' )
+      'method'    => array('PUT', 'POST'),
+      'views'      => array('ajax', 'html')
     ),
     'formchangepasswd' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab', 'html' )
+      'method'    => array('GET'),
+      'views'      => array('maintab', 'html')
     ),
     'changepasswd' => array
     (
-      'method'    => array( 'PUT', 'POST' ),
-      'views'      => array( 'ajax', 'html' )
+      'method'    => array('PUT', 'POST'),
+      'views'      => array('ajax', 'html')
     ),
     'formforgotpasswd' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab', 'html' )
+      'method'    => array('GET'),
+      'views'      => array('maintab', 'html')
     ),
     'forgotpasswd' => array
     (
-      'method'    => array( 'PUT', 'POST' ),
-      'views'      => array( 'ajax', 'html' )
+      'method'    => array('PUT', 'POST'),
+      'views'      => array('ajax', 'html')
     ),
   );
 
@@ -97,19 +97,19 @@ class WebfrapAuth_Controller extends Controller
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_form($request, $response )
+  public function service_form($request, $response)
   {
 
-    if ($this->view->isType( View::AJAX ) )
+    if ($this->view->isType(View::AJAX))
       View::$sendBody = true;
 
     View::$sendMenu = false;
 
-    $this->view->setTitle( Conf::status( 'default.title' ).' Login' );
-    $this->view->setIndex( 'login'  );
-    $this->view->setTemplate( 'webfrap/auth/form_login', true  );
+    $this->view->setTitle(Conf::status('default.title').' Login');
+    $this->view->setIndex('login'  );
+    $this->view->setTemplate('webfrap/auth/form_login', true  );
 
-    $inputLoginname = $this->view->newInput( 'inputLoginname' , 'Input' );
+    $inputLoginname = $this->view->newInput('inputLoginname' , 'Input');
     $inputLoginname->addAttributes
     (array
     (
@@ -118,7 +118,7 @@ class WebfrapAuth_Controller extends Controller
       'class' => 'medium'
     ));
 
-    $inputPasswd = $this->view->newInput( 'inputPasswd' , 'Input' );
+    $inputPasswd = $this->view->newInput('inputPasswd' , 'Input');
     $inputPasswd->addAttributes
     (array
     (
@@ -127,7 +127,7 @@ class WebfrapAuth_Controller extends Controller
       'class' => 'medium'
     ));
 
-    $inputSubmit = $this->view->newInput( 'inputSubmit' , 'Input' );
+    $inputSubmit = $this->view->newInput('inputSubmit' , 'Input');
     $inputSubmit->addAttributes
     (array
     (
@@ -143,31 +143,31 @@ class WebfrapAuth_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_login($request, $response )
+  public function service_login($request, $response)
   {
 
-    $auth     = new LibAuth($this );
+    $auth     = new LibAuth($this);
     $response = $this->getResponse();
     $orm      = $this->getOrm();
 
     /* @var $model WebfrapAuth_Model */
-    $model = $this->loadModel( 'WebfrapAuth' );
+    $model = $this->loadModel('WebfrapAuth');
 
-    if ($auth->login() ) {
+    if ($auth->login()) {
 
       $user = $this->getUser();
-      $user->setDb($this->getDb() );
+      $user->setDb($this->getDb());
 
       $userName = $auth->getUsername();
 
       try {
-        if (!$authRole = $orm->get( 'WbfsysRoleUser', "UPPER(name) = UPPER('{$userName}')" ) ) {
-          $response->addError( 'User '.$userName.' not exists' );
+        if (!$authRole = $orm->get('WbfsysRoleUser', "UPPER(name) = UPPER('{$userName}')")) {
+          $response->addError('User '.$userName.' not exists');
 
           return false;
         }
-      } catch ( LibDb_Exception $exc ) {
-        $response->addError( 'Error in the query to fetch the data for user: '.$userName );
+      } catch (LibDb_Exception $exc) {
+        $response->addError('Error in the query to fetch the data for user: '.$userName);
 
         return false;
       }
@@ -175,7 +175,7 @@ class WebfrapAuth_Controller extends Controller
       if
       (
         defined('WBF_AUTH_TYPE')
-          && 2 == WBF_AUTH_TYPE && ($userName != 'admin' )
+          && 2 == WBF_AUTH_TYPE && ($userName != 'admin')
           && !$authRole->non_cert_login
       )
       {
@@ -188,15 +188,15 @@ class WebfrapAuth_Controller extends Controller
         return;
       }
 
-      if ($user->login($authRole ) ) {
+      if ($user->login($authRole)) {
 
-        if ($this->view->isType( View::AJAX ) )
+        if ($this->view->isType(View::AJAX))
           View::$sendIndex = true;
 
-        $model->protocolLogin($user );
+        $model->protocolLogin($user);
 
         $conf = Conf::get('view');
-        $this->view->setHtmlHead($conf['head.user'] );
+        $this->view->setHtmlHead($conf['head.user']);
 
         Webfrap::getInstance()->redirectToDefault();
 
@@ -206,17 +206,17 @@ class WebfrapAuth_Controller extends Controller
 
         $conf = Conf::get('view');
 
-        $this->view->setIndex($conf['index.login'] );
-        $this->view->setHtmlHead($conf['head.login'] );
+        $this->view->setIndex($conf['index.login']);
+        $this->view->setHtmlHead($conf['head.login']);
 
-        $this->view->message->addError( 'Failed to login' );
+        $this->view->message->addError('Failed to login');
       }
     } else {
       $conf = Conf::get('view');
-      $this->view->setIndex($conf['index.login'] );
-      $this->view->setHtmlHead($conf['head.login'] );
+      $this->view->setIndex($conf['index.login']);
+      $this->view->setHtmlHead($conf['head.login']);
       $this->view->message->addError('Login Failed');
-      $this->service_form($request, $response );
+      $this->service_form($request, $response);
     }
 
   }// end public function service_login */
@@ -226,10 +226,10 @@ class WebfrapAuth_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_reload($request, $response )
+  public function service_reload($request, $response)
   {
 
-    $auth = new LibAuth($this );
+    $auth = new LibAuth($this);
 
     $user = $this->getUser();
     $user->reload();
@@ -241,13 +241,13 @@ class WebfrapAuth_Controller extends Controller
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_formResetPasswd($request, $response )
+  public function service_formResetPasswd($request, $response)
   {
 
-    $this->tplEngine->setHtmlHead( 'public' );
-    $this->tplEngine->setIndex( 'public/default' );
+    $this->tplEngine->setHtmlHead('public');
+    $this->tplEngine->setIndex('public/default');
 
-    $this->view->setTemplate( 'webfrap/auth/form_reset_pwd', true  );
+    $this->view->setTemplate('webfrap/auth/form_reset_pwd', true  );
 
   }//end public function service_formResetPasswd */
 
@@ -256,13 +256,13 @@ class WebfrapAuth_Controller extends Controller
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_formChangePasswd($request, $response )
+  public function service_formChangePasswd($request, $response)
   {
 
-    $this->tplEngine->setHtmlHead( 'public' );
-    $this->tplEngine->setIndex( 'public/default' );
+    $this->tplEngine->setHtmlHead('public');
+    $this->tplEngine->setIndex('public/default');
 
-    $this->view->setTemplate( 'webfrap/auth/form_change_pwd', true  );
+    $this->view->setTemplate('webfrap/auth/form_change_pwd', true  );
 
   }//end public function service_formChangePasswd */
 
@@ -271,13 +271,13 @@ class WebfrapAuth_Controller extends Controller
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_formForgotPasswd($request, $response )
+  public function service_formForgotPasswd($request, $response)
   {
 
-    $this->tplEngine->setHtmlHead( 'public' );
-    $this->tplEngine->setIndex( 'public/plain' );
+    $this->tplEngine->setHtmlHead('public');
+    $this->tplEngine->setIndex('public/plain');
 
-    $this->view->setTemplate( 'webfrap/auth/form_forgot_pwd', true  );
+    $this->view->setTemplate('webfrap/auth/form_forgot_pwd', true  );
 
   }//end public function service_formForgotPasswd */
 
@@ -286,22 +286,22 @@ class WebfrapAuth_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_resetPasswd($request, $response )
+  public function service_resetPasswd($request, $response)
   {
 
     $response = $this->getResponse();
     $request  = $this->getRequest();
     $user     = $this->getUser();
 
-    $auth = new LibAuth($this );
+    $auth = new LibAuth($this);
 
-    $oldPwd     = $request->data( 'password_old' , Validator::PASSWORD );
-    $pwdNew     = $request->data( 'password_new' , Validator::TEXT );
-    $pwdCheck   = $request->data( 'password_check' , Validator::TEXT );
+    $oldPwd     = $request->data('password_old' , Validator::PASSWORD);
+    $pwdNew     = $request->data('password_new' , Validator::TEXT);
+    $pwdCheck   = $request->data('password_check' , Validator::TEXT);
 
     $i18n = $this->getI18n();
 
-    if ($auth->verificate($user->getData('name'), $oldPwd ) ) {
+    if ($auth->verificate($user->getData('name'), $oldPwd)) {
       if ($pwdNew ==  $pwdCheck) {
 
         $user->changePasswd($pwdNew);
@@ -329,22 +329,22 @@ class WebfrapAuth_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_changePasswd($request, $response )
+  public function service_changePasswd($request, $response)
   {
 
     $response = $this->getResponse();
     $request  = $this->getRequest();
     $user     = $this->getUser();
 
-    $auth = new LibAuth($this );
+    $auth = new LibAuth($this);
 
-    $oldPwd     = $request->data( 'password_old' , Validator::PASSWORD );
-    $pwdNew     = $request->data( 'password_new' , Validator::TEXT );
-    $pwdCheck   = $request->data( 'password_check' , Validator::TEXT );
+    $oldPwd     = $request->data('password_old' , Validator::PASSWORD);
+    $pwdNew     = $request->data('password_new' , Validator::TEXT);
+    $pwdCheck   = $request->data('password_check' , Validator::TEXT);
 
     $i18n = $this->getI18n();
 
-    if ($auth->verificate($user->getData('name'), $oldPwd ) ) {
+    if ($auth->verificate($user->getData('name'), $oldPwd)) {
       if ($pwdNew ==  $pwdCheck) {
 
         $user->changePasswd($pwdNew);
@@ -372,17 +372,17 @@ class WebfrapAuth_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_forgotPasswd($request, $response )
+  public function service_forgotPasswd($request, $response)
   {
 
     $response = $this->getResponse();
     $request  = $this->getRequest();
     $orm      = $this->getOrm();
 
-    $userName  = $request->data( 'username', Validator::TEXT );
-    $eMail     = $request->data( 'e_mail', Validator::EMAIL );
+    $userName  = $request->data('username', Validator::TEXT);
+    $eMail     = $request->data('e_mail', Validator::EMAIL);
 
-    $model = $this->loadModel( 'WebfrapAuth' );
+    $model = $this->loadModel('WebfrapAuth');
 
     $view = $response->loadView
     (
@@ -393,7 +393,7 @@ class WebfrapAuth_Controller extends Controller
     try {
       if ($userName) {
 
-        $user = $model->getUserByName($userName );
+        $user = $model->getUserByName($userName);
 
         if (!$user) {
           $view->displayError
@@ -404,7 +404,7 @@ class WebfrapAuth_Controller extends Controller
           return;
         }
 
-        $model->startResetProcess($user );
+        $model->startResetProcess($user);
 
         $view->displaySuccess
         (
@@ -414,7 +414,7 @@ class WebfrapAuth_Controller extends Controller
 
       } elseif ($eMail) {
 
-        $user = $model->getUserByEmail($eMail );
+        $user = $model->getUserByEmail($eMail);
 
         if (!$user) {
           $view->displayError
@@ -425,7 +425,7 @@ class WebfrapAuth_Controller extends Controller
           return;
         }
 
-        $model->startResetProcess($user );
+        $model->startResetProcess($user);
 
         $view->displaySuccess
         (
@@ -440,8 +440,8 @@ class WebfrapAuth_Controller extends Controller
           sich angemeldet haben benötigt. Solltest du beide vergessen haben wende dich bitte an den Support."
         );
       }
-    } catch ( WebfrapSys_Exception $e ) {
-      $view->displayError($e->getMessage() );
+    } catch (WebfrapSys_Exception $e) {
+      $view->displayError($e->getMessage());
     }
 
   }// end public function service_forgotPasswd */
@@ -451,7 +451,7 @@ class WebfrapAuth_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_logout($request, $response )
+  public function service_logout($request, $response)
   {
 
     $response = $this->getResponse();
@@ -462,10 +462,10 @@ class WebfrapAuth_Controller extends Controller
     $user->logout();
     $response->addMessage
     (
-      $response->i18n->l( 'User logged out', 'wbf.message' )
+      $response->i18n->l('User logged out', 'wbf.message')
     );
 
-    $flow->redirectToDefault($this->tplEngine->isType( View::AJAX ) );
+    $flow->redirectToDefault($this->tplEngine->isType(View::AJAX));
 
   }//end public function service_logout */
 

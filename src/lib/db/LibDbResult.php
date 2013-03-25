@@ -148,7 +148,7 @@ abstract class LibDbResult
    * @param  string $fetchMode
    * @return void
    */
-  public function setFetchMode($fetchMode )
+  public function setFetchMode($fetchMode)
   {
     $this->fetchMode = $fetchMode;
 
@@ -166,7 +166,7 @@ abstract class LibDbResult
   /**
    * @return array
    */
-  public function get( )
+  public function get()
   {
     return array();
   }//end public function getName
@@ -217,7 +217,7 @@ abstract class LibDbResult
    */
   public function next()
   {
-    return $this->get( );
+    return $this->get();
   }//end public function next ()
 
   /**
@@ -237,7 +237,7 @@ abstract class LibDbResult
    */
   public function valid ()
   {
-    if ( 0 === $this->pos )
+    if (0 === $this->pos)
       $this->get();
 
     return !is_null($this->pos);
@@ -253,7 +253,7 @@ abstract class LibDbResult
    */
   public function count()
   {
-    return $this->getNumRows( );
+    return $this->getNumRows();
   }//end public function count()
 
 }//end abstract class LibDbResult

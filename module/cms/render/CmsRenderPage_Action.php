@@ -33,7 +33,7 @@ class CmsRenderPage_Action extends Action
    * @param TFlag $params
    * @param BaseChild $env
    */
-  public function renderPage($entity, $params, $env )
+  public function renderPage($entity, $params, $env)
   {
 
      $this->env = $env;
@@ -41,7 +41,7 @@ class CmsRenderPage_Action extends Action
 
      if ($entity->type == ECmsPageType::SLICED) {
 
-       $slices = $orm->getListWhere( 'CmsSlice', "id_page=".$entity, array( 'order', array('m_order') ) );
+       $slices = $orm->getListWhere('CmsSlice', "id_page=".$entity, array('order', array('m_order')));
 
        $content = '';
 

@@ -30,8 +30,8 @@ class Vacuum_Action extends Action {
 			$db = $this->env->getDb ();
 			
 			$sql = "VACUUM {$tableName}";
-			$db->query ( $sql );
-		} catch ( Exception $e ) {
+			$db->query ($sql);
+		} catch (Exception $e) {
 		}
 	}
 	

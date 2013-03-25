@@ -99,7 +99,7 @@ class LibMessageChannelMessage extends LibMessageChannel
 
       );
 
-      //Message::addMessage(  "send to {$receiver->userId}");
+      //Message::addMessage( "send to {$receiver->userId}");
 
 
       $mailer->send($envelop);

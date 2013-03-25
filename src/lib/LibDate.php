@@ -45,7 +45,7 @@ class LibDate
    * @param int $timeStamp
    * @return string
    */
-  public function humanDate($timeStamp )
+  public function humanDate($timeStamp)
   {
 
     $formDate = '';
@@ -60,7 +60,7 @@ class LibDate
       $months     = round($weeks    / self::WEEK_MONTH);
       $years      = round($months   / self::MONTH_YEAR);
 
-      if (($diff < self::SEC_MIN ) || ($minutes <= 1))
+      if (($diff < self::SEC_MIN) || ($minutes <= 1))
         return 'less than 1 minute ago';
 
       if ($hours == 0) {

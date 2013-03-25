@@ -1,7 +1,7 @@
 <?php
 
 // view: assign_user_area_vid_idx
-if ($this->viewExists($dbName, $schemaName, 'webfrap_acl_max_permission_view'  ) ) {
+if ($this->viewExists($dbName, $schemaName, 'webfrap_acl_max_permission_view'  )) {
   $this->dropView($dbName, $schemaName, 'webfrap_acl_max_permission_view'  );
 }
 
@@ -22,7 +22,7 @@ AS
     ON
       acl_gu.id_group = acl_access.id_group
       AND acl_gu.id_area = acl_access.id_area
-      AND ( acl_access.partial = 0 OR acl_access.partial IS NULL )
+      AND (acl_access.partial = 0 OR acl_access.partial IS NULL)
   JOIN
     {$schemaName}.wbfsys_security_area acl_area
     ON
@@ -35,11 +35,11 @@ AS
     acl_gu.partial
 ;
 SQL;
-$this->ddl($sql );
-$this->chownView(  $dbName, $schemaName, 'webfrap_acl_max_permission_view', $owner );
+$this->ddl($sql);
+$this->chownView( $dbName, $schemaName, 'webfrap_acl_max_permission_view', $owner);
 
 // view: assign_user_area_vid_idx
-if ($this->viewExists($dbName, $schemaName, 'webfrap_acl_assigned_view'  ) ) {
+if ($this->viewExists($dbName, $schemaName, 'webfrap_acl_assigned_view'  )) {
   $this->dropView($dbName, $schemaName, 'webfrap_acl_assigned_view'  );
 }
 $sql = <<<SQL
@@ -66,7 +66,7 @@ AS
     ON
       acl_gu.id_group = acl_access.id_group
       AND acl_gu.id_area = acl_access.id_area
-      AND ( acl_access.partial = 0 OR acl_access.partial IS NULL )
+      AND (acl_access.partial = 0 OR acl_access.partial IS NULL)
   WHERE
     acl_gu.vid is null
   GROUP BY
@@ -77,11 +77,11 @@ AS
 ;
 
 SQL;
-$this->ddl($sql );
-$this->chownView(  $dbName, $schemaName, 'webfrap_acl_assigned_view', $owner );
+$this->ddl($sql);
+$this->chownView( $dbName, $schemaName, 'webfrap_acl_assigned_view', $owner);
 
 // view: assign_user_area_vid_idx
-if ($this->viewExists($dbName, $schemaName, 'webfrap_inject_acls_view'  ) ) {
+if ($this->viewExists($dbName, $schemaName, 'webfrap_inject_acls_view'  )) {
   $this->dropView($dbName, $schemaName, 'webfrap_inject_acls_view'  );
 }
 
@@ -109,7 +109,7 @@ CREATE OR REPLACE VIEW {$schemaName}.webfrap_inject_acls_view
   left JOIN
     {$schemaName}.wbfsys_group_users acl_gu
     ON
-      ( acl_gu.partial = 0 or acl_gu.partial is null )
+      (acl_gu.partial = 0 or acl_gu.partial is null)
 
   WHERE
   (
@@ -137,11 +137,11 @@ CREATE OR REPLACE VIEW {$schemaName}.webfrap_inject_acls_view
 ;
 
 SQL;
-$this->ddl($sql );
-$this->chownView(  $dbName, $schemaName, 'webfrap_inject_acls_view', $owner );
+$this->ddl($sql);
+$this->chownView( $dbName, $schemaName, 'webfrap_inject_acls_view', $owner);
 
 // view: assign_user_area_vid_idx
-if ($this->viewExists($dbName, $schemaName, 'webfrap_has_arearole_view'  ) ) {
+if ($this->viewExists($dbName, $schemaName, 'webfrap_has_arearole_view'  )) {
   $this->dropView($dbName, $schemaName, 'webfrap_has_arearole_view'  );
 }
 
@@ -162,11 +162,11 @@ CREATE  OR REPLACE VIEW {$schemaName}.webfrap_has_arearole_view
     {$schemaName}.wbfsys_security_access acl_access
     ON
       acl_access.id_area = acl_area.rowid
-        and ( acl_access.partial = 0 or acl_access.partial is null )
+        and (acl_access.partial = 0 or acl_access.partial is null)
   JOIN
     {$schemaName}.wbfsys_group_users acl_gu
     ON
-      ( acl_gu.partial = 0 or acl_gu.partial is null )
+      (acl_gu.partial = 0 or acl_gu.partial is null)
 
   JOIN
     {$schemaName}.wbfsys_role_group group_role
@@ -190,11 +190,11 @@ CREATE  OR REPLACE VIEW {$schemaName}.webfrap_has_arearole_view
 
 
 SQL;
-$this->ddl($sql );
-$this->chownView(  $dbName, $schemaName, 'webfrap_has_arearole_view', $owner );
+$this->ddl($sql);
+$this->chownView( $dbName, $schemaName, 'webfrap_has_arearole_view', $owner);
 
 // view: assign_user_area_vid_idx
-if ($this->viewExists($dbName, $schemaName, 'webfrap_acl_level_global_asgd_view'  ) ) {
+if ($this->viewExists($dbName, $schemaName, 'webfrap_acl_level_global_asgd_view'  )) {
   $this->dropView($dbName, $schemaName, 'webfrap_acl_level_global_asgd_view'  );
 }
 
@@ -230,7 +230,7 @@ AS
   WHERE
     acl_gu.id_area is null
       AND acl_gu.vid is null
-      AND ( acl_gu.partial = 0 OR acl_gu.partial IS NULL )
+      AND (acl_gu.partial = 0 OR acl_gu.partial IS NULL)
   GROUP BY
     acl_gu.id_user,
     acl_area.access_key,
@@ -238,6 +238,6 @@ AS
 ;
 
 SQL;
-$this->ddl($sql );
-$this->chownView(  $dbName, $schemaName, 'webfrap_acl_level_global_asgd_view', $owner );
+$this->ddl($sql);
+$this->chownView( $dbName, $schemaName, 'webfrap_acl_level_global_asgd_view', $owner);
 

@@ -27,7 +27,7 @@ class WgtInputText extends WgtInput
    *
    * @return unknown_type
    */
-  public function build($attributes = array() )
+  public function build($attributes = array())
   {
 
     // ist immer ein text attribute
@@ -47,7 +47,7 @@ class WgtInputText extends WgtInput
     if (!isset($this->attributes['id']))
       return '';
 
-    if (!isset($this->attributes['value']) )
+    if (!isset($this->attributes['value']))
       $this->attributes['value'] = '';
 
     $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="value" ><![CDATA['

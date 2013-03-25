@@ -35,10 +35,10 @@ class WebfrapComment_Context extends Context
   /**
    * @param LibRequestHttp $request
    */
-  public function __construct($request = null )
+  public function __construct($request = null)
   {
 
-    if (!$request )
+    if (!$request)
       return null;
 
     if ($element = $request->param('element', Validator::CKEY))
@@ -61,19 +61,19 @@ class WebfrapComment_Context extends Context
   public function toUrlExt()
   {
 
-    if ($this->urlExt )
+    if ($this->urlExt)
       return $this->urlExt;
 
-    if ($this->element )
+    if ($this->element)
       $this->urlExt .= '&amp;element='.$this->element;
 
-    if ($this->refMask )
+    if ($this->refMask)
       $this->urlExt .= '&amp;ref_mask='.$this->refMask;
 
-    if ($this->refField )
+    if ($this->refField)
       $this->urlExt .= '&amp;ref_field='.$this->refField;
 
-    if ($this->refId )
+    if ($this->refId)
       $this->urlExt .= '&amp;ref_id='.$this->refId;
 
     return $this->urlExt;
@@ -86,19 +86,19 @@ class WebfrapComment_Context extends Context
   public function toActionExt()
   {
 
-    if ($this->actionExt )
+    if ($this->actionExt)
       return $this->actionExt;
 
-    if ($this->element )
+    if ($this->element)
       $this->actionExt .= '&element='.$this->element;
 
-    if ($this->refMask )
+    if ($this->refMask)
       $this->actionExt .= '&ref_mask='.$this->refMask;
 
-    if ($this->refField )
+    if ($this->refField)
       $this->actionExt .= '&ref_field='.$this->refField;
 
-    if ($this->refId )
+    if ($this->refId)
       $this->actionExt .= '&ref_id='.$this->refId;
 
     return $this->actionExt;

@@ -270,4 +270,4 @@ php-apc
   CustomLog "/var/log/apache2/demo/access.log" combined
 
 </VirtualHost>
-<?php display_highlight( 'xml' ); ?>
+<?php display_highlight('xml'); ?>

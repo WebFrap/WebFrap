@@ -33,7 +33,7 @@ class WebfrapStatsSso_Graph extends LibGraphEz
   {
 
     $this->data = new WebfrapStatsSso_Graph_Query();
-    $this->data->fetch( '2012-01-01' );
+    $this->data->fetch('2012-01-01');
 
     $this->width = 400;
     $this->height = 300;
@@ -43,7 +43,7 @@ class WebfrapStatsSso_Graph extends LibGraphEz
   /**
    * @return void
    */
-  public function render(  )
+  public function render()
   {
 
     $this->graph = new ezcGraphPieChart();
@@ -52,7 +52,7 @@ class WebfrapStatsSso_Graph extends LibGraphEz
     $this->setDefaultSettings();
 
     // Add data
-    $this->graph->data['SSO Usage'] = new ezcGraphArrayDataSet( array( 'sso' => '33', 'no sso'=> '44' ) );
+    $this->graph->data['SSO Usage'] = new ezcGraphArrayDataSet(array('sso' => '33', 'no sso'=> '44'));
 
   }//end public function render */
 

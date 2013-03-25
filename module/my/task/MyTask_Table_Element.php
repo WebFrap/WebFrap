@@ -152,13 +152,13 @@ class MyTask_Table_Element extends WgtTable
    *
    * @return string
    */
-  public function buildHtml( )
+  public function buildHtml()
   {
     // if we have html we can assume that the table was allready parsed
     // so we return just the html and stop here
     // this behaviour enables you to call a specific parser method from outside
     // of the view, but then get the html of the called parse method
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
     // check for replace is used to check if this table should be pushed via ajax
@@ -194,7 +194,7 @@ class MyTask_Table_Element extends WgtTable
    * create the head for the table
    * @return string
    */
-  public function buildThead( )
+  public function buildThead()
   {
 
     $this->numCols = 6;
@@ -210,8 +210,8 @@ class MyTask_Table_Element extends WgtTable
     $html .= '<tr>'.NL;
 
     // check for multi selection
-    if ($this->enableMultiSelect )
-      $html .= '<th style="width:40px;">'.$this->view->i18n->l( 'Check', 'wbf.label'  ).'</th>'.NL;
+    if ($this->enableMultiSelect)
+      $html .= '<th style="width:40px;">'.$this->view->i18n->l('Check', 'wbf.label'  ).'</th>'.NL;
 
     $html .= '<th style="width:200px" >'.$this->view->i18n->l('Title','wbfsys.task.label').'</th>'.NL;
     $html .= '<th style="width:200px" >'.$this->view->i18n->l('URL','wbfsys.task.label').'</th>'.NL;
@@ -222,7 +222,7 @@ class MyTask_Table_Element extends WgtTable
     // the default navigation col
     if ($this->enableNav) {
       $navWidth = count($this->actions)*30+5;
-      $html .= '<th style="width:'.$navWidth.'px;">'.$this->view->i18n->l( 'Nav.', 'wbf.label'  ).'</th>'.NL;
+      $html .= '<th style="width:'.$navWidth.'px;">'.$this->view->i18n->l('Nav.', 'wbf.label'  ).'</th>'.NL;
     }
 
     $html .= '</tr>'.NL;
@@ -236,7 +236,7 @@ class MyTask_Table_Element extends WgtTable
    * create the body for the table
    * @return string
    */
-  public function buildTbody( )
+  public function buildTbody()
   {
 
     // create the table body
@@ -257,7 +257,7 @@ class MyTask_Table_Element extends WgtTable
       }
 
       $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['my_task_title']).'</td>'.NL;
-      $body .= '<td valign="top" style="text-align:center;" >'.( trim($row['my_task_http_url'] ) == '' ? ' ' : '<a href="'.Validator::sanitizeHtml($row['my_task_http_url']).'">'.Validator::sanitizeHtml($row['my_task_http_url']).'</a>' ).'</td>'.NL;
+      $body .= '<td valign="top" style="text-align:center;" >'.(trim($row['my_task_http_url']) == '' ? ' ' : '<a href="'.Validator::sanitizeHtml($row['my_task_http_url']).'">'.Validator::sanitizeHtml($row['my_task_http_url']).'</a>').'</td>'.NL;
       $body .= '<td valign="top" class="wcm wcm_ui_progress" >'.(!is_null($row['my_task_progress'])?$row['my_task_progress']:0).'</td>'.NL;
       $body .= '<td valign="top" ><a class="wcm wcm_req_ajax" href="maintab.php?c=Wbfsys.TaskType.listing" >'.Validator::sanitizeHtml($row['wbfsys_task_type_name']).'</a></td>'.NL;
       $body .= '<td valign="top" ><a class="wcm wcm_req_ajax" href="maintab.php?c=Wbfsys.TaskStatus.listing" >'.Validator::sanitizeHtml($row['wbfsys_task_status_name']).'</a></td>'.NL;
@@ -274,12 +274,12 @@ class MyTask_Table_Element extends WgtTable
       $body .= '</tr>'.NL;
 
       $num ++;
-      if ($num > $this->numOfColors )
+      if ($num > $this->numOfColors)
         $num = 1;
 
     } //end foreach
 
-    if ($this->dataSize > ($this->start + $this->stepSize) ) {
+    if ($this->dataSize > ($this->start + $this->stepSize)) {
       $body .= '<tr><td colspan="'.$this->numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  ><var>'.($this->start + $this->stepSize).'</var>'.$this->image('wgt/bar-loader.gif','loader').' Loading the next '.$this->stepSize.' entries.</td></tr>';
     }
 
@@ -294,14 +294,14 @@ class MyTask_Table_Element extends WgtTable
    *
    * @return string
    */
-  public function buildAjax( )
+  public function buildAjax()
   {
 
     // if we have html we can assume that the table was allready parsed
     // so we return just the html and stop here
     // this behaviour enables you to call a specific parser method from outside
     // of the view, but then get the html of the called parse method
-    if ($this->xml )
+    if ($this->xml)
       return $this->xml;
 
     if ($this->appendMode) {
@@ -311,7 +311,7 @@ class MyTask_Table_Element extends WgtTable
     }
 
     foreach ($this->data as $key => $row) {
-      $body .= $this->buildAjaxTbody($row );
+      $body .= $this->buildAjaxTbody($row);
     }//end foreach
 
     if ($this->appendMode) {
@@ -323,7 +323,7 @@ class MyTask_Table_Element extends WgtTable
       if ($this->enableMultiSelect)
         ++ $numCols;
 
-      if ($this->dataSize > ($this->start + $this->stepSize) ) {
+      if ($this->dataSize > ($this->start + $this->stepSize)) {
         $body .= '<tr><td colspan="'.$numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  ><var>'.($this->start + $this->stepSize).'</var>'.$this->image('wgt/bar-loader.gif','loader').' Loading the next '.$this->stepSize.' entries.</td></tr>';
       }
 
@@ -363,7 +363,7 @@ class MyTask_Table_Element extends WgtTable
     }
 
     $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['my_task_title']).'</td>'.NL;
-    $body .= '<td valign="top" style="text-align:center;" >'.( trim($row['my_task_http_url'] ) == '' ? ' ' : '<a href="'.Validator::sanitizeHtml($row['my_task_http_url']).'">'.Validator::sanitizeHtml($row['my_task_http_url']).'</a>' ).'</td>'.NL;
+    $body .= '<td valign="top" style="text-align:center;" >'.(trim($row['my_task_http_url']) == '' ? ' ' : '<a href="'.Validator::sanitizeHtml($row['my_task_http_url']).'">'.Validator::sanitizeHtml($row['my_task_http_url']).'</a>').'</td>'.NL;
     $body .= '<td valign="top" class="wcm wcm_ui_progress" >'.(!is_null($row['my_task_progress'])?$row['my_task_progress']:0).'</td>'.NL;
     $body .= '<td valign="top" ><a class="wcm wcm_req_ajax" href="maintab.php?c=Wbfsys.TaskType.listing" >'.Validator::sanitizeHtml($row['wbfsys_task_type_name']).'</a></td>'.NL;
     $body .= '<td valign="top" ><a class="wcm wcm_req_ajax" href="maintab.php?c=Wbfsys.TaskStatus.listing" >'.Validator::sanitizeHtml($row['wbfsys_task_status_name']).'</a></td>'.NL;

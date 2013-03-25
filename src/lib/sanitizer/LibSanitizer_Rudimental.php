@@ -34,11 +34,11 @@ class LibSanitizer_Rudimental
    *
    * @return string
    */
-  public function sanitize($raw, $encoding = 'utf-8', $configKey = 'default' )
+  public function sanitize($raw, $encoding = 'utf-8', $configKey = 'default')
   {
 
-    Debug::console( "Used unsecure Rudimental Sannitizer Plugin!" );
-    Log::warn( "Used unsecure Rudimental Sannitizer Plugin! Besser use the HTMLPurifier Adapter in WebFrap_Lib_Htmlpurifier" );
+    Debug::console("Used unsecure Rudimental Sannitizer Plugin!");
+    Log::warn("Used unsecure Rudimental Sannitizer Plugin! Besser use the HTMLPurifier Adapter in WebFrap_Lib_Htmlpurifier");
 
     return strip_tags
     (

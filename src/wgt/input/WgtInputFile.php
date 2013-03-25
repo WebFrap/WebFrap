@@ -32,7 +32,7 @@ class WgtInputFile extends WgtInput
   /**
    * @param string $link
    */
-  public function setLink($link )
+  public function setLink($link)
   {
     $this->link = $link;
   }//end public function setLink */
@@ -41,7 +41,7 @@ class WgtInputFile extends WgtInput
    *
    * @return unknown_type
    */
-  public function build($attributes = array() )
+  public function build($attributes = array())
   {
 
     if ($attributes)
@@ -51,7 +51,7 @@ class WgtInputFile extends WgtInput
     $this->attributes['type'] = 'text';
     $value = null;
 
-    if ( isset($this->attributes['value'] ) ) {
+    if (isset($this->attributes['value'])) {
       $value = $this->attributes['value'];
     }
 
@@ -63,7 +63,7 @@ class WgtInputFile extends WgtInput
     $fName    = $this->attributes['name'];
 
     $required = $this->required?'<span class="wgt-required">*</span>':'';
-    $icon     = Wgt::icon('control/upload.png', 'xsmall', 'Upload' );
+    $icon     = Wgt::icon('control/upload.png', 'xsmall', 'Upload');
 
     $this->attributes['class'] = isset($this->attributes['class'])
       ? $this->attributes['class'].' wgt-ignore wgt-overlay'
@@ -76,7 +76,7 @@ class WgtInputFile extends WgtInput
       ? 'asgd-'.$this->assignedForm
       : '';
 
-    $helpIcon = $this->renderDocu($id );
+    $helpIcon = $this->renderDocu($id);
 
     $html = <<<HTML
     <div class="wgt-box input" id="wgt-box-{$id}" >

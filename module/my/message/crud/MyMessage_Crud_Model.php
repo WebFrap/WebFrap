@@ -47,9 +47,9 @@ class MyMessage_Crud_Model extends Model
 
     $orm = $this->getOrm();
 
-    if ($val = $request->data( 'my_message', Validator::EID, 'objid' ) ) {
+    if ($val = $request->data('my_message', Validator::EID, 'objid')) {
       $objid = $val;
-    } elseif ($val = $request->param('objid', Validator::EID ) ) {
+    } elseif ($val = $request->param('objid', Validator::EID)) {
       $objid = $val;
     } elseif ($val = $request->param('access_key', Validator::CNAME)) {
       $accessKey = $val;
@@ -63,15 +63,15 @@ class MyMessage_Crud_Model extends Model
     if ($objid) {
       $searchId = $objid;
       $keyType  = 'rowid';
-      $entity   = $orm->get( 'WbfsysMessage', $objid );
+      $entity   = $orm->get('WbfsysMessage', $objid);
     } elseif ($uuid) {
       $searchId = $uuid;
       $keyType  = 'uuid';
-      $entity   = $orm->getByUuid( 'WbfsysMessage', $uuid );
+      $entity   = $orm->getByUuid('WbfsysMessage', $uuid);
     } elseif ($accessKey) {
       $searchId = $accessKey;
       $keyType  = 'access_key';
-      $entity   = $orm->getByKey( 'WbfsysMessage', $accessKey );
+      $entity   = $orm->getByKey('WbfsysMessage', $accessKey);
     } else {
       $response = $this->getResponse();
 
@@ -89,7 +89,7 @@ class MyMessage_Crud_Model extends Model
     }
 
     if ($entity) {
-      $this->setEntityMyMessage($entity );
+      $this->setEntityMyMessage($entity);
 
       return $entity;
     } else {
@@ -105,7 +105,7 @@ class MyMessage_Crud_Model extends Model
           'wbf.message',
           array
           (
-            'resource'  => $response->i18n->l( 'Message', 'wbfsys.message.label' ),
+            'resource'  => $response->i18n->l('Message', 'wbfsys.message.label'),
             'key_type'  => $keyType,
             'id'        => $searchId
           )
@@ -127,9 +127,9 @@ class MyMessage_Crud_Model extends Model
   * @param int $objid
   * @return WbfsysMessage_Entity
   */
-  public function getEntity($objid = null )
+  public function getEntity($objid = null)
   {
-    return $this->getEntityMyMessage($objid );
+    return $this->getEntityMyMessage($objid);
 
   }//end public function getEntity */
 
@@ -137,10 +137,10 @@ class MyMessage_Crud_Model extends Model
   * Setzen der Haupt Entity, unabhängig vom Maskenname
   * @param WbfsysMessage_Entity $entity
   */
-  public function setEntity($entity )
+  public function setEntity($entity)
   {
 
-    $this->setEntityMyMessage($entity );
+    $this->setEntityMyMessage($entity);
 
   }//end public function setEntity */
 
@@ -150,21 +150,21 @@ class MyMessage_Crud_Model extends Model
   * @param int $objid
   * @return WbfsysMessage_Entity
   */
-  public function getEntityMyMessage($objid = null )
+  public function getEntityMyMessage($objid = null)
   {
 
     $response = $this->getResponse();
 
-    if (!$entityMyMessage = $this->getRegisterd( 'main_entity' ) )
-      $entityMyMessage = $this->getRegisterd( 'entityMyMessage' );
+    if (!$entityMyMessage = $this->getRegisterd('main_entity'))
+      $entityMyMessage = $this->getRegisterd('entityMyMessage');
 
     //entity wbfsys_message
     if (!$entityMyMessage) {
 
-      if (!is_null($objid ) ) {
+      if (!is_null($objid)) {
         $orm = $this->getOrm();
 
-        if (!$entityMyMessage = $orm->get( 'WbfsysMessage', $objid) ) {
+        if (!$entityMyMessage = $orm->get('WbfsysMessage', $objid)) {
           $response->addError
           (
             $response->i18n->l
@@ -177,19 +177,19 @@ class MyMessage_Crud_Model extends Model
           return null;
         }
 
-        $this->register( 'entityMyMessage', $entityMyMessage );
-        $this->register( 'main_entity', $entityMyMessage);
+        $this->register('entityMyMessage', $entityMyMessage);
+        $this->register('main_entity', $entityMyMessage);
 
       } else {
         $entityMyMessage   = new WbfsysMessage_Entity() ;
-        $this->register( 'entityMyMessage', $entityMyMessage );
-        $this->register( 'main_entity', $entityMyMessage);
+        $this->register('entityMyMessage', $entityMyMessage);
+        $this->register('main_entity', $entityMyMessage);
       }
 
-    } elseif ($objid && $objid != $entityMyMessage->getId() ) {
+    } elseif ($objid && $objid != $entityMyMessage->getId()) {
       $orm = $this->getOrm();
 
-      if (!$entityMyMessage = $orm->get( 'WbfsysMessage', $objid) ) {
+      if (!$entityMyMessage = $orm->get('WbfsysMessage', $objid)) {
         $response->addError
         (
           $response->i18n->l
@@ -202,8 +202,8 @@ class MyMessage_Crud_Model extends Model
         return null;
       }
 
-      $this->register( 'entityMyMessage', $entityMyMessage);
-      $this->register( 'main_entity', $entityMyMessage);
+      $this->register('entityMyMessage', $entityMyMessage);
+      $this->register('main_entity', $entityMyMessage);
     }
 
     return $entityMyMessage;
@@ -215,11 +215,11 @@ class MyMessage_Crud_Model extends Model
   * and returns it instead
   * @param WbfsysMessage_Entity $entity
   */
-  public function setEntityMyMessage($entity )
+  public function setEntityMyMessage($entity)
   {
 
-    $this->register( 'entityMyMessage', $entity );
-    $this->register( 'main_entity', $entity );
+    $this->register('entityMyMessage', $entity);
+    $this->register('main_entity', $entity);
 
   }//end public function setEntityMyMessage */
 
@@ -227,24 +227,24 @@ class MyMessage_Crud_Model extends Model
    * @param WbfsysMessage_Entity $message
    * @return WbfsysMessage_Entity
    */
-  public function getRefer($message )
+  public function getRefer($message)
   {
 
     $orm = $this->getOrm();
 
-    if (!$message->id_refer )
+    if (!$message->id_refer)
       return null;
 
-    return $orm->get( 'WbfsysMessage', $message->id_refer );
+    return $orm->get('WbfsysMessage', $message->id_refer);
 
   }//end public function getRefer */
 
   /**
    * @return WbfsysMessageStatus_Entity
    */
-  public function getMessageStatus( )
+  public function getMessageStatus()
   {
-    return $this->getRegisterd( 'messageStatus' );
+    return $this->getRegisterd('messageStatus');
 
   }//end public getMessageStatus getMessageStatus */
 
@@ -263,10 +263,10 @@ class MyMessage_Crud_Model extends Model
 
     $message = $this->getEntity();
 
-    $messageStatus = $orm->get( 'WbfsysMessageReceiver', "id_message=".$message." and id_receiver=".$user->getId() );
+    $messageStatus = $orm->get('WbfsysMessageReceiver', "id_message=".$message." and id_receiver=".$user->getId());
 
     if (!$messageStatus) {
-      if ($message->id_sender != $user->getId() ) {
+      if ($message->id_sender != $user->getId()) {
         throw new RequestDenied_Exception
         (
           "This Message was not send to you, but we've noticed the sender and receivers that you are interested in the message content. Have a nice day."
@@ -274,7 +274,7 @@ class MyMessage_Crud_Model extends Model
       } else {
         // passiert wenn der sender die mail zum lesen öffnet
         $message->id_status    = EMessageStatus::OPEN;
-        $orm->save($message );
+        $orm->save($message);
 
       }
 
@@ -283,11 +283,11 @@ class MyMessage_Crud_Model extends Model
       if (!$messageStatus->id_status || EMessageStatus::IS_NEW == $messageStatus->id_status || $messageStatus->id_status > EMessageStatus::ARCHIVED) {
         $messageStatus->id_status = EMessageStatus::OPEN;
         $messageStatus->opened = date('Y-m-d');
-        $orm->save($messageStatus );
+        $orm->save($messageStatus);
       }
     }
 
-    $this->register( 'messageStatus', $messageStatus );
+    $this->register('messageStatus', $messageStatus);
 
     return $message;
 
@@ -308,7 +308,7 @@ class MyMessage_Crud_Model extends Model
    * @param TFlag $params named parameters
    * @return null|Error im Fehlerfall
    */
-  public function send($params )
+  public function send($params)
   {
 
     // laden der resourcen
@@ -319,7 +319,7 @@ class MyMessage_Crud_Model extends Model
     $user     = $this->getUser();
 
     try {
-      if (!$entityMyMessage = $this->getRegisterd( 'entityMyMessage' ) ) {
+      if (!$entityMyMessage = $this->getRegisterd('entityMyMessage')) {
         return new Error
         (
           $response->i18n->l
@@ -332,7 +332,7 @@ class MyMessage_Crud_Model extends Model
           (
             'The expected Entity with the key {@key@} was not in the registry',
             'wbf.message',
-            array( 'key' => 'entityMyMessage' )
+            array('key' => 'entityMyMessage')
           )
         );
       }
@@ -340,7 +340,7 @@ class MyMessage_Crud_Model extends Model
       $entityMyMessage->id_sender = $user->getId();
       $entityMyMessage->id_sender_status = EMessageStatus::IS_NEW;
 
-      if (!$orm->insert($entityMyMessage ) ) {
+      if (!$orm->insert($entityMyMessage)) {
 
         throw new InternalError_Exception
         (
@@ -356,19 +356,19 @@ class MyMessage_Crud_Model extends Model
           (
             'Successfully created Message {@label@}',
             'wbfsys.message.message',
-            array( 'label' => $entityText )
+            array('label' => $entityText)
           )
         );
 
         // die Nachrichten den Empfängern zuordnen
         ///TODO errorhandling für nicht existierende empfänger
         foreach ($this->receivers as $receiver) {
-          $entityReceiver = $orm->newEntity( 'WbfsysMessageReceiver' );
+          $entityReceiver = $orm->newEntity('WbfsysMessageReceiver');
           $entityReceiver->id_message   = $entityMyMessage;
           $entityReceiver->id_receiver  = $receiver;
           $entityReceiver->id_status    = EMessageStatus::IS_NEW;
           $entityReceiver->visible      = true;
-          $orm->save($entityReceiver );
+          $orm->save($entityReceiver);
         }
 
         $this->protocol
@@ -380,7 +380,7 @@ class MyMessage_Crud_Model extends Model
 
       }
 
-    } catch ( LibDb_Exception $e ) {
+    } catch (LibDb_Exception $e) {
       // Datenbank exception in einen Request Exeption packen
       throw new InternalError_Exception
       (
@@ -396,7 +396,7 @@ class MyMessage_Crud_Model extends Model
    * @param TFlag $params named parameters
    * @return boolean
    */
-  public function archive($params )
+  public function archive($params)
   {
 
     // laden der resourcen
@@ -407,7 +407,7 @@ class MyMessage_Crud_Model extends Model
     $user     = $this->getUser();
 
     try {
-      if (!$entityMyMessage = $this->getRegisterd( 'entityMyMessage' ) ) {
+      if (!$entityMyMessage = $this->getRegisterd('entityMyMessage')) {
         // Datenbank exception in einen Request Exeption packen
         throw new InternalError_Exception
         (
@@ -416,12 +416,12 @@ class MyMessage_Crud_Model extends Model
         );
       }
 
-      if ($entityMyMessage->id_sender = $user->getId() ) {
+      if ($entityMyMessage->id_sender = $user->getId()) {
         $entityMyMessage->id_sender_status = EMessageStatus::ARCHIVED;
 
         try {
-          $orm->save($entityMyMessage );
-        } catch ( LibDb_Exception $e ) {
+          $orm->save($entityMyMessage);
+        } catch (LibDb_Exception $e) {
           throw new InternalError_Exception
           (
             "Sorry failed to archive this message",
@@ -432,15 +432,15 @@ class MyMessage_Crud_Model extends Model
         return;
       }
 
-      $messageStatus = $orm->get( 'WbfsysMessageReceiver', "id_message=".$entityMyMessage." and id_receiver=".$user->getId() );
+      $messageStatus = $orm->get('WbfsysMessageReceiver', "id_message=".$entityMyMessage." and id_receiver=".$user->getId());
 
       if (!$messageStatus) {
-        throw new RequestDenied_Exception( "You are not allowed to archive this message" );
+        throw new RequestDenied_Exception("You are not allowed to archive this message");
       } else {
         $messageStatus->id_status = EMessageStatus::ARCHIVED;
       }
 
-      if (!$orm->save($messageStatus ) ) {
+      if (!$orm->save($messageStatus)) {
         $entityText = $entityMyMessage->text();
 
         throw new InternalError_Exception
@@ -473,7 +473,7 @@ class MyMessage_Crud_Model extends Model
         );
 
       }
-    } catch ( LibDb_Exception $e ) {
+    } catch (LibDb_Exception $e) {
       throw new InternalError_Exception
       (
         "Sorry failed to archive this message",
@@ -498,7 +498,7 @@ class MyMessage_Crud_Model extends Model
    * @param TFlag $params named parameters
    * @return boolean
    */
-  public function fetchInsertData(  $params )
+  public function fetchInsertData( $params)
   {
 
     $httpRequest = $this->getRequest();
@@ -510,7 +510,7 @@ class MyMessage_Crud_Model extends Model
       $fields      = $this->getInsertFields();
 
       //management  wbfsys_message source wbfsys_message
-      $entityMyMessage = $orm->newEntity( 'WbfsysMessage' );
+      $entityMyMessage = $orm->newEntity('WbfsysMessage');
 
       // if the validation fails report
       $httpRequest->validateInsert
@@ -523,16 +523,16 @@ class MyMessage_Crud_Model extends Model
       );
 
       // register the entity in the mode registry
-      $this->register( 'entityMyMessage', $entityMyMessage );
+      $this->register('entityMyMessage', $entityMyMessage);
 
-      if ($state->hasErrors() ) {
-        $response->addError($state->errors );
+      if ($state->hasErrors()) {
+        $response->addError($state->errors);
       }
 
-      $this->receivers = $httpRequest->data( 'receiver', Validator::EID );
+      $this->receivers = $httpRequest->data('receiver', Validator::EID);
 
       return $state->status;
-    } catch ( InvalidInput_Exception $e ) {
+    } catch (InvalidInput_Exception $e) {
       return State::ERROR;
     }
 
@@ -558,7 +558,7 @@ class MyMessage_Crud_Model extends Model
 
       $orm = $this->getOrm();
 
-      if (!$entityMyMessage = $orm->get( 'WbfsysMessage',  $id )) {
+      if (!$entityMyMessage = $orm->get('WbfsysMessage',  $id)) {
         $response->addError
         (
           $response->i18n->l
@@ -575,10 +575,10 @@ class MyMessage_Crud_Model extends Model
       }
     }
 
-    if (!$params->categories )
+    if (!$params->categories)
       $params->categories = array();
 
-    if (!$params->fieldsWbfsysMessage )
+    if (!$params->fieldsWbfsysMessage)
       $params->fieldsWbfsysMessage  = $entityMyMessage->getCols
       (
         $params->categories
@@ -590,7 +590,7 @@ class MyMessage_Crud_Model extends Model
       'my_message',
       $params->fieldsWbfsysMessage
     );
-    $this->register( 'entityMyMessage', $entityMyMessage );
+    $this->register('entityMyMessage', $entityMyMessage);
 
     return !$response->hasErrors();
 
@@ -624,7 +624,7 @@ class MyMessage_Crud_Model extends Model
    * just fetch the post data without any required validation
    * @return array
    */
-  public function getCreateRoFields( )
+  public function getCreateRoFields()
   {
     return array
     (

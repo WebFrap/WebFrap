@@ -75,12 +75,12 @@ View::$searchPathTemplate[]     = PATH_FW.'templates/';
 I18n::$i18nPath[]         = PATH_FW.'i18n/';
 Conf::$confPath[]         = PATH_FW.'conf/';
 
-if (!isset($_GET['c'] ) ) {
-  Webfrap::loadClassIndex( 'default' );
+if (!isset($_GET['c'])) {
+  Webfrap::loadClassIndex('default');
 } else {
-  Webfrap::loadClassIndex($_GET['c'] );
+  Webfrap::loadClassIndex($_GET['c']);
 }
 
-//set_error_handler( 'Webfrap::debugErrorHandler' );
+//set_error_handler('Webfrap::debugErrorHandler');
 Log::cleanDebugLog();
 

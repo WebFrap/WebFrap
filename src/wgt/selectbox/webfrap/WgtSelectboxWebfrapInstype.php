@@ -36,8 +36,8 @@ class WgtSelectboxWebfrapInstype extends WgtSelectboxHardcoded
    */
   protected $data = array
   (
-  'dev_multi'       =>  array( 'value' => 'developer multiuser'   ),
-  'prod_multi'      =>  array( 'value' => 'production multiuser'   ),
+  'dev_multi'       =>  array('value' => 'developer multiuser'   ),
+  'prod_multi'      =>  array('value' => 'production multiuser'   ),
   );
 
 } // end class WgtSelectboxWebfrapInstype

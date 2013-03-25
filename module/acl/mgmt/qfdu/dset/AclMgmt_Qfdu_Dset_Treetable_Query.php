@@ -52,10 +52,10 @@ class AclMgmt_Qfdu_Dset_Treetable_Query extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetch($groupId, $userId, $areaId, $condition = null, $context = null )
+  public function fetch($groupId, $userId, $areaId, $condition = null, $context = null)
   {
 
-    if (!$context )
+    if (!$context)
       $context = new TFlag();
 
     $context->qsize = -1;
@@ -64,7 +64,7 @@ class AclMgmt_Qfdu_Dset_Treetable_Query extends LibSqlQuery
     $db                = $this->getDb();
 
     $criteria  = $db->orm->newCriteria();
-    $dsetEntiy = $db->orm->newEntity($this->domainNode->srcKey );
+    $dsetEntiy = $db->orm->newEntity($this->domainNode->srcKey);
 
     $textKeys = $dsetEntiy->textKeys();
     $tableKey = $dsetEntiy->getTable();
@@ -81,15 +81,15 @@ class AclMgmt_Qfdu_Dset_Treetable_Query extends LibSqlQuery
     $ids->userId = $userId;
     $ids->areaId = $areaId;
 
-    $this->setCols($criteria, $tableKey, $fieldKeys );
-    $this->setTables($criteria, $tableKey );
-    $this->appendConditions($criteria, $condition, $ids, $tableKey, $fieldKeys, $context );
-    $this->checkLimitAndOrder($criteria, $tableKey, $fieldKeys, $context );
+    $this->setCols($criteria, $tableKey, $fieldKeys);
+    $this->setTables($criteria, $tableKey);
+    $this->appendConditions($criteria, $condition, $ids, $tableKey, $fieldKeys, $context);
+    $this->checkLimitAndOrder($criteria, $tableKey, $fieldKeys, $context);
 
 
     // Run Query und save the result
-    $this->result     = $db->orm->select($criteria );
-    $this->calcQuery  = $criteria->count( 'count(DISTINCT group_users.id_group) as '.Db::Q_SIZE, true );
+    $this->result     = $db->orm->select($criteria);
+    $this->calcQuery  = $criteria->count('count(DISTINCT group_users.id_group) as '.Db::Q_SIZE, true);
 
   }//end public function fetch */
 
@@ -103,10 +103,10 @@ class AclMgmt_Qfdu_Dset_Treetable_Query extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetchListUser($userId, $areaId, $condition = null, $context = null )
+  public function fetchListUser($userId, $areaId, $condition = null, $context = null)
   {
 
-    if (!$context )
+    if (!$context)
       $context = new TFlag();
 
     $context->qsize = -1;
@@ -115,7 +115,7 @@ class AclMgmt_Qfdu_Dset_Treetable_Query extends LibSqlQuery
     $db                = $this->getDb();
 
     $criteria  = $db->orm->newCriteria();
-    $dsetEntiy = $db->orm->newEntity($this->domainNode->srcKey );
+    $dsetEntiy = $db->orm->newEntity($this->domainNode->srcKey);
 
     $textKeys = $dsetEntiy->textKeys();
     $tableKey = $dsetEntiy->getTable();
@@ -134,14 +134,14 @@ class AclMgmt_Qfdu_Dset_Treetable_Query extends LibSqlQuery
     $context->groupBy = 'user';
 
 
-    $this->setColsListUser($criteria, $tableKey, $fieldKeys );
-    $this->setTables($criteria, $tableKey );
-    $this->appendConditions($criteria, $condition, $ids, $tableKey, $fieldKeys, $context );
-    $this->checkLimitAndOrder($criteria, $tableKey, $fieldKeys, $context );
+    $this->setColsListUser($criteria, $tableKey, $fieldKeys);
+    $this->setTables($criteria, $tableKey);
+    $this->appendConditions($criteria, $condition, $ids, $tableKey, $fieldKeys, $context);
+    $this->checkLimitAndOrder($criteria, $tableKey, $fieldKeys, $context);
 
     // Run Query und save the result
-    $this->result     = $db->orm->select($criteria );
-    $this->calcQuery  = $criteria->count( 'count(DISTINCT group_users.id_user) as '.Db::Q_SIZE, true );
+    $this->result     = $db->orm->select($criteria);
+    $this->calcQuery  = $criteria->count('count(DISTINCT group_users.id_user) as '.Db::Q_SIZE, true);
 
   }//end public function fetchListUser */
 
@@ -155,17 +155,17 @@ class AclMgmt_Qfdu_Dset_Treetable_Query extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetchListDset($areaId, $condition = null, $context = null )
+  public function fetchListDset($areaId, $condition = null, $context = null)
   {
 
-    if (!$context )
+    if (!$context)
       $context = new TFlag();
 
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
     $criteria  = $db->orm->newCriteria();
-    $dsetEntiy = $db->orm->newEntity($this->domainNode->srcKey );
+    $dsetEntiy = $db->orm->newEntity($this->domainNode->srcKey);
 
     $textKeys = $dsetEntiy->textKeys();
     $tableKey = $dsetEntiy->getTable();
@@ -183,15 +183,15 @@ class AclMgmt_Qfdu_Dset_Treetable_Query extends LibSqlQuery
     $context->groupBy = 'dset';
 
 
-    $this->setColsListDset($criteria, $tableKey, $fieldKeys );
-    $this->setTables($criteria, $tableKey );
-    $this->appendConditions($criteria, $condition, $ids, $tableKey, $fieldKeys, $context );
-    $this->checkLimitAndOrder($criteria, $tableKey, $fieldKeys, $context );
+    $this->setColsListDset($criteria, $tableKey, $fieldKeys);
+    $this->setTables($criteria, $tableKey);
+    $this->appendConditions($criteria, $condition, $ids, $tableKey, $fieldKeys, $context);
+    $this->checkLimitAndOrder($criteria, $tableKey, $fieldKeys, $context);
 
 
     // Run Query und save the result
-    $this->result     = $db->orm->select($criteria );
-    $this->calcQuery  = $criteria->count( 'count(DISTINCT group_users.vid) as '.Db::Q_SIZE, true );
+    $this->result     = $db->orm->select($criteria);
+    $this->calcQuery  = $criteria->count('count(DISTINCT group_users.vid) as '.Db::Q_SIZE, true);
 
   }//end public function fetchListDset */
 
@@ -206,13 +206,13 @@ class AclMgmt_Qfdu_Dset_Treetable_Query extends LibSqlQuery
    * @param Entity $dsetEntiy
    * @return void
    */
-  public function setCols($criteria, $tableKey, $textKeys )
+  public function setCols($criteria, $tableKey, $textKeys)
   {
 
     $colSql = '';
 
     if ($textKeys) {
-      $colSql = implode( " || ', ' ||  ", $textKeys ).' as dset_text ';
+      $colSql = implode(" || ', ' ||  ", $textKeys).' as dset_text ';
     } else {
       $colSql = "'{$this->domainNode->label}: ' || {$tableKey}.rowid as dset_text ";
     }
@@ -225,7 +225,7 @@ class AclMgmt_Qfdu_Dset_Treetable_Query extends LibSqlQuery
       $tableKey.".rowid as dset_rowid",
       $colSql
     );
-    $criteria->select($cols );
+    $criteria->select($cols);
 
   }//end public function setCols */
 
@@ -240,7 +240,7 @@ class AclMgmt_Qfdu_Dset_Treetable_Query extends LibSqlQuery
    * @param Entity $dsetEntiy
    * @return void
    */
-  public function setColsListUser($criteria, $tableKey, $textKeys )
+  public function setColsListUser($criteria, $tableKey, $textKeys)
   {
 
     $colSql = '';
@@ -250,7 +250,7 @@ class AclMgmt_Qfdu_Dset_Treetable_Query extends LibSqlQuery
     );
 
     if ($textKeys) {
-      $colSql = implode( " || ', ' ||  ", $textKeys ).' as dset_text ';
+      $colSql = implode(" || ', ' ||  ", $textKeys).' as dset_text ';
 
       foreach ($textKeys as $textKey) {
         $groupBy[] = $textKey;
@@ -264,11 +264,11 @@ class AclMgmt_Qfdu_Dset_Treetable_Query extends LibSqlQuery
     (
       $tableKey.".rowid as dset_rowid",
       $colSql,
-      "count( distinct group_users.id_group ) as num_groups"
+      "count(distinct group_users.id_group) as num_groups"
     );
-    $criteria->select($cols );
+    $criteria->select($cols);
 
-    $criteria->groupBy($groupBy );
+    $criteria->groupBy($groupBy);
 
   }//end public function setColsListUser */
 
@@ -283,7 +283,7 @@ class AclMgmt_Qfdu_Dset_Treetable_Query extends LibSqlQuery
    * @param Entity $dsetEntiy
    * @return void
    */
-  public function setColsListDset($criteria, $tableKey, $textKeys )
+  public function setColsListDset($criteria, $tableKey, $textKeys)
   {
 
     $colSql = '';
@@ -293,7 +293,7 @@ class AclMgmt_Qfdu_Dset_Treetable_Query extends LibSqlQuery
     );
 
     if ($textKeys) {
-      $colSql = implode( " || ', ' ||  ", $textKeys ).' as dset_text ';
+      $colSql = implode(" || ', ' ||  ", $textKeys).' as dset_text ';
 
       foreach ($textKeys as $textKey) {
         $groupBy[] = $textKey;
@@ -306,11 +306,11 @@ class AclMgmt_Qfdu_Dset_Treetable_Query extends LibSqlQuery
     (
       $tableKey.".rowid as dset_rowid",
       $colSql,
-      "count( distinct group_users.vid ) as num_users"
+      "count(distinct group_users.vid) as num_users"
     );
-    $criteria->select($cols );
+    $criteria->select($cols);
 
-    $criteria->groupBy($groupBy );
+    $criteria->groupBy($groupBy);
 
   }//end public function setColsListDset */
 
@@ -323,10 +323,10 @@ class AclMgmt_Qfdu_Dset_Treetable_Query extends LibSqlQuery
    * @param string $tableKey
    * @return void
    */
-  public function setTables($criteria, $tableKey )
+  public function setTables($criteria, $tableKey)
   {
 
-    $criteria->from( 'wbfsys_group_users group_users', 'group_users' );
+    $criteria->from('wbfsys_group_users group_users', 'group_users');
 
     $criteria->join
     (
@@ -334,7 +334,7 @@ class AclMgmt_Qfdu_Dset_Treetable_Query extends LibSqlQuery
         JOIN '.$tableKey.'
           ON group_users.vid = '.$tableKey.'.rowid
       ',
-      array($tableKey )
+      array($tableKey)
     );
 
   }//end public function setTables */
@@ -367,34 +367,34 @@ class AclMgmt_Qfdu_Dset_Treetable_Query extends LibSqlQuery
   )
   {
 
-    if ( isset($condition['free'] ) && trim($condition['free'] ) != ''  ) {
+    if (isset($condition['free']) && trim($condition['free']) != ''  ) {
 
-      if ( ctype_digit($condition['free'] ) ) {
+      if (ctype_digit($condition['free'])) {
         $criteria->where
         (
-          '(  '.$tableKey.'.rowid = \''.$condition['free'].'\' )'
+          '( '.$tableKey.'.rowid = \''.$condition['free'].'\')'
         );
       } else {
 
-        if ( strpos($condition['free'], ',' ) ) {
+        if (strpos($condition['free'], ',')) {
 
-          $parts = explode( ',', $condition['free'] );
+          $parts = explode(',', $condition['free']);
 
           foreach ($parts as $part) {
 
-            $part = trim($part );
+            $part = trim($part);
 
             // prüfen, dass der string nicht leer ist
-            if ( '' == trim($part ) )
+            if ('' == trim($part))
               continue;
 
             $tmp = array();
 
             foreach ($textKeys as $tKey) {
-              $tmp[] = "(  upper({$tKey}) like upper('%{$part}%') )";
+              $tmp[] = "( upper({$tKey}) like upper('%{$part}%'))";
             }
 
-            $criteria->where( '( '.implode( ' OR ', $tmp ).' )' );
+            $criteria->where('('.implode(' OR ', $tmp).')');
 
           }
 
@@ -405,10 +405,10 @@ class AclMgmt_Qfdu_Dset_Treetable_Query extends LibSqlQuery
           $tmp = array();
 
           foreach ($textKeys as $tKey) {
-            $tmp[] = "(  upper({$tKey}) like upper('%{$part}%') )";
+            $tmp[] = "( upper({$tKey}) like upper('%{$part}%'))";
           }
 
-          $criteria->where( '( '.implode( ' OR ', $tmp ).' )' );
+          $criteria->where('('.implode(' OR ', $tmp).')');
 
         }
 
@@ -480,19 +480,19 @@ class AclMgmt_Qfdu_Dset_Treetable_Query extends LibSqlQuery
 
     if ($textKeys) {
       // check if there is a given order
-      $criteria->orderBy( current($textKeys) );
+      $criteria->orderBy(current($textKeys));
     } else {
-      $criteria->orderBy( "{$tableKey}.rowid" );
+      $criteria->orderBy("{$tableKey}.rowid");
     }
 
     // Check the offset
     if ($context->start) {
-      if ($context->start < 0 )
+      if ($context->start < 0)
         $context->start = 0;
     } else {
       $context->start = null;
     }
-    $criteria->offset($context->start );
+    $criteria->offset($context->start);
 
     // Check the limit
     if (-1 == $context->qsize) {
@@ -500,14 +500,14 @@ class AclMgmt_Qfdu_Dset_Treetable_Query extends LibSqlQuery
       $context->qsize = null;
     } elseif ($context->qsize) {
       // limit must not be bigger than max, for no limit use -1
-      if ($context->qsize > Wgt::$maxListSize )
+      if ($context->qsize > Wgt::$maxListSize)
         $context->qsize = Wgt::$maxListSize;
     } else {
       // if limit 0 or null use the default limit
       $context->qsize = Wgt::$defListSize;
     }
 
-    $criteria->limit($context->qsize );
+    $criteria->limit($context->qsize);
 
   }//end public function checkLimitAndOrder */
 

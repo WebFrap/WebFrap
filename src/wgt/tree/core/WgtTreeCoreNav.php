@@ -31,8 +31,8 @@ class WgtTreeCoreNav extends WgtTreeAbstract
    */
   public function load()
   {
-    if ( Log::$levelDebug )
-      Log::start( __file__ , __line__ ,__method__  );
+    if (Log::$levelDebug)
+      Log::start(__file__ , __line__ ,__method__  );
 
     $collection = new CollectionCoreTree();
 
@@ -44,10 +44,10 @@ class WgtTreeCoreNav extends WgtTreeAbstract
    *
    * @return
    */
-  public function build( )
+  public function build()
   {
-    if ( Log::$levelDebug )
-      Log::start( __file__ , __line__ ,__method__  );
+    if (Log::$levelDebug)
+      Log::start(__file__ , __line__ ,__method__  );
 
     $this->load();
 
@@ -66,12 +66,12 @@ class WgtTreeCoreNav extends WgtTreeAbstract
   */
   public function genTree()
   {
-    if ( Log::$levelDebug )
-      Log::start( __file__ , __line__ ,__method__  );
+    if (Log::$levelDebug)
+      Log::start(__file__ , __line__ ,__method__  );
 
     $html = '<div class="wgtTree" ><ul>'.NL;
-    $html .= $this->genFolderTree( '0' );
-    $html .= $this->genFileTree( '0' );
+    $html .= $this->genFolderTree('0');
+    $html .= $this->genFileTree('0');
     $html .= '</ul></div>'.NL;
 
     return $html;
@@ -87,16 +87,16 @@ class WgtTreeCoreNav extends WgtTreeAbstract
   * @param Int Pos Die Id des Vaterordners
   * @return void
   */
-  public function genFolderTree($pos )
+  public function genFolderTree($pos)
   {
-    if ( Log::$levelDebug )
-      Log::start( __file__ , __line__ ,__method__ ,array($pos) );
+    if (Log::$levelDebug)
+      Log::start(__file__ , __line__ ,__method__ ,array($pos));
 
     $view = Controller::getSysmodul('VIEW');
 
     $html = '';
 
-    if ( isset($this->folders[$pos]) ) {
+    if (isset($this->folders[$pos])) {
       foreach ($this->folders[$pos] as $entry) {
         $id        =  $entry['rowid'];
         $name      =  $entry['name'];
@@ -113,7 +113,7 @@ class WgtTreeCoreNav extends WgtTreeAbstract
           ),
           'DmsFolder erstellen'
         ).'">'
-        .$view->createIcon( 'dms/folder_add.gif' , 'xsmall' , 'Ordner anlegen' )
+        .$view->createIcon('dms/folder_add.gif' , 'xsmall' , 'Ordner anlegen')
         .'</a>';
 
       $linkWorkon = '<a href="'.TUrl::asUrl
@@ -128,7 +128,7 @@ class WgtTreeCoreNav extends WgtTreeAbstract
         ),
         'DmsFolder bearbeiten'
         ).'">'
-        .$view->createIcon( 'dms/folder_edit.gif' , 'xsmall' , 'Ordner bearbeiten' )
+        .$view->createIcon('dms/folder_edit.gif' , 'xsmall' , 'Ordner bearbeiten')
         .'</a>';
 
       $linkDelete = '<a href="'.TUrl::asUrl
@@ -143,7 +143,7 @@ class WgtTreeCoreNav extends WgtTreeAbstract
         ),
         'DmsFolder löschen'
         ).'">'
-        .$view->createIcon( 'dms/folder_delete.gif' , 'xsmall' , 'Ordner löschen' )
+        .$view->createIcon('dms/folder_delete.gif' , 'xsmall' , 'Ordner löschen')
         .'</a>';
 
       $linkNewFile = '<a href="'.TUrl::asUrl
@@ -158,7 +158,7 @@ class WgtTreeCoreNav extends WgtTreeAbstract
           ),
           'Datei erstellen'
         ).'">'
-        .$view->createIcon( 'dms/file_add.gif' , 'xsmall' , 'File anlegen' )
+        .$view->createIcon('dms/file_add.gif' , 'xsmall' , 'File anlegen')
         .'</a>';
 
         $html .= '<li>'
@@ -169,8 +169,8 @@ class WgtTreeCoreNav extends WgtTreeAbstract
           .'</span>';
 
         $html .= "<ul>\n";
-        $html .= $this->genFolderTree($id );
-        $html .= $this->genFileTree($id );
+        $html .= $this->genFolderTree($id);
+        $html .= $this->genFileTree($id);
         $html .= "</ul>\n";
 
         $html .= "</li>\n";
@@ -192,13 +192,13 @@ class WgtTreeCoreNav extends WgtTreeAbstract
   * @param Int Pos Die Id des Vaterordners
   * @return void
   */
-  public function genFileTree($pos )
+  public function genFileTree($pos)
   {
 
     $html = '';
     $view = View::getActive();
 
-    if ( isset($this->files[$pos]) ) {
+    if (isset($this->files[$pos])) {
 
       foreach ($this->files[$pos] as $entry) {
 
@@ -217,7 +217,7 @@ class WgtTreeCoreNav extends WgtTreeAbstract
         ),
         'Datei bearbeiten'
         ).'">'
-        .$view->createIcon( 'dms/file_edit.gif' , 'xsmall' , 'File bearbeiten' )
+        .$view->createIcon('dms/file_edit.gif' , 'xsmall' , 'File bearbeiten')
         .'</a>';
 
       $linkDelete = '<a href="'.TUrl::asUrl
@@ -232,7 +232,7 @@ class WgtTreeCoreNav extends WgtTreeAbstract
         ),
         'Datei löschen'
         ).'">'
-        .$view->createIcon( 'dms/file_delete.gif' , 'xsmall' , 'File löschen' )
+        .$view->createIcon('dms/file_delete.gif' , 'xsmall' , 'File löschen')
         .'</a>';
 
         $html .= '

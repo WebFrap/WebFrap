@@ -14,7 +14,7 @@ der Heißen-Luft-Produktion Anwendung finden.
 <p>
 Du wirst Fehler machen. Punkt. Ich weiß das, du weißt das und jeder andere
 weiß das auch. Das ist ein Umstand der nicht zu ändern ist finde dich damit ab.
-Das mussten alle andere ( inklusive mir ) auch lernen.
+Das mussten alle andere (inklusive mir) auch lernen.
 Das werden eine Menge kleiner unrelevanter Fehler sein, aber früher oder später
 mit an Sicherheit grenzender Wahrscheinlichkeit irgendetwas so dämliches / peinliches oder auch
 folgenträchtiges, dass du am liebsten durch den Boden versinken würdest. 

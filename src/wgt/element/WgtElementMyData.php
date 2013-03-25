@@ -36,18 +36,18 @@ class WgtElementMyData extends WgtAbstract
   /**
    * @return string
    */
-  public function render($params = null )
+  public function render($params = null)
   {
 
     $user    = User::getActive();
     $db      = Db::getActive();
     $orm     = $db->getOrm();
 
-    $userNode   = $orm->get( 'WbfsysRoleUser', $user->getId()  );
-    $personNode = $orm->get( 'CorePerson', $userNode->id_person  );
+    $userNode   = $orm->get('WbfsysRoleUser', $user->getId()  );
+    $personNode = $orm->get('CorePerson', $userNode->id_person  );
 
-    $iconDel     = $this->icon( 'control/delete.png', 'Delete' );
-    $iconUpload  = $this->icon( 'control/upload.png', 'Upload' );
+    $iconDel     = $this->icon('control/delete.png', 'Delete');
+    $iconUpload  = $this->icon('control/upload.png', 'Upload');
 
     $userForm = new WgtFormBuilder
     (
@@ -78,9 +78,9 @@ class WgtElementMyData extends WgtAbstract
       'name'    =>  'switch_profile',
       'id'      =>  'wgt-panel-switch-profile',
       'class'   =>  'medium',
-      'onchange'  => '$R.redirect( \'index.php\',{c:\'Webfrap.Profile.change\',profile:$S(\'#wgt-panel-switch-profile\').val()} );'
+      'onchange'  => '$R.redirect(\'index.php\',{c:\'Webfrap.Profile.change\',profile:$S(\'#wgt-panel-switch-profile\').val()});'
     ));
-    $codeSelectboxProfile = WgtForm::decorateElement( 'Profile', 'wgt-panel-switch-profile', $selectboxProfile );
+    $codeSelectboxProfile = WgtForm::decorateElement('Profile', 'wgt-panel-switch-profile', $selectboxProfile);
 
     /*
      * UI theme
@@ -93,9 +93,9 @@ class WgtElementMyData extends WgtAbstract
       'name'    =>  'switch_ui_theme',
       'id'      =>  'wgt-panel-switch-ui_theme',
       'class'   =>  'medium',
-      'onchange'  => '$R.redirect( \'index.php\',{c:\'Webfrap.Profile.change\',profile:$S(\'#wgt-panel-switch-ui_theme\').val()} );'
+      'onchange'  => '$R.redirect(\'index.php\',{c:\'Webfrap.Profile.change\',profile:$S(\'#wgt-panel-switch-ui_theme\').val()});'
     ));
-    $codeSlctUiTheme = WgtForm::decorateElement( 'UI Theme', 'wgt-panel-switch-ui_theme', $slctUiTheme );
+    $codeSlctUiTheme = WgtForm::decorateElement('UI Theme', 'wgt-panel-switch-ui_theme', $slctUiTheme);
 
     /*
      * Icon theme
@@ -108,9 +108,9 @@ class WgtElementMyData extends WgtAbstract
       'name'    =>  'switch_icon_theme',
       'id'      =>  'wgt-panel-switch-icon_theme',
       'class'   =>  'medium',
-      'onchange'  => '$R.redirect( \'index.php\',{c:\'Webfrap.Profile.change\',profile:$S(\'#wgt-panel-switch-icon_theme\').val()} );'
+      'onchange'  => '$R.redirect(\'index.php\',{c:\'Webfrap.Profile.change\',profile:$S(\'#wgt-panel-switch-icon_theme\').val()});'
     ));
-    $codeSlctIconTheme = WgtForm::decorateElement( 'Icon Theme', 'wgt-panel-switch-icon_theme', $slctIconTheme );
+    $codeSlctIconTheme = WgtForm::decorateElement('Icon Theme', 'wgt-panel-switch-icon_theme', $slctIconTheme);
 
     /*
      * Language switcher
@@ -123,9 +123,9 @@ class WgtElementMyData extends WgtAbstract
       'name'      =>  'switch_language',
       'id'        =>  'wgt-panel-switch_language',
       'class'     =>  'medium',
-      'onchange'  => '$R.redirect( \'index.php\',{c:\'Webfrap.Profile.change\',profile:$S(\'#wgt-panel-switch_language\').val()} );'
+      'onchange'  => '$R.redirect(\'index.php\',{c:\'Webfrap.Profile.change\',profile:$S(\'#wgt-panel-switch_language\').val()});'
     ));
-    $codeSlctLSw = WgtForm::decorateElement( 'Language', 'wgt-panel-switch_language', $slctLSw );
+    $codeSlctLSw = WgtForm::decorateElement('Language', 'wgt-panel-switch_language', $slctLSw);
 
     // budget items
 
@@ -143,7 +143,7 @@ class WgtElementMyData extends WgtAbstract
     id_user = {$user->getid()};
 SQL;
 
-    $contactItems     = $db->select($sqlItems );
+    $contactItems     = $db->select($sqlItems);
     $htmlContactItems = '';
 
     foreach ($contactItems as $contactItem) {

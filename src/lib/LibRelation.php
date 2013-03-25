@@ -39,8 +39,8 @@ class LibRelation extends BaseChild
   {
 
     if (!self::$default) {
-      self::$default = new LibRelation( );
-      self::$default->setEnv( Webfrap::$env  );
+      self::$default = new LibRelation();
+      self::$default->setEnv(Webfrap::$env  );
     }
 
     return self::$default;
@@ -57,7 +57,7 @@ class LibRelation extends BaseChild
    * @param string $type
    *
    */
-  public function getUsers($relations )
+  public function getUsers($relations)
   {
 
     //$receivers    = $message->getReceivers();
@@ -70,17 +70,17 @@ class LibRelation extends BaseChild
         switch ($relation->type) {
           case 'group':
           {
-            $users = $this->loadGroup($relation, $users );
+            $users = $this->loadGroup($relation, $users);
             break;
           }
           case 'user':
           {
-            $users = $this->loadUser($relation, $users );
+            $users = $this->loadUser($relation, $users);
             break;
           }
 
         }
-      } catch ( LibRelation_Exception $exc ) {
+      } catch (LibRelation_Exception $exc) {
 
       }
 
@@ -97,16 +97,16 @@ class LibRelation extends BaseChild
    *
    * @return array
    */
-  public function loadGroup($receiver, $userList )
+  public function loadGroup($receiver, $userList)
   {
 
     $relationLoader = $this->getRelationLoader();
 
-    if (!$users = $relationLoader->fetchGroups($receiver ) ) {
+    if (!$users = $relationLoader->fetchGroups($receiver)) {
 
       if ($receiver->else) {
         foreach ($receiver->else as $elseReceiver) {
-          $userList = $this->getUsers($elseReceiver, $userList );
+          $userList = $this->getUsers($elseReceiver, $userList);
         }
       }
 
@@ -114,7 +114,7 @@ class LibRelation extends BaseChild
     }
 
     foreach ($users as $userData) {
-      $node = new LibRelationNode_User($userData );
+      $node = new LibRelationNode_User($userData);
 
       // jede adresse nur einmal zulassen, doppelte werden einfach
       // überschrieben
@@ -132,22 +132,22 @@ class LibRelation extends BaseChild
    *
    * @return array
    */
-  public function loadUser($receiver, $users )
+  public function loadUser($receiver, $users)
   {
 
     $addressLoader = $this->getRelationLoader();
 
-    if (!$userData = $addressLoader->fetchUser($receiver ) ) {
+    if (!$userData = $addressLoader->fetchUser($receiver)) {
       if ($receiver->else) {
         foreach ($receiver->else as $elseReceiver) {
-          $users = $this->getUsers($elseReceiver, $users );
+          $users = $this->getUsers($elseReceiver, $users);
         }
       }
 
       return $users;
     }
 
-    $contact = new LibRelationNode_User($userData );
+    $contact = new LibRelationNode_User($userData);
     $users[$contact->address] = $contact;
 
     return $users;
@@ -162,7 +162,7 @@ class LibRelation extends BaseChild
 
     if (!$this->relationLoader) {
       $db                 = $this->getDb();
-      $this->relationLoader  = $db->newQuery( 'LibRelationLoader' );
+      $this->relationLoader  = $db->newQuery('LibRelationLoader');
     }
 
     return $this->relationLoader;

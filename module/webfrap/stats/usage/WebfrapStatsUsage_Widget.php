@@ -49,15 +49,15 @@ class WebfrapStatsUsage_Widget extends WgtWidget
    * @param string $tabSize
    * @return void
    */
-  public function render($tabId, $tabSize = 'medium' )
+  public function render($tabId, $tabSize = 'medium')
   {
 
     $user         = $this->getUser();
     $view         = $this->getView();
     $httpRequest  = $this->getRequest();
 
-    $chartType  = $httpRequest->param('graph', Validator::CNAME );
-    $startDate  = $httpRequest->param('start', Validator::DATE );
+    $chartType  = $httpRequest->param('graph', Validator::CNAME);
+    $startDate  = $httpRequest->param('start', Validator::DATE);
 
     $startDate = date('Y').'-01-01';
 
@@ -73,9 +73,9 @@ class WebfrapStatsUsage_Widget extends WgtWidget
       'class'     => 'medium cursor',
     ));
     $selectbox->setWidth('medium');
-    $selectbox->setFirstfree( 'Select an Entity' );
+    $selectbox->setFirstfree('Select an Entity');
 
-    $selectbox->setData($this->query->fetchSelectbox() );
+    $selectbox->setData($this->query->fetchSelectbox());
     $selectbox->setActive($entityKey);
 
     $boxWidth   = $this->width - 122;
@@ -151,17 +151,17 @@ HTML;
     $view         = $this->getView();
     $httpRequest  = $this->getRequest();
 
-    $tabId      = $httpRequest->param(  'target',Validator::CKEY  );
-    $size       = $httpRequest->data(  'size',Validator::CNAME  );
+    $tabId      = $httpRequest->param( 'target',Validator::CKEY  );
+    $size       = $httpRequest->data( 'size',Validator::CNAME  );
 
-    $chartType  = $httpRequest->data(  'graph',Validator::CNAME  );
-    $entityKey  = $httpRequest->data(  'entity',Validator::CNAME  );
-    $startDate  = $httpRequest->data(  'start',Validator::DATE  );
+    $chartType  = $httpRequest->data( 'graph',Validator::CNAME  );
+    $entityKey  = $httpRequest->data( 'entity',Validator::CNAME  );
+    $startDate  = $httpRequest->data( 'start',Validator::DATE  );
 
-    $width      = $httpRequest->param(  'width',Validator::INT  );
-    $height     = $httpRequest->param(  'height',Validator::INT  );
+    $width      = $httpRequest->param( 'width',Validator::INT  );
+    $height     = $httpRequest->param( 'height',Validator::INT  );
 
-    $json = $this->load($entityKey, $startDate );
+    $json = $this->load($entityKey, $startDate);
 
 
     if (!$width || !$height) {
@@ -199,14 +199,14 @@ HTML;
    * @param string $entityKey
    * @param string $startDate
    */
-  public function load($entityKey , $startDate )
+  public function load($entityKey , $startDate)
   {
 
     Debug::console("$entityKey , $startDate");
 
     $query  = new StatsEntity_Widget_Query();
     $this->query = $query;
-    $data   = $query->fetch($entityKey, $startDate );
+    $data   = $query->fetch($entityKey, $startDate);
 
     //Message::addMessage('fkn test');
 
@@ -236,7 +236,7 @@ HTML;
     $json = '{';
     $json .= '"label": ["'.implode('", "', $labels).'"],';
     $json .= '"values": [';
-    $json .= implode( ',', $jsonData );
+    $json .= implode(',', $jsonData);
     $json .= ']}';
 
     return $json;

@@ -44,10 +44,10 @@ class Backup_Action extends Action {
 		
 		$filename = $tableName . "-backup-" . time () . ".csv";
 		
-		$path = implode ( '\\', array (
+		$path = implode ('\\', array (
 				$this->backupPathWin,
 				$filename 
-		) );
+		));
 		
 		$db = $this->env->getDb ();
 		
@@ -59,7 +59,7 @@ class Backup_Action extends Action {
 		
 SQL;
 		
-		$db->query ( $sql );
+		$db->query ($sql);
 	}
 	
 	/**
@@ -87,10 +87,19 @@ SQL;
 		
 		$result = null;
 		
+<<<<<<< HEAD
 		if($tv == "1") {
 			$result = true;
 		} 
 		if($tv == "0") {
+=======
+		if ($tv == 1) {
+			echo "# Hier kam <b>true</b> raus <br>";
+			$result = true;
+		} 
+		if ($tv == 0) {
+			echo "#Hier kam <b>false</b> raus <br>";
+>>>>>>> development
 			$result = false;
 		}
 		

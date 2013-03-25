@@ -31,23 +31,23 @@ class WebfrapMaintenance_Maintab extends WgtMaintab
    * @param string $menuName
    * @return void
    */
-  public function display($menuName, $params )
+  public function display($menuName, $params)
   {
 
     $this->setLabel('Maintenance');
     $this->setTitle('Maintenance');
 
-    $this->setTemplate( 'webfrap/navigation/maintab/modmenu' );
+    $this->setTemplate('webfrap/navigation/maintab/modmenu');
 
-    $modMenu = $this->newItem( 'modMenu', 'MenuFolder' );
+    $modMenu = $this->newItem('modMenu', 'MenuFolder');
     $modMenu->setData
     (
-      DaoFoldermenu::get( 'maintenance/'.$menuName, true ),
+      DaoFoldermenu::get('maintenance/'.$menuName, true),
       'maintab.php'
     );
 
     $params = new TArray();
-    $this->addMenuMenu($modMenu, $params );
+    $this->addMenuMenu($modMenu, $params);
 
   }//end public function displayMenu */
 
@@ -60,7 +60,7 @@ class WebfrapMaintenance_Maintab extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenuMenu($modMenu, $params )
+  public function addMenuMenu($modMenu, $params)
   {
 
     $menu     = $this->newMenu
@@ -70,7 +70,7 @@ class WebfrapMaintenance_Maintab extends WgtMaintab
     );
     $menu->id = $this->id.'_dropmenu';
     $menu->crumbs = $modMenu->buildCrumbs();
-    $menu->buildMenu($params );
+    $menu->buildMenu($params);
 
   }//end public function addMenuMenu */
 

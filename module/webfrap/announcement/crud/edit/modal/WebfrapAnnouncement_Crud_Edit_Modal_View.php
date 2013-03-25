@@ -52,7 +52,7 @@ class WebfrapAnnouncement_Crud_Edit_Modal_View extends WgtModal
   * @param TFlag $params
   * @return Error im Fehlerfall sonst null
   */
-  public function displayForm($objid, $params )
+  public function displayForm($objid, $params)
   {
 
     // laden der benötigten Resource Objekte
@@ -61,7 +61,7 @@ class WebfrapAnnouncement_Crud_Edit_Modal_View extends WgtModal
     $this->position = '#wgt-box-webfrap_announcement-form';
 
     // set the form template
-    $this->setTemplate( 'webfrap/announcement/crud/edit/modal/form_edit', true );
+    $this->setTemplate('webfrap/announcement/crud/edit/modal/form_edit', true);
 
     // Setzen von Viewspezifischen Control Flags
     $params->viewType  = 'modal';
@@ -72,19 +72,19 @@ class WebfrapAnnouncement_Crud_Edit_Modal_View extends WgtModal
     $params->formId     = 'wgt-form-webfrap_announcement';
 
     // Setzen der letzten metadaten
-    $this->addVar( 'params', $params );
-    $this->addVar( 'context', 'edit' );
+    $this->addVar('params', $params);
+    $this->addVar('context', 'edit');
 
     // Das Create Form Objekt erstellen und mit allen nötigen Daten befüllen
-    $form = $this->newForm( 'WebfrapAnnouncement_Crud_Edit' );
-    $entity = $this->model->getEntity($objid );
-    $form->setEntity($entity );
+    $form = $this->newForm('WebfrapAnnouncement_Crud_Edit');
+    $entity = $this->model->getEntity($objid);
+    $form->setEntity($entity);
 
     // Form Action und ID setzen
-    $form->setFormTarget($params->formAction, $params->formId, $params );
+    $form->setFormTarget($params->formAction, $params->formId, $params);
 
     // Form rendern
-    $form->renderForm($params );
+    $form->renderForm($params);
 
     // kein fehler aufgetreten? bestens also geben wir auch keinen zurück
     return null;

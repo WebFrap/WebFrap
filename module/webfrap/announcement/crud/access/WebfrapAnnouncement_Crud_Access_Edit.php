@@ -27,7 +27,7 @@ class WebfrapAnnouncement_Crud_Access_Edit extends LibAclPermission
    * @param TFlag $params
    * @param WbfsysAnnouncement_Entity $entity
    */
-  public function loadDefault($params, $entity = null )
+  public function loadDefault($params, $entity = null)
   {
 
     // laden der benötigten Resource Objekte
@@ -37,7 +37,7 @@ class WebfrapAnnouncement_Crud_Access_Edit extends LibAclPermission
     // dann befinden wir uns im root und brauchen keine pfadafrage
     // um potentielle fehler abzufangen wird auch direkt der richtige Root gesetzt
     // nicht das hier einer einen falschen pfad injected
-    if (is_null($params->aclRoot) || 1 == $params->aclLevel ) {
+    if (is_null($params->aclRoot) || 1 == $params->aclLevel) {
       $params->isAclRoot     = true;
       $params->aclRoot       = 'mgmt-wbfsys_announcement';
       $params->aclRootId     = $entity->getid(); // die aktive entity ist der root

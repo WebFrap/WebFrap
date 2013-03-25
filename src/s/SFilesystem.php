@@ -38,40 +38,40 @@ class SFilesystem
     if ($absolut) {
       $activFolder = '/';
     } else {
-      if ($folder[0] == '.' )
+      if ($folder[0] == '.')
         $activFolder = '';
       else
         $activFolder = './';
     }
 
     if ($rekursiv) {
-      $folders = explode( '/' , $folder );
+      $folders = explode('/' , $folder);
 
       foreach ($folders as $tpFolder) {
-        if (!file_exists($activFolder.$tpFolder ) ) {
+        if (!file_exists($activFolder.$tpFolder)) {
 
-          if (!is_writeable($activFolder) ) {
-            throw new Io_Exception( 'Folder: '.$activFolder.' is not writeable' );
+          if (!is_writeable($activFolder)) {
+            throw new Io_Exception('Folder: '.$activFolder.' is not writeable');
           }
 
-          if (!mkdir($activFolder.$tpFolder) ) {
-            throw new Io_Exception( 'Failed to create folder: '.$activFolder.$tpFolder );
+          if (!mkdir($activFolder.$tpFolder)) {
+            throw new Io_Exception('Failed to create folder: '.$activFolder.$tpFolder);
           }
 
         }
 
         $activFolder .= $tpFolder.'/';
 
-      }//end foreach($folders as $tpFolder )
+      }//end foreach($folders as $tpFolder)
     } else {
-      if ( is_dir($folder) )
+      if (is_dir($folder))
        return true;
 
-      if (!is_writeable($folder) ) {
+      if (!is_writeable($folder)) {
         throw new Io_Exception('Folder: '.$folder.' is not writeable');
       }
 
-      if (!mkdir($folder) ) {
+      if (!mkdir($folder)) {
         throw new Io_Exception('Failed to create folder: '.$folder);
       }
 
@@ -88,7 +88,7 @@ class SFilesystem
    * @param string $fileName
    * @return string
    */
-  public static function dirname($fileName )
+  public static function dirname($fileName)
   {
     return dirname($fileName);
 
@@ -100,7 +100,7 @@ class SFilesystem
    * @param string $fileName
    * @return string
    */
-  public static function filename($fileName )
+  public static function filename($fileName)
   {
     return basename($fileName);
 
@@ -116,32 +116,32 @@ class SFilesystem
   public static function mkdir($folder , $rekursiv = true , $absolut = false  )
   {
 
-    if ( '' == trim($folder) )
-      throw new Io_Exception( 'Called mkdir with empty folderstring' );
+    if ('' == trim($folder))
+      throw new Io_Exception('Called mkdir with empty folderstring');
 
     if ($absolut) {
       $activFolder = '/';
     } else {
-      if ($folder[0] == '.' )
+      if ($folder[0] == '.')
         $activFolder = '';
       else
         $activFolder = './';
     }
 
     if ($rekursiv) {
-      $folders = explode( '/' , $folder );
+      $folders = explode('/' , $folder);
 
       foreach ($folders as $tpFolder) {
-        if (!file_exists($activFolder.$tpFolder ) ) {
+        if (!file_exists($activFolder.$tpFolder)) {
 
-          if (!is_writeable($activFolder) ) {
+          if (!is_writeable($activFolder)) {
             if (Webfrap::classExists('Io_Exception'))
               throw new Io_Exception('Folder: '.$activFolder.' is not writeable');
             else
               return false;
           }
 
-          if (!mkdir($activFolder.$tpFolder) ) {
+          if (!mkdir($activFolder.$tpFolder)) {
             if (Webfrap::classExists('Io_Exception'))
               throw new Io_Exception('Failed to create folder: '.$activFolder.$tpFolder);
             else
@@ -153,12 +153,12 @@ class SFilesystem
 
         $activFolder .= $tpFolder.'/';
 
-      }//end foreach($folders as $tpFolder )
+      }//end foreach($folders as $tpFolder)
     } else {
-      if ( is_dir($folder) )
+      if (is_dir($folder))
        return true;
 
-      if (!is_writeable($folder) ) {
+      if (!is_writeable($folder)) {
         if (Webfrap::classExists('Io_Exception'))
           throw new Io_Exception('Folder: '.$folder.' is not writeable');
         else
@@ -166,7 +166,7 @@ class SFilesystem
 
       }
 
-      if (!mkdir($folder) ) {
+      if (!mkdir($folder)) {
         if (Webfrap::classExists('Io_Exception'))
           throw new Io_Exception('Failed to create folder: '.$folder);
         else
@@ -186,7 +186,7 @@ class SFilesystem
    * @param string $touch
    * @return boolean
    */
-  public static function touch($file )
+  public static function touch($file)
   {
 
     if (file_exists($file))
@@ -195,10 +195,10 @@ class SFilesystem
     $path     = dirname($file);
     //$filename = filename($file);
 
-    //Log::error( "Touch dir: $path file: $file" );
+    //Log::error("Touch dir: $path file: $file");
 
-    if (!is_dir($path) ) {
-      if (!self::mkdir($path) )
+    if (!is_dir($path)) {
+      if (!self::mkdir($path))
         return false;
     }
 
@@ -211,7 +211,7 @@ class SFilesystem
    * @param string $touch
    * @return boolean
    */
-  public static function touchFolder($folder )
+  public static function touchFolder($folder)
   {
 
     if (!file_exists($folder))
@@ -226,12 +226,12 @@ class SFilesystem
    * @param string $fileName
    * @return boolean
    */
-  public static function touchFileFolder($fileName )
+  public static function touchFileFolder($fileName)
   {
 
     $filePath = dirname($fileName);
 
-    if (!file_exists($filePath) )
+    if (!file_exists($filePath))
       self::mkdir($filePath);
 
   }//end public static function touchFileFolder */
@@ -242,7 +242,7 @@ class SFilesystem
    * @param string $folder
    * @return boolean
    */
-  public static function isAbsolute($folder )
+  public static function isAbsolute($folder)
   {
     return $folder[0] == '/' ? true:false;
   }//end public static function isAbsolute */
@@ -253,15 +253,15 @@ class SFilesystem
    * @param string Folder Der Pfad zum Ordner desse Inhalt man haben möchte
    * @return boolean
    */
-  public static function delete($path , $isSub = false )
+  public static function delete($path , $isSub = false)
   {
 
     // if file not exists just ignore
     if (!file_exists($path))
       return false;
 
-    if ( is_file($path ) ) {
-      if (!is_writeable($path) ) {
+    if (is_file($path)) {
+      if (!is_writeable($path)) {
         throw new Io_Exception
         (
           I18n::s
@@ -276,8 +276,8 @@ class SFilesystem
       return unlink($path);
     }
 
-    if ( is_dir($path ) ) {
-      if (!is_writeable($path ) ) {
+    if (is_dir($path)) {
+      if (!is_writeable($path)) {
         throw new Io_Exception
         (
           I18n::s
@@ -293,15 +293,15 @@ class SFilesystem
 
       // Read all content from folder and delete manual
       if ($dh = opendir($path)) {
-        while ( ($file = readdir($dh) ) !== false ) {
+        while (($file = readdir($dh)) !== false) {
           $tmpPath = $path;
           if ($file != "." and $file != ".." and $file != ".svn") {
-            if ( is_dir($tmpPath.'/'.$file) ) {
+            if (is_dir($tmpPath.'/'.$file)) {
               // Rekursiv delete folder Content
               if (!self::delete($tmpPath.'/'.$file , true))
                 $clean = false;
             } else {
-              if (is_writeable($tmpPath.'/'.$file) ) {
+              if (is_writeable($tmpPath.'/'.$file)) {
                 if (!unlink($tmpPath.'/'.$file))
                   $clean = false;
               } else {
@@ -335,17 +335,17 @@ class SFilesystem
    * @param string Folder Der Pfad zum Ordner desse Inhalt man haben möchte
    * @return boolean
    */
-  public static function cleanFolder($path , $isSub = false )
+  public static function cleanFolder($path , $isSub = false)
   {
 
-    if (!file_exists($path) )
+    if (!file_exists($path))
       return false;
 
-    if ( is_file($path ) ) {
-      if (!is_writeable($path) ) {
+    if (is_file($path)) {
+      if (!is_writeable($path)) {
         Error::cachtableError
         (
-        I18n::s( 'wbf.message.fileNotDeleteable',array($path) ),
+        I18n::s('wbf.message.fileNotDeleteable',array($path)),
         'Io_Exception'
         );
       }
@@ -353,11 +353,11 @@ class SFilesystem
       return unlink($path);
     }
 
-    if ( is_dir($path ) ) {
-      if (!is_readable($path ) or !is_writeable($path ) ) {
+    if (is_dir($path)) {
+      if (!is_readable($path) or !is_writeable($path)) {
         Error::cachtableError
         (
-        I18n::s( 'wbf.message.folderInvalidRights',array($path) ),
+        I18n::s('wbf.message.folderInvalidRights',array($path)),
         'Io_Exception'
         );
       }
@@ -366,15 +366,15 @@ class SFilesystem
 
       // Read all content from folder and delete manual
       if ($dh = opendir($path)) {
-        while ( ($file = readdir($dh) ) !== false ) {
+        while (($file = readdir($dh)) !== false) {
           $tmpPath = $path;
           if ($file != "." and $file != ".." and $file != ".svn") {
-            if ( is_dir($tmpPath.'/'.$file) ) {
+            if (is_dir($tmpPath.'/'.$file)) {
               // Rekursiv delete folder Content
               if (!self::cleanFolder($tmpPath.'/'.$file , true))
                 $clean = false;
             } else {
-              if (is_writeable($tmpPath.'/'.$file) ) {
+              if (is_writeable($tmpPath.'/'.$file)) {
                 if (!unlink($tmpPath.'/'.$file))
                   $clean = false;
               } else {
@@ -394,7 +394,7 @@ class SFilesystem
         closedir($dh);
       }
 
-      if ($isSub )
+      if ($isSub)
         return rmdir($path);// Delete Folder at the end
       else
         return true;
@@ -409,23 +409,23 @@ class SFilesystem
    * @param string $isSub
    * @return boolean
    */
-  public static function copy($path , $target, $isSub = false )
+  public static function copy($path , $target, $isSub = false)
   {
 
-    if (!file_exists($path) ) {
+    if (!file_exists($path)) {
 
       Error::addError
       (
-      I18n::s( 'The file: '.$path.' not exists' , 'wbf.message.fileNotExists',array($path) ),
+      I18n::s('The file: '.$path.' not exists' , 'wbf.message.fileNotExists',array($path)),
       'Io_Exception'
       );
     }
 
-    if ( is_file($path ) ) {
-      return self::copyFile($path , $target );
+    if (is_file($path)) {
+      return self::copyFile($path , $target);
     }
 
-    if ( is_dir($path ) ) {
+    if (is_dir($path)) {
       return self::copyFolder($path , $target);
     }
 
@@ -440,24 +440,24 @@ class SFilesystem
    * @param string $isSub
    * @return boolean
    */
-  public static function replace($path , $target, $isSub = false )
+  public static function replace($path , $target, $isSub = false)
   {
 
     if (!is_readable($path)) {
       Error::addError
       (
-        I18n::s( 'The file: '.$path.' not exists' , 'wbf.message.fileNotExists',array($path) ),
+        I18n::s('The file: '.$path.' not exists' , 'wbf.message.fileNotExists',array($path)),
         'Io_Exception'
       );
     }
 
     $success = false;
 
-    if ( is_file($path ) ) {
-      $success = self::copyFile($path , $target );
+    if (is_file($path)) {
+      $success = self::copyFile($path , $target);
     }
 
-    if ( is_dir($path ) ) {
+    if (is_dir($path)) {
       $success = self::copyFolder($path , $target);
     }
 
@@ -474,21 +474,21 @@ class SFilesystem
    * @param string $isSub
    * @return boolean
    */
-  public static function merge($path , $target, $isSub = false )
+  public static function merge($path , $target, $isSub = false)
   {
 
-    if (!file_exists($path) ) {
+    if (!file_exists($path)) {
       Error::addError
       (
-      I18n::s( 'Die Datei '.$path.' existiert nicht', 'wbf.message.fileNotExists',array($path) ),
+      I18n::s('Die Datei '.$path.' existiert nicht', 'wbf.message.fileNotExists',array($path)),
       'Io_Exception'
       );
     }
 
-    if ( is_file($path ) )
-      return self::mergeFile($path , $target );
+    if (is_file($path))
+      return self::mergeFile($path , $target);
 
-    if ( is_dir($path ) )
+    if (is_dir($path))
       return self::mergeFolder($path , $target);
 
     return false;
@@ -502,21 +502,21 @@ class SFilesystem
    * @param string $isSub
    * @return boolean
    */
-  public static function retrofit($path , $target, $isSub = false )
+  public static function retrofit($path , $target, $isSub = false)
   {
 
     if (!file_exists($path)) {
         Error::addError
         (
-        I18n::s( 'Die Datei '.$path.' existiert nicht', 'wbf.message.fileNotExists',array($path) ),
+        I18n::s('Die Datei '.$path.' existiert nicht', 'wbf.message.fileNotExists',array($path)),
         'Io_Exception'
         );
     }
 
-    if ( is_file($path ) )
-      return self::mergeFile($path , $target );
+    if (is_file($path))
+      return self::mergeFile($path , $target);
 
-    if ( is_dir($path ) )
+    if (is_dir($path))
       return self::mergeFolder($path , $target);
 
     return false;
@@ -534,23 +534,23 @@ class SFilesystem
 
     $status = true;
 
-    if (!is_readable($path ) ) {
+    if (!is_readable($path)) {
       Error::addError
       (
-        I18n::s( 'wbf.message.folderInvalidRights',array($path) ),
+        I18n::s('wbf.message.folderInvalidRights',array($path)),
         'Io_Exception'
       );
     }
 
-    if (!file_exists($target) )
+    if (!file_exists($target))
       if (!mkdir($target))
         $status = false;
 
-    if (!is_dir($target) ) {
+    if (!is_dir($target)) {
       Error::addError
       (
         "Invalide Pfadangabe: ".$path,
-        //I18n::s( 'wbf.message.targetIsNoFolder',array($path) ),
+        //I18n::s('wbf.message.targetIsNoFolder',array($path)),
         'Io_Exception'
       );
     }
@@ -559,7 +559,7 @@ class SFilesystem
       Error::addError
       (
         "Ungenügende Rechte für Pfadangabe: ".$path,
-        //I18n::s( 'wbf.message.targetInvalidRights',array($path) ),
+        //I18n::s('wbf.message.targetInvalidRights',array($path)),
         'Io_Exception'
       );
     }
@@ -568,12 +568,12 @@ class SFilesystem
 
     // Read all content from folder and delete manual
     if ($dh = opendir($path)) {
-      while ( ($file = readdir($dh) ) !== false ) {
+      while (($file = readdir($dh)) !== false) {
         $tmpPath = $path;
         if ($file != "." and $file != ".." and $file != ".svn") {
 
-          if ( is_file($path.'/'.$file) ) {
-            if (!self::copyFile($path.'/'.$file , $target.'/'.$file ));
+          if (is_file($path.'/'.$file)) {
+            if (!self::copyFile($path.'/'.$file , $target.'/'.$file));
               $status = false;
 
             continue;
@@ -595,14 +595,14 @@ class SFilesystem
    * @param string $folder
    * @return int
    */
-  public static function getFolderSize($folder )
+  public static function getFolderSize($folder)
   {
 
-    if (!file_exists($folder ) )
+    if (!file_exists($folder))
       return 0;
 
     Response::collectOutput();
-    $data = explode( "\t", system( "du -hs ".$folder ) ) ;
+    $data = explode("\t", system("du -hs ".$folder)) ;
     Response::getOutput();
 
     return $data[0];
@@ -613,14 +613,14 @@ class SFilesystem
    * @param string $folder
    * @return int
    */
-  public static function countFiles($folder )
+  public static function countFiles($folder)
   {
 
-    if (!file_exists($folder ) )
+    if (!file_exists($folder))
       return 0;
 
     Response::collectOutput();
-    $data = system( "find ".$folder." -type f | wc -l " );
+    $data = system("find ".$folder." -type f | wc -l ");
     Response::getOutput();
 
     return $data;
@@ -631,13 +631,13 @@ class SFilesystem
    * @param string $folder
    * @return int
    */
-  public static function timeChanged($folder )
+  public static function timeChanged($folder)
   {
 
-    if (!file_exists($folder ) )
+    if (!file_exists($folder))
       return '';
 
-    return date ( "Y-m-d H:i:s", filemtime($folder ) );
+    return date ("Y-m-d H:i:s", filemtime($folder));
 
   }//end public static function countFiles */
 
@@ -652,13 +652,13 @@ class SFilesystem
    * @param unknown_type $target
    * @return unknown
    */
-  protected static function copyFile($path , $target )
+  protected static function copyFile($path , $target)
   {
-    if (!is_readable($path) ) {
-      throw new Io_Exception(I18n::s( 'wbf.message.fileNotReadable',array($path) ));
+    if (!is_readable($path)) {
+      throw new Io_Exception(I18n::s('wbf.message.fileNotReadable',array($path)));
     }
 
-    self::touchFolder( SParserString::getFileFolder($target)  );
+    self::touchFolder(SParserString::getFileFolder($target)  );
 
     return copy($path , $target);
 
@@ -673,23 +673,23 @@ class SFilesystem
 
     $status = true;
 
-    if (!is_readable($path ) ) {
+    if (!is_readable($path)) {
       Error::addError
       (
-        I18n::s( 'wbf.message.folderInvalidRights',array($path) ),
+        I18n::s('wbf.message.folderInvalidRights',array($path)),
         'Io_Exception'
       );
     }
 
-    if (!file_exists($target) )
+    if (!file_exists($target))
       if (!mkdir($target))
         $status = false;
 
-    if (!is_dir($target) ) {
+    if (!is_dir($target)) {
       Error::addError
       (
         "Pfad ist kein Verzeichnis: ".$path,
-        //I18n::s( 'wbf.message.targetIsNoFolder',array($path) ),
+        //I18n::s('wbf.message.targetIsNoFolder',array($path)),
         'Io_Exception'
       );
     }
@@ -698,7 +698,7 @@ class SFilesystem
       Error::addError
       (
         "Invalide Rechte für Pfad: ".$path,
-        //I18n::s( 'wbf.message.targetInvalidRights',array($path) ),
+        //I18n::s('wbf.message.targetInvalidRights',array($path)),
         'Io_Exception'
       );
     }
@@ -707,12 +707,12 @@ class SFilesystem
 
     // Read all content from folder and delete manual
     if ($dh = opendir($path)) {
-      while ( ($file = readdir($dh) ) !== false ) {
+      while (($file = readdir($dh)) !== false) {
         $tmpPath = $path;
         if ($file != "." and $file != ".." and $file != ".svn") {
 
-          if ( is_file($path.'/'.$file) ) {
-            if (!self::copyFile($path.'/'.$file , $target.'/'.$file ));
+          if (is_file($path.'/'.$file)) {
+            if (!self::copyFile($path.'/'.$file , $target.'/'.$file));
               $status = false;
 
             continue;
@@ -738,25 +738,25 @@ class SFilesystem
    * @param string $target
    * @return boolean
    */
-  protected static function mergeFile($path , $target )
+  protected static function mergeFile($path , $target)
   {
 
-    if (!is_readable($path) ) {
+    if (!is_readable($path)) {
       Error::addError
       (
-        I18n::s( 'wbf.message.fileNotReadable',array($path) ),
+        I18n::s('wbf.message.fileNotReadable',array($path)),
         'Io_Exception'
       );
     }
 
-    if (!is_writeable( SParserString::getFileFolder($target) ) ) {
+    if (!is_writeable(SParserString::getFileFolder($target))) {
       Error::addError
       (
-        I18n::s( 'wbf.message.folderNotWriteable',array($target) ),
+        I18n::s('wbf.message.folderNotWriteable',array($target)),
         'Io_Exception'
       );
     } else {
-      if (!file_exists($target ) )
+      if (!file_exists($target))
         return copy($path , $target);
 
       else
@@ -770,12 +770,12 @@ class SFilesystem
    * @param string $target
    *
    */
-  protected static function mergeFolder($path, $target )
+  protected static function mergeFolder($path, $target)
   {
 
     $status = true;
 
-    if (!is_readable($path ) ) {
+    if (!is_readable($path)) {
 
       throw new Io_Exception
       (
@@ -783,20 +783,20 @@ class SFilesystem
         (
           'Folder Invalid Rights {@folder@}',
           'wbf.message',
-          array( 'folder' => $path )
+          array('folder' => $path)
         )
       );
     }
 
-    if (!file_exists($target) )
-      if (!mkdir($target) )
+    if (!file_exists($target))
+      if (!mkdir($target))
         $status = false;
 
-    if (!is_dir($target) ) {
+    if (!is_dir($target)) {
       Error::addError
       (
         "Invalide Pfadangabe: ".$path,
-        //I18n::s( 'wbf.message.targetIsNoFolder',array($path) ),
+        //I18n::s('wbf.message.targetIsNoFolder',array($path)),
         'Io_Exception'
       );
     }
@@ -805,7 +805,7 @@ class SFilesystem
       Error::addError
       (
         "Invalide Rechte für Pfad: ".$path,
-        //I18n::s( 'wbf.message.targetInvalidRights',array($path) ),
+        //I18n::s('wbf.message.targetInvalidRights',array($path)),
         'Io_Exception'
       );
     }
@@ -813,14 +813,14 @@ class SFilesystem
     $folder = SParserString::getPathFileName($path);
 
     // Read all content from folder and delete manual
-    if ($dh = opendir($path) ) {
+    if ($dh = opendir($path)) {
 
-      while ( ($file = readdir($dh) ) !== false ) {
+      while (($file = readdir($dh)) !== false) {
         $tmpPath = $path;
         if ($file != "." and $file != ".." and $file != ".svn") {
 
-          if ( is_file($path.'/'.$file) ) {
-            if (!self::mergeFile($path.'/'.$file , $target.'/'.$file ));
+          if (is_file($path.'/'.$file)) {
+            if (!self::mergeFile($path.'/'.$file , $target.'/'.$file));
               $status = false;
 
             continue;

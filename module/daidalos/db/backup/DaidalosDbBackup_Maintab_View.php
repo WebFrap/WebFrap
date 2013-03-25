@@ -37,21 +37,21 @@ class DaidalosDbBackup_Maintab_View extends WgtMaintabCustom
    * @param TFlag $params
    * @return void
    */
-  public function displayForm($key, $params )
+  public function displayForm($key, $params)
   {
 
-    $this->setLabel( 'Backup Database' );
-    $this->setTitle( 'Backup Database' );
+    $this->setLabel('Backup Database');
+    $this->setTitle('Backup Database');
 
-    $this->addVar( 'dbKey', $key );
+    $this->addVar('dbKey', $key);
 
-    $this->setTemplate( 'daidalos/db/backup/maintab/form' );
-    //$table = $this->newItem( 'tableCompilation' , 'DaidalosDb_Table' );
+    $this->setTemplate('daidalos/db/backup/maintab/form');
+    //$table = $this->newItem('tableCompilation' , 'DaidalosDb_Table');
 
     //$this->tabId = 'daidalos_db_form_backup-'.$key;
 
     $params = new TArray();
-    $this->addMenu($params, $key );
+    $this->addMenu($params, $key);
 
   }//end public function displayForm */
 
@@ -60,27 +60,27 @@ class DaidalosDbBackup_Maintab_View extends WgtMaintabCustom
    * @param TFlag $params
    * @return void
    */
-  public function displayList($key, $params )
+  public function displayList($key, $params)
   {
 
-    $this->setLabel( 'Restore Database '.$key );
-    $this->setTitle( 'Restore Database '.$key );
+    $this->setLabel('Restore Database '.$key);
+    $this->setTitle('Restore Database '.$key);
 
-    $this->addVar( 'dbKey', $key );
+    $this->addVar('dbKey', $key);
 
     if ($this->importMsg) {
-      $this->addVar( 'importMsg', $this->importMsg );
+      $this->addVar('importMsg', $this->importMsg);
     }
 
-    $this->addVar( 'files', $this->model->getRestoreList($key ) );
+    $this->addVar('files', $this->model->getRestoreList($key));
 
-    $this->setTemplate( 'daidalos/db/restore/maintab/list' );
-    //$table = $this->newItem( 'tableCompilation' , 'DaidalosDb_Table' );
+    $this->setTemplate('daidalos/db/restore/maintab/list');
+    //$table = $this->newItem('tableCompilation' , 'DaidalosDb_Table');
 
     //$this->tabId = 'daidalos_db_form_backup-'.$key;
 
     $params = new TArray();
-    $this->addMenu($params, $key );
+    $this->addMenu($params, $key);
 
   }//end public function displayForm */
 
@@ -93,7 +93,7 @@ class DaidalosDbBackup_Maintab_View extends WgtMaintabCustom
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu($params, $key )
+  public function addMenu($params, $key)
   {
 
     $menu     = $this->newMenu
@@ -103,9 +103,9 @@ class DaidalosDbBackup_Maintab_View extends WgtMaintabCustom
     );
 
     $menu->id = $this->id.'_dropmenu';
-    $menu->buildMenu($key, $params );
+    $menu->buildMenu($key, $params);
 
-    $menu->injectActions($this, $key, $params );
+    $menu->injectActions($this, $key, $params);
 
   }//end public function addMenu */
 

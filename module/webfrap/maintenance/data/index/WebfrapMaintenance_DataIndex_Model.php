@@ -30,7 +30,7 @@ class WebfrapMaintenance_DataIndex_Model extends Model
   /**
    * @return void
    */
-  public function getStats(  )
+  public function getStats()
   {
 
     $db = $this->getDb();
@@ -44,14 +44,14 @@ FROM
   wbfsys_data_index
 SQL;
 
-    $stats['numer_entries'] =  $db->select($query )->getField('num');
+    $stats['numer_entries'] =  $db->select($query)->getField('num');
 
   }//end public function getStats */
 
   /**
    * @return void
    */
-  public function getModules(  )
+  public function getModules()
   {
     return array();
 

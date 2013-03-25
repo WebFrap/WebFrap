@@ -31,23 +31,23 @@ class DaidalosDbSchema_Maintab_View extends WgtMaintabCustom
    * @param TFlag $params
    * @return void
    */
-  public function display($request, $response, $params )
+  public function display($request, $response, $params)
   {
 
-    $this->setLabel( 'DB Schemas' );
-    $this->setTitle( 'DB Schemas' );
+    $this->setLabel('DB Schemas');
+    $this->setTitle('DB Schemas');
 
-    $this->setTemplate( 'daidalos/db/maintab/list_db_schema' );
+    $this->setTemplate('daidalos/db/maintab/list_db_schema');
 
-    $dbKey = $request->param('key', Validator::CNAME );
+    $dbKey = $request->param('key', Validator::CNAME);
 
-    $this->model->loadDb($dbKey );
+    $this->model->loadDb($dbKey);
 
-    $this->addVar( 'dbName', $dbKey );
-    $this->addVar( 'schemas', $this->model->getSchemas($dbKey ) );
+    $this->addVar('dbName', $dbKey);
+    $this->addVar('schemas', $this->model->getSchemas($dbKey));
 
     $params = new TArray();
-    $this->addMenuMenu($dbKey, $params );
+    $this->addMenuMenu($dbKey, $params);
 
   }//end public function display */
 
@@ -60,7 +60,7 @@ class DaidalosDbSchema_Maintab_View extends WgtMaintabCustom
    *   string formId: the id of the form;
    * }
    */
-  public function addMenuMenu($dbKey, $params )
+  public function addMenuMenu($dbKey, $params)
   {
 
     $menu     = $this->newMenu
@@ -69,20 +69,20 @@ class DaidalosDbSchema_Maintab_View extends WgtMaintabCustom
     );
 
     $menu->id = $this->id.'_dropmenu';
-    $this->injectActions($dbKey, $params );
+    $this->injectActions($dbKey, $params);
 
-    $iconMenu          = $this->icon( 'control/menu.png',  'Menu' );
-    $iconClose         = $this->icon( 'control/close.png',  'Close' );
-    $iconSearch        = $this->icon( 'control/search.png',  'Search' );
-    $iconBookmark      = $this->icon( 'control/bookmark.png',  'Bookmark');
+    $iconMenu          = $this->icon('control/menu.png',  'Menu');
+    $iconClose         = $this->icon('control/close.png',  'Close');
+    $iconSearch        = $this->icon('control/search.png',  'Search');
+    $iconBookmark      = $this->icon('control/bookmark.png',  'Bookmark');
 
-    $iconSupport = $this->icon( 'control/support.png'  ,'Support' );
-    $iconBug     = $this->icon( 'control/bug.png'      ,'Bug' );
-    $iconFaq     = $this->icon( 'control/faq.png'      ,'Faq' );
-    $iconHelp    = $this->icon( 'control/help.png'     ,'Help' );
+    $iconSupport = $this->icon('control/support.png'  ,'Support');
+    $iconBug     = $this->icon('control/bug.png'      ,'Bug');
+    $iconFaq     = $this->icon('control/faq.png'      ,'Faq');
+    $iconHelp    = $this->icon('control/help.png'     ,'Help');
 
-    $iconQuery         = $this->icon( 'daidalos/query.png',  'Query' );
-    $iconCreate        = $this->icon( 'control/add.png',  'Create' );
+    $iconQuery         = $this->icon('daidalos/query.png',  'Query');
+    $iconCreate        = $this->icon('control/add.png',  'Create');
 
     $entries = new TArray();
 
@@ -145,7 +145,7 @@ HTML;
    *     services
    * }
    */
-  public function injectActions($dbKey, $params )
+  public function injectActions($dbKey, $params)
   {
 
     // add the button action for save in the window
@@ -159,7 +159,7 @@ HTML;
     });
 
     self.getObject().find(".wgtac_query").click(function(){
-      \$R.get( 'maintab.php?c=Daidalos.Db.query' );
+      \$R.get('maintab.php?c=Daidalos.Db.query');
     });
 
     self.getObject().find(".wgtac_create").click(function(){
@@ -168,11 +168,11 @@ HTML;
         width : '350',
         buttons: {
           "Create": function() {
-            \$R.form( 'wgt-form-daiadlos-db-{$dbKey}-create' );
-            \$S( this ).dialog( "close" );
+            \$R.form('wgt-form-daiadlos-db-{$dbKey}-create');
+            \$S(this).dialog("close");
           },
           Cancel: function() {
-            \$S( this ).dialog( "close" );
+            \$S(this).dialog("close");
           }
         }
       });
@@ -180,7 +180,7 @@ HTML;
 
 BUTTONJS;
 
-    $this->addJsCode($code );
+    $this->addJsCode($code);
 
   }//end public function injectActions */
 

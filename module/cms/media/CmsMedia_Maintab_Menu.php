@@ -36,20 +36,20 @@ class CmsMedia_Maintab_Menu extends WgtDropmenu
    *   string formId: the id of the form;
    * }
    */
-  public function buildMenu($params )
+  public function buildMenu($params)
   {
 
     // benötigte resourcen laden
     $acl   = $this->getAcl();
     $view   = $this->getView();
 
-    $iconMenu    = $view->icon('control/menu.png',  'Menu' );
-    $iconExecute    = $view->icon('control/exec.png', 'Send' );
-    $iconBookmark  = $view->icon('control/bookmark.png', 'Bookmark' );
-    $iconClose     = $view->icon('control/close.png', 'Close' );
+    $iconMenu    = $view->icon('control/menu.png',  'Menu');
+    $iconExecute    = $view->icon('control/exec.png', 'Send');
+    $iconBookmark  = $view->icon('control/bookmark.png', 'Bookmark');
+    $iconClose     = $view->icon('control/close.png', 'Close');
 
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport($params );
+    $entries->support  = $this->entriesSupport($params);
 
     $this->content = <<<HTML
 <ul class="wcm wcm_ui_dropmenu wgt-dropmenu" id="{$this->id}" >
@@ -83,7 +83,7 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport($params )
+  protected function entriesSupport($params)
   {
 
     $iconSupport         = $this->view->icon('control/support.png'      ,'Support');

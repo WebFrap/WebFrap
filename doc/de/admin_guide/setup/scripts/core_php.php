@@ -12,10 +12,10 @@
 
 define('NL',"\n");
 
-if( 'cli' == php_sapi_name() )
-  define( 'IS_CLI', true );
+if ('cli' == php_sapi_name())
+  define('IS_CLI', true);
 else
-  define( 'IS_CLI', false );
+  define('IS_CLI', false);
 
 /**
  * Ausgabe in die Console
@@ -27,10 +27,10 @@ class Console
    * Einfach ausgabe des Textes
    * @param string $text
    */
-  static function out( $text, $appendDate = false  )
+  static function out($text, $appendDate = false  )
   {
     
-    if( $appendDate )
+    if ($appendDate)
       $text .= date('Y-m-d');
     
     echo $text;
@@ -42,13 +42,13 @@ class Console
    * Neue Zeile schreiben
    * @param string $text
    */
-  static function outl( $text, $appendDate = false  )
+  static function outl($text, $appendDate = false  )
   {
     
-    if( $appendDate )
+    if ($appendDate)
       $text .= date('Y-m-d');
     
-    if( IS_CLI )
+    if (IS_CLI)
       echo $text.NL;
     else 
       echo $text.NL."<br />";
@@ -61,13 +61,13 @@ class Console
    * Head Bereich
    * @param string $text
    */
-  static function header( $text, $appendDate = false  )
+  static function header($text, $appendDate = false  )
   {
     
-    if( $appendDate )
+    if ($appendDate)
       $text .= date('Y-m-d');
     
-    if( IS_CLI )
+    if (IS_CLI)
     {
       echo "################################################################################".NL;
       echo "# ".$text.NL;
@@ -86,13 +86,13 @@ class Console
    * Head Bereich
    * @param string $text
    */
-  static function chapter( $text, $appendDate = false )
+  static function chapter($text, $appendDate = false)
   {
     
-    if( $appendDate )
+    if ($appendDate)
       $text .= date('Y-m-d');
     
-    if( IS_CLI )
+    if (IS_CLI)
     {
       echo "# ".$text.NL;
       echo "################################################################################".NL;
@@ -110,13 +110,13 @@ class Console
    * Head Bereich
    * @param string $text
    */
-  static function footer( $text, $appendDate = false  )
+  static function footer($text, $appendDate = false  )
   {
     
-    if( $appendDate )
+    if ($appendDate)
       $text .= date('Y-m-d');
     
-    if( IS_CLI )
+    if (IS_CLI)
     {
       echo "________________________________________________________________________________".NL;
       echo "|".NL;
@@ -135,10 +135,10 @@ class Console
   /**
    * Block Starten
    */
-  static function startBlock( )
+  static function startBlock()
   {
     
-    if( IS_CLI )
+    if (IS_CLI)
     {
       echo "---------------------------------------------------------------------------------".NL;
     }
@@ -154,10 +154,10 @@ class Console
   /**
    * Block beenden
    */
-  static function endBlock( )
+  static function endBlock()
   {
     
-    if( IS_CLI )
+    if (IS_CLI)
     {
       echo "---------------------------------------------------------------------------------".NL;
     }
@@ -181,10 +181,10 @@ class Process
   /**
    * @param string $command
    */
-  static function run( $command )
+  static function run($command)
   {
     $result = '';
-    if ($proc = popen("($command)2>&1","r") )
+    if ($proc = popen("($command)2>&1","r"))
     {
       while (!feof($proc))
         echo fgets($proc, 1000);
@@ -198,10 +198,10 @@ class Process
   /**
    * @param string $command
    */
-  static function execute( $command )
+  static function execute($command)
   {
     $result = '';
-    if ($proc = popen("($command)2>&1","r") )
+    if ($proc = popen("($command)2>&1","r"))
     {
       while (!feof($proc))
         $result .= fgets($proc, 1000);
@@ -225,7 +225,7 @@ class Fs
    * Den aktuellen Pfad des Scriptes ändern
    * @param string $path
    */
-  static function chdir( $path )
+  static function chdir($path)
   {
     
     chdir($path);
@@ -236,10 +236,10 @@ class Fs
    * Den aktuellen Pfad des Scriptes ändern
    * @param string $path
    */
-  static function exists( $path )
+  static function exists($path)
   {
     
-    return file_exists( $path );
+    return file_exists($path);
     
   }//end static function exists */
   
@@ -250,12 +250,12 @@ class Fs
    * @param string $target
    * @param boolean $isFolder
    */
-  static function copy( $src, $target, $isFolder = true )
+  static function copy($src, $target, $isFolder = true)
   {
     
-    if( $isFolder && !file_exists($target) )
+    if ($isFolder && !file_exists($target))
     {
-      Fs::mkdir( $target );
+      Fs::mkdir($target);
     }
     
     Process::run("cp -rfv $src $target");
@@ -266,7 +266,7 @@ class Fs
    * Datei oder Verzeichniss rekursiv löschen
    * @param string $path
    */
-  static function del( $path )
+  static function del($path)
   {    
     
     Process::run("rm -rfv $path");
@@ -279,12 +279,12 @@ class Fs
    * @param string $path
    * @param int $mode
    */
-  static function mkdir( $path, $mode = 0777 )
+  static function mkdir($path, $mode = 0777)
   {    
     
-    if( !file_exists($path) )
+    if (!file_exists($path))
     {
-      mkdir( $path, $mode, true );
+      mkdir($path, $mode, true);
     }
     
   }//end static function mkdir */
@@ -293,10 +293,10 @@ class Fs
    * Eine Datei erstellen
    * @param string $path
    */
-  static function touch( $path )
+  static function touch($path)
   {    
     
-    Process::run( "touch $path" );
+    Process::run("touch $path");
     
   }//end static function touch */
   
@@ -306,9 +306,9 @@ class Fs
    * @param string $path
    * @param string $user
    */
-  static function chown( $path, $user )
+  static function chown($path, $user)
   {    
-    Process::run( "chown -R $user $path" );
+    Process::run("chown -R $user $path");
     
   }//end static function chown */
   
@@ -318,9 +318,9 @@ class Fs
    * @param string $path
    * @param string $level
    */
-  static function chmod( $path, $level )
+  static function chmod($path, $level)
   {    
-    Process::run( "chmod -R $level $path" );
+    Process::run("chmod -R $level $path");
     
   }//end static function chmod */
   
@@ -344,7 +344,7 @@ class Hg
    * @param string $proxy
    */
   public static function createTmpRc
-  ( 
+  (
     $deplPath,
     $repos, 
     $displayName, 
@@ -369,7 +369,7 @@ groups = *
 CODE;
     
     // wenn durch einen proxy hindurchgesynct werden soll
-    if( $proxy )
+    if ($proxy)
     {
       
       $hgRc .= <<<CODE
@@ -387,12 +387,12 @@ CODE;
 
 CODE;
 
-    foreach( $repos as $repoKey => $listRepos )
+    foreach($repos as $repoKey => $listRepos)
     {
       
       $repoPath = $listRepos['path'];
       
-      foreach( $listRepos['repos'] as $repo => $tmpUrl )
+      foreach($listRepos['repos'] as $repo => $tmpUrl)
       {
     
         $key = str_replace('-','_',$repoKey);
@@ -409,8 +409,8 @@ CODE;
       }
     }
 
-    file_put_contents(  $deplPath.'.hgrc' , $hgRc  );
-    putenv( "HGRCPATH={$deplPath}.hgrc" );
+    file_put_contents( $deplPath.'.hgrc' , $hgRc  );
+    putenv("HGRCPATH={$deplPath}.hgrc");
 
   }//end public static function createTmpRc */
   
@@ -421,16 +421,16 @@ CODE;
    * @param string $user
    * @param string $pwd
    */
-  public static function cloneRepo( $url, $repo, $user = null, $pwd = null )
+  public static function cloneRepo($url, $repo, $user = null, $pwd = null)
   {
     
     // es wird nur https zugelassen. punkt
-    if( $user && $pwd )
+    if ($user && $pwd)
       $url = 'https://'.$user.':'.$pwd.'@'.$url;
     else 
       $url = 'https://'.$url;
 
-    Process::run( 'hg clone "'.$url.'" "'.$repo.'"' );
+    Process::run('hg clone "'.$url.'" "'.$repo.'"');
     
   }//end public static function cloneRepo */
   
@@ -443,15 +443,15 @@ CODE;
    * @param string $user
    * @param string $pwd
    */
-  public static function getArchive( $url, $type, $rev = null, $user = null, $pwd = null )
+  public static function getArchive($url, $type, $rev = null, $user = null, $pwd = null)
   {
     
-    if( $user && $pwd )
+    if ($user && $pwd)
       $url = 'https://'.$user.':'.$pwd.'@'.$url;
     else 
       $url = 'https://'.$url;
       
-    Process::run( 'wget "'.$url.'"' );
+    Process::run('wget "'.$url.'"');
     
   }//end public static function getArchive */
   
@@ -461,7 +461,7 @@ CODE;
    * @param string $rev
    * @param string $type
    */
-  public static function archive( $target, $rev = null, $type = null  )
+  public static function archive($target, $rev = null, $type = null  )
   {
     
   }//end public static function archive */
@@ -470,17 +470,17 @@ CODE;
    * Repository clonen
    * @param string $rev
    */
-  public static function update( $rev = null  )
+  public static function update($rev = null  )
   {
     
     $command = "hg update";
     
-    if( $rev )
+    if ($rev)
     {
       
-      $tmp = explode( ':',$rev  );
+      $tmp = explode(':',$rev  );
       
-      if( $rev[0] == 'ref' )
+      if ($rev[0] == 'ref')
         $command .= "-C -r ".$rev[1];
       else 
         $command .= " ".$rev[1].'  -C';
@@ -490,17 +490,17 @@ CODE;
       $command .= ' -C';
     }
     
-    Process::run( $command );
+    Process::run($command);
     
   }//end public static function update */
   
   /**
    * Änderungen commiten
    */
-  public static function commit( $message = 'Autocommit' )
+  public static function commit($message = 'Autocommit')
   {
     
-    Process::run( 'hg commit -A -m "'.$message.'"' );
+    Process::run('hg commit -A -m "'.$message.'"');
      
   }//end public static function commit */
   
@@ -510,16 +510,16 @@ CODE;
    * @param string $user
    * @param string $pwd
    */
-  public static function push( $url, $user = null, $pwd = null    )
+  public static function push($url, $user = null, $pwd = null    )
   {
     
     // es wird nur https zugelassen. punkt
-    if( $user && $pwd )
+    if ($user && $pwd)
       $url = 'https://'.$user.':'.$pwd.'@'.$url;
     else 
       $url = 'https://'.$url;
 
-    Process::run( 'hg push -f "'.$url.'" "'.$repo.'"' );
+    Process::run('hg push -f "'.$url.'" "'.$repo.'"');
     
   }//end public static function push */
   
@@ -529,16 +529,16 @@ CODE;
    * @param string $user
    * @param string $pwd
    */
-  public static function pull( $url, $user = null, $pwd = null )
+  public static function pull($url, $user = null, $pwd = null)
   {
     
     // es wird nur https zugelassen. punkt
-    if( $user && $pwd )
+    if ($user && $pwd)
       $url = 'https://'.$user.':'.$pwd.'@'.$url;
     else 
       $url = 'https://'.$url;
 
-    Process::run( 'hg pull -f "'.$url.'" "'.$repo.'"' );
+    Process::run('hg pull -f "'.$url.'" "'.$repo.'"');
     
   }//end public static function pull */
   
@@ -548,23 +548,23 @@ CODE;
    * 
    * @param array $repos
    */
-  public static function sync( $repos, $contactMail )
+  public static function sync($repos, $contactMail)
   {
     
-    foreach( $repos as $repoKey => $listRepos )
+    foreach($repos as $repoKey => $listRepos)
     {
       $repoPath = $listRepos['path'];
       
-      foreach( $listRepos['repos'] as $repoName => $repoData )
+      foreach($listRepos['repos'] as $repoName => $repoData)
       {
-        if( Fs::exists( $repoPath.'/'.$repoName) )
+        if (Fs::exists($repoPath.'/'.$repoName))
         {
           
-          Fs::chdir( $repoPath.$repoName );
+          Fs::chdir($repoPath.$repoName);
           
-          Console::chapter( "Sync {$repoData['url']}{$repoName} ".date('Y-m-d') );
+          Console::chapter("Sync {$repoData['url']}{$repoName} ".date('Y-m-d'));
           
-          Console::startBlock(  );
+          Console::startBlock();
           Hg::pull
           (
             $repoData['url'].$repoName,
@@ -573,7 +573,7 @@ CODE;
           );
           
           Hg::push
-          ( 
+          (
             $repoData['url'].$repoName,
             (isset($repoData['user'])?$repoData['user']:null), 
             (isset($repoData['pwd'])?$repoData['pwd']:null) 
@@ -585,12 +585,12 @@ CODE;
         else
         {
           
-          Console::chapter( "Clone {$repoData['url']}{$repoName} ".date('Y-m-d') );
-          Console::startBlock(  );
-          Fs::chdir( $repoPath );
+          Console::chapter("Clone {$repoData['url']}{$repoName} ".date('Y-m-d'));
+          Console::startBlock();
+          Fs::chdir($repoPath);
 
           Hg::cloneRepo
-          ( 
+          (
             $repoData['url'].$repoName, 
             $repoPath.'/'.$repoName,
             (isset($repoData['user'])?$repoData['user']:null), 
@@ -598,13 +598,13 @@ CODE;
           );
           
           // hgweb.config sollte bitte existieren, sonst schreiben wir keine
-          if( Fs::exists( $repoPath.'hgweb.config' ) )
+          if (Fs::exists($repoPath.'hgweb.config'))
           {
-            Process::run( 'echo "'.$repoName.' = ' .$repoPath.'/'.$repoName.'" >> hgweb.config' );
-            Process::run( 'echo "[web]" > ./'.$repoName.'/.hg/hgrc' );
-            Process::run( 'echo "contact = '.$contactMail.'" >> ./'.$repoName.'/.hg/hgrc' );
-            Process::run( 'echo "allow_archive = gz, zip, bz" >> ./'.$repoName.'/.hg/hgrc' );
-            Process::run( 'echo "allow_push = *' );
+            Process::run('echo "'.$repoName.' = ' .$repoPath.'/'.$repoName.'" >> hgweb.config');
+            Process::run('echo "[web]" > ./'.$repoName.'/.hg/hgrc');
+            Process::run('echo "contact = '.$contactMail.'" >> ./'.$repoName.'/.hg/hgrc');
+            Process::run('echo "allow_archive = gz, zip, bz" >> ./'.$repoName.'/.hg/hgrc');
+            Process::run('echo "allow_push = *');
           }
 
           Console::endBlock();
@@ -628,35 +628,35 @@ class Archive
   /**
    * @param string $fileName
    */
-  public static function unpack( $fileName  )
+  public static function unpack($fileName  )
   {
     
-    $tmp     = explode( '.', $fileName );
+    $tmp     = explode('.', $fileName);
     $ending  = $tmp[count($tmp)-1];
     
-    switch( $ending )
+    switch($ending)
     {
       case 'tar':
       {
-        Process::run( "tar xvf ".$fileName );
+        Process::run("tar xvf ".$fileName);
         return null;
       }
       
       case 'gz':
       {
-        Process::run( "tar xzvf ".$fileName );
+        Process::run("tar xzvf ".$fileName);
         return null;
       }
       
       case 'bz2':
       {
-        Process::run( "tar xjvf ".$fileName );
+        Process::run("tar xjvf ".$fileName);
         return null;
       }
       
       case 'zip':
       {
-        Process::run( "unzip ".$fileName );
+        Process::run("unzip ".$fileName);
         return null;
       }
         
@@ -670,4 +670,4 @@ class Archive
   }//end public static function unpack */
   
 }//end class Archive */
-<?php display_highlight( 'php' ); ?>
+<?php display_highlight('php'); ?>

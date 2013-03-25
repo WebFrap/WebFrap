@@ -30,7 +30,7 @@ class WgtMenuCrumbRight extends WgtMenuEntryAbstract
    *
    * @return String
    */
-  public function build( )
+  public function build()
   {
 
     $title = is_null($this->title)?'title="'.$this->title.'"':'';
@@ -39,7 +39,7 @@ class WgtMenuCrumbRight extends WgtMenuEntryAbstract
       $this->data = SParserString::seperatedToKeyArray($this->data ,'-');
     }
 
-    $url = TUrl::asUrl( 'index.php',$this->data,str_replace( ' ', '-', $this->text )) ;
+    $url = TUrl::asUrl('index.php',$this->data,str_replace(' ', '-', $this->text)) ;
 
     $icon = '';
 
@@ -49,7 +49,7 @@ class WgtMenuCrumbRight extends WgtMenuEntryAbstract
 
     return '<span style="vertical-align:middle;float:right;" ><a '.$title.' href="'.$url.'">'.$icon.$this->text.' </a></span>';
 
-  } // end public function build( )
+  } // end public function build()
 
 } // end class WgtMenuCrumbRight
 

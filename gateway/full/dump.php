@@ -11,7 +11,7 @@ try {
 
   $errors = '';
 
-  View::setType( View::BINARY );
+  View::setType(View::BINARY);
   Webfrap::init();
 
   $webfrap = Webfrap::init();
@@ -20,10 +20,10 @@ try {
   $webfrap->main();
 
   $errors = $webfrap->out();
-  $webfrap->shutdown($errors );
+  $webfrap->shutdown($errors);
 
 } // ENDE TRY
-catch( Exception $exception ) {
+catch(Exception $exception) {
   $extType = get_class($exception);
 
   Error::addError
@@ -39,8 +39,8 @@ catch( Exception $exception ) {
   }
 
   if (!DEBUG) {
-    if ( isset($view) and is_object($view) ) {
-      $view->publishError($exception->getMessage() , $errors );
+    if (isset($view) and is_object($view)) {
+      $view->publishError($exception->getMessage() , $errors);
     } else {
       View::printErrorPage
       (

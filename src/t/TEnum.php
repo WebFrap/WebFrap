@@ -37,7 +37,7 @@ class TEnum
   /**
    *
    */
-  public function construct( )
+  public function construct()
   {
 
     $anz = func_get_args();
@@ -48,7 +48,7 @@ class TEnum
       $this->pool = array();
     }
 
-  }//end public function __construct( )
+  }//end public function __construct()
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Interface: ArrayAccess

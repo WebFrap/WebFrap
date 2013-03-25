@@ -27,10 +27,10 @@ class SFormatStrings
    * @param string Folder Der Pfad zum Ordner desse Inhalt man haben möchte
    * @return array
    */
-  public static function cutLastChars($String , $Anz = 1 )
+  public static function cutLastChars($String , $Anz = 1)
   {
     return substr($String , 0 , -$Anz  );
-  } // end public static function cutLastChars($String , $Anz = 1 )
+  } // end public static function cutLastChars($String , $Anz = 1)
 
   /** Abschneiden einer bestimmten Anzahl von Zeichen am Ende eines Strings
    *  und hinzufügen von Punkten falls eine bestimmte Anzahl von Zeichen
@@ -40,13 +40,13 @@ class SFormatStrings
    * @param int Mlength Maximallänge des Strings
    * @return array
    */
-  public static function cuttingAndDotting($string , $Mlength = 35 )
+  public static function cuttingAndDotting($string , $Mlength = 35)
   {
 
     $Length = strlen($string);
     $dot = $Length > $Mlength ? '...': '';
 
-    return substr($string , 0 , $Mlength ).$dot;
+    return substr($string , 0 , $Mlength).$dot;
 
   } // end of member function cuttingAndDotting
 
@@ -58,7 +58,7 @@ class SFormatStrings
    * @param int Mlength Maximallänge des Strings
    * @return array
    */
-  public static function getClassPackages($className )
+  public static function getClassPackages($className)
   {
 
     $length = strlen($className);
@@ -69,7 +69,7 @@ class SFormatStrings
 
     // Bei 1 Starten um den ersten Buchstaben zu Überpringen
     for ($pos = 1 ; $pos < $length ; ++$pos) {
-      if (ctype_upper($className[$pos]) ) {
+      if (ctype_upper($className[$pos])) {
         $parts[] = strtolower(substr($className, $start, $end  ));
         $start = $end;
         $end = 0;
@@ -87,19 +87,19 @@ class SFormatStrings
   /**
    * format a longer text that all collumns are shorter than $lenght chars
    */
-  public static function toMaxColumLength($text , $lenght = 80 , $asArray = false )
+  public static function toMaxColumLength($text , $lenght = 80 , $asArray = false)
   {
 
     // First remove als new lines from the text
-    $text = str_replace( array("\n","\r"),array('',''), $text );
-    $words = explode( ' ' , $text  );
+    $text = str_replace(array("\n","\r"),array('',''), $text);
+    $words = explode(' ' , $text  );
 
     $size = 0;
 
     if ($asArray) {
       $formatedText = '';
       foreach ($words as $word) {;
-        if ( ($size + strlen($word)) > $lenght  ) {
+        if (($size + strlen($word)) > $lenght  ) {
           $size = 0;
           $formatedText .= NL;
         }
@@ -110,7 +110,7 @@ class SFormatStrings
 
       $tmpText = '';
       foreach ($words as $word) {;
-        if ( ($size + strlen($word)) > $lenght  ) {
+        if (($size + strlen($word)) > $lenght  ) {
           $size = 0;
           $formatedText[] = $tmpText;
           $tmpText = '';
@@ -128,9 +128,9 @@ class SFormatStrings
    * @param string $value
    * @return string
    */
-  public static function cleanCC($value )
+  public static function cleanCC($value)
   {
-    return str_replace( array('&','<','>','"',"'"), array('&amp;','&lt;','&gt;','&quot;','&#039;'), $value );
+    return str_replace(array('&','<','>','"',"'"), array('&amp;','&lt;','&gt;','&quot;','&#039;'), $value);
   } // end public static function cleanCC */
 
   /**
@@ -138,7 +138,7 @@ class SFormatStrings
    * @param string $name
    * @return string
    */
-  public static function nameToAccessKey($name )
+  public static function nameToAccessKey($name)
   {
 
     /*
@@ -173,7 +173,7 @@ class SFormatStrings
     );
     */
 
-    return substr( preg_replace('/[^a-zA-Z0-9_-]/', '', $name ), 0, 35  );
+    return substr(preg_replace('/[^a-zA-Z0-9_-]/', '', $name), 0, 35  );
 
   }//end public static function nameToAccessKey */
 
@@ -187,7 +187,7 @@ class SFormatStrings
   {
      $handle = fopen('php://temp', 'r+');
      foreach ($data as $row) {
-       fputcsv($handle, $row, $delimiter, $enclosure );
+       fputcsv($handle, $row, $delimiter, $enclosure);
      }
 
      $contents = '';
@@ -205,7 +205,7 @@ class SFormatStrings
    * @param string $str
    * @param boolean $firstSmall
    */
-  public static function subToCamelCase($str , $firstSmall = false )
+  public static function subToCamelCase($str , $firstSmall = false)
   {
 
     /*
@@ -218,24 +218,24 @@ class SFormatStrings
     }
     */
 
-    $tmp = explode( '_' , trim($str) );
+    $tmp = explode('_' , trim($str));
     $camelCase = '';
 
     foreach ($tmp as $case) {
       $camelCase .= ucfirst($case);
     }
 
-    $tmp2       = explode( '-' , trim($camelCase) );
+    $tmp2       = explode('-' , trim($camelCase));
     $camelCase2 = array();
 
     foreach ($tmp2 as $case2) {
       $camelCase2[] = ucfirst($case2);
     }
 
-    $camelCase = implode( '_', $camelCase2 );
+    $camelCase = implode('_', $camelCase2);
 
-    if ($firstSmall && isset($camelCase[0] ) )
-      $camelCase[0] = mb_strtolower($camelCase[0] );
+    if ($firstSmall && isset($camelCase[0]))
+      $camelCase[0] = mb_strtolower($camelCase[0]);
 
     return $camelCase;
 
@@ -244,14 +244,14 @@ class SFormatStrings
   /**
    * @param string $str
    */
-  public static function mNameToUrl($str )
+  public static function mNameToUrl($str)
   {
 
-    $tmp1 = explode( ':', $str );
+    $tmp1 = explode(':', $str);
 
-    $tmp   = explode( '_' , trim($tmp1[0]) );
+    $tmp   = explode('_' , trim($tmp1[0]));
 
-    $mod   = ucfirst( array_shift($tmp) ) ;
+    $mod   = ucfirst(array_shift($tmp)) ;
     $contr = '';
 
     foreach ($tmp as $node) {

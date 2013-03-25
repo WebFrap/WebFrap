@@ -30,7 +30,7 @@ class WgtTplDialog
    * @var LibTemplate $view
    * @var boolean $out
    */
-  public static function render($id, $content, $code, $view, $out = true )
+  public static function render($id, $content, $code, $view, $out = true)
   {
 
     $html = <<<HTML
@@ -39,9 +39,9 @@ class WgtTplDialog
   </div>
 HTML;
 
-    $view->addJsCode($code );
+    $view->addJsCode($code);
 
-    if ($out )
+    if ($out)
       echo $html;
 
     return $html;

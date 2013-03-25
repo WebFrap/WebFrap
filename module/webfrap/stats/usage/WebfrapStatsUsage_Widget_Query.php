@@ -37,19 +37,19 @@ class WebfrapStatsUsage_Widget_Query extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetch($entityKey, $start )
+  public function fetch($entityKey, $start)
   {
 
     $db     = $this->getDb();
 
     $matrix = array();
 
-    $dateStart  = new DateTime($start );
-    $dateEnd    = new DateTime($start );
+    $dateStart  = new DateTime($start);
+    $dateEnd    = new DateTime($start);
     $dateEnd->add(new DateInterval('P1Y'));
 
     $interval   = new DateInterval('P1M');
-    $periods    = new DatePeriod($dateStart, $interval , $dateEnd );
+    $periods    = new DatePeriod($dateStart, $interval , $dateEnd);
 
     // fillup
     foreach ($periods as $perPos) {

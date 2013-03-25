@@ -48,92 +48,92 @@ class DaidalosDeploy_Controller extends Controller
   /**
    * sync the metadata inside of the database
    */
-  public function service_syncMetadata($request, $respsonse )
+  public function service_syncMetadata($request, $respsonse)
   {
 
     /* @var $model DaidalosDeployDatabase_Model */
-    $model = $this->loadModel( 'DaidalosDeployDatabase' );
+    $model = $this->loadModel('DaidalosDeployDatabase');
 
-    $respsonse->addMessage( 'Start Metadata Sync: '.date('Y-m-d H:i:s') );
+    $respsonse->addMessage('Start Metadata Sync: '.date('Y-m-d H:i:s'));
 
-    $rootPath = $request->param('root_path', Validator::FOLDERNAME )?:PATH_ROOT;
-    $respsonse->addMessage( "Using Rootpath ".$rootPath );
+    $rootPath = $request->param('root_path', Validator::FOLDERNAME)?:PATH_ROOT;
+    $respsonse->addMessage("Using Rootpath ".$rootPath);
 
-    $type = $request->param('type', Validator::CNAME );
+    $type = $request->param('type', Validator::CNAME);
 
-    $model->syncMetadata($rootPath, $type );
+    $model->syncMetadata($rootPath, $type);
 
-    $respsonse->addMessage( 'Sucessfully synced Metadata '.date('Y-m-d H:i:s') );
+    $respsonse->addMessage('Sucessfully synced Metadata '.date('Y-m-d H:i:s'));
 
   }//end public function service_syncMetadata */
 
   /**
    * sync the metadata inside of the database
    */
-  public function service_syncDocu($request, $respsonse )
+  public function service_syncDocu($request, $respsonse)
   {
 
-    $model = $this->loadModel( 'DaidalosDeployDocu' );
+    $model = $this->loadModel('DaidalosDeployDocu');
     /* @var $model DaidalosDeployDocu_Model */
 
-    $respsonse->addMessage( 'Start Docu Sync: '.date('Y-m-d H:i:s') );
+    $respsonse->addMessage('Start Docu Sync: '.date('Y-m-d H:i:s'));
 
     $model->syncDocu();
 
-    $respsonse->addMessage( 'Sucessfully synced Docu '.date('Y-m-d H:i:s') );
+    $respsonse->addMessage('Sucessfully synced Docu '.date('Y-m-d H:i:s'));
 
   }//end public function service_syncDocu */
 
   /**
    * synchronize the database structure
    */
-  public function service_syncDatabase($request, $respsonse )
+  public function service_syncDatabase($request, $respsonse)
   {
 
-    $model = $this->loadModel( 'DaidalosDeployDatabase' );
+    $model = $this->loadModel('DaidalosDeployDatabase');
     /* @var $model DaidalosDeployDatabase_Model */
 
-    $syncCol   = $request->param('sync_col', Validator::BOOLEAN );
-    $deleteCol = $request->param('delete_col', Validator::BOOLEAN );
-    $syncTable = $request->param('sync_table', Validator::BOOLEAN );
-    $rootPath  = $request->param('root_path', Validator::FOLDERNAME )?:PATH_ROOT;
+    $syncCol   = $request->param('sync_col', Validator::BOOLEAN);
+    $deleteCol = $request->param('delete_col', Validator::BOOLEAN);
+    $syncTable = $request->param('sync_table', Validator::BOOLEAN);
+    $rootPath  = $request->param('root_path', Validator::FOLDERNAME)?:PATH_ROOT;
 
-    if ($deleteCol )
-      $model->forceColSync( true );
+    if ($deleteCol)
+      $model->forceColSync(true);
 
-    $model->syncCol($syncCol );
-    $model->syncTable($syncTable );
+    $model->syncCol($syncCol);
+    $model->syncTable($syncTable);
 
-    $respsonse->addMessage( "Start Database Sync" );
+    $respsonse->addMessage("Start Database Sync");
 
     if ($syncTable) {
-      $respsonse->addMessage( "Try to Sync Tables" );
+      $respsonse->addMessage("Try to Sync Tables");
     }
 
     if ($syncCol) {
-      $respsonse->addMessage( "Try to Sync Cols" );
+      $respsonse->addMessage("Try to Sync Cols");
     }
 
-    $respsonse->addMessage( 'Start Table Sync: '.date('Y-m-d H:i:s') );
-    $model->syncDatabase($rootPath );
-    $respsonse->addMessage( 'Sucessfully sychronised Tables '.date('Y-m-d H:i:s') );
+    $respsonse->addMessage('Start Table Sync: '.date('Y-m-d H:i:s'));
+    $model->syncDatabase($rootPath);
+    $respsonse->addMessage('Sucessfully sychronised Tables '.date('Y-m-d H:i:s'));
 
   }//end public function service_syncDatabase */
 
   /**
    * synchronize with the data from the modell
    */
-  public function service_syncData($request, $respsonse )
+  public function service_syncData($request, $respsonse)
   {
 
-    $rootPath  = $request->param('root_path', Validator::FOLDERNAME )?:PATH_ROOT;
+    $rootPath  = $request->param('root_path', Validator::FOLDERNAME)?:PATH_ROOT;
 
-    $model = $this->loadModel( 'DaidalosDeployDatabase' );
+    $model = $this->loadModel('DaidalosDeployDatabase');
     /* @var $model DaidalosDeployDatabase_Model */
 
-    $respsonse->addMessage( 'Start Model / Data Sync: '.date('Y-m-d H:i:s') );
-    $model->syncData($rootPath );
-    $respsonse->addMessage( 'Sucessfully sychronized Data from the Model '.date('Y-m-d H:i:s') );
+    $respsonse->addMessage('Start Model / Data Sync: '.date('Y-m-d H:i:s'));
+    $model->syncData($rootPath);
+    $respsonse->addMessage('Sucessfully sychronized Data from the Model '.date('Y-m-d H:i:s'));
 
   }//end public function service_syncData */
 

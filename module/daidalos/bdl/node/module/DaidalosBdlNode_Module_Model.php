@@ -39,11 +39,11 @@ class DaidalosBdlNode_Module_Model extends DaidalosBdlNode_Model
   /**
    * @param $modeller DaidalosBdlModeller_Model
    */
-  public function loadBdlNode($modeller )
+  public function loadBdlNode($modeller)
   {
 
     $this->modeller = $modeller;
-    $this->node     = new BdlNodeModule($this->modeller->bdlFile );
+    $this->node     = new BdlNodeModule($this->modeller->bdlFile);
 
   }//end public function loadBdlNode */
 
@@ -56,44 +56,44 @@ class DaidalosBdlNode_Module_Model extends DaidalosBdlNode_Model
 
     $response = $this->getResponse();
 
-    if ($name = $request->data( 'module', Validator::CKEY, 'name' ) )
-      $this->node->setName($name );
+    if ($name = $request->data('module', Validator::CKEY, 'name'))
+      $this->node->setName($name);
 
     // label / description / docu
-    $labels = $request->data( 'module', Validator::TEXT, 'label' );
+    $labels = $request->data('module', Validator::TEXT, 'label');
     if ($labels) {
       foreach ($labels as $lang => $content) {
-        $this->node->setLabel($lang, $content );
+        $this->node->setLabel($lang, $content);
       }
     } else {
-      if (!$this->node->hasLabel( 'de' ) )
-        $this->node->setLabel( 'de', $this->node->getName() );
-      if (!$this->node->hasLabel( 'en' ) )
-        $this->node->setLabel( 'en', $this->node->getName() );
+      if (!$this->node->hasLabel('de'))
+        $this->node->setLabel('de', $this->node->getName());
+      if (!$this->node->hasLabel('en'))
+        $this->node->setLabel('en', $this->node->getName());
     }
 
-    $shortDescs = $request->data( 'module', Validator::TEXT, 'short_desc' );
+    $shortDescs = $request->data('module', Validator::TEXT, 'short_desc');
     if ($shortDescs) {
       foreach ($shortDescs as $lang => $content) {
-        $this->node->setShortDesc($lang, $content );
+        $this->node->setShortDesc($lang, $content);
       }
     } else {
-      if (!$this->node->hasShortDesc( 'de' ) )
-        $this->node->setShortDesc( 'de', $this->node->getLabelByLang( 'de' ) );
-      if (!$this->node->hasShortDesc( 'en' ) )
-        $this->node->setShortDesc( 'en', $this->node->getLabelByLang( 'en' ) );
+      if (!$this->node->hasShortDesc('de'))
+        $this->node->setShortDesc('de', $this->node->getLabelByLang('de'));
+      if (!$this->node->hasShortDesc('en'))
+        $this->node->setShortDesc('en', $this->node->getLabelByLang('en'));
     }
 
-    $docus = $request->data( 'module', Validator::TEXT, 'docu' );
+    $docus = $request->data('module', Validator::TEXT, 'docu');
     if ($docus) {
       foreach ($docus as $lang => $content) {
-        $this->node->setDocu($lang, $content );
+        $this->node->setDocu($lang, $content);
       }
     } else {
-      if (!$this->node->hasDocu( 'de' ) )
-        $this->node->setDocu( 'de', $this->node->getDescriptionByLang( 'de' ) );
-      if (!$this->node->hasDocu( 'en' ) )
-        $this->node->setDocu( 'en', $this->node->getDescriptionByLang( 'en' ) );
+      if (!$this->node->hasDocu('de'))
+        $this->node->setDocu('de', $this->node->getDescriptionByLang('de'));
+      if (!$this->node->hasDocu('en'))
+        $this->node->setDocu('en', $this->node->getDescriptionByLang('en'));
     }
 
     $this->modeller->save();

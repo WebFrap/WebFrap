@@ -48,8 +48,8 @@ class WebfrapSystem_Conf_Controller extends MvcController
   (
     'overview' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     )
   );
 
@@ -62,7 +62,7 @@ class WebfrapSystem_Conf_Controller extends MvcController
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_overview($request, $response )
+  public function service_overview($request, $response)
   {
 
     /* @var $view WebfrapSystem_Conf_Maintab_View  */
@@ -73,10 +73,10 @@ class WebfrapSystem_Conf_Controller extends MvcController
       'displayOverview'
     );
 
-    $model = $this->loadModel( 'WebfrapSystem_Conf' );
+    $model = $this->loadModel('WebfrapSystem_Conf');
 
-    $view->setModel($model );
-    $view->displayOverview( );
+    $view->setModel($model);
+    $view->displayOverview();
 
   }//end public function service_overview */
 

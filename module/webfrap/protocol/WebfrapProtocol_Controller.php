@@ -34,8 +34,8 @@ class WebfrapProtocol_Controller extends Controller
   (
     'overlaydset' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('GET'),
+      'views'      => array('ajax')
     ),
   );
 
@@ -48,11 +48,11 @@ class WebfrapProtocol_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_overlayDset($request, $response )
+  public function service_overlayDset($request, $response)
   {
 
-    $dKey     = $request->param('dkey', Validator::TEXT );
-    $objid    = $request->param('objid', Validator::EID );
+    $dKey     = $request->param('dkey', Validator::TEXT);
+    $objid    = $request->param('objid', Validator::EID);
 
     /* @var $view WebfrapProtocol_Ajax_View  */
     $view = $response->loadView
@@ -63,10 +63,10 @@ class WebfrapProtocol_Controller extends Controller
     );
 
     /* @var $model WebfrapProtocol_Model */
-    $model = $this->loadModel( 'WebfrapProtocol' );
+    $model = $this->loadModel('WebfrapProtocol');
 
-    $view->setModel($model );
-    $view->displayOverlay($dKey, $objid );
+    $view->setModel($model);
+    $view->displayOverlay($dKey, $objid);
 
   }//end public function service_overlayDset */
 

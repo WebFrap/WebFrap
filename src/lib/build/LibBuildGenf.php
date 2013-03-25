@@ -32,18 +32,18 @@ class LibBuildGenf extends LibBuildAction
    * @param unknown_type $node
    * @return unknown_type
    */
-  public function execute( )
+  public function execute()
   {
 
     $action         = $this->args[0];
 
-    if (!method_exists($this , $action ) ) {
-      Error::addError('Requested invalid Genf Action: '.$action.'sn . Please Check you Buildconfiguration.' );
+    if (!method_exists($this , $action)) {
+      Error::addError('Requested invalid Genf Action: '.$action.'sn . Please Check you Buildconfiguration.');
 
       return false;
     }
 
-    return $repoObj->$action($node );
+    return $repoObj->$action($node);
 
   }//end public function execute */
 

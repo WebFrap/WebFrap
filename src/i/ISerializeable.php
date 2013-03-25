@@ -33,6 +33,6 @@ interface ISerializeable
   /**
    * @param write back the data in de new object vor deserializing
    */
-  public function deserialize($data );
+  public function deserialize($data);
 
 } // end interface ISerializeable

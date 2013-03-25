@@ -51,20 +51,20 @@ class AclMgmt_Path_Maintab_Menu extends WgtDropmenu
    *   string formId: the id of the form;
    * }
    */
-  public function buildMenu($objid, $params )
+  public function buildMenu($objid, $params)
   {
 
     $view             = $this->view;
-    $iconMenu        = $view->icon( 'control/menu.png'      ,'Menu' );
-    $iconEdit        = $view->icon( 'control/save.png'      ,'Save' );
-    $iconBookmark    = $view->icon( 'control/bookmark.png'  ,'Bookmark' );
-    $iconClose       = $view->icon( 'control/close.png'     ,'Close' );
+    $iconMenu        = $view->icon('control/menu.png'      ,'Menu');
+    $iconEdit        = $view->icon('control/save.png'      ,'Save');
+    $iconBookmark    = $view->icon('control/bookmark.png'  ,'Bookmark');
+    $iconClose       = $view->icon('control/close.png'     ,'Close');
 
     $access           = $params->access;
     $user            = $this->getUser();
 
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport($objid, $params );
+    $entries->support  = $this->entriesSupport($objid, $params);
 
     $this->content = <<<HTML
 
@@ -109,13 +109,13 @@ HTML;
    * @param int $objid
    * @param TArray $params
    */
-  protected function entriesSupport($objid, $params )
+  protected function entriesSupport($objid, $params)
   {
 
-    $iconSupport  = $this->view->icon(  'control/support.png'  ,'Support');
-    $iconBug      = $this->view->icon(  'control/bug.png'      ,'Bug'  );
-    $iconFaq      = $this->view->icon(  'control/faq.png'      ,'Faq'  );
-    $iconHelp     = $this->view->icon(  'control/help.png'     ,'Help' );
+    $iconSupport  = $this->view->icon( 'control/support.png'  ,'Support');
+    $iconBug      = $this->view->icon( 'control/bug.png'      ,'Bug'  );
+    $iconFaq      = $this->view->icon( 'control/faq.png'      ,'Faq'  );
+    $iconHelp     = $this->view->icon( 'control/help.png'     ,'Help');
 
 
     $html = <<<HTML
@@ -162,7 +162,7 @@ HTML;
 
     self.getObject().find('#wgt-button-{$this->domainNode->domainName}-acl-form-append').click(function(){
       if (\$S('#wgt-input-{$this->domainNode->domainName}-acl-id_group').val()=='') {
-        \$D.errorWindow( 'Error', 'Please select a group first' );
+        \$D.errorWindow('Error', 'Please select a group first');
 
         return false;
       }

@@ -28,4 +28,4 @@ echo $dObj->getTimestamp('some_date').NL;
 echo $dObj->some_value.NL;
 echo $dObj->getHtml('some_value');
 
-<?php display_highlight( 'php' ); ?>
+<?php display_highlight('php'); ?>

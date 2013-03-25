@@ -30,24 +30,24 @@ class Desktop_Module extends Module
    *
    * @return void
    */
-  protected function setController($name = null )
+  protected function setController($name = null)
   {
 
     $request = $this->getRequest();
 
     if (!$name  )
-      $name = $request->param('mex', Validator::CNAME );
+      $name = $request->param('mex', Validator::CNAME);
 
-    if ( Log::$levelDebug )
-      Debug::console( 'Desktop '.$name.' in Module ' .$this->modName );
+    if (Log::$levelDebug)
+      Debug::console('Desktop '.$name.' in Module ' .$this->modName);
 
-    if (!$name )
+    if (!$name)
       $name = $this->defaultControllerName;
 
     $classname = 'Desktop'.$this->modName.ucfirst($name);
 
-    if ( WebFrap::loadable($classname) ) {
-      $this->controller = new $classname( );
+    if (WebFrap::loadable($classname)) {
+      $this->controller = new $classname();
     } else {
 
       // Create a Error Page
@@ -75,7 +75,7 @@ class Desktop_Module extends Module
    *
    * @return void
    */
-  protected function runController( )
+  protected function runController()
   {
 
     $request = $this->getRequest();
@@ -88,7 +88,7 @@ class Desktop_Module extends Module
       // Run the mainpart
       $method = 'run'.ucfirst($request->param('do', Validator::CNAME));
 
-      if (!method_exists($this->controller, $method) ) {
+      if (!method_exists($this->controller, $method)) {
         $this->modulErrorPage
         (
           'Invalid Access',
@@ -99,15 +99,15 @@ class Desktop_Module extends Module
       }
 
       // Initialisieren der Extention
-      if (!$this->controller->initDesktop( ))
-        throw new Webfrap_Exception( 'Failed to initialize Controller' );
+      if (!$this->controller->initDesktop())
+        throw new Webfrap_Exception('Failed to initialize Controller');
 
-      $this->controller->$method( );
+      $this->controller->$method();
 
       // shout down the extension
-      $this->controller->shutdownDesktop( );
+      $this->controller->shutdownDesktop();
 
-    } catch ( Exception $exc ) {
+    } catch (Exception $exc) {
 
       Error::report
       (
@@ -165,7 +165,7 @@ class Desktop_Module extends Module
 
       }//end else
 
-    }//end catch( Exception $exc )
+    }//end catch(Exception $exc)
 
   } // end protected function runController */
 

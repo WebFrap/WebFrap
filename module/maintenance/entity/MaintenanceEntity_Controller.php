@@ -39,28 +39,28 @@ class MaintenanceEntity_Controller extends Controller
   (
     'showmeta' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'modal' )
+      'method'    => array('GET'),
+      'views'      => array('modal')
     ),
     'statsentity' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'modal' )
+      'method'    => array('GET'),
+      'views'      => array('modal')
     ),
     'statsdataset' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'modal' )
+      'method'    => array('GET'),
+      'views'      => array('modal')
     ),
     'protocolentity' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'modal' )
+      'method'    => array('GET'),
+      'views'      => array('modal')
     ),
     'protocoldataset' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'modal' )
+      'method'    => array('GET'),
+      'views'      => array('modal')
     ),
   );
 
@@ -74,13 +74,13 @@ class MaintenanceEntity_Controller extends Controller
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_showMeta($request, $response )
+  public function service_showMeta($request, $response)
   {
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
     $params  = $this->getFormFlags($request);
 
-    $domainKey   = $request->param('dkey', Validator::CKEY );
+    $domainKey   = $request->param('dkey', Validator::CKEY);
     if (!$domainKey) {
       throw new InvalidRequest_Exception
       (
@@ -89,7 +89,7 @@ class MaintenanceEntity_Controller extends Controller
       );
     }
 
-    $domainNode  = DomainNode::getNode($domainKey );
+    $domainNode  = DomainNode::getNode($domainKey);
 
     if (!$domainNode) {
       throw new InvalidRequest_Exception
@@ -101,7 +101,7 @@ class MaintenanceEntity_Controller extends Controller
 
 
     // check the acl permissions
-    if (!$this->acl->access($domainNode->domainAcl.':access'  ) ) {
+    if (!$this->acl->access($domainNode->domainAcl.':access'  )) {
       throw new InvalidRequest_Exception
       (
         'You have no permission to access this service',
@@ -110,7 +110,7 @@ class MaintenanceEntity_Controller extends Controller
     }
 
     // check if we got a valid objid
-    if (!$objid = $this->getOID() ) {
+    if (!$objid = $this->getOID()) {
       throw new InvalidRequest_Exception
       (
         'Missing the ID',
@@ -125,15 +125,15 @@ class MaintenanceEntity_Controller extends Controller
       'EnterpriseCompany_Maintenance',
       'displayShowMeta'
     );
-    $view->setModel($this->loadModel($domainNode->domainKey.'_Crud' ) );
+    $view->setModel($this->loadModel($domainNode->domainKey.'_Crud'));
 
     // load the flow flags
-    $params  = $this->getFormFlags($params );
+    $params  = $this->getFormFlags($params);
 
     // show only the the fields in the meta category
     $params->categories = array('meta');
 
-    $error = $view->displayShowMeta($domainNode, $objid, $params );
+    $error = $view->displayShowMeta($domainNode, $objid, $params);
 
     // im Fehlerfall jedoch bekommen wir eine Error Objekt das wird noch kurz
     // behandeln sollten
@@ -156,13 +156,13 @@ class MaintenanceEntity_Controller extends Controller
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_statsEntity($request, $response )
+  public function service_statsEntity($request, $response)
   {
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
     $params  = $this->getFormFlags($request);
 
-    $domainKey   = $request->param('dkey', Validator::CKEY );
+    $domainKey   = $request->param('dkey', Validator::CKEY);
     if (!$domainKey) {
       throw new InvalidRequest_Exception
       (
@@ -171,7 +171,7 @@ class MaintenanceEntity_Controller extends Controller
       );
     }
 
-    $domainNode  = DomainNode::getNode($domainKey );
+    $domainNode  = DomainNode::getNode($domainKey);
 
     if (!$domainNode) {
       throw new InvalidRequest_Exception
@@ -183,7 +183,7 @@ class MaintenanceEntity_Controller extends Controller
 
 
     // check the acl permissions
-    if (!$this->acl->access($domainNode->domainAcl.':access'  ) ) {
+    if (!$this->acl->access($domainNode->domainAcl.':access'  )) {
       throw new InvalidRequest_Exception
       (
         'You have no permission to access this service',
@@ -198,9 +198,9 @@ class MaintenanceEntity_Controller extends Controller
       'MaintenanceEntity_Stats',
       'displayEntity'
     );
-    $view->setModel($this->loadModel($domainNode->domainKey.'_Crud' ) );
+    $view->setModel($this->loadModel($domainNode->domainKey.'_Crud'));
 
-    $view->displayEntity($domainNode, $params );
+    $view->displayEntity($domainNode, $params);
 
 
   }//end public function service_statsEntity */
@@ -211,13 +211,13 @@ class MaintenanceEntity_Controller extends Controller
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_statsDataset($request, $response )
+  public function service_statsDataset($request, $response)
   {
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
     $params  = $this->getFormFlags($request);
 
-    $domainKey   = $request->param('dkey', Validator::CKEY );
+    $domainKey   = $request->param('dkey', Validator::CKEY);
     if (!$domainKey) {
       throw new InvalidRequest_Exception
       (
@@ -226,7 +226,7 @@ class MaintenanceEntity_Controller extends Controller
       );
     }
 
-    $domainNode  = DomainNode::getNode($domainKey );
+    $domainNode  = DomainNode::getNode($domainKey);
 
     if (!$domainNode) {
       throw new InvalidRequest_Exception
@@ -237,7 +237,7 @@ class MaintenanceEntity_Controller extends Controller
     }
 
     // check the acl permissions
-    if (!$this->acl->access($domainNode->domainAcl.':access'  ) ) {
+    if (!$this->acl->access($domainNode->domainAcl.':access'  )) {
       throw new InvalidRequest_Exception
       (
         'You have no permission to access this service',
@@ -247,7 +247,7 @@ class MaintenanceEntity_Controller extends Controller
 
 
     // check if we got a valid objid
-    if (!$objid = $this->getOID() ) {
+    if (!$objid = $this->getOID()) {
       throw new InvalidRequest_Exception
       (
         'Missing the ID',
@@ -262,9 +262,9 @@ class MaintenanceEntity_Controller extends Controller
       'MaintenanceEntity_Stats',
       'displayDataset'
      );
-    $view->setModel($this->loadModel($domainNode->domainKey.'_Crud' ) );
+    $view->setModel($this->loadModel($domainNode->domainKey.'_Crud'));
 
-    $error = $view->displayDataset($domainNode, $objid, $params );
+    $error = $view->displayDataset($domainNode, $objid, $params);
 
     // im Fehlerfall jedoch bekommen wir eine Error Objekt das wird noch kurz
     // behandeln sollten
@@ -286,10 +286,10 @@ class MaintenanceEntity_Controller extends Controller
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_protocolEntity($request, $response )
+  public function service_protocolEntity($request, $response)
   {
 
-    $domainKey   = $request->param('dkey', Validator::CKEY );
+    $domainKey   = $request->param('dkey', Validator::CKEY);
     if (!$domainKey) {
       throw new InvalidRequest_Exception
       (
@@ -298,7 +298,7 @@ class MaintenanceEntity_Controller extends Controller
       );
     }
 
-    $domainNode  = DomainNode::getNode($domainKey );
+    $domainNode  = DomainNode::getNode($domainKey);
 
     if (!$domainNode) {
       throw new InvalidRequest_Exception
@@ -309,7 +309,7 @@ class MaintenanceEntity_Controller extends Controller
     }
 
     // check the acl permissions
-    if (!$this->acl->access($domainNode->domainAcl.':access'  ) ) {
+    if (!$this->acl->access($domainNode->domainAcl.':access'  )) {
       throw new InvalidRequest_Exception
       (
         'You have no permission to access this service',
@@ -324,12 +324,12 @@ class MaintenanceEntity_Controller extends Controller
       'MaintenanceEntity_Protocol',
       'displayEntity'
     );
-    $view->setModel($this->model );
+    $view->setModel($this->model);
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
     $params  = $this->getFormFlags($request);
 
-    $view->displayEntity($domainNode, $params );
+    $view->displayEntity($domainNode, $params);
 
   }//end public function service_protocolEntity */
 
@@ -339,13 +339,13 @@ class MaintenanceEntity_Controller extends Controller
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_protocolDataset($request, $response )
+  public function service_protocolDataset($request, $response)
   {
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
     $params  = $this->getFormFlags($request);
 
-      $domainKey   = $request->param('dkey', Validator::CKEY );
+      $domainKey   = $request->param('dkey', Validator::CKEY);
     if (!$domainKey) {
       throw new InvalidRequest_Exception
       (
@@ -354,7 +354,7 @@ class MaintenanceEntity_Controller extends Controller
       );
     }
 
-    $domainNode  = DomainNode::getNode($domainKey );
+    $domainNode  = DomainNode::getNode($domainKey);
 
     if (!$domainNode) {
       throw new InvalidRequest_Exception
@@ -365,7 +365,7 @@ class MaintenanceEntity_Controller extends Controller
     }
 
       // check if we got a valid objid
-    if (!$objid = $this->getOID() ) {
+    if (!$objid = $this->getOID()) {
       throw new InvalidRequest_Exception
       (
         'Missing the ID',
@@ -374,7 +374,7 @@ class MaintenanceEntity_Controller extends Controller
     }
 
     // check the acl permissions
-    if (!$this->acl->access($domainNode->domainAcl.':access', $objid  ) ) {
+    if (!$this->acl->access($domainNode->domainAcl.':access', $objid  )) {
       throw new InvalidRequest_Exception
       (
         'You have no permission to access this service',
@@ -390,12 +390,12 @@ class MaintenanceEntity_Controller extends Controller
       'MaintenanceEntity_Protocol',
       'displayDataset'
     );
-    $view->setModel($this->model );
+    $view->setModel($this->model);
 
     // load the flow flags
     $params  = $this->getFormFlags($request);
 
-    $error = $view->displayDataset($domainNode, $objid,  $params );
+    $error = $view->displayDataset($domainNode, $objid,  $params);
 
     // im Fehlerfall jedoch bekommen wir eine Error Objekt das wird noch kurz
     // behandeln sollten

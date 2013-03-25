@@ -46,7 +46,7 @@ abstract class LibSerializerAbstract
   /**
    *
    */
-  public function __construct($toSerialize = null )
+  public function __construct($toSerialize = null)
   {
 
     $this->toSerialize = $toSerialize;
@@ -90,7 +90,7 @@ abstract class LibSerializerAbstract
   /**
    * abstract serializer method
    */
-  abstract public function serialize($data = null );
+  abstract public function serialize($data = null);
 
 } // end abstract class LibSerializerAbstract
 

@@ -563,4 +563,3 @@ SQL;
     );
   }
 }//end class Webfrap_TaskPlanner_Model */
-

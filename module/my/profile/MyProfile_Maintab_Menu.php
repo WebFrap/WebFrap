@@ -51,7 +51,7 @@ class MyProfile_Maintab_Menu extends WgtDropmenu
    *   string formId: the id of the form;
    * }
    */
-  public function buildMenu($params )
+  public function buildMenu($params)
   {
 
     // benötigte resourcen laden
@@ -64,10 +64,10 @@ class MyProfile_Maintab_Menu extends WgtDropmenu
     $iconClose     = $view->icon('control/close.png', 'Close');
 
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport($params );
+    $entries->support  = $this->entriesSupport($params);
 
     // prüfen ob der aktuelle benutzer überhaupt neue einträge anlegen darf
-    //if ($params->access->insert )
+    //if ($params->access->insert)
     //{
 
       $entries->buttonSend = <<<BUTTON
@@ -105,13 +105,13 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport($params )
+  protected function entriesSupport($params)
   {
 
-    $iconSupport  = $this->view->icon( 'control/support.png'  ,'Support');
-    $iconBug      = $this->view->icon( 'control/bug.png'      ,'Bug');
-    $iconFaq      = $this->view->icon( 'control/faq.png'      ,'Faq');
-    $iconHelp     = $this->view->icon( 'control/help.png'     ,'Help');
+    $iconSupport  = $this->view->icon('control/support.png'  ,'Support');
+    $iconBug      = $this->view->icon('control/bug.png'      ,'Bug');
+    $iconFaq      = $this->view->icon('control/faq.png'      ,'Faq');
+    $iconHelp     = $this->view->icon('control/help.png'     ,'Help');
 
 
     $html = <<<HTML

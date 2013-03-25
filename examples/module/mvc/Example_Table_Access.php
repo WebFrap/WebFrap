@@ -29,7 +29,7 @@ class Example_Table_Access extends LibAclPermissionList
    * @param TFlag $params
    * @param CorePerson_Entity $entity
    */
-  public function loadDefault($params, $entity = null )
+  public function loadDefault($params, $entity = null)
   {
 
     // laden der benötigten Resource Objekte
@@ -79,9 +79,9 @@ class Example_Table_Access extends LibAclPermissionList
       // checken ob rechte über den rootcontainer bis hier her vereerbt
       // werden sollen
       try {
-        $rootContainer = $acl->getRootContainer($params->aclRoot );
+        $rootContainer = $acl->getRootContainer($params->aclRoot);
 
-        $rootPerm = $rootContainer->getRefAccess($params->aclRootId, $params->aclLevel, $params->aclNode );
+        $rootPerm = $rootContainer->getRefAccess($params->aclRootId, $params->aclLevel, $params->aclNode);
 
         if ($rootPerm) {
           if (!$this->defLevel || $rootPerm['level'] > $this->defLevel) {
@@ -93,10 +93,10 @@ class Example_Table_Access extends LibAclPermissionList
         }
 
         if ($rootPerm['roles']) {
-          $this->roles = array_merge($this->roles, $rootPerm['roles'] );
+          $this->roles = array_merge($this->roles, $rootPerm['roles']);
         }
 
-      } catch ( LibAcl_Exception $e ) {
+      } catch (LibAcl_Exception $e) {
 
       }
     }
@@ -108,7 +108,7 @@ class Example_Table_Access extends LibAclPermissionList
    * @param string $condition
    * @param TFlag $params
    */
-  public function fetchListTableDefault($query, $condition, $params )
+  public function fetchListTableDefault($query, $condition, $params)
   {
 
     // laden der benötigten Resource Objekte
@@ -119,18 +119,18 @@ class Example_Table_Access extends LibAclPermissionList
     $userId    = $user->getId();
 
     // erstellen der Acl criteria und befüllen mit den relevanten cols
-    $criteria  = $orm->newCriteria( 'inner_acl' );
+    $criteria  = $orm->newCriteria('inner_acl');
 
-    $envelop = $orm->newCriteria( );
+    $envelop = $orm->newCriteria();
     $envelop->subQuery = $criteria;
     $envelop->select(array(
       'inner_acl.rowid',
-      'max( inner_acl."acl-level" ) as "acl-level"'
+      'max(inner_acl."acl-level") as "acl-level"'
     ));
-    $query->injectLimit($envelop, $params );
-    $envelop->groupBy( 'inner_acl.rowid' );
+    $query->injectLimit($envelop, $params);
+    $envelop->groupBy('inner_acl.rowid');
 
-    $criteria->select( array( 'core_person.rowid as rowid' )  );
+    $criteria->select(array('core_person.rowid as rowid')  );
 
     if (!$this->defLevel || $this->isPartAssign) {
       $greatest = <<<SQL
@@ -159,13 +159,13 @@ SQL;
 
     $criteria->selectAlso($greatest  );
 
-    $query->setTables($criteria );
+    $query->setTables($criteria);
     $query->appendConditions($criteria, $condition, $params  );
-    $query->injectAclOrder($criteria, $params );
-    $query->appendFilter($criteria, $condition, $params );
+    $query->injectAclOrder($criteria, $params);
+    $query->appendFilter($criteria, $condition, $params);
 
     if ($query->extendedConditions) {
-      $query->renderExtendedConditions($criteria, $query->extendedConditions );
+      $query->renderExtendedConditions($criteria, $query->extendedConditions);
     }
 
     $criteria->join
@@ -173,13 +173,13 @@ SQL;
       " {$joinType} JOIN
         {$acl->sourceRelation} as acls
         ON
-          UPPER(acls.\"acl-area\") IN( UPPER('mod-core'), UPPER('mgmt-core_person') )
+          UPPER(acls.\"acl-area\") IN(UPPER('mod-core'), UPPER('mgmt-core_person'))
             AND acls.\"acl-user\" = {$userId}
             AND acls.\"acl-vid\" = core_person.rowid ",
       'acls'
     );
 
-    $tmp         = $orm->select($envelop );
+    $tmp         = $orm->select($envelop);
     $ids       = array();
     $this->ids = array();
 
@@ -188,7 +188,7 @@ SQL;
       $this->ids[] = $row['rowid'];
     }
 
-    $query->setCalcQuery($criteria, $params );
+    $query->setCalcQuery($criteria, $params);
 
     return $ids;
 

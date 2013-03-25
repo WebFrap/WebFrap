@@ -69,7 +69,7 @@ class LibTemplateHtmlError
    *
    * @param string $index
    */
-  public static function setIndex($index )
+  public static function setIndex($index)
   {
 
     self::$index = $index;
@@ -80,7 +80,7 @@ class LibTemplateHtmlError
    *
    * @param string $template
    */
-  public static function setTemplate($template, $inCode = false )
+  public static function setTemplate($template, $inCode = false)
   {
 
     self::$template = $template;
@@ -97,7 +97,7 @@ class LibTemplateHtmlError
    * @param string $errorMessage
    * @param int $errorCode
    */
-  public static function printErrorPageXml($errorMessage , $errorCode = null )
+  public static function printErrorPageXml($errorMessage , $errorCode = null)
   {
 
     self::$errorMessage = $errorMessage;
@@ -106,9 +106,9 @@ class LibTemplateHtmlError
       self::$errorCode = $errorCode;
     }
 
-    $filename = $this->templatePath( self::$index , 'index' );
+    $filename = $this->templatePath(self::$index , 'index');
 
-    if ( file_exists($filename ) and is_readable($filename) ) {
+    if (file_exists($filename) and is_readable($filename)) {
 
       $TITLE         = self::$title;
       $ERROR_MESSAGE = self::$errorMessage;
@@ -138,7 +138,7 @@ class LibTemplateHtmlError
    * @param string $errorMessage
    * @param int $errorCode
    */
-  public static function printErrorPage($errorMessage , $errorCode = null , $data = null )
+  public static function printErrorPage($errorMessage , $errorCode = null , $data = null)
   {
 
     self::$errorMessage = $errorMessage;
@@ -147,9 +147,9 @@ class LibTemplateHtmlError
       self::$errorCode = $errorCode;
     }
 
-    $filename = $this->templatePath( self::$index , 'index' );
+    $filename = $this->templatePath(self::$index , 'index');
 
-    if ( file_exists($filename ) and is_readable($filename) ) {
+    if (file_exists($filename) and is_readable($filename)) {
 
       $TITLE         = self::$title;
       $ERROR_MESSAGE = self::$errorMessage;
@@ -179,16 +179,16 @@ class LibTemplateHtmlError
    * @param string $template
    * @return string
    */
-  public static function includeBody($template )
+  public static function includeBody($template)
   {
 
     if (!$filename = $this->bodyPath($template)) {
-      Error::addError('failed to load the body template: '.$template );
+      Error::addError('failed to load the body template: '.$template);
 
       return '<p class="wgt-box error">failed to load the body</p>';
     }
 
-    if ( file_exists($filename ) and is_readable($filename) ) {
+    if (file_exists($filename) and is_readable($filename)) {
 
       $TITLE         = self::$title;
       $ERROR_MESSAGE = self::$errorMessage;

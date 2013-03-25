@@ -61,7 +61,7 @@ class WgtElementContentTree extends WgtAbstract
    *
    * @param int $name the name of the wgt object
    */
-  public function __construct($name = null, $view = null )
+  public function __construct($name = null, $view = null)
   {
 
     $this->texts  = new TArray();
@@ -69,8 +69,8 @@ class WgtElementContentTree extends WgtAbstract
     $this->name   = $name;
     $this->init();
 
-    if ($view )
-      $view->addElement($name, $this );
+    if ($view)
+      $view->addElement($name, $this);
 
   } // end public function __construct */
 
@@ -78,16 +78,16 @@ class WgtElementContentTree extends WgtAbstract
    * @param TFlag $params
    * @return string
    */
-  public function render($params = null )
+  public function render($params = null)
   {
 
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
-    $codeEntr = $this->renderEntry( 0 );
+    $codeEntr = $this->renderEntry(0);
 
-    $id       = $this->getId( );
-    $iconAdd  = $this->icon( 'control/add.png', 'Add' );
+    $id       = $this->getId();
+    $iconAdd  = $this->icon('control/add.png', 'Add');
 
     $html = <<<HTML
 
@@ -171,7 +171,7 @@ HTML;
    * @param int $id
    * @return string
    */
-  public function renderEntry($id )
+  public function renderEntry($id)
   {
 
     $html = '';
@@ -188,13 +188,13 @@ lastname,
 user_name
      */
 
-    if ( isset($this->data[$id] ) ) {
+    if (isset($this->data[$id])) {
 
       $entries = $this->data[$id];
 
       foreach ($entries as $entry) {
 
-        $date = date( 'Y-m-d - H:i', $entry['time_created'] );
+        $date = date('Y-m-d - H:i', $entry['time_created']);
 
         $html .= <<<HTML
   <li>
@@ -210,9 +210,9 @@ HTML;
 
         $parent = (int) $this->data['parent'];
 
-        if ($parent && isset($this->data[$parent] ) ) {
+        if ($parent && isset($this->data[$parent])) {
           $html .= '<ul>';
-          $html .= $this->renderEntry($parent );
+          $html .= $this->renderEntry($parent);
           $html .= '</ul>';
         }
 

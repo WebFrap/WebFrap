@@ -52,14 +52,14 @@ class ContextTab extends Context
 
       // start position of the query and size of the table
     $this->offset
-      = $request->param('offset', Validator::INT );
+      = $request->param('offset', Validator::INT);
 
     // start position of the query and size of the table
     $this->start
-      = $request->param('start', Validator::INT );
+      = $request->param('start', Validator::INT);
 
     if ($this->offset) {
-      if (!$this->start )
+      if (!$this->start)
         $this->start = $this->offset;
     }
 
@@ -69,7 +69,7 @@ class ContextTab extends Context
 
     // order for the multi display element
     $this->order
-      = $request->param('order', Validator::CNAME );
+      = $request->param('order', Validator::CNAME);
 
     // target for a callback function
     $this->target
@@ -84,15 +84,15 @@ class ContextTab extends Context
       = $request->param('tabid', Validator::CKEY  );
 
     // flag for beginning seach filter
-    if ($text = $request->param('begin', Validator::TEXT  ) ) {
+    if ($text = $request->param('begin', Validator::TEXT  )) {
       // whatever is comming... take the first char
       $this->begin = $text[0];
     }
 
     $this->refIds
-      = $request->paramList( 'refids', Validator::INT  );
+      = $request->paramList('refids', Validator::INT  );
 
-    $this->dynFilters = $request->param('dynfilter', Validator::TEXT );
+    $this->dynFilters = $request->param('dynfilter', Validator::TEXT);
 
     // exclude whatever
     $this->exclude

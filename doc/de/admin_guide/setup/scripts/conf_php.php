@@ -90,17 +90,17 @@ $sysAccess = '770';
  * @var array
  */
 $deplGateways   = array
-(  
+( 
   /* examples
   array
-  ( 
+  (
     'name'  => 'WebFrap_Gw_SBiz', // Name des Projektes im Deployment Path
     'src'   => $repoRoot.'s-db/WebFrap_Gw_SBiz', 
     'rev'    => '', // definieren welche Revision verwendet werden soll
     'conf'  => 'sbd.demo' // den zu verwendenten Conf Key definieren
   ),
   array
-  ( 
+  (
     'name'  => 'WebFrap_Gw_Cu4711' , 
     'src'   => $repoRoot.'WebFrap_customer/WebFrap_Gw_Cu4711', 
     'conf'  => 'prod.4711',
@@ -119,11 +119,11 @@ $deplGateways   = array
  * @var array
  */
 $deplIcons     = array
-(  
+( 
   'Icons' => array
   (
     array
-    ( 
+    (
       'src'   => $repoRoot.'webfrap_net/WebFrap_Icons_Default' 
     )
   )
@@ -138,12 +138,12 @@ $deplThemes    = array
   'Themes' => array
   (
     array
-    (  
+    ( 
       'src'   => $repoRoot.'s-db/WebFrap_Theme_Default',
       'rev'   => 'rev:someref'
     ),
     array
-    (  
+    ( 
       'src'   => $repoRoot.'WebFrap_customer/WebFrap_Theme_Customer'  
     )
   )
@@ -154,7 +154,7 @@ $deplThemes    = array
  * @var array
  */
 $deplWgt       = array
-(  
+( 
   'name'  => 'WebFrap_Wgt', 
   'src'   => $repoRoot.'webfrap_net/WebFrap_Wgt',
   'rev'    => ''
@@ -165,7 +165,7 @@ $deplWgt       = array
  * @var array
  */
 $deplFw     = array
-(  
+( 
   'name'  => 'WebFrap', 
   'src'   => $repoRoot.'webfrap/WebFrap'         
 );
@@ -313,4 +313,4 @@ $syncRepos = array
     ),
   ),
 );
-<?php display_highlight( 'php' ); ?>
+<?php display_highlight('php'); ?>

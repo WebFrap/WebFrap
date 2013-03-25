@@ -54,23 +54,23 @@ class ShopFront_Article_Controller extends ControllerFrontend
   (
     'loadaccessoires' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('GET'),
+      'views'      => array('ajax')
     ),
     'loadtests' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('GET'),
+      'views'      => array('ajax')
     ),
     'loadquestions' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('GET'),
+      'views'      => array('ajax')
     ),
     'loadsimilar' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('GET'),
+      'views'      => array('ajax')
     ),
   );
 
@@ -81,28 +81,28 @@ class ShopFront_Article_Controller extends ControllerFrontend
   /**
    * @return void
    */
-  public function service_loadAccessoires( )
+  public function service_loadAccessoires()
   {
 
     $view    = $this->getView();
     $request = $this->getRequest();
 
     /* @var $model ShopFront_Model */
-    $model = $this->loadModel( 'ShopFront' );
+    $model = $this->loadModel('ShopFront');
 
-    $storeId = $request->param('store', Validator::EID );
+    $storeId = $request->param('store', Validator::EID);
 
-    if ($storeId )
-      $model->setStoreId($storeId );
+    if ($storeId)
+      $model->setStoreId($storeId);
     else
       $storeId = $model->getDefStoreId();
 
     $body = new ShopFront_Start_Body();
 
     $frontend = new ShopFront_Frontend();
-    $frontend->setModel($model );
+    $frontend->setModel($model);
 
-    $frontend->render($view, $body );
+    $frontend->render($view, $body);
 
   }//end public function service_loadAccessoires */
 

@@ -30,7 +30,7 @@ class WgtInputCheckbox extends WgtInput
   /**
    * @param string
    */
-  public function setActive($activ = true )
+  public function setActive($activ = true)
   {
 
     if ($activ) {
@@ -50,7 +50,7 @@ class WgtInputCheckbox extends WgtInput
   /**
    * @return string
    */
-  public function build($attributes = array() )
+  public function build($attributes = array())
   {
 
     if ($attributes)

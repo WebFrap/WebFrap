@@ -105,13 +105,13 @@ class WebfrapAnnouncement_Table_Element extends WgtTable
    *
    * @return string
    */
-  public function buildHtml( )
+  public function buildHtml()
   {
     // if we have html we can assume that the table was allready parsed
     // so we return just the html and stop here
     // this behaviour enables you to call a specific parser method from outside
     // of the view, but then get the html of the called parse method
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
     // check for replace is used to check if this table should be pushed via ajax
@@ -150,12 +150,12 @@ class WebfrapAnnouncement_Table_Element extends WgtTable
    * create the head for the table
    * @return string
    */
-  public function buildThead( )
+  public function buildThead()
   {
 
     $this->numCols = 3;
 
-    if ($this->enableNav )
+    if ($this->enableNav)
       ++ $this->numCols;
 
     // Creating the Head
@@ -163,19 +163,19 @@ class WebfrapAnnouncement_Table_Element extends WgtTable
     $html .= '<tr>'.NL;
 
     // check for multi selection
-    $html .= '<th style="width:30px;">'.$this->view->i18n->l( 'Pos.', 'wbf.label'  ).'</th>'.NL;
+    $html .= '<th style="width:30px;">'.$this->view->i18n->l('Pos.', 'wbf.label'  ).'</th>'.NL;
 
-    $html .= '<th style="width:250px" >'.$this->view->i18n->l( 'Title', 'wbf.label' ).'</th>'.NL;
-    $html .= '<th style="width:80px" >'.$this->view->i18n->l( 'Channel', 'wbf.label' ).'</th>'.NL;
-    $html .= '<th style="width:80px" >'.$this->view->i18n->l( 'Importance', 'wbf.label' ).'</th>'.NL;
-    $html .= '<th style="width:80px" >'.$this->view->i18n->l( 'Type', 'wbf.label' ).'</th>'.NL;
-    $html .= '<th style="width:190px" >'.$this->view->i18n->l( 'Creator', 'wbf.label' ).'</th>'.NL;
-    $html .= '<th style="width:75px" >'.$this->view->i18n->l( 'Created', 'wbf.label' ).'</th>'.NL;
+    $html .= '<th style="width:250px" >'.$this->view->i18n->l('Title', 'wbf.label').'</th>'.NL;
+    $html .= '<th style="width:80px" >'.$this->view->i18n->l('Channel', 'wbf.label').'</th>'.NL;
+    $html .= '<th style="width:80px" >'.$this->view->i18n->l('Importance', 'wbf.label').'</th>'.NL;
+    $html .= '<th style="width:80px" >'.$this->view->i18n->l('Type', 'wbf.label').'</th>'.NL;
+    $html .= '<th style="width:190px" >'.$this->view->i18n->l('Creator', 'wbf.label').'</th>'.NL;
+    $html .= '<th style="width:75px" >'.$this->view->i18n->l('Created', 'wbf.label').'</th>'.NL;
 
     // the default navigation col
     if ($this->enableNav) {
       $navWidth = count($this->actions)*30+5;
-      $html .= '<th style="width:'.$navWidth.'px;">'.$this->view->i18n->l( 'Nav.', 'wbf.label'  ).'</th>'.NL;
+      $html .= '<th style="width:'.$navWidth.'px;">'.$this->view->i18n->l('Nav.', 'wbf.label'  ).'</th>'.NL;
     }
 
     $html .= '</tr>'.NL;
@@ -189,13 +189,13 @@ class WebfrapAnnouncement_Table_Element extends WgtTable
    * create the body for the table
    * @return string
    */
-  public function buildTbody( )
+  public function buildTbody()
   {
 
     // create the table body
     $body = '<tbody>'.NL;
 
-    $priorityContainer = new WgtInputPriority( 'l-prio-dp' );
+    $priorityContainer = new WgtInputPriority('l-prio-dp');
 
     // simple switch method to create collored rows
     $num = 1;
@@ -225,10 +225,10 @@ HTML;
       $prioLabel = '';
 
       if ($row['wbfsys_announcement_importance']) {
-        $prioLabel = $priorityContainer->getLabel($row['wbfsys_announcement_importance'] );
+        $prioLabel = $priorityContainer->getLabel($row['wbfsys_announcement_importance']);
         $prioIcon  = $this->icon
         (
-          $priorityContainer->getIcon($row['wbfsys_announcement_importance'] ),
+          $priorityContainer->getIcon($row['wbfsys_announcement_importance']),
           $prioLabel
         );
       }
@@ -239,12 +239,12 @@ HTML;
 
       // creator
       $userName = "({$row['wbfsys_role_user_name']}) {$row['core_person_lastname']}, {$row['core_person_firstname']} ";
-      $body .= '<td valign="top" >'.Validator::sanitizeHtml($userName ).'</td>'.NL;
+      $body .= '<td valign="top" >'.Validator::sanitizeHtml($userName).'</td>'.NL;
 
       // created
       $body .= '<td valign="top" >'.($row['wbfsys_announcement_m_time_created']
-        ? $this->i18n->date($row['wbfsys_announcement_m_time_created'] )
-        : '&nbsp;' ).'</td>'.NL;
+        ? $this->i18n->date($row['wbfsys_announcement_m_time_created'])
+        : '&nbsp;').'</td>'.NL;
 
       if ($this->enableNav) {
         $navigation  = $this->rowMenu
@@ -258,14 +258,14 @@ HTML;
       $body .= '</tr>'.NL;
 
       $num ++;
-      if ($num > $this->numOfColors )
+      if ($num > $this->numOfColors)
         $num = 1;
 
       ++$pos;
 
     } //end foreach
 
-    if ($this->dataSize > ($this->start + $this->stepSize) ) {
+    if ($this->dataSize > ($this->start + $this->stepSize)) {
       $body .= '<tr><td colspan="'.$this->numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  ><var>'.($this->start + $this->stepSize).'</var>'.$this->image('wgt/bar-loader.gif','loader').' Loading the next '.$this->stepSize.' entries.</td></tr>';
     }
 
@@ -280,21 +280,21 @@ HTML;
    *
    * @return string
    */
-  public function buildAjax( )
+  public function buildAjax()
   {
     // if we have html we can assume that the table was allready parsed
     // so we return just the html and stop here
     // this behaviour enables you to call a specific parser method from outside
     // of the view, but then get the html of the called parse method
-    if ($this->xml )
+    if ($this->xml)
       return $this->xml;
 
     $this->numCols = 3;
 
-    if ($this->enableNav )
+    if ($this->enableNav)
       ++ $this->numCols;
 
-    if ($this->enableMultiSelect )
+    if ($this->enableMultiSelect)
       ++ $this->numCols;
 
     if ($this->appendMode) {
@@ -304,19 +304,19 @@ HTML;
     }
 
     foreach ($this->data as $key => $row) {
-      $body .= $this->buildAjaxTbody($row );
+      $body .= $this->buildAjaxTbody($row);
     }//end foreach
 
     if ($this->appendMode) {
       $numCols = 3;
 
-      if ($this->enableNav )
+      if ($this->enableNav)
         ++ $numCols;
 
-      if ($this->enableMultiSelect )
+      if ($this->enableMultiSelect)
         ++ $numCols;
 
-      if ($this->dataSize > ($this->start + $this->stepSize ) ) {
+      if ($this->dataSize > ($this->start + $this->stepSize)) {
         $body .= '<tr><td colspan="'.$numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  ><var>'.($this->start + $this->stepSize).'</var>'.$this->image('wgt/bar-loader.gif','loader').' Loading the next '.$this->stepSize.' entries.</td></tr>';
       }
 
@@ -362,11 +362,11 @@ HTML;
       $prioLabel = '';
 
       if ($row['wbfsys_announcement_importance']) {
-        $priorityContainer = new WgtInputPriority( 'l-prio-dp' );
-        $prioLabel = $priorityContainer->getLabel($row['wbfsys_announcement_importance'] );
+        $priorityContainer = new WgtInputPriority('l-prio-dp');
+        $prioLabel = $priorityContainer->getLabel($row['wbfsys_announcement_importance']);
         $prioIcon  = $this->icon
         (
-          $priorityContainer->getIcon($row['wbfsys_announcement_importance'] ),
+          $priorityContainer->getIcon($row['wbfsys_announcement_importance']),
           $prioLabel
         );
       }
@@ -377,12 +377,12 @@ HTML;
 
       // creator
       $userName = "({$row['wbfsys_role_user_name']}) {$row['core_person_lastname']}, {$row['core_person_firstname']} ";
-      $body .= '<td valign="top" >'.Validator::sanitizeHtml($userName ).'</td>'.NL;
+      $body .= '<td valign="top" >'.Validator::sanitizeHtml($userName).'</td>'.NL;
 
       // created
       $body .= '<td valign="top" >'.($row['wbfsys_announcement_m_time_created']
-        ? $this->i18n->date($row['wbfsys_announcement_m_time_created'] )
-        : '&nbsp;' ).'</td>'.NL;
+        ? $this->i18n->date($row['wbfsys_announcement_m_time_created'])
+        : '&nbsp;').'</td>'.NL;
 
       if ($this->enableNav) {
 

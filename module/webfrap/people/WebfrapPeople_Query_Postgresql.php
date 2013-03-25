@@ -36,10 +36,10 @@ class WebfrapPeople_Query_Postgresql extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetchByKey($key, $params = null )
+  public function fetchByKey($key, $params = null)
   {
 
-    if (!$params )
+    if (!$params)
       $params = new TFlag();
 
     $this->sourceSize  = null;
@@ -60,8 +60,8 @@ class WebfrapPeople_Query_Postgresql extends LibSqlQuery
     $sql = <<<SQL
   SELECT
     wbfsys_role_user.rowid as id,
-    COALESCE ( '('||wbfsys_role_user.name||') ', '' ) || COALESCE ( core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '' ) as value,
-    COALESCE ( '('||wbfsys_role_user.name||') ', '' ) || COALESCE ( core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '' ) as label
+    COALESCE ('('||wbfsys_role_user.name||') ', '') || COALESCE (core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '') as value,
+    COALESCE ('('||wbfsys_role_user.name||') ', '') || COALESCE (core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '') as label
   FROM
     wbfsys_role_user
   JOIN
@@ -73,7 +73,7 @@ class WebfrapPeople_Query_Postgresql extends LibSqlQuery
   LIMIT 15;
 SQL;
 
-    $this->result = $db->select($sql );
+    $this->result = $db->select($sql);
 
   }//end public function fetchByKey */
 

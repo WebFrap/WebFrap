@@ -36,21 +36,21 @@ class DaidalosDbBackup_Maintab_Menu extends WgtDropmenu
    *   string formId: the id of the form;
    * }
    */
-  public function buildMenu($key, $params )
+  public function buildMenu($key, $params)
   {
 
-    $iconMenu          = $this->view->icon( 'control/menu.png'     ,'Menu'   );
-    $iconClose         = $this->view->icon( 'control/close.png'    ,'Close'   );
-    $iconSearch        = $this->view->icon( 'control/search.png'   ,'Search'  );
-    $iconBookmark      = $this->view->icon( 'control/bookmark.png' ,'Bookmark');
-    $iconBackup        = $this->view->icon( 'daidalos/backup.png' ,'Backup' );
-    $iconSupport       = $this->view->icon( 'control/support.png'  ,'Support' );
-    $iconBug           = $this->view->icon( 'control/bug.png'      ,'Bug' );
-    $iconFaq           = $this->view->icon( 'control/faq.png'      ,'Faq' );
-    $iconHelp          = $this->view->icon( 'control/help.png'     ,'Help' );
+    $iconMenu          = $this->view->icon('control/menu.png'     ,'Menu'   );
+    $iconClose         = $this->view->icon('control/close.png'    ,'Close'   );
+    $iconSearch        = $this->view->icon('control/search.png'   ,'Search'  );
+    $iconBookmark      = $this->view->icon('control/bookmark.png' ,'Bookmark');
+    $iconBackup        = $this->view->icon('daidalos/backup.png' ,'Backup');
+    $iconSupport       = $this->view->icon('control/support.png'  ,'Support');
+    $iconBug           = $this->view->icon('control/bug.png'      ,'Bug');
+    $iconFaq           = $this->view->icon('control/faq.png'      ,'Faq');
+    $iconHelp          = $this->view->icon('control/help.png'     ,'Help');
 
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport($params );
+    $entries->support  = $this->entriesSupport($params);
 
     $this->content = <<<HTML
 
@@ -105,7 +105,7 @@ HTML;
    *     services
    * }
    */
-  public function injectActions($view, $key, $params )
+  public function injectActions($view, $key, $params)
   {
 
     // add the button action for save in the window
@@ -119,12 +119,12 @@ HTML;
     });
 
     self.getObject().find(".wgtac_start_backup").click(function(){
-      \$R.form( 'wgt-form-daidalos_db_backup-{$key}' );
+      \$R.form('wgt-form-daidalos_db_backup-{$key}');
     });
 
 BUTTONJS;
 
-    $view->addJsCode($code );
+    $view->addJsCode($code);
 
   }//end public function injectActions */
 

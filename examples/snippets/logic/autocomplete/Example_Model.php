@@ -33,11 +33,11 @@ class Example_Model extends Model
    * @param string $key
    * @param TArray $params
    */
-  public function getAutolistByKey($key, $params )
+  public function getAutolistByKey($key, $params)
   {
 
     $db     = $this->getDb();
-    $query  = $db->newQuery( 'Autocomplete' );
+    $query  = $db->newQuery('Autocomplete');
     /* @var $query Autocomplete_Query  */
 
     $query->fetchAutocomplete

@@ -35,14 +35,14 @@ class WebfrapNavigation_Maintab_Menu extends WgtDropmenu
    * build the window menu
    * @param TArray $params
    */
-  public function buildMenu($params )
+  public function buildMenu($params)
   {
 
-    $iconMenu         = $this->view->icon( 'control/menu.png'   , 'Menu'    );
-    $iconMisc         = $this->view->icon( 'control/misc.png'   , 'Misc'    );
-    $iconClose        = $this->view->icon( 'control/close.png'  , 'Close'   );
-    $iconEntity       = $this->view->icon( 'control/entity.png' , 'Entity'  );
-    $iconSearch       = $this->view->icon( 'control/search.png' , 'Search'  );
+    $iconMenu         = $this->view->icon('control/menu.png'   , 'Menu'    );
+    $iconMisc         = $this->view->icon('control/misc.png'   , 'Misc'    );
+    $iconClose        = $this->view->icon('control/close.png'  , 'Close'   );
+    $iconEntity       = $this->view->icon('control/entity.png' , 'Entity'  );
+    $iconSearch       = $this->view->icon('control/search.png' , 'Search'  );
 
     $entries = new TArray();
 
@@ -96,7 +96,7 @@ HTML;
    *   string formId: the id of the form;
    * }
    */
-  public function addActions(  $params )
+  public function addActions( $params)
   {
 
     // add the button action for save in the window

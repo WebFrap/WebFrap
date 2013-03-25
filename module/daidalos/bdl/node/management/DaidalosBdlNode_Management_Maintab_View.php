@@ -37,24 +37,24 @@ class DaidalosBdlNode_Management_Maintab_View extends WgtMaintabCustom
    * @param TFlag $params
    * @return void
    */
-  public function displayEditor(  $params )
+  public function displayEditor( $params)
   {
 
     $managementName = $this->model->node->getName();
 
-    $this->setLabel( 'Management: '.$managementName );
-    $this->setTitle( 'Management: '.$managementName );
+    $this->setLabel('Management: '.$managementName);
+    $this->setTitle('Management: '.$managementName);
 
-    $this->addVar( 'node', $this->model->node );
-    $this->addVar( 'key', $this->model->modeller->key );
-    $this->addVar( 'bdlFile', $this->model->modeller->bdlFileName );
+    $this->addVar('node', $this->model->node);
+    $this->addVar('key', $this->model->modeller->key);
+    $this->addVar('bdlFile', $this->model->modeller->bdlFileName);
 
-    $this->setTabId( 'wgt-tab-daidalos-bdl_management-edit-'.$this->model->modeller->key );
+    $this->setTabId('wgt-tab-daidalos-bdl_management-edit-'.$this->model->modeller->key);
 
-    $this->setTemplate( 'daidalos/bdl/node/management/maintab/form' );
+    $this->setTemplate('daidalos/bdl/node/management/maintab/form');
 
     $params = new TArray();
-    $this->addMenu($params );
+    $this->addMenu($params);
 
   }//end public function displayEditor */
 
@@ -67,7 +67,7 @@ class DaidalosBdlNode_Management_Maintab_View extends WgtMaintabCustom
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu($params )
+  public function addMenu($params)
   {
 
     $menu     = $this->newMenu
@@ -77,9 +77,9 @@ class DaidalosBdlNode_Management_Maintab_View extends WgtMaintabCustom
     );
 
     $menu->id = $this->id.'_dropmenu';
-    $menu->buildMenu(  $params );
+    $menu->buildMenu( $params);
 
-    $menu->injectActions($this, $params );
+    $menu->injectActions($this, $params);
 
   }//end public function addMenu */
 

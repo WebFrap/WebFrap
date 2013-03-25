@@ -27,7 +27,7 @@ class ReportBase_Model extends Model
   /**
    * @return int
    */
-  public function getNumPersons( )
+  public function getNumPersons()
   {
 
     $db = $this->getDb();

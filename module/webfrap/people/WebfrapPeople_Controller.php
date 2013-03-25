@@ -33,7 +33,7 @@ class WebfrapPeople_Controller extends Controller
    * @param LibResponseHttp $response
    * @return boolean
    */
-  public function service_search($request, $response )
+  public function service_search($request, $response)
   {
 
     // load request parameters an interpret as flags
@@ -41,8 +41,8 @@ class WebfrapPeople_Controller extends Controller
 
     $user = $this->getUser();
 
-    $access = new WebfrapPeople_Access_List_Container( null, null, $this );
-    $access->load($user->getProfileName(), $params );
+    $access = new WebfrapPeople_Access_List_Container(null, null, $this);
+    $access->load($user->getProfileName(), $params);
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
     if (!$access->listing) {
@@ -61,14 +61,14 @@ class WebfrapPeople_Controller extends Controller
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
 
-    $model = $this->loadModel( 'WebfrapPeople' );
+    $model = $this->loadModel('WebfrapPeople');
 
-    $view   = $this->tpl->loadView( 'WebfrapPeople_Ajax' );
-    $view->setModel($model );
+    $view   = $this->tpl->loadView('WebfrapPeople_Ajax');
+    $view->setModel($model);
 
-    $searchKey  = $request->param('key', Validator::TEXT );
+    $searchKey  = $request->param('key', Validator::TEXT);
 
-    $error = $view->displayAutocomplete($searchKey, $params );
+    $error = $view->displayAutocomplete($searchKey, $params);
 
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
     // ist der so schwer war, dass die View den Job abbrechen musste
@@ -131,7 +131,7 @@ class WebfrapPeople_Controller extends Controller
 
     // start position of the query and size of the table
     $params->start
-      = $request->param('start', Validator::INT );
+      = $request->param('start', Validator::INT);
 
     // stepsite for query (limit) and the table
     if (!$params->qsize = $request->param('qsize', Validator::INT))
@@ -139,7 +139,7 @@ class WebfrapPeople_Controller extends Controller
 
     // order for the multi display element
     $params->order
-      = $request->param('order', Validator::CNAME );
+      = $request->param('order', Validator::CNAME);
 
     // target for a callback function
     $params->target
@@ -150,7 +150,7 @@ class WebfrapPeople_Controller extends Controller
       = $request->param('target_id', Validator::CKEY  );
 
     // flag for beginning seach filter
-    if ($text = $request->param('begin', Validator::TEXT  ) ) {
+    if ($text = $request->param('begin', Validator::TEXT  )) {
       // whatever is comming... take the first char
       $params->begin = $text[0];
     }
@@ -158,7 +158,7 @@ class WebfrapPeople_Controller extends Controller
     // the model should add all inputs in the ajax request, not just the text
     // converts per default to false, thats ok here
     $params->fullLoad
-      = $request->param('full_load', Validator::BOOLEAN );
+      = $request->param('full_load', Validator::BOOLEAN);
 
     // keyname to tageting ui elements
     $params->keyName

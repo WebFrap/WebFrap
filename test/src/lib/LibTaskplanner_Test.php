@@ -180,4 +180,3 @@ class LibTaskplanner_Test extends LibTestUnit {
 		$this->assertEquals ( "31.12.2013 05:44:00", $result, $expectedResult );
 	}
 }
-

@@ -39,7 +39,7 @@ class WgtTreeMessage extends WgtTree
   /**
    * @param array $entry
    */
-  protected function buildTreeNode($entry )
+  protected function buildTreeNode($entry)
   {
 
     $title        = $entry['title'];

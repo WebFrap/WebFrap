@@ -42,46 +42,46 @@ class DaidalosAcl_Controller extends Controller
   /**
    *
    */
-  public function form($params = null )
+  public function form($params = null)
   {
 
-    $params = $this->getFlags($this->getRequest() );
+    $params = $this->getFlags($this->getRequest());
 
     $view   = $response->loadView('wgt-view-daidalos_acl-form', 'DaidalosAcl');
 
     $model  = $this->loadModel('DaidalosAcl');
 
-    $view->setModel($model );
-    $view->displayForm($params );
+    $view->setModel($model);
+    $view->displayForm($params);
 
   }//end public function form */
 
   /**
    *
    */
-  public function updateAcl($params = null )
+  public function updateAcl($params = null)
   {
 
-    $params = $this->getFlags($this->getRequest() );
+    $params = $this->getFlags($this->getRequest());
 
     $model  = $this->loadModel('DaidalosAcl');
-    $model->updateArea($this->getRequest() );
+    $model->updateArea($this->getRequest());
 
   }//end public function updateAcl */
 
   /**
    *
    */
-  public function deactivateAllUsers($params = null )
+  public function deactivateAllUsers($params = null)
   {
 
     $response = $this->getResponse();
-    $params   = $this->getFlags($this->getRequest() );
+    $params   = $this->getFlags($this->getRequest());
     $model    = $this->loadModel('DaidalosAcl');
 
     $model->dissableAllUsers();
 
-    $response->addMessage( 'Dissabled all Users' );
+    $response->addMessage('Dissabled all Users');
 
   }//end public function deactivateAllUsers */
 

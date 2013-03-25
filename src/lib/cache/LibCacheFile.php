@@ -40,13 +40,13 @@ class LibCacheFile extends LibCacheAdapter
    *
    * @param array
    */
-  public function __construct($conf )
+  public function __construct($conf)
   {
 
-    if (!isset($conf['folder']) ) {
+    if (!isset($conf['folder'])) {
       $conf['folder'] = PATH_GW.'cache/';
     }
-    if (!isset($conf['expire']) ) {
+    if (!isset($conf['expire'])) {
       $conf['expire'] = 240;
     }
 
@@ -65,7 +65,7 @@ class LibCacheFile extends LibCacheAdapter
   public function exists($key, $time = Cache::MEDIUM  )
   {
 
-    if ( isset($this->cache[$key] )    )
+    if (isset($this->cache[$key])    )
       return true;
 
     $fName = $this->folder.'/'.$key;
@@ -73,7 +73,7 @@ class LibCacheFile extends LibCacheAdapter
     if (!is_readable($fName)  )
       return false;
 
-    if ( is_file($fName) && filemtime($fName) < (time() - $time ) ) {
+    if (is_file($fName) && filemtime($fName) < (time() - $time)) {
       unlink($fName);
 
       return false;
@@ -88,7 +88,7 @@ class LibCacheFile extends LibCacheAdapter
    *
    * @return bool
    */
-  public function enoughFree( )
+  public function enoughFree()
   {
     return true;
 
@@ -103,7 +103,7 @@ class LibCacheFile extends LibCacheAdapter
    * @param int $offset
    * @return bool
    */
-  public function add($key,  $data )
+  public function add($key,  $data)
   {
 
     // zwischenspeichern
@@ -115,15 +115,15 @@ class LibCacheFile extends LibCacheAdapter
       if (!SFilesystem::createFolder($path)) {
         throw new LibCache_Exception
         (
-          I18n::s( 'Failed to create the cache Folder {@folder@}', 'wbf.message' , array( 'folder' => $key) )
+          I18n::s('Failed to create the cache Folder {@folder@}', 'wbf.message' , array('folder' => $key))
         );
       }
     }
 
-    if (!SFiles::writeCache($this->folder.'/'.$key,  $data ) ) {
+    if (!SFiles::writeCache($this->folder.'/'.$key,  $data)) {
       throw new LibCache_Exception
       (
-        I18n::s( 'Failed to write in the Cache {@folder@}', 'wbf.message' , array( 'folder' => $key) )
+        I18n::s('Failed to write in the Cache {@folder@}', 'wbf.message' , array('folder' => $key))
       );
     }
 
@@ -138,7 +138,7 @@ class LibCacheFile extends LibCacheAdapter
    * @return bool
 
    */
-  public function replace($key,  $data )
+  public function replace($key,  $data)
   {
     return $this->add($key,  $data);
   } // end public function replace */
@@ -150,16 +150,16 @@ class LibCacheFile extends LibCacheAdapter
    * @param string Area Die zu verwendente Subarea
    * @return string
    */
-  public function get($key, $time = Cache::MEDIUM )
+  public function get($key, $time = Cache::MEDIUM)
   {
 
-    if ( isset($this->cache[$key]) )
+    if (isset($this->cache[$key]))
       return $this->cache[$key];
 
     $fName = $this->folder.'/'.$key;
 
     // temporary
-    if ( is_file($fName) && filemtime($fName) < ( time() - $time ) ) {
+    if (is_file($fName) && filemtime($fName) < (time() - $time)) {
       unlink($fName);
 
       return null;
@@ -168,7 +168,7 @@ class LibCacheFile extends LibCacheAdapter
     if (!is_readable($fName)) {
       return null;
     } else {
-      $this->cache[$key] = SFiles::readCache ($fName );
+      $this->cache[$key] = SFiles::readCache ($fName);
 
       return $this->cache[$key];
     }
@@ -182,7 +182,7 @@ class LibCacheFile extends LibCacheAdapter
    * @param string Area Die zu verwendente Subarea
    * @return bool
    */
-  public function remove($key )
+  public function remove($key)
   {
     SFilesystem::delete($this->folder.'/'.$key);
   } // end public function remove */
@@ -192,9 +192,9 @@ class LibCacheFile extends LibCacheAdapter
    *
    * @return bool
    */
-  public function clean( )
+  public function clean()
   {
-    SFilesystem::cleanFolder($this->folder );
+    SFilesystem::cleanFolder($this->folder);
   } // end public function clean */
 
   /**
@@ -202,7 +202,7 @@ class LibCacheFile extends LibCacheAdapter
    * @param string $area Eine bestimmte Subarea cleanen
    * @return bool
    */
-  public function cleanSubarea($key )
+  public function cleanSubarea($key)
   {
     SFilesystem::cleanFolder($this->folder.'/'.$key);
   } // end public function cleanSubarea */

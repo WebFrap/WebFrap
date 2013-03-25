@@ -33,9 +33,9 @@ final class SParserString
    * @param array $arr
    * @return String
    */
-  public static function arrayToComSepStr($arr )
+  public static function arrayToComSepStr($arr)
   {
-    return implode( ', ', $arr );
+    return implode(', ', $arr);
 
   }//end public static function arrayToComSepStr */
 
@@ -47,7 +47,7 @@ final class SParserString
    * @param String $key
    * @return String
    */
-  public static function xmlToComSepStr($xml , $key )
+  public static function xmlToComSepStr($xml , $key)
   {
 
     $ret = '';
@@ -73,7 +73,7 @@ final class SParserString
    * @param array $data
    * @return string
    */
-  public static function arrayToArrayElements($data )
+  public static function arrayToArrayElements($data)
   {
 
     $output = '';
@@ -96,11 +96,11 @@ final class SParserString
    * @param array $data
    * @return string
    */
-  public static function prioArrayToString($data )
+  public static function prioArrayToString($data)
   {
     $output = '';
 
-    krsort($data );
+    krsort($data);
 
     foreach ($data as $tmp) {
       $output .= implode($tmp , NL  );
@@ -114,7 +114,7 @@ final class SParserString
    * @param string $str
    * @param boolean $firstSmall
    */
-  public static function subToCamelCase($str , $firstSmall = false )
+  public static function subToCamelCase($str , $firstSmall = false)
   {
 
     /*
@@ -127,24 +127,24 @@ final class SParserString
     }
     */
 
-    $tmp = explode( '_' , trim($str) );
+    $tmp = explode('_' , trim($str));
     $camelCase = '';
 
     foreach ($tmp as $case) {
       $camelCase .= ucfirst($case);
     }
 
-    $tmp2       = explode( '-' , trim($camelCase) );
+    $tmp2       = explode('-' , trim($camelCase));
     $camelCase2 = array();
 
     foreach ($tmp2 as $case2) {
       $camelCase2[] = ucfirst($case2);
     }
 
-    $camelCase = implode( '_', $camelCase2 );
+    $camelCase = implode('_', $camelCase2);
 
-    if ($firstSmall && isset($camelCase[0] ) )
-      $camelCase[0] = mb_strtolower($camelCase[0] );
+    if ($firstSmall && isset($camelCase[0]))
+      $camelCase[0] = mb_strtolower($camelCase[0]);
 
     return $camelCase;
 
@@ -157,18 +157,18 @@ final class SParserString
   public static function subToModule($str, $firstSmall = false  )
   {
 
-    if (!strpos($str, '_' ) ) {
+    if (!strpos($str, '_')) {
       if ($firstSmall) {
         return $str;
       } else {
-        return ucfirst($str );
+        return ucfirst($str);
       }
     }
 
-    $tmp = explode( '_' , trim($str ) );
-    $tmp = explode( '-' , trim($tmp[0] ) );
+    $tmp = explode('_' , trim($str));
+    $tmp = explode('-' , trim($tmp[0]));
 
-    if ($firstSmall )
+    if ($firstSmall)
       return array_shift($tmp);
     else
       return ucfirst(array_shift($tmp));
@@ -190,11 +190,11 @@ final class SParserString
       }
     }
 
-    $tmp = explode( '_' , trim($str) );
+    $tmp = explode('_' , trim($str));
 
     array_pop($tmp);
 
-    return str_replace( '-', '_', implode( '.', $tmp ) ) ;
+    return str_replace('-', '_', implode('.', $tmp)) ;
 
   }//end public static function subToPackage */
 
@@ -206,16 +206,16 @@ final class SParserString
    * @param string $str
    * @return string
    */
-  public static function subToUrl($str )
+  public static function subToUrl($str)
   {
 
     if (!strpos($str, '_')) {
       return ucfirst($str);
     }
 
-    $tmp   = explode( '_' , trim($str) );
+    $tmp   = explode('_' , trim($str));
 
-    $mod   = ucfirst( array_shift($tmp) ) ;
+    $mod   = ucfirst(array_shift($tmp)) ;
     $contr = '';
 
     foreach ($tmp as $node) {
@@ -231,14 +231,14 @@ final class SParserString
   /**
    *
    */
-  public static function subToName($str , $shift = false )
+  public static function subToName($str , $shift = false)
   {
 
-    $tmp = explode( '_' , trim($str) );
+    $tmp = explode('_' , trim($str));
 
     if ($shift) {
       // shift only if there are more than one parts
-      if (count($tmp > 1 ) )
+      if (count($tmp > 1))
         array_shift($tmp);
     } elseif ($tmp[0] == 'id') {
       array_shift($tmp);
@@ -249,17 +249,17 @@ final class SParserString
     foreach($tmp as $node)
       $tmp2[] = ucfirst($node);
 
-    return implode( ' ' , $tmp2  ) ;
+    return implode(' ' , $tmp2  ) ;
 
   }//end public static function subToName */
 
   /**
    *
    */
-  public static function ucAll($parts )
+  public static function ucAll($parts)
   {
 
-    if (!is_array($parts) ) {
+    if (!is_array($parts)) {
       $parts = explode(' ',$parts);
     }
 
@@ -268,21 +268,21 @@ final class SParserString
     foreach($parts as $node)
       $tmp2[] = ucfirst($node);
 
-    return implode( ' ' , $tmp2  ) ;
+    return implode(' ' , $tmp2  ) ;
 
   }//end public static function ucAll */
 
   /**
    *
    */
-  public static function subBody($subString )
+  public static function subBody($subString)
   {
 
-    $tmp = explode( '_' , trim($subString) );
+    $tmp = explode('_' , trim($subString));
 
     array_shift($tmp);
 
-    return str_replace( '-', '_', implode( '_' , $tmp  ) );
+    return str_replace('-', '_', implode('_' , $tmp  ));
 
   }//end public static function subBody */
 
@@ -290,13 +290,13 @@ final class SParserString
    * @param string $code
    * @param int $idention
    */
-  public static function setIndentinon($code, $idention )
+  public static function setIndentinon($code, $idention)
   {
 
-    $lines     = explode( NL, $code );
+    $lines     = explode(NL, $code);
     $indLines  = array();
 
-    $ident     = str_repeat( '  ', $idention );
+    $ident     = str_repeat('  ', $idention);
 
     $newCode   = '';
 
@@ -304,7 +304,7 @@ final class SParserString
       $indLines[] = $ident.$line;
     }
 
-    return implode( NL, $indLines );
+    return implode(NL, $indLines);
 
   }//end public static function setIndentinon */
 
@@ -313,10 +313,10 @@ final class SParserString
    * @param string $delimiter
    * @param string $backdelimiter
    */
-  public static function getStringgBody($subString , $delimiter = '_' , $backdelimiter = '_' )
+  public static function getStringgBody($subString , $delimiter = '_' , $backdelimiter = '_')
   {
 
-    $tmp = explode($delimiter , trim($subString) );
+    $tmp = explode($delimiter , trim($subString));
 
     array_shift($tmp);
 
@@ -330,10 +330,10 @@ final class SParserString
    * @param string $delimiter
    * @return mixed
    */
-  public static function getStringHead($subString , $delimiter = '_' )
+  public static function getStringHead($subString , $delimiter = '_')
   {
 
-    $tmp = explode($delimiter , trim($subString) );
+    $tmp = explode($delimiter , trim($subString));
 
     return array_shift($tmp);
 
@@ -344,7 +344,7 @@ final class SParserString
    * @param string $name
    * @return string
    */
-  public static function nameToAccessKey($name )
+  public static function nameToAccessKey($name)
   {
     $clean = array
     (
@@ -391,7 +391,7 @@ final class SParserString
       $length = mb_strlen($className);
 
       for ($pos = 1 ; $pos < $length  ; ++$pos) {
-        if ( ctype_upper($className[$pos]) ) {
+        if (ctype_upper($className[$pos])) {
           $package .= mb_strtolower(substr($className, $start, $end  )).'_' ;
           $start += $end;
           $end = 0;
@@ -401,7 +401,7 @@ final class SParserString
 
       $package .= mb_strtolower(substr($className, $start, $end  ));
 
-      if ( isset($package[mb_strlen($package)]) && $package[mb_strlen($package)] == '_' ) {
+      if (isset($package[mb_strlen($package)]) && $package[mb_strlen($package)] == '_') {
         $package = substr($package,0,-1);
       }
 
@@ -422,7 +422,7 @@ final class SParserString
     $length = mb_strlen($className);
 
     for ($pos = 1 ; $pos < $length  ; ++$pos) {
-      if (ctype_upper($className[$pos]) ) {
+      if (ctype_upper($className[$pos])) {
         $package .= mb_strtolower(substr($className, $start, $end  )).'.' ;
         $start += $end;
         $end = 0;
@@ -432,7 +432,7 @@ final class SParserString
 
     $package .= mb_strtolower(substr($className, $start, $end  ));
 
-    if ($package[mb_strlen($package)] == '.' )
+    if ($package[mb_strlen($package)] == '.')
       $package = substr($package,0,-1);
 
     return $package;
@@ -452,17 +452,17 @@ final class SParserString
     $length = mb_strlen($className);
 
     for ($pos = 1 ; $pos < $length  ; ++$pos) {
-      if (ctype_upper($className[$pos]) ) {
-        $package .= substr($className, $start, $end ).' ' ;
+      if (ctype_upper($className[$pos])) {
+        $package .= substr($className, $start, $end).' ' ;
         $start += $end;
         $end = 0;
       }
       ++$end;
     }
 
-    $package .= substr($className, $start, $end );
+    $package .= substr($className, $start, $end);
 
-    if ($package[mb_strlen($package)] == '.' )
+    if ($package[mb_strlen($package)] == '.')
       $package = substr($package,0,-1);
 
     return $package;
@@ -475,7 +475,7 @@ final class SParserString
    * @return String
    *
    */
-  public static function getClassPath($className , $full = true )
+  public static function getClassPath($className , $full = true)
   {
 
     $level = 0;
@@ -486,8 +486,8 @@ final class SParserString
     $length = mb_strlen($className);
 
     for ($pos = 1 ; $pos < $length  ; ++$pos) {
-      if (ctype_upper($className[$pos]) ) {
-        $package .= mb_strtolower( str_replace( '_', '', substr($className, $start, $end  ) ) ).'/' ;
+      if (ctype_upper($className[$pos])) {
+        $package .= mb_strtolower(str_replace('_', '', substr($className, $start, $end  ))).'/' ;
         $start += $end;
         $end = 0;
         ++$level;
@@ -541,7 +541,7 @@ final class SParserString
    * @return String
    *
    */
-  public static function getFirstHump($className )
+  public static function getFirstHump($className)
   {
     $end   = 1;
 
@@ -550,7 +550,7 @@ final class SParserString
     $length = mb_strlen($className);
 
     for ($pos = 1 ; $pos < $length  ; ++$pos) {
-      if (ctype_upper($className[$pos]) ) {
+      if (ctype_upper($className[$pos])) {
         $hump = substr($className, 0, $end  );
         break;
       }
@@ -565,7 +565,7 @@ final class SParserString
    * @return String
    *
    */
-  public static function getBodyHumps($className )
+  public static function getBodyHumps($className)
   {
 
     $end   = 1;
@@ -576,8 +576,8 @@ final class SParserString
 
     for ($pos = 1 ; $pos < $length  ; ++$pos) {
 
-      if (ctype_upper($className[$pos]) ) {
-        $hump = substr($className, -($length-$end) );
+      if (ctype_upper($className[$pos])) {
+        $hump = substr($className, -($length-$end));
         break;
       }
       ++$end;
@@ -591,7 +591,7 @@ final class SParserString
    * @return String
    *
    */
-  public static function getJsClassPath($className , $full = true )
+  public static function getJsClassPath($className , $full = true)
   {
     $level = 0;
     $start = 0;
@@ -601,20 +601,20 @@ final class SParserString
     $length = mb_strlen($className);
 
     for ($pos = 1 ; $pos < $length  ; ++$pos) {
-      if (ctype_upper($className[$pos]) ) {
+      if (ctype_upper($className[$pos])) {
 
         $package .= mb_strtolower(substr($className, $start, $end  )).'/' ;
         $start += $end;
         $end = 0;
         ++$level;
 
-        if ($level == Webfrap::MAX_PACKAGE_LEVEL )
+        if ($level == Webfrap::MAX_PACKAGE_LEVEL)
           break;
       }
       ++$end;
     }
 
-    if ($full )
+    if ($full)
       $classPath = $package.$className.'.js';
     else
       $classPath = $package;
@@ -636,7 +636,7 @@ final class SParserString
 
     $folder = PATH_GW.'i18n/'.$lPackage.'/'.$lang.'/' ;
 
-    $folders = explode( '.' , $name );
+    $folders = explode('.' , $name);
     array_pop($folders); // last element away
 
     $fileName = array_pop($folders); // get the filename
@@ -667,7 +667,7 @@ final class SParserString
     $length = mb_strlen($eventName);
 
     for ($pos = 1 ; $pos < $length  ; ++$pos) {
-      if ( ctype_upper($eventName[$pos]) ) {
+      if (ctype_upper($eventName[$pos])) {
         $package .= mb_strtolower(substr($eventName, $start, $end  )).'/' ;
         $start += $end;
         $end = 0;
@@ -691,17 +691,17 @@ final class SParserString
    * @param boolean $withFile
    * @return unknown
    */
-  public static function geti18nBasePath($name , $withFile = true )
+  public static function geti18nBasePath($name , $withFile = true)
   {
 
     $folder = '/' ;
 
-    $folders = explode( '.' , $name );
+    $folders = explode('.' , $name);
     //array_pop($folders); // last element away
 
     $fileName = array_pop($folders); // get the filename
 
-    $folder .= implode( '/', $folders ).'/';
+    $folder .= implode('/', $folders).'/';
 
     /*foreach ($folders as $subFolder) {
       $folder .= $subFolder."/";
@@ -722,10 +722,10 @@ final class SParserString
    * @param unknown_type $withFile
    * @return unknown
    */
-  public static function geti18nModname($name , $lower = false )
+  public static function geti18nModname($name , $lower = false)
   {
 
-    $tmp = explode( '.' , $name , 2 );
+    $tmp = explode('.' , $name , 2);
 
     if ($lower) {
       // should be lower case, but you never know
@@ -740,11 +740,11 @@ final class SParserString
    * @return String
    *
    */
-  public static function getModname($name , $lower = false )
+  public static function getModname($name , $lower = false)
   {
 
-    $tmp = explode( '_' , $name , 2 );
-    $tmp = explode( '-' , $tmp[0] , 2 );
+    $tmp = explode('_' , $name , 2);
+    $tmp = explode('-' , $tmp[0] , 2);
 
     if ($lower) {
       // should be lower case, but you never know
@@ -760,11 +760,11 @@ final class SParserString
    * @param boolean $lower
    * @return String
    */
-  public static function getDomainName($name , $lower = false )
+  public static function getDomainName($name , $lower = false)
   {
 
-    $tmp = explode( '_' , $name , 2 );
-    $tmp = explode( '-', $tmp[0], 2 );
+    $tmp = explode('_' , $name , 2);
+    $tmp = explode('-', $tmp[0], 2);
 
     if ($lower) {
       // should be lower case, but you never know
@@ -781,7 +781,7 @@ final class SParserString
    * @param unknown_type $filename
    * @return unknown
    */
-  public static function getFileFolder($filename )
+  public static function getFileFolder($filename)
   {
     return mb_substr($filename , 0 , strrpos($filename,'/')+1);
   }//end public static function getFileFolder */
@@ -792,18 +792,18 @@ final class SParserString
    * @param unknown_type $filename
    * @return unknown
    */
-  public static function shiftXTokens($string, $delimiter, $x )
+  public static function shiftXTokens($string, $delimiter, $x)
   {
 
-    if ( (int) $x < 0 )
+    if ((int) $x < 0)
       $x = -1*(int) $x;
 
-    if (!$x )
+    if (!$x)
       return $string;
 
     $tmp = explode($delimiter, $string);
 
-    if (count($tmp) <= $x )
+    if (count($tmp) <= $x)
       return '';
 
     while ($x) {
@@ -821,7 +821,7 @@ final class SParserString
    * @param unknown_type $filename
    * @return unknown
    */
-  public static function getPathFileName($filename )
+  public static function getPathFileName($filename)
   {
     return mb_substr($filename , strrpos($filename,'/')+1  );
   }//end public static function getFileFolder */
@@ -832,7 +832,7 @@ final class SParserString
    * @param string $filename
    * @return string
    */
-  public static function removeFirstSub($filename )
+  public static function removeFirstSub($filename)
   {
     return mb_substr($filename, (stripos($filename,'_')+1)  );
   }//end public static function removeFirstSub */
@@ -841,11 +841,11 @@ final class SParserString
    * @param string
    * @return String
    */
-  public static function getFirstSub($key )
+  public static function getFirstSub($key)
   {
 
-    $tmp = explode( '_' , $key , 2 );
-    $tmp = explode( '-', $tmp[0], 2 );
+    $tmp = explode('_' , $key , 2);
+    $tmp = explode('-', $tmp[0], 2);
 
     return $tmp[0];
 
@@ -857,9 +857,9 @@ final class SParserString
    * @param string $string
    * @return unknown
    */
-  public static function toCname($string )
+  public static function toCname($string)
   {
-    return str_replace( array('-'," ") , array('_','_') ,(string) $string );
+    return str_replace(array('-'," ") , array('_','_') ,(string) $string);
 
   }//end public static function getFileFolder */
 
@@ -871,17 +871,17 @@ final class SParserString
    * @param string $append
    * @return string
    */
-  public static function shortLabel($string, $size = 35, $append = '...', $reverse = false )
+  public static function shortLabel($string, $size = 35, $append = '...', $reverse = false)
   {
     $length = mb_strlen($string);
 
-    if ($length <= $size )
+    if ($length <= $size)
       return $string;
 
     if ($reverse) {
-      return $append.mb_substr($string, (-1*($size - $length)), $length, 'utf-8' );
+      return $append.mb_substr($string, (-1*($size - $length)), $length, 'utf-8');
     } else {
-      return mb_substr($string, 0, $size, 'utf-8' ).$append;
+      return mb_substr($string, 0, $size, 'utf-8').$append;
     }
 
   }//end public static function shortLabel */
@@ -892,9 +892,9 @@ final class SParserString
    * @param unknown_type $filename
    * @return unknown
    */
-  public static function removeAllWhitespace($string )
+  public static function removeAllWhitespace($string)
   {
-    return str_replace( array(' ',"\n","\r") , array('','','') ,$string );
+    return str_replace(array(' ',"\n","\r") , array('','','') ,$string);
 
   }//end public static function getFileFolder */
 
@@ -942,13 +942,13 @@ final class SParserString
    * @param String $data
    * @return array
    */
-  public static function seperatedToKeyArray($data , $seperator )
+  public static function seperatedToKeyArray($data , $seperator)
   {
 
     $tmp = explode($seperator,$data);
 
     $data = array();
-    for ($nam = 0 ; $nam < count($tmp) ; ++$nam ) {
+    for ($nam = 0 ; $nam < count($tmp) ; ++$nam) {
       $data[$tmp[$nam]] = $tmp[++$nam];
     }
 
@@ -962,7 +962,7 @@ final class SParserString
    * @param string $data
    * @return string
    */
-  public static function lcfirst($data )
+  public static function lcfirst($data)
   {
 
     $data = (string) $data;
@@ -981,18 +981,18 @@ final class SParserString
    * @return array
    *
    */
-  public static function splitFilename($filename )
+  public static function splitFilename($filename)
   {
 
-    if (!$pos = strrpos($filename , '/' ) ) {
+    if (!$pos = strrpos($filename , '/')) {
       $back['folder'] = '';
       $back['file'] = $filename;
 
       return $back;
     }
 
-    $back['folder']  = substr($filename , 0 ,  $pos );
-    $back['file']  = substr($filename , ($pos+1) );
+    $back['folder']  = substr($filename , 0 ,  $pos);
+    $back['file']  = substr($filename , ($pos+1));
 
     return $back;
 
@@ -1002,7 +1002,7 @@ final class SParserString
    * @param string $filfile
    * @return string
    */
-  public static function replaceRootFolder($file )
+  public static function replaceRootFolder($file)
   {
 
     $search = array('{$PATH_FW}','{$PATH_GW}');
@@ -1018,16 +1018,16 @@ final class SParserString
    *
    * @return array
    */
-  public static function split($seperators, $string )
+  public static function split($seperators, $string)
   {
 
-    $tmp = array($string );
+    $tmp = array($string);
 
     foreach ($seperators as $sep) {
       $tmp2 = array();
 
       foreach ($tmp as $part) {
-        $tmp3 = explode($sep, $part );
+        $tmp3 = explode($sep, $part);
         $tmp2 = array_merge($tmp2,$tmp3);
       }
 
@@ -1042,14 +1042,14 @@ final class SParserString
    * @param string $file
    * @return string
    */
-  public static function getClassNameFromPath($file )
+  public static function getClassNameFromPath($file)
   {
 
-    $tmp = explode( '/', $file );
+    $tmp = explode('/', $file);
 
     $filename = array_pop($tmp);
 
-    $tmp = explode( '.', $filename );
+    $tmp = explode('.', $filename);
     array_pop($tmp);
 
     // ein klassenname kann keine punkte enthalten
@@ -1059,7 +1059,7 @@ final class SParserString
 
   /**
    */
-  public static function definedUuid($key )
+  public static function definedUuid($key)
   {
 
     $tmp = md5($key);

@@ -35,7 +35,7 @@ class WebfrapDocu_Edit_Modal_View extends WgtModal
  /**
   * @param WbfsysDocuPage $helpPage
   */
-  public function displayForm($helpPage )
+  public function displayForm($helpPage)
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -50,16 +50,16 @@ class WebfrapDocu_Edit_Modal_View extends WgtModal
     );
 
     // set the window title
-    $this->setTitle($i18nText );
+    $this->setTitle($i18nText);
 
     // set the window status text
-    $this->setStatus($i18nText );
+    $this->setStatus($i18nText);
 
     // set the from template
-    $this->addVar( 'entity' , $helpPage );
-    $this->setTemplate( 'webfrap/docu/modal/edit', true );
+    $this->addVar('entity' , $helpPage);
+    $this->setTemplate('webfrap/docu/modal/edit', true);
 
-    $this->addActions($helpPage );
+    $this->addActions($helpPage);
 
     // kein fehler aufgetreten
     return null;
@@ -81,7 +81,7 @@ class WebfrapDocu_Edit_Modal_View extends WgtModal
    *   string formId: the id of the form;
    * }
    */
-  public function addActions($helpPage )
+  public function addActions($helpPage)
   {
 
     // add the button actions for create in the window
@@ -95,7 +95,7 @@ class WebfrapDocu_Edit_Modal_View extends WgtModal
     });
 
     self.find(".wgtac_save_a_close").click(function(){
-      \$R.form( 'wgt-form-webfrap-docu-{$helpPage->access_key}-edit', null, { success:function(){
+      \$R.form('wgt-form-webfrap-docu-{$helpPage->access_key}-edit', null, { success:function(){
         \$S.modal.close();
         \$R.get('modal.php?c=Webfrap.Docu.open&key={$helpPage->access_key}');
       }});
@@ -104,7 +104,7 @@ class WebfrapDocu_Edit_Modal_View extends WgtModal
 
 BUTTONJS;
 
-    $this->addJsCode($code );
+    $this->addJsCode($code);
 
   }//end public function addActions */
 

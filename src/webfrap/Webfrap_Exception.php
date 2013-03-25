@@ -77,13 +77,13 @@ CODE;
       $table .= '<td>'.$file.'</td>';
       $table .= '<td>'.$line.'</td>';
 
-      if (!isset($value['class']) ) {
+      if (!isset($value['class'])) {
         $table .= '<td>'.$value['function'].'</td>';
       } else {
         $table .= '<td>'.$value['class'].$value['type'].$value['function'].'</td>';
       }
 
-      if (!isset($value['args']) ) {
+      if (!isset($value['args'])) {
         $table .= '<td></td>';
       } else {
         $table .= '<td>
@@ -105,11 +105,11 @@ CODE;
           $table .='<td>'.$numArg.'</td>';
           $table .='<td>'.$type.'</td>';
 
-          if ( is_scalar($argValue) ) {
+          if (is_scalar($argValue)) {
             $table .='<td>'.$argValue.'</td>';
-          } elseif ( is_array($argValue) ) {
+          } elseif (is_array($argValue)) {
             $table .='<td>size:'.count($argValue).'</td>';
-          } elseif ( is_object($argValue) ) {
+          } elseif (is_object($argValue)) {
             $table .='<td>class: '.get_class($argValue).'</td>';
           } else {
             $table .='<td></td>';
@@ -135,8 +135,8 @@ CODE;
   public function __toString()
   {
 
-    if ( DEBUG )
-      return Debug::dumpToString($this );
+    if (DEBUG)
+      return Debug::dumpToString($this);
     else
       return $this->message;
 

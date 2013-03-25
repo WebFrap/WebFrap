@@ -43,7 +43,7 @@ class WgtDashboardMenu extends WgtElement
    *        )
    *      )
    *    )
-   * )
+   *)
    *
    * @var array
    */

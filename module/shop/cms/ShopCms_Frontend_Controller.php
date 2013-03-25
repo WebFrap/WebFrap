@@ -54,8 +54,8 @@ class ShopCms_Frontend_Controller extends ControllerFrontend
   (
     'page' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'html' )
+      'method'    => array('GET'),
+      'views'      => array('html')
     ),
   );
 
@@ -66,34 +66,34 @@ class ShopCms_Frontend_Controller extends ControllerFrontend
   /**
    * @return void
    */
-  public function service_page( )
+  public function service_page()
   {
 
     $view     = $this->getView();
     $request  = $this->getRequest();
 
     /* @var $model ShopFront_Model */
-    $baseModel = $this->loadModel( 'ShopFront' );
+    $baseModel = $this->loadModel('ShopFront');
 
-    $storeId = $request->param('store', Validator::EID );
+    $storeId = $request->param('store', Validator::EID);
 
-    if ($storeId )
-      $baseModel->setStoreId($storeId );
+    if ($storeId)
+      $baseModel->setStoreId($storeId);
     else
       $storeId = $baseModel->getDefStoreId();
 
-    $pageKey = $request->param('page', Validator::CKEY ) ;
+    $pageKey = $request->param('page', Validator::CKEY) ;
 
-    $model = $this->getCmsModel( );
+    $model = $this->getCmsModel();
 
-    $body = new ShopCms_Page_Body($this->getView() );
+    $body = new ShopCms_Page_Body($this->getView());
     $body->pageKey = $pageKey;
-    $body->setModel($model );
+    $body->setModel($model);
 
     $frontend = new ShopFront_Frontend();
-    $frontend->setModel($baseModel );
+    $frontend->setModel($baseModel);
 
-    $frontend->render($view, $body );
+    $frontend->render($view, $body);
 
   }//end public function service_page */
 
@@ -102,7 +102,7 @@ class ShopCms_Frontend_Controller extends ControllerFrontend
    */
   public function getCmsModel()
   {
-    return $this->loadModel( 'ShopCms_Frontend' );
+    return $this->loadModel('ShopCms_Frontend');
   }//end public function getCmsModel */
 
 }//end class ShopFront_Controller

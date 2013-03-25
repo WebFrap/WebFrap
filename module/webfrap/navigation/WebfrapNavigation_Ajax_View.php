@@ -32,11 +32,11 @@ class WebfrapNavigation_Ajax_View extends LibTemplatePlain
    * @param string $key
    * @param TArray $params
    */
-  public function displayAutocomplete($key, $params )
+  public function displayAutocomplete($key, $params)
   {
 
     $view = $this->getTplEngine();
-    $view->setRawJsonData($this->model->searchEntriesAutocomplete($key, $params ) );
+    $view->setRawJsonData($this->model->searchEntriesAutocomplete($key, $params));
 
   }//end public function displayAutocomplete */
 
@@ -45,7 +45,7 @@ class WebfrapNavigation_Ajax_View extends LibTemplatePlain
    * @param LibSqlQuery $data
    * @param TArray $params
    */
-  public function displayNavlist($key, $data, $params )
+  public function displayNavlist($key, $data, $params)
   {
 
   }//end public function displayNavlist */

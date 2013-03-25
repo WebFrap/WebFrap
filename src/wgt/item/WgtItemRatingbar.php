@@ -31,16 +31,16 @@ class WgtItemRatingbar extends WgtAbstract
   /**
    *
    */
-  public function __construct($name = null )
+  public function __construct($name = null)
   {
     parent::__construct($name);
-  }//end public function __construct($name = null )
+  }//end public function __construct($name = null)
 
 /*//////////////////////////////////////////////////////////////////////////////
 // getter and Setter
 //////////////////////////////////////////////////////////////////////////////*/
 
-  public function setContent($data )
+  public function setContent($data)
   {
 
   }

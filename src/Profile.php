@@ -87,7 +87,7 @@ class Profile extends Base
   /**
    * @return string
    */
-  public function getKey(  )
+  public function getKey()
   {
     return strtolower($this->key);
   }//end public function getKey */
@@ -95,7 +95,7 @@ class Profile extends Base
   /**
    * @param string $mainMenuName
    */
-  public function setMainMenuName($mainMenuName )
+  public function setMainMenuName($mainMenuName)
   {
     $this->mainMenuName = $mainMenuName;
   }//end public function setMainMenuName */
@@ -103,7 +103,7 @@ class Profile extends Base
   /**
    * @param string $desktopName
    */
-  public function setDesktopMenuName($desktopName )
+  public function setDesktopMenuName($desktopName)
   {
     $this->desktopName = $desktopName ;
   }//end public function setDesktopMenuName */
@@ -111,7 +111,7 @@ class Profile extends Base
   /**
    * @param string $navigationName
    */
-  public function setNavigationName($navigationName )
+  public function setNavigationName($navigationName)
   {
     $this->navigationName = $navigationName ;
   }//end public function setNavigationName */
@@ -119,7 +119,7 @@ class Profile extends Base
   /**
    * @param string $menuBar
    */
-  public function setPanelName($panelName )
+  public function setPanelName($panelName)
   {
     $this->panelName = $panelName ;
   }//end public function setPanelName */
@@ -133,7 +133,7 @@ class Profile extends Base
     if (!$this->mainMenu) {
       $className = 'WgtDesktopMainmenu'.$this->mainMenuName;
 
-      if ( Webfrap::classLoadable($className ) ) {
+      if (Webfrap::classLoadable($className)) {
         $this->mainMenu = new $className();
       } else {
         $this->mainMenu = new WgtDesktopMainmenuDefault();
@@ -153,7 +153,7 @@ class Profile extends Base
     if (!$this->desktop) {
       $className = 'WgtDesktop'.$this->desktopName;
 
-      if ( Webfrap::classLoadable($className ) ) {
+      if (Webfrap::classLoadable($className)) {
         $this->desktop = new $className();
       } else {
         $this->desktop = new WgtDesktopDefault();
@@ -174,7 +174,7 @@ class Profile extends Base
     if (!$this->navigation) {
       $className = 'WgtDesktopNavigation'.$this->navigationName;
 
-      if ( Webfrap::classLoadable($className ) ) {
+      if (Webfrap::classLoadable($className)) {
         $this->navigation = new $className();
       } else {
         $this->navigation = new WgtDesktopNavigationDefault();
@@ -195,7 +195,7 @@ class Profile extends Base
     if (!$this->panel) {
       $className = 'WgtDesktopPanel'.$this->panelName;
 
-      if ( Webfrap::classLoadable($className ) ) {
+      if (Webfrap::classLoadable($className)) {
         $this->panel = new $className();
       } else {
         $this->panel = new WgtDesktopPanelDefault();

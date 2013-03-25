@@ -41,7 +41,7 @@ class LibEncodeDummy
   /**
    * @param string $pwd
    */
-  public function encode($string )
+  public function encode($string)
   {
     return $string;
   }//end public static function encode */
@@ -50,9 +50,9 @@ class LibEncodeDummy
    * check for hidden redirects in the url
    * @return void
    */
-  public function i18n($key, $repo, $data = array() )
+  public function i18n($key, $repo, $data = array())
   {
-    return $this->i18n->l($key, $repo, $data );
+    return $this->i18n->l($key, $repo, $data);
 
   }//end function function i18n */
 

@@ -33,7 +33,7 @@ class MyTask_Table_Maintab_Menu extends WgtDropmenu
    *    die aktuelle maske
    * }
    */
-  public function buildMenu($params )
+  public function buildMenu($params)
   {
 
     $iconMenu         = $this->view->icon('control/menu.png'      ,'Menu');
@@ -47,12 +47,12 @@ class MyTask_Table_Maintab_Menu extends WgtDropmenu
 
     // prüfen ob die person zugriff auf die wartungsmenüs hat
     if ($params->access->maintenance) {
-      $entries->maintenance  = $this->entriesMaintenance($params );
+      $entries->maintenance  = $this->entriesMaintenance($params);
     }
 
     // um rechte vergeben zu können werde selbst administrative rechte benötigt
 
-    $entries->support  = $this->entriesSupport($params );
+    $entries->support  = $this->entriesSupport($params);
 
     // prüfen ob der aktuelle benutzer überhaupt neue einträge anlegen darf
     if ($params->access->insert) {
@@ -92,7 +92,7 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesMaintenance($params )
+  protected function entriesMaintenance($params)
   {
 
     $iconMaintenance    = $this->view->icon('control/maintenance.png'      ,'Maintenance');
@@ -102,13 +102,13 @@ HTML;
     $html = <<<HTML
 
   <li>
-    <p>{$iconMaintenance} {$this->view->i18n->l( 'Maintenance', 'wbf.label' )}</p>
+    <p>{$iconMaintenance} {$this->view->i18n->l('Maintenance', 'wbf.label')}</p>
     <ul>
       <li>
-        <a class="wcm wcm_req_ajax" href="modal.php?c=Project.Project_Maintenance.protocolEntity" >{$iconProtocol} {$this->view->i18n->l( 'Protocol', 'wbf.label' )}</a>
+        <a class="wcm wcm_req_ajax" href="modal.php?c=Project.Project_Maintenance.protocolEntity" >{$iconProtocol} {$this->view->i18n->l('Protocol', 'wbf.label')}</a>
       </li>
       <li>
-        <a class="wcm wcm_req_ajax" href="modal.php?c=Project.Project_Maintenance.statsEntity" >{$iconStats} {$this->view->i18n->l( 'Stats', 'wbf.label' )}</a>
+        <a class="wcm wcm_req_ajax" href="modal.php?c=Project.Project_Maintenance.statsEntity" >{$iconStats} {$this->view->i18n->l('Stats', 'wbf.label')}</a>
       </li>
     </ul>
   </li>
@@ -123,7 +123,7 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport($params )
+  protected function entriesSupport($params)
   {
 
     $iconSupport         = $this->view->icon('control/support.png'      ,'Support');

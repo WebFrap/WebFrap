@@ -84,7 +84,7 @@ class ContextExport extends Context
   /**
    * @param LibRequestHttp $request
    */
-  public function __construct($request = null )
+  public function __construct($request = null)
   {
 
     if ($request)
@@ -99,7 +99,7 @@ class ContextExport extends Context
    * @param string $key
    * @param string $value
    */
-  public function __set($key , $value )
+  public function __set($key , $value)
   {
     $this->content[$key] = $value;
   }// end public function __set */
@@ -111,7 +111,7 @@ class ContextExport extends Context
    * @param string $key
    * @return string
    */
-  public function __get($key )
+  public function __get($key)
   {
     return isset($this->content[$key])
       ? $this->content[$key]
@@ -128,7 +128,7 @@ class ContextExport extends Context
 
     $this->filter = new TFlag();
 
-    $filters = $request->param('filter', Validator::BOOLEAN );
+    $filters = $request->param('filter', Validator::BOOLEAN);
 
     if ($filters) {
       foreach ($filters as $key => $value) {
@@ -158,14 +158,14 @@ class ContextExport extends Context
 
       // start position of the query and size of the table
     $this->offset
-      = $request->param('offset', Validator::INT );
+      = $request->param('offset', Validator::INT);
 
     // start position of the query and size of the table
     $this->start
-      = $request->param('start', Validator::INT );
+      = $request->param('start', Validator::INT);
 
     if ($this->offset) {
-      if (!$this->start )
+      if (!$this->start)
         $this->start = $this->offset;
     }
 
@@ -175,10 +175,10 @@ class ContextExport extends Context
 
     // order for the multi display element
     $this->order
-      = $request->param('order', Validator::CNAME );
+      = $request->param('order', Validator::CNAME);
 
     // flag for beginning seach filter
-    if ($text = $request->param('begin', Validator::TEXT  ) ) {
+    if ($text = $request->param('begin', Validator::TEXT  )) {
       // whatever is comming... take the first char
       $this->begin = $text[0];
     }
@@ -195,25 +195,25 @@ class ContextExport extends Context
   public function toUrlExt()
   {
 
-    if ($this->urlExt )
+    if ($this->urlExt)
       return $this->urlExt;
 
-    if ($this->aclRoot )
+    if ($this->aclRoot)
       $this->urlExt .= '&amp;a_root='.$this->aclRoot;
 
-    if ($this->aclRootId )
+    if ($this->aclRootId)
       $this->urlExt .= '&amp;a_root_id='.$this->aclRootId;
 
-    if ($this->aclKey )
+    if ($this->aclKey)
       $this->urlExt .= '&amp;a_key='.$this->aclKey;
 
-    if ($this->aclNode )
+    if ($this->aclNode)
       $this->urlExt .= '&amp;a_node='.$this->aclNode;
 
-    if ($this->aclLevel )
+    if ($this->aclLevel)
       $this->urlExt .= '&amp;a_level='.$this->aclLevel;
 
-    if ($this->dKey )
+    if ($this->dKey)
       $this->urlExt .= '&amp;dkey='.$this->dKey;
 
     return $this->urlExt;
@@ -226,22 +226,22 @@ class ContextExport extends Context
   public function toActionExt()
   {
 
-    if ($this->actionExt )
+    if ($this->actionExt)
       return $this->actionExt;
 
-    if ($this->aclRoot )
+    if ($this->aclRoot)
       $this->actionExt .= '&a_root='.$this->aclRoot;
 
-    if ($this->aclRootId )
+    if ($this->aclRootId)
       $this->actionExt .= '&a_root_id='.$this->aclRootId;
 
-    if ($this->aclKey )
+    if ($this->aclKey)
       $this->actionExt .= '&a_key='.$this->aclKey;
 
-    if ($this->aclNode )
+    if ($this->aclNode)
       $this->actionExt .= '&a_node='.$this->aclNode;
 
-    if ($this->aclLevel )
+    if ($this->aclLevel)
       $this->actionExt .= '&a_level='.$this->aclLevel;
 
     return $this->actionExt;
@@ -256,19 +256,19 @@ class ContextExport extends Context
    *
    *   @example
    *   <code>
-   *   if ($params->existingButNull )
+   *   if ($params->existingButNull)
    *     echo "will not be reached when key exists but ist null" // false;
    *
-   *   if ($params->exists('existingButNull') )
+   *   if ($params->exists('existingButNull'))
    *      echo "will be reached when key exists but ist null" // true;
    *
    *   </code>
    * }
    * @param string $key
    */
-  public function exists($key )
+  public function exists($key)
   {
-    return array_key_exists($key , $this->content );
+    return array_key_exists($key , $this->content);
   }//end public function exists */
 
 } // end class TFlagListing

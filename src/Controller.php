@@ -73,7 +73,7 @@ abstract class Controller extends BaseChild
   protected $initialized  = false;
 
   /**
-   * Alle Methoden welche direkt über ein CallTripple ( c=Simple.Example.helloWorld)
+   * Alle Methoden welche direkt über ein CallTripple (c=Simple.Example.helloWorld)
    * angesprochen werden können, müssen hier lowercase! im array angegeben werden.
    *
    * Klappt nicht?
@@ -121,14 +121,14 @@ abstract class Controller extends BaseChild
    * (
    *   'helloworld' => array
    *   (
-   *     'method'    => array( 'GET', 'POST'),
+   *     'method'    => array('GET', 'POST'),
    *     'interface' => array
    *     (
    *        'GET' => array
    *       (
    *         'param' => array
    *          (
-   *           'name' => array( 'type' => 'string', 'semantic' => 'The Name of the Whatever', 'required' => true, 'default' => 'true'),
+   *           'name' => array('type' => 'string', 'semantic' => 'The Name of the Whatever', 'required' => true, 'default' => 'true'),
    *          ),
    *       )
    *       'POST' => array
@@ -164,7 +164,7 @@ abstract class Controller extends BaseChild
    * de:
    * {
    *   Alle Methoden die in diesem Array gelistet werden können ohne Authetifizierung
-   *   ( Der Benutzer muss nicht eingeloggt sein)
+   *   (Der Benutzer muss nicht eingeloggt sein)
    *   aufgerufen werden.
    *   Die Methodennamen müssen lowercase angegeben werden
    *   @example
@@ -243,8 +243,8 @@ abstract class Controller extends BaseChild
 
     $this->env = $env;
 
-    if ( DEBUG)
-      Debug::console( 'Load Controller '.get_class($this));
+    if (DEBUG)
+      Debug::console('Load Controller '.get_class($this));
 
   }//end public function __construct */
 
@@ -303,7 +303,7 @@ abstract class Controller extends BaseChild
   public function loadModel($modelKey, $key = null, $injectKeys = array())
   {
 
-    if ( is_array($key))
+    if (is_array($key))
       $injectKeys = $key;
 
     if (!$key || is_array($key))
@@ -313,7 +313,7 @@ abstract class Controller extends BaseChild
     $modelNameOld = 'Model'.$modelKey;
 
     if (!isset($this->models[$key]  )) {
-      if ( Webfrap::classLoadable($modelName)) {
+      if (Webfrap::classLoadable($modelName)) {
         $model = new $modelName($this);
 
         foreach ($injectKeys as $injectKey) {
@@ -321,7 +321,7 @@ abstract class Controller extends BaseChild
         }
 
         $this->models[$key] = $model;
-      } elseif ( Webfrap::classLoadable($modelNameOld)) {
+      } elseif (Webfrap::classLoadable($modelNameOld)) {
         $model = new $modelNameOld($this);
 
         foreach ($injectKeys as $injectKey) {
@@ -353,7 +353,7 @@ abstract class Controller extends BaseChild
   public function getModel($key)
   {
 
-    if ( isset($this->models[$key]))
+    if (isset($this->models[$key]))
       return $this->models[$key];
     else
       return null;
@@ -388,7 +388,7 @@ abstract class Controller extends BaseChild
    *
    * @return LibFlow
    */
-  public function getFlowController(  )
+  public function getFlowController()
   {
     return Webfrap::getActive();
 
@@ -444,7 +444,7 @@ abstract class Controller extends BaseChild
 
       // Initialisieren der Extention
       if (!$controller->initController())
-        throw new Webfrap_Exception( 'Failed to initialize Controller');
+        throw new Webfrap_Exception('Failed to initialize Controller');
 
       // Run the mainpart
       $controller->run($do);
@@ -452,7 +452,7 @@ abstract class Controller extends BaseChild
       // shout down the extension
       $controller->shutdownController();
 
-    } catch ( Exception $exc) {
+    } catch (Exception $exc) {
 
       Error::report
       (
@@ -485,7 +485,7 @@ abstract class Controller extends BaseChild
           {
             $this->errorPage
             (
-              $response->i18n->l( 'Access Denied', 'wbf.message'  ),
+              $response->i18n->l('Access Denied', 'wbf.message'  ),
               Response::FORBIDDEN
             );
             break;
@@ -503,7 +503,7 @@ abstract class Controller extends BaseChild
             } else {
               $this->errorPage
               (
-                $response->i18n->l(  'Sorry Internal Error', 'wbf.message'  ),
+                $response->i18n->l( 'Sorry Internal Error', 'wbf.message'  ),
                 Response::INTERNAL_ERROR
               );
             }
@@ -560,12 +560,12 @@ abstract class Controller extends BaseChild
 
       $methodeName = 'service_'.$methodeKey;
 
-       if ( method_exists($this, $methodeName)) {
+       if (method_exists($this, $methodeName)) {
 
          try {
 
            // prüfen der options soweit vorhanden
-           if ( isset($this->options[$methodeKey])) {
+           if (isset($this->options[$methodeKey])) {
 
              // prüfen ob die HTTP Methode überhaupt zulässig ist
              if
@@ -583,7 +583,7 @@ abstract class Controller extends BaseChild
                   array
                   (
                     'method' => $request->method(),
-                    'use'    => implode( ' or ', $this->options[$methodeKey]['method'])
+                    'use'    => implode(' or ', $this->options[$methodeKey]['method'])
                   )
                 ),
                 Request::METHOD_NOT_ALLOWED
@@ -607,7 +607,7 @@ abstract class Controller extends BaseChild
                    array
                    (
                      'type' => $response->tpl->getType(),
-                     'use'  => implode( ' or ', $this->options[$methodeKey]['views'])
+                     'use'  => implode(' or ', $this->options[$methodeKey]['views'])
                    )
                  ),
                  Request::NOT_ACCEPTABLE
@@ -615,7 +615,7 @@ abstract class Controller extends BaseChild
 
              }
 
-             if ( isset($this->options[$methodeKey]['ssl'])) {
+             if (isset($this->options[$methodeKey]['ssl'])) {
 
                if ($this->options[$methodeKey]['ssl'] && !$request->isSecure()) {
                  throw new InvalidRequest_Exception
@@ -630,7 +630,7 @@ abstract class Controller extends BaseChild
                }
              }
 
-             if ( isset($this->options[$methodeKey]['auth'])) {
+             if (isset($this->options[$methodeKey]['auth'])) {
 
                $user = $this->getUser();
                if ($this->options[$methodeKey]['auth'] && !$user->getLogedIn()) {
@@ -654,12 +654,12 @@ abstract class Controller extends BaseChild
              $this->errorPage($error);
            }
 
-         } catch ( Webfrap_Exception $error) {
+         } catch (Webfrap_Exception $error) {
            $this->errorPage
            (
              $error
            );
-         } catch ( Exception $error) {
+         } catch (Exception $error) {
            $this->errorPage
            (
              $error,
@@ -673,7 +673,7 @@ abstract class Controller extends BaseChild
          if (DEBUG) {
            Debug::console($methodeName.' is not callable!' ,  $this->callAble);
 
-           $methodes = implode( ', ', get_class_methods($this));
+           $methodes = implode(', ', get_class_methods($this));
            $response->addError
            (
              'The action :'.$methodeName .' is not callable on service: '.get_class($this).' methode: '.$methodes.'!'
@@ -685,7 +685,7 @@ abstract class Controller extends BaseChild
               Response::NOT_FOUND
            );
          } else {
-           $response->addError( 'The action :'.$methodeName .' is not callable on service: '.get_class($this).' !');
+           $response->addError('The action :'.$methodeName .' is not callable on service: '.get_class($this).' !');
            $this->errorPage
            (
               'The action :'.$methodeName .' is not callable on service: '.get_class($this).' !',
@@ -724,7 +724,7 @@ abstract class Controller extends BaseChild
   public function runIfExists($methodeName , $view = null)
   {
 
-    if ( method_exists($this , $methodeName  )) {
+    if (method_exists($this , $methodeName  )) {
       if ($view)
         $this->$methodeName($view);
 
@@ -756,7 +756,7 @@ abstract class Controller extends BaseChild
       return true;
 
     // prüfen mit den options
-    if ( isset($this->options[$action]['public'])  ) {
+    if (isset($this->options[$action]['public'])  ) {
 
       if ($this->options[$action]['public']) {
         return true;
@@ -915,11 +915,11 @@ abstract class Controller extends BaseChild
   public function errorPage($message, $errorCode = Response::INTERNAL_ERROR, $dump = null)
   {
 
-    if ( is_object($message)) {
+    if (is_object($message)) {
       $messageText  = $message->getMessage();
 
       // Fallback für nicht wbf exceptions
-      if ( method_exists($message, 'getErrorKey'))
+      if (method_exists($message, 'getErrorKey'))
         $errorCode    = $message->getErrorKey();
       else
         $errorCode = Response::INTERNAL_ERROR;
@@ -933,17 +933,17 @@ abstract class Controller extends BaseChild
     // bei ajax request wird einfach eine fehlermeldung geworfen
     if
     (
-      $response->tpl->isType( View::MAINTAB)
-        || $response->tpl->isType( View::MODAL)
-        || $response->tpl->isType( View::AJAX)
-        || $response->tpl->isType( View::SERVICE)
+      $response->tpl->isType(View::MAINTAB)
+        || $response->tpl->isType(View::MODAL)
+        || $response->tpl->isType(View::AJAX)
+        || $response->tpl->isType(View::SERVICE)
     )
     {
 
-      $response->sendHeader( "X-error-message: ".urlencode($messageText.' '.$errorCode));
+      $response->sendHeader("X-error-message: ".urlencode($messageText.' '.$errorCode));
 
       $response->addError($messageText);
-    } elseif ($response->tpl->isType( View::DOCUMENT)) {
+    } elseif ($response->tpl->isType(View::DOCUMENT)) {
 
       // Wenn ein dokument angefragt wurde das nicht bearbeitet werden kann
       // wird eine html fehlermeldung zurückgegeben
@@ -972,22 +972,22 @@ abstract class Controller extends BaseChild
 
       $this->tplEngine->setIndex('error');
 
-      $this->tplEngine->setTitle($response->i18n->l( 'An Error occured', 'wbf.label'));
-      $this->tplEngine->setTemplate( 'error/message'  );
-      $this->tplEngine->addVar( 'errorTitle' , $messageText);
-      $this->tplEngine->addVar( 'errorMessage' , $message);
+      $this->tplEngine->setTitle($response->i18n->l('An Error occured', 'wbf.label'));
+      $this->tplEngine->setTemplate('error/message'  );
+      $this->tplEngine->addVar('errorTitle' , $messageText);
+      $this->tplEngine->addVar('errorMessage' , $message);
 
-    } elseif ($response->tpl->isType( View::JSON)) {
+    } elseif ($response->tpl->isType(View::JSON)) {
 
-      $this->tplEngine->setDataBody( 'error: '.$message);
+      $this->tplEngine->setDataBody('error: '.$message);
 
     } else {
 
       $view = $this->getView();
 
-      $view->setTitle($response->i18n->l( 'Error', 'wbf.label'));
-      $view->setTemplate( 'error/message'  );
-      $view->addVar( 'errorMessage', $message);
+      $view->setTitle($response->i18n->l('Error', 'wbf.label'));
+      $view->setTemplate('error/message'  );
+      $view->addVar('errorMessage', $message);
 
 
     }
@@ -1014,7 +1014,7 @@ abstract class Controller extends BaseChild
         (
           'Invalid access type {@type@}',
           'wbf.message',
-          array( 'type', $type)
+          array('type', $type)
         ),
         Response::NOT_IMPLEMENTED
       );
@@ -1037,7 +1037,7 @@ abstract class Controller extends BaseChild
    *
    * @example
    * <code>
-   *  $view = $this->getSubView( 'exampleEditForm', 'ExampleDomain');
+   *  $view = $this->getSubView('exampleEditForm', 'ExampleDomain');
    *
    *  if (!$view)
    *  {
@@ -1219,7 +1219,7 @@ abstract class Controller extends BaseChild
         }
       }
 
-    } catch ( LibTemplate_Exception $e) {
+    } catch (LibTemplate_Exception $e) {
       ///TODO besseres error handling implementieren
       return $this->handleNonexistingView($throwError);
     }
@@ -1236,7 +1236,7 @@ abstract class Controller extends BaseChild
    *
    * @example
    * <code>
-   *  $view = $this->loadView( 'exampleEditForm', 'ExampleDomain');
+   *  $view = $this->loadView('exampleEditForm', 'ExampleDomain');
    *
    *  if (!$view)
    *  {
@@ -1342,7 +1342,7 @@ abstract class Controller extends BaseChild
     $orm     = $this->getOrm();
 
     ///TODO was sollte der check auf post?
-    if (!$request->method( Request::POST))
+    if (!$request->method(Request::POST))
       return false;
 
     $auth     = new LibAuth($this, 'Httppost');
@@ -1356,19 +1356,19 @@ abstract class Controller extends BaseChild
       $userName = $auth->getUsername();
 
       try {
-        if (!$authRole = $orm->get( 'WbfsysRoleUser', "UPPER(name) = UPPER('{$userName}')")) {
-          $response->addError( 'User '.$userName.' not exists');
+        if (!$authRole = $orm->get('WbfsysRoleUser', "UPPER(name) = UPPER('{$userName}')")) {
+          $response->addError('User '.$userName.' not exists');
 
           return false;
         }
-      } catch ( LibDb_Exception $exc) {
-        $response->addError( 'Error in the query to fetch the data for user: '.$userName);
+      } catch (LibDb_Exception $exc) {
+        $response->addError('Error in the query to fetch the data for user: '.$userName);
 
         return false;
       }
 
-      if(
-        defined( 'WBF_AUTH_TYPE')
+      if (
+        defined('WBF_AUTH_TYPE')
           && 2 == WBF_AUTH_TYPE && ($userName != 'admin')
           && !$authRole->non_cert_login
       ) {
@@ -1384,7 +1384,7 @@ abstract class Controller extends BaseChild
         return true;
       } else {
 
-        $response->addError( 'Failed to autologin User: '.$auth->getUsername());
+        $response->addError('Failed to autologin User: '.$auth->getUsername());
         return false;
       }
 
@@ -1463,7 +1463,7 @@ abstract class Controller extends BaseChild
 
     if (DEBUG) {
       $caller = Debug::getCaller();
-      Debug::console( 'Access Denied from '.$caller);
+      Debug::console('Access Denied from '.$caller);
     }
 
     Message::addError($message);
@@ -1496,7 +1496,7 @@ abstract class Controller extends BaseChild
 
     if (DEBUG) {
       $caller = Debug::getCaller();
-      Debug::console( 'This Request was invalid for '.$caller);
+      Debug::console('This Request was invalid for '.$caller);
     }
 
     Message::addError($message);
@@ -1529,7 +1529,7 @@ abstract class Controller extends BaseChild
 
     if (DEBUG) {
       $caller = Debug::getCaller();
-      Debug::console( 'This Request was invalid for '.$caller);
+      Debug::console('This Request was invalid for '.$caller);
     }
 
     Message::addError($message);

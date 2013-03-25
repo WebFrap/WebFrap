@@ -36,18 +36,18 @@ class DaidalosBdlNode_Profile_Maintab_Menu extends WgtDropmenu
    *   string formId: the id of the form;
    * }
    */
-  public function buildMenu(  $params )
+  public function buildMenu( $params)
   {
 
-    $iconMenu          = $this->view->icon( 'control/menu.png'     ,'Menu'   );
-    $iconClose         = $this->view->icon( 'control/close.png'    ,'Close'   );
-    $iconSearch        = $this->view->icon( 'control/search.png'   ,'Search'  );
-    $iconBookmark      = $this->view->icon( 'control/bookmark.png' ,'Bookmark');
-    $iconSave          = $this->view->icon( 'control/save.png' ,'Save' );
-    $iconRefresh       = $this->view->icon( 'control/refresh.png' ,'Refresh' );
+    $iconMenu          = $this->view->icon('control/menu.png'     ,'Menu'   );
+    $iconClose         = $this->view->icon('control/close.png'    ,'Close'   );
+    $iconSearch        = $this->view->icon('control/search.png'   ,'Search'  );
+    $iconBookmark      = $this->view->icon('control/bookmark.png' ,'Bookmark');
+    $iconSave          = $this->view->icon('control/save.png' ,'Save');
+    $iconRefresh       = $this->view->icon('control/refresh.png' ,'Refresh');
 
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport($params );
+    $entries->support  = $this->entriesSupport($params);
 
     $this->content = <<<HTML
 <ul class="wcm wcm_ui_dropmenu wgt-dropmenu" id="{$this->id}"  >
@@ -81,13 +81,13 @@ HTML;
   /**
    * @param TFlag $params
    */
-  protected function entriesSupport($params )
+  protected function entriesSupport($params)
   {
 
-    $iconSupport = $this->view->icon( 'control/support.png'  ,'Support' );
-    $iconBug     = $this->view->icon( 'control/bug.png'      ,'Bug' );
-    $iconFaq     = $this->view->icon( 'control/faq.png'      ,'Faq' );
-    $iconHelp    = $this->view->icon( 'control/help.png'     ,'Help' );
+    $iconSupport = $this->view->icon('control/support.png'  ,'Support');
+    $iconBug     = $this->view->icon('control/bug.png'      ,'Bug');
+    $iconFaq     = $this->view->icon('control/faq.png'      ,'Faq');
+    $iconHelp    = $this->view->icon('control/help.png'     ,'Help');
 
     $html = <<<HTML
 
@@ -118,7 +118,7 @@ HTML;
    *     services
    * }
    */
-  public function injectActions($view, $params )
+  public function injectActions($view, $params)
   {
 
     $profileName = $view->model->node->getName();
@@ -139,7 +139,7 @@ HTML;
 
     self.getObject().find(".wgtac_refresh").click(function(){
       self.close();
-      \$R.get( 'maintab.php?c=Daidalos.BdlModeller.openEditor'
+      \$R.get('maintab.php?c=Daidalos.BdlModeller.openEditor'
         +'&amp;key={$view->model->modeller->key}&amp;bdl_file={$view->model->modeller->bdlFileName}');
     });
 
@@ -254,7 +254,7 @@ HTML;
 
 BUTTONJS;
 
-    $view->addJsCode($code );
+    $view->addJsCode($code);
 
   }//end public function injectActions */
 

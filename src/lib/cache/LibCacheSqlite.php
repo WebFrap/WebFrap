@@ -36,20 +36,20 @@ class LibCacheSqlite extends LibCacheAdapter
    *
    * @param array
    */
-  public function __construct($conf )
+  public function __construct($conf)
   {
 
-    if (!isset($conf['db']) ) {
+    if (!isset($conf['db'])) {
       $conf['db'] = PATH_GW.'cache/cache.db';
     }
 
-    if (!isset($conf['expire']) ) {
+    if (!isset($conf['expire'])) {
       $conf['expire'] = 360;
     }
 
     $this->expire = $conf['expire'];
 
-    if (!$this->db = sqlite_open($conf['db'] )) {
+    if (!$this->db = sqlite_open($conf['db'])) {
       throw new LibCache_Exception('Failed to open Cachedb');
     }
 
@@ -62,29 +62,29 @@ class LibCacheSqlite extends LibCacheAdapter
    * @param string Area Name der zu löschenden Subarea
    * @return bool
    */
-  public function exists($key )
+  public function exists($key)
   {
 
     if (isset($this->cache[$key])) return true;
 
     $sql = "select cid as numb from defcache where cid = '$key' and expires < ".time().";";
 
-    if (!$result = sqlite_query($this->db , $sql ))return false;
+    if (!$result = sqlite_query($this->db , $sql))return false;
     if (!$data = sqlite_fetch_array($result))return false;
     return $data['numb']?true:false;
 
-  } // end public function exists($key )
+  } // end public function exists($key)
 
   /**
    * Testen ob noch genug Platz im Cache ist
    *
    * @return bool
    */
-  public function enoughFree( )
+  public function enoughFree()
   {
     return true;
 
-  } // end public function enoughFree( )
+  } // end public function enoughFree()
 
   /**
    * Neune Eintrag in den Cache werfen
@@ -95,7 +95,7 @@ class LibCacheSqlite extends LibCacheAdapter
    * @param int $offset
    * @return bool
    */
-  public function add($key,  $data )
+  public function add($key,  $data)
   {
 
     $this->cache[$key] = $data;
@@ -111,7 +111,7 @@ class LibCacheSqlite extends LibCacheAdapter
       return true;
     }
 
-  }//end public function add($key,  $data )
+  }//end public function add($key,  $data)
 
   /**
    * Einen bestimmten Wert im Cache updaten bzw ersetzen
@@ -122,10 +122,10 @@ class LibCacheSqlite extends LibCacheAdapter
    * @return bool
 
    */
-  public function replace($key,  $data )
+  public function replace($key,  $data)
   {
     return $this->add($key,  $data);
-  } // end public function replace($key,  $data )
+  } // end public function replace($key,  $data)
 
   /**
    * Ein Objekt aus dem Cache anfragen
@@ -137,11 +137,11 @@ class LibCacheSqlite extends LibCacheAdapter
   public function get($key  )
   {
 
-    if (isset($this->cache[$key] ))return $this->cache[$key];
+    if (isset($this->cache[$key]))return $this->cache[$key];
 
     $sql = "select * from defcache where cid = '$key' and expires < ".time().";";
 
-    if (!$result = sqlite_query($this->db , $sql ))return null;
+    if (!$result = sqlite_query($this->db , $sql))return null;
     if (!$data = sqlite_fetch_array($result))return null;
 
     $data = unserialize($data);
@@ -158,37 +158,37 @@ class LibCacheSqlite extends LibCacheAdapter
    * @param string Area Die zu verwendente Subarea
    * @return bool
    */
-  public function remove($key )
+  public function remove($key)
   {
 
-    if ($this->cache[$key] ) unset($this->cache[$key]);
+    if ($this->cache[$key]) unset($this->cache[$key]);
     return sqlite_exec($this->db, "DELETE from defcache where cid = '$key' ;");
 
-  } // end public function remove($key )
+  } // end public function remove($key)
 
   /**
    * clean the cache
    *
    * @return bool
    */
-  public function clean( )
+  public function clean()
   {
     $this->cache = array();
 
     return sqlite_exec($this->db, "DELETE from defcache;");
-  } // end public function clean( )
+  } // end public function clean()
 
   /**
    *
    * @param string $area Eine bestimmte Subarea cleanen
    * @return bool
    */
-  public function cleanSubarea($key )
+  public function cleanSubarea($key)
   {
     $this->cache = array();
 
     return sqlite_exec($this->db, "DELETE from defcache;");
-  } // end public function cleanSubarea($key )
+  } // end public function cleanSubarea($key)
 
 } // end class LibCacheSqlite
 

@@ -64,4 +64,4 @@ class IndexEntity
 
 }
 
-<?php display_highlight( 'php' ); ?>
+<?php display_highlight('php'); ?>

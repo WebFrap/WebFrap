@@ -53,19 +53,19 @@ class WebfrapMediathek_Image_Modal_View extends WgtModal
   * @param TFlag $params
   * @return void
   */
-  public function displayAdd($mediaId, $elementId, $params = null )
+  public function displayAdd($mediaId, $elementId, $params = null)
   {
 
     // fetch the i18n text for title, status and bookmark
     $i18nText = 'Add Image';
 
     // set the window title
-    $this->setTitle($i18nText );
+    $this->setTitle($i18nText);
 
     // set the from template
-    $this->setTemplate( 'webfrap/mediathek/modal/form_image_add' );
+    $this->setTemplate('webfrap/mediathek/modal/form_image_add');
 
-    $this->addVars( array(
+    $this->addVars(array(
       'mediaId'    => $mediaId,
       'elementKey' => $elementId,
     ));
@@ -81,19 +81,19 @@ class WebfrapMediathek_Image_Modal_View extends WgtModal
   * @param TFlag $params
   * @return void
   */
-  public function displayEdit($imageId, $mediaId, $elementId, $imageNode, $params = null )
+  public function displayEdit($imageId, $mediaId, $elementId, $imageNode, $params = null)
   {
 
     // fetch the i18n text for title, status and bookmark
     $i18nText = 'Edit Image';
 
     // set the window title
-    $this->setTitle($i18nText );
+    $this->setTitle($i18nText);
 
     // set the from template
-    $this->setTemplate( 'webfrap/mediathek/modal/form_image_edit' );
+    $this->setTemplate('webfrap/mediathek/modal/form_image_edit');
 
-    $this->addVars( array(
+    $this->addVars(array(
       'imageId'    => $imageId,
       'mediaId'    => $mediaId,
       'elementId'  => $elementId,

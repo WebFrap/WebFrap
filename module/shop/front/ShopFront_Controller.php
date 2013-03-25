@@ -54,18 +54,18 @@ class ShopFront_Controller extends ControllerFrontend
   (
     'start' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'html' )
+      'method'    => array('GET'),
+      'views'      => array('html')
     ),
     'category' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'html' )
+      'method'    => array('GET'),
+      'views'      => array('html')
     ),
     'article' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'html' )
+      'method'    => array('GET'),
+      'views'      => array('html')
     ),
   );
 
@@ -76,88 +76,88 @@ class ShopFront_Controller extends ControllerFrontend
   /**
    * @return void
    */
-  public function service_start( )
+  public function service_start()
   {
 
     $view    = $this->getView();
     $request = $this->getRequest();
 
     /* @var $model ShopFront_Model */
-    $model = $this->loadModel( 'ShopFront' );
+    $model = $this->loadModel('ShopFront');
 
-    $storeId = $request->param('store', Validator::EID );
+    $storeId = $request->param('store', Validator::EID);
 
-    if ($storeId )
-      $model->setStoreId($storeId );
+    if ($storeId)
+      $model->setStoreId($storeId);
     else
       $storeId = $model->getDefStoreId();
 
     $body = new ShopFront_Start_Body();
 
     $frontend = new ShopFront_Frontend();
-    $frontend->setModel($model );
+    $frontend->setModel($model);
 
-    $frontend->render($view, $body );
+    $frontend->render($view, $body);
 
   }//end public function service_start */
 
   /**
    * @return void
    */
-  public function service_category( )
+  public function service_category()
   {
 
     $view    = $this->getView();
     $request = $this->getRequest();
 
     /* @var $model ShopFront_Model */
-    $model = $this->loadModel( 'ShopFront' );
+    $model = $this->loadModel('ShopFront');
 
-    $storeId = $request->param('store', Validator::EID );
+    $storeId = $request->param('store', Validator::EID);
 
-    if ($storeId )
-      $model->setStoreId($storeId );
+    if ($storeId)
+      $model->setStoreId($storeId);
     else
       $storeId = $model->getDefStoreId();
 
     $body = new ShopFront_Category_Body();
-    $body->category = $request->param('key', Validator::CKEY );
-    $body->setModel($model );
+    $body->category = $request->param('key', Validator::CKEY);
+    $body->setModel($model);
 
     $frontend = new ShopFront_Frontend();
-    $frontend->setModel($model );
+    $frontend->setModel($model);
 
-    $frontend->render($view, $body );
+    $frontend->render($view, $body);
 
   }//end public function service_category */
 
   /**
    * @return void
    */
-  public function service_article( )
+  public function service_article()
   {
 
     $view    = $this->getView();
     $request = $this->getRequest();
 
     /* @var $model ShopFront_Model */
-    $model = $this->loadModel( 'ShopFront' );
+    $model = $this->loadModel('ShopFront');
 
-    $storeId = $request->param('store', Validator::EID );
+    $storeId = $request->param('store', Validator::EID);
 
-    if ($storeId )
-      $model->setStoreId($storeId );
+    if ($storeId)
+      $model->setStoreId($storeId);
     else
       $storeId = $model->getDefStoreId();
 
     $body = new ShopFront_Article_Body();
-    $body->articleId = $request->param('id', Validator::EID );
-    $body->setModel($model );
+    $body->articleId = $request->param('id', Validator::EID);
+    $body->setModel($model);
 
     $frontend = new ShopFront_Frontend();
-    $frontend->setModel($model );
+    $frontend->setModel($model);
 
-    $frontend->render($view, $body );
+    $frontend->render($view, $body);
 
   }//end public function service_category */
 

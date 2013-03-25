@@ -31,7 +31,7 @@ final class SParserSql
    * @param unknown_type $arr
    * @return unknown
    */
-  public static function arrayToInsert($data , $tabName, $quotes , $schema = null )
+  public static function arrayToInsert($data , $tabName, $quotes , $schema = null)
   {
 
     $keys   = '';
@@ -40,9 +40,9 @@ final class SParserSql
     foreach ($data as $key => $value) {
       $keys .= $key.',';
 
-      if (is_null($value) ) {
+      if (is_null($value)) {
         $values .= 'null,';
-      } elseif (trim($value) == '' ) {
+      } elseif (trim($value) == '') {
         $values .= 'null,';
       } elseif ($data[$key]) {
         $values .= "'".Db::addSlashes($value)."',";
@@ -60,9 +60,9 @@ final class SParserSql
        $tabName = $schema.'.'.$tabName;
     }
 
-    return 'INSERT INTO '.$tabName.' ( '.$keys.' ) VALUES ( '.$values.' ); '.NL;
+    return 'INSERT INTO '.$tabName.' ('.$keys.') VALUES ('.$values.'); '.NL;
 
-  }//end public static function arrayToInsert($data , $tabName, $quotes )
+  }//end public static function arrayToInsert($data , $tabName, $quotes)
 
 }// end class SParserString
 

@@ -38,20 +38,20 @@ class DaidalosSearch_Controller extends Controller
   /**
    * @return void
    */
-  public function form( )
+  public function form()
   {
 
-    if ($this->tplEngine->isType( View::WINDOW ) ) {
+    if ($this->tplEngine->isType(View::WINDOW)) {
       $view = $this->tplEngine->newWindow('DeveloperSearch', 'Default');
     } else {
       $view = $this->tplEngine;
     }
 
     $model = $this->loadModel('DaidalosSearch');
-    $view->setModel($model );
+    $view->setModel($model);
 
     $view->setTitle('Search Form');
-    $view->setTemplate( 'daidalos/search/search_form' );
+    $view->setTemplate('daidalos/search/search_form');
 
   } // end public function form
 
@@ -64,14 +64,14 @@ class DaidalosSearch_Controller extends Controller
     $httpRequest  = $this->getRequest();
     $view         = $this->tplEngine->newSubView('table_searchresult');
 
-    $view->setPosition( '#search_results' );
-    $view->setTemplate( 'daidalos/search/search_result' );
+    $view->setPosition('#search_results');
+    $view->setTemplate('daidalos/search/search_result');
 
     $model = $this->loadModel('DaidalosSearch');
 
-    $pattern = $httpRequest->data( 'keyword', Validator::TEXT );
-    $endings = $httpRequest->data( 'endings', Validator::TEXT );
-    $projects = $httpRequest->data( 'projects', Validator::TEXT );
+    $pattern = $httpRequest->data('keyword', Validator::TEXT);
+    $endings = $httpRequest->data('endings', Validator::TEXT);
+    $projects = $httpRequest->data('projects', Validator::TEXT);
 
     $seachFolders = array();
 
@@ -80,13 +80,13 @@ class DaidalosSearch_Controller extends Controller
         $seachFolders[] = PATH_ROOT.'/'.$project.'/';
       }
 
-      $model->search($seachFolders, $pattern, $endings );
+      $model->search($seachFolders, $pattern, $endings);
 
     } else {
-      $model->search( PATH_GW, $pattern, $endings );
+      $model->search(PATH_GW, $pattern, $endings);
     }
 
-    $view->setModel($model );
+    $view->setModel($model);
 
   }//end public function search */
 

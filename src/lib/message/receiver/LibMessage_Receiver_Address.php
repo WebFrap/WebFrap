@@ -62,12 +62,12 @@ class LibMessage_Receiver_Address
    * @param string / array $name
    * @param array<string type: string address> $address
    */
-  public function __construct($name, array $address )
+  public function __construct($name, array $address)
   {
 
-    if ( is_string($name ) ) {
-      $this->name     = array( 'nickname' => $name );
-    } elseif ( is_array($name ) ) {
+    if (is_string($name)) {
+      $this->name     = array('nickname' => $name);
+    } elseif (is_array($name)) {
       $this->name = $name;
     }
 

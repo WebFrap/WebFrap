@@ -125,20 +125,20 @@ class TUrl
    *
    * @param unknown_type $file
    */
-  public function setFile($file )
+  public function setFile($file)
   {
     $this->urlFile = $file;
-  }//end public function setFile($file )
+  }//end public function setFile($file)
 
   /**
    * Enter description here...
    *
    * @param unknown_type $params
    */
-  public function addParams($params )
+  public function addParams($params)
   {
     $this->urlParams = array_merge($this->urlParams,$params);
-  }//end public function addParams($params )
+  }//end public function addParams($params)
 
   /**
    * Enter description here...
@@ -156,20 +156,20 @@ class TUrl
    *
    * @param unknown_type $title
    */
-  public function setTitle($title )
+  public function setTitle($title)
   {
     $this->urlTitle = $title;
-  }//end public function setTitle($title )
+  }//end public function setTitle($title)
 
   /**
    * set the url anchor
    *
    * @param string $anchor
    */
-  public function setAnchor($anchor )
+  public function setAnchor($anchor)
   {
     $this->urlAnchor = $anchor;
-  }//end public function setAnchor($anchor )
+  }//end public function setAnchor($anchor)
 
   /**
    * Enter description here...
@@ -186,7 +186,7 @@ class TUrl
    * @param string/array $key
    * @param string[optional] $value
    */
-  public static function addPersistentParams($key , $value = null )
+  public static function addPersistentParams($key , $value = null)
   {
     if (is_array($key)) {
       self::$persistentParam = array_merge(self::$persistentParam,$key);
@@ -204,7 +204,7 @@ class TUrl
    *
    * @return String
    */
-  public function toUrl($file = null , $params = array() , $title = null , $anchor = null )
+  public function toUrl($file = null , $params = array() , $title = null , $anchor = null)
   {
     if (Log::$levelDebug)
      Log::start(__file__,__line__,__method__,array($file, $params, $title, $anchor));
@@ -218,7 +218,7 @@ class TUrl
 
     return self::asUrl($file,$params,$title,$anchor);
 
-  }//end public function toUrl( )
+  }//end public function toUrl()
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Static Methodes
@@ -233,7 +233,7 @@ class TUrl
    * @param string $anchor
    * @return string
    */
-  public static function asUrl($filename , $attributes , $title = null , $anchor = null )
+  public static function asUrl($filename , $attributes , $title = null , $anchor = null)
   {
     if (Log::$levelDebug)
      Log::start(__file__,__line__,__method__,array($filename , $attributes , $title, $anchor));
@@ -247,7 +247,7 @@ class TUrl
 
       $url .= $map[0]
         .self::asmAttributes($attributes)
-        .self::buildTitle($title )
+        .self::buildTitle($title)
         .$map[1]
         .self::buildAnchor($anchor);
 
@@ -256,7 +256,7 @@ class TUrl
       return $filename.self::asmAttributes($attributes).self::buildAnchor($anchor);
     }
 
-  }//end public static function asUrl($filename , $attributes , $title = null , $anchor = null )
+  }//end public static function asUrl($filename , $attributes , $title = null , $anchor = null)
 
   /**
    * Enter description here...
@@ -264,14 +264,14 @@ class TUrl
    * @param unknown_type $filename
    * @return unknown
    */
-  protected static function getDesignedData($filename )
+  protected static function getDesignedData($filename)
   {
-    if ( isset( self::$fileMap[$filename] ) ) {
+    if (isset(self::$fileMap[$filename])) {
        return self::$fileMap[$filename];
     } else {
       return array($filename,'');
     }
-  }//end protected static function getDesignedData($filename )
+  }//end protected static function getDesignedData($filename)
 
   /**
    * Enter description here...
@@ -279,7 +279,7 @@ class TUrl
    * @param unknown_type $attributes
    * @return unknown
    */
-  protected static function asmAttributes($attributes )
+  protected static function asmAttributes($attributes)
   {
     if (Log::$levelDebug)
      Log::start(__file__,__line__,__method__,array($attributes));
@@ -312,14 +312,14 @@ class TUrl
    * @param unknown_type $title
    * @return unknown
    */
-  protected static function buildTitle($title )
+  protected static function buildTitle($title)
   {
 
     if (trim($title) == '') {
       return 'Webfrap';
     } else {
 
-      $parts = explode( ' ',$title );
+      $parts = explode(' ',$title);
 
       $assembled = '';
 
@@ -330,7 +330,7 @@ class TUrl
       return substr($assembled,0,-1);
     }
 
-  }//end protected static function buildTitle($title )
+  }//end protected static function buildTitle($title)
 
   /**
    * Enter description here...
@@ -338,14 +338,14 @@ class TUrl
    * @param string $anchor
    * @return string
    */
-  protected static function buildAnchor($anchor )
+  protected static function buildAnchor($anchor)
   {
     if (Log::$levelDebug)
      Log::start(__file__,__line__,__method__,array($anchor));
 
     return trim($anchor) != '' ? '#'.$anchor : '';
 
-  }//end protected static function buildAnchor($anchor )
+  }//end protected static function buildAnchor($anchor)
 
 }//end class TUrl
 

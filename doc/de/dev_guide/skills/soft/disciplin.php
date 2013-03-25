@@ -24,7 +24,7 @@ Wir sind doch alle kreative Menschen, ist Disziplin da nicht Gift?
   dieser Menge Code liegt die Vermutung sehr Nahe, dass dort mit viel heißer 
   Luft eine Wasserbombe zum Zeppelin aufgeblasen wurde.
   Das ist tatsächlich ein Problem, das es gerade erfahrenen Entwicklern und Entscheidern
-  schwer fallen dürfte, nicht genau diese Bild ( oder ein Vergleichbares Bild ) im Kopf zu haben. 
+  schwer fallen dürfte, nicht genau diese Bild (oder ein Vergleichbares Bild) im Kopf zu haben. 
 </p>
 
 <p>

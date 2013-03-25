@@ -27,12 +27,12 @@ class LibTemplateTest extends LibTemplateHtml
    *
    * @return string the assembled page
    */
-  public function build( )
+  public function build()
   {
 
     $filename = PATH_TEST.'templates/template/'.$this->template.'.tpl';
 
-    if ( file_exists($filename ) and is_readable($filename ) ) {
+    if (file_exists($filename) and is_readable($filename)) {
 
       $VAR       = $this->var;
       $ITEM      = $this->object;
@@ -47,13 +47,13 @@ class LibTemplateTest extends LibTemplateHtml
       //$this->html = $this->head.$content.$this->foot;
       return $content ;
     } else {
-      if ( Log::$levelDebug )
+      if (Log::$levelDebug)
         return '!!!Template:'.$filename.' not exists ';
       else
         return '<strong class="wgt-box error">!!!Sorry an error occured!!!</strong><!-- '.$filename.' -->';
     }
 
-  } // end public function build( )
+  } // end public function build()
 
 } // end class LibTemplateTest
 

@@ -39,7 +39,7 @@ class AclMgmt_Dset_Query extends LibSqlQuery
    *
    * @throws LibDb_Exception
    */
-  public function fetchGroups($areaid, $params = null )
+  public function fetchGroups($areaid, $params = null)
   {
 
     if (!$params)
@@ -66,7 +66,7 @@ class AclMgmt_Dset_Query extends LibSqlQuery
 
 SQL;
 
-    $this->data = $db->select($sql )->getAll();
+    $this->data = $db->select($sql)->getAll();
 
   }//end public function fetchAreaGroups */
 
@@ -80,7 +80,7 @@ SQL;
    *
    * @throws LibDb_Exception
    */
-  public function fetchUsersByKey($areaId, $key, $params = null )
+  public function fetchUsersByKey($areaId, $key, $params = null)
   {
 
     if (!$params)
@@ -95,9 +95,9 @@ SQL;
 
     foreach ($tmp as $value) {
 
-      $safeVal = $db->addSlashes( trim($value ) );
+      $safeVal = $db->addSlashes(trim($value));
 
-      if ( '' == $safeVal )
+      if ('' == $safeVal)
         continue;
 
       $wheres[] = " upper(wbfsys_role_user.name) like upper('{$safeVal}%')
@@ -110,8 +110,8 @@ SQL;
     $sql = <<<SQL
   SELECT
     wbfsys_role_user.rowid as id,
-    COALESCE ( '('||wbfsys_role_user.name||') ', '' ) || COALESCE ( core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '' ) as value,
-    COALESCE ( '('||wbfsys_role_user.name||') ', '' ) || COALESCE ( core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '' ) as label
+    COALESCE ('('||wbfsys_role_user.name||') ', '') || COALESCE (core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '') as value,
+    COALESCE ('('||wbfsys_role_user.name||') ', '') || COALESCE (core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '') as label
 
   FROM
     wbfsys_role_user
@@ -139,7 +139,7 @@ SQL;
   LIMIT 10;
 SQL;
 
-    $this->result = $db->select($sql );
+    $this->result = $db->select($sql);
 
   }//end public function fetchUsersByKey */
 

@@ -31,21 +31,21 @@ class DaidalosDb_Maintab_View extends WgtMaintabCustom
    * @param TFlag $params
    * @return void
    */
-  public function displayListing($params )
+  public function displayListing($params)
   {
 
-    $this->setLabel( 'Overview databases' );
-    $this->setTitle( 'Overview databases' );
+    $this->setLabel('Overview databases');
+    $this->setTitle('Overview databases');
 
-    $this->addVar( 'databases', $this->model->getDatabases()  );
+    $this->addVar('databases', $this->model->getDatabases()  );
 
-    $this->setTemplate( 'daidalos/db/maintab/list_db' );
-    //$table = $this->newItem( 'tableCompilation' , 'DaidalosDb_Table' );
+    $this->setTemplate('daidalos/db/maintab/list_db');
+    //$table = $this->newItem('tableCompilation' , 'DaidalosDb_Table');
 
     //$this->tabId = 'daidalos_db_form_backup';
 
     $params = new TArray();
-    $this->addMenu($params );
+    $this->addMenu($params);
 
   }//end public function displayListing */
 
@@ -58,7 +58,7 @@ class DaidalosDb_Maintab_View extends WgtMaintabCustom
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu($params )
+  public function addMenu($params)
   {
 
     $menu     = $this->newMenu
@@ -68,12 +68,12 @@ class DaidalosDb_Maintab_View extends WgtMaintabCustom
     );
 
     $menu->id = $this->id.'_dropmenu';
-    $menu->setAcl($this->getAcl() );
-    $menu->setModel($this->model );
+    $menu->setAcl($this->getAcl());
+    $menu->setModel($this->model);
 
-    $menu->buildMenu($params );
+    $menu->buildMenu($params);
 
-    $menu->injectActions($this, $params );
+    $menu->injectActions($this, $params);
 
   }//end public function addMenu */
 

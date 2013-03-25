@@ -27,17 +27,17 @@ class WgtInputTimestamp extends WgtInput
    * @param array $attributes
    * @return string
    */
-  public function build($attributes = array() )
+  public function build($attributes = array())
   {
 
-    if ($attributes )
-      $this->attributes = array_merge($this->attributes, $attributes );
+    if ($attributes)
+      $this->attributes = array_merge($this->attributes, $attributes);
 
     // ist immer ein text attribute
     $this->attributes['type']= 'text';
 
       // add the date validator for datepicker
-    if (!isset($this->attributes['class']) ) {
+    if (!isset($this->attributes['class'])) {
       $this->classes['wcm'] = 'wcm';
       $this->classes['wcm_ui_date_timepicker'] = 'wcm_ui_date_timepicker';
       $this->classes['medium'] = 'medium';
@@ -67,20 +67,20 @@ HTML;
 
     return parent::build();
 
-  } // end public function build( )
+  } // end public function build()
 
   /**
    * Parser for the input field
    *
    * @return String
    */
-  public function buildAjax( )
+  public function buildAjax()
   {
 
     if (!isset($this->attributes['id']))
       return '';
 
-    if (!isset($this->attributes['value']) )
+    if (!isset($this->attributes['value']))
       $this->attributes['value'] = '';
 
     $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="value" ><![CDATA['
@@ -88,7 +88,7 @@ HTML;
 
     return $html;
 
-  } // end public function build( )
+  } // end public function build()
 
 } // end class WgtInputTimestamp
 

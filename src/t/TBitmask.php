@@ -41,13 +41,13 @@ class TBitmask
    *
    * @param array/int $data
    */
-  public function __construct($data = null )
+  public function __construct($data = null)
   {
 
-    if ( is_numeric($data) ) {
+    if (is_numeric($data)) {
       $this->value = $data;
       $this->createMask((int) $data);
-    } elseif ( is_array($data) ) {
+    } elseif (is_array($data)) {
       //$this->mask = array_flip($data);
       $this->mask = $data;
       $this->createValue($data);
@@ -72,13 +72,13 @@ class TBitmask
    */
   public function setData($data)
   {
-    if ( is_numeric($data) ) {
+    if (is_numeric($data)) {
       $this->value = $data;
       $this->createMask((int) $data);
-    } elseif ( is_array($data) ) {
+    } elseif (is_array($data)) {
       //$this->mask = array_flip($data);
       $this->mask = $data;
-      $this->createValue($data );
+      $this->createValue($data);
     }
   }//end public function setData
 
@@ -87,7 +87,7 @@ class TBitmask
    *
    * @param array $data
    */
-  public function createMask($data )
+  public function createMask($data)
   {
 
     $this->mask = array();
@@ -108,11 +108,11 @@ class TBitmask
    *
    * @param array $data
    */
-  public function createValue($data )
+  public function createValue($data)
   {
 
     $this->value = 0;
-    $this->value = array_sum( array_keys($data)  );
+    $this->value = array_sum(array_keys($data)  );
 
   }//end public function createValue
 
@@ -129,7 +129,7 @@ class TBitmask
   public function offsetSet($offset, $value)
   {
 
-    if ($value )
+    if ($value)
       $this->mask[$offset] = $value;
     else
       unset($this->mask[$offset]);

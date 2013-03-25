@@ -48,18 +48,18 @@ class WebfrapDataLoader_Controller extends Controller
   (
     'form' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
     'list' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
     'subtree' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('GET'),
+      'views'      => array('ajax')
     ),
   );
 
@@ -72,7 +72,7 @@ class WebfrapDataLoader_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_form($request, $response )
+  public function service_form($request, $response)
   {
 
     ///@trows InvalidRequest_Exception
@@ -83,7 +83,7 @@ class WebfrapDataLoader_Controller extends Controller
       'displayform'
     );
 
-    $view->displayform( );
+    $view->displayform();
 
   }//end public function service_form */
 
@@ -92,7 +92,7 @@ class WebfrapDataLoader_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_showDoubles($request, $response )
+  public function service_showDoubles($request, $response)
   {
 
     ///@trows InvalidRequest_Exception
@@ -103,7 +103,7 @@ class WebfrapDataLoader_Controller extends Controller
       'displayform'
     );
 
-    $view->displayform( );
+    $view->displayform();
 
   }//end public function service_showDoubles */
 
@@ -112,7 +112,7 @@ class WebfrapDataLoader_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_list($request, $response )
+  public function service_list($request, $response)
   {
 
     ///@trows InvalidRequest_Exception
@@ -127,10 +127,10 @@ class WebfrapDataLoader_Controller extends Controller
 
     $params = $this->getFlags($request);
 
-    $model = $this->loadModel( 'WebfrapMaintenance_DataIndex' );
+    $model = $this->loadModel('WebfrapMaintenance_DataIndex');
 
-    $view->setModel($model );
-    $view->displayStats($params );
+    $view->setModel($model);
+    $view->displayStats($params);
 
   }//end public function service_list */
 

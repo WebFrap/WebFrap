@@ -30,10 +30,10 @@ class LibCacheMemcache extends LibCache_L1Adapter
    *  - host:
    *  - port
    */
-  public function __construct($conf )
+  public function __construct($conf)
   {
 
-    $this->connectMemached($conf );
+    $this->connectMemached($conf);
 
   } // end public function __construct */
 
@@ -52,13 +52,13 @@ class LibCacheMemcache extends LibCache_L1Adapter
    * @param string Area Name der zu löschenden Subarea
    * @return bool
    */
-  public function isIncache($name,  $area = null )
+  public function isIncache($name,  $area = null)
   {
 
-    if (trim($area) == "" ) {
+    if (trim($area) == "") {
       $area = "default";
     }
-    if ($this->cache->get($area."_".$name )) {
+    if ($this->cache->get($area."_".$name)) {
       return true;
     } else {
       return false;
@@ -71,7 +71,7 @@ class LibCacheMemcache extends LibCache_L1Adapter
    *
    * @return bool
    */
-  public function enoughFree( )
+  public function enoughFree()
   {
     return true;
 
@@ -85,13 +85,13 @@ class LibCacheMemcache extends LibCache_L1Adapter
    * @param string Area Die zu verwendente Subarea
    * @return bool
    */
-  public function add($name,  $data,  $area = null , $offset = null )
+  public function add($name,  $data,  $area = null , $offset = null)
   {
 
-    if (trim($area) == "" ) {
+    if (trim($area) == "") {
       $area = "default";
     }
-    if ($this->cache->set($area."_".$name , $data ) ) {
+    if ($this->cache->set($area."_".$name , $data)) {
       return true;
     }
 
@@ -109,11 +109,11 @@ class LibCacheMemcache extends LibCache_L1Adapter
   public function replace($key, $data, $subKey = null  )
   {
 
-    if (trim($subKey) == "" ) {
+    if (trim($subKey) == "") {
       $subKey = "default";
     }
 
-    if ($this->cache->replace($key."_".$subKey, $data ) ) {
+    if ($this->cache->replace($key."_".$subKey, $data)) {
       return true;
     }
 
@@ -128,13 +128,13 @@ class LibCacheMemcache extends LibCache_L1Adapter
    * @param string Area Die zu verwendente Subarea
    * @return string
    */
-  public function get($name,  $area = null )
+  public function get($name,  $area = null)
   {
 
-    if (trim($area) == "" ) {
+    if (trim($area) == "") {
       $area = "default";
     }
-    if ($data = $this->cache->get($area."_".$name )) {
+    if ($data = $this->cache->get($area."_".$name)) {
       return $data;
     }
 
@@ -149,13 +149,13 @@ class LibCacheMemcache extends LibCache_L1Adapter
    * @param string Area Die zu verwendente Subarea
    * @return bool
    */
-  public function delete($name,  $area = null )
+  public function delete($name,  $area = null)
   {
 
-    if (trim($area) == "" ) {
+    if (trim($area) == "") {
       $area = "default";
     }
-    if ( !$this->cache->delete($area."_".$name )) {
+    if (!$this->cache->delete($area."_".$name)) {
       return false;
     }
 
@@ -170,13 +170,13 @@ class LibCacheMemcache extends LibCache_L1Adapter
    * @param string Area Die zu verwendente Subarea
    * @return bool
    */
-  public function increment($name,  $area = null )
+  public function increment($name,  $area = null)
   {
 
-    if (trim($area) == "" ) {
+    if (trim($area) == "") {
       $area = "default";
     }
-    if ( !$this->cache->increment(  $area."_".$name )) {
+    if (!$this->cache->increment( $area."_".$name)) {
       return false;
     }
 
@@ -191,14 +191,14 @@ class LibCacheMemcache extends LibCache_L1Adapter
    * @param string Area Die zu verwendente Subarea
    * @return bool
    */
-  public function decrement(  $name,  $area = null  )
+  public function decrement( $name,  $area = null  )
   {
 
-    if (is_null($area) ) {
+    if (is_null($area)) {
       $area = "default";
     }
 
-    if ( !$this->cache->decrement($area."_".$name )) {
+    if (!$this->cache->decrement($area."_".$name)) {
       return false;
     }
 
@@ -211,7 +211,7 @@ class LibCacheMemcache extends LibCache_L1Adapter
    *
    * @return bool
    */
-  public function cacheClean( )
+  public function cacheClean()
   {
 
     if (!$this->cache->flush()) {
@@ -227,16 +227,16 @@ class LibCacheMemcache extends LibCache_L1Adapter
    * @param array $conf
    * @return bool
    */
-  public function connectMemached($conf )
+  public function connectMemached($conf)
   {
 
-    if ( WebFrap::loadable('Memcache') ) {
+    if (WebFrap::loadable('Memcache')) {
       $this->cache = new Memcache();
     } else {
       throw new LibCache_Exception('the Memcached modul not exists!');
     }
 
-    $this->cache->connect($conf['server'] , (int) $conf['port'] );
+    $this->cache->connect($conf['server'] , (int) $conf['port']);
 
   } //end protected function connectMemached */
 
@@ -244,7 +244,7 @@ class LibCacheMemcache extends LibCache_L1Adapter
    *
    * @return bool
   */
-  public function closeMemcached( )
+  public function closeMemcached()
   {
     $this->cache->close();
 

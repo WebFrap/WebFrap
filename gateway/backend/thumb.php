@@ -27,14 +27,14 @@ try {
   $webfrap = Webfrap::init();
 
   $request  = Request::getInstance();
-  $key      = $request->get( 'f',Validator::CKEY );
-  $size     = $request->get( 's',Validator::CKEY );
+  $key      = $request->get('f',Validator::CKEY);
+  $size     = $request->get('s',Validator::CKEY);
 
-  $tmp = explode( '-', $key );
+  $tmp = explode('-', $key);
 
   $id = (int) $tmp[2];
 
-  if ($name = $request->get( 'n',Validator::TEXT)) {
+  if ($name = $request->get('n',Validator::TEXT)) {
     $name = base64_decode($name);
   } else {
     $name = $id;
@@ -42,13 +42,13 @@ try {
 
   $fileName = PATH_GW.'data/uploads/'.$tmp[0].'/'.$tmp[1].SParserString::idToPath($id).'/'.$id;
 
-  if ( file_exists( PATH_GW.'data/images/missing/'.$tmp[0].'_'.$tmp[1].'.png' ) ) {
+  if (file_exists(PATH_GW.'data/images/missing/'.$tmp[0].'_'.$tmp[1].'.png')) {
     $errorpic = PATH_GW.'data/images/missing/'.$tmp[0].'_'.$tmp[1].'.png';
   } else {
     $errorpic = View::$themeWeb."/images/wgt/not_available.png";
   }
 
-  if ( file_exists($fileName ) ) {
+  if (file_exists($fileName)) {
     $pic = $fileName;
   } else {
     $pic = $errorpic;
@@ -56,7 +56,7 @@ try {
 
   if ($size) {
 
-    if (!isset($layouts[$size] ) ) {
+    if (!isset($layouts[$size])) {
       $size       = 'medium';
       $maxWidth   = 200;
       $maxHeight  = 200;
@@ -64,14 +64,14 @@ try {
       // X / Y
       $layouts = array
       (
-        'toosmall' => array( 25 , 25 ),
-        'xxsmall' => array( 50 , 50 ),
-        'xsmall' => array( 75 , 75 ),
-        'small' => array( 100 , 100 ),
-        'medium' => array( 200 , 200 ),
-        'large' => array( 300 , 300 ),
-        'xlarge' => array( 400 , 400 ),
-        'xxlarge' => array( 500 , 500 ),
+        'toosmall' => array(25 , 25),
+        'xxsmall' => array(50 , 50),
+        'xsmall' => array(75 , 75),
+        'small' => array(100 , 100),
+        'medium' => array(200 , 200),
+        'large' => array(300 , 300),
+        'xlarge' => array(400 , 400),
+        'xxlarge' => array(500 , 500),
       );
 
       $maxWidth   = $layouts[$size][0];
@@ -88,9 +88,9 @@ try {
   $newName     = PATH_GW.'data/thumbs/'.$tmp[0].'/'.$tmp[1].SParserString::idToPath($id).'/'.$id.'/'.$size;
   //$newName = PATH_GW.'tmp/'.Webfrap::uniqid();
 
-  if (!file_exists($newName ) ) {
+  if (!file_exists($newName)) {
     try {
-      $imgdata      = getimagesize ($pic );
+      $imgdata      = getimagesize ($pic);
       $org_width    = $imgdata[0];
       $org_height   = $imgdata[1];
       $type         = $imgdata[2];
@@ -99,7 +99,7 @@ try {
 
         case IMAGETYPE_GIF :
         {
-          if (!$im = ImageCreateFromGIF($pic)) {
+          if (!$im = ImageCreateFromGif ($pic)) {
             throw new LibImage_Exception("Konnte das Bild nicht erstellen");
           }
           break;
@@ -140,15 +140,15 @@ try {
       if ($org_width > $org_height) {
         $verhaltnis = $org_width / $org_height;
         $new_width  = $maxWidth;
-        $new_height = round( ($new_width / $verhaltnis)  ) ;
+        $new_height = round(($new_width / $verhaltnis)  ) ;
       } else {
         $verhaltnis = $org_height / $org_width ;
         $new_height = $maxHeight;
-        $new_width = round( ($new_height / $verhaltnis)  ) ;
+        $new_width = round(($new_height / $verhaltnis)  ) ;
       }
 
       // neugenerieren des THUMBS
-      $thumb = imagecreatetruecolor($new_width, $new_height );
+      $thumb = imagecreatetruecolor($new_width, $new_height);
 
       imagecopyresampled
       (
@@ -158,13 +158,13 @@ try {
         $new_width,$new_height,$org_width,$org_height
       );
 
-      if (!file_exists($thumbFolder ) )
-        mkdir($thumbFolder, 0777, true );
+      if (!file_exists($thumbFolder))
+        mkdir($thumbFolder, 0777, true);
 
-      if (!imagejpeg($thumb, $newName, 95 ) ) {
-        throw new LibImage_Exception( 'Failed to create '.$this->thumbName );
+      if (!imagejpeg($thumb, $newName, 95)) {
+        throw new LibImage_Exception('Failed to create '.$this->thumbName);
       }
-    } catch ( Exception $e ) {
+    } catch (Exception $e) {
       $newName = $errorpic;
     }
   }
@@ -172,15 +172,15 @@ try {
   $errors .= ob_get_contents();
   ob_end_clean();
 
-  header( 'Content-Type: image/jpeg' );
-  header( 'Content-Disposition: attachment;filename="'.urlencode($size.'_'.$name).'"' );
-  header( 'ETag: '.md5_file($newName) );
-  header( 'Content-Length: '.filesize($newName ) );
+  header('Content-Type: image/jpeg');
+  header('Content-Disposition: attachment;filename="'.urlencode($size.'_'.$name).'"');
+  header('ETag: '.md5_file($newName));
+  header('Content-Length: '.filesize($newName));
 
   readfile($newName);
 
 } // ENDE TRY
-catch( Exception $exception ) {
+catch(Exception $exception) {
   $extType = get_class($exception);
 
   Error::addError
@@ -196,8 +196,8 @@ catch( Exception $exception ) {
   }
 
   if (!DEBUG) {
-    if ( isset($view) and is_object($view) ) {
-      $view->publishError($exception->getMessage() , $errors );
+    if (isset($view) and is_object($view)) {
+      $view->publishError($exception->getMessage() , $errors);
     } else {
       View::printErrorPage
       (

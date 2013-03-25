@@ -29,11 +29,11 @@ class WgtItemInput extends WgtItemAbstract
    *
    * @return
    */
-  public function build( )
+  public function build()
   {
     return '<input '.$this->asmAttributes().' />'.NL;
 
-  } // end public function build( )
+  } // end public function build()
 
 } // end class WgtItemInput
 

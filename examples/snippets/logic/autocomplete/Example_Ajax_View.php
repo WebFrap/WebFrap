@@ -34,11 +34,11 @@ class Example_Ajax_View extends LibTemplateAjaxView
    * @param string $key
    * @param TArray $params
    */
-  public function displayAutocomplete($key, $params )
+  public function displayAutocomplete($key, $params)
   {
 
-    $view = $this->getTpl( );
-    $view->setRawJsonData($this->model->getAutolistByKey($key, $params) );
+    $view = $this->getTpl();
+    $view->setRawJsonData($this->model->getAutolistByKey($key, $params));
 
   }//end public function displayAutocomplete */
 

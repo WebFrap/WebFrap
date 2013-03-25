@@ -27,7 +27,7 @@ class MyActionLog_Table_Access extends LibAclPermission
    * @param TFlag $params
    * @param MyTask_Entity $entity
    */
-  public function loadDefault($params, $entity = null )
+  public function loadDefault($params, $entity = null)
   {
 
     // laden der benötigten Resource Objekte
@@ -82,7 +82,7 @@ class MyActionLog_Table_Access extends LibAclPermission
    * @param string $condition
    * @param TFlag $params
    */
-  public function fetchListTableDefault($query, $condition, $params )
+  public function fetchListTableDefault($query, $condition, $params)
   {
 
     // laden der benötigten Resource Objekte
@@ -95,7 +95,7 @@ class MyActionLog_Table_Access extends LibAclPermission
     // erstellen der Acl criteria und befüllen mit den relevanten cols
     $criteria  = $orm->newCriteria();
 
-    $criteria->select( array( 'project_project.rowid as rowid' )  );
+    $criteria->select(array('project_project.rowid as rowid')  );
 
     if (!$this->defLevel) {
       $greatest = <<<SQL
@@ -124,30 +124,30 @@ SQL;
 
     $criteria->selectAlso($greatest  );
 
-    $query->setTables($criteria );
+    $query->setTables($criteria);
     $query->appendConditions($criteria, $condition, $params  );
-    $query->checkLimitAndOrder($criteria, $params );
-    $query->appendFilter($criteria, $params );
+    $query->checkLimitAndOrder($criteria, $params);
+    $query->appendFilter($criteria, $params);
 
     $criteria->join
     (
       " {$joinType} JOIN
         {$acl->sourceRelation} as acls
         ON
-          acls.\"acl-area\" IN( 'mod-project', 'mgmt-project_project' )
+          acls.\"acl-area\" IN('mod-project', 'mgmt-project_project')
             AND acls.\"acl-user\" = {$userId}
             AND acls.\"acl-vid\" = project_project.rowid ",
       'acls'
     );
 
-    $tmp = $orm->select($criteria );
+    $tmp = $orm->select($criteria);
     $ids = array();
 
     foreach ($tmp as $row) {
       $ids[$row['rowid']] = $row['acl-level'];
     }
 
-    $query->setCalcQuery($criteria, $params );
+    $query->setCalcQuery($criteria, $params);
 
     return $ids;
 

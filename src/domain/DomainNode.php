@@ -165,10 +165,10 @@ class DomainNode
    * @param string $key
    * @return DomainNode
    */
-  public static function getNode($key )
+  public static function getNode($key)
   {
 
-    if (!array_key_exists($key, self::$pool ) ) {
+    if (!array_key_exists($key, self::$pool)) {
 
       $className = SParserString::subToCamelCase($key).'_Domain';
 

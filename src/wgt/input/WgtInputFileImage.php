@@ -31,14 +31,14 @@ class WgtInputFileImage extends WgtInput
    */
   public $link = null;
 
-  public function setLink($link )
+  public function setLink($link)
   {
     $this->link = $link;
   }
 
   public $source = null;
 
-  public function setSource($source )
+  public function setSource($source)
   {
     $this->source = $source;
   }
@@ -49,18 +49,18 @@ class WgtInputFileImage extends WgtInput
    * @param array $attributes
    * @return string
    */
-  public function build($attributes = array() )
+  public function build($attributes = array())
   {
 
-    if ($attributes )
-      $this->attributes = array_merge($this->attributes, $attributes );
+    if ($attributes)
+      $this->attributes = array_merge($this->attributes, $attributes);
 
     // ist immer ein text attribute
     $this->attributes['type'] = 'text';
 
     $value = null;
 
-    if ( isset($this->attributes['value'] ) ) {
+    if (isset($this->attributes['value'])) {
       $value = $this->attributes['value'];
     }
 
@@ -77,7 +77,7 @@ class WgtInputFileImage extends WgtInput
 
     $fName    = $this->attributes['name'];
     $required = $this->required?'<span class="wgt-required">*</span>':'';
-    $icon     = Wgt::icon('control/upload_image.png', 'xsmall', 'Upload Image' );
+    $icon     = Wgt::icon('control/upload_image.png', 'xsmall', 'Upload Image');
 
     $this->attributes['class'] = isset($this->attributes['class'])
       ? $this->attributes['class'].' wgt-ignore wgt-overlay'
@@ -120,7 +120,7 @@ HTML;
     if (!isset($this->attributes['id']))
       return '';
 
-    if (!isset($this->attributes['value']) )
+    if (!isset($this->attributes['value']))
       $this->attributes['value'] = '';
 
     $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="value" ><![CDATA['

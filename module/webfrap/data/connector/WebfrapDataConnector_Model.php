@@ -30,7 +30,7 @@ class WebfrapDataConnector_Model extends Model
   /**
    * @param $request WebfrapDataConnector_Search_Request 
    */
-  public function search( $searchRqt )
+  public function search($searchRqt)
   {
     
     $orm = $this->getOrm();
@@ -40,7 +40,7 @@ class WebfrapDataConnector_Model extends Model
     $type = null;
     $searchValue = null;
 
-    if(isset($tokens[1])){
+    if (isset($tokens[1])){
       $type = $tokens[0];
       $searchValue = $tokens[1];
     } else {
@@ -58,7 +58,7 @@ class WebfrapDataConnector_Model extends Model
   ent.name as entity_name,
   ent.access_key as entity_key
 SQL
-   , true );
+   , true);
 
     $criteria->from('wbfsys_data_index idx');
 
@@ -68,24 +68,24 @@ SQL
     );
 
     $criteria->where(<<<SQL
-(to_tsvector('english', idx.title) @@ to_tsquery( 'english', '{$searchValue}')
-   OR UPPER(idx.title) like UPPER( '{$searchValue}%' ))
+(to_tsvector('english', idx.title) @@ to_tsquery('english', '{$searchValue}')
+   OR UPPER(idx.title) like UPPER('{$searchValue}%'))
 SQL
     );
 
-    if( $type ){
+    if ($type){
       $criteria->join(<<<SQL
 	JOIN wbfsys_entity_alias al on al.id_entity = idx.id_vid_entity
 SQL
       );
 
       $criteria->where(<<<SQL
-	UPPER(al.name) like UPPER( '{$type}%' )
+	UPPER(al.name) like UPPER('{$type}%')
 SQL
       );
     }
 
-    $criteria->orderBy( 'title asc' );
+    $criteria->orderBy('title asc');
     $criteria->limit(50);
 
 

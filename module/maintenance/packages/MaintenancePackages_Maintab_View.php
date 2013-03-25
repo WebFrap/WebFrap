@@ -31,7 +31,7 @@ class MaintenancePackages_Maintab_View extends WgtMaintabCustom
  /**
   * @param TFlag $params
   */
-  public function displayList($params )
+  public function displayList($params)
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -42,18 +42,18 @@ class MaintenancePackages_Maintab_View extends WgtMaintabCustom
     );
 
     // set the window title
-    $this->setTitle($i18nText );
+    $this->setTitle($i18nText);
 
     // set the window status text
-    $this->setLabel($i18nText );
+    $this->setLabel($i18nText);
 
-    $this->addVar( 'caches', $this->model->getCaches() );
+    $this->addVar('caches', $this->model->getCaches());
 
     // set the from template
-    $this->setTemplate( 'maintenance/packages/maintab/list_packages' );
+    $this->setTemplate('maintenance/packages/maintab/list_packages');
 
-    $this->addMenu($params );
-    $this->addActions($params );
+    $this->addMenu($params);
+    $this->addActions($params);
 
     // kein fehler aufgetreten
     return null;
@@ -73,19 +73,19 @@ class MaintenancePackages_Maintab_View extends WgtMaintabCustom
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu($params )
+  public function addMenu($params)
   {
 
     $i18n         = $this->getI18n();
 
-    $iconMenu     = $this->icon( 'control/menu.png'      ,'Menu');
-    $iconSupport  = $this->icon( 'control/support.png'      ,'Support');
-    $iconHelp     = $this->icon( 'control/help.png'      ,'Help');
-    $iconClose    = $this->icon( 'control/close.png'      ,'Close');
-    $iconEdit     = $this->icon( 'control/edit.png'      ,'Edit');
-    $iconBug      = $this->icon( 'control/bug.png'      ,'Bug');
+    $iconMenu     = $this->icon('control/menu.png'      ,'Menu');
+    $iconSupport  = $this->icon('control/support.png'      ,'Support');
+    $iconHelp     = $this->icon('control/help.png'      ,'Help');
+    $iconClose    = $this->icon('control/close.png'      ,'Close');
+    $iconEdit     = $this->icon('control/edit.png'      ,'Edit');
+    $iconBug      = $this->icon('control/bug.png'      ,'Bug');
 
-    $iconRefresh    = $this->icon( 'control/refresh.png'      ,'Refresh');
+    $iconRefresh    = $this->icon('control/refresh.png'      ,'Refresh');
 
     $menu          = $this->newMenu($this->id.'_dropmenu');
     $menu->content = <<<HTML
@@ -130,7 +130,7 @@ HTML;
    *   string formId: the id of the form;
    * }
    */
-  public function addActions($params )
+  public function addActions($params)
   {
 
     // add the button actions for create in the window
@@ -150,7 +150,7 @@ self.getObject().find(".wgtac_close").click(function(){
 
 BUTTONJS;
 
-    $this->addJsCode($code );
+    $this->addJsCode($code);
 
   }//end public function addActions */
 

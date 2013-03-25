@@ -33,15 +33,15 @@ class LibDownloadFile extends LibDownloadAdapter
     $httpRequest = Request::getActive();
     $orm         = Db::getOrm();
 
-    if (!$fid = $httpRequest->param('file' , Validator::INT )) {
-      throw new Io_Exception('Invalid File Requested :'. urlencode($fid) );
+    if (!$fid = $httpRequest->param('file' , Validator::INT)) {
+      throw new Io_Exception('Invalid File Requested :'. urlencode($fid));
     }
 
-    if (!$file = $orm->get( 'WbfsysFile', $fid)) {
+    if (!$file = $orm->get('WbfsysFile', $fid)) {
       throw new Io_Exception('Invalid File Requested');
     }
 
-    if ($filename = $httpRequest->param('filename','raw') ) {
+    if ($filename = $httpRequest->param('filename','raw')) {
       $this->fileName = $filename;
     } else {
       $this->fileName = $file->getData('name');
@@ -60,8 +60,8 @@ class LibDownloadFile extends LibDownloadAdapter
   public function download()
   {
 
-    if ( file_exists($this->fullpath ) ) {
-      $this->setHeaderForceDownload($this->fileName );
+    if (file_exists($this->fullpath)) {
+      $this->setHeaderForceDownload($this->fileName);
       $this->stream($this->fullpath);
     } else {
       $this->setHeaderFileNotFound();

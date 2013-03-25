@@ -62,10 +62,10 @@ class LibFilereaderCsv extends LibFilereader
   /**
    * @param string $filename
    */
-  public function load($filename )
+  public function load($filename)
   {
 
-    if (!$this->resource = fopen($filename , 'r' ) ) {
+    if (!$this->resource = fopen($filename , 'r')) {
       throw new Io_Exception('failed to open csv resource: '.$filename);
     }
 
@@ -77,7 +77,7 @@ class LibFilereaderCsv extends LibFilereader
    */
   public function close()
   {
-    if ( is_resource($this->resource) )
+    if (is_resource($this->resource))
      fclose($this->resource);
 
   }//end public function close
@@ -108,7 +108,7 @@ class LibFilereaderCsv extends LibFilereader
   public function next()
   {
     ++$this->pos;
-    $this->actual = fgetcsv($this->resource, 0, $this->delimiter, $this->enclosure, $this->escape );
+    $this->actual = fgetcsv($this->resource, 0, $this->delimiter, $this->enclosure, $this->escape);
 
     return $this->actual;
 
@@ -121,7 +121,7 @@ class LibFilereaderCsv extends LibFilereader
   {
     --$this->pos;
     fseek($this->resource, $this->pos);
-    $this->actual = fgetcsv($this->resource, 0, $this->delimiter, $this->enclosure, $this->escape );
+    $this->actual = fgetcsv($this->resource, 0, $this->delimiter, $this->enclosure, $this->escape);
 
     return $this->actual;
 

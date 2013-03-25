@@ -38,11 +38,11 @@ class LibRelationLoader_Query extends LibSqlQuery
     $id     = null;
 
     if ($group->area) {
-      $areas = $this->extractWeightedKeys($group->area );
+      $areas = $this->extractWeightedKeys($group->area);
     }
 
     if ($group->entity) {
-      if ( is_object($group->entity) ) {
+      if (is_object($group->entity)) {
         $id = $group->entity->getId();
       } else {
         $id = $group->entity;
@@ -54,7 +54,7 @@ class LibRelationLoader_Query extends LibSqlQuery
     // wenn keine Area übergeben wurde dann brauchen wir nur die
     // globalen assignments
     if ($id) {
-      $areaKeys = " UPPER(wbfsys_security_area.access_key)  IN( UPPER('".implode($areas,"'), UPPER('")."') ) " ;
+      $areaKeys = " UPPER(wbfsys_security_area.access_key)  IN(UPPER('".implode($areas,"'), UPPER('")."')) " ;
 
       $joins = <<<SQL
 
@@ -96,7 +96,7 @@ SQL;
 
 
     } elseif ($areas) {
-      $areaKeys = " UPPER(wbfsys_security_area.access_key)  IN( upper('".implode($areas,"'),upper('")."') )" ;
+      $areaKeys = " UPPER(wbfsys_security_area.access_key)  IN(upper('".implode($areas,"'),upper('")."'))" ;
 
       $joins = <<<SQL
 
@@ -142,8 +142,8 @@ SQL;
 
     }
 
-    if ( is_array($group->name ) ) {
-      $groupRoles = " IN( upper('".implode($group->name,"'),upper('")."') )" ;
+    if (is_array($group->name)) {
+      $groupRoles = " IN(upper('".implode($group->name,"'),upper('")."'))" ;
     } else {
       $groupRoles = " =  upper('{$group->name}') " ;
     }
@@ -188,7 +188,7 @@ SQL;
 
     $db   = $this->getDb();
 
-    return $db->select($query )->getAll();
+    return $db->select($query)->getAll();
 
   }//end public function fetchGroups */
 
@@ -196,13 +196,13 @@ SQL;
    * @param LibMessage_Receiver_User $user
    * @param string $type
    */
-  public function fetchUser($user )
+  public function fetchUser($user)
   {
 
     if ($user->user) {
 
       if (!$user->user->id_person) {
-        throw new LibMessage_Exception( 'Invalid Userobject '. $user->user->name .', missing person ID' );
+        throw new LibMessage_Exception('Invalid Userobject '. $user->user->name .', missing person ID');
       }
 
       $sql = <<<SQL
@@ -293,21 +293,21 @@ JOIN
     wbfsys_role_user.id_person = core_person.rowid
 
 WHERE
-  UPPER(wbfsys_role_user.name) = UPPER( '{$user->name}' )
+  UPPER(wbfsys_role_user.name) = UPPER('{$user->name}')
   AND  NOT wbfsys_role_user.inactive = TRUE
 
 SQL;
 
     } else {
-      Debug::console( 'Receiver for User: '.$user->name.' '.$user->id.' was empty',$user );
-      throw new LibRelation_Exception( 'Receiver for User: '.$user->name.' '.$user->id.' was empty' );
+      Debug::console('Receiver for User: '.$user->name.' '.$user->id.' was empty',$user);
+      throw new LibRelation_Exception('Receiver for User: '.$user->name.' '.$user->id.' was empty');
     }
 
     $db   = $this->getDb();
 
-    $userData = $db->select($sql )->get();
+    $userData = $db->select($sql)->get();
 
-    Debug::console($sql, $userData );
+    Debug::console($sql, $userData);
 
     return $userData;
 
@@ -319,20 +319,20 @@ SQL;
    * @param array/string $keys
    * @return array
    */
-  protected function extractWeightedKeys($keys )
+  protected function extractWeightedKeys($keys)
   {
 
     $keysData = array();
 
-    $tmp    = explode( '>', $keys );
+    $tmp    = explode('>', $keys);
 
-    $areas  = explode( '/', $tmp[0] );
+    $areas  = explode('/', $tmp[0]);
 
     $wAreas = array();
-    if ( isset($tmp[1]) )
-      $wAreas = explode( '/', $tmp[1] );;
+    if (isset($tmp[1]))
+      $wAreas = explode('/', $tmp[1]);;
 
-    $keysData = array_merge($areas, $wAreas );
+    $keysData = array_merge($areas, $wAreas);
 
     return $keysData;
 

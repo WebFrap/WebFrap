@@ -32,7 +32,7 @@ class LibVendorGeshi
    */
   public function highlightCode($string , $lang = null  )
   {
-    $geshi = new GeSHi($string, $lang );
+    $geshi = new GeSHi($string, $lang);
     $geshi->set_header_type(GESHI_HEADER_NONE);
     return '<code>' . $geshi->parse_code() . '</code>' ;
   }

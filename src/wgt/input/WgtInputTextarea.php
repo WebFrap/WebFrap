@@ -30,10 +30,10 @@ class WgtInputTextarea extends WgtInput
    * @param $name
    * @return unknown_type
    */
-  public function __construct($name )
+  public function __construct($name)
   {
-    parent::__construct($name );
-    $this->attributes = array( 'cols' => '' , 'rows' => '' );
+    parent::__construct($name);
+    $this->attributes = array('cols' => '' , 'rows' => '');
 
   }//end public function __construct */
 
@@ -81,7 +81,7 @@ class WgtInputTextarea extends WgtInput
  /**
   * @return void
   */
-  public function element( )
+  public function element()
   {
     return '<textarea '.$this->asmAttributes().' >'.$this->data.'</textarea>';
   }// end public function element */
@@ -90,7 +90,7 @@ class WgtInputTextarea extends WgtInput
    *
    * @return unknown_type
    */
-  public function build($attributes = array() )
+  public function build($attributes = array())
   {
 
     if ($attributes)
@@ -112,19 +112,19 @@ class WgtInputTextarea extends WgtInput
 
     return $html;
 
-  } // end public function build( )
+  } // end public function build()
 
   /**
    * (non-PHPdoc)
    * @see src/wgt/WgtAbstract#buildAjax()
    */
-  public function buildAjax( )
+  public function buildAjax()
   {
 
     if (!isset($this->attributes['id']))
       return '';
 
-    if (!isset($this->attributes['value']) )
+    if (!isset($this->attributes['value']))
       $this->attributes['value'] = '';
 
     $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="value" ><![CDATA['

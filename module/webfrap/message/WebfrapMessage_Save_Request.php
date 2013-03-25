@@ -41,10 +41,12 @@ class WebfrapMessage_Save_Request extends Context
     
     $aspStack = $request->data('aspect', Validator::INT);
     
-    foreach( $aspStack as $asp ){
-      if($asp)
+    foreach($aspStack as $asp){
+      if ($asp)
         $this->aspects[] = $asp;
     }
+    
+    $this->aspects[] = $request->data('paspect', Validator::INT);
     
     Debug::console('$this->aspects',$this->aspects,null,true);
 

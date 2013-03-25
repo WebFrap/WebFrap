@@ -32,7 +32,7 @@ class DaidalosDatabase_Connection_Table_Element extends WgtTable
    * @param string $Class Der Datenbanktype
    * @return
    */
-  public function build( )
+  public function build()
   {
 
     // Creating the Head
@@ -63,7 +63,7 @@ class DaidalosDatabase_Connection_Table_Element extends WgtTable
 
       $urlConf = 'index.php?c=Daidalos.Projects.genMask&amp;objid='.urlencode($key);
       $linkConf = '<a title="GenMask"  class="wcm wcm_req_ajax wgt_info" href="'.$urlConf.'">'
-        .Wgt::icon('daidalos/bdl_mask.png' , 'xsmall' , 'build' ).'</a>';
+        .Wgt::icon('daidalos/bdl_mask.png' , 'xsmall' , 'build').'</a>';
 
       $body .= '<td valign="top" >'.$key.'</td>'.NL;
       $body .= '<td valign="top" >'.$row['class'].'</td>'.NL;
@@ -77,7 +77,7 @@ class DaidalosDatabase_Connection_Table_Element extends WgtTable
       $body .= '</tr>'.NL;
 
       $num ++;
-      if ($num > $this->numOfColors )
+      if ($num > $this->numOfColors)
         $num = 1;
 
     }// ENDE FOREACH

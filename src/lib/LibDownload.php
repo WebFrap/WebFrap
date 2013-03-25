@@ -42,7 +42,7 @@ class LibDownload
 
     $classname = 'LibDownload'.ucfirst($type);
 
-    if ( WebFrap::loadable($classname) &&  $classname != 'LibDownloadAdapter' ) {
+    if (WebFrap::loadable($classname) &&  $classname != 'LibDownloadAdapter') {
       $download = new $classname();
     } else {
       throw new Io_Exception('Invalid Donwload Type');

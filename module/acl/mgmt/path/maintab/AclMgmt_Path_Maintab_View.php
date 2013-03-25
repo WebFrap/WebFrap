@@ -52,13 +52,13 @@ class AclMgmt_Path_Maintab_View extends WgtMaintab
   * @param TFlag $params
   * @return boolean
   */
-  public function displayGraph($groupId, $params )
+  public function displayGraph($groupId, $params)
   {
 
     // set the path to the template
     // the system search in all modules for the template
     // the tpl ending is assigned automatically
-    $this->setTemplate( 'acl/mgmt/path/maintab/acl_graph', true );
+    $this->setTemplate('acl/mgmt/path/maintab/acl_graph', true);
 
 
     // fetch the i18n text only one time
@@ -66,7 +66,7 @@ class AclMgmt_Path_Maintab_View extends WgtMaintab
     (
       'Access Inheritance for {@label@}',
       'wbf.label',
-      array( 'label' => $this->model->domainNode->pLabel )
+      array('label' => $this->model->domainNode->pLabel)
     );
 
     // set browser title
@@ -79,27 +79,27 @@ class AclMgmt_Path_Maintab_View extends WgtMaintab
     // the tabid that is used in the template
     // this tabid has to be placed in the class attribute of all subtasks
 
-    $areaId = $this->model->getAreaId($this->model->domainNode->aclBaseKey );
+    $areaId = $this->model->getAreaId($this->model->domainNode->aclBaseKey);
 
-    $this->addVar( 'params', $params );
-    $this->addVar( 'treeData', $this->model->getReferences($areaId, $groupId, $params ) );
-    $this->addVar( 'groups', $this->model->getAreaGroups($areaId, $groupId, $params ) );
+    $this->addVar('params', $params);
+    $this->addVar('treeData', $this->model->getReferences($areaId, $groupId, $params));
+    $this->addVar('groups', $this->model->getAreaGroups($areaId, $groupId, $params));
 
 
-    $this->addVar( 'areaId', $areaId );
-    $this->addVar( 'groupId', $groupId );
-    $this->addVar( 'group', $this->model->getGroup($groupId ) );
+    $this->addVar('areaId', $areaId);
+    $this->addVar('groupId', $groupId);
+    $this->addVar('group', $this->model->getGroup($groupId));
 
-    $this->addVar( 'domain', $this->model->domainNode );
+    $this->addVar('domain', $this->model->domainNode);
 
     // check graph type
-    if (!$params->graphType )
+    if (!$params->graphType)
       $params->graphType = 'spacetree';
 
-    $this->addVar( 'graphType', $params->graphType );
+    $this->addVar('graphType', $params->graphType);
 
     // create form elements
-    $selectAccess = new AclMgmt_Selectbox_Access( 'inputAccess', $this );
+    $selectAccess = new AclMgmt_Selectbox_Access('inputAccess', $this);
     $selectAccess->addAttributes(array(
       'id'    => 'wgt-input-'.$this->model->domainNode->aclDomainKey.'-acl-path-access_level',
       'class' => 'medium',
@@ -108,7 +108,7 @@ class AclMgmt_Path_Maintab_View extends WgtMaintab
 
 
     // inject the menu in the view object
-    $this->createMenu($areaId, $params );
+    $this->createMenu($areaId, $params);
 
     return null;
 
@@ -124,7 +124,7 @@ class AclMgmt_Path_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function createMenu($objid, $params )
+  public function createMenu($objid, $params)
   {
 
     $menu     = $this->newMenu
@@ -134,9 +134,9 @@ class AclMgmt_Path_Maintab_View extends WgtMaintab
     );
 
     $menu->id = $this->id.'_dropmenu';
-    $menu->buildMenu($objid, $params );
+    $menu->buildMenu($objid, $params);
 
-    $menu->addMenuLogic($this, $objid, $params );
+    $menu->addMenuLogic($this, $objid, $params);
 
     return true;
 

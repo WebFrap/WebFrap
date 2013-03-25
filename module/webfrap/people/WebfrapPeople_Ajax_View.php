@@ -40,11 +40,11 @@ class WebfrapPeople_Ajax_View extends LibTemplateAjaxView
    *
    * @return void
    */
-  public function displayAutocomplete($key, $params )
+  public function displayAutocomplete($key, $params)
   {
 
     $view = $this->getTplEngine();
-    $view->setRawJsonData($this->model->getUsersByKey($key, $params ) );
+    $view->setRawJsonData($this->model->getUsersByKey($key, $params));
 
     return null;
 

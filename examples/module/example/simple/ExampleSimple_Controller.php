@@ -38,7 +38,7 @@ class ExampleSimple_Controller extends Controller
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
    */
-  public function service_helloWorld($request, $response )
+  public function service_helloWorld($request, $response)
   {
 
     // einfachster weg, template direkt der standard template engine übergeben
@@ -107,14 +107,14 @@ class ExampleSimple_Controller extends Controller
     }
 
     // prüfen ob der aktive user die rolle admin in relation zu einem pfad hat
-    if (!$acl->hasRole( 'admin', 'mod-key/entity-key/mgmt-key')) {
+    if (!$acl->hasRole('admin', 'mod-key/entity-key/mgmt-key')) {
       $this->accessDenied();
 
       return false;
     }
 
     // auch hier kann die rolle in relation zu einer entität abgefragt werden
-    if (!$acl->hasRole( 'admin', 'mod-key/entity-key/mgmt-key',$entityObject)) {
+    if (!$acl->hasRole('admin', 'mod-key/entity-key/mgmt-key',$entityObject)) {
       $this->accessDenied();
 
       return false;

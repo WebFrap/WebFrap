@@ -30,7 +30,7 @@ class SetupDatabase_Consistency extends DataContainer
   /**
    * @return void
    */
-  public function run(  )
+  public function run()
   {
 
     $this->systemUsers();
@@ -46,7 +46,7 @@ class SetupDatabase_Consistency extends DataContainer
     $orm = $this->getOrm();
     $request = $this->getRequest();
 
-    $userLib = new LibUser($this );
+    $userLib = new LibUser($this);
 
     $user = new LibEnvelopUser();
 
@@ -61,9 +61,9 @@ class SetupDatabase_Consistency extends DataContainer
     $user->inactive     = false;
     $user->nonCertLogin = false;
 
-    $user->addressItems[] = array( 'mail', 'system@'.$request->getServerName() );
+    $user->addressItems[] = array('mail', 'system@'.$request->getServerName());
 
-    $userLib->createUser($user );
+    $userLib->createUser($user);
 
   }//end protected function systemUsers */
 

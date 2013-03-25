@@ -109,6 +109,14 @@
     </li>
 		<li><span>ui</span>
 			<ul>
+        <li><span>Layout Elements</span>
+          <ul>
+            <li><a
+              href="area.php?c=Example.Wgt.area&area=layout.accordion"
+              class="wcm wcm_req_ajax" >Accordion</a>
+            </li>
+          </ul>
+        </li>
 				<li><span>Tab heads</span>
   				<ul>
             <li><a
@@ -121,7 +129,11 @@
             </li>
             <li><a
             	href="area.php?c=Example.Wgt.area&area=ui.buttonset_tabhead"
-            	class="wcm wcm_req_ajax" >Buttonset Tabhead Selectbox</a>
+            	class="wcm wcm_req_ajax" >Buttonset Tabhead</a>
+            </li>
+            <li><a
+              href="area.php?c=Example.Wgt.area&area=ui.accordion_tabhead"
+              class="wcm wcm_req_ajax" >Accordion Tabhead</a>
             </li>
           </ul>
         </li>

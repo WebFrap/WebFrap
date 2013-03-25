@@ -1891,7 +1891,7 @@ SQL;
     }
 
     if (DEBUG)
-      Debug::console( "area access Level  $accessLevel");
+      Debug::console("area access Level  $accessLevel");
 
     if ($this->aclCache) {
       $this->aclCache->add($cacheKey, $accessLevel);
@@ -1932,7 +1932,7 @@ SQL;
     }
 
     if (DEBUG)
-      Debug::console( "area ref access Level  $accessLevel");
+      Debug::console("area ref access Level  $accessLevel");
 
     return $accessLevel;
 

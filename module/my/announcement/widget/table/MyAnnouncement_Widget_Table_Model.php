@@ -33,9 +33,9 @@ class MyAnnouncement_Widget_Table_Model extends Model
   * @param int $objid
   * @return WbfsysAnnouncement_Entity
   */
-  public function getEntity($objid = null )
+  public function getEntity($objid = null)
   {
-    return $this->getEntityWbfsysAnnouncement($objid );
+    return $this->getEntityWbfsysAnnouncement($objid);
 
   }//end public function getEntity */
 
@@ -43,10 +43,10 @@ class MyAnnouncement_Widget_Table_Model extends Model
   * Setzen der Haupt Entity, unabhängig vom Maskenname
   * @param WbfsysAnnouncement_Entity $entity
   */
-  public function setEntity($entity )
+  public function setEntity($entity)
   {
 
-    $this->setEntityWbfsysAnnouncement($entity );
+    $this->setEntityWbfsysAnnouncement($entity);
 
   }//end public function setEntity */
 
@@ -56,21 +56,21 @@ class MyAnnouncement_Widget_Table_Model extends Model
   * @param int $objid
   * @return WbfsysAnnouncement_Entity
   */
-  public function getEntityWbfsysAnnouncement($objid = null )
+  public function getEntityWbfsysAnnouncement($objid = null)
   {
 
     $response = $this->getResponse();
 
-    if (!$entityWbfsysAnnouncement = $this->getRegisterd( 'main_entity' ) )
-      $entityWbfsysAnnouncement = $this->getRegisterd( 'entityWbfsysAnnouncement' );
+    if (!$entityWbfsysAnnouncement = $this->getRegisterd('main_entity'))
+      $entityWbfsysAnnouncement = $this->getRegisterd('entityWbfsysAnnouncement');
 
     //entity wbfsys_announcement
     if (!$entityWbfsysAnnouncement) {
 
-      if (!is_null($objid ) ) {
+      if (!is_null($objid)) {
         $orm = $this->getOrm();
 
-        if (!$entityWbfsysAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) ) {
+        if (!$entityWbfsysAnnouncement = $orm->get('WbfsysAnnouncement', $objid)) {
           $response->addError
           (
             $response->i18n->l
@@ -83,19 +83,19 @@ class MyAnnouncement_Widget_Table_Model extends Model
           return null;
         }
 
-        $this->register( 'entityWbfsysAnnouncement', $entityWbfsysAnnouncement );
-        $this->register( 'main_entity', $entityWbfsysAnnouncement);
+        $this->register('entityWbfsysAnnouncement', $entityWbfsysAnnouncement);
+        $this->register('main_entity', $entityWbfsysAnnouncement);
 
       } else {
         $entityWbfsysAnnouncement   = new WbfsysAnnouncement_Entity() ;
-        $this->register( 'entityWbfsysAnnouncement', $entityWbfsysAnnouncement );
-        $this->register( 'main_entity', $entityWbfsysAnnouncement);
+        $this->register('entityWbfsysAnnouncement', $entityWbfsysAnnouncement);
+        $this->register('main_entity', $entityWbfsysAnnouncement);
       }
 
-    } elseif ($objid && $objid != $entityWbfsysAnnouncement->getId() ) {
+    } elseif ($objid && $objid != $entityWbfsysAnnouncement->getId()) {
       $orm = $this->getOrm();
 
-      if (!$entityWbfsysAnnouncement = $orm->get( 'WbfsysAnnouncement', $objid) ) {
+      if (!$entityWbfsysAnnouncement = $orm->get('WbfsysAnnouncement', $objid)) {
         $response->addError
         (
           $response->i18n->l
@@ -108,8 +108,8 @@ class MyAnnouncement_Widget_Table_Model extends Model
         return null;
       }
 
-      $this->register( 'entityWbfsysAnnouncement', $entityWbfsysAnnouncement);
-      $this->register( 'main_entity', $entityWbfsysAnnouncement);
+      $this->register('entityWbfsysAnnouncement', $entityWbfsysAnnouncement);
+      $this->register('main_entity', $entityWbfsysAnnouncement);
     }
 
     return $entityWbfsysAnnouncement;
@@ -121,11 +121,11 @@ class MyAnnouncement_Widget_Table_Model extends Model
   * and returns it instead
   * @param WbfsysAnnouncement_Entity $entity
   */
-  public function setEntityWbfsysAnnouncement($entity )
+  public function setEntityWbfsysAnnouncement($entity)
   {
 
-    $this->register( 'entityWbfsysAnnouncement', $entity );
-    $this->register( 'main_entity', $entity );
+    $this->register('entityWbfsysAnnouncement', $entity);
+    $this->register('main_entity', $entity);
 
   }//end public function setEntityWbfsysAnnouncement */
 
@@ -135,7 +135,7 @@ class MyAnnouncement_Widget_Table_Model extends Model
    * @param TFlag $params named parameters
    * @return boolean
    */
-  public function getEntryData($params )
+  public function getEntryData($params)
   {
 
     $orm   = $this->getOrm();
@@ -149,11 +149,11 @@ class MyAnnouncement_Widget_Table_Model extends Model
     foreach ($data as $tabName => $ent) {
       // prüfen ob etwas gefunden wurde
       if (!$ent) {
-        Debug::console( "Missing Entity for Reference: ".$tabName );
+        Debug::console("Missing Entity for Reference: ".$tabName);
         continue;
       }
 
-      $tabData = array_merge($tabData , $ent->getAllData($tabName ) );
+      $tabData = array_merge($tabData , $ent->getAllData($tabName));
 
     }
 
@@ -188,7 +188,7 @@ class MyAnnouncement_Widget_Table_Model extends Model
    * Berechtigungen werden bei bedarf berücksichtigt
    *
    * Am Ende wird ein geladenes Query Objekt zurückgegeben, über welches
-   * ( wie über einen Array ) itteriert werden kann
+   * (wie über einen Array) itteriert werden kann
    *
    * @param LibAclContainer $access
    * @param TFlag $params named parameters
@@ -198,9 +198,9 @@ class MyAnnouncement_Widget_Table_Model extends Model
    *
    * @throws LibDb_Exception
    *    wenn die Query fehlschlägt
-   *    Datenbank Verbindungsfehler... etc ( siehe meldung )
+   *    Datenbank Verbindungsfehler... etc (siehe meldung)
    */
-  public function search($access, $params, $condition = array() )
+  public function search($access, $params, $condition = array())
   {
 
     // laden der benötigten resourcen
@@ -216,12 +216,12 @@ class MyAnnouncement_Widget_Table_Model extends Model
     if ($free = $httpRequest->param('free_search' , Validator::TEXT))
       $condition['free'] = $free;
 
-      if (!$fieldsWbfsysAnnouncement = $this->getRegisterd( 'search_fields_wbfsys_announcement' ) ) {
-         $fieldsWbfsysAnnouncement   = $orm->getSearchCols( 'WbfsysAnnouncement' );
+      if (!$fieldsWbfsysAnnouncement = $this->getRegisterd('search_fields_wbfsys_announcement')) {
+         $fieldsWbfsysAnnouncement   = $orm->getSearchCols('WbfsysAnnouncement');
       }
 
-      if ($refs = $httpRequest->dataSearchIds( 'search_wbfsys_announcement' ) ) {
-        $fieldsWbfsysAnnouncement = array_unique( array_merge
+      if ($refs = $httpRequest->dataSearchIds('search_wbfsys_announcement')) {
+        $fieldsWbfsysAnnouncement = array_unique(array_merge
         (
           $fieldsWbfsysAnnouncement,
           $refs
@@ -230,50 +230,50 @@ class MyAnnouncement_Widget_Table_Model extends Model
 
       $filterWbfsysAnnouncement     = $httpRequest->checkSearchInput
       (
-        $orm->getValidationData( 'WbfsysAnnouncement', $fieldsWbfsysAnnouncement ),
-        $orm->getErrorMessages( 'WbfsysAnnouncement'  ),
+        $orm->getValidationData('WbfsysAnnouncement', $fieldsWbfsysAnnouncement),
+        $orm->getErrorMessages('WbfsysAnnouncement'  ),
         'search_wbfsys_announcement'
       );
       $condition['wbfsys_announcement'] = $filterWbfsysAnnouncement->getData();
 
-      if ($mRoleCreate = $httpRequest->data( 'search_wbfsys_announcement', Validator::EID, 'm_role_create'   ) )
+      if ($mRoleCreate = $httpRequest->data('search_wbfsys_announcement', Validator::EID, 'm_role_create'   ))
         $condition['wbfsys_announcement']['m_role_create'] = $mRoleCreate;
 
-      if ($mRoleChange = $httpRequest->data( 'search_wbfsys_announcement', Validator::EID, 'm_role_change'   ) )
+      if ($mRoleChange = $httpRequest->data('search_wbfsys_announcement', Validator::EID, 'm_role_change'   ))
         $condition['wbfsys_announcement']['m_role_change'] = $mRoleChange;
 
-      if ($mTimeCreatedBefore = $httpRequest->data( 'search_wbfsys_announcement', Validator::DATE, 'm_time_created_before'   ) )
+      if ($mTimeCreatedBefore = $httpRequest->data('search_wbfsys_announcement', Validator::DATE, 'm_time_created_before'   ))
         $condition['wbfsys_announcement']['m_time_created_before'] = $mTimeCreatedBefore;
 
-      if ($mTimeCreatedAfter = $httpRequest->data( 'search_wbfsys_announcement', Validator::DATE, 'm_time_created_after'   ) )
+      if ($mTimeCreatedAfter = $httpRequest->data('search_wbfsys_announcement', Validator::DATE, 'm_time_created_after'   ))
         $condition['wbfsys_announcement']['m_time_created_after'] = $mTimeCreatedAfter;
 
-      if ($mTimeChangedBefore = $httpRequest->data( 'search_wbfsys_announcement', Validator::DATE, 'm_time_changed_before'   ) )
+      if ($mTimeChangedBefore = $httpRequest->data('search_wbfsys_announcement', Validator::DATE, 'm_time_changed_before'   ))
         $condition['wbfsys_announcement']['m_time_changed_before'] = $mTimeChangedBefore;
 
-      if ($mTimeChangedAfter = $httpRequest->data( 'search_wbfsys_announcement}', Validator::DATE, 'm_time_changed_after'   ) )
+      if ($mTimeChangedAfter = $httpRequest->data('search_wbfsys_announcement}', Validator::DATE, 'm_time_changed_after'   ))
         $condition['wbfsys_announcement']['m_time_changed_after'] = $mTimeChangedAfter;
 
-      if ($mRowid = $httpRequest->data( 'search_wbfsys_announcement', Validator::EID, 'm_rowid'   ) )
+      if ($mRowid = $httpRequest->data('search_wbfsys_announcement', Validator::EID, 'm_rowid'   ))
         $condition['wbfsys_announcement']['m_rowid'] = $mRowid;
 
-      if ($mUuid = $httpRequest->data( 'search_wbfsys_announcement', Validator::TEXT, 'm_uuid'    ) )
+      if ($mUuid = $httpRequest->data('search_wbfsys_announcement', Validator::TEXT, 'm_uuid'    ))
         $condition['wbfsys_announcement']['m_uuid'] = $mUuid;
 
-    $query = $db->newQuery( 'WbfsysAnnouncement_Table' );
+    $query = $db->newQuery('WbfsysAnnouncement_Table');
 
     if ($params->dynFilters) {
       foreach ($params->dynFilters as $dynFilter) {
         try {
           $filter = $db->newFilter
           (
-            'WbfsysAnnouncement_Table_'.SParserString::subToCamelCase($dynFilter )
+            'WbfsysAnnouncement_Table_'.SParserString::subToCamelCase($dynFilter)
           );
 
-          if ($filter )
-            $query->inject($filter, $params );
-        } catch ( LibDb_Exception $e ) {
-          $response->addError( "Requested nonexisting filter ".$dynFilter );
+          if ($filter)
+            $query->inject($filter, $params);
+        } catch (LibDb_Exception $e) {
+          $response->addError("Requested nonexisting filter ".$dynFilter);
         }
 
       }
@@ -284,16 +284,16 @@ class MyAnnouncement_Widget_Table_Model extends Model
     // wird häufig verwendet um bereits zugewiesenen datensätze aus zu blenden
     if ($params->exclude) {
 
-      $tmp = explode( '-', $params->exclude );
+      $tmp = explode('-', $params->exclude);
 
       $conName   = $tmp[0];
       $srcId     = $tmp[1];
       $targetId  = $tmp[2];
 
       $excludeCond = ' wbfsys_announcement.rowid NOT IN '
-      .'( select '.$targetId .' from '.$conName.' where '.$srcId.' = '.$params->objid.' ) ';
+      .'(select '.$targetId .' from '.$conName.' where '.$srcId.' = '.$params->objid.') ';
 
-      $query->setCondition($excludeCond );
+      $query->setCondition($excludeCond);
 
     }
 
@@ -358,7 +358,7 @@ class MyAnnouncement_Widget_Table_Model extends Model
     try {
 
       //management  wbfsys_announcement source wbfsys_announcement
-      $entityWbfsysAnnouncement = $orm->newEntity( 'WbfsysAnnouncement' );
+      $entityWbfsysAnnouncement = $orm->newEntity('WbfsysAnnouncement');
 
       if (!$params->fieldsWbfsysAnnouncement) {
         $params->fieldsWbfsysAnnouncement  = $entityWbfsysAnnouncement->getCols
@@ -383,7 +383,7 @@ class MyAnnouncement_Widget_Table_Model extends Model
        );
 
       return !$response->hasErrors();
-    } catch ( InvalidInput_Exception $e ) {
+    } catch (InvalidInput_Exception $e) {
       return false;
     }
 
@@ -395,13 +395,13 @@ class MyAnnouncement_Widget_Table_Model extends Model
    * @param LibTemplateWindow $view
    * @return boolean
    */
-  public function searchForm($view )
+  public function searchForm($view)
   {
 
     $searchFields = $this->getSearchFields();
 
     //entity wbfsys_announcement
-    if (!$entityWbfsysAnnouncement = $this->getRegisterd('entityWbfsysAnnouncement') ) {
+    if (!$entityWbfsysAnnouncement = $this->getRegisterd('entityWbfsysAnnouncement')) {
       $entityWbfsysAnnouncement   = new WbfsysAnnouncement_Entity() ;
     }
 
@@ -411,7 +411,7 @@ class MyAnnouncement_Widget_Table_Model extends Model
     $formWbfsysAnnouncement->createSearchForm
     (
       $entityWbfsysAnnouncement,
-      ( isset($searchFields['wbfsys_announcement'])?$searchFields['wbfsys_announcement']:array() )
+      (isset($searchFields['wbfsys_announcement'])?$searchFields['wbfsys_announcement']:array())
     );
 
   }//end public function searchForm */

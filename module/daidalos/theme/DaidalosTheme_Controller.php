@@ -44,16 +44,16 @@ class DaidalosTheme_Controller extends Controller
   /**
    * @return void
    */
-  public function form( )
+  public function form()
   {
 
-    if (!$view = $response->loadView('daidalos-theme-form', 'DaidalosTheme' ))
+    if (!$view = $response->loadView('daidalos-theme-form', 'DaidalosTheme'))
       return false;
 
-    Session::setStatus('web.theme', WEB_ROOT.'WebFrap_Theme_Default/themes/default/' );
-    Session::setStatus('web.images', WEB_ROOT.'WebFrap_Theme_Default/themes/default/images/' );
+    Session::setStatus('web.theme', WEB_ROOT.'WebFrap_Theme_Default/themes/default/');
+    Session::setStatus('web.images', WEB_ROOT.'WebFrap_Theme_Default/themes/default/images/');
 
-    Session::setStatus('path.theme', WEB_ROOT.'WebFrap_Theme_Default/themes/default/' );
+    Session::setStatus('path.theme', WEB_ROOT.'WebFrap_Theme_Default/themes/default/');
 
     $view->display($this->getRequest(),$this->getFlags()  );
 

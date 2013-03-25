@@ -139,4 +139,3 @@ class WebfrapTaskPlanner_Plan_Validator extends ValidStructure
     }
   } //end public function check_advanced */
 }//end class WebfrapTaskPlanner_Plan_Validator */
-

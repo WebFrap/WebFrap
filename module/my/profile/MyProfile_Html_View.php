@@ -27,7 +27,7 @@ class MyProfile_View_Frontend extends LibTemplatePlain
   /**
    *
    */
-  public function displayForgotForm($params )
+  public function displayForgotForm($params)
   {
 
     $this->setIndex();

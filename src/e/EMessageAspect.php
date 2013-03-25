@@ -38,12 +38,7 @@ class EMessageAspect
   /**
    * @var int
    */
-  const NOTICE = 2;
-
-  /**
-   * @var int
-   */
-  const MEMO = 3;
+  const DOCUMENT = 2;
 
   /**
    * @var int
@@ -53,7 +48,7 @@ class EMessageAspect
   /**
    * @var int
    */
-  const SHARED_DOC = 5;
+  const SHARED = 5;
 
   /**
    * @var int
@@ -76,10 +71,9 @@ class EMessageAspect
   public static $labels = array(
     self::NO_ASPECT   => 'No Aspect',
     self::MESSAGE   => 'Message',
-    self::NOTICE   => 'Notice',
-    self::MEMO   => 'Memo',
+    self::NOTICE   => 'Notice / Memo',
     self::APPOINTMENT   => 'Appointment',
-    self::SHARED_DOC   => 'Shared Doc',
+    self::SHARED   => 'Shared',
     self::TASK   => 'Task',
     self::DISCUSSION => 'Discussion',
     self::CHECKLIST => 'Checklist',
@@ -90,18 +84,18 @@ class EMessageAspect
    * @param string $def
    * @return string
    */
-  public static function label( $key, $def = null )
+  public static function label($key, $def = null)
   {
 
-    if( !is_null( $def )  )
+    if (!is_null($def)  )
     {
-      return isset( self::$labels[$key] )
+      return isset(self::$labels[$key])
         ? self::$labels[$key]
         : $def;
     }
     else
     {
-      return isset( self::$labels[$key] )
+      return isset(self::$labels[$key])
         ? self::$labels[$key]
         : '0';
     }

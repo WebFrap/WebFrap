@@ -35,7 +35,7 @@ abstract class WgtBlocklist extends WgtList
     // $S(\'form#'.$this->searchForm.'\').data(\'size\',$S(this).val());
 
     //$onchange = 'onchange="$S(\'form#'.$this->searchForm.'\').data(\'qsize\',$S(this).val());$R.form(\''.$this->searchForm.'\');"';
-    $onchange = 'onchange="$S(\'table#'.$this->id.'_table\').grid( \'pageSize\', \''.$this->searchForm.'\' )"';
+    $onchange = 'onchange="$S(\'table#'.$this->id.'_table\').grid(\'pageSize\', \''.$this->searchForm.'\')"';
 
 
     $sizes = array(10,25,50,100,250,500);
@@ -152,7 +152,7 @@ abstract class WgtBlocklist extends WgtList
     $html .=        $this->subFooterLeft();
     $html .= '    </div>';
     $html .= '    <div class="menu"  style="text-align:center;margin:0px auto;" >';
-    $html .=        $this->menuCharFilter( );
+    $html .=        $this->menuCharFilter();
     $html .= '    </div>';
     $html .= '  </div>';
     $html .= '</li>'.NL;

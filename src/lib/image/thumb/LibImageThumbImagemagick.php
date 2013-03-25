@@ -31,7 +31,7 @@ class LibmageThumbImagemagick extends LibImageThumbAdapter
    * Enter description here...
    *
    */
-  public function genThumb( )
+  public function genThumb()
   {
 
     $thumb = new Imagick();

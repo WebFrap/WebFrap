@@ -26,28 +26,28 @@ class WebfrapAuth_ForgotPasswd_Html_View extends LibTemplateHtmlView
 
   public function init()
   {
-    $this->setHtmlHead( 'public' );
-    $this->setIndex( 'public/plain' );
+    $this->setHtmlHead('public');
+    $this->setIndex('public/plain');
   }
 
   /**
    *
    */
-  public function displayError($errorMessage )
+  public function displayError($errorMessage)
   {
-    $this->addVar( 'error', $errorMessage );
-    $this->setTemplate( 'webfrap/auth/form_forgot_pwd', true  );
+    $this->addVar('error', $errorMessage);
+    $this->setTemplate('webfrap/auth/form_forgot_pwd', true  );
 
   }//end public function displayError */
 
   /**
    * @param string $message
    */
-  public function displaySuccess($message )
+  public function displaySuccess($message)
   {
 
-    $this->addVar( 'message', $message );
-    $this->setTemplate( 'webfrap/auth/success', true  );
+    $this->addVar('message', $message);
+    $this->setTemplate('webfrap/auth/success', true  );
 
   }//end public function displaySucess */
 

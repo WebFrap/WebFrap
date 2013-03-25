@@ -32,7 +32,7 @@ class WgtWidgetWbfProtocol extends WgtWidget
    * @param string $tabSize
    * @return void
    */
-  public function asTab($containerId, $tabId, $tabSize = 'medium' )
+  public function asTab($containerId, $tabId, $tabSize = 'medium')
   {
 
     $user     = $this->getUser();
@@ -54,7 +54,7 @@ class WgtWidgetWbfProtocol extends WgtWidget
 
     $tableProtocol = $view->newItem('tableWbfsysProtocolMessage','WbfsysProtocolMessage_Table');
     $tableProtocol->setId('wgt-table_widget_protocol');
-    $tableProtocol->setData($query );
+    $tableProtocol->setData($query);
     $tableProtocol->addAttributes(array
     (
       'style' => 'width:99%;'

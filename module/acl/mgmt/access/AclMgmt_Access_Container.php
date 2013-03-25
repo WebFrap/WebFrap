@@ -74,8 +74,8 @@ class AclMgmt_Access_Container extends LibAclPermission
 
     $this->levels = Acl::$accessLevels;
 
-    if (!is_null($level ) )
-      $this->setPermission($level, $refBaseLevel );
+    if (!is_null($level))
+      $this->setPermission($level, $refBaseLevel);
 
     $this->domainNode = $domainNode;
 
@@ -85,7 +85,7 @@ class AclMgmt_Access_Container extends LibAclPermission
    * @param TFlag $params
    * @param Entity $entity
    */
-  public function loadDefault($params, $entity = null )
+  public function loadDefault($params, $entity = null)
   {
 
     // laden der benötigten Resource Objekte
@@ -93,7 +93,7 @@ class AclMgmt_Access_Container extends LibAclPermission
 
     // wenn keine acl root übergeben wird, da befinden wir uns an dem
     // startpunkt für einen potentiell vorhandenen rechte pfad
-    if (is_null($params->aclRoot )  ) {
+    if (is_null($params->aclRoot)  ) {
       $params->isAclRoot     = true;
       $params->aclRoot       = $this->domainNode->aclBaseKey;
       $params->aclRootId     = null;

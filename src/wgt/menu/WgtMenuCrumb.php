@@ -30,7 +30,7 @@ class WgtMenuCrumb extends WgtMenuEntryAbstract
    *
    * @return String
    */
-  public function build( )
+  public function build()
   {
 
     $title = is_null($this->title)?'title="'.$this->title.'"':'';
@@ -44,7 +44,7 @@ class WgtMenuCrumb extends WgtMenuEntryAbstract
 
     return '<li style="vertical-align:middle;" ><a class="'.$this->class.'" '.$title.' href="'.$url.'">'.$icon.$this->text.' '.$this->seperator.' </a></li>';
 
-  } // end public function build( )
+  } // end public function build()
 
 } // end class WgtMenuCrumb
 

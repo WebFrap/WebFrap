@@ -33,7 +33,7 @@ class WebfrapAnnouncement_Table_Maintab_Menu extends WgtDropmenu
    *    die aktuelle maske
    * }
    */
-  public function buildMenu($params )
+  public function buildMenu($params)
   {
 
     // benötigte resourcen laden
@@ -47,10 +47,10 @@ class WebfrapAnnouncement_Table_Maintab_Menu extends WgtDropmenu
     $iconBookmark    = $this->view->icon('control/bookmark.png'      ,'Bookmark');
     $iconAdd         = $this->view->icon('control/add.png'      ,'Create');
 
-    $iconSupport   = $this->view->icon( 'control/support.png'  ,'Support' );
-    $iconBug       = $this->view->icon( 'control/bug.png'      ,'Bug' );
-    $iconFaq       = $this->view->icon( 'control/faq.png'      ,'Faq' );
-    $iconHelp      = $this->view->icon( 'control/help.png'     ,'Help' );
+    $iconSupport   = $this->view->icon('control/support.png'  ,'Support');
+    $iconBug       = $this->view->icon('control/bug.png'      ,'Bug');
+    $iconFaq       = $this->view->icon('control/faq.png'      ,'Faq');
+    $iconHelp      = $this->view->icon('control/help.png'     ,'Help');
 
     $entries = new TArray();
 

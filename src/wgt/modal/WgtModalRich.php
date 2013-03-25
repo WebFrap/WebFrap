@@ -45,10 +45,10 @@ class WgtModalRich extends WgtModal
   /**
    * @param array $actions
    */
-  protected function setupListMenu($actions )
+  protected function setupListMenu($actions)
   {
 
-    $this->listBuilder = new WgtListMenu($actions );
+    $this->listBuilder = new WgtListMenu($actions);
 
   }//end protected function setupListMenu */
 
@@ -56,9 +56,9 @@ class WgtModalRich extends WgtModal
    * @param array $row
    * @param array $actions
    */
-  protected function renderActions($row, $actions = null )
+  protected function renderActions($row, $actions = null)
   {
-    return $this->listBuilder->renderActions($row, $actions );
+    return $this->listBuilder->renderActions($row, $actions);
 
   }//end rotected function renderActions */
 
@@ -68,9 +68,9 @@ class WgtModalRich extends WgtModal
    * @param string $method
    * @param boolean $cout
    */
-  protected function newFormBuilder($action, $domainKey, $method = 'post', $cout = true )
+  protected function newFormBuilder($action, $domainKey, $method = 'post', $cout = true)
   {
-    return new WgtFormBuilder($this, $action, $domainKey, $method, $cout );
+    return new WgtFormBuilder($this, $action, $domainKey, $method, $cout);
 
   }//end protected function newFormBuilder */
 

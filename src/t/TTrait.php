@@ -38,11 +38,11 @@ class TTrait
    * @param string $key
    * @return mixed
    */
-  public function __call($funcName , $params )
+  public function __call($funcName , $params)
   {
 
-    if (!isset($this->funcs[$funcName]) ) {
-      throw new FunctionNotExists_Exception( 'Requested invalid functioncall '.$funcName );
+    if (!isset($this->funcs[$funcName])) {
+      throw new FunctionNotExists_Exception('Requested invalid functioncall '.$funcName);
     }
 
     $func = $this->funcs[$funcName];
@@ -61,7 +61,7 @@ class TTrait
       case 9: return $func($params[0],$params[1],$params[2],$params[3],$params[4],$params[5],$params[6],$params[7],$params[8]);
       default:
       {
-        return call_user_func_array($func, $params );
+        return call_user_func_array($func, $params);
         break;
       }
     }
@@ -73,7 +73,7 @@ class TTrait
    * @param string $key
    * @param mixed $value
    */
-  public function __set($key , $value )
+  public function __set($key , $value)
   {
     $this->funcs[$key] = $value;
   }// end public function __set */
@@ -84,7 +84,7 @@ class TTrait
    * @param string $key
    * @return mixed
    */
-  public function __get($key )
+  public function __get($key)
   {
     return isset($this->funcs[$key])?$this->funcs[$key]:null;
   }// end public function __get */

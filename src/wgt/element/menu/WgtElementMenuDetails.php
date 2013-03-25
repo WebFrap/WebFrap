@@ -40,7 +40,7 @@ class WgtElementMenuDetails extends WgtElementMenu
    *
    * @return string
    */
-  public function build( )
+  public function build()
   {
 
     $this->baseFolder = View::$iconsWeb.'/medium/';
@@ -50,14 +50,14 @@ class WgtElementMenuDetails extends WgtElementMenu
       $folders  = array();
       $files    = array();
 
-      if ( isset($this->data->folders) && $this->data->folders ) {
+      if (isset($this->data->folders) && $this->data->folders) {
         foreach ($this->data->folders as $entry) {
           $folders[$entry[2]] = $entry;
         }
         ksort($folders);
       }
 
-      if ( isset($this->data->files) && $this->data->files ) {
+      if (isset($this->data->files) && $this->data->files) {
         foreach ($this->data->files as $entry) {
           $files[$entry[2]] = $entry;
         }
@@ -77,19 +77,19 @@ class WgtElementMenuDetails extends WgtElementMenu
 
     $html = '<ul class="wgt-menu list wgt-space" >'.NL;
 
-    if ( isset($this->data->firstEntry) && $this->data->firstEntry ) {
-      $html .= $this->renderListEntry($this->data->firstEntry );
+    if (isset($this->data->firstEntry) && $this->data->firstEntry) {
+      $html .= $this->renderListEntry($this->data->firstEntry);
     }
 
     $pos = 0;
 
     // Generieren der Rows
     foreach ($folders as $entry) {
-      $html .= $this->renderListEntry($entry, '&amp;mtype=list' );
+      $html .= $this->renderListEntry($entry, '&amp;mtype=list');
     }
 
     foreach ($files as $entry) {
-      $html .= $this->renderListEntry($entry );
+      $html .= $this->renderListEntry($entry);
     }
 
     $html .= '</li>'.NL;
@@ -105,12 +105,12 @@ class WgtElementMenuDetails extends WgtElementMenu
    * @param string $append
    * @return
    */
-  protected function renderListEntry($pic, $append = '' )
+  protected function renderListEntry($pic, $append = '')
   {
 
-    if ($pic[WgtMenu::ICON] != '' || trim($pic[WgtMenu::TEXT]) != '' ) {
+    if ($pic[WgtMenu::ICON] != '' || trim($pic[WgtMenu::TEXT]) != '') {
 
-      $text = trim($pic[WgtMenu::TEXT] ) != '' ? $pic[WgtMenu::TEXT].'<br />' : '';
+      $text = trim($pic[WgtMenu::TEXT]) != '' ? $pic[WgtMenu::TEXT].'<br />' : '';
 
       if (Wgt::ACTION == $pic[WgtMenu::TYPE]) {
         $link = $text.'<img class="icon xsmall cursor" '.

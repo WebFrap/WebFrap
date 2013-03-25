@@ -34,7 +34,7 @@ class DaoSelectbox extends Dao
    * @param $mapName
    * @return unknown_type
    */
-  public static function get($mapName )
+  public static function get($mapName)
   {
 
     if (isset(self::$pool[$mapName]))
@@ -49,12 +49,12 @@ class DaoSelectbox extends Dao
    * @param unknown_type $mapName
    * @return unknown_type
    */
-  public static function load($mapName )
+  public static function load($mapName)
   {
 
     foreach (Conf::$confPath as $path) {
 
-      if (!$this->source )
+      if (!$this->source)
         $menuPath = $path.'/selectbox/'.$this->name.'/';
       else
         $menuPath = $path.'/selectbox/'.$this->source.'/';
@@ -62,9 +62,9 @@ class DaoSelectbox extends Dao
       if (!file_exists($menuPath))
         continue;
 
-      $folder = new LibFilesystemFolder($menuPath );
+      $folder = new LibFilesystemFolder($menuPath);
 
-      foreach($folder->getFiles() as $file )
+      foreach($folder->getFiles() as $file)
         include $file->getName(true);
 
        // break after found data

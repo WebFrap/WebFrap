@@ -8,7 +8,7 @@
 $serverAddress = (isset($_SERVER['HTTPS']) && 'on' == $_SERVER['HTTPS']) ?'https://' :'http://';
 $serverAddress .= $_SERVER['SERVER_NAME'];
 
-if ( isset($_SERVER['HTTPS'] ) && 'on' == $_SERVER['HTTPS'] ) {
+if (isset($_SERVER['HTTPS']) && 'on' == $_SERVER['HTTPS']) {
   if ($_SERVER['SERVER_PORT'] != '443') {
     $serverAddress .= ':'.$_SERVER['SERVER_PORT'];
   }
@@ -18,64 +18,64 @@ if ( isset($_SERVER['HTTPS'] ) && 'on' == $_SERVER['HTTPS'] ) {
   }
 }
 
-$serverAddress .= '/'.mb_substr($_SERVER['REQUEST_URI'] , 0 , strrpos($_SERVER['REQUEST_URI'],'/')+1 );
+$serverAddress .= '/'.mb_substr($_SERVER['REQUEST_URI'] , 0 , strrpos($_SERVER['REQUEST_URI'],'/')+1);
 
 $length = strlen($serverAddress);
 
-if ( '/' != $serverAddress[($length-1)] )
+if ('/' != $serverAddress[($length-1)])
   $serverAddress .= '/';
 
-if (!defined('WEB_GW') )
-  define( 'WEB_GW', $serverAddress );
+if (!defined('WEB_GW'))
+  define('WEB_GW', $serverAddress);
 
 /**
  * ROOT Path of the Gateway
  * @var
  */
-if (!defined('PATH_GW') )
-  define( 'PATH_GW'     , './' );
+if (!defined('PATH_GW'))
+  define('PATH_GW'     , './');
 
 /**
  * path for tmp files
  * @var string
  */
-define( 'PATH_TMP'     , PATH_GW.'tmp/' );
+define('PATH_TMP'     , PATH_GW.'tmp/');
 
 /**
  * ROOT Path for all Modules, Libs and Gateways
  * @var
  */
-define( 'PATH_ROOT'     , '../' );
+define('PATH_ROOT'     , '../');
 
 /**
  * Root Path of the WebFrap Framework
  * @var
  */
-define( 'PATH_FW'       , PATH_ROOT.'WebFrap/' );
+define('PATH_FW'       , PATH_ROOT.'WebFrap/');
 
 /**
  * Path for all files
  * @var
  */
-define( 'PATH_FILES'    , PATH_GW );
+define('PATH_FILES'    , PATH_GW);
 
 /**
  * Source Path to the style
  * @var
  */
-define( 'PATH_THEME'    , PATH_ROOT.'WebFrap_Wgt/'  );
+define('PATH_THEME'    , PATH_ROOT.'WebFrap_Wgt/'  );
 
 /**
  * Source Path to the style
  * @var
  */
-define( 'PATH_ICONS'    , PATH_ROOT.'WebFrap_Wgt/'  );
+define('PATH_ICONS'    , PATH_ROOT.'WebFrap_Wgt/'  );
 
 /**
  * Source path to the webfrap wgt
  * @var
  */
-define( 'PATH_WGT'      , PATH_ROOT.'WebFrap_Wgt/' );
+define('PATH_WGT'      , PATH_ROOT.'WebFrap_Wgt/');
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Web Pfade
@@ -86,39 +86,39 @@ define( 'PATH_WGT'      , PATH_ROOT.'WebFrap_Wgt/' );
  * Constant
  * @var
  */
-define( 'WEB_ROOT'      , '../' );
+define('WEB_ROOT'      , '../');
 
 /**
  * Root for The WebBrowser, all static files should be placed relativ to this
  * Constant
  * @var
  */
-define( 'WEB_GW'        , './' );
+define('WEB_GW'        , './');
 
 /**
  * Root for The WebBrowser, all static files should be placed relativ to this
  * Constant
  * @var
  */
-define( 'WEB_FILES'     , WEB_GW );
+define('WEB_FILES'     , WEB_GW);
 
 /**
  * Root from the activ Style Project
  * @var
  */
-define( 'WEB_THEME' , WEB_GW.'themes/' );
+define('WEB_THEME' , WEB_GW.'themes/');
 
 /**
  * Root from the activ Style Project
  * @var
  */
-define( 'WEB_ICONS' , WEB_GW.'icons/' );
+define('WEB_ICONS' , WEB_GW.'icons/');
 
 /**
  * ROOT path for the WebFrap Famework
  * @var
  */
-define( 'WEB_WGT'   , WEB_GW.'wgt/'  );
+define('WEB_WGT'   , WEB_GW.'wgt/'  );
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Wbf Config
@@ -128,24 +128,24 @@ define( 'WEB_WGT'   , WEB_GW.'wgt/'  );
  * Which Systemcontroller Should be used
  * @var
  */
-define( 'WBF_CONTROLLER' , 'Apachemod' );
+define('WBF_CONTROLLER' , 'Apachemod');
 
 /**
  * db key
  * @var
  */
-define( 'WBF_DB_KEY' , 'rowid' );
+define('WBF_DB_KEY' , 'rowid');
 
 /**
  * db key
  * @var
  */
-define( 'WBF_ERROR_HANDLER' , 'Webfrap::errorHandler' );
+define('WBF_ERROR_HANDLER' , 'Webfrap::errorHandler');
 
 /***
  *
  */
-define( 'CONF_KEY' , '127.0.0.1' );
+define('CONF_KEY' , '127.0.0.1');
 
 /*//////////////////////////////////////////////////////////////////////////////
 // constants
@@ -154,22 +154,22 @@ define( 'CONF_KEY' , '127.0.0.1' );
 /**
  * @var
  */
-define( 'NL' , "\n" );
+define('NL' , "\n");
 
 /**
  * @var
  */
-define( 'TEMP_SEP' , "~#&~" );
+define('TEMP_SEP' , "~#&~");
 
 /**
  * @var
  */
-define( 'P_S' , PATH_SEPARATOR );
+define('P_S' , PATH_SEPARATOR);
 
 /**
  * @var
  */
-define( 'D_S' , '/' );
+define('D_S' , '/');
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Developer constantes, NEVER USE IN PRODUCTION SYSTEMS!!! NEVER EVER!!!
@@ -178,35 +178,35 @@ define( 'D_S' , '/' );
 /**
  * @var boolean
  */
-//define( 'MODE_MAINTENANCE' , true  );
+//define('MODE_MAINTENANCE' , true  );
 
 /**
  * Debugausgabe aktivieren
  * @var boolean
  */
-define( 'DEBUG' ,  true  );
+define('DEBUG' ,  true  );
 
 /**
  * Ausgabe der Debug Console im Browser
  * @var boolean
  */
-define( 'DEBUG_CONSOLE' ,  true  );
+define('DEBUG_CONSOLE' ,  true  );
 
 /**
  * Wenn true, wird die komplette ausgabe mit ob_start abgefangen
  * Das ermöglicht es z.B noch in den Templates header zu setzen
  * @var boolean
  */
-define( 'BUFFER_OUTPUT' ,  false  );
+define('BUFFER_OUTPUT' ,  false  );
 
 /**
  * Wenn True wird nicht geprüft ob der Benutzer eingeloggt ist
  * @var boolean
  */
-define( 'WBF_NO_LOGIN' , false );
+define('WBF_NO_LOGIN' , false);
 
 /**
  * Wenn True wird die Prüfung auf ACLs deaktiviert
  * @var boolean
  */
-define( 'WBF_NO_ACL' , true );
+define('WBF_NO_ACL' , true);

@@ -39,12 +39,12 @@ class WebfrapAnnouncement_Table_Ui extends MvcUi
   *   // Parameter die ausgewertet werden, oder weitergeleitet
   *
   *   @param: int start, Offset für die Listenelemente. Wird absolut übergeben und nicht
-  *     mit multiplikator ( 50 anstelle von <strike>5 mal listengröße</strike> )
+  *     mit multiplikator (50 anstelle von <strike>5 mal listengröße</strike>)
   *
   *   @param: int qsize, Die Anzahl der zu Ladenten Einträge. Momentan wird alles > 500 auf 500 gekappt
   *     alles kleiner 0 wird auf den standardwert von aktuell 25 gesetzt
   *
-  *   @param: array(string fieldname => string [asc|desc] ) order, Die Daten für die Sortierung
+  *   @param: array(string fieldname => string [asc|desc]) order, Die Daten für die Sortierung
   *
   *   @param: char begin, Mit Begin wird ein Buchstabe übergeben, der verwendet wird die Listeelemente
   *     nach dem Anfangsbuchstaben zu filtern. Kann im Prinzip jedes beliebige Zeichen, also auch eine Zahl sein
@@ -82,14 +82,14 @@ class WebfrapAnnouncement_Table_Ui extends MvcUi
     $view = $this->getView();
 
     // Erstellen des Template Elements
-    $table = new WebfrapAnnouncement_Table_Element( 'tableWebfrapAnnouncement', $view );
+    $table = new WebfrapAnnouncement_Table_Element('tableWebfrapAnnouncement', $view);
 
     // die daten direkt dem element übergeben
-    $table->setData($data );
+    $table->setData($data);
 
     // den access container dem listenelement übergeben
-    $table->setAccess($access );
-    $table->setAccessPath($params, $params->aclKey, $params->aclNode );
+    $table->setAccess($access);
+    $table->setAccessPath($params, $params->aclKey, $params->aclNode);
 
     // set the offset to set the paging menu correct
     $table->start    = $params->start;
@@ -98,16 +98,16 @@ class WebfrapAnnouncement_Table_Ui extends MvcUi
     $table->stepSize = $params->qsize;
 
     // check if there is a filter for the first char
-    if ($params->begin )
+    if ($params->begin)
       $table->begin    = $params->begin;
 
     // if there is a given tableId for the html id of the the table replace
     // the default id with it
-    if ($params->targetId )
-      $table->setId($params->targetId );
+    if ($params->targetId)
+      $table->setId($params->targetId);
 
-    if (!is_null($params->listingActions ) ) {
-      $table->addActions($params->listingActions );
+    if (!is_null($params->listingActions)) {
+      $table->addActions($params->listingActions);
     } else {
 
       // definieren der aktions
@@ -119,24 +119,24 @@ class WebfrapAnnouncement_Table_Ui extends MvcUi
       $actions[] = 'edit';
       $actions[] = 'delete';
 
-      $table->addActions($actions );
+      $table->addActions($actions);
     }
 
     // for paging use the default search form, to enshure to keep the order
     // and to page in search results if there was any search
 
     // Die ID des Suchformulars wir für das Paging benötigt, details, siehe apidoc
-    if (!$params->searchFormId )
+    if (!$params->searchFormId)
       $params->searchFormId = 'wgt-form-table-webfrap_announcement-search';
 
-    $table->setPagingId($params->searchFormId );
+    $table->setPagingId($params->searchFormId);
 
     // Über Listenelemente können Eigene Panelcontainer gepackt werden
     // hier verwenden wir ein einfaches Standardpanel mit Titel und
     // simplem Suchfeld
-    $tabPanel = new WgtPanelTable($table );
+    $tabPanel = new WgtPanelTable($table);
 
-    //$tabPanel->title = $view->i18n->l( 'Announcement', 'wbfsys.announcement.label' );
+    //$tabPanel->title = $view->i18n->l('Announcement', 'wbfsys.announcement.label');
     $tabPanel->searchKey = 'webfrap_announcement';
 
     // display the toggle button for the advanced search
@@ -164,7 +164,7 @@ class WebfrapAnnouncement_Table_Ui extends MvcUi
   \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth');
 
 WGTJS;
-        $view->addJsCode($jsCode );
+        $view->addJsCode($jsCode);
       }
 
     } else {
@@ -180,7 +180,7 @@ WGTJS;
 
 WGTJS;
 
-        $view->addJsCode($jsCode );
+        $view->addJsCode($jsCode);
 
       }
 
@@ -199,12 +199,12 @@ WGTJS;
   *   // Parameter die ausgewertet werden, oder weitergeleitet
   *
   *   @param: int start, Offset für die Listenelemente. Wird absolut übergeben und nicht
-  *     mit multiplikator ( 50 anstelle von <strike>5 mal listengröße</strike> )
+  *     mit multiplikator (50 anstelle von <strike>5 mal listengröße</strike>)
   *
   *   @param: int qsize, Die Anzahl der zu Ladenten Einträge. Momentan wird alles > 500 auf 500 gekappt
   *     alles kleiner 0 wird auf den standardwert von aktuell 25 gesetzt
   *
-  *   @param: array(string fieldname => string [asc|desc] ) order, Die Daten für die Sortierung
+  *   @param: array(string fieldname => string [asc|desc]) order, Die Daten für die Sortierung
   *
   *   @param: char begin, Mit Begin wird ein Buchstabe übergeben, der verwendet wird die Listeelemente
   *     nach dem Anfangsbuchstaben zu filtern. Kann im Prinzip jedes beliebige Zeichen, also auch eine Zahl sein
@@ -240,21 +240,21 @@ WGTJS;
 
     $view = $this->getView();
 
-    $table = new WebfrapAnnouncement_Table_Element( null,$view );
+    $table = new WebfrapAnnouncement_Table_Element(null,$view);
 
-    $table->addData($this->model->getEntryData($params ) );
+    $table->addData($this->model->getEntryData($params));
 
     // den access container dem listenelement übergeben
-    $table->setAccess($access );
-    $table->setAccessPath($params, $params->aclKey, $params->aclNode );
+    $table->setAccess($access);
+    $table->setAccessPath($params, $params->aclKey, $params->aclNode);
 
     // if a table id is given use it for the table
     if ($params->targetId  )
       $table->id = $params->targetId;
 
 
-    if (!is_null($params->listingActions) ) {
-      $table->addActions($params->listingActions );
+    if (!is_null($params->listingActions)) {
+      $table->addActions($params->listingActions);
     } else {
       $actions = array();
 
@@ -264,13 +264,13 @@ WGTJS;
       $actions[] = 'delete';
       $actions[] = 'rights';
 
-      $table->addActions($actions );
+      $table->addActions($actions);
     }
 
     $table->insertMode = $insert;
 
-    if (!$params->noParse )
-      $view->setAreaContent( 'tabRowWbfsysAnnouncement' , $table->buildAjax() );
+    if (!$params->noParse)
+      $view->setAreaContent('tabRowWbfsysAnnouncement' , $table->buildAjax());
 
     if ($insert) {
       $jsCode = <<<WGTJS
@@ -286,7 +286,7 @@ WGTJS;
 WGTJS;
     }
 
-    $view->addJsCode($jsCode );
+    $view->addJsCode($jsCode);
 
     return $table;
 
@@ -328,7 +328,7 @@ JSCODE;
    * @param TFlag $params
    * @return void
    */
-  public function searchForm(  $model, $params = null )
+  public function searchForm( $model, $params = null)
   {
 
     // laden der benötigten resourcen
@@ -337,10 +337,10 @@ JSCODE;
     $entityWbfsysAnnouncement  = $model->getEntityWbfsysAnnouncement();
     $fieldsWbfsysAnnouncement  = $entityWbfsysAnnouncement->getSearchCols();
 
-    $formWbfsysAnnouncement    = $view->newForm( 'WbfsysAnnouncement' );
-    $formWbfsysAnnouncement->setNamespace( 'WbfsysAnnouncement' );
-    $formWbfsysAnnouncement->setPrefix( 'WbfsysAnnouncement' );
-    $formWbfsysAnnouncement->setKeyName( 'wbfsys_announcement' );
+    $formWbfsysAnnouncement    = $view->newForm('WbfsysAnnouncement');
+    $formWbfsysAnnouncement->setNamespace('WbfsysAnnouncement');
+    $formWbfsysAnnouncement->setPrefix('WbfsysAnnouncement');
+    $formWbfsysAnnouncement->setKeyName('wbfsys_announcement');
     $formWbfsysAnnouncement->createSearchForm
     (
       $entityWbfsysAnnouncement,

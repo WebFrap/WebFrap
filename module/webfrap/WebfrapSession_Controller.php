@@ -44,14 +44,14 @@ class WebfrapSession_Controller extends Controller
   /**
    * @return void
    */
-  public function switchProfile( )
+  public function switchProfile()
   {
 
     $profile = $this->getRequest()->get('profile',Validator::CNAME);
 
     $user = $this->getUser();
 
-    if ($user->hasProfile($profile) ) {
+    if ($user->hasProfile($profile)) {
       $user->switchProfile($profile);
     }
 

@@ -72,12 +72,12 @@ class LibMessage_Receiver_Group
    * @param Entity $entiy
    * @param array<IReceiver> $else
    */
-  public function __construct($group, $area = null, $entiy = null, $else = array() )
+  public function __construct($group, $area = null, $entiy = null, $else = array())
   {
 
-    if ( is_object($group ) ) {
+    if (is_object($group)) {
       $this->group = $group;
-    } elseif ( is_numeric($group ) ) {
+    } elseif (is_numeric($group)) {
       $this->id = $group;
     } else {
       $this->name = $group;

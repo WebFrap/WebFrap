@@ -72,7 +72,7 @@ class LibParser
    * Enter description here ...
    * @param unknown_type $name
    */
-  public function setName($name )
+  public function setName($name)
   {
     $this->registry->name = $name;
   }//end public function setName
@@ -80,12 +80,12 @@ class LibParser
   /**
    * @return LibGenfName
    */
-  public function getName(  )
+  public function getName()
   {
     return $this->registry->name;
   }//end public function getName */
 
-  public function setNode($node )
+  public function setNode($node)
   {
     $this->registry->node = $node;
   }//end public function setNode
@@ -93,10 +93,10 @@ class LibParser
   /**
    * @param string $rawCode
    */
-  public function split($rawCode )
+  public function split($rawCode)
   {
 
-    $this->lexer->split($rawCode );
+    $this->lexer->split($rawCode);
 
   }//end public function parse */
 
@@ -127,9 +127,9 @@ class LibParser
   /**
    * @return array
    */
-  public function setPadding($padding )
+  public function setPadding($padding)
   {
-    $this->registry->setWsPadding($padding );
+    $this->registry->setWsPadding($padding);
   }//end public function setPadding */
 
 } // end class LibParser

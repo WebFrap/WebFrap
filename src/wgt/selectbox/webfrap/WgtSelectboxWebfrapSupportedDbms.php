@@ -36,10 +36,10 @@ class WgtSelectboxWebfrapSupportedDbms extends WgtSelectboxHardcoded
    */
   protected $data = array
   (
-  'pgsql'     =>  array( 'value' => 'PostgreSQL'   ),
-  'pdo_pgsql' =>  array( 'value' => 'PDO PostgreSQL'   ),
-  'mysqli'    =>  array( 'value' => 'MySQL(i)'   ),
-  'pdo_mysql' =>  array( 'value' => 'PDO MySQL'  ),
+  'pgsql'     =>  array('value' => 'PostgreSQL'   ),
+  'pdo_pgsql' =>  array('value' => 'PDO PostgreSQL'   ),
+  'mysqli'    =>  array('value' => 'MySQL(i)'   ),
+  'pdo_mysql' =>  array('value' => 'PDO MySQL'  ),
   );
 
 } // end class WgtSelectboxWebfrapSupportedDbms

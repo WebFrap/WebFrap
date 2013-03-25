@@ -32,7 +32,7 @@ class Example_Ajax_View extends LibTemplatePlain
    * Render des Suchergebnisses und übergabe in die ajax response
    * @param string $elementId
    */
-  public function displayOpen($elementId )
+  public function displayOpen($elementId)
   {
 
     $tpl = $this->getTplEngine();
@@ -42,13 +42,13 @@ class Example_Ajax_View extends LibTemplatePlain
     $pageFragment->action = 'replace';
 
     $msgElement = new WgtElementMessageList();
-    $msgElement->setId($elementId );
+    $msgElement->setId($elementId);
 
-    $messagesRes = $this->model->loadMessages(  );
+    $messagesRes = $this->model->loadMessages();
 
-    $pageFragment->setContent($msgElement->renderFull($messagesRes ) );
+    $pageFragment->setContent($msgElement->renderFull($messagesRes));
 
-    $tpl->setArea( 'message_list', $pageFragment);
+    $tpl->setArea('message_list', $pageFragment);
 
   }//end public function displayOpen */
 

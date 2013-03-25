@@ -44,20 +44,20 @@ class LibConnector_Message_Mail extends LibConnector_Message_Adapter
   public function open()
   {
 
-    if (!$this->server )
-      $this->addError( 'Server Address is missing' );
+    if (!$this->server)
+      $this->addError('Server Address is missing');
 
-    if (!$this->port )
-      $this->addError( 'Server Port is missing' );
+    if (!$this->port)
+      $this->addError('Server Port is missing');
 
-    if (!$this->userName )
-      $this->addError( 'Username for the Server is missing' );
+    if (!$this->userName)
+      $this->addError('Username for the Server is missing');
 
-    if (!$this->password )
-      $this->addError( 'Password for the Server is missing' );
+    if (!$this->password)
+      $this->addError('Password for the Server is missing');
 
-    if ($this->hasError() )
-      throw new LibConnector_Exception($this->getError() );
+    if ($this->hasError())
+      throw new LibConnector_Exception($this->getError());
 
     $connectionString = $this->buildConnectionAddress();
 
@@ -86,8 +86,8 @@ class LibConnector_Message_Mail extends LibConnector_Message_Adapter
   public function close()
   {
 
-    if ($this->resource )
-      imap_close($this->resource );
+    if ($this->resource)
+      imap_close($this->resource);
 
   }//end public function close */
 
@@ -103,7 +103,7 @@ class LibConnector_Message_Mail extends LibConnector_Message_Adapter
    *
    * @return object
    */
-  public function getMailboxInfo($msgInfo = false )
+  public function getMailboxInfo($msgInfo = false)
   {
 
     if ($msgInfo) {
@@ -118,7 +118,7 @@ class LibConnector_Message_Mail extends LibConnector_Message_Adapter
         Size:   Gesamtgröße des Postfachs in Bytes
        */
 
-      return imap_mailboxmsginfo($this->resource );
+      return imap_mailboxmsginfo($this->resource);
     } else {
       /*
        * Date - Aktuelle Serverzeit, formatiert gemäß » RFC2822
@@ -128,7 +128,7 @@ class LibConnector_Message_Mail extends LibConnector_Message_Adapter
        * Recent - Anzahl kürzlich eingetroffener Nachrichten im Postfach
        */
 
-      return imap_check($this->resource );
+      return imap_check($this->resource);
     }
 
   }//end public function getMailboxInfo */
@@ -139,16 +139,16 @@ class LibConnector_Message_Mail extends LibConnector_Message_Adapter
    */
   public function getNumMessages()
   {
-    return imap_num_msg($this->resource );
+    return imap_num_msg($this->resource);
   }//end public function getNumMessages */
 
   /**
    * @return string
    */
-  public function getMessageHeads(  )
+  public function getMessageHeads()
   {
 
-    $headers = imap_headers($this->resource );
+    $headers = imap_headers($this->resource);
 
     return $headers;
 
@@ -160,14 +160,14 @@ class LibConnector_Message_Mail extends LibConnector_Message_Adapter
    */
   public function getMessageHead($msgNo  )
   {
-    return imap_headerinfo($this->resource, $msgNo );;
+    return imap_headerinfo($this->resource, $msgNo);;
 
   }//end public function getMessageHeads */
 
   /**
    * @return string
    */
-  public function getMessageBody($number )
+  public function getMessageBody($number)
   {
 
   }//end public function getMessageBody */
@@ -175,7 +175,7 @@ class LibConnector_Message_Mail extends LibConnector_Message_Adapter
   /**
    * @return string
    */
-  public function getFullMessage($number )
+  public function getFullMessage($number)
   {
 
   }//end public function getFullMessage */

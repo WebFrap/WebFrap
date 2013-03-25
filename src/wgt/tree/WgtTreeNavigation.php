@@ -42,7 +42,7 @@ abstract class WgtTreeNavigation extends WgtAbstract
   public function getAcl()
   {
 
-    if (!$this->acl )
+    if (!$this->acl)
       $this->acl = Webfrap::$env->getAcl();
 
     return $this->acl;
@@ -54,7 +54,7 @@ abstract class WgtTreeNavigation extends WgtAbstract
    */
   public function getId()
   {
-    if (is_null($this->id) )
+    if (is_null($this->id))
       $this->id = 'wgtid_'.WebFrap::uniqid();
 
     return $this->id;
@@ -66,7 +66,7 @@ abstract class WgtTreeNavigation extends WgtAbstract
    * @param $id
    * @return unknown_type
    */
-  public function setId($id )
+  public function setId($id)
   {
     $this->id = $id;
   }//end public function setId */
@@ -78,10 +78,10 @@ abstract class WgtTreeNavigation extends WgtAbstract
   public function build()
   {
 
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
-    if (count($this->data) == 0 ) {
+    if (count($this->data) == 0) {
       $this->html .= '<ul id="'.$this->id.'" class="wgt_tree" >'.NL;
       $this->html .= '</ul>'.NL;
 
@@ -124,10 +124,10 @@ HTML;
    *
    * @return String
    */
-  public function buildAjaxNode($parentNode )
+  public function buildAjaxNode($parentNode)
   {
 
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
     $html = '';

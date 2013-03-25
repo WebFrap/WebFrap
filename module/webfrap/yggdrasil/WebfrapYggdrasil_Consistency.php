@@ -30,21 +30,21 @@ class WebfrapYggdrasil_Consistency extends DataContainer
   /**
    * @return void
    */
-  public function run(  )
+  public function run()
   {
 
     $db      = $this->getDb();
 
-    $conf    = Conf::get( 'db', 'connection' );
+    $conf    = Conf::get('db', 'connection');
     $defCon  = $conf['default'];
 
-    $revision = $db->select( 'select max(revision) as max_ref from wbfsys_module' )->getField('max_ref');
+    $revision = $db->select('select max(revision) as max_ref from wbfsys_module')->getField('max_ref');
 
-    $this->cleanModules($db, $revision );
-    $this->cleanEntities($db, $revision );
-    $this->cleanManagements($db, $revision );
-    $this->cleanWidgets($db, $revision );
-    $this->cleanProcess($db, $revision );
+    $this->cleanModules($db, $revision);
+    $this->cleanEntities($db, $revision);
+    $this->cleanManagements($db, $revision);
+    $this->cleanWidgets($db, $revision);
+    $this->cleanProcess($db, $revision);
 
   }//end public function run */
 
@@ -52,7 +52,7 @@ class WebfrapYggdrasil_Consistency extends DataContainer
    * @param LibDbPostgresql $db
    * @param int $revision
    */
-  public function cleanModules($db, $revision )
+  public function cleanModules($db, $revision)
   {
 
     $delDeprecated = <<<SQL
@@ -60,7 +60,7 @@ DELETE from wbfsys_module where revision is null or revision < {$revision};
 
 SQL;
 
-    $db->delete($delDeprecated );
+    $db->delete($delDeprecated);
 
   }//end public function cleanModules */
 
@@ -68,7 +68,7 @@ SQL;
    * @param LibDbPostgresql $db
    * @param int $revision
    */
-  public function cleanEntities($db, $revision )
+  public function cleanEntities($db, $revision)
   {
 
     $delDeprecatedEnt = <<<SQL
@@ -76,21 +76,21 @@ DELETE from wbfsys_entity where revision is null or revision < {$revision};
 
 SQL;
 
-    $db->delete($delDeprecatedEnt );
+    $db->delete($delDeprecatedEnt);
 
     $delDeprecatedAttr = <<<SQL
 DELETE from wbfsys_entity_attribute where revision is null or revision < {$revision};
 
 SQL;
 
-    $db->delete($delDeprecatedAttr );
+    $db->delete($delDeprecatedAttr);
 
     $delDeprecatedRef = <<<SQL
 DELETE from wbfsys_entity_reference where revision is null or revision < {$revision};
 
 SQL;
 
-    $db->delete($delDeprecatedRef );
+    $db->delete($delDeprecatedRef);
 
   }//end public function cleanEntities */
 
@@ -98,7 +98,7 @@ SQL;
    * @param LibDbPostgresql $db
    * @param int $revision
    */
-  public function cleanManagements($db, $revision )
+  public function cleanManagements($db, $revision)
   {
 
     $delDeprecated = <<<SQL
@@ -106,7 +106,7 @@ DELETE from wbfsys_management where revision is null or revision < {$revision};
 
 SQL;
 
-    $db->delete($delDeprecated );
+    $db->delete($delDeprecated);
 
   }//end public function cleanManagements */
 
@@ -114,7 +114,7 @@ SQL;
    * @param LibDbPostgresql $db
    * @param int $revision
    */
-  public function cleanWidgets($db, $revision )
+  public function cleanWidgets($db, $revision)
   {
 
     $delDeprecated = <<<SQL
@@ -122,7 +122,7 @@ DELETE from wbfsys_widget where revision is null or revision < {$revision};
 
 SQL;
 
-    $db->delete($delDeprecated );
+    $db->delete($delDeprecated);
 
   }//end public function cleanWidgets */
 
@@ -130,7 +130,7 @@ SQL;
    * @param LibDbPostgresql $db
    * @param int $revision
    */
-  public function cleanProcess($db, $revision )
+  public function cleanProcess($db, $revision)
   {
 
     // process
@@ -139,7 +139,7 @@ DELETE from wbfsys_process where revision is null or revision < {$revision};
 
 SQL;
 
-    $db->delete($delProcess );
+    $db->delete($delProcess);
 
     // process node
     $delProcessNode = <<<SQL
@@ -147,7 +147,7 @@ DELETE from wbfsys_process_node where revision is null or revision < {$revision}
 
 SQL;
 
-    $db->delete($delProcessNode );
+    $db->delete($delProcessNode);
 
     // process phase
     $delProcessPhase = <<<SQL
@@ -155,7 +155,7 @@ DELETE from wbfsys_process_phase where revision is null or revision < {$revision
 
 SQL;
 
-    $db->delete($delProcessPhase );
+    $db->delete($delProcessPhase);
 
   }//end public function cleanWidgets */
 

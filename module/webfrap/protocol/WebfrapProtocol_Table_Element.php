@@ -86,7 +86,7 @@ class WebfrapProtocol_Table_Element extends WgtTable
    *
    * @return string
    */
-  public function buildProtocolEntityHtml( )
+  public function buildProtocolEntityHtml()
   {
     $conf = $this->getConf();
 
@@ -94,10 +94,10 @@ class WebfrapProtocol_Table_Element extends WgtTable
     // so we return just the html and stop here
     // this behaviour enables you to call a specific parser method from outside
     // of the view, but then get the html of the called parse method
-    if ($this->html )
+    if ($this->html)
       return $this->html;
 
-    if ( DEBUG )
+    if (DEBUG)
       $renderStart = Webfrap::startMeasure();
 
     // check for replace is used to check if this table should be pushed via ajax
@@ -132,8 +132,8 @@ class WebfrapProtocol_Table_Element extends WgtTable
 
     }
 
-    if ( DEBUG )
-      Debug::console( "table ".__METHOD__." {$this->id} rendertime: ".Webfrap::getDuration($renderStart) );
+    if (DEBUG)
+      Debug::console("table ".__METHOD__." {$this->id} rendertime: ".Webfrap::getDuration($renderStart));
 
     return $this->html;
 
@@ -143,18 +143,18 @@ class WebfrapProtocol_Table_Element extends WgtTable
    * create the head for the table
    * @return string
    */
-  public function buildThead( )
+  public function buildThead()
   {
     $this->numCols = 2;
 
-    if ($this->enableNav )
+    if ($this->enableNav)
       ++ $this->numCols;
 
     // Creating the Head
     $html = '<thead>'.NL;
     $html .= '<tr>'.NL;
 
-    $html .= '<th style="width:30px;" class="pos" >'.$this->view->i18n->l( 'Pos.', 'wbf.label'  ).'</th>'.NL;
+    $html .= '<th style="width:30px;" class="pos" >'.$this->view->i18n->l('Pos.', 'wbf.label'  ).'</th>'.NL;
     $html .= '<th style="width:150px;" >Time</th>'.NL;
     $html .= '<th style="width:180px;" >User</th>'.NL;
     $html .= '<th style="width:70px;" >Type</th>'.NL;
@@ -171,7 +171,7 @@ class WebfrapProtocol_Table_Element extends WgtTable
    * create the body for the table
    * @return string
    */
-  public function buildTbody( )
+  public function buildTbody()
   {
 
     $conf = $this->getConf();
@@ -201,12 +201,12 @@ class WebfrapProtocol_Table_Element extends WgtTable
 
       $pos ++;
       $num ++;
-      if ($num > $this->numOfColors )
+      if ($num > $this->numOfColors)
         $num = 1;
 
     } //end foreach
 
-    if ($this->dataSize > ($this->start + $this->stepSize) ) {
+    if ($this->dataSize > ($this->start + $this->stepSize)) {
       $body .= '<tr class="wgt-block-appear" >'
         .'<td class="pos" >&nbsp;</td>'
         .'<td colspan="'.$this->numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  >'
@@ -226,18 +226,18 @@ class WebfrapProtocol_Table_Element extends WgtTable
    *
    * @return string
    */
-  public function buildAjax( )
+  public function buildAjax()
   {
     // if we have html we can assume that the table was allready parsed
     // so we return just the html and stop here
     // this behaviour enables you to call a specific parser method from outside
     // of the view, but then get the html of the called parse method
-    if ($this->xml )
+    if ($this->xml)
       return $this->xml;
 
     $this->numCols = 2;
 
-    if ($this->enableNav )
+    if ($this->enableNav)
       ++ $this->numCols;
 
     if ($this->appendMode) {
@@ -247,16 +247,16 @@ class WebfrapProtocol_Table_Element extends WgtTable
     }
 
     foreach ($this->data as $key => $row) {
-      $body .= $this->buildAjaxTbody($row );
+      $body .= $this->buildAjaxTbody($row);
     }//end foreach
 
     if ($this->appendMode) {
       $numCols = 2;
 
-      if ($this->enableNav )
+      if ($this->enableNav)
         ++ $numCols;
 
-      if ($this->dataSize > ($this->start + $this->stepSize ) ) {
+      if ($this->dataSize > ($this->start + $this->stepSize)) {
         $body .= '<tr class="wgt-block-appear" ><td class="pos" ></td><td colspan="'.$numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  ><var>'.($this->start + $this->stepSize).'</var>'.$this->image('wgt/bar-loader.gif','loader').' Loading the next '.$this->stepSize.' entries.</td></tr>';
       }
 

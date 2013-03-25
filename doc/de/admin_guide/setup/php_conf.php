@@ -1378,4 +1378,4 @@ soap.wsdl_cache_ttl=86400
 ; Local Variables:
 ; tab-width: 4
 ; End:
-<?php display_highlight( 'ini' ); ?>
+<?php display_highlight('ini'); ?>

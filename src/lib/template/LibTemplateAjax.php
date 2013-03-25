@@ -74,7 +74,7 @@ class LibTemplateAjax extends LibTemplateHtml
    * @param $redirectUrl
    * @return void
    */
-  public function redirect($redirectUrl )
+  public function redirect($redirectUrl)
   {
 
     $this->redirectUrl = $redirectUrl;
@@ -84,7 +84,7 @@ class LibTemplateAjax extends LibTemplateHtml
   /**
    * @param string $jsonData
    */
-  public function setJsonData($jsonData )
+  public function setJsonData($jsonData)
   {
 
     $this->jsonData = $jsonData;
@@ -94,10 +94,10 @@ class LibTemplateAjax extends LibTemplateHtml
   /**
    * @param string $jsonData
    */
-  public function setRawJsonData($jsonData )
+  public function setRawJsonData($jsonData)
   {
 
-    $this->jsonData = json_encode($jsonData );
+    $this->jsonData = json_encode($jsonData);
 
   }//end public function setRawJsonData */
 
@@ -123,18 +123,18 @@ class LibTemplateAjax extends LibTemplateHtml
    *
    * @return void
    */
-  public function buildPage( )
+  public function buildPage()
   {
 
-    if ($this->compiled )
+    if ($this->compiled)
       return;
 
     $this->compiled = '';
     $this->output   = '';
 
-    Log::verbose( 'Start building the Page' );
+    Log::verbose('Start building the Page');
 
-    $this->compiled = $this->buildBody( );
+    $this->compiled = $this->buildBody();
 
   }//end public function buildPage */
 
@@ -161,11 +161,11 @@ class LibTemplateAjax extends LibTemplateHtml
    * @param string $content
    * @return string
    */
-  public function includeBody($template, $content = null )
+  public function includeBody($template, $content = null)
   {
 
-    if (!$filename = $this->bodyPath($template ) ) {
-      Error::addError('failed to load the body template: '.$template );
+    if (!$filename = $this->bodyPath($template)) {
+      Error::addError('failed to load the body template: '.$template);
 
       return '<p class="wgt-box error">failed to load the body</p>';
     }
@@ -195,7 +195,7 @@ class LibTemplateAjax extends LibTemplateHtml
    *
    * @return string
    */
-  protected function buildMessages( )
+  protected function buildMessages()
   {
 
     $pool = Message::getActive();
@@ -203,28 +203,28 @@ class LibTemplateAjax extends LibTemplateHtml
     $html = '';
 
     // Gibet Fehlermeldungen? Wenn ja dann Raus mit
-    if ($errors = $pool->getErrors() ) {
+    if ($errors = $pool->getErrors()) {
       $html .= '<error><![CDATA['.NL;
 
-       foreach($errors as $error )
+       foreach($errors as $error)
         $html .= $error.'<br />'.NL;
 
       $html .= ']]></error>';
     }
 
-    if ($warnings = $pool->getWarnings() ) {
+    if ($warnings = $pool->getWarnings()) {
       $html .= '<warning><![CDATA['.NL;
 
-      foreach($warnings as $warn )
+      foreach($warnings as $warn)
         $html .= $warn."<br />".NL;
 
       $html .= ']]></warning>';
     }
 
-    if ($messages = $pool->getMessages() ) {
+    if ($messages = $pool->getMessages()) {
       $html .= '<message><![CDATA['.NL;
 
-       foreach($messages as $message )
+       foreach($messages as $message)
           $html .= $message.'<br />'.NL;
 
       $html .= ']]></message>'.NL;
@@ -240,7 +240,7 @@ class LibTemplateAjax extends LibTemplateHtml
    *
    * @return string
    */
-  protected function buildWallmessage( )
+  protected function buildWallmessage()
   {
 
     $html = '';
@@ -261,17 +261,17 @@ class LibTemplateAjax extends LibTemplateHtml
    * @return string
    *
    */
-  public function buildBody( )
+  public function buildBody()
   {
 
-    if ($filename = Webfrap::templatePath( 'ajax', 'index' ) ) {
+    if ($filename = Webfrap::templatePath('ajax', 'index')) {
 
       if ($this->jsCode) {
 
         $this->assembledJsCode = '';
 
         foreach ($this->jsCode as $jsCode) {
-          if ( is_object($jsCode) )
+          if (is_object($jsCode))
             $this->assembledJsCode .= $jsCode->getJsCode();
           else
             $this->assembledJsCode .= $jsCode;
@@ -303,16 +303,16 @@ class LibTemplateAjax extends LibTemplateHtml
    *
    * @return string
    */
-  public function buildIndex( )
+  public function buildIndex()
   {
 
-    if ($filename = Webfrap::templatePath($this->indexTemplate, 'index' ) ) {
+    if ($filename = Webfrap::templatePath($this->indexTemplate, 'index')) {
 
-      if ( Log::$levelVerbose )
-        Log::verbose(__file__ , __line__, 'Parsing index: '.$filename );
+      if (Log::$levelVerbose)
+        Log::verbose(__file__ , __line__, 'Parsing index: '.$filename);
 
-      if ( DEBUG )
-        Debug::console( 'Parsing index: '.$filename );
+      if (DEBUG)
+        Debug::console('Parsing index: '.$filename);
 
       $stop      = true; // block
       $VAR       = $this->var;
@@ -335,9 +335,9 @@ class LibTemplateAjax extends LibTemplateHtml
       ob_end_clean();
 
     } else {
-      Error::addError( 'Index Template not exists: '.$filename );
+      Error::addError('Index Template not exists: '.$filename);
 
-      if ( Log::$levelDebug )
+      if (Log::$levelDebug)
         $content = '<p class="wgt-box error">Wrong Index Template: '.$filename.' </p>';
       else
         $content = '<p class="wgt-box error">Wrong Index Template</p>';

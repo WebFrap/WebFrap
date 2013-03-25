@@ -31,7 +31,7 @@ class WebfrapMediathek_File_Model extends Model
    * @param object $dataNode
    * @return WbfsysFile_Entity
    */
-  public function insert($mediaId, $file, $dataNode )
+  public function insert($mediaId, $file, $dataNode)
   {
 
     $orm = $this->getOrm();
@@ -39,7 +39,7 @@ class WebfrapMediathek_File_Model extends Model
     $checkSum = $file->getChecksum();
     $fileSize = $file->getSize();
 
-    $fileNode = $orm->newEntity( "WbfsysFile" );
+    $fileNode = $orm->newEntity("WbfsysFile");
     $fileNode->name = $file->getNewname();
     $fileNode->file_hash = $checkSum;
     $fileNode->file_size = $fileSize;
@@ -52,15 +52,15 @@ class WebfrapMediathek_File_Model extends Model
     $fileNode->id_confidentiality = $dataNode->id_confidentiality;
     $fileNode->description   = $dataNode->description;
 
-    $fileNode = $orm->insert($fileNode );
+    $fileNode = $orm->insert($fileNode);
 
-    if (is_null($fileNode ) )
-      throw new LibDb_Exception( "Failed to save the file" );
+    if (is_null($fileNode))
+      throw new LibDb_Exception("Failed to save the file");
 
     $fileId = $fileNode->getId();
 
-    $filePath = PATH_GW.'data/uploads/wbfsys_file/file/'.SParserString::idToPath($fileId );
-    $file->copy($fileId, $filePath );
+    $filePath = PATH_GW.'data/uploads/wbfsys_file/file/'.SParserString::idToPath($fileId);
+    $file->copy($fileId, $filePath);
 
     return $fileNode;
 
@@ -73,14 +73,14 @@ class WebfrapMediathek_File_Model extends Model
    * @param object $dataNode
    * @return void
    */
-  public function update($objid, $mediaId, $file, $dataNode )
+  public function update($objid, $mediaId, $file, $dataNode)
   {
 
     $orm = $this->getOrm();
 
-    $fileNode = $orm->get( "WbfsysFile", $objid );
+    $fileNode = $orm->get("WbfsysFile", $objid);
 
-    if ($file && is_object($file) ) {
+    if ($file && is_object($file)) {
       $checkSum = $file->getChecksum();
       $fileSize = $file->getSize();
 
@@ -91,10 +91,10 @@ class WebfrapMediathek_File_Model extends Model
       $fileNode->mimetype = $file->getFiletype();
 
       $fileId   = $fileNode->getId();
-      $filePath = SParserString::idToPath($fileId );
+      $filePath = SParserString::idToPath($fileId);
 
       $filePath = PATH_GW.'data/uploads/wbfsys_file/file/'.$filePath;
-      $file->copy($fileId, $filePath );
+      $file->copy($fileId, $filePath);
     }
 
     $fileNode->id_mediathek = $mediaId;
@@ -102,7 +102,7 @@ class WebfrapMediathek_File_Model extends Model
     $fileNode->id_confidentiality = $dataNode->id_confidentiality;
     $fileNode->description = $dataNode->description;
 
-    $fileNode = $orm->update($fileNode );
+    $fileNode = $orm->update($fileNode);
 
     return $fileNode;
 
@@ -112,11 +112,11 @@ class WebfrapMediathek_File_Model extends Model
    * @param int $fileId
    * @return WbfsysFile_Entity
    */
-  public function loadFile($fileId )
+  public function loadFile($fileId)
   {
 
     $orm = $this->getOrm();
-    $fileNode = $orm->get( 'WbfsysFile', $fileId );
+    $fileNode = $orm->get('WbfsysFile', $fileId);
 
     return $fileNode;
 
@@ -126,7 +126,7 @@ class WebfrapMediathek_File_Model extends Model
    * @param int $mediaId
    * @return int
    */
-  public function clean($mediaId )
+  public function clean($mediaId)
   {
 
   }//end public function clean */
@@ -135,18 +135,18 @@ class WebfrapMediathek_File_Model extends Model
    * @param int $imgId
    * @return int
    */
-  public function delete($imgId )
+  public function delete($imgId)
   {
 
-    $orm    = $this->getOrm(  );
+    $orm    = $this->getOrm();
 
     // datei löschen
-    $orm->delete( 'WbfsysFile', $imgId );
+    $orm->delete('WbfsysFile', $imgId);
 
     $dataPath = SParserString::idToPath($imgId);
 
     $filePath = PATH_GW.'data/uploads/wbfsys_file/file/'.$dataPath.$imgId;
-    SFilesystem::delete($filePath );
+    SFilesystem::delete($filePath);
 
   }//end public function delete */
 

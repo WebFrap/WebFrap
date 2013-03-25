@@ -34,7 +34,7 @@ final class STestDate
    * @param string Template Das zu bearbeitende Template
    * @return String
    */
-  public static function isLeapYear($Year )
+  public static function isLeapYear($Year)
   {
 
     if ($Year % 4 != 0) {
@@ -46,9 +46,9 @@ final class STestDate
 
     return true;
 
-  } // end public static function isLeapYear($Year )
+  } // end public static function isLeapYear($Year)
 
-  public static function  getMonthLenght($Month , $Year )
+  public static function  getMonthLenght($Month , $Year)
   {
 
     if ($Month > 11) {
@@ -59,7 +59,7 @@ final class STestDate
       -- $Year;
     }
 
-    $MonthLenght = array( 0 =>  31,
+    $MonthLenght = array(0 =>  31,
                           1 =>  28,
                           2 =>  31,
                           3 =>  30,
@@ -73,13 +73,13 @@ final class STestDate
                           11 => 31
                         );
 
-    if ( self::isLeapYear($Year) and $Month == 1 ) {
+    if (self::isLeapYear($Year) and $Month == 1) {
       return 29;
     } else {
       return $MonthLenght[$Month];
     }
 
-  }//end public static function  getMonthLenght($Month , $Year )
+  }//end public static function  getMonthLenght($Month , $Year)
 
 } // end final class STestDate
 

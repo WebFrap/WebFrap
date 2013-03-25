@@ -97,7 +97,7 @@ class DaoFoldermenu extends Dao
    *
    * @param string $files
    */
-  public function __construct($files, $interface = 'maintab.php' )
+  public function __construct($files, $interface = 'maintab.php')
   {
 
     $this->interface = $interface;
@@ -111,13 +111,13 @@ class DaoFoldermenu extends Dao
     $title = null;
     $label = null;
 
-    foreach($files as $file )
-      include $file->getName( true );
+    foreach($files as $file)
+      include $file->getName(true);
 
-    if ($title )
+    if ($title)
       $this->title = $title;
 
-    if ($label )
+    if ($label)
       $this->label = $label;
 
   }//end public function __construct */
@@ -125,28 +125,28 @@ class DaoFoldermenu extends Dao
   /**
    * Zusammenführen von bereits geladenen und neuen menüdaten
    */
-  public function merge($data )
+  public function merge($data)
   {
 
-    if ($data->firstEntry )
+    if ($data->firstEntry)
       $this->firstEntry = $data->firstEntry;
 
     if ($data->folders) {
-      $this->folders = array_merge($this->folders, $data->folders );
+      $this->folders = array_merge($this->folders, $data->folders);
     }
 
     if ($data->files) {
-      $this->files = array_merge($this->files, $data->files );
+      $this->files = array_merge($this->files, $data->files);
     }
 
     if ($data->crumbs) {
       $this->crumbs = $data->crumbs;
     }
 
-    if ($data->title )
+    if ($data->title)
       $this->title = $data->title;
 
-    if ($data->label )
+    if ($data->label)
       $this->label = $data->label;
 
   }//end public function merge */
@@ -180,7 +180,7 @@ class DaoFoldermenu extends Dao
    * @param boolean $all should the system search in every conf folder or use the first menu it finds
    * @return array
    */
-  public static function load($menuName , $all = false )
+  public static function load($menuName , $all = false)
   {
 
     //self::$pool[$menuName] = array();
@@ -189,22 +189,22 @@ class DaoFoldermenu extends Dao
 
       $menuPath = $path.'/menu/'.$menuName.'/';
 
-      if (!file_exists($menuPath ) )
+      if (!file_exists($menuPath))
         continue;
 
-      $folder   = new LibFilesystemFolder($menuPath );
-      $menuData = new DaoFoldermenu($folder->getFiles() );
+      $folder   = new LibFilesystemFolder($menuPath);
+      $menuData = new DaoFoldermenu($folder->getFiles());
 
       if (DEBUG)
-        Debug::console( 'load menu '.$menuName.' from '.$menuPath ,$menuData );
+        Debug::console('load menu '.$menuName.' from '.$menuPath ,$menuData);
 
-      if ( isset( self::$pool[$menuName] ) )
-        self::$pool[$menuName]->merge($menuData );
+      if (isset(self::$pool[$menuName]))
+        self::$pool[$menuName]->merge($menuData);
       else
         self::$pool[$menuName] = $menuData ;
 
        // break after found data
-       if (!$all )
+       if (!$all)
         break;
     }
 

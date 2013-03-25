@@ -37,20 +37,20 @@ class MaintenanceBase_Maintab_View extends WgtMaintabCustom
     $this->setLabel('Maintenance Menu');
     $this->setTitle('Maintenance Menu');
 
-    $this->setTemplate( 'webfrap/navigation/maintab/modmenu'  );
+    $this->setTemplate('webfrap/navigation/maintab/modmenu'  );
 
     $className = 'ElementMenu'.ucfirst($params->menuType) ;
 
-    $modMenu = $this->newItem( 'modMenu', $className );
+    $modMenu = $this->newItem('modMenu', $className);
     $modMenu->setData
     (
-      DaoFoldermenu::get( 'maintenance/'.$menuName, true ),
+      DaoFoldermenu::get('maintenance/'.$menuName, true),
       'maintab.php'
     );
 
     $params = new TArray();
-    $this->addMenuMenu($modMenu, $params );
-    $this->addActions($params );
+    $this->addMenuMenu($modMenu, $params);
+    $this->addActions($params);
 
   }//end public function displayMenu */
 
@@ -63,7 +63,7 @@ class MaintenanceBase_Maintab_View extends WgtMaintabCustom
    *   string formId: the id of the form;
    * }
    */
-  public function addMenuMenu($modMenu, $params )
+  public function addMenuMenu($modMenu, $params)
   {
 
     $menu     = $this->newMenu
@@ -74,7 +74,7 @@ class MaintenanceBase_Maintab_View extends WgtMaintabCustom
     $menu->id = $this->id.'_dropmenu';
 
     $menu->crumbs = $modMenu->buildCrumbs();
-    $menu->buildMenu($params );
+    $menu->buildMenu($params);
 
   }//end public function addMenuMenu */
 
@@ -87,7 +87,7 @@ class MaintenanceBase_Maintab_View extends WgtMaintabCustom
    *   string formId: the id of the form;
    * }
    */
-  public function addActions(  $params )
+  public function addActions( $params)
   {
 
     // add the button action for save in the window
@@ -103,7 +103,7 @@ class MaintenanceBase_Maintab_View extends WgtMaintabCustom
 
 BUTTONJS;
 
-    $this->addJsCode($code );
+    $this->addJsCode($code);
 
   }//end public function addActions */
 

@@ -32,7 +32,7 @@ class WebfrapContactForm_User_Message extends LibMessageStack
    * Die Kannäle über welcher die Nachricht verschickt werden soll
    * @var array
    */
-  public $channels = array( 'message', 'mail' );
+  public $channels = array('message', 'mail');
 
   /**
    * Die Entity zu der die Nachricht in Relation steht
@@ -59,7 +59,7 @@ class WebfrapContactForm_User_Message extends LibMessageStack
   /**
    * @param ProjectActivity_Entity $entity
    */
-  public function setEntity($entity )
+  public function setEntity($entity)
   {
 
     $this->entity = $entity;
@@ -75,7 +75,7 @@ class WebfrapContactForm_User_Message extends LibMessageStack
    * @param LibMessageReceiver $receiver = null
    * @return string
    */
-  public function getSubject($receiver = null, $sender = null )
+  public function getSubject($receiver = null, $sender = null)
   {
     return <<<SUBJECT
 {$this->info->getAppName()}: {$this->subject}
@@ -90,10 +90,10 @@ SUBJECT;
    * @param LibMessageSender $sender = null
    * @return string
    */
-  public function buildContent($receiver = null, $sender = null )
+  public function buildContent($receiver = null, $sender = null)
   {
 
-    Debug::console( 'userContent', $this->userContent );
+    Debug::console('userContent', $this->userContent);
 
     $this->htmlDynContent = <<<HTML
 

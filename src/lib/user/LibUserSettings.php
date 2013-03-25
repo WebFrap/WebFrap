@@ -46,7 +46,7 @@ class LibUserSettings
    * @param string $key
    * @return TArray
    */
-  public function getSetting( $key )
+  public function getSetting($key)
   {
 
     $cKey = null;
@@ -56,7 +56,7 @@ class LibUserSettings
     $userId = $this->user->getId();
     $cKey = "{$key}-".$userId;
 
-    if(!isset($this->settings[$cKey])){
+    if (!isset($this->settings[$cKey])){
 
       $className = EUserSettingType::getClass($key);
 
@@ -66,7 +66,7 @@ SQL;
 
       $data = $this->db->select($sql)->get();
 
-      if($data)
+      if ($data)
         $setting = new $className($data['jdata'],$data['rowid']);
       else
         $setting = new $className();
@@ -85,7 +85,7 @@ SQL;
    * @param int $key
    * @param TArray $data
    */
-  public function saveSetting( $key, $data )
+  public function saveSetting($key, $data)
   {
 
     $this->settings[$key] = $data;
@@ -94,10 +94,10 @@ SQL;
 
     $id = $data->getId();
 
-    if( $id ){
-      $this->db->getOrm()->update( 'WbfsysUserSetting', $id, array('jdata'=>$jsonString,'type'=>$key) );
+    if ($id){
+      $this->db->getOrm()->update('WbfsysUserSetting', $id, array('jdata'=>$jsonString,'type'=>$key));
     } else {
-      $this->db->getOrm()->insert( 'WbfsysUserSetting', array(
+      $this->db->getOrm()->insert('WbfsysUserSetting', array(
       	'jdata' => $jsonString,
       	'type' => $key,
       	'id_user' => $this->user->getId()

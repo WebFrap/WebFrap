@@ -34,46 +34,46 @@ class MvcRouterAdressCheck
    * @param LibConfPhp $conf
    * @return void
    */
-  public static function checkRedirect($request, $conf )
+  public static function checkRedirect($request, $conf)
   {
 
-    $gwDomain = $conf->getStatus( 'gateway.domain' );
-    $gwSSL    = $conf->getStatus( 'gateway.ssl' );
+    $gwDomain = $conf->getStatus('gateway.domain');
+    $gwSSL    = $conf->getStatus('gateway.ssl');
 
     $redirect    = false;
     $enforeceSSL = false;
     $denySSL     = false;
 
-    if ( 2 === (int) $gwSSL ) {
+    if (2 === (int) $gwSSL) {
       $enforeceSSL = true;
-    } elseif ( 1 === (int) $gwSSL ) {
+    } elseif (1 === (int) $gwSSL) {
       $denySSL = true;
     }
 
     // nichts zu tun
-    if (!$gwDomain && !$enforeceSSL && !$denySSL )
+    if (!$gwDomain && !$enforeceSSL && !$denySSL)
       return false;
 
     if ($enforeceSSL) {
-      if (!$request->isSecure() )
+      if (!$request->isSecure())
         $redirect = true;
     } elseif ($denySSL) {
-      if ($request->isSecure() )
+      if ($request->isSecure())
         $redirect = true;
     }
 
     if (!$redirect) {
       $actualDomain = $request->getServerName();
 
-      if ( strtolower($actualDomain) != strtolower($enforeceSSL) )
+      if (strtolower($actualDomain) != strtolower($enforeceSSL))
         $redirect = true;
     }
 
-    if ( strtolower($actualDomain) != strtolower($enforeceSSL) ) {
+    if (strtolower($actualDomain) != strtolower($enforeceSSL)) {
       $redirectUrl = $request->createRedirectAddress($gwDomain, $gwSSL  );
 
-      header( "HTTP/1.1 301 Moved Permanently" );
-      header( "Location:{$redirectUrl}" );
+      header("HTTP/1.1 301 Moved Permanently");
+      header("Location:{$redirectUrl}");
 
       return true;
     }

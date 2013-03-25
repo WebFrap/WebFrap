@@ -40,7 +40,7 @@ class LibProcessStatus_Selectbox_Query extends LibSqlQuery
    * Fetch method for the ProjectProject Selectbox
    * @return void
    */
-  public function fetchSelectbox( )
+  public function fetchSelectbox()
   {
 
     if (!$this->processName && !$this->processId) {
@@ -52,21 +52,21 @@ class LibProcessStatus_Selectbox_Query extends LibSqlQuery
 
     $db = $this->getDb();
 
-    if (!$this->criteria )
+    if (!$this->criteria)
       $criteria = $db->orm->newCriteria();
     else
       $criteria = $this->criteria;
 
-    $criteria->select( array
+    $criteria->select(array
     (
       'wbfsys_process_node.rowid as id',
       'wbfsys_process_node.label as value'
      ));
 
-    $criteria->from( 'wbfsys_process_node' );
+    $criteria->from('wbfsys_process_node');
 
     if ($this->processId) {
-      $criteria->where( 'wbfsys_process_node.id_process = '.$this->processId );
+      $criteria->where('wbfsys_process_node.id_process = '.$this->processId);
     } else {
 
       $criteria->leftJoinOn
@@ -79,12 +79,12 @@ class LibProcessStatus_Selectbox_Query extends LibSqlQuery
         'wbfsys_process'
       );
 
-      $criteria->where( 'upper(wbfsys_process.access_key) = upper(\''.$this->processName."')" );
+      $criteria->where('upper(wbfsys_process.access_key) = upper(\''.$this->processName."')");
     }
 
-    $criteria->orderBy( 'wbfsys_process_node.m_order' );
+    $criteria->orderBy('wbfsys_process_node.m_order');
 
-    $this->result = $db->orm->select($criteria );
+    $this->result = $db->orm->select($criteria);
 
   }//end public function fetchSelectbox */
 

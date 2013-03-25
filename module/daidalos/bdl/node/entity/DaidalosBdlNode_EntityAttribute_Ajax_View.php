@@ -32,42 +32,42 @@ class DaidalosBdlNode_EntityAttribute_Ajax_View extends LibTemplateAjaxView
    * @param int $index
    * @param string $entityName
    */
-  public function displayInsert($attribute, $index, $entityName )
+  public function displayInsert($attribute, $index, $entityName)
   {
 
     $target = $attribute->getTarget();
 
     $targetVal = '';
 
-    if ($target )
+    if ($target)
       $targetVal = '::'.$target;
 
-    if ( '' !=  trim($target) )
-      $iconAttrKey = Wgt::icon( 'daidalos/table/key.png', 'xsmall', 'Key' );
+    if ('' !=  trim($target))
+      $iconAttrKey = Wgt::icon('daidalos/table/key.png', 'xsmall', 'Key');
     else
       $iconAttrKey = '';
 
-    if ( '' != $attribute->getIndex() )
-      $iconAttrIndex = Wgt::icon( 'daidalos/table/index.png', 'xsmall', 'Index' );
+    if ('' != $attribute->getIndex())
+      $iconAttrIndex = Wgt::icon('daidalos/table/index.png', 'xsmall', 'Index');
     else
       $iconAttrIndex = '';
 
-    if ( 'true' == $attribute->getRequired() )
-      $iconAttrRequired = Wgt::icon( 'daidalos/table/required.png', 'xsmall', 'Required' );
+    if ('true' == $attribute->getRequired())
+      $iconAttrRequired = Wgt::icon('daidalos/table/required.png', 'xsmall', 'Required');
     else
       $iconAttrRequired = '';
 
-    if ( 'true' == $attribute->getUnique() )
-      $iconAttrUnique = Wgt::icon( 'daidalos/table/unique.png', 'xsmall', 'Unique' );
+    if ('true' == $attribute->getUnique())
+      $iconAttrUnique = Wgt::icon('daidalos/table/unique.png', 'xsmall', 'Unique');
     else
       $iconAttrUnique = '';
 
-    $iconEdit   = Wgt::icon( 'control/edit.png', 'xsmall' );
-    $iconDelete = Wgt::icon( 'control/delete.png', 'xsmall' );
+    $iconEdit   = Wgt::icon('control/edit.png', 'xsmall');
+    $iconDelete = Wgt::icon('control/delete.png', 'xsmall');
 
     $pos = $index +1;
 
-    $this->setAreaContent( 'childNode', <<<XML
+    $this->setAreaContent('childNode', <<<XML
 <htmlArea selector="table#wgt-grid-entity-{$entityName}-attributes-table>tbody" action="append" ><![CDATA[
       <tr id="wgt-grid-entity-{$entityName}-attr-{$index}" >
         <td class="pos" >{$pos}</td>
@@ -91,7 +91,7 @@ class DaidalosBdlNode_EntityAttribute_Ajax_View extends LibTemplateAjaxView
 XML
     );
 
-    $this->setAreaContent( 'childCode', <<<XML
+    $this->setAreaContent('childCode', <<<XML
 <htmlArea selector="tr#wgt-grid-entity-{$entityName}-attr-{$index}" action="function" ><![CDATA[
 
     self.find(".wgtac_edit_attribute").click(function(){
@@ -121,43 +121,43 @@ XML
    * @param int $index
    * @param string $entityName
    */
-  public function displayUpdate($attribute, $index, $entityName )
+  public function displayUpdate($attribute, $index, $entityName)
   {
 
     $target = $attribute->getTarget();
 
     $targetVal = '';
 
-    if ($target )
+    if ($target)
       $targetVal = '::'.$target;
 
-    if ( '' !=  trim($target) )
-      $iconAttrKey = Wgt::icon( 'daidalos/table/key.png', 'xsmall', 'Key' );
+    if ('' !=  trim($target))
+      $iconAttrKey = Wgt::icon('daidalos/table/key.png', 'xsmall', 'Key');
     else
       $iconAttrKey = '';
 
-    if ( '' != $attribute->getIndex() )
-      $iconAttrIndex = Wgt::icon( 'daidalos/table/index.png', 'xsmall', 'Index' );
+    if ('' != $attribute->getIndex())
+      $iconAttrIndex = Wgt::icon('daidalos/table/index.png', 'xsmall', 'Index');
     else
       $iconAttrIndex = '';
 
-    if ( 'true' == $attribute->getRequired() )
-      $iconAttrRequired = Wgt::icon( 'daidalos/table/required.png', 'xsmall', 'Required' );
+    if ('true' == $attribute->getRequired())
+      $iconAttrRequired = Wgt::icon('daidalos/table/required.png', 'xsmall', 'Required');
     else
       $iconAttrRequired = '';
 
-    if ( 'true' == $attribute->getUnique() )
-      $iconAttrUnique = Wgt::icon( 'daidalos/table/unique.png', 'xsmall', 'Unique' );
+    if ('true' == $attribute->getUnique())
+      $iconAttrUnique = Wgt::icon('daidalos/table/unique.png', 'xsmall', 'Unique');
     else
       $iconAttrUnique = '';
 
 
-    $iconEdit   = Wgt::icon( 'control/edit.png', 'xsmall' );
-    $iconDelete = Wgt::icon( 'control/delete.png', 'xsmall' );
+    $iconEdit   = Wgt::icon('control/edit.png', 'xsmall');
+    $iconDelete = Wgt::icon('control/delete.png', 'xsmall');
 
     $pos = $index +1;
 
-    $this->setAreaContent( 'childNode', <<<XML
+    $this->setAreaContent('childNode', <<<XML
 <htmlArea selector="tr#wgt-grid-entity-{$entityName}-attr-{$index}" action="replace" ><![CDATA[
       <tr id="wgt-grid-entity-{$entityName}-attr-{$index}" >
         <td class="pos" >{$pos}</td>
@@ -181,7 +181,7 @@ XML
 XML
     );
 
-    $this->setAreaContent( 'childCode', <<<XML
+    $this->setAreaContent('childCode', <<<XML
 <htmlArea selector="tr#wgt-grid-entity-{$entityName}-attr-{$index}" action="function" ><![CDATA[
 
     self.find(".wgtac_edit_attribute").click(function(){
@@ -210,10 +210,10 @@ XML
    * @param $index int
    * @param $entityName string
    */
-  public function displayDelete($index, $entityName )
+  public function displayDelete($index, $entityName)
   {
 
-    $this->setAreaContent( 'childNode', <<<XML
+    $this->setAreaContent('childNode', <<<XML
 <htmlArea selector="tr#wgt-grid-entity-{$entityName}-attr-{$index}" action="remove" ></htmlArea>
 XML
     );

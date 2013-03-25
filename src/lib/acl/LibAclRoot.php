@@ -30,7 +30,7 @@ class LibAclRoot extends BaseChild
 
   /**
    * Cache für die gefundenen Pfad Access Daten
-   * @var [int $rootId][int $level][string $refKey][string:('level'=>int "access level",'roles' => [string] "role names" )]
+   * @var [int $rootId][int $level][string $refKey][string:('level'=>int "access level",'roles' => [string] "role names")]
    */
   protected $paths = null;
 

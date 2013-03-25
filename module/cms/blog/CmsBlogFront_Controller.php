@@ -49,13 +49,13 @@ class CmsBlogFront_Controller extends Controller
   (
     'page' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'html' )
+      'method'    => array('GET'),
+      'views'      => array('html')
     ),
     'preview' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'html', 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('html', 'maintab')
     ),
   );
 
@@ -73,15 +73,15 @@ class CmsBlogFront_Controller extends Controller
   * @param TFlag $params named parameters
   * @return boolean
   */
-  public function service_page( )
+  public function service_page()
   {
 
     $httpRequest = $this->getRequest();
 
     // load the flow flags
-    $params   = $this->getPageFlags($httpRequest );
+    $params   = $this->getPageFlags($httpRequest);
 
-    $model    = $this->loadModel( 'CmsFront' );
+    $model    = $this->loadModel('CmsFront');
 
     /* @var $view CmsFront_Html_View */
     $view     = $response->loadView
@@ -91,17 +91,17 @@ class CmsBlogFront_Controller extends Controller
       'displayPage'
     );
 
-    $view->setModel($model );
-    $view->setRequest($httpRequest );
+    $view->setModel($model);
+    $view->setRequest($httpRequest);
 
-    $key    = $httpRequest->param('p', Validator::CKEY )?:'default';
-    $rowid  = $httpRequest->param('objid', Validator::EID );
+    $key    = $httpRequest->param('p', Validator::CKEY)?:'default';
+    $rowid  = $httpRequest->param('objid', Validator::EID);
 
-    if ($rowid )
+    if ($rowid)
       $key = $rowid;
 
     // call the create form on the view
-    $view->displayPage($key, $params );
+    $view->displayPage($key, $params);
 
   }//end public function service_page */
 
@@ -110,16 +110,16 @@ class CmsBlogFront_Controller extends Controller
   * @param TFlag $params named parameters
   * @return boolean
   */
-  public function service_preview( )
+  public function service_preview()
   {
 
     $httpRequest = $this->getRequest();
 
     // load the flow flags
-    $params   = $this->getPageFlags($httpRequest );
+    $params   = $this->getPageFlags($httpRequest);
 
-    $key    = $httpRequest->param('p', Validator::CKEY )?:'default';
-    $rowid  = $httpRequest->param('objid', Validator::EID );
+    $key    = $httpRequest->param('p', Validator::CKEY)?:'default';
+    $rowid  = $httpRequest->param('objid', Validator::EID);
 
     $view     = $response->loadView
     (
@@ -128,14 +128,14 @@ class CmsBlogFront_Controller extends Controller
       'displayPreview'
     );
 
-    $model = $this->loadModel( 'CmsFront' );
-    $view->setModel($model );
+    $model = $this->loadModel('CmsFront');
+    $view->setModel($model);
 
-    if ($rowid )
+    if ($rowid)
       $key = $rowid;
 
     // call the create form on the view
-    if (!$view->displayPreview($key, $params ) ) {
+    if (!$view->displayPreview($key, $params)) {
       // if display fails show the error page
       $this->errorPage
       (
@@ -159,7 +159,7 @@ class CmsBlogFront_Controller extends Controller
    * @param LibHttpRequest $httpRequest
    * @return TFlag
    */
-  protected function getPageFlags($httpRequest )
+  protected function getPageFlags($httpRequest)
   {
 
     $flowFlags = new TFlag();

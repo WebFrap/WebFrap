@@ -32,7 +32,7 @@ class WebfrapMessage_List_Ajax_View extends LibTemplateAjaxView
    * Render des Suchergebnisses und übergabe in die ajax response
    * @param string $elementId
    */
-  public function displaySearch($params )
+  public function displaySearch($params)
   {
 
     // benötigte resourcen laden
@@ -48,19 +48,19 @@ class WebfrapMessage_List_Ajax_View extends LibTemplateAjaxView
 
     $params->searchFormId = 'wgt-form-webfrap-groupware-search';
 
-    $data = $this->model->fetchMessages($params );
+    $data = $this->model->fetchMessages($params);
 
-    $table = new WebfrapMessage_Table_Element( 'messageList', $this );
-    $table->setId( 'wgt-table-webfrap-groupware_message' );
+    $table = new WebfrapMessage_Table_Element('messageList', $this);
+    $table->setId('wgt-table-webfrap-groupware_message');
     $table->access = $params->access;
 
-    $table->setData($data );
+    $table->setData($data);
     $table->addAttributes(array
     (
       'style' => 'width:99%;'
     ));
 
-    $table->setPagingId($params->searchFormId );
+    $table->setPagingId($params->searchFormId);
 
 
     // the table should only replace the content inside of the container
@@ -68,7 +68,7 @@ class WebfrapMessage_List_Ajax_View extends LibTemplateAjaxView
     $table->insertMode = false;
 
     if ($params->append) {
-      $table->setAppendMode( true );
+      $table->setAppendMode(true);
       $table->buildAjax();
 
       $jsCode = <<<WGTJS
@@ -76,7 +76,7 @@ class WebfrapMessage_List_Ajax_View extends LibTemplateAjaxView
   \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth');
 
 WGTJS;
-      $this->addJsCode($jsCode );
+      $this->addJsCode($jsCode);
 
     } else {
       $jsCode = <<<WGTJS
@@ -85,12 +85,12 @@ WGTJS;
 
 WGTJS;
 
-      $this->addJsCode($jsCode );
+      $this->addJsCode($jsCode);
 
       $table->buildHtml();
     }
 
-    $this->setAreaContent( 'wgt-table-message', $table->buildAjaxArea() );
+    $this->setAreaContent('wgt-table-message', $table->buildAjaxArea());
 
   }//end public function displaySearch */
 

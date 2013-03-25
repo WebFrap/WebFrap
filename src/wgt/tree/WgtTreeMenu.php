@@ -35,14 +35,14 @@ class WgtTreeMenu extends WgtMenu
       $html .= '<li><a class="wcm wcm_req_ajax" href="'.$node[WgtMenu::ACTION].'" >';
 
       if ($node[WgtMenu::ICON])
-        $html .= Wgt::icon($node[WgtMenu::ICON] , 'xsmall' , $node[WgtMenu::TITLE] );
+        $html .= Wgt::icon($node[WgtMenu::ICON] , 'xsmall' , $node[WgtMenu::TITLE]);
 
       $html .= $node[WgtMenu::TEXT];
 
       $html .= '</a></li>';
     }
 
-    return $this->decorateMenu($html );
+    return $this->decorateMenu($html);
 
   }//end public function build */
 
@@ -57,7 +57,7 @@ class WgtTreeMenu extends WgtMenu
   /**
    * @param $menu
    */
-  protected function decorateMenu($menu )
+  protected function decorateMenu($menu)
   {
 
     $html = '<ul class="wgt_menu_tree" >';

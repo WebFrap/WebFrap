@@ -25,11 +25,11 @@ class DaidalosSystem_Model extends Model
    * @param string $key
    * @param TFlag $params
    */
-  public function getUsersByKey($key, $params )
+  public function getUsersByKey($key, $params)
   {
 
     $db     = $this->getDb();
-    $query  = $db->newQuery( 'DaidalosSystem' );
+    $query  = $db->newQuery('DaidalosSystem');
 
     $query->fetchUsersByKey
     (

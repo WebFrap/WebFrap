@@ -56,7 +56,7 @@ class WebfrapAnnouncement_Table_Maintab_View extends WgtMaintab
   * @param TFlag $params benamte parameter
   * @return boolean
   */
-  public function displayListing($params )
+  public function displayListing($params)
   {
 
     // laden der benötigten resourcen
@@ -64,10 +64,10 @@ class WebfrapAnnouncement_Table_Maintab_View extends WgtMaintab
     $access   = $params->access;
 
     // Setzen der letzten metadaten
-    $this->addVar( 'params', $params );
+    $this->addVar('params', $params);
 
     // setzen des templates
-    $this->setTemplate( 'webfrap/announcement/maintab/table/listing_table' );
+    $this->setTemplate('webfrap/announcement/maintab/table/listing_table');
 
     // fetch the i18n text only one time
     $i18nText = $this->i18n->l
@@ -77,33 +77,33 @@ class WebfrapAnnouncement_Table_Maintab_View extends WgtMaintab
     );
 
     // setzen des Tabl Labels, sowie den Titel des Tab Title panels
-    $this->setLabel($i18nText );
-    $this->setTitle($i18nText );
+    $this->setLabel($i18nText);
+    $this->setTitle($i18nText);
 
     // such formular ID und Aktion müssen gesetzt werden
     // sie können von auserhalb übergeben werden, wenn nicht vorhanden
     // muss eine standard action sowie eine standard id gesetzt werden
-    if (!$params->searchFormAction )
+    if (!$params->searchFormAction)
       $params->searchFormAction = 'index.php?c=Webfrap.Announcement.search';
 
-    if (!$params->searchFormId )
+    if (!$params->searchFormId)
       $params->searchFormId = 'wgt-form-table-webfrap_announcement-search';
 
     // set search form erweitert die Action anhand der in params mit
     // übergebene flags und schiebt formAction und formId in den VAR index
     // der aktuellen view
-    $this->setSearchFormData($params );
+    $this->setSearchFormData($params);
 
     // filter auswerten die mitgeschickt werden können
     $condition = array();
 
-    $ui = $this->loadUi( 'WebfrapAnnouncement_Table' );
+    $ui = $this->loadUi('WebfrapAnnouncement_Table');
 
     // Das Listenelement wird erstellt
     // ACLs werden im Model weiter ausgewertet
     $ui->createListItem
     (
-      $this->model->search($access, $params, $condition ),
+      $this->model->search($access, $params, $condition),
       $access,
       $params
     );
@@ -122,17 +122,17 @@ class WebfrapAnnouncement_Table_Maintab_View extends WgtMaintab
     $params->formId       = 'wgt-form-webfrap_announcement';
 
     // Das Create Form Objekt erstellen und mit allen nötigen Daten befüllen
-    $form = $this->newForm( 'WebfrapAnnouncement_Crud_Create' );
+    $form = $this->newForm('WebfrapAnnouncement_Crud_Create');
     $entity = $this->model->getEntity();
-    $form->setEntity($entity );
+    $form->setEntity($entity);
 
     // Form Action und ID setzen
-    $form->setFormTarget($params->formAction, $params->formId, $params );
-    $form->renderForm($params );
+    $form->setFormTarget($params->formAction, $params->formId, $params);
+    $form->renderForm($params);
 
     /// addMenu erstellt das dropdown menü und schiebt es dann in die view
-    $this->addMenuListing($params );
-    $this->addActionsListing($params );
+    $this->addMenuListing($params);
+    $this->addActionsListing($params);
 
     // kein fehler aufgetreten?
     // na dann ist ja bestens :-)
@@ -151,7 +151,7 @@ class WebfrapAnnouncement_Table_Maintab_View extends WgtMaintab
    *
    * @param TFlag $params benamte parameter
    */
-  public function addMenuListing($params )
+  public function addMenuListing($params)
   {
 
     $menu     = $this->newMenu
@@ -162,7 +162,7 @@ class WebfrapAnnouncement_Table_Maintab_View extends WgtMaintab
 
     // wir übernehmen einfach die ID des Maintabs und hängen dropmenu dran
     $menu->id = $this->id.'_dropmenu';
-    $menu->buildMenu($params );
+    $menu->buildMenu($params);
 
     return true;
 
@@ -181,7 +181,7 @@ class WebfrapAnnouncement_Table_Maintab_View extends WgtMaintab
    *   LibAclContainer access: Container mit den aktiven ACL Informationen
    * }
    */
-  public function addActionsListing($params )
+  public function addActionsListing($params)
   {
 
     // en:

@@ -36,22 +36,22 @@ class DaidalosDb_Maintab_Menu extends WgtDropmenu
    *   string formId: the id of the form;
    * }
    */
-  public function buildMenu($params )
+  public function buildMenu($params)
   {
 
     $view = $this->view;
 
-    $iconMenu          = $view->icon( 'control/menu.png'     ,'Menu'   );
-    $iconClose         = $view->icon( 'control/close.png'    ,'Close'   );
-    $iconSearch        = $view->icon( 'control/search.png'   ,'Search'  );
-    $iconBookmark      = $view->icon( 'control/bookmark.png' ,'Bookmark');
-    $iconQuery         = $view->icon( 'daidalos/query.png' ,'Query' );
-    $iconSupport = $view->icon( 'control/support.png'  ,'Support' );
-    $iconBug     = $view->icon( 'control/bug.png'      ,'Bug' );
-    $iconFaq     = $view->icon( 'control/faq.png'      ,'Faq' );
+    $iconMenu          = $view->icon('control/menu.png'     ,'Menu'   );
+    $iconClose         = $view->icon('control/close.png'    ,'Close'   );
+    $iconSearch        = $view->icon('control/search.png'   ,'Search'  );
+    $iconBookmark      = $view->icon('control/bookmark.png' ,'Bookmark');
+    $iconQuery         = $view->icon('daidalos/query.png' ,'Query');
+    $iconSupport = $view->icon('control/support.png'  ,'Support');
+    $iconBug     = $view->icon('control/bug.png'      ,'Bug');
+    $iconFaq     = $view->icon('control/faq.png'      ,'Faq');
 
     $entries = new TArray();
-    //$entries->support  = $this->entriesSupport($params );
+    //$entries->support  = $this->entriesSupport($params);
 
     $this->content = <<<HTML
 
@@ -105,7 +105,7 @@ HTML;
    *     services
    * }
    */
-  public function injectActions($view,  $params )
+  public function injectActions($view,  $params)
   {
 
     // add the button action for save in the window
@@ -119,12 +119,12 @@ HTML;
     });
 
     self.getObject().find(".wgtac_query").click(function(){
-      \$R.get( 'maintab.php?c=Daidalos.Db.query' );
+      \$R.get('maintab.php?c=Daidalos.Db.query');
     });
 
 BUTTONJS;
 
-    $view->addJsCode($code );
+    $view->addJsCode($code);
 
   }//end public function injectActions */
 

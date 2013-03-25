@@ -60,7 +60,7 @@ class LibTemplateMail extends LibTemplateHtml
    * @param string $html
    * @return void
    */
-  public function setContent($html )
+  public function setContent($html)
   {
     $this->compiled = $html;
   }//end public function setContent */
@@ -74,23 +74,23 @@ class LibTemplateMail extends LibTemplateHtml
    *
    * @return string the assembled page
    */
-  public function build($template = null , $PARAMS = array() )
+  public function build($template = null , $PARAMS = array())
   {
 
-    if ($this->compiled )
+    if ($this->compiled)
       return $this->compiled;
 
     if (!$template)
       $template = $this->template;
 
-    if (!$filename = $this->templatePath($template  ) ) {
+    if (!$filename = $this->templatePath($template  )) {
 
       Error::report
       (
       'Failed to load the template :'.$template
       );
 
-      if ( Log::$levelDebug )
+      if (Log::$levelDebug)
         return "<p class=\"wgt-box error\">Template: $template not exists.</p>";
       else
         return '<p class="wgt-box error">Error Code: 42</p>';

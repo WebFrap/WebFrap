@@ -64,8 +64,8 @@ View::$searchPathTemplate[]     = PATH_FW.'templates/default/';
 I18n::$i18nPath[]         = PATH_FW.'i18n/';
 Conf::$confPath[]         = PATH_FW.'conf/';
 
-Webfrap::loadClassIndex( 'task_planner' );
+Webfrap::loadClassIndex('task_planner');
 
-//set_error_handler( 'Webfrap::debugErrorHandler' );
+//set_error_handler('Webfrap::debugErrorHandler');
 Log::cleanDebugLog();
 

@@ -30,7 +30,7 @@ class WebfrapYggdrasil_Model extends Model
   /**
    * @return void
    */
-  public function getModules(  )
+  public function getModules()
   {
 
     $db = $this->getDb();
@@ -47,14 +47,14 @@ ORDER BY
   name;
 SQL;
 
-    return $db->select($query );
+    return $db->select($query);
 
   }//end public function getModules */
 
   /**
    * @return void
    */
-  public function getEntities($moduleId )
+  public function getEntities($moduleId)
   {
 
     $db = $this->getDb();
@@ -73,7 +73,7 @@ ORDER BY
   name;
 SQL;
 
-    return $db->select($query );
+    return $db->select($query);
 
   }//end public function getEntities */
 

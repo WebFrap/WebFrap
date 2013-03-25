@@ -73,7 +73,7 @@ class State extends TArray
    */
   public function isOk()
   {
-    return ($this->status == State::OK );
+    return ($this->status == State::OK);
   }//end public function isOk */
 
   /**
@@ -93,7 +93,7 @@ class State extends TArray
   /**
    * @param string $message
    */
-  public function addMessage($message )
+  public function addMessage($message)
   {
 
     $this->messages[] = $message;
@@ -105,10 +105,10 @@ class State extends TArray
    * @param string $warnKey eine flag setzen gegen die gecheckt werden kann
    *   ob an einer bestimmten stelle eine warnung getriggert wurde
    */
-  public function addWarning($warning, $warnKey = null )
+  public function addWarning($warning, $warnKey = null)
   {
 
-    if (!$this->status )
+    if (!$this->status)
       $this->status = State::WARN;
 
     $this->warnings[] = $warning;
@@ -123,7 +123,7 @@ class State extends TArray
    * @param string $errorKey eine flag setzen gegen die gecheckt werden kann
    *   ob an einer bestimmten stelle fehler aufgetreten sind
    */
-  public function addError($error, $errorKey = null )
+  public function addError($error, $errorKey = null)
   {
     $this->status = State::ERROR;
 
@@ -138,7 +138,7 @@ class State extends TArray
    * @param string $stateKey
    * @param string $state der Status
    */
-  public function setKeyState($stateKey, $state )
+  public function setKeyState($stateKey, $state)
   {
 
     $this->pool[$stateKey] = $state;

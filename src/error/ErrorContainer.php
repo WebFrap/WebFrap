@@ -51,7 +51,7 @@ class ErrorContainer
    * Neue Fehlermeldung hinzufügen
    * @param string $message
    */
-  public function addMessage($message )
+  public function addMessage($message)
   {
 
     $this->messages[] = $message;
@@ -79,7 +79,7 @@ class ErrorContainer
    * Die Fehler in das Response Objekt für eine Ausgabe schieben
    * @param LibResponseHttp $response
    */
-  public function publish($response )
+  public function publish($response)
   {
 
     foreach ($this->messages as $message) {

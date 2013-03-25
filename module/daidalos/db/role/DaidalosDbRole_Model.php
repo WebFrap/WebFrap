@@ -32,7 +32,7 @@ class DaidalosDbRole_Model extends Model
   /**
    * @return array liste der Views
    */
-  public function getLoginRoles(  )
+  public function getLoginRoles()
   {
 
     $db = $this->getDb();
@@ -58,7 +58,7 @@ SQL;
   /**
    * @return array liste der Views
    */
-  public function getRoles(  )
+  public function getRoles()
   {
 
     $db = $this->getDb();
@@ -86,7 +86,7 @@ SQL;
   /**
    * @param string $roleName
    */
-  public function createRole($roleName )
+  public function createRole($roleName)
   {
 
     $db = $this->getDb();
@@ -99,7 +99,7 @@ SQL;
 
     $sql .= ";";
 
-    return $db->exec($sql );
+    return $db->exec($sql);
 
   }//end public function createRole */
 

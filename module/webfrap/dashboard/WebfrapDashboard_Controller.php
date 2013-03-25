@@ -36,33 +36,33 @@ class WebfrapDashboard_Controller extends Controller
   (
     'dashboard' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'html' )
+      'method'    => array('GET'),
+      'views'      => array('html')
     ),
     'reloadquiklinks' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('GET'),
+      'views'      => array('ajax')
     ),
     'reloadbookmarks' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('GET'),
+      'views'      => array('ajax')
     ),
     'reloadlastvisited' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('GET'),
+      'views'      => array('ajax')
     ),
     'reloadmostvisited' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('GET'),
+      'views'      => array('ajax')
     ),
     'reloaddesktop' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('GET'),
+      'views'      => array('ajax')
     ),
   );
 
@@ -75,22 +75,22 @@ class WebfrapDashboard_Controller extends Controller
    * @param LibResonseHttp $response
    * @return void
    */
-  public function service_dashboard($request, $response )
+  public function service_dashboard($request, $response)
   {
 
     $view = $this->view;
 
-    $selectWidget = $view->newInput( 'selectWidget' , 'SelectboxCmsMashupWidget'  );
+    $selectWidget = $view->newInput('selectWidget' , 'SelectboxCmsMashupWidget'  );
     $selectWidget->addAttributes
     (array(
     'class' => 'medium'
     ));
 
-    $mashup = $view->addItem( 'dashboard' , 'Mashup' );
+    $mashup = $view->addItem('dashboard' , 'Mashup');
     $mashup->where = ' id_owner = '.User::getActive()->getId();
 
     $view->setTitle('Dashboard');
-    $view->setTemplate( 'mashup' , 'webfrap' );
+    $view->setTemplate('mashup' , 'webfrap');
 
   } // end public function service_dashboard */
 
@@ -99,7 +99,7 @@ class WebfrapDashboard_Controller extends Controller
    * @param LibResonseHttp $response
    * @return void
    */
-  public function service_reloadQuikLinks($request, $response )
+  public function service_reloadQuikLinks($request, $response)
   {
 
     // laden der passenden subview
@@ -112,9 +112,9 @@ class WebfrapDashboard_Controller extends Controller
       true
     );
 
-    $model = $this->loadModel( 'WebfrapDashboard' );
+    $model = $this->loadModel('WebfrapDashboard');
 
-    $view->setModel($model );
+    $view->setModel($model);
 
     $view->displayReloadQuikLinks();
 

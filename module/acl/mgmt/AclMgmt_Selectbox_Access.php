@@ -34,7 +34,7 @@ class AclMgmt_Selectbox_Access extends WgtSelectbox
 
     $select = '<select '.$attributes.' >'.NL;
 
-    if (!is_null($this->firstFree) )
+    if (!is_null($this->firstFree))
       $select .= '<option value=" " >'.$this->firstFree.'</option>'.NL;
 
     foreach (Acl::$accessLevels as $value => $id) {
@@ -48,7 +48,7 @@ class AclMgmt_Selectbox_Access extends WgtSelectbox
 
     }
 
-    if ($this->firstFree && !$this->activValue )
+    if ($this->firstFree && !$this->activValue)
       $this->activValue = $this->firstFree;
 
     $select .= '</select>'.NL;

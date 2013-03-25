@@ -31,19 +31,19 @@ class WebfrapMessage_Show_Maintab_View extends WgtMaintab
    * @param TFlag $params
    * @return void
    */
-  public function displayShow(  $params )
+  public function displayShow( $params)
   {
 
     $message = $this->model->getMessageNode();
 
-    $this->setLabel( 'Message: '.$message->title );
-    $this->setTitle( 'Message: '.$message->title );
+    $this->setLabel('Message: '.$message->title);
+    $this->setTitle('Message: '.$message->title);
 
-    $this->addVar( 'msgNode', $message );
-    $this->addVar( 'refs', $this->model->loadMessageReferences($message->msg_id) );
-    $this->setTemplate( 'webfrap/message/maintab/show_page', true );
+    $this->addVar('msgNode', $message);
+    $this->addVar('refs', $this->model->loadMessageReferences($message->msg_id));
+    $this->setTemplate('webfrap/message/maintab/show_page', true);
 
-    $this->addMenu($params );
+    $this->addMenu($params);
 
   }//end public function displayShow */
 
@@ -112,7 +112,7 @@ class WebfrapMessage_Show_Maintab_View extends WgtMaintab
 
 HTML;
 
-    $this->injectActions($menu, $params );
+    $this->injectActions($menu, $params);
 
   }//end public function addMenu */
 
@@ -129,7 +129,7 @@ HTML;
    *     services
    * }
    */
-  public function injectActions($menu, $params )
+  public function injectActions($menu, $params)
   {
 
     $message = $this->model->getMessageNode();
@@ -146,21 +146,21 @@ HTML;
       self.close();
     });
 
-    self.getObject().find(".wgtac_forward").click( function(){
-      \$R.get( 'maintab.php?c=Webfrap.Message.formForward&objid={$message->msg_id}',{success:function(){ self.close(); }} );
+    self.getObject().find(".wgtac_forward").click(function(){
+      \$R.get('maintab.php?c=Webfrap.Message.formForward&objid={$message->msg_id}',{success:function(){ self.close(); }});
     });
 
-    self.getObject().find(".wgtac_reply").click( function(){
-      \$R.get( 'maintab.php?c=Webfrap.Message.formReply&objid={$message->msg_id}',{success:function(){ self.close(); }} );
+    self.getObject().find(".wgtac_reply").click(function(){
+      \$R.get('maintab.php?c=Webfrap.Message.formReply&objid={$message->msg_id}',{success:function(){ self.close(); }});
     });
 
-   self.getObject().find(".wgtac_save").click( function(){
+   self.getObject().find(".wgtac_save").click(function(){
       \$R.form('wgt-form-msg-show-save-{$message->msg_id}');
    });
 
 BUTTONJS;
 
-    $this->addJsCode($code );
+    $this->addJsCode($code);
 
   }//end public function injectActions */
 

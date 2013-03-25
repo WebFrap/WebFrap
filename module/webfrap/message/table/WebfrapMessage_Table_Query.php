@@ -148,7 +148,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
    *
    * @return void
    */
-  public function setTables($criteria )
+  public function setTables($criteria)
   {
 
     $criteria->from('wbfsys_message');
@@ -485,34 +485,34 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
 
           $criteria->where(
           	"((wbfsys_message.id_sender = ".$userId
-              ." OR wbfsys_message_receiver.vid = ".$userId." ) AND wbfsys_message_aspect.id_receiver = ".$userId." )"
+              ." OR wbfsys_message_receiver.vid = ".$userId.") AND wbfsys_message_aspect.id_receiver = ".$userId.")"
           );
 
         } else {
 
-          $criteria->where("(wbfsys_message_receiver.vid = ".$userId." AND wbfsys_message_aspect.id_receiver = ".$userId." )");
+          $criteria->where("(wbfsys_message_receiver.vid = ".$userId." AND wbfsys_message_aspect.id_receiver = ".$userId.")");
         }
 
       } elseif ($condition['filters']['channel']->outbox) {
 
-        $criteria->where("wbfsys_message.id_sender = ".$userId );
+        $criteria->where("wbfsys_message.id_sender = ".$userId);
       }
 
 
     } else {
       // nur die inbox anzeigen
-      $criteria->where("(wbfsys_message_receiver.vid = ".$userId." AND wbfsys_message_aspect.id_receiver = ".$userId." )" );
+      $criteria->where("(wbfsys_message_receiver.vid = ".$userId." AND wbfsys_message_aspect.id_receiver = ".$userId.")");
     }
 
     if (isset($condition['aspects'])) {
 
       if (!$condition['aspects'])
-        $condition['aspects'] = array(EMessageAspect::MESSAGE );
+        $condition['aspects'] = array(EMessageAspect::MESSAGE);
 
       $criteria->where("wbfsys_message_aspect.aspect IN(".implode(',', $condition['aspects']).") ");
     }
     else
-      $criteria->where("wbfsys_message_aspect.aspect = ".EMessageAspect::MESSAGE );
+      $criteria->where("wbfsys_message_aspect.aspect = ".EMessageAspect::MESSAGE);
 
 
   }//end public function appendFilter */

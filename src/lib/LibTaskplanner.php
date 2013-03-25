@@ -284,4 +284,3 @@ SQL;
     return $db->select($sql)->getAll();
   }
 }
-

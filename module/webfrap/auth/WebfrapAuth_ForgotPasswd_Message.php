@@ -52,7 +52,7 @@ class WebfrapAuth_ForgotPasswd_Message extends LibMessageStack
   /**
    * @param WbfsysUser_Entity $entity
    */
-  public function setEntity($entity )
+  public function setEntity($entity)
   {
 
     $this->entity = $entity;
@@ -64,7 +64,7 @@ class WebfrapAuth_ForgotPasswd_Message extends LibMessageStack
    * @param LibMessageReceiver $receiver = null
    * @return string
    */
-  public function getSubject($receiver = null, $sender = null )
+  public function getSubject($receiver = null, $sender = null)
   {
     return <<<SUBJECT
 {$this->info->getAppName()}: Anfrage zum Zurücksetzen ihres Passworts
@@ -79,7 +79,7 @@ SUBJECT;
    * @param LibMessageSender $sender = null
    * @return string
    */
-  public function buildContent($receiver = null, $sender = null )
+  public function buildContent($receiver = null, $sender = null)
   {
 
     $this->htmlDynContent = <<<MAIL

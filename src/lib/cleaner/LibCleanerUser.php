@@ -32,7 +32,7 @@ class LibCleanerUser
   public static function getDefault()
   {
 
-    if (!self::$default )
+    if (!self::$default)
       self::$default = new LibCleanerDset();
 
     return self::$default;
@@ -45,13 +45,13 @@ class LibCleanerUser
    * @param LibDbConnection $db
    * @param int $id
    */
-  public function cleanDefault($db, $id )
+  public function cleanDefault($db, $id)
   {
 
-    if ( is_object($id) && $id instanceof Entity )
+    if (is_object($id) && $id instanceof Entity)
       $id = $id->getId();
 
-    if (!ctype_digit($id) || ! (int) $id > 0 ) {
+    if (!ctype_digit($id) || ! (int) $id > 0) {
 
       $userMsg = <<<ERRMSG
 Sorry, there was a
@@ -61,7 +61,7 @@ ERRMSG;
 Tried
 ERRMSG;
 
-      throw new Io_Exception($userMsg, $errMsg );
+      throw new Io_Exception($userMsg, $errMsg);
     }
 
     $sql = array();
@@ -101,7 +101,7 @@ SQL;
 DELETE FROM wbfsys_process_status where vid = {$id};
 SQL;
 
-    $db->multiDelete($sql );
+    $db->multiDelete($sql);
 
   }//end public function cleanDefault */
 

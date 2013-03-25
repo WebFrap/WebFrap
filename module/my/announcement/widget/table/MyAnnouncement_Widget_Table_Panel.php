@@ -33,19 +33,19 @@ class MyAnnouncement_Widget_Table_Panel extends WgtPanelTable
    *
    * @return string
    */
-  public function setUp( )
+  public function setUp()
   {
 
     $user   = $this->getUser();
     $acl    = $this->getAcl();
     $i18n   = $this->getI18n();
 
-    $this->title = $i18n->l( 'My Announcements', 'wbfsys.announcement.label' );
+    $this->title = $i18n->l('My Announcements', 'wbfsys.announcement.label');
     $this->searchKey = 'my_announcement';
 
     $buttonArchive = <<<HTML
       <div class="inline wgt-border-light wgt-bg-light" style="padding:2px;margin-top:-2px;margin-right:3px;" >
-        <span>{$i18n->l( 'Only Important', 'wbf.label' )}: </span>
+        <span>{$i18n->l('Only Important', 'wbf.label')}: </span>
         <input
           type="checkbox"
           id="wgt-filter-my_announcement-important"
@@ -56,7 +56,7 @@ class MyAnnouncement_Widget_Table_Panel extends WgtPanelTable
       </div>
 
       <div class="inline wgt-border-light wgt-bg-light" style="padding:2px;margin-top:-2px;margin-right:3px;" >
-        <span>{$i18n->l( 'Archive', 'wbf.label' )}: </span>
+        <span>{$i18n->l('Archive', 'wbf.label')}: </span>
         <input
           type="checkbox"
           id="wgt-filter-my_announcement-archive"

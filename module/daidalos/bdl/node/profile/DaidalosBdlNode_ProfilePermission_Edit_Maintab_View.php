@@ -37,24 +37,24 @@ class DaidalosBdlNode_ProfilePermission_Edit_Maintab_View extends WgtMaintabCust
    * @param TFlag $params
    * @return void
    */
-  public function displayEdit($idx, $params )
+  public function displayEdit($idx, $params)
   {
 
-    $this->setLabel( 'Edit Permssion '.$idx );
-    $this->setTitle( 'Edit Permssion '.$idx );
+    $this->setLabel('Edit Permssion '.$idx);
+    $this->setTitle('Edit Permssion '.$idx);
 
-    $this->addVar( 'node', $this->model->node );
-    $this->addVar( 'profile', $this->model->profile );
-    $this->addVar( 'key', $this->model->modeller->key );
-    $this->addVar( 'bdlFile', $this->model->modeller->bdlFileName );
-    $this->addVar( 'idx', $idx );
+    $this->addVar('node', $this->model->node);
+    $this->addVar('profile', $this->model->profile);
+    $this->addVar('key', $this->model->modeller->key);
+    $this->addVar('bdlFile', $this->model->modeller->bdlFileName);
+    $this->addVar('idx', $idx);
 
-    $this->setTabId( 'wgt-tab-daidalos-bdl_profile-edit-permission-'.$idx );
+    $this->setTabId('wgt-tab-daidalos-bdl_profile-edit-permission-'.$idx);
 
-    $this->setTemplate( 'daidalos/bdl/node/profile/permission/maintab/edit' );
+    $this->setTemplate('daidalos/bdl/node/profile/permission/maintab/edit');
 
     $params = new TArray();
-    $this->addMenu($idx, $params );
+    $this->addMenu($idx, $params);
 
   }//end public function displayEdit */
 
@@ -67,7 +67,7 @@ class DaidalosBdlNode_ProfilePermission_Edit_Maintab_View extends WgtMaintabCust
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu($idx, $params )
+  public function addMenu($idx, $params)
   {
 
     $menu     = $this->newMenu
@@ -78,9 +78,9 @@ class DaidalosBdlNode_ProfilePermission_Edit_Maintab_View extends WgtMaintabCust
     /* @var $menu DaidalosBdlNode_ProfilePermission_Edit_Maintab_Menu */
 
     $menu->id = $this->id.'_dropmenu';
-    $menu->buildMenu(  $params );
+    $menu->buildMenu( $params);
 
-    $menu->injectActions($idx, $this, $params );
+    $menu->injectActions($idx, $this, $params);
 
   }//end public function addMenu */
 

@@ -36,20 +36,20 @@ class WebfrapMaintenance_DataIndex_Stats_Maintab_Menu extends WgtDropmenu
    *   string formId: the id of the form;
    * }
    */
-  public function buildMenu($params )
+  public function buildMenu($params)
   {
 
     // benötigte resourcen laden
     $acl     = $this->getAcl();
     $view   = $this->getView();
 
-    $iconMenu      = $view->icon(  'control/menu.png',  'Menu');
-    $iconRebuild   = $view->icon(  'maintenance/rebuild_index.png', 'Rebuild Index');
-    $iconBookmark  = $view->icon(  'control/bookmark.png', 'Bookmark');
-    $iconClose     = $view->icon(  'control/close.png', 'Close');
+    $iconMenu      = $view->icon( 'control/menu.png',  'Menu');
+    $iconRebuild   = $view->icon( 'maintenance/rebuild_index.png', 'Rebuild Index');
+    $iconBookmark  = $view->icon( 'control/bookmark.png', 'Bookmark');
+    $iconClose     = $view->icon( 'control/close.png', 'Close');
 
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport($params );
+    $entries->support  = $this->entriesSupport($params);
 
     // prüfen ob der aktuelle benutzer überhaupt neue einträge anlegen darf
     if ($params->access->maintenance) {
@@ -84,7 +84,7 @@ BUTTON;
       </li>
     {$entries->support}
       <li>
-        <a class="wgtac_close" >{$iconClose} {$this->view->i18n->l( 'Close', 'wbf.label' )}</a>
+        <a class="wgtac_close" >{$iconClose} {$this->view->i18n->l('Close', 'wbf.label')}</a>
       </li>
     </ul>
   </div>
@@ -99,7 +99,7 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport($params )
+  protected function entriesSupport($params)
   {
 
     $iconSupport    = $this->view->icon('control/support.png'  ,'Support');

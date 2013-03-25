@@ -51,17 +51,17 @@ class WebfrapIssue_Controller extends Controller
   /**
    * @return void
    */
-  public function form( )
+  public function form()
   {
 
-    if (!$this->view->isType( View::WINDOW )) {
+    if (!$this->view->isType(View::WINDOW)) {
       $this->errorPage('Invalid Request');
     }
 
     $view = $this->view->newWindow('WbfSysHelp', 'Default');
     $view->setTitle('Help System');
 
-    $view->setTemplate( 'base/issue/form' );
+    $view->setTemplate('base/issue/form');
 
     $button = $view->newButton('save');
     $button->text = 'send report';

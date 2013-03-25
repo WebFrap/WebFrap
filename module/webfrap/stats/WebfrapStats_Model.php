@@ -54,18 +54,18 @@ class WebfrapStats_Model  extends Model
    * @param  int  $container
    * @return  WbfsysKnowHowNode_Entity
    */
-  public function addNode($title, $accessKey, $content, $container )
+  public function addNode($title, $accessKey, $content, $container)
   {
 
     $orm = $this->getOrm();
 
-    $khNode = $orm->newEntity( "WbfsysKnowHowNode" );
+    $khNode = $orm->newEntity("WbfsysKnowHowNode");
     $khNode->title = $title;
     $khNode->access_key = $accessKey;
     $khNode->id_repository = $container;
     $khNode->raw_content = $content;
     $khNode->content = $content;
-    $khNode = $orm->insert($khNode );
+    $khNode = $orm->insert($khNode);
 
     $this->activeNode = $khNode;
 
@@ -81,18 +81,18 @@ class WebfrapStats_Model  extends Model
    * @param  int  $container
    * @return  WbfsysKnowHowNode_Entity
    */
-  public function updateNode($rowid, $title, $accessKey, $content, $container )
+  public function updateNode($rowid, $title, $accessKey, $content, $container)
   {
 
     $orm = $this->getOrm();
 
-    $khNode = $orm->get( "WbfsysKnowHowNode", $rowid );
+    $khNode = $orm->get("WbfsysKnowHowNode", $rowid);
     $khNode->title = $title;
     $khNode->access_key = $accessKey;
     $khNode->id_repository = $container;
     $khNode->raw_content = $content;
     $khNode->content  = $content;
-    $khNode = $orm->update($khNode );
+    $khNode = $orm->update($khNode);
 
     $this->activeNode = $khNode;
 
@@ -105,11 +105,11 @@ class WebfrapStats_Model  extends Model
    * @param  int  $containerId
    * @return  WbfsysKnowHowNode_Entity
    */
-  public function preCreateNode($nodeKey, $containerId )
+  public function preCreateNode($nodeKey, $containerId)
   {
 
     $orm = $this->getOrm();
-    $activeNode = $orm->newEntity( 'WbfsysKnowHowNode' );
+    $activeNode = $orm->newEntity('WbfsysKnowHowNode');
 
     $activeNode->id_container = $containerId;
     $activeNode->access_key = $nodeKey;
@@ -122,11 +122,11 @@ class WebfrapStats_Model  extends Model
    * @param  int  $objid
    * @return  WbfsysKnowHowNode_Entity
    */
-  public function loadNodeById($objid )
+  public function loadNodeById($objid)
   {
 
     $orm = $this->getOrm();
-    $this->activeNode = $orm->get( 'WbfsysKnowHowNode', $objid );
+    $this->activeNode = $orm->get('WbfsysKnowHowNode', $objid);
 
     return $this->activeNode;
 
@@ -136,13 +136,13 @@ class WebfrapStats_Model  extends Model
    * @param  string  $key
    * @return  WbfsysKnowHowNode_Entity
    */
-  public function loadNodeByKey($key, $containerId )
+  public function loadNodeByKey($key, $containerId)
   {
 
     $orm = $this->getOrm();
-    $this->activeNode = $orm->getWhere( 'WbfsysKnowHowNode', "upper(access_key)  =  upper('{$orm->escape($key)}')  " );
+    $this->activeNode = $orm->getWhere('WbfsysKnowHowNode', "upper(access_key)  =  upper('{$orm->escape($key)}')  ");
 
-    Debug::console( "load  by  key  " . $key, $this->activeNode );
+    Debug::console("load  by  key  " . $key, $this->activeNode);
 
     return $this->activeNode;
 
@@ -152,11 +152,11 @@ class WebfrapStats_Model  extends Model
    * @param  int  $objid
    * @return  int
    */
-  public function delete($objid )
+  public function delete($objid)
   {
 
     $orm = $this->getOrm();
-    $orm->delete( 'WbfsysKnowHowNode', $objid );
+    $orm->delete('WbfsysKnowHowNode', $objid);
 
   }//end  public  function  delete  */
 
@@ -165,11 +165,11 @@ class WebfrapStats_Model  extends Model
    * @param  int  $container
    * @return  int
    */
-  public function deleteByKey($key, $container )
+  public function deleteByKey($key, $container)
   {
 
     $orm = $this->getOrm();
-    $orm->deleteWhere( 'WbfsysKnowHowNode', "UPPER(access_key)  =  UPPER('{$orm->escape($key)}')" );
+    $orm->deleteWhere('WbfsysKnowHowNode', "UPPER(access_key)  =  UPPER('{$orm->escape($key)}')");
 
   } //end  public  function  deleteByKey  */
 
