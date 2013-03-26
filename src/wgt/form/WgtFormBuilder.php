@@ -105,8 +105,13 @@ class WgtFormBuilder
    * @param string $method
    * @param boolean $cout
    */
-  public function __construct($view, $action, $domainKey, $method = 'post', $cout = true)
-  {
+  public function __construct(
+    $view, 
+    $action, 
+    $domainKey, 
+    $method = 'post', 
+    $cout = true
+  ) {
 
     $this->view   = $view;
     $this->action = $action;
@@ -203,8 +208,7 @@ CODE;
    * @param array $attributes
    * @param array $params
    */
-  public function input
-  (
+  public function input(
     $label,
     $name,
     $value = null,
@@ -287,16 +291,14 @@ CODE;
    * @param array $attributes
    * @param array $params
    */
-  public function richInput
-  (
+  public function richInput(
     $type,
     $label,
     $name,
     $value = null,
     $attributes = array(),
     $params = null
-  )
-  {
+  ) {
 
     $pNode = $this->prepareParams($params);
 
@@ -1651,7 +1653,7 @@ CODE;
     </var>
 HTML;
 
-    return $this->out($code);
+    return $this->out($html);
 
   }//end public function i18nSelectSrc */
 
