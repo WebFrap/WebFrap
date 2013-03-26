@@ -266,6 +266,7 @@ abstract class Entity implements ArrayAccess
 
       $this->orm = $orm;
     } else {
+      
       $this->orm = Db::getOrm();
     }
 
@@ -607,6 +608,19 @@ abstract class Entity implements ArrayAccess
   {
     return isset(static::$cols[$colKey]);
   }//end public function hasCol */
+  
+  /**
+   * Getter für die Cols
+   * @param string/array $catKeys if converts to false, always return all fields
+   * @return array
+   */
+  public function isColUnique($colKey)
+  {
+    
+    return in_array($colKey,static::$uniqueCols);
+    
+  }//end public function isColUnique */
+  
 
   /**
    *
@@ -717,8 +731,7 @@ abstract class Entity implements ArrayAccess
   {
 
     if (!isset(static::$cols[$key])) {
-      Error::report
-      (
+      Error::report(
         'asked for wrong Validation data: '.$key . ' in '.get_class($this)
       );
 
@@ -737,8 +750,7 @@ abstract class Entity implements ArrayAccess
   {
 
     if (!isset(static::$cols[$key])) {
-      Error::report
-      (
+      Error::report(
         'asked for wrong Validation data: '.$key . ' in '.get_class($this)
       );
 
@@ -757,8 +769,9 @@ abstract class Entity implements ArrayAccess
   {
 
     if (!isset(static::$cols[$key])) {
-      Error::report
-       ('asked for wrong default value data: '.$key . ' in '.get_class($this));
+      Error::report(
+      	'asked for wrong default value data: '.$key . ' in '.get_class($this)
+      );
 
       return null;
     }
@@ -788,12 +801,15 @@ abstract class Entity implements ArrayAccess
     $data = array();
 
     foreach ($keys as $key) {
+      
       if (!isset(static::$cols[$key])) {
 
-        Debug::console(get_class($this).'::'.$key , static::$cols  );
+        Debug::console(get_class($this).'::'.$key, static::$cols);
 
-        throw new LibDb_Exception
-          ('asked for wrong Validation data: '.$key . ' in '.get_class($this));
+        throw new LibDb_Exception(
+					'asked for wrong Validation data: '.$key . ' in '.get_class($this)
+        );
+        
       } else {
         $data[$key] = static::$cols[$key];
       }
@@ -993,10 +1009,8 @@ abstract class Entity implements ArrayAccess
     Debug::console('set id entity: '.$this->getTable().' id: '.$id , $id);
 
     if (!is_numeric($id)) {
-      throw new LibDb_Exception
-      (
-        I18n::s
-        (
+      throw new LibDb_Exception(
+        I18n::s(
           'Got invalid error ID {@id@}',
           'wbf.message',
           array('id' => $id)
