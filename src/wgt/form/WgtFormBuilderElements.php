@@ -34,6 +34,7 @@ class WgtFormBuilderElements extends WgtFormBuilder
    * @param array $params
    */
   public function input(
+    $label,
     $name,
     $value = null,
     $attributes = array(),
@@ -97,6 +98,7 @@ CODE;
    * @param array $params
    */
   public function autocomplete(
+    $label,
     $name,
     $value = null,
     $loadUrl = null,
@@ -201,6 +203,7 @@ CODE;
    * @param array $params
    */
   public function wysiwyg(
+    $label,
     $name,
     $value = null,
     $attributes = array(),
@@ -257,6 +260,7 @@ CODE;
    * @param array $params
    */
   public function textarea(
+    $label,
     $name,
     $value = null,
     $attributes = array(),
@@ -481,6 +485,7 @@ CODE;
    * @param array $params
    */
   public function ratingbar(
+    $label,
     $name,
     $active,
     $data = array(),
@@ -592,6 +597,7 @@ HTML;
    * @param array $params
    */
   public function selectboxByKey(
+    $label,
     $name,
     $elementKey,
     $data,
@@ -629,7 +635,7 @@ HTML;
       array(
         'name'      => $name,
         'id'        => $id,
-        'class'     => 'asgd-'.$this->id,
+        'class'     => 'small asgd-'.$this->id,
       )
     );
     $selectBoxNode->setWidth($pNode->size);
@@ -660,6 +666,7 @@ HTML;
    * @param array $params
    */
   public function multiSelectByKey(
+    $label,
     $name,
     $elementKey,
     $data,
@@ -700,7 +707,7 @@ HTML;
       array(
         'name'      => $name,
         'id'        => $id,
-        'class'     => 'asgd-'.$this->id,
+        'class'     => 'medium asgd-'.$this->id,
       )
     );
     $selectBoxNode->setWidth('small');

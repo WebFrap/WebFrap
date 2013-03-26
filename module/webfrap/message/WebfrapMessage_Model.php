@@ -115,8 +115,21 @@ select
   msg.m_time_created,
   msg.id_sender_status,
   msg.confidential,
+  task.deadline as task_deadline,
+  task.progress as task_progress,
+  task.status as task_status,
+  task.flag_urgent as task_urgent,
+  task.rowid as task_id,
+  appoint.timestamp_start as appoint_start,
+  appoint.timestamp_end as appoint_end,
+  appoint.flag_all_day as appoint_all_day,
+  appoint.id_category as appoint_category,
+  appoint.rowid as appoint_id,
   receiver.status as receiver_status,
   receiver.rowid as receiver_id,
+  receiver.flag_participation_required,
+  receiver.flag_action_required,
+  receiver.flag_editable,
   sender.fullname as sender_name,
   sender.core_person_rowid as sender_pid,
   sender.wbfsys_role_user_rowid as sender_id
@@ -126,6 +139,15 @@ FROM
 JOIN
 	wbfsys_message_receiver receiver
 		ON receiver.id_message = msg.rowid
+		
+LEFT JOIN
+	wbfsys_task task
+		ON task.id_message = msg.rowid
+		
+LEFT JOIN
+	wbfsys_appointment appoint
+		ON appoint.id_message = msg.rowid
+		
 
 JOIN
   view_person_role sender

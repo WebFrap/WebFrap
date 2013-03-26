@@ -1,6 +1,6 @@
 <?php 
 
-$sForm = new WgtFormBuilder(
+$sForm = new WgtFormBuilderElements(
   $this,
   'ajax.php?c=Webfrap.Message.saveMessage&objid='.$VAR->msgNode->msg_id,
   'msg-show-save-'.$VAR->msgNode->msg_id,
@@ -13,6 +13,9 @@ $selectMessageTaskStatus->addAttributes(array(
   'name' => 'task[status]',
   'class' => $sForm->dKey,
 ));
+
+$apointCategory = $sForm->loadQuery( 'WbfsysAppointmentCategory_Selectbox' );
+$apointCategory->fetchSelectbox();
 
 ?>
 
@@ -31,56 +34,71 @@ $selectMessageTaskStatus->addAttributes(array(
     <div class="ac_body np"  >
       
       <ul class="wgt-list wgt-space" >
-        <li><label>Status:</label> <span>Opened</span></li>
+        <li><label>Status:</label> <span><?php echo EMessageStatus::label($VAR->msgNode->receiver_status); ?></span></li>
         <li><label>Priority:</label> <span><?php echo EMessagePriority::label($VAR->msgNode->priority/10); ?></span></li>
-        <li><label>Confidential:</label> <span>None</span></li>
+        <li><label>Confidential:</label> <span><?php echo EWbfsysConfidential::label($VAR->msgNode->confidential); ?></span></li>
       </ul>
       
+      <?php var_dump($VAR->msgNode->flag_action_required);?>
+      
       <div id="wgt-mox-show-msg-task-<?php echo $VAR->msgNode->msg_id; ?>" >
-        <div class="wgt-clear medium" >&nbsp;</div>
+        <div class="wgt-clear small" >&nbsp;</div>
         <div class="wgt-panel" ><h2>Task</h2></div>
         <ul class="wgt-list kv wgt-space" >
-          <li><label>Your Action required:</label> <span><input 
-            type="checkbox"
-            name="task[required]"
-            class="<?php echo $sForm->dKey ?>" /></span></li>
-          <li><label>Status:</label> <span><?php echo $selectMessageTaskStatus->element(); ?></span></li>
-          <li><label>Deadline:</label> <span><input 
+          <li><label>Status:</label> <span><?php $sForm->selectboxByKey(null,
+          		'task[status]', 
+          		'WebfrapMessageTaskStatus_Selectbox', 
+            EMessageTaskStatus::$labels,
+            $VAR->msgNode->task_status
+          ); ?></span></li>
+          <li><label>Deadline:</label> <p><input 
             type="text" 
             name="task[dealine]"
-            class="wcm wcm_ui_date small <?php echo $sForm->dKey ?>" /></span></li>
+            value="<?php echo $VAR->msgNode->deadline; ?>"
+            class="wcm wcm_ui_date_timepicker medium <?php echo $sForm->dKey ?>" /></p></li>
+          <li><label>Your Action required:</label> <span><input 
+            type="checkbox"
+            name="receiver[flag_action_required]"
+            <?php echo Wgt::checked('t', $VAR->msgNode->flag_action_required) ?>
+            class="<?php echo $sForm->dKey ?>" /></span></li>
           <li><label>Urgent:</label> <span><input 
             type="checkbox"
-            name="task[urgent]"
-            class="<?php echo $sForm->dKey ?>" /></span></li>
-          <li><label>Completed:</label> <span><input 
-            type="checkbox"
-            name="task[completed]"
+            name="task[flag_urgent]"
+            <?php echo Wgt::checked('t', $VAR->msgNode->task_urgent) ?>
             class="<?php echo $sForm->dKey ?>" /></span></li>
         </ul>
       </div>
       
       <div id="wgt-box-show-msg-appoint-<?php echo $VAR->msgNode->msg_id; ?>" >
-        <div class="wgt-clear medium" >&nbsp;</div>
+        <div class="wgt-clear small" >&nbsp;</div>
         <div class="wgt-panel" ><h2>Appointment</h2></div>
         <ul class="wgt-list kv wgt-space" >
-          <li><label>Category:</label> <span>Event</span></li>
+          <li><label>Category:</label> <span><?php $sForm->selectboxByKey(null,
+          		'appointment[id_category]', 
+          		'WbfsysAppointmentCategory_Selectbox', 
+            $apointCategory->getAll(),
+            $VAR->msgNode->appoint_category
+          ); ?></span></li>
           <li><label>Start:</label> <span><input 
             type="text" 
             name="appointment[start]"
-            class="wcm wcm_ui_date small <?php echo $sForm->dKey ?>" /></span></li>
+            value="<?php echo $VAR->msgNode->appoint_start  ?>"
+            class="wcm wcm_ui_date_timepicker small <?php echo $sForm->dKey ?>" /></span></li>
           <li><label>End:</label> <span><input 
             type="text" 
             name="appointment[end]"
-            class="wcm wcm_ui_date small <?php echo $sForm->dKey ?>" /></span></li>
+            value="<?php echo $VAR->msgNode->appoint_end  ?>"
+            class="wcm wcm_ui_date_timepicker small <?php echo $sForm->dKey ?>" /></span></li>
           <li><label>Full Day:</label> <span><input 
             type="checkbox" 
             name="appointment[full_day]"
+            <?php echo Wgt::checked('t', $VAR->msgNode->flag_all_day) ?>
             class="<?php echo $sForm->dKey ?>"
             /></span></li>
           <li><label>Part. required:</label> <span><input 
             type="checkbox"
             name="appointment[required]"
+            <?php echo Wgt::checked('t', $VAR->msgNode->flag_participation_required) ?>
             class="<?php echo $sForm->dKey ?>"  /></span></li>
           <li><label>Location:</label><p><textarea 
             class="medium <?php echo $sForm->dKey ?>" 
@@ -106,7 +124,7 @@ $selectMessageTaskStatus->addAttributes(array(
             id="wgt-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>-{$id}" 
             eid="" 
             class="template" ><p 
-              class="kvlac_del" ><i class="icon-remove" ></i></a></p><span><input 
+              class="kvlac_del" ><i class="icon-remove" ></i></p><span><input 
                 name="checklist[{$id}][value]" type="checkbox" /></span><span 
                   style="width:145px;" 
                   name="checklist[{$id}][label]"
@@ -116,7 +134,7 @@ $selectMessageTaskStatus->addAttributes(array(
           <li 
             id="wgt-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>-1" 
             eid="1" ><p 
-              class="kvlac_del" ><i class="icon-remove" ></i></a></p><span><input 
+              class="kvlac_del" ><i class="icon-remove" ></i></p><span><input 
                 name="checklist[1][value]" type="checkbox" /></span><span 
                   style="width:145px;" 
                   name="checklist[1][label]"
@@ -124,7 +142,7 @@ $selectMessageTaskStatus->addAttributes(array(
           <li 
             id="wgt-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>-2" 
             eid="2" ><p 
-              class="kvlac_del" ><i class="icon-remove" ></i></a></p><span><input 
+              class="kvlac_del" ><i class="icon-remove" ></i></p><span><input 
                 name="checklist[2][value]" type="checkbox" /></span><span 
                   style="width:145px;" 
                   name="checklist[2][label]"
@@ -132,7 +150,7 @@ $selectMessageTaskStatus->addAttributes(array(
           <li 
             id="wgt-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>-3" 
             eid="3" ><p 
-              class="kvlac_del" ><i class="icon-remove" ></i></a></p><span><input 
+              class="kvlac_del" ><i class="icon-remove" ></i></p><span><input 
                 name="checklist[3][value]" type="checkbox" /></span><span 
                   style="width:145px;" 
                   name="checklist[3][label]"

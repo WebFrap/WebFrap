@@ -155,10 +155,10 @@ class WebfrapMessage_Controller extends Controller
 
     $view->setModel($model);
 
+    ///FIXME woher kommt der Domain Node?
+    $view->displayOpen($domainNode, $params);
 
-   $view->displayOpen($domainNode, $params);
-
-  }//end public function service_showMeta */
+  }//end public function service_openArea */
 
  /**
   * create an new window with an edit form for the enterprise_company entity
