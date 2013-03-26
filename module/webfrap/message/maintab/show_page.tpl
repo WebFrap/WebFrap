@@ -38,9 +38,7 @@ $apointCategory->fetchSelectbox();
         <li><label>Priority:</label> <span><?php echo EMessagePriority::label($VAR->msgNode->priority/10); ?></span></li>
         <li><label>Confidential:</label> <span><?php echo EWbfsysConfidential::label($VAR->msgNode->confidential); ?></span></li>
       </ul>
-      
-      <?php var_dump($VAR->msgNode->flag_action_required);?>
-      
+
       <div id="wgt-mox-show-msg-task-<?php echo $VAR->msgNode->msg_id; ?>" >
         <div class="wgt-clear small" >&nbsp;</div>
         <div class="wgt-panel" ><h2>Task</h2></div>
