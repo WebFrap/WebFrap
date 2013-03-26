@@ -415,6 +415,10 @@ SQL;
     	" id_receiver={$user->getId()} AND id_message={$messageId} AND NOT aspect IN(".implode(', ',$rqtData->aspects).") " 
     );
     
+    if($rqtData->taskId){
+      
+    }
+    
 
   }//ebnd public function saveMessage 
 

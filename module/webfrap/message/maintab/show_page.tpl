@@ -23,6 +23,14 @@ $apointCategory->fetchSelectbox();
   method="put"
   id="wgt-form-msg-show-save-<?php echo $VAR->msgNode->msg_id; ?>"
   action="ajax.php?c=Webfrap.Message.saveMessage&objid=<?php echo $VAR->msgNode->msg_id; ?>" ></form>
+  
+<?php 
+
+$sForm->hidden('task_id', $VAR->msgNode->task_id); 
+$sForm->hidden('appoint_id', $VAR->msgNode->appoint_id); 
+$sForm->hidden('receiver_id', $VAR->msgNode->receiver_id); 
+
+?>
 
 <div
   class="wgt-border-right"
@@ -56,12 +64,12 @@ $apointCategory->fetchSelectbox();
             class="wcm wcm_ui_date_timepicker medium <?php echo $sForm->dKey ?>" /></p></li>
           <li><label>Your Action required:</label> <span><input 
             type="checkbox"
-            name="receiver[flag_action_required]"
+            name="receiver[action_required]"
             <?php echo Wgt::checked('t', $VAR->msgNode->flag_action_required) ?>
             class="<?php echo $sForm->dKey ?>" /></span></li>
           <li><label>Urgent:</label> <span><input 
             type="checkbox"
-            name="task[flag_urgent]"
+            name="task[urgent]"
             <?php echo Wgt::checked('t', $VAR->msgNode->task_urgent) ?>
             class="<?php echo $sForm->dKey ?>" /></span></li>
         </ul>
@@ -72,7 +80,7 @@ $apointCategory->fetchSelectbox();
         <div class="wgt-panel" ><h2>Appointment</h2></div>
         <ul class="wgt-list kv wgt-space" >
           <li><label>Category:</label> <span><?php $sForm->selectboxByKey(null,
-          		'appointment[id_category]', 
+          		'appointment[category]', 
           		'WbfsysAppointmentCategory_Selectbox', 
             $apointCategory->getAll(),
             $VAR->msgNode->appoint_category
@@ -89,13 +97,13 @@ $apointCategory->fetchSelectbox();
             class="wcm wcm_ui_date_timepicker small <?php echo $sForm->dKey ?>" /></span></li>
           <li><label>Full Day:</label> <span><input 
             type="checkbox" 
-            name="appointment[full_day]"
+            name="appointment[all_day]"
             <?php echo Wgt::checked('t', $VAR->msgNode->flag_all_day) ?>
             class="<?php echo $sForm->dKey ?>"
             /></span></li>
           <li><label>Part. required:</label> <span><input 
             type="checkbox"
-            name="appointment[required]"
+            name="receiver[part_required]"
             <?php echo Wgt::checked('t', $VAR->msgNode->flag_participation_required) ?>
             class="<?php echo $sForm->dKey ?>"  /></span></li>
           <li><label>Location:</label><p><textarea 
