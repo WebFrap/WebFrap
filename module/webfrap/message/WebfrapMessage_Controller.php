@@ -280,8 +280,7 @@ class WebfrapMessage_Controller extends Controller
     }
 
     // create a window
-    $view   = $response->loadView
-    (
+    $view   = $response->loadView(
       'form-messages-new',
       'WebfrapMessage_New',
       'displayNew'
