@@ -166,7 +166,9 @@ abstract class WgtAbstract
   {
 
     try {
+      
       return $this->build();
+      
     } catch (Exception $e) {
 
       $this->html = '<b>failed to create</b>';

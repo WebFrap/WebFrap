@@ -39,6 +39,12 @@ abstract class WgtInput extends WgtAbstract
   public $required  = false;
 
   /**
+   * Flag ob auf dem Feld ein Unique Constraint liegt
+   * @var boolean
+   */
+  public $unqiue  = false;
+  
+  /**
    *
    * @var boolean
    */
@@ -194,6 +200,25 @@ abstract class WgtInput extends WgtAbstract
   * @return void
   */
   public function setRequired($required = true)
+  {
+
+    if ($required) {
+      $this->classes['wcm'] = 'wcm';
+      $this->classes['wcm_valid_required'] = 'wcm_valid_required';
+    } else {
+      if (isset($this->classes['wcm_valid_required']))
+        unset($this->classes['wcm_valid_required']);
+    }
+
+    $this->required = $required;
+
+  }// end public function setRequired */
+  
+ /**
+  * @param boolean $required
+  * @return void
+  */
+  public function setUnique($required = true)
   {
 
     if ($required) {
