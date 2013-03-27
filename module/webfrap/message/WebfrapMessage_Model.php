@@ -125,6 +125,7 @@ select
   appoint.flag_all_day as appoint_all_day,
   appoint.id_category as appoint_category,
   appoint.rowid as appoint_id,
+  appoint.location_text as appoint_location,
   receiver.status as receiver_status,
   receiver.rowid as receiver_id,
   receiver.flag_participation_required,
@@ -414,11 +415,61 @@ SQL;
     	'WbfsysMessageAspect', 
     	" id_receiver={$user->getId()} AND id_message={$messageId} AND NOT aspect IN(".implode(', ',$rqtData->aspects).") " 
     );
+
     
-    if($rqtData->taskId){
+    // task data speichern
+    if ($rqtData->hasTask) {
       
+      if($rqtData->taskId){
+        
+        $entTask = $orm->get('WbfsysTask', $rqtData->taskId);
+        
+      } else {
+        
+        $entTask = $orm->newEntity('WbfsysTask');
+        $entTask->id_message = $messageId;
+      }
+      
+      $entTask->addData($rqtData->taskData);
+      
+      $orm->save($entTask);
+      
+    } else if($rqtData->taskId) {
+      
+      $orm->delete('WbfsysTask',$rqtData->taskId);
+      $rqtData->receiverData['flag_action_required'] = false;
+
     }
     
+    // appointment data speichern
+    if ($rqtData->hasAppointment) {
+      
+      if($rqtData->appointId){
+        
+        $entAppoint = $orm->get('WbfsysAppointment', $rqtData->appointId);
+        
+      } else {
+        
+        $entAppoint = $orm->newEntity('WbfsysAppointment');
+        $entAppoint->id_message = $messageId;
+      }
+      
+      $entAppoint->addData($rqtData->appointData);
+      
+      $orm->save($entAppoint);
+      
+    } else if ($rqtData->appointId) {
+
+      // wenn id vorhanden dann löschen
+      $orm->delete('WbfsysAppointment',$rqtData->appointId);
+      $rqtData->receiverData['flag_participation_required'] = false;
+    }
+    
+    
+    // task data speichern
+    $entRecv = $orm->get('WbfsysMessageReceiver', $rqtData->receiverId);
+    $entRecv->addData($rqtData->receiverData);
+    $orm->save($entRecv);
 
   }//ebnd public function saveMessage 
 
@@ -446,10 +497,14 @@ SQL;
       $orm->delete('WbfsysMessage', $messageId);
     }
     
-    // aspects leeren
+    // referenz tabellen leeren
     $orm->deleteWhere('WbfsysMessageAspect', 'id_message='.$messageId);
-    //$orm->deleteWhere('WbfsysMessageAspect', 'id_message='.$messageId);
-
+    $orm->deleteWhere('WbfsysTask', 'id_message='.$messageId);
+    $orm->deleteWhere('WbfsysAppointment', 'id_message='.$messageId);
+    $orm->deleteWhere('WbfsysMessageReceiver', 'vid='.$messageId);
+    $orm->deleteWhere('WbfsysDataIndex', 'vid='.$messageId);
+    
+    
   }//ebnd public function deleteMessage 
 
   /**

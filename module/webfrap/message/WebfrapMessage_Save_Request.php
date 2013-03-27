@@ -37,7 +37,6 @@ class WebfrapMessage_Save_Request extends Context
    */
   public $receiverId = null;
   
-
   /**
    * @var boolean
    */
@@ -85,7 +84,7 @@ class WebfrapMessage_Save_Request extends Context
     
     $aspStack = $request->data('aspect', Validator::INT);
     
-    foreach($aspStack as $asp){
+    foreach ($aspStack as $asp) {
       if ($asp)
         $this->aspects[] = $asp;
     }
@@ -99,20 +98,23 @@ class WebfrapMessage_Save_Request extends Context
     
     if (in_array(EMessageAspect::APPOINTMENT, $this->aspects)) {
       $this->hasAppointment = true;
-      $this->appointId = $request->data('appoint_id',Validator::EID); 
       $this->appointData['timestamp_start'] = $request->data('appointment',Validator::TIMESTAMP,'start'); 
       $this->appointData['timestamp_end'] = $request->data('appointment',Validator::TIMESTAMP,'end'); 
       $this->appointData['flag_all_day'] = $request->data('appointment',Validator::BOOLEAN,'all_day'); 
-      $this->appointData['id_category'] = $request->data('appointment',Validator::BOOLEAN,'category'); 
+      $this->appointData['id_category'] = $request->data('appointment',Validator::INT,'category'); 
+      $this->appointData['location_text'] = $request->data('appointment',Validator::TEXT,'location'); 
     }
+    // wenn vorhanden ohne aspekt, löschen
+    $this->appointId = $request->data('appoint_id',Validator::EID); 
     
     if (in_array(EMessageAspect::TASK, $this->aspects)) {
       $this->hasTask = true;
-      $this->taskId = $request->data('task_id',Validator::EID); 
-      $this->taskData['dealine'] = $request->data('task',Validator::TIMESTAMP,'deadline'); 
+      $this->taskData['deadline'] = $request->data('task',Validator::TIMESTAMP,'deadline'); 
       $this->taskData['flag_urgent'] = $request->data('task',Validator::BOOLEAN,'urgent'); 
       $this->taskData['status'] = $request->data('task',Validator::INT,'status'); 
     }
+    // wenn vorhanden ohne aspekt, löschen
+    $this->taskId = $request->data('task_id',Validator::EID); 
     
     
     

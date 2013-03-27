@@ -59,8 +59,8 @@ $sForm->hidden('receiver_id', $VAR->msgNode->receiver_id);
           ); ?></span></li>
           <li><label>Deadline:</label> <p><input 
             type="text" 
-            name="task[dealine]"
-            value="<?php echo $VAR->msgNode->deadline; ?>"
+            name="task[deadline]"
+            value="<?php echo $VAR->msgNode->task_deadline; ?>"
             class="wcm wcm_ui_date_timepicker medium <?php echo $sForm->dKey ?>" /></p></li>
           <li><label>Your Action required:</label> <span><input 
             type="checkbox"
@@ -98,7 +98,7 @@ $sForm->hidden('receiver_id', $VAR->msgNode->receiver_id);
           <li><label>Full Day:</label> <span><input 
             type="checkbox" 
             name="appointment[all_day]"
-            <?php echo Wgt::checked('t', $VAR->msgNode->flag_all_day) ?>
+            <?php echo Wgt::checked('t', $VAR->msgNode->appoint_all_day) ?>
             class="<?php echo $sForm->dKey ?>"
             /></span></li>
           <li><label>Part. required:</label> <span><input 
@@ -109,7 +109,7 @@ $sForm->hidden('receiver_id', $VAR->msgNode->receiver_id);
           <li><label>Location:</label><p><textarea 
             class="medium <?php echo $sForm->dKey ?>" 
             name="appointment[location]"
-            style="width:190px;" ></textarea></p></li>
+            style="width:190px;" ><?php echo htmlentities($VAR->msgNode->appoint_location); ?></textarea></p></li>
           
         </ul>
       </div>
