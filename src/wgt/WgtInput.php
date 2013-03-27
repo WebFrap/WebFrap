@@ -209,17 +209,30 @@ abstract class WgtInput extends WgtAbstract
   }// end public function setRequired */
 
  /**
+  * Setzen des Validators
+  * @param boolean $validator
   * @param boolean $required
+  * @param boolean $unique
   * @return void
   */
-  public function setValidator($validator)
+  public function setValidator($validator, $required = false, $unique = false)
   {
 
     $this->classes['wcm'] = 'wcm';
-    $this->classes['wcm_valid_'.$validator] = 'wcm_valid_'.$validator;
+    
+    // kann auch unique sein wenn nur required oder unique gesetzt werden soll
+    if ($validator)
+      $this->classes['wcm_valid_'.$validator] = 'wcm_valid_'.$validator;
+    
+    if($unique)
+      $this->classes['wcm_valid_unique'] = 'wcm_valid_unique';
+      
+    if($required)
+      $this->classes['wcm_valid_required'] = 'wcm_valid_required';
 
     $this->required = $required;
-  }// end public function setRequired */
+    
+  }// end public function setValidator */
 
  /**
   * @param string $data
