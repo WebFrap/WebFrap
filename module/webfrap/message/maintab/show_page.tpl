@@ -6,7 +6,7 @@ $sForm = new WgtFormBuilderElements(
   'msg-show-save-'.$VAR->msgNode->msg_id,
   'put'
 );
-$sForm->form();
+
 
 $selectMessageTaskStatus = new WebfrapMessageTaskStatus_Selectbox($this);
 $selectMessageTaskStatus->addAttributes(array(
@@ -17,14 +17,9 @@ $selectMessageTaskStatus->addAttributes(array(
 $apointCategory = $sForm->loadQuery( 'WbfsysAppointmentCategory_Selectbox' );
 $apointCategory->fetchSelectbox();
 
-?>
+// ausgabe
 
-<form 
-  method="put"
-  id="wgt-form-msg-show-save-<?php echo $VAR->msgNode->msg_id; ?>"
-  action="ajax.php?c=Webfrap.Message.saveMessage&objid=<?php echo $VAR->msgNode->msg_id; ?>" ></form>
-  
-<?php 
+$sForm->form();
 
 $sForm->hidden('task_id', $VAR->msgNode->task_id); 
 $sForm->hidden('appoint_id', $VAR->msgNode->appoint_id); 
@@ -119,12 +114,18 @@ $sForm->hidden('receiver_id', $VAR->msgNode->receiver_id);
     <h3><a href="checklist"  >Checklist</a></h3><!--1-->
     <div class="ac_body np"  >
       <div id="wgt-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>" class="wcm wcm_widget_kvlist" >
+        <var id="wgt-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>-kvl-cfg" >{
+          "save_form":"<?php echo $sForm->id ?>",
+          "edit_able":true,
+          "allow_insert": false
+        }</var>
         <ul class="wgt-list kv wgt-space editor" >
-          <li><p><i class="icon-plus-sign" ></i></p><span><input 
+          <li><p><input 
             type="text"
             class="inp_label"
             style="width:165px;" 
-            class="wgt-border" ></span>
+            class="wgt-border" ></p><span><i 
+              class="icon-plus-sign" ></i></span>
           </li>
           <li 
             id="wgt-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>-{$id}" 
@@ -139,27 +140,12 @@ $sForm->hidden('receiver_id', $VAR->msgNode->receiver_id);
         <ul class="wgt-list kv wgt-space content" >
           <li 
             id="wgt-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>-1" 
-            eid="1" ><p 
-              class="kvlac_del" ><i class="icon-remove" ></i></p><span><input 
-                name="checklist[1][value]" type="checkbox" /></span><span 
+            eid="1" ><p><input 
+              name="checklist[1][value]" 
+              type="checkbox" /></p><span
+                class="kvlac_del"><i class="icon-remove" ></i></span><span 
                   style="width:145px;" 
                   name="checklist[1][label]"
-                  class="editable" >Full Day</span></li>
-          <li 
-            id="wgt-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>-2" 
-            eid="2" ><p 
-              class="kvlac_del" ><i class="icon-remove" ></i></p><span><input 
-                name="checklist[2][value]" type="checkbox" /></span><span 
-                  style="width:145px;" 
-                  name="checklist[2][label]"
-                  class="editable" >Full Day</span></li>
-          <li 
-            id="wgt-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>-3" 
-            eid="3" ><p 
-              class="kvlac_del" ><i class="icon-remove" ></i></p><span><input 
-                name="checklist[3][value]" type="checkbox" /></span><span 
-                  style="width:145px;" 
-                  name="checklist[3][label]"
                   class="editable" >Full Day</span></li>
         </ul>
       </div>
