@@ -31,6 +31,14 @@ class Backup_Action extends Action
   public $response = null;
 
   /**
+   * 
+   * @var string
+   */
+  public $DBdataPath = "C:\\Program Files (x86)\\PostgreSQL\\9.2\\data";
+
+  public $zipPath = "C:\\Program Files\\7-Zip\\7z.exe";
+
+  /**
 	 *
 	 * @param LibFlowApachemod $env        	
 	 */
@@ -85,9 +93,9 @@ SQL;
 	 *
 	 * @param String $databaseName        	
 	 */
-  public function trigger_database ($databaseName)
+  public function trigger_database ($response)
   {
-
+    
     echo "Starting Backup of Database: " . $databaseName . "<br>";
   }
 
@@ -121,6 +129,25 @@ SQL;
     }
     
     return $result;
+  }
+
+  public function trigger_continuousArchive ($response)
+  {
+
+    $label = "lalalalaTestBackup";
+    
+    $db = $this->env->getDb();
+    
+    // Force Checkpoint
+    $sql = "SELECT pg_start_backup('{$label}', true)";
+    
+    $db->query($sql);
+    
+    system("C:\\Backup\\bck.cmd");
+    
+    $sql = "SELECT pg_stop_backup()";
+    
+    $db->query($sql);
   }
 
   /**
