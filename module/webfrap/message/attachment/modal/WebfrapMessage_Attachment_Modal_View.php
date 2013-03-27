@@ -26,20 +26,17 @@ class WebfrapMessage_Attachment_Modal_View extends WgtModal
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-  
-  public $width = 800;
 
-  public $height = 600;
   
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * @param string $menuName
+   * @param TFlag $params
    * @return void
    */
-  public function displayCreate()
+  public function displayCreate( $params )
   {
 
     $this->setStatus('Upload Attachment');
@@ -48,6 +45,20 @@ class WebfrapMessage_Attachment_Modal_View extends WgtModal
     $this->setTemplate('webfrap/message/attachment/modal/create_form', true);
 
   }//end public function displayCreate */
+  
+  /**
+   * @param TFlag $params
+   * @return void
+   */
+  public function displayEdit( $params )
+  {
 
-}//end class WebfrapMessage_Modal_View
+    $this->setStatus('Upload Attachment');
+    $this->setTitle('Upload Attachment');
+
+    $this->setTemplate('webfrap/message/attachment/modal/edit_form', true);
+
+  }//end public function displayEdit */
+
+}//end class WebfrapMessage_Attachment_Modal_View
 

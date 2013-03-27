@@ -3,8 +3,8 @@
 $orm = $this->getOrm();
 $uplForm = new WgtFormBuilder(
   $this,
-  'ajax.php?c=Webfrap.Message_Attachment.insert',
-  'wbf-msg-attach-add',
+  'ajax.php?c=Webfrap.Message_Attachment.update',
+  'wbf-msg-attach-edit',
   'post'
 );
 $uplForm->form();
