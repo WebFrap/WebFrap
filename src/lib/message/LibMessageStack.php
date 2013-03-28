@@ -190,6 +190,12 @@ class LibMessageStack extends PBase
    * @var int
    */
   public $priority = 3;
+  
+  /**
+   * Confidential Level
+   * @var int
+   */
+  public $confidential = 0;
 
   /**
    * Die Entity zu der die Nachricht in Relation steht

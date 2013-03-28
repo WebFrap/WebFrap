@@ -43,8 +43,7 @@ HTML;
   </div>
 
   <div class="left bw3" >
-    <?php $cntForm->multiSelectByKey
-    (
+    <?php $cntForm->multiSelectByKey(
       'Channels',
       'channels[]',
       'WebfrapContactItemType_Checklist',
@@ -54,10 +53,9 @@ HTML;
   </div>
 
   <div class="inline bw3" >
-    <?php  $cntForm->selectboxByKey
-    (
+    <?php  $cntForm->selectboxByKey(
       'Confidentiality Level',
-      'id_confidentiality',
+      'confidential',
       'WbfsysConfidentialityLevel_Selectbox',
       $confidentialData->getAll(),
       $orm->getIdByKey( 'WbfsysConfidentialityLevel', 'public' )
@@ -68,8 +66,7 @@ HTML;
       'Importance',
       'importance',
       2,
-      array
-      (
+      array(
         1 => 'Low',
         2 => 'Medium',
         3 => 'High',

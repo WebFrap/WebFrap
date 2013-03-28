@@ -99,7 +99,7 @@ class WebfrapMessage_Model extends Model
    * @param int $msgId
    * @throws DataNotExists_Exception if the message not exists
    */
-  public function loadMessage($msgId)
+  public function loadMessage($msgId, $setOpen = true)
   {
 
     $db = $this->getDb();
@@ -114,7 +114,25 @@ select
   msg.priority,
   msg.m_time_created,
   msg.id_sender_status,
+  msg.confidential,
+  task.deadline as task_deadline,
+  task.progress as task_progress,
+  task.status as task_status,
+  task.flag_urgent as task_urgent,
+  task.rowid as task_id,
+  appoint.timestamp_start as appoint_start,
+  appoint.timestamp_end as appoint_end,
+  appoint.flag_all_day as appoint_all_day,
+  appoint.id_category as appoint_category,
+  appoint.rowid as appoint_id,
+  appoint.location_text as appoint_location,
+  receiver.status as receiver_status,
+  receiver.rowid as receiver_id,
+  receiver.flag_participation_required,
+  receiver.flag_action_required,
+  receiver.flag_editable,
   sender.fullname as sender_name,
+  sender.core_person_rowid as sender_pid,
   sender.wbfsys_role_user_rowid as sender_id
 
 FROM
@@ -122,6 +140,15 @@ FROM
 JOIN
 	wbfsys_message_receiver receiver
 		ON receiver.id_message = msg.rowid
+		
+LEFT JOIN
+	wbfsys_task task
+		ON task.id_message = msg.rowid
+		
+LEFT JOIN
+	wbfsys_appointment appoint
+		ON appoint.id_message = msg.rowid
+		
 
 JOIN
   view_person_role sender
@@ -131,11 +158,21 @@ WHERE
 
 SQL;
 
+
     $node = $db->select($sql)->get();
 
-    if ($node)
-      $this->messageNode = new TDataObject($node);
+    if ($node) {
 
+      // auf open setzen wenn noch closed
+      if ($setOpen && EMessageStatus::IS_NEW == $node['receiver_status'] ){
+        $db->update("UPDATE wbfsys_message_receiver set status =".EMessageStatus::OPEN." WHERE rowid = ".$node['receiver_id'] );
+        $node['receiver_status'] = EMessageStatus::OPEN;
+      }
+  
+      $this->messageNode = new TDataObject($node);
+          
+    }
+    
     if (!$this->messageNode)
       throw new DataNotExists_Exception('The requested message not exists.');
       
@@ -347,6 +384,7 @@ SQL;
     $message->setChannels($mgsData->channels);
     $message->subject = $mgsData->subject;
     $message->userContent = $mgsData->message;
+    $message->confidential = $mgsData->confidential;
 
     $msgProvider = $this->getMessage();
     $msgProvider->send($message);
@@ -377,7 +415,61 @@ SQL;
     	'WbfsysMessageAspect', 
     	" id_receiver={$user->getId()} AND id_message={$messageId} AND NOT aspect IN(".implode(', ',$rqtData->aspects).") " 
     );
+
     
+    // task data speichern
+    if ($rqtData->hasTask) {
+      
+      if($rqtData->taskId){
+        
+        $entTask = $orm->get('WbfsysTask', $rqtData->taskId);
+        
+      } else {
+        
+        $entTask = $orm->newEntity('WbfsysTask');
+        $entTask->id_message = $messageId;
+      }
+      
+      $entTask->addData($rqtData->taskData);
+      
+      $orm->save($entTask);
+      
+    } else if($rqtData->taskId) {
+      
+      $orm->delete('WbfsysTask',$rqtData->taskId);
+      $rqtData->receiverData['flag_action_required'] = false;
+
+    }
+    
+    // appointment data speichern
+    if ($rqtData->hasAppointment) {
+      
+      if($rqtData->appointId){
+        
+        $entAppoint = $orm->get('WbfsysAppointment', $rqtData->appointId);
+        
+      } else {
+        
+        $entAppoint = $orm->newEntity('WbfsysAppointment');
+        $entAppoint->id_message = $messageId;
+      }
+      
+      $entAppoint->addData($rqtData->appointData);
+      
+      $orm->save($entAppoint);
+      
+    } else if ($rqtData->appointId) {
+
+      // wenn id vorhanden dann löschen
+      $orm->delete('WbfsysAppointment',$rqtData->appointId);
+      $rqtData->receiverData['flag_participation_required'] = false;
+    }
+    
+    
+    // task data speichern
+    $entRecv = $orm->get('WbfsysMessageReceiver', $rqtData->receiverId);
+    $entRecv->addData($rqtData->receiverData);
+    $orm->save($entRecv);
 
   }//ebnd public function saveMessage 
 
@@ -405,10 +497,14 @@ SQL;
       $orm->delete('WbfsysMessage', $messageId);
     }
     
-    // aspects leeren
+    // referenz tabellen leeren
     $orm->deleteWhere('WbfsysMessageAspect', 'id_message='.$messageId);
-    //$orm->deleteWhere('WbfsysMessageAspect', 'id_message='.$messageId);
-
+    $orm->deleteWhere('WbfsysTask', 'id_message='.$messageId);
+    $orm->deleteWhere('WbfsysAppointment', 'id_message='.$messageId);
+    $orm->deleteWhere('WbfsysMessageReceiver', 'vid='.$messageId);
+    $orm->deleteWhere('WbfsysDataIndex', 'vid='.$messageId);
+    
+    
   }//ebnd public function deleteMessage 
 
   /**
@@ -469,7 +565,6 @@ SQL;
    */
   public function countNewMessages($user)
   {
-  	return 0;
 
     $status = EMessageStatus::IS_NEW;
 

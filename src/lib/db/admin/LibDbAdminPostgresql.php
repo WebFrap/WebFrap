@@ -987,7 +987,7 @@ SQL;
    *
    * @throws LibDb_Exception
    */
-  public function alterColumn($colName, $newData , $diff = null,  $tableName= null  )
+  public function alterColumn($colName, $newData , $diff = null, $tableName= null)
   {
 
     // rowid is inmutable!
@@ -1072,8 +1072,7 @@ where action is one of:
       $typeKey = 'boolean';
 
     if (!isset($this->invertMapping[$typeKey])  ) {
-      Error::report
-      (
+      Error::report(
         "type ".$newData[LibDbAdmin::COL_TYPE].' scheint nicht zu existieren ',
         $newData
       );
@@ -1083,7 +1082,7 @@ where action is one of:
 
     $type = $this->invertMapping[$typeKey];
 
-    if (in_array(LibDbAdmin::COL_TYPE,  $diff)  ) {
+    if (in_array(LibDbAdmin::COL_TYPE,  $diff)) {
 
 
       if ($type == 'char' || $type == 'varchar'  || $type == 'char[]' || $type == 'varchar[]') {
@@ -1165,17 +1164,14 @@ SQL;
     }//end if (in_array(LibDbAdmin::COL_TYPE,  $diff)  )
     else {
 
-      if
-      (
-        (
+      if((
           $type == 'char'
             || $type == 'varchar'
             || $type == 'char[]'
             || $type == 'varchar[]'
         )
         && in_array(LibDbAdmin::COL_LENGTH , $diff)
-      )
-      {
+      ) {
 
         $size = trim($newData[LibDbAdmin::COL_LENGTH]);
 
@@ -1247,21 +1243,23 @@ SQL;
 
       if ($default) {
 
-        if (in_array($type, array
-        (
+        if (in_array($type, array(
           'varchar', 'text', 'date',
           'time', 'timestamp', 'cidr', 'inet',
           'macaddr', 'interval'
-        )))
-        {
-          $def = ' DEFAULT \''.(string) $default.'\' ';
+        ))) {
+
+          $def = ' DEFAULT \''.(string)$default.'\' ';
+        
         } else {
-          $def = ' DEFAULT '.(string) $default.' ';
+          
+          $def = ' DEFAULT '.(string)$default.' ';
+          
         }
 
 
         $sql[] = <<<SQL
-ALTER TABLE {$tableName} ALTER column {$colName} SET $def;
+ALTER TABLE {$tableName} ALTER column {$colName} SET {$def};
 
 SQL;
 
@@ -1278,12 +1276,16 @@ SQL;
     if (in_array(LibDbAdmin::COL_NULL_ABLE , $diff)) {
 
       $nullAble =  $newData[LibDbAdmin::COL_NULL_ABLE];
+      $default =  $newData[LibDbAdmin::COL_DEFAULT];
 
       if ($nullAble == 'NO') {
 
         if ($type == 'char' || $type == 'varchar' || $type == 'text') {
+          
+          $default = $default?:' ';
+          
           $sql[] = <<<SQL
-UPDATE {$tableName} SET {$colName} = ' ' where {$colName} is null;
+UPDATE {$tableName} SET {$colName} = '{$default}' where {$colName} is null;
 
 SQL;
         } elseif ($type == 'char[]'  || $type == 'varchar[]' || $type == 'text[]') {
@@ -1292,36 +1294,59 @@ UPDATE {$tableName} SET {$colName} = '{""}' where {$colName} is null;
 
 SQL;
         } elseif ($type == 'bytea') {
+          
+          $default = $default?:'';
+          
           $sql[] = <<<SQL
-UPDATE {$tableName} SET {$colName} = '' where {$colName} is null;
+UPDATE {$tableName} SET {$colName} = '{$default}' where {$colName} is null;
 
 SQL;
         } elseif (in_array($type , array('smallint', 'integer', 'int', 'bigint', 'numeric')  )  ) {
+          
+          $default = $default?:'0';
+          
           $sql[] = <<<SQL
-UPDATE {$tableName} SET {$colName} = 0 where {$colName} is null;
+UPDATE {$tableName} SET {$colName} = {$default} where {$colName} is null;
 
 SQL;
         } elseif (in_array($type , array('smallint[]', 'integer[]', 'int[]', 'bigint[]', 'numeric[]')  )   ) {
+          
+          $default = $default?:'{0}';
+          
           $sql[] = <<<SQL
-UPDATE {$tableName} SET {$colName} = '{0}' where {$colName} is null;
+UPDATE {$tableName} SET {$colName} = '{$default}' where {$colName} is null;
+
+SQL;
+        } elseif ($type == 'boolean') {
+          
+          $default = $default?:'false';
+          
+          $sql[] = <<<SQL
+UPDATE {$tableName} SET {$colName} = {$default} where {$colName} is null;
 
 SQL;
         } elseif ($type == 'time') {
-          $now = date('H:i:s');
+          
+          $default = $default?:date('H:i:s');
+          
           $sql[] = <<<SQL
-UPDATE {$tableName} SET {$colName} = {$now} where {$colName} is null;
+UPDATE {$tableName} SET {$colName} = '{$default}' where {$colName} is null;
 
 SQL;
         } elseif ($type == 'timestamp') {
-          $now = date('Y-m-d H:i:s');
+          
+          $default = $default?:date('Y-m-d H:i:s');
+
           $sql[] = <<<SQL
-UPDATE {$tableName} SET {$colName} = {$now} where {$colName} is null;
+UPDATE {$tableName} SET {$colName} = '{$default}' where {$colName} is null;
 
 SQL;
         } elseif ($type == 'date') {
-          $now = date('Y-m-d');
+          
+          $default = $default?:date('Y-m-d');
+       
           $sql[] = <<<SQL
-UPDATE {$tableName} SET {$colName} = {$now} where {$colName} is null;
+UPDATE {$tableName} SET {$colName} = '{$default}' where {$colName} is null;
 
 SQL;
         } elseif ($type == 'time[]' || $type == 'timestamp[]' || $type == 'date[]') {
@@ -1345,6 +1370,7 @@ UPDATE {$tableName} SET {$colName} = '{$uuid}' where {$colName} = {$pos['rowid']
 SQL;
 
           }
+          
         } elseif ($type == 'uuid[]') {
 
           $rows = $this->db->select('select rowid from '.$tableName.' where '.$colName.' is null;'.NL);
@@ -1364,9 +1390,11 @@ SQL;
 
     if (DEBUG)
       Debug::console('Got non matched type for set not null: '.$type);
+      
+      $default = $default?:' ';
 
           $sql[] = <<<SQL
-UPDATE {$tableName} SET {$colName} = ' ' where {$colName} is null;
+UPDATE {$tableName} SET {$colName} = '{$default}' where {$colName} is null;
 
 SQL;
         }

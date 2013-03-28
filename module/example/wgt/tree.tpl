@@ -167,6 +167,10 @@
               href="area.php?c=Example.Wgt.area&area=form.wysiwyg"
               class="wcm wcm_req_ajax" >Wysiwyg Editor</a>
             </li>
+            <li><a
+              href="area.php?c=Example.Wgt.area&area=form.validators"
+              class="wcm wcm_req_ajax" >Validatoren</a>
+            </li>
           </ul>
         </li>
 			</ul>

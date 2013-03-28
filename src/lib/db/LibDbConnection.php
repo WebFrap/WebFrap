@@ -318,10 +318,9 @@ abstract class LibDbConnection
       return new $defClassNameOld(null, $this);
     } else {
 
-      throw new LibDb_Exception
-      (
+      throw new LibDb_Exception(
         'Requested nonexisting Query: '.$defClassName.'. Please check the loadpath of WebFrap, or if this Class exists.'
-      );
+       );
 
     }
 
@@ -339,16 +338,23 @@ abstract class LibDbConnection
     $dbClassName  = $defClassName.'_'.$this->builderType;
 
     if (Webfrap::classLoadable($dbClassName)) {
-      return new $dbClassName(null, $this);
-    } elseif (Webfrap::classLoadable($defClassName)) {
-      return new $defClassName(null, $this);
-    } else {
-      return null;
 
+      return new $dbClassName(null, $this);
+    
+    } elseif (Webfrap::classLoadable($defClassName)) {
+
+      return new $defClassName(null, $this);
+    
+    } else {
+      
+      return null;
+      
+      /*
       throw new LibDb_Exception(
         'Requested nonexisting Filter: '.$defClassName.'. '
         .'Please check the loadpath of WebFrap, or if this Class exists.'
       );
+      */
 
     }
 
@@ -379,11 +385,10 @@ abstract class LibDbConnection
 
     // initialize the orm just when it is requested
     if (!$this->orm)
-      $this->orm = new LibDbOrm
-        (
-          $this, $this->builderType,
-          $this->databaseName, $this->schema
-        );
+      $this->orm = new LibDbOrm(
+        $this, $this->builderType,
+        $this->databaseName, $this->schema
+      );
 
     return $this->orm;
 

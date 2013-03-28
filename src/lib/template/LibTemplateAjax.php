@@ -105,7 +105,7 @@ class LibTemplateAjax extends LibTemplateHtml
    * @param string $jsonData
    * @param string $type
    */
-  public function setReturnData($jsonData, $type  )
+  public function setReturnData($jsonData, $type)
   {
 
     $this->returnType = $type;
@@ -335,6 +335,7 @@ class LibTemplateAjax extends LibTemplateHtml
       ob_end_clean();
 
     } else {
+      
       Error::addError('Index Template not exists: '.$filename);
 
       if (Log::$levelDebug)

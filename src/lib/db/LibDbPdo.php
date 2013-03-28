@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-abstract class LibDbPdo
-     extends LibDbConnection
+abstract class LibDbPdo extends LibDbConnection
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

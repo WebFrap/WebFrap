@@ -155,10 +155,10 @@ class WebfrapMessage_Controller extends Controller
 
     $view->setModel($model);
 
+    ///FIXME woher kommt der Domain Node?
+    $view->displayOpen($domainNode, $params);
 
-   $view->displayOpen($domainNode, $params);
-
-  }//end public function service_showMeta */
+  }//end public function service_openArea */
 
  /**
   * create an new window with an edit form for the enterprise_company entity
@@ -280,8 +280,7 @@ class WebfrapMessage_Controller extends Controller
     }
 
     // create a window
-    $view   = $response->loadView
-    (
+    $view   = $response->loadView(
       'form-messages-new',
       'WebfrapMessage_New',
       'displayNew'
@@ -617,7 +616,7 @@ JS
 
     $mgsData->channels = $chanels;
 
-    $mgsData->confidentiality = $request->data('id_confidentiality', Validator::INT);
+    $mgsData->confidential = $request->data('confidential', Validator::INT);
     $mgsData->importance = $request->data('importance', Validator::INT);
     $mgsData->message = $request->data('message', Validator::HTML);
 
