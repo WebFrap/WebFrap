@@ -4,20 +4,6 @@ class Backup_Action extends Action
 {
 
   /**
-	 * Benutzerobjekt mit dessen Rechten die Aktion ausgeführt wird.
-	 *
-	 * @var User
-	 */
-  public $user = null;
-
-  /**
-	 * Das Umgebungsobjekt.
-	 *
-	 * @var LibFlowApachemod $env
-	 */
-  public $env = null;
-
-  /**
 	 * Pfad zu den Backups
 	 *
 	 * @var String
@@ -31,18 +17,10 @@ class Backup_Action extends Action
   public $response = null;
 
   /**
-   * 
-   * @var string
-   */
-  public $DBdataPath = "C:\\Program Files (x86)\\PostgreSQL\\9.2\\data";
-
-  public $zipPath = "C:\\Program Files\\7-Zip\\7z.exe";
-
-  /**
 	 *
 	 * @param LibFlowApachemod $env        	
 	 */
-  public function __construct ($env = null, $response = null)
+  public function __construct ($env = null)
   {
 
     if ($env) {
@@ -50,12 +28,7 @@ class Backup_Action extends Action
     } else {
       $this->env = WebFrap::$env;
     }
-    
-    if ($response) {
-      $this->response = $response;
-    } else {
-      $this->response = new LibResponseCollector();
-    }
+
   }
 
   /**
@@ -66,8 +39,6 @@ class Backup_Action extends Action
   public function trigger_table ($tableName)
   {
 
-    echo "Starting Backup of Table " . $tableName . "<br>";
-    
     $filename = $tableName . "-backup-" . time() . ".csv";
     
     $path = implode('\\', array(
@@ -93,9 +64,9 @@ SQL;
 	 *
 	 * @param String $databaseName        	
 	 */
-  public function trigger_database ($response)
+  public function trigger_database ()
   {
-    
+
     echo "Starting Backup of Database: " . $databaseName . "<br>";
   }
 

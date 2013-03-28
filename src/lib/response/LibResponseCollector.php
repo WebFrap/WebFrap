@@ -17,6 +17,10 @@
 *******************************************************************************/
 
 /**
+ * Sammlet Nachrichten aus verschiedenen Quellen. Mögliche Typen sind allgemeine Nachrichten,
+ * Warnungen, Fehler und ein Protokoll mit dem Nachrichten in einen Kontext, bzw. mit einer Entität
+ * in Verbindung gebracht werden können.
+ * 
  * @package WebFrap
  * @subpackage tech_core
  */
