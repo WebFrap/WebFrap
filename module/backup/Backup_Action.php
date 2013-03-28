@@ -17,6 +17,10 @@ class Backup_Action extends Action
   public $response = null;
 
   /**
+ * @return the $response
+ */
+  
+  /**
 	 *
 	 * @param LibFlowApachemod $env        	
 	 */
@@ -28,7 +32,6 @@ class Backup_Action extends Action
     } else {
       $this->env = WebFrap::$env;
     }
-
   }
 
   /**
@@ -85,24 +88,24 @@ SQL;
    * @param LibResponseCollector $response
    * @return boolean
    */
-  public function trigger_happy ($tv, $response)
+  public function trigger_happy ($tv)
   {
 
     $result = false;
     
     if ($tv == "1") {
-      $response->addMessage("Eingabe erfolgreich!");
+      $this->response->addMessage("Eingabe erfolgreich!");
       $result = true;
     }
     if ($tv == "0") {
-      $response->addWarning("Eingabe nicht erfolgreich!");
+      $this->response->addWarning("Eingabe nicht erfolgreich!");
       $result = false;
     }
     
     return $result;
   }
 
-  public function trigger_continuousArchive ($response)
+  public function trigger_continuousArchive ()
   {
 
     $label = "lalalalaTestBackup";
@@ -130,6 +133,21 @@ SQL;
   {
 
     $this->user = $user;
+  }
+
+  public function getResponse ()
+  {
+
+    return $this->response;
+  }
+
+  /**
+   * @param Ambigous <LibResponseCollector, LibResponseHttp> $response
+   */
+  public function setResponse ($response)
+  {
+
+    $this->response = $response;
   }
 }
 

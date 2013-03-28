@@ -365,19 +365,21 @@ class LibFlowTaskplanner extends LibFlow
         $action->inf = 'plain';
       }
       
+      $actionClass->setResponse($response);
+      
       // Der Rückgabewert der Methode muss true oder false sein
       switch ($action->inf) {
         case 'plain' :
-          $result = $actionClass->{$actionMethod}($response);
+          $result = $actionClass->{$actionMethod}();
           break;
         case 'entity' :
-          $result = $actionClass->{$actionMethod}($action->params->id, $response);
+          $result = $actionClass->{$actionMethod}($action->params->id);
           break;
         case 'table' :
-          $result = $actionClass->{$actionMethod}($action->params->name, $response);
+          $result = $actionClass->{$actionMethod}($action->params->name);
           break;
         case 'mask' :
-          $result = $actionClass->{$actionMethod}($action->params->mask, $action->params->id, $response);
+          $result = $actionClass->{$actionMethod}($action->params->mask, $action->params->id);
           break;
         default :
           throw new LibTaskplanner_Exception("Unknown Interface " . $action->inf);
