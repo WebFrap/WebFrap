@@ -231,31 +231,25 @@ SQL;
 
     $sql = <<<SQL
 
-SELECT
-  attach.rowid as attach_id,
-  file.rowid  as file_id,
+select
+  file.rowid as file_id,
   file.name as file_name,
-  file.file_size as file_size,
-  file.mimetype as mimetype,
-  file.description as description
-
+	attach.rowid as attach_id
 FROM
-  wbfsys_entity_attachment attach
-
-JOIN
   wbfsys_file file
-    on file.rowid = attach.id_file
+  
+JOIN
+	wbfsys_entity_attachment attach
+		ON attach.id_file = file.rowid
 
 WHERE
-	vid = {$msgId}
-ORDER BY
-  file.name desc;
+  attach.vid = {$msgId};
 
 SQL;
 
-    $attachments = $db->select($sql)->getAll();
+    //$references = $db->select($sql)->getAll();
 
-    return $attachments;
+    return $db->select($sql);
 
   }//end public function loadMessageAttachments */
 
@@ -738,42 +732,7 @@ SQL;
 // Attachments
 ////////////////////////////////////////////////////////////////////////////////
   
-  /**
-   * @param int $msgId
-   * @throws DataNotExists_Exception if the message not exists
-   */
-  public function loadMessageAttachments($msgId)
-  {
 
-    $db = $this->getDb();
-
-    $sql = <<<SQL
-
-select
-  file.rowid as file_id,
-  file.name as file_name,
-  idx.vid,
-  idx.title,
-  ent.name,
-  ent.default_edit as edit_link
-
-FROM
-  wbfsys_file file
-  
-JOIN
-	wbfsys_entity_attachment attach
-		ON attach.id_file = file.rowid
-
-WHERE
-  attach.vid = {$msgId};
-
-SQL;
-
-    //$references = $db->select($sql)->getAll();
-
-    return $db->select($sql);
-
-  }//end public function loadMessageAttachments */
   
 } // end class WebfrapMessage_Model
 

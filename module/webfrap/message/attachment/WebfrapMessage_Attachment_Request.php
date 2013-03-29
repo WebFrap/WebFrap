@@ -54,7 +54,7 @@ class WebfrapMessage_Attachment_Request extends Context
     
     $this->file = $request->file('file');
 
-    if (!$file || !is_object($file)) {
+    if (!$this->file || !is_object($this->file)) {
       throw new InvalidRequest_Exception(
         Error::INVALID_REQUEST,
         Error::INVALID_REQUEST_MSG

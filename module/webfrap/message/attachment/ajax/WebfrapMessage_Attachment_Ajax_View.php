@@ -86,6 +86,21 @@ HTML
     $tpl->setArea('attachment', $pageFragment);
 
   }//end public function displayUpdate */
+  
+  /**
+   * @param Context $params
+   */
+  public function displayDelete($params)
+  {
+
+    $tpl = $this->getTplEngine();
+    
+    $tpl->addJsCode(<<<JSCODE
+	\$S('#wgt-entry-msg-attach-{$params->msgId}').remove();
+JSCODE
+    );
+ 
+  }//end public function displayDelete */
 
 } // end class WebfrapMessage_Attachment_Ajax_View */
 

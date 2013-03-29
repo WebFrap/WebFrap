@@ -44,15 +44,15 @@ class WebfrapMessage_Attachment_Model extends Model
 
     $orm = $this->getOrm();
 
-    $checkSum = $file->getChecksum();
-    $fileSize = $file->getSize();
+    $checkSum = $userRequest->file->getChecksum();
+    $fileSize = $userRequest->file->getSize();
 
     $fileNode = $orm->newEntity("WbfsysFile");
-    $fileNode->name = $file->getNewname();
+    $fileNode->name = $userRequest->file->getNewname();
     $fileNode->file_hash = $checkSum;
     $fileNode->file_size = $fileSize;
     $fileNode->id_type = $userRequest->data['id_type'];
-    $fileNode->mimetype = $file->getFiletype();
+    $fileNode->mimetype = $userRequest->file->getFiletype();
     $fileNode->flag_versioning = $userRequest->data['flag_versioning'];
     $fileNode->id_confidentiality = $userRequest->data['id_confidentiality'];
     $fileNode->description = $userRequest->data['description'];
@@ -67,7 +67,7 @@ class WebfrapMessage_Attachment_Model extends Model
     $fileId = $fileNode->getId();
 
     $filePath = PATH_GW.'data/uploads/wbfsys_file/name/'.SParserString::idToPath($fileId);
-    $file->copy($fileId, $filePath);
+    $userRequest->file->copy($fileId, $filePath);
 
     $attachmentNode = $orm->newEntity("WbfsysEntityAttachment");
     $attachmentNode->vid = $userRequest->msgId;
