@@ -41,6 +41,8 @@ class WebfrapMessage_Attachment_Modal_View extends WgtModal
 
     $this->setStatus('Upload Attachment');
     $this->setTitle('Upload Attachment');
+    
+    $this->addVar( 'msgId', $params->msgId );
 
     $this->setTemplate('webfrap/message/attachment/modal/create_form', true);
 

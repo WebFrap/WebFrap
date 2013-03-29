@@ -268,7 +268,15 @@ $sForm->hidden('receiver_id', $VAR->msgNode->receiver_id);
     <ul 
       id="wgt-list-show-msg-attach-<?php echo $VAR->msgNode->msg_id; ?>"
       class="wgt-list" >
-      
+     <?php foreach( $VAR->attachments as $attach ){  ?>
+        <li id="wgt-entry-msg-attach-<?php echo $attach['file_id']; ?>" ><a 
+          target="attach"
+          href="file.php?f=wbfsys_file-name-<?php echo $attach['file_id']; ?>&n=<?php echo base64_encode($attach['file_name'])  ?>" 
+          ><?php echo $attach['file_name']; ?></a><a 
+          class="wcm wcm_req_del" 
+          title="Please confirm you want to delete this Attachment"
+          href="ajax.php?c=Webfrap.Message_Attachment.delete&delid=<?php echo $ref['attach_id']; ?>"  ><i class="icon-remove" ></i></a></li>
+      <?php } ?>
     </ul>
   </div>
   

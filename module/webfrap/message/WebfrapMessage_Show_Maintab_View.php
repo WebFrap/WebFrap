@@ -41,9 +41,10 @@ class WebfrapMessage_Show_Maintab_View extends WgtMaintab
 
     $this->addVar('msgNode', $message);
     $this->addVar('refs', $this->model->loadMessageReferences($message->msg_id));
+    $this->addVar('attachments', $this->model->loadMessageAttachments($message->msg_id));
     $this->setTemplate('webfrap/message/maintab/show_page', true);
 
-    $this->addMenu($params);
+    $this->addMenu($params,$message);
 
   }//end public function displayShow */
 
@@ -56,7 +57,7 @@ class WebfrapMessage_Show_Maintab_View extends WgtMaintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu($params)
+  public function addMenu($params,$message)
   {
 
     $menu     = $this->newMenu($this->id.'_dropmenu');
@@ -107,7 +108,8 @@ class WebfrapMessage_Show_Maintab_View extends WgtMaintab
 
 <div class="wgt-panel-control" >
   <button
-  	class="wgt-button wgtac_save" ><i class="icon-save" ></i> {$this->i18n->l('Save','wbf.label')}</button>
+  	class="wgt-button wgtac_save save_first"
+  	id="wgt-btn-show-msg-save-{$message->msg_id}" ><i class="icon-save" ></i> {$this->i18n->l('Save','wbf.label')}</button>
 </div>
 
 HTML;

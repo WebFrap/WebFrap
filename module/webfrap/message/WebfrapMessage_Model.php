@@ -734,5 +734,46 @@ SQL;
 
   }//end public function delRef */
   
-} // end class WebfrapSearch_Model
+////////////////////////////////////////////////////////////////////////////////
+// Attachments
+////////////////////////////////////////////////////////////////////////////////
+  
+  /**
+   * @param int $msgId
+   * @throws DataNotExists_Exception if the message not exists
+   */
+  public function loadMessageAttachments($msgId)
+  {
+
+    $db = $this->getDb();
+
+    $sql = <<<SQL
+
+select
+  file.rowid as file_id,
+  file.name as file_name,
+  idx.vid,
+  idx.title,
+  ent.name,
+  ent.default_edit as edit_link
+
+FROM
+  wbfsys_file file
+  
+JOIN
+	wbfsys_entity_attachment attach
+		ON attach.id_file = file.rowid
+
+WHERE
+  attach.vid = {$msgId};
+
+SQL;
+
+    //$references = $db->select($sql)->getAll();
+
+    return $db->select($sql);
+
+  }//end public function loadMessageAttachments */
+  
+} // end class WebfrapMessage_Model
 
