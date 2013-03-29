@@ -116,13 +116,14 @@ $sForm->hidden('receiver_id', $VAR->msgNode->receiver_id);
       <div id="wgt-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>" class="wcm wcm_widget_kvlist" >
         <var id="wgt-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>-cfg-kvlist" >{
           "save_form":"wgt-form-save-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>",
-          "edit_able":true
+          "edit_able":true,
+          "srv_delete":"ajax.php?c=Webfrap.Message_Checklist.delete&delid="
         }</var>
         
         <form 
           id="wgt-form-save-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>"
           method="put"
-          action="ajax.php?c=Webfrap.Message_Checklist.save" ></form>
+          action="ajax.php?c=Webfrap.Message_Checklist.save&msg=<?php echo $VAR->msgNode->msg_id; ?>" ></form>
         
         <ul class="wgt-list kv wgt-space editor" >
           <li><p><input 
@@ -136,12 +137,12 @@ $sForm->hidden('receiver_id', $VAR->msgNode->receiver_id);
             id="wgt-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>-{$id}" 
             eid="" 
             class="template" ><p><input 
-                name="checklist[{$new}][value]" 
+                name="checklist[{$new}][flag_checked]" 
                 type="checkbox" /><input 
                 name="checklist[{$new}][vid]"
                 value="<?php echo $VAR->msgNode->msg_id; ?>" 
-                type="hidden" /></p><span 
-                  class="kvlac_del" ><i class="icon-remove" ></i></span><span 
+                type="hidden" /></p><a 
+                  class="kvlac_del" ><i class="icon-remove" ></i></a><span 
                     style="width:145px;" 
                     name="checklist[{$new}][label]"
                     class="editable" ></span></li>
@@ -154,15 +155,15 @@ $sForm->hidden('receiver_id', $VAR->msgNode->receiver_id);
             <li 
               id="wgt-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>-<?php echo $entry['id'] ?>" 
               eid="<?php echo $entry['id'] ?>" ><p><input 
-                name="checklist[<?php echo $entry['id'] ?>][value]" 
+                name="checklist[<?php echo $entry['id'] ?>][flag_checked]" 
                 class="asgd-wgt-form-save-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>"
                 <?php echo Wgt::checked('t', $entry['checked']) ?>
                 type="checkbox" /><input 
                 name="checklist[<?php echo $entry['id'] ?>][vid]"
                 value="<?php echo $VAR->msgNode->msg_id; ?>"
                 class="asgd-wgt-form-save-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>"
-                type="hidden" /></p><span
-                  class="kvlac_del"><i class="icon-remove" ></i></span><span 
+                type="hidden" /></p><a
+                  class="kvlac_del"><i class="icon-remove" ></i></a><span 
                     style="width:145px;" 
                     name="checklist[<?php echo $entry['id'] ?>][label]"
                     class="editable" ><?php echo $entry['label'] ?></span></li>

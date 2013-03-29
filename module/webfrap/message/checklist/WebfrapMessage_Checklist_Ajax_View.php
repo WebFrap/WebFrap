@@ -30,48 +30,49 @@ class WebfrapMessage_Checklist_Ajax_View extends LibTemplateAjaxView
 
   
   /**
+   * @param int $msgId
+   * @param array $entryIds
+   * @param array $entries
    * @param Context $params
    */
-  public function displaySave($params)
+  public function displaySave($msgId, $entryIds, $entries, $params)
   {
-
-    $tpl = $this->getTplEngine();
-
-    $pageFragment = new WgtAjaxArea();
-    $pageFragment->selector = 'wgt-entry-msg-attach-'.$this->model->attachment->getId();
-    $pageFragment->action = 'replace';
     
-    $encName = base64_encode($this->model->file->name);
+    $tpl = $this->getTpl();
+    
+    foreach( $entries as $entry ){
+      
+      $isChecked = Wgt::checked('t', $entry['checked']);
 
-    $pageFragment->setContent(<<<HTML
-  <li id="wgt-entry-msg-attach-{$this->model->attachment->getId()}" ><a 
-      target="attach"
-      href="file.php?f=wbfsys_file-name-{$this->model->file->getId()}&n={$encName}" 
-      >{$this->model->file->name}</a><a 
-      class="wcm wcm_req_del" 
-      title="Please confirm you want to delete this Attachment"
-      href="ajax.php?c=Webfrap.Message_Attachment.delete&delid={$this->model->attachment->getId()}"  ><i class="icon-remove" ></i></a></li>
-HTML
-    );
-
-    $tpl->setArea('attachment', $pageFragment);
-
+      $codeEntry = <<<HTML
+	<htmlArea selector="#wgt-kvl-msg-checklist-{$msgId}-{$entryIds[$entry['id']]}"  action="replace" ><![CDATA[
+    <li 
+      id="wgt-kvl-msg-checklist-{$msgId}-{$entry['id']}" 
+      eid="{$entry['id']}" ><p><input 
+        name="checklist[{$entry['id']}][flag_checked]" 
+        class="asgd-wgt-form-save-kvl-msg-checklist-{$msgId}"
+        {$isChecked}
+        type="checkbox" /><input 
+        name="checklist[{$entry['id']}][vid]"
+        value="{$msgId}"
+        class="asgd-wgt-form-save-kvl-msg-checklist-{$msgId}"
+        type="hidden" /></p><a
+          class="kvlac_del"><i class="icon-remove" ></i></a><span 
+            style="width:145px;" 
+            name="checklist[{$entry['id']}][label]"
+            class="editable" >{$entry['label']}</span></li>]]></htmlArea>
+    
+HTML;
+        
+     $tpl->setArea(
+        'row-'.$entryIds[$entry['id']],
+        $codeEntry
+     );
+      
+    }
+    
   }//end public function displaySave */
-  
-  /**
-   * @param int $delId
-   */
-  public function displayDelete($delId)
-  {
-
-    $tpl = $this->getTplEngine();
-    
-    $tpl->addJsCode( <<<JSCODE
-	\$S('#wgt-entry-msg-attach-{$delId}').remove();
-JSCODE
-    );
  
-  }//end public function displayDelete */
 
-} // end class WebfrapMessage_Attachment_Ajax_View */
+} // end class WebfrapMessage_Checklist_Ajax_View */
 

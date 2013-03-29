@@ -760,7 +760,7 @@ SQL;
 
     return $db->select($sql);
 
-  }//end public function loadMessageAttachments */
+  }//end public function loadMessageChecklist */
   
   
 } // end class WebfrapMessage_Model

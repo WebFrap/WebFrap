@@ -114,5 +114,38 @@ class WebfrapMessage_Checklist_Model extends Model
     
   }//end public function delete */
   
+  
+  /**
+   * @param int $msgId
+   * @throws DataNotExists_Exception if the message not exists
+   */
+  public function loadChecklistEntries($ids)
+  {
+
+    $db = $this->getDb();
+    
+    $where = implode( ', ', $ids );
+
+    $sql = <<<SQL
+
+select
+  checklist.rowid as id,
+  checklist.label as label,
+	checklist.flag_checked as checked
+
+FROM
+  wbfsys_checklist_entry checklist
+
+WHERE
+  checklist.rowid IN({$where});
+
+SQL;
+
+    //$references = $db->select($sql)->getAll();
+
+    return $db->select($sql);
+
+  }//end public function loadChecklistEntries */
+  
 } // end class WebfrapMessage_Checklist_Model
 

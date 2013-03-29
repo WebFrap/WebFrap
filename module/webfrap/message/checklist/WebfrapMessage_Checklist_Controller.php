@@ -75,6 +75,12 @@ class WebfrapMessage_Checklist_Controller extends Controller
         Response::FORBIDDEN
       );
     }
+    
+    $params->msgId = $request->param('msg',Validator::EID);
+    
+    if( !$params->msgId ){
+      throw new InvalidRequest_Exception('Missing the request id');
+    }
 
     /* @var $view WebfrapMessage_Checklist_Ajax_View */
     $view   = $response->loadView(
@@ -88,9 +94,11 @@ class WebfrapMessage_Checklist_Controller extends Controller
     $checklistModel = $this->loadModel('WebfrapMessage_Checklist');
     $view->setModel($checklistModel);
     
-    $checklistModel->save($params);
+    $newIds = $checklistModel->save($params);
+    
+    $entries = $checklistModel->loadChecklistEntries(array_keys($newIds));
 
-    $view->displaySave($params);
+    $view->displaySave($params->msgId,$newIds,$entries,$params);
 
   }//end public function service_save */
   
@@ -123,21 +131,13 @@ class WebfrapMessage_Checklist_Controller extends Controller
       throw new InvalidRequest_Exception('Missing the request id');
     }
 
-    /* @var $view WebfrapMessage_Attachment_Ajax_View */
-    $view   = $response->loadView(
-      'form-messages-attachment-delete',
-      'WebfrapMessage_Attachment',
-      'displayDelete'
-    );
-
     // request bearbeiten
-    /* @var $model WebfrapMessage_Attachment_Model */
-    $attachModel = $this->loadModel('WebfrapMessage_Attachment');
-    $view->setModel($attachModel);
+    /* @var $model WebfrapMessage_Checklist_Model */
+    $checklistModel = $this->loadModel('WebfrapMessage_Checklist');
+    $view->setModel($checklistModel);
     
-    $attachModel->delete( $params->delId, $params );
+    $checklistModel->delete( $params->delId, $params );
 
-    $view->displayDelete( $params->delId );
 
   }//end public function service_insert */
   
