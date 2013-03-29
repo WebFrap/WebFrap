@@ -37,7 +37,7 @@ class WebfrapMessage_Attachment_Ajax_View extends LibTemplateAjaxView
     $tpl = $this->getTplEngine();
 
     $pageFragment = new WgtAjaxArea();
-    $pageFragment->selector = 'wgt-list-show-msg-attach-'.$params->msgId;
+    $pageFragment->selector = '#wgt-list-show-msg-attach-'.$params->msgId;
     $pageFragment->action = 'prepend';
     
     $encName = base64_encode($this->model->file->name);
@@ -88,15 +88,15 @@ HTML
   }//end public function displayUpdate */
   
   /**
-   * @param Context $params
+   * @param int $delId
    */
-  public function displayDelete($params)
+  public function displayDelete($delId)
   {
 
     $tpl = $this->getTplEngine();
     
-    $tpl->addJsCode(<<<JSCODE
-	\$S('#wgt-entry-msg-attach-{$params->msgId}').remove();
+    $tpl->addJsCode( <<<JSCODE
+	\$S('#wgt-entry-msg-attach-{$delId}').remove();
 JSCODE
     );
  

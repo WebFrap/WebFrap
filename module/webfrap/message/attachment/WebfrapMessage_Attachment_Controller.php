@@ -162,7 +162,7 @@ class WebfrapMessage_Attachment_Controller extends Controller
   {
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params = new WebfrapMessage_Attachment_Request($request);
+    $params  = $this->getFlags($request);
 
     $model = $this->loadModel('WebfrapMessage');
     $model->loadTableAccess($params);
@@ -173,8 +173,14 @@ class WebfrapMessage_Attachment_Controller extends Controller
         Response::FORBIDDEN
       );
     }
+    
+    $params->delId = $request->param('delid',Validator::EID);
+    
+    if( !$params->delId ){
+      throw new InvalidRequest_Exception('Missing the request id');
+    }
 
-    /* @var $view WebfrapMessage_Attachment_Modal_View */
+    /* @var $view WebfrapMessage_Attachment_Ajax_View */
     $view   = $response->loadView(
       'form-messages-attachment-delete',
       'WebfrapMessage_Attachment',
@@ -186,9 +192,9 @@ class WebfrapMessage_Attachment_Controller extends Controller
     $attachModel = $this->loadModel('WebfrapMessage_Attachment');
     $view->setModel($attachModel);
     
-    $attachModel->insert( $params );
+    $attachModel->delete( $params->delId, $params );
 
-    $view->displayInsert($params);
+    $view->displayDelete( $params->delId );
 
   }//end public function service_insert */
   
