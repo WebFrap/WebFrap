@@ -52,23 +52,30 @@ class WebfrapMessage_Checklist_Request extends Context
   public function interpretRequest($request)
   {
     
-    $this->file = $request->file('file');
-
-    if (!$this->file || !is_object($this->file)) {
-      throw new InvalidRequest_Exception(
-        Error::INVALID_REQUEST,
-        Error::INVALID_REQUEST_MSG
-      );
-    }
+    parent::interpretRequest($request);
     
-    $this->msgId = $request->data('msg', Validator::EID);
+    $saveFields = array();
+    $saveFields['checklist'][] = 'label';
+    $saveFields['checklist'][] = 'flag_checked';
+    $saveFields['checklist'][] = 'vid';
+    $saveFields['checklist'][] = 'priority';
 
-    $this->data['id_type'] = $request->data('type', Validator::EID);
-    $this->data['flag_versioning'] = $request->data('version', Validator::BOOLEAN);
-    $this->data['description']  = $request->data('description', Validator::TEXT);
-    $this->data['id_confidentiality'] = $request->data('id_confidentiality', Validator::EID);
 
-    $this->interpretRequestAcls($request);
+    try{
+
+      // if the validation fails report
+      $this->dataBody = $request->validateMultiSave(
+        'WbfsysChecklistEntry',
+        'checklist',
+        $saveFields['checklist']
+      );
+
+      return null;
+
+    } catch(InvalidInput_Exception $e) {
+    
+      return $e;
+    }
     
   }//end public function interpretRequest */
 

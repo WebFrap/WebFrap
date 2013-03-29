@@ -42,6 +42,7 @@ class WebfrapMessage_Show_Maintab_View extends WgtMaintab
     $this->addVar('msgNode', $message);
     $this->addVar('refs', $this->model->loadMessageReferences($message->msg_id));
     $this->addVar('attachments', $this->model->loadMessageAttachments($message->msg_id));
+    $this->addVar('checklist', $this->model->loadMessageChecklist($message->msg_id));
     $this->setTemplate('webfrap/message/maintab/show_page', true);
 
     $this->addMenu($params,$message);

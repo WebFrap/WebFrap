@@ -729,10 +729,39 @@ SQL;
   }//end public function delRef */
   
 ////////////////////////////////////////////////////////////////////////////////
-// Attachments
+// Checklist
 ////////////////////////////////////////////////////////////////////////////////
   
+  /**
+   * @param int $msgId
+   * @throws DataNotExists_Exception if the message not exists
+   */
+  public function loadMessageChecklist($msgId)
+  {
 
+    $db = $this->getDb();
+
+    $sql = <<<SQL
+
+select
+  checklist.rowid as id,
+  checklist.label as label,
+	checklist.flag_checked as checked
+
+FROM
+  wbfsys_checklist_entry checklist
+
+WHERE
+  checklist.vid = {$msgId};
+
+SQL;
+
+    //$references = $db->select($sql)->getAll();
+
+    return $db->select($sql);
+
+  }//end public function loadMessageAttachments */
+  
   
 } // end class WebfrapMessage_Model
 

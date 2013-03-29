@@ -24,14 +24,6 @@
 class WebfrapMessage_Checklist_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
-// Attributes
-//////////////////////////////////////////////////////////////////////////////*/
-  
-  public $file = null;
-  
-  public $attachment = null;
-
-/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
@@ -39,115 +31,88 @@ class WebfrapMessage_Checklist_Model extends Model
    * @param WebfrapMessage_Attachment_Request $userRequest
    * @return WbfsysEntityAttachment_Entity
    */
-  public function insert($userRequest)
+  public function save($formData)
   {
 
-    $orm = $this->getOrm();
-
-    $checkSum = $userRequest->file->getChecksum();
-    $fileSize = $userRequest->file->getSize();
-
-    $fileNode = $orm->newEntity("WbfsysFile");
-    $fileNode->name = $userRequest->file->getNewname();
-    $fileNode->file_hash = $checkSum;
-    $fileNode->file_size = $fileSize;
-    $fileNode->id_type = $userRequest->data['id_type'];
-    $fileNode->mimetype = $userRequest->file->getFiletype();
-    $fileNode->flag_versioning = $userRequest->data['flag_versioning'];
-    $fileNode->id_confidentiality = $userRequest->data['id_confidentiality'];
-    $fileNode->description = $userRequest->data['description'];
-
-    $fileNode = $orm->insert($fileNode);
+    $orm       = $this->getOrm();
+    $db        = $this->getDb();
+    $user      = $this->getUser();
+    $response  = $this->getResponse();
     
-    $this->file = $fileNode;
+    $savedIds = array();
 
-    if (!$fileNode)
-      throw new LibUploadException('Failed to upload file');
-
-    $fileId = $fileNode->getId();
-
-    $filePath = PATH_GW.'data/uploads/wbfsys_file/name/'.SParserString::idToPath($fileId);
-    $userRequest->file->copy($fileId, $filePath);
-
-    $attachmentNode = $orm->newEntity("WbfsysEntityAttachment");
-    $attachmentNode->vid = $userRequest->msgId;
-    $attachmentNode->id_file = $fileNode;
-
-    $attachmentNode = $orm->insert($attachmentNode);
+    try {
     
-    $this->attachment = $attachmentNode;
+      // start a transaction in the database
+      $db->begin();
 
-    return $attachmentNode;
 
-  }//end public function insert */
+      $entityTexts = array();
+
+      foreach ($formData->dataBody as $entityEntry) {
+
+        if ($entityEntry->isNew()) {
+
+          if (!$orm->insert($entityEntry)) {
+            $entityText = $entityEntry->text();
+
+            $response->addError("Failed to create entry: {$entityText}" );
+
+          } else {
+
+            $entityTexts[] = $entityEntry->text();
+            $savedIds[$entityEntry->getId()] = $entityEntry->tmpId;
+          }
+
+        } else {
+
+          if (!$orm->update($entityEntry)) {
+            
+            $entityText = $entityEntry->text();
+            $response->addError("Failed to save entry: {$entityText}" );
+            
+          } else {
+
+            $entityTexts[] = $entityEntry->text();         
+            $savedIds[$entityEntry->getId()] = $entityEntry->getId();
+            
+          }
+        }
+      }
+
+      $textSaved = implode($entityTexts, ', ');
+      $response->addMessage( 'Successfully saved Project: '.$textSaved);
+      
+      // everything ok
+      $db->commit();
+
+    } catch(LibDb_Exception $e) {
+
+      $db->rollback();
+      return $savedIds;
+      
+    } catch(WebfrapSys_Exception $e) {
+
+      return $savedIds;
+    }
+
+    // check if there were any errors, if not fine
+    return $savedIds;
+
+  }//end public function save */
+
   
-    /**
-   * @param WebfrapMessage_Attachment_Request $userRequest
-   * @return WbfsysEntityAttachment_Entity
-   */
-  public function update($userRequest)
-  {
-
-    $orm = $this->getOrm();
-
-    $checkSum = $userRequest->file->getChecksum();
-    $fileSize = $userRequest->file->getSize();
-
-    $fileNode = $orm->newEntity("WbfsysFile");
-    $fileNode->name = $userRequest->file->getNewname();
-    $fileNode->file_hash = $checkSum;
-    $fileNode->file_size = $fileSize;
-    $fileNode->id_type = $userRequest->data['id_type'];
-    $fileNode->mimetype = $userRequest->file->getFiletype();
-    $fileNode->flag_versioning = $userRequest->data['flag_versioning'];
-    $fileNode->id_confidentiality = $userRequest->data['id_confidentiality'];
-    $fileNode->description = $userRequest->data['description'];
-
-    $fileNode = $orm->insert($fileNode);
-    
-    $this->file = $fileNode;
-
-    if (!$fileNode)
-      throw new LibUploadException('Failed to upload file');
-
-    $fileId = $fileNode->getId();
-
-    $filePath = PATH_GW.'data/uploads/wbfsys_file/name/'.SParserString::idToPath($fileId);
-    $userRequest->file->copy($fileId, $filePath);
-
-    $attachmentNode = $orm->newEntity("WbfsysEntityAttachment");
-    $attachmentNode->vid = $userRequest->msgId;
-    $attachmentNode->id_file = $fileNode;
-
-    $attachmentNode = $orm->insert($attachmentNode);
-    
-    $this->attachment = $attachmentNode;
-
-    return $attachmentNode;
-
-  }//end public function update */
-  
-    /**
-   * @param WebfrapMessage_Attachment_Request $userRequest
-   * @return WbfsysEntityAttachment_Entity
+  /**
+   * @param int $delId
+   * @param Context $params
    */
   public function delete($delId, $params)
   {
     
     $orm = $this->getOrm();
+    $attachEnt = $orm->delete("WbfsysChecklistEntry",$delId);
     
-    $attachEnt = $orm->get("WbfsysEntityAttachment",$delId);
-    $fileId = $attachEnt->id_file;
-    
-    $orm->delete($attachEnt);
-    
-    if( !$orm->countRows("WbfsysEntityAttachment","id_file=".$fileId) ){
-      $orm->delete("WbfsysFile",$fileId);
-      $filePath = PATH_GW.'data/uploads/wbfsys_file/name/'.SParserString::idToPath($fileId).'/'.$fileId;
-      SFiles::delete($filePath);
-    }
-
   }//end public function delete */
   
-} // end class WebfrapMessage_Attachment_Model
+} // end class WebfrapMessage_Checklist_Model
 

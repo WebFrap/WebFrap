@@ -64,7 +64,7 @@ class WebfrapMessage_Checklist_Controller extends Controller
   {
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params = new WebfrapMessage_Attachment_Request($request);
+    $params = new WebfrapMessage_Checklist_Request($request);
 
     $model = $this->loadModel('WebfrapMessage');
     $model->loadTableAccess($params);
@@ -76,21 +76,21 @@ class WebfrapMessage_Checklist_Controller extends Controller
       );
     }
 
-    /* @var $view WebfrapMessage_Attachment_Modal_View */
+    /* @var $view WebfrapMessage_Checklist_Ajax_View */
     $view   = $response->loadView(
-      'form-messages-attachment-insert',
-      'WebfrapMessage_Attachment',
-      'displayInsert'
+      'form-messages-checklist-save',
+      'WebfrapMessage_Checklist',
+      'displaySave'
     );
 
     // request bearbeiten
-    /* @var $model WebfrapMessage_Attachment_Model */
-    $attachModel = $this->loadModel('WebfrapMessage_Attachment');
-    $view->setModel($attachModel);
+    /* @var $model WebfrapMessage_Checklist_Model */
+    $checklistModel = $this->loadModel('WebfrapMessage_Checklist');
+    $view->setModel($checklistModel);
     
-    $attachModel->insert( $params );
+    $checklistModel->save($params);
 
-    $view->displayInsert($params);
+    $view->displaySave($params);
 
   }//end public function service_save */
   
