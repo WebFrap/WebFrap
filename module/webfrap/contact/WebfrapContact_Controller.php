@@ -73,15 +73,25 @@ class WebfrapContact_Controller extends Controller
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
     $params  = $this->getFlags($request);
+    
+    /* @var $model WebfrapContact_Model */
+    $model = $this->loadModel('WebfrapContact');
+    $model->loadTableAccess($params);
+
+    if (!$model->access->listing) {
+      throw new InvalidRequest_Exception(
+        Response::FORBIDDEN_MSG,
+        Response::FORBIDDEN
+      );
+    }
 
     // create a window
     $view = $response->loadView(
       'webfrap-contact-list',
-      'WebfrapContact',
+      'WebfrapContact_List',
       'displayList'
     );
     
-    $model = $this->loadModel('WebfrapContact');
     $view->setModel($model);
 
     $view->displayList($params);
@@ -106,8 +116,7 @@ class WebfrapContact_Controller extends Controller
     $model->loadTableAccess($params);
 
     if (!$model->access->listing) {
-      throw new InvalidRequest_Exception
-      (
+      throw new InvalidRequest_Exception(
         Response::FORBIDDEN_MSG,
         Response::FORBIDDEN
       );
