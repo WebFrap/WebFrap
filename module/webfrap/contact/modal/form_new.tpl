@@ -23,14 +23,15 @@ $cntForm->form();
     <h3>Data</h3>
   	<?php $cntForm->input( 'Surname', 'person[firstname]', null ); ?>
     <?php $cntForm->input( 'Lastname', 'person[lastname]', null ); ?>
-    <?php $cntForm->input( 'Academic title', 'person[academic_title]', null ); ?>
-    <?php $cntForm->input( 'Noblesse title', 'person[noblesse_title]', null ); ?>
+    <?php $cntForm->input( 'Prefix title', 'person[title_before]', null ); ?>
+    <?php $cntForm->input( 'Title', 'person[title_middle]', null ); ?>
+    <?php $cntForm->input( 'Postfix title', 'person[title_after]', null ); ?>
   </div>
   
   <div class="bw3 inline" >
     <h3>Image</h3>
     <div style="height:90px;" >Image</div>
-    <?php $cntForm->upload( 'Image', 'person[image]', null ); ?>
+    <?php $cntForm->upload( 'Image', 'person[photo]', null ); ?>
   </div>
   
   <div class="wgt-clear small wgt-border-bottom" style="width:96%;margin:0px auto;" >&nbsp;</div>
@@ -55,7 +56,7 @@ $cntForm->form();
       <div class="left" ><h3>Contact Items</h3></div>
       <div class="right" ><button class="wgt-button" ><i class="icon-plus-sign" ></i></button></div>
     </div>
-    <div class="left" style="height:250px;overflow:auto;" >
+    <div class="left" style="height:230px;overflow:auto;" >
     <?php $cntForm->input( 'E-Mail', 'contact_item[email][birthday]', null ); ?>
     <?php $cntForm->input( 'Mobile', 'contact_item[mobile][birthday]', null ); ?>
     <?php $cntForm->input( 'Skype', 'contact_item[skype][birthday]', null ); ?>
