@@ -179,6 +179,7 @@ class WgtMenuBuilder
           if ($row['acl-level']  <  $button[Wgt::BUTTON_ACCESS]) {
             continue;
           }
+          
           if (isset($button[Wgt::BUTTON_MAX_ACCESS]) && $row['acl-level'] >= $button[Wgt::BUTTON_MAX_ACCESS]) {
             continue;
           }
@@ -191,12 +192,14 @@ class WgtMenuBuilder
           if ($this->access->level  <  $button[Wgt::BUTTON_ACCESS]) {
             continue;
           }
+          
           if (isset($button[Wgt::BUTTON_MAX_ACCESS]) && $this->access->level >= $button[Wgt::BUTTON_MAX_ACCESS]) {
             continue;
           }
 
           return $this->buttons[$action][2].$id.$urlExt;
         }
+        
       } else {
         // ok keine rechte dann bauen wir das menü einfach so und gehen
         // davon aus, dass keine rechte benötigt werden oder die
@@ -237,12 +240,14 @@ class WgtMenuBuilder
 
         // prüfen ob alle nötigen daten für die acls vorhanden sind
         if (isset($button[Wgt::BUTTON_ACCESS])) {
+          
           // prüfen ob zeilenbasierte rechte vorhanden sind
           if (isset($row['acl-level']  )) {
 
             if ($row['acl-level']  <  $button[Wgt::BUTTON_ACCESS]) {
               continue;
             }
+            
             if (isset($button[Wgt::BUTTON_MAX_ACCESS]) && $row['acl-level'] >= $button[Wgt::BUTTON_MAX_ACCESS]) {
               continue;
             }
@@ -261,7 +266,9 @@ class WgtMenuBuilder
             }
 
             $html .= $this->buildButton($button, $row, $id, $value);
+            
           } else {
+            
             Debug::console("NO ACCESS DATA! ".$action) ;
           }
         } else {
@@ -273,6 +280,7 @@ class WgtMenuBuilder
         }
 
       } else {
+        
         Debug::console("MISSING ACTION ".$action);
       }
 
