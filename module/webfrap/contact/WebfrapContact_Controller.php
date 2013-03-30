@@ -35,10 +35,18 @@ class WebfrapContact_Controller extends Controller
   /**
    * @var array
    */
-  protected $options           = array
-  (
+  protected $options           = array(
+  
     'list' => array(
       'method'    => array('GET'),
+      'views'      => array('maintab')
+    ),
+    'formnew' => array(
+      'method'    => array('GET'),
+      'views'      => array('modal')
+    ),
+    'insert' => array(
+      'method'    => array('POST'),
       'views'      => array('maintab')
     ),
 

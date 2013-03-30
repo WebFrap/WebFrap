@@ -42,7 +42,7 @@ class WebfrapContact_Model extends Model
     $user = $this->getUser();
 
     // ok nun kommen wir zu der zugriffskontrolle
-    $this->access = new WebfrapMessage_Table_Access(null, null, $this);
+    $this->access = new WebfrapContact_Table_Access(null, null, $this);
     $this->access->load($user->getProfileName(), $params);
 
     $params->access = $this->access;

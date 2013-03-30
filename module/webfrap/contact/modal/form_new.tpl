@@ -30,7 +30,7 @@ $cntForm->form();
   <div class="bw3 inline" >
     <h3>Image</h3>
     <div style="height:90px;" >Image</div>
-    <?php $cntForm->input( 'Image', 'person[image]', null ); ?>
+    <?php $cntForm->upload( 'Image', 'person[image]', null ); ?>
   </div>
   
   <div class="wgt-clear small wgt-border-bottom" style="width:96%;margin:0px auto;" >&nbsp;</div>
@@ -51,8 +51,11 @@ $cntForm->form();
   </div>
   
   <div class="bw3 inline" >
-    <h3>Contact Items</h3>
-    <div style="height:250px;overflow:auto;" >
+    <div class="bw3 left" >
+      <div class="left" ><h3>Contact Items</h3></div>
+      <div class="right" ><button class="wgt-button" ><i class="icon-plus-sign" ></i></button></div>
+    </div>
+    <div class="left" style="height:250px;overflow:auto;" >
     <?php $cntForm->input( 'E-Mail', 'contact_item[email][birthday]', null ); ?>
     <?php $cntForm->input( 'Mobile', 'contact_item[mobile][birthday]', null ); ?>
     <?php $cntForm->input( 'Skype', 'contact_item[skype][birthday]', null ); ?>

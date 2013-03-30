@@ -11,7 +11,10 @@ $menuBuilder->setup();
   class="wgt-border-bottom" >
 
   <?php for( $i = 0; $i < 10; ++ $i ){ ?>
-    <div class="wgt-border ui-corner-all bh1 wgt-ispace wgt-space inline" style="width:290px;" >
+    <div 
+      class="wcm wcm_control_access_dataset wgt-border ui-corner-all bh1 wgt-ispace wgt-space inline"
+      wgt_url="modal.php?c=Webfrap.Contact.edit&amp;objid=<?php echo $i ?>" 
+      style="width:290px;" >
       <div class="wgt-border-bottom" >
         <div class="left" style="overflow:hidden;width:235px;" >
           <a>Sir Dr. Hans von Wurst Bezwinger der Schlei (superdidi)</a>
