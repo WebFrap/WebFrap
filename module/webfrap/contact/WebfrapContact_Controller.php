@@ -195,48 +195,7 @@ class WebfrapContact_Controller extends Controller
   }//end public function service_formShow */
 
 
-  /**
-   * Standard Service für Autoloadelemente wie zb. Window Inputfelder
-   * Über diesen Service kann analog zu dem Selection / Search Service
-   * Eine gefilterte Liste angefragt werden um Zuweisungen zu vereinfachen
-   *
-   * @param LibRequestHttp $request
-   * @param LibResponseHttp $response
-   * @return void
-   */
-  public function service_loadUser($request, $response)
-  {
-
-    // resource laden
-    $user     = $this->getUser();
-    $acl      = $this->getAcl();
-
-
-    // load request parameters an interpret as flags
-    $params = $this->getFlags($request);
-
-    // der contextKey wird benötigt um potentielle Konflikte in der UI
-    // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
-    $params->contextKey = 'message-user-autocomplete';
-
-    $view  = $response->loadView
-    (
-      'message-user-ajax',
-      'WebfrapMessage',
-      'displayUserAutocomplete',
-      View::AJAX
-    );
-    /* @var $model Example_Model */
-    $model  = $this->loadModel('WebfrapMessage');
-    //$model->setAccess($access);
-    $view->setModel($model);
-
-    $searchKey  = $this->request->param('key', Validator::TEXT);
-
-    $view->displayUserAutocomplete($searchKey, $params);
-
-
-  }//end public function service_loadUser */
+ 
 
   /**
    * Standard Service für Autoloadelemente wie zb. Window Inputfelder
@@ -247,7 +206,7 @@ class WebfrapContact_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_deleteMessage($request, $response)
+  public function service_delete($request, $response)
   {
 
     // resource laden
@@ -261,8 +220,7 @@ class WebfrapContact_Controller extends Controller
 
     $messageId  = $request->param('objid', Validator::EID);
 
-    $resContext->assertNotNull
-    (
+    $resContext->assertNotNull(
       'Missing the Message ID',
       $messageId
     );
@@ -283,7 +241,7 @@ class WebfrapContact_Controller extends Controller
 JS
     );
 
-  }//end public function service_deleteMessage */
+  }//end public function service_delete */
 
   /**
    * Standard Service für Autoloadelemente wie zb. Window Inputfelder

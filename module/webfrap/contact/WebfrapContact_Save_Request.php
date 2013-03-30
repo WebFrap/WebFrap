@@ -142,8 +142,6 @@ class WebfrapContact_Save_Request extends Context
       return null;
     }
     
-    
-
     $this->interpretRequestAcls($request);
     
   }//end public function interpretRequest */

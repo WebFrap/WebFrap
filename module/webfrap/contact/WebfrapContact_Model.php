@@ -50,6 +50,35 @@ class WebfrapContact_Model extends Model
     return $this->access;
 
   }//end public function loadTableAccess */
+  
+  
+  /**
+   * @param WebfrapContact_Save_Request $saveRqt
+   * @throws InternalError_Exception
+   */
+  public function insertContact( $saveRqt )
+  {
+    
+    $db = $this->getDb();
+    $orm = $this->getOrm();
+    
+    $db->begin();
+    try {
+      
+      // speichert sowohl contact als auch person
+      $orm->save($saveRqt->contact);
+      
+    } catch( LibDb_Exception $exc ) {
+      
+      $db->rollback();
+      throw new InternalError_Exception( 'Save Failed', $exc->getMessage() );
+      
+    }
+    
+    $db->commit();
+
+  }//end public function insertContact */
+  
 
   /**
    * @param TFlag $params
