@@ -28,20 +28,21 @@ class ControllerCrud extends Controller
 
   /**
    * get the form flags for this management
-   * @param TFlag $params
-   * @return TFlag
+   * @param LibRequest $request
+   * @return ContextForm
    */
-  protected function getFormFlags ($request)
+  protected function getFormFlags($request)
   {
+    
     return new ContextForm($request);
 
   } //end protected function getFormFlags */
 
   /**
-   * @param TFlag $params
-   * @return TFlag
+   * @param LibRequest $request
+   * @return ContextCrud
    */
-  protected function getCrudFlags ($request)
+  protected function getCrudFlags($request)
   {
     return new ContextCrud($request);
 
@@ -91,9 +92,9 @@ class ControllerCrud extends Controller
    * @get_param: int a_level,
    * Die aktuelle position im ACL Pfad
    *
-   * @param TFlag $params
+   * @param LibRequest $request
    *
-   * @return TFlag
+   * @return ContextListing
    */
   protected function getListingFlags ($request)
   {
@@ -102,8 +103,8 @@ class ControllerCrud extends Controller
   } //end protected function getListingFlags */
 
   /**
-   * @param TFlag $params
-   * @return TFlag
+   * @param LibRequest $request
+   * @return ContextTab
    */
   protected function getTabFlags ($request)
   {
