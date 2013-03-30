@@ -16,56 +16,57 @@ $cntForm->form();
 
 
 ?>
-<fieldset>
-  <legend>Message</legend>
+<fieldset class="wgt-space bw62" style="height:530px;" >
+  <legend>Create new Contact</legend>
   
-    <table style="width:100%" >
-      <tr>
-        <td colspan="2" >
-          <?php $cntForm->input
-          ( 
-          	 'Subject', 
-          	 'subject', 
-            '', 
-            array(), 
-            array
-            (
-            	 'size'=>'xxlarge'
-              )  
-          ); ?>
-        </td>
-      </tr>
-      
-      <tr>
-        <td colspan="2" >
-        
-        
-        <?php  $cntForm->ratingbar
-        ( 
-          'Importance', 
-          'importance', 
-          2,
-          array
-          ( 
-            1 => 'Low',
-            2 => 'Medium',
-            3 => 'High',
-          ),
-          array(),
-          array( 'starParts' => 1 )
-        ); ?>
-        </td>
-      </td>
-
-      <tr>
-        <td>
-        </td>
-        <td valign="bottom" align="right"  >
-          <div style="padding-top:15px;" >
-            <?php $cntForm->submit( 'Send Message', '$S.modal.close();' ); ?>
-          </div>
-        </td>
-      </tr>
-    </table>
-
+  <div class="bw3 left" >
+    <h3>Data</h3>
+  	<?php $cntForm->input( 'Surname', 'person[firstname]', null ); ?>
+    <?php $cntForm->input( 'Lastname', 'person[lastname]', null ); ?>
+    <?php $cntForm->input( 'Academic title', 'person[academic_title]', null ); ?>
+    <?php $cntForm->input( 'Noblesse title', 'person[noblesse_title]', null ); ?>
+  </div>
+  
+  <div class="bw3 inline" >
+    <h3>Image</h3>
+    <div style="height:90px;" >Image</div>
+    <?php $cntForm->input( 'Image', 'person[image]', null ); ?>
+  </div>
+  
+  <div class="wgt-clear small wgt-border-bottom" style="width:96%;margin:0px auto;" >&nbsp;</div>
+  <div class="wgt-clear small" >&nbsp;</div>
+  
+  <div class="bw3 left" >
+    <h3>Personal Data</h3>
+    <?php $cntForm->input( 'Birthday', 'person[birthday]', null ); ?>
+    <?php $cntForm->input( 'Language', 'person[id_preflang]', null ); ?>
+    <?php $cntForm->input( 'Nationality', 'person[id_nationality]', null ); ?>
+    <?php $cntForm->textarea( 
+    	'Comment', 
+    	'contact[description]', 
+      null, 
+      array( 'style'=>"width:265px;" ), 
+      array('size'=>'large') 
+    );?>
+  </div>
+  
+  <div class="bw3 inline" >
+    <h3>Contact Items</h3>
+    <div style="height:250px;overflow:auto;" >
+    <?php $cntForm->input( 'E-Mail', 'contact_item[email][birthday]', null ); ?>
+    <?php $cntForm->input( 'Mobile', 'contact_item[mobile][birthday]', null ); ?>
+    <?php $cntForm->input( 'Skype', 'contact_item[skype][birthday]', null ); ?>
+    </div>
+  </div>
+  
+  <div class="wgt-clear small wgt-border-bottom" style="width:96%;margin:0px auto;" >&nbsp;</div>
+  <div class="wgt-clear small" >&nbsp;</div>
+  
+  <div class="bw61 left alr" style="text-align:right;" >
+    <button 
+      class="wgt-button" ><i class="icon-remove" ></i> Chancel</button> 
+    | 
+    <?php $cntForm->submit( '<i class="icon-save" > </i> Create Contact', '$S.modal.close();' ); ?>
+  </div>
+  
 </fieldset>

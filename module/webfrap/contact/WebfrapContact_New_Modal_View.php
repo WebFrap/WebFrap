@@ -27,7 +27,7 @@ class WebfrapContact_New_Modal_View extends WgtModal
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
 
-  public $width = 800;
+  public $width = 830;
   
   public $height = 600;
   
