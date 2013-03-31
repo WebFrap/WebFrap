@@ -128,6 +128,12 @@ class WebfrapMessage_Controller extends Controller
       'views'      => array('ajax')
     ),
     
+    // reopen einen archivierten Datensatz wieder öffnen
+    'reopen' => array(
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
+    ),
+    
     // spam / ham
     'setspam' => array(
       'method'    => array('PUT'),
@@ -983,12 +989,19 @@ JS
     $user       = $this->getUser();
     $acl        = $this->getAcl();
     $tpl        = $this->getTpl();
-
-    if ($resContext->hasError)
-      throw new InvalidRequest_Exception();
+    
+    $params = $this->getFlags($request);
 
     /* @var $model WebfrapMessage_Model */
-    $model  = $this->loadModel('WebfrapMessage');
+    $model = $this->loadModel('WebfrapMessage');
+    $model->loadTableAccess($params);
+
+    if (!$model->access->access) {
+      throw new InvalidRequest_Exception(
+        'Access denied',
+        Response::FORBIDDEN
+      );
+    }
 
     $model->archiveAllMessage();
 
@@ -1039,5 +1052,40 @@ JS
     $tpl->addJsCode($jsCode);
 
   }//end public function service_archiveSelection */
+  
+  /**
+   *
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_reopen($request, $response)
+  {
+
+    // resource laden
+    $user       = $this->getUser();
+    $acl        = $this->getAcl();
+    $tpl        = $this->getTpl();
+    $resContext = $response->createContext();
+
+    // load request parameters an interpret as flags
+    $params = $this->getFlags($request);
+
+    $messageId  = $request->param('objid', Validator::EID);
+
+    $resContext->assertNotNull(
+      'Missing the Message ID',
+      $messageId
+    );
+
+    if ($resContext->hasError)
+      throw new InvalidRequest_Exception();
+
+    /* @var $model WebfrapMessage_Model */
+    $model  = $this->loadModel('WebfrapMessage');
+
+    $model->archiveMessage($messageId, false);
+
+  }//end public function service_reopen */
   
 } // end class WebfrapMessage_Controller

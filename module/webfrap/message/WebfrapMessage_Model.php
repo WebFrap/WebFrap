@@ -631,6 +631,47 @@ SQL;
     }
 
   }//end public function archiveSelection */
+  
+  /**
+   * @param int $messageId
+   * @param boolean $archive archive or reopen
+   */
+  public function archiveMessage($messageId, $archive)
+  {
+    
+    $db = $this->getDb();
+    $orm = $this->getOrm();
+    $user = $this->getUser();
+    
+
+    $msgNode = $orm->get( 'WbfsysMessage', $messageId );
+    
+    if( $msgNode->id_sender == $user->getId() ){
+      
+      if( $archive )
+        $msgNode->id_sender_status = EMessageStatus::ARCHIVED;
+      else 
+        $msgNode->id_sender_status = EMessageStatus::OPEN;
+        
+      $orm->save($msgNode);
+      
+    } else {
+      
+      $queries = array();
+      
+      if( $archive )
+        $queries[] = 'UPDATE wbfsys_message_receiver set status = '.EMessageStatus::ARCHIVED.' WHERE vid = '.$user->getId().' AND rowid = '.$messageId;
+      else 
+        $queries[] = 'UPDATE wbfsys_message_receiver set status = '.EMessageStatus::OPEN.' WHERE vid = '.$user->getId().' AND rowid = '.$messageId;
+  
+      foreach ($queries as $query) {
+        $db->exec($query);
+      }
+      
+    }
+    
+  }//ebnd public function archiveMessage 
+  
 
   /**
    *

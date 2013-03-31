@@ -115,6 +115,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
       'wbfsys_message.message as "wbfsys_message_message"',
       'wbfsys_message.priority as "wbfsys_message_priority"',
       'wbfsys_message.stack_id as "wbfsys_message_stack_id"',
+      'wbfsys_message.spam_level as "wbfsys_message_spam_level"',
       'wbfsys_message.message_id as "wbfsys_message_message_id"',
       'wbfsys_message.id_refer as "wbfsys_message_id_refer"',
       'wbfsys_message.id_sender as "wbfsys_message_id_sender"',
@@ -154,8 +155,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
     $criteria->from('wbfsys_message');
 
     // der sender
-    $criteria->joinOn
-    (
+    $criteria->joinOn(
       'wbfsys_message', 'id_sender',
       'view_person_role', 'wbfsys_role_user_rowid',
       null,
@@ -163,8 +163,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
     );
 
     // der receiver
-    $criteria->joinOn
-    (
+    $criteria->joinOn(
       'wbfsys_message', 'rowid',
       'wbfsys_message_receiver', 'id_message',
       null,
@@ -172,8 +171,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
     );
 
     // der receiver
-    $criteria->joinOn
-    (
+    $criteria->joinOn(
       'wbfsys_message', 'rowid',
       'wbfsys_message_aspect', 'id_message',
       null,
@@ -181,8 +179,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
     );
 
     // der receiver
-    $criteria->joinOn
-    (
+    $criteria->joinOn(
       'wbfsys_message_receiver', 'vid',
       'view_person_role', 'wbfsys_role_user_rowid',
       null,
@@ -256,12 +253,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
 
           $part = $condition['free'];
 
-          $criteria->where
-          (
-            '(
-               wbfsys_message.rowid = \''.$part.'\'
-            )'
-          );
+          $criteria->where('( wbfsys_message.rowid = \''.$part.'\' )');
        } else {
 
           // prüfen ob mehrere suchbegriffe kommagetrennt übergeben wurden
@@ -471,11 +463,24 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
     $db = $this->getDb();
     $user = $this->getUser();
     $userId = $user->getId();
+    
+    $filterSpam = ' wbfsys_message.spam_level < 51 ';
+    $filterSender = ' AND wbfsys_message.id_sender_status < '.EMessageStatus::ARCHIVED;
+    $filterReceiver = ' AND wbfsys_message_receiver.status < '.EMessageStatus::ARCHIVED;
+    
 
     if (isset($condition['filters']['channel'])) {
 
       if (!$condition['filters']['channel']->inbox && !$condition['filters']['channel']->outbox){
         $condition['filters']['channel']->inbox = true;
+      }
+      
+      if( $condition['filters']['channel']->archive ){
+        $filterSender = $filterReceiver = "";
+      }
+      
+      if( !$condition['filters']['channel']->unsolicited ){
+        $criteria->where($filterSpam);
       }
 
       if ($condition['filters']['channel']->inbox) {
@@ -484,32 +489,34 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
         if ($condition['filters']['channel']->outbox) {
 
           $criteria->where(
-          	"(( ( wbfsys_message.id_sender = ".$userId." AND NOT wbfsys_message.flag_sender_deleted = true ) "
-              ." OR ( wbfsys_message_receiver.vid = ".$userId." AND NOT wbfsys_message_receiver.flag_deleted = true  ) ) "
+          	"(( ( wbfsys_message.id_sender = ".$userId." AND NOT wbfsys_message.flag_sender_deleted = true {$filterSender} ) "
+              ." OR ( wbfsys_message_receiver.vid = ".$userId." AND NOT wbfsys_message_receiver.flag_deleted = true {$filterReceiver} ) ) "
               ." AND wbfsys_message_aspect.id_receiver = ".$userId.")"
           );
 
         } else {
-
+          
+          // nur inbox
           $criteria->where(
-          	"(wbfsys_message_receiver.vid = "
-              .$userId." AND wbfsys_message_aspect.id_receiver = "
-              .$userId." AND NOT wbfsys_message_receiver.flag_deleted = true )"
+          	"( wbfsys_message_receiver.vid = ".$userId
+              ." AND wbfsys_message_aspect.id_receiver = ".$userId
+              ." AND NOT wbfsys_message_receiver.flag_deleted = true {$filterReceiver} )"
           );
         }
 
       } elseif ($condition['filters']['channel']->outbox) {
 
-        $criteria->where("wbfsys_message.id_sender = ".$userId);
+        // nur outbox
+        $criteria->where("wbfsys_message.id_sender = ".$userId.$filterSender );
       }
 
 
     } else {
       // nur die inbox anzeigen
       $criteria->where(
-      	"(wbfsys_message_receiver.vid = "
-          .$userId." AND wbfsys_message_aspect.id_receiver = "
-          .$userId." AND NOT wbfsys_message_receiver.flag_deleted = true )"
+      	"(wbfsys_message_receiver.vid = ".$userId
+          ." AND wbfsys_message_aspect.id_receiver = ".$userId
+          ." AND wbfsys_message_receiver.flag_deleted = false {$filterReceiver} )"
       );
     }
 
@@ -517,11 +524,14 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
 
       if (!$condition['aspects'])
         $condition['aspects'] = array(EMessageAspect::MESSAGE);
+        
+      $aspects = array_unique($condition['aspects']);
 
-      $criteria->where("wbfsys_message_aspect.aspect IN(".implode(',', $condition['aspects']).") ");
+      $criteria->where("wbfsys_message_aspect.aspect IN(".implode(',', $aspects).") ");
     }
-    else
+    else {
       $criteria->where("wbfsys_message_aspect.aspect = ".EMessageAspect::MESSAGE);
+    }
 
 
   }//end public function appendFilter */

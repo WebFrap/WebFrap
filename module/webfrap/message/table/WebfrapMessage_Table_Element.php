@@ -101,6 +101,29 @@ class WebfrapMessage_Table_Element extends WgtTable
         }
       ),
 
+      'reopen'    => array(
+        Wgt::ACTION_BUTTON_PUT,
+        'Reopen',
+        'ajax.php?c=Webfrap.Message.reopen&amp;objid=',
+        'icon-envelope-alt',
+        '',
+        'wbf.label',
+        Acl::UPDATE,
+        Wgt::BUTTON_CHECK => function($row, $id, $value, $access) use ($user) {
+
+          // nicht auf eigene mails replyen
+          if ($row['wbfsys_message_id_sender'] == $user->getId()  ) {
+            
+            return ($row['wbfsys_message_id_sender_status'] == EMessageStatus::ARCHIVED);
+            
+          } else {
+            
+            return ($row['wbfsys_message_receiver_status'] == EMessageStatus::ARCHIVED);
+          }
+
+        }
+      ),
+
       'archive'    => array(
         Wgt::ACTION_BUTTON_GET,
         'Archive',
@@ -108,7 +131,20 @@ class WebfrapMessage_Table_Element extends WgtTable
         'icon-folder-close',
         '',
         'wbf.label',
-        Acl::UPDATE
+        Acl::UPDATE,
+        Wgt::BUTTON_CHECK => function($row, $id, $value, $access) use ($user) {
+
+          // nicht auf eigene mails replyen
+          if ($row['wbfsys_message_id_sender'] == $user->getId()  ) {
+            
+            return ($row['wbfsys_message_id_sender_status'] != EMessageStatus::ARCHIVED);
+            
+          } else {
+            
+            return ($row['wbfsys_message_receiver_status'] != EMessageStatus::ARCHIVED);
+          }
+
+        }
       ),
 
       'ham'    => array(
@@ -118,7 +154,20 @@ class WebfrapMessage_Table_Element extends WgtTable
         'icon-thumbs-up',
         '',
         'wbf.label',
-        Acl::UPDATE
+        Acl::UPDATE,
+        Wgt::BUTTON_CHECK => function($row, $id, $value, $access) use ($user) {
+
+          // nicht auf eigene mails replyen
+          if ( (int)$row['wbfsys_message_spam_level'] != 0 ) {
+            
+            return true;
+            
+          } else {
+            
+            return false;
+          }
+
+        }
       ),
 
       'spam'    => array(
@@ -128,7 +177,20 @@ class WebfrapMessage_Table_Element extends WgtTable
         'icon-thumbs-down',
         '',
         'wbf.label',
-        Acl::UPDATE
+        Acl::UPDATE,
+        Wgt::BUTTON_CHECK => function($row, $id, $value, $access) use ($user) {
+
+          // nicht auf eigene mails replyen
+          if ( (int)$row['wbfsys_message_spam_level'] > 75 ) {
+            
+            return false;
+            
+          } else {
+            
+            return true;
+          }
+
+        }
       ),
 
       'delete'  => array(
@@ -154,6 +216,7 @@ class WebfrapMessage_Table_Element extends WgtTable
     $this->actions[] = 'spam';
     $this->actions[] = 'ham';
     $this->actions[] = 'sep';
+    $this->actions[] = 'reopen';
     $this->actions[] = 'archive';
     $this->actions[] = 'sep';
     $this->actions[] = 'delete';
