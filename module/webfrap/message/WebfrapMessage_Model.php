@@ -165,7 +165,7 @@ SQL;
     if ($node) {
 
       // auf open setzen wenn noch closed
-      if ($setOpen && EMessageStatus::IS_NEW == $node['receiver_status'] ){
+      if ($setOpen && EMessageStatus::OPEN > $node['receiver_status'] ){
         $db->update("UPDATE wbfsys_message_receiver set status =".EMessageStatus::OPEN." WHERE rowid = ".$node['receiver_id'] );
         $node['receiver_status'] = EMessageStatus::OPEN;
       }
@@ -548,9 +548,9 @@ SQL;
     $userID = $user->getId();
 
     $queries = array();
-    $queries[] = 'UPDATE wbfsys_message set flag_sender_deleted = true WHERE id_sender = '.$userID;
-    $queries[] = 'DELETE FROM wbfsys_message_receiver WHERE vid = '.$userID;
-    $queries[] = 'DELETE FROM wbfsys_message_aspect WHERE id_receiver = '.$userID.' AND id_message='.$messageId;
+    $queries[] = 'UPDATE wbfsys_message set flag_sender_deleted = true WHERE id_sender = '.$userID.';';
+    $queries[] = 'DELETE FROM wbfsys_message_receiver WHERE vid = '.$userID.';';
+    $queries[] = 'DELETE FROM wbfsys_message_aspect WHERE id_receiver = '.$userID.';';
 
     foreach ($queries as $query){
       $db->exec($query);
@@ -585,6 +585,52 @@ SQL;
     }
 
   }//end public function deleteSelection */
+  
+  /**
+   * Alle Nachrichten des Users Archivieren
+   */
+  public function archiveAllMessage()
+  {
+
+    $db = $this->getDb();
+    $user = $this->getUser();
+    $userID = $user->getId();
+
+    $queries = array();
+    $queries[] = 'UPDATE wbfsys_message set id_sender_status = '.EMessageStatus::ARCHIVED.' WHERE id_sender = '.$userID.';';
+    $queries[] = 'UPDATE wbfsys_message_receiver set status = '.EMessageStatus::ARCHIVED.' WHERE vid = '.$userID.';';
+
+    foreach ($queries as $query){
+      $db->exec($query);
+    }
+
+  }//end public function archiveAllMessage */
+
+  /**
+   * Eine Auswahl von Nachrichten Archivieren
+   * @param int $msgIds
+   */
+  public function archiveSelection($msgIds)
+  {
+
+    $db = $this->getDb();
+    $user = $this->getUser();
+    $userID = $user->getId();
+
+    if (!$msgIds)
+      return;
+
+    $sqlIds = implode(', ', $msgIds);
+
+    $queries = array();
+    $queries[] = 'UPDATE wbfsys_message set id_sender_status = '.EMessageStatus::ARCHIVED.' WHERE id_sender = '.$userID.' AND rowid IN('.$sqlIds.')';
+    $queries[] = 'UPDATE wbfsys_message_receiver set status = '.EMessageStatus::ARCHIVED.' WHERE vid = '.$userID.' AND rowid IN('.$sqlIds.')';
+
+    foreach ($queries as $query) {
+      $db->exec($query);
+    }
+
+  }//end public function archiveSelection */
 
   /**
    *

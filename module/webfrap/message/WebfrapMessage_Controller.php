@@ -114,6 +114,20 @@ class WebfrapMessage_Controller extends Controller
       'views'      => array('ajax')
     ),
     
+    // archive
+    'archivemessage' => array(
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
+    ),
+    'archiveall' => array(
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
+    ),
+    'archiveselection' => array(
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
+    ),
+    
     // spam / ham
     'setspam' => array(
       'method'    => array('PUT'),
@@ -544,7 +558,7 @@ JS
 
     $model->deleteMessage($messageId);
 
-    //wgt-table-my_message_row_
+    //wgt-table-webfrap-groupware_message_row_
     $tpl->addJsCode(<<<JS
     \$S('#wgt-table-webfrap-groupware_message_row_{$messageId}').remove();
 JS
@@ -577,10 +591,10 @@ JS
 
     $model->deleteAllMessage();
 
-    //wgt-table-my_message_row_
+    //wgt-table-webfrap-groupware_message_row_
     $tpl->addJsCode(<<<JS
 
-    \$S('table#wgt-table-my_message-table tbody').html('');
+    \$S('table#wgt-table-webfrap-groupware_message-table tbody').html('');
 
 JS
     );
@@ -616,7 +630,7 @@ JS
     $entries = array();
 
     foreach($msgIds as $msgId){
-      $entries[] = "#wgt-table-my_message_row_".$msgId;
+      $entries[] = "#wgt-table-webfrap-groupware_message_row_".$msgId;
     }
 
     $jsCode = "\$S('".implode(', ',$entries)."').remove();";
@@ -908,4 +922,122 @@ JS
 
   }//end public function service_addRef */
   
-} // end class MaintenanceEntity_Controller
+////////////////////////////////////////////////////////////////////////////////
+// Archive
+////////////////////////////////////////////////////////////////////////////////
+  
+  /**
+   *
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_archiveMessage($request, $response)
+  {
+
+    // resource laden
+    $user       = $this->getUser();
+    $acl        = $this->getAcl();
+    $tpl        = $this->getTpl();
+    $resContext = $response->createContext();
+
+    // load request parameters an interpret as flags
+    $params = $this->getFlags($request);
+
+    $messageId  = $request->param('objid', Validator::EID);
+
+    $resContext->assertNotNull(
+      'Missing the Message ID',
+      $messageId
+    );
+
+    if ($resContext->hasError)
+      throw new InvalidRequest_Exception();
+
+    /* @var $model WebfrapMessage_Model */
+    $model  = $this->loadModel('WebfrapMessage');
+
+    $model->archiveMessage($messageId);
+
+    //wgt-table-webfrap-groupware_message_row_
+    $tpl->addJsCode(<<<JS
+    \$S('#wgt-table-webfrap-groupware_message_row_{$messageId}').remove();
+JS
+    );
+
+  }//end public function service_archiveMessage */
+
+  /**
+   * Standard Service für Autoloadelemente wie zb. Window Inputfelder
+   * Über diesen Service kann analog zu dem Selection / Search Service
+   * Eine gefilterte Liste angefragt werden um Zuweisungen zu vereinfachen
+   *
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_archiveAll($request, $response)
+  {
+
+    // resource laden
+    $user       = $this->getUser();
+    $acl        = $this->getAcl();
+    $tpl        = $this->getTpl();
+
+    if ($resContext->hasError)
+      throw new InvalidRequest_Exception();
+
+    /* @var $model WebfrapMessage_Model */
+    $model  = $this->loadModel('WebfrapMessage');
+
+    $model->archiveAllMessage();
+
+    //wgt-table-webfrap-groupware_message_row_
+    $tpl->addJsCode(<<<JS
+
+    \$S('table#wgt-table-webfrap-groupware_message-table tbody').html('');
+
+JS
+    );
+
+  }//end public function service_archiveAll */
+
+  /**
+   * Standard Service für Autoloadelemente wie zb. Window Inputfelder
+   * Über diesen Service kann analog zu dem Selection / Search Service
+   * Eine gefilterte Liste angefragt werden um Zuweisungen zu vereinfachen
+   *
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_archiveSelection($request, $response)
+  {
+
+    // resource laden
+    $user       = $this->getUser();
+    $acl        = $this->getAcl();
+    $tpl        = $this->getTpl();
+
+    // load request parameters an interpret as flags
+    $params = $this->getFlags($request);
+
+    $msgIds = $request->param('slct', Validator::EID);
+
+    /* @var $model WebfrapMessage_Model */
+    $model  = $this->loadModel('WebfrapMessage');
+    $model->archiveSelection($msgIds);
+
+    $entries = array();
+
+    foreach($msgIds as $msgId){
+      $entries[] = "#wgt-table-webfrap-groupware_message_row_".$msgId;
+    }
+
+    $jsCode = "\$S('".implode(', ',$entries)."').remove();";
+
+    $tpl->addJsCode($jsCode);
+
+  }//end public function service_archiveSelection */
+  
+} // end class WebfrapMessage_Controller
