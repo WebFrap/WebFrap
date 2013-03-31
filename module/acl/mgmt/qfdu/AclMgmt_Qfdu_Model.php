@@ -984,7 +984,7 @@ class AclMgmt_Qfdu_Model extends Model
       $orm->deleteWhere
       (
         'WbfsysGroupUsers',
-        " id_group={$groupId} and id_area={$areaId} and (partial = 0 or partial is null) "
+        " id_group={$groupId} and id_area={$areaId} and (partial = 0) "
       );
 
       $response->addMessage
@@ -1035,7 +1035,7 @@ class AclMgmt_Qfdu_Model extends Model
       $orm->deleteWhere
       (
         'WbfsysGroupUsers',
-        "id_area={$areaId} and (partial = 0 or partial is null)"
+        "id_area={$areaId} and (partial = 0)"
       );
 
       $response->addMessage

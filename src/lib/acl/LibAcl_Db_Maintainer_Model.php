@@ -62,7 +62,7 @@ SQL;
   WHERE
     wbfsys_group_users.id_user = {$userId}
       AND wbfsys_group_users.id_group = {$groupId}
-      AND (wbfsys_group_users.partial = 0 OR wbfsys_group_users.partial IS NULL)
+      AND (wbfsys_group_users.partial = 0)
 {$condition}
 
 SQL;

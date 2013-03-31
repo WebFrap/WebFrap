@@ -138,18 +138,18 @@ CREATE  OR REPLACE VIEW webfrap_inject_acls_view
         THEN
           acl_access.id_group = acl_gu.id_group
             and acl_gu.id_area = acl_area.rowid
-            and (acl_gu.partial = 0 or acl_gu.partial is null)
+            and (acl_gu.partial = 0)
         ELSE
           acl_access.id_group = acl_gu.id_group
             and acl_gu.id_area = acl_area.rowid
-            and (acl_gu.partial = 0 or acl_gu.partial is null)
+            and (acl_gu.partial = 0)
             and acl_gu.vid is null
         END
       )
       ELSE
         acl_access.id_group = acl_gu.id_group
           and acl_gu.id_area is null
-          and (acl_gu.partial = 0 or acl_gu.partial is null)
+          and (acl_gu.partial = 0)
           and acl_gu.vid is null
       END
     )

@@ -64,7 +64,7 @@ class AclMgmt_Tree_Query extends LibSqlQuery
   WHERE
     wbfsys_security_access.id_area = {$areaId}
     AND
-      (wbfsys_security_access.partial = 0 or wbfsys_security_access.partial is null)
+      (wbfsys_security_access.partial = 0)
   ORDER BY
     wbfsys_role_group.name asc;
 
@@ -98,7 +98,7 @@ SELECT
   WHERE
     id_area = {$areaKey}
     AND id_group = {$idGroup}
-      AND (partial = 0 OR partial is null);
+      AND (partial = 0);
 SQL;
 
     $areaLevel = $db->select($sql)->getField('access_level');

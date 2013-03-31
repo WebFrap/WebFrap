@@ -315,7 +315,7 @@ class LibAclManager_Db extends LibAclManager
 
       $whereDelete = "id_group = {$groupId}"
         ." and id_user = {$userId}"
-        ." and (partial = 0 or partial is null)";
+        ." and (partial = 0)";
 
       if ($areaId) {
         $whereDelete .=" and id_area = {$areaId}";
@@ -339,7 +339,7 @@ class LibAclManager_Db extends LibAclManager
         ." and id_group = {$groupId}"
         ." and id_user = {$userId}"
         ." and vid = {$dsetId} "
-        ." and (partial = 0 or partial is null)";
+        ." and (partial = 0)";
 
       $whereDelete = "id_area = {$areaId}"
         ." and id_group = {$groupId}"
@@ -356,7 +356,7 @@ class LibAclManager_Db extends LibAclManager
       $whereCount = "id_area = {$areaId}"
         ." and id_group = {$groupId}"
         ." and id_user = {$userId}"
-        ." and (partial = 0 or partial is null)";
+        ." and (partial = 0)";
 
       $whereDelete = "id_area = {$areaId}"
         ." and id_group = {$groupId}"
@@ -369,7 +369,7 @@ class LibAclManager_Db extends LibAclManager
 
     $whereCount = "id_group = {$groupId}"
       ." and id_user = {$userId}"
-      ." and (partial = 0 or partial is null)";
+      ." and (partial = 0)";
 
     $whereDelete = "id_group = {$groupId}"
       ." and id_user = {$userId}"

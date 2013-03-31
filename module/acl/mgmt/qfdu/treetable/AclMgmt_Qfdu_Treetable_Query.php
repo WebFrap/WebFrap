@@ -281,7 +281,7 @@ class AclMgmt_Qfdu_Treetable_Query extends LibSqlQuery
     $criteria->where
     (
       "group_users.id_area={$areaId}
-        and (group_users.partial = 0 or group_users.partial is null) "
+        and (group_users.partial = 0) "
     );
 
     // and NOT group_users.vid IS NULL

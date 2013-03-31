@@ -177,8 +177,6 @@ WHERE
     AND
     (
       wbfsys_group_users.partial = 0
-        OR
-          wbfsys_group_users.partial IS NULL
     )
     AND
       NOT wbfsys_role_user.inactive = TRUE

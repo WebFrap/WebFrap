@@ -101,7 +101,7 @@ class AclMgmt_Dset_Treetable_Query_Postgresql extends LibSqlQuery
       ON security_access.id_group = role_group.rowid
   WHERE
     security_access.id_area = {$idArea}
-      AND (security_access.partial = 0 or security_access.partial is null)
+      AND (security_access.partial = 0 )
 
 SQL;
 
@@ -181,7 +181,7 @@ SQL;
     AND
       group_users.id_area = {$areaId}
     AND
-      (group_users.partial = 0 OR group_users.partial is null)
+      (group_users.partial = 0 )
     AND
       group_users.vid = {$datasetId}
 
