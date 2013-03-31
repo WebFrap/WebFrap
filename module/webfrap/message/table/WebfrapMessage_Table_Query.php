@@ -480,17 +480,22 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
 
       if ($condition['filters']['channel']->inbox) {
 
-
+        // beide anzeigen
         if ($condition['filters']['channel']->outbox) {
 
           $criteria->where(
-          	"((wbfsys_message.id_sender = ".$userId
-              ." OR wbfsys_message_receiver.vid = ".$userId.") AND wbfsys_message_aspect.id_receiver = ".$userId.")"
+          	"(( ( wbfsys_message.id_sender = ".$userId." AND NOT wbfsys_message.flag_sender_deleted = true ) "
+              ." OR ( wbfsys_message_receiver.vid = ".$userId." AND NOT wbfsys_message_receiver.flag_deleted = true  ) ) "
+              ." AND wbfsys_message_aspect.id_receiver = ".$userId.")"
           );
 
         } else {
 
-          $criteria->where("(wbfsys_message_receiver.vid = ".$userId." AND wbfsys_message_aspect.id_receiver = ".$userId.")");
+          $criteria->where(
+          	"(wbfsys_message_receiver.vid = "
+              .$userId." AND wbfsys_message_aspect.id_receiver = "
+              .$userId." AND NOT wbfsys_message_receiver.flag_deleted = true )"
+          );
         }
 
       } elseif ($condition['filters']['channel']->outbox) {
@@ -501,7 +506,11 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
 
     } else {
       // nur die inbox anzeigen
-      $criteria->where("(wbfsys_message_receiver.vid = ".$userId." AND wbfsys_message_aspect.id_receiver = ".$userId.")");
+      $criteria->where(
+      	"(wbfsys_message_receiver.vid = "
+          .$userId." AND wbfsys_message_aspect.id_receiver = "
+          .$userId." AND NOT wbfsys_message_receiver.flag_deleted = true )"
+      );
     }
 
     if (isset($condition['aspects'])) {

@@ -137,6 +137,7 @@ select
 
 FROM
   wbfsys_message msg
+  
 JOIN
 	wbfsys_message_receiver receiver
 		ON receiver.id_message = msg.rowid
@@ -474,15 +475,60 @@ SQL;
    */
   public function deleteMessage($messageId)
   {
-
+    
+    $db = $this->getDb();
     $orm = $this->getOrm();
     $user = $this->getUser();
+    
+    $sql = <<<SQL
+SELECT 
+	msg.flag_sender_deleted,
+	msg.id_sender,
+	recv.flag_deleted,
+	recv.vid as id_receiver,
+	recv.rowid as recvid
+FROM 
+	wbfsys_message msg
+JOIN
+	wbfsys_message_receiver recv
+		ON recv.id_message = msg.rowid
+WHERE
+ recv.vid = {$user->getId()}
 
-    $msg = $orm->get('WbfsysMessage', $messageId  );
+SQL;
 
-    if ($msg->id_receiver == $user->getId()) {
-      $msg->flag_receiver_deleted = true;
-    } elseif ($msg->id_sender == $user->getId()) {
+    $tmpData = $db->select($sql)->get();
+    
+    if (!$tmpData) {
+      // ok sollte nicht passieren
+      return;
+    }
+    
+  
+    
+    if( $tmpData['id_sender'] == $user->getId() ){
+      
+      // löschen wenn deleted flag
+      if( 't' != $tmpData['flag_deleted'] ){
+        $orm->update( 'WbfsysMessageReceiver', $messageId, array('flag_deleted',true) );
+        return;
+      }
+      
+    } else {
+      
+      // löschen wenn deleted flag
+      if( 't' != $tmpData['flag_sender_deleted'] ){
+        
+        $orm->update( 'WbfsysMessage', $messageId, array('flag_sender_deleted',true) );
+        return;
+        
+      }
+      
+    }
+
+    $msg = $orm->get('WbfsysMessage', $messageId);
+
+    if ($msg->id_sender == $user->getId()) {
       $msg->flag_sender_deleted = true;
     }
 
@@ -514,9 +560,8 @@ SQL;
     $userID = $user->getId();
 
     $queries = array();
-    $queries[] = 'UPDATE wbfsys_message set flag_receiver_deleted = true WHERE id_receiver = '.$userID;
+    $queries[] = 'UPDATE wbfsys_message_receiver set flag_deleted = true WHERE vid = '.$userID;
     $queries[] = 'UPDATE wbfsys_message set flag_sender_deleted = true WHERE id_sender = '.$userID;
-    $queries[] = 'DELETE FROM wbfsys_message WHERE id_sender = '.$userID.' OR id_receiver = '.$userID;
 
     foreach ($queries as $query){
       $db->exec($query);
@@ -615,6 +660,20 @@ SQL;
 
   }//end public function countNewMessages */
 
+  /**
+   * @param int $msgId
+   * @param boolean $flagSpam
+   * @param TFlag $params
+   */
+  public function setSpam($msgId, $flagSpam, $params)
+  {
+
+    $orm = $this->getOrm();
+  
+    $orm->update( 'WbfsysMessage', $msgId, array( 'spam_level' => $flagSpam ) );
+
+  }//end public function setSpam */
+  
 ////////////////////////////////////////////////////////////////////////////////
 // References
 ////////////////////////////////////////////////////////////////////////////////

@@ -114,6 +114,12 @@ class WebfrapMessage_Controller extends Controller
       'views'      => array('ajax')
     ),
     
+    // spam / ham
+    'setspam' => array(
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
+    ),
+    
     // references
     'addref' => array(
       'method'    => array('PUT'),
@@ -430,9 +436,6 @@ class WebfrapMessage_Controller extends Controller
   
   
   /**
-   * Standard Service für Autoloadelemente wie zb. Window Inputfelder
-   * Über diesen Service kann analog zu dem Selection / Search Service
-   * Eine gefilterte Liste angefragt werden um Zuweisungen zu vereinfachen
    *
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -465,11 +468,50 @@ class WebfrapMessage_Controller extends Controller
 
   }//end public function service_saveMessage */
   
-
   /**
-   * Standard Service für Autoloadelemente wie zb. Window Inputfelder
-   * Über diesen Service kann analog zu dem Selection / Search Service
-   * Eine gefilterte Liste angefragt werden um Zuweisungen zu vereinfachen
+   *
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_setSpam($request, $response)
+  {
+
+    // resource laden
+    $user     = $this->getUser();
+    $acl      = $this->getAcl();
+
+    // load request parameters an interpret as flags
+    $rqtData = $this->getFlags($request);
+    $msgId = $request->param('objid',Validator::EID);
+    $flagSpam = $request->param('spam',Validator::INT);
+
+  	/* @var $model WebfrapMessage_Model */
+    $model = $this->loadModel('WebfrapMessage');
+    $model->loadTableAccess($rqtData);
+
+    if (!$model->access->access) {
+      throw new InvalidRequest_Exception(
+        'Access denied',
+        Response::FORBIDDEN
+      );
+    }
+    
+    if( 100 == $flagSpam){
+      //wenn spam dann löschen
+      $this->getTpl()->addJsCode(<<<JS
+
+    \$S('#wgt-table-webfrap-groupware_message_row_{$msgId}').remove();
+
+JS
+      );
+    }
+    
+    $model->setSpam($msgId, $flagSpam, $rqtData);
+
+  }//end public function service_saveMessage */
+  
+  /**
    *
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -489,8 +531,7 @@ class WebfrapMessage_Controller extends Controller
 
     $messageId  = $request->param('objid', Validator::EID);
 
-    $resContext->assertNotNull
-    (
+    $resContext->assertNotNull(
       'Missing the Message ID',
       $messageId
     );
@@ -505,9 +546,7 @@ class WebfrapMessage_Controller extends Controller
 
     //wgt-table-my_message_row_
     $tpl->addJsCode(<<<JS
-
-    \$S('#wgt-table-my_message_row_{$messageId}').remove();
-
+    \$S('#wgt-table-webfrap-groupware_message_row_{$messageId}').remove();
 JS
     );
 

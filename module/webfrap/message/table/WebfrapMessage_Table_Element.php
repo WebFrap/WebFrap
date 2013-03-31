@@ -61,10 +61,8 @@ class WebfrapMessage_Table_Element extends WgtTable
 
     $user = Webfrap::$env->getUser();
 
-    $this->url  = array
-    (
-      'show'    => array
-      (
+    $this->url  = array(
+      'show'    => array(
         Wgt::ACTION_BUTTON_GET,
         'Show',
         'maintab.php?c=Webfrap.Message.formShow&amp;objid=',
@@ -74,8 +72,7 @@ class WebfrapMessage_Table_Element extends WgtTable
         Acl::ACCESS
       ),
 
-      'forward'    => array
-      (
+      'forward'    => array(
         Wgt::ACTION_BUTTON_GET,
         'Forward',
         'maintab.php?c=Webfrap.Message.formForward&amp;objid=',
@@ -85,8 +82,7 @@ class WebfrapMessage_Table_Element extends WgtTable
         Acl::INSERT
       ),
 
-      'reply'    => array
-      (
+      'reply'    => array(
         Wgt::ACTION_BUTTON_GET,
         'Reply',
         'maintab.php?c=Webfrap.Message.formReply&amp;objid=',
@@ -105,8 +101,7 @@ class WebfrapMessage_Table_Element extends WgtTable
         }
       ),
 
-      'archive'    => array
-      (
+      'archive'    => array(
         Wgt::ACTION_BUTTON_GET,
         'Archive',
         'maintab.php?c=Webfrap.Message.archive&amp;objid=',
@@ -116,30 +111,27 @@ class WebfrapMessage_Table_Element extends WgtTable
         Acl::UPDATE
       ),
 
-      'ham'    => array
-      (
-        Wgt::ACTION_BUTTON_GET,
+      'ham'    => array(
+        Wgt::ACTION_BUTTON_PUT,
         'Ham',
-        'maintab.php?c=Webfrap.Message.setSpam&spam=1&amp;objid=',
+        'ajax.php?c=Webfrap.Message.setSpam&spam=0&amp;objid=',
         'icon-thumbs-up',
         '',
         'wbf.label',
         Acl::UPDATE
       ),
 
-      'spam'    => array
-      (
-        Wgt::ACTION_BUTTON_GET,
+      'spam'    => array(
+        Wgt::ACTION_BUTTON_PUT,
         'Spam',
-        'maintab.php?c=Webfrap.Message.setSpam&spam=1&amp;objid=',
+        'ajax.php?c=Webfrap.Message.setSpam&spam=100&amp;objid=',
         'icon-thumbs-down',
         '',
         'wbf.label',
         Acl::UPDATE
       ),
 
-      'delete'  => array
-      (
+      'delete'  => array(
         Wgt::ACTION_DELETE,
         'Delete',
         'ajax.php?c=Webfrap.Message.deleteMessage&amp;objid=',
@@ -149,8 +141,7 @@ class WebfrapMessage_Table_Element extends WgtTable
         Acl::DELETE
       ),
 
-      'sep'  => array
-      (
+      'sep'  => array(
         Wgt::ACTION_SEP
       )
 
