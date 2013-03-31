@@ -271,4 +271,41 @@ class LibCacheRequestCss extends LibCacheRequest
 
   }//end public function rebuildList */
 
+  
+  protected function rBgGradient( $light, $dark, $vert = true ){
+    
+    if( $vert ){
+      
+    return <<<CSS
+  background: {$light}; /* Old browsers */
+  background: -moz-linear-gradient(top,  {$light} 1%, {$dark} 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,{$light}), color-stop(100%,{$dark})); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  {$light} 1%,{$dark} 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  {$light} 1%,{$dark} 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  {$light} 1%,{$dark} 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  {$light} 1%,{$dark} 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='{$light}', endColorstr='{$dark}',GradientType=0 ); /* IE6-9 */
+    
+CSS;
+
+    } else {
+      
+    return <<<CSS
+  background: {$light}; /* Old browsers */
+  background: -moz-linear-gradient(left,  {$light} 1%, {$dark} 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left right, left right, color-stop(1%,{$light}), color-stop(100%,{$dark})); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(left,  {$light} 1%,{$dark} 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(left,  {$light} 1%,{$dark} 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(left,  {$light} 1%,{$dark} 100%); /* IE10+ */
+  background: linear-gradient(to right,  {$light} 1%,{$dark} 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='{$light}', endColorstr='{$dark}',GradientType=1 ); /* IE6-9 */
+    
+CSS;
+      
+    }
+    
+
+    
+  }
+  
 } // end class LibCacheRequestCss

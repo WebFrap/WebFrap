@@ -19,7 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core/cache
  */
-class LibCacheRequestWebTheme extends LibCacheRequest
+class LibCacheRequestWebTheme extends LibCacheRequestCss
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attribute
