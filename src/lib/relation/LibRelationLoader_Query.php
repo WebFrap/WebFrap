@@ -174,10 +174,7 @@ FROM
 
 WHERE
   UPPER(wbfsys_role_group.access_key) {$groupRoles}
-    AND
-    (
-      wbfsys_group_users.partial = 0
-    )
+    AND ( wbfsys_group_users.partial = 0 )
     AND
       NOT wbfsys_role_user.inactive = TRUE
 
