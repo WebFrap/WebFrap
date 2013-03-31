@@ -469,9 +469,7 @@ SQL;
   }//ebnd public function saveMessage 
 
   /**
-   *
    * @param int $messageId
-   * @throws Per
    */
   public function deleteMessage($messageId)
   {
@@ -484,17 +482,18 @@ SQL;
 SELECT 
 	msg.flag_sender_deleted,
 	msg.id_sender,
-	recv.flag_deleted,
-	recv.vid as id_receiver,
-	recv.rowid as recvid
+	count(recv.flag_deleted) as flag_deleted
 FROM 
 	wbfsys_message msg
-JOIN
+LEFT JOIN
 	wbfsys_message_receiver recv
-		ON recv.id_message = msg.rowid
+		ON recv.id_message = msg.rowid AND recv.vid = {$user->getId()}
 WHERE
- recv.vid = {$user->getId()}
-
+ 	msg.rowid = {$messageId}
+ 		AND NOT recv.flag_deleted = true
+GROUP BY
+	msg.id_sender,
+	msg.flag_sender_deleted
 SQL;
 
     $tmpData = $db->select($sql)->get();
@@ -504,13 +503,11 @@ SQL;
       return;
     }
     
-  
-    
     if( $tmpData['id_sender'] == $user->getId() ){
       
       // löschen wenn deleted flag
       if( 't' != $tmpData['flag_deleted'] ){
-        $orm->update( 'WbfsysMessageReceiver', $messageId, array('flag_deleted',true) );
+        $orm->update( 'WbfsysMessage', $messageId, array('flag_sender_deleted'=>true) );
         return;
       }
       
@@ -519,31 +516,24 @@ SQL;
       // löschen wenn deleted flag
       if( 't' != $tmpData['flag_sender_deleted'] ){
         
-        $orm->update( 'WbfsysMessage', $messageId, array('flag_sender_deleted',true) );
+        $orm->update( 'WbfsysMessageReceiver', $messageId, array('flag_deleted'=>true) );
+        $orm->deleteWhere('WbfsysMessageAspect', 'id_message='.$messageId.' and id_receiver = '.$user->getId() );
         return;
         
       }
       
     }
 
-    $msg = $orm->get('WbfsysMessage', $messageId);
-
-    if ($msg->id_sender == $user->getId()) {
-      $msg->flag_sender_deleted = true;
-    }
-
-    // wenn sender und receiver löschen, dann brauchen wir die message nichtmehr
-    if ($msg->flag_receiver_deleted && $msg->flag_sender_deleted) {
-      $orm->delete('WbfsysMessage', $messageId);
-    }
+    $orm->delete('WbfsysMessage', $messageId);
     
     // referenz tabellen leeren
-    $orm->deleteWhere('WbfsysMessageAspect', 'id_message='.$messageId);
-    $orm->deleteWhere('WbfsysTask', 'id_message='.$messageId);
-    $orm->deleteWhere('WbfsysAppointment', 'id_message='.$messageId);
-    $orm->deleteWhere('WbfsysMessageReceiver', 'vid='.$messageId);
-    $orm->deleteWhere('WbfsysDataIndex', 'vid='.$messageId);
-    
+    $orm->deleteWhere('WbfsysMessageAspect', 'id_message='.$messageId); // aspekt flags
+    $orm->deleteWhere('WbfsysTask', 'id_message='.$messageId); // eventueller task aspekt
+    $orm->deleteWhere('WbfsysAppointment', 'id_message='.$messageId); // eventueller appointment aspekt
+    $orm->deleteWhere('WbfsysMessageReceiver', 'vid='.$messageId); // alle receiver
+    $orm->deleteWhere('WbfsysDataIndex', 'vid='.$messageId); // fulltext index der db
+    $orm->deleteWhere('WbfsysDataLink', 'vid='.$messageId); // referenzen
+    $orm->deleteWhere('WbfsysEntityAttachment', 'vid='.$messageId); // attachments
     
   }//ebnd public function deleteMessage 
 
@@ -560,8 +550,9 @@ SQL;
     $userID = $user->getId();
 
     $queries = array();
-    $queries[] = 'UPDATE wbfsys_message_receiver set flag_deleted = true WHERE vid = '.$userID;
     $queries[] = 'UPDATE wbfsys_message set flag_sender_deleted = true WHERE id_sender = '.$userID;
+    $queries[] = 'DELETE FROM wbfsys_message_receiver WHERE vid = '.$userID;
+    $queries[] = 'DELETE FROM wbfsys_message_aspect WHERE id_receiver = '.$userID.' AND id_message='.$messageId;
 
     foreach ($queries as $query){
       $db->exec($query);
