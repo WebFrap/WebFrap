@@ -83,7 +83,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
 
     $this->setTables($criteria);
     $this->appendConditions($criteria, $condition, $params);
-    $this->checkLimitAndOrder($criteria, $params);
+    $this->checkLimitAndOrder($criteria, $condition, $params);
     $this->appendFilter($criteria, $condition, $params);
 
     // Run Query und save the result
@@ -119,11 +119,13 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
       'wbfsys_message.message_id as "wbfsys_message_message_id"',
       'wbfsys_message.id_refer as "wbfsys_message_id_refer"',
       'wbfsys_message.id_sender as "wbfsys_message_id_sender"',
-      'wbfsys_message_receiver.vid as "wbfsys_message_id_receiver"',
       'wbfsys_message.id_sender_status as "wbfsys_message_id_sender_status"',
-      'wbfsys_message_receiver.status as "wbfsys_message_receiver_status"',
       'wbfsys_message.m_role_create as "wbfsys_message_m_role_create"',
       'wbfsys_message.m_time_created as "wbfsys_message_m_time_created"',
+      'wbfsys_message_receiver.vid as "wbfsys_message_id_receiver"',
+      'wbfsys_message_receiver.status as "wbfsys_message_receiver_status"',
+      'wbfsys_message_receiver.flag_action_required as "receiver_action_required"',
+      'task.flag_urgent',
       'sender.core_person_lastname',
       'sender.core_person_firstname',
       'sender.wbfsys_role_user_name',
@@ -168,6 +170,14 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
       'wbfsys_message_receiver', 'id_message',
       null,
       'wbfsys_message_receiver'
+    );
+    
+    // action
+    $criteria->leftJoinOn(
+      'wbfsys_message', 'rowid',
+      'wbfsys_task', 'id_message',
+      null,
+      'task'
     );
 
     // der receiver
@@ -382,12 +392,12 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
    *
    * @return void
    */
-  public function checkLimitAndOrder($criteria, $params)
+  public function checkLimitAndOrder($criteria, $condition, $params)
   {
 
     // check if there is a given order
-    if ($params->order) {
-      $criteria->orderBy($params->order);
+    if ($condition['order']) {
+      $criteria->orderBy($condition['order']);
 
     } else { // if not use the default
       $criteria->orderBy('wbfsys_message.m_time_created desc');

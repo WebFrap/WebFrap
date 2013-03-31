@@ -29,6 +29,8 @@ class WebfrapMessage_Table_Search_Request extends ContextListing
    * @var WebfrapMessage_Table_Search_Settings
    */
   public $settings = null;
+  
+  public $order = array();
 
   /**
    * @param LibRequestHttp $request
@@ -45,9 +47,10 @@ class WebfrapMessage_Table_Search_Request extends ContextListing
         $this->filter->$key = $value;
       }
     }
-
+    
     $this->settings = $settings;
 
+    
     $this->interpretRequest($request);
 
   } // end public function __construct */
@@ -138,6 +141,30 @@ class WebfrapMessage_Table_Search_Request extends ContextListing
 
       $this->conditions['filters']['task_action'] = new TArray((array)$this->settings->taskAction);
     }
+    
+    $this->conditions['order'] = array();
+
+    // order by
+    if ($title = $request->param('order', Validator::CNAME,'titel'))
+      if ('' != trim($title))
+        $this->conditions['order'][] = 'wbfsys_message.title '.('asc' == $title?'asc':'desc');
+      
+    if ($sender = $request->param('order', Validator::CNAME,'sender'))
+      if ('' != trim($sender))
+        $this->conditions['order'][] = 'sender.wbfsys_role_user_name '.('asc' == $sender?'asc':'desc');
+      
+    if ($receiver = $request->param('order', Validator::CNAME,'receiver'))
+      if ('' != trim($receiver))
+        $this->conditions['order'][] = 'receiver.wbfsys_role_user_name '.('asc' == $receiver?'asc':'desc');
+      
+    if ($date = $request->param('order', Validator::CNAME,'date'))
+      if ('' != trim($date))
+        $this->conditions['order'][] = 'wbfsys_message.m_time_created '.('asc' == $date?'asc':'desc');
+      
+    if ($priority = $request->param('order', Validator::CNAME,'priority'))
+      if ('' != trim($priority))
+        $this->conditions['order'][] = 'wbfsys_message.priority '.('asc' == $priority?'asc':'desc');
+
 
   }//end public function interpretRequest */
 

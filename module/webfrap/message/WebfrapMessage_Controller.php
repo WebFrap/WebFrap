@@ -217,6 +217,7 @@ class WebfrapMessage_Controller extends Controller
     }
 
     // create a window
+    /* @var $view WebfrapMessage_List_Maintab_View  */
     $view = $response->loadView(
       'list-message_list',
       'WebfrapMessage_List',

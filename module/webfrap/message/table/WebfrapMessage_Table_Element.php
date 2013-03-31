@@ -303,11 +303,11 @@ class WebfrapMessage_Table_Element extends WgtTable
     $html .= '<tr>'.NL;
 
     $html .= '<th style="width:30px;" class="pos" >'.$this->view->i18n->l('Pos.', 'wbf.label'  ).'</th>'.NL;
-    $html .= '<th style="width:250px" >'.$this->view->i18n->l('Title', 'wbf.label').'</th>'.NL;
-    $html .= '<th style="width:250px" >'.$this->view->i18n->l('Sender', 'wbf.label').'</th>'.NL;
-    $html .= '<th style="width:250px" >'.$this->view->i18n->l('Receiver', 'wbf.label').'</th>'.NL;
-    $html .= '<th style="width:80px" >'.$this->view->i18n->l('Date', 'wbf.label').'</th>'.NL;
-    $html .= '<th style="width:95px" >'.$this->view->i18n->l('Status', 'wbf.label').'</th>'.NL;
+    $html .= '<th style="width:250px" wgt_sort_name="order[titel]" >'.$this->view->i18n->l('Title', 'wbf.label').'</th>'.NL;
+    $html .= '<th style="width:250px" wgt_sort_name="order[sender]" >'.$this->view->i18n->l('Sender', 'wbf.label').'</th>'.NL;
+    $html .= '<th style="width:250px" wgt_sort_name="order[receiver]" >'.$this->view->i18n->l('Receiver', 'wbf.label').'</th>'.NL;
+    $html .= '<th style="width:80px" wgt_sort_name="order[date]" >'.$this->view->i18n->l('Date', 'wbf.label').'</th>'.NL;
+    $html .= '<th style="width:95px"  wgt_sort_name="order[priority]" >'.$this->view->i18n->l('Status', 'wbf.label').'</th>'.NL;
 
     // the default navigation col
     if ($this->enableNav) {
@@ -402,7 +402,25 @@ class WebfrapMessage_Table_Element extends WgtTable
         $isInbox = false;
       }
         
+      // action required
+      
 
+      // SPAM / HAM status
+      $body .=  ($row['wbfsys_message_spam_level']>51)
+        ? '<i class="icon-thumbs-down mal" title="is SPAM" ></i> '
+        : '';
+      
+      // action required
+      $body .=  ( 't' == $row['receiver_action_required'])
+        ? '<i class="icon-exclamation-sign attention" title="Your action is required" ></i> '
+        : '';
+        
+      // urgent
+      $body .=  ( 't' == $row['flag_urgent'])
+        ? '<i class="icon-time urgent" title="Ok, this getting a little urgent now!" ></i> '
+        : '';
+
+      
       // priority
       $body .=  $row['wbfsys_message_priority']
         ? $iconPrio[$row['wbfsys_message_priority']].' '
