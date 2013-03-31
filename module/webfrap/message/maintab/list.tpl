@@ -105,6 +105,12 @@
                 /> Action Required</li>
               <li><input
                 type="checkbox"
+                name="task_action[waiting]"
+                <?php echo Wgt::checked(true, isset($VAR->settings->taskAction->waiting) )?>
+                class="fparam-wgt-form-webfrap-groupware-search"
+                /> Waiting for Action</li>
+              <li><input
+                type="checkbox"
                 name="task_action[completed]"
                 <?php echo Wgt::checked(true, isset($VAR->settings->taskAction->completed) )?>
                 class="fparam-wgt-form-webfrap-groupware-search"
@@ -113,6 +119,11 @@
           </li>
         </ul>
       </li>
+      <li><input
+        type="checkbox"
+        <?php echo Wgt::checked(true, isset($VAR->settings->channels->unsolicited) )?>
+        name="channel[unsolicited]"
+        class="fparam-wgt-form-webfrap-groupware-search" /> <a><strong>Unsolicited</strong></a></li>
       <li><a href="#" ><strong>Drafts</strong></a></li>
       <li><a href="#" ><strong>Templates</strong></a>
         <ul>
