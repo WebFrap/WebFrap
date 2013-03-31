@@ -388,8 +388,7 @@ class WebfrapMessage_Controller extends Controller
     $model->loadTableAccess($params);
 
     if (!$model->access->access) {
-      throw new InvalidRequest_Exception
-      (
+      throw new InvalidRequest_Exception(
         Response::FORBIDDEN_MSG,
         Response::FORBIDDEN
       );
@@ -398,8 +397,7 @@ class WebfrapMessage_Controller extends Controller
     $model->loadMessage($msgId);
 
     // create a window
-    $view   = $response->loadView
-    (
+    $view   = $response->loadView(
       'form-messages-show-'.$msgId,
       'WebfrapMessage',
       'displayContent',
@@ -435,8 +433,7 @@ class WebfrapMessage_Controller extends Controller
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
     $params->contextKey = 'message-user-autocomplete';
 
-    $view  = $response->loadView
-    (
+    $view  = $response->loadView(
       'message-user-ajax',
       'WebfrapMessage',
       'displayUserAutocomplete',

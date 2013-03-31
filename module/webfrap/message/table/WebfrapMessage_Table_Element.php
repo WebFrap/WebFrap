@@ -297,20 +297,17 @@ class WebfrapMessage_Table_Element extends WgtTable
     if ($this->enableNav)
       ++ $this->numCols;
 
-    $iconInbox   = $this->icon('message/in.png', 'Inbox');
-    $iconOutbox  = $this->icon('message/out.png', 'Outbox');
 
     // Creating the Head
     $html = '<thead>'.NL;
     $html .= '<tr>'.NL;
 
     $html .= '<th style="width:30px;" class="pos" >'.$this->view->i18n->l('Pos.', 'wbf.label'  ).'</th>'.NL;
-
-    $html .= '<th style="width:55px" >'.$this->view->i18n->l('Status', 'wbf.label').'</th>'.NL;
     $html .= '<th style="width:250px" >'.$this->view->i18n->l('Title', 'wbf.label').'</th>'.NL;
     $html .= '<th style="width:250px" >'.$this->view->i18n->l('Sender', 'wbf.label').'</th>'.NL;
     $html .= '<th style="width:250px" >'.$this->view->i18n->l('Receiver', 'wbf.label').'</th>'.NL;
     $html .= '<th style="width:80px" >'.$this->view->i18n->l('Date', 'wbf.label').'</th>'.NL;
+    $html .= '<th style="width:95px" >'.$this->view->i18n->l('Status', 'wbf.label').'</th>'.NL;
 
     // the default navigation col
     if ($this->enableNav) {
@@ -334,17 +331,18 @@ class WebfrapMessage_Table_Element extends WgtTable
     $user = User::getActive();
 
     $iconStatus = array();
-    $iconStatus[EMessageStatus::IS_NEW] = $this->icon('message/mail_new.png', 'New');
-    $iconStatus[EMessageStatus::OPEN] = $this->icon('message/mail_open.png', 'Open');
-    $iconStatus[EMessageStatus::ARCHIVED] = $this->icon('message/mail_archive.png', 'Archive');
+    $iconStatus[EMessageStatus::IS_NEW] = '<i class="icon-envelope new" ></i>';
+    $iconStatus[EMessageStatus::UPDATED] = '<i class="icon-envelope update" ></i>';
+    $iconStatus[EMessageStatus::OPEN] = '<i class="icon-folder-open-alt open" ></i>';
+    $iconStatus[EMessageStatus::ARCHIVED] = '<i class="icon-envelope-alt archive" ></i>';
 
     $iconPrio = array();
 
-    $iconPrio[10] = $this->icon('priority/min.png', 'Very Low');
-    $iconPrio[20] = $this->icon('priority/low.png', 'Low');
-    $iconPrio[30] = $this->icon('priority/normal.png', 'Normal');
-    $iconPrio[40] = $this->icon('priority/high.png', 'High');
-    $iconPrio[50] = $this->icon('priority/max.png', 'Very Heigh');
+    $iconPrio[10] = '<i class="icon-flag min" ></i>';
+    $iconPrio[20] = '<i class="icon-flag low" ></i>';
+    $iconPrio[30] = '<i class="icon-flag avg" ></i>';
+    $iconPrio[40] = '<i class="icon-flag high" ></i>';
+    $iconPrio[50] = '<i class="icon-flag max" ></i>';
 
     // create the table body
     $body = '<tbody>'.NL;
@@ -375,6 +373,27 @@ class WebfrapMessage_Table_Element extends WgtTable
 
       $body .= '<td valign="top" class="pos" >'.$pos.'</td>'.NL;
 
+
+      $body .= '<td valign="top" >'
+        . '<a class="wcm wcm_req_ajax" href="maintab.php?c=Webfrap.Message.formShow&amp;objid='.$objid.'" >'
+        . Validator::sanitizeHtml($row['wbfsys_message_title'])
+        . '<a/></td>'.NL;
+
+      $senderName = "{$row['wbfsys_role_user_name']} <{$row['core_person_lastname']}, {$row['core_person_firstname']}> ";
+      $receiverName = "{$row['receiver_wbfsys_role_user_name']} <{$row['receiver_core_person_lastname']}, {$row['receiver_core_person_firstname']}> ";
+
+      $body .= '<td valign="top" >'.Validator::sanitizeHtml($senderName).'</td>'.NL;
+      $body .= '<td valign="top" >'.Validator::sanitizeHtml($receiverName).'</td>'.NL;
+
+
+      $body .= '<td valign="top" >'.(
+          '' != trim($row['wbfsys_message_m_time_created'])
+          ? $this->view->i18n->date($row['wbfsys_message_m_time_created'])
+          : ' '
+        ).'</td>'.NL;
+        
+        
+
       $body .= '<td valign="top" style="text-align:center" >';
 
       if ($row['wbfsys_message_id_receiver'] == $user->getId()) {
@@ -382,6 +401,7 @@ class WebfrapMessage_Table_Element extends WgtTable
       } else {
         $isInbox = false;
       }
+        
 
       // priority
       $body .=  $row['wbfsys_message_priority']
@@ -405,24 +425,6 @@ class WebfrapMessage_Table_Element extends WgtTable
       }
 
       $body .= '</td>'.NL;
-
-      $body .= '<td valign="top" >'
-        . '<a class="wcm wcm_req_ajax" href="maintab.php?c=Webfrap.Message.formShow&amp;objid='.$objid.'" >'
-        . Validator::sanitizeHtml($row['wbfsys_message_title'])
-        . '<a/></td>'.NL;
-
-      $senderName = "{$row['wbfsys_role_user_name']} <{$row['core_person_lastname']}, {$row['core_person_firstname']}> ";
-      $receiverName = "{$row['receiver_wbfsys_role_user_name']} <{$row['receiver_core_person_lastname']}, {$row['receiver_core_person_firstname']}> ";
-
-      $body .= '<td valign="top" >'.Validator::sanitizeHtml($senderName).'</td>'.NL;
-      $body .= '<td valign="top" >'.Validator::sanitizeHtml($receiverName).'</td>'.NL;
-
-
-      $body .= '<td valign="top" >'.(
-          '' != trim($row['wbfsys_message_m_time_created'])
-          ? $this->view->i18n->date($row['wbfsys_message_m_time_created'])
-          : ' '
-        ).'</td>'.NL;
 
       if ($this->enableNav) {
         $navigation  = $this->rowMenu(
@@ -520,20 +522,18 @@ class WebfrapMessage_Table_Element extends WgtTable
     $user = User::getActive();
 
     $iconStatus = array();
-    $iconStatus[EMessageStatus::IS_NEW] = $this->icon('message/mail_new.png', 'New');
-    $iconStatus[EMessageStatus::OPEN] = $this->icon('message/mail_open.png', 'Open');
-    $iconStatus[EMessageStatus::ARCHIVED] = $this->icon('message/mail_archive.png', 'Archive');
+    $iconStatus[EMessageStatus::IS_NEW] = '<i class="icon-envelope new" ></i>';
+    $iconStatus[EMessageStatus::UPDATED] = '<i class="icon-envelope update" ></i>';
+    $iconStatus[EMessageStatus::OPEN] = '<i class="icon-folder-open-alt open" ></i>';
+    $iconStatus[EMessageStatus::ARCHIVED] = '<i class="icon-envelope-alt archive" ></i>';
 
     $iconPrio = array();
 
-    $iconPrio[10] = $this->icon('priority/min.png', 'Very Low');
-    $iconPrio[20] = $this->icon('priority/low.png', 'Low');
-    $iconPrio[30] = $this->icon('priority/normal.png', 'Normal');
-    $iconPrio[40] = $this->icon('priority/high.png', 'High');
-    $iconPrio[50] = $this->icon('priority/max.png', 'Very Heigh');
-
-    $iconInbox   = $this->icon('message/inbox.png', 'Inbox');
-    $iconOutbox  = $this->icon('message/outbox.png', 'Outbox');
+    $iconPrio[10] = '<i class="icon-flag min" ></i>';
+    $iconPrio[20] = '<i class="icon-flag low" ></i>';
+    $iconPrio[30] = '<i class="icon-flag avg" ></i>';
+    $iconPrio[40] = '<i class="icon-flag high" ></i>';
+    $iconPrio[50] = '<i class="icon-flag max" ></i>';
 
     // is this an insert or an update area
     if ($this->insertMode) {
@@ -551,6 +551,21 @@ class WebfrapMessage_Table_Element extends WgtTable
     }
 
     $body .= '<td valign="top" class="pos" >'.($key+1).'</td>'.NL;
+
+
+      $body .= '<td valign="top" >'
+        . '<a class="wcm wcm_req_ajax" href="maintab.php?c=Webfrap.Message.showMessage&amp;target_mask=MyMessage_Widget&amp;ltype=table&amp;objid='.$objid.'" >'
+        . Validator::sanitizeHtml($row['wbfsys_message_title'])
+        . '<a/></td>'.NL;
+
+      $body .= '<td valign="top" >'.Validator::sanitizeHtml($userName).'</td>'.NL;
+
+      $body .= '<td valign="top" >'.(
+        '' != trim($row['wbfsys_message_m_time_created'])
+        ? $this->view->i18n->date($row['wbfsys_message_m_time_created'])
+        : ' '
+      ).'</td>'.NL;
+      
 
       $body .= '<td valign="top" style="text-align:center" >';
 
@@ -586,19 +601,6 @@ class WebfrapMessage_Table_Element extends WgtTable
       }
 
       $body .= '</td>'.NL;
-
-      $body .= '<td valign="top" >'
-        . '<a class="wcm wcm_req_ajax" href="maintab.php?c=Webfrap.Message.showMessage&amp;target_mask=MyMessage_Widget&amp;ltype=table&amp;objid='.$objid.'" >'
-        . Validator::sanitizeHtml($row['wbfsys_message_title'])
-        . '<a/></td>'.NL;
-
-      $body .= '<td valign="top" >'.Validator::sanitizeHtml($userName).'</td>'.NL;
-
-      $body .= '<td valign="top" >'.(
-        '' != trim($row['wbfsys_message_m_time_created'])
-        ? $this->view->i18n->date($row['wbfsys_message_m_time_created'])
-        : ' '
-      ).'</td>'.NL;
 
       if ($this->enableNav) {
         $navigation  = $this->rowMenu (
