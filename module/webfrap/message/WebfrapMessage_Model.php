@@ -478,11 +478,15 @@ SQL;
     $orm = $this->getOrm();
     $user = $this->getUser();
     
+    // erst mal eventuelle receiver & aspekte des users löschen
+    $orm->deleteWhere( 'WbfsysMessageReceiver', 'vid = '.$user->getId().' and id_message = '.$messageId );
+    $orm->deleteWhere('WbfsysMessageAspect', 'id_message='.$messageId.' and id_receiver = '.$user->getId() );
+    
     $sql = <<<SQL
 SELECT 
 	msg.flag_sender_deleted,
 	msg.id_sender,
-	count(recv.flag_deleted) as flag_deleted
+	count(recv.rowid) as num_receiver
 FROM 
 	wbfsys_message msg
 LEFT JOIN
@@ -505,8 +509,8 @@ SQL;
     
     if( $tmpData['id_sender'] == $user->getId() ){
       
-      // löschen wenn deleted flag
-      if( 't' != $tmpData['flag_deleted'] ){
+      // nur löschen wenn keine receiver mehr da sind
+      if( $tmpData['num_receiver'] ){
         $orm->update( 'WbfsysMessage', $messageId, array('flag_sender_deleted'=>true) );
         return;
       }
@@ -515,11 +519,7 @@ SQL;
       
       // löschen wenn deleted flag
       if( 't' != $tmpData['flag_sender_deleted'] ){
-        
-        $orm->update( 'WbfsysMessageReceiver', $messageId, array('flag_deleted'=>true) );
-        $orm->deleteWhere('WbfsysMessageAspect', 'id_message='.$messageId.' and id_receiver = '.$user->getId() );
         return;
-        
       }
       
     }
@@ -538,9 +538,7 @@ SQL;
   }//ebnd public function deleteMessage 
 
   /**
-   *
    * @param int $messageId
-   * @throws Per
    */
   public function deleteAllMessage()
   {
