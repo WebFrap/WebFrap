@@ -47,6 +47,7 @@ class WebfrapMessage_Consistency extends DataContainer
     $this->sysUsers   = $orm->getIds("WbfsysRoleUser", "rowid>0");
 
     $this->fixUserAddresses();
+    $this->fixUserReceiver();
 
   }//end public function run */
 
@@ -85,45 +86,16 @@ class WebfrapMessage_Consistency extends DataContainer
   {
     
     $db = $this->getDb();
-    $orm = $this->getOrm();
     
-    $sql = <<<SQL
-SELECT 
-	rowid, 
-	id_receiver,
-	id_receiver_status,
-	flag_receiver_deleted
-FROM 
-	wbfsys_message 
-WHERE 
-		not id_receiver is null;
-    
-SQL;
+      $queries = array();
+      $queries[] = 'UPDATE wbfsys_message set id_sender_status = '.EMessageStatus::IS_NEW.' WHERE id_sender_status is null; ';
+      $queries[] = 'UPDATE wbfsys_message_receiver set status = '.EMessageStatus::IS_NEW.' WHERE status is null; ';
+  
+      foreach ($queries as $query) {
+        $db->exec($query);
+      }
+      
 
-    $msgs = $db->select($sql);
-    
-    foreach($msgs as $msg){
-      
-      $receiver = $orm->newEntity('WbfsysMessageReceiver');
-      $receiver->status = $msg['id_receiver_status'];
-      $receiver->vid = $msg['id_receiver'];
-      $receiver->id_message = $msg['rowid'];
-      $receiver->flag_deleted = false;
-      
-      $orm->insert($receiver);
-      
-    }
-    
-    $sql = <<<SQL
-UPDATE
-	wbfsys_message 
-	SET  id_receiver = null, id_receiver_status = null
-	WHERE
-		not id_receiver is null;
-    
-SQL;
-
-    $msgs = $db->select($sql);
 
   }//end protected function fixUserAddresses */
 
