@@ -117,6 +117,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
       'wbfsys_message.stack_id as "wbfsys_message_stack_id"',
       'wbfsys_message.spam_level as "wbfsys_message_spam_level"',
       'wbfsys_message.message_id as "wbfsys_message_message_id"',
+      'wbfsys_message.main_aspect as "wbfsys_message_main_aspect"',
       'wbfsys_message.id_refer as "wbfsys_message_id_refer"',
       'wbfsys_message.id_sender as "wbfsys_message_id_sender"',
       'wbfsys_message.id_sender_status as "wbfsys_message_id_sender_status"',

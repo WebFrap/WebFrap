@@ -303,6 +303,7 @@ class WebfrapMessage_Table_Element extends WgtTable
     $html .= '<tr>'.NL;
 
     $html .= '<th style="width:30px;" class="pos" >'.$this->view->i18n->l('Pos.', 'wbf.label'  ).'</th>'.NL;
+    $html .= '<th style="width:30px" wgt_sort_name="order[type]" >&nbsp;</th>'.NL;
     $html .= '<th style="width:250px" wgt_sort_name="order[titel]" >'.$this->view->i18n->l('Title', 'wbf.label').'</th>'.NL;
     $html .= '<th style="width:250px" wgt_sort_name="order[sender]" >'.$this->view->i18n->l('Sender', 'wbf.label').'</th>'.NL;
     $html .= '<th style="width:250px" wgt_sort_name="order[receiver]" >'.$this->view->i18n->l('Receiver', 'wbf.label').'</th>'.NL;
@@ -344,6 +345,11 @@ class WebfrapMessage_Table_Element extends WgtTable
     $iconPrio[40] = '<i class="icon-flag high" ></i>';
     $iconPrio[50] = '<i class="icon-flag max" ></i>';
 
+    $iconType = array();
+    $iconType[EMessageAspect::MESSAGE] = '<i class="icon-envelope" ></i>';
+    $iconType[EMessageAspect::DOCUMENT] = '<i class="icon-file-alt" ></i>';
+    $iconType[EMessageAspect::DISCUSSION] = '<i class="icon-comments-alt" ></i>';
+    
     // create the table body
     $body = '<tbody>'.NL;
 
@@ -372,6 +378,8 @@ class WebfrapMessage_Table_Element extends WgtTable
         .' id="'.$rowid.'" wgt_eid="'.$objid.'" >'.NL;
 
       $body .= '<td valign="top" class="pos" >'.$pos.'</td>'.NL;
+      
+      $body .= '<td valign="top" >'.$iconType[$row['wbfsys_message_main_aspect']].'</td>'.NL;
 
 
       $body .= '<td valign="top" >'
@@ -383,7 +391,7 @@ class WebfrapMessage_Table_Element extends WgtTable
       $receiverName = "{$row['receiver_wbfsys_role_user_name']} <{$row['receiver_core_person_lastname']}, {$row['receiver_core_person_firstname']}> ";
 
       $body .= '<td valign="top" >'.Validator::sanitizeHtml($senderName).'</td>'.NL;
-      $body .= '<td valign="top" >'.Validator::sanitizeHtml($receiverName).'</td>'.NL;
+      $body .= '<td valign="top" style="text-align:center;" >'.Validator::sanitizeHtml($receiverName).'</td>'.NL;
 
 
       $body .= '<td valign="top" >'.(
