@@ -15,9 +15,6 @@ $cntForm = new WgtFormBuilder
 $cntForm->form();
 
 
-$confidentialData = $cntForm->loadQuery( 'WbfsysConfidentialityLevel_Selectbox' );
-$confidentialData->fetchSelectbox();
-
 $itemType = $cntForm->loadQuery( 'WebfrapContactItemType_Checklist' );
 $itemType->fetch();
 
@@ -31,8 +28,7 @@ HTML;
 <div class="bw62 wgt-space" >
 
   <div class="left bw6" >
-    <?php $cntForm->autocomplete
-    (
+    <?php $cntForm->autocomplete(
     	 'Receiver',
     	 'receiver',
       '',
@@ -56,9 +52,8 @@ HTML;
     <?php  $cntForm->selectboxByKey(
       'Confidentiality Level',
       'confidential',
-      'WbfsysConfidentialityLevel_Selectbox',
-      $confidentialData->getAll(),
-      $orm->getIdByKey( 'WbfsysConfidentialityLevel', 'public' )
+      'WbfsysConfidential_Selectbox',
+      EWebfrapConfidential::$labels
     ); ?>
 
     <?php  $cntForm->ratingbar
