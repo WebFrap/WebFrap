@@ -303,12 +303,12 @@ class WebfrapMessage_Table_Element extends WgtTable
     $html .= '<tr>'.NL;
 
     $html .= '<th style="width:30px;" class="pos" >'.$this->view->i18n->l('Pos.', 'wbf.label'  ).'</th>'.NL;
-    $html .= '<th style="width:30px" wgt_sort_name="order[type]" >&nbsp;</th>'.NL;
+    $html .= '<th style="width:20px" wgt_sort_name="order[type]" ></th>'.NL;
     $html .= '<th style="width:250px" wgt_sort_name="order[titel]" >'.$this->view->i18n->l('Title', 'wbf.label').'</th>'.NL;
     $html .= '<th style="width:250px" wgt_sort_name="order[sender]" >'.$this->view->i18n->l('Sender', 'wbf.label').'</th>'.NL;
     $html .= '<th style="width:250px" wgt_sort_name="order[receiver]" >'.$this->view->i18n->l('Receiver', 'wbf.label').'</th>'.NL;
     $html .= '<th style="width:80px" wgt_sort_name="order[date]" >'.$this->view->i18n->l('Date', 'wbf.label').'</th>'.NL;
-    $html .= '<th style="width:95px"  wgt_sort_name="order[priority]" >'.$this->view->i18n->l('Status', 'wbf.label').'</th>'.NL;
+    $html .= '<th style="width:115px"  wgt_sort_name="order[priority]" >'.$this->view->i18n->l('Status', 'wbf.label').'</th>'.NL;
 
     // the default navigation col
     if ($this->enableNav) {
@@ -332,18 +332,18 @@ class WebfrapMessage_Table_Element extends WgtTable
     $user = User::getActive();
 
     $iconStatus = array();
-    $iconStatus[EMessageStatus::IS_NEW] = '<i class="icon-envelope new" ></i>';
-    $iconStatus[EMessageStatus::UPDATED] = '<i class="icon-envelope update" ></i>';
-    $iconStatus[EMessageStatus::OPEN] = '<i class="icon-folder-open-alt open" ></i>';
-    $iconStatus[EMessageStatus::ARCHIVED] = '<i class="icon-envelope-alt archive" ></i>';
+    $iconStatus[EMessageStatus::IS_NEW] = '<i class="icon-envelope new" title="New message" ></i>';
+    $iconStatus[EMessageStatus::UPDATED] = '<i class="icon-envelope update" title="Message was updated" ></i>';
+    $iconStatus[EMessageStatus::OPEN] = '<i class="icon-folder-open-alt open" title="Message is open" ></i>';
+    $iconStatus[EMessageStatus::ARCHIVED] = '<i class="icon-envelope-alt archive" title="Message was archived" ></i>';
 
     $iconPrio = array();
 
-    $iconPrio[10] = '<i class="icon-flag min" ></i>';
-    $iconPrio[20] = '<i class="icon-flag low" ></i>';
-    $iconPrio[30] = '<i class="icon-flag avg" ></i>';
-    $iconPrio[40] = '<i class="icon-flag high" ></i>';
-    $iconPrio[50] = '<i class="icon-flag max" ></i>';
+    $iconPrio[10] = '<i class="icon-flag min" title="min priority" ></i>';
+    $iconPrio[20] = '<i class="icon-flag low" title="low priority" ></i>';
+    $iconPrio[30] = '<i class="icon-flag avg" title="average priority" ></i>';
+    $iconPrio[40] = '<i class="icon-flag high" title="high priority" ></i>';
+    $iconPrio[50] = '<i class="icon-flag max" title="max priority" ></i>';
 
     $iconType = array();
     $iconType[EMessageAspect::MESSAGE] = '<i class="icon-envelope" ></i>';
@@ -379,7 +379,7 @@ class WebfrapMessage_Table_Element extends WgtTable
 
       $body .= '<td valign="top" class="pos" >'.$pos.'</td>'.NL;
       
-      $body .= '<td valign="top" >'.$iconType[$row['wbfsys_message_main_aspect']].'</td>'.NL;
+      $body .= '<td valign="top" style="text-align:center;"  >'.$iconType[$row['wbfsys_message_main_aspect']].'</td>'.NL;
 
 
       $body .= '<td valign="top" >'
@@ -391,7 +391,7 @@ class WebfrapMessage_Table_Element extends WgtTable
       $receiverName = "{$row['receiver_wbfsys_role_user_name']} <{$row['receiver_core_person_lastname']}, {$row['receiver_core_person_firstname']}> ";
 
       $body .= '<td valign="top" >'.Validator::sanitizeHtml($senderName).'</td>'.NL;
-      $body .= '<td valign="top" style="text-align:center;" >'.Validator::sanitizeHtml($receiverName).'</td>'.NL;
+      $body .= '<td valign="top" >'.Validator::sanitizeHtml($receiverName).'</td>'.NL;
 
 
       $body .= '<td valign="top" >'.(
@@ -412,6 +412,14 @@ class WebfrapMessage_Table_Element extends WgtTable
         
       // action required
       
+      $body .=  $row['task_id']
+        ? '<i class="icon-tasks" title="Is Task" ></i> '
+        : '';
+        
+      $body .=  $row['appoint_id']
+        ? '<i class="icon-calendar" title="Is Appointment" ></i> '
+        : '';
+      
 
       // SPAM / HAM status
       $body .=  ($row['wbfsys_message_spam_level']>51)
@@ -428,11 +436,10 @@ class WebfrapMessage_Table_Element extends WgtTable
         ? '<i class="icon-time urgent" title="Ok, this getting a little urgent now!" ></i> '
         : '';
 
-      
       // priority
-      $body .=  $row['wbfsys_message_priority']
+      $body .=  ( $row['wbfsys_message_priority'] && ($row['wbfsys_message_priority'] > 30 || 10 == $row['wbfsys_message_priority'] )  ) 
         ? $iconPrio[$row['wbfsys_message_priority']].' '
-        : $iconPrio[30].' ';
+        : ' ';
 
       if ($isInbox) {
 

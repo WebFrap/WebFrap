@@ -128,6 +128,8 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
       'wbfsys_message_receiver.flag_action_required as "receiver_action_required"',
       'task.flag_urgent',
       'task.deadline',
+      'task.rowid as task_id',
+      'appoint.rowid as appoint_id',
       'sender.core_person_lastname',
       'sender.core_person_firstname',
       'sender.wbfsys_role_user_name',
@@ -180,6 +182,13 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
       'wbfsys_task', 'id_message',
       null,
       'task'
+    );
+    
+    $criteria->leftJoinOn(
+      'wbfsys_message', 'rowid',
+      'wbfsys_appointment', 'id_message',
+      null,
+      'appoint'
     );
 
     // aspekt zum filtern
