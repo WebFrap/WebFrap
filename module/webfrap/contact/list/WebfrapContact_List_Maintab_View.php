@@ -31,15 +31,17 @@ class WebfrapContact_List_Maintab_View extends WgtMaintab
    * @param WebfrapMessage_Table_Search_Request $params
    * @return void
    */
-  public function displayList($params)
+  public function displayList($userRqt)
   {
 
     $this->setLabel('Contacts');
     $this->setTitle('Contacts');
 
     $this->setTemplate('webfrap/contact/maintab/list', true);
+    
+    $this->addVar( 'contacts', $this->model->fetchContacts($userRqt)  );
 
-    $this->addMenu($params);
+    $this->addMenu($userRqt);
 
   }//end public function displayList */
 

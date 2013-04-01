@@ -80,11 +80,11 @@ class WebfrapContact_Controller extends Controller
   {
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFlags($request);
+    $usrRqt  = new WebfrapContact_List_Request($request);
     
     /* @var $model WebfrapContact_Model */
     $model = $this->loadModel('WebfrapContact');
-    $model->loadTableAccess($params);
+    $model->loadTableAccess($usrRqt);
 
     if (!$model->access->listing) {
       throw new InvalidRequest_Exception(
@@ -93,7 +93,7 @@ class WebfrapContact_Controller extends Controller
       );
     }
 
-    // create a window
+    /* @var $view WebfrapContact_List_Maintab_View */
     $view = $response->loadView(
       'webfrap-contact-list',
       'WebfrapContact_List',
@@ -102,7 +102,7 @@ class WebfrapContact_Controller extends Controller
     
     $view->setModel($model);
 
-    $view->displayList($params);
+    $view->displayList($usrRqt);
 
   }//end public function service_list */
 
@@ -143,6 +143,65 @@ class WebfrapContact_Controller extends Controller
     $view->displayNew($params);
 
   }//end public function service_formNew */
+  
+  
+ /**
+  * Form zum anschauen einer Nachricht
+  * @param LibRequestHttp $request
+  * @param LibResponseHttp $response
+  * @return boolean
+  */
+  public function service_insert($request, $response)
+  {
+
+    // prüfen ob irgendwelche steuerflags übergeben wurde
+    $userRqt  = new WebfrapContact_Save_Request($request);
+
+    /* @var $model WebfrapContact_Model */
+    $model = $this->loadModel('WebfrapContact');
+    $model->loadTableAccess($userRqt);
+
+    if (!$model->access->access) {
+      throw new InvalidRequest_Exception(
+        Response::FORBIDDEN_MSG,
+        Response::FORBIDDEN
+      );
+    }
+
+    $model->insert($userRqt);
+
+    /* @var $view Li */
+    $view   = $response->loadView(
+      'form-messages-show-'.$msgId,
+      'WebfrapContact_Tile',
+      'displayEntry'
+    );
+    $view->setModel($model);
+
+    $view->displayEntry($params, true);
+
+  }//end public function service_insert */
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
  /**
   * Form zum anschauen einer Nachricht

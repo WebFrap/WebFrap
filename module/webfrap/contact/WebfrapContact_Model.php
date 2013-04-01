@@ -81,17 +81,19 @@ class WebfrapContact_Model extends Model
   
 
   /**
-   * @param TFlag $params
+   * @param TFlag $userRqt
    * @return array
    */
-  public function fetchMessages($params)
+  public function fetchContacts($userRqt)
   {
 
     $db = $this->getDb();
+    $user = $this->getUser();
 
 
-    /* @var $query WebfrapMessage_Table_Query */
-    $query = $db->newQuery('WebfrapMessage_Table');
+    /* @var $query WebfrapContact_List_Query */
+    $query = $db->newQuery('WebfrapContact_List');
+    $query->userId = $user->getId();
 
     $query->fetch(
       $this->params->conditions,
