@@ -90,6 +90,7 @@ class WebfrapMessage_Consistency extends DataContainer
       $queries = array();
       $queries[] = 'UPDATE wbfsys_message set id_sender_status = '.EMessageStatus::IS_NEW.' WHERE id_sender_status is null; ';
       $queries[] = 'UPDATE wbfsys_message_receiver set status = '.EMessageStatus::IS_NEW.' WHERE status is null; ';
+      $queries[] = 'UPDATE wbfsys_message set spam_level = -1 WHERE spam_level is null; ';
   
       foreach ($queries as $query) {
         $db->exec($query);

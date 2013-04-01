@@ -367,7 +367,7 @@ class WebfrapMessage_Table_Element extends WgtTable
       }
 
       $body .= '<tr '
-        .' class="wcm '.$rowWcm.' row'.$num.' good"'
+        .' class="wcm '.$rowWcm.' row'.$num.' "'
         .$rowParams
         .' id="'.$rowid.'" wgt_eid="'.$objid.'" >'.NL;
 

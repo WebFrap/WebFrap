@@ -126,6 +126,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
       'wbfsys_message_receiver.status as "wbfsys_message_receiver_status"',
       'wbfsys_message_receiver.flag_action_required as "receiver_action_required"',
       'task.flag_urgent',
+      'task.deadline',
       'sender.core_person_lastname',
       'sender.core_person_firstname',
       'sender.wbfsys_role_user_name',
@@ -535,6 +536,30 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
           ." AND wbfsys_message_receiver.flag_deleted = false {$filterReceiver} )"
       );
     }
+    
+    // status filter
+    $statusFilter = array();
+  
+    if (isset($condition['filters']['status'])) {
+
+      if( $condition['filters']['status']->new )
+        $statusFilter[] = "wbfsys_message_receiver.status = ".EMessageStatus::IS_NEW;
+        
+      if( $condition['filters']['status']->important )
+        $statusFilter[] = "wbfsys_message.priority > ".EPriority::HIGH;
+        
+      if( $condition['filters']['status']->urgent )
+        $statusFilter[] = "task.flag_urgent = true ";
+        
+      if( $condition['filters']['status']->overdue )
+        $statusFilter[] = " task.deadline < now() ";
+      
+    }
+    
+    if($statusFilter)
+      $criteria->where( "(".implode( 'OR ', $statusFilter ).")" );
+    
+
 
     if (isset($condition['aspects'])) {
 

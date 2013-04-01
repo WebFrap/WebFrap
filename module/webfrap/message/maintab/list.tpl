@@ -21,34 +21,28 @@
           name="channel[outbox]"
           class="fparam-wgt-form-webfrap-groupware-search" /> <a><strong>Outbox</strong></a>
         <ul>
-          <li><input
-            type="radio" 
-            name="filter" 
-            value="all"
-            <?php echo Wgt::checked(true, isset($VAR->settings->filter->all) )?>
-            /> All Posts
+          <li><strong>Filter</strong>
             <ul>
               <li><input
-                type="radio"
-                name="filter"
-                value="new"
-                <?php echo Wgt::checked(true, isset($VAR->settings->filter->new) )?>
-                class="fparam-wgt-form-webfrap-groupware-search"  /> Show New Posts</li>
+                type="checkbox"
+                name="status[new]"
+                <?php echo Wgt::checked(true, isset($VAR->settings->status->new) )?>
+                class="fparam-wgt-form-webfrap-groupware-search"  /> New Posts</li>
               <li><input
                 type="checkbox"
                 name="status[important]"
                 <?php echo Wgt::checked(true, isset($VAR->settings->status->important) )?>
-                class="fparam-wgt-form-webfrap-groupware-search" /> Show Important Posts</li>
+                class="fparam-wgt-form-webfrap-groupware-search" /> Important Posts</li>
               <li><input
                 type="checkbox"
                 name="status[urgent]"
                 <?php echo Wgt::checked(true, isset($VAR->settings->status->urgent) )?>
-                class="fparam-wgt-form-webfrap-groupware-search" /> Show Urgent Posts</li>
+                class="fparam-wgt-form-webfrap-groupware-search" /> Urgent Posts</li>
               <li><input
                 type="checkbox"
                 name="status[overdue]"
                 <?php echo Wgt::checked(true, isset($VAR->settings->status->overdue) )?>
-                class="fparam-wgt-form-webfrap-groupware-search" /> Show Overdue Posts</li>
+                class="fparam-wgt-form-webfrap-groupware-search" /> Overdue Posts</li>
             </ul>
           </li>
 
