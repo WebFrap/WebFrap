@@ -609,9 +609,9 @@ SQL;
     $sqlIds = implode(', ', $msgIds);
 
     $queries = array();
-    $queries[] = 'UPDATE wbfsys_message set flag_receiver_deleted = true WHERE id_receiver = '.$userID.' AND rowid IN('.$sqlIds.')';
-    $queries[] = 'UPDATE wbfsys_message set flag_sender_deleted = true WHERE id_sender = '.$userID.' AND rowid IN('.$sqlIds.')';
-    $queries[] = 'DELETE FROM wbfsys_message WHERE (id_sender = '.$userID.' OR id_receiver = '.$userID.') AND rowid IN('.$sqlIds.')';
+    $queries[] = 'UPDATE wbfsys_message set flag_sender_deleted = true WHERE id_sender = '.$userID.' AND rowid IN('.$sqlIds.');';
+    $queries[] = 'DELETE FROM wbfsys_message_receiver WHERE vid = '.$userID.' AND id_message IN('.$sqlIds.');';
+    $queries[] = 'DELETE FROM wbfsys_message_aspect WHERE id_receiver = '.$userID.' AND id_message IN('.$sqlIds.');';
 
     foreach ($queries as $query) {
       $db->exec($query);
@@ -628,7 +628,7 @@ JOIN
 		ON recv.id_message = msg.rowid
 having count(recv.rowid) = 0
 WHERE
-	msg.id_sender = {$userID} AND msg.rowid IN('.$sqlIds.')
+	msg.id_sender = {$userID} AND msg.rowid IN({$sqlIds})
 SQL;
     
     
@@ -639,6 +639,10 @@ SQL;
     foreach( $messages as $msg ){
       $msgIds[] = $msg['msg_id'];
     }
+    
+    // wenn keine msg ids dann sind wir fertig
+    if(!$msgIds)
+      return;
     
     $whereString = implode(', ', $msgIds);
     
