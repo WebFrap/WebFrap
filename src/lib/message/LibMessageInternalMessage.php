@@ -129,6 +129,7 @@ class LibMessageInternalMessage extends LibMessageAdapter
     // Header
     $messageObj->id_sender = $envelop->stack->sender->userId;
     $messageObj->flag_sender_deleted   = 0;
+    $messageObj->id_sender_status   = EMessageStatus::IS_NEW;
     $messageObj->confidential = $envelop->stack->confidential;
 
     $messageObj->priority = $envelop->stack->priority
