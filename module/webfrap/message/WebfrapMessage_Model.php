@@ -395,6 +395,7 @@ SQL;
   {
 
     $orm = $this->getOrm();
+    $db = $this->getDb();
     $user = $this->getUser();
     
     foreach($rqtData->aspects as $aspect){
@@ -410,6 +411,9 @@ SQL;
     	'WbfsysMessageAspect', 
     	" id_receiver={$user->getId()} AND id_message={$messageId} AND NOT aspect IN(".implode(', ',$rqtData->aspects).") " 
     );
+    
+    $msgNode = $orm->get('WbfsysMessage',$messageId);
+    
 
     
     // task data speichern
@@ -465,6 +469,37 @@ SQL;
     $entRecv = $orm->get('WbfsysMessageReceiver', $rqtData->receiverId);
     $entRecv->addData($rqtData->receiverData);
     $orm->save($entRecv);
+    
+    $mainAspect = 0;
+    
+    if( in_array(EMessageAspect::MESSAGE, $rqtData->aspects) )
+      $mainAspect = EMessageAspect::MESSAGE;
+    elseif ( in_array(EMessageAspect::DOCUMENT, $rqtData->aspects) ) {
+      $mainAspect = EMessageAspect::DOCUMENT;
+    } else {
+      $mainAspect = EMessageAspect::DISCUSSION;
+    }
+    
+    if( $msgNode->main_aspect != $mainAspect ){
+      $msgNode->main_aspect = $mainAspect;
+      $msgNode->id_sender_status = EMessageStatus::UPDATED;
+      
+      $orm->save($msgNode);
+    }
+    
+    $tmpUSt = EMessageStatus::UPDATED;
+    $tmpASt = EMessageStatus::ARCHIVED;
+    
+    // alle nicht archivierten oder gelöschten receiver updaten
+    $sql = <<<SQL
+UPDATE wbfsys_message_receiver 
+	set status = {$tmpUSt}
+WHERE
+	id_message = {$messageId}
+	AND ( NOT status = {$tmpASt} OR flag_deleted  = true );
+SQL;
+    
+    $db->update($sql);
 
   }//ebnd public function saveMessage 
 

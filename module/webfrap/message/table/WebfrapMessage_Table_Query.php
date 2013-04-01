@@ -134,7 +134,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
       'receiver.core_person_lastname as receiver_core_person_lastname',
       'receiver.core_person_firstname as receiver_core_person_firstname',
       'receiver.wbfsys_role_user_name as receiver_wbfsys_role_user_name',
-   );
+    );
 
     $criteria->select($cols, true);
 
