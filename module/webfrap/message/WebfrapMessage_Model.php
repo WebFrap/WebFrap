@@ -555,6 +555,39 @@ SQL;
     foreach ($queries as $query){
       $db->exec($query);
     }
+    
+    // alle 
+    $sql = <<<SQL
+SELECT 
+	msg.rowid as msg_id
+FROM
+	wbfsys_message msg
+JOIN
+	wbfsys_message_receiver recv
+		ON recv.id_message = msg.rowid
+having count(recv.rowid) = 0
+WHERE
+	msg.id_sender = {$userID} 
+SQL;
+    
+    
+    $messages = $db->select($sql);
+    
+    $msgIds = array();
+    
+    foreach( $messages as $msg ){
+      $msgIds[] = $msg['msg_id'];
+    }
+    
+    $whereString = implode(', ', $msgIds);
+    
+    $orm->deleteWhere('WbfsysMessageAspect', 'id_message IN('.$whereString.')'); // aspekt flags
+    $orm->deleteWhere('WbfsysTask', 'id_message IN('.$whereString.')'); // eventueller task aspekt
+    $orm->deleteWhere('WbfsysAppointment', 'id_message IN('.$whereString.')'); // eventueller appointment aspekt
+    $orm->deleteWhere('WbfsysMessageReceiver', 'id_message IN('.$whereString.')'); // alle receiver
+    $orm->deleteWhere('WbfsysDataIndex', 'id_message IN('.$whereString.')'); // fulltext index der db
+    $orm->deleteWhere('WbfsysDataLink', 'id_message IN('.$whereString.')'); // referenzen
+    $orm->deleteWhere('WbfsysEntityAttachment', 'id_message IN('.$whereString.')'); // attachments
 
   }//end public function deleteAllMessage */
 
@@ -583,6 +616,39 @@ SQL;
     foreach ($queries as $query) {
       $db->exec($query);
     }
+    
+    // alle 
+    $sql = <<<SQL
+SELECT 
+	msg.rowid as msg_id
+FROM
+	wbfsys_message msg
+JOIN
+	wbfsys_message_receiver recv
+		ON recv.id_message = msg.rowid
+having count(recv.rowid) = 0
+WHERE
+	msg.id_sender = {$userID} AND msg.rowid IN('.$sqlIds.')
+SQL;
+    
+    
+    $messages = $db->select($sql);
+    
+    $msgIds = array();
+    
+    foreach( $messages as $msg ){
+      $msgIds[] = $msg['msg_id'];
+    }
+    
+    $whereString = implode(', ', $msgIds);
+    
+    $orm->deleteWhere('WbfsysMessageAspect', 'id_message IN('.$whereString.')'); // aspekt flags
+    $orm->deleteWhere('WbfsysTask', 'id_message IN('.$whereString.')'); // eventueller task aspekt
+    $orm->deleteWhere('WbfsysAppointment', 'id_message IN('.$whereString.')'); // eventueller appointment aspekt
+    $orm->deleteWhere('WbfsysMessageReceiver', 'id_message IN('.$whereString.')'); // alle receiver
+    $orm->deleteWhere('WbfsysDataIndex', 'id_message IN('.$whereString.')'); // fulltext index der db
+    $orm->deleteWhere('WbfsysDataLink', 'id_message IN('.$whereString.')'); // referenzen
+    $orm->deleteWhere('WbfsysEntityAttachment', 'id_message IN('.$whereString.')'); // attachments
 
   }//end public function deleteSelection */
   
