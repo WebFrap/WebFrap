@@ -143,11 +143,12 @@
         <?php echo Wgt::checked(true, isset($VAR->settings->channels->draft) )?>
         name="channel[draft]"
         class="fparam-wgt-form-webfrap-groupware-search" /> <a><strong>Drafts</strong></a></li>
+        <!--  
       <li><a href="#" ><strong>Templates</strong></a>
         <ul>
           <li><button class="wgt-button" ><i class="icon-plus-sign" ></i> Create Template</button></li>
         </ul>
-      </li>
+      </li>-->
       <li><input
         type="checkbox"
         <?php echo Wgt::checked(true, isset($VAR->settings->channels->archive) )?>
