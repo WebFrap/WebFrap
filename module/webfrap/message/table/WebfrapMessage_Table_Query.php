@@ -180,7 +180,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
       'task'
     );
 
-    // der receiver
+    // aspekt zum filtern
     $criteria->joinOn(
       'wbfsys_message', 'rowid',
       'wbfsys_message_aspect', 'id_message',
@@ -491,6 +491,12 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
       
       if( !$condition['filters']['channel']->unsolicited ){
         $criteria->where($filterSpam);
+      }
+      
+      if( !$condition['filters']['channel']->draft ){
+        $criteria->where('wbfsys_message.flag_draft = false');
+      } else {
+        $criteria->where('wbfsys_message.flag_draft = true');
       }
 
       if ($condition['filters']['channel']->inbox) {
