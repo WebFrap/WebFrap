@@ -124,6 +124,22 @@ class WebfrapMessage_Table_Search_Request extends ContextListing
 
       $this->conditions['filters']['status'] = new TArray((array)$this->settings->status);
     }
+    
+    if ($request->paramExists('task_status')){
+
+      $status = $request->param(
+      	'task_status',
+        Validator::INT
+      );
+
+      $this->settings->taskStatus = $status;
+
+      $this->conditions['filters']['task_status'] = $status;
+
+    } else {
+
+      $this->conditions['filters']['task_status'] = 1;
+    }
 
     if ($request->paramExists('task_action')){
 

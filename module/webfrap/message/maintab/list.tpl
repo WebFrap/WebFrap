@@ -97,6 +97,27 @@
             /> Tasks
             <ul>
               <li><input
+                type="radio"
+                name="task_status"
+                value="1"
+                <?php echo Wgt::checked(1, $VAR->settings->taskStatus )?>
+                class="fparam-wgt-form-webfrap-groupware-search"
+                 /> All</li>
+              <li><input
+                type="radio"
+                name="task_status"
+                value="2"
+                <?php echo Wgt::checked(2, $VAR->settings->taskStatus )?>
+                class="fparam-wgt-form-webfrap-groupware-search"
+                 /> Open</li>
+              <li><input
+                type="radio"
+                name="task_status"
+                value="3"
+                <?php echo Wgt::checked(3, $VAR->settings->taskStatus )?>
+                class="fparam-wgt-form-webfrap-groupware-search"
+                 /> Completed</li>
+              <li><input
                 type="checkbox"
                 name="task_action[required]"
                 <?php echo Wgt::checked(true, isset($VAR->settings->taskAction->required) )?>
@@ -108,12 +129,6 @@
                 <?php echo Wgt::checked(true, isset($VAR->settings->taskAction->waiting) )?>
                 class="fparam-wgt-form-webfrap-groupware-search"
                 /> Waiting for Action</li>
-              <li><input
-                type="checkbox"
-                name="task_action[completed]"
-                <?php echo Wgt::checked(true, isset($VAR->settings->taskAction->completed) )?>
-                class="fparam-wgt-form-webfrap-groupware-search"
-                 /> Completed</li>
             </ul>
           </li>
         </ul>

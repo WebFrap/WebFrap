@@ -44,6 +44,11 @@ class WebfrapMessage_Table_Search_Settings extends LibSettingsNode
    * @var stdClass
    */
   public $taskAction = null;
+  
+  /**
+   * @var int
+   */
+  public $taskStatus = null;
 
 
   /**
@@ -127,6 +132,10 @@ class WebfrapMessage_Table_Search_Settings extends LibSettingsNode
     $this->taskAction = isset($this->node->task_action)
       ? (object)$this->node->task_action
       : new stdClass();
+      
+    $this->taskStatus = isset($this->node->task_status)
+      ? $this->node->task_status
+      : 1;
 
   }//end protected function prepareSettings */
 
@@ -140,6 +149,7 @@ class WebfrapMessage_Table_Search_Settings extends LibSettingsNode
     $this->node->aspects = $this->aspects;
     $this->node->task_action = $this->taskAction;
     $this->node->status = $this->status;
+    $this->node->task_status = $this->taskStatus;
 
     return json_encode($this->node);
 
