@@ -82,7 +82,7 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
     //$tabPanel->advancedSearch = true;
 
     // search element im maintab
-    $searchElement = $this->setSearchElement(new WgtPanelElementSearch_Splitted($table));
+    $searchElement = $this->setSearchElement(new WgtPanelElementSearch_Overlay($table));
     $searchElement->searchKey = 'my_message';
     $searchElement->searchFieldSize = 'xlarge';
     //$searchElement->advancedSearch = true;
