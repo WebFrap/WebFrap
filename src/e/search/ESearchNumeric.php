@@ -21,26 +21,35 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class ESearchBoolean
+class ESearchNumeric
 {
 
-  const IS_TRUE       = 1;
-
-  const IS_FALSE      = 2;
+  const EQUALS        = 1;
   
-  const IS_T_OR_F     = 3;
+  const SMALLER       = 2;
 
-  const IS_NULL       = 4;
+  const SMALLER_EQUAL  = 3;
+  
+  const BIGGER         = 4;
+  
+  const BIGGER_EQUAL   = 5;
+  
+  const IS_NULL       = 5;
+  
+  const IS_NOT_NULL   = 7;
 
   /**
    * @var array
    */
   public static $text = array(
-    self::IS_TRUE      => 'True',
-    self::IS_FALSE     => 'False',
-    self::IS_T_OR_F    => 'True or False',
-    self::IS_NULL      => 'Is not Set',
+    self::EQUALS      => 'equals',
+    self::SMALLER      => 'smaller',
+    self::SMALLER_EQUAL => 'smaller or equal',
+    self::BIGGER       => 'bigger',
+    self::BIGGER_EQUAL => 'bigger or equal',
+    self::IS_NULL     => 'is empty',
+    self::IS_NOT_NULL => 'is not empty',
   );
 
-}//end class ESearchBoolean
+}//end class ESearchNumeric
 

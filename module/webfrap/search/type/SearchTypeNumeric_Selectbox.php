@@ -16,31 +16,29 @@
 *******************************************************************************/
 
 /**
+ * Search Type Numeric Selectbox
+ * 
+ * @package WebFrap
+ * @subpackage Core
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
- * @package WebFrap
- * @subpackage tech_core
  */
-class ESearchBoolean
+class SearchTypeNumeric_Selectbox extends WgtSelectboxEnum
 {
-
-  const IS_TRUE       = 1;
-
-  const IS_FALSE      = 2;
-  
-  const IS_T_OR_F     = 3;
-
-  const IS_NULL       = 4;
+/*//////////////////////////////////////////////////////////////////////////////
+// Methodes
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * @var array
+   * Laden der Daten
+   * @return void
    */
-  public static $text = array(
-    self::IS_TRUE      => 'True',
-    self::IS_FALSE     => 'False',
-    self::IS_T_OR_F    => 'True or False',
-    self::IS_NULL      => 'Is not Set',
-  );
+  public function init()
+  {
 
-}//end class ESearchBoolean
+    $this->data = ESearchNumeric::$labels;
+
+  }//end function init */
+
+}// end class SearchTypeNumeric_Selectbox
 
