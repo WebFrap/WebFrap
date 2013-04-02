@@ -23,12 +23,17 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class SearchTypeBoolean_Selectbox extends WgtSelectboxEnum
+class WebfrapSearchTypeBoolean_Selectbox extends WgtSelectboxEnum
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
+  /**
+   * @var string
+   */
+  public $width = 'small';
+  
   /**
    * Laden der Daten
    * @return void

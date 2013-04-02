@@ -16,19 +16,24 @@
 *******************************************************************************/
 
 /**
- * Search Type Id Selectbox
+ * Search Type Text Selectbox
  * 
  * @package WebFrap
  * @subpackage Core
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class SearchTypeId_Selectbox extends WgtSelectboxEnum
+class WebfrapSearchTypeText_Selectbox extends WgtSelectboxEnum
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
+  /**
+   * @var string
+   */
+  public $width = 'small';
+  
   /**
    * Laden der Daten
    * @return void
@@ -36,9 +41,9 @@ class SearchTypeId_Selectbox extends WgtSelectboxEnum
   public function init()
   {
 
-    $this->data = ESearchId::$labels;
+    $this->data = ESearchText::$labels;
 
   }//end function init */
 
-}// end class SearchTypeId_Selectbox
+}// end class SearchTypeText_Selectbox
 

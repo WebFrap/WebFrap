@@ -16,19 +16,24 @@
 *******************************************************************************/
 
 /**
- * Search Type Numeric Selectbox
+ * Search Type Date Selectbox
  * 
  * @package WebFrap
  * @subpackage Core
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class SearchTypeNumeric_Selectbox extends WgtSelectboxEnum
+class WebfrapSearchTypeDate_Selectbox extends WgtSelectboxEnum
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
+  /**
+   * @var string
+   */
+  public $width = 'small';
+  
   /**
    * Laden der Daten
    * @return void
@@ -36,9 +41,9 @@ class SearchTypeNumeric_Selectbox extends WgtSelectboxEnum
   public function init()
   {
 
-    $this->data = ESearchNumeric::$labels;
+    $this->data = ESearchDate::$labels;
 
   }//end function init */
 
-}// end class SearchTypeNumeric_Selectbox
+}// end class SearchTypeDate_Selectbox
 

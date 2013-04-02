@@ -78,7 +78,7 @@ class WgtPanelElementSearch_Overlay extends WgtPanelElement
   /**
    * @var SearchData
    */
-  public $searchData = null;
+  public $searchFields = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // constructor
@@ -109,6 +109,20 @@ class WgtPanelElementSearch_Overlay extends WgtPanelElement
     $this->filters = $filters;
 
   }//end public function setFilter */
+  
+  /**
+   * @param string|array $fields
+   * @param boolean $isJson
+   */
+  public function setSearchFields( $fields, $isJson = false )
+  {
+
+    if($isJson)
+      $this->searchFields = json_decode($fields);
+    else
+      $this->searchFields = $fields;
+      
+  }//end public function setSearchFields */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // build method
@@ -150,8 +164,6 @@ class WgtPanelElementSearch_Overlay extends WgtPanelElement
 
     if ($this->searchKey) {
 
-      $iconInfo     = $this->icon('control/info.png', 'Info');
-
       $buttonAdvanced = '';
       $customButtons  = '';
 
@@ -191,6 +203,11 @@ HTML;
           ."/<span>{$this->filters->numFilter}</span>)</span>";
 
       }
+      
+      $selectboxFields = $this->renderAdvancedSearchFieldsSelectbox();
+      
+      $slctBoolean = new WebfrapSearchTypeBoolean_Selectbox();
+      $slctText = new WebfrapSearchTypeText_Selectbox();
 
       $html .= <<<HTML
 
@@ -229,7 +246,17 @@ HTML;
               </div>            
               
               <div class="half right" >
-              	<h3>Custom Filter</h3>
+              	<h3 style="width:150px;float:left;" >Custom Filter</h3>
+              	<div class="right" >
+              		<button class="wgt-button" >Save actual Selection</button>
+              	</div>
+              	<div class="wgt-clear" >&nbsp;</div>
+              	<label></label>
+              	<ul>
+              		<li>Urgent</li>
+              		<li>Send by Joe</li>
+              		<li>Project X 2012</li>
+              	</ul>
               </div>
 
     				</div>
@@ -239,8 +266,76 @@ HTML;
             <div class="wgt-space" >
             	<h3>Advanced search</h3>
             	
-            	<div style="height:250px;" >
+            	<div class="left" >{$selectboxFields}</div>
+            	<div class="inline" >&nbsp;&nbsp; <button class="wgt-button" ><i class="icon-plus-sign" ></i></button></div>
             	
+            	<div class="wgt-clear small" >&nbsp;</div>
+            	
+            	<div style="height:250px;" >
+            		<table>
+            			<thead>
+            				<tr>
+            					<th style="width:100px;" >A/O</th>
+            					<th style="width:120px;" >Field</th>
+            					<th style="width:70px;" >Not</th>
+            					<th style="width:120px;" >Condition</th>
+            					<th style="width:150px;" >Value</th>
+            					<th style="width:75px;" >Menu</th>
+            				</tr>
+            			<thead>
+            			<tbody>
+            				<tr>
+            					<td>
+            						<select>
+            							<option>AND</option>
+            							<option>OR</option>
+            						</select>
+            					</td>
+            					<td style="text-align:right;" >
+            						{$selectboxFields}
+            					</td>
+            					<td style="text-align:center;" >
+            						<input type="checkbox" />
+            					</td>
+            					<td style="text-align:center;" >
+            						{$slctText->element()}
+            					</td>
+            					<td style="text-align:left;" >
+            						<input type="text" />
+            					</td>
+            					<td style="text-align:right;" >
+            						<button 
+            							class="wgt-button" ><i class="icon-plus-sign" ></i></button><button 
+            								class="wgt-button" ><i class="icon-remove-sign" ></i></button>
+            					</td>
+            				</tr>
+            				<tr>
+            					<td>
+            						<select>
+            							<option>AND</option>
+            							<option>OR</option>
+            						</select>
+            					</td>
+            					<td style="text-align:right;" >
+            						{$selectboxFields}
+            					</td>
+            					<td style="text-align:center;" >
+            						<input type="checkbox" />
+            					</td>
+            					<td style="text-align:center;" >
+            						{$slctText->element()}
+            					</td>
+            					<td style="text-align:left;" >
+            						<input type="text" />
+            					</td>
+            					<td style="text-align:right;" >
+            						<button 
+            							class="wgt-button" ><i class="icon-plus-sign" ></i></button><button 
+            								class="wgt-button" ><i class="icon-remove-sign" ></i></button>
+            					</td>
+            				</tr>
+            			</tbody>
+                </table>
             	</div>
 
     				</div>
@@ -258,6 +353,32 @@ HTML;
     return $html;
 
   }//end public function renderSearchArea */
+  
+  
+  /**
+   * @return string
+   */
+  protected function renderAdvancedSearchFieldsSelectbox()
+  {
+    
+    $select = '<select>';
+    
+    foreach ( $this->searchFields as $category => $catFields ) {
+      
+      $select .= '<optgroup label="'.$category.'">';
+      
+      foreach ( $catFields as $catKey => $catData ) {
+        $select .= '<option value="'.$catKey.'" >'.$catData[0].'</option>';
+      }
+      
+      $select .= '</optgroup>';
+    }
+    
+    $select .= '</select>';
+    
+    return $select;
+    
+  }//end protected function renderAdvancedSearchFieldsSelectbox */
 
 }//end class WgtPanelElementSearch_Splitted
 

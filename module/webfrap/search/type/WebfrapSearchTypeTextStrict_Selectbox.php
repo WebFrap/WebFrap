@@ -16,19 +16,24 @@
 *******************************************************************************/
 
 /**
- * Search Type Date Selectbox
+ * Search Type Text Strict Selectbox
  * 
  * @package WebFrap
  * @subpackage Core
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class SearchTypeDate_Selectbox extends WgtSelectboxEnum
+class WebfrapSearchTypeTextStrict_Selectbox extends WgtSelectboxEnum
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
+  /**
+   * @var string
+   */
+  public $width = 'small';
+  
   /**
    * Laden der Daten
    * @return void
@@ -36,9 +41,9 @@ class SearchTypeDate_Selectbox extends WgtSelectboxEnum
   public function init()
   {
 
-    $this->data = ESearchDate::$labels;
+    $this->data = ESearchTextStrict::$labels;
 
   }//end function init */
 
-}// end class SearchTypeDate_Selectbox
+}// end class SearchTypeTextStrict_Selectbox
 
