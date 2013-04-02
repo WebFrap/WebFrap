@@ -38,7 +38,7 @@ $sForm->hidden('receiver_id', $VAR->msgNode->receiver_id);
       
       <ul class="wgt-list wgt-space" >
         <li><label>Status:</label> <span><?php echo EMessageStatus::label($VAR->msgNode->receiver_status); ?></span></li>
-        <li><label>Priority:</label> <span><?php echo EMessagePriority::label($VAR->msgNode->priority/10); ?></span></li>
+        <li><label>Priority:</label> <span><?php echo EMessagePriority::label($VAR->msgNode->priority); ?></span></li>
         <li><label>Confidential:</label> <span><?php echo EWbfsysConfidential::label($VAR->msgNode->confidential); ?></span></li>
       </ul>
 
@@ -114,11 +114,17 @@ $sForm->hidden('receiver_id', $VAR->msgNode->receiver_id);
     <h3><a href="checklist"  >Checklist</a></h3><!--1-->
     <div class="ac_body np"  >
       <div id="wgt-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>" class="wcm wcm_widget_kvlist" >
-        <var id="wgt-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>-kvl-cfg" >{
-          "save_form":"<?php echo $sForm->id ?>",
+        <var id="wgt-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>-cfg-kvlist" >{
+          "save_form":"wgt-form-save-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>",
           "edit_able":true,
-          "allow_insert": false
+          "srv_delete":"ajax.php?c=Webfrap.Message_Checklist.delete&delid="
         }</var>
+        
+        <form 
+          id="wgt-form-save-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>"
+          method="put"
+          action="ajax.php?c=Webfrap.Message_Checklist.save&msg=<?php echo $VAR->msgNode->msg_id; ?>" ></form>
+        
         <ul class="wgt-list kv wgt-space editor" >
           <li><p><input 
             type="text"
@@ -130,23 +136,39 @@ $sForm->hidden('receiver_id', $VAR->msgNode->receiver_id);
           <li 
             id="wgt-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>-{$id}" 
             eid="" 
-            class="template" ><p 
-              class="kvlac_del" ><i class="icon-remove" ></i></p><span><input 
-                name="checklist[{$id}][value]" type="checkbox" /></span><span 
-                  style="width:145px;" 
-                  name="checklist[{$id}][label]"
-                  class="editable" ></span></li>
+            class="template" ><p><input 
+                name="checklist[{$new}][flag_checked]" 
+                type="checkbox" /><input 
+                name="checklist[{$new}][vid]"
+                value="<?php echo $VAR->msgNode->msg_id; ?>" 
+                type="hidden" /></p><a 
+                  class="kvlac_del" ><i class="icon-remove" ></i></a><span 
+                    style="width:145px;" 
+                    name="checklist[{$new}][label]"
+                    class="editable" ></span></li>
         </ul>
+        <div class="full wgt-space" ><button 
+          class="wgt-button wgac_save_checklist"
+          ><i class="icon-save" ></i> save</button></div>
         <ul class="wgt-list kv wgt-space content" >
-          <li 
-            id="wgt-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>-1" 
-            eid="1" ><p><input 
-              name="checklist[1][value]" 
-              type="checkbox" /></p><span
-                class="kvlac_del"><i class="icon-remove" ></i></span><span 
-                  style="width:145px;" 
-                  name="checklist[1][label]"
-                  class="editable" >Full Day</span></li>
+          <?php foreach( $VAR->checklist as $entry ){ ?>
+            <li 
+              id="wgt-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>-<?php echo $entry['id'] ?>" 
+              eid="<?php echo $entry['id'] ?>" ><p><input 
+                name="checklist[<?php echo $entry['id'] ?>][flag_checked]" 
+                class="asgd-wgt-form-save-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>"
+                <?php echo Wgt::checked('t', $entry['checked']) ?>
+                type="checkbox" /><input 
+                name="checklist[<?php echo $entry['id'] ?>][vid]"
+                value="<?php echo $VAR->msgNode->msg_id; ?>"
+                class="asgd-wgt-form-save-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>"
+                type="hidden" /></p><a
+                  class="kvlac_del"><i class="icon-remove" ></i></a><span 
+                    style="width:145px;" 
+                    name="checklist[<?php echo $entry['id'] ?>][label]"
+                    class="editable" ><?php echo $entry['label'] ?></span></li>
+          <?php } ?>
+          
         </ul>
       </div>
     </div>
@@ -268,7 +290,15 @@ $sForm->hidden('receiver_id', $VAR->msgNode->receiver_id);
     <ul 
       id="wgt-list-show-msg-attach-<?php echo $VAR->msgNode->msg_id; ?>"
       class="wgt-list" >
-      
+     <?php foreach( $VAR->attachments as $attach ){  ?>
+        <li id="wgt-entry-msg-attach-<?php echo $attach['attach_id']; ?>" ><a 
+          target="attach"
+          href="file.php?f=wbfsys_file-name-<?php echo $attach['file_id']; ?>&n=<?php echo base64_encode($attach['file_name'])  ?>" 
+          ><?php echo $attach['file_name']; ?></a><a 
+          class="wcm wcm_req_del" 
+          title="Please confirm you want to delete this Attachment"
+          href="ajax.php?c=Webfrap.Message_Attachment.delete&delid=<?php echo $attach['attach_id']; ?>"  ><i class="icon-remove" ></i></a></li>
+      <?php } ?>
     </ul>
   </div>
   
@@ -323,6 +353,11 @@ self.getObject().find(".wgac_add_attachment").click( function(){
 self.getObject().find(".wgac_add_reference").click( function(){
   $R.get( 'modal.php?c=Webfrap.DataConnector.selection&con=Webfrap.Message.connectDset&cbe=wgt-button-message-addref-<?php echo $VAR->msgNode->msg_id; ?>&dset=<?php echo $VAR->msgNode->msg_id; ?>' );
 });
+
+self.getObject().find(".wgac_save_checklist").click( function(){
+  $S('#wgt-kvl-msg-checklist-<?php echo $VAR->msgNode->msg_id; ?>').kvList('save');
+});
+
 
 self.getObject().find("#wgt-acc-show-msg-<?php echo $VAR->msgNode->msg_id; ?>").accordion({autoHeight: true,fillSpace: true,animated: false, icons:null});
 

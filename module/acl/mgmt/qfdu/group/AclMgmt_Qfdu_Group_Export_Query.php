@@ -218,7 +218,7 @@ class AclMgmt_Qfdu_Group_Export_Query extends LibSqlQuery
     $criteria->where
     (
       "group_users.id_area={$areaId}
-        and (group_users.partial = 0 or group_users.partial is null) "
+        and (group_users.partial = 0) "
     );
 
   }//end public function appendConditions */

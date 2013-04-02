@@ -164,6 +164,10 @@
               class="wcm wcm_req_ajax" >Color Picker</a>
             </li>
             <li><a
+              href="area.php?c=Example.Wgt.area&area=form.multiselect"
+              class="wcm wcm_req_ajax" >Multiselect</a>
+            </li>
+            <li><a
               href="area.php?c=Example.Wgt.area&area=form.wysiwyg"
               class="wcm wcm_req_ajax" >Wysiwyg Editor</a>
             </li>

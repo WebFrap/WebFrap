@@ -379,8 +379,6 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
           AND
           (
             group_users.partial = 0
-            OR
-            group_users.partial is null
           )"
       );
     } elseif ('dset' == $context->groupBy) {
@@ -391,8 +389,6 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
           AND
           (
             group_users.partial = 0
-            OR
-            group_users.partial is null
           )"
       );
     } else {
@@ -403,8 +399,6 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
           AND
           (
             group_users.partial = 0
-            OR
-            group_users.partial is null
           )"
       );
     }

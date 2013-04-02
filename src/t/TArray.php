@@ -158,7 +158,7 @@ class TArray implements ITObject, Iterator, Countable
   /**
    * @see Iterator::current
    */
-  public function current ()
+  public function current()
   {
     return current($this->pool);
   }//end public function current */
@@ -166,7 +166,7 @@ class TArray implements ITObject, Iterator, Countable
   /**
    * @see Iterator::key
    */
-  public function key ()
+  public function key()
   {
     return key($this->pool);
   }//end public function key */
@@ -174,7 +174,7 @@ class TArray implements ITObject, Iterator, Countable
   /**
    * @see Iterator::next
    */
-  public function next ()
+  public function next()
   {
     return next($this->pool);
   }//end public function next */
@@ -182,7 +182,7 @@ class TArray implements ITObject, Iterator, Countable
   /**
    * @see Iterator::rewind
    */
-  public function rewind ()
+  public function rewind()
   {
     reset($this->pool);
   }//end public function rewind */
@@ -190,7 +190,7 @@ class TArray implements ITObject, Iterator, Countable
   /**
    * @see Iterator::valid
    */
-  public function valid ()
+  public function valid()
   {
     return current($this->pool)? true:false;
   }//end public function valid */

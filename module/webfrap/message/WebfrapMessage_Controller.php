@@ -114,6 +114,32 @@ class WebfrapMessage_Controller extends Controller
       'views'      => array('ajax')
     ),
     
+    // archive
+    'archivemessage' => array(
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
+    ),
+    'archiveall' => array(
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
+    ),
+    'archiveselection' => array(
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
+    ),
+    
+    // reopen einen archivierten Datensatz wieder öffnen
+    'reopen' => array(
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
+    ),
+    
+    // spam / ham
+    'setspam' => array(
+      'method'    => array('PUT'),
+      'views'      => array('ajax')
+    ),
+    
     // references
     'addref' => array(
       'method'    => array('PUT'),
@@ -191,6 +217,7 @@ class WebfrapMessage_Controller extends Controller
     }
 
     // create a window
+    /* @var $view WebfrapMessage_List_Maintab_View  */
     $view = $response->loadView(
       'list-message_list',
       'WebfrapMessage_List',
@@ -362,8 +389,7 @@ class WebfrapMessage_Controller extends Controller
     $model->loadTableAccess($params);
 
     if (!$model->access->access) {
-      throw new InvalidRequest_Exception
-      (
+      throw new InvalidRequest_Exception(
         Response::FORBIDDEN_MSG,
         Response::FORBIDDEN
       );
@@ -372,8 +398,7 @@ class WebfrapMessage_Controller extends Controller
     $model->loadMessage($msgId);
 
     // create a window
-    $view   = $response->loadView
-    (
+    $view   = $response->loadView(
       'form-messages-show-'.$msgId,
       'WebfrapMessage',
       'displayContent',
@@ -409,8 +434,7 @@ class WebfrapMessage_Controller extends Controller
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
     $params->contextKey = 'message-user-autocomplete';
 
-    $view  = $response->loadView
-    (
+    $view  = $response->loadView(
       'message-user-ajax',
       'WebfrapMessage',
       'displayUserAutocomplete',
@@ -430,9 +454,6 @@ class WebfrapMessage_Controller extends Controller
   
   
   /**
-   * Standard Service für Autoloadelemente wie zb. Window Inputfelder
-   * Über diesen Service kann analog zu dem Selection / Search Service
-   * Eine gefilterte Liste angefragt werden um Zuweisungen zu vereinfachen
    *
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -465,11 +486,50 @@ class WebfrapMessage_Controller extends Controller
 
   }//end public function service_saveMessage */
   
-
   /**
-   * Standard Service für Autoloadelemente wie zb. Window Inputfelder
-   * Über diesen Service kann analog zu dem Selection / Search Service
-   * Eine gefilterte Liste angefragt werden um Zuweisungen zu vereinfachen
+   *
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_setSpam($request, $response)
+  {
+
+    // resource laden
+    $user     = $this->getUser();
+    $acl      = $this->getAcl();
+
+    // load request parameters an interpret as flags
+    $rqtData = $this->getFlags($request);
+    $msgId = $request->param('objid',Validator::EID);
+    $flagSpam = $request->param('spam',Validator::INT);
+
+  	/* @var $model WebfrapMessage_Model */
+    $model = $this->loadModel('WebfrapMessage');
+    $model->loadTableAccess($rqtData);
+
+    if (!$model->access->access) {
+      throw new InvalidRequest_Exception(
+        'Access denied',
+        Response::FORBIDDEN
+      );
+    }
+    
+    if( 100 == $flagSpam){
+      //wenn spam dann löschen
+      $this->getTpl()->addJsCode(<<<JS
+
+    \$S('#wgt-table-webfrap-groupware_message_row_{$msgId}').remove();
+
+JS
+      );
+    }
+    
+    $model->setSpam($msgId, $flagSpam, $rqtData);
+
+  }//end public function service_saveMessage */
+  
+  /**
    *
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -489,8 +549,7 @@ class WebfrapMessage_Controller extends Controller
 
     $messageId  = $request->param('objid', Validator::EID);
 
-    $resContext->assertNotNull
-    (
+    $resContext->assertNotNull(
       'Missing the Message ID',
       $messageId
     );
@@ -503,11 +562,9 @@ class WebfrapMessage_Controller extends Controller
 
     $model->deleteMessage($messageId);
 
-    //wgt-table-my_message_row_
+    //wgt-table-webfrap-groupware_message_row_
     $tpl->addJsCode(<<<JS
-
-    \$S('#wgt-table-my_message_row_{$messageId}').remove();
-
+    \$S('#wgt-table-webfrap-groupware_message_row_{$messageId}').remove();
 JS
     );
 
@@ -538,10 +595,10 @@ JS
 
     $model->deleteAllMessage();
 
-    //wgt-table-my_message_row_
+    //wgt-table-webfrap-groupware_message_row_
     $tpl->addJsCode(<<<JS
 
-    \$S('table#wgt-table-my_message-table tbody').html('');
+    \$S('table#wgt-table-webfrap-groupware_message-table tbody').html('');
 
 JS
     );
@@ -577,7 +634,7 @@ JS
     $entries = array();
 
     foreach($msgIds as $msgId){
-      $entries[] = "#wgt-table-my_message_row_".$msgId;
+      $entries[] = "#wgt-table-webfrap-groupware_message_row_".$msgId;
     }
 
     $jsCode = "\$S('".implode(', ',$entries)."').remove();";
@@ -869,4 +926,164 @@ JS
 
   }//end public function service_addRef */
   
-} // end class MaintenanceEntity_Controller
+////////////////////////////////////////////////////////////////////////////////
+// Archive
+////////////////////////////////////////////////////////////////////////////////
+  
+  /**
+   *
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_archiveMessage($request, $response)
+  {
+
+    // resource laden
+    $user       = $this->getUser();
+    $acl        = $this->getAcl();
+    $tpl        = $this->getTpl();
+    $resContext = $response->createContext();
+
+    // load request parameters an interpret as flags
+    $params = $this->getFlags($request);
+
+    $messageId  = $request->param('objid', Validator::EID);
+
+    $resContext->assertNotNull(
+      'Missing the Message ID',
+      $messageId
+    );
+
+    if ($resContext->hasError)
+      throw new InvalidRequest_Exception();
+
+    /* @var $model WebfrapMessage_Model */
+    $model  = $this->loadModel('WebfrapMessage');
+
+    $model->archiveMessage($messageId);
+
+    //wgt-table-webfrap-groupware_message_row_
+    $tpl->addJsCode(<<<JS
+    \$S('#wgt-table-webfrap-groupware_message_row_{$messageId}').remove();
+JS
+    );
+
+  }//end public function service_archiveMessage */
+
+  /**
+   * Standard Service für Autoloadelemente wie zb. Window Inputfelder
+   * Über diesen Service kann analog zu dem Selection / Search Service
+   * Eine gefilterte Liste angefragt werden um Zuweisungen zu vereinfachen
+   *
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_archiveAll($request, $response)
+  {
+
+    // resource laden
+    $user       = $this->getUser();
+    $acl        = $this->getAcl();
+    $tpl        = $this->getTpl();
+    
+    $params = $this->getFlags($request);
+
+    /* @var $model WebfrapMessage_Model */
+    $model = $this->loadModel('WebfrapMessage');
+    $model->loadTableAccess($params);
+
+    if (!$model->access->access) {
+      throw new InvalidRequest_Exception(
+        'Access denied',
+        Response::FORBIDDEN
+      );
+    }
+
+    $model->archiveAllMessage();
+
+    //wgt-table-webfrap-groupware_message_row_
+    $tpl->addJsCode(<<<JS
+
+    \$S('table#wgt-table-webfrap-groupware_message-table tbody').html('');
+
+JS
+    );
+
+  }//end public function service_archiveAll */
+
+  /**
+   * Standard Service für Autoloadelemente wie zb. Window Inputfelder
+   * Über diesen Service kann analog zu dem Selection / Search Service
+   * Eine gefilterte Liste angefragt werden um Zuweisungen zu vereinfachen
+   *
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_archiveSelection($request, $response)
+  {
+
+    // resource laden
+    $user       = $this->getUser();
+    $acl        = $this->getAcl();
+    $tpl        = $this->getTpl();
+
+    // load request parameters an interpret as flags
+    $params = $this->getFlags($request);
+
+    $msgIds = $request->param('slct', Validator::EID);
+
+    /* @var $model WebfrapMessage_Model */
+    $model  = $this->loadModel('WebfrapMessage');
+    $model->archiveSelection($msgIds);
+
+    $entries = array();
+
+    foreach($msgIds as $msgId){
+      $entries[] = "#wgt-table-webfrap-groupware_message_row_".$msgId;
+    }
+
+    $jsCode = "\$S('".implode(', ',$entries)."').remove();";
+
+    $tpl->addJsCode($jsCode);
+
+  }//end public function service_archiveSelection */
+  
+  /**
+   *
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_reopen($request, $response)
+  {
+
+    // resource laden
+    $user       = $this->getUser();
+    $acl        = $this->getAcl();
+    $tpl        = $this->getTpl();
+    $resContext = $response->createContext();
+
+    // load request parameters an interpret as flags
+    $params = $this->getFlags($request);
+
+    $messageId  = $request->param('objid', Validator::EID);
+
+    $resContext->assertNotNull(
+      'Missing the Message ID',
+      $messageId
+    );
+
+    if ($resContext->hasError)
+      throw new InvalidRequest_Exception();
+
+    /* @var $model WebfrapMessage_Model */
+    $model  = $this->loadModel('WebfrapMessage');
+
+    $model->archiveMessage($messageId, false);
+
+  }//end public function service_reopen */
+  
+} // end class WebfrapMessage_Controller

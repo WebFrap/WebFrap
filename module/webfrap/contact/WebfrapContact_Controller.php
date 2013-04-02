@@ -35,92 +35,31 @@ class WebfrapContact_Controller extends Controller
   /**
    * @var array
    */
-  protected $options           = array
-  (
-    'openarea' => array
-    (
-      'method'    => array('GET'),
-      'views'      => array('modal')
-    ),
-    'messagelist' => array
-    (
+  protected $options           = array(
+  
+    'list' => array(
       'method'    => array('GET'),
       'views'      => array('maintab')
     ),
-    'searchlist' => array
-    (
+    'formnew' => array(
       'method'    => array('GET'),
-      'views'      => array('ajax')
+      'views'      => array('modal')
     ),
-
-    // message logic
-    'formnew' => array
-    (
-      'method'    => array('GET'),
-      'views'      => array('modal', 'maintab')
-    ),
-    'formshow' => array
-    (
-      'method'    => array('GET'),
-      'views'      => array('modal', 'maintab')
-    ),
-    'showmailcontent' => array
-    (
-      'method'    => array('GET'),
-      'views'      => array('html')
-    ),
-    'sendusermessage' => array
-    (
+    'insert' => array(
       'method'    => array('POST'),
-      'views'      => array('ajax')
-    ),
-
-    'loaduser' => array
-    (
-      'method'    => array('GET'),
-      'views'      => array('ajax')
-    ),
-
-    // form forward
-    'formforward' => array
-    (
-      'method'    => array('GET'),
-      'views'      => array('modal', 'maintab')
-    ),
-
-    'sendforward' => array
-    (
-      'method'    => array('POST'),
-      'views'      => array('ajax')
-    ),
-
-    // form reply
-    'formreply' => array
-    (
-      'method'    => array('GET'),
-      'views'      => array('modal', 'maintab')
-    ),
-
-    'sendreply' => array
-    (
-      'method'    => array('POST'),
-      'views'      => array('ajax')
+      'views'      => array('maintab')
     ),
 
     // delete
-
-    'deletemessage' => array
-    (
+    'delete' => array(
       'method'    => array('DELETE'),
       'views'      => array('ajax')
     ),
-    'deleteall' => array
-    (
+    'deleteall' => array(
       'method'    => array('DELETE'),
       'views'      => array('ajax')
     ),
-    'deleteselection' => array
-    (
+    'deleteselection' => array(
       'method'    => array('DELETE'),
       'views'      => array('ajax')
     ),
@@ -137,76 +76,15 @@ class WebfrapContact_Controller extends Controller
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_openArea($request, $response)
+  public function service_list($request, $response)
   {
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFlags($request);
-
-    // create a window
-    $view   = $response->loadView
-    (
-      'list-messages',
-      'WebfrapMessage',
-      'displayOpen',
-      View::AJAX
-    );
-    $view->setModel($this->loadModel('WebfrapMessage'));
-
-   $view->displayOpen($domainNode, $params);
-
-  }//end public function service_showMeta */
-
- /**
-  * create an new window with an edit form for the enterprise_company entity
-  * @param LibRequestHttp $request
-  * @param LibResponseHttp $response
-  * @return boolean
-  */
-  public function service_messageList($request, $response)
-  {
-
-    // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = new WebfrapMessage_Table_Search_Request($request);
-
-    $model = $this->loadModel('WebfrapMessage');
-    $model->params = $params;
-    $model->loadTableAccess($params);
-
-    if (!$model->access->listing) {
-      throw new InvalidRequest_Exception (
-        Response::FORBIDDEN_MSG,
-        Response::FORBIDDEN
-      );
-    }
-
-    // create a window
-    $view = $response->loadView(
-      'list-message_list',
-      'WebfrapMessage_List',
-      'displayList',
-      View::MAINTAB
-    );
+    $usrRqt  = new WebfrapContact_List_Request($request);
     
-    $view->setModel($this->loadModel('WebfrapMessage'));
-    $view->displayList($params);
-
-  }//end public function service_messageList */
-
- /**
-  * create an new window with an edit form for the enterprise_company entity
-  * @param LibRequestHttp $request
-  * @param LibResponseHttp $response
-  * @return boolean
-  */
-  public function service_searchList($request, $response)
-  {
-
-    // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = new WebfrapMessage_Table_Search_Request($request);
-
-    $model = $this->loadModel('WebfrapMessage');
-    $model->loadTableAccess($params);
+    /* @var $model WebfrapContact_Model */
+    $model = $this->loadModel('WebfrapContact');
+    $model->loadTableAccess($usrRqt);
 
     if (!$model->access->listing) {
       throw new InvalidRequest_Exception(
@@ -215,28 +93,19 @@ class WebfrapContact_Controller extends Controller
       );
     }
 
-    // create a window
+    /* @var $view WebfrapContact_List_Maintab_View */
     $view = $response->loadView(
-      'list-message_list',
-      'WebfrapMessage_List',
-      'displaySearch',
-      View::AJAX
+      'webfrap-contact-list',
+      'WebfrapContact_List',
+      'displayList'
     );
-
-    $model = $this->loadModel('WebfrapMessage');
-    $view->setModel($model);
-      
-    $model->params = $params;
     
-    // request
-    $model->conditions['free'] = $request->param('free_search', Validator::SEARCH);
-    $model->conditions['filters']['channel'] = $request->param('channel', Validator::BOOLEAN);
-    $model->conditions['filters']['mailbox'] = $request->param('mailbox', Validator::CKEY);
-    $model->conditions['filters']['archive'] = $request->param('archive', Validator::BOOLEAN);
+    $view->setModel($model);
 
-    $view->displaySearch($params);
+    $view->displayList($usrRqt);
 
-  }//end public function service_searchList */
+  }//end public function service_list */
+
 
  /**
   * Form zum erstellen einer neuen Message
@@ -250,33 +119,89 @@ class WebfrapContact_Controller extends Controller
     // prüfen ob irgendwelche steuerflags übergeben wurde
     $params  = $this->getFlags($request);
 
-    $model = $this->loadModel('WebfrapMessage');
+    /* @var $model WebfrapContact_Model */
+    $model = $this->loadModel('WebfrapContact');
     $model->loadTableAccess($params);
 
     if (!$model->access->listing) {
-      throw new InvalidRequest_Exception
-      (
+      throw new InvalidRequest_Exception(
         Response::FORBIDDEN_MSG,
         Response::FORBIDDEN
       );
     }
 
     // create a window
-    $view   = $response->loadView
-    (
+    $view   = $response->loadView(
       'form-messages-new',
-      'WebfrapMessage_New',
+      'WebfrapContact_New',
       'displayNew'
     );
 
     // request bearbeiten
-    /* @var $model WebfrapMessage_Model */
-    $model = $this->loadModel('WebfrapMessage');
     $view->setModel($model);
 
     $view->displayNew($params);
 
   }//end public function service_formNew */
+  
+  
+ /**
+  * Form zum anschauen einer Nachricht
+  * @param LibRequestHttp $request
+  * @param LibResponseHttp $response
+  * @return boolean
+  */
+  public function service_insert($request, $response)
+  {
+
+    // prüfen ob irgendwelche steuerflags übergeben wurde
+    $userRqt  = new WebfrapContact_Save_Request($request);
+
+    /* @var $model WebfrapContact_Model */
+    $model = $this->loadModel('WebfrapContact');
+    $model->loadTableAccess($userRqt);
+
+    if (!$model->access->access) {
+      throw new InvalidRequest_Exception(
+        Response::FORBIDDEN_MSG,
+        Response::FORBIDDEN
+      );
+    }
+
+    $model->insert($userRqt);
+
+    /* @var $view Li */
+    $view   = $response->loadView(
+      'form-messages-show-'.$msgId,
+      'WebfrapContact_Tile',
+      'displayEntry'
+    );
+    $view->setModel($model);
+
+    $view->displayEntry($params, true);
+
+  }//end public function service_insert */
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
 
  /**
   * Form zum anschauen einer Nachricht
@@ -328,47 +253,8 @@ class WebfrapContact_Controller extends Controller
 
   }//end public function service_formShow */
 
- /**
-  * Form zum anschauen einer Nachricht
-  * @param LibRequestHttp $request
-  * @param LibResponseHttp $response
-  * @return boolean
-  */
-  public function service_showMailContent($request, $response)
-  {
 
-    // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFlags($request);
-
-    $msgId = $request->param('objid', Validator::EID);
-
-    /* @var $model WebfrapMessage_Model */
-    $model = $this->loadModel('WebfrapMessage');
-    $model->loadTableAccess($params);
-
-    if (!$model->access->access) {
-      throw new InvalidRequest_Exception
-      (
-        Response::FORBIDDEN_MSG,
-        Response::FORBIDDEN
-      );
-    }
-
-    $model->loadMessage($msgId);
-
-    // create a window
-    $view   = $response->loadView
-    (
-      'form-messages-show-'.$msgId,
-      'WebfrapMessage',
-      'displayContent',
-      View::HTML
-    );
-    $view->setModel($this->loadModel('WebfrapMessage'));
-
-    $view->displayContent($params);
-
-  }//end public function service_showMailContent */
+ 
 
   /**
    * Standard Service für Autoloadelemente wie zb. Window Inputfelder
@@ -379,50 +265,7 @@ class WebfrapContact_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_loadUser($request, $response)
-  {
-
-    // resource laden
-    $user     = $this->getUser();
-    $acl      = $this->getAcl();
-
-
-    // load request parameters an interpret as flags
-    $params = $this->getFlags($request);
-
-    // der contextKey wird benötigt um potentielle Konflikte in der UI
-    // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
-    $params->contextKey = 'message-user-autocomplete';
-
-    $view  = $response->loadView
-    (
-      'message-user-ajax',
-      'WebfrapMessage',
-      'displayUserAutocomplete',
-      View::AJAX
-    );
-    /* @var $model Example_Model */
-    $model  = $this->loadModel('WebfrapMessage');
-    //$model->setAccess($access);
-    $view->setModel($model);
-
-    $searchKey  = $this->request->param('key', Validator::TEXT);
-
-    $view->displayUserAutocomplete($searchKey, $params);
-
-
-  }//end public function service_loadUser */
-
-  /**
-   * Standard Service für Autoloadelemente wie zb. Window Inputfelder
-   * Über diesen Service kann analog zu dem Selection / Search Service
-   * Eine gefilterte Liste angefragt werden um Zuweisungen zu vereinfachen
-   *
-   * @param LibRequestHttp $request
-   * @param LibResponseHttp $response
-   * @return void
-   */
-  public function service_deleteMessage($request, $response)
+  public function service_delete($request, $response)
   {
 
     // resource laden
@@ -436,8 +279,7 @@ class WebfrapContact_Controller extends Controller
 
     $messageId  = $request->param('objid', Validator::EID);
 
-    $resContext->assertNotNull
-    (
+    $resContext->assertNotNull(
       'Missing the Message ID',
       $messageId
     );
@@ -458,7 +300,7 @@ class WebfrapContact_Controller extends Controller
 JS
     );
 
-  }//end public function service_deleteMessage */
+  }//end public function service_delete */
 
   /**
    * Standard Service für Autoloadelemente wie zb. Window Inputfelder

@@ -52,8 +52,7 @@ class AclMgmt_SyncAssignment_Query extends LibSqlQuery
       $criteria = $this->criteria;
     }
 
-    $cols = array
-    (
+    $cols = array(
       'wbfsys_group_users.rowid as "wbfsys_group_users_rowid"',
       'wbfsys_group_users.vid as "wbfsys_group_users_vid"',
       'wbfsys_group_users.id_user as "wbfsys_group_users_id_user"',
@@ -66,8 +65,7 @@ class AclMgmt_SyncAssignment_Query extends LibSqlQuery
 
     $criteria->from('wbfsys_group_users');
 
-    $criteria->where
-    (
+    $criteria->where(
       "wbfsys_group_users.id_area={$areaId} and wbfsys_group_users.partial = 0"
     );
 

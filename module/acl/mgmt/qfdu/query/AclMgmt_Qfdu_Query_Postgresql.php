@@ -65,7 +65,7 @@ class AclMgmt_Qfdu_Query_Postgresql extends LibSqlQuery
   WHERE
     wbfsys_security_access.id_area = {$areaId}
     and
-      (wbfsys_security_access.partial = 0 or wbfsys_security_access.partial is null)
+      (wbfsys_security_access.partial = 0)
 SQL;
 
     $this->result = $db->select($sql);
@@ -138,7 +138,7 @@ SQL;
                 wbfsys_group_users.id_area IS null
             )
             AND
-              (wbfsys_group_users.partial = 0 OR wbfsys_group_users.partial IS null)
+              (wbfsys_group_users.partial = 0)
     )
   LIMIT 10;
 SQL;

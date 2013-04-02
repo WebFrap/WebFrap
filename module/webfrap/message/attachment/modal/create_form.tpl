@@ -16,6 +16,8 @@ $typeData->fetchSelectbox( );
 $confidentialData = $uplForm->loadQuery( 'WbfsysConfidentialityLevel_Selectbox' );
 $confidentialData->fetchSelectbox();
 
+$uplForm->hidden('msg', $VAR->msgId);
+
 ?>
 
 <fieldset>
@@ -27,17 +29,18 @@ $confidentialData->fetchSelectbox();
     </tr>
     <tr>
       <td valign="top" >
-        <?php $uplForm->selectboxByKey( 
-        		'Type', 
-        		'type', 
-        		'WebfrapFileType_Selectbox', 
+        <?php 
+        $uplForm->selectboxByKey( 
+      		'Type', 
+      		'type', 
+      		'WebfrapFileType_Selectbox', 
           $typeData->getAll()  
-        ); ?>
-        <?php $uplForm->selectboxByKey
-        ( 
-        		'Confidentiality Level', 
-        		'id_confidentiality', 
-        		'WbfsysConfidentialityLevel_Selectbox', 
+        );
+        
+        $uplForm->selectboxByKey( 
+      		'Confidentiality Level', 
+      		'id_confidentiality', 
+      		'WbfsysConfidentialityLevel_Selectbox', 
           $confidentialData->getAll(),
           $orm->getIdByKey( 'WbfsysConfidentialityLevel', 'public' )   
         ); ?>

@@ -72,7 +72,7 @@ class LibAcl_Db_Loader_Model extends LibAcl_Db_Model
       wbfsys_group_users.id_group       = wbfsys_role_group.rowid
         AND wbfsys_group_users.id_area  is null
         AND wbfsys_group_users.vid      is null
-        AND (wbfsys_group_users.partial = 0 or wbfsys_group_users.partial is null  )
+        AND (wbfsys_group_users.partial = 0)
 SQL;
 
     } elseif (is_null($id) || (is_object($id) && !$id->getId())  ) {
@@ -89,7 +89,7 @@ SQL;
     wbfsys_group_users
     ON
       wbfsys_group_users.id_group = wbfsys_role_group.rowid
-        AND (wbfsys_group_users.partial = 0 or wbfsys_group_users.partial is null  )
+        AND (wbfsys_group_users.partial = 0)
 
   LEFT JOIN
     wbfsys_security_area
@@ -131,7 +131,7 @@ SQL;
     wbfsys_group_users
     ON
       wbfsys_group_users.id_group = wbfsys_role_group.rowid
-        AND (wbfsys_group_users.partial = 0 or wbfsys_group_users.partial is null  )
+        AND (wbfsys_group_users.partial = 0)
 
   LEFT JOIN
     wbfsys_security_area
@@ -237,7 +237,7 @@ SQL;
       wbfsys_group_users.id_group = wbfsys_role_group.rowid
         and wbfsys_group_users.id_area is null
         and wbfsys_group_users.vid is null
-        and (wbfsys_group_users.partial = 0 or wbfsys_group_users.partial is null)
+        and (wbfsys_group_users.partial = 0)
 SQL;
 
     } elseif (is_null($id)) {
@@ -250,7 +250,7 @@ SQL;
     wbfsys_group_users
     ON
       wbfsys_group_users.id_group = wbfsys_role_group.rowid
-        AND (wbfsys_group_users.partial = 0 or wbfsys_group_users.partial is null)
+        AND (wbfsys_group_users.partial = 0)
 
   LEFT JOIN
     wbfsys_security_area
@@ -293,7 +293,7 @@ SQL;
     wbfsys_group_users
     ON
       wbfsys_group_users.id_group = wbfsys_role_group.rowid
-        AND (wbfsys_group_users.partial = 0 or wbfsys_group_users.partial is null)
+        AND (wbfsys_group_users.partial = 0)
 
   LEFT JOIN
     wbfsys_security_area
@@ -839,7 +839,7 @@ SQL;
     wbfsys_group_users
     ON
       wbfsys_group_users.id_group = wbfsys_role_group.rowid
-        AND (wbfsys_group_users.partial = 0 or wbfsys_group_users.partial is null)
+        AND (wbfsys_group_users.partial = 0)
 {$areaCheck}
   WHERE
     wbfsys_group_users.id_user = {$userId}
@@ -888,7 +888,7 @@ SQL;
     wbfsys_group_users
     ON
       wbfsys_group_users.id_group = wbfsys_role_group.rowid
-        AND (wbfsys_group_users.partial = 0 or wbfsys_group_users.partial is null)
+        AND (wbfsys_group_users.partial = 0)
 
   JOIN
     wbfsys_security_area
@@ -915,7 +915,7 @@ SQL;
     wbfsys_group_users
     ON
       wbfsys_group_users.id_group = wbfsys_role_group.rowid
-        and (wbfsys_group_users.partial = 0 or wbfsys_group_users.partial is null)
+        and (wbfsys_group_users.partial = 0)
 
   JOIN
     wbfsys_security_area
@@ -995,7 +995,7 @@ SQL;
     wbfsys_group_users
     ON
       wbfsys_group_users.id_group = wbfsys_role_group.rowid
-        and (wbfsys_group_users.partial = 0 or wbfsys_group_users.partial is null)
+        and (wbfsys_group_users.partial = 0)
 
   JOIN
     wbfsys_security_area
@@ -1022,7 +1022,7 @@ SQL;
     wbfsys_group_users
     ON
       wbfsys_group_users.id_group = wbfsys_role_group.rowid
-        and (wbfsys_group_users.partial = 0 or wbfsys_group_users.partial is null)
+        and (wbfsys_group_users.partial = 0)
 
   JOIN
     wbfsys_security_area
@@ -1103,7 +1103,7 @@ SQL;
     wbfsys_group_users
     ON
       wbfsys_group_users.id_group = wbfsys_role_group.rowid
-        AND (wbfsys_group_users.partial = 0 or wbfsys_group_users.partial is null)
+        AND (wbfsys_group_users.partial = 0)
 
   LEFT JOIN
     wbfsys_security_area
@@ -1318,7 +1318,7 @@ SQL;
         and wbfsys_group_users.id_area = wbfsys_security_area.rowid
         and {$areaKeys}
         and wbfsys_group_users.vid IN({$checkKeys})
-        and (wbfsys_group_users.partial = 0 or wbfsys_group_users.partial is null)
+        and (wbfsys_group_users.partial = 0)
 
 SQL;
 
@@ -1390,7 +1390,7 @@ SQL;
     wbfsys_group_users
     ON
       wbfsys_group_users.id_group = wbfsys_role_group.rowid
-        and (wbfsys_group_users.partial = 0 or wbfsys_group_users.partial is null)
+        and (wbfsys_group_users.partial = 0)
 
   JOIN
     wbfsys_security_area
@@ -1857,7 +1857,7 @@ SQL;
     if ($partial) {
       $checkPartial = '';
     } else {
-      $checkPartial = ' AND (acl_access.partial = 0 OR acl_access.partial is null)';
+      $checkPartial = ' AND (acl_access.partial = 0)';
     }
 
 
@@ -1943,8 +1943,8 @@ SQL;
       $checkPartial     = '';
       $checkUserPartial = '';
     } else {
-      $checkPartial     = ' AND (acl_access.partial = 0 OR acl_access.partial is null)';
-      $checkUserPartial = ' AND (acl_gu.partial = 0 OR acl_gu.partial is null)';
+      $checkPartial     = ' AND (acl_access.partial = 0)';
+      $checkUserPartial = ' AND (acl_gu.partial = 0)';
     }
 
     if (is_null($entity)) {
@@ -2039,7 +2039,7 @@ SQL;
     upper("acl-area") in({$areaKeys})
       and "acl-user" = {$userId}
       and "acl-vid" is null
-      and ("assign-partial" = 0 OR "assign-partial" IS NULL)
+      and ("assign-partial" = 0)
 
 SQL;
 
@@ -2068,7 +2068,7 @@ SQL;
   WHERE
     upper("acl-area") in({$areaKeys})
       and "acl-user" = {$userId}
-      and ("assign-partial" = 0 OR "assign-partial" IS NULL)
+      and ("assign-partial" = 0)
       and
       (
         "acl-vid" = {$entity}
@@ -2221,8 +2221,8 @@ JOIN
 WHERE
     UPPER(wbfsys_security_area.access_key) in({$areaKeys})
       AND acl_gu.id_user = {$userId}
-      AND (acl_gu.partial = 0 OR acl_gu.partial IS NULL)
-      AND (acl_access.partial = 0 OR acl_access.partial IS NULL)
+      AND (acl_gu.partial = 0)
+      AND (acl_access.partial = 0)
       {$whereGroup}
       {$whereVid}
 

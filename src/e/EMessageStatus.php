@@ -33,12 +33,12 @@ class EMessageStatus
   /**
    * @var int
    */
-  const OPEN = 2;
+  const UPDATED = 2;
 
   /**
    * @var int
    */
-  const UPDATED = 3;
+  const OPEN = 3;
 
   /**
    * @var int
@@ -50,8 +50,8 @@ class EMessageStatus
    */
   public static $labels = array(
     self::IS_NEW   => 'New',
-    self::OPEN     => 'Opened',
     self::UPDATED  => 'Updated',
+    self::OPEN     => 'Opened',
     self::ARCHIVED => 'Archived',
   );
 

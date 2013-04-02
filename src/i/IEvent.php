@@ -16,8 +16,6 @@
 *******************************************************************************/
 
 /**
- * Abstract Class For SysExtention Controllers
- *
  * @package WebFrap
  * @subpackage tech_core
  */
@@ -25,19 +23,19 @@ interface IEvent
 {
 
   /**
+   * @param string $event
    * fire an event
-   *
    */
   public function fireEvent($event);
 
   /**
-   * Enter description here...
-   *
+   * @param string $event
+   * @param string $eventName
+   * @param string $action
    */
   public static function addEvent($event , $eventName , $action);
+  
   /**
-   * Enter description here...
-   *
    */
   public static function saveEvent();
 

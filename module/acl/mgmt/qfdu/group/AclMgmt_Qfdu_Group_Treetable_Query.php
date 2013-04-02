@@ -312,8 +312,6 @@ class AclMgmt_Qfdu_Group_Treetable_Query extends LibSqlQuery
           AND
           (
             group_users.partial = 0
-            OR
-            group_users.partial is null
           )"
       );
 
@@ -327,8 +325,6 @@ class AclMgmt_Qfdu_Group_Treetable_Query extends LibSqlQuery
           AND
           (
             group_users.partial = 0
-            OR
-            group_users.partial is null
           )"
       );
 
@@ -336,7 +332,7 @@ class AclMgmt_Qfdu_Group_Treetable_Query extends LibSqlQuery
       $criteria->where
       (
         "group_users.id_area={$areaId}
-          and (group_users.partial = 0 or group_users.partial is null) "
+          and (group_users.partial = 0) "
       );
 
     }

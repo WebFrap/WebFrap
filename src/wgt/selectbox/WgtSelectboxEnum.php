@@ -169,6 +169,11 @@ class WgtSelectboxEnum extends WgtSelectbox
         $this->attributes['class'] = $this->semanticClass;
       }
     }
+    
+
+    $this->attributes['class'] = isset($this->attributes['class'])
+      ? $this->attributes['class'].' wcm wcm_widget_selectbox'
+      : 'wcm wcm_widget_selectbox';
 
     $attributes = $this->asmAttributes();
     $required   = $this->required?'<span class="wgt-required">*</span>':'';

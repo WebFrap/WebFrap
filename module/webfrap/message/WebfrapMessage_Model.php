@@ -137,6 +137,7 @@ select
 
 FROM
   wbfsys_message msg
+  
 JOIN
 	wbfsys_message_receiver receiver
 		ON receiver.id_message = msg.rowid
@@ -164,7 +165,7 @@ SQL;
     if ($node) {
 
       // auf open setzen wenn noch closed
-      if ($setOpen && EMessageStatus::IS_NEW == $node['receiver_status'] ){
+      if ($setOpen && EMessageStatus::OPEN > $node['receiver_status'] ){
         $db->update("UPDATE wbfsys_message_receiver set status =".EMessageStatus::OPEN." WHERE rowid = ".$node['receiver_id'] );
         $node['receiver_status'] = EMessageStatus::OPEN;
       }
@@ -231,31 +232,25 @@ SQL;
 
     $sql = <<<SQL
 
-SELECT
-  attach.rowid as attach_id,
-  file.rowid  as file_id,
+select
+  file.rowid as file_id,
   file.name as file_name,
-  file.file_size as file_size,
-  file.mimetype as mimetype,
-  file.description as description
-
+	attach.rowid as attach_id
 FROM
-  wbfsys_entity_attachment attach
-
-JOIN
   wbfsys_file file
-    on file.rowid = attach.id_file
+  
+JOIN
+	wbfsys_entity_attachment attach
+		ON attach.id_file = file.rowid
 
 WHERE
-	vid = {$msgId}
-ORDER BY
-  file.name desc;
+  attach.vid = {$msgId};
 
 SQL;
 
-    $attachments = $db->select($sql)->getAll();
+    //$references = $db->select($sql)->getAll();
 
-    return $attachments;
+    return $db->select($sql);
 
   }//end public function loadMessageAttachments */
 
@@ -400,6 +395,7 @@ SQL;
   {
 
     $orm = $this->getOrm();
+    $db = $this->getDb();
     $user = $this->getUser();
     
     foreach($rqtData->aspects as $aspect){
@@ -415,6 +411,9 @@ SQL;
     	'WbfsysMessageAspect', 
     	" id_receiver={$user->getId()} AND id_message={$messageId} AND NOT aspect IN(".implode(', ',$rqtData->aspects).") " 
     );
+    
+    $msgNode = $orm->get('WbfsysMessage',$messageId);
+    
 
     
     // task data speichern
@@ -470,47 +469,111 @@ SQL;
     $entRecv = $orm->get('WbfsysMessageReceiver', $rqtData->receiverId);
     $entRecv->addData($rqtData->receiverData);
     $orm->save($entRecv);
+    
+    $mainAspect = 0;
+    
+    if( in_array(EMessageAspect::MESSAGE, $rqtData->aspects) )
+      $mainAspect = EMessageAspect::MESSAGE;
+    elseif ( in_array(EMessageAspect::DOCUMENT, $rqtData->aspects) ) {
+      $mainAspect = EMessageAspect::DOCUMENT;
+    } else {
+      $mainAspect = EMessageAspect::DISCUSSION;
+    }
+    
+    if( $msgNode->main_aspect != $mainAspect ){
+      $msgNode->main_aspect = $mainAspect;
+      $msgNode->id_sender_status = EMessageStatus::UPDATED;
+      
+      $orm->save($msgNode);
+    }
+    
+    $tmpUSt = EMessageStatus::UPDATED;
+    $tmpASt = EMessageStatus::ARCHIVED;
+    
+    // alle nicht archivierten oder gelöschten receiver updaten
+    $sql = <<<SQL
+UPDATE wbfsys_message_receiver 
+	set status = {$tmpUSt}
+WHERE
+	id_message = {$messageId}
+	AND ( NOT status = {$tmpASt} OR flag_deleted  = true );
+SQL;
+    
+    $db->update($sql);
 
   }//ebnd public function saveMessage 
 
   /**
-   *
    * @param int $messageId
-   * @throws Per
    */
   public function deleteMessage($messageId)
   {
-
+    
+    $db = $this->getDb();
     $orm = $this->getOrm();
     $user = $this->getUser();
+    
+    // erst mal eventuelle receiver & aspekte des users löschen
+    $orm->deleteWhere( 'WbfsysMessageReceiver', 'vid = '.$user->getId().' and id_message = '.$messageId );
+    $orm->deleteWhere('WbfsysMessageAspect', 'id_message='.$messageId.' and id_receiver = '.$user->getId() );
+    
+    $sql = <<<SQL
+SELECT 
+	msg.flag_sender_deleted,
+	msg.id_sender,
+	count(recv.rowid) as num_receiver
+FROM 
+	wbfsys_message msg
+LEFT JOIN
+	wbfsys_message_receiver recv
+		ON recv.id_message = msg.rowid AND recv.vid = {$user->getId()}
+WHERE
+ 	msg.rowid = {$messageId}
+ 		AND NOT recv.flag_deleted = true
+GROUP BY
+	msg.id_sender,
+	msg.flag_sender_deleted
+SQL;
 
-    $msg = $orm->get('WbfsysMessage', $messageId  );
-
-    if ($msg->id_receiver == $user->getId()) {
-      $msg->flag_receiver_deleted = true;
-    } elseif ($msg->id_sender == $user->getId()) {
-      $msg->flag_sender_deleted = true;
+    $tmpData = $db->select($sql)->get();
+    
+    if (!$tmpData) {
+      // ok sollte nicht passieren
+      return;
+    }
+    
+    if( $tmpData['id_sender'] == $user->getId() ){
+      
+      // nur löschen wenn keine receiver mehr da sind
+      if( $tmpData['num_receiver'] ){
+        $orm->update( 'WbfsysMessage', $messageId, array('flag_sender_deleted'=>true) );
+        return;
+      }
+      
+    } else {
+      
+      // löschen wenn deleted flag
+      if( 't' != $tmpData['flag_sender_deleted'] ){
+        return;
+      }
+      
     }
 
-    // wenn sender und receiver löschen, dann brauchen wir die message nichtmehr
-    if ($msg->flag_receiver_deleted && $msg->flag_sender_deleted) {
-      $orm->delete('WbfsysMessage', $messageId);
-    }
+    $orm->delete('WbfsysMessage', $messageId);
     
     // referenz tabellen leeren
-    $orm->deleteWhere('WbfsysMessageAspect', 'id_message='.$messageId);
-    $orm->deleteWhere('WbfsysTask', 'id_message='.$messageId);
-    $orm->deleteWhere('WbfsysAppointment', 'id_message='.$messageId);
-    $orm->deleteWhere('WbfsysMessageReceiver', 'vid='.$messageId);
-    $orm->deleteWhere('WbfsysDataIndex', 'vid='.$messageId);
-    
+    $orm->deleteWhere('WbfsysMessageAspect', 'id_message='.$messageId); // aspekt flags
+    $orm->deleteWhere('WbfsysTask', 'id_message='.$messageId); // eventueller task aspekt
+    $orm->deleteWhere('WbfsysAppointment', 'id_message='.$messageId); // eventueller appointment aspekt
+    $orm->deleteWhere('WbfsysMessageReceiver', 'vid='.$messageId); // alle receiver
+    $orm->deleteWhere('WbfsysDataIndex', 'vid='.$messageId); // fulltext index der db
+    $orm->deleteWhere('WbfsysDataLink', 'vid='.$messageId); // referenzen
+    $orm->deleteWhere('WbfsysEntityAttachment', 'vid='.$messageId); // attachments
     
   }//ebnd public function deleteMessage 
 
   /**
-   *
    * @param int $messageId
-   * @throws Per
    */
   public function deleteAllMessage()
   {
@@ -520,13 +583,46 @@ SQL;
     $userID = $user->getId();
 
     $queries = array();
-    $queries[] = 'UPDATE wbfsys_message set flag_receiver_deleted = true WHERE id_receiver = '.$userID;
-    $queries[] = 'UPDATE wbfsys_message set flag_sender_deleted = true WHERE id_sender = '.$userID;
-    $queries[] = 'DELETE FROM wbfsys_message WHERE id_sender = '.$userID.' OR id_receiver = '.$userID;
+    $queries[] = 'UPDATE wbfsys_message set flag_sender_deleted = true WHERE id_sender = '.$userID.';';
+    $queries[] = 'DELETE FROM wbfsys_message_receiver WHERE vid = '.$userID.';';
+    $queries[] = 'DELETE FROM wbfsys_message_aspect WHERE id_receiver = '.$userID.';';
 
     foreach ($queries as $query){
       $db->exec($query);
     }
+    
+    // alle 
+    $sql = <<<SQL
+SELECT 
+	msg.rowid as msg_id
+FROM
+	wbfsys_message msg
+JOIN
+	wbfsys_message_receiver recv
+		ON recv.id_message = msg.rowid
+having count(recv.rowid) = 0
+WHERE
+	msg.id_sender = {$userID} 
+SQL;
+    
+    
+    $messages = $db->select($sql);
+    
+    $msgIds = array();
+    
+    foreach( $messages as $msg ){
+      $msgIds[] = $msg['msg_id'];
+    }
+    
+    $whereString = implode(', ', $msgIds);
+    
+    $orm->deleteWhere('WbfsysMessageAspect', 'id_message IN('.$whereString.')'); // aspekt flags
+    $orm->deleteWhere('WbfsysTask', 'id_message IN('.$whereString.')'); // eventueller task aspekt
+    $orm->deleteWhere('WbfsysAppointment', 'id_message IN('.$whereString.')'); // eventueller appointment aspekt
+    $orm->deleteWhere('WbfsysMessageReceiver', 'id_message IN('.$whereString.')'); // alle receiver
+    $orm->deleteWhere('WbfsysDataIndex', 'id_message IN('.$whereString.')'); // fulltext index der db
+    $orm->deleteWhere('WbfsysDataLink', 'id_message IN('.$whereString.')'); // referenzen
+    $orm->deleteWhere('WbfsysEntityAttachment', 'id_message IN('.$whereString.')'); // attachments
 
   }//end public function deleteAllMessage */
 
@@ -548,15 +644,139 @@ SQL;
     $sqlIds = implode(', ', $msgIds);
 
     $queries = array();
-    $queries[] = 'UPDATE wbfsys_message set flag_receiver_deleted = true WHERE id_receiver = '.$userID.' AND rowid IN('.$sqlIds.')';
-    $queries[] = 'UPDATE wbfsys_message set flag_sender_deleted = true WHERE id_sender = '.$userID.' AND rowid IN('.$sqlIds.')';
-    $queries[] = 'DELETE FROM wbfsys_message WHERE (id_sender = '.$userID.' OR id_receiver = '.$userID.') AND rowid IN('.$sqlIds.')';
+    $queries[] = 'UPDATE wbfsys_message set flag_sender_deleted = true WHERE id_sender = '.$userID.' AND rowid IN('.$sqlIds.');';
+    $queries[] = 'DELETE FROM wbfsys_message_receiver WHERE vid = '.$userID.' AND id_message IN('.$sqlIds.');';
+    $queries[] = 'DELETE FROM wbfsys_message_aspect WHERE id_receiver = '.$userID.' AND id_message IN('.$sqlIds.');';
+
+    foreach ($queries as $query) {
+      $db->exec($query);
+    }
+    
+    // alle 
+    $sql = <<<SQL
+SELECT 
+	msg.rowid as msg_id
+FROM
+	wbfsys_message msg
+JOIN
+	wbfsys_message_receiver recv
+		ON recv.id_message = msg.rowid
+having count(recv.rowid) = 0
+WHERE
+	msg.id_sender = {$userID} AND msg.rowid IN({$sqlIds})
+SQL;
+    
+    
+    $messages = $db->select($sql);
+    
+    $msgIds = array();
+    
+    foreach( $messages as $msg ){
+      $msgIds[] = $msg['msg_id'];
+    }
+    
+    // wenn keine msg ids dann sind wir fertig
+    if(!$msgIds)
+      return;
+    
+    $whereString = implode(', ', $msgIds);
+    
+    $orm->deleteWhere('WbfsysMessageAspect', 'id_message IN('.$whereString.')'); // aspekt flags
+    $orm->deleteWhere('WbfsysTask', 'id_message IN('.$whereString.')'); // eventueller task aspekt
+    $orm->deleteWhere('WbfsysAppointment', 'id_message IN('.$whereString.')'); // eventueller appointment aspekt
+    $orm->deleteWhere('WbfsysMessageReceiver', 'id_message IN('.$whereString.')'); // alle receiver
+    $orm->deleteWhere('WbfsysDataIndex', 'id_message IN('.$whereString.')'); // fulltext index der db
+    $orm->deleteWhere('WbfsysDataLink', 'id_message IN('.$whereString.')'); // referenzen
+    $orm->deleteWhere('WbfsysEntityAttachment', 'id_message IN('.$whereString.')'); // attachments
+
+  }//end public function deleteSelection */
+  
+  /**
+   * Alle Nachrichten des Users Archivieren
+   */
+  public function archiveAllMessage()
+  {
+
+    $db = $this->getDb();
+    $user = $this->getUser();
+    $userID = $user->getId();
+
+    $queries = array();
+    $queries[] = 'UPDATE wbfsys_message set id_sender_status = '.EMessageStatus::ARCHIVED.' WHERE id_sender = '.$userID.';';
+    $queries[] = 'UPDATE wbfsys_message_receiver set status = '.EMessageStatus::ARCHIVED.' WHERE vid = '.$userID.';';
+
+    foreach ($queries as $query){
+      $db->exec($query);
+    }
+
+  }//end public function archiveAllMessage */
+
+  /**
+   * Eine Auswahl von Nachrichten Archivieren
+   * @param int $msgIds
+   */
+  public function archiveSelection($msgIds)
+  {
+
+    $db = $this->getDb();
+    $user = $this->getUser();
+    $userID = $user->getId();
+
+    if (!$msgIds)
+      return;
+
+    $sqlIds = implode(', ', $msgIds);
+
+    $queries = array();
+    $queries[] = 'UPDATE wbfsys_message set id_sender_status = '.EMessageStatus::ARCHIVED.' WHERE id_sender = '.$userID.' AND rowid IN('.$sqlIds.')';
+    $queries[] = 'UPDATE wbfsys_message_receiver set status = '.EMessageStatus::ARCHIVED.' WHERE vid = '.$userID.' AND rowid IN('.$sqlIds.')';
 
     foreach ($queries as $query) {
       $db->exec($query);
     }
 
-  }//end public function deleteSelection */
+  }//end public function archiveSelection */
+  
+  /**
+   * @param int $messageId
+   * @param boolean $archive archive or reopen
+   */
+  public function archiveMessage($messageId, $archive)
+  {
+    
+    $db = $this->getDb();
+    $orm = $this->getOrm();
+    $user = $this->getUser();
+    
+
+    $msgNode = $orm->get( 'WbfsysMessage', $messageId );
+    
+    if( $msgNode->id_sender == $user->getId() ){
+      
+      if( $archive )
+        $msgNode->id_sender_status = EMessageStatus::ARCHIVED;
+      else 
+        $msgNode->id_sender_status = EMessageStatus::OPEN;
+        
+      $orm->save($msgNode);
+      
+    } else {
+      
+      $queries = array();
+      
+      if( $archive )
+        $queries[] = 'UPDATE wbfsys_message_receiver set status = '.EMessageStatus::ARCHIVED.' WHERE vid = '.$user->getId().' AND rowid = '.$messageId;
+      else 
+        $queries[] = 'UPDATE wbfsys_message_receiver set status = '.EMessageStatus::OPEN.' WHERE vid = '.$user->getId().' AND rowid = '.$messageId;
+  
+      foreach ($queries as $query) {
+        $db->exec($query);
+      }
+      
+    }
+    
+  }//ebnd public function archiveMessage 
+  
 
   /**
    *
@@ -621,6 +841,20 @@ SQL;
 
   }//end public function countNewMessages */
 
+  /**
+   * @param int $msgId
+   * @param boolean $flagSpam
+   * @param TFlag $params
+   */
+  public function setSpam($msgId, $flagSpam, $params)
+  {
+
+    $orm = $this->getOrm();
+  
+    $orm->update( 'WbfsysMessage', $msgId, array( 'spam_level' => $flagSpam ) );
+
+  }//end public function setSpam */
+  
 ////////////////////////////////////////////////////////////////////////////////
 // References
 ////////////////////////////////////////////////////////////////////////////////
@@ -734,5 +968,40 @@ SQL;
 
   }//end public function delRef */
   
-} // end class WebfrapSearch_Model
+////////////////////////////////////////////////////////////////////////////////
+// Checklist
+////////////////////////////////////////////////////////////////////////////////
+  
+  /**
+   * @param int $msgId
+   * @throws DataNotExists_Exception if the message not exists
+   */
+  public function loadMessageChecklist($msgId)
+  {
+
+    $db = $this->getDb();
+
+    $sql = <<<SQL
+
+select
+  checklist.rowid as id,
+  checklist.label as label,
+	checklist.flag_checked as checked
+
+FROM
+  wbfsys_checklist_entry checklist
+
+WHERE
+  checklist.vid = {$msgId};
+
+SQL;
+
+    //$references = $db->select($sql)->getAll();
+
+    return $db->select($sql);
+
+  }//end public function loadMessageChecklist */
+  
+  
+} // end class WebfrapMessage_Model
 

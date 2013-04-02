@@ -190,8 +190,7 @@ class WebfrapAttachment_Controller extends Controller
     $searchData  = $model->getAttachmentList($context->refId, null, $searchKey);
 
     /* @var $view WebfrapAttachment_Ajax_View */
-    $view = $response->loadView
-    (
+    $view = $response->loadView(
       'search-form',
       'WebfrapAttachment',
       'renderSearch'
@@ -250,8 +249,7 @@ class WebfrapAttachment_Controller extends Controller
     $file = $request->file('file');
 
     if (!$file || !is_object($file)) {
-      throw new InvalidRequest_Exception
-      (
+      throw new InvalidRequest_Exception(
         Error::INVALID_REQUEST,
         Error::INVALID_REQUEST_MSG
       );

@@ -705,21 +705,21 @@ CODE;
    * @param array $attributes
    * @param array $params
    */
-  public function textarea
-  (
+  public function textarea(
     $label,
     $name,
     $value = null,
     $attributes = array(),
     $params = null
-  )
-  {
+  ) {
 
     $pNode = $this->prepareParams($params);
 
     if (isset($attributes['id'])) {
+      
       $id      = $attributes['id'];
       $inpName = $name;
+      
     } else {
 
       $tmp = explode(',', $name);
@@ -1693,8 +1693,7 @@ CODE;
     $params,
     $size = 'medium',
     $appendText = ''
-  )
-  {
+  ) {
 
     if (is_array($params)) {
       $pNode = new TFlag($params);

@@ -21,29 +21,28 @@
           name="channel[outbox]"
           class="fparam-wgt-form-webfrap-groupware-search" /> <a><strong>Outbox</strong></a>
         <ul>
-          <li><input
-            type="checkbox" /> All Posts
+          <li><strong>Filter</strong>
             <ul>
               <li><input
                 type="checkbox"
                 name="status[new]"
                 <?php echo Wgt::checked(true, isset($VAR->settings->status->new) )?>
-                class="fparam-wgt-form-webfrap-groupware-search"  /> Only New Posts</li>
+                class="fparam-wgt-form-webfrap-groupware-search"  /> New Posts</li>
               <li><input
                 type="checkbox"
                 name="status[important]"
                 <?php echo Wgt::checked(true, isset($VAR->settings->status->important) )?>
-                class="fparam-wgt-form-webfrap-groupware-search" /> Only Important Posts</li>
+                class="fparam-wgt-form-webfrap-groupware-search" /> Important Posts</li>
               <li><input
                 type="checkbox"
                 name="status[urgent]"
                 <?php echo Wgt::checked(true, isset($VAR->settings->status->urgent) )?>
-                class="fparam-wgt-form-webfrap-groupware-search" /> Only Urgent Posts</li>
+                class="fparam-wgt-form-webfrap-groupware-search" /> Urgent Posts</li>
               <li><input
                 type="checkbox"
                 name="status[overdue]"
                 <?php echo Wgt::checked(true, isset($VAR->settings->status->overdue) )?>
-                class="fparam-wgt-form-webfrap-groupware-search" /> Only Overdue Posts</li>
+                class="fparam-wgt-form-webfrap-groupware-search" /> Overdue Posts</li>
             </ul>
           </li>
 
@@ -98,6 +97,27 @@
             /> Tasks
             <ul>
               <li><input
+                type="radio"
+                name="task_status"
+                value="1"
+                <?php echo Wgt::checked(1, $VAR->settings->taskStatus )?>
+                class="fparam-wgt-form-webfrap-groupware-search"
+                 /> All</li>
+              <li><input
+                type="radio"
+                name="task_status"
+                value="2"
+                <?php echo Wgt::checked(2, $VAR->settings->taskStatus )?>
+                class="fparam-wgt-form-webfrap-groupware-search"
+                 /> Open</li>
+              <li><input
+                type="radio"
+                name="task_status"
+                value="3"
+                <?php echo Wgt::checked(3, $VAR->settings->taskStatus )?>
+                class="fparam-wgt-form-webfrap-groupware-search"
+                 /> Completed</li>
+              <li><input
                 type="checkbox"
                 name="task_action[required]"
                 <?php echo Wgt::checked(true, isset($VAR->settings->taskAction->required) )?>
@@ -105,20 +125,30 @@
                 /> Action Required</li>
               <li><input
                 type="checkbox"
-                name="task_action[completed]"
-                <?php echo Wgt::checked(true, isset($VAR->settings->taskAction->completed) )?>
+                name="task_action[waiting]"
+                <?php echo Wgt::checked(true, isset($VAR->settings->taskAction->waiting) )?>
                 class="fparam-wgt-form-webfrap-groupware-search"
-                 /> Completed</li>
+                /> Waiting for Action</li>
             </ul>
           </li>
         </ul>
       </li>
-      <li><a href="#" ><strong>Drafts</strong></a></li>
+      <li><input
+        type="checkbox"
+        <?php echo Wgt::checked(true, isset($VAR->settings->channels->unsolicited) )?>
+        name="channel[unsolicited]"
+        class="fparam-wgt-form-webfrap-groupware-search" /> <a><strong>Unsolicited</strong></a></li>
+      <li><input
+        type="checkbox"
+        <?php echo Wgt::checked(true, isset($VAR->settings->channels->draft) )?>
+        name="channel[draft]"
+        class="fparam-wgt-form-webfrap-groupware-search" /> <a><strong>Drafts</strong></a></li>
+        <!--  
       <li><a href="#" ><strong>Templates</strong></a>
         <ul>
           <li><button class="wgt-button" ><i class="icon-plus-sign" ></i> Create Template</button></li>
         </ul>
-      </li>
+      </li>-->
       <li><input
         type="checkbox"
         <?php echo Wgt::checked(true, isset($VAR->settings->channels->archive) )?>
