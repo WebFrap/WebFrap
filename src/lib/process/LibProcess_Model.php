@@ -103,6 +103,12 @@ class LibProcess_Model extends PBase
    * @var array
    */
   protected $processData   = null;
+  
+  /**
+   * Flag zum verhindern, dass bei change status noch das standard change event getriggert wird
+   * @var array
+   */
+  protected $allreadyChanged   = false;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // constructor
@@ -380,6 +386,9 @@ class LibProcess_Model extends PBase
    */
   public function changeStatus($newNodeName, $params, $closeProcess = false)
   {
+    
+    if($this->allreadyChanged)
+      return;
 
     if (!$this->processId)
       $this->loadProcessId();
@@ -433,6 +442,8 @@ class LibProcess_Model extends PBase
 
     $this->db->orm->update($this->activStatus);
 
+    $this->allreadyChanged = true;
+    
     $this->activKey   = $newNodeName;
     $this->activNode  = $newNode;
     $this->process->activKey = $newNodeName;
@@ -505,8 +516,7 @@ class LibProcess_Model extends PBase
   public function getNodeByName($name)
   {
 
-    $node = $this->db->orm->get
-    (
+    $node = $this->db->orm->get(
       'WbfsysProcessNode',
       "access_key='{$name}' and id_process={$this->processId}"
     );
@@ -606,7 +616,6 @@ class LibProcess_Model extends PBase
     );
 
     $this->requestedEdge = $request->param('process_edge', Validator::CNAME);
-
     $this->changePState = $request->param('process_state', Validator::INT);
 
   }//end public function fetchProcessRequestData */
@@ -619,8 +628,7 @@ class LibProcess_Model extends PBase
 
     $request = $this->getRequest();
 
-    $this->processData['comment'] = $request->data
-    (
+    $this->processData['comment'] = $request->data(
       $this->process->name,
       Validator::TEXT,
       'comment'
