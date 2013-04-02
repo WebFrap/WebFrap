@@ -41,7 +41,7 @@ class ESearchNumeric
   /**
    * @var array
    */
-  public static $text = array(
+  public static $labels = array(
     self::EQUALS      => 'equals',
     self::SMALLER      => 'smaller',
     self::SMALLER_EQUAL => 'smaller or equal',
@@ -50,6 +50,18 @@ class ESearchNumeric
     self::IS_NULL     => 'is empty',
     self::IS_NOT_NULL => 'is not empty',
   );
+  
+  /**
+   * @param string $key
+   * @return string
+   */
+  public static function label($key)
+  {
+    return isset(self::$labels[$key])
+      ? self::$labels[$key]
+      : ''; // per default custom
+
+  }//end public static function label */
 
 }//end class ESearchNumeric
 

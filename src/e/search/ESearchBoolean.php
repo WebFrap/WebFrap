@@ -35,12 +35,24 @@ class ESearchBoolean
   /**
    * @var array
    */
-  public static $text = array(
+  public static $labels = array(
     self::IS_TRUE      => 'True',
     self::IS_FALSE     => 'False',
     self::IS_T_OR_F    => 'True or False',
     self::IS_NULL      => 'Is not Set',
   );
 
+  /**
+   * @param string $key
+   * @return string
+   */
+  public static function label($key)
+  {
+    return isset(self::$labels[$key])
+      ? self::$labels[$key]
+      : ''; // per default custom
+
+  }//end public static function label */
+  
 }//end class ESearchBoolean
 

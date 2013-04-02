@@ -29,9 +29,21 @@ class ESearchId
   /**
    * @var array
    */
-  public static $text = array(
+  public static $labels = array(
     self::EQUALS      => 'Equals',
   );
+  
+  /**
+   * @param string $key
+   * @return string
+   */
+  public static function label($key)
+  {
+    return isset(self::$labels[$key])
+      ? self::$labels[$key]
+      : ''; // per default custom
+
+  }//end public static function label */
 
 }//end class ESearchId
 
