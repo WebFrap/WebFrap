@@ -222,16 +222,14 @@ abstract class Process extends PBase
    * Alle möglichen security areas
    * @var array
    */
-  protected $areas  = array
-  (
+  protected $areas  = array(
   );
 
   /**
    * liste mit den relativen ids
    * @var array
    */
-  protected $ids  = array
-  (
+  protected $ids  = array(
   );
 
   /**
@@ -299,13 +297,12 @@ abstract class Process extends PBase
    */
   public function setEntity($entity)
   {
-
     if (!is_object($entity) || !$entity instanceof Entity)
       throw new LibProcess_Exception("Tried to set an invalid entity to the process ".$this->debugData());
 
     $this->entity = $entity;
     $this->model->setEntity($entity);
-
+    
   }//end public function setEntity */
 
   /**
@@ -314,7 +311,6 @@ abstract class Process extends PBase
   public function getEntity()
   {
     return $this->entity;
-
   }//end public function getEntity */
 
   /**
@@ -326,7 +322,6 @@ abstract class Process extends PBase
     return isset($this->areas[$key])
       ? $this->areas[$key]
       : null;
-
   }//end public function getAreaByKey */
 
   /**
@@ -338,7 +333,6 @@ abstract class Process extends PBase
     return isset($this->ids[$key])
       ? $this->ids[$key]
       : null;
-
   }//end public function getIdByKey */
 
   /**
@@ -349,9 +343,7 @@ abstract class Process extends PBase
    */
   public function setUserRoles($userRoles)
   {
-
     $this->userRoles = $userRoles;
-
   }//end public function setUserRoles */
 
   /**
@@ -369,7 +361,6 @@ abstract class Process extends PBase
   public function getProcessId()
   {
     return $this->processId;
-
   }//end public function getProcessId */
 
   /**
@@ -390,7 +381,6 @@ abstract class Process extends PBase
   public function getNode($key)
   {
     return new LibProcess_Node($this, $this->nodes[$key], $key);
-
   }//end public function getNode */
 
   /**
@@ -509,9 +499,9 @@ abstract class Process extends PBase
         ///@todo checken wann wir ein objekt bekommen, welches dieses methode implementieren sollte
         /// es aber nicht tut
         if (method_exists($this->access, 'checkEdgeAccess')) {
-          if (!$this->access->checkEdgeAccess($this, $edge, $this->entity))
+          if (!$this->access->checkEdgeAccess($this, $edge, $this->entity)) {
             continue;
-          else{
+          } else {
             Debug::console("By checkEdgeAcess");
             $accessFlag = true;
           }
@@ -981,7 +971,7 @@ abstract class Process extends PBase
       $this->newNode    = $this->oldKey;
     }
 
-    if (!isset($this->nodes[$this->newNode])  ) {
+    if (!isset($this->nodes[$this->newNode])) {
       throw new LibProcess_Exception('Invalid actual node '.$this->newNode.' in '.$this->debugData());
     }
 
@@ -1224,8 +1214,7 @@ abstract class Process extends PBase
       // zum aufruf passt
       Debug::console("No PATH this->edges[$this->oldKey][$nodeKey] ");
       if ($pathRequired) {
-        throw new LibProcess_Exception
-        (
+        throw new LibProcess_Exception(
           'Tried to change the status from '.$this->oldKey.' '.$nodeKey.' without path in Process '.$this->debugData()
         );
       }
@@ -1253,7 +1242,6 @@ abstract class Process extends PBase
 
       // wenn ein fehler objekt zurückgegeben wird, wird der schritt abgebrochen
       if ($error = $this->{$action}($params))
-
         return $error;
 
     } else {
@@ -1420,13 +1408,11 @@ abstract class Process extends PBase
   {
 
     switch ($resp['type']) {
-      case Acl::ROLE:
-      {
+      case Acl::ROLE: {
         return $this->buildGroupReceiver($resp);
         break;
       }
-      default:
-      {
+      default: {
         throw new LibProcess_Exception('Tried to build a nonexisting receiver type: '.$resp['type'].' in Process '. $this->debugData());
         break;
       }
