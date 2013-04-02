@@ -53,7 +53,11 @@ class Acl_Consistency extends DataContainer
     
       $queries = array();
       $queries[] = 'UPDATE wbfsys_security_access set message_level = 0 WHERE message_level is null; ';
+      $queries[] = 'UPDATE wbfsys_security_access set priv_message_level = 0 WHERE priv_message_level is null; ';
+      $queries[] = 'UPDATE wbfsys_security_access set meta_level = 0 WHERE meta_level is null; ';
+      $queries[] = 'UPDATE wbfsys_security_access set partial = 0 WHERE partial is null; ';
   
+      
       foreach ($queries as $query) {
         $db->exec($query);
       }
