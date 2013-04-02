@@ -1,0 +1,55 @@
+<?php
+/*******************************************************************************
+*
+* @author      : Dominik Bonsch <dominik.bonsch@webfrap.net>
+* @date        :
+* @copyright   : Webfrap Developer Network <contact@webfrap.net>
+* @project     : Webfrap Web Frame Application
+* @projectUrl  : http://webfrap.net
+*
+* @licence     : BSD License see: LICENCE/BSD Licence.txt
+*
+* @version: @package_version@  Revision: @package_revision@
+*
+* Changes:
+*
+*******************************************************************************/
+
+/**
+ * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
+ * @copyright Webfrap Developer Network <contact@webfrap.net>
+ * @package WebFrap
+ * @subpackage tech_core
+ */
+class ESearchDate
+{
+
+  const EQUALS        = 1;
+  
+  const BEFORE        = 2;
+
+  const BEFORE_EQUAL  = 3;
+  
+  const AFTER         = 4;
+  
+  const AFTER_EQUAL   = 5;
+  
+  const IS_NULL       = 5;
+  
+  const IS_NOT_NULL   = 7;
+
+  /**
+   * @var array
+   */
+  public static $text = array(
+    self::EQUALS      => 'equals',
+    self::BEFORE      => 'before',
+    self::BEFORE_EQUAL => 'before or equal',
+    self::AFTER       => 'after',
+    self::AFTER_EQUAL => 'after or equal',
+    self::IS_NULL     => 'is empty',
+    self::IS_NOT_NULL => 'is not empty',
+  );
+
+}//end class ESearchDate
+
