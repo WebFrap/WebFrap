@@ -49,48 +49,39 @@ class AclMgmt_Qfdu_Group_Controller extends AclMgmt_Controller
    *
    * @var array
    */
-  protected $options           = array
-  (
+  protected $options           = array(
 
-    'search' => array
-    (
+    'search' => array(
       'method'    => array('GET'),
       'views'      => array('ajax')
     ),
-    'loadusers' => array
-    (
+    'loadusers' => array(
       'method'    => array('GET'),
       'views'      => array('ajax')
     ),
-    'loaddsets' => array
-    (
+    'loaddsets' => array(
       'method'    => array('GET'),
       'views'      => array('ajax')
     ),
-    'append' => array
-    (
+    'append' => array(
       'method'    => array('PUT', 'POST'),
       'views'      => array('ajax')
     ),
-    'export' => array
-    (
+    'export' => array(
       'method'    => array('GET'),
       //'views'      => array('document')
     ),
 
     // dropping of assignments
-    'dropgroupassignments' => array
-    (
+    'dropgroupassignments' => array(
       'method'    => array('DELETE'),
       'views'      => array('ajax')
     ),
-    'dropuserassignments' => array
-    (
+    'dropuserassignments' => array(
       'method'    => array('DELETE'),
       'views'      => array('ajax')
     ),
-    'dropdsetassignments' => array
-    (
+    'dropdsetassignments' => array(
       'method'    => array('DELETE'),
       'views'      => array('ajax')
     ),
@@ -124,12 +115,11 @@ class AclMgmt_Qfdu_Group_Controller extends AclMgmt_Controller
     $areaId = $model->getAreaId();
 
     // this can only be an ajax request, so we can directly load the ajax view
-    $view   = $response->loadView
-    (
+    $view   = $response->loadView(
       $domainNode->domainName.'-mgmt-acl',
       'AclMgmt_Qfdu_Group',
       'displaySearch'
-    );
+     );
 
     $view->domainNode = $domainNode;
 
@@ -205,8 +195,7 @@ class AclMgmt_Qfdu_Group_Controller extends AclMgmt_Controller
     $params->areaId = $areaId;
 
     /* @var $view AclMgmt_Qfdu_Group_Ajax_View  */
-    $view   = $response->loadView
-    (
+    $view   = $response->loadView(
       $domainNode->domainName.'-mgmt-acl',
       'AclMgmt_Qfdu_Group',
       'displayConnect'
@@ -222,13 +211,11 @@ class AclMgmt_Qfdu_Group_Controller extends AclMgmt_Controller
     ///TODO hier muss noch ein trigger in die datenbank um raceconditions zu vermeiden
     if (!$model->checkUnique()) {
 
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
+      throw new InvalidRequest_Exception(
+        $response->i18n->l(
           'This Assignment allready exists!',
           'wbf.message'
-        ),
+         ),
         Error::CONFLICT
       );
 
@@ -277,12 +264,11 @@ class AclMgmt_Qfdu_Group_Controller extends AclMgmt_Controller
 
     // this can only be an ajax request, so we can directly load the ajax view
     /* @var $view AclMgmt_Qfdu_Ajax_View */
-    $view   = $response->loadView
-    (
+    $view   = $response->loadView(
       $domainNode->domainName.'-mgmt-acl',
       'AclMgmt_Qfdu',
       'displayLoadGridUsers'
-    );
+     );
 
     $view->domainNode = $domainNode;
 
@@ -328,12 +314,11 @@ class AclMgmt_Qfdu_Group_Controller extends AclMgmt_Controller
 
     // this can only be an ajax request, so we can directly load the ajax view
     /* @var $view AclMgmt_Qfdu_Ajax_View */
-    $view   = $response->loadView
-    (
+    $view   = $response->loadView(
       $domainNode->domainName.'-mgmt-acl',
       'AclMgmt_Qfdu',
       'displayLoadGridDsets'
-    );
+     );
 
     $view->domainNode = $domainNode;
 
@@ -366,16 +351,13 @@ class AclMgmt_Qfdu_Group_Controller extends AclMgmt_Controller
     // did we receive an id of an object that should be deleted
     if ($rqCont->hasError) {
       // wenn die daten nicht valide sind, dann war es eine ungültige anfrage
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
+      throw new InvalidRequest_Exception(
+        $response->i18n->l(
           'The Request for {@resource@} was invalid.',
           'wbf.message',
-          array
-          (
+          array(
             'resource' => 'dropGroupAssignments'
-          )
+           )
         ),
         Response::BAD_REQUEST
       );
@@ -406,6 +388,7 @@ class AclMgmt_Qfdu_Group_Controller extends AclMgmt_Controller
       $ui->setModel($model);
       $ui->setView($this->tpl);
       $ui->removeGroupEntry($groupId);
+      
     } catch (Webfrap_Exception $e) {
       throw new InternalError_Exception(null, $e->getMessage());
     }
@@ -433,16 +416,13 @@ class AclMgmt_Qfdu_Group_Controller extends AclMgmt_Controller
     // did we receive an id of an object that should be deleted
     if ($rqCont->hasError) {
       // wenn die daten nicht valide sind, dann war es eine ungültige anfrage
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
+      throw new InvalidRequest_Exception(
+        $response->i18n->l(
           'The Request for {@resource@} was invalid.',
           'wbf.message',
-          array
-          (
+          array(
             'resource' => 'cleanQfdUser'
-          )
+            )
         ),
         Response::BAD_REQUEST
       );
@@ -499,16 +479,13 @@ class AclMgmt_Qfdu_Group_Controller extends AclMgmt_Controller
     // did we receive an id of an object that should be deleted
     if (!$objid = $request->param('objid', Validator::EID)) {
       // wenn nicht ist die anfrage per definition invalide
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
+      throw new InvalidRequest_Exception(
+        $response->i18n->l(
           'The Request for action {@resource@} was invalid. ID was missing!',
           'wbf.message',
-          array
-          (
+          array(
             'resource' => 'deleteDset'
-          )
+            )
         ),
         Response::BAD_REQUEST
       );
@@ -531,12 +508,14 @@ class AclMgmt_Qfdu_Group_Controller extends AclMgmt_Controller
 
       /* @var $ui AclMgmt_Qfdu_Group_Ui */
       $ui = $this->loadUi('AclMgmt_Qfdu_Group');
+      $ui->domainNode = $domainNode;
 
       $ui->setModel($model);
       $ui->setView($this->tpl);
       $ui->removeDatasetEntry($asgdData);
 
     } catch (Webfrap_Exception $e) {
+      
       throw new InternalError_Exception(null, $e->getMessage());
     }
 

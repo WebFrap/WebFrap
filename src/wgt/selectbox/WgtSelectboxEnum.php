@@ -24,12 +24,12 @@ class WgtSelectboxEnum extends WgtSelectbox
 
   /**
    * Firstfree ist hier ein String kein boolean
-   *
+   * @var string
    */
   public $firstFree = null;
 
   /**
-   * @param boolean
+   * @var boolean
    */
   public $checkIcons = false;
 
@@ -46,9 +46,13 @@ class WgtSelectboxEnum extends WgtSelectbox
    * @var array
    */
   public $layouts = array();
+  
+  /**
+   * @var string
+   */
+  public $width = 'medium';
 
   /**
-   *
    * @param string $name
    */
   public function __construct($name = null)
@@ -172,8 +176,8 @@ class WgtSelectboxEnum extends WgtSelectbox
     
 
     $this->attributes['class'] = isset($this->attributes['class'])
-      ? $this->attributes['class'].' wcm wcm_widget_selectbox'
-      : 'wcm wcm_widget_selectbox';
+      ? $this->attributes['class'].' wcm wcm_widget_selectbox '.$this->width
+      : 'wcm wcm_widget_selectbox '.$this->width;
 
     $attributes = $this->asmAttributes();
     $required   = $this->required?'<span class="wgt-required">*</span>':'';
@@ -186,6 +190,7 @@ class WgtSelectboxEnum extends WgtSelectbox
     $helpIcon = $this->renderDocu($id);
 
     if (is_array($this->activ)  ) {
+      
       foreach ($this->data as $id => $value) {
 
         $optClass  = '';
@@ -264,6 +269,10 @@ class WgtSelectboxEnum extends WgtSelectbox
         $this->attributes['class'] = $this->semanticClass;
       }
     }
+    
+    $this->attributes['class'] = isset($this->attributes['class'])
+      ? $this->attributes['class'].' wcm wcm_widget_selectbox '.$this->width
+      : 'wcm wcm_widget_selectbox '.$this->width;
 
     $attributes = $this->asmAttributes();
     $required = $this->required?'<span class="wgt-required" >*</span>':'';
@@ -314,7 +323,7 @@ class WgtSelectboxEnum extends WgtSelectbox
       }
     }
 
-    $select .= '</select>'.NL;
+    $select .= '</select><var>{"width":"'.$this->width.'"}</var>'.NL;
 
     return $select;
 

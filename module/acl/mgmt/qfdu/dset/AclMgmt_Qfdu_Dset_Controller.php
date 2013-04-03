@@ -498,7 +498,7 @@ class AclMgmt_Qfdu_Dset_Controller extends AclMgmt_Controller
 
       /* @var $ui AclMgmt_Qfdu_Group_Ui */
       $ui = $this->loadUi('AclMgmt_Qfdu_Group');
-
+      $ui->domainNode = $domainNode;
       $ui->setModel($model);
       $ui->setView($this->tpl);
       $ui->removeDatasetEntry($asgdData);
