@@ -25,10 +25,10 @@ define( 'TPL_END',   '?>'  );
 <div 
   class="box_template wgt-editlayer border" 
   contenteditable="true" 
-  id="wgt-edit-field-date" ><input 
+  id="wgt-edit-field-date" style="overflow:hidden;" ><input 
     type="text" 
     class="wcm wcm_list_date" 
-    style="border:0px;width:100%;margin:0px;padding:0px;" 
+    style="border:0px;width:100%;margin:0px;padding:0px;overflow:hidden;" 
     /></div>
 <div class="box_template wgt-editlayer" contenteditable="true" id="wgt-edit-field-datetime" ><input 
   type="text" 
