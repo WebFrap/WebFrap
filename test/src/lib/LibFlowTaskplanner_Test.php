@@ -1,4 +1,5 @@
 <?php
+
 /*******************************************************************************
 *
 * @author      : Dominik Bonsch <dominik.bonsch@webfrap.net>
@@ -20,28 +21,42 @@
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
-class LibFlowTaskplanner_Test extends LibTestUnit {
-	public function setUp() {
-	}
-	public function test_first() {
-		$flowTaskplanner = new LibFlowTaskplanner ();
-		
-		$test = <<<JSON
-[
-    {
-        "key" : "a",
-        "class" : "Backup",
-        "method" : "happy",
-		"inf" : "entity",
-        "params":{
-            "id" : "1
-		"
-        }
-    }
-]
-JSON;
-		$json = json_decode ($test);
-		$flowTaskplanner->tasks = $json;
-		$flowTaskplanner->service_run();
-	}
+class LibFlowTaskplanner_Test extends LibTestUnit
+{
+
+  public function setUp ()
+  {
+
+  }
+
+  public function test_first ()
+  {
+
+    $taskPlan = new LibTaskplanner(WebFrap::$env, 1395846000);
+    
+    $flow = new LibFlowTaskplanner();
+    
+    $orm = $this->getOrm();
+    
+    $title = "Testn";
+    $action = '[{"key" : "start","class" : "Backup","method" : "happy","inf" : "entity","params":{"id" : "1" }}]';
+    $flags = '{"flags":{"advanced":false,"by_day":false,"is_list":false},"trigger_time":"2013-03-23 00:00","months":[],"days":[],"hours":[],"minutes":[],"monthWeeks":[],"weekDays":[],"taskList":[],"type":0,"status":0}';
+    $id = 230;
+    
+    $db = $this->getDb();
+    
+    $plan = <<<SQL
+INSERT INTO wbfsys_task_plan (title, flag_series, series_rule, actions, id_user, rowid)
+VALUES (
+        {$title},
+        false,
+        {$flags},
+        {$action},
+        8266134,
+        {$id}
+        );
+SQL;
+    
+    $db->insert($plan, 'wbfsys_task_plan', 'rowid');
+  }
 }

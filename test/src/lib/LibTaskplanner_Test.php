@@ -39,7 +39,7 @@ class LibTaskplanner_Test extends LibTestUnit {
 	 */
 	public function test_findSingleTask() {
 		// 00:00, 31.12.2013
-		$taskplanner = new LibTaskplanner (1362580200);
+		$taskplanner = new LibTaskplanner ( Webfrap::$env, 1362580200 );
 		$result = $taskplanner->taskTypes;
 		$expectedResult = array (
 				ETaskType::MINUTE,
@@ -48,10 +48,10 @@ class LibTaskplanner_Test extends LibTestUnit {
 				ETaskType::MINUTE_30 
 		);
 		
-		$this->assertEquals ("00:00, 31.12.2013", $result, $expectedResult);
+		$this->assertEquals ( "00:00, 31.12.2013", $result, $expectedResult );
 		
 		// 06.03.2013 12:22:00
-		$taskplanner = new LibTaskplanner (1362568920);
+		$taskplanner = new LibTaskplanner ( Webfrap::$env, 1362568920 );
 		$result = $taskplanner->taskTypes;
 		$expectedResult = array (
 				ETaskType::MINUTE,
@@ -60,10 +60,10 @@ class LibTaskplanner_Test extends LibTestUnit {
 				ETaskType::HOUR_12 
 		);
 		
-		$this->assertEquals ("06.03.2013 12:22:00", $result, $expectedResult);
+		$this->assertEquals ( "06.03.2013 12:22:00", $result, $expectedResult );
 		
 		// 22.03.2013 02:22:00
-		$taskplanner = new LibTaskplanner (1363915320);
+		$taskplanner = new LibTaskplanner ( Webfrap::$env, 1363915320 );
 		$result = $taskplanner->taskTypes;
 		$expectedResult = array (
 				ETaskType::MINUTE,
@@ -72,10 +72,10 @@ class LibTaskplanner_Test extends LibTestUnit {
 				ETaskType::WORK_DAY 
 		);
 		
-		$this->assertEquals ("22.03.2013 02:22:00", $result, $expectedResult);
+		$this->assertEquals ( "22.03.2013 02:22:00", $result, $expectedResult );
 		
 		// 03.03.2013 02:22:00
-		$taskplanner = new LibTaskplanner (1362273720);
+		$taskplanner = new LibTaskplanner ( Webfrap::$env, 1362273720 );
 		$result = $taskplanner->taskTypes;
 		$expectedResult = array (
 				ETaskType::MINUTE,
@@ -84,10 +84,10 @@ class LibTaskplanner_Test extends LibTestUnit {
 				ETaskType::WEEK_END 
 		);
 		
-		$this->assertEquals ("03.03.2013 02:22:00", $result, $expectedResult);
+		$this->assertEquals ( "03.03.2013 02:22:00", $result, $expectedResult );
 		
 		// 06.05.2013 02:22:00
-		$taskplanner = new LibTaskplanner (1363915320);
+		$taskplanner = new LibTaskplanner ( Webfrap::$env, 1363915320 );
 		$result = $taskplanner->taskTypes;
 		$expectedResult = array (
 				ETaskType::MINUTE,
@@ -96,10 +96,10 @@ class LibTaskplanner_Test extends LibTestUnit {
 				ETaskType::WORK_DAY 
 		);
 		
-		$this->assertEquals ("06.05.2013 02:22:00", $result, $expectedResult);
+		$this->assertEquals ( "06.05.2013 02:22:00", $result, $expectedResult );
 		
 		// 18.03.2013 02:22:00
-		$taskplanner = new LibTaskplanner (1363569720);
+		$taskplanner = new LibTaskplanner ( Webfrap::$env, 1363569720 );
 		$result = $taskplanner->taskTypes;
 		$expectedResult = array (
 				ETaskType::MINUTE,
@@ -109,30 +109,30 @@ class LibTaskplanner_Test extends LibTestUnit {
 				ETaskType::WEEK_2 
 		);
 		
-		$this->assertEquals ("18.03.2013 02:22:00", $result, $expectedResult);
+		$this->assertEquals ( "18.03.2013 02:22:00", $result, $expectedResult );
 		
 		// 01.02.2013 05:44:00
-		$taskplanner = new LibTaskplanner (1359693840);
+		$taskplanner = new LibTaskplanner ( Webfrap::$env, 1359693840 );
 		$result = $taskplanner->taskTypes;
 		$expectedResult = array (
 				ETaskType::MINUTE,
 				ETaskType::MONTH_START 
 		);
 		
-		$this->assertEquals ("01.02.2013 05:44:00", $result, $expectedResult);
+		$this->assertEquals ( "01.02.2013 05:44:00", $result, $expectedResult );
 		
 		// 28.02.2013 05:44:00
-		$taskplanner = new LibTaskplanner (1362026640);
+		$taskplanner = new LibTaskplanner ( Webfrap::$env, 1362026640 );
 		$result = $taskplanner->taskTypes;
 		$expectedResult = array (
 				ETaskType::MINUTE,
 				ETaskType::MONTH_END 
 		);
 		
-		$this->assertEquals ("28.02.2013 05:44:00", $result, $expectedResult);
+		$this->assertEquals ( "28.02.2013 05:44:00", $result, $expectedResult );
 		
 		// 01.06.2013 05:44:00
-		$taskplanner = new LibTaskplanner (1370058240);
+		$taskplanner = new LibTaskplanner ( Webfrap::$env, 1370058240 );
 		$result = $taskplanner->taskTypes;
 		$expectedResult = array (
 				ETaskType::MINUTE,
@@ -141,10 +141,10 @@ class LibTaskplanner_Test extends LibTestUnit {
 				ETaskType::MONTH_6_START 
 		);
 		
-		$this->assertEquals ("01.06.2013 05:44:00", $result, $expectedResult);
+		$this->assertEquals ( "01.06.2013 05:44:00", $result, $expectedResult );
 		
 		// 30.06.2013 05:44:00
-		$taskplanner = new LibTaskplanner (1372563840);
+		$taskplanner = new LibTaskplanner ( Webfrap::$env, 1372563840 );
 		$result = $taskplanner->taskTypes;
 		$expectedResult = array (
 				ETaskType::MINUTE,
@@ -153,10 +153,10 @@ class LibTaskplanner_Test extends LibTestUnit {
 				ETaskType::MONTH_6_END 
 		);
 		
-		$this->assertEquals ("30.06.2013 05:44:00", $result, $expectedResult);
+		$this->assertEquals ( "30.06.2013 05:44:00", $result, $expectedResult );
 		
 		// 01.01.2013 05:44:00
-		$taskplanner = new LibTaskplanner (1357015440);
+		$taskplanner = new LibTaskplanner ( Webfrap::$env, 1357015440 );
 		$result = $taskplanner->taskTypes;
 		$expectedResult = array (
 				ETaskType::MINUTE,
@@ -164,10 +164,10 @@ class LibTaskplanner_Test extends LibTestUnit {
 				ETaskType::YEAR_START 
 		);
 		
-		$this->assertEquals ("01.01.2013 05:44:00", $result, $expectedResult);
+		$this->assertEquals ( "01.01.2013 05:44:00", $result, $expectedResult );
 		
 		// 31.12.2013 05:44:00
-		$taskplanner = new LibTaskplanner (1388465040);
+		$taskplanner = new LibTaskplanner ( Webfrap::$env, 1388465040 );
 		$result = $taskplanner->taskTypes;
 		$expectedResult = array (
 				ETaskType::MINUTE,
@@ -177,7 +177,6 @@ class LibTaskplanner_Test extends LibTestUnit {
 				ETaskType::YEAR_END 
 		);
 		
-		$this->assertEquals ("31.12.2013 05:44:00", $result, $expectedResult);
+		$this->assertEquals ( "31.12.2013 05:44:00", $result, $expectedResult );
 	}
 }
-
