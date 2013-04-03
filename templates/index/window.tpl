@@ -30,10 +30,10 @@ define( 'TPL_END',   '?>'  );
     class="wcm wcm_list_date" 
     style="border:0px;width:100%;margin:0px;padding:0px;overflow:hidden;" 
     /></div>
-<div class="box_template wgt-editlayer" contenteditable="true" id="wgt-edit-field-datetime" ><input 
+<div class="box_template wgt-editlayer"  style="overflow:hidden;" contenteditable="true" id="wgt-edit-field-datetime" ><input 
   type="text" 
   class="wcm wcm_list_date_timepicker" 
-  style="border:0px;width:100%;margin:0px;padding:0px;" 
+  style="border:0px;width:100%;margin:0px;padding:0px;overflow:hidden;" 
   /></div>
 <div class="box_template wgt-editlayer border" contenteditable="true" id="wgt-edit-field-money" ><input 
   type="text" 
