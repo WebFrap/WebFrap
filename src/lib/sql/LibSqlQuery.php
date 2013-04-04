@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-abstract class LibSqlQuery
-  implements Iterator, Countable
+abstract class LibSqlQuery implements Iterator, Countable
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Konstanten
