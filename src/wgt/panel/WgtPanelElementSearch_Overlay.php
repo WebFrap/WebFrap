@@ -223,11 +223,11 @@ HTML;
             class="{$this->searchFieldSize} wcm wcm_req_search{$setFocus} wgt-no-save fparam-{$this->searchForm}" />
         </div>
 
-        <button
-            class="wcm wcm_ui_dropform wcm_ui_tip-top ui-state-default wgt-button"
+        <button class="wgt-button splitted wgtac_search" ><i class="icon-search" ></i></button><button
+            class="wcm wcm_ui_dropform wcm_ui_tip-top ui-state-default wgt-button append"
             id="wgt-search-{$this->context}-{$this->searchKey}-con"
             title="Click to Change the Status"
-          ><i class="icon-search" ></i> <i class="icon-angle-down" ></i><var>{"size":"big"}</var></button>
+          ><i class="icon-angle-down" ></i><var>{"size":"big"}</var></button>
     
       	<div class="wgt-search-{$this->context}-{$this->searchKey}-con hidden" >
 
@@ -423,7 +423,7 @@ HTML;
           <div class="wgt-clear tiny" >&nbsp;</div>
           
           <div class="full wgt-space" style="text-align:right" >
-          	<button class="wgt button" ><i class="icon-search" ></i> Search</button>
+          	<button class="wgt button wgtac_search" ><i class="icon-search" ></i> Search</button>
           </div>
 
         </div> <!-- end dropdown -->
