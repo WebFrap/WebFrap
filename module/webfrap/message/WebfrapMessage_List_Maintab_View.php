@@ -249,7 +249,7 @@ HTML;
       \$R.get('maintab.php?c=Webfrap.Message.formNew');
     });
 
-    self.getObject().find(".wgtac_refresh").click(function(){
+    self.getObject().find(".wgtac_refresh,.wgtac_search").click(function(){
       \$R.form('wgt-form-webfrap-groupware-search');
     });
 
