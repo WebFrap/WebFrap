@@ -244,26 +244,6 @@ HTML;
               <div class="left half" >   
               	<h3>Filter</h3>
 {$htmlFilters}
-              	<!--
-              	<div class="left half" >
-              		<label>Message</label>
-                	<ul class="wgt-tree" >
-                		<li><input type="checkbox" /> New Posts</li>
-                		<li><input type="checkbox" /> Important Posts</li>
-                		<li><input type="checkbox" /> Urgent Posts</li>
-                		<li><input type="checkbox" /> Overdue Posts</li>
-                	</ul>
-              	</div>
-              	<div class="inline half" >
-              		<label>Tasks</label>
-                	<ul class="wgt-tree" >
-                		<li><input type="radio" name="task" /> All</li>
-                		<li><input type="radio" name="task" /> Open</li>
-                		<li><input type="radio" name="task" /> Completed</li>
-                		<li><input type="checkbox" /> Action required</li>
-                		<li><input type="checkbox" /> Waiting for action</li>
-                	</ul>
-              	</div>-->
               	<div class="wgt-clear" ></div>
               </div>            
               
