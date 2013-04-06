@@ -117,7 +117,7 @@ class WgtPanelElementSearch_Overlay extends WgtPanelElement
   public function setSearchFields( $fields, $isJson = false )
   {
 
-    if($isJson)
+    if ($isJson)
       $this->searchFields = json_decode($fields);
     else
       $this->searchFields = $fields;
@@ -243,6 +243,8 @@ HTML;
             
               <div class="left half" >   
               	<h3>Filter</h3>
+{$htmlFilters}
+              	<!--
               	<div class="left half" >
               		<label>Message</label>
                 	<ul class="wgt-tree" >
@@ -261,7 +263,7 @@ HTML;
                 		<li><input type="checkbox" /> Action required</li>
                 		<li><input type="checkbox" /> Waiting for action</li>
                 	</ul>
-              	</div>
+              	</div>-->
               	<div class="wgt-clear" ></div>
               </div>            
               

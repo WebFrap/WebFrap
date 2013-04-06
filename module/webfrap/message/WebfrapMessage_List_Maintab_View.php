@@ -43,6 +43,8 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
     $user     = $this->getUser();
     $acl      = $this->getAcl();
     $request  = $this->getRequest();
+    
+    $access = $params->access;
 
     $params->qsize  = 50;
 
@@ -115,6 +117,29 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
     
     $searchElement->setSearchFields($searchFields);
     
+    // Ein Panel für die Filter hinzufügen
+    // Die Filteroptionen befinden sich im Panel
+    // Die UI Klasse wird als Environment übergeben
+    $filterSubPanel = new WebfrapMessage_List_SubPanel_Filter($this);
+    
+    // Search Form wird benötigt um die Filter an das passende Suchformular zu
+    // binden
+    $filterSubPanel->setSearchForm($params->searchFormId);
+    
+
+    
+    // Setzen der Filterzustände, werden aus der URL ausgelesen
+    $filterSubPanel->setFilterStatus($params->settings);
+    
+    // Access wird im Panel als Rechte Container verwendet
+    $filterSubPanel->setAccess($access);
+    $filterSubPanel->searchKey = $searchElement->searchKey;
+          
+    // Jetzt wird das SubPanel in den Suchen Splittbutton integriert
+    $searchElement->setFilter($filterSubPanel);
+    
+    
+    // templates
 
     $this->setTemplate('webfrap/message/maintab/list', true);
 

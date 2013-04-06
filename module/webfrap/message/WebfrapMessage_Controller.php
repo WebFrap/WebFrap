@@ -35,8 +35,7 @@ class WebfrapMessage_Controller extends Controller
   /**
    * @var array
    */
-  protected $options           = array
-  (
+  protected $options           = array(
     'openarea' => array(
       'method'    => array('GET'),
       'views'      => array('modal')
@@ -299,8 +298,7 @@ class WebfrapMessage_Controller extends Controller
     $model->loadTableAccess($params);
 
     if (!$model->access->listing) {
-      throw new InvalidRequest_Exception
-      (
+      throw new InvalidRequest_Exception(
         Response::FORBIDDEN_MSG,
         Response::FORBIDDEN
       );
