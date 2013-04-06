@@ -107,6 +107,12 @@ abstract class WgtAbstract
    */
   public $flags = null;
 
+  /**
+   * @var array
+   */
+  public $attributes = array();
+  
+  
 /*//////////////////////////////////////////////////////////////////////////////
 // Protected Attributes
 //////////////////////////////////////////////////////////////////////////////*/
@@ -135,11 +141,6 @@ abstract class WgtAbstract
    * @var string
    */
   protected $xml        = '';
-
-  /**
-   * @var array
-   */
-  protected $attributes = array();
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Constructors and Magic Functions
@@ -193,6 +194,7 @@ abstract class WgtAbstract
    *
    * @param string $key
    * @param string $value
+   * @deprecated
    */
   public function __set($key , $value)
   {
@@ -210,6 +212,7 @@ abstract class WgtAbstract
    *
    * @param string $key
    * @return string
+   * @deprecated
    */
   public function __get($key)
   {
