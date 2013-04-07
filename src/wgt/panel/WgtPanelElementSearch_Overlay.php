@@ -273,131 +273,40 @@ HTML;
     				
             <div class="wgt-clear small wgt-border-bottom" >&nbsp;</div>
             
-            <div class="wgt-space" >
-            	<h3>Advanced search</h3>
+            <div class="wcm wcm_ui_search_builder wgt-space" style="height:300px;" >
+            
+            	<h3>Extended search</h3>
             	
-            	<div class="left" >{$selectboxFields}</div>
-            	<div class="inline" >&nbsp;&nbsp; <button class="wgt-button" ><i class="icon-plus-sign" ></i></button></div>
-            	
-            	<div class="wgt-clear small" >&nbsp;</div>
-            	
-            	<div style="height:250px;" >
-            		<table>
+          		<div style="max-height:250px;">
+        				<table class="search-container" >
             			<thead>
             				<tr>
-            					<th style="width:100px;" >And/Or</th>
-            					<th style="width:120px;" >Field</th>
-            					<th style="width:70px;" >Not</th>
-            					<th style="width:120px;" >Condition</th>
-            					<th style="width:150px;" >Value</th>
-            					<th style="width:75px;" >Menu</th>
+            					<th style="width:100px;">And/Or</th>
+            					<th style="width:120px;">Field</th>
+            					<th style="width:40px;">Not</th>
+                      <th style="width:40px;">Cs</th>
+            					<th style="width:120px;">Condition</th>
+            					<th style="width:150px;">Value</th>
+            					<th style="width:75px;">Menu</th>
             				</tr>
-            			<thead>
-            			<tbody>
-            				<tr>
-            					<td>
-            						<select>
-            							<option>AND</option>
-            							<option>OR</option>
-            						</select>
-            					</td>
-            					<td style="text-align:right;" >
-            						{$selectboxFields}
-            					</td>
-            					<td style="text-align:center;" >
-            						<input type="checkbox" />
-            					</td>
-            					<td style="text-align:center;" >
-            						{$slctText->element()}
-            					</td>
-            					<td style="text-align:left;" >
-            						<input type="text" />
-            					</td>
-            					<td style="text-align:right;" >
-            						<button 
-            							class="wgt-button" ><i class="icon-plus-sign" ></i></button><button 
-            								class="wgt-button" ><i class="icon-remove-sign" ></i></button>
-            					</td>
-            				</tr>
-            				<tr>
-            					<td style="padding-left:10px;" >
-            						<i class="icon-double-angle-right" ></i> <select>
-            							<option>AND</option>
-            							<option>OR</option>
-            						</select>
-            					</td>
-            					<td style="text-align:right;" >
-            						{$selectboxFields}
-            					</td>
-            					<td style="text-align:center;" >
-            						<input type="checkbox" />
-            					</td>
-            					<td style="text-align:center;" >
-            						{$slctText->element()}
-            					</td>
-            					<td style="text-align:left;" >
-            						<input type="text" />
-            					</td>
-            					<td style="text-align:right;" >
-            						<button 
-            							class="wgt-button" ><i class="icon-plus-sign" ></i></button><button 
-            								class="wgt-button" ><i class="icon-remove-sign" ></i></button>
-            					</td>
-            				</tr>
-										<tr>
-            					<td style="padding-left:30px;" >
-            						<i class="icon-double-angle-right" ></i> <select>
-            							<option>AND</option>
-            							<option>OR</option>
-            						</select>
-            					</td>
-            					<td style="text-align:right;" >
-            						{$selectboxFields}
-            					</td>
-            					<td style="text-align:center;" >
-            						<input type="checkbox" />
-            					</td>
-            					<td style="text-align:center;" >
-            						{$slctText->element()}
-            					</td>
-            					<td style="text-align:left;" >
-            						<input type="text" />
-            					</td>
-            					<td style="text-align:right;" >
-            						<button 
-            								class="wgt-button" ><i class="icon-remove-sign" ></i></button>
-            					</td>
-            				</tr>
-            				<tr>
-            					<td>
-            						<select>
-            							<option>AND</option>
-            							<option>OR</option>
-            						</select>
-            					</td>
-            					<td style="text-align:right;" >
-            						{$selectboxFields}
-            					</td>
-            					<td style="text-align:center;" >
-            						<input type="checkbox" />
-            					</td>
-            					<td style="text-align:center;" >
-            						{$slctText->element()}
-            					</td>
-            					<td style="text-align:left;" >
-            						<input type="text" />
-            					</td>
-            					<td style="text-align:right;" >
-            						<button 
-            							class="wgt-button" ><i class="icon-plus-sign" ></i></button><button 
-            								class="wgt-button" ><i class="icon-remove-sign" ></i></button>
-            					</td>
-            				</tr>
+            			</thead>
+                  <tbody>
+                  
             			</tbody>
                 </table>
             	</div>
+            	
+    				
+      				<div class="wgt-clear small" >&nbsp;</div>
+  
+            	<div class="left" >{$selectboxFields}</div>
+              <div class="inline">&nbsp;&nbsp; <button class="wa_add_line wgt-button" ><i class="icon-plus-sign"></i></button></div>
+            
+              <div class="wgt-clear small">&nbsp;</div>
 
     				</div>
+
+            	
     				
           </div>
           
@@ -427,14 +336,17 @@ HTML;
   protected function renderAdvancedSearchFieldsSelectbox()
   {
     
-    $select = '<select class="wcm wcm_widget_selectbox" >';
+    $select = '<select class="wd-fields wcm wcm_widget_selectbox" >';
+    
+    // first free
+    $select .= '<option></option>';
     
     foreach ( $this->searchFields as $category => $catFields ) {
       
       $select .= '<optgroup label="'.$category.'">';
       
       foreach ( $catFields as $catKey => $catData ) {
-        $select .= '<option value="'.$catKey.'" >'.$catData[0].'</option>';
+        $select .= '<option value="'.$catKey.'" type="'.strtolower($catData[1]).'" >'.$catData[0].'</option>';
       }
       
       $select .= '</optgroup>';
