@@ -270,8 +270,11 @@ HTML;
     				
             <div class="wgt-clear small wgt-border-bottom" >&nbsp;</div>
             
-            <div class="wcm wcm_ui_search_builder wgt-space" style="height:300px;" >
-            
+            <div id="wgt-box-extsrch-{$this->context}-{$this->searchKey}" class="wcm wcm_ui_search_builder wgt-space" style="height:300px;" >
+            	<var id="wgt-box-extsrch-{$this->context}-{$this->searchKey}-cfg-sb" >
+							{"dkey":"{$this->context}-{$this->searchKey}","search_form":"{$this->searchForm}"}
+            	</var>
+            	
             	<h3>Extended search</h3>
             	
           		<div style="max-height:250px;">
