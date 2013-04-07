@@ -116,6 +116,24 @@ class LibSqlConditions
   protected function renderSubCondition( $conditions )
   {
     
+    $sql = '';
+    
+    foreach( $conditions as $condition ){
+      
+      if( isset( $cond['sub'] ) ){
+        
+        $firstNode = current($cond['sub']);
+        
+        $sql .= '(';
+        
+        $sql .= $this->renderSubCondition( $cond['sub'] );
+        
+        $sql .= ')';
+        
+      }
+      
+    }
+    
   }//end protected function renderSubCondition */
 
   /**

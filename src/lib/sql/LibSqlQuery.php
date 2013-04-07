@@ -269,6 +269,35 @@ abstract class LibSqlQuery implements Iterator, Countable
 
     return $this->acl;
   }//end public function getAcl */
+  
+
+  /**
+   * load the database Object
+   * @return LibDbConnection
+   */
+  protected function getDb()
+  {
+
+    if (!$this->db)
+      $this->db = Db::getActive();
+
+    return  $this->db;
+
+  }//end public function getDb */
+
+  /**
+   * load the database Object
+   * @return LibDbConnection
+   */
+  protected function getOrm()
+  {
+
+    if (!$this->db)
+      $this->db = Db::getActive();
+
+    return  $this->db->getOrm();
+
+  }//end public function getDb */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic
@@ -562,8 +591,7 @@ abstract class LibSqlQuery implements Iterator, Countable
     }
 
     switch ($extCond[self::OPERATOR]) {
-      case 'equals':
-      {
+      case 'equals': {
         if ($isCS)
           $sql .= " = UPPER('{$value}') ";
         else
@@ -571,13 +599,11 @@ abstract class LibSqlQuery implements Iterator, Countable
 
         break;
       }
-      case 'null':
-      {
+      case 'null': {
         $sql .= " IS NULL ";
         break;
       }
-      case 'like':
-      {
+      case 'like': {
         if ($isCS)
           $sql .= " like UPPER('%{$value}%') ";
         else
@@ -585,8 +611,7 @@ abstract class LibSqlQuery implements Iterator, Countable
 
         break;
       }
-      case 'start_with':
-      {
+      case 'start_with': {
         if ($isCS)
           $sql .= " like UPPER('{$value}%') ";
         else
@@ -594,8 +619,7 @@ abstract class LibSqlQuery implements Iterator, Countable
 
         break;
       }
-      case 'end_with':
-      {
+      case 'end_with': {
         if ($isCS)
           $sql .= " like UPPER('%{$value}') ";
         else
@@ -603,8 +627,7 @@ abstract class LibSqlQuery implements Iterator, Countable
 
         break;
       }
-      case 'in':
-      {
+      case 'in': {
 
         if (is_array($value)) {
 
@@ -626,8 +649,7 @@ abstract class LibSqlQuery implements Iterator, Countable
 
         break;
       }
-      default:
-      {
+      default: {
         throw new LibDb_Exception("Got nonsupported extended condition operator: ".$extCond[self::OPERATOR]);
       }
 
@@ -637,33 +659,6 @@ abstract class LibSqlQuery implements Iterator, Countable
 
   }//end public function renderExtendedCondition */
 
-  /**
-   * load the database Object
-   * @return LibDbConnection
-   */
-  protected function getDb()
-  {
-
-    if (!$this->db)
-      $this->db = Db::getActive();
-
-    return  $this->db;
-
-  }//end public function getDb */
-
-  /**
-   * load the database Object
-   * @return LibDbConnection
-   */
-  protected function getOrm()
-  {
-
-    if (!$this->db)
-      $this->db = Db::getActive();
-
-    return  $this->db->getOrm();
-
-  }//end public function getDb */
 
   /**
    * get the size of the last query
@@ -671,7 +666,7 @@ abstract class LibSqlQuery implements Iterator, Countable
    */
   public function getIds()
   {
-   return $this->ids;
+    return $this->ids;
 
   }//end public function getIds */
 
