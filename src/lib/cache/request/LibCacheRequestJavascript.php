@@ -177,6 +177,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
 
     if ($files) {
       if (!DEBUG && $minify) {
+      //if (true) {
 
         if (!file_exists(PATH_GW.'cache/jsmin/'))
           SFilesystem::createFolder(PATH_GW.'cache/jsmin/');
@@ -196,11 +197,14 @@ class LibCacheRequestJavascript extends LibCacheRequest
             if (!file_exists(dirname($cacheFile)))
               SFilesystem::createFolder(dirname($cacheFile));
 
+            /*
             if (!file_exists($cacheFile)) {
               system('java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'.$file.'" --type js --charset utf-8 -o "'.$cacheFile.'"');
+            }*/
+            if (!file_exists($cacheFile)) {
+              system('java -jar '.PATH_WGT.'compressor/compiler.jar  --js "'.$file.'" --js_output_file "'.$cacheFile.'"');
             }
 
-            //$code .= '/* java java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'.$file.'" --type js --charset utf-8   -o "'.$file.'.min" */'.NL;
             $code .= file_get_contents($cacheFile).NL;
 
           } catch (Exception $e) {
@@ -315,8 +319,12 @@ class LibCacheRequestJavascript extends LibCacheRequest
             if (!file_exists(dirname($cacheFile)))
               SFilesystem::createFolder(dirname($cacheFile));
 
+            /*
             if (!file_exists($cacheFile)) {
               system('java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'.$file.'" --type js --charset utf-8 -o "'.$cacheFile.'"');
+            }*/
+            if (!file_exists($cacheFile)) {
+              system('java -jar '.PATH_WGT.'compressor/compiler.jar  --js "'.$file.'" --js_output_file "'.$cacheFile.'"');
             }
 
             //$code .= '/* java java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'.$file.'" --type js --charset utf-8   -o "'.$file.'.min" */'.NL;
@@ -340,8 +348,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
       SFilesystem::createFolder(PATH_GW.$this->folder.'/list/'  );
 
     file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.plain' ,  $code);
-    file_put_contents
-    (
+    file_put_contents(
       PATH_GW.$this->folder.'/list/'.$list.'.plain.meta' ,
       json_encode(array('etag'=> $etag, 'size'=> $plainSize))
     );
@@ -351,8 +358,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
       $encodedSize  = strlen($encoded);
 
       file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.gz' ,  $encoded);
-      file_put_contents
-      (
+      file_put_contents(
         PATH_GW.$this->folder.'/list/'.$list.'.gz.meta' ,
         json_encode(array('etag'=> $etag, 'size'=> $encodedSize))
       );
