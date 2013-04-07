@@ -107,6 +107,14 @@
         </li>
       </ul>
     </li>
+    <li><span>Search</span>
+      <ul>
+        <li><a
+          href="area.php?c=Example.Wgt.area&area=search.builder"
+          class="wcm wcm_req_ajax" >Search Builder</a>
+        </li>
+      </ul>
+    </li>
 		<li><span>ui</span>
 			<ul>
         <li><span>Layout Elements</span>
