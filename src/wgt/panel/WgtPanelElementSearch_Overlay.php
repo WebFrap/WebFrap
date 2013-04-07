@@ -205,10 +205,7 @@ HTML;
       }
       
       $selectboxFields = $this->renderAdvancedSearchFieldsSelectbox();
-      
-      $slctBoolean = new WebfrapSearchTypeBoolean_Selectbox();
-      $slctText = new WebfrapSearchTypeText_Selectbox();
-
+  
       $html .= <<<HTML
 
       <div class="right" >
