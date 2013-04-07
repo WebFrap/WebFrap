@@ -28,9 +28,7 @@ class ESearchBoolean
 
   const IS_FALSE      = 2;
   
-  const IS_T_OR_F     = 3;
-
-  const IS_NULL       = 4;
+  const IS_NULL       = 3;
 
   /**
    * @var array
@@ -38,7 +36,6 @@ class ESearchBoolean
   public static $labels = array(
     self::IS_TRUE      => 'True',
     self::IS_FALSE     => 'False',
-    self::IS_T_OR_F    => 'True or False',
     self::IS_NULL      => 'Is not Set',
   );
 

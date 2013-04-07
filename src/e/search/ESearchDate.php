@@ -36,8 +36,6 @@ class ESearchDate
   
   const IS_NULL       = 6;
   
-  const IS_NOT_NULL   = 7;
-
   /**
    * @var array
    */
@@ -48,7 +46,6 @@ class ESearchDate
     self::AFTER       => 'after',
     self::AFTER_EQUAL => 'after or equal',
     self::IS_NULL     => 'is empty',
-    self::IS_NOT_NULL => 'is not empty',
   );
   
   /**

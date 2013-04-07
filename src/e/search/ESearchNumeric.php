@@ -34,9 +34,7 @@ class ESearchNumeric
   
   const BIGGER_EQUAL   = 5;
   
-  const IS_NULL       = 5;
-  
-  const IS_NOT_NULL   = 7;
+  const IS_NULL       = 6;
 
   /**
    * @var array
@@ -48,7 +46,6 @@ class ESearchNumeric
     self::BIGGER       => 'bigger',
     self::BIGGER_EQUAL => 'bigger or equal',
     self::IS_NULL     => 'is empty',
-    self::IS_NOT_NULL => 'is not empty',
   );
   
   /**
