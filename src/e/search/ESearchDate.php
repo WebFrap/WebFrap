@@ -34,7 +34,7 @@ class ESearchDate
   
   const AFTER_EQUAL   = 5;
   
-  const IS_NULL       = 5;
+  const IS_NULL       = 6;
   
   const IS_NOT_NULL   = 7;
 
