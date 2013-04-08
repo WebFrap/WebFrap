@@ -169,8 +169,7 @@ class LibAclManager_Db extends LibAclManager
     // per definition nicht partiell
     $entityGUser->partial       = 0;
 
-    $orm->insertIfNotExists
-    (
+    $orm->insertIfNotExists(
       $entityGUser,
       array
       (
@@ -622,9 +621,8 @@ class LibAclManager_Db extends LibAclManager
       throw new LibAcl_Exception("Missing required data: User or Profile {$entityUserProfile->id_user} || {$entityUserProfile->id_profile}");
     }
 
-    $orm->insertIfNotExists
-    (
-      $entityGUser,
+    $orm->insertIfNotExists(
+      $entityUserProfile,
       array
       (
         'id_profile',
