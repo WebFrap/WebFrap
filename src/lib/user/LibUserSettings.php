@@ -21,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibUserSettings
-  extends LibSettings
+class LibUserSettings extends LibSettings
 {
 
   public $user = null;
