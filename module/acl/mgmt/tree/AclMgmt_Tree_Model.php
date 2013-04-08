@@ -300,8 +300,7 @@ class AclMgmt_Tree_Model extends AclMgmt_Model
       $entityWbfsysSecurityPath = new WbfsysSecurityPath_Entity;
     }
 
-    $fields = array
-    (
+    $fields = array(
       'access_level',
       'id_group',
       'id_reference',
@@ -310,8 +309,7 @@ class AclMgmt_Tree_Model extends AclMgmt_Model
       'description',
     );
 
-    $httpRequest->validateUpdate
-    (
+    $httpRequest->validateUpdate(
       $entityWbfsysSecurityPath,
       'security_path',
       $fields
