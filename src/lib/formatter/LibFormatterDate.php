@@ -281,10 +281,8 @@ class LibFormatterDate
   }
 
   /**
-   * Enter description here...
-   *
-   * @param unknown_type $date
-   * @return unknown
+   * @param string $date
+   * @return string
    */
   public function format($date)
   {
