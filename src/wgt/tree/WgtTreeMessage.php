@@ -51,7 +51,7 @@ class WgtTreeMessage extends WgtTree
   <div style="width:{$this->width}px;" >
     <span class="date" >{$date}</span>
     <span class="title" >{$title}</span>
-    <span class="name" >{$from}</span>
+    <span class="name" >{$senderName}</span>
   </div>
 HTML;
 
