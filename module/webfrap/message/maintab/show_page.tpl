@@ -39,7 +39,7 @@ $sForm->hidden('receiver_id', $VAR->msgNode->receiver_id);
       <ul class="wgt-list wgt-space" >
         <li><label>Status:</label> <span><?php echo EMessageStatus::label($VAR->msgNode->receiver_status); ?></span></li>
         <li><label>Priority:</label> <span><?php echo EMessagePriority::label($VAR->msgNode->priority); ?></span></li>
-        <li><label>Confidential:</label> <span><?php echo EWbfsysConfidential::label($VAR->msgNode->confidential); ?></span></li>
+        <li><label>Confidential:</label> <span><?php echo EWebfrapConfidential::label($VAR->msgNode->confidential); ?></span></li>
       </ul>
 
       <div id="wgt-mox-show-msg-task-<?php echo $VAR->msgNode->msg_id; ?>" >
