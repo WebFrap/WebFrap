@@ -6,8 +6,7 @@ $this->crumbs = array(
   array('Backup', $this->interface.'?c=Webfrap.Base.menu&amp;menu=access','control/folder.png'),
 );
 
-$this->firstEntry = array
-(
+$this->firstEntry = array(
   'menu_mod_root',
    Wgt::MAIN_TAB,
   '..',
@@ -18,8 +17,7 @@ $this->firstEntry = array
 
 if ($acl->hasRole('developer')) {
 
-  $this->firstEntry = array
-  (
+  $this->firstEntry = array(
     'menu_mod_maintenance',
      Wgt::MAIN_TAB,
     '..',
@@ -28,8 +26,7 @@ if ($acl->hasRole('developer')) {
     WgtIcon::big('places/folder.png'),
   );
 
-  $this->folders[] = array
-  (
+  $this->folders[] = array(
     'menu_mod_maintenance_backup_db',
     Wgt::MAIN_TAB,
     'backup db',
