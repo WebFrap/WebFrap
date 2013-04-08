@@ -67,17 +67,8 @@ class LibSettings
 
 
       $sql = <<<SQL
-SELECT rowid, jdata from wbfsys_user_setting where type = {$key}
+SELECT rowid, jdata from wbfsys_user_setting where type = {$key} AND id_user is null;
 SQL;
-
-      if ($userId){
-
-        $sql .= " AND id_user = {$userId}; ";
-
-      } else {
-
-        $sql .= " AND id_user is null;";
-      }
 
       $data = $this->db->select($sql)->get();
 
