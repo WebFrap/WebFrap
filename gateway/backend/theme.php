@@ -41,7 +41,7 @@ Webfrap::loadClassIndex($type.'/'.$id);
 
 $webfrap  = Webfrap::init();
 Webfrap::$autoloadPath[]  = View::$themePath.'src/';
-$cache    = new LibCacheRequestTheme();
+$cache    = new LibCacheRequestAppTheme();
 
 if (isset($_GET['clean']))
   $cache->clean();
