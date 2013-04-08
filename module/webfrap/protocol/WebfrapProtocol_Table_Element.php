@@ -299,7 +299,7 @@ class WebfrapProtocol_Table_Element extends WgtTable
       $body = '<htmlArea selector="tr#'.$rowid.'" action="html" ><![CDATA[';
     }
 
-    $body .= '<td valign="top" class="pos" name="slct['.$objid.']" style="text-align:right;" >'.$pos.'</td>'.NL;
+    $body .= '<td valign="top" class="pos" name="slct['.$objid.']" style="text-align:right;" >1</td>'.NL;
 
     $body .= '<td valign="top" style="text-align:right;"  >'.$row['wbfsys_protocol_m_time_created'].'</td>'.NL;
     $body .= '<td valign="top"  >'.$row['core_person_lastname'].', '.$row['core_person_firstname'].'</td>'.NL;
