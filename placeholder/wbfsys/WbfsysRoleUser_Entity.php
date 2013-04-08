@@ -21,4 +21,6 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WbfsysRoleUser_Entity{}
+class WbfsysRoleUser_Entity extends Entity
+{
+}
