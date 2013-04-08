@@ -132,7 +132,7 @@ class ContextListing
   protected $actionExt = null;
   
   /**
-   * @var string
+   * @var ValidSearchBuilder
    */
   protected $extSearchValidator = null;
   
@@ -328,21 +328,25 @@ class ContextListing
     
     foreach ($extSearchFields as $fKey => $extField) {
       
+      if (!isset($this->searchFields[$extField['field']])){
+        // field not exists
+        continue;
+      }
+      
       if (isset($extField['parent'])) {
         
         if (!isset($this->extSearch[$extField['parent']]->sub)  )
           $this->extSearch[$extField['parent']]->sub = array();
           
-        $this->extSearch[$extField['parent']]->sub[] = (object)$this->extSearchValidator->validate($extField, $this-> $fieldData);
+        $this->extSearch[$extField['parent']]->sub[] = (object)$this->extSearchValidator->validate($extField, $this->searchFields[$extField['field']] );
           
       } else {
         
-        $this->extSearch[$fKey] = (object)$extField;
+        $this->extSearch[$fKey] = (object)$this->extSearchValidator->validate($extField, $this->searchFields[$extField['field']]);
         
       }
       
     }
-
 
   }//end public function interpretExtendedSearch */
 
