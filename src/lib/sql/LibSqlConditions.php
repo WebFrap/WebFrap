@@ -120,13 +120,13 @@ class LibSqlConditions
     
     foreach( $conditions as $condition ){
       
-      if( isset( $cond['sub'] ) ){
+      if( isset( $condition['sub'] ) ){
         
-        $firstNode = current($cond['sub']);
+        $firstNode = current($condition['sub']);
         
         $sql .= '(';
         
-        $sql .= $this->renderSubCondition( $cond['sub'] );
+        $sql .= $this->renderSubCondition( $condition['sub'] );
         
         $sql .= ')';
         
