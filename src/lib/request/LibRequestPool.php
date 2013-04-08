@@ -554,7 +554,7 @@ class LibRequestPool extends LibRequestAbstract
       return $this->files;
     }
 
-    if ($typ) {
+    if ($type) {
 
       if (isset($this->files[$key])) {
         $classname = 'LibUpload'.SParserString::subToCamelCase($type);
