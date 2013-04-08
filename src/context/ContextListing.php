@@ -150,8 +150,18 @@ class ContextListing
         $this->filter->$key = $value;
       }
     }
+    
+  
+    if ($request->paramExists('as')) {
+      if ($extSearchValidator)
+        $this->extSearchValidator = $extSearchValidator;
+      else
+        $this->extSearchValidator = new ValidSearchBuilder();
+    }
 
     $this->interpretRequest($request);
+    
+
 
   } // end public function __construct */
   
@@ -190,6 +200,10 @@ class ContextListing
    */
   public function interpretRequest($request)
   {
+    
+    if( $request->paramExists('as') ){
+      $this->interpretExtendedSearch($request);
+    }
 
     // the publish type, like selectbox, tree, table..
     if ($publish  = $request->param('publish', Validator::CNAME))
@@ -313,7 +327,7 @@ class ContextListing
         if (!isset($this->extSearch[$extField['parent']]->sub)  )
           $this->extSearch[$extField['parent']]->sub = array();
           
-        $this->extSearch[$extField['parent']]->sub[] = (object)$extField;
+        $this->extSearch[$extField['parent']]->sub[] = (object)$this->extSearchValidator->validate($extField, $this-> $fieldData);
           
       } else {
         
