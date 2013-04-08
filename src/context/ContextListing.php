@@ -97,6 +97,12 @@ class ContextListing
   public $filter = null;
   
   /**
+   * Search Fields
+   * @var array
+   */
+  public $searchFields = array();
+  
+  /**
    * Extended Search filter
    * @var array
    */
