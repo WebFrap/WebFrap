@@ -86,7 +86,7 @@ class WebRegister_Frontend_Controller extends ControllerFrontend
   /**
    * @return void
    */
-  public function service_listing()
+  public function service_listing($request,$response)
   {
 
     $view    = $this->getView();
@@ -116,7 +116,7 @@ class WebRegister_Frontend_Controller extends ControllerFrontend
   /**
    * @return void
    */
-  public function service_addArticle()
+  public function service_addArticle($request,$response)
   {
 
     $view    = $this->getView();
@@ -157,7 +157,7 @@ class WebRegister_Frontend_Controller extends ControllerFrontend
   /**
    * @return void
    */
-  public function service_removeArticle()
+  public function service_removeArticle($request,$response)
   {
 
     $view    = $this->getView();
@@ -197,7 +197,7 @@ class WebRegister_Frontend_Controller extends ControllerFrontend
   /**
    * @return void
    */
-  public function service_clear()
+  public function service_clear($request,$response)
   {
 
     $view    = $this->getView();
@@ -238,7 +238,7 @@ class WebRegister_Frontend_Controller extends ControllerFrontend
   /**
    * @return void
    */
-  public function service_update()
+  public function service_update($request,$response)
   {
 
     $view    = $this->getView();
