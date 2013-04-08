@@ -63,7 +63,7 @@ class WebfrapAnnouncement_Crud_Controller extends ControllerCrud
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
     $params->contextKey = 'my_message-create';
 
-    $access = new WbfsysMessage_Crud_Access_Create(null, null, $this);
+    $access = new WebfrapAnnouncement_Crud_Access_Create(null, null, $this);
     $access->load($user->getProfileName(), $params);
 
     // der Access Container des Users für die Resource wird als flag übergeben
@@ -188,7 +188,7 @@ class WebfrapAnnouncement_Crud_Controller extends ControllerCrud
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
     $params->contextKey = 'wbfsys_message-send';
 
-    $access = new WbfsysMessage_Crud_Access_Insert(null, null, $this);
+    $access = new WebfrapAnnouncement_Crud_Access_Insert(null, null, $this);
     $access->load($user->getProfileName(),  $params);
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
