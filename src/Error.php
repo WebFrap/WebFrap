@@ -145,7 +145,7 @@ class Error
    * @var string
    */
   const INTERNAL_ERROR_MSG = <<<HTML
-The system detected a pontential problem during the execution of your request.
+The system detected a potential problem during the execution of your request.
 This is NOT your fault, it seems to be a bug that need to be fixed.<br />
 The Problem was logged and the system maintainer was noticed.
 We will take care for this issue as soon as possible.<br />
@@ -181,7 +181,7 @@ HTML;
    * @var string
    */
   const PROGRAM_BUG = <<<HTML
-The system detected a pontential problem during the execution of your request.
+The system detected a potential problem during the execution of your request.
 This is NOT your fault, it seems to be a bug that need to be fixed.<br />
 The Problem was logged and the system maintainer was noticed.
 We will take care for this issue as soon as possible.<br />
