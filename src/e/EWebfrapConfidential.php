@@ -87,7 +87,7 @@ class EWebfrapConfidential
       
       return isset(self::$labels[$key])
         ? self::$labels[$key]
-        : $labels[self::PUBLICLY];
+        : self::$labels[self::PUBLICLY];
     }
 
 
