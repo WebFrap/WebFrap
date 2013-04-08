@@ -268,10 +268,8 @@ class AclMgmt_Model extends Model
    */
   public function getEditFieldsAccess()
   {
-    return array
-    (
-      'security_access' => array
-      (
+    return array(
+      'security_access' => array(
         'access_level',
         'description',
         'date_start',
