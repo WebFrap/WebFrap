@@ -84,6 +84,11 @@ class ValidSearchBuilder
   {
     
     $type = $fieldData[$searchCol['field']][1];
+
+    if(!in_array($type,$this->supportedTypes)){
+      Debug::console( "Got unsupported type ".$type );
+      return null;
+    }
     
     $searchCol['con'] = (boolean)$searchCol['con'];
     $searchCol['not'] = (boolean)$searchCol['not'];
@@ -99,8 +104,11 @@ class ValidSearchBuilder
   protected function validate_boolean($searchCol)
   {
     
+    if (!isset(ESearchBoolean::$labels[(int)$searchCol['cond']])) {
+      return null;
+    }
     
-    
+    return $searchCol;
     
   }//end protected function validate_boolean */
   
@@ -111,6 +119,30 @@ class ValidSearchBuilder
   protected function validate_date($searchCol)
   {
     
+    if (!isset(ESearchDate::$labels[(int)$searchCol['cond']])) {
+      return null;
+    }
+    
+    if( (int)$searchCol['cond'] !== ESearchText::IS_NULL  ){
+    
+      if ('' === trim($searchCol['value'])) {
+        // nichts zu tun
+        return null;
+      }
+    }
+    $formatter = LibFormatterDate::getActive();
+
+    $formatter->setFormat($this->i18n->dateFormat);
+    $formatter->setSeperator($this->i18n->dateSeperator);
+
+    if (!$formatter->setDateLanguage($searchCol['value'])) {
+      return null;
+    }
+
+    $searchCol['value'] = $formatter->formatToEnglish();
+    
+    return $searchCol;
+    
   }//end protected function validate_date */
   
   /**
@@ -119,6 +151,16 @@ class ValidSearchBuilder
    */
   protected function validate_id($searchCol)
   {
+    
+    if (!isset(ESearchId::$labels[(int)$searchCol['cond']])) {
+      return null;
+    }
+    
+    if (!ctype_digit($searchCol['value']) ){
+      return null;
+    }
+    
+    return $searchCol;
     
   }//end protected function validate_id */
   
@@ -129,6 +171,16 @@ class ValidSearchBuilder
   protected function validate_numeric($searchCol)
   {
     
+    if (!isset(ESearchNumeric::$labels[(int)$searchCol['cond']])) {
+      return null;
+    }
+    
+    if (!is_numeric($searchCol['value'])) {
+      return null;
+    }
+    
+    return $searchCol;
+    
   }//end protected function validate_numeric */
   
   /**
@@ -138,6 +190,24 @@ class ValidSearchBuilder
   protected function validate_text($searchCol)
   {
     
+    if (!isset(ESearchText::$labels[(int)$searchCol['cond']])) {
+      return null;
+    }
+    
+    if( (int)$searchCol['cond'] !== ESearchText::IS_NULL  ){
+      
+      if ('' === trim($searchCol['value'])) {
+        // nichts zu tun
+        return null;
+      }
+      
+    }
+
+    $searchCol['value'] = $this->db->addSlashes($searchCol['value']);
+    
+    
+    return $searchCol;
+    
   }//end protected function validate_text */
   
   /**
@@ -146,6 +216,22 @@ class ValidSearchBuilder
    */
   protected function validate_text_strict($searchCol)
   {
+    
+    if (!isset(ESearchTextStrict::$labels[(int)$searchCol['cond']])) {
+      return null;
+    }
+    
+    if( (int)$searchCol['cond'] !== ESearchTextStrict::IS_NULL  ){
+      if ('' === trim($searchCol['value'])) {
+        // nichts zu tun
+        return null;
+      }
+    }
+
+    $searchCol['value'] = $this->db->addSlashes($searchCol['value']);
+    
+    
+    return $searchCol;
     
   }//end protected function validate_text_strict */
 
