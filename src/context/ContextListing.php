@@ -124,6 +124,12 @@ class ContextListing
    * @var string
    */
   protected $actionExt = null;
+  
+  /**
+   * @var string
+   */
+  protected $extSearchValidator = null;
+  
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Magic Functions
@@ -132,7 +138,7 @@ class ContextListing
   /**
    * @param LibRequestHttp $request
    */
-  public function __construct($request)
+  public function __construct($request, $extSearchValidator = null)
   {
 
     $this->filter = new TFlag();
@@ -148,6 +154,8 @@ class ContextListing
     $this->interpretRequest($request);
 
   } // end public function __construct */
+  
+  
 
   /**
    * virtual __set
@@ -294,6 +302,26 @@ class ContextListing
   {
     
     $extSearchFields = $request->param('as');
+    
+    if (!$extSearchFields)
+      return;
+    
+    foreach ($extSearchFields as $fKey => $extField) {
+      
+      if (isset($extField['parent'])) {
+        
+        if (!isset($this->extSearch[$extField['parent']]->sub)  )
+          $this->extSearch[$extField['parent']]->sub = array();
+          
+        $this->extSearch[$extField['parent']]->sub[] = (object)$extField;
+          
+      } else {
+        
+        $this->extSearch[$fKey] = (object)$extField;
+        
+      }
+      
+    }
 
 
   }//end public function interpretExtendedSearch */
