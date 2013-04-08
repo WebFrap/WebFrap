@@ -44,11 +44,11 @@ class LibProtocol_UserAction
    */
   public function write($message, $area = null, $entity = null)
   {
-
+    
     $vid      = null;
     $idEntity = null;
 
-    $orm->insert(
+    $this->orm->insert(
       'WbfsysActionLog',
       array(
         'content' => $message,
