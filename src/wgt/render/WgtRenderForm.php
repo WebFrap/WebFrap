@@ -67,8 +67,7 @@ class WgtRenderForm
    * Liste der I18n Languages
    * @var array
    */
-  public $i18nLanguages = array
-  (
+  public $i18nLanguages = array(
     array('id' => 'de', 'value' => 'german'),
     array('id' => 'en', 'value' => 'english'  )
   );
@@ -1025,7 +1024,7 @@ CODE;
     </var>
 HTML;
 
-    return $this->out($code);
+    return $this->out($langCode);
 
   }//end public function i18nSelectSrc */
 
