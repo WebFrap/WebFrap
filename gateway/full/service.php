@@ -29,8 +29,7 @@ try {
 catch(Exception $exception) {
   $extType = get_class($exception);
 
-  Error::addError
-  (
+  Error::addError(
     'Uncatched  Exception: '.$extType.' Message:  '.$exception->getMessage() ,
     null,
     $exception
@@ -42,6 +41,9 @@ catch(Exception $exception) {
   }
 
   if (!DEBUG) {
+    
+    $view = Webfrap::$env->getView();
+    
     if (isset($view) and is_object($view)) {
       $view->publishError($exception->getMessage() , $errors);
     } else {
