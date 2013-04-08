@@ -203,10 +203,10 @@ $slctTextStrict->setId('wgt-select-astype-{$dkey}-{$pos}');
 		<input class="label" readonly="readonly" type="text" value="" />
 	</td>
 	<td class="not" style="text-align:center;" >
-		<input name="as[{$pos}][not]" checked="checked" type="checkbox" />
+		<input name="as[{$pos}][not]" type="checkbox" />
 	</td>
 	<td class="cs" style="text-align:center;" >
-		<input name="as[{$pos}][cs]" checked="checked" type="checkbox" />
+		<input name="as[{$pos}][cs]" type="checkbox" />
 	</td>
 	<td class="condition" style="text-align:center;" >
 		<?php echo $slctText->element(); ?>
