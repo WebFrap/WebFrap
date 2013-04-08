@@ -581,6 +581,7 @@ SQL;
     $db = $this->getDb();
     $user = $this->getUser();
     $userID = $user->getId();
+    $orm = $this->getOrm();
 
     $queries = array();
     $queries[] = 'UPDATE wbfsys_message set flag_sender_deleted = true WHERE id_sender = '.$userID.';';
@@ -637,6 +638,7 @@ SQL;
     $db = $this->getDb();
     $user = $this->getUser();
     $userID = $user->getId();
+    $orm = $this->getOrm();
 
     if (!$msgIds)
       return;
