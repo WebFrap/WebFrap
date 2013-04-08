@@ -1095,9 +1095,9 @@ HTML;
     $name,
     $value = null,
     $attributes = array(),
-    $params = null
-  )
-  {
+    $params = null,
+    $check = true
+  ) {
 
 
     $pNode = $this->prepareParams($params);
@@ -1177,7 +1177,7 @@ HTML;
   <label for="wgt-input-{$id}" class="wgt-label">{$helpIcon}{$label}{$pNode->requiredText}</label>
   {$helpText}
   <div class="wgt-input {$size}" >
-    <input {$codeAttr} />{$appendText}
+    <input {$codeAttr} />{$pNode->appendText}
   </div>
   <div class="wgt-clear tiny" ></div>
 </div>
