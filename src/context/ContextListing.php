@@ -95,6 +95,12 @@ class ContextListing
    * @var TFlag
    */
   public $filter = null;
+  
+  /**
+   * Extended Search filter
+   * @var array
+   */
+  public $extSearch = array();
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Protected data
@@ -278,6 +284,19 @@ class ContextListing
       = $request->param('mask', Validator::CNAME);
 
   }//end public function interpretRequest */
+  
+  
+  /**
+   * Interpretieren von Extended Search Parametern
+   * @param LibRequestHttp $request
+   */
+  public function interpretExtendedSearch($request)
+  {
+    
+    $extSearchFields = $request->param('as');
+
+
+  }//end public function interpretExtendedSearch */
 
   /**
    * @return string
