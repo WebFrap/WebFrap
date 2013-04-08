@@ -222,34 +222,7 @@ class LibCachePostgresql extends LibCache_L1Adapter
 
   } // end public function cacheClean */
 
-  /**
-   * Zum Memcache Server Connecten
-   * @param array $conf
-   * @return bool
-   */
-  public function connectMemached($conf)
-  {
-
-    if (WebFrap::loadable('Memcache')) {
-      $this->cache = new Memcache();
-    } else {
-      throw new LibCache_Exception('the Memcached modul not exists!');
-    }
-
-    $this->cache->connect($conf['server'] , (int) $conf['port']);
-
-  } //end protected function connectMemached */
-
-  /** Verbindung zum Memcache Server schliesen
-   *
-   * @return bool
-  */
-  public function closeMemcached()
-  {
-    $this->cache->close();
-
-  }
-
+ 
   /* (non-PHPdoc)
    * @see LibCacheAdapter::exists()
    */
