@@ -95,7 +95,7 @@ class LibImage_Gd extends LibImageAdapter
           }
 
           // Neueinlesen der benötigten Daten
-          $imgdata = getimagesize ($errorpic);
+          $imgdata = getimagesize ($this->resource);
           $this->width = $imgdata[0];
           $this->height = $imgdata[1];
           $this->type = 'image/jpeg';
