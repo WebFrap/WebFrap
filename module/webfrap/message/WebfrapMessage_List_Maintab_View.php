@@ -90,32 +90,9 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
     $searchElement->searchFieldSize = 'xlarge';
     //$searchElement->advancedSearch = true;
     $searchElement->focus = true;
+
     
-    $searchFields = array(
-      'Message' => array(
-        'title' => array( 'Title', 'Text' ),
-        'sender' => array( 'Sender', 'Text' ),
-        'receiver' => array( 'Receiver', 'Text' ),
-        'date_received' => array( 'Date Receiver', 'Date' ),
-        'date_updated' => array( 'Date Updated', 'Date' )
-      ),
-      'Appointment' => array(
-        'appoint_deadline' => array( 'Deadline', 'Date' ),
-        'sender' => array( 'Sender', 'Text' ),
-        'receiver' => array( 'Receiver', 'Text' ),
-        'date_received' => array( 'Date receiver', 'Date' ),
-        'date_updated' => array( 'Date updated', 'Date' ),
-        'full_day' => array( 'Full day', 'Boolean' ),
-        'part_required' => array( 'Participation required', 'Boolean' )
-      ),
-      'Task' => array(
-        'task_start' => array( 'Task Start', 'Date' ),
-        'task_end' => array( 'Task End', 'Date' ),
-        'action_required' => array( 'Action required', 'Boolean' )
-      )
-    );
-    
-    $searchElement->setSearchFields($searchFields);
+    $searchElement->setSearchFields($params->searchFields);
     
     // Ein Panel für die Filter hinzufügen
     // Die Filteroptionen befinden sich im Panel
