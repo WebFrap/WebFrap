@@ -62,21 +62,7 @@ class LibSqlConditions
   public function setConditions( $conditions )
   {
     
-    foreach ( $conditions as $pos => $cond ) {
-      
-      if (isset($cond['parent'])) {
-        
-        if (!isset($this->conditions[(int)$cond['parent']]['sub']))
-          $this->conditions[(int)$cond['parent']]['sub'] = array();
-          
-        $this->conditions[(int)$cond['parent']]['sub'][] = $cond;
-        
-      } else {
-        
-        $this->conditions[(int)$pos] = $cond;
-      }
-      
-    }
+    $this->conditions = $conditions;
     
   }//end public function setConditions */
 
@@ -98,11 +84,30 @@ class LibSqlConditions
       }
     }
     
+    $sql = '';
+    $first = null;
+    
     foreach ($this->conditions as $cond) {
       
-      if( !isset($fields[$cond]) ){
+      if( !isset($this->fields[$cond->field]) ){
         continue;
       }
+      
+      $fieldData = $this->fields[$cond->field];
+      
+      
+      $method = 'handleCondition_'.ucfirst($fieldData[1]);
+      
+      if (is_null($first)) {
+        
+        $first  = $cond->con;
+        $sql .= $this->{$method}($cond);
+        
+      } else {
+        
+        $sql .= ($cond->con?' AND ':' OR ').$this->{$method}($cond);
+      }
+      
       
     }
 
@@ -120,13 +125,13 @@ class LibSqlConditions
     
     foreach( $conditions as $condition ){
       
-      if( isset( $condition['sub'] ) ){
+      if( isset( $condition->sub ) ){
         
-        $firstNode = current($condition['sub']);
+        $firstNode = current($condition->sub);
         
         $sql .= '(';
         
-        $sql .= $this->renderSubCondition( $condition['sub'] );
+        $sql .= $this->renderSubCondition($condition->sub);
         
         $sql .= ')';
         
@@ -145,13 +150,13 @@ class LibSqlConditions
     
     $sql = '';
     
-    $fieldName = $this->fields[$cond['cond']['field']];
+    $fieldName = $this->fields[$cond->field];
     
-    if ($cond['cond']['not']) {
+    if ($cond->not) {
       $sql .= ' NOT ';
     }
     
-    switch ($cond['cond']) {
+    switch ($cond->cond) {
       
       case ESearchBoolean::IS_FALSE: {
         
@@ -176,7 +181,7 @@ class LibSqlConditions
       
     }
     
-    if( isset( $cond['sub'] ) ){
+    if (isset($cond->sub)) {
       $sql .= $this->renderSubCondition( $cond );
     }
     
@@ -194,37 +199,37 @@ class LibSqlConditions
 
     $sql = '';
     
-    $fieldName = $this->fields[$cond['cond']['field']];
+    $fieldName = $this->fields[$cond->field];
     
-    if ($cond['cond']['not']) {
+    if ($cond->not) {
       $sql .= ' NOT ';
     }
     
-    switch ($cond['cond']) {
+    switch ($cond->cond) {
       
       case ESearchDate::AFTER: {
         
-        $sql .= ' '.$fieldName[2]." > '".$cond['cond']['value']."'";
+        $sql .= ' '.$fieldName[2]." > '".$cond->value."'";
         break;
       }
       case ESearchDate::AFTER_EQUAL: {
         
-        $sql .= ' '.$fieldName[2]." >= '".$cond['cond']['value']."'";
+        $sql .= ' '.$fieldName[2]." >= '".$cond->value."'";
         break;
       }
       case ESearchDate::BEFORE: {
         
-        $sql .= ' '.$fieldName[2]." < '".$cond['cond']['value']."'";
+        $sql .= ' '.$fieldName[2]." < '".$cond->value."'";
         break;
       }
       case ESearchDate::BEFORE_EQUAL: {
         
-        $sql .= ' '.$fieldName[2]." <= '".$cond['cond']['value']."'";
+        $sql .= ' '.$fieldName[2]." <= '".$cond->value."'";
         break;
       }
       case ESearchDate::EQUALS: {
         
-        $sql .= ' '.$fieldName[2]." = '".$cond['cond']['value']."'";
+        $sql .= ' '.$fieldName[2]." = '".$cond->value."'";
         break;
       }
       case ESearchDate::IS_NULL: {
@@ -234,7 +239,7 @@ class LibSqlConditions
       }
       default:{
         
-        Debug::console('invalid check type '.$cond['cond']);
+        Debug::console('invalid check type '.$cond->cond);
         
       }
       
@@ -253,22 +258,22 @@ class LibSqlConditions
 
     $sql = '';
     
-    $fieldName = $this->fields[$cond['cond']['field']];
+    $fieldName = $this->fields[$cond->field];
     
-    if ($cond['cond']['not']) {
+    if ($cond->not) {
       $sql .= ' NOT ';
     }
     
-    switch ($cond['cond']) {
+    switch ($cond->cond) {
       
       case ESearchId::EQUALS: {
         
-        $sql .= ' '.$fieldName[2]." ".$cond['cond']['value'];
+        $sql .= ' '.$fieldName[2]." ".$cond->value;
         break;
       }
       default:{
         
-        Debug::console('invalid check type '.$cond['cond']);
+        Debug::console('invalid check type '.$cond->cond);
         
       }
       
@@ -287,37 +292,37 @@ class LibSqlConditions
 
     $sql = '';
     
-    $fieldName = $this->fields[$cond['cond']['field']];
+    $fieldName = $this->fields[$cond->field];
     
-    if ($cond['cond']['not']) {
+    if ($cond->not) {
       $sql .= ' NOT ';
     }
     
-    switch ($cond['cond']) {
+    switch ($cond->cond) {
       
       case ESearchNumeric::BIGGER: {
         
-        $sql .= ' '.$fieldName[2]." < ".$cond['cond']['value'];
+        $sql .= ' '.$fieldName[2]." < ".$cond->value;
         break;
       }
       case ESearchNumeric::BIGGER_EQUAL: {
         
-        $sql .= ' '.$fieldName[2]." <= ".$cond['cond']['value'];
+        $sql .= ' '.$fieldName[2]." <= ".$cond->value;
         break;
       }
       case ESearchNumeric::EQUALS: {
         
-        $sql .= ' '.$fieldName[2]." = ".$cond['cond']['value'];
+        $sql .= ' '.$fieldName[2]." = ".$cond->value;
         break;
       }
       case ESearchNumeric::SMALLER: {
         
-        $sql .= ' '.$fieldName[2]." > ".$cond['cond']['value'];
+        $sql .= ' '.$fieldName[2]." > ".$cond->value;
         break;
       }
       case ESearchNumeric::SMALLER_EQUAL: {
         
-        $sql .= ' '.$fieldName[2]." >= ".$cond['cond']['value'];
+        $sql .= ' '.$fieldName[2]." >= ".$cond->value;
         break;
       }
       case ESearchNumeric::IS_NULL: {
@@ -327,7 +332,7 @@ class LibSqlConditions
       }
       default:{
         
-        Debug::console('invalid check type '.$cond['cond']);
+        Debug::console('invalid check type '.$cond->cond);
         
       }
       
@@ -346,47 +351,47 @@ class LibSqlConditions
 
     $sql = '';
     
-    $fieldName = $this->fields[$cond['cond']['field']];
+    $fieldName = $this->fields[$cond->field];
     
-    if ($cond['cond']['not']) {
+    if ($cond->not) {
       $sql .= ' NOT ';
     }
     
-    switch ($cond['cond']) {
+    switch ($cond->cond) {
       
       case ESearchText::EQUALS: {
         
-        if($cond['cs'])
-          $sql .= ' '.$fieldName[2]." = '".$this->db->addSlashes($cond['cond']['value'])."'";
+        if($cond->cs)
+          $sql .= ' '.$fieldName[2]." = '".$this->db->addSlashes($cond->value)."'";
         else 
-          $sql .= ' UPPER('.$fieldName[2].") = UPPER('".$this->db->addSlashes($cond['cond']['value'])."')";
+          $sql .= ' UPPER('.$fieldName[2].") = UPPER('".$this->db->addSlashes($cond->value)."')";
           
         break;
       }
       case ESearchText::START_WITH: {
         
-        if($cond['cs'])
-          $sql .= ' '.$fieldName[2]." like '".$this->db->addSlashes($cond['cond']['value'])."%'";
+        if($cond->cs)
+          $sql .= ' '.$fieldName[2]." like '".$this->db->addSlashes($cond->value)."%'";
         else 
-          $sql .= ' UPPER('.$fieldName[2].") like UPPER('".$this->db->addSlashes($cond['cond']['value'])."%')";
+          $sql .= ' UPPER('.$fieldName[2].") like UPPER('".$this->db->addSlashes($cond->value)."%')";
           
         break;
       }
       case ESearchText::END_WITH: {
         
-        if($cond['cs'])
-          $sql .= ' '.$fieldName[2]." like '%".$this->db->addSlashes($cond['cond']['value'])."'";
+        if($cond->cs)
+          $sql .= ' '.$fieldName[2]." like '%".$this->db->addSlashes($cond->value)."'";
         else 
-          $sql .= ' UPPER('.$fieldName[2].") like UPPER('%".$this->db->addSlashes($cond['cond']['value'])."')";
+          $sql .= ' UPPER('.$fieldName[2].") like UPPER('%".$this->db->addSlashes($cond->value)."')";
           
         break;
       }
       case ESearchText::CONTAINS: {
         
-        if($cond['cs'])
-          $sql .= ' '.$fieldName[2]." like '%".$this->db->addSlashes($cond['cond']['value'])."%'";
+        if($cond->cs)
+          $sql .= ' '.$fieldName[2]." like '%".$this->db->addSlashes($cond->value)."%'";
         else 
-          $sql .= ' UPPER('.$fieldName[2].") like UPPER('%".$this->db->addSlashes($cond['cond']['value'])."%')";
+          $sql .= ' UPPER('.$fieldName[2].") like UPPER('%".$this->db->addSlashes($cond->value)."%')";
         break;
       }
       case ESearchText::IS_NULL: {
@@ -396,7 +401,7 @@ class LibSqlConditions
       }
       default:{
         
-        Debug::console('invalid check type '.$cond['cond']);
+        Debug::console('invalid check type '.$cond->cond);
         
       }
       
@@ -416,20 +421,20 @@ class LibSqlConditions
 
     $sql = '';
     
-    $fieldName = $this->fields[$cond['cond']['field']];
+    $fieldName = $this->fields[$cond->field];
     
-    if ($cond['cond']['not']) {
+    if ($cond->not) {
       $sql .= ' NOT ';
     }
     
-    switch ($cond['cond']) {
+    switch ($cond->cond) {
       
       case ESearchTextStrict::EQUALS: {
         
-        if($cond['cs'])
-          $sql .= ' '.$fieldName[2]." = '".$this->db->addSlashes($cond['cond']['value'])."'";
+        if($cond->cs)
+          $sql .= ' '.$fieldName[2]." = '".$this->db->addSlashes($cond->value)."'";
         else 
-          $sql .= ' UPPER('.$fieldName[2].") = UPPER('".$this->db->addSlashes($cond['cond']['value'])."')";
+          $sql .= ' UPPER('.$fieldName[2].") = UPPER('".$this->db->addSlashes($cond->value)."')";
           
         break;
       }
@@ -440,7 +445,7 @@ class LibSqlConditions
       }
       default:{
         
-        Debug::console('invalid check type '.$cond['cond']);
+        Debug::console('invalid check type '.$cond->cond);
         
       }
       

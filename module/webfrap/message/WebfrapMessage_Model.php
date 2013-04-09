@@ -85,6 +85,8 @@ class WebfrapMessage_Model extends Model
 
     /* @var $query WebfrapMessage_Table_Query */
     $query = $db->newQuery('WebfrapMessage_Table');
+    
+    
 
     $query->fetch(
       $this->params->conditions,
