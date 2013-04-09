@@ -73,13 +73,13 @@ class CmsBlogFront_Controller extends Controller
   * @param TFlag $params named parameters
   * @return boolean
   */
-  public function service_page()
+  public function service_page($request, $response)
   {
 
-    $httpRequest = $this->getRequest();
+    $request = $this->getRequest();
 
     // load the flow flags
-    $params   = $this->getPageFlags($httpRequest);
+    $params   = $this->getPageFlags($request);
 
     $model    = $this->loadModel('CmsFront');
 
@@ -92,10 +92,10 @@ class CmsBlogFront_Controller extends Controller
     );
 
     $view->setModel($model);
-    $view->setRequest($httpRequest);
+    $view->setRequest($request);
 
-    $key    = $httpRequest->param('p', Validator::CKEY)?:'default';
-    $rowid  = $httpRequest->param('objid', Validator::EID);
+    $key    = $request->param('p', Validator::CKEY)?:'default';
+    $rowid  = $request->param('objid', Validator::EID);
 
     if ($rowid)
       $key = $rowid;
@@ -110,16 +110,16 @@ class CmsBlogFront_Controller extends Controller
   * @param TFlag $params named parameters
   * @return boolean
   */
-  public function service_preview()
+  public function service_preview($request, $response)
   {
 
-    $httpRequest = $this->getRequest();
+    $request = $this->getRequest();
 
     // load the flow flags
-    $params   = $this->getPageFlags($httpRequest);
+    $params   = $this->getPageFlags($request);
 
-    $key    = $httpRequest->param('p', Validator::CKEY)?:'default';
-    $rowid  = $httpRequest->param('objid', Validator::EID);
+    $key    = $request->param('p', Validator::CKEY)?:'default';
+    $rowid  = $request->param('objid', Validator::EID);
 
     $view     = $response->loadView
     (
@@ -156,24 +156,24 @@ class CmsBlogFront_Controller extends Controller
 
   /**
    * get the form flags for this management
-   * @param LibHttpRequest $httpRequest
+   * @param LibHttpRequest $request
    * @return TFlag
    */
-  protected function getPageFlags($httpRequest)
+  protected function getPageFlags($request)
   {
 
     $flowFlags = new TFlag();
 
     // the publish type, like selectbox, tree, table..
-    if ($publish  = $httpRequest->param('publish', Validator::CNAME))
+    if ($publish  = $request->param('publish', Validator::CNAME))
       $flowFlags->publish   = $publish;
 
     // if of the target element, can be a table, a tree or whatever
-    if ($targetId = $httpRequest->param('targetId', Validator::CNAME))
+    if ($targetId = $request->param('targetId', Validator::CNAME))
       $flowFlags->targetId  = $targetId;
 
     // callback for a target function in thr browser
-    if ($target   = $httpRequest->param('target', Validator::CNAME))
+    if ($target   = $request->param('target', Validator::CNAME))
       $flowFlags->target    = $target;
 
     return $flowFlags;
