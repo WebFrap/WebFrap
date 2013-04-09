@@ -35,10 +35,10 @@ class ControllerFrontend extends Controller
    * @param TFlag $params
    * @return TFlag
    */
-  protected function getFormFlags ($params = null)
+  protected function getFormFlags ($request = null)
   {
 
-    if (! $request)
+    if (!$request)
       $request = Webfrap::$env->getRequest();
 
     return new ContextForm($request);
@@ -49,7 +49,7 @@ class ControllerFrontend extends Controller
    * @param TFlag $params
    * @return TFlag
    */
-  protected function getCrudFlags ($params = null)
+  protected function getCrudFlags ($request = null)
   {
 
     if (! $request)
@@ -107,7 +107,7 @@ class ControllerFrontend extends Controller
    *
    * @return TFlag
    */
-  protected function getListingFlags ($params = null)
+  protected function getListingFlags ($request = null)
   {
 
     if (! $request)
@@ -121,7 +121,7 @@ class ControllerFrontend extends Controller
    * @param TFlag $params
    * @return TFlag
    */
-  protected function getTabFlags ($params = null)
+  protected function getTabFlags ($request = null)
   {
 
     if (! $request)
