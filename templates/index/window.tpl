@@ -74,8 +74,8 @@ $slctTextStrict->setId('wgt-select-astype-{$dkey}-{$pos}');
 <tr>
 	<td class="ao" >
 		<select name="as[{$pos}][con]" >
-			<option>AND</option>
-			<option>OR</option>
+			<option value="1" >AND</option>
+			<option value="0" >OR</option>
 		</select>
 	</td>
 	<td class="field" style="text-align:right;" >
@@ -102,8 +102,8 @@ $slctTextStrict->setId('wgt-select-astype-{$dkey}-{$pos}');
 <tr>
 	<td class="ao" >
 		<select name="as[{$pos}][con]" >
-			<option>AND</option>
-			<option>OR</option>
+			<option value="1" >AND</option>
+			<option value="0" >OR</option>
 		</select>
 	</td>
 	<td class="field" style="text-align:right;" >
@@ -132,8 +132,8 @@ $slctTextStrict->setId('wgt-select-astype-{$dkey}-{$pos}');
 <tr>
 	<td class="ao" >
 		<select name="as[{$pos}][con]" >
-			<option>AND</option>
-			<option>OR</option>
+			<option value="1" >AND</option>
+			<option value="0" >OR</option>
 		</select>
 	</td>
 	<td class="field" style="text-align:right;" >
@@ -163,8 +163,8 @@ $slctTextStrict->setId('wgt-select-astype-{$dkey}-{$pos}');
 <tr>
 	<td class="ao" >
 		<select name="as[{$pos}][con]" >
-			<option>AND</option>
-			<option>OR</option>
+			<option value="1" >AND</option>
+			<option value="0" >OR</option>
 		</select>
 	</td>
 	<td class="field" style="text-align:right;" >
@@ -194,8 +194,8 @@ $slctTextStrict->setId('wgt-select-astype-{$dkey}-{$pos}');
 <tr>
 	<td class="ao" >
 		<select name="as[{$pos}][con]" >
-			<option>AND</option>
-			<option>OR</option>
+			<option value="1" >AND</option>
+			<option value="0" >OR</option>
 		</select>
 	</td>
 	<td class="field" style="text-align:right;" >
@@ -226,8 +226,8 @@ $slctTextStrict->setId('wgt-select-astype-{$dkey}-{$pos}');
 <tr>
 	<td class="ao" >
 		<select name="as[{$pos}][con]" >
-			<option>AND</option>
-			<option>OR</option>
+			<option value="1" >AND</option>
+			<option value="0" >OR</option>
 		</select>
 	</td>
 	<td class="field" style="text-align:right;" >
