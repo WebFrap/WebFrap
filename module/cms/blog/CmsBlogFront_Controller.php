@@ -70,7 +70,8 @@ class CmsBlogFront_Controller extends Controller
 
  /**
   *
-  * @param TFlag $params named parameters
+  * @param LibRequestHttp $request
+  * @param LibResponseHttp $response
   * @return boolean
   */
   public function service_page($request, $response)
