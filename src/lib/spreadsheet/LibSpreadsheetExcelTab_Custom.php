@@ -63,11 +63,13 @@ class LibSpreadsheetExcelTab_Custom extends LibSpreadsheetExcelTab
     $margins->setBottom(1);
 
     $cPos = ($this->posX.$this->posY);
-
+    
+    /* */
     $this->setCellValueExplicit($cPos, $data[self::LABEL], PHPExcel_Cell_DataType::TYPE_STRING  );
 
     if (isset($data[self::WIDTH]))
       $this->getColumnDimension($this->posX)->setWidth($data[self::WIDTH]);
+   
 
     $this->posX++;
 

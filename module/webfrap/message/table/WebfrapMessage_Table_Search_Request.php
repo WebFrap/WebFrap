@@ -69,7 +69,6 @@ class WebfrapMessage_Table_Search_Request extends ContextListing
     }
     
     $this->settings = $settings;
-
     
     $this->interpretRequest($request);
 
@@ -82,6 +81,7 @@ class WebfrapMessage_Table_Search_Request extends ContextListing
   public function interpretRequest($request)
   {
 
+    $this->extSearchValidator = new ValidSearchBuilder();
     parent::interpretRequest($request);
 
     $this->conditions = array();
@@ -90,7 +90,7 @@ class WebfrapMessage_Table_Search_Request extends ContextListing
     $this->conditions['free'] = $request->param('free_search', Validator::SEARCH);
 
     // die channels
-    if ($request->paramExists('channel')){
+    if ($request->paramExists('channel')) {
 
       $channels = $request->paramList(
       	'channel',
@@ -110,7 +110,7 @@ class WebfrapMessage_Table_Search_Request extends ContextListing
         $this->conditions['filters']['channel'] = new TArray((array)array('inbox'=>true));
     }
 
-    if ($request->paramExists('aspect')){
+    if ($request->paramExists('aspect')) {
 
       $aspects = $request->param(
       	'aspect',
@@ -128,7 +128,7 @@ class WebfrapMessage_Table_Search_Request extends ContextListing
         : array(1);
     }
 
-    if ($request->paramExists('status')){
+    if ($request->paramExists('status')) {
 
       $status = $request->paramList(
       	'status',

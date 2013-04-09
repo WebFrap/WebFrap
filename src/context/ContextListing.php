@@ -103,6 +103,12 @@ class ContextListing
   public $searchFields = array();
   
   /**
+   * Search Fields
+   * @var array
+   */
+  public $searchFieldsStack = array();
+  
+  /**
    * Extended Search filter
    * @var array
    */
@@ -167,8 +173,6 @@ class ContextListing
 
     $this->interpretRequest($request);
     
-
-
   } // end public function __construct */
   
   
@@ -326,27 +330,44 @@ class ContextListing
     if (!$extSearchFields)
       return;
     
+    if (!$this->searchFieldsStack) {
+      foreach ($this->searchFields as $searchFields) {
+        foreach ($searchFields as $sKey => $sData) {
+          $this->searchFieldsStack[$sKey] = $sData;
+        }
+      }
+    }
+    
+    Debug::console('got search fields',$extSearchFields);
+    
     foreach ($extSearchFields as $fKey => $extField) {
       
-      if (!isset($this->searchFields[$extField['field']])){
+      if (!isset($this->searchFieldsStack[$extField['field']])){
         // field not exists
         continue;
       }
       
-      if (isset($extField['parent'])) {
+      $validField = $this->extSearchValidator->validate($extField, $this->searchFieldsStack[$extField['field']]);
+      
+      if ($validField) {
         
-        if (!isset($this->extSearch[$extField['parent']]->sub)  )
-          $this->extSearch[$extField['parent']]->sub = array();
+        if (isset($extField['parent'])) {
           
-        $this->extSearch[$extField['parent']]->sub[] = (object)$this->extSearchValidator->validate($extField, $this->searchFields[$extField['field']] );
+          if (!isset($this->extSearch[$extField['parent']]->sub)  )
+            $this->extSearch[$extField['parent']]->sub = array();
           
+          $this->extSearch[$extField['parent']]->sub[] = (object)$validField;
+            
+        } else {
+          
+          $this->extSearch[$fKey] = (object)$validField;
+          
+        }
       } else {
-        
-        $this->extSearch[$fKey] = (object)$this->extSearchValidator->validate($extField, $this->searchFields[$extField['field']]);
-        
+        Debug::console($extField['field'].' was invalid ');
       }
       
-    }
+    }//end foreach
 
   }//end public function interpretExtendedSearch */
 

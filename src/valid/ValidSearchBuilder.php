@@ -82,8 +82,8 @@ class ValidSearchBuilder
    */
   public function validate($searchCol, $fieldData)
   {
-    
-    $type = $fieldData[$searchCol['field']][1];
+
+    $type = strtolower($fieldData[1]);
 
     if(!in_array($type,$this->supportedTypes)){
       Debug::console( "Got unsupported type ".$type );
@@ -92,6 +92,10 @@ class ValidSearchBuilder
     
     $searchCol['con'] = (boolean)$searchCol['con'];
     $searchCol['not'] = (boolean)$searchCol['not'];
+    
+
+
+    Debug::console( "validate_".$type );
 
     return $this->{"validate_".$type}($searchCol);
     
@@ -191,6 +195,7 @@ class ValidSearchBuilder
   {
     
     if (!isset(ESearchText::$labels[(int)$searchCol['cond']])) {
+      Debug::console( 'invalid cond' );
       return null;
     }
     
@@ -198,14 +203,12 @@ class ValidSearchBuilder
       
       if ('' === trim($searchCol['value'])) {
         // nichts zu tun
+        Debug::console( 'Missing value!' );
         return null;
       }
       
     }
 
-    $searchCol['value'] = $this->db->addSlashes($searchCol['value']);
-    
-    
     return $searchCol;
     
   }//end protected function validate_text */
@@ -228,9 +231,6 @@ class ValidSearchBuilder
       }
     }
 
-    $searchCol['value'] = $this->db->addSlashes($searchCol['value']);
-    
-    
     return $searchCol;
     
   }//end protected function validate_text_strict */

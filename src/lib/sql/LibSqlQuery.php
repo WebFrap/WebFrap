@@ -308,7 +308,7 @@ abstract class LibSqlQuery implements Iterator, Countable
    * @param LibSqlFilter $queryPart
    * @param TFlowFlag $params
    */
-  public function inject($queryPart, $params)
+  public function inject($queryPart, $params = null)
   {
 
     if (!$this->criteria)
@@ -316,6 +316,22 @@ abstract class LibSqlQuery implements Iterator, Countable
 
     $queryPart->inject($this->criteria, $params);
 
+  }//end public function inject */
+  
+  /**
+   * @param array $searchFields
+   * @param array $searchCond
+   */
+  public function extSearch($searchFields,$searchCond)
+  {
+  
+    if (!$this->criteria)
+      $this->criteria = $this->getDb()->orm->newCriteria();
+    
+    $advancedSearch = new LibSqlConditions($this->getDb());
+
+    $advancedSearch->inject($this->criteria, $searchFields, $searchCond);
+  
   }//end public function inject */
 
   /**

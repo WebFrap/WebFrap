@@ -55,6 +55,18 @@ class LibSqlConditions
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic
 ///////////////////////////////////////s//////////////////////////////////////*/
+
+  /**
+   * @var LibDbConnection $db
+   */
+  public function __construct( $db )
+  {
+    $this->db = $db;
+  }//end public function __construct */
+  
+/*//////////////////////////////////////////////////////////////////////////////
+// Logic
+///////////////////////////////////////s//////////////////////////////////////*/
  
   /**
    * @param array $conditions
@@ -67,31 +79,36 @@ class LibSqlConditions
   }//end public function setConditions */
 
   /**
-   * @param TFlowFlag $criteria
+   * @param LibSqlCriteria $criteria
    * @param array $fields
    * @param array $conditions
    * @param TFlowFlag $env
    */
-  public function inject($criteria, $fields, $conditions = array(), $env = null)
+  public function inject($criteria, $fields, $conditions = array())
   {
     
     if ($conditions)
-      $this->setConditions($conditions);
-      
-    foreach ($fields as $searchFields) {
-      foreach ($searchFields as $sKey => $sData) {
-        $this->fields[$sKey] = $sData;
-      }
-    }
+      $this->conditions = $conditions;
+    
+    $this->fields = $fields;
+
     
     $sql = '';
     $first = null;
     
     foreach ($this->conditions as $cond) {
       
-      if( !isset($this->fields[$cond->field]) ){
+      if( !isset($cond->field) ){
+        Debug::console('wrong field type ',$cond);
         continue;
       }
+      
+      if( !isset($this->fields[$cond->field]) ){
+        Debug::console('missing field '.$cond->field);
+        continue;
+      }
+      
+      Debug::console('in field '.$cond->field);
       
       $fieldData = $this->fields[$cond->field];
       
@@ -103,41 +120,71 @@ class LibSqlConditions
         $first  = $cond->con;
         $sql .= $this->{$method}($cond);
         
+        if (isset($cond->sub)) {
+          $sql .= $this->renderSubCondition( $cond->sub );
+        }
+        
       } else {
         
         $sql .= ($cond->con?' AND ':' OR ').$this->{$method}($cond);
+        
+        if (isset($cond->sub)) {
+          $sql .= $this->renderSubCondition( $cond->sub );
+        }
+        
       }
       
       
     }
-
+    
+    // inject into the criteria
+    $criteria->where( $sql, ($first?'AND':'OR') );
+    
+    Debug::console('ext search '.$sql);
 
   }//end public function inject */
 
   
   /**
-   * 
+   * @param array $conditions
    */
   protected function renderSubCondition( $conditions )
   {
     
     $sql = '';
     
-    foreach( $conditions as $condition ){
+    $firstNode = current($conditions);
+    $first = true;
+    
+    $sql .= ($firstNode->con?' AND ':' OR ');
+    
+    $sql .= '(';
+    
+    foreach ($conditions as $condition) {
       
-      if( isset( $condition->sub ) ){
+      $fieldData = $this->fields[$condition->field];
+      $method = 'handleCondition_'.ucfirst($fieldData[1]);
+      
+      if ($first) {
+
+        $sql .= $this->{$method}($condition);
+        $first = false;
         
-        $firstNode = current($condition->sub);
+      } else {
         
-        $sql .= '(';
+        $sql .= ($condition->con?' AND ':' OR ').$this->{$method}($condition);
+      }
+      
+      if (isset($condition->sub)) {
         
         $sql .= $this->renderSubCondition($condition->sub);
-        
-        $sql .= ')';
-        
       }
       
     }
+    
+    $sql .= ')';
+    
+    return $sql;
     
   }//end protected function renderSubCondition */
 
