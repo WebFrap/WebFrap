@@ -101,7 +101,7 @@ SQL;
   public function chownSequence($schema, $seqName, $owner)
   {
 
-    $sql = "ALTER SEQUENCE {$schema}.{$sequence} OWNER TO {$owner}; ";
+    $sql = "ALTER SEQUENCE {$schema}.{$seqName} OWNER TO {$owner}; ";
 
     return $this->db->exec($sql);
 
