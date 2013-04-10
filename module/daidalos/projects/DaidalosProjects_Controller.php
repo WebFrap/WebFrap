@@ -310,7 +310,7 @@ class DaidalosProjects_Controller extends Controller
       return;
     }
 
-    $version = isset($projectXml['version'])?  trim($projectXml['version']) : ModGenf::GENF_VERSION;
+    $version = isset($projectXml['version'])?  trim($projectXml['version']) : 1;
     $version = str_replace(array('.', ' '), array('x', '') , $version);
 
     $compilerName = 'LibGenfCompile'.$version;
