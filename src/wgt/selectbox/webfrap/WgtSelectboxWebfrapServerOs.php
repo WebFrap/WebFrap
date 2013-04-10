@@ -19,7 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtSelectboxWebfrapServerOs extends WgtSelectboxHardcoded
+class WgtSelectboxWebfrapServerOs extends WgtSelectboxEnum
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -34,15 +34,9 @@ class WgtSelectboxWebfrapServerOs extends WgtSelectboxHardcoded
 
     $this->firstFree = ' ';
 
-    $this->data =  array(
-      ECoreServerOs::WINDOWS => array('value' => ECoreServerOs::$text[ECoreServerOs::WINDOWS]),
-      ECoreServerOs::LINUX   => array('value' => ECoreServerOs::$text[ECoreServerOs::LINUX]),
-      ECoreServerOs::SOLARIS => array('value' => ECoreServerOs::$text[ECoreServerOs::SOLARIS]),
-      ECoreServerOs::BSD     => array('value' => ECoreServerOs::$text[ECoreServerOs::BSD]),
-      ECoreServerOs::MAC     => array('value' => ECoreServerOs::$text[ECoreServerOs::MAC])
-    );
+    $this->data =  ESupportedServerOs::$labels;
 
   }//end public function load()
 
-} // end class WgtSelectboxCoreServerOs
+} // end class WgtSelectboxCorESupportedServerOs
 
