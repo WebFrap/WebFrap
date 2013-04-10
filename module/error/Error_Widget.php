@@ -55,7 +55,7 @@ HTML;
   {
 
     $html = <<<HTML
-    <div id="{$tabId}" class="wgt_tab {$tabSize}" title="error"  >
+    <div id="{$tabId}" class="wgt_tab medium" title="error"  >
       <h2>The Widget you requested was not loadable</h2>
       <div class="wgt-clear small"></div>
     </div>
