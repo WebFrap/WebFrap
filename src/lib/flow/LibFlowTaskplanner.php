@@ -114,7 +114,7 @@ class LibFlowTaskplanner extends LibFlow
 
   
   /**
-  * the main method
+  * Führt die anstehenden Tasks aus
   * @param LibRequestPhp $httpRequest
   * @param LibSessionPhp $session
   * @param Transaction $transaction
