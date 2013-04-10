@@ -853,12 +853,10 @@ HTML
     $listLabels = '';
 
     foreach ($labels as $lang => $label) {
-      $listLabels .= '<li class="lang-'.$lang.'" >'. WgtForm::input
-      (
+      $listLabels .= '<li class="lang-'.$lang.'" >'. WgtForm::input(
         'Lang '.Wgt::icon('flags/'.$lang.'.png', 'xsmall', array(), ''),
         $idPrefix.'-label-'.$lang,
-        $label, array
-        (
+        $label, array(
           'name'  => $nodeKey.'[label]['.$lang.']',
           'class' => 'medium lang-'.$lang
         ),
