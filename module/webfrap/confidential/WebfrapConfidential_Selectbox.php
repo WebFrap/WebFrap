@@ -35,9 +35,9 @@ class WebfrapConfidential_Selectbox extends WgtSelectboxEnum
   public function init()
   {
 
-    $this->data = EWbfsysConfidential::$labels;
+    $this->data = EWebfrapConfidential::$labels;
 
   }//end function init */
 
-}// end class WbfsysConfidential_Selectbox
+}// end class WebfrapConfidential_Selectbox
 
