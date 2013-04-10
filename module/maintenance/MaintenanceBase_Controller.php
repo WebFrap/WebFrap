@@ -79,8 +79,7 @@ class MaintenanceBase_Controller extends Controller
       $params->menuType = 'explorer';
 
     /* @var $view MaintenanceBase_Maintab_View  */
-    $view = $response->loadView
-    (
+    $view = $response->loadView(
       'maintenance-menu',
       'MaintenanceBase',
       'displayMenu'
@@ -89,16 +88,6 @@ class MaintenanceBase_Controller extends Controller
     $view->displayMenu($menuName, $params);
 
   }//end public function service_menu */
-
-  /**
-   * @return void
-   */
-  public function showStatus()
-  {
-
-    $view->setTemplate('maintenance/show_status');
-
-  }//end public function showStatus */
 
 }//end class MaintenanceBase_Controller
 
