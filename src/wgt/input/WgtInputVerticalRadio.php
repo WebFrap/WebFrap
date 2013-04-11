@@ -26,11 +26,9 @@ class WgtInputVerticalRadio extends WgtInput
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * Enter description here...
-   *
-   * @var unknown_type
+   * @var array
    */
-  protected $attributes     = array('type' => 'radio');
+  public $attributes     = array('type' => 'radio');
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
