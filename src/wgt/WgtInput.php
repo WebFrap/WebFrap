@@ -43,7 +43,7 @@ abstract class WgtInput extends WgtAbstract
    * @var boolean
    */
   public $unqiue  = false;
-  
+
   /**
    *
    * @var boolean
@@ -213,7 +213,7 @@ abstract class WgtInput extends WgtAbstract
     $this->required = $required;
 
   }// end public function setRequired */
-  
+
  /**
   * @param boolean $unique
   * @return void
@@ -244,19 +244,19 @@ abstract class WgtInput extends WgtAbstract
   {
 
     $this->classes['wcm'] = 'wcm';
-    
+
     // kann auch unique sein wenn nur required oder unique gesetzt werden soll
     if ($validator)
       $this->classes['wcm_valid_'.$validator] = 'wcm_valid_'.$validator;
-    
+
     if($unique)
       $this->classes['wcm_valid_unique'] = 'wcm_valid_unique';
-      
+
     if($required)
       $this->classes['wcm_valid_required'] = 'wcm_valid_required';
 
     $this->required = $required;
-    
+
   }// end public function setValidator */
 
  /**
