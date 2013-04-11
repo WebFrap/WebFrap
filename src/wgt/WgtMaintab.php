@@ -401,6 +401,15 @@ class WgtMaintab extends LibTemplatePublisher
 
   }//end public function buildButtons */
 
+  /**
+   * @param string $name
+   * @param string $code
+   */
+  public function addEvent( $name, $code )
+  {
+
+  }//end public function addEvent */
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic
 //////////////////////////////////////////////////////////////////////////////*/
