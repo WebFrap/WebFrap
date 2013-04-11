@@ -24,25 +24,6 @@
 class ReportBase_Model extends Model
 {
 
-  /**
-   * @return int
-   */
-  public function getNumPersons()
-  {
-
-    $db = $this->getDb();
-
-    $query = <<<SQL
-
- select count(rowid) as num from core_person;
-
-SQL;
-
-    $res = $db->select($query);
-
-    return $res->getField('num');
-
-  }//end public function getNumPersons */
 
 } // end class ReportBase_Model
 
