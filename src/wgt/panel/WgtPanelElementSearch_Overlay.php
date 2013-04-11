@@ -221,9 +221,9 @@ HTML;
         </div>
 
         <button class="wgt-button splitted wgtac_search" ><i class="icon-search" ></i></button><button
-            class="wcm wcm_ui_dropform wcm_ui_tip-top ui-state-default wgt-button append"
+            class="wcm wcm_ui_dropform ui-state-default wgt-button append"
             id="wgt-search-{$this->context}-{$this->searchKey}-con"
-            title="Click to Change the Status"
+            title="Open the extended search"
           ><i class="icon-angle-down" ></i><var>{"size":"big"}</var></button>
     
       	<div class="wgt-search-{$this->context}-{$this->searchKey}-con hidden" >
