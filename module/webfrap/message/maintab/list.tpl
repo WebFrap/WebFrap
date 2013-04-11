@@ -7,9 +7,12 @@
 <div
   class="wgt-border-right"
   style="position:absolute;width:200px;top:0px;bottom:0px;left:0px;" >
+  
   <div class="wgt-panel" ><button class="wgt-button wgtac_refresh" ><i class="icon-filter" ></i> Filter</button></div>
+  
   <div id="wgt-tree-message-navigation" >
     <ul id="wgt-tree-message-navigation-tree" class="wgt-tree wgt-space" >
+      
       <li><input
         type="checkbox"
         <?php echo Wgt::checked(true, isset($VAR->settings->channels->inbox) )?>
@@ -20,6 +23,7 @@
           <?php echo Wgt::checked(true, isset($VAR->settings->channels->outbox) )?>
           name="channel[outbox]"
           class="fparam-wgt-form-webfrap-groupware-search" /> <a><strong>Outbox</strong></a>
+          
         <ul>
           <li><input
             type="checkbox"
@@ -70,9 +74,10 @@
             <?php echo Wgt::checked(true, in_array( EMessageAspect::TASK,$VAR->settings->aspects) )?>
             class="fparam-wgt-form-webfrap-groupware-search"
             /> Tasks </li>
-          </li>
+            
         </ul>
       </li>
+      
       <li><input
         type="checkbox"
         <?php echo Wgt::checked(true, isset($VAR->settings->channels->unsolicited) )?>
@@ -93,7 +98,8 @@
         type="checkbox"
         <?php echo Wgt::checked(true, isset($VAR->settings->channels->archive) )?>
         name="channel[archive]"
-        class="fparam-wgt-form-webfrap-groupware-search" /> <a><strong>Archiv</strong></a></li>
+        class="fparam-wgt-form-webfrap-groupware-search" /> <a><strong>Archiv</strong></a>
+      </li>
     </ul>
   </div>
 </div>
@@ -107,21 +113,23 @@
   <div
     id="wgt-message-list-show_messagebox" style="position:absolute;top:360px;bottom:0px;left:200px;right:0px;" >
     <?php if( $VAR->message ){ ?>
-    <div class="wgt-panel" ><h2>Super duper</h2></div>
+    <div class="wgt-panel" ><h2><?php $VAR->message->title ?></h2></div>
     <div class="wgt-panel hx2"  >
-      Sender: <br />
-      Date: <br />
-      To: <br />
+      Sender: <?php $VAR->message->sender_name ?><br />
+      Date: <?php $VAR->message->receiver_name ?><br />
+      To: <?php $VAR->message->receiver_name ?><br />
     </div>
     <div class="full" >
-      Content
+      <iframe
+        src="plain.php?c=Webfrap.Message.showMailContent&objid=<?php echo $VAR->message->msg_id; ?>"
+        style="width:100%;min-height:300px;padding:0px;margin:0px;border:0px;" ></iframe>
     </div>
     <?php } else { ?>
     <div class="wgt-panel" ><h2>No Message selected</h2></div>
     <div class="wgt-panel hx2"  >
     </div>
     <div class="full" >
-      <?php var_dump( $VAR->settings->channel )?>
+      
     </div>
     <?php } ?>
   </div>

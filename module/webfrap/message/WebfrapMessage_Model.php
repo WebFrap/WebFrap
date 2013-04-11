@@ -138,7 +138,8 @@ select
   receiver.flag_editable,
   sender.fullname as sender_name,
   sender.core_person_rowid as sender_pid,
-  sender.wbfsys_role_user_rowid as sender_id
+  sender.wbfsys_role_user_rowid as sender_id,
+  receiver_name.fullname as receiver_name
 
 FROM
   wbfsys_message msg
@@ -155,10 +156,14 @@ LEFT JOIN
 	wbfsys_appointment appoint
 		ON appoint.id_message = msg.rowid
 		
-
 JOIN
   view_person_role sender
     ON sender.wbfsys_role_user_rowid = msg.id_sender
+    
+JOIN
+  view_person_role receiver_name
+    ON receiver_name.wbfsys_role_user_rowid = receiver.vid
+    
 WHERE
   msg.rowid = {$msgId};
 
