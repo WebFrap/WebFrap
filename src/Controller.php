@@ -285,6 +285,15 @@ abstract class Controller extends BaseChild
   {
     $this->modAccess = $modAccess;
   }//end public function setModAccess */
+  
+  /**
+   * Rückgabe der Options eines Controllers
+   * @return array
+   */
+  public function getOptions()
+  {
+    return $this->options;
+  }//end public function getOptions */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // load methodes for loading resources
