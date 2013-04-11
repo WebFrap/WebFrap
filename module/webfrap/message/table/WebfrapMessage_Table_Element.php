@@ -601,7 +601,7 @@ class WebfrapMessage_Table_Element extends WgtTable
     
     
     $body .= '<td valign="top" >'
-      .'<a class="wcm wcm_req_ajax" href="maintab.php?c=Webfrap.Message.formShow&amp;objid='.$objid.'" >'
+      .'<a class="wcm wcm_req_ajax" href="ajax.php?c=Webfrap.Message.showPreview&amp;objid='.$objid.'" >'
       .Validator::sanitizeHtml($row['wbfsys_message_title'])
      .'<a/></td>'.NL;
   
