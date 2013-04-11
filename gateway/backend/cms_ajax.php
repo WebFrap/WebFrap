@@ -59,11 +59,13 @@ catch(Exception $exception) {
   }
 
   if (!DEBUG) {
+    
+    $view = Webfrap::$env->getView();
+    
     if (isset($view) and is_object($view)) {
       $view->publishError($exception->getMessage() , $errors);
     } else {
-      View::printErrorPage
-      (
+      View::printErrorPage(
         $exception->getMessage(),
         '500',
         $errors

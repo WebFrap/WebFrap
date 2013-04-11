@@ -21,7 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibDbImportForget_Exception extends LibDb_Exception
+class LibDbImport_Exception extends LibDb_Exception
 {
 
   /**

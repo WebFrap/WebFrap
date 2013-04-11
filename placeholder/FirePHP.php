@@ -16,14 +16,11 @@
 *******************************************************************************/
 
 /**
+ * Platzhalter, muss über ein Modul geladen werden
  *
  * @package WebFrap
- * @subpackage Modprofiles
- * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
- * @copyright webfrap.net <contact@webfrap.net>
+ * @subpackage tech_core
  */
-class MyAnnouncement_Widget_Table_Controller extends ControllerWidget
+class FirePHP
 {
-
-}// end class WbfsysAnnouncement_Widget_Table_Controller
-
+}

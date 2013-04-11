@@ -44,9 +44,9 @@ class DaidalosDatabase_Controller extends Controller
   {
 
     $params = $this->getFlags($this->getRequest());
+    $response = $this->getResponse();
 
-    $view   = $response->loadView
-    (
+    $view   = $response->loadView(
       'wgt-view-daidalos_projects-list',
       'DaidalosDatabase'
     );

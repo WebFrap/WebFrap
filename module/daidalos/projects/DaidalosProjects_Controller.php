@@ -29,10 +29,7 @@ class DaidalosProjects_Controller extends Controller
    *
    * @var unknown_type
    */
-  protected $callAble = array
-  (
-    'genmask',
-    'listing',
+  protected $callAble = array(
     'build',
     'deploy',
     'clean',
@@ -48,66 +45,6 @@ class DaidalosProjects_Controller extends Controller
 /*//////////////////////////////////////////////////////////////////////////////
 //Logic: Meta Model
 //////////////////////////////////////////////////////////////////////////////*/
-
-  /**
-   * @return void
-   */
-  public function menu()
-  {
-
-    if ($this->view->isType(View::WINDOW)) {
-      $view = $this->view->newWindow('WebfrapMainMenu', 'Default');
-      $view->setTitle('Daidalos Module');
-    } else {
-      $view = $this->view;
-    }
-
-    $view->setTemplate('menu/modmenu');
-
-    $modMenu = $view->newItem('modMenu', 'MenuFolder');
-    $modMenu->setSource('genf/bdl/modmenu');
-
-  }//end public function menu */
-
-  /**
-   * @return void
-   */
-  public function genMask()
-  {
-
-    if ($this->view->isType(View::WINDOW)) {
-      $view = $this->view->newWindow('DaidalosGenMask', 'DaidalosGenMask');
-    } else {
-      $view = $this->view;
-    }
-
-    $view->setTitle('Daidalos GenMask');
-
-    $modMenu = $view->newItem('modMenu', 'MenuFolder');
-    $modMenu->setSource('genf/bdl/modmenu');
-
-  }//end public function genMask */
-
-  /**
-   * @return void
-   */
-  public function listing()
-  {
-
-    // check the acl permissions
-    if (!$this->acl->access(array('daidalos/projects:access')  )) {
-      $this->errorPage("Permission denied", Response::FORBIDDEN);
-
-      return false;
-    }
-
-    // check the access type
-    if (!$view = $response->loadView('table_daidalos_projects', 'DaidalosProjects'))
-      return false;
-
-    $view->display($this->getRequest(), $this->getFlags($this->getRequest())  );
-
-  }//end public function listing */
 
   /**
    * @return void
@@ -373,7 +310,7 @@ class DaidalosProjects_Controller extends Controller
       return;
     }
 
-    $version = isset($projectXml['version'])?  trim($projectXml['version']) : ModGenf::GENF_VERSION;
+    $version = isset($projectXml['version'])?  trim($projectXml['version']) : 1;
     $version = str_replace(array('.', ' '), array('x', '') , $version);
 
     $compilerName = 'LibGenfCompile'.$version;

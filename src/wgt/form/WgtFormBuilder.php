@@ -1451,20 +1451,17 @@ CODE;
     $iconAdd = $this->icon('control/add.png', 'Add');
     $iconDel = $this->icon('control/delete.png', 'Delete');
 
-    $addInput = WgtForm::input
-    (
+    $addInput = WgtForm::input(
       'Label',
       $this->domainKey.'-label-text',
       '',
-      array
-      (
+      array(
         'name'  => 'label[text]',
         'class' => 'medium wgte-text'
       )
     );
 
-    $langSelector = WgtForm::decorateInput
-    (
+    $langSelector = WgtForm::decorateInput(
         'Lang',
         'wgt-select-'.$this->domainKey.'-label-lang',
         <<<HTML
@@ -1482,12 +1479,10 @@ HTML
     $listLabels = '';
 
     foreach ($labels as $lang => $label) {
-      $listLabels .= '<li class="lang-'.$lang.'" >'. WgtForm::input
-      (
+      $listLabels .= '<li class="lang-'.$lang.'" >'. WgtForm::input(
         'Lang '.Wgt::icon('flags/'.$lang.'.png', 'xsmall', array(), ''),
         $idPrefix.'-label-'.$lang,
-        $label, array
-        (
+        $label, array(
           'name'  => $nodeKey.'[label]['.$lang.']',
           'class' => 'medium lang-'.$lang
         ),

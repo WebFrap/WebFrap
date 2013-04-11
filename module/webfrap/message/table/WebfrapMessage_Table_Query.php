@@ -74,23 +74,21 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
     $db                = $this->getDb();
 
     if (!$this->criteria) {
-      $criteria = $db->orm->newCriteria();
-    } else {
-      $criteria = $this->criteria;
+      $this->criteria = $db->orm->newCriteria();
     }
 
-    $this->setCols($criteria);
+    $this->setCols($this->criteria);
 
-    $this->setTables($criteria);
-    $this->appendConditions($criteria, $condition, $params);
-    $this->checkLimitAndOrder($criteria, $condition, $params);
-    $this->appendFilter($criteria, $condition, $params);
+    $this->setTables($this->criteria);
+    $this->appendConditions($this->criteria, $condition, $params);
+    $this->checkLimitAndOrder($this->criteria, $condition, $params);
+    $this->appendFilter($this->criteria, $condition, $params);
 
     // Run Query und save the result
-    $this->result    = $db->orm->select($criteria);
+    $this->result    = $db->orm->select($this->criteria);
 
     if ($params->loadFullSize)
-      $this->calcQuery = $criteria->count('count(wbfsys_message.'.Db::PK.') as '.Db::Q_SIZE);
+      $this->calcQuery = $this->criteria->count('count(wbfsys_message.'.Db::PK.') as '.Db::Q_SIZE);
 
   }//end public function fetch */
 

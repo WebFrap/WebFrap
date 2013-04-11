@@ -355,6 +355,11 @@ class AclMgmt_Qfdu_Dset_Controller extends AclMgmt_Controller
 
     // interpret the given user parameters
     $params = $this->getCrudFlags($request);
+    $objid = $request->param('objid',Validator::EID);
+    
+    if (!$objid){
+      throw new InvalidRequest_Exception('Missing objid');
+    }
 
 
     /* @var $model AclMgmt_Qfdu_Model */

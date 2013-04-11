@@ -158,8 +158,8 @@ class MvcRouter_Socket extends LibFlowApachemod
       return false;
     }
 
-    self::$instance = new ControllerSocket();
-    $_SESSION['OBJECTS']['SYS'] = self::$instance;
+    //self::$instance = new ControllerSocket();
+    //$_SESSION['OBJECTS']['SYS'] = self::$instance;
 
     return true;
 

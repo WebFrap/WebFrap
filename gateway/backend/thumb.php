@@ -55,30 +55,33 @@ try {
   }
 
   if ($size) {
+    
+    $layouts = array(
+      'toosmall' => array(25 , 25),
+      'xxsmall' => array(50 , 50),
+      'xsmall' => array(75 , 75),
+      'small' => array(100 , 100),
+      'medium' => array(200 , 200),
+      'large' => array(300 , 300),
+      'xlarge' => array(400 , 400),
+      'xxlarge' => array(500 , 500),
+    );
 
     if (!isset($layouts[$size])) {
+      
       $size       = 'medium';
       $maxWidth   = 200;
       $maxHeight  = 200;
+      
     } else {
+      
       // X / Y
-      $layouts = array
-      (
-        'toosmall' => array(25 , 25),
-        'xxsmall' => array(50 , 50),
-        'xsmall' => array(75 , 75),
-        'small' => array(100 , 100),
-        'medium' => array(200 , 200),
-        'large' => array(300 , 300),
-        'xlarge' => array(400 , 400),
-        'xxlarge' => array(500 , 500),
-      );
-
       $maxWidth   = $layouts[$size][0];
       $maxHeight  = $layouts[$size][1];
     }
 
   } else {
+    
     $size       = 'medium';
     $maxWidth   = 200;
     $maxHeight  = 200;
@@ -97,24 +100,21 @@ try {
 
       switch ($type) {
 
-        case IMAGETYPE_GIF :
-        {
+        case IMAGETYPE_GIF :{
           if (!$im = ImageCreateFromGif ($pic)) {
             throw new LibImage_Exception("Konnte das Bild nicht erstellen");
           }
           break;
         } // ENDE CASE
 
-        case IMAGETYPE_JPEG :
-        {
+        case IMAGETYPE_JPEG :{
           if (!$im = ImageCreateFromJPEG($pic)) {
             throw new LibImage_Exception("Konnte das Bild nicht erstellen");
           }
           break;
         } // ENDE CASE
 
-        case IMAGETYPE_PNG :
-        {
+        case IMAGETYPE_PNG :{
           if (!$im = ImageCreateFromPNG($pic)) {
             throw new LibImage_Exception("Konnte das Bild nicht erstellen");
           }
@@ -122,8 +122,7 @@ try {
         } // ENDE CASE
 
         // Erstellen eines eigenen Vorschaubilds
-        default:
-        {
+        default: {
           // Standartbild hinkopieren
           if (!$im = ImageCreateFromJPEG($errorpic)) {
             throw new LibImage_Exception("Konnte das Bild nicht erstellen");
@@ -150,8 +149,7 @@ try {
       // neugenerieren des THUMBS
       $thumb = imagecreatetruecolor($new_width, $new_height);
 
-      imagecopyresampled
-      (
+      imagecopyresampled(
         $thumb,
         $im,
         0,0,0,0,
@@ -181,10 +179,10 @@ try {
 
 } // ENDE TRY
 catch(Exception $exception) {
+  
   $extType = get_class($exception);
 
-  Error::addError
-  (
+  Error::addError(
     'Uncatched  Exception: '.$extType.' Message:  '.$exception->getMessage() ,
     null,
     $exception
@@ -196,6 +194,9 @@ catch(Exception $exception) {
   }
 
   if (!DEBUG) {
+    
+    $view = Webfrap::$env->getView();
+    
     if (isset($view) and is_object($view)) {
       $view->publishError($exception->getMessage() , $errors);
     } else {

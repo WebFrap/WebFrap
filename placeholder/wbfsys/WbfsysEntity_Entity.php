@@ -1,7 +1,7 @@
 <?php
 /*******************************************************************************
 *
-* @author      : Tobias Schmidt-Tudl <tobias.schmidt-tudl@webfrap.net>
+* @author      : Dominik Bonsch <dominik.bonsch@webfrap.net>
 * @date        :
 * @copyright   : Webfrap Developer Network <contact@webfrap.net>
 * @project     : Webfrap Web Frame Application
@@ -16,16 +16,11 @@
 *******************************************************************************/
 
 /**
+ * Platzhalter, muss über ein Modul geladen werden
+ *
  * @package WebFrap
  * @subpackage tech_core
- * @author Tobias Schmidt-Tudl <tobias.schmidt-tudl@webfrap.net>
- * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class LibDocumentRenderLatex extends LibTemplateLatex
+class WbfsysEntity_Entity extends Entity
 {
-/*//////////////////////////////////////////////////////////////////////////////
-// attribute
-//////////////////////////////////////////////////////////////////////////////*/
-
-}//end class LibDocumentRenderLatex
-
+}

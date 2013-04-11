@@ -36,10 +36,6 @@ class WebfrapMessage_Controller extends Controller
    * @var array
    */
   protected $options           = array(
-    'openarea' => array(
-      'method'    => array('GET'),
-      'views'      => array('modal')
-    ),
     'messagelist' => array(
       'method'    => array('GET'),
       'views'      => array('maintab')
@@ -154,36 +150,6 @@ class WebfrapMessage_Controller extends Controller
 /*//////////////////////////////////////////////////////////////////////////////
 // methodes
 //////////////////////////////////////////////////////////////////////////////*/
-
- /**
-  * create an new window with an edit form for the enterprise_company entity
-  * @param LibRequestHttp $request
-  * @param LibResponseHttp $response
-  * @return boolean
-  */
-  public function service_openArea($request, $response)
-  {
-
-    // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFlags($request);
-
-    // create a window
-    $view   = $response->loadView(
-      'list-messages',
-      'WebfrapMessage',
-      'displayOpen',
-      View::AJAX
-    );
-
-    /* @var $model WebfrapMessage_Model  */
-    $model = $this->loadModel('WebfrapMessage');
-
-    $view->setModel($model);
-
-    ///FIXME woher kommt der Domain Node?
-    $view->displayOpen($domainNode, $params);
-
-  }//end public function service_openArea */
 
  /**
   * create an new window with an edit form for the enterprise_company entity

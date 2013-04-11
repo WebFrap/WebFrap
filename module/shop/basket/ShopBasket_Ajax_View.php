@@ -55,7 +55,7 @@ class ShopBasket_Ajax_View extends LibTemplateAjaxView
   {
 
     $this->setAreaContent('childNode', <<<XML
-<htmlArea selector="tr#wgt-table-shop_basket-entry-{$idArticle}" action="remove" />
+<htmlArea selector="tr#wgt-table-shop_basket-entry-{$articleId}" action="remove" />
 XML
     );
 

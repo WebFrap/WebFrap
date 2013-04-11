@@ -33,8 +33,6 @@ class ESearchText
   const END_WITH      = 4;
 
   const IS_NULL       = 5;
-  
-  const IS_NOT_NULL   = 6;
 
   /**
    * @var array
@@ -45,7 +43,6 @@ class ESearchText
     self::CONTAINS    => 'contains',
     self::END_WITH    => 'ends with',
     self::IS_NULL     => 'is empty',
-    self::IS_NOT_NULL => 'is not empty',
   );
   
   /**

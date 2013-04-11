@@ -33,7 +33,7 @@ class LibCleanerUser
   {
 
     if (!self::$default)
-      self::$default = new LibCleanerDset();
+      self::$default = new LibCleanerUser();
 
     return self::$default;
 
@@ -61,7 +61,7 @@ ERRMSG;
 Tried
 ERRMSG;
 
-      throw new Io_Exception($userMsg, $errMsg);
+      throw new Io_Exception($userMsg, $devMsg);
     }
 
     $sql = array();

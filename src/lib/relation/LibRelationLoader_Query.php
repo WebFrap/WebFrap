@@ -217,19 +217,10 @@ JOIN
   ON
     wbfsys_role_user.id_person = core_person.rowid
 
-JOIN
-  wbfsys_address_item
-  ON
-    wbfsys_address_item.id_user = {$user->user}
+WHERE
+  wbfsys_role_user.rowid = {$user->user}
+  	AND  NOT wbfsys_role_user.inactive = TRUE
 
-JOIN
-  wbfsys_address_item_type
-  ON
-    wbfsys_address_item_type.rowid = wbfsys_address_item.id_type
-    AND
-      UPPER(wbfsys_address_item_type.access_key) = UPPER('{$type}')
-    AND
-      NOT wbfsys_role_user.inactive = TRUE
 
 SQL;
 
@@ -252,19 +243,9 @@ JOIN
   ON
     wbfsys_role_user.id_person = core_person.rowid
 
-JOIN
-  wbfsys_address_item
-  ON
-    wbfsys_address_item.id_user = {$user->id}
-
-JOIN
-  wbfsys_address_item_type
-  ON
-    wbfsys_address_item_type.rowid = wbfsys_address_item.id_type
-    AND
-      UPPER(wbfsys_address_item_type.access_key) = UPPER('{$type}')
-    AND
-      NOT wbfsys_role_user.inactive = TRUE
+WHERE
+  wbfsys_role_user.rowid = {$user->id}
+  	AND  NOT wbfsys_role_user.inactive = TRUE
 
 SQL;
 

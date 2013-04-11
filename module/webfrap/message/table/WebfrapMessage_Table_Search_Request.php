@@ -31,6 +31,26 @@ class WebfrapMessage_Table_Search_Request extends ContextListing
   public $settings = null;
   
   public $order = array();
+  
+  public $searchFields = array(
+    'Message' => array(
+      'title' => array( 'Title', 'Text', 'wbfsys_message.title' ),
+      'sender' => array( 'Sender', 'Text', 'sender.wbfsys_role_user_name' ),
+      'receiver' => array( 'Receiver', 'Text', 'receiver.wbfsys_role_user_name' ),
+      'date_received' => array( 'Date Receiver', 'Date', 'wbfsys_message_receiver.date_seen' ),
+      'date_updated' => array( 'Date Updated', 'Date', 'wbfsys_message.m_time_changed' )
+    ),
+    'Appointment' => array(
+      'appoint_start' => array( 'Start', 'Date', 'appoint.timestamp_start' ),
+      'appoint_end' => array( 'End', 'Date', 'appoint.timestamp_end' ),
+      'full_day' => array( 'Full day', 'Boolean', 'appoint.flag_all_day' ),
+      'part_required' => array( 'Participation required', 'Boolean', 'appoint.' )
+    ),
+    'Task' => array(
+      'task_deadline' => array( 'Deadline', 'Date', 'task.deadline' ),
+      'action_required' => array( 'Action required', 'Boolean', 'wbfsys_message_receiver.flag_action_required' )
+    )
+  );
 
   /**
    * @param LibRequestHttp $request
@@ -49,7 +69,6 @@ class WebfrapMessage_Table_Search_Request extends ContextListing
     }
     
     $this->settings = $settings;
-
     
     $this->interpretRequest($request);
 
@@ -62,6 +81,7 @@ class WebfrapMessage_Table_Search_Request extends ContextListing
   public function interpretRequest($request)
   {
 
+    $this->extSearchValidator = new ValidSearchBuilder();
     parent::interpretRequest($request);
 
     $this->conditions = array();
@@ -70,7 +90,7 @@ class WebfrapMessage_Table_Search_Request extends ContextListing
     $this->conditions['free'] = $request->param('free_search', Validator::SEARCH);
 
     // die channels
-    if ($request->paramExists('channel')){
+    if ($request->paramExists('channel')) {
 
       $channels = $request->paramList(
       	'channel',
@@ -90,7 +110,7 @@ class WebfrapMessage_Table_Search_Request extends ContextListing
         $this->conditions['filters']['channel'] = new TArray((array)array('inbox'=>true));
     }
 
-    if ($request->paramExists('aspect')){
+    if ($request->paramExists('aspect')) {
 
       $aspects = $request->param(
       	'aspect',
@@ -108,7 +128,7 @@ class WebfrapMessage_Table_Search_Request extends ContextListing
         : array(1);
     }
 
-    if ($request->paramExists('status')){
+    if ($request->paramExists('status')) {
 
       $status = $request->paramList(
       	'status',

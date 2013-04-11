@@ -68,7 +68,7 @@ class WebfrapComment_Ajax_View extends LibTemplateAjaxView
     $pageFragment->action = 'replace';
 
     $commentElement = new WgtElementCommentTree();
-    $commentElement->setId($elementId);
+    $commentElement->setId('wgt-comment_tree-'.$context->element);
 
     $pageFragment->setContent($commentElement->renderAjaxUpdateEntry($context->element, $entry));
 

@@ -44,6 +44,7 @@ class ControllerCrud extends Controller
    */
   protected function getCrudFlags($request)
   {
+    
     return new ContextCrud($request);
 
   } //end protected function getCrudFlags */

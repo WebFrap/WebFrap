@@ -2451,7 +2451,7 @@ SQL;
  WHERE
    proisagg = FALSE
      AND typname <> 'trigger'
-     typns.nspname = '{$schema}'
+     typns.nspname = '{$schemaName}'
  ORDER BY proname
 
 SQL;
@@ -2499,7 +2499,7 @@ SELECT
  WHERE
   proisagg = FALSE
   AND typname = 'trigger'
-  AND typns.nspname = '{$schema}'
+  AND typns.nspname = '{$schemaName}'
  ORDER BY proname;
 
 SQL;

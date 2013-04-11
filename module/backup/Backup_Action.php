@@ -67,7 +67,7 @@ SQL;
 	 *
 	 * @param String $databaseName        	
 	 */
-  public function trigger_database ()
+  public function trigger_database ( $databaseName )
   {
 
     echo "Starting Backup of Database: " . $databaseName . "<br>";

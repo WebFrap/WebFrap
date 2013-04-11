@@ -41,6 +41,17 @@ try {
   }
 
   if ($size) {
+    
+    $layouts = array(
+      'toosmall' => array(25 , 25),
+      'xxsmall' => array(50 , 50),
+      'xsmall' => array(75 , 75),
+      'small' => array(100 , 100),
+      'medium' => array(200 , 200),
+      'large' => array(300 , 300),
+      'xlarge' => array(400 , 400),
+      'xxlarge' => array(500 , 500),
+    );
 
     if (!isset($layouts[$size])) {
       $size       = 'medium';
@@ -48,18 +59,6 @@ try {
       $maxHeight  = 200;
     } else {
       // X / Y
-      $layouts = array
-      (
-        'toosmall' => array(25 , 25),
-        'xxsmall' => array(50 , 50),
-        'xsmall' => array(75 , 75),
-        'small' => array(100 , 100),
-        'medium' => array(200 , 200),
-        'large' => array(300 , 300),
-        'xlarge' => array(400 , 400),
-        'xxlarge' => array(500 , 500),
-      );
-
       $maxWidth   = $layouts[$size][0];
       $maxHeight  = $layouts[$size][1];
     }
@@ -136,8 +135,7 @@ try {
       // neugenerieren des THUMBS
       $thumb = imagecreatetruecolor($new_width, $new_height);
 
-      imagecopyresampled
-      (
+      imagecopyresampled(
         $thumb,
         $im,
         0,0,0,0,
@@ -167,10 +165,10 @@ try {
 
 } // ENDE TRY
 catch(Exception $exception) {
+  
   $extType = get_class($exception);
 
-  Error::addError
-  (
+  Error::addError(
     'Uncatched  Exception: '.$extType.' Message:  '.$exception->getMessage() ,
     null,
     $exception
@@ -182,6 +180,9 @@ catch(Exception $exception) {
   }
 
   if (!DEBUG) {
+    
+    $view = Webfrap::$env->getView();
+    
     if (isset($view) and is_object($view)) {
       $view->publishError($exception->getMessage() , $errors);
     } else {
@@ -192,6 +193,7 @@ catch(Exception $exception) {
         $errors
       );
     }
+    
   } else {
     echo $errors;
   }

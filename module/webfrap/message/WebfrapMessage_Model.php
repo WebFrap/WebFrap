@@ -74,7 +74,7 @@ class WebfrapMessage_Model extends Model
   }//end public function loadTableAccess */
 
   /**
-   * @param TFlag $params
+   * @param WebfrapMessage_Table_Search_Request $params
    * @return array
    */
   public function fetchMessages($params)
@@ -85,6 +85,11 @@ class WebfrapMessage_Model extends Model
 
     /* @var $query WebfrapMessage_Table_Query */
     $query = $db->newQuery('WebfrapMessage_Table');
+    
+    Debug::console('$params->searchFields',$params->searchFields);
+    Debug::console('$params->extSearch',$params->extSearch);
+    
+    $query->extSearch($params->searchFieldsStack, $params->extSearch);
 
     $query->fetch(
       $this->params->conditions,
@@ -581,6 +586,7 @@ SQL;
     $db = $this->getDb();
     $user = $this->getUser();
     $userID = $user->getId();
+    $orm = $this->getOrm();
 
     $queries = array();
     $queries[] = 'UPDATE wbfsys_message set flag_sender_deleted = true WHERE id_sender = '.$userID.';';
@@ -637,6 +643,7 @@ SQL;
     $db = $this->getDb();
     $user = $this->getUser();
     $userID = $user->getId();
+    $orm = $this->getOrm();
 
     if (!$msgIds)
       return;

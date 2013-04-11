@@ -134,8 +134,7 @@ class WebfrapMessage_Checklist_Controller extends Controller
     // request bearbeiten
     /* @var $model WebfrapMessage_Checklist_Model */
     $checklistModel = $this->loadModel('WebfrapMessage_Checklist');
-    $view->setModel($checklistModel);
-    
+
     $checklistModel->delete( $params->delId, $params );
 
 

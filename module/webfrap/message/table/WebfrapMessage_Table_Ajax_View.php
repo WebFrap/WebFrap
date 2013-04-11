@@ -74,7 +74,7 @@ class WebfrapMessage_Ajax_View extends LibTemplatePlain
   \$S('table#{$table->id}-table').grid('renderRowLayout').grid('syncColWidth');
 
 WGTJS;
-      $view->addJsCode($jsCode);
+      $this->addJsCode($jsCode);
 
     } else {
 

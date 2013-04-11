@@ -22,10 +22,10 @@ try {
 
 } // ENDE TRY
 catch(Exception $exception) {
+  
   $extType = get_class($exception);
 
-  Error::addError
-  (
+  Error::addError(
     'Uncatched  Exception: '.$extType.' Message:  '.$exception->getMessage() ,
     null,
     $exception
@@ -37,8 +37,7 @@ catch(Exception $exception) {
   }
 
   if (!DEBUG) {
-    View::printErrorPage
-    (
+    View::printErrorPage(
       $exception->getMessage(),
       '500',
       $errors

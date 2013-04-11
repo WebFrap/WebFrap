@@ -107,36 +107,6 @@ HTML;
 
   }//end public function buildMenu */
 
-  /**
-   * build the window menu
-   * @param TArray $params
-   */
-  protected function entriesSupport($params)
-  {
-
-
-
-
-    $html = <<<HTML
-
-      <li>
-        <p>{$iconSupport} {$this->view->i18n->l('Support','wbf.label')}</p>
-        <ul>
-
-          <li><a class="wcm wcm_req_ajax" href="modal.php?c=Webfrap.Docu.open&amp;key=wbfsys_message-create" >{$iconHelp} {$this->view->i18n->l('Help','wbf.label')}</a></li>
-
-          <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Issue.create&amp;context=create" >{$iconBug} {$this->view->i18n->l('Bug','wbf.label')}</a></li>
-
-          <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Faq.create&amp;context=create" >{$iconFaq} {$this->view->i18n->l('FAQ','wbf.label')}</a></li>
-
-        </ul>
-      </li>
-
-HTML;
-
-    return $html;
-
-  }//end public function entriesSupport */
 
 }//end class MaintenanceDb_Index_Stats_Maintab_Menu
 

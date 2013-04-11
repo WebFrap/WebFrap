@@ -97,6 +97,18 @@ class ContextListing
   public $filter = null;
   
   /**
+   * Search Fields
+   * @var array
+   */
+  public $searchFields = array();
+  
+  /**
+   * Search Fields
+   * @var array
+   */
+  public $searchFieldsStack = array();
+  
+  /**
    * Extended Search filter
    * @var array
    */
@@ -124,6 +136,12 @@ class ContextListing
    * @var string
    */
   protected $actionExt = null;
+  
+  /**
+   * @var ValidSearchBuilder
+   */
+  protected $extSearchValidator = null;
+  
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Magic Functions
@@ -132,7 +150,7 @@ class ContextListing
   /**
    * @param LibRequestHttp $request
    */
-  public function __construct($request)
+  public function __construct($request, $extSearchValidator = null)
   {
 
     $this->filter = new TFlag();
@@ -144,10 +162,20 @@ class ContextListing
         $this->filter->$key = $value;
       }
     }
+    
+  
+    if ($request->paramExists('as')) {
+      if ($extSearchValidator)
+        $this->extSearchValidator = $extSearchValidator;
+      else
+        $this->extSearchValidator = new ValidSearchBuilder();
+    }
 
     $this->interpretRequest($request);
-
+    
   } // end public function __construct */
+  
+  
 
   /**
    * virtual __set
@@ -182,6 +210,10 @@ class ContextListing
    */
   public function interpretRequest($request)
   {
+    
+    if( $request->paramExists('as') ){
+      $this->interpretExtendedSearch($request);
+    }
 
     // the publish type, like selectbox, tree, table..
     if ($publish  = $request->param('publish', Validator::CNAME))
@@ -294,7 +326,48 @@ class ContextListing
   {
     
     $extSearchFields = $request->param('as');
-
+    
+    if (!$extSearchFields)
+      return;
+    
+    if (!$this->searchFieldsStack) {
+      foreach ($this->searchFields as $searchFields) {
+        foreach ($searchFields as $sKey => $sData) {
+          $this->searchFieldsStack[$sKey] = $sData;
+        }
+      }
+    }
+    
+    Debug::console('got search fields',$extSearchFields);
+    
+    foreach ($extSearchFields as $fKey => $extField) {
+      
+      if (!isset($this->searchFieldsStack[$extField['field']])){
+        // field not exists
+        continue;
+      }
+      
+      $validField = $this->extSearchValidator->validate($extField, $this->searchFieldsStack[$extField['field']]);
+      
+      if ($validField) {
+        
+        if (isset($extField['parent'])) {
+          
+          if (!isset($this->extSearch[$extField['parent']]->sub)  )
+            $this->extSearch[$extField['parent']]->sub = array();
+          
+          $this->extSearch[$extField['parent']]->sub[] = (object)$validField;
+            
+        } else {
+          
+          $this->extSearch[$fKey] = (object)$validField;
+          
+        }
+      } else {
+        Debug::console($extField['field'].' was invalid ');
+      }
+      
+    }//end foreach
 
   }//end public function interpretExtendedSearch */
 

@@ -5,6 +5,7 @@ $this->crumbs = array(
   array('Daidalos',$this->interface.'?c=Daidalos.Base.menu','control/folder.png'),
 );
 
+
 if ($acl->hasRole('developer')) {
 
   $this->firstEntry = array
