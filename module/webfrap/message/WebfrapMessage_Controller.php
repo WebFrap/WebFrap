@@ -226,6 +226,7 @@ class WebfrapMessage_Controller extends Controller
     }
 
     // create a window
+    /* @var $view WebfrapMessage_List_Ajax_View */
     $view = $response->loadView(
       'list-message_list',
       'WebfrapMessage_List',
@@ -233,16 +234,9 @@ class WebfrapMessage_Controller extends Controller
       View::AJAX
     );
 
-    $model = $this->loadModel('WebfrapMessage');
     $view->setModel($model);
 
     $model->params = $params;
-
-    // request
-    $model->conditions['free'] = $request->param('free_search', Validator::SEARCH);
-    $model->conditions['filters']['channel'] = $request->param('channel', Validator::BOOLEAN);
-    $model->conditions['filters']['mailbox'] = $request->param('mailbox', Validator::CKEY);
-    $model->conditions['filters']['archive'] = $request->param('archive', Validator::BOOLEAN);
 
     $view->displaySearch($params);
 
