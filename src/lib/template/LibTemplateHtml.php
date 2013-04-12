@@ -189,6 +189,10 @@ class LibTemplateHtml extends LibTemplatePresenter
      $doctype     = isset($conf['doctype'])
       ? $conf['doctype']
       : View::XML1_TRANS;
+     
+     if (View::$docType){
+       $doctype = View::$docType;
+     }
 
      $this->setDoctype($doctype);
 

@@ -263,6 +263,12 @@ class View
    * @var array
    */
   public static $searchPathIndex = array();
+  
+  /**
+   * Erzwingen eines Doctypes soweit nötig
+   * @var int
+   */
+  public static $docType = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Instance
