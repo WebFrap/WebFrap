@@ -328,7 +328,9 @@ class WgtMenuBuilder
    */
   public function buildContextLogic()
   {
-
+  
+    return '';
+    
     $entries = array();
 
     foreach ($this->actions as $action) {
