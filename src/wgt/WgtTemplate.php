@@ -306,11 +306,13 @@ abstract class WgtTemplate
    * @param string $template
    * @return string
    */
-  public function renderTemplate($template = null)
+  public function renderTemplate($template = null, $isCodeTpl = true)
   {
 
     if (!is_null($this->rendered))
       return $this->rendered;
+    
+    $this->tplInCode = $isCodeTpl;
 
     if (!$template)
       $template = $this->template;
