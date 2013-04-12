@@ -129,6 +129,12 @@ class Wgt
    * @var int
    */
   const ACTION_JUST_LABEL = 14;
+  
+  /**
+   * Open in Window Action
+   * @var int
+   */
+  const ACTION_OPEN_IN_WINDOW = 15;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Menu Types
@@ -251,7 +257,7 @@ class Wgt
 // Else
 //////////////////////////////////////////////////////////////////////////////*/
 
-  const XML_HEAD = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n";
+  const XML_HEAD = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>\n";
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
