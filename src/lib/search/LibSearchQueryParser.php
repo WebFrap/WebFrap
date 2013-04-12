@@ -19,7 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibSearchParser extends LibParser
+class LibSearchQueryParser extends LibParser
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attribute
