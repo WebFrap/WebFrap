@@ -215,21 +215,21 @@ abstract class WgtInput extends WgtAbstract
   }// end public function setRequired */
   
  /**
-  * @param boolean $required
+  * @param boolean $unique
   * @return void
   */
-  public function setUnique($required = true)
+  public function setUnique($unique = true)
   {
 
-    if ($required) {
+    if ($unique) {
       $this->classes['wcm'] = 'wcm';
-      $this->classes['wcm_valid_required'] = 'wcm_valid_required';
+      $this->classes['wcm_valid_unique'] = 'wcm_valid_unique';
     } else {
-      if (isset($this->classes['wcm_valid_required']))
-        unset($this->classes['wcm_valid_required']);
+      if (isset($this->classes['wcm_valid_unique']))
+        unset($this->classes['wcm_valid_unique']);
     }
 
-    $this->required = $required;
+    $this->unqiue = $unique;
 
   }// end public function setRequired */
 
