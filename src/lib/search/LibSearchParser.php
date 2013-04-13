@@ -28,7 +28,7 @@ class LibSearchParser
   /**
    * @var array
    */
-  protected $rawTokens = array();
+  protected $rawTokenss = array();
 
   /**
    * @var array
@@ -36,23 +36,30 @@ class LibSearchParser
   protected $operators = array(
     '+',
     '-',
-    '!',
+    //'!',
     '>',
     '<',
     '>=',
     '<=',
     '=',
+    '#',
+    '@',
   );
 
   /**
    * @var array
    */
-  public $stringToken = array();
+  public $stringTokens = array();
 
   /**
    * @var array
    */
-  public $numberToken = array();
+  public $numberTokens = array();
+
+  /**
+   * @var array
+   */
+  public $intTokens = array();
 
   /**
    * @var array
@@ -84,40 +91,74 @@ class LibSearchParser
 hans wurst #test "#test nochwas" @dominik
      */
 
-    $this->rawTokens = explode(' ', $searchString);
+    $this->rawTokenss = explode(' ', $searchString);
 
     $lastValue = '';
 
-    foreach( $this->rawTokens as $token ){
+    foreach( $this->rawTokenss as $token ){
 
       $token = trim($token);
 
       if( '' === $token )
         continue;
 
+      // indentify if we have an operator
       $fC = $token[0];
       $op = null;
+      $value = '';
 
-      if ( $token[1] )
-      $op = isset($token[1])?;
+      if (isset($token[1])) {
 
-      if ( '@' === $fC ){
-        $this->users[] = $token;
-      } else if( '#' === $fC ){
-        $this->tags[] = $token;
-      } else if( '>' === $fC || '<' === $fC){
-        $this->tags[] = $token;
+        if($this->isOperator($fC)){
+          if($this->isOperator($fC.$token[1])){
+            $op = $fC.$token[1];
+          } else {
+            $op = $fC;
+          }
+        }
+
+      } else if ($this->isOperator($fC)) {
+        $op = $fC;
+      }
+
+      if ($op) {
+        $value = substr($token, strlen($op));
+      } else {
+        $value = $token;
+      }
+
+      if( $op ){
+
+        if ( '@' === $op ){
+          $this->users[] = $value;
+        } else if( '#' === $op ){
+          $this->tags[] = $value;
+        } else {
+
+          if (ctype_digit($value)) {
+            $this->intTokens[] = array($op,$value);
+          } else if( is_numeric($value) ) {
+            $this->numberTokens[] = array($op,$value);
+          } else if (preg_match('/^\d{4}-\d{1,2}-\d{1,2}$/', $value)){
+            $this->dates[] = array($op,$value);
+          } else {
+            $this->stringTokens[] = array($op,$value);
+          }
+        }
+
       } else {
 
-
-        if (preg_match('/^\d{4}-\d{1,2}-\d{1,2}$/', $token)) {
-          $this->dates =
+        if (ctype_digit($value)) {
+          $this->intTokens[] = $value;
+        } else if( is_numeric($value) ) {
+          $this->numberTokens[] = $value;
+        } else if (preg_match('/^\d{4}-\d{1,2}-\d{1,2}$/', $value)){
+          $this->dates[] = $value;
+        } else {
+          $this->stringTokens[] = $value; // operator ignorieren?
         }
 
       }
-
-
-
 
     }
 
@@ -125,10 +166,17 @@ hans wurst #test "#test nochwas" @dominik
   }//end public function analyse */
 
 
-  protected function isOperator()
+  /**
+   * Check ob der string ein Operator ist
+   * @param string $string
+   * @return boolean
+   */
+  protected function isOperator( $string )
   {
 
-  }
+    return in_array($string, $this->operators);
+
+  }//end protected function isOperator */
 
 
 } // end class LibSearchParser
