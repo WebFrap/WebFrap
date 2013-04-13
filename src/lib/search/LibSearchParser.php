@@ -28,7 +28,7 @@ class LibSearchParser
   /**
    * @var array
    */
-  protected $rawTokenss = array();
+  protected $rawTokens = array();
 
   /**
    * @var array
@@ -91,11 +91,11 @@ class LibSearchParser
 hans wurst #test "#test nochwas" @dominik
      */
 
-    $this->rawTokenss = explode(' ', $searchString);
+    $this->rawTokens = explode(' ', $searchString);
 
     $lastValue = '';
 
-    foreach( $this->rawTokenss as $token ){
+    foreach( $this->rawTokens as $token ){
 
       $token = trim($token);
 
