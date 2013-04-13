@@ -349,7 +349,7 @@ if (isset($_SESSION['PHPLOG'])) {
 <ul>
 <?php
   if (isset($_SESSION['FILES']))
-    foreach($_SESSION['FILES'] as $file)
+    foreach ($_SESSION['FILES'] as $file)
       echo "<li>$file</li>\n";
 
 ?>

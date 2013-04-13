@@ -95,7 +95,7 @@ hans wurst #test "#test nochwas" @dominik
 
     $lastValue = '';
 
-    foreach( $this->rawTokens as $token ){
+    foreach ( $this->rawTokens as $token ) {
 
       $token = trim($token);
 
@@ -109,8 +109,8 @@ hans wurst #test "#test nochwas" @dominik
 
       if (isset($token[1])) {
 
-        if($this->isOperator($fC)){
-          if($this->isOperator($fC.$token[1])){
+        if($this->isOperator($fC)) {
+          if($this->isOperator($fC.$token[1])) {
             $op = $fC.$token[1];
           } else {
             $op = $fC;
@@ -127,11 +127,11 @@ hans wurst #test "#test nochwas" @dominik
         $value = $token;
       }
 
-      if( $op ){
+      if( $op ) {
 
-        if ( '@' === $op ){
+        if ( '@' === $op ) {
           $this->users[] = $value;
-        } else if( '#' === $op ){
+        } else if( '#' === $op ) {
           $this->tags[] = $value;
         } else {
 
@@ -139,7 +139,7 @@ hans wurst #test "#test nochwas" @dominik
             $this->intTokens[] = array($op,$value);
           } else if( is_numeric($value) ) {
             $this->numberTokens[] = array($op,$value);
-          } else if (preg_match('/^\d{4}-\d{1,2}-\d{1,2}$/', $value)){
+          } else if (preg_match('/^\d{4}-\d{1,2}-\d{1,2}$/', $value)) {
             $this->dates[] = array($op,$value);
           } else {
             $this->stringTokens[] = array($op,$value);
@@ -152,7 +152,7 @@ hans wurst #test "#test nochwas" @dominik
           $this->intTokens[] = $value;
         } else if( is_numeric($value) ) {
           $this->numberTokens[] = $value;
-        } else if (preg_match('/^\d{4}-\d{1,2}-\d{1,2}$/', $value)){
+        } else if (preg_match('/^\d{4}-\d{1,2}-\d{1,2}$/', $value)) {
           $this->dates[] = $value;
         } else {
           $this->stringTokens[] = $value; // operator ignorieren?

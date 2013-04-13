@@ -151,19 +151,19 @@ HTML;
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       self.close();
     });
 
-    self.getObject().find(".wgtac_create").click(function(){
+    self.getObject().find(".wgtac_create").click(function() {
       \$R.get('modal.php?c=Webfrap.Contact.formNew');
     });
 
-    self.getObject().find(".wgtac_search_con").click(function(){
+    self.getObject().find(".wgtac_search_con").click(function() {
       \$R.get('maintab.php?c=Webfrap.Contact.selection');
     });
 
-    self.getObject().find(".wgtac_refresh").click(function(){
+    self.getObject().find(".wgtac_refresh").click(function() {
       \$R.form('wgt-form-webfrap-contact-search');
     });
 

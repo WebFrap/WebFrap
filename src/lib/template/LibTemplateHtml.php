@@ -190,7 +190,7 @@ class LibTemplateHtml extends LibTemplatePresenter
       ? $conf['doctype']
       : View::XML1_TRANS;
      
-     if (View::$docType){
+     if (View::$docType) {
        $doctype = View::$docType;
      }
 
@@ -1130,7 +1130,7 @@ HTML;
 
     if ($this->openWindow)
       $this->compiled .= <<<CODE
-<script type="application/javascript" >\$S(document).ready(function(){\$R.get('{$this->openWindow}');});</script>
+<script type="application/javascript" >\$S(document).ready(function() {\$R.get('{$this->openWindow}');});</script>
 CODE;
 
     $this->compiled .= '</body>'.NL;

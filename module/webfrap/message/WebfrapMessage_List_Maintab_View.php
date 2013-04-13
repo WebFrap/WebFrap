@@ -243,19 +243,19 @@ HTML;
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       self.close();
     });
 
-    self.getObject().find(".wgtac_new_msg").click(function(){
+    self.getObject().find(".wgtac_new_msg").click(function() {
       \$R.get('maintab.php?c=Webfrap.Message.formNew');
     });
 
-    self.getObject().find(".wgtac_refresh,.wgtac_search").click(function(){
+    self.getObject().find(".wgtac_refresh,.wgtac_search").click(function() {
       \$R.form('wgt-form-webfrap-groupware-search');
     });
 
-    self.getObject().find('.wgt-mentry-my_message-boxtype').change(function(){
+    self.getObject().find('.wgt-mentry-my_message-boxtype').change(function() {
       \$R.form('wgt-form-webfrap-groupware-search');
     });
 

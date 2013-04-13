@@ -658,23 +658,23 @@ HTML;
 
       process.addClass('flag-touch');
 
-      process.data('paction-history-{$this->process->name}', function(){
+      process.data('paction-history-{$this->process->name}', function() {
         \$R.get('modal.php?c=Process.Base.showHistory&process={$this->process->activStatus}&objid={$entity}&entity={$entity->getTable()}');
         \$S.fn.miniMenu.close();
       });
 
 
-      process.data('paction-graph-{$this->process->name}', function(){
+      process.data('paction-graph-{$this->process->name}', function() {
         \$R.get('maintab.php?c={$this->process->processUrl}.showNodeGraph&objid={$this->process->activStatus}');
         \$S.fn.miniMenu.close();
       });
 
-      process.data('paction-change-{$this->process->name}', function(){
+      process.data('paction-change-{$this->process->name}', function() {
         \$R.get('modal.php?c=Webfrap.Maintenance_Process.formSwitchStatus&process_id={$this->process->processId}&vid={$entity->getId()}&dkey={$entity->getTable()}&active={$this->process->activStatus}');
         \$S.fn.miniMenu.close();
       });
 
-      process.data('paction-stateChange-{$this->process->name}', function(state){
+      process.data('paction-stateChange-{$this->process->name}', function(state) {
         self.setChanged(false);
         \$R.form('{$params->formId}','&process_state='+state+'&reload=true',{append:true});
       });
@@ -693,7 +693,7 @@ HTML;
 
     if (process) {
 
-      process.data('paction-{$this->process->name}-{$edge->key}', function(){
+      process.data('paction-{$this->process->name}-{$edge->key}', function() {
         self.setChanged(false);
         if (!\$S('input#wgt-input-{$this->process->name}-confirm-{$entity}').is(':checked')) {
           \$D.errorWindow('You have to confirm before trigger {$edge->label}');
@@ -710,7 +710,7 @@ HTML;
         $html .= <<<HTML
 
     if (process) {
-      process.data('paction-{$this->process->name}-{$edge->key}', function(){
+      process.data('paction-{$this->process->name}-{$edge->key}', function() {
         self.setChanged(false);
         \$R.form('{$params->formId}','&process_edge={$edge->key}&reload=true',{append:true});
       });
@@ -748,18 +748,18 @@ HTML;
       process.addClass('flag-touch');
       appendEvents = true;
 
-      process.data('paction-history-{$this->process->name}', function(){
+      process.data('paction-history-{$this->process->name}', function() {
         \$R.get('modal.php?c=Process.Base.showHistory&process={$this->process->activStatus}&objid={$entity}&entity={$entity->getTable()}');
         \$S.fn.miniMenu.close();
       });
 
 
-      process.data('paction-graph-{$this->process->name}', function(){
+      process.data('paction-graph-{$this->process->name}', function() {
         \$R.get('maintab.php?c={$this->process->processUrl}.showNodeGraph&objid={$this->process->activStatus}');
         \$S.fn.miniMenu.close();
       });
 
-      process.data('paction-change-{$this->process->name}', function(){
+      process.data('paction-change-{$this->process->name}', function() {
         \$R.get('modal.php?c=Webfrap.Maintenance_Process.formSwitchStatus&process_id={$this->process->processId}&vid={$entity->getId()}&dkey={$entity->getTable()}&active={$this->process->activStatus}');
         \$S.fn.miniMenu.close();
       });
@@ -774,7 +774,7 @@ HTML;
         $html .= <<<HTML
 
     if (appendEvents) {
-      process.data('paction-{$this->process->name}-{$edge->key}', function(){
+      process.data('paction-{$this->process->name}-{$edge->key}', function() {
         if (!\$S('#wgt-input-{$this->process->name}-confirm-{$entity}').is(':checked')) {
           \$D.errorWindow('You have to confirm before trigger {$edge->label}');
 
@@ -791,7 +791,7 @@ HTML;
 
     if (appendEvents) {
 
-      process.data('paction-{$this->process->name}-{$edge->key}', function(){
+      process.data('paction-{$this->process->name}-{$edge->key}', function() {
         \$R.form('{$this->formId}','&status={$edge->key}&reload=true',{append:true});
       });
     }
@@ -803,7 +803,7 @@ HTML;
 
     $this->view->addJsCode($html);
 
-    //return '<script type="application/javascript" >(function(){'.$html.'})(window);</script>';
+    //return '<script type="application/javascript" >(function() {'.$html.'})(window);</script>';
 
   }//end public function renderListFormActionJs */
 
@@ -832,15 +832,15 @@ HTML;
       process.addClass('flag-touch');
 
 
-      process.data('paction-history-{$this->process->name}', function(){
+      process.data('paction-history-{$this->process->name}', function() {
         \$R.get('modal.php?c=Process.Base.showHistory&process={$this->process->activStatus}&objid={$entity}&entity={$entity->getTable()}');
       });
 
-      process.data('paction-graph-{$this->process->name}', function(){
+      process.data('paction-graph-{$this->process->name}', function() {
         \$R.get('maintab.php?c={$this->process->processUrl}.showNodeGraph&objid={$this->process->activStatus}');
       });
 
-      process.data('paction-change-{$this->process->name}', function(){
+      process.data('paction-change-{$this->process->name}', function() {
         \$R.get('modal.php?c=Webfrap.Maintenance_Process.formSwitchStatus&process_id={$this->process->processId}&vid={$entity->getId()}&dkey={$entity->getTable()}&active={$this->process->activStatus}');
       });
     } else {
@@ -858,7 +858,7 @@ HTML;
         $html .= <<<HTML
 
     if (process) {
-      process.data('paction-{$this->process->name}-{$edge->key}', function(){
+      process.data('paction-{$this->process->name}-{$edge->key}', function() {
 
         if (!\$S('#wgt-input-{$this->process->name}-confirm-{$entity}').is(':checked')) {
           \$D.errorWindow('You have to confirm before trigger {$edge->label}');
@@ -878,7 +878,7 @@ HTML;
 
     if (process) {
 
-      process.data('paction-{$this->process->name}-{$edge->key}', function(){
+      process.data('paction-{$this->process->name}-{$edge->key}', function() {
         \$R.form('{$params->formId}','&process_edge={$edge->key}',{append:true});
       });
       console.log('Add pAction paction-{$this->process->name}-{$edge->key}');
@@ -964,7 +964,7 @@ HTML;
       foreach ($this->process->nodes as $nodeKey => $nodeData) {
 
         // überspringen wenn nicht im pfad
-        if (isset($nodeData['display']['path']) && !$nodeData['display']['path']){
+        if (isset($nodeData['display']['path']) && !$nodeData['display']['path']) {
           
           if ($statusData->key !== $nodeKey)
             continue;

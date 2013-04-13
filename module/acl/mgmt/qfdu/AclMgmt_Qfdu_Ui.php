@@ -254,10 +254,10 @@ WGTJS;
 
     $code = <<<JSCODE
 
-    \$S('#{$itemId}_row_{$key}').fadeOut(100,function(){\$S('#{$itemId}_row_{$key}').remove();});
+    \$S('#{$itemId}_row_{$key}').fadeOut(100,function() {\$S('#{$itemId}_row_{$key}').remove();});
     \$S('#{$itemId}-table').grid('decEntries');
 
-    \$S('#{$itemId}_row_{$key}').fadeOut(100,function(){
+    \$S('#{$itemId}_row_{$key}').fadeOut(100,function() {
       \$S('#{$itemId}_row_{$key}').remove();
       \$S('#{$itemId}-table .group-{$key}').remove();
     });
@@ -282,7 +282,7 @@ JSCODE;
     // remove all children from the user
     $code = <<<JSCODE
 
-    \$S('#{$itemId}-table .user-{$userId}.group-{$groupId}').fadeOut(100,function(){
+    \$S('#{$itemId}-table .user-{$userId}.group-{$groupId}').fadeOut(100,function() {
       \$S('#{$userId}-table .user-{$userId}.group-{$groupId}').remove();
     });
 
@@ -306,7 +306,7 @@ JSCODE;
     // remove user entry and children
     $code = <<<JSCODE
 
-    \$S('#{$itemId}_row_{$groupId}_{$userId}').fadeOut(100,function(){
+    \$S('#{$itemId}_row_{$groupId}_{$userId}').fadeOut(100,function() {
       \$S('#{$itemId}_row_{$groupId}_{$userId}').remove();
       \$S('#{$userId}-table .user-{$userId}.group-{$groupId}').remove();
     });
@@ -329,7 +329,7 @@ JSCODE;
 
     $code = <<<JSCODE
 
-    \$S('#{$itemId}_row_{$key}').fadeOut(100,function(){\$S('#{$itemId}_row_{$key}').remove();});
+    \$S('#{$itemId}_row_{$key}').fadeOut(100,function() {\$S('#{$itemId}_row_{$key}').remove();});
 
 JSCODE;
 

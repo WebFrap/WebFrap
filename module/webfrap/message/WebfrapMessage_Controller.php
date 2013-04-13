@@ -532,7 +532,7 @@ class WebfrapMessage_Controller extends Controller
       );
     }
     
-    if( 100 == $flagSpam){
+    if( 100 == $flagSpam) {
       //wenn spam dann löschen
       $this->getTpl()->addJsCode(<<<JS
 
@@ -650,7 +650,7 @@ JS
 
     $entries = array();
 
-    foreach($msgIds as $msgId){
+    foreach ($msgIds as $msgId) {
       $entries[] = "#wgt-table-webfrap-groupware_message_row_".$msgId;
     }
 
@@ -683,7 +683,7 @@ JS
     $tmpChannels = $request->data('channels', Validator::CKEY);
     $chanels = array();
 
-    foreach($tmpChannels as $tmpCh){
+    foreach ($tmpChannels as $tmpCh) {
       if ($tmpCh)
         $chanels[] = $tmpCh;
     }
@@ -1058,7 +1058,7 @@ JS
 
     $entries = array();
 
-    foreach($msgIds as $msgId){
+    foreach ($msgIds as $msgId) {
       $entries[] = "#wgt-table-webfrap-groupware_message_row_".$msgId;
     }
 

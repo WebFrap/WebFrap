@@ -129,29 +129,29 @@ HTML;
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       self.close();
     }).removeClass('wgtac_close');
 
-    self.getObject().find(".wgtac_save").click(function(){
+    self.getObject().find(".wgtac_save").click(function() {
       \$R.form('wgt-form-bdl_profile-{$profileName}');
     }).removeClass('wgtac_save');
 
-    self.getObject().find(".wgtac_refresh").click(function(){
+    self.getObject().find(".wgtac_refresh").click(function() {
       self.close();
       \$R.get('maintab.php?c=Daidalos.BdlModeller.openEditor'
         +'&amp;key={$view->model->modeller->key}&amp;bdl_file={$view->model->modeller->bdlFileName}');
     });
 
     // permission logic
-    self.getObject().find(".wgtac_create_permission").click(function(){
+    self.getObject().find(".wgtac_create_permission").click(function() {
       \$R.get(
         'maintab.php?c=Daidalos.BdlNode_ProfilePermission.create'
           +'&amp;key={$view->model->modeller->key}&amp;bdl_file={$view->model->modeller->bdlFileName}'
       );
     }).removeClass('wgtac_create_permission');
 
-    self.getObject().find(".wgtac_edit_permission").click(function(){
+    self.getObject().find(".wgtac_edit_permission").click(function() {
       \$R.get(
         'maintab.php?c=Daidalos.BdlNode_ProfilePermission.edit'
           +'&amp;key={$view->model->modeller->key}&amp;bdl_file={$view->model->modeller->bdlFileName}'
@@ -159,7 +159,7 @@ HTML;
       );
     }).removeClass('wgtac_edit_permission');
 
-    self.getObject().find(".wgtac_delete_permission").click(function(){
+    self.getObject().find(".wgtac_delete_permission").click(function() {
       \$R.del(
         'ajax.php?c=Daidalos.BdlNode_ProfilePermission.delete'
           +'&amp;key={$view->model->modeller->key}&amp;bdl_file={$view->model->modeller->bdlFileName}'
@@ -168,7 +168,7 @@ HTML;
     }).removeClass('wgtac_delete_permission');
 
     // permission ref logic
-    self.getObject().find(".wgtac_add_permission_ref").click(function(){
+    self.getObject().find(".wgtac_add_permission_ref").click(function() {
       \$R.get(
         'maintab.php?c=Daidalos.BdlNode_ProfilePermission.createRef'
           +'&amp;key={$view->model->modeller->key}&amp;bdl_file={$view->model->modeller->bdlFileName}'
@@ -177,7 +177,7 @@ HTML;
       );
     }).removeClass('wgtac_add_permission_ref');
 
-    self.getObject().find(".wgtac_add_permission_base_ref").click(function(){
+    self.getObject().find(".wgtac_add_permission_base_ref").click(function() {
       \$R.get(
         'maintab.php?c=Daidalos.BdlNode_ProfilePermission.createRef'
           +'&amp;key={$view->model->modeller->key}&amp;bdl_file={$view->model->modeller->bdlFileName}'
@@ -186,7 +186,7 @@ HTML;
       );
     }).removeClass('wgtac_add_permission_base_ref');
 
-    self.getObject().find(".wgtac_edit_permission_ref").click(function(){
+    self.getObject().find(".wgtac_edit_permission_ref").click(function() {
       \$R.get(
         'maintab.php?c=Daidalos.BdlNode_ProfilePermission.editRef'
           +'&amp;key={$view->model->modeller->key}&amp;bdl_file={$view->model->modeller->bdlFileName}'
@@ -194,7 +194,7 @@ HTML;
       );
     }).removeClass('wgtac_edit_permission_ref');
 
-    self.getObject().find(".wgtac_delete_permission_ref").click(function(){
+    self.getObject().find(".wgtac_delete_permission_ref").click(function() {
       \$R.del(
         'ajax.php?c=Daidalos.BdlNode_ProfilePermission.deleteRef'
           +'&amp;key={$view->model->modeller->key}&amp;bdl_file={$view->model->modeller->bdlFileName}'
@@ -203,14 +203,14 @@ HTML;
     }).removeClass('wgtac_delete_permission_ref');
 
     // backpath
-    self.getObject().find(".wgtac_create_backpath").click(function(){
+    self.getObject().find(".wgtac_create_backpath").click(function() {
       \$R.get(
         'maintab.php?c=Daidalos.BdlNode_ProfileBackpath.create'
           +'&amp;key={$view->model->modeller->key}&amp;bdl_file={$view->model->modeller->bdlFileName}'
       );
     }).removeClass('wgtac_create_backpath');
 
-    self.getObject().find(".wgtac_edit_backpath").click(function(){
+    self.getObject().find(".wgtac_edit_backpath").click(function() {
       \$R.get(
         'maintab.php?c=Daidalos.BdlNode_ProfileBackpath.edit'
           +'&amp;key={$view->model->modeller->key}&amp;bdl_file={$view->model->modeller->bdlFileName}'
@@ -218,7 +218,7 @@ HTML;
       );
     }).removeClass('wgtac_edit_backpath');
 
-    self.getObject().find(".wgtac_delete_backpath").click(function(){
+    self.getObject().find(".wgtac_delete_backpath").click(function() {
       \$R.del(
         'ajax.php?c=Daidalos.BdlNode_ProfileBackpath.delete'
           +'&amp;key={$view->model->modeller->key}&amp;bdl_file={$view->model->modeller->bdlFileName}'
@@ -227,7 +227,7 @@ HTML;
     }).removeClass('wgtac_delete_backpath');
 
     // backpath node logic
-    self.getObject().find(".wgtac_add_backpath_node").click(function(){
+    self.getObject().find(".wgtac_add_backpath_node").click(function() {
       \$R.get(
         'maintab.php?c=Daidalos.BdlNode_ProfileBackpath.createNode'
           +'&amp;key={$view->model->modeller->key}&amp;bdl_file={$view->model->modeller->bdlFileName}'
@@ -235,7 +235,7 @@ HTML;
       );
     }).removeClass('wgtac_add_backpath_node');
 
-    self.getObject().find(".wgtac_edit_backpath_node").click(function(){
+    self.getObject().find(".wgtac_edit_backpath_node").click(function() {
       \$R.get(
         'maintab.php?c=Daidalos.BdlNode_ProfileBackpath.editNode'
           +'&amp;key={$view->model->modeller->key}&amp;bdl_file={$view->model->modeller->bdlFileName}'
@@ -243,7 +243,7 @@ HTML;
       );
     }).removeClass('wgtac_edit_backpath_node');
 
-    self.getObject().find(".wgtac_delete_backpath_node").click(function(){
+    self.getObject().find(".wgtac_delete_backpath_node").click(function() {
       \$R.del(
         'ajax.php?c=Daidalos.BdlNode_ProfileBackpath.deleteNode'
           +'&amp;key={$view->model->modeller->key}&amp;bdl_file={$view->model->modeller->bdlFileName}'

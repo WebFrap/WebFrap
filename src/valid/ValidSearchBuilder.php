@@ -85,7 +85,7 @@ class ValidSearchBuilder
 
     $type = strtolower($fieldData[1]);
 
-    if(!in_array($type,$this->supportedTypes)){
+    if(!in_array($type,$this->supportedTypes)) {
       Debug::console( "Got unsupported type ".$type );
       return null;
     }
@@ -127,7 +127,7 @@ class ValidSearchBuilder
       return null;
     }
     
-    if( (int)$searchCol['cond'] !== ESearchText::IS_NULL  ){
+    if( (int)$searchCol['cond'] !== ESearchText::IS_NULL  ) {
     
       if ('' === trim($searchCol['value'])) {
         // nichts zu tun
@@ -160,7 +160,7 @@ class ValidSearchBuilder
       return null;
     }
     
-    if (!ctype_digit($searchCol['value']) ){
+    if (!ctype_digit($searchCol['value']) ) {
       return null;
     }
     
@@ -199,7 +199,7 @@ class ValidSearchBuilder
       return null;
     }
     
-    if( (int)$searchCol['cond'] !== ESearchText::IS_NULL  ){
+    if( (int)$searchCol['cond'] !== ESearchText::IS_NULL  ) {
       
       if ('' === trim($searchCol['value'])) {
         // nichts zu tun
@@ -224,7 +224,7 @@ class ValidSearchBuilder
       return null;
     }
     
-    if( (int)$searchCol['cond'] !== ESearchTextStrict::IS_NULL  ){
+    if( (int)$searchCol['cond'] !== ESearchTextStrict::IS_NULL  ) {
       if ('' === trim($searchCol['value'])) {
         // nichts zu tun
         return null;

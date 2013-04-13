@@ -22,7 +22,7 @@
 abstract class WgtBlocklist extends WgtList
 {
 
-  public function build(){ return $this->html; }
+  public function build() { return $this->html; }
 
   /**
    *

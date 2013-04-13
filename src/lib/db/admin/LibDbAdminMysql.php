@@ -101,7 +101,7 @@ SQL;
 
     $meta = array();
 
-    foreach($results as $row)
+    foreach ($results as $row)
       $meta[$row['name']] = $quotes[$row['type']];
 
     return $meta;

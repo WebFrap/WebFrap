@@ -78,7 +78,7 @@ class WebfrapMessage_Checklist_Controller extends Controller
     
     $params->msgId = $request->param('msg',Validator::EID);
     
-    if( !$params->msgId ){
+    if( !$params->msgId ) {
       throw new InvalidRequest_Exception('Missing the request id');
     }
 
@@ -127,7 +127,7 @@ class WebfrapMessage_Checklist_Controller extends Controller
     
     $params->delId = $request->param('delid',Validator::EID);
     
-    if( !$params->delId ){
+    if( !$params->delId ) {
       throw new InvalidRequest_Exception('Missing the request id');
     }
 

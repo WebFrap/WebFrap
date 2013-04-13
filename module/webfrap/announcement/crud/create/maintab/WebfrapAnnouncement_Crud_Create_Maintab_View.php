@@ -156,20 +156,20 @@ class WbfsysAnnouncement_Crud_Create_Maintab_View extends WgtMaintabCustom
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-self.getObject().find(".wgtac_create").click(function(){
+self.getObject().find(".wgtac_create").click(function() {
   self.setChanged(false);
   \$R.form('{$params->formId}','&amp;reopen=true',{append:true});
   self.close();
 });
 
-self.getObject().find(".wgtac_create_a_close").click(function(){
+self.getObject().find(".wgtac_create_a_close").click(function() {
   self.setChanged(false);
   \$R.form('{$params->formId}');
   self.close();
 });
 
 // close tab
-self.getObject().find(".wgtac_close").click(function(){
+self.getObject().find(".wgtac_close").click(function() {
   self.close();
 });
 

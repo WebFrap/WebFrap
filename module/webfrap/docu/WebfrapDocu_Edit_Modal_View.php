@@ -90,12 +90,12 @@ class WebfrapDocu_Edit_Modal_View extends WgtModal
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-    self.find(".wgtac_save").click(function(){
+    self.find(".wgtac_save").click(function() {
       \$R.form('wgt-form-webfrap-docu-{$helpPage->access_key}-edit');
     });
 
-    self.find(".wgtac_save_a_close").click(function(){
-      \$R.form('wgt-form-webfrap-docu-{$helpPage->access_key}-edit', null, { success:function(){
+    self.find(".wgtac_save_a_close").click(function() {
+      \$R.form('wgt-form-webfrap-docu-{$helpPage->access_key}-edit', null, { success:function() {
         \$S.modal.close();
         \$R.get('modal.php?c=Webfrap.Docu.open&key={$helpPage->access_key}');
       }});

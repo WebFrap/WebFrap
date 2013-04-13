@@ -157,7 +157,7 @@ class LibMessageInternalMessage extends LibMessageAdapter
     $orm->save($msgReceiver);
   
     /* Auswerten der Aspekte */
-    foreach($envelop->stack->aspects as $aspect){
+    foreach ($envelop->stack->aspects as $aspect) {
       
       $msgAspect = $orm->newEntity('WbfsysMessageAspect');
       $msgAspect->id_receiver = $envelop->receiver->id;
@@ -195,7 +195,7 @@ class LibMessageInternalMessage extends LibMessageAdapter
       $receiverAlso->vid = $sendAlsoCC;
       $orm->save($receiverAlso);
       
-      foreach($envelop->stack->aspects as $aspect){
+      foreach ($envelop->stack->aspects as $aspect) {
       
         $msgAspect = $orm->newEntity('WbfsysMessageAspect');
         $msgAspect->id_message = $messageObj;
@@ -213,7 +213,7 @@ class LibMessageInternalMessage extends LibMessageAdapter
       $receiverAlso->vid = $sendAlsoCC;
       $orm->save($receiverAlso);
       
-      foreach($envelop->stack->aspects as $aspect){
+      foreach ($envelop->stack->aspects as $aspect) {
       
         $msgAspect = $orm->newEntity('WbfsysMessageAspect');
         $msgAspect->id_message = $messageObj;

@@ -492,7 +492,7 @@ HTML;
     if (!isset($attributes['id']))
       $attributes['id'] = 'wgt-input-'.uniqid();
 
-    foreach($attributes as $key => $value)
+    foreach ($attributes as $key => $value)
       $html .= $key.'="'.$value.'" ';
 
     return $html;

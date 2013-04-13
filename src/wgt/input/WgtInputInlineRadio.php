@@ -72,7 +72,7 @@ class WgtInputInlineRadio extends WgtInput
       unset($this->attributes['id']);
 
       $attribute = '';
-      foreach($this->attributes as $key => $value)
+      foreach ($this->attributes as $key => $value)
         $attribute .= $key.'="'.$value.'" ';
 
       $html = '<ul class="wgt_list inline" >';

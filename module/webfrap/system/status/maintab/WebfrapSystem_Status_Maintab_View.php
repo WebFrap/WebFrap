@@ -208,13 +208,13 @@ HTML;
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-self.getObject().find(".wgtac_refresh").click(function(){
+self.getObject().find(".wgtac_refresh").click(function() {
   self.close();
   \$R.get('maintab.php?c=Webfrap.System_Status.stats');
 });
 
 // close tab
-self.getObject().find(".wgtac_close").click(function(){
+self.getObject().find(".wgtac_close").click(function() {
   self.close();
 });
 

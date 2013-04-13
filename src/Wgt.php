@@ -322,8 +322,8 @@ class Wgt
     // wenn es mit icon- anfängt und kein Punkt vorhanden ist, dann ist es sehr
     // sicher eine icon klasse und kein url auf ein icon, dass zumindest einen punkt
     // bei der endung haben sollte
-    if ('icon-' === substr($name, 0, 5) && !strpos($name, '.')){
-      if (!is_numeric($size)){
+    if ('icon-' === substr($name, 0, 5) && !strpos($name, '.')) {
+      if (!is_numeric($size)) {
         return '<i class="'.$name.'" ></i>';
       } else {
         return '<i class="'.$name.' icon-'.str_replace('.', '_', $size).'x" ></i>';
@@ -705,7 +705,7 @@ class Wgt
 
     $html = '';
 
-    foreach($attributes as $key => $value)
+    foreach ($attributes as $key => $value)
       $html .= $key.'="'.$value.'" ';
 
     return $html;
@@ -725,7 +725,7 @@ class Wgt
     foreach ($data as $tabName => $ent) {
       $tabData[$tabName.'_'.DB::KEY] = $ent->getId();
 
-      foreach($ent->getData() as $key => $col)
+      foreach ($ent->getData() as $key => $col)
         $tabData[$tabName.'_'.$key] = $col;
     }
 

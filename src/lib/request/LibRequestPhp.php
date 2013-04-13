@@ -291,7 +291,7 @@ class LibRequestPhp
 
           $tmp = $filter->getData($key);
 
-          if ((int)$tmp){
+          if ((int)$tmp) {
             $paramList->$key = $tmp;
           }
 
@@ -1624,7 +1624,7 @@ class LibRequestPhp
         $filtered[$id] = $filtr;
       }
 
-    }//end foreach($_POST[$subkey] as $id => $row)
+    }//end foreach ($_POST[$subkey] as $id => $row)
 
     return $filtered;
 

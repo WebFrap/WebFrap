@@ -150,7 +150,7 @@ class MyMessage_Crud_Show_Maintab_View extends WgtMaintab
     if ($this->bookmark) {
 
       $bookmark = <<<BUTTONJS
-    self.getObject().find('.wgtac_bookmark').click(function(){
+    self.getObject().find('.wgtac_bookmark').click(function() {
       var requestData  = {
          'wbfsys_bookmark[id_role]':'{$this->bookmark['role']}',
          'wbfsys_bookmark[url]':'{$this->bookmark['url']}',
@@ -170,7 +170,7 @@ BUTTONJS;
 
 {$bookmark}
 
-self.getObject().find(".wgtac_close").click(function(){
+self.getObject().find(".wgtac_close").click(function() {
   self.close();
 });
 
@@ -178,12 +178,12 @@ BUTTONJS;
 
     $code .= <<<BUTTONJS
 
-self.getObject().find(".wgtac_respond").click(function(){
+self.getObject().find(".wgtac_respond").click(function() {
   self.setChanged(false);
   \$R.form('{$params->formId}');
 }).removeClass('wgtac_respond');
 
-self.getObject().find(".wgtac_archive").click(function(){
+self.getObject().find(".wgtac_archive").click(function() {
   self.setChanged(false);
   \$R.put('ajax.php?c=My.Message_Crud.archive&amp;target_mask=MyMessage_Widget&amp;ltype=table&amp;objid={$objid}');
 }).removeClass('wgtac_archive');

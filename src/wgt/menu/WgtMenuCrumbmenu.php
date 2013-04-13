@@ -100,7 +100,7 @@ class WgtMenuCrumbmenu extends WgtAbstract
 
     $html = '<ul class="wgtMenu crumb" >'.NL;
 
-    foreach($this->data as $menuPoint)
+    foreach ($this->data as $menuPoint)
       $html .= $menuPoint->build().NL;
 
     $html .= '</ul>'.NL;

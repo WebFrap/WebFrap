@@ -537,7 +537,7 @@ class WebfrapAnnouncement_Crud_Model extends Model
 
     $entStatus = $orm->get('WbfsysUserAnnouncement', "id_user='{$userId}' AND id_announcement='{$delId}' ");
 
-    if (!$entStatus){
+    if (!$entStatus) {
       $entStatus = $orm->newEntity('WbfsysUserAnnouncement');
       $entStatus->id_user = $userId;
       $entStatus->id_announcement = $delId;

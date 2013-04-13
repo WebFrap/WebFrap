@@ -149,21 +149,21 @@ HTML;
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       self.close();
     });
 
-    self.getObject().find(".wgtac_save").click(function(){
+    self.getObject().find(".wgtac_save").click(function() {
       \$R.form(
         'wgt-form-bdl_{$this->domainKey}-{$pNodeName}-backpath-node-edit-{$pathId}',
         null,
         {"statusCallback":{
-          "ok":function(){ self.close(); }
+          "ok":function() { self.close(); }
         }}
       );
     });
 
-    self.getObject().find(".wgtac_refresh").click(function(){
+    self.getObject().find(".wgtac_refresh").click(function() {
       self.close();
       \$R.get('maintab.php?c=Daidalos.BdlNode_{$this->domainClass}Backpath.editNode'
         +'&amp;key={$view->model->modeller->key}&amp;bdl_file={$view->model->modeller->bdlFileName}'

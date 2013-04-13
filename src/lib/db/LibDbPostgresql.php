@@ -471,7 +471,7 @@ class LibDbPostgresql extends LibDbConnection
    */
   public function multiDelete(array $sqls)
   {
-    foreach($sqls as $sql)
+    foreach ($sqls as $sql)
       $this->delete($sql);
   }//end public function multiDelete */
 
@@ -1373,7 +1373,7 @@ class LibDbPostgresql extends LibDbConnection
       if (is_array($value)) {
         $tmp = array();
 
-        foreach($value as $key => $data)
+        foreach ($value as $key => $data)
           $tmp[$key] = $this->addSlashes($data);
 
         $value = $tmp;
@@ -1399,7 +1399,7 @@ class LibDbPostgresql extends LibDbConnection
 
       $tmp = array();
 
-      foreach($value as $key => $data)
+      foreach ($value as $key => $data)
         $tmp[$key] = $this->firstStripThenAddSlashes($data);
 
       $value = $tmp;

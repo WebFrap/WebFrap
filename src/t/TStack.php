@@ -187,7 +187,7 @@ class TStack
         $this->next = $size;
       }
 
-    }//end foreach($autoLayout as $layout)
+    }//end foreach ($autoLayout as $layout)
 
     // fillup the list for the smallest nodes
     foreach ($this->stacks as $stackName => $stack) {

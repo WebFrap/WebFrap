@@ -129,15 +129,15 @@ HTML;
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       self.close();
     });
 
-    self.getObject().find(".wgtac_save").click(function(){
+    self.getObject().find(".wgtac_save").click(function() {
       \$R.form('wgt-form-bdl_entity-{$nodeName}');
     });
 
-    self.getObject().find(".wgtac_refresh").click(function(){
+    self.getObject().find(".wgtac_refresh").click(function() {
       self.close();
       \$R.get(
         'maintab.php?c=Daidalos.BdlModeller.openEditor'
@@ -146,14 +146,14 @@ HTML;
     });
 
     // entity attribute
-    self.getObject().find(".wgtac_append_attribute").click(function(){
+    self.getObject().find(".wgtac_append_attribute").click(function() {
       \$R.get(
         'maintab.php?c=Daidalos.BdlNode_EntityAttribute.create'
           +'&amp;key={$view->model->modeller->key}&amp;bdl_file={$view->model->modeller->bdlFileName}'
       );
     }).removeClass('wgtac_append_attribute');
 
-    self.getObject().find(".wgtac_edit_attribute").click(function(){
+    self.getObject().find(".wgtac_edit_attribute").click(function() {
       \$R.get(
         'maintab.php?c=Daidalos.BdlNode_EntityAttribute.edit'
           +'&amp;key={$view->model->modeller->key}&amp;bdl_file={$view->model->modeller->bdlFileName}'
@@ -161,7 +161,7 @@ HTML;
       );
     }).removeClass('wgtac_edit_attribute');
 
-    self.getObject().find(".wgtac_delete_attribute").click(function(){
+    self.getObject().find(".wgtac_delete_attribute").click(function() {
       \$R.del(
         'ajax.php?c=Daidalos.BdlNode_EntityAttribute.delete'
           +'&amp;key={$view->model->modeller->key}&amp;bdl_file={$view->model->modeller->bdlFileName}'

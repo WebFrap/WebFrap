@@ -61,7 +61,7 @@ class LibSettings
   {
 
 
-    if (!isset($this->settings[$key])){
+    if (!isset($this->settings[$key])) {
 
       $className = EUserSettingType::getClass($key);
 
@@ -98,7 +98,7 @@ SQL;
 
     $jsonString = $this->db->addSlashes($data->toJson());
 
-    if ($data->id){
+    if ($data->id) {
       $this->db->orm()->update('WbfsysUserSetting', $data->id, array('jdata',$jsonString));
     } else {
       $this->db->orm()->insert('WbfsysUserSetting', array('jdata',$jsonString));

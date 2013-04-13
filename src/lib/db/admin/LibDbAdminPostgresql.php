@@ -398,7 +398,7 @@ SQL;
 
     $meta = array();
 
-    foreach($results as $row)
+    foreach ($results as $row)
       $meta[$row['name']] = true;
 
     return $meta;

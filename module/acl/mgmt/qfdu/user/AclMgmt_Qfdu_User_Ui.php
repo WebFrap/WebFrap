@@ -373,7 +373,7 @@ WGTJS;
 
     $code = <<<JSCODE
 
-    \$S('#{$groupRowId}').fadeOut(100,function(){
+    \$S('#{$groupRowId}').fadeOut(100,function() {
       \$S('#{$groupRowId}').remove();
       if (!\$S('.c-{$userRowId}').length) {
         \$S('#{$userRowId}').remove();
@@ -406,9 +406,9 @@ JSCODE;
 
     $code = <<<JSCODE
 
-    \$S('#{$userRowId}').fadeOut(100,function(){
+    \$S('#{$userRowId}').fadeOut(100,function() {
       \$S('#{$userRowId}').remove();
-      \$S('.c-{$userRowId}').each(function(){
+      \$S('.c-{$userRowId}').each(function() {
         \$S('.c-'+\$S(this).attr('id')).remove();
       });
       \$S('.c-{$userRowId}').remove();
@@ -436,7 +436,7 @@ JSCODE;
 
     $code = <<<JSCODE
 
-    \$S('#{$userRowId}').fadeOut(100,function(){
+    \$S('#{$userRowId}').fadeOut(100,function() {
       \$S('#{$userRowId}').remove();
       \$S('.c-{$userRowId}').remove();
       if (!\$S('.c-{$dsetRowId}').length) {

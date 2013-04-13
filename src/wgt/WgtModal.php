@@ -285,24 +285,24 @@ CODE;
    *
    * @return void
    */
-  public function compile(){}
+  public function compile() {}
 
   /**
    *
    * @return void
    */
-  public function init(){}
+  public function init() {}
 
   /**
    *
    * @return void
    */
-  public function publish(){}
+  public function publish() {}
 
   /**
    *
    */
-  protected function buildMessages(){}
+  protected function buildMessages() {}
 
 } // end class WgtModal
 

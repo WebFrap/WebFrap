@@ -387,12 +387,12 @@ CODE;
 
 CODE;
 
-    foreach($repos as $repoKey => $listRepos)
+    foreach ($repos as $repoKey => $listRepos)
     {
       
       $repoPath = $listRepos['path'];
       
-      foreach($listRepos['repos'] as $repo => $tmpUrl)
+      foreach ($listRepos['repos'] as $repo => $tmpUrl)
       {
     
         $key = str_replace('-','_',$repoKey);
@@ -551,11 +551,11 @@ CODE;
   public static function sync($repos, $contactMail)
   {
     
-    foreach($repos as $repoKey => $listRepos)
+    foreach ($repos as $repoKey => $listRepos)
     {
       $repoPath = $listRepos['path'];
       
-      foreach($listRepos['repos'] as $repoName => $repoData)
+      foreach ($listRepos['repos'] as $repoName => $repoData)
       {
         if (Fs::exists($repoPath.'/'.$repoName))
         {

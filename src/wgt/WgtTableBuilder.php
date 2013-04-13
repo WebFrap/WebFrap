@@ -130,7 +130,7 @@ class WgtTableBuilder extends WgtTable
     // Creating the Head
     $head = '<thead>'.NL;
     $head .= '<tr>'.NL;
-    foreach($keys as $colName)
+    foreach ($keys as $colName)
       $head .= '<th>'.$colName.'</th>'.NL;
 
     $head .= '<th style="width:70px;">'.$this->i18n->l('nav', 'wbf.text.tableNav'  ).'</th>'.NL;
@@ -170,7 +170,7 @@ class WgtTableBuilder extends WgtTable
       $rowid = $this->id.'_row_'.$objid;
       $body .= '<tr class="row'.$num.'" id="'.$rowid.'" >'.NL;
 
-      foreach($keys as $key)
+      foreach ($keys as $key)
         $body .= '<td>'.Validator::sanitizeHtml($row[$key]).'</td>'.NL;
 
       $body .= '<td valign="top" style="text-align:center;" >'.$cbAction($objid).'</td>'.NL;

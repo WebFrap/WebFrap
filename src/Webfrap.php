@@ -555,7 +555,7 @@ class Webfrap
   Webfrap::$classIndex = array
   ('.NL;
 
-    foreach(self::$classIndex as $class => $path)
+    foreach (self::$classIndex as $class => $path)
       $index .= "    '$class' => '$path',".NL;
 
     $index .= NL.');'.NL.NL;
@@ -565,7 +565,7 @@ class Webfrap
   Webfrap::$tplIndex = array
   ('.NL;
 
-    foreach(self::$tplIndex as $key => $path)
+    foreach (self::$tplIndex as $key => $path)
       $index .= "    '$key' => '$path',".NL;
 
     $index .= NL.');'.NL.NL;
@@ -638,7 +638,7 @@ class Webfrap
           }
         }//end if (file_exists($path.$classname.'.php'))
 
-      }//end foreach(Webfrap::$autoloadPath as $path)
+      }//end foreach (Webfrap::$autoloadPath as $path)
 
   } //function public static function pathAutoload */
 
@@ -950,7 +950,7 @@ class Webfrap
         Log::debug('Found WBF_CONTROLLER: LibFlowApachemod');
     }
 
-    foreach($conf->initClasses as $class)
+    foreach ($conf->initClasses as $class)
       $class::init(self::$instance); // php > 5.3
 
     // if no controller is defined the framework FLow Handler does not start

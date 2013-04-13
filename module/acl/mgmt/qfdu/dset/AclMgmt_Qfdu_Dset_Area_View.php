@@ -111,12 +111,12 @@ class AclMgmt_Qfdu_Dset_Area_View extends LibTemplateAreaView
 
     $jsCode = <<<JSCODE
 
-  \$S('input#wgt-input-{$this->domainNode->aclDomainKey}-acl-dset-id_user-tostring').data('assign',function(objid){
+  \$S('input#wgt-input-{$this->domainNode->aclDomainKey}-acl-dset-id_user-tostring').data('assign',function(objid) {
     \$S('input#wgt-input-{$this->domainNode->aclDomainKey}-acl-dset-id_user').val(objid);
     \$R.get('ajax.php?c=Wbfsys.RoleUser.data&amp;objid='+objid);
   });
 
-  \$S('input#wgt-input-{$this->domainNode->aclDomainKey}-acl-dset-vid-tostring').data('assign',function(objid){
+  \$S('input#wgt-input-{$this->domainNode->aclDomainKey}-acl-dset-vid-tostring').data('assign',function(objid) {
     \$S('input#wgt-input-{$this->domainNode->aclDomainKey}-acl-dset-vid').val(objid);
     \$R.get('ajax.php?c={$this->domainNode->aclDomainKey}.data&amp;objid='+objid);
   });

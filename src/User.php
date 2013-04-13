@@ -325,7 +325,7 @@ class User extends BaseChild
       $this->env = Webfrap::getActive();
     }
     
-    if ($userId){
+    if ($userId) {
       
       if (ctype_digit($userId))
         $this->loginById($userId);
@@ -341,7 +341,7 @@ class User extends BaseChild
    *
    * höchstens zum testen mal mit rumspielen, daher protected
    */
-  protected function __clone(){}
+  protected function __clone() {}
 
   /**
    * de:
@@ -849,7 +849,7 @@ class User extends BaseChild
     $orm       = $this->getOrm();
     $response  = $this->getResponse();
   
-    if ($userId){
+    if ($userId) {
       try {
         if (!$authRole = $orm->get('WbfsysRoleUser', $userId)) {
           $response->addError('User '.$userId.' not exists');

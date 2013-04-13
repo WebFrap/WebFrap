@@ -145,7 +145,7 @@ class WebfrapMessage_Table_Search_Request extends ContextListing
       $this->conditions['filters']['status'] = new TArray((array)$this->settings->status);
     }
     
-    if ($request->paramExists('task_status')){
+    if ($request->paramExists('task_status')) {
 
       $status = $request->param(
       	'task_status',
@@ -161,7 +161,7 @@ class WebfrapMessage_Table_Search_Request extends ContextListing
       $this->conditions['filters']['task_status'] = 1;
     }
 
-    if ($request->paramExists('task_action')){
+    if ($request->paramExists('task_action')) {
 
       $taskAction = $request->paramList(
       	'task_action',

@@ -177,11 +177,11 @@ BUTTONJS;
 
     $code = <<<BUTTONJS
 
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       self.close();
     });
 
-    self.getObject().find(".wgtac_save").click(function(){
+    self.getObject().find(".wgtac_save").click(function() {
       \$R.form('wgt-form-knowhow-node-{$idKey}');
     });
 
@@ -191,7 +191,7 @@ BUTTONJS;
     if ($id) {
       $code .= <<<BUTTONJS
 
-    self.getObject().find(".wgtac_show").click(function(){
+    self.getObject().find(".wgtac_show").click(function() {
       self.close();
       \$R.get('maintab.php?c=Webfrap.KnowhowNode.show&objid={$id}');
     });

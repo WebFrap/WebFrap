@@ -98,12 +98,12 @@ class LibSqlConditions
     
     foreach ($this->conditions as $cond) {
       
-      if( !isset($cond->field) ){
+      if( !isset($cond->field) ) {
         Debug::console('wrong field type ',$cond);
         continue;
       }
       
-      if( !isset($this->fields[$cond->field]) ){
+      if( !isset($this->fields[$cond->field]) ) {
         Debug::console('missing field '.$cond->field);
         continue;
       }

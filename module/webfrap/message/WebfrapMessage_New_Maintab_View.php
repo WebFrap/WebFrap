@@ -135,13 +135,13 @@ HTML;
     $code = <<<BUTTONJS
 
     // close tab
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       \$S('#{$this->id}_dropmenu-control').dropdown('remove');
       self.close();
     });
 
-    self.getObject().find(".wgtac_send").click(function(){
-      \$R.form('wgt-form-wbf-message-form',null,{success:function(){ self.close(); }});
+    self.getObject().find(".wgtac_send").click(function() {
+      \$R.form('wgt-form-wbf-message-form',null,{success:function() { self.close(); }});
     });
 
 BUTTONJS;

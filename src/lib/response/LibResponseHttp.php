@@ -634,12 +634,12 @@ class LibResponseHttp extends LibResponse
     $this->sendHeader('HTTP/1.1 '.$this->getStatus($this->httpState));
 
     // Abschicken der Header die gesetzt wurden
-    foreach($this->header as $header)
+    foreach ($this->header as $header)
       $this->sendHeader($header);
 
     $this->sendHeader('X-UA-Compatible: IE=edge');
 
-    foreach($this->cookies as /* @var WgtCookie $cookie */ $cookie)
+    foreach ($this->cookies as /* @var WgtCookie $cookie */ $cookie)
       $cookie->setCookie();
 
     // ok wenn wir kein tpl haben dann by by

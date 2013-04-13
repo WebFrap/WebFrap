@@ -86,7 +86,7 @@ class TString
       return array();
 
     $tmp2 = array();
-    foreach($tmp as $text)
+    foreach ($tmp as $text)
       $tmp2 = new TString($text);
 
     return $tmp2;

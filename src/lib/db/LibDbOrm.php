@@ -2443,7 +2443,7 @@ SQL;
     $tableName  = $this->getTableName($entityKey);
     $entities   = $this->getListWhere($entityKey, $where);
 
-    foreach($entities as $entity)
+    foreach ($entities as $entity)
       $this->delete($entity);
 
   }//end public function deleteWhere */
@@ -2461,7 +2461,7 @@ SQL;
 
     $entities = $this->getAll($entityKey);
 
-    foreach($entities as $entity)
+    foreach ($entities as $entity)
       $this->delete($entity);
 
   }//end public function cleanResource */
@@ -2482,7 +2482,7 @@ SQL;
 
     $result = array();
 
-    foreach($this->cols as $col)
+    foreach ($this->cols as $col)
       $result[$col] = null;
 
     return $result;

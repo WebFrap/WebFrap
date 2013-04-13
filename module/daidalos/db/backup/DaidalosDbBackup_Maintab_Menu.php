@@ -114,11 +114,11 @@ HTML;
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       self.close();
     });
 
-    self.getObject().find(".wgtac_start_backup").click(function(){
+    self.getObject().find(".wgtac_start_backup").click(function() {
       \$R.form('wgt-form-daidalos_db_backup-{$key}');
     });
 

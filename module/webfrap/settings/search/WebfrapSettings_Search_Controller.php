@@ -214,7 +214,7 @@ class WebfrapSettings_Search_Controller extends Controller
       );
     }
     
-    if( 100 == $flagSpam){
+    if( 100 == $flagSpam) {
       //wenn spam dann löschen
       $this->getTpl()->addJsCode(<<<JS
 

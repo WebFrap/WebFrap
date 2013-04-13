@@ -77,7 +77,7 @@ class ContextListing
    * @var array / null wenn leer
    */
   public $colConditions = null;
-  
+
   /**
    * Conditions für die query
    * @var array / null wenn leer
@@ -95,19 +95,19 @@ class ContextListing
    * @var TFlag
    */
   public $filter = null;
-  
+
   /**
    * Search Fields
    * @var array
    */
   public $searchFields = array();
-  
+
   /**
    * Search Fields
    * @var array
    */
   public $searchFieldsStack = array();
-  
+
   /**
    * Extended Search filter
    * @var array
@@ -136,12 +136,12 @@ class ContextListing
    * @var string
    */
   protected $actionExt = null;
-  
+
   /**
    * @var ValidSearchBuilder
    */
   protected $extSearchValidator = null;
-  
+
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Magic Functions
@@ -162,8 +162,8 @@ class ContextListing
         $this->filter->$key = $value;
       }
     }
-    
-  
+
+
     if ($request->paramExists('as')) {
       if ($extSearchValidator)
         $this->extSearchValidator = $extSearchValidator;
@@ -172,10 +172,11 @@ class ContextListing
     }
 
     $this->interpretRequest($request);
-    
+    $this->interpretCustomSearch($request);
+
   } // end public function __construct */
-  
-  
+
+
 
   /**
    * virtual __set
@@ -210,8 +211,8 @@ class ContextListing
    */
   public function interpretRequest($request)
   {
-    
-    if( $request->paramExists('as') ){
+
+    if( $request->paramExists('as') ) {
       $this->interpretExtendedSearch($request);
     }
 
@@ -316,20 +317,20 @@ class ContextListing
       = $request->param('mask', Validator::CNAME);
 
   }//end public function interpretRequest */
-  
-  
+
+
   /**
    * Interpretieren von Extended Search Parametern
    * @param LibRequestHttp $request
    */
   public function interpretExtendedSearch($request)
   {
-    
+
     $extSearchFields = $request->param('as');
-    
+
     if (!$extSearchFields)
       return;
-    
+
     if (!$this->searchFieldsStack) {
       foreach ($this->searchFields as $searchFields) {
         foreach ($searchFields as $sKey => $sData) {
@@ -337,39 +338,48 @@ class ContextListing
         }
       }
     }
-    
+
     Debug::console('got search fields',$extSearchFields);
-    
+
     foreach ($extSearchFields as $fKey => $extField) {
-      
-      if (!isset($this->searchFieldsStack[$extField['field']])){
+
+      if (!isset($this->searchFieldsStack[$extField['field']])) {
         // field not exists
         continue;
       }
-      
+
       $validField = $this->extSearchValidator->validate($extField, $this->searchFieldsStack[$extField['field']]);
-      
+
       if ($validField) {
-        
+
         if (isset($extField['parent'])) {
-          
+
           if (!isset($this->extSearch[$extField['parent']]->sub)  )
             $this->extSearch[$extField['parent']]->sub = array();
-          
+
           $this->extSearch[$extField['parent']]->sub[] = (object)$validField;
-            
+
         } else {
-          
+
           $this->extSearch[$fKey] = (object)$validField;
-          
+
         }
       } else {
         Debug::console($extField['field'].' was invalid ');
       }
-      
+
     }//end foreach
 
   }//end public function interpretExtendedSearch */
+
+  /**
+   * Interpretieren der Custom Search / Order Flags
+   * @param LibRequestHttp $request
+   */
+  public function interpretCustomSearch($request)
+  {
+
+  }//end public function interpretCustomSearch */
 
   /**
    * @return string

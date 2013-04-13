@@ -41,7 +41,7 @@ class DaidalosProjects_Table extends WgtTable
     $this->data = array();
 
     // Load als xmi Files
-    foreach($files as $file)
+    foreach ($files as $file)
       if (substr($file, -3 , strlen($file)) == "xml")
         $this->data[] = $file;
     */

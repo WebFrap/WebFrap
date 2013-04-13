@@ -170,18 +170,18 @@ class LibTemplateAjaxView extends LibTemplate
    *
    * @return void
    */
-  public function build(){ return ''; }
+  public function build() { return ''; }
 
   /**
    *
    * @return void
    */
-  public function compile(){}
+  public function compile() {}
 
   /**
    *
    */
-  protected function buildMessages(){}
+  protected function buildMessages() {}
 
 } // end class LibTemplateDocument
 

@@ -141,7 +141,7 @@ class LibTestEngine
       $this->testClass($className, $report  );
     }
 
-    foreach($folder->getFolders() as $folder)
+    foreach ($folder->getFolders() as $folder)
       $this->testFolder($folder->getFoldername(), $report);
 
   }//end public function testFolder */

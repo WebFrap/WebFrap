@@ -148,7 +148,7 @@ HTML;
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-    self.getObject().find('#wgt-button-{$this->domainNode->domainName}-acl-form-append').click(function(){
+    self.getObject().find('#wgt-button-{$this->domainNode->domainName}-acl-form-append').click(function() {
       if (\$S('#wgt-input-{$this->domainNode->domainName}-acl-id_group').val()=='') {
         \$D.errorWindow('Error', 'Please select a group first');
 
@@ -162,7 +162,7 @@ HTML;
 
     });
 
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       \$S('#{$this->id}-control').dropdown('remove');
       self.close();
     });

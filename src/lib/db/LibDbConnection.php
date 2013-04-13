@@ -497,7 +497,7 @@ abstract class LibDbConnection
 
       $ignoreNext = false;
 
-    }//end foreach($string as $char)
+    }//end foreach ($string as $char)
 
     return $array;
 
@@ -545,7 +545,7 @@ abstract class LibDbConnection
 
       $ignoreNext = false;
 
-    }//end foreach($string as $char)
+    }//end foreach ($string as $char)
 
     if (trim($value)  != '')
       $array[] = $value;

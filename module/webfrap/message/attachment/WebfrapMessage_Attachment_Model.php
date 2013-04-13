@@ -141,7 +141,7 @@ class WebfrapMessage_Attachment_Model extends Model
     
     $orm->delete($attachEnt);
     
-    if( !$orm->countRows("WbfsysEntityAttachment","id_file=".$fileId) ){
+    if( !$orm->countRows("WbfsysEntityAttachment","id_file=".$fileId) ) {
       $orm->delete("WbfsysFile",$fileId);
       $filePath = PATH_GW.'data/uploads/wbfsys_file/name/'.SParserString::idToPath($fileId).'/'.$fileId;
       SFiles::delete($filePath);

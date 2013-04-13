@@ -199,11 +199,11 @@ class WebfrapAnnouncement_Table_Maintab_View extends WgtMaintab
     $code = <<<BUTTONJS
 
     // close tab
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       self.close();
     });
 
-    self.getObject().find(".wgtac_search").click(function(){
+    self.getObject().find(".wgtac_search").click(function() {
       \$R.form('{$params->searchFormId}', null, {search:true});
     });
 
@@ -213,7 +213,7 @@ BUTTONJS;
     // create code wird ohne creatbutton auch nicht benötigt
     if ($params->access->insert) {
       $code .= <<<BUTTONJS
-    self.getObject().find(".wgtac_new").click(function(){
+    self.getObject().find(".wgtac_new").click(function() {
        \$R.get('modal.php?c=Webfrap.Announcement.create&ltype=table');
     });
 

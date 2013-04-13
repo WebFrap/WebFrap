@@ -482,7 +482,7 @@ abstract class Entity implements ArrayAccess
 
     $string = '';
 
-    foreach($keys as $key)
+    foreach ($keys as $key)
       $string .=  isset($this->data[$key])? $this->data[$key].', ':'';
 
     return substr($string,0,-2);
@@ -1397,12 +1397,12 @@ abstract class Entity implements ArrayAccess
         $data = array();
 
         if (is_string($preTab)) {
-          foreach($this->data as $key => $value)
+          foreach ($this->data as $key => $value)
             $data[$preTab.'_'.$key] = $value;
 
           $data[$preTab.'_'.Db::PK] = $this->id ;
         } else {
-          foreach($this->data as $key => $value)
+          foreach ($this->data as $key => $value)
             $data[static::$table.'_'.$key] = $value;
 
           $data[static::$table.'_'.Db::PK] = $this->id ;
@@ -1584,7 +1584,7 @@ abstract class Entity implements ArrayAccess
       if ($preTab) {
         $data = array();
 
-        foreach($this->data as $key => $value)
+        foreach ($this->data as $key => $value)
           $data[static::$table.'_'.$key] =  Validator::sanitizeHtml($value);
 
         $data[static::$table.'_'.Db::PK] = $this->id ;
@@ -1613,7 +1613,7 @@ abstract class Entity implements ArrayAccess
       $data = $function($this->data[$key]);
 
       if (is_array($function)) {
-        foreach($function as $func)
+        foreach ($function as $func)
           $data = $func($data);
       } else {
         $data = $function($data);

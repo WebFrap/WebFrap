@@ -111,12 +111,12 @@ class AclUser_Area_View extends LibTemplateAreaView
 
     $jsCode = <<<JSCODE
 
-  \$S('input#wgt-input-{$this->domainNode->aclDomainKey}-acl-tuser-id_user-tostring').data('assign',function(objid){
+  \$S('input#wgt-input-{$this->domainNode->aclDomainKey}-acl-tuser-id_user-tostring').data('assign',function(objid) {
     \$S('input#wgt-input-{$this->domainNode->aclDomainKey}-acl-tuser-id_user').val(objid);
     \$R.get('ajax.php?c=Wbfsys.RoleUser.data&amp;objid='+objid);
   });
 
-  \$S('input#wgt-input-{$this->domainNode->aclDomainKey}-acl-tuser-vid-tostring').data('assign',function(objid){
+  \$S('input#wgt-input-{$this->domainNode->aclDomainKey}-acl-tuser-vid-tostring').data('assign',function(objid) {
     \$S('input#wgt-input-{$this->domainNode->aclDomainKey}-acl-tuser-vid').val(objid);
     \$R.get('ajax.php?c={$this->domainNode->aclDomainKey}.data&amp;objid='+objid);
   });

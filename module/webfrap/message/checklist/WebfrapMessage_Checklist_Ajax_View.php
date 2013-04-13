@@ -40,7 +40,7 @@ class WebfrapMessage_Checklist_Ajax_View extends LibTemplateAjaxView
     
     $tpl = $this->getTpl();
     
-    foreach( $entries as $entry ){
+    foreach ( $entries as $entry ) {
       
       $isChecked = Wgt::checked('t', $entry['checked']);
 

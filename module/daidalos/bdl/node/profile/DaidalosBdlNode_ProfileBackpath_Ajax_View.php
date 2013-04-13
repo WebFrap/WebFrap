@@ -65,7 +65,7 @@ XML
     $this->setAreaContent('childCode', <<<XML
 <htmlArea selector="ul#wgt-list-profile-{$profileName}-backpath" action="function" ><![CDATA[
 
-    self.find(".wgtac_add_backpath_node").click(function(){
+    self.find(".wgtac_add_backpath_node").click(function() {
       \$R.get(
         'maintab.php?c=Daidalos.BdlNode_ProfileBackpath.createNode'
           +'&amp;key={$this->model->modeller->key}&amp;bdl_file={$this->model->modeller->bdlFileName}'
@@ -73,13 +73,13 @@ XML
       );
     }).removeClass('wgtac_add_backpath_node');
 
-    self.find(".wgtac_edit_backpath").click(function(){
+    self.find(".wgtac_edit_backpath").click(function() {
       \$R.get(
         'maintab.php?c=Daidalos.BdlNode_ProfileBackpath.edit&amp;key={$this->model->modeller->key}&amp;bdl_file={$this->model->modeller->bdlFileName}&amp;idx='+\$S(this).attr('wgt_idx')
       );
     }).removeClass('wgtac_edit_backpath');
 
-    self.find(".wgtac_delete_backpath").click(function(){
+    self.find(".wgtac_delete_backpath").click(function() {
       \$R.del(
         'ajax.php?c=Daidalos.BdlNode_ProfileBackpath.delete&amp;key={$this->model->modeller->key}&amp;bdl_file={$this->model->modeller->bdlFileName}&amp;idx='+\$S(this).attr('wgt_idx')
       );
@@ -177,7 +177,7 @@ XML
 
     $this->setAreaContent('childCode', <<<XML
 <htmlArea selector="ul#wgt-list-profile-{$profileName}-backpath" action="function" ><![CDATA[
-    self.find(".wgtac_edit_backpath").click(function(){
+    self.find(".wgtac_edit_backpath").click(function() {
       \$R.get(
         'maintab.php?c=Daidalos.BdlNode_ProfileBackpath.edit'
           +'&amp;key={$this->model->modeller->key}&amp;bdl_file={$this->model->modeller->bdlFileName}'
@@ -185,7 +185,7 @@ XML
       );
     }).removeClass('wgtac_edit_backpath');
 
-    self.find(".wgtac_delete_backpath").click(function(){
+    self.find(".wgtac_delete_backpath").click(function() {
       \$R.del(
         'ajax.php?c=Daidalos.BdlNode_ProfileBackpath.delete'
           +'&amp;key={$this->model->modeller->key}&amp;bdl_file={$this->model->modeller->bdlFileName}'

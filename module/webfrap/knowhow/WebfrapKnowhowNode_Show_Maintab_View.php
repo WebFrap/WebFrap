@@ -144,11 +144,11 @@ HTML;
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       self.close();
     });
 
-    self.getObject().find(".wgtac_edit").click(function(){
+    self.getObject().find(".wgtac_edit").click(function() {
       self.close();
       \$R.get('maintab.php?c=Webfrap.KnowhowNode.open&objid={$activeNode->getId()}');
     });

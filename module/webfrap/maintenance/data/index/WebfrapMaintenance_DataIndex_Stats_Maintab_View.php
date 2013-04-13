@@ -127,7 +127,7 @@ class WebfrapMaintenance_DataIndex_Stats_Maintab_View extends WgtMaintabCustom
     $code = <<<BUTTONJS
 
 // close tab
-self.getObject().find(".wgtac_close").click(function(){
+self.getObject().find(".wgtac_close").click(function() {
   self.close();
 });
 

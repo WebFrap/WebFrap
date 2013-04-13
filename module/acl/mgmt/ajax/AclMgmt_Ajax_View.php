@@ -135,7 +135,7 @@ class AclMgmt_Ajax_View extends LibTemplatePlain
 
     $code = <<<JSCODE
 
-    \$S('#{$itemId}').fadeOut(100,function(){
+    \$S('#{$itemId}').fadeOut(100,function() {
       \$S('#{$itemId}').remove();
     });
 

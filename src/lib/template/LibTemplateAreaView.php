@@ -346,12 +346,12 @@ class LibTemplateAreaView extends LibTemplateHtml
    *
    * @return void
    */
-  public function compile(){}
+  public function compile() {}
 
   /**
    *
    */
-  protected function buildMessages(){}
+  protected function buildMessages() {}
 
 } // end class LibTemplateArea
 

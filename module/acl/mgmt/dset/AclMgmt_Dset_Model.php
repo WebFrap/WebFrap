@@ -184,7 +184,7 @@ class AclMgmt_Dset_Model extends AclMgmt_Model
 
     $tabData = array();
 
-    foreach($data as $tabName => $ent)
+    foreach ($data as $tabName => $ent)
       $tabData = array_merge($tabData , $ent->getAllData($tabName));
 
     $tabData['group_users_date_start'] = null;

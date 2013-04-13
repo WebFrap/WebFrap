@@ -798,7 +798,7 @@ abstract class Controller extends BaseChild
 
     $this->initialized = true;
 
-    foreach($data as $name => $value)
+    foreach ($data as $name => $value)
       $this->$name = $value;
 
     // View und Request und User werden immer benötigt
@@ -896,13 +896,13 @@ abstract class Controller extends BaseChild
   /**
    * Trigger the custom init method of this controller
    */
-  public function init(){ return true; }
+  public function init() { return true; }
 
   /**
    * Overwrite if needed
    * use this instead of destructor
    */
-  public function shutDown(){}
+  public function shutDown() {}
 
 
 /*//////////////////////////////////////////////////////////////////////////////

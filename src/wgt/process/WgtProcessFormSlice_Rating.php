@@ -615,12 +615,12 @@ HTML;
     if (process) {
       process.addClass('flag-touch');
 
-      process.data('paction-history-{$this->process->name}', function(){
+      process.data('paction-history-{$this->process->name}', function() {
         \$R.get('modal.php?c=Process.Base.showHistory&amp;process={$this->process->activStatus}&amp;objid={$entity}&amp;entity={$entity->getTable()}');
         \$S.fn.miniMenu.close();
       });
 
-      process.data('paction-details-{$this->process->name}', function(){
+      process.data('paction-details-{$this->process->name}', function() {
         \$R.get('maintab.php?c={$this->process->processUrl}.form&amp;objid={$this->process->activStatus}');
         \$S.fn.miniMenu.close();
       });
@@ -634,7 +634,7 @@ HTML;
       $html .= <<<HTML
 
     if (process) {
-      process.data('paction-{$this->process->name}-{$edge->key}', function(){
+      process.data('paction-{$this->process->name}-{$edge->key}', function() {
         self.setChanged(false);
         \$R.form('{$params->formId}','&amp;process_edge={$edge->key}&amp;reload=true',{append:true});
       });
@@ -669,12 +669,12 @@ HTML;
     if (process) {
       process.addClass('flag-touch');
 
-      process.data('paction-history-{$this->process->name}', function(){
+      process.data('paction-history-{$this->process->name}', function() {
         \$R.get('modal.php?c=Process.Base.showHistory&amp;process={$this->process->activStatus}&amp;objid={$entity}&amp;entity={$entity->getTable()}');
         \$S.fn.miniMenu.close();
       });
 
-      process.data('paction-details-{$this->process->name}', function(){
+      process.data('paction-details-{$this->process->name}', function() {
         \$R.get('maintab.php?c={$this->process->processUrl}.form&amp;objid={$this->process->activStatus}');
         \$S.fn.miniMenu.close();
       });
@@ -688,7 +688,7 @@ HTML;
       $html .= <<<HTML
 
     if (process) {
-      process.data('paction-{$this->process->name}-{$edge->key}', function(){
+      process.data('paction-{$this->process->name}-{$edge->key}', function() {
         \$R.form('{$params->formId}','&status={$edge->key}&reload=true',{append:true});
       });
     }
@@ -723,11 +723,11 @@ HTML;
     if (process) {
       process.addClass('flag-touch');
 
-      process.data('paction-history-{$this->process->name}', function(){
+      process.data('paction-history-{$this->process->name}', function() {
         \$R.get('modal.php?c=Process.Base.showHistory&amp;process={$this->process->activStatus}&amp;objid={$entity}&amp;entity={$entity->getTable()}');
       });
 
-      process.data('paction-details-{$this->process->name}', function(){
+      process.data('paction-details-{$this->process->name}', function() {
         \$R.get('maintab.php?c={$this->process->processUrl}.form&amp;objid={$this->process->activStatus}');
       });
 
@@ -740,7 +740,7 @@ HTML;
       $html .= <<<HTML
 
     if (process) {
-      \$S('#wgt-button-{$this->process->name}-{$params->contextKey}-{$edge->key}').click(function(){
+      \$S('#wgt-button-{$this->process->name}-{$params->contextKey}-{$edge->key}').click(function() {
         \$R.form('{$params->formId}','&amp;process_edge={$edge->key}',{append:true});
       });
     }

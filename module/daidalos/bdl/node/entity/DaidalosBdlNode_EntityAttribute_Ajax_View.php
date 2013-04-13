@@ -94,7 +94,7 @@ XML
     $this->setAreaContent('childCode', <<<XML
 <htmlArea selector="tr#wgt-grid-entity-{$entityName}-attr-{$index}" action="function" ><![CDATA[
 
-    self.find(".wgtac_edit_attribute").click(function(){
+    self.find(".wgtac_edit_attribute").click(function() {
       \$R.get(
         'maintab.php?c=Daidalos.BdlNode_EntityAttribute.edit'
           +'&amp;key={$this->model->modeller->key}&amp;bdl_file={$this->model->modeller->bdlFileName}'
@@ -102,7 +102,7 @@ XML
       );
     }).removeClass('wgtac_edit_attribute');
 
-    self.find(".wgtac_delete_attribute").click(function(){
+    self.find(".wgtac_delete_attribute").click(function() {
       \$R.del(
         'ajax.php?c=Daidalos.BdlNode_EntityAttribute.delete'
           +'&amp;key={$this->model->modeller->key}&amp;bdl_file={$this->model->modeller->bdlFileName}'
@@ -184,7 +184,7 @@ XML
     $this->setAreaContent('childCode', <<<XML
 <htmlArea selector="tr#wgt-grid-entity-{$entityName}-attr-{$index}" action="function" ><![CDATA[
 
-    self.find(".wgtac_edit_attribute").click(function(){
+    self.find(".wgtac_edit_attribute").click(function() {
       \$R.get(
         'maintab.php?c=Daidalos.BdlNode_EntityAttribute.edit'
           +'&amp;key={$this->model->modeller->key}&amp;bdl_file={$this->model->modeller->bdlFileName}'
@@ -192,7 +192,7 @@ XML
       );
     }).removeClass('wgtac_edit_attribute');
 
-    self.find(".wgtac_delete_attribute").click(function(){
+    self.find(".wgtac_delete_attribute").click(function() {
       \$R.del(
         'ajax.php?c=Daidalos.BdlNode_EntityAttribute.delete'
           +'&amp;key={$this->model->modeller->key}&amp;bdl_file={$this->model->modeller->bdlFileName}'

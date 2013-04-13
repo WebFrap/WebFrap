@@ -102,7 +102,7 @@ XML
   selector="ul#wgt-list-{$this->domainKey}-{$pNodeName}-permission"
   action="function" ><![CDATA[
 
-    self.find(".wgtac_add_permission_ref").click(function(){
+    self.find(".wgtac_add_permission_ref").click(function() {
       \$R.get(
         'maintab.php?c=Daidalos.BdlNode_{$this->domainClass}Permission.createRef'
           +'&amp;key={$this->model->modeller->key}&amp;bdl_file={$this->model->modeller->bdlFileName}'
@@ -110,7 +110,7 @@ XML
       );
     }).removeClass('wgtac_add_permission_ref');
 
-    self.find(".wgtac_edit_permission").click(function(){
+    self.find(".wgtac_edit_permission").click(function() {
       \$R.get(
         'maintab.php?c=Daidalos.BdlNode_{$this->domainClass}Permission.editRef'
           +'&amp;key={$this->model->modeller->key}&amp;bdl_file={$this->model->modeller->bdlFileName}'
@@ -118,7 +118,7 @@ XML
       );
     }).removeClass('wgtac_edit_permission');
 
-    self.find(".wgtac_delete_permission").click(function(){
+    self.find(".wgtac_delete_permission").click(function() {
       \$R.del(
         'ajax.php?c=Daidalos.BdlNode_{$this->domainClass}Permission.deleteRef'
           +'&amp;key={$this->model->modeller->key}&amp;bdl_file={$this->model->modeller->bdlFileName}'
@@ -240,7 +240,7 @@ XML
   selector="ul#wgt-list-{$this->domainKey}-{$pNodeName}-permission"
   action="function" ><![CDATA[
 
-    self.find(".wgtac_add_permission_ref").click(function(){
+    self.find(".wgtac_add_permission_ref").click(function() {
       \$R.get(
         'maintab.php?c=Daidalos.BdlNode_{$this->domainClass}Permission.createRef'
           +'&amp;key={$this->model->modeller->key}&amp;bdl_file={$this->model->modeller->bdlFileName}'
@@ -248,7 +248,7 @@ XML
       );
     }).removeClass('wgtac_add_permission_ref');
 
-    self.find(".wgtac_edit_permission").click(function(){
+    self.find(".wgtac_edit_permission").click(function() {
       \$R.get(
         'maintab.php?c=Daidalos.BdlNode_{$this->domainClass}Permission.editRef'
           +'&amp;key={$this->model->modeller->key}&amp;bdl_file={$this->model->modeller->bdlFileName}'
@@ -256,7 +256,7 @@ XML
       );
     }).removeClass('wgtac_edit_permission');
 
-    self.find(".wgtac_delete_permission").click(function(){
+    self.find(".wgtac_delete_permission").click(function() {
       \$R.del(
         'ajax.php?c=Daidalos.BdlNode_{$this->domainClass}Permission.deleteRef'
           +'&amp;key={$this->model->modeller->key}&amp;bdl_file={$this->model->modeller->bdlFileName}'

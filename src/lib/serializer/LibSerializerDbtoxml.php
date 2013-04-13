@@ -132,7 +132,7 @@ class LibSerializerDbtoxml extends LibSerializerAbstract
   /**
    *
    */
-  public function serialize($data = array()){}
+  public function serialize($data = array()) {}
 
   /**
    *

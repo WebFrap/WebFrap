@@ -103,10 +103,10 @@ HTML;
     $id = $this->getId();
 
     $this->jsCode = <<<JCODE
-\$S('#{$id} .wgac_remove').each(function(){
-	\$S(this).bind('click', function(){
+\$S('#{$id} .wgac_remove').each(function() {
+	\$S(this).bind('click', function() {
 		var eid = \$S(this).attr('wgt_eid');
-		\$R.del('ajax.php?c=Webfrap.Announcement.archiveEntry&objid='+eid,{'success':function(){
+		\$R.del('ajax.php?c=Webfrap.Announcement.archiveEntry&objid='+eid,{'success':function() {
 			\$S('#{$id}-entry-'+eid).remove();
   	}});
 	});
