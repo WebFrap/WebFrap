@@ -19,7 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibConnector_Message_Adapter
+class LibConnector_Adapter
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -213,7 +213,7 @@ class LibConnector_Message_Adapter
     if (!$this->error)
       $this->error = new ErrorContainer();
 
-    $this->error->addMessage();
+    $this->error->addMessage($message);
 
   }//end public function addError */
 

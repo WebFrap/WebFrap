@@ -19,7 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibConnector_Message_Mail extends LibConnector_Message_Adapter
+class LibConnector_Message_Ez extends LibConnector_Adapter
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -30,6 +30,12 @@ class LibConnector_Message_Mail extends LibConnector_Message_Adapter
    * @var string
    */
   public $type   = null;
+
+  /**
+   * Resource
+   * @var ezcMailPop3Transport
+   */
+  protected $resource = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
@@ -59,22 +65,26 @@ class LibConnector_Message_Mail extends LibConnector_Message_Adapter
     if ($this->hasError())
       throw new LibConnector_Exception($this->getError());
 
-    $connectionString = $this->buildConnectionAddress();
+    $options = new ezcMailPop3TransportOptions();
+    $options->ssl = $this->useSsl;
+    $options->timeout = 3;
+    $options->authenticationMethod = ezcMailPop3Transport::AUTH_APOP;
 
-    $this->resource = imap_open
-    (
-      $connectionString,
-      $this->userName,
-      $this->password,
-      null,
-      $this->tries // anzahl der versuche
-    );
+    try {
 
-    if (!$this->resource) {
-      throw new LibConnector_Exception
-      (
-        'Failed to open the connection to server '.$this->server,
-        'Failed to open the connection to server '.$this->server.', Error:'.imap_last_error()
+      $this->resource = ezcMailPop3Transport(
+        $this->server,
+        $this->port,
+        $options
+      );
+
+      $this->resource->authenticate( $this->userName, $this->password );
+
+    } catch( ezcMailTransportException $exc ) {
+
+      throw new LibConnector_Exception(
+          'Failed to open the connection to server '.$this->server,
+          'Failed to open the connection to server '.$this->server.', Error:'.$exc->getMessage()
       );
     }
 
@@ -87,13 +97,23 @@ class LibConnector_Message_Mail extends LibConnector_Message_Adapter
   {
 
     if ($this->resource)
-      imap_close($this->resource);
+      $this->resource->disconnect();
 
   }//end public function close */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Zugriff auf die Nachrichten
 //////////////////////////////////////////////////////////////////////////////*/
+
+
+  /**
+   * Anzahl der vorhandenen Nachrichten Abfragen
+   * @return int
+   */
+  public function getNumMessages()
+  {
+    return count($this->resource->listUniqueIdentifiers());
+  }//end public function getNumMessages */
 
   /**
    * Informationen für die Mailbox abrufen
@@ -133,14 +153,6 @@ class LibConnector_Message_Mail extends LibConnector_Message_Adapter
 
   }//end public function getMailboxInfo */
 
-  /**
-   * Anzahl der vorhandenen Nachrichten Abfragen
-   * @return int
-   */
-  public function getNumMessages()
-  {
-    return imap_num_msg($this->resource);
-  }//end public function getNumMessages */
 
   /**
    * @return string
