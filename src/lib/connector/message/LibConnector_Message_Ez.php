@@ -151,73 +151,52 @@ class LibConnector_Message_Ez extends LibConnector_Adapter
 
   }//end public function listUniqueIdentifiers */
 
-
   /**
-   * Informationen für die Mailbox abrufen
-   *
-   * @param boolean $msgInfo wenn true werden Informationen über die Nachrichten
-   *     zurückgegeben, wenn false Informationen zur Mailbox
-   *
-   * @return object
+   * @param boolean $deleteFromServer sollen die Mails vom Server gelöscht werden
+   * @return array
    */
-  public function getMailboxInfo($msgInfo = false)
+  public function getAllMessages($deleteFromServer = false)
   {
 
-    if ($msgInfo) {
-       /*
-        Date:   Zeitpunkt der letzten Änderung (aktuelle Zeit)
-        Driver:   Treiber
-        Mailbox:   Name des Postfachs
-        Nmsgs:   Anzahl der Nachrichten
-        Recent:   Anzahl der kürzlich eingetroffenen Nachrichten
-        Unread:   Anzal der ungelesenen Nachrichten
-        Deleted:   Anzahl der gelöschten Nachrichten
-        Size:   Gesamtgröße des Postfachs in Bytes
-       */
+    $set = $this->resource->fetchAll($deleteFromServer);
 
-      return imap_mailboxmsginfo($this->resource);
-    } else {
-      /*
-       * Date - Aktuelle Serverzeit, formatiert gemäß » RFC2822
-       * Driver - Protokoll des Postfachs: POP3, IMAP, NNTP
-       * Mailbox - Name des Postfachs
-       * Nmsgs - Anzahl der Nachrichten im Postfach
-       * Recent - Anzahl kürzlich eingetroffener Nachrichten im Postfach
-       */
+    $parser = new ezcMailParser();
+    return $parser->parseMail( $set );
 
-      return imap_check($this->resource);
-    }
-
-  }//end public function getMailboxInfo */
-
+  }//end public function getAllMessages */
 
 
   /**
-   * @param int $msgNo
-   * @return object
+   * @param int $offset
+   * @param int $limit
+   * @param boolean $deleteFromServer sollen die Mails vom Server gelöscht werden
+   * @return array
    */
-  public function getMessageHead($msgNo  )
+  public function getRange( $offset, $limit, $deleteFromServer = false)
   {
-    return imap_headerinfo($this->resource, $msgNo);;
 
-  }//end public function getMessageHeads */
+    $set = $this->resource->fetchFromOffset($offset, $limit, $deleteFromServer);
+
+    $parser = new ezcMailParser();
+    return $parser->parseMail( $set );
+
+  }//end public function getRange */
 
   /**
-   * @return string
+   * @param int $idx
+   * @param boolean $deleteFromServer sollen die Mails vom Server gelöscht werden
+   * @return array
    */
-  public function getMessageBody($number)
+  public function getMessageByIndex( $idx, $deleteFromServer = false)
   {
 
-  }//end public function getMessageBody */
+    $set = $this->resource->fetchByMessageNr($idx, $deleteFromServer);
 
-  /**
-   * @return string
-   */
-  public function getFullMessage($number)
-  {
+    $parser = new ezcMailParser();
+    return $parser->parseMail( $set );
 
-  }//end public function getFullMessage */
+  }//end public function getMessageByIndex */
 
 
-}//end class LibConnector_Message_Adapter
+}//end class LibConnector_Message_Ez
 

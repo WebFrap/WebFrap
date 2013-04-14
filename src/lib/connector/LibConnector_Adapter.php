@@ -65,6 +65,12 @@ class LibConnector_Adapter
   public $allowPrivateSigned = true;
 
   /**
+   * Sollen die Messages beim abholen gelöscht werden?
+   * @var int
+   */
+  public $deleteOnFetch = false;
+
+  /**
    * Anzahl der Verbindungsversuche
    * @var int
    */
