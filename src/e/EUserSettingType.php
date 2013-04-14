@@ -29,6 +29,9 @@ class EUserSettingType
    * @var int
    */
   const MESSAGES = 1;
+  const LISTING = 2;
+  const LISTING_REF = 3;
+  const SELECTION = 4;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Labels
