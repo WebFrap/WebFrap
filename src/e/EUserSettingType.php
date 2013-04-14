@@ -39,6 +39,9 @@ class EUserSettingType
    */
   public static $labels = array(
     self::MESSAGES     => 'Messages',
+    self::LISTING      => 'Listing',
+    self::LISTING_REF  => 'Listing Ref',
+    self::SELECTION    => 'Selection',
   );
 
   /**
@@ -46,6 +49,9 @@ class EUserSettingType
    */
   public static $classes = array(
     self::MESSAGES     => 'WebfrapMessage_Table_Search_Settings',
+    self::LISTING      => 'WgtSettings_Search_Listing',
+    self::LISTING_REF  => 'WgtSettings_Search_Listing',
+    self::SELECTION    => 'WgtSettings_Search_Listing',
   );
 
   /**

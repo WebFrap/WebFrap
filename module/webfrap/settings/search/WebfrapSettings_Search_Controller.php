@@ -36,7 +36,7 @@ class WebfrapSettings_Search_Controller extends Controller
    * @var array
    */
   protected $options           = array(
-      
+
     'refresh' => array(
       'method'    => array('GET'),
       'views'      => array('ajax')
@@ -59,6 +59,42 @@ class WebfrapSettings_Search_Controller extends Controller
 /*//////////////////////////////////////////////////////////////////////////////
 // methodes
 //////////////////////////////////////////////////////////////////////////////*/
+
+
+  /**
+   *
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_insert($request, $response)
+  {
+
+    // resource laden
+    $user     = $this->getUser();
+    $acl      = $this->getAcl();
+
+
+    // load request parameters an interpret as flags
+    $rqtData = new WebfrapSettings_Search_Save_Request($request);
+
+
+
+    /* @var $model WebfrapSettings_Search_Model */
+    $model = $this->loadModel('WebfrapSettings_Search');
+    $model->loadUserAccess($rqtData);
+
+    if (!$model->access->access) {
+      throw new InvalidRequest_Exception(
+          'Access denied',
+          Response::FORBIDDEN
+      );
+    }
+
+    $model->saveMessage($msgId, $rqtData);
+
+  }//end public function service_saveMessage */
+
 
 
  /**
@@ -150,41 +186,10 @@ class WebfrapSettings_Search_Controller extends Controller
 
 
   }//end public function service_loadUser */
-  
-  
-  /**
-   *
-   * @param LibRequestHttp $request
-   * @param LibResponseHttp $response
-   * @return void
-   */
-  public function service_saveMessage($request, $response)
-  {
-
-    // resource laden
-    $user     = $this->getUser();
-    $acl      = $this->getAcl();
 
 
-    // load request parameters an interpret as flags
-    $rqtData = new WebfrapMessage_Save_Request($request);
-    $msgId = $request->param('objid',Validator::EID);
 
-  	/* @var $model WebfrapMessage_Model */
-    $model = $this->loadModel('WebfrapMessage');
-    $model->loadTableAccess($rqtData);
 
-    if (!$model->access->access) {
-      throw new InvalidRequest_Exception(
-        'Access denied',
-        Response::FORBIDDEN
-      );
-    }
-    
-    $model->saveMessage($msgId, $rqtData);
-
-  }//end public function service_saveMessage */
-  
   /**
    *
    * @param LibRequestHttp $request
@@ -213,7 +218,7 @@ class WebfrapSettings_Search_Controller extends Controller
         Response::FORBIDDEN
       );
     }
-    
+
     if( 100 == $flagSpam) {
       //wenn spam dann löschen
       $this->getTpl()->addJsCode(<<<JS
@@ -223,11 +228,11 @@ class WebfrapSettings_Search_Controller extends Controller
 JS
       );
     }
-    
+
     $model->setSpam($msgId, $flagSpam, $rqtData);
 
   }//end public function service_saveMessage */
-  
+
   /**
    *
    * @param LibRequestHttp $request
@@ -269,5 +274,5 @@ JS
 
   }//end public function service_deleteMessage */
 
-  
+
 } // end class WebfrapMessage_Controller
