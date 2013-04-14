@@ -37,6 +37,21 @@ class LibConnector_Message_Ez extends LibConnector_Adapter
    */
   protected $resource = null;
 
+  /**
+   * @param array $conf
+   */
+  public function __construct($conf)
+  {
+
+    $this->useSsl = true;
+
+    $this->server = $conf['server'];
+    $this->port = $conf['port'];
+    $this->userName = $conf['user'];
+    $this->password = $conf['password'];
+
+  }//end public function __construct */
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/
@@ -49,6 +64,8 @@ class LibConnector_Message_Ez extends LibConnector_Adapter
    */
   public function open()
   {
+
+    LibVendorEz::load();
 
     if (!$this->server)
       $this->addError('Server Address is missing');
@@ -66,13 +83,12 @@ class LibConnector_Message_Ez extends LibConnector_Adapter
       throw new LibConnector_Exception($this->getError());
 
     $options = new ezcMailPop3TransportOptions();
-    $options->ssl = $this->useSsl;
-    $options->timeout = 3;
-    $options->authenticationMethod = ezcMailPop3Transport::AUTH_APOP;
+    $options->ssl = true;
+    $options->timeout = 10;
 
     try {
 
-      $this->resource = ezcMailPop3Transport(
+      $this->resource = new ezcMailPop3Transport(
         $this->server,
         $this->port,
         $options
@@ -116,6 +132,27 @@ class LibConnector_Message_Ez extends LibConnector_Adapter
   }//end public function getNumMessages */
 
   /**
+   * @return array
+   */
+  public function listMessages()
+  {
+
+    return $this->resource->listMessages();
+
+  }//end public function listMessages */
+
+  /**
+   * @return array
+   */
+  public function listUniqueIdentifiers()
+  {
+
+    return $this->resource->listUniqueIdentifiers();
+
+  }//end public function listUniqueIdentifiers */
+
+
+  /**
    * Informationen für die Mailbox abrufen
    *
    * @param boolean $msgInfo wenn true werden Informationen über die Nachrichten
@@ -154,17 +191,6 @@ class LibConnector_Message_Ez extends LibConnector_Adapter
   }//end public function getMailboxInfo */
 
 
-  /**
-   * @return string
-   */
-  public function getMessageHeads()
-  {
-
-    $headers = imap_headers($this->resource);
-
-    return $headers;
-
-  }//end public function getMessageHeads */
 
   /**
    * @param int $msgNo
@@ -192,60 +218,6 @@ class LibConnector_Message_Ez extends LibConnector_Adapter
 
   }//end public function getFullMessage */
 
-/*//////////////////////////////////////////////////////////////////////////////
-// address builder
-//////////////////////////////////////////////////////////////////////////////*/
-
-  /**
-   * Zusammenbauen eines connection strings
-   *
-   * @param string the address
-   */
-  public function buildConnectionAddress()
-  {
-
-    /*
-    // Verbindung zu einem IMAP server auf Port 143 des lokalen Rechners
-    $mbox = imap_open("{localhost:143}INBOX", "user_id", "password");
-
-    // Verbindung zu einem POP3 server auf Port 110 des lokalen Rechners
-    $mbox = imap_open ("{localhost:110/pop3}INBOX", "user_id", "password");
-
-    // Für SSL verschlüsselte Verbindungen wird /ssl an die
-    // Protokollspezifikation angefügt
-    $mbox = imap_open ("{localhost:993/imap/ssl}INBOX", "user_id", "password");
-
-    // Zur SSL Verbindung mit Servern mit selbstsignierten Zertifikaten
-    // muss zusätzlich /novalidate-cert angefügt werden
-    $mbox = imap_open ("{localhost:995/pop3/ssl/novalidate-cert}", "user_id", "password");
-
-    // Verbindung zu einem NNTP server auf Port 119 des lokalen Rechners
-    $nntp = imap_open ("{localhost:119/nntp}comp.test", "", "");
-     */
-
-    $conString = "{{$this->server}:{$this->port}/{$this->type}";
-
-    if ($this->useSsl) {
-      $conString .= "/ssl";
-
-      if ($this->allowPrivateSigned) {
-        $conString .= "/novalidate-cert";
-      } else {
-        $conString .= "/validate-cert";
-      }
-    }
-
-    if ($this->useTls) {
-      $conString .= "/tls";
-    } else {
-      $conString .= "/notls";
-    }
-
-    $conString .= "}INBOX";
-
-    return $conString;
-
-  }//end public function buildConnectionAddress */
 
 }//end class LibConnector_Message_Adapter
 

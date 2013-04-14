@@ -66,8 +66,8 @@
         <li><span>Tests</span>
           <ul>
             <li><a
-              href="area.php?c=Example.Tech.area&area=mail.test.include"
-              class="wcm wcm_req_ajax" >Test Include</a>
+              href="area.php?c=Example.Tech.area&area=mail.test.simple"
+              class="wcm wcm_req_ajax" >Test Simple</a>
             </li>
           </ul>
         </li>
