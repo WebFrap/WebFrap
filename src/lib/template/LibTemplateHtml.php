@@ -822,7 +822,7 @@ class LibTemplateHtml extends LibTemplatePresenter
 
     } else {
       
-      Error::report('Index Template not exists: '.$this->indexTemplate);
+      Error::report('Index Template does not exist: '.$this->indexTemplate);
 
       ///TODO add some good error handler here
       if (Log::$levelDebug)

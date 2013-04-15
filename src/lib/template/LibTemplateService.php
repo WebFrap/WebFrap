@@ -123,7 +123,7 @@ class LibTemplateService extends LibTemplate
       ob_end_clean();
 
     } else {
-      Error::report('Service Template not exists: '.$this->template.' '. ($this->tplInCode?'local tpl':'global tpl'));
+      Error::report('Service Template does not exist: '.$this->template.' '. ($this->tplInCode?'local tpl':'global tpl'));
 
       ///TODO add some good error handler here
       if (Log::$levelDebug)
@@ -175,7 +175,7 @@ class LibTemplateService extends LibTemplate
       ob_end_clean();
 
     } else {
-      Error::addError('Index Template not exists: '.$filename);
+      Error::addError('Index Template does not exist: '.$filename);
 
       if (Log::$levelDebug)
         $content = '<p class="wgt-box error">Wrong Index Template: '.$filename.' </p>';

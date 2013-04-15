@@ -336,7 +336,7 @@ class LibTemplateAjax extends LibTemplateHtml
 
     } else {
       
-      Error::addError('Index Template not exists: '.$filename);
+      Error::addError('Index Template does not exist: '.$filename);
 
       if (Log::$levelDebug)
         $content = '<p class="wgt-box error">Wrong Index Template: '.$filename.' </p>';
