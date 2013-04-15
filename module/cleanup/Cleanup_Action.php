@@ -11,7 +11,7 @@ class Cleanup_Action extends Action
 
   /**
 	 *
-	 * @param LibFlowApachemod $env        	
+	 * @param LibFlowApachemod $env
 	 */
   public function __construct ($env = null)
   {
@@ -25,8 +25,7 @@ class Cleanup_Action extends Action
 
   /**
 	 * Sucht alle Benutzer ohne aktiven Vertrag und setzt deren Status auf inaktiv.
-	 *
-	 * @param String $tableName        	
+	 *     	
 	 */
   public function trigger_inactiveUsers ()
   {
@@ -42,11 +41,11 @@ SQL;
     $result = $db->select($sql);
     $count = $result->count();
     $ids = $result->getColumn("rowid");
-      
     
     $inactiveIds = implode(", ", $ids);
     
     $this->response->addWarning("Disabling " . $count . " Users");
+    
     $this->response->addMessage("Disabled User IDs: " . $inactiveIds);
     
     $sql = <<<SQL
@@ -54,8 +53,25 @@ UPDATE wbfsys_role_user
 SET inactive = true
 WHERE id_employee IN ({$inactiveIds})
 SQL;
+    
+    //$db->update($sql);
+    
   }
 
+  /**
+   * (non-PHPdoc)
+   *
+   * @see BaseChild::setUser()
+   */
+  public function setUser ($user)
+  {
+
+    $this->user = $user;
+  }
+
+  /**
+   * @param LibResponseCollector $response
+   */
   public function getResponse ()
   {
 
@@ -63,7 +79,7 @@ SQL;
   }
 
   /**
-   * @param Ambigous <LibResponseCollector, LibResponseHttp> $response
+   * @param LibResponseCollector $response
    */
   public function setResponse ($response)
   {
