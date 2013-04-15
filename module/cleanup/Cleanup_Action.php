@@ -4,6 +4,12 @@ class Cleanup_Action extends Action
 {
 
   /**
+   * Response Objekt für Logging etc.
+   * @var LibResponseCollector
+   */
+  public $response = null;
+
+  /**
 	 *
 	 * @param LibFlowApachemod $env        	
 	 */
@@ -24,7 +30,45 @@ class Cleanup_Action extends Action
 	 */
   public function trigger_inactiveUsers ()
   {
+
+    $db = $this->getDb();
     
+    $sql = <<<SQL
+SELECT DISTINCT rowid FROM view_compliance_employees
+  WHERE current_date NOT BETWEEN c_start AND c_end
+    AND rowid NOT IN (SELECT rowid FROM view_compliance_employees WHERE current_date BETWEEN c_start AND c_end)
+SQL;
+    
+    $result = $db->select($sql);
+    $count = $result->count();
+    $ids = $result->getColumn("rowid");
+      
+    
+    $inactiveIds = implode(", ", $ids);
+    
+    $this->response->addWarning("Disabling " . $count . " Users");
+    $this->response->addMessage("Disabled User IDs: " . $inactiveIds);
+    
+    $sql = <<<SQL
+UPDATE wbfsys_role_user
+SET inactive = true
+WHERE id_employee IN ({$inactiveIds})
+SQL;
+  }
+
+  public function getResponse ()
+  {
+
+    return $this->response;
+  }
+
+  /**
+   * @param Ambigous <LibResponseCollector, LibResponseHttp> $response
+   */
+  public function setResponse ($response)
+  {
+
+    $this->response = $response;
   }
 }
 
