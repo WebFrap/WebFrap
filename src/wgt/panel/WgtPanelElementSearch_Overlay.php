@@ -246,10 +246,7 @@ HTML;
               
               <div class="half right" >
               	<h3 style="width:150px;float:left;" >Custom Filter</h3>
-              	<div class="right" >
-              		<button class="wgt-button" ><i class="icon-save" ></i> Save filter</button>
-              		<button class="wgt-button" ><i class="icon-save" ></i> Save filter as </button>
-              	</div>
+
               	<div class="wgt-clear" >&nbsp;</div>
               	
               	<ul class="wgt-tree" >
@@ -275,7 +272,18 @@ HTML;
 							{"dkey":"{$this->context}-{$this->searchKey}","search_form":"{$this->searchForm}"}
             	</var>
             	
-            	<h3>Extended search</h3>
+            	<div class="wgt-panel" >
+            	  <div class="left bw15" >
+            	    <h3>Extended search</h3>
+            	  </div>
+            	  <div class="inline bw25" >
+            	    <label>Filter Name:</label> <input type="text" value="Send by Joe" /><button class="wgt-button append" ><i class="icon-trash" ></i></button>
+            	  </div>
+              	<div class="right" >
+              		<button class="wgt-button" ><i class="icon-save" ></i> Save filter</button>
+              		<button class="wgt-button" ><i class="icon-save" ></i> Save filter as </button>
+              	</div>
+            	</div>
             	
           		<div style="max-height:250px;">
         				<table class="search-container" >

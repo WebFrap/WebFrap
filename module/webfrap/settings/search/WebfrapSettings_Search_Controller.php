@@ -78,8 +78,6 @@ class WebfrapSettings_Search_Controller extends Controller
     // load request parameters an interpret as flags
     $rqtData = new WebfrapSettings_Search_Save_Request($request);
 
-
-
     /* @var $model WebfrapSettings_Search_Model */
     $model = $this->loadModel('WebfrapSettings_Search');
     $model->loadUserAccess($rqtData);
@@ -91,7 +89,7 @@ class WebfrapSettings_Search_Controller extends Controller
       );
     }
 
-    $model->saveMessage($msgId, $rqtData);
+    $model->saveSearch( $rqtData );
 
   }//end public function service_saveMessage */
 

@@ -91,7 +91,7 @@ class LibTemplateMail extends LibTemplateHtml
       );
 
       if (Log::$levelDebug)
-        return "<p class=\"wgt-box error\">Template: $template not exists.</p>";
+        return "<p class=\"wgt-box error\">Template: $template does not exist.</p>";
       else
         return '<p class="wgt-box error">Error Code: 42</p>';
 

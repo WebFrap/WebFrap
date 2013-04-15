@@ -335,7 +335,7 @@ abstract class WgtTemplate
       ob_end_clean();
 
     } else {
-      Error::report('Index Template not exists: '.$template);
+      Error::report('Index Template does not exist: '.$template);
 
       ///TODO add some good error handler here
       if (Log::$levelDebug)
