@@ -41,7 +41,7 @@ class WebfrapSettings_Search_Controller extends Controller
       'method'    => array('GET'),
       'views'      => array('ajax')
     ),
-    'insert' => array(
+    'save' => array(
       'method'    => array('POST'),
       'views'      => array('ajax')
     ),
@@ -67,7 +67,7 @@ class WebfrapSettings_Search_Controller extends Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_insert($request, $response)
+  public function service_save($request, $response)
   {
 
     // resource laden
@@ -91,7 +91,7 @@ class WebfrapSettings_Search_Controller extends Controller
 
     $model->saveSearch( $rqtData );
 
-  }//end public function service_saveMessage */
+  }//end public function service_save */
 
 
 

@@ -38,6 +38,12 @@ class WgtPanelElementSearch_Overlay extends WgtPanelElement
    * @var string
    */
   public $searchForm = null;
+  
+  /**
+   * Service mit dem eine aktuelle Filter / Suchkonfiguration gespeichert werden kann
+   * @var string
+   */
+  public $saveService = 'ajax.php?c=Webfrap.Settings_Search.save';
 
   /**
    * flag if the advanced search button should be added to the panel
@@ -269,7 +275,7 @@ HTML;
             
             <div id="wgt-box-extsrch-{$this->context}-{$this->searchKey}" class="wcm wcm_ui_search_builder wgt-space" style="height:300px;" >
             	<var id="wgt-box-extsrch-{$this->context}-{$this->searchKey}-cfg-sb" >
-							{"dkey":"{$this->context}-{$this->searchKey}","search_form":"{$this->searchForm}"}
+							{"dkey":"{$this->context}-{$this->searchKey}","search_form":"{$this->searchForm}","save_service":"{$this->saveService}"}
             	</var>
             	
             	<div class="wgt-panel" >
@@ -277,11 +283,15 @@ HTML;
             	    <h3>Extended search</h3>
             	  </div>
             	  <div class="inline bw25" >
-            	    <label>Filter Name:</label> <input type="text" value="Send by Joe" /><button class="wgt-button append" ><i class="icon-trash" ></i></button>
+            	    <label>Filter Name:</label> <input 
+            	      type="text" 
+            	      name="filter_name" 
+            	      class="filter_name asgd-{$this->searchForm}" 
+            	      value="Send by Joe" /><button 
+            	        class="wgt-button append wa_reset_filter" ><i class="icon-trash" ></i></button>
             	  </div>
               	<div class="right" >
-              		<button class="wgt-button" ><i class="icon-save" ></i> Save filter</button>
-              		<button class="wgt-button" ><i class="icon-save" ></i> Save filter as </button>
+              		<button class="wgt-button wa_save_filter" ><i class="icon-save" ></i> Save filter</button>
               	</div>
             	</div>
             	
