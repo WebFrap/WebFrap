@@ -202,6 +202,45 @@ class Db
     // logic
     //////////////////////////////////////////////////////////////////////////////*/
 
+    /**
+     * Welchseln der aktiven Datenbankverbindung
+     *
+     * @param string Name Name der Datenbankverbindung die erstellt oder zurückgeben werden soll, bzw die
+     * @return LibDbAbstract
+     */
+    public static function switchDbcon($name)
+    {
+        if (!isset($this->databases[$name])) {
+            throw new LibDb_Exception
+            (
+                'Database: Keinen Verbindungsdaten mit dem Namen: ' . $name . ' vorhanden'
+            );
+        }
+
+        if (isset($this->connectionPool[$name])) {
+            $this->activDb     = $this->connectionPool[$name];
+            $this->activDbName = $name;
+
+            return $this->activDb;
+        } else {
+            $classname = 'LibDb' . $this->databases[$name]['class'];
+
+            if (WebFrap::loadable($classname)) {
+                $this->activDb     = new $classname($this->databases[$name]);
+                $this->activDbName = $name;
+
+                $this->connectionPool[$name] = $this->activDb;
+
+                return $this->activDb;
+            } else {
+                throw new LibDb_Exception
+                (
+                    'Database: Unbekannte Datenbank Extention ' . $classname . ' angefordert'
+                );
+            }
+        }
+    }
+
     //end public static function switchDbcon */
 
     /**
