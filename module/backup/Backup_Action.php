@@ -67,7 +67,7 @@ SQL;
 	 *
 	 * @param String $databaseName        	
 	 */
-  public function trigger_database ( $databaseName )
+  public function trigger_database ($databaseName)
   {
 
     echo "Starting Backup of Database: " . $databaseName . "<br>";
@@ -135,6 +135,9 @@ SQL;
     $this->user = $user;
   }
 
+  /**
+   * @param LibResponseCollector $response
+   */
   public function getResponse ()
   {
 
@@ -142,7 +145,7 @@ SQL;
   }
 
   /**
-   * @param Ambigous <LibResponseCollector, LibResponseHttp> $response
+   * @param LibResponseCollector $response
    */
   public function setResponse ($response)
   {
