@@ -93,8 +93,7 @@ class WebfrapSys_Exception extends Webfrap_Exception
 
     if ($protocol) {
       $logger = LibProtocol_SystemError::getDefault();
-      $logger->write
-      (
+      $logger->write(
         $debugMessage,
         $this->getTraceAsString(),
         $request,
