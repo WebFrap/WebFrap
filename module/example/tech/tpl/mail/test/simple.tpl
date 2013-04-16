@@ -23,6 +23,27 @@ echo implode('</li><li>', $connector->listMessages()) ;
 echo "</li></ul>";
 
 
+$mails = $connector->getRange(1, 10);
+
+foreach( $mails as /* @var ezMail */ $mail ){
+
+  echo 'Mail: <br />';
+  echo 'Subject: '.$mail->subject.'<br />';
+  echo 'From: '.htmlentities($mail->from).'<br />';
+
+  $parts = $mail->fetchParts();
+  foreach ( $parts as $part ){
+    if ( $part instanceof ezcMailFile ) {
+      echo "File: ".$part->contentDisposition->displayFileName.'<br />';
+    } else if ( $part instanceof ezcMailText ) {
+      echo "Plain: ".$part->text.'<br />';
+    }
+  }
+
+}
+
+
+
 } catch( Exception $exc ){
 
   echo $exc->getMessage().NL.'<br /><br />'.$exc;
