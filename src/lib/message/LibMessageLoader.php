@@ -46,14 +46,31 @@ class LibMessageLoader
   public function messagesExists( array $list )
   {
 
+    if (!$list)
+      return array();
+
+    $whereIn = implode( "'), UPPER('", $list );
+
     $sql = <<<SQL
 SELECT
   rowid,
   message_id
 FROM
+  wbfsys_message_sync
+WHERE
+  UPPER(message_id) IN(UPPER('{$whereIn}'));
 
 SQL;
 
+    $tmp = $this->db->select($sql)->getAll();
+
+    $ids = array();
+
+    foreach ( $tmp as $row ) {
+      $ids[$row['message_id']] = $row['rowid'];
+    }
+
+    return $ids;
 
   }//end public function messagesExists */
 
