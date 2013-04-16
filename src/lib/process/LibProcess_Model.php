@@ -608,8 +608,7 @@ class LibProcess_Model extends PBase
 
     $request = $this->getRequest();
 
-    $this->processData['comment'] = $request->data
-    (
+    $this->processData['comment'] = $request->data(
       $this->process->name,
       Validator::TEXT,
       'comment'
