@@ -34,7 +34,7 @@ class WebfrapMaintenance_Metadata_Model extends Model
     "wbfsys_module" => array(false),
     "wbfsys_module_category" => array(false),
     "wbfsys_entity" => array(false),
-    "wbfsys_entity_alias" => array(false),
+    //"wbfsys_entity_alias" => array(false), // lassen wir so, kann auch von hand erweitert werden
     "wbfsys_entity_attribute" => array(false),
     "wbfsys_entity_category" => array(false),
     "wbfsys_entity_reference" => array(false),
