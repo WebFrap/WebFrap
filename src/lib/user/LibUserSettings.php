@@ -104,6 +104,39 @@ SQL;
     }
 
   }//end public function saveSetting */
+  
+  /**
+   * Speichern der Settings
+   *
+   * @param int $key
+   * @param TArray $data
+   */
+  public function saveNamedMaskSetting($key, $name, $mask, $data)
+  {
+  
+    $orm = $this->db->getOrm();
+    
+    $this->settings[$key.'-'.$mask.'-'.$name] = $data;
+    $jsonString = $data->toJson();
+  
+    $id = $data->getId();
+    
+    $sNode = $orm->get(
+      'WbfsysUserSetting',
+      "id_user=".$this->user->getId()." type=".$key
+     );
+  
+    if ($id) {
+      $this->db->getOrm()->update('WbfsysUserSetting', $id, array('jdata'=>$jsonString,'type'=>$key));
+    } else {
+      $this->db->getOrm()->insert('WbfsysUserSetting', array(
+          'jdata' => $jsonString,
+          'type' => $key,
+          'id_user' => $this->user->getId()
+      ));
+    }
+  
+  }//end public function saveNamedMaskSetting */
 
 }// end class LibUserSettings
 

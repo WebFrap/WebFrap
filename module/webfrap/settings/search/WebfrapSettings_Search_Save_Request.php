@@ -38,7 +38,19 @@ class WebfrapSettings_Search_Save_Request extends Context
    * @var int
    */
   public $type = null;
+  
+  /**
+   * Der name der zu speichernden Konfiguration
+   * @var int
+   */
+  public $name = null;
 
+  /**
+   * Key der Maske der zu speichernden Konfiguration
+   * @var int
+   */
+  public $mask = null;
+  
   /**
    * @var TFlag
    */

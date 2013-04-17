@@ -30,8 +30,9 @@ class EUserSettingType
    */
   const MESSAGES = 1;
   const LISTING = 2;
-  const LISTING_REF = 3;
-  const SELECTION = 4;
+  const LISTING_SEARCH = 3;
+  const LISTING_REF = 4;
+  const SELECTION = 5;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Labels
@@ -43,6 +44,7 @@ class EUserSettingType
   public static $labels = array(
     self::MESSAGES     => 'Messages',
     self::LISTING      => 'Listing',
+    self::LISTING_SEARCH  => 'Listing Search',
     self::LISTING_REF  => 'Listing Ref',
     self::SELECTION    => 'Selection',
   );
@@ -53,6 +55,7 @@ class EUserSettingType
   public static $classes = array(
     self::MESSAGES     => 'WebfrapMessage_Table_Search_Settings',
     self::LISTING      => 'WgtSettings_Search_Listing',
+    self::LISTING_SEARCH => 'WgtSettings_Search_Listing',
     self::LISTING_REF  => 'WgtSettings_Search_Listing',
     self::SELECTION    => 'WgtSettings_Search_Listing',
   );
