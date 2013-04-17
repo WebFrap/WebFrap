@@ -88,16 +88,26 @@ SELECT
   count(rowid) as num_old
   FROM {$key}
   WHERE
-    revision < {$deplVal}
+    revision < {$deplVal} or revision is null
 
 
 SQL;
+  
+      $sqlAll = <<<SQL
+SELECT
+  count(rowid) as num_all
+  FROM {$key}
+      
+      
+SQL;
+  
       $this->statsData[] = array
       (
         'id'=> $key,
         'access_key'=> $key,
         'label'=> $key,
-        'num_old' =>  $db->select($sql)->getField('num_old')
+        'num_old' =>  $db->select($sql)->getField('num_old'),
+        'num_all' =>  $db->select($sqlAll)->getField('num_all')
       );
 
     }
@@ -122,7 +132,7 @@ SQL;
 DELETE
   FROM {$key}
   WHERE
-    revision < {$deplVal};
+    revision < {$deplVal} or revision is null;
 
 SQL;
 
