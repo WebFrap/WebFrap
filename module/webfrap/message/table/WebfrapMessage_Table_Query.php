@@ -490,19 +490,19 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
 
     if (isset($condition['filters']['channel'])) {
 
-      if (!$condition['filters']['channel']->inbox && !$condition['filters']['channel']->outbox){
+      if (!$condition['filters']['channel']->inbox && !$condition['filters']['channel']->outbox) {
         $condition['filters']['channel']->inbox = true;
       }
       
-      if( $condition['filters']['channel']->archive ){
+      if( $condition['filters']['channel']->archive ) {
         $filterSender = $filterReceiver = "";
       }
       
-      if( !$condition['filters']['channel']->unsolicited ){
+      if( !$condition['filters']['channel']->unsolicited ) {
         $criteria->where($filterSpam);
       }
       
-      if( !$condition['filters']['channel']->draft ){
+      if( !$condition['filters']['channel']->draft ) {
         $criteria->where('wbfsys_message.flag_draft = false');
       } else {
         $criteria->where('wbfsys_message.flag_draft = true');

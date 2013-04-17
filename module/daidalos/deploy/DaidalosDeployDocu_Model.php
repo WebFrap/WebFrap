@@ -98,14 +98,14 @@ class DaidalosDeployDocu_Model extends Model
 
       $files = $folder->getFilesByEnding('.php');
 
-      foreach($files as $file)
+      foreach ($files as $file)
         include $file;
 
       $folder = new LibFilesystemFolder(PATH_ROOT.$module.'/sandbox/data/docu/'.$archKey.'/');
 
       $files = $folder->getFilesByEnding('.php');
 
-      foreach($files as $file)
+      foreach ($files as $file)
         include $file;
 
     }

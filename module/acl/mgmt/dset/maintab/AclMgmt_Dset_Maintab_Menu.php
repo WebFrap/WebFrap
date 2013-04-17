@@ -169,31 +169,31 @@ HTML;
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-    self.getObject().find(".wgtac_edit").click(function(){
+    self.getObject().find(".wgtac_edit").click(function() {
       \$R.form('{$params->formId}');
     });
 
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       self.close();
     });
 
-    self.getObject().find(".wgtac_mask_entity_rights").click(function(){
+    self.getObject().find(".wgtac_mask_entity_rights").click(function() {
       \$S('#{$this->id}-control').dropdown('remove');
       self.close();
       \$R.get('maintab.php?c=Acl.Mgmt_Dset.listing&dkey={$view->domainNode->srcName}&objid={$objid}');
     });
 
-    self.getObject().find(".wgtac_mask_list_rights").click(function(){
+    self.getObject().find(".wgtac_mask_list_rights").click(function() {
       \$S('#{$this->id}-control').dropdown('remove');
       self.close();
       \$R.get('maintab.php?c=Acl.Mgmt.listing&dkey={$view->domainNode->domainName}&objid={$objid}');
     });
 
-    self.getObject().find(".wgtac_search").click(function(){
+    self.getObject().find(".wgtac_search").click(function() {
       \$R.form('{$params->searchFormId}',null,{search:true});
     });
 
-    self.getObject().find('#wgt-button-{$view->domainNode->aclDomainKey}-acl-form-append').click(function(){
+    self.getObject().find('#wgt-button-{$view->domainNode->aclDomainKey}-acl-form-append').click(function() {
 
       if (\$S('#wgt-input-{$view->domainNode->aclDomainKey}-acl-id_group').val() === '') {
 

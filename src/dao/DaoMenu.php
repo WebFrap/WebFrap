@@ -63,7 +63,7 @@ class DaoMenu extends Dao
 
     $this->view = View::getActive();
 
-    foreach($files as $file)
+    foreach ($files as $file)
       include $file->getName(true);
 
   }//end public function __construct */

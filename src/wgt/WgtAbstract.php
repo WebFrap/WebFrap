@@ -422,7 +422,7 @@ abstract class WgtAbstract
     if (!$this->jsCode)
       $this->buildJsCode();
 
-    if ($this->jsCode){
+    if ($this->jsCode) {
       Debug::console("inject JS CODE ".$this->jsCode);
       $view->addJsCode($this->jsCode);
     } else {
@@ -503,7 +503,7 @@ abstract class WgtAbstract
     if (!isset($attributes['id']))
       $attributes['id'] = 'wgt_item_'.uniqid();
 
-    foreach($attributes as $key => $value)
+    foreach ($attributes as $key => $value)
       $html .= $key.'="'.$value.'" ';
 
     return $html;

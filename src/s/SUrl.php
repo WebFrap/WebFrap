@@ -25,7 +25,7 @@ final class SUrl
 
   /** Privater Konstruktor zum Unterbinde von Instanzen
    */
-  private function __construct(){}
+  private function __construct() {}
 
   /**
    * Extrahieren der ACL Teile der URL zusammebauen zu einem

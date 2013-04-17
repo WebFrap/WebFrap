@@ -80,6 +80,15 @@ abstract class WgtTemplate
    * @var string
    */
   public $rendered = null;
+  
+  /**
+   * Befindet sich das Template beim Code oder
+   * im templates folder?
+   *
+   * @since 0.9.2
+   * @var string
+   */
+  public $tplInCode      = false;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Abstract Methodes
@@ -270,9 +279,10 @@ abstract class WgtTemplate
   /**
    * @param string $template
    */
-  public function setTemplate($template)
+  public function setTemplate($template, $inCode = false)
   {
     $this->template = $template;
+    $this->tplInCode = $inCode;
   }//end public function setTemplate */
 
   /**
@@ -288,7 +298,7 @@ abstract class WgtTemplate
   public function templatePath($file , $type = 'content')
   {
     // use the webfrap template
-    return WebFrap::templatePath( $file , $type);
+    return WebFrap::templatePath( $file , $type, $this->tplInCode);
 
   }//end public function templatePath */
 
@@ -296,11 +306,13 @@ abstract class WgtTemplate
    * @param string $template
    * @return string
    */
-  public function renderTemplate($template = null)
+  public function renderTemplate($template = null, $isCodeTpl = true)
   {
 
     if (!is_null($this->rendered))
       return $this->rendered;
+    
+    $this->tplInCode = $isCodeTpl;
 
     if (!$template)
       $template = $this->template;
@@ -323,7 +335,7 @@ abstract class WgtTemplate
       ob_end_clean();
 
     } else {
-      Error::report('Index Template not exists: '.$template);
+      Error::report('Index Template does not exist: '.$template);
 
       ///TODO add some good error handler here
       if (Log::$levelDebug)

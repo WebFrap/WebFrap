@@ -226,11 +226,11 @@ BUTTONJS;
     $code = <<<BUTTONJS
 
     // close tab
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       self.close();
     });
 
-    self.getObject().find(".wgtac_search").click(function(){
+    self.getObject().find(".wgtac_search").click(function() {
       \$R.form('{$params->searchFormId}', null, {search:true});
     });
 
@@ -240,16 +240,16 @@ BUTTONJS;
     // create code wird ohne creatbutton auch nicht benötigt
     if ($params->access->insert) {
       $code .= <<<BUTTONJS
-    self.getObject().find(".wgtac_new").click(function(){
+    self.getObject().find(".wgtac_new").click(function() {
        \$S('#wgt-form-my_task-table-crud').show();
     });
 
-    self.getObject().find(".wgtac_create").click(function(){
+    self.getObject().find(".wgtac_create").click(function() {
       \$R.form('{$params->formId}');
       \$S('#wgt-form-my_task-table-crud').hide();
     });
 
-    self.getObject().find(".wgtac_cancel").click(function(){
+    self.getObject().find(".wgtac_cancel").click(function() {
        \$S('#wgt-form-my_task-table-crud').hide();
     });
 

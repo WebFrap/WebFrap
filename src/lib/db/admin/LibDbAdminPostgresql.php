@@ -398,7 +398,7 @@ SQL;
 
     $meta = array();
 
-    foreach($results as $row)
+    foreach ($results as $row)
       $meta[$row['name']] = true;
 
     return $meta;
@@ -570,46 +570,36 @@ SQL;
         $sql .= $row[LibDbAdmin::COL_NAME].' '.$type;
 
         ///FIX fixed text / size bug
-        if
-        (
+        if (
           trim($row[LibDbAdmin::COL_LENGTH]) != ''
-            && !in_array
-            (
+            && !in_array(
               $type,
-              array
-              (
+              array(
                 'integer', 'int4',
                 'int2', 'int8',
-                'bool', 'boolean',
+                'boolean',
                 'bytea'
               )
             )
-        )
-        {
+        ) {
           $sql .= '('.str_replace('.',',',$row[LibDbAdmin::COL_LENGTH]).')';
-        } else if
-        (
+        } else if (
           isset($row[LibDbAdmin::COL_PRECISION])
             && '' != trim(LibDbAdmin::COL_PRECISION)
             && (int) $row[LibDbAdmin::COL_PRECISION]
-        )
-        {
+        ) {
 
-          if
-          (
+          if(
             isset($row[LibDbAdmin::COL_SCALE])
               && '' != trim(LibDbAdmin::COL_SCALE)
               && (int) $row[LibDbAdmin::COL_SCALE]
-              && in_array
-              (
+              && in_array(
                 $row[LibDbAdmin::COL_TYPE],
-                array
-                (
+                array(
                   'numeric'
                 )
               )
-          )
-          {
+          ) {
             $sql .= '('.(int) $row[LibDbAdmin::COL_PRECISION].', '.(int) $row[LibDbAdmin::COL_SCALE].')';
           } else {
             $sql .= '('.(int) $row[LibDbAdmin::COL_PRECISION].')';
@@ -622,6 +612,9 @@ SQL;
       } else {
 
         $type = $row[LibDbAdmin::COL_TYPE];
+
+        if ($type == 'bool')
+          $type = 'boolean';
 
         ///FIX fixed text / size bug
         if (trim($row[LibDbAdmin::COL_LENGTH]) != '' && $type == 'text')
@@ -639,7 +632,7 @@ SQL;
               (
                 'integer', 'int4',
                 'int2', 'int8',
-                'bool', 'boolean',
+                'boolean',
                 'bytea'
               )
             )
@@ -1250,11 +1243,11 @@ SQL;
         ))) {
 
           $def = ' DEFAULT \''.(string)$default.'\' ';
-        
+
         } else {
-          
+
           $def = ' DEFAULT '.(string)$default.' ';
-          
+
         }
 
 
@@ -1281,9 +1274,9 @@ SQL;
       if ($nullAble == 'NO') {
 
         if ($type == 'char' || $type == 'varchar' || $type == 'text') {
-          
+
           $default = $default?:' ';
-          
+
           $sql[] = <<<SQL
 UPDATE {$tableName} SET {$colName} = '{$default}' where {$colName} is null;
 
@@ -1294,47 +1287,47 @@ UPDATE {$tableName} SET {$colName} = '{""}' where {$colName} is null;
 
 SQL;
         } elseif ($type == 'bytea') {
-          
+
           $default = $default?:'';
-          
+
           $sql[] = <<<SQL
 UPDATE {$tableName} SET {$colName} = '{$default}' where {$colName} is null;
 
 SQL;
         } elseif (in_array($type , array('smallint', 'integer', 'int', 'bigint', 'numeric')  )  ) {
-          
+
           $default = $default?:'0';
-          
+
           $sql[] = <<<SQL
 UPDATE {$tableName} SET {$colName} = {$default} where {$colName} is null;
 
 SQL;
         } elseif (in_array($type , array('smallint[]', 'integer[]', 'int[]', 'bigint[]', 'numeric[]')  )   ) {
-          
+
           $default = $default?:'{0}';
-          
+
           $sql[] = <<<SQL
 UPDATE {$tableName} SET {$colName} = '{$default}' where {$colName} is null;
 
 SQL;
         } elseif ($type == 'boolean') {
-          
+
           $default = $default?:'false';
-          
+
           $sql[] = <<<SQL
 UPDATE {$tableName} SET {$colName} = {$default} where {$colName} is null;
 
 SQL;
         } elseif ($type == 'time') {
-          
+
           $default = $default?:date('H:i:s');
-          
+
           $sql[] = <<<SQL
 UPDATE {$tableName} SET {$colName} = '{$default}' where {$colName} is null;
 
 SQL;
         } elseif ($type == 'timestamp') {
-          
+
           $default = $default?:date('Y-m-d H:i:s');
 
           $sql[] = <<<SQL
@@ -1342,9 +1335,9 @@ UPDATE {$tableName} SET {$colName} = '{$default}' where {$colName} is null;
 
 SQL;
         } elseif ($type == 'date') {
-          
+
           $default = $default?:date('Y-m-d');
-       
+
           $sql[] = <<<SQL
 UPDATE {$tableName} SET {$colName} = '{$default}' where {$colName} is null;
 
@@ -1370,7 +1363,7 @@ UPDATE {$tableName} SET {$colName} = '{$uuid}' where {$colName} = {$pos['rowid']
 SQL;
 
           }
-          
+
         } elseif ($type == 'uuid[]') {
 
           $rows = $this->db->select('select rowid from '.$tableName.' where '.$colName.' is null;'.NL);
@@ -1390,7 +1383,7 @@ SQL;
 
     if (DEBUG)
       Debug::console('Got non matched type for set not null: '.$type);
-      
+
       $default = $default?:' ';
 
           $sql[] = <<<SQL

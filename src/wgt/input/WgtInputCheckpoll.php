@@ -26,11 +26,9 @@ class WgtInputCheckpoll extends WgtInput
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * Enter description here...
-   *
-   * @var unknown_type
+   * @var array
    */
-  protected $attributes     = array('type' => 'checkbox');
+  public $attributes     = array('type' => 'checkbox');
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
@@ -73,7 +71,7 @@ class WgtInputCheckpoll extends WgtInput
 
       $attribute = '';
 
-      foreach($this->attributes as $key => $value)
+      foreach ($this->attributes as $key => $value)
         $attribute .= $key.'="'.$value.'" ';
 
       $html = '';

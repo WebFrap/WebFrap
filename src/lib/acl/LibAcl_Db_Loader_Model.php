@@ -1564,7 +1564,9 @@ SQL;
     }
 
     if (is_array($areaId)) {
+      
       $whereAreaId = " IN(".implode(',', $areaId).")";
+      
     } else {
 
       if ($level >= 3) {

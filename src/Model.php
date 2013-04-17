@@ -83,7 +83,7 @@ abstract class Model extends BaseChild
   {
 
     $code = <<<JSCODE
-    \$S('#{$wgtId}_row_{$key}').fadeOut(100,function(){\$S('#{$wgtId}_row_{$key}').remove();});
+    \$S('#{$wgtId}_row_{$key}').fadeOut(100,function() {\$S('#{$wgtId}_row_{$key}').remove();});
 
 JSCODE;
 

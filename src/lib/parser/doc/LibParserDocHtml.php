@@ -341,7 +341,7 @@ class LibParserDocHtml
     } else {
       Error::report
       (
-        'Index Template not exists: '.$filename
+        'Index Template does not exist: '.$filename
       );
 
       $content = '<p style="errorMessage">Wrong Index Template</p>';

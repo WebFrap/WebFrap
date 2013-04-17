@@ -19,102 +19,165 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibSearchParser extends LibParser
+class LibSearchParser
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attribute
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   *
-   * @var LibSearchLexer
+   * @var array
    */
-  protected $lexer      = null;
+  protected $rawTokens = array();
 
   /**
-   *
-   * @var LibBdlSst
+   * @var array
    */
-  protected $sst      = null;
+  protected $operators = array(
+    '+',
+    '-',
+    //'!',
+    '>',
+    '<',
+    '>=',
+    '<=',
+    '=',
+    '#',
+    '@',
+  );
 
   /**
-   * the parsed code
-   * @var string
+   * @var array
    */
-  protected $parsed     = null;
+  public $stringTokens = array();
+
+  /**
+   * @var array
+   */
+  public $numberTokens = array();
+
+  /**
+   * @var array
+   */
+  public $intTokens = array();
+
+  /**
+   * @var array
+   */
+  public $tags = array();
+
+  /**
+   * @var array
+   */
+  public $users = array();
+
+  /**
+   * @var array
+   */
+  public $dates = array();
 
 /*//////////////////////////////////////////////////////////////////////////////
 // init methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
+
   /**
-   * @param LibGenfBuild $builder
+   * @param string $searchString
    */
-  public function __construct()
+  public function analyse( $searchString )
   {
 
-    $this->loadLexer();
-    $this->loadSst();
-    $this->loadRegistry();
+    /* string
+hans wurst #test "#test nochwas" @dominik
+     */
 
-  }//end public function __construct */
+    $this->rawTokens = explode(' ', $searchString);
+
+    $lastValue = '';
+
+    foreach ( $this->rawTokens as $token ) {
+
+      $token = trim($token);
+
+      if( '' === $token )
+        continue;
+
+      // indentify if we have an operator
+      $fC = $token[0];
+      $op = null;
+      $value = '';
+
+      if (isset($token[1])) {
+
+        if($this->isOperator($fC)) {
+          if($this->isOperator($fC.$token[1])) {
+            $op = $fC.$token[1];
+          } else {
+            $op = $fC;
+          }
+        }
+
+      } else if ($this->isOperator($fC)) {
+        $op = $fC;
+      }
+
+      if ($op) {
+        $value = substr($token, strlen($op));
+      } else {
+        $value = $token;
+      }
+
+      if( $op ) {
+
+        if ( '@' === $op ) {
+          $this->users[] = $value;
+        } else if( '#' === $op ) {
+          $this->tags[] = $value;
+        } else {
+
+          if (ctype_digit($value)) {
+            $this->intTokens[] = array($op,$value);
+          } else if( is_numeric($value) ) {
+            $this->numberTokens[] = array($op,$value);
+          } else if (preg_match('/^\d{4}-\d{1,2}-\d{1,2}$/', $value)) {
+            $this->dates[] = array($op,$value);
+          } else {
+            $this->stringTokens[] = array($op,$value);
+          }
+        }
+
+      } else {
+
+        if (ctype_digit($value)) {
+          $this->intTokens[] = $value;
+        } else if( is_numeric($value) ) {
+          $this->numberTokens[] = $value;
+        } else if (preg_match('/^\d{4}-\d{1,2}-\d{1,2}$/', $value)) {
+          $this->dates[] = $value;
+        } else {
+          $this->stringTokens[] = $value; // operator ignorieren?
+        }
+
+      }
+
+    }
+
+
+  }//end public function analyse */
+
 
   /**
-   * load the lexer
+   * Check ob der string ein Operator ist
+   * @param string $string
+   * @return boolean
    */
-  public function loadLexer()
+  protected function isOperator( $string )
   {
 
-  }//end public function loadLexer */
+    return in_array($string, $this->operators);
 
-  /**
-   *
-   */
-  public function loadRegistry()
-  {
+  }//end protected function isOperator */
 
-  }//end public function loadRegistry */
 
-  /**
-   *
-   */
-  public function loadSst()
-  {
-
-  }//end public function loadSst */
-
-  /**
-   *
-   */
-  public function cleanWorkspace()
-  {
-
-    $this->registry->name     = null;
-    $this->registry->context  = null;
-    $this->registry->node     = null;
-
-  }//end public function clean */
-
-  /**
-   *
-   */
-  public function clean()
-  {
-
-    $this->registry->name     = null;
-    $this->registry->context  = null;
-    $this->registry->node     = null;
-
-  }//end public function clean */
-
-/*//////////////////////////////////////////////////////////////////////////////
-// parser method
-//////////////////////////////////////////////////////////////////////////////*/
-
-  /**
-   * @param string $rawCode
-   */
-  public function parse($rawCode){ return ''; }
-
-} // end class LibBdlParser
+} // end class LibSearchParser
 

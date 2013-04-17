@@ -1005,10 +1005,10 @@ abstract class Process extends PBase
       Debug::console("call  $action");
 
       if ($error = $this->{$action}($params))
-
         return $error;
 
     } else {
+      
       $tmp1 = $this->edges[$this->oldKey];
       $tmp2 = $tmp1[$this->newNode];
       $tmp3 = $tmp2['actions'];
@@ -1062,7 +1062,7 @@ abstract class Process extends PBase
 
     if (!$this->model->requestedEdge && $validateNode) {
 
-      if (isset($this->nodes[$this->model->activKey]['constraints'])  ) {
+      if (isset($this->nodes[$this->model->activKey]['constraints'])) {
         $constraints = $this->nodes[$this->model->activKey]['constraints'];
       } else {
         return null;
@@ -1089,6 +1089,15 @@ abstract class Process extends PBase
 
       /// TODO Error handling
       if (!method_exists($this, $action)) {
+        
+        $logger = LibProtocol_SystemError::getDefault();
+        $logger->write(
+          'Missing Constraint '.$constraint,
+          Debug::backtrace(),
+          $this->getRequest(),
+          null,
+          $this->entity
+        );
         Debug::console('Missing Constraint '.$constraint);
         continue;
       }

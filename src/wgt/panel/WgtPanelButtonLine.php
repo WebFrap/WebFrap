@@ -36,6 +36,7 @@ class WgtPanelButtonLine extends WgtPanelElement
    * @var Entity
    */
   public $entity = null;
+  
 
 /*//////////////////////////////////////////////////////////////////////////////
 // build method

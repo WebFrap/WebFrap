@@ -79,7 +79,7 @@ class WgtTreemenu extends WgtMenuAbstract
     $template = Webfrap::getSysStatus('systemplate');
     $baseFolder = View::$webIcons.'/xsmall/';
 
-    $html = '$S(document).ready(function(){ '.NL;
+    $html = '$S(document).ready(function() { '.NL;
 
     $html .= '
   // create menubar
@@ -123,7 +123,7 @@ class WgtTreemenu extends WgtMenuAbstract
     $template   = Webfrap::getSysStatus('systemplate');
     $baseFolder = View::$webIcons.'/xsmall/';
 
-    $html = NL.'function extendMainmenu'.$this->name.'(){ '.NL;
+    $html = NL.'function extendMainmenu'.$this->name.'() { '.NL;
     $html .= ' var mBarWid'.$this->name
       .' = $S("div#'.$this->menuId.'").getMenubar().createWidgetMenu(null, dummy, true);'.NL;
     $html .= 'var mBarWidSub'.$this->name

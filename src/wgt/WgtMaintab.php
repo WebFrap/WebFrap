@@ -45,7 +45,7 @@ class WgtMaintab extends LibTemplatePublisher
           <action>
                 <![CDATA[
 
-      return function(){
+      return function() {
         //self == Current window
 
       }
@@ -392,7 +392,7 @@ class WgtMaintab extends LibTemplatePublisher
 
     $html = '<div class="buttons left" >';
 
-    foreach($this->buttons as /* @var $button WgtButton */ $button  )
+    foreach ($this->buttons as /* @var $button WgtButton */ $button  )
       $html .= $button->buildMaintab();
 
     $html .= '</div>';
@@ -400,6 +400,15 @@ class WgtMaintab extends LibTemplatePublisher
     return $html;
 
   }//end public function buildButtons */
+
+  /**
+   * @param string $name
+   * @param string $code
+   */
+  public function addEvent( $name, $code )
+  {
+
+  }//end public function addEvent */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic
@@ -434,12 +443,12 @@ class WgtMaintab extends LibTemplatePublisher
 
     $buttons = '';
 
-    foreach($this->buttons as /* @var $button WgtButton */ $button  )
+    foreach ($this->buttons as /* @var $button WgtButton */ $button  )
       $buttons .= $button->buildMaintab();
 
     $maskActions = '';
 
-    foreach($this->maskActions as /* @var $maskAction WgtButton */ $maskAction  )
+    foreach ($this->maskActions as /* @var $maskAction WgtButton */ $maskAction  )
       $maskActions .= $maskAction->buildAction();
 
    /*
@@ -450,7 +459,7 @@ class WgtMaintab extends LibTemplatePublisher
     $this->rightPanel->flags->messages = true;
     */
 
-    if ($this->rightPanel  ){
+    if ($this->rightPanel  ) {
 
       if ($this->var->entity  )
         $this->rightPanel->entity = $this->var->entity;
@@ -526,7 +535,7 @@ HTML;
       }
 
       $buttonClose = '';
-      if (!$this->closeCustom  ){
+      if (!$this->closeCustom  ) {
         $buttonClose = <<<HTML
           <button
             class="wcm wcm_ui_tip-left wgt-button wgtac_close"
@@ -624,24 +633,24 @@ CODE;
    *
    * @return void
    */
-  public function compile(){}
+  public function compile() {}
 
   /**
    *
    * @return void
    */
-  public function init(){}
+  public function init() {}
 
   /**
    *
    * @return void
    */
-  public function publish(){}
+  public function publish() {}
 
   /**
    *
    */
-  protected function buildMessages(){}
+  protected function buildMessages() {}
 
 } // end class WgtMaintab
 

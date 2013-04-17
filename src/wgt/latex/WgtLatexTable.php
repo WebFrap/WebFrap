@@ -66,7 +66,7 @@ class WgtLatexTable extends WgtTable
     // Creating the Head
     $head = '{';
 
-    foreach($this->rows as $row)
+    foreach ($this->rows as $row)
       $head .= '|l';
 
     $head .= '|}';
@@ -78,7 +78,7 @@ class WgtLatexTable extends WgtTable
       $head .= '\\hline'.NL;
 
       $tmp = '';
-      foreach($this->rows as $row)
+      foreach ($this->rows as $row)
         $tmp .= str_replace('_' , ' ' , $row).' & ';
 
       $head .= substr($tmp,0,-2).'\\\\'.NL;
@@ -108,7 +108,7 @@ class WgtLatexTable extends WgtTable
 
         $tmp = '';
 
-        foreach($keys as $key)
+        foreach ($keys as $key)
           $tmp .= $row[$key] .' & ';
 
         $tmp = substr($tmp,0,-2);
@@ -137,7 +137,7 @@ class WgtLatexTable extends WgtTable
 
         $tmp = '';
 
-        foreach($keys as $key)
+        foreach ($keys as $key)
           $tmp .= $row[$key] .'&';
 
         $body .= substr($tmp,0,-1);

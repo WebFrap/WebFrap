@@ -24,7 +24,7 @@ final class STestStrings
 
   /** Privater Konstruktor zum Unterbinde von Instanzen
    */
-  private function __construct(){}
+  private function __construct() {}
 
   /** Funktion zum maskieren von Strings und Arrays
    *

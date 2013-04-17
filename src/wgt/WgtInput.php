@@ -43,7 +43,7 @@ abstract class WgtInput extends WgtAbstract
    * @var boolean
    */
   public $unqiue  = false;
-  
+
   /**
    *
    * @var boolean
@@ -213,23 +213,23 @@ abstract class WgtInput extends WgtAbstract
     $this->required = $required;
 
   }// end public function setRequired */
-  
+
  /**
-  * @param boolean $required
+  * @param boolean $unique
   * @return void
   */
-  public function setUnique($required = true)
+  public function setUnique($unique = true)
   {
 
-    if ($required) {
+    if ($unique) {
       $this->classes['wcm'] = 'wcm';
-      $this->classes['wcm_valid_required'] = 'wcm_valid_required';
+      $this->classes['wcm_valid_unique'] = 'wcm_valid_unique';
     } else {
-      if (isset($this->classes['wcm_valid_required']))
-        unset($this->classes['wcm_valid_required']);
+      if (isset($this->classes['wcm_valid_unique']))
+        unset($this->classes['wcm_valid_unique']);
     }
 
-    $this->required = $required;
+    $this->unqiue = $unique;
 
   }// end public function setRequired */
 
@@ -244,19 +244,19 @@ abstract class WgtInput extends WgtAbstract
   {
 
     $this->classes['wcm'] = 'wcm';
-    
+
     // kann auch unique sein wenn nur required oder unique gesetzt werden soll
     if ($validator)
       $this->classes['wcm_valid_'.$validator] = 'wcm_valid_'.$validator;
-    
+
     if($unique)
       $this->classes['wcm_valid_unique'] = 'wcm_valid_unique';
-      
+
     if($required)
       $this->classes['wcm_valid_required'] = 'wcm_valid_required';
 
     $this->required = $required;
-    
+
   }// end public function setValidator */
 
  /**
@@ -492,7 +492,7 @@ HTML;
     if (!isset($attributes['id']))
       $attributes['id'] = 'wgt-input-'.uniqid();
 
-    foreach($attributes as $key => $value)
+    foreach ($attributes as $key => $value)
       $html .= $key.'="'.$value.'" ';
 
     return $html;

@@ -155,12 +155,12 @@ class WgtInputRatingbar extends WgtInput
 
     /*
     $this->jsCode = <<<JS_CODE
-\$S(function(){ // wait for document to load
+\$S(function() { // wait for document to load
 var activ = null;
 \$S('#wgt_box_{$id}  input.wgt_start_rating').rating({
-focus: function(value, link){\$S('#{$id}_text').html(link.title);},
-blur: function(value, link){\$S('#{$id}_text').html(activ  || '&nbsp;');},
-callback: function(value, link){activ = link.title;\$S('#h{$id}_text').html(link.title);}
+focus: function(value, link) {\$S('#{$id}_text').html(link.title);},
+blur: function(value, link) {\$S('#{$id}_text').html(activ  || '&nbsp;');},
+callback: function(value, link) {activ = link.title;\$S('#h{$id}_text').html(link.title);}
 });});
 JS_CODE;
 */

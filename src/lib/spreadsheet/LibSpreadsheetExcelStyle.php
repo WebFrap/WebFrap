@@ -103,7 +103,7 @@ class LibSpreadsheetExcelStyle
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
-  public function __construct(){}
+  public function __construct() {}
 
   /**
    * @param int $key

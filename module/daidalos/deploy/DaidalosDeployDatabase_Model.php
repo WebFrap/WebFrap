@@ -375,14 +375,14 @@ class DaidalosDeployDatabase_Model extends Model
 
       $files = $folder->getFilesByEnding('.php');
 
-      foreach($files as $file)
+      foreach ($files as $file)
         include $file;
 
       $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/entity_ref/');
 
       $files = $folder->getFilesByEnding('.php');
 
-      foreach($files as $file)
+      foreach ($files as $file)
         include $file;
 
     }
@@ -726,14 +726,14 @@ class DaidalosDeployDatabase_Model extends Model
 
       $files = $folder->getFilesByEnding('.php');
 
-      foreach($files as $file)
+      foreach ($files as $file)
         include $file;
 
       $folder = new LibFilesystemFolder($rootPath.$module.'/sandbox/data/metadata/widget/');
 
       $files = $folder->getFilesByEnding('.php');
 
-      foreach($files as $file)
+      foreach ($files as $file)
         include $file;
 
     }

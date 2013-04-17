@@ -173,7 +173,7 @@ SQL;
     if ($node) {
 
       // auf open setzen wenn noch closed
-      if ($setOpen && EMessageStatus::IS_NEW == $node['receiver_status'] ){
+      if ($setOpen && EMessageStatus::IS_NEW == $node['receiver_status'] ) {
         $db->update("UPDATE wbfsys_message_receiver set status =".EMessageStatus::OPEN." WHERE rowid = ".$node['receiver_id'] );
         $node['receiver_status'] = EMessageStatus::OPEN;
       }

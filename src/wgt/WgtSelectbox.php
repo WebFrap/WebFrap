@@ -596,8 +596,7 @@ class WgtSelectbox extends WgtInput
     $required = $this->required?'<span class="wgt-required">*</span>':'';
 
     if ($this->editUrl) {
-      //$select .= '<a href="'.$this->editUrl.'" class="wcm wcm_req_ajax" >'
-      //  .Wgt::icon('control/edit.png','xsmall',array('alt'=>'edit')).'</a>'.NL;
+      $this->label =  '<a href="'.$this->editUrl.'" class="wcm wcm_req_ajax" >'.$this->label.'</a>'.NL;
     }
 
     $helpIcon = null;

@@ -124,12 +124,12 @@ HTML;
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-    self.find(".wgtac_edit").click(function(){
+    self.find(".wgtac_edit").click(function() {
       \$S.modal.close();
       \$R.get('modal.php?c=Webfrap.Docu.edit&key={$helpPage->access_key}');
     });
 
-    self.find(".wgtac_close").click(function(){
+    self.find(".wgtac_close").click(function() {
       \$S.modal.close();
     });
 

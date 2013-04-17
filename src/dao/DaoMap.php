@@ -80,7 +80,7 @@ class DaoMap extends Dao
 
       $folder = new LibFilesystemFolder($menuPath);
 
-      foreach($folder->getFiles() as $file)
+      foreach ($folder->getFiles() as $file)
         include $file->getName(true);
 
        // break after found data

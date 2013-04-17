@@ -66,7 +66,7 @@ class LibCacheRequestWebTheme extends LibCacheRequestCss
       include PATH_GW.'conf/conf.style.default.php';
 
     $tmpVar = array();
-    foreach($variables as $key => $val  )
+    foreach ($variables as $key => $val  )
       $tmpVar['@{'.$key.'}'] = $val;
 
     $code = ob_get_contents();
@@ -148,7 +148,7 @@ class LibCacheRequestWebTheme extends LibCacheRequestCss
       include PATH_GW.'conf/conf.style.default.php';
 
     $tmpVar = array();
-    foreach($variables as $key => $val  )
+    foreach ($variables as $key => $val  )
       $tmpVar['@{'.$key.'}'] = $val;
     */
 

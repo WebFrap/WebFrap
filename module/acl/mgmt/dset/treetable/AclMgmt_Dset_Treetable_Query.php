@@ -64,7 +64,7 @@ class AclMgmt_Dset_Treetable_Query extends LibSqlQuery
     $this->queryGroups($areaId, $condition);
 
     $groupIds = array();
-    foreach($this->data as $data)
+    foreach ($this->data as $data)
       $groupIds[] = $data['role_group_rowid'];
 
     $this->queryUsers($areaId, $groupIds, $datasetId, $condition);

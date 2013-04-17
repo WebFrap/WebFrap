@@ -51,6 +51,28 @@ class WebfrapMessage_Ajax_View extends LibTemplatePlain
     $tpl->setArea('message_list', $pageFragment);
 
   }//end public function displayOpen */
+  
+  /**
+   * Render des Suchergebnisses und übergabe in die ajax response
+   * @param string $elementId
+   */
+  public function displayMsgPreview( $msgNode )
+  {
+  
+    $tpl = $this->getTplEngine();
+  
+    $pageFragment = new WgtAjaxArea();
+    $pageFragment->selector = '#wgt-message-list-show_messagebox';
+    $pageFragment->action = 'html';
+  
+    $pageFragment->addVar( 'message', $msgNode );
+    $pageFragment->setTemplate('webfrap/message/maintab/list_msgbox',true);
+    $pageFragment->render();
+
+    $tpl->setArea('message_list', $pageFragment);
+  
+  }//end public function displayMsgPreview */  
+
 
   /**
    * Autocomplete für User

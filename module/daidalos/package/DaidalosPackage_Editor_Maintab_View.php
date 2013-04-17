@@ -158,16 +158,16 @@ HTML;
     $code = <<<BUTTONJS
 
 // close tab
-self.getObject().find(".wgtac_close").click(function(){
+self.getObject().find(".wgtac_close").click(function() {
   self.close();
 });
 
-self.getObject().find(".wgtac_save").click(function(){
+self.getObject().find(".wgtac_save").click(function() {
   \$R.form('wgt-form-daidalos_package_edit-{$key}');
   //self.close();
 });
 
-self.getObject().find(".wgtac_build_package").click(function(){
+self.getObject().find(".wgtac_build_package").click(function() {
   \$S('#wgt-modal-daidalos-package-{$key}').modal();
   //self.close();
 });

@@ -38,7 +38,7 @@ class WgtRndTable
     if ($label) {
       if (is_array($label)) {
         $table .= '<thead>'.NL.'<tr>'.NL;
-        foreach($label as $name)
+        foreach ($label as $name)
           $table .= '<th>'.$name.'</th>'.NL;
 
         $table .= '</tr>'.NL.'</thead>'.NL;
@@ -46,7 +46,7 @@ class WgtRndTable
         $label = array_keys($data[0]);
 
         $table .= '<thead>'.NL.'<tr>'.NL;
-        foreach($label as $name)
+        foreach ($label as $name)
           $table .= '<th>'.$name.'</th>'.NL;
 
         $table .= '</tr>'.NL.'</thead>'.NL;
@@ -60,7 +60,7 @@ class WgtRndTable
     if ($label) {
       foreach ($data as $row) {
         $table .= '<tr>'.NL;
-        foreach(array_keys($label) as $col)
+        foreach (array_keys($label) as $col)
           $table .= '<td>'.$row[$col].'</td>'.NL;
 
         $table .= '</tr>'.NL;
@@ -68,7 +68,7 @@ class WgtRndTable
     } else {
       foreach ($data as $row) {
         $table .= '<tr>'.NL;
-        foreach( $row as $col)
+        foreach ( $row as $col)
           $table .= '<td>'.$col.'</td>'.NL;
 
         $table .= '</tr>'.NL;

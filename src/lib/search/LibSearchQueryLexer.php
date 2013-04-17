@@ -19,7 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibSearchLexer extends LibLexer
+class LibSearchQueryLexer extends LibLexer
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attribute

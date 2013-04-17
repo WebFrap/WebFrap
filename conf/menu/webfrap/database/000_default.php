@@ -6,8 +6,7 @@ $this->crumbs = array(
   array('Database', $this->interface.'?c=Webfrap.Base.menu&amp;menu=database','control/folder.png'),
 );
 
-$this->firstEntry = array
-(
+$this->firstEntry = array(
   'menu_mod_root',
    Wgt::MAIN_TAB,
   '..',
@@ -16,8 +15,7 @@ $this->firstEntry = array
   'places/folder_up.png',
 );
 
-$this->files[] = array
-(
+$this->files[] = array(
   'menu-system-maintenance-db-consistency',
   Wgt::AJAX,
   'Db Concistency',
@@ -25,4 +23,14 @@ $this->files[] = array
   'maintab.php?c=Maintenance.DbConsistency.table',
   'utilities/db.png',
 );
+
+$this->files[] = array(
+  'menu-system-maintenance-db-queries',
+  Wgt::AJAX,
+  'Db Queries',
+  'Db Queries',
+  'maintab.php?c=Webfrap.Db_QueryManager.table',
+  'utilities/db.png',
+);
+
 

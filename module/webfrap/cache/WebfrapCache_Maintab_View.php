@@ -161,17 +161,17 @@ HTML;
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-self.getObject().find(".wgtac_clean_cache").click(function(){
+self.getObject().find(".wgtac_clean_cache").click(function() {
   \$R.del('ajax.php?c=Webfrap.Cache.cleanAll');
 });
 
-self.getObject().find(".wgtac_refresh").click(function(){
+self.getObject().find(".wgtac_refresh").click(function() {
   self.close();
   \$R.get('maintab.php?c=Webfrap.Cache.stats');
 });
 
 // close tab
-self.getObject().find(".wgtac_close").click(function(){
+self.getObject().find(".wgtac_close").click(function() {
   self.close();
 });
 

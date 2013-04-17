@@ -67,7 +67,7 @@ class LibCacheRequestCss extends LibCacheRequest
       include PATH_GW.'conf/conf.style.default.php';
 
     $tmpVar = array();
-    foreach($variables as $key => $val  )
+    foreach ($variables as $key => $val  )
       $tmpVar['@{'.$key.'}'] = $val;
     */
 
@@ -139,7 +139,7 @@ class LibCacheRequestCss extends LibCacheRequest
       include PATH_GW.'conf/conf.style.default.php';
 
     $tmpVar = array();
-    foreach($variables as $key => $val  )
+    foreach ($variables as $key => $val  )
       $tmpVar['@{'.$key.'}'] = $val;
     */
 
@@ -272,9 +272,9 @@ class LibCacheRequestCss extends LibCacheRequest
   }//end public function rebuildList */
 
   
-  protected function rBgGradient( $light, $dark, $vert = true ){
+  protected function rBgGradient( $light, $dark, $vert = true ) {
     
-    if( $vert ){
+    if( $vert ) {
       
     return <<<CSS
   background: {$light}; /* Old browsers */

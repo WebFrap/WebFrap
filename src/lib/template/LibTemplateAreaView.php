@@ -260,7 +260,7 @@ class LibTemplateAreaView extends LibTemplateHtml
       );
 
       if (Log::$levelDebug)
-        return "<p class=\"wgt-box error\">Template: $template not exists.</p>";
+        return "<p class=\"wgt-box error\">Template: $template does not exist.</p>";
       else
         return '<p class="wgt-box error">Error Code: 42</p>';
 
@@ -314,7 +314,7 @@ class LibTemplateAreaView extends LibTemplateHtml
       Error::report('Failed to load the template :'.$template);
 
       if (Log::$levelDebug)
-        echo "<p class=\"wgt-box error\">Template: $template not exists.</p>";
+        echo "<p class=\"wgt-box error\">Template: $template does not exist.</p>";
       else
         echo '<p class="wgt-box error">Error Code: 42</p>';
 
@@ -337,7 +337,7 @@ class LibTemplateAreaView extends LibTemplateHtml
 
       echo $this->compiled;
     } else {
-      echo '!!!template not exists!!!';
+      echo '!!!Template does not exist!!!';
     }
 
   } // end public function embed
@@ -346,12 +346,12 @@ class LibTemplateAreaView extends LibTemplateHtml
    *
    * @return void
    */
-  public function compile(){}
+  public function compile() {}
 
   /**
    *
    */
-  protected function buildMessages(){}
+  protected function buildMessages() {}
 
 } // end class LibTemplateArea
 

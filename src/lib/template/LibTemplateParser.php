@@ -259,7 +259,7 @@ class LibTemplateParser
 
   }
 
-  protected function replaceTplForeach($node)
+  protected function replaceTplforeach ($node)
   {
 
   }

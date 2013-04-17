@@ -142,15 +142,15 @@ class MaintenanceDb_Index_Stats_Maintab_View extends WgtMaintabCustom
     $code = <<<BUTTONJS
 
 // close tab
-self.getObject().find(".wgtac_close").click(function(){
+self.getObject().find(".wgtac_close").click(function() {
   self.close();
 });
 
-self.getObject().find(".wgtac_recreate").click(function(){
+self.getObject().find(".wgtac_recreate").click(function() {
   \$R.put('ajax.php?c=Maintenance.Db_Index.recalcAll',{});
 });
 
-self.getObject().find(".wgtac_search_form").click(function(){
+self.getObject().find(".wgtac_search_form").click(function() {
   \$R.get('maintab.php?c=Maintenance.Db_Index.searchForm');
 });
 

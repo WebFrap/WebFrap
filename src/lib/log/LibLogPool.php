@@ -174,7 +174,7 @@ class LibLogPool
       return;
 
     // Die logAppendermodue auslesen
-    foreach($conf['activ'] as $appender)
+    foreach ($conf['activ'] as $appender)
       $this->logAppender[] = $appender;
 
     // Die Logmodule auslese und die Extensions laden

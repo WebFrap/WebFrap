@@ -908,7 +908,7 @@ class LibRequestSubrequest
         $filtered[$id] = $filtr;
       }
 
-    }//end foreach($this->data[$subkey] as $id => $row)
+    }//end foreach ($this->data[$subkey] as $id => $row)
 
     return $filtered;
 

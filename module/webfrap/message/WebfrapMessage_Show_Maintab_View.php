@@ -144,20 +144,20 @@ HTML;
     $code = <<<BUTTONJS
 
     // close tab
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       \$S('#{$this->id}_dropmenu-control').dropdown('remove');
       self.close();
     });
 
-    self.getObject().find(".wgtac_forward").click(function(){
-      \$R.get('maintab.php?c=Webfrap.Message.formForward&objid={$message->msg_id}',{success:function(){ self.close(); }});
+    self.getObject().find(".wgtac_forward").click(function() {
+      \$R.get('maintab.php?c=Webfrap.Message.formForward&objid={$message->msg_id}',{success:function() { self.close(); }});
     });
 
-    self.getObject().find(".wgtac_reply").click(function(){
-      \$R.get('maintab.php?c=Webfrap.Message.formReply&objid={$message->msg_id}',{success:function(){ self.close(); }});
+    self.getObject().find(".wgtac_reply").click(function() {
+      \$R.get('maintab.php?c=Webfrap.Message.formReply&objid={$message->msg_id}',{success:function() { self.close(); }});
     });
 
-   self.getObject().find(".wgtac_save").click(function(){
+   self.getObject().find(".wgtac_save").click(function() {
       \$R.form('wgt-form-msg-show-save-{$message->msg_id}');
    });
 

@@ -492,6 +492,24 @@ class WgtMenuBuilder_SplitButton extends WgtMenuBuilder
             $button[Wgt::BUTTON_LABEL]
           ).' '.$button[Wgt::BUTTON_LABEL]
         .'</a>';
+    } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_OPEN_IN_WINDOW) {
+      
+      $url = $button[Wgt::BUTTON_ACTION].$id.$urlExt;
+      
+      $html .= '<a  '
+        .' class="wcm wcm_req_mainwin '.$button[Wgt::BUTTON_PROP].($addClass? ' '.$addClass:'').'" '
+        .' href="'.$url.'" '
+        .' title="'.$this->view->i18n->l(
+            $button[Wgt::BUTTON_LABEL],
+            $button[Wgt::BUTTON_I18N]
+          ).'" >'.
+          Wgt::icon
+          (
+            $button[Wgt::BUTTON_ICON],
+            'xsmall',
+            $button[Wgt::BUTTON_LABEL]
+          ).' '.$button[Wgt::BUTTON_LABEL]
+        .'</a>';
     } else {
       if ($id) {
         $html .= '<a  '

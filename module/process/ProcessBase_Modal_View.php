@@ -120,16 +120,16 @@ class ProcessBase_Modal_View extends WgtModal
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-    self.getObject().find(".wgtac_edit").click(function(){
+    self.getObject().find(".wgtac_edit").click(function() {
       self.setChanged(false);
       \$R.form('{$params->formId}');
     }).removeClass("wgtac_edit");
 
-    self.getObject().find(".wgtac_show").click(function(){
+    self.getObject().find(".wgtac_show").click(function() {
       \$R.get('modal.php?c=Project.Constraint.show&amp;objid={$objid}');
     }).removeClass("wgtac_show");
 
-    self.getObject().find(".wgtac_metadata").click(function(){
+    self.getObject().find(".wgtac_metadata").click(function() {
       \$R.get('modal.php?c=Project.Constraint.showMeta&amp;objid={$objid}');
     }).removeClass("wgtac_metadata");
 

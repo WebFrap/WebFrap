@@ -62,7 +62,7 @@ class SFilesystem
 
         $activFolder .= $tpFolder.'/';
 
-      }//end foreach($folders as $tpFolder)
+      }//end foreach ($folders as $tpFolder)
     } else {
       if (is_dir($folder))
        return true;
@@ -153,7 +153,7 @@ class SFilesystem
 
         $activFolder .= $tpFolder.'/';
 
-      }//end foreach($folders as $tpFolder)
+      }//end foreach ($folders as $tpFolder)
     } else {
       if (is_dir($folder))
        return true;

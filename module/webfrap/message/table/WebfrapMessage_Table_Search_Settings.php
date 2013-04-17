@@ -44,7 +44,7 @@ class WebfrapMessage_Table_Search_Settings extends LibSettingsNode
    * @var stdClass
    */
   public $taskAction = null;
-  
+
   /**
    * @var int
    */
@@ -54,11 +54,11 @@ class WebfrapMessage_Table_Search_Settings extends LibSettingsNode
   /**
    * @param array $channels
    */
-  public function setChannel($channels){
+  public function setChannel($channels) {
 
     $channels = (object)$channels;
 
-    if ($this->channels != $channels){
+    if ($this->channels != $channels) {
 
       $this->changed = true;
       $this->channels = $channels;
@@ -69,9 +69,9 @@ class WebfrapMessage_Table_Search_Settings extends LibSettingsNode
   /**
    * @param array $channels
    */
-  public function setAspects($aspects){
+  public function setAspects($aspects) {
 
-    if ($this->aspects !== $aspects){
+    if ($this->aspects !== $aspects) {
       $this->changed = true;
       $this->aspects = $aspects;
     }
@@ -81,13 +81,13 @@ class WebfrapMessage_Table_Search_Settings extends LibSettingsNode
   /**
    * @param array $status
    */
-  public function setStatus($status){
+  public function setStatus($status) {
 
     $status = (object)$status;
 
     $this->changed = true;
 
-    if ($this->status != $status){
+    if ($this->status != $status) {
 
       $this->status = $status;
     }
@@ -97,13 +97,13 @@ class WebfrapMessage_Table_Search_Settings extends LibSettingsNode
   /**
    * @param array $taskAction
    */
-  public function setTaskAction($taskAction){
+  public function setTaskAction($taskAction) {
 
     $taskAction = (object)$taskAction;
 
     $this->changed = true;
 
-    if ($this->taskAction != $taskAction){
+    if ($this->taskAction != $taskAction) {
 
       $this->taskAction = $taskAction;
     }
@@ -132,7 +132,7 @@ class WebfrapMessage_Table_Search_Settings extends LibSettingsNode
     $this->taskAction = isset($this->node->task_action)
       ? (object)$this->node->task_action
       : new stdClass();
-      
+
     $this->taskStatus = isset($this->node->task_status)
       ? $this->node->task_status
       : 1;
@@ -154,6 +154,21 @@ class WebfrapMessage_Table_Search_Settings extends LibSettingsNode
     return json_encode($this->node);
 
   }//end public function toJson */
+
+  /**
+   * @param string $data
+   */
+  public function loadByJson( $data )
+  {
+    $this->node = json_decode($data);
+
+    $this->channels = $this->node->channels;
+    $this->aspects = $this->node->aspects;
+    $this->taskAction = $this->node->task_action;
+    $this->status = $this->node->status;
+    $this->taskStatus = $this->node->task_status;
+
+  }//end public function loadByJson */
 
 } // end class WebfrapMessage_Table_Search_Request */
 

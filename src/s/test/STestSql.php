@@ -24,7 +24,7 @@ final class STestSql
 
   /** Privater Konstruktor zum Unterbinde von Instanzen
    */
-  private function __construct(){}
+  private function __construct() {}
 
   /** Funktion zum testen was für einen Art SQL String man vor sich hat
    *

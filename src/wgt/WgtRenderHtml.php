@@ -123,7 +123,7 @@ abstract class WgtRenderHtml
     if (!isset($attributes['id']))
       $attributes['id'] = 'wgt_item_'.uniqid();
 
-    foreach($attributes as $key => $value)
+    foreach ($attributes as $key => $value)
       $html .= $key.'="'.$value.'" ';
 
     return $html;

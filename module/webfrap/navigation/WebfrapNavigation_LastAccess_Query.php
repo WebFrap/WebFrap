@@ -54,7 +54,7 @@ class WebfrapNavigation_LastAccess_Query extends LibSqlQuery
 
     $criteria->from('wbfsys_protocol_message');
 
-    $this->checkLimitAndOrder($criteria, $params);
+    $this->checkLimitAndOrder($criteria, new TFlag());
 
     // Run Query und save the result
     $this->result     = $db->orm->select($criteria);

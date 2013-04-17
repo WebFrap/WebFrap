@@ -95,11 +95,13 @@ class DaidalosDeployProject_Model extends Model
   {
 
     try {
+      
       $state = $this->load($entity, $deployConf, $params, $env);
       $this->createBackups();
-
-       SFilesystem::delete($this->deployTmp);
+      SFilesystem::delete($this->deployTmp);
+      
     } catch (Exception $e) {
+      
       SFilesystem::delete($this->deployTmp);
     }
 

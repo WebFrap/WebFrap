@@ -112,12 +112,12 @@ class WebfrapMessage_Table_Element extends WgtTable
         Wgt::BUTTON_CHECK => function($row, $id, $value, $access) use ($user) {
 
           // nicht auf eigene mails replyen
-          if ($row['wbfsys_message_id_sender'] == $user->getId()  ) {
-            
+          if ($row['wbfsys_message_id_sender'] == $user->getId()) {
+
             return ($row['wbfsys_message_id_sender_status'] == EMessageStatus::ARCHIVED);
-            
+
           } else {
-            
+
             return ($row['wbfsys_message_receiver_status'] == EMessageStatus::ARCHIVED);
           }
 
@@ -136,11 +136,11 @@ class WebfrapMessage_Table_Element extends WgtTable
 
           // nicht auf eigene mails replyen
           if ($row['wbfsys_message_id_sender'] == $user->getId()  ) {
-            
+
             return ($row['wbfsys_message_id_sender_status'] != EMessageStatus::ARCHIVED);
-            
+
           } else {
-            
+
             return ($row['wbfsys_message_receiver_status'] != EMessageStatus::ARCHIVED);
           }
 
@@ -159,11 +159,11 @@ class WebfrapMessage_Table_Element extends WgtTable
 
           // nicht auf eigene mails replyen
           if ( (int)$row['wbfsys_message_spam_level'] != 0 ) {
-            
+
             return true;
-            
+
           } else {
-            
+
             return false;
           }
 
@@ -182,16 +182,42 @@ class WebfrapMessage_Table_Element extends WgtTable
 
           // nicht auf eigene mails replyen
           if ( (int)$row['wbfsys_message_spam_level'] > 75 ) {
-            
+
             return false;
-            
+
           } else {
-            
+
             return true;
           }
 
         }
       ),
+      'mark_read'    => array(
+          Wgt::ACTION_BUTTON_PUT,
+          'Mark as read',
+          'ajax.php?c=Webfrap.Message.markAsRead&amp;objid=',
+          'icon-eye-open',
+          '',
+          'wbf.label',
+          Acl::UPDATE,
+          Wgt::BUTTON_CHECK => function($row, $id, $value, $access) use ($user) {
+
+            // nicht auf eigene mails replyen
+            if ( (int)$row['wbfsys_message_receiver_status'] <= EMessageStatus::UPDATED ) {
+
+              if( $row['wbfsys_message_id_receiver'] == $user->getId() )
+                return true;
+              else
+                return false;
+
+            } else {
+
+              return false;
+            }
+
+          }
+      ),
+
 
       'delete'  => array(
         Wgt::ACTION_DELETE,
@@ -349,7 +375,7 @@ class WebfrapMessage_Table_Element extends WgtTable
     $iconType[EMessageAspect::MESSAGE] = '<i class="icon-envelope" ></i>';
     $iconType[EMessageAspect::DOCUMENT] = '<i class="icon-file-alt" ></i>';
     $iconType[EMessageAspect::DISCUSSION] = '<i class="icon-comments-alt" ></i>';
-    
+
     // create the table body
     $body = '<tbody>'.NL;
 
@@ -378,12 +404,12 @@ class WebfrapMessage_Table_Element extends WgtTable
         .' id="'.$rowid.'" wgt_eid="'.$objid.'" >'.NL;
 
       $body .= '<td valign="top" class="pos" >'.$pos.'</td>'.NL;
-      
+
       $body .= '<td valign="top" style="text-align:center;"  >'.$iconType[$row['wbfsys_message_main_aspect']].'</td>'.NL;
 
 
       $body .= '<td valign="top" >'
-        . '<a class="wcm wcm_req_ajax" href="maintab.php?c=Webfrap.Message.formShow&amp;objid='.$objid.'" >'
+        . '<a class="wcm wcm_req_ajax" href="ajax.php?c=Webfrap.Message.showPreview&amp;objid='.$objid.'" >'
         . Validator::sanitizeHtml($row['wbfsys_message_title'])
         . '<a/></td>'.NL;
 
@@ -399,8 +425,8 @@ class WebfrapMessage_Table_Element extends WgtTable
           ? $this->view->i18n->date($row['wbfsys_message_m_time_created'])
           : ' '
         ).'</td>'.NL;
-        
-        
+
+
 
       $body .= '<td valign="top" style="text-align:center" >';
 
@@ -409,35 +435,35 @@ class WebfrapMessage_Table_Element extends WgtTable
       } else {
         $isInbox = false;
       }
-        
+
       // action required
-      
+
       $body .=  $row['task_id']
         ? '<i class="icon-tasks" title="Is Task" ></i> '
         : '';
-        
+
       $body .=  $row['appoint_id']
         ? '<i class="icon-calendar" title="Is Appointment" ></i> '
         : '';
-      
+
 
       // SPAM / HAM status
       $body .=  ($row['wbfsys_message_spam_level']>51)
         ? '<i class="icon-thumbs-down mal" title="is SPAM" ></i> '
         : '';
-      
+
       // action required
       $body .=  ( 't' == $row['receiver_action_required'])
         ? '<i class="icon-exclamation-sign attention" title="Your action is required" ></i> '
         : '';
-        
+
       // urgent
       $body .=  ( 't' == $row['flag_urgent'])
         ? '<i class="icon-time urgent" title="Ok, this getting a little urgent now!" ></i> '
         : '';
 
       // priority
-      $body .=  ( $row['wbfsys_message_priority'] && ($row['wbfsys_message_priority'] > 30 || 10 == $row['wbfsys_message_priority'] )  ) 
+      $body .=  ( $row['wbfsys_message_priority'] && ($row['wbfsys_message_priority'] > 30 || 10 == $row['wbfsys_message_priority'] )  )
         ? $iconPrio[$row['wbfsys_message_priority']].' '
         : ' ';
 
@@ -549,99 +575,142 @@ class WebfrapMessage_Table_Element extends WgtTable
   public function buildAjaxTbody($row  )
   {
 
-    $objid = $row['core_person_rowid'];
-    $rowid = $this->id.'_row_'.$objid;
-
     $user = User::getActive();
 
     $iconStatus = array();
-    $iconStatus[EMessageStatus::IS_NEW] = '<i class="icon-envelope new" ></i>';
-    $iconStatus[EMessageStatus::UPDATED] = '<i class="icon-envelope update" ></i>';
-    $iconStatus[EMessageStatus::OPEN] = '<i class="icon-folder-open-alt open" ></i>';
-    $iconStatus[EMessageStatus::ARCHIVED] = '<i class="icon-envelope-alt archive" ></i>';
+    $iconStatus[EMessageStatus::IS_NEW] = '<i class="icon-envelope new" title="New message" ></i>';
+    $iconStatus[EMessageStatus::UPDATED] = '<i class="icon-envelope update" title="Message was updated" ></i>';
+    $iconStatus[EMessageStatus::OPEN] = '<i class="icon-folder-open-alt open" title="Message is open" ></i>';
+    $iconStatus[EMessageStatus::ARCHIVED] = '<i class="icon-envelope-alt archive" title="Message was archived" ></i>';
 
     $iconPrio = array();
 
-    $iconPrio[10] = '<i class="icon-flag min" ></i>';
-    $iconPrio[20] = '<i class="icon-flag low" ></i>';
-    $iconPrio[30] = '<i class="icon-flag avg" ></i>';
-    $iconPrio[40] = '<i class="icon-flag high" ></i>';
-    $iconPrio[50] = '<i class="icon-flag max" ></i>';
+    $iconPrio[10] = '<i class="icon-flag min" title="min priority" ></i>';
+    $iconPrio[20] = '<i class="icon-flag low" title="low priority" ></i>';
+    $iconPrio[30] = '<i class="icon-flag avg" title="average priority" ></i>';
+    $iconPrio[40] = '<i class="icon-flag high" title="high priority" ></i>';
+    $iconPrio[50] = '<i class="icon-flag max" title="max priority" ></i>';
+
+    $iconType = array();
+    $iconType[EMessageAspect::MESSAGE] = '<i class="icon-envelope" ></i>';
+    $iconType[EMessageAspect::DOCUMENT] = '<i class="icon-file-alt" ></i>';
+    $iconType[EMessageAspect::DISCUSSION] = '<i class="icon-comments-alt" ></i>';
+
+    $objid = $row['wbfsys_message_rowid'];
+    $rowid = $this->id.'_row_'.$objid;
+    $num = 0;
+    $pos = 1;
 
     // is this an insert or an update area
     if ($this->insertMode) {
+
       $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="prepend" >'
         .'<![CDATA[<tr '
         .' wgt_eid="'.$objid.'" '
         .' class="wcm wcm_ui_highlight node-'.$objid.'" '
         .' id="'.$rowid.'" >'.NL;
+
     } elseif ($this->appendMode) {
+
       $body = '<tr id="'.$rowid.'" '
         .' wgt_eid="'.$objid.'" '
         .' class="wcm wcm_ui_highlight node-'.$objid.'" >'.NL;
+
     } else {
+
       $body = '<htmlArea selector="tr#'.$rowid.'" action="html" ><![CDATA[';
     }
 
-    $body .= '<td valign="top" class="pos" >'.($key+1).'</td>'.NL;
+    $body .= '<td valign="top" class="pos" >'.$pos.'</td>'.NL;
+
+    $body .= '<td valign="top" style="text-align:center;"  >'.$iconType[$row['wbfsys_message_main_aspect']].'</td>'.NL;
 
 
-      $body .= '<td valign="top" >'
-        . '<a class="wcm wcm_req_ajax" href="maintab.php?c=Webfrap.Message.showMessage&amp;target_mask=MyMessage_Widget&amp;ltype=table&amp;objid='.$objid.'" >'
-        . Validator::sanitizeHtml($row['wbfsys_message_title'])
-        . '<a/></td>'.NL;
+    $body .= '<td valign="top" >'
+      .'<a class="wcm wcm_req_ajax" href="ajax.php?c=Webfrap.Message.showPreview&amp;objid='.$objid.'" >'
+      .Validator::sanitizeHtml($row['wbfsys_message_title'])
+     .'<a/></td>'.NL;
 
-      $body .= '<td valign="top" >'.Validator::sanitizeHtml($userName).'</td>'.NL;
+    $senderName = "{$row['wbfsys_role_user_name']} <{$row['core_person_lastname']}, {$row['core_person_firstname']}> ";
+    $receiverName = "{$row['receiver_wbfsys_role_user_name']} <{$row['receiver_core_person_lastname']}, {$row['receiver_core_person_firstname']}> ";
 
-      $body .= '<td valign="top" >'.(
+    $body .= '<td valign="top" >'.Validator::sanitizeHtml($senderName).'</td>'.NL;
+    $body .= '<td valign="top" >'.Validator::sanitizeHtml($receiverName).'</td>'.NL;
+
+
+    $body .= '<td valign="top" >'.(
         '' != trim($row['wbfsys_message_m_time_created'])
         ? $this->view->i18n->date($row['wbfsys_message_m_time_created'])
         : ' '
-      ).'</td>'.NL;
-      
+    ).'</td>'.NL;
 
-      $body .= '<td valign="top" style="text-align:center" >';
 
-      if ($row['wbfsys_message_id_receiver'] == $user->getId()) {
-        $iconType = $iconInbox;
-        $isInbox = true;
-      } else {
-        $iconType = $iconOutbox;
-        $isInbox = false;
-      }
 
-      // priority
-      $body .=  $row['wbfsys_message_priority']
-        ? $iconPrio[$row['wbfsys_message_priority']].' '
-        : $iconPrio[30].' ';
+    $body .= '<td valign="top" style="text-align:center" >';
 
-      if ($isInbox) {
+    if ($row['wbfsys_message_id_receiver'] == $user->getId()) {
+      $isInbox = true;
+    } else {
+      $isInbox = false;
+    }
 
-        // status
-        $body .= isset( $iconStatus[(int) $row['wbfsys_message_receiver_status']])
-          ? $iconStatus[(int) $row['wbfsys_message_receiver_status']]
-          : $iconStatus[EMessageStatus::IS_NEW];
+    // action required
 
-        $userName = "{$row['wbfsys_role_user_name']} <{$row['core_person_lastname']}, {$row['core_person_firstname']}> ";
-      } else {
+    $body .=  $row['task_id']
+    ? '<i class="icon-tasks" title="Is Task" ></i> '
+        : '';
 
-        // status
-        $body .= $row['wbfsys_message_id_sender_status']
-          ? $iconStatus[(int) $row['wbfsys_message_id_sender_status']]
-          : $iconStatus[EMessageStatus::IS_NEW];
+    $body .=  $row['appoint_id']
+    ? '<i class="icon-calendar" title="Is Appointment" ></i> '
+        : '';
 
-        $userName = "{$row['receiver_wbfsys_role_user_name']} <{$row['receiver_core_person_lastname']}, {$row['receiver_core_person_firstname']}> ";
-      }
 
-      $body .= '</td>'.NL;
+    // SPAM / HAM status
+    $body .=  ($row['wbfsys_message_spam_level']>51)
+    ? '<i class="icon-thumbs-down mal" title="is SPAM" ></i> '
+        : '';
 
-      if ($this->enableNav) {
-        $navigation  = $this->rowMenu (
-          $objid,
-          $row
-        );
-        $body .= '<td valign="top" style="text-align:center;" class="wcm wcm_ui_buttonset" >'.$navigation.'</td>'.NL;
-      }
+    // action required
+    $body .=  ( 't' == $row['receiver_action_required'])
+    ? '<i class="icon-exclamation-sign attention" title="Your action is required" ></i> '
+        : '';
+
+    // urgent
+    $body .=  ( 't' == $row['flag_urgent'])
+    ? '<i class="icon-time urgent" title="Ok, this getting a little urgent now!" ></i> '
+        : '';
+
+    // priority
+    $body .=  ( $row['wbfsys_message_priority'] && ($row['wbfsys_message_priority'] > 30 || 10 == $row['wbfsys_message_priority'] )  )
+    ? $iconPrio[$row['wbfsys_message_priority']].' '
+        : ' ';
+
+    if ($isInbox) {
+
+      // status
+      $body .= isset( $iconStatus[(int) $row['wbfsys_message_receiver_status']])
+        ? $iconStatus[(int) $row['wbfsys_message_receiver_status']]
+        : $iconStatus[EMessageStatus::IS_NEW];
+
+    } else {
+
+      // status
+      $body .= $row['wbfsys_message_id_sender_status']
+        ? $iconStatus[(int) $row['wbfsys_message_id_sender_status']]
+        : $iconStatus[EMessageStatus::IS_NEW];
+
+    }
+
+    $body .= '</td>'.NL;
+
+    if ($this->enableNav) {
+      $navigation  = $this->rowMenu(
+        $objid,
+        $row
+      );
+      $body .= '<td valign="top" style="text-align:center;" '
+          .' class="wcm wcm_ui_buttonset nav" >'.$navigation.'</td>'.NL;
+    }
 
     $body .= '</tr>'.NL;
 
@@ -690,6 +759,20 @@ class WebfrapMessage_Table_Element extends WgtTable
     wgt_drop_box="{$this->id}-list-action-menu" ><i class="icon-list" ></i> List Menu</button>
   </div>
   <div class="wgt-dropdownbox" id="{$this->id}-list-action-menu" >
+      <ul>
+
+        <li><a
+          class="wcm wcm_req_put"
+          href="ajax.php?c=Webfrap.Message.markReadAll"
+        ><i class="icon-eye-open" ></i> Mark all as read</a></li>
+
+        <li><a
+          class="wcm wcm_req_put_selection"
+          href="ajax.php?c=Webfrap.Message.markReadSelection"
+          wgt_elem="table#{$this->id}-table"
+        ><i class="icon-eye-open" ></i> Mark selected as read</a></li>
+
+      </ul>
       <ul>
 
         <li><a

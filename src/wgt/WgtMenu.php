@@ -221,7 +221,7 @@ abstract class WgtMenu
 
       Debug::console('files' , $files);
 
-      foreach($files as $file)
+      foreach ($files as $file)
         include $file->getName(true);
 
        // break after found data

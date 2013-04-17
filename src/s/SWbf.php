@@ -24,7 +24,7 @@ final class SWbf
 
   /** Privater Konstruktor zum Unterbinde von Instanzen
    */
-  private function __construct(){}
+  private function __construct() {}
 
   /**
    * Enter description here...

@@ -51,7 +51,7 @@ class LibMessageChannelMessage extends LibMessageChannel
 
     $sender   = $message->getSender();
 
-    if (!$sender){
+    if (!$sender) {
       $sender = $this->getSender();
       $message->sender = $sender;
     }

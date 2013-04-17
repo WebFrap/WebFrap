@@ -489,7 +489,7 @@ SQL;
       }
     } else {
       
-      if (isset($this->rolesCache[$loadKey]) && $this->rolesCache[$loadKey]){
+      if (isset($this->rolesCache[$loadKey]) && $this->rolesCache[$loadKey]) {
         return true;
       }
 

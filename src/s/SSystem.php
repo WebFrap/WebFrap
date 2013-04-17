@@ -24,7 +24,7 @@ final class SSystem
 
   /** Privater Konstruktor zum Unterbinde von Instanzen
    */
-  private function __construct(){}
+  private function __construct() {}
 
   /**
    * @param string $command

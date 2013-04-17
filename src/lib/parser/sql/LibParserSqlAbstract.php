@@ -795,7 +795,7 @@ abstract class LibParserSqlAbstract
 
     $sql = ' ';
 
-    foreach($cols as $col)
+    foreach ($cols as $col)
       $sql .= ' '.$col.',';
 
     return substr($sql , 0, -1);
@@ -814,7 +814,7 @@ abstract class LibParserSqlAbstract
 
     $sql = ' ';
 
-    foreach($where as $cond)
+    foreach ($where as $cond)
       $sql .= ' '.$cond.' ';
 
     return $sql;
@@ -1318,7 +1318,7 @@ SQL;
     if (!$values = $db->orm->convertData($table , $values  ))
       throw new LibDb_Exception('Konvert ist fehlgeschlagen');
 
-    foreach($values as $key => $value)
+    foreach ($values as $key => $value)
       $sql .= ' '.$key.' = '.$value.' , ';
 
     $sql = substr($sql, 0, -2);

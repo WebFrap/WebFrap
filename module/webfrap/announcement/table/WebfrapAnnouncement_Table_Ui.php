@@ -310,7 +310,7 @@ WGTJS;
 
     $code = <<<JSCODE
 
-    \$S('#{$itemId}_row_{$key}').fadeOut(100,function(){\$S('#{$itemId}_row_{$key}').remove();});
+    \$S('#{$itemId}_row_{$key}').fadeOut(100,function() {\$S('#{$itemId}_row_{$key}').remove();});
     \$S('#{$itemId}-table').grid('decEntries');
 JSCODE;
 

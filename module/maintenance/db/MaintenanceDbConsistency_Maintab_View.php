@@ -148,12 +148,12 @@ class MaintenanceDbConsistency_Maintab_View extends WgtMaintabCustom
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-self.getObject().find(".wgtac_run_all").click(function(){
+self.getObject().find(".wgtac_run_all").click(function() {
   \$R.get('ajax.php?c=Maintenance.DbConsistency.fixAll');
 });
 
 // close tab
-self.getObject().find(".wgtac_close").click(function(){
+self.getObject().find(".wgtac_close").click(function() {
   self.close();
 });
 

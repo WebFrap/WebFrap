@@ -296,7 +296,7 @@ class AclMgmt_Model extends Model
 
     $tabData = array();
 
-    foreach($data as $tabName => $ent)
+    foreach ($data as $tabName => $ent)
       $tabData = array_merge($tabData , $ent->getAllData($tabName));
 
     $tabData['num_assignments'] = 0;

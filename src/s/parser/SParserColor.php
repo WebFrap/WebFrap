@@ -25,7 +25,7 @@ final class SParserColor
   /**
    * Privater Konstruktor zum Unterbinde von Instanzen
    */
-  private function __construct(){}
+  private function __construct() {}
 
   /**
    *

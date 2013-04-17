@@ -328,7 +328,9 @@ class WgtMenuBuilder
    */
   public function buildContextLogic()
   {
-
+  
+    return '';
+    
     $entries = array();
 
     foreach ($this->actions as $action) {
@@ -1141,7 +1143,7 @@ HTML;
       // $button[Wgt::BUTTON_ACTION].$id.$urlExt,
 
       $html  = <<<HTML
-      {$action}: function(el, pos, id){
+      {$action}: function(el, pos, id) {
         \$R.get('{$button[Wgt::BUTTON_ACTION]}'+id+'{$urlExt}');
 
         return false;
@@ -1151,7 +1153,7 @@ HTML;
     } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_URL) {
 
       $html  = <<<HTML
-      {$action}: function(el, pos, id){
+      {$action}: function(el, pos, id) {
         window.open('{$button[Wgt::BUTTON_ACTION]}'+id, '_blank');
 
         return false;
@@ -1170,7 +1172,7 @@ HTML;
       }
 
       $html  = <<<HTML
-      {$action}: function(el, pos, id){
+      {$action}: function(el, pos, id) {
         \$R.del('{$url}',{confirm:'{$confirm}'});
 
         return false;
@@ -1210,7 +1212,7 @@ HTML;
         : 'post';
 
       $html  = <<<HTML
-      {$action}: function(el, pos, id){
+      {$action}: function(el, pos, id) {
         \$R.{$rqType}('{$url}',{$bParamsBody}{$confirm});
 
         return false;
@@ -1222,7 +1224,7 @@ HTML;
       $onClick = str_replace(array('{$parentId}', '{$id}'), array($this->parentId, "'+id+'"),  $button[Wgt::BUTTON_ACTION]);
 
       $html  = <<<HTML
-      {$action}: function(el, pos, id){ 
+      {$action}: function(el, pos, id) { 
         {$onClick};
         return false;
       }
@@ -1238,7 +1240,7 @@ HTML;
       $onClick = str_replace(array('{$parentId}', '{$id}'), array($this->parentId, "'+id+'"),  $button[Wgt::BUTTON_ACTION]);
 
       $html  = <<<HTML
-      {$action}: function(el, pos, id){ 
+      {$action}: function(el, pos, id) { 
         {$onClick};
         return false;
       }

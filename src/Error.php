@@ -145,14 +145,14 @@ class Error
    * @var string
    */
   const INTERNAL_ERROR_MSG = <<<HTML
-The system detected a potential problem during the execution of your request.
-This is NOT your fault, it seems to be a bug that need to be fixed.<br />
-The Problem was logged and the system maintainer was noticed.
-We will take care for this issue as soon as possible.<br />
-In urgent cases contact your the system support and describe exactly what you need
-to do. Sometimes there are easy workarounds especially for important use cases.
+The system detected a potential problem during execution of your request.
+This seems to be a bug that will be fixed.<br />
+The problem was logged and the system administrator was notified.
+We will take care of this issue as soon as possible.<br />
+In urgent cases contact your system support and describe exactly what you need
+to do. In some cases there are easy workarounds especially for important use cases.
 <br />
-Sorry for the inconveniences.
+We apologize for the inconvenience.
 HTML;
 
   /**

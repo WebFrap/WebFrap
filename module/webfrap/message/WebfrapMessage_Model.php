@@ -138,7 +138,8 @@ select
   receiver.flag_editable,
   sender.fullname as sender_name,
   sender.core_person_rowid as sender_pid,
-  sender.wbfsys_role_user_rowid as sender_id
+  sender.wbfsys_role_user_rowid as sender_id,
+  receiver_name.fullname as receiver_name
 
 FROM
   wbfsys_message msg
@@ -155,10 +156,14 @@ LEFT JOIN
 	wbfsys_appointment appoint
 		ON appoint.id_message = msg.rowid
 		
-
 JOIN
   view_person_role sender
     ON sender.wbfsys_role_user_rowid = msg.id_sender
+    
+JOIN
+  view_person_role receiver_name
+    ON receiver_name.wbfsys_role_user_rowid = receiver.vid
+    
 WHERE
   msg.rowid = {$msgId};
 
@@ -170,7 +175,7 @@ SQL;
     if ($node) {
 
       // auf open setzen wenn noch closed
-      if ($setOpen && EMessageStatus::OPEN > $node['receiver_status'] ){
+      if ($setOpen && EMessageStatus::OPEN > $node['receiver_status'] ) {
         $db->update("UPDATE wbfsys_message_receiver set status =".EMessageStatus::OPEN." WHERE rowid = ".$node['receiver_id'] );
         $node['receiver_status'] = EMessageStatus::OPEN;
       }
@@ -403,7 +408,7 @@ SQL;
     $db = $this->getDb();
     $user = $this->getUser();
     
-    foreach($rqtData->aspects as $aspect){
+    foreach ($rqtData->aspects as $aspect) {
       $msgAspect = $orm->newEntity('WbfsysMessageAspect');
       $msgAspect->id_receiver = $user->getId();
       $msgAspect->id_message = $messageId;
@@ -424,7 +429,7 @@ SQL;
     // task data speichern
     if ($rqtData->hasTask) {
       
-      if($rqtData->taskId){
+      if($rqtData->taskId) {
         
         $entTask = $orm->get('WbfsysTask', $rqtData->taskId);
         
@@ -448,7 +453,7 @@ SQL;
     // appointment data speichern
     if ($rqtData->hasAppointment) {
       
-      if($rqtData->appointId){
+      if($rqtData->appointId) {
         
         $entAppoint = $orm->get('WbfsysAppointment', $rqtData->appointId);
         
@@ -485,7 +490,7 @@ SQL;
       $mainAspect = EMessageAspect::DISCUSSION;
     }
     
-    if( $msgNode->main_aspect != $mainAspect ){
+    if( $msgNode->main_aspect != $mainAspect ) {
       $msgNode->main_aspect = $mainAspect;
       $msgNode->id_sender_status = EMessageStatus::UPDATED;
       
@@ -547,10 +552,10 @@ SQL;
       return;
     }
     
-    if( $tmpData['id_sender'] == $user->getId() ){
+    if( $tmpData['id_sender'] == $user->getId() ) {
       
       // nur löschen wenn keine receiver mehr da sind
-      if( $tmpData['num_receiver'] ){
+      if( $tmpData['num_receiver'] ) {
         $orm->update( 'WbfsysMessage', $messageId, array('flag_sender_deleted'=>true) );
         return;
       }
@@ -558,7 +563,7 @@ SQL;
     } else {
       
       // löschen wenn deleted flag
-      if( 't' != $tmpData['flag_sender_deleted'] ){
+      if( 't' != $tmpData['flag_sender_deleted'] ) {
         return;
       }
       
@@ -593,7 +598,7 @@ SQL;
     $queries[] = 'DELETE FROM wbfsys_message_receiver WHERE vid = '.$userID.';';
     $queries[] = 'DELETE FROM wbfsys_message_aspect WHERE id_receiver = '.$userID.';';
 
-    foreach ($queries as $query){
+    foreach ($queries as $query) {
       $db->exec($query);
     }
     
@@ -616,7 +621,7 @@ SQL;
     
     $msgIds = array();
     
-    foreach( $messages as $msg ){
+    foreach ( $messages as $msg ) {
       $msgIds[] = $msg['msg_id'];
     }
     
@@ -678,7 +683,7 @@ SQL;
     
     $msgIds = array();
     
-    foreach( $messages as $msg ){
+    foreach ( $messages as $msg ) {
       $msgIds[] = $msg['msg_id'];
     }
     
@@ -712,7 +717,7 @@ SQL;
     $queries[] = 'UPDATE wbfsys_message set id_sender_status = '.EMessageStatus::ARCHIVED.' WHERE id_sender = '.$userID.';';
     $queries[] = 'UPDATE wbfsys_message_receiver set status = '.EMessageStatus::ARCHIVED.' WHERE vid = '.$userID.';';
 
-    foreach ($queries as $query){
+    foreach ($queries as $query) {
       $db->exec($query);
     }
 
@@ -758,7 +763,7 @@ SQL;
 
     $msgNode = $orm->get( 'WbfsysMessage', $messageId );
     
-    if( $msgNode->id_sender == $user->getId() ){
+    if( $msgNode->id_sender == $user->getId() ) {
       
       if( $archive )
         $msgNode->id_sender_status = EMessageStatus::ARCHIVED;

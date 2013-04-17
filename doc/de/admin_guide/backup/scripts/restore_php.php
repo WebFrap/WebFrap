@@ -19,7 +19,7 @@ $backupGw   = Request::arg('gateway');
 if (!$backupKey)
   $backupKey = date('Ymdhis');
   
-foreach($deplGateways as $gateway)
+foreach ($deplGateways as $gateway)
 {
   
   if ($backupGw && $backupGw != $gateway['name'])

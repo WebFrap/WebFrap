@@ -58,6 +58,10 @@ class WebfrapMessage_Controller extends Controller
       'method'    => array('GET'),
       'views'      => array('html')
     ),
+    'showpreview' => array(
+      'method'    => array('GET'),
+      'views'      => array('ajax')
+    ),
     'sendusermessage' => array(
       'method'    => array('POST'),
       'views'      => array('ajax')
@@ -134,6 +138,20 @@ class WebfrapMessage_Controller extends Controller
       'method'    => array('PUT'),
       'views'      => array('ajax')
     ),
+      
+    // nachricht als gelesen markieren
+    'markread' => array(
+        'method'    => array('PUT'),
+        'views'      => array('ajax')
+    ),
+    'markreadall' => array(
+        'method'    => array('PUT'),
+        'views'      => array('ajax')
+    ),
+    'markreadselection' => array(
+        'method'    => array('PUT'),
+        'views'      => array('ajax')
+    ),
     
     // references
     'addref' => array(
@@ -181,7 +199,7 @@ class WebfrapMessage_Controller extends Controller
       );
     }
 
-    // create a window
+    // load the view object
     /* @var $view WebfrapMessage_List_Maintab_View  */
     $view = $response->loadView(
       'list-message_list',
@@ -225,7 +243,8 @@ class WebfrapMessage_Controller extends Controller
       );
     }
 
-    // create a window
+    // load the view object
+    /* @var $view WebfrapMessage_List_Ajax_View */
     $view = $response->loadView(
       'list-message_list',
       'WebfrapMessage_List',
@@ -233,16 +252,9 @@ class WebfrapMessage_Controller extends Controller
       View::AJAX
     );
 
-    $model = $this->loadModel('WebfrapMessage');
     $view->setModel($model);
 
     $model->params = $params;
-
-    // request
-    $model->conditions['free'] = $request->param('free_search', Validator::SEARCH);
-    $model->conditions['filters']['channel'] = $request->param('channel', Validator::BOOLEAN);
-    $model->conditions['filters']['mailbox'] = $request->param('mailbox', Validator::CKEY);
-    $model->conditions['filters']['archive'] = $request->param('archive', Validator::BOOLEAN);
 
     $view->displaySearch($params);
 
@@ -270,7 +282,7 @@ class WebfrapMessage_Controller extends Controller
       );
     }
 
-    // create a window
+    // load the view object
     $view   = $response->loadView(
       'form-messages-new',
       'WebfrapMessage_New',
@@ -322,7 +334,7 @@ class WebfrapMessage_Controller extends Controller
       }
     }
 
-    // create a window
+    // load the view object
     $view = $response->loadView(
       'form-messages-show-'.$msgId,
       'WebfrapMessage_Show',
@@ -361,18 +373,59 @@ class WebfrapMessage_Controller extends Controller
 
     $model->loadMessage($msgId);
 
-    // create a window
+    // load the view object
     $view   = $response->loadView(
       'form-messages-show-'.$msgId,
       'WebfrapMessage',
       'displayContent',
       View::HTML
     );
-    $view->setModel($this->loadModel('WebfrapMessage'));
+    $view->setModel($model);
 
     $view->displayContent($params);
 
   }//end public function service_showMailContent */
+  
+
+  /**
+   * Form zum anschauen einer Nachricht
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return boolean
+   */
+  public function service_showPreview($request, $response)
+  {
+  
+    // prüfen ob irgendwelche steuerflags übergeben wurde
+    $params  = $this->getFlags($request);
+  
+    $msgId = $request->param('objid', Validator::EID);
+  
+    /* @var $model WebfrapMessage_Model */
+    $model = $this->loadModel('WebfrapMessage');
+    $model->loadTableAccess($params);
+  
+    if (!$model->access->access) {
+      throw new InvalidRequest_Exception(
+          Response::FORBIDDEN_MSG,
+          Response::FORBIDDEN
+      );
+    }
+  
+    $msgNode = $model->loadMessage($msgId);
+  
+    // load the view object
+    /* @var $view WebfrapMessage_Ajax_View */
+    $view   = $response->loadView(
+        'messages-preview-'.$msgId,
+        'WebfrapMessage',
+        'displayMsgPreview'
+    );
+    $view->setModel($model);
+  
+    $view->displayMsgPreview($msgNode);
+  
+  }//end public function service_showPreview */
 
   /**
    * Standard Service für Autoloadelemente wie zb. Window Inputfelder
@@ -479,7 +532,7 @@ class WebfrapMessage_Controller extends Controller
       );
     }
     
-    if( 100 == $flagSpam){
+    if( 100 == $flagSpam) {
       //wenn spam dann löschen
       $this->getTpl()->addJsCode(<<<JS
 
@@ -597,7 +650,7 @@ JS
 
     $entries = array();
 
-    foreach($msgIds as $msgId){
+    foreach ($msgIds as $msgId) {
       $entries[] = "#wgt-table-webfrap-groupware_message_row_".$msgId;
     }
 
@@ -630,7 +683,7 @@ JS
     $tmpChannels = $request->data('channels', Validator::CKEY);
     $chanels = array();
 
-    foreach($tmpChannels as $tmpCh){
+    foreach ($tmpChannels as $tmpCh) {
       if ($tmpCh)
         $chanels[] = $tmpCh;
     }
@@ -673,7 +726,7 @@ JS
 
     $model->loadMessage($msgId);
 
-    // create a window
+    // load the view object
     $view   = $response->loadView
     (
       'form-messages-forward-'.$msgId,
@@ -753,7 +806,7 @@ JS
 
     $model->loadMessage($msgId);
 
-    // create a window
+    // load the view object
     $view   = $response->loadView(
       'form-messages-reply-'.$msgId,
       'WebfrapMessage_Reply',
@@ -1005,7 +1058,7 @@ JS
 
     $entries = array();
 
-    foreach($msgIds as $msgId){
+    foreach ($msgIds as $msgId) {
       $entries[] = "#wgt-table-webfrap-groupware_message_row_".$msgId;
     }
 

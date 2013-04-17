@@ -206,7 +206,7 @@ class LibTemplateAjax extends LibTemplateHtml
     if ($errors = $pool->getErrors()) {
       $html .= '<error><![CDATA['.NL;
 
-       foreach($errors as $error)
+       foreach ($errors as $error)
         $html .= $error.'<br />'.NL;
 
       $html .= ']]></error>';
@@ -215,7 +215,7 @@ class LibTemplateAjax extends LibTemplateHtml
     if ($warnings = $pool->getWarnings()) {
       $html .= '<warning><![CDATA['.NL;
 
-      foreach($warnings as $warn)
+      foreach ($warnings as $warn)
         $html .= $warn."<br />".NL;
 
       $html .= ']]></warning>';
@@ -224,7 +224,7 @@ class LibTemplateAjax extends LibTemplateHtml
     if ($messages = $pool->getMessages()) {
       $html .= '<message><![CDATA['.NL;
 
-       foreach($messages as $message)
+       foreach ($messages as $message)
           $html .= $message.'<br />'.NL;
 
       $html .= ']]></message>'.NL;
@@ -336,7 +336,7 @@ class LibTemplateAjax extends LibTemplateHtml
 
     } else {
       
-      Error::addError('Index Template not exists: '.$filename);
+      Error::addError('Index Template does not exist: '.$filename);
 
       if (Log::$levelDebug)
         $content = '<p class="wgt-box error">Wrong Index Template: '.$filename.' </p>';

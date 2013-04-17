@@ -41,7 +41,7 @@ class WgtInputCheckboxList extends WgtInput
    * Type vordefinieren
    * @var array
    */
-  protected $attributes     = array('type' => 'checkbox');
+  public $attributes     = array('type' => 'checkbox');
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
@@ -85,7 +85,7 @@ class WgtInputCheckboxList extends WgtInput
 
     $attribute = '';
 
-    foreach($this->attributes as $key => $value)
+    foreach ($this->attributes as $key => $value)
       $attribute .= $key.'="'.$value.'" ';
 
     $html = '';

@@ -79,27 +79,27 @@ abstract class LibFilereader
   /**
    * @see Iterator::current
    */
-  public function current (){}
+  public function current () {}
 
   /**
    * @see Iterator::key
    */
-  public function key (){}
+  public function key () {}
 
   /**
    * @see Iterator::next
    */
-  public function next (){}
+  public function next () {}
 
   /**
    * @see Iterator::rewind
    */
-  public function rewind (){}
+  public function rewind () {}
 
   /**
    * @see Iterator::valid
    */
-  public function valid (){}
+  public function valid () {}
 
 } // end class LibFilereader
 

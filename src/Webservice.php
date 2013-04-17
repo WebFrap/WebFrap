@@ -102,7 +102,7 @@ abstract class Webservice extends Pbase
       } elseif (is_object($value) and $value instanceof ISerializeable) {
 
       }
-    }//end foreach($data  as $key => $value)
+    }//end foreach ($data  as $key => $value)
 
     return $xml;
 

@@ -19,7 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibConnector_Message_Mail extends LibConnector_Message_Adapter
+class LibConnector_Message_Phpimap extends LibConnector_Adapter
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -61,8 +61,7 @@ class LibConnector_Message_Mail extends LibConnector_Message_Adapter
 
     $connectionString = $this->buildConnectionAddress();
 
-    $this->resource = imap_open
-    (
+    $this->resource = imap_open(
       $connectionString,
       $this->userName,
       $this->password,
@@ -71,8 +70,7 @@ class LibConnector_Message_Mail extends LibConnector_Message_Adapter
     );
 
     if (!$this->resource) {
-      throw new LibConnector_Exception
-      (
+      throw new LibConnector_Exception(
         'Failed to open the connection to server '.$this->server,
         'Failed to open the connection to server '.$this->server.', Error:'.imap_last_error()
       );

@@ -159,7 +159,7 @@ CODE;
     $callback = '';
     if ($this->ajax) {
       if ($callbackCode)
-        $callback = ",'',{callback:function(){{$callbackCode}}}";
+        $callback = ",'',{callback:function() {{$callbackCode}}}";
     }
 
     $attributes['class'] = 'wgt-button';

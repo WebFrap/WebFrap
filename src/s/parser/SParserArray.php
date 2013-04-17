@@ -24,7 +24,7 @@ final class SParserArray
 
   /** Privater Konstruktor zum Unterbinde von Instanzen
    */
-  private function __construct(){}
+  private function __construct() {}
 
   /**
    * fusion the first layer of a multidim array

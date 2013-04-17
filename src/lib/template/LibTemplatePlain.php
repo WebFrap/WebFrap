@@ -83,24 +83,24 @@ class LibTemplatePlain extends LibTemplate
    *
    * @return void
    */
-  public function build(){}
+  public function build() {}
 
   /**
    *
    * @return void
    */
-  public function compile(){}
+  public function compile() {}
 
   /**
    *
    * @return void
    */
-  public function publish(){}
+  public function publish() {}
 
   /**
    *
    */
-  protected function buildMessages(){}
+  protected function buildMessages() {}
 
 } // end class LibTemplateDocument
 

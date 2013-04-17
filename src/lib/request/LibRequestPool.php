@@ -878,7 +878,7 @@ class LibRequestPool extends LibRequestAbstract
 
       $filtered[$rowPos] = $filter->getData();
 
-    }//end foreach($this->post[$subkey] as $id => $row)
+    }//end foreach ($this->post[$subkey] as $id => $row)
 
     return $filtered;
 
@@ -947,7 +947,7 @@ class LibRequestPool extends LibRequestAbstract
         $filtered[$id] = $filtr;
       }
 
-    }//end foreach($this->post[$subkey] as $id => $row)
+    }//end foreach ($this->post[$subkey] as $id => $row)
 
     return $filtered;
 

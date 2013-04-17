@@ -127,7 +127,7 @@ class WebfrapYggdrasil_Maintab_View extends WgtMaintab
     $code = <<<BUTTONJS
 
 // close tab
-self.getObject().find(".wgtac_close").click(function(){
+self.getObject().find(".wgtac_close").click(function() {
   self.close();
 });
 

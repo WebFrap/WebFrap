@@ -101,7 +101,7 @@ abstract class Module extends BaseChild
   public function init($data = array())
   {
 
-    foreach($data as $name => $value)
+    foreach ($data as $name => $value)
       $this->$name = $value;
 
     // Main fungiert hier gleichzeitig noch als pseudo Wakeup Funktion

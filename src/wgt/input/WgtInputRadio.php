@@ -26,10 +26,9 @@ class WgtInputRadio extends WgtInput
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * Type vordefinieren
    * @var array
    */
-  protected $attributes     = array('type' => 'radio');
+  public $attributes     = array('type' => 'radio');
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
@@ -64,7 +63,7 @@ class WgtInputRadio extends WgtInput
 
     $attribute = '';
 
-    foreach($this->attributes as $key => $value)
+    foreach ($this->attributes as $key => $value)
       $attribute .= $key.'="'.$value.'" ';
 
     $html = '';

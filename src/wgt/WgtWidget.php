@@ -140,7 +140,7 @@ abstract class WgtWidget extends PBase
   /**
    * Methode wird nach dem Rendern des Widgets aufgerufen
    */
-  public function shutdown(){}
+  public function shutdown() {}
 
 } // end abstract class WgtWidget
 

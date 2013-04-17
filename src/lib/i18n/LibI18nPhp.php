@@ -402,7 +402,7 @@ class LibI18nPhp
 
         $keys = array();
 
-        foreach(array_keys($data) as $keyData)
+        foreach (array_keys($data) as $keyData)
           $keys[] = '{@'.$keyData.'@}';
 
         return str_replace( $keys, array_values($data), $text);
@@ -416,7 +416,7 @@ class LibI18nPhp
 
       $keys = array();
 
-      foreach(array_keys($data) as $keyData)
+      foreach (array_keys($data) as $keyData)
         $keys[] = '{@'.$keyData.'@}';
 
       return str_replace( $keys, array_values($data), $this->l[$key][$text]);

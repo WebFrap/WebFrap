@@ -8,17 +8,17 @@ if (typeof console === "undefined") {
   // console log fix
   // sicher stellen, dass der IE keinen fehler bei console wirft
   window.console = {
-    log: function(){},
-    debug: function(){},
-    info: function(){},
-    warn: function(){},
-    error: function(){},
-    time: function(){},
-    timeEnd: function(){},
-    trace: function(){},
-    group: function(){},
-    groupEnd: function(){},
-    assert: function(){}
+    log: function() {},
+    debug: function() {},
+    info: function() {},
+    warn: function() {},
+    error: function() {},
+    time: function() {},
+    timeEnd: function() {},
+    trace: function() {},
+    group: function() {},
+    groupEnd: function() {},
+    assert: function() {}
   };
 }
 

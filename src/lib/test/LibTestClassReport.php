@@ -151,7 +151,7 @@ class LibTestClassReport
 
     $count = 0;
 
-    foreach($this->errors[$testClass] as $methodes)
+    foreach ($this->errors[$testClass] as $methodes)
         $count += count($methodes);
 
     return $count;
@@ -176,7 +176,7 @@ class LibTestClassReport
   {
     $count = 0;
 
-    foreach($this->tests as $tests)
+    foreach ($this->tests as $tests)
       $count += array_sum($tests);
 
     return $count;
@@ -191,8 +191,8 @@ class LibTestClassReport
   {
     $count = 0;
 
-    foreach($this->errors as $tests)
-      foreach($tests as $methodes)
+    foreach ($this->errors as $tests)
+      foreach ($tests as $methodes)
         $count += count($methodes);
 
     return $count;

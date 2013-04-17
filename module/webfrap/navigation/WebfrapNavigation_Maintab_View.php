@@ -108,7 +108,7 @@ class WebfrapNavigation_Maintab_View extends WgtMaintab
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       self.close();
     });
 

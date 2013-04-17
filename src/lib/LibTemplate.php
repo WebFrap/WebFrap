@@ -1328,17 +1328,16 @@ abstract class LibTemplate extends BaseChild
 
     if (!$filename = $this->templatePath($template , $type, $inCode)) {
 
-      Error::addError
-      (
-        'Failed to load the template :'.$template
-    );
+      Error::addError( 'Failed to load the template :'.$template );
 
       if (DEBUG) {
+        
         $error = '<p class="wgt-box error">template '.$template.' not exists</p>';
         $error .= '<pre>'.get_class($this).'<br />'.Debug::backtrace().'</pre>';
-
         return $error;
+        
       } else {
+        
         return '<p class="wgt-box error">template '.$template.' not exists</p>';
       }
 
@@ -1586,8 +1585,8 @@ abstract class LibTemplate extends BaseChild
     if ($condition)
       $this->assembledMainContent = $this->conditionTemplate($template, 'content', $condition, $PARAMS);
     else
-      $this->assembledMainContent = $this->includeTemplate($template, 'content', $PARAMS);
-
+      $this->assembledMainContent = $this->includeTemplate($template, 'content', $PARAMS, $this->tplInCode );
+          
     return $this->assembledMainContent;
 
   }//end public function buildMainContent */
@@ -1640,7 +1639,7 @@ abstract class LibTemplate extends BaseChild
       ob_end_clean();
 
     } else {
-      Error::report('Index Template not exists: '.$this->indexTemplate);
+      Error::report('Index Template does not exist: '.$this->indexTemplate);
 
       ///TODO add some good error handler here
       if (Log::$levelDebug)
@@ -1687,7 +1686,7 @@ abstract class LibTemplate extends BaseChild
       ob_end_clean();
 
     } else {
-      Error::report('Index Template not exists: '.$this->indexTemplate);
+      Error::report('Index Template does not exist: '.$this->indexTemplate);
 
       ///TODO add some good error handler here
       if (Log::$levelDebug)

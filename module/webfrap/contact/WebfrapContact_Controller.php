@@ -365,7 +365,7 @@ JS
 
     $entries = array();
 
-    foreach($msgIds as $msgId){
+    foreach ($msgIds as $msgId) {
       $entries[] = "#wgt-table-my_message_row_".$msgId;
     }
 
@@ -398,7 +398,7 @@ JS
     $tmpChannels = $request->data('channels', Validator::CKEY);
     $chanels = array();
 
-    foreach($tmpChannels as $tmpCh){
+    foreach ($tmpChannels as $tmpCh) {
       if ($tmpCh)
         $chanels[] = $tmpCh;
     }

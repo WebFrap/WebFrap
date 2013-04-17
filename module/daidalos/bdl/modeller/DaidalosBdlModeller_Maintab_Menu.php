@@ -131,11 +131,11 @@ HTML;
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       self.close();
     });
 
-    self.getObject().find(".wgtac_sync_index").click(function(){
+    self.getObject().find(".wgtac_sync_index").click(function() {
       \$R.put('ajax.php?c=Daidalos.BdlIndex.sync');
     });
 

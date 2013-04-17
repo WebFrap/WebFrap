@@ -111,7 +111,7 @@ class DaoFoldermenu extends Dao
     $title = null;
     $label = null;
 
-    foreach($files as $file)
+    foreach ($files as $file)
       include $file->getName(true);
 
     if ($title)

@@ -334,7 +334,7 @@ class LibAclAdapter_File
     if (!isset($this->extend[$file][$key]))
       return false;
 
-    foreach($this->extend[$file][$key] as $key)
+    foreach ($this->extend[$file][$key] as $key)
       if ($this->level($key, $level))
         return true;
 
@@ -354,7 +354,7 @@ class LibAclAdapter_File
     if (!isset($this->extend[$path][$key]))
       return false;
 
-    foreach($this->extend[$path][$key] as $extKey)
+    foreach ($this->extend[$path][$key] as $extKey)
       if ($this->group($extKey , $groups))
         return true;
 

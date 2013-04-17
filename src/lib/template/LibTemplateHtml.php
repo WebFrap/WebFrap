@@ -189,6 +189,10 @@ class LibTemplateHtml extends LibTemplatePresenter
      $doctype     = isset($conf['doctype'])
       ? $conf['doctype']
       : View::XML1_TRANS;
+     
+     if (View::$docType) {
+       $doctype = View::$docType;
+     }
 
      $this->setDoctype($doctype);
 
@@ -224,61 +228,71 @@ class LibTemplateHtml extends LibTemplatePresenter
    */
   public function setDoctype($doctype)
   {
+    
     switch ($doctype) {
-      case View::HTML4_STRICT :
-      {
+      
+      case View::HTML4_STRICT : {
         $this->doctype = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
         "http://www.w3.org/TR/html4/strict.dtd">
 <html>';
         break;
       }
 
-      case View::HTML4_TRANS :
-      {
+      case View::HTML4_TRANS : {
         $this->doctype = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
        "http://www.w3.org/TR/html4/loose.dtd">
 <html>';
         break;
       }
-      case View::HTML4_FRAME :
-      {
+      
+      case View::HTML4_FRAME : {
         $this->doctype = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
         "http://www.w3.org/TR/html4/frameset.dtd">
 <html>';
         break;
       }
-      case View::XML1_STRICT :
-      {
+      
+      case View::XML1_STRICT : {
         $this->doctype = '<?xml version="1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">';
         break;
       }
-      case View::XML1_TRANS :
-      {
+      
+      case View::XML1_TRANS : {
         $this->doctype = '<?xml version="1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">';
         break;
       }
-      case View::XML1_FRAME :
-      {
+      
+      case View::XML1_FRAME : {
         $this->doctype = '<?xml version="1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">';
         break;
       }
-      case View::XML1_1_STRICT:
-      {
+      
+      case View::XML1_1_STRICT: {
         $this->doctype = '<?xml version="1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">';
         break;
       }
+      
+      case View::HTML5: {
+        $this->doctype = '<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->';
+        break;
+      }
+      
     } // ENDE SWITCH
 
   } // end public function setDoctype */
@@ -808,7 +822,7 @@ class LibTemplateHtml extends LibTemplatePresenter
 
     } else {
       
-      Error::report('Index Template not exists: '.$this->indexTemplate);
+      Error::report('Index Template does not exist: '.$this->indexTemplate);
 
       ///TODO add some good error handler here
       if (Log::$levelDebug)
@@ -1116,7 +1130,7 @@ HTML;
 
     if ($this->openWindow)
       $this->compiled .= <<<CODE
-<script type="application/javascript" >\$S(document).ready(function(){\$R.get('{$this->openWindow}');});</script>
+<script type="application/javascript" >\$S(document).ready(function() {\$R.get('{$this->openWindow}');});</script>
 CODE;
 
     $this->compiled .= '</body>'.NL;

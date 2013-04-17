@@ -24,7 +24,7 @@ final class SParserString
 
   /** Privater Konstruktor zum Unterbinde von Instanzen
    */
-  private function __construct(){}
+  private function __construct() {}
 
   /**
    *  the values of an array to a comma sperated String
@@ -246,7 +246,7 @@ final class SParserString
 
     $tmp2 = array();
 
-    foreach($tmp as $node)
+    foreach ($tmp as $node)
       $tmp2[] = ucfirst($node);
 
     return implode(' ' , $tmp2  ) ;
@@ -265,7 +265,7 @@ final class SParserString
 
     $tmp2 = array();
 
-    foreach($parts as $node)
+    foreach ($parts as $node)
       $tmp2[] = ucfirst($node);
 
     return implode(' ' , $tmp2  ) ;
@@ -641,7 +641,7 @@ final class SParserString
 
     $fileName = array_pop($folders); // get the filename
 
-    foreach($folders as $subFolder)
+    foreach ($folders as $subFolder)
       $folder .= $subFolder."/";
 
     $folder .= $fileName.".php";
