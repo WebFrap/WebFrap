@@ -57,6 +57,11 @@ class WebfrapSettings_Search_Save_Request extends Context
   public $searchFieldsStack = array();
 
   /**
+   * @var ValidSearchBuilder
+   */
+  public $extSearchValidator = null;
+  
+  /**
    * Extended Search filter
    * @var array
   */
@@ -79,7 +84,10 @@ class WebfrapSettings_Search_Save_Request extends Context
         $this->extSearchValidator = new ValidSearchBuilder();
     }
 
-    $this->interpretRequest($request);
+    $extSearchFields = $request->param('as');
+    
+    if ($extSearchFields)
+      $this->interpretRequest($request);
 
   } // end public function __construct */
 
@@ -104,15 +112,7 @@ class WebfrapSettings_Search_Save_Request extends Context
     $this->vid = $request->param( 'vid', Validator::EID );
     $this->type = $request->param( 'type', Validator::INT );
 
-    if ($extSearchValidator)
-      $this->extSearchValidator = $extSearchValidator;
-    else
-      $this->extSearchValidator = new ValidSearchBuilder();
-
     $extSearchFields = $request->param('as');
-
-    if (!$extSearchFields)
-      return;
 
     if (!$this->searchFieldsStack) {
       foreach ($this->searchFields as $searchFields) {
@@ -145,7 +145,9 @@ class WebfrapSettings_Search_Save_Request extends Context
           $this->extSearch[$fKey] = (object)$validField;
 
         }
+        
       } else {
+        
         Debug::console($extField['field'].' was invalid ');
       }
 
