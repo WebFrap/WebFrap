@@ -121,8 +121,9 @@ class WebfrapSettings_Search_Save_Request extends Context
       }
     }
 
-    $this->vid = $request->param( 'vid', Validator::EID );
-    $this->type = $request->param( 'type', Validator::INT );
+    $this->vid = $request->data( 'vid', Validator::EID );
+    $this->type = $request->data( 'type', Validator::INT );
+    $this->name = $request->data( 'filter_name', Validator::TEXT );
 
     $extSearchFields = $request->param('as');
 
@@ -167,6 +168,28 @@ class WebfrapSettings_Search_Save_Request extends Context
 
 
   }//end public function interpretRequest */
+  
+  /**
+   * @return int
+   */
+  public function getId()
+  {
+  
+    return $this->vid;
+  
+  }//end public function getId */
 
+  /**
+   * @return string
+   */
+  public function toJson()
+  {
+    
+    $jsonString = json_encode($this->extSearch);
+    
+    return $jsonString;
+    
+  }//end public function toJson */
+  
 }//end class WebfrapSettings_Search_Save_Request */
 

@@ -115,15 +115,17 @@ SQL;
   {
   
     $orm = $this->db->getOrm();
+    $id  = $data->getId();
     
-    $this->settings[$key.'-'.$mask.'-'.$name] = $data;
+    $this->settings[$key.'-'.$mask.'-'.$name.'-'.$id] = $data;
     $jsonString = $data->toJson();
   
-    $id = $data->getId();
+    
+    $whereVid = is_null($id)?' IS NULL ':' = '.$id;
     
     $sNode = $orm->get(
       'WbfsysUserSetting',
-      "id_user=".$this->user->getId()." type=".$key
+      "id_user=".$this->user->getId()." AND type=".$key.' and vid '.$whereVid
      );
   
     if ($id) {
