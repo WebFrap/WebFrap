@@ -44,13 +44,20 @@ class DaidalosMail_Controller extends Controller
    *
    * @var array
    */
-  protected $options = array ('form' => array ('method' => array ('GET'), 'views' => array ('maintab')),
+  protected $options = array (
+    'form' => array (
+      'method' => array ('GET'), 
+      'views' => array ('maintab')
+    ),
+    'login' => array (
+      'method' => array ('POST', 'GET'), 
+      'views' => array ('maintab')
+    )
+  );
 
-      'login' => array ('method' => array ('POST', 'GET'), 'views' => array ('maintab')));
-
-  //////////////////////////////////////////////////////////////////////////////*/
-  // Backup & Restore
-  //////////////////////////////////////////////////////////////////////////////*/
+//////////////////////////////////////////////////////////////////////////////*/
+// Backup & Restore
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
