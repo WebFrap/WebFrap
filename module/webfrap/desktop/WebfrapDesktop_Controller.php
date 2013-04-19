@@ -32,20 +32,16 @@ class WebfrapDesktop_Controller extends Controller
    *
    * @var array
    */
-  protected $options           = array
-  (
-    'display' => array
-    (
+  protected $options           = array(
+    'display' => array(
       'method'    => array('GET', 'POST'),
       'views'      => array('html')
     ),
-    'displaysimple' => array
-    (
+    'displaysimple' => array(
       'method'    => array('GET'),
       'views'      => array('html')
     ),
-    'dropmenu' => array
-    (
+    'dropmenu' => array(
       'method'    => array('GET'),
       'views'      => array('html')
     ),
@@ -135,9 +131,7 @@ class WebfrapDesktop_Controller extends Controller
   public function service_displaySimple( $request, $response  )
   {
 
-    if (!$view) {
-      $view = $this->view;
-    }
+    $view = $this->getTpl();
 
     $view->setTitle('Desktop');
     $view->setTemplate('webfrap/desktop_simple'  );
