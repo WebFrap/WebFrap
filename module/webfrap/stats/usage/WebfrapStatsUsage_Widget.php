@@ -76,7 +76,7 @@ class WebfrapStatsUsage_Widget extends WgtWidget
     $selectbox->setFirstfree('Select an Entity');
 
     $selectbox->setData($this->query->fetchSelectbox());
-    $selectbox->setActive($entityKey);
+    $selectbox->setActive($this->entityKey);
 
     $boxWidth   = $this->width - 122;
 
@@ -182,11 +182,9 @@ HTML;
       </div>
 HTML;
 
-    $view->newArea
-    (
+    $view->newArea(
       '#'.$tabId.'_graph',
-      array
-      (
+      array(
         'replace',
         $code
       )
@@ -218,8 +216,7 @@ HTML;
 
     foreach ($data as $period => $row) {
       $key          = date('M',strtotime($period));
-      $values[$key] = array
-      (
+      $values[$key] = array(
         (isset($row['created'])?$row['created']:0),
         (isset($row['changed'])?$row['changed']:0)
       );
