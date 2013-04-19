@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,12 +21,11 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-abstract class Model
-  extends BaseChild
+abstract class Model extends BaseChild
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Public Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Die vorhadenen Registry keys
@@ -45,46 +44,46 @@ abstract class Model
    * @var Error
    */
   protected $error = null;
-  
-////////////////////////////////////////////////////////////////////////////////
+
+/*//////////////////////////////////////////////////////////////////////////////
 // Constructor
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param Base $env
    */
-  public function __construct( $env = null )
+  public function __construct($env = null)
   {
 
-    if( !$env )
+    if (!$env)
       $env = Webfrap::getActive();
-    
+
     $this->env = $env;
 
     $this->getRegistry();
 
-    if( DEBUG )
-      Debug::console( 'Load model '.get_class( $this ) );
+    if (DEBUG)
+      Debug::console('Load model '.get_class($this));
 
   }//end public function __construct */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Generic Logic Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * 
+   *
    * @param LibTemplateAjax $view
    * @param string $key
    * @param string $wgtId
-   * 
+   *
    * @return void
    */
-  public function removeTableRow( $view, $key, $wgtId  )
+  public function removeTableRow($view, $key, $wgtId  )
   {
 
     $code = <<<JSCODE
-    \$S('#{$wgtId}_row_{$key}').fadeOut(100,function(){\$S('#{$wgtId}_row_{$key}').remove();});
+    \$S('#{$wgtId}_row_{$key}').fadeOut(100,function() {\$S('#{$wgtId}_row_{$key}').remove();});
 
 JSCODE;
 
@@ -92,18 +91,17 @@ JSCODE;
 
   }//end public function removeTableRow */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // registry methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * get data from the registry of the model
    * @param string $key
    * @return mixed
    */
-  public function getRegisterd( $key )
+  public function getRegisterd($key)
   {
-
     return isset($this->registry[$key])
       ?$this->registry[$key]
       :null;
@@ -116,59 +114,54 @@ JSCODE;
    * @param mixed $value
    * @return void
    */
-  public function register( $key, $value )
+  public function register($key, $value)
   {
     $this->regKeys[$key]  = true;
     $this->registry[$key] = $value;
   }//end public function register */
-  
+
   /**
    * a data to the registry in the model
    * @param string $key
    * @param mixed $value
    * @return void
    */
-  public function protocol( $message, $context = null, $object = null, $mask = null )
+  public function protocol($message, $context = null, $object = null, $mask = null)
   {
 
-    $this->getResponse()->protocol( $message, $context, $object, $mask );
-    
+    $this->getResponse()->protocol($message, $context, $object, $mask);
+
   }//end public function protocol */
-  
- 
+
   /**
    * @param string $type
    * @param mixed $where
    * @return Entity
    */
-  public function getGenericEntity( $type, $where )
+  public function getGenericEntity($type, $where)
   {
+    return $this->getOrm()->get($type, $where);
 
-    return $this->getOrm()->get( $type, $where );
-    
   }//end public function getGenericEntity */
 
   /**
    * Die Registry leeren
    * @return void
    */
-  public function reset(  )
+  public function reset()
   {
 
-    if( !$this->regKeys )
+    if (!$this->regKeys)
       return;
 
-    if( $keys = array_keys( $this->regKeys ) )
-    {
-      foreach( $keys as $key  )
-      {
-        if( isset( $this->registry[$key] ) )
-          unset( $this->registry[$key] );
+    if ($keys = array_keys($this->regKeys)) {
+      foreach ($keys as $key) {
+        if (isset($this->registry[$key]))
+          unset($this->registry[$key]);
       }
     }
 
   }//end public function reset */
-
 
   /**
    * request the default action of the ControllerClass
@@ -176,27 +169,24 @@ JSCODE;
    * @param string $key
    * @return Model
    */
-  public function loadModel( $modelKey, $key = null )
+  public function loadModel($modelKey, $key = null)
   {
 
-    if(!$key)
+    if (!$key)
       $key = $modelKey;
 
     $modelName    = $modelKey.'_Model';
     $modelNameOld = 'Model'.$modelKey;
 
-    if( !isset( $this->subModels[$key]  ) )
-    {
-      if( !Webfrap::classLoadable($modelName) )
-      {
+    if (!isset($this->subModels[$key]  )) {
+      if (!Webfrap::classLoadable($modelName)) {
         $modelName = $modelNameOld;
-        if( !Webfrap::classLoadable($modelName) )
-        {
-          throw new Controller_Exception( 'Internal Error', 'Failed to load Submodul: '.$modelName );
+        if (!Webfrap::classLoadable($modelName)) {
+          throw new Controller_Exception('Internal Error', 'Failed to load Submodul: '.$modelName);
         }
       }
 
-      $this->subModels[$key] = new $modelName( $this );
+      $this->subModels[$key] = new $modelName($this);
 
     }
 
@@ -209,43 +199,42 @@ JSCODE;
    * @param string $key
    * @return Model
    */
-  public function getModel( $key )
+  public function getModel($key)
   {
 
-    if( isset( $this->subModels[$key] ) )
+    if (isset($this->subModels[$key]))
       return $this->subModels[$key];
     else
       return null;
 
   }//public function getModel */
-  
-////////////////////////////////////////////////////////////////////////////////
+
+/*//////////////////////////////////////////////////////////////////////////////
 // Error handling
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param string $message
    */
-  public function addError( $message )
+  public function addError($message)
   {
-    
-    if( !$this->error )
+
+    if (!$this->error)
       $this->error = new ErrorContainer();
-      
+
     $this->error->addMessage();
-    
+
   }//end public function addError */
-  
+
   /**
    * @return boolean
    */
   public function hasError()
   {
-    
-    return isset( $this->error );
-    
+    return isset($this->error);
+
   }//end public function hasError */
-  
+
   /**
    * @return boolean
    */
@@ -253,8 +242,6 @@ JSCODE;
   {
     return $this->error;
   }//end public function getError */
-
-
 
 } // end abstract class Model
 

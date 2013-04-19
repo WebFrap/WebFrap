@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * class WgtItemAutocomplete
@@ -22,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputButtonReset
-  extends WgtInput
+class WgtInputButtonReset extends WgtInput
 {
 
   /**
@@ -31,10 +29,10 @@ class WgtInputButtonReset
    *
    * @return String
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array())
   {
 
-    if($attributes)
+    if ($attributes)
       $this->attributes = array_merge($this->attributes,$attributes);
 
     $this->attributes['type'] = 'reset';
@@ -45,8 +43,7 @@ class WgtInputButtonReset
 
     return $html;
 
-  } // end public function build( )
+  } // end public function build()
 
 } // end class WgtItemReset
-
 

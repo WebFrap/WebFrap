@@ -15,19 +15,17 @@
 *
 *******************************************************************************/
 
-
 /**
  * A Menu that looks like a filesystem folder
  *
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtMatrixBuilder
-  extends WgtAbstract
+class WgtMatrixBuilder extends WgtList
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // logic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * die HTML ID für das Matrix element
@@ -42,16 +40,8 @@ class WgtMatrixBuilder
   public $id = null;
 
   /**
-   * die HTML ID des Formulars welche für die Suche verwendet wird
-   * Wenn vorhanden wird kein eingenes Search form mit gebaut, sondern ein
-   * externen Search form verwendet
-   * @var string
-   */
-  public $searchFormID = null;
-
-  /**
    * Url für die Suche in der Matrix
-   * Wird nicht benötigt wenn bereits eine searchFormID gesetzt wurde
+   * Wird nicht benötigt wenn bereits eine searchForm gesetzt wurde
    * @var string
    */
   public $searchURL = null;
@@ -124,6 +114,22 @@ class WgtMatrixBuilder
   public $type = 'matrix';
 
   /**
+   * @var string
+   */
+  public $accessPath = null;
+
+  /**
+   * @var array
+   */
+  public $actions = array();
+
+  /**
+   * Namekey
+   * @var string
+   */
+  public $nKey = null;
+
+  /**
    * Die Datenmatrix
    * @var array
    */
@@ -133,35 +139,52 @@ class WgtMatrixBuilder
    * X Achse mit platzhalter für leere werte
    * @var array
    */
-  protected $axisX  = array( '---' => '---' );
+  protected $axisX  = array('---' => '---');
 
   /**
    * Y Achse mit platzhalter für leere werte
    * @var array
    */
-  protected $axisY  = array( '---' => '---' );
+  protected $axisY  = array('---' => '---');
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Constructor
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * default constructor
    *
    * @param int $name the name of the wgt object
    */
-  public function __construct( $env )
+  public function __construct($name, $view)
   {
 
-    $this->env = $env;
+    $this->env = $view;
+
+    $view->addItem($name,  $this);
+
+    $this->idKey = $name;
 
   } // end public function __construct */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Method
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
+
+  /**
+   * @param string $cellType
+   */
+  public function setCellRenderer($cellType)
+  {
+
+    if (!$cellType)
+      $cellType = 'Tile';
+
+    $cellClass = $this->nKey.'_Matrix_Cell_'.ucfirst($cellType);
+
+    $this->cellRenderer = new $cellClass($this);
+
+  }//end public function setCellRenderer */
 
   /**
    * Sortieren der Query daten in ein Matrixformat
@@ -170,27 +193,28 @@ class WgtMatrixBuilder
   public function prepareData()
   {
 
-    foreach( $this->data as $value )
-    {
+    Debug::console("IN prepare data ".count($this->data));
 
-      $valX = $value[$this->fAxisX];
-      if( empty($valX) )
+    foreach ($this->data as $value) {
+
+      $valX = $value[$this->lAxisX];
+      if (empty($valX))
         $valX = '---';
 
-      $valY = $value[$this->fAxisY];
-      if( empty($valY) )
+      $valY = $value[$this->lAxisY];
+      if (empty($valY))
         $valY = '---';
 
       $this->axisX[$valX] = $valX;
       $this->axisY[$valY] = $valY;
 
-      if( !isset($this->matrixData[$valX][$valY]) )
-        $this->matrixData[$valX][$valY] = array();
+      if (!isset($this->matrixData[$valY][$valX]))
+        $this->matrixData[$valY][$valX] = array();
 
-      $this->matrixData[$valX][$valY][] = $value;
+      $this->matrixData[$valY][$valX][] = $value;
     }
 
-    if( $this->idKey )
+    if ($this->idKey)
       $this->id = 'wgt-matrix-'.$this->idKey;
     else
       $this->idKey = substr($this->id, 11);
@@ -201,33 +225,30 @@ class WgtMatrixBuilder
    * Rendern der Matrix
    * @return string
    */
-  public function render( $params = null )
+  public function render($params = null)
   {
+
+    if ($this->html)
+      return $this->html;
 
     $this->prepareData();
 
-    asort( $this->axisX );
-    asort( $this->axisY );
+    asort($this->axisX);
+    asort($this->axisY);
 
     $mHead = '<th></th>';
-    foreach( $this->axisY as $kY )
-    {
+    foreach ($this->axisY as $kY) {
       $mHead .= '<th>'.$kY.'</th>';
     }
 
     $mBody = '';
-    foreach( $this->axisX as $kX  )
-    {
+    foreach ($this->axisX as $kX) {
       $mBody .= '<tr>';
       $mBody .= '<td class="head" >'.$kX.'</td>';
-      foreach( $this->axisY as $kY )
-      {
-        if( isset( $this->matrixData[$kX][$kY] ) )
-        {
-          $mBody .= '<td>'.$this->cellRenderer->render( $this->matrixData[$kX][$kY] ).'</td>';
-        }
-        else
-        {
+      foreach ($this->axisY as $kY) {
+        if (isset($this->matrixData[$kY][$kX])) {
+          $mBody .= '<td>'.$this->cellRenderer->render($this->matrixData[$kY][$kX]).'</td>';
+        } else {
           $mBody .= '<td> </td>';
         }
       }
@@ -235,31 +256,28 @@ class WgtMatrixBuilder
     }
 
     $codeVariants = '';
-    foreach( $this->variantList as $key => $label )
-    {
+    foreach ($this->variantList as $key => $label) {
 
       $selected = '';
-      if( $key == $this->cellRenderer->type )
+      if ($key == $this->cellRenderer->type)
         $selected = ' selected="selected" ';
 
       $codeVariants .= '<option value="'.$key.'" '.$selected.'  >'.$label.'</option>';
     }
 
     $codeGroupsRow = '';
-    foreach( $this->groupList as $key => $label )
-    {
+    foreach ($this->groupList as $key => $label) {
       $selected = '';
-      if( $key == $this->fAxisX )
+      if ($key == $this->fAxisX)
         $selected = ' selected="selected" ';
 
       $codeGroupsRow .= '<option value="'.$key.'" '.$selected.'  >'.$label.'</option>';
     }
 
     $codeGroupsCol = '';
-    foreach( $this->groupList as $key => $label )
-    {
+    foreach ($this->groupList as $key => $label) {
       $selected = '';
-      if( $key == $this->fAxisY )
+      if ($key == $this->fAxisY)
         $selected = ' selected="selected" ';
 
       $codeGroupsCol .= '<option value="'.$key.'" '.$selected.'  >'.$label.'</option>';
@@ -267,72 +285,84 @@ class WgtMatrixBuilder
 
     $panel = $this->renderPanel();
 
-
     $searchForm = '';
-    if( $this->searchURL )
-    {
+    if ($this->searchURL) {
 
-      $this->searchFormID = 'wgt-search-matrix-'.$this->idKey;
+      $this->searchForm = 'wgt-search-matrix-'.$this->idKey;
 
       $searchForm = <<<HTML
 
   <form
-  	id="{$this->searchFormID}"
-  	method="get"
-  	action="{$this->searchURL}&amp;element={$this->id}" ></form>
+    id="{$this->searchForm}"
+    method="get"
+    action="{$this->searchURL}&amp;element={$this->id}" ></form>
 
 HTML;
 
     }
 
-    $view = $this->env;
+    //$view = $this->env->getView();
 
-    $iconAdd = $view->icon( 'control/add.png', 'Create' );
-    $iconRefresh = $view->icon( 'control/refresh.png', 'Refresh' );
+    /*
+
+    <button class="wgt-button" onclick="\$R.get('{$this->addURL}');" >{$iconAdd} Create</button>
+    &nbsp;|&nbsp;&nbsp;
+     */
 
     $html = <<<HTML
-<div id="{$this->id}-box" >
+<div class="wgt-grid" id="{$this->id}-box" >
+
+<var id="{$this->id}-table-cfg-grid" >{
+  "height":"{$this->bodyHeight}",
+  "search_able":true,
+  "search_form":"{$this->searchForm}",
+  "select_able":"true"
+}</var>
 
   {$panel}
   {$searchForm}
 
   <div class="wgt-panel" >
-  	<button class="wgt-button" onclick="\$R.get('{$this->addURL}');" >{$iconAdd} Create</button>
-		&nbsp;|&nbsp;&nbsp;
-		<label>Rows:</label> <select
-			name="grow"
-			class="fparam-{$this->searchFormID} medium"
-			  >{$codeGroupsRow}</select>&nbsp;|&nbsp;
-		<label>Cols:</label> <select
-			name="gcol"
-			class="fparam-{$this->searchFormID} medium"
-				>{$codeGroupsCol}</select>&nbsp;|&nbsp;
-		<label>Show as:</label> <select
-			name="vari"
-			class="fparam-{$this->searchFormID} medium"
-				>{$codeVariants}</select>
-		&nbsp;&nbsp; <button class="wgt-button" onclick="\$R.form('{$this->searchFormID}');"  >{$iconRefresh} Refresh</button>
+    <label>Rows:</label> <select
+      name="grow"
+      class="fparam-{$this->searchForm} medium"
+        >{$codeGroupsRow}</select>&nbsp;|&nbsp;
+    <label>Cols:</label> <select
+      name="gcol"
+      class="fparam-{$this->searchForm} medium"
+        >{$codeGroupsCol}</select>&nbsp;|&nbsp;
+    <label>Show as:</label> <select
+      name="vari"
+      class="fparam-{$this->searchForm} medium"
+        >{$codeVariants}</select>
+    &nbsp;&nbsp; <button class="wgt-button" onclick="\$R.form('{$this->searchForm}');"  ><i class="icon-refresh" ></i> Refresh</button>
   </div>
 
-	<table class="wgt-matrix" id="{$this->id}" >
-		<thead>
-			<tr>
+  <table class="wgt-grid wcm wcm_widget_grid hide-head wgt-matrix" id="{$this->id}-table"  >
+    <thead>
+      <tr>
 {$mHead}
-			</tr>
-		</thead>
-		<tbody>
+      </tr>
+    </thead>
+    <tbody>
 {$mBody}
-		</tbody>
-	</table>
+    </tbody>
+  </table>
+
 
 </div>
 HTML;
 
+    $this->html = $html;
 
     return $html;
 
   }//end public function render */
 
+  public function buildHtml()
+  {
+    return $this->render();
+  }
 
   /**
    * @return string
@@ -340,7 +370,7 @@ HTML;
   protected function renderPanel()
   {
 
-    if( !$this->panel )
+    if (!$this->panel)
       return '';
 
     return $this->panel->build();
@@ -348,5 +378,4 @@ HTML;
   }//end protected function renderPanel */
 
 } // end class WgtMatrix
-
 

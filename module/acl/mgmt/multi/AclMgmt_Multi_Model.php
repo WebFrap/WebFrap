@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,12 +26,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Multi_Model
-  extends Model
+class AclMgmt_Multi_Model extends Model
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * multi save action, with this action you can save multiple entries
@@ -41,22 +40,20 @@ class AclMgmt_Multi_Model
    * @param TFlag $params named parameters
    * @return void
    */
-  public function update( $params   )
+  public function update($params   )
   {
 
     $orm  = $this->getOrm();
     $db   = $this->getDb();
     $view = $this->getView();
 
-    try
-    {
+    try {
       // start a transaction in the database
       $db->begin();
 
       // for insert there has to be a list of values that have to be saved
-      if( !$listWbfsysSecurityAccess = $this->getRegisterd( 'listRefWbfsysSecurityAccess' ) )
-      {
-        throw new Model_Exception
+      if (!$listWbfsysSecurityAccess = $this->getRegisterd('listRefWbfsysSecurityAccess')) {
+        throw new WebfrapSys_Exception
         (
           'Internal Error',
           'listWbfsysSecurityAccess was not registered'
@@ -65,10 +62,8 @@ class AclMgmt_Multi_Model
 
       $entityTexts = array();
 
-      foreach( $listWbfsysSecurityAccess as $entityWbfsysSecurityAccess )
-      {
-        if( !$orm->update( $entityWbfsysSecurityAccess ) )
-        {
+      foreach ($listWbfsysSecurityAccess as $entityWbfsysSecurityAccess) {
+        if (!$orm->update($entityWbfsysSecurityAccess)) {
           $entityText = $entityWbfsysSecurityAccess->text();
           $this->getResponse()->addError
           (
@@ -79,9 +74,7 @@ class AclMgmt_Multi_Model
               array($entityText)
             )
           );
-        }
-        else
-        {
+        } else {
           $entityTexts[] = $entityWbfsysSecurityAccess->text();
         }
       }
@@ -93,21 +86,17 @@ class AclMgmt_Multi_Model
         (
           'Successfully saved Area: '.$textSaved,
           'wbf.message',
-          array( $textSaved )
+          array($textSaved)
         )
       );
 
       // everything ok
       $db->commit();
 
-    }
-    catch( LibDb_Exception $e )
-    {
+    } catch (LibDb_Exception $e) {
       $this->getResponse()->addError($e->getMessage());
       $db->rollback();
-    }
-    catch( Model_Exception $e )
-    {
+    } catch (WebfrapSys_Exception $e) {
       $this->getResponse()->addError($e->getMessage());
     }
 
@@ -124,29 +113,27 @@ class AclMgmt_Multi_Model
    * @param TFlag $params named parameters
    * @return boolean
    */
-  public function fetchUpdateData( $params  )
+  public function fetchUpdateData($params  )
   {
 
     $httpRequest = $this->getRequest();
     $orm         = $this->getOrm();
 
-    try
-    {
+    try {
 
       // if the validation fails report
-      $listWbfsysSecurityAccess = $httpRequest->validateMultiUpdate
-      (
+      $listWbfsysSecurityAccess = $httpRequest->validateMultiUpdate(
         'WbfsysSecurityAccess',
         'security_access',
-        $params->fieldsWbfsysSecurityArea
+        array('access_level','ref_access_level','meta_level','message_level','priv_message_level')
       );
 
       $this->register('listRefWbfsysSecurityAccess',$listWbfsysSecurityAccess);
+
       return true;
 
-    }
-    catch( InvalidInput_Exception $e )
-    {
+    } catch (InvalidInput_Exception $e) {
+
       return false;
     }
 

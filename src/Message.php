@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -93,17 +93,14 @@ class Message
    */
   public static function init()
   {
-    
-    if( self::$instance )
+
+    if (self::$instance)
       return;
 
-    if( defined( 'WBF_MESSAGE_ADAPTER' ) )
-    {
+    if (defined('WBF_MESSAGE_ADAPTER')) {
       $className = 'LibMessage'.WBF_MESSAGE_ADAPTER;
       self::$instance = new $className();
-    }
-    else
-    {
+    } else {
       self::$instance = new LibMessagePool();
     }
 
@@ -116,12 +113,12 @@ class Message
    */
   public static function getInstance()
   {
-    if( !self::$instance )
+    if (!self::$instance)
       self::init();
 
     return self::$instance;
   }//end public static function getInstance */
-  
+
   /**
    * Interface für das Gateway Singleton
    *
@@ -129,18 +126,17 @@ class Message
    */
   public static function getActive()
   {
-    
-    if( !self::$instance )
+
+    if (!self::$instance)
       self::init();
 
     return self::$instance;
-    
-  }//end public static function getActive */
-  
 
-////////////////////////////////////////////////////////////////////////////////
+  }//end public static function getActive */
+
+/*//////////////////////////////////////////////////////////////////////////////
 // Messaging System
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Eine neue Fehlermeldung in einen Channel schreiben
@@ -148,9 +144,9 @@ class Message
    * @param string $channel der channel in den die meldung soll
    * @return void
    */
-  public static function addI18nError( $error, $channel = 'stdout' )
+  public static function addI18nError($error, $channel = 'stdout')
   {
-    self::$instance->addError( I18n::s($error), $channel = 'stdout' );
+    self::$instance->addError(I18n::s($error), $channel = 'stdout');
   }//end public static function addI18nError */
 
   /**
@@ -159,9 +155,9 @@ class Message
    * @param string $channel der channel in den die meldung soll
    * @return void
    */
-  public static function addError( $error, $channel = 'stdout' )
+  public static function addError($error, $channel = 'stdout')
   {
-    self::$instance->addError( $error, $channel = 'stdout' );
+    self::$instance->addError($error, $channel = 'stdout');
   }//end public static function addError */
 
   /**
@@ -169,9 +165,9 @@ class Message
    * @param $channel name des Channels standard stdout
    * @return void
    */
-  public static function resetErrors( $channel = 'stdout' )
+  public static function resetErrors($channel = 'stdout')
   {
-    self::$instance->resetErrors( $channel );
+    self::$instance->resetErrors($channel);
   }//end public static function resetErrors */
 
   /**
@@ -179,9 +175,9 @@ class Message
    * @param $channel name des Channels standard stdout
    * @return boolean
    */
-  public static function hasErrors( $channel = 'stdout' )
+  public static function hasErrors($channel = 'stdout')
   {
-    return self::$instance->hasErrors( $channel );
+    return self::$instance->hasErrors($channel);
   }//end public static function hasErrors */
 
   /**
@@ -189,9 +185,9 @@ class Message
    * @param $channel name des Channels standard stdout
    * @return boolean
    */
-  public static function cleanErrors( $channel = 'stdout' )
+  public static function cleanErrors($channel = 'stdout')
   {
-    return self::$instance->cleanErrors( $channel );
+    return self::$instance->cleanErrors($channel);
   }//end public static function cleanErrors */
 
   /**
@@ -199,9 +195,9 @@ class Message
    * @param $channel name des Channels standard stdout
    * @return array
    */
-  public static function getErrors( $channel = 'stdout' )
+  public static function getErrors($channel = 'stdout')
   {
-    return self::$instance->getErrors( $channel );
+    return self::$instance->getErrors($channel);
   }//end public static function getErrors */
 
   /**
@@ -210,9 +206,9 @@ class Message
    * @param $channel name des Channels standard stdout
    * @return void
    */
-  public static function addI18nMessage( $message  , $channel = 'stdout' )
+  public static function addI18nMessage($message  , $channel = 'stdout')
   {
-    self::$instance->addMessage( I18n::s($message), $channel );
+    self::$instance->addMessage(I18n::s($message), $channel);
   }//end public static function addI18nMessage */
 
   /**
@@ -221,9 +217,9 @@ class Message
    * @param $channel name des Channels standard stdout
    * @return void
    */
-  public static function addMessage( $message  , $channel = 'stdout' )
+  public static function addMessage($message  , $channel = 'stdout')
   {
-    self::$instance->addMessage( $message, $channel );
+    self::$instance->addMessage($message, $channel);
   }//end public static function addMessage */
 
   /**
@@ -231,11 +227,10 @@ class Message
    * @param $channel name des Channels standard stdout
    * @return void
    */
-  public static function resetMessages( $channel = 'stdout' )
+  public static function resetMessages($channel = 'stdout')
   {
     self::$instance->resetMessages($channel);
   }//end public static function resetMessages */
-
 
   /**
    * Fragen ob Nachrichten in einem Channel vorhanden sind
@@ -263,9 +258,9 @@ class Message
    * @param $channel name des Channels standard stdout
    * @return void
    */
-  public static function addI18nWarning( $warning  , $channel = 'stdout' )
+  public static function addI18nWarning($warning  , $channel = 'stdout')
   {
-    self::$instance->addWarning( I18n::s($warning) , $channel);
+    self::$instance->addWarning(I18n::s($warning) , $channel);
   }//end public static function addWarning */
 
   /**
@@ -274,7 +269,7 @@ class Message
    * @param $channel name des Channels standard stdout
    * @return void
    */
-  public static function addWarning( $warning  , $channel = 'stdout' )
+  public static function addWarning($warning  , $channel = 'stdout')
   {
     self::$instance->addWarning($warning, $channel);
   }//end public static function addWarning */
@@ -284,7 +279,7 @@ class Message
    * @param $channel name des Channels standard stdout
    * @return void
    */
-  public static function resetWarnings( $channel = 'stdout' )
+  public static function resetWarnings($channel = 'stdout')
   {
     self::$instance->resetWarnings($channel);
   }//end public static function resetWarnings */

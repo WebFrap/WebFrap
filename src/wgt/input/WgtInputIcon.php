@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * class WgtItemInput
@@ -22,12 +21,11 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputIcon
-  extends WgtInput
+class WgtInputIcon extends WgtInput
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * path to the icon
@@ -36,39 +34,37 @@ class WgtInputIcon
    */
   protected $icon = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * setter for the icon
    *
    * @param string $icon
    */
-  public function setIcon( $icon )
+  public function setIcon($icon)
   {
 
     $this->icon = $icon;
 
-  }//end public function setIcon( $icon )
+  }//end public function setIcon($icon)
 
   /**
    *
    *
    * @return
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array())
   {
 
-    if($attributes) $this->attributes = array_merge($this->attributes,$attributes);
+    if ($attributes) $this->attributes = array_merge($this->attributes,$attributes);
 
-    if( isset( $this->attributes['type'] ) )
-    {
+    if (isset($this->attributes['type'])) {
       unset($this->attributes['type']);
     }
 
-    if($this->icon)
-    {
+    if ($this->icon) {
       $src = 'background:url('.View::$iconsWeb.'xsmall/'.$this->icon.') no-repeat;' ;
     }
 
@@ -76,13 +72,12 @@ class WgtInputIcon
 
     return $html;
 
-  } // end public function build( )
+  } // end public function build()
 
-  public function buildAjax( )
+  public function buildAjax()
   {
 
-    if( isset( $this->attributes['type'] ) )
-    {
+    if (isset($this->attributes['type'])) {
       unset($this->attributes['type']);
     }
 
@@ -90,8 +85,7 @@ class WgtInputIcon
 
     return $html;
 
-  } // end public function buildAjax( )
+  } // end public function buildAjax()
 
 } // end class WgtItemInput
-
 

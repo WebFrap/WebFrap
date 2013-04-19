@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,14 +21,12 @@
  * @author Dominik Bonsch <db@s-db.de>
  * @copyright Softwareentwicklung Dominik Bonsch <db@s-db.de>
  */
-class MyActionLog_Table_Query
-  extends LibSqlQuery
+class MyActionLog_Table_Query extends LibSqlQuery
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
-    
  /**
    * Vollständige Datenbankabfrage mit allen Filtern und Formatierungsanweisungen
    * ACLs werden nicht beachtet
@@ -41,46 +39,41 @@ class MyActionLog_Table_Query
    * @throws LibDb_Exception bei technischen Problemen wie zB. keine Verbindung
    *   zum Datenbank server, aber auch fehlerhafte sql queries
    */
-  public function fetch( $condition = null, $params = null )
+  public function fetch($condition = null, $params = null)
   {
 
-    if(!$params)
+    if (!$params)
       $params = new TFlag();
 
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    if( !$this->criteria )
-    {
+    if (!$this->criteria) {
       $criteria = $db->orm->newCriteria();
-    }
-    else
-    {
+    } else {
       $criteria = $this->criteria;
     }
 
-    if( !$criteria->cols )
-    {
-      $this->setCols( $criteria );
+    if (!$criteria->cols) {
+      $this->setCols($criteria);
     }
 
-    $this->setTables( $criteria );
-    $this->appendConditions( $criteria, $condition, $params  );
-    $this->checkLimitAndOrder( $criteria, $params );
-    $this->appendFilter( $criteria, $params );
+    $this->setTables($criteria);
+    $this->appendConditions($criteria, $condition, $params  );
+    $this->checkLimitAndOrder($criteria, $params);
+    $this->appendFilter($criteria, $params);
 
     // Run Query und save the result
-    $this->result    = $db->orm->select( $criteria );
+    $this->result    = $db->orm->select($criteria);
 
-    if($params->loadFullSize)
+    if ($params->loadFullSize)
       $this->calcQuery = $criteria->count('count(wbfsys_task.'.Db::PK.') as '.Db::Q_SIZE);
 
   }//end public function fetch */
 
-
  /**
    * Nur die Datensätz laden die im Key übergeben werden
-   * 
+   *
    * Es werden keine Filter oder Acls, limits, offset oder sortierung beachtet!
    *
    *
@@ -94,38 +87,37 @@ class MyActionLog_Table_Query
    *  wenn bei der Abfragen technische Problemen auftreten, zb server nicht
    *  ereichbar, invalides sql... etc.
    */
-  public function fetchInAcls( array $inKeys, $params = null )
+  public function fetchInAcls(array $inKeys, $params = null)
   {
 
-    if( !$params )
+    if (!$params)
       $params = new TFlag();
 
     $db                = $this->getDb();
-    
+
     // wenn keine keys vorhanden sind wird ein leeres result objekt gesetzt
-    if( !$inKeys )
-    {
+    if (!$inKeys) {
       $this->result = $db->getEmptyResult();
+
       return;
     }
-    
+
     $criteria          = $db->orm->newCriteria();
 
-    $this->setCols( $criteria );
-    $this->setTables( $criteria );
+    $this->setCols($criteria);
+    $this->setTables($criteria);
 
     $criteria->where
     (
-      " wbfsys_task.rowid  IN( ". implode( ', ', array_keys($inKeys) ) ." )"
+      " wbfsys_task.rowid  IN(". implode(', ', array_keys($inKeys)) .")"
     );
 
     // Run Query und save the result
-    $result    = $db->orm->select( $criteria );
-    
+    $result    = $db->orm->select($criteria);
+
     $this->data = array();
-    
-    foreach( $result as $row )
-    {
+
+    foreach ($result as $row) {
       $row['acl-level'] = $inKeys[$row['wbfsys_task_rowid']];
       $this->data[]     = $row;
     }
@@ -134,17 +126,17 @@ class MyActionLog_Table_Query
 
  /**
    * Injecten der zu ladenden Columns in die SQL Query
-   * Wenn bereits Colums vorhanden waren werden diese komplett 
-   * überschrieben 
+   * Wenn bereits Colums vorhanden waren werden diese komplett
+   * überschrieben
    * Wenn Columns ergänzt werden sollen, dann können diese mit
-   * $criteria->selectAlso( 'additional.column' );
+   * $criteria->selectAlso('additional.column');
    * übergeben werden
    *
    * @param LibSqlCriteria $criteria
    *
    * @return void
    */
-  public function setCols( $criteria )
+  public function setCols($criteria)
   {
 
     $cols = array
@@ -164,7 +156,7 @@ class MyActionLog_Table_Query
   }//end public function setCols */
 
   /**
-   * Injecten der Zieltabelle, sowie 
+   * Injecten der Zieltabelle, sowie
    * aller nötigen Joins zum laden der Daten
    *
    * Es werden jedoch nicht sofort alle möglichen Joins injiziert
@@ -176,7 +168,7 @@ class MyActionLog_Table_Query
    *
    * @return void
    */
-  public function setTables( $criteria   )
+  public function setTables($criteria   )
   {
 
     $criteria->from('wbfsys_task');
@@ -201,16 +193,14 @@ class MyActionLog_Table_Query
       'wbfsys_task_status'
     );// attribute reference wbfsys_task  by alias wbfsys_task_status
 
-
-
   }//end public function setTables */
 
  /**
-   * Leider gibt num_cols nur die Anzahl der tatsächlich gefundenen 
-   * Datensätze zurück. Wenn Limit in der Query verwendet 
-   * bringt diese Zahl dann nichtsmehr, wenn man eigentlich wissen 
+   * Leider gibt num_cols nur die Anzahl der tatsächlich gefundenen
+   * Datensätze zurück. Wenn Limit in der Query verwendet
+   * bringt diese Zahl dann nichtsmehr, wenn man eigentlich wissen
    * möchte wieviele denn ohne limit gefunden worden wären.
-   * 
+   *
    * Setzen der query mit der die anzahl der gefundenen datensätze ohne
    * limit ermittelt wird
    *
@@ -218,10 +208,10 @@ class MyActionLog_Table_Query
    * @param TFlag $params
    * @return void
    */
-  public function setCalcQuery( $criteria, $params )
+  public function setCalcQuery($criteria, $params)
   {
 
-    if($params->loadFullSize)
+    if ($params->loadFullSize)
       $this->calcQuery = $criteria->count('count(wbfsys_task.'.Db::PK.') as '.Db::Q_SIZE);
 
   }//end public function setCalcQuery */
@@ -233,57 +223,40 @@ class MyActionLog_Table_Query
    * @param TFlag $params
    * @return void
    */
-  public function appendConditions( $criteria, $condition, $params )
+  public function appendConditions($criteria, $condition, $params)
   {
 
-
     // append codition if the query has a default filter
-    if( $this->condition )
-    {
+    if ($this->condition) {
 
-      if( is_string($this->condition) )
-      {
+      if (is_string($this->condition)) {
 
-        if( ctype_digit($this->condition) )
-        {
-          $criteria->where( 'wbfsys_task.rowid = '.$this->condition );
-        }
-        else
-        {
-          $criteria->where( $this->condition );
+        if (ctype_digit($this->condition)) {
+          $criteria->where('wbfsys_task.rowid = '.$this->condition);
+        } else {
+          $criteria->where($this->condition);
         }
 
-      }
-      else if( is_array($this->condition) )
-      {
-        $this->checkConditions( $criteria, $this->condition  );
+      } elseif (is_array($this->condition)) {
+        $this->checkConditions($criteria, $this->condition  );
       }
     }
 
-    if( $condition )
-    {
+    if ($condition) {
 
-      if( is_string( $condition) )
-      {
-        if( ctype_digit( $condition ) )
-        {
-          $criteria->where( 'wbfsys_task.rowid = '.$condition );
+      if (is_string($condition)) {
+        if (ctype_digit($condition)) {
+          $criteria->where('wbfsys_task.rowid = '.$condition);
+        } else {
+          $criteria->where($condition);
         }
-        else
-        {
-          $criteria->where( $condition );
-        }
-      }
-      else if( is_array( $condition ) )
-      {
-        $this->checkConditions( $criteria, $condition  );
+      } elseif (is_array($condition)) {
+        $this->checkConditions($criteria, $condition  );
       }
     }
 
-
-    if( $params->begin )
-    {
-      $this->checkCharBegin( $criteria, $params );
+    if ($params->begin) {
+      $this->checkCharBegin($criteria, $params);
     }
 
   }//end public function appendConditions */
@@ -294,22 +267,19 @@ class MyActionLog_Table_Query
    * @param array $condition the conditions
    * @return void
    */
-  public function checkConditions( $criteria, array $condition )
+  public function checkConditions($criteria, array $condition)
   {
 
+      if (isset($condition['free']) && trim($condition['free']) != ''  ) {
 
-      if( isset($condition['free']) && trim( $condition['free'] ) != ''  )
-      {
-
-         if( ctype_digit( $condition['free'] ) )
-         {
+         if (ctype_digit($condition['free'])) {
 
             $part = $condition['free'];
 
             $criteria->where
             (
               '(
-                  wbfsys_task.rowid = \''.$part.'\' 
+                  wbfsys_task.rowid = \''.$part.'\'
               )'
             );
          }
@@ -317,49 +287,47 @@ class MyActionLog_Table_Query
       }//end if
 
       // search conditions for  wbfsys_task
-      if( isset ($condition['wbfsys_task']) )
-      {
+      if (isset ($condition['wbfsys_task'])) {
         $whereCond = $condition['wbfsys_task'];
 
-        if( isset($whereCond['title']) && trim($whereCond['title']) != ''  )
-          $criteria->where( ' wbfsys_task.title = \''.$whereCond['title'].'\' ');
+        if (isset($whereCond['title']) && trim($whereCond['title']) != ''  )
+          $criteria->where(' wbfsys_task.title = \''.$whereCond['title'].'\' ');
 
-        if( isset($whereCond['http_url']) && trim($whereCond['http_url']) != ''  )
-          $criteria->where( ' wbfsys_task.http_url = \''.$whereCond['http_url'].'\' ');
+        if (isset($whereCond['http_url']) && trim($whereCond['http_url']) != ''  )
+          $criteria->where(' wbfsys_task.http_url = \''.$whereCond['http_url'].'\' ');
 
-        if( isset($whereCond['id_type']) && count($whereCond['id_type']) )
-          $criteria->where( " wbfsys_task.id_type IN( '".implode("','",$whereCond['id_type'])."' ) " );
+        if (isset($whereCond['id_type']) && count($whereCond['id_type']))
+          $criteria->where(" wbfsys_task.id_type IN('".implode("','",$whereCond['id_type'])."') ");
 
-        if( isset($whereCond['id_status']) && count($whereCond['id_status']) )
-          $criteria->where( " wbfsys_task.id_status IN( '".implode("','",$whereCond['id_status'])."' ) " );
+        if (isset($whereCond['id_status']) && count($whereCond['id_status']))
+          $criteria->where(" wbfsys_task.id_status IN('".implode("','",$whereCond['id_status'])."') ");
 
         // append meta information
-        if( isset($whereCond['m_role_create']) && trim($whereCond['m_role_create']) != ''  )
-          $criteria->where( ' wbfsys_task.m_role_create = '.$whereCond['m_role_create'].' ');
+        if (isset($whereCond['m_role_create']) && trim($whereCond['m_role_create']) != ''  )
+          $criteria->where(' wbfsys_task.m_role_create = '.$whereCond['m_role_create'].' ');
 
-        if( isset($whereCond['m_role_change']) && trim($whereCond['m_role_change']) != ''  )
-          $criteria->where( ' wbfsys_task.m_role_change = '.$whereCond['m_role_change'].' ');
+        if (isset($whereCond['m_role_change']) && trim($whereCond['m_role_change']) != ''  )
+          $criteria->where(' wbfsys_task.m_role_change = '.$whereCond['m_role_change'].' ');
 
-        if( isset($whereCond['m_time_created_before']) && trim($whereCond['m_time_created_before']) != ''  )
-          $criteria->where( ' wbfsys_task.m_time_created <= \''.$whereCond['m_time_created_before'].'\' ');
+        if (isset($whereCond['m_time_created_before']) && trim($whereCond['m_time_created_before']) != ''  )
+          $criteria->where(' wbfsys_task.m_time_created <= \''.$whereCond['m_time_created_before'].'\' ');
 
-        if( isset($whereCond['m_time_created_after']) && trim($whereCond['m_time_created_after']) != ''  )
-          $criteria->where( ' wbfsys_task.m_time_created >= \''.$whereCond['m_time_created_after'].'\' ');
+        if (isset($whereCond['m_time_created_after']) && trim($whereCond['m_time_created_after']) != ''  )
+          $criteria->where(' wbfsys_task.m_time_created >= \''.$whereCond['m_time_created_after'].'\' ');
 
-        if( isset($whereCond['m_time_changed_before']) && trim($whereCond['m_time_changed_before']) != ''  )
-          $criteria->where( ' wbfsys_task.m_time_changed <= \''.$whereCond['m_time_changed_before'].'\' ');
+        if (isset($whereCond['m_time_changed_before']) && trim($whereCond['m_time_changed_before']) != ''  )
+          $criteria->where(' wbfsys_task.m_time_changed <= \''.$whereCond['m_time_changed_before'].'\' ');
 
-        if( isset($whereCond['m_time_changed_after']) && trim($whereCond['m_time_changed_after']) != ''  )
-          $criteria->where( ' wbfsys_task.m_time_changed >= \''.$whereCond['m_time_changed_after'].'\' ');
+        if (isset($whereCond['m_time_changed_after']) && trim($whereCond['m_time_changed_after']) != ''  )
+          $criteria->where(' wbfsys_task.m_time_changed >= \''.$whereCond['m_time_changed_after'].'\' ');
 
-        if( isset($whereCond['m_rowid']) && trim($whereCond['m_rowid']) != ''  )
-          $criteria->where( ' wbfsys_task.rowid >= \''.$whereCond['m_rowid'].'\' ');
+        if (isset($whereCond['m_rowid']) && trim($whereCond['m_rowid']) != ''  )
+          $criteria->where(' wbfsys_task.rowid >= \''.$whereCond['m_rowid'].'\' ');
 
-        if( isset($whereCond['m_uuid']) && trim($whereCond['m_uuid']) != ''  )
-          $criteria->where( ' wbfsys_task.m_uuid >= \''.$whereCond['m_uuid'].'\' ');
+        if (isset($whereCond['m_uuid']) && trim($whereCond['m_uuid']) != ''  )
+          $criteria->where(' wbfsys_task.m_uuid >= \''.$whereCond['m_uuid'].'\' ');
 
-      }//end if( isset ($condition['wbfsys_task']) )
-
+      }//end if (isset ($condition['wbfsys_task']))
 
   }//end public function checkConditions */
 
@@ -371,24 +339,19 @@ class MyActionLog_Table_Query
    *
    * @return void
    */
-  public function checkCharBegin( $criteria, $params )
+  public function checkCharBegin($criteria, $params)
   {
 
       // filter for a beginning char
-      if( $params->begin )
-      {
+      if ($params->begin) {
 
-        if( '?' == $params->begin  )
-        {
-          $criteria->where( "wbfsys_task.m_parent ~* '^[^a-zA-Z]'" );
-        }
-        else
-        {
-          $criteria->where( "upper(substr(wbfsys_task.m_parent,1,1)) = '".strtoupper($params->begin)."'" );
+        if ('?' == $params->begin) {
+          $criteria->where("wbfsys_task.m_parent ~* '^[^a-zA-Z]'");
+        } else {
+          $criteria->where("upper(substr(wbfsys_task.m_parent,1,1)) = '".strtoupper($params->begin)."'");
         }
 
       }
-
 
   }//end public function checkCharBegin */
 
@@ -400,52 +363,39 @@ class MyActionLog_Table_Query
    *
    * @return void
    */
-  public function checkLimitAndOrder( $criteria, $params  )
+  public function checkLimitAndOrder($criteria, $params  )
   {
 
-
     // check if there is a given order
-    if( $params->order )
-    {
-      $criteria->orderBy( $params->order );
-    }
-    else // if not use the default
-    {
+    if ($params->order) {
+      $criteria->orderBy($params->order);
+    } else { // if not use the default
       $criteria->orderBy('wbfsys_task.rowid');
     }
 
     // Check the offset
-    if( $params->start )
-    {
-      if( $params->start < 0)
+    if ($params->start) {
+      if ($params->start < 0)
         $params->start = 0;
-    }
-    else
-    {
+    } else {
       $params->start = null;
     }
-    $criteria->offset( $params->start );
+    $criteria->offset($params->start);
 
     // Check the limit
-    if( -1 == $params->qsize )
-    {
+    if (-1 == $params->qsize) {
       // no limit if -1
       $params->qsize = null;
-    }
-    else if( $params->qsize )
-    {
+    } elseif ($params->qsize) {
       // limit must not be bigger than max, for no limit use -1
-      if( $params->qsize > Wgt::$maxListSize )
+      if ($params->qsize > Wgt::$maxListSize)
         $params->qsize = Wgt::$maxListSize;
-    }
-    else
-    {
+    } else {
       // if limit 0 or null use the default limit
       $params->qsize = Wgt::$defListSize;
     }
 
-    $criteria->limit( $params->qsize );
-
+    $criteria->limit($params->qsize);
 
   }//end public function checkLimitAndOrder */
 
@@ -457,20 +407,15 @@ class MyActionLog_Table_Query
    *
    * @return void
    */
-  public function injectOrder( $criteria, $params  )
+  public function injectOrder($criteria, $params  )
   {
 
-
     // check if there is a given order
-    if( $params->order )
-    {
-      $criteria->orderBy( $params->order );
-    }
-    else // if not use the default
-    {
+    if ($params->order) {
+      $criteria->orderBy($params->order);
+    } else { // if not use the default
       $criteria->orderBy('wbfsys_task.rowid');
     }
-
 
   }//end public function injectOrder */
 
@@ -487,9 +432,9 @@ class MyActionLog_Table_Query
    *
    * @return void
    */
-  public function appendFilter( $criteria, $params  )
+  public function appendFilter($criteria, $params  )
   {
-  
+
     $db = $this->getDb();
 
   }//end public function appendFilter */

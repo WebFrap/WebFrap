@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,13 +21,12 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class CmsMedia_Maintab_Menu
-  extends WgtDropmenu
+class CmsMedia_Maintab_Menu extends WgtDropmenu
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // menu: create
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
   /**
    * add a drop menu to the create window
    *
@@ -37,21 +36,20 @@ class CmsMedia_Maintab_Menu
    *   string formId: the id of the form;
    * }
    */
-  public function buildMenu( $params )
+  public function buildMenu($params)
   {
-  
+
     // benötigte resourcen laden
     $acl   = $this->getAcl();
     $view   = $this->getView();
 
-    $iconMenu    = $view->icon('control/menu.png',  'Menu' );
-    $iconExecute    = $view->icon('control/exec.png', 'Send' );
-    $iconBookmark  = $view->icon('control/bookmark.png', 'Bookmark' );
-    $iconClose     = $view->icon('control/close.png', 'Close' );
+    $iconMenu    = $view->icon('control/menu.png',  'Menu');
+    $iconExecute    = $view->icon('control/exec.png', 'Send');
+    $iconBookmark  = $view->icon('control/bookmark.png', 'Bookmark');
+    $iconClose     = $view->icon('control/close.png', 'Close');
 
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport( $params );
-
+    $entries->support  = $this->entriesSupport($params);
 
     $this->content = <<<HTML
 <ul class="wcm wcm_ui_dropmenu wgt-dropmenu" id="{$this->id}" >
@@ -70,7 +68,7 @@ class CmsMedia_Maintab_Menu
   </li>
 {$entries->customButton}
   <li class="wgt-root" >
-    <button 
+    <button
       class="wcm wcm_ui_button wgtac_run_all wcm_ui_tip-top"
       title="{$view->i18n->l('Run All','wbf.label')}" >{$iconExecute} {$view->i18n->l('Run All','wbf.label')}</button>
     <ul style="margin-top:-10px;" ></ul>
@@ -85,7 +83,7 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport( $params )
+  protected function entriesSupport($params)
   {
 
     $iconSupport         = $this->view->icon('control/support.png'      ,'Support');
@@ -112,7 +110,7 @@ HTML;
 HTML;
 
     return $html;
-    
+
   }//end public function entriesSupport */
 
 }//end class MaintenanceDbConsistency_Maintab_Menu

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrapUnit
@@ -23,9 +22,9 @@
 abstract class LibTestGui
 {
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var int
@@ -66,15 +65,14 @@ abstract class LibTestGui
    */
   protected $outputPool = array();
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Magic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
    */
-  public function __construct( )
+  public function __construct()
   {
 
       ++ self::$anzClass;
@@ -83,9 +81,9 @@ abstract class LibTestGui
 
   }//end public function __construct
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // getter and Setter Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Enter description here...
@@ -93,20 +91,18 @@ abstract class LibTestGui
    */
   public function getOutput()
   {
-
     return $this->outputPool;
   }//end public function getOutput()
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Controller
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
    */
-  public function run( $view )
+  public function run($view)
   {
-
 
     $reflector = new LibReflectorClass($this);
 
@@ -114,19 +110,14 @@ abstract class LibTestGui
     $methodes = $reflector->getAllMethodNames();
 
     $this->setUp();
-    foreach( $methodes as $method )
-    {
-      if ( strtolower(substr( $method, 0, 4 )) == 'test' )
-      {
-        try
-        {
+    foreach ($methodes as $method) {
+      if (strtolower(substr($method, 0, 4)) == 'test') {
+        try {
           $this->view->cleanParser(true);
-          $this->$method( );
+          $this->$method();
           $this->failedMethod[$method] = false;
           $this->outputPool['method: '.$method] = $this->view->build();
-        }
-        catch( LibTestException $exc )
-        {
+        } catch (LibTestException $exc) {
           $this->failedMethod[$method] = $exc->getMessage();
         }
       }
@@ -153,27 +144,27 @@ abstract class LibTestGui
 
   }//end public function tearDown
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Tests
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * the only test method
    * @param string $message
    */
-  protected function failed( $message  )
+  protected function failed($message  )
   {
 
     ++self::$anzTests;
     ++self::$failedTests;
-    throw new LibTestException( $message );
+    throw new LibTestException($message);
 
   }//end protected function failed
 
   /**
    * @return void
    */
-  protected function success( )
+  protected function success()
   {
 
     ++self::$anzTests;

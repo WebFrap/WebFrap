@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @lang de:
@@ -25,9 +24,9 @@
  */
 abstract class WgtRenderHtml
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Public Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @lang de:
@@ -43,15 +42,15 @@ abstract class WgtRenderHtml
    */
   public $view       = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Public Construct
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * the to string method
    * @return string
    */
-  public function __construct( $view )
+  public function __construct($view)
   {
 
     $this->view = $view;
@@ -65,12 +64,9 @@ abstract class WgtRenderHtml
   public function __toString()
   {
 
-    try
-    {
+    try {
       return $this->render();
-    }
-    catch( Exception $e )
-    {
+    } catch (Exception $e) {
 
       $this->html = '<b>failed to create</b>';
 
@@ -80,7 +76,7 @@ abstract class WgtRenderHtml
         $e
       );
 
-      if(Log::$levelDebug)
+      if (Log::$levelDebug)
         return '<b>failed to create: '.get_class($this).'</b>';
       else
         return '<b>failed to create</b>';
@@ -94,7 +90,7 @@ abstract class WgtRenderHtml
    * @param string $alt
    * @param string $size
    */
-  public function icon( $name, $alt, $size = 'xsmall' )
+  public function icon($name, $alt, $size = 'xsmall')
   {
     return Wgt::icon($name, $size, array('alt'=>$alt));
   }//end public function icon */
@@ -103,32 +99,31 @@ abstract class WgtRenderHtml
    * @param string $name
    * @param string $alt
    */
-  public function image( $name, $param, $flag = false )
+  public function image($name, $param, $flag = false)
   {
     return Wgt::image($name, array('alt'=>$param),true);
   }//end public function image */
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Logic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * build the attributes
    * @return String
    */
-  protected function asmAttributes( $attributes = array() )
+  protected function asmAttributes($attributes = array())
   {
 
-    if(!$attributes)
+    if (!$attributes)
       $attributes = $this->attributes;
 
     $html = '';
 
-    if(!isset($attributes['id']))
+    if (!isset($attributes['id']))
       $attributes['id'] = 'wgt_item_'.uniqid();
 
-    foreach( $attributes as $key => $value )
+    foreach ($attributes as $key => $value)
       $html .= $key.'="'.$value.'" ';
 
     return $html;
@@ -145,15 +140,15 @@ abstract class WgtRenderHtml
 
     $html = '';
 
-    if(!isset($this->attributes['id']))
+    if (!isset($this->attributes['id']))
       $this->attributes['id'] = 'wgtitem_'.uniqid();
 
     $html .= ' id="'.$this->attributes['id'].'" ';
 
-    if( isset($this->attributes['value']) )
+    if (isset($this->attributes['value']))
       $html .= ' value="'.$this->attributes['value'].'" ';
 
-    if( isset($this->attributes['title']) )
+    if (isset($this->attributes['title']))
       $html .= 'title="'.$this->attributes['title'].'" ';
 
     return $html;
@@ -165,13 +160,13 @@ abstract class WgtRenderHtml
    *
    * @return string
    */
-  public function toHtml( )
+  public function toHtml()
   {
 
-    if( $this->assembled )
+    if ($this->assembled)
       return $this->html;
     else
-      return $this->build( );
+      return $this->build();
 
   } // end public function toHtml */
 
@@ -180,15 +175,12 @@ abstract class WgtRenderHtml
    *
    * @return string
    */
-  public function toXml( )
+  public function toXml()
   {
 
-    if( $this->assembled )
-    {
+    if ($this->assembled) {
       return $this->xml;
-    }
-    else
-    {
+    } else {
       return $this->buildAjaxArea();
     }
 
@@ -202,13 +194,12 @@ abstract class WgtRenderHtml
   public function buildAjaxArea()
   {
 
-    if( $this->xml )
+    if ($this->xml)
       return $this->xml;
 
     return $this->build();
 
   }//end public function buildAjaxArea */
-
 
 }//end class WgtAbstract
 

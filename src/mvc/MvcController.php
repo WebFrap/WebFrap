@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,12 +21,11 @@
  * @package WebFrap
  * @subpackage Mvc
  */
-abstract class MvcController
-  extends BaseChild
+abstract class MvcController extends BaseChild
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var string the default Action
@@ -38,7 +37,7 @@ abstract class MvcController
    * @var array
    */
   protected $models         = array();
-  
+
   /**
    * @var array
    */
@@ -74,14 +73,14 @@ abstract class MvcController
    * (
    *   'helloworld' => array
    *   (
-   *     'method'    => array( 'GET', 'POST' ),
+   *     'method'    => array('GET', 'POST'),
    *     'interface' => array
    *     (
    *        'GET' => array
    *       (
    *         'param' => array
    *          (
-   *           'name' => array( 'type' => 'string', 'semantic' => 'The Name of the Whatever', 'required' => true, 'default' => 'true' ),
+   *           'name' => array('type' => 'string', 'semantic' => 'The Name of the Whatever', 'required' => true, 'default' => 'true'),
    *          ),
    *       )
    *       'POST' => array
@@ -106,7 +105,7 @@ abstract class MvcController
    *     'docref'       => 'some_link',
    *     'author'       => 'author <author@mail.addr>'
    *   )
-   * );
+   *);
    *
    * @var array
    */
@@ -137,10 +136,9 @@ abstract class MvcController
    */
   protected $fullAccess         = false;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // deprecated attributes
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -150,37 +148,37 @@ abstract class MvcController
    */
   public $listMethod    = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Constructor and other Magics
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param Base $env
    */
-  public function __construct( $env = null )
+  public function __construct($env = null)
   {
 
-    if( !$env )
+    if (!$env)
       $env = Webfrap::getActive();
 
     $this->env = $env;
 
-    if( DEBUG )
-      Debug::console( 'Load Controller '.get_class($this) );
+    if (DEBUG)
+      Debug::console('Load Controller '.get_class($this));
 
   }//end public function __construct */
 
   /**
    * default constructor
    */
-  public function __destruct( )
+  public function __destruct()
   {
     $this->initialized = false;
   } // end public function __destruct */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter, Setter and Adder Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /** request the actually activ Action
    * @return string
@@ -203,27 +201,22 @@ abstract class MvcController
    * @return Model
    * @throws Controller_Exception wenn das angefragt Modell nicht existiert
    */
-  public function loadModel( $modelKey, $key = null )
+  public function loadModel($modelKey, $key = null)
   {
 
-    if( is_array( $key ) )
+    if (is_array($key))
       $injectKeys = $key;
 
-    if( !$key || is_array( $key ) )
+    if (!$key || is_array($key))
       $key = $modelKey;
-
 
     $modelName    = $modelKey.'_Model';
 
-    if( !isset( $this->models[$key]  ) )
-    {
-      if( Webfrap::classLoadable( $modelName ) )
-      {
-        $model = new $modelName( $this );
+    if (!isset($this->models[$key]  )) {
+      if (Webfrap::classLoadable($modelName)) {
+        $model = new $modelName($this);
         $this->models[$key] = $model;
-      }
-      else
-      {
+      } else {
         throw new Mvc_Exception
         (
           'Internal Error',
@@ -235,33 +228,26 @@ abstract class MvcController
     return $this->models[$key];
 
   }//end public function loadModel */
-  
+
   /**
    * request the default action of the ControllerClass
    * @return Ui
    */
-  public function loadUi( $uiName , $key = null )
+  public function loadUi($uiName , $key = null)
   {
 
-    if(!$key)
+    if (!$key)
       $key = $uiName;
 
     $className = $uiName.'_Ui';
     $oldClassName = 'Ui'.$uiName;
 
-
-    if( !isset( $this->uis[$key]  ) )
-    {
-      if(Webfrap::classLoadable($className))
-      {
+    if (!isset($this->uis[$key]  )) {
+      if (Webfrap::classLoadable($className)) {
         $this->uis[$key] = new $className();
-      }
-      else if(Webfrap::classLoadable($oldClassName))
-      {
+      } elseif (Webfrap::classLoadable($oldClassName)) {
         $this->uis[$key] = new $oldClassName();
-      }
-      else
-      {
+      } else {
         throw new Controller_Exception('Internal Error','Failed to load ui: '.$uiName);
       }
     }
@@ -278,10 +264,10 @@ abstract class MvcController
    * @param $key
    * @return Model
    */
-  public function getModel( $key )
+  public function getModel($key)
   {
 
-    if( isset( $this->models[$key] ) )
+    if (isset($this->models[$key]))
       return $this->models[$key];
     else
       return null;
@@ -292,16 +278,15 @@ abstract class MvcController
    *
    * @return LibFlow
    */
-  public function getFlowController(  )
+  public function getFlowController()
   {
-
     return Webfrap::getActive();
 
   }//public function getFlowController */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Logic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Den Aufruf an einen Subcontroller weiterrouten
@@ -313,37 +298,33 @@ abstract class MvcController
    *
    * @throws Webfrap_Exception
    */
-  public function routeToSubcontroller( $conKey, $do, $request, $response )
+  public function routeToSubcontroller($conKey, $do, $request, $response)
   {
 
     $request   = $this->getRequest();
     $response  = $this->getResponse();
 
-    try
-    {
+    try {
 
       $className = $conKey.'_Controller';
 
-      if( !Webfrap::classLoadable( $className ) )
-      {
-        throw new InvalidRoute_Exception( $className );
+      if (!Webfrap::classLoadable($className)) {
+        throw new InvalidRoute_Exception($className);
       }
 
       $controller = new $className();
 
       // Initialisieren der Extention
-      if( !$controller->initController( ) )
-        throw new Webfrap_Exception( 'Failed to initialize Controller' );
+      if (!$controller->initController())
+        throw new Webfrap_Exception('Failed to initialize Controller');
 
       // Run the mainpart
-      $controller->run( $do );
+      $controller->run($do);
 
       // shout down the extension
-      $controller->shutdownController( );
+      $controller->shutdownController();
 
-    }
-    catch( Exception $exc )
-    {
+    } catch (Exception $exc) {
 
       Error::report
       (
@@ -361,8 +342,7 @@ abstract class MvcController
 
       $type = get_class($exc);
 
-      if( Log::$levelDebug )
-      {
+      if (Log::$levelDebug) {
         // Create a Error Page
         $this->errorPage
         (
@@ -371,16 +351,13 @@ abstract class MvcController
           '<pre>'.Debug::dumpToString($exc).'</pre>'
         );
 
-      }
-      else
-      {
-        switch( $type )
-        {
+      } else {
+        switch ($type) {
           case 'Security_Exception':
           {
             $this->errorPage
             (
-              $response->i18n->l( 'Access Denied', 'wbf.message'  ),
+              $response->i18n->l('Access Denied', 'wbf.message'  ),
               Response::FORBIDDEN
             );
             break;
@@ -388,20 +365,17 @@ abstract class MvcController
           default:
           {
 
-            if( Log::$levelDebug )
-            {
+            if (Log::$levelDebug) {
               $this->errorPage
               (
                 'Exception '.$type.' not catched ',
                 Response::INTERNAL_ERROR,
                 Debug::dumpToString($exc)
               );
-            }
-            else
-            {
+            } else {
               $this->errorPage
               (
-                $response->i18n->l(  'Sorry Internal Error', 'wbf.message'  ),
+                $response->i18n->l( 'Sorry Internal Error', 'wbf.message'  ),
                 Response::INTERNAL_ERROR
               );
             }
@@ -422,45 +396,40 @@ abstract class MvcController
    * die vom request angeforderte methode auf rufen
    * @param string $action
    */
-  public function run( $action = null )
+  public function run($action = null)
   {
 
-
-    if( !$this->checkAction( $action ) )
+    if (!$this->checkAction($action))
       return;
 
-    $this->runIfCallable( $action );
+    $this->runIfCallable($action);
 
   }//end public function run */
 
   /**
    * @param string $methodeName
    */
-  public function runIfCallable( $methodeKey  )
+  public function runIfCallable($methodeKey  )
   {
 
     $request   = $this->getRequest();
     $response  = $this->getResponse();
 
-
-    $methodeKey = strtolower( $methodeKey );
+    $methodeKey = strtolower($methodeKey);
     $methodeName = 'service_'.$methodeKey;
 
-     if( method_exists( $this, $methodeName ) )
-     {
+     if (method_exists($this, $methodeName)) {
 
-       try
-       {
+       try {
 
          // prüfen der options soweit vorhanden
-         if( isset( $this->options[$methodeKey] ) )
-         {
+         if (isset($this->options[$methodeKey])) {
 
            // prüfen ob die HTTP Methode überhaupt zulässig ist
            if
            (
-             isset( $this->options[$methodeKey]['method'] )
-               && !$request->method( $this->options[$methodeKey]['method'] )
+             isset($this->options[$methodeKey]['method'])
+               && !$request->method($this->options[$methodeKey]['method'])
            )
            {
             throw new InvalidRequest_Exception
@@ -472,7 +441,7 @@ abstract class MvcController
                 array
                 (
                   'method' => $request->method(),
-                  'use'    => implode( ' or ', $this->options[$methodeKey]['method'] )
+                  'use'    => implode(' or ', $this->options[$methodeKey]['method'])
                 )
               ),
               Request::METHOD_NOT_ALLOWED
@@ -482,8 +451,8 @@ abstract class MvcController
 
            if
            (
-             isset( $this->options[$methodeKey]['views'] )
-               && !$response->tpl->isType( $this->options[$methodeKey]['views'] )
+             isset($this->options[$methodeKey]['views'])
+               && !$response->tpl->isType($this->options[$methodeKey]['views'])
            )
            {
 
@@ -496,7 +465,7 @@ abstract class MvcController
                  array
                  (
                    'type' => $response->tpl->getType(),
-                   'use'  => implode( ' or ', $this->options[$methodeKey]['views'] )
+                   'use'  => implode(' or ', $this->options[$methodeKey]['views'])
                  )
                ),
                Request::NOT_ACCEPTABLE
@@ -504,23 +473,17 @@ abstract class MvcController
 
            }
 
-
          }
 
-         $error = $this->$methodeName( $request, $response  );
+         $error = $this->$methodeName($request, $response  );
 
-         if( $error && is_object( $error ) )
-         {
-           $this->errorPage( $error );
+         if ($error && is_object($error)) {
+           $this->errorPage($error);
          }
 
-       }
-       catch( Webfrap_Exception $error )
-       {
-         $this->errorPage( $error );
-       }
-       catch( Exception $error )
-       {
+       } catch (Webfrap_Exception $error) {
+         $this->errorPage($error);
+       } catch (Exception $error) {
          $this->errorPage
          (
            $error->getMessage(),
@@ -530,35 +493,30 @@ abstract class MvcController
 
        return;
 
-     }
-     else
-     {
-       if( DEBUG )
-       {
-         Debug::console( $methodeName.' is not callable!' ,  array_keys($this->options) );
-         
-         $methodes = implode( ', ', get_class_methods($this) );
+     } else {
+       if (DEBUG) {
+         Debug::console($methodeName.' is not callable!' ,  array_keys($this->options));
+
+         $methodes = implode(', ', get_class_methods($this));
          $response->addError
-         ( 
-         	'The action :'.$methodeName .' is not callable on service: '.get_class($this).' methode: '.$methodes.'!' 
+         (
+           'The action :'.$methodeName .' is not callable on service: '.get_class($this).' methode: '.$methodes.'!'
           );
-       
+
          $this->errorPage
          (
-            'The action :'.$methodeName .' is not callable on service: '.get_class($this).' methode: '.$methodes.'!', 
+            'The action :'.$methodeName .' is not callable on service: '.get_class($this).' methode: '.$methodes.'!',
             Response::NOT_FOUND
          );
-       }
-       else 
-       { 
-         $response->addError( 'The action :'.$methodeName .' is not callable on service: '.get_class($this).' !' );
+       } else {
+         $response->addError('The action :'.$methodeName .' is not callable on service: '.get_class($this).' !');
          $this->errorPage
          (
             'The action :'.$methodeName .' is not callable on service: '.get_class($this).' !',
             Response::NOT_FOUND
          );
        }
-       
+
        return;
      }
 
@@ -572,21 +530,18 @@ abstract class MvcController
    *
    * @return void
    */
-  public function runIfExists( $methodeName , $view = null )
+  public function runIfExists($methodeName , $view = null)
   {
 
-    if( method_exists( $this , $methodeName  ) )
-    {
-      if( $view )
-        $this->$methodeName( $view );
+    if (method_exists($this , $methodeName  )) {
+      if ($view)
+        $this->$methodeName($view);
 
       else
-        $this->$methodeName( );
+        $this->$methodeName();
 
       return true;
-    }
-    else
-    {
+    } else {
       return false;
     }
 
@@ -596,39 +551,32 @@ abstract class MvcController
    * @param string $action
    * @return void
    */
-  protected function checkAction( $action )
+  protected function checkAction($action)
   {
 
-    $action = strtolower( $action );
+    $action = strtolower($action);
     $this->activAction = $action;
 
-    if( $this->fullAccess )
+    if ($this->fullAccess)
       return true;
 
     $user = $this->getUser();
-    if( $user->getLogedIn() )
+    if ($user->getLogedIn())
       return true;
 
     // prüfen mit den options
-    if( isset($this->options[$action]['public'])  )
-    {
+    if (isset($this->options[$action]['public'])  ) {
 
-      if( $this->options[$action]['public'] )
-      {
+      if ($this->options[$action]['public']) {
         return true;
-      }
-      else if( $this->login()  )
-      {
+      } elseif ($this->login()  ) {
         return true;
       }
 
       // wenn false fällt der code direkt zum login redirect
-    }
-    else if( $this->login()  )
-    {
+    } elseif ($this->login()  ) {
       return true;
     }
-
 
     Webfrap::getActive()->redirectToLogin();
 
@@ -642,15 +590,15 @@ abstract class MvcController
    * @param array $data
    * @return void
    */
-  public function initController( $data = array() )
+  public function initController($data = array())
   {
 
-    if( $this->initialized )
+    if ($this->initialized)
       return true;
 
     $this->initialized = true;
 
-    foreach( $data as $name => $value )
+    foreach ($data as $name => $value)
       $this->$name = $value;
 
     // View und Request und User werden immer benötigt
@@ -659,16 +607,16 @@ abstract class MvcController
     $this->getRequest();
 
     $response = $this->getResponse();
-    $response->setMessage( $this->getMessage() );
-    $response->setI18n( $this->getI18n() );
+    $response->setMessage($this->getMessage());
+    $response->setI18n($this->getI18n());
 
     $tpl =  $this->getTplEngine();
-    $response->setTplEngine( $tpl );
+    $response->setTplEngine($tpl);
 
-    $tpl->setI18n( $this->getI18n() );
-    $tpl->setUser( $this->getUser() );
-    $tpl->setMessage( $this->getMessage() );
-    $tpl->setAcl( $this->getAcl() );
+    $tpl->setI18n($this->getI18n());
+    $tpl->setUser($this->getUser());
+    $tpl->setMessage($this->getMessage());
+    $tpl->setAcl($this->getAcl());
 
     $this->setView($tpl);
 
@@ -683,14 +631,14 @@ abstract class MvcController
    *
    * @return void
    */
-  public function shutdownController( )
+  public function shutdownController()
   {
     $this->shutDown();
   } // end public function shutdownController */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Controler Logic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -700,44 +648,39 @@ abstract class MvcController
    * @param string $validator
    * @return int/string
    */
-  protected function getOID( $key = null, $accessKey = null, $validator = Validator::CKEY )
+  protected function getOID($key = null, $accessKey = null, $validator = Validator::CKEY)
   {
 
     $request = $this->getRequest();
 
-    if( $key )
-    {
-      $id = $request->data( $key, Validator::INT, 'rowid' );
+    if ($key) {
+      $id = $request->data($key, Validator::INT, 'rowid');
 
-      if($id)
-      {
+      if ($id) {
         Debug::console('got post rowid: '.$id);
+
         return $id;
       }
     }
 
-    $id = $request->param( 'objid', Validator::INT );
+    $id = $request->param('objid', Validator::INT);
 
-    if( !$id && $accessKey )
-    {
-      if( $key )
-      {
-        $id = $request->data( $key, $validator, $accessKey );
+    if (!$id && $accessKey) {
+      if ($key) {
+        $id = $request->data($key, $validator, $accessKey);
 
-        if($id)
-        {
+        if ($id) {
           Debug::console('got post rowid: '.$id);
+
           return $id;
         }
       }
 
-      $id = $request->param( $accessKey, $validator );
+      $id = $request->param($accessKey, $validator);
 
       Debug::console('got param '.$accessKey.': '.$id);
 
-    }
-    else
-    {
+    } else {
       Debug::console('got param objid: '.$id);
     }
 
@@ -745,26 +688,26 @@ abstract class MvcController
 
   }//end protected function getOID
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methodes to overwrite
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
 
   /**
    * Trigger the custom init method of this controller
    */
-  public function init(){ return true; }
+  public function init() { return true; }
 
   /**
    * Overwrite if needed
    * use this instead of destructor
    */
-  public function shutDown(){}
+  public function shutDown() {}
 
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // error page and messages
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * de:
@@ -778,16 +721,13 @@ abstract class MvcController
    *
    * @return void
    */
-  public function errorPage( $message, $errorCode = Response::INTERNAL_ERROR, $dump = null )
+  public function errorPage($message, $errorCode = Response::INTERNAL_ERROR, $dump = null)
   {
 
-    if( is_object( $message ) )
-    {
+    if (is_object($message)) {
       $messageText  = $message->getMessage();
       $errorCode    = $message->getErrorKey();
-    }
-    else
-    {
+    } else {
       $messageText  = $message;
     }
 
@@ -797,19 +737,17 @@ abstract class MvcController
     // bei ajax request wird einfach eine fehlermeldung geworfen
     if
     (
-      $response->tpl->isType( View::MAINTAB )
-        || $response->tpl->isType( View::MODAL )
-        || $response->tpl->isType( View::AJAX )
-        || $response->tpl->isType( View::SERVICE )
+      $response->tpl->isType(View::MAINTAB)
+        || $response->tpl->isType(View::MODAL)
+        || $response->tpl->isType(View::AJAX)
+        || $response->tpl->isType(View::SERVICE)
     )
     {
 
-      $response->sendHeader( "X-error-message: ".urlencode($messageText.' '.$errorCode) );
+      $response->sendHeader("X-error-message: ".urlencode($messageText.' '.$errorCode));
 
-      $response->addError( $messageText );
-    }
-    elseif( $response->tpl->isType( View::DOCUMENT ) )
-    {
+      $response->addError($messageText);
+    } elseif ($response->tpl->isType(View::DOCUMENT)) {
 
       // Wenn ein dokument angefragt wurde das nicht bearbeitet werden kann
       // wird eine html fehlermeldung zurückgegeben
@@ -819,42 +757,35 @@ abstract class MvcController
 
       // nach rebase wird die neue aktive templateengine geholt
       $this->tplEngine = View::getActive();
-      Webfrap::getActive()->setTplEngine( $this->tplEngine );
+      Webfrap::getActive()->setTplEngine($this->tplEngine);
 
       //TODO prüfen ob set index und html head in der form bleiben sollen
       $conf = Conf::get('view');
-      if( $this->user->getLogedIn() )
-      {
-        $this->tplEngine->setIndex( $conf['index.user'] );
-        $this->tplEngine->setHtmlHead( $conf['head.user'] );
-      }
-      else
-      {
-        $this->tplEngine->setIndex( $conf['index.annon'] );
-        $this->tplEngine->setHtmlHead( $conf['head.annon'] );
+      if ($this->user->getLogedIn()) {
+        $this->tplEngine->setIndex($conf['index.user']);
+        $this->tplEngine->setHtmlHead($conf['head.user']);
+      } else {
+        $this->tplEngine->setIndex($conf['index.annon']);
+        $this->tplEngine->setHtmlHead($conf['head.annon']);
       }
 
       $this->tplEngine->contentType = View::CONTENT_TYPE_TEXT;
 
-      $this->tplEngine->setTitle( $response->i18n->l( 'Error', 'wbf.label' ) );
-      $this->tplEngine->setTemplate( 'error/message'  );
-      $this->tplEngine->addVar( 'errorMessage' , $message );
+      $this->tplEngine->setTitle($response->i18n->l('Error', 'wbf.label'));
+      $this->tplEngine->setTemplate('error/message'  );
+      $this->tplEngine->addVar('errorMessage' , $message);
 
-    }
-    elseif( $response->tpl->isType( View::JSON ) )
-    {
+    } elseif ($response->tpl->isType(View::JSON)) {
 
-      $this->tplEngine->setDataBody( 'error: '.$message );
+      $this->tplEngine->setDataBody('error: '.$message);
 
-    }
-    else
-    {
+    } else {
 
       $view = $this->getView();
 
-      $view->setTitle( $response->i18n->l( 'Error', 'wbf.label' ) );
-      $view->setTemplate( 'error/message'  );
-      $view->addVar( 'errorMessage', $message );
+      $view->setTitle($response->i18n->l('Error', 'wbf.label'));
+      $view->setTemplate('error/message'  );
+      $view->addVar('errorMessage', $message);
 
 
     }
@@ -872,38 +803,35 @@ abstract class MvcController
     $orm     = $this->getOrm();
 
     ///TODO was sollte der check auf post?
-    if( !$request->method( Request::POST ) )
+    if (!$request->method(Request::POST))
       return false;
 
-    $auth     = new LibAuth( $this, 'Httppost' );
+    $auth     = new LibAuth($this, 'Httppost');
     $response = $this->getResponse();
 
-    if( $auth->login() )
-    {
+    if ($auth->login()) {
 
       $user = $this->getUser();
-      $user->setDb( $this->getDb() );
+      $user->setDb($this->getDb());
 
       $userName = $auth->getUsername();
 
-      try
-      {
-        if( !$authRole = $orm->get( 'WbfsysRoleUser', "UPPER(name) = UPPER('{$userName}')" ) )
-        {
-          $response->addError( 'User '.$userName.' not exists' );
+      try {
+        if (!$authRole = $orm->get('WbfsysRoleUser', "UPPER(name) = UPPER('{$userName}')")) {
+          $response->addError('User '.$userName.' not exists');
+
           return false;
         }
-      }
-      catch( LibDb_Exception $exc )
-      {
-        $response->addError( 'Error in the query to fetch the data for user: '.$userName );
+      } catch (LibDb_Exception $exc) {
+        $response->addError('Error in the query to fetch the data for user: '.$userName);
+
         return false;
       }
 
       if
       (
-        defined( 'WBF_AUTH_TYPE' )
-          && 2 == WBF_AUTH_TYPE && ( $userName != 'admin' )
+        defined('WBF_AUTH_TYPE')
+          && 2 == WBF_AUTH_TYPE && ($userName != 'admin')
           && !$authRole->non_cert_login
       )
       {
@@ -911,28 +839,23 @@ abstract class MvcController
         (
           'Login Via Password is not permitted, you need a valid X509 SSO Certificate'
         );
+
         return false;
       }
 
-      if( $user->login( $authRole ) )
-      {
+      if ($user->login($authRole)) {
         return true;
-      }
-      else
-      {
-        $response->addError( 'Failed to autologin User: '.$auth->getUsername() );
+      } else {
+        $response->addError('Failed to autologin User: '.$auth->getUsername());
+
         return false;
       }
 
-    }
-    else
-    {
+    } else {
       return false;
     }
 
   }//end public function login */
-
-
 
 } // end abstract class Controller
 

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -23,29 +22,28 @@
 class WgtStyle
 {
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Die Breite des Elements
    */
   protected $styles = array();
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Magic Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Implementieren eines Getters für die StyleElemente
    *
    * @return WgtStyleNode
    */
-  public function __get( $type )
+  public function __get($type)
   {
 
-    if(!isset( $this->styles[$type] ))
-    {
+    if (!isset($this->styles[$type])) {
       $styleClass = 'WgtStyle'.ucfirst($type);
       $this->styles[$type] = new $styleClass();
     }
@@ -62,8 +60,7 @@ class WgtStyle
 
     $oldStyles = $this->styles;
 
-    foreach( $oldStyles as $key => $object )
-    {
+    foreach ($oldStyles as $key => $object) {
         $this->styles[$key] = clone $object;
     }
 
@@ -77,9 +74,9 @@ class WgtStyle
     return $this->build();
   }//end public function __toString */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Logic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @return string
@@ -89,8 +86,7 @@ class WgtStyle
 
     $style = '';
 
-    foreach( $this->styles as $styleNode  )
-    {
+    foreach ($this->styles as $styleNode) {
       $style .= $styleNode->build();
     }
 
@@ -99,5 +95,4 @@ class WgtStyle
   }//end public function build */
 
 } // end class WgtStyle
-
 

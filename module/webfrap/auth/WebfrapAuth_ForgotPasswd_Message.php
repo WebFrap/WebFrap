@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,26 +21,23 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapAuth_ForgotPasswd_Message
-  extends LibMessageEnvelop
-{    
-    
+class WebfrapAuth_ForgotPasswd_Message extends LibMessageStack
+{
+
   /**
    * Die Kanäle über welcher die Nachricht verschickt werden soll
    * @var array
    */
   public $channels = array
-  ( 
+  (
     'mail'
    );
-    
-  
+
   /**
    * Die Entity zu der die Nachricht in Relation steht
    * @var WbfsysUser_Entity
    */
   public $entity = null;
-  
 
   /**
    * Pfad zum Master Template der Nachricht
@@ -48,57 +45,52 @@ class WebfrapAuth_ForgotPasswd_Message
    */
   public $htmlMaster = 'index';
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Setter & Getter
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
-  
   /**
    * @param WbfsysUser_Entity $entity
    */
-  public function setEntity( $entity )
+  public function setEntity($entity)
   {
-    
-    $this->entity = $entity;
-    
-  }//end public function setEntity */
-  
 
-        
+    $this->entity = $entity;
+
+  }//end public function setEntity */
+
   /**
    * Subject der Nachricht
    * @param LibMessageReceiver $receiver = null
    * @return string
    */
-  public function getSubject( $receiver = null, $sender = null )
+  public function getSubject($receiver = null, $sender = null)
   {
-
     return <<<SUBJECT
 {$this->info->getAppName()}: Anfrage zum Zurücksetzen ihres Passworts
 SUBJECT;
-    
+
   }//end public function getSubject */
-  
+
   /**
    * Erstellen des Contents, soweit dynamisch nötig
-   * 
+   *
    * @param LibMessageReceiver $receiver = null
    * @param LibMessageSender $sender = null
    * @return string
    */
-  public function buildContent( $receiver = null, $sender = null )
+  public function buildContent($receiver = null, $sender = null)
   {
-    
 
     $this->htmlDynContent = <<<MAIL
 <p class="mail_head" >
   <a href="{$this->getServerAddress()}" >{$this->info->getAppName()}</a> Anfrage zum Zurücksetzen deines Passworts
 </p>
 
-<p class="text_def" > 
+<p class="text_def" >
   <strong>Hallo {$receiver->firstname} {$receiver->lastname},</strong>
 </p>
-  
+
 <p class="text_def" >
   Es wurde eine Anfrage zum zurücksetzen deines Passworts gestellt.
   Bitte bestätige mit dem klicken auf diesen Link, dass auch wirklich du darum
@@ -120,17 +112,15 @@ SUBJECT;
 MAIL;
 
   }//end public function buildContent */
-          
+
   /**
    * laden der Attachments für die Nachricht
    * @return void
    */
   public function loadAttachments()
   {
-  
 
-    
   }//end public function loadAttachments */
-    
+
 } // end class ProjectProject_Development_Accepted_Message */
 

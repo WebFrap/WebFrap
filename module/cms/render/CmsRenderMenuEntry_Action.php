@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,12 +21,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class CmsRenderMenuEntry_Action
-  extends Action
+class CmsRenderMenuEntry_Action extends Action
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Trigger Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param Entity $entity
@@ -38,16 +37,16 @@ class CmsRenderMenuEntry_Action
    *
    * @throws LibAction_Exception Bei Fehlern die jedoch nicht so schwer sind
    *  um den Fortlauf des Programms zu gefährden
-   *  
+   *
    */
-  public function render( $entity, $params, $env )
+  public function render($entity, $params, $env)
   {
-  
-    if( !$entity->getId() || !$entity->id_menu )
+
+    if (!$entity->getId() || !$entity->id_menu)
       return;
-  
+
      $this->env = $env;
-     
+
     $db = $this->getDb();
 
     $sql = <<<SQL
@@ -72,14 +71,13 @@ SQL;
 
     $result = $db->select($sql);
 
-
     $menuBuilder = new WgtBuilderTreemenu();
-    $menuBuilder->setRawData( $result );
-    
+    $menuBuilder->setRawData($result);
+
     $orm = $db->getOrm();
-    $orm->update( 'CmsMenu', $entity->id_menu, $menuBuilder->build()  );
+    $orm->update('CmsMenu', $entity->id_menu, $menuBuilder->build()  );
 
   }//end public function render */
-    
+
 }//end CmsRenderMenuEntry_Action
 

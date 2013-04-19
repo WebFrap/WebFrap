@@ -26,11 +26,10 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Tree_Query
-  extends LibSqlQuery
-{////////////////////////////////////////////////////////////////////////////////
+class AclMgmt_Tree_Query extends LibSqlQuery
+{/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Loading the tabledata from the database
@@ -40,10 +39,10 @@ class AclMgmt_Tree_Query
    *
    * @throws LibDb_Exception
    */
-  public function fetchAreaGroups( $areaId, $params = null )
+  public function fetchAreaGroups($areaId, $params = null)
   {
 
-    if(!$params)
+    if (!$params)
       $params = new TFlag();
 
     $this->sourceSize  = null;
@@ -65,13 +64,13 @@ class AclMgmt_Tree_Query
   WHERE
     wbfsys_security_access.id_area = {$areaId}
     AND
-      ( wbfsys_security_access.partial = 0 or wbfsys_security_access.partial is null )
+      (wbfsys_security_access.partial = 0)
   ORDER BY
-  	wbfsys_role_group.name asc;
+    wbfsys_role_group.name asc;
 
 SQL;
 
-    $this->result = $db->select( $sql );
+    $this->result = $db->select($sql);
 
   }//end public function fetchAreaGroups */
 
@@ -84,14 +83,27 @@ SQL;
    *
    * @throws LibDb_Exception
    */
-  public function fetchAccessTree( $areaKey, $idGroup, $params = null )
+  public function fetchAccessTree($areaKey, $idGroup, $params = null)
   {
 
-    if( !$params )
+    if (!$params)
       $params = new TFlag();
 
-    $this->sourceSize  = null;
+
     $db                = $this->getDb();
+
+    $sql = <<<SQL
+SELECT
+  access_level from wbfsys_security_access
+  WHERE
+    id_area = {$areaKey}
+    AND id_group = {$idGroup}
+      AND (partial = 0);
+SQL;
+
+    $areaLevel = $db->select($sql)->getField('access_level');
+
+    $this->sourceSize  = null;
 
     /*
     Beschreibung der Felder in der Rekursion:
@@ -101,11 +113,11 @@ SQL;
 
       child.rowid
         Die rowid des Security-Area Zielknotens vom Pfad
-        ( wird benötigt um den Graph zu erstellen )
+        (wird benötigt um den Graph zu erstellen)
 
       child.label
         Das Label des Security-Area Zielknotens vom Pfad
-        ( wird benötigt um den Graph zu erstellen )
+        (wird benötigt um den Graph zu erstellen)
 
       child.access_key
         Der Access Key des Security-Area Zielknotens vom Pfad
@@ -118,11 +130,11 @@ SQL;
 
       path.access_level as access_level
         Die Berechtigung welche der Pfad dem Benutzer auf den Zielknoten zuweist
-        ( Wird im Pfad Form angezeigt und ist editierbar )
+        (Wird im Pfad Form angezeigt und ist editierbar)
 
       path.rowid as assign_id
         Rowid des Pfades, wir benötigt um den Pfad direkt zu adressieren
-        ( Wird zum updaten und löschen des Pfades benötigt )
+        (Wird zum updaten und löschen des Pfades benötigt)
 
       child.id_target as target
         Die Ziel Security Area der Referenz Security Area
@@ -135,7 +147,7 @@ SQL;
 
       path.description as description
         Beschreibung des Pfades
-        ( Wird im Pfad Form angezeigt und ist editierbar )
+        (Wird im Pfad Form angezeigt und ist editierbar)
      */
 
      // diese Query trägt den schönen namen Ilse, weil keiner willse...
@@ -168,7 +180,7 @@ AS
     root.rowid as target,
     root.description as area_description,
     1 as depth,
-    0 as access_level,
+    {$areaLevel} as access_level,
     0::bigint as assign_id,
     root.rowid as path_area,
     null::bigint as path_real_area,
@@ -199,23 +211,22 @@ AS
 
   JOIN
     sec_tree tree
-    	ON child.m_parent in( tree.path_area, tree.path_real_area )
+      ON child.m_parent in(tree.path_area, tree.path_real_area)
 
   JOIN
     wbfsys_security_area_type
       ON wbfsys_security_area_type.rowid = child.id_type
-        and upper(wbfsys_security_area_type.access_key) IN( upper('mgmt_reference'), upper('mgmt_element') )
+        and upper(wbfsys_security_area_type.access_key) IN(upper('mgmt_reference'), upper('mgmt_element'))
 
   LEFT JOIN
     wbfsys_security_path path
       ON
-  			child.rowid = path.id_reference
+        child.rowid = path.id_reference
         AND path.id_group = {$idGroup}
         AND path.id_root = {$areaKey}
 
-
     WHERE depth < 10
- )
+)
 
   SELECT
     rowid,
@@ -235,7 +246,7 @@ AS
 
 SQL;
 
-    $this->result = $db->select( $sql );
+    $this->result = $db->select($sql);
 
   }//end public function fetchAccessTree */
 

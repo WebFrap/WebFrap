@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -22,10 +21,8 @@
  * @author Dominik Bonsch
  * @copyright Dominik Bonsch <dominik.bonsch@webfrap.net>
  */
-class WgtWidgetPlain
-  extends WgtWidget
+class WgtWidgetPlain extends WgtWidget
 {
-
 
   /**
    * @param string $containerId
@@ -33,7 +30,7 @@ class WgtWidgetPlain
    * @param string $tabSize
    * @return void
    */
-  public function asTab( $containerId, $tabId, $tabSize = 'medium' )
+  public function asTab($containerId, $tabId, $tabSize = 'medium')
   {
 
     $html = <<<HTML
@@ -47,5 +44,4 @@ HTML;
   }//end public function asTab */
 
 } // end class WgtWidgetPlain
-
 

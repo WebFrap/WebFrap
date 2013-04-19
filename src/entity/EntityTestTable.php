@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -23,8 +23,7 @@
  * @author Dominik Bonsch
  *
  */
-class EntityTestTable
-  extends Entity
+class EntityTestTable extends Entity
 {
 
   public static $table = 'test_table';

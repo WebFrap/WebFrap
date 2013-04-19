@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -22,12 +21,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapProfile_Controller
-  extends Controller
+class WebfrapProfile_Controller extends Controller
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * list with all callable methodes in this subcontroller
@@ -43,24 +41,24 @@ class WebfrapProfile_Controller
     'change',
   );
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @return void
    */
-  public function change( )
+  public function change()
   {
 
     $user = $this->getUser();
 
     $profile = $this->getRequest()->param('profile',Validator::CNAME);
 
-    if(!$profile)
+    if (!$profile)
       $profile = $this->getRequest()->data('profile',Validator::CNAME);
 
-    if($profile)
+    if ($profile)
       $user->switchProfile($profile);
 
     $flow = Webfrap::getInstance();
@@ -71,11 +69,10 @@ class WebfrapProfile_Controller
   /**
    * @return void
    */
-  public function display( )
+  public function display()
   {
 
-    if(!$this->view->isType( View::WINDOW ))
-    {
+    if (!$this->view->isType(View::WINDOW)) {
       $this->errorPage('Invalid Request');
     }
 
@@ -86,20 +83,17 @@ class WebfrapProfile_Controller
     $button->text = 'save';
     $button->class = 'save';
 
-    $view->setTemplate( 'base/profile' );
-
+    $view->setTemplate('base/profile');
 
   }//end public function display */
-
 
   /**
    * @return void
    */
-  public function settings( )
+  public function settings()
   {
 
-    if(!$this->view->isType( View::WINDOW ))
-    {
+    if (!$this->view->isType(View::WINDOW)) {
       $this->errorPage('Invalid Request');
     }
 
@@ -110,11 +104,9 @@ class WebfrapProfile_Controller
     $button->text = 'save';
     $button->class = 'save';
 
-    $view->setTemplate( 'base/settings' );
-
+    $view->setTemplate('base/settings');
 
   }//end public function display */
-
 
 }//end class ControllerWebfrapProfile
 

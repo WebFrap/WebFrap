@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -23,9 +23,9 @@
  */
 class LibBuild
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // constantes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -39,9 +39,9 @@ class LibBuild
    */
   const PARAMS = 1;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param string
@@ -53,15 +53,14 @@ class LibBuild
    */
   protected $build      = array();
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // nethodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
    */
-  public function __construct( $buildConf = null )
+  public function __construct($buildConf = null)
   {
 
     $this->buildConf = $buildConf;
@@ -78,27 +77,25 @@ class LibBuild
 
     $actions = array();
 
-    foreach( $this->build as $buildNode )
-    {
+    foreach ($this->build as $buildNode) {
 
       $action = $buildNode[LibBuild::ACTION];
       $params = $buildNode[LibBuild::PARAMS];
 
       $className = 'LibBuild'.ucfirst($action);
 
-      if( !WebFrap::classLoadable($className) )
-      {
+      if (!WebFrap::classLoadable($className)) {
         Error::addError('Tried to call nonexisting build action '.$action);
+
         return false;
       }
 
-      $actions[] = new $className( $params );
+      $actions[] = new $className($params);
 
     }
 
-    foreach( $actions as $action )
-    {
-      if(!$action->execute())
+    foreach ($actions as $action) {
+      if (!$action->execute())
         break;
     }
 
@@ -106,26 +103,24 @@ class LibBuild
 
   }//end public function build */
 
-
   /**
    *
    */
-  protected function load( $buildConf = null )
+  protected function load($buildConf = null)
   {
 
-    if(!$buildConf)
+    if (!$buildConf)
       $buildConf = $this->buildConf;
 
-    if(!file_exists($this->buildConf))
-    {
+    if (!file_exists($this->buildConf)) {
       Error::addError('Got invalid Build File: '.$this->buildConf.'. Please check the Buildpath you have given.');
+
       return;
     }
 
     include $this->buildConf;
 
   }//end public function build */
-
 
 } // end class LibGenfBuild
 

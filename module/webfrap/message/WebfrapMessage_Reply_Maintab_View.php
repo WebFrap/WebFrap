@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,30 +21,28 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapMessage_Reply_Maintab_View
-  extends WgtMaintab
+class WebfrapMessage_Reply_Maintab_View extends WgtMaintab
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
-  
   /**
    * @param TFlag $params
    * @return void
    */
-  public function displayForm(  $params )
+  public function displayForm( $params)
   {
-    
+
     $message = $this->model->getMessageNode();
 
-    $this->setLabel( 'Reply to: '.$message->title );
-    $this->setTitle( 'Reply to: '.$message->title );
+    $this->setLabel('Reply to: '.$message->title);
+    $this->setTitle('Reply to: '.$message->title);
 
-    $this->addVar( 'msgNode', $message );
-    $this->setTemplate( 'webfrap/message/maintab/reply_form', true );
+    $this->addVar('msgNode', $message);
+    $this->setTemplate('webfrap/message/maintab/reply_form', true);
 
-    $this->addMenu( $params );
+    $this->addMenu($params);
 
   }//end public function displayForm */
 
@@ -55,32 +53,32 @@ class WebfrapMessage_Reply_Maintab_View
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $params )
+  public function addMenu($params)
   {
 
-    $iconMenu          = $this->icon( 'control/menu.png'     ,'Menu'   );
-    $iconClose         = $this->icon( 'control/close.png'    ,'Close'   );
-    $iconSearch        = $this->icon( 'control/search.png'   ,'Search'  );
-    $iconSupport   = $this->icon( 'control/support.png'  ,'Support' );
-    $iconBug       = $this->icon( 'control/bug.png'      ,'Bug' );
-    $iconFaq       = $this->icon( 'control/faq.png'      ,'Faq' );
-    $iconHelp      = $this->icon( 'control/help.png'     ,'Help' );
+    $iconMenu          = '<i class="icon-reorder" ></i>';
+    $iconClose         = $this->icon('control/close.png'    ,'Close'   );
+    $iconSearch        = $this->icon('control/search.png'   ,'Search'  );
+    $iconSupport   = $this->icon('control/support.png'  ,'Support');
+    $iconBug       = $this->icon('control/bug.png'      ,'Bug');
+    $iconFaq       = $this->icon('control/faq.png'      ,'Faq');
+    $iconHelp      = $this->icon('control/help.png'     ,'Help');
 
-    $iconSend  = $this->icon( 'message/send.png' ,'Send' );
-      
-    $menu     = $this->newMenu( $this->id.'_dropmenu' );
-    
+    $iconSend  = $this->icon('message/send.png' ,'Send');
+
+    $menu     = $this->newMenu($this->id.'_dropmenu');
+
     $menu->id = $this->id.'_dropmenu';
 
     $menu->content = <<<HTML
-    
+
 <div class="inline" >
-  <button 
+  <button
     class="wcm wcm_control_dropmenu wgt-button"
-    id="{$this->id}_dropmenu-control" 
+    id="{$this->id}_dropmenu-control"
     wgt_drop_box="{$this->id}_dropmenu"  >{$iconMenu} {$this->i18n->l('Menu','wbf.label')}</button>
 </div>
-    
+
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
   <ul>
     <li>
@@ -104,11 +102,10 @@ class WebfrapMessage_Reply_Maintab_View
 
 
 HTML;
-    
-    $this->injectActions( $menu, $params );
+
+    $this->injectActions($menu, $params);
 
   }//end public function addMenu */
-  
 
   /**
    * just add the code for the edit ui controls
@@ -123,9 +120,9 @@ HTML;
    *     services
    * }
    */
-  public function injectActions( $menu, $params )
+  public function injectActions($menu, $params)
   {
-    
+
     $message = $this->model->getMessageNode();
 
     // add the button action for save in the window
@@ -135,20 +132,19 @@ HTML;
     $code = <<<BUTTONJS
 
     // close tab
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       \$S('#{$this->id}_dropmenu-control').dropdown('remove');
       self.close();
     });
-    
-    self.getObject().find(".wgtac_send").click( function(){
-      \$R.form( 'wgt-form-wbf-message-reply-form',null,{success:function(){ self.close(); }} );
+
+    self.getObject().find(".wgtac_send").click(function() {
+      \$R.form('wgt-form-wbf-message-reply-form',null,{success:function() { self.close(); }});
     });
-    
+
 
 BUTTONJS;
 
-
-    $this->addJsCode( $code );
+    $this->addJsCode($code);
 
   }//end public function injectActions */
 

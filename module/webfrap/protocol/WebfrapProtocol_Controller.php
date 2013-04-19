@@ -15,19 +15,17 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage Core
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapProtocol_Controller
-  extends Controller
+class WebfrapProtocol_Controller extends Controller
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var array
@@ -36,44 +34,41 @@ class WebfrapProtocol_Controller
   (
     'overlaydset' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('GET'),
+      'views'      => array('ajax')
     ),
   );
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Base Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_overlayDset( $request, $response )
+  public function service_overlayDset($request, $response)
   {
 
-    $dKey     = $request->param( 'dkey', Validator::TEXT );
-    $objid    = $request->param( 'objid', Validator::EID );
+    $dKey     = $request->param('dkey', Validator::TEXT);
+    $objid    = $request->param('objid', Validator::EID);
 
     /* @var $view WebfrapProtocol_Ajax_View  */
     $view = $response->loadView
     (
-    	'webfrap-protocol-dset',
-    	'WebfrapProtocol',
-    	'displayOverlay'
+      'webfrap-protocol-dset',
+      'WebfrapProtocol',
+      'displayOverlay'
     );
 
     /* @var $model WebfrapProtocol_Model */
-    $model = $this->loadModel( 'WebfrapProtocol' );
+    $model = $this->loadModel('WebfrapProtocol');
 
-    $view->setModel( $model );
-    $view->displayOverlay( $dKey, $objid );
-
+    $view->setModel($model);
+    $view->displayOverlay($dKey, $objid);
 
   }//end public function service_overlayDset */
 
-
 } // end class WebfrapProtocol_Controller
-
 

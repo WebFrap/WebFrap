@@ -33,21 +33,20 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Ajax_View
-  extends LibTemplatePlain
+class AclMgmt_Ajax_View extends LibTemplatePlain
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var DomainNode
    */
   public $domainNode = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // display methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * inject the search result from the autocomplete request as json in the view
@@ -59,11 +58,11 @@ class AclMgmt_Ajax_View
    * @param TArray $params
    * @return null / Error im Fehlerfall
    */
-  public function displayAutocomplete( $key, $params )
+  public function displayAutocomplete($key, $params)
   {
 
     $view = $this->getTplEngine();
-    $view->setRawJsonData( $this->model->searchGroupsAutocomplete( $key, $params ) );
+    $view->setRawJsonData($this->model->searchGroupsAutocomplete($key, $params));
 
     return null;
 
@@ -75,14 +74,14 @@ class AclMgmt_Ajax_View
    *
    * @param TArray $params control flags
    */
-  public function displayConnect( $params )
+  public function displayConnect($params)
   {
 
-    $ui = $this->tpl->loadUi( 'AclMgmt' );
+    $ui = $this->tpl->loadUi('AclMgmt');
     $ui->domainNode = $this->domainNode;
-    $ui->setModel( $this->model );
+    $ui->setModel($this->model);
 
-    $ui->listEntry( $params->access, $params, true  );
+    $ui->listEntry($params->access, $params, true  );
 
     // kein fehler? na buper :-)
     return null;
@@ -97,24 +96,24 @@ class AclMgmt_Ajax_View
    * @param TArray $params control flags
    * @return null / Error im Fehlerfall
    */
-  public function displaySearch( $areaId, $params )
+  public function displaySearch($areaId, $params)
   {
 
     $access = $params->access;
 
-    $ui = $this->tpl->loadUi( 'AclMgmt' );
+    $ui = $this->tpl->loadUi('AclMgmt');
     $ui->domainNode = $this->domainNode;
-    $ui->setModel( $this->model );
+    $ui->setModel($this->model);
 
     // add the id to the form
-    if( !$params->searchFormId )
+    if (!$params->searchFormId)
       $params->searchFormId = 'wgt-form-table-'.$this->domainNode->aclDomainKey.'-acl-search';
 
     $params->ajax = true;
 
     $ui->createListItem
     (
-      $this->model->search( $areaId, $access, $params ),
+      $this->model->search($areaId, $access, $params),
       $access,
       $params
     );
@@ -129,20 +128,20 @@ class AclMgmt_Ajax_View
    *
    * @param TArray $params control flags
    */
-  public function displayDeleteGroup( $objid )
+  public function displayDeleteGroup($objid)
   {
 
     $itemId = 'wgt-table-'.$this->domainNode->aclDomainKey.'-acl_row_'.$objid;
 
     $code = <<<JSCODE
 
-    \$S('#{$itemId}').fadeOut(100,function(){
-    	\$S('#{$itemId}').remove();
-  	});
+    \$S('#{$itemId}').fadeOut(100,function() {
+      \$S('#{$itemId}').remove();
+    });
 
 JSCODE;
 
-    $this->view->addJsCode( $code );
+    $this->view->addJsCode($code);
 
   }//end public function displayDeleteGroup */
 

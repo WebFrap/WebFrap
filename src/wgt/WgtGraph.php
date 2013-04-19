@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -22,14 +21,13 @@
  */
 abstract class WgtGraph
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   public $graphId = null;
 
   protected $graph = null;
-
 
   public function setGraphId($graphId)
   {
@@ -42,7 +40,6 @@ abstract class WgtGraph
   {
 
   }
-
 
 } // end abstract class WgtGraph
 

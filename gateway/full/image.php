@@ -1,32 +1,27 @@
 <?php
 /*@interface.header@*/
 
-
-try
-{
+try {
 
   include './conf/bootstrap.php';
 
   // Buffer Output
-  if(BUFFER_OUTPUT)
+  if (BUFFER_OUTPUT)
     ob_start();
 
   $errors = '';
   $webfrap = Webfrap::init();
 
   $request  = Request::getInstance();
-  $key      = $request->get( 'f',Validator::CKEY );
+  $key      = $request->get('f',Validator::CKEY);
 
-  $tmp = explode( '-', $key );
+  $tmp = explode('-', $key);
 
-  $id = (int)$tmp[2];
+  $id = (int) $tmp[2];
 
-  if( $name = $request->get( 'n',Validator::TEXT ) )
-  {
+  if ($name = $request->get('n',Validator::TEXT)) {
     $name = base64_decode($name);
-  }
-  else
-  {
+  } else {
     $name = $id;
   }
 
@@ -34,15 +29,14 @@ try
 
   $size = getimagesize($fileName);
 
-  if( isset($size['mime']) )
+  if (isset($size['mime']))
     $contentType = $size['mime'];
   else
     $contentType = 'application/octet-stream' ;
 
   file_put_contents('mime.txt',$contentType);
 
-  if( BUFFER_OUTPUT )
-  {
+  if (BUFFER_OUTPUT) {
     $errors .= ob_get_contents();
     ob_end_clean();
   }
@@ -50,14 +44,12 @@ try
   header('Content-Type: '.$contentType);
   header('Content-Disposition: attachment;filename="'.urlencode($name).'"');
   header('ETag: '.md5_file($fileName));
-  header('Content-Length: '.filesize( $fileName ));
+  header('Content-Length: '.filesize($fileName));
 
   readfile($fileName);
 
-
 } // ENDE TRY
-catch( Exception $exception )
-{
+catch(Exception $exception) {
   $extType = get_class($exception);
 
   Error::addError
@@ -67,20 +59,18 @@ catch( Exception $exception )
     $exception
   );
 
-  if( BUFFER_OUTPUT )
-  {
+  if (BUFFER_OUTPUT) {
     $errors .= ob_get_contents();
     ob_end_clean();
   }
 
-  if( !DEBUG )
-  {
-    if( isset($view) and is_object($view) )
-    {
-      $view->publishError( $exception->getMessage() , $errors );
-    }
-    else
-    {
+  if (!DEBUG) {
+    
+    $view = Webfrap::$env->getView();
+    
+    if (isset($view) and is_object($view)) {
+      $view->publishError($exception->getMessage() , $errors);
+    } else {
       View::printErrorPage
       (
         $exception->getMessage(),
@@ -88,9 +78,7 @@ catch( Exception $exception )
         $errors
       );
     }
-  }
-  else
-  {
+  } else {
     echo $errors;
   }
 

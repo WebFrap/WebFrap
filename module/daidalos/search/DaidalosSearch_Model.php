@@ -8,25 +8,22 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
-
 /**
  * @package WebFrap
  * @subpackage Core
  */
-class DaidalosSearch_Model
-  extends Model
+class DaidalosSearch_Model extends Model
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -56,19 +53,17 @@ class DaidalosSearch_Model
     return $this->data;
   }//end public function getSearchResults */
 
-
   /**
    * @return array
    */
   public function getProjects()
   {
 
-    $xml = simplexml_load_file( PATH_GW.'/data/bdl/workspace/projects.xml' );
+    $xml = simplexml_load_file(PATH_GW.'/data/bdl/workspace/projects.xml');
 
     $projects = array();
 
-    foreach( $xml->body->workspace->project as $project )
-    {
+    foreach ($xml->body->workspace->project as $project) {
       $projects[] = trim($project['name']);
     }
 
@@ -79,7 +74,7 @@ class DaidalosSearch_Model
   /**
    * @return void
    */
-  public function search( $folder, $pattern, $endings  )
+  public function search($folder, $pattern, $endings  )
   {
 
     $this->pattern = $pattern;
@@ -88,7 +83,6 @@ class DaidalosSearch_Model
     $this->data = $search->search($folder, $pattern, $endings,true);
 
   } // end public function search */
-
 
 }//end class ModelDaidalosSearch
 

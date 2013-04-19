@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,26 +22,23 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapNavigation_Ajax_View
-  extends LibTemplatePlain
+class WebfrapNavigation_Ajax_View extends LibTemplatePlain
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // display methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param string $key
    * @param TArray $params
    */
-  public function displayAutocomplete( $key, $params )
+  public function displayAutocomplete($key, $params)
   {
 
     $view = $this->getTplEngine();
-    $view->setRawJsonData( $this->model->searchEntriesAutocomplete( $key, $params ) );
+    $view->setRawJsonData($this->model->searchEntriesAutocomplete($key, $params));
 
   }//end public function displayAutocomplete */
-
-
 
 } // end class Webfrap_Navigation_Ajax_View */
 

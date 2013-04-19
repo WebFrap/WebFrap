@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -22,14 +21,11 @@
  * @author Tobias Schmidt-Tudl <tobias.schmidt-tudl@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class LibDocumentBillSimple
-  extends LibDocumentBill
+class LibDocumentBillSimple extends LibDocumentBill
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attribute
 //////////////////////////////////////////////////////////////////////////////*/
-
-
 
 }//end class LibDocumentBillSimple
 

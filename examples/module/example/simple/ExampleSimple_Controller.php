@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Dummy class for Extentions
@@ -23,8 +22,7 @@
  * @package WebFrap
  * @subpackage Core
  */
-class ExampleSimple_Controller
-  extends Controller
+class ExampleSimple_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -40,7 +38,7 @@ class ExampleSimple_Controller
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
    */
-  public function service_helloWorld( $request, $response )
+  public function service_helloWorld($request, $response)
   {
 
     // einfachster weg, template direkt der standard template engine übergeben
@@ -89,9 +87,9 @@ class ExampleSimple_Controller
 
     // prüfen ob der aktive user zugriffsrechte auf mindestens einer
     // der ebenen hat
-    if(!$acl->access('mod-key/entity-key/mgmt-key:level'))
-    {
+    if (!$acl->access('mod-key/entity-key/mgmt-key:level')) {
       $this->accessDenied();
+
       return false;
     }
 
@@ -102,23 +100,23 @@ class ExampleSimple_Controller
     // - in relation zu einer tabelle
     // - in relatin zu einem datensatz
     // vergeben werden
-    if(!$acl->access('mod-key/entity-key/mgmt-key:level',$entityObject))
-    {
+    if (!$acl->access('mod-key/entity-key/mgmt-key:level',$entityObject)) {
       $this->accessDenied();
+
       return false;
     }
 
     // prüfen ob der aktive user die rolle admin in relation zu einem pfad hat
-    if(!$acl->hasRole( 'admin', 'mod-key/entity-key/mgmt-key'))
-    {
+    if (!$acl->hasRole('admin', 'mod-key/entity-key/mgmt-key')) {
       $this->accessDenied();
+
       return false;
     }
 
     // auch hier kann die rolle in relation zu einer entität abgefragt werden
-    if(!$acl->hasRole( 'admin', 'mod-key/entity-key/mgmt-key',$entityObject))
-    {
+    if (!$acl->hasRole('admin', 'mod-key/entity-key/mgmt-key',$entityObject)) {
       $this->accessDenied();
+
       return false;
     }
 
@@ -145,6 +143,5 @@ class ExampleSimple_Controller
     $model2 = $this->loadModel('AndereKlasse','nochEins');
 
   }//end public function models1 */
-
 
 } // end class ControllerCrud

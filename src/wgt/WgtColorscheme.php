@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -22,9 +21,9 @@
  */
 class WgtColorscheme
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // text colors
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * default color for all texts, excluding links
@@ -32,16 +31,16 @@ class WgtColorscheme
    */
   public $colors = array();
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Zugriff Auf die Elemente per magic set
    * @param string $key
    * @param mixed $value
    */
-  public function __set( $key , $value )
+  public function __set($key , $value)
   {
     $this->colors[$key] = $value;
   }//end public function __set */
@@ -52,11 +51,10 @@ class WgtColorscheme
    * @param string $key
    * @return mixed
    */
-  public function __get( $key )
+  public function __get($key)
   {
     return isset($this->colors[$key])?$this->colors[$key]:null;
   }//end public function __get */
-
 
   /**
    */
@@ -73,5 +71,4 @@ class WgtColorscheme
   }//end public function load */
 
 } // end class WgtColorschemeDefault
-
 

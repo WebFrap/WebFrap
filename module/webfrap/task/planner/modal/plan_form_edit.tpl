@@ -22,30 +22,42 @@ $iconDel = $this->icon( 'control/delete.png', "Delete" );
 <div class="wgt-layout-grid bw62" >
   
   <div>
-	  <?php $planForm->input
-	  ( 
-	  	'Title', 
-	  	'plan[title]', 
-	    $this->plan->title, 
-	    array(), 
-	    array( 
-	    	'size' => 'xlarge',
-	      'required' => true 
-	    )  
-	  ); ?>
+      <?php $planForm->input
+      ( 
+        'Title', 
+        'plan[title]', 
+        $this->plan->title, 
+        array(), 
+        array( 
+            'size' => 'xlarge',
+          'required' => true 
+        )  
+      ); ?>
   </div>
   
   <div>
     <div class="left" >
       <?php $planForm->checkbox
       ( 
-      	'Series', 
-      	'plan[flag-series]', 
+        'Series', 
+        'plan[flag-series]', 
         $this->plan->flag_series, 
         array( 
-        	'class' => 'wcm wcm_control_toggle',
-        	'wgt_target' => '.wgt-box-dateplanner-series' 
-      )); ?>
+            'class' => 'wcm wcm_control_toggle',
+            'wgt_target' => '.wgt-box-dateplanner-series' 
+      ));
+            
+      if($this->task->status == ETaskStatus::OPEN || $this->task->status == ETaskStatus::DISABLED) {
+      $planForm->checkbox
+      (
+        'Active',
+        'task[status]',
+        $this->task->status != ETaskStatus::DISABLED,
+        array()
+       );
+      }
+      
+       ?>
     </div>
     <div class="inline wgt-box-dateplanner-series" >
       <div class="left" >
@@ -95,9 +107,9 @@ $iconDel = $this->icon( 'control/delete.png', "Delete" );
       <div class="left" >
         <?php $planForm->richInput
         ( 
-        	'date_timepicker', 
-        	'Start', 
-        	'plan[timestamp_start]',
+            'date_timepicker', 
+            'Start', 
+            'plan[timestamp_start]',
           $this->plan->timestamp_start,
           array(),
           array(
@@ -109,13 +121,13 @@ $iconDel = $this->icon( 'control/delete.png', "Delete" );
       <div class="inline" >
         <?php $planForm->richInput
         ( 
-        	'date_timepicker', 
-        	'End', 
-        	'plan[timestamp_end]',
+            'date_timepicker', 
+            'End', 
+            'plan[timestamp_end]',
           $this->plan->timestamp_end,
           array(),
           array(
-          	'size' => 'medium',
+            'size' => 'medium',
             'button' => 'control/calendar.png' 
           ) 
         ); ?>
@@ -369,9 +381,9 @@ $iconDel = $this->icon( 'control/delete.png', "Delete" );
     <div class="wgt-box-dateplanner-advanced left bw62" wgt_hidden="true" >
       <?php $planForm->selectboxByKey
       ( 
-      	'Type', 
-      	'plan[series_rule-id_type]', 
-      	'WebfrapTaskPlanner_Type_Selectbox', 
+        'Type', 
+        'plan[series_rule-id_type]', 
+        'WebfrapTaskPlanner_Type_Selectbox', 
         ETaskType::$labels,
         $this->schedule->type
       ); ?>
@@ -438,6 +450,6 @@ $iconDel = $this->icon( 'control/delete.png', "Delete" );
 
 <div>
   <?php $planForm->submit( 'Save Plan', '$S.modal.close();', 'control/save.png' ); ?>
-  or <span onclick="$S.modal.close();" class="wgt-clickable" >Chancel</span>
+  or <span onclick="$S.modal.close();" class="wgt-clickable" >Cancel</span>
 </div>
 

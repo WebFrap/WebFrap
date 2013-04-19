@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -20,30 +20,29 @@
  * @package WebFrap
  * @subpackage Build
  */
-class WgtTableBuild
-  extends WgtTable
+class WgtTableBuild extends WgtTable
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Logic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
  /**
    * Loading the tabledata from the database
    *
    * @return void
    */
-  public function load(  )
+  public function load()
   {
 
     /*
-    $folder = new LibFilesystemFolder( PATH_GW.'data/bdl/' );
+    $folder = new LibFilesystemFolder(PATH_GW.'data/bdl/');
     $files = $folder->getPlainFiles();
 
     $this->data = array();
 
     // Load als xmi Files
-    foreach( $files as $file )
-      if( substr( $file, -3 , strlen($file) ) == "xml" )
+    foreach ($files as $file)
+      if (substr($file, -3 , strlen($file)) == "xml")
         $this->data[] = $file;
     */
 
@@ -63,7 +62,7 @@ class WgtTableBuild
    * @param string $Class Der Datenbanktype
    * @return
    */
-  public function buildTable( )
+  public function buildTable()
   {
 
     $view = View::getActive();
@@ -85,16 +84,14 @@ class WgtTableBuild
     $body = '<tbody>'.NL;
 
     $num = 1;
-    foreach( $this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
       $rowid = $this->name."_row_$key";
 
       $body .= "<tr class=\"row$num\" id=\"$rowid\" >";
 
       $urlGenerate = 'index.php?c=Build.Base.build&amp;objid='.urlencode($key);
       $linkGenerate = '<a title="Projekt bauen"  class="wcm wcm_req_ajax wgt_info" href="'.$urlGenerate.'">'
-        .Wgt::icon('daidalos/buildr.png' , 'xsmall' , 'build' ).'</a>';
-
+        .Wgt::icon('daidalos/buildr.png' , 'xsmall' , 'build').'</a>';
 
       $body .= '<td valign="top" >'.$row[0].'</td>'.NL;
       //$body .= '<td valign="top" >'.$row[1].'</td>'.NL;
@@ -104,14 +101,13 @@ class WgtTableBuild
       $body .= '</tr>'.NL;
 
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors)
         $num = 1;
 
     }// ENDE FOREACH
 
     $body .= "</tbody>".NL;
     //\ Generieren des Bodys
-
 
     $html ='<table id="table_'.$this->name.'" class="wgt-table" >'.NL;
     $html .= $head;
@@ -127,11 +123,11 @@ class WgtTableBuild
    *
    * @return string
    */
-  public function build( )
+  public function build()
   {
 
     $this->load();
-    $this->html = $this->buildTable( ) ;
+    $this->html = $this->buildTable() ;
 
     return $this->html;
 

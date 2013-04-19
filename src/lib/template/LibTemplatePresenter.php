@@ -8,28 +8,24 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
-
 /**
  * @package WebFrap
  * @subpackage tech_core
  */
-abstract class LibTemplatePresenter
-  extends LibTemplate
+abstract class LibTemplatePresenter extends LibTemplate
 {
 
   /**
    * @var Model
    */
   protected $model  = null;
-
 
   /**
    * de:
@@ -38,10 +34,9 @@ abstract class LibTemplatePresenter
    */
   public $menu          = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter Methodes
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * (non-PHPdoc)
@@ -61,7 +56,7 @@ abstract class LibTemplatePresenter
    * @param string $active
    * @param string $value
    */
-  public function isChecked( $active , $value )
+  public function isChecked($active , $value)
   {
     return $active == $value? ' checked="checked" ':'';
   }
@@ -71,7 +66,7 @@ abstract class LibTemplatePresenter
    * @param string $active
    * @param string $value
    */
-  public function isSelected( $active , $value )
+  public function isSelected($active , $value)
   {
     return $active == $value? ' selected="selected" ':'';
   }
@@ -81,7 +76,7 @@ abstract class LibTemplatePresenter
    * @param string $active
    * @param string $value
    */
-  public function isActive( $active, $value )
+  public function isActive($active, $value)
   {
     return $active === $value ? ' ui-state-active ':'';
   }

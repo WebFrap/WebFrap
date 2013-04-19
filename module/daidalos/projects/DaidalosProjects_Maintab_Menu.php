@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,12 +21,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosProjects_Maintab_Menu
-  extends WgtDropmenu
+class DaidalosProjects_Maintab_Menu extends WgtDropmenu
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * add a drop menu to the create window
@@ -37,7 +36,7 @@ class DaidalosProjects_Maintab_Menu
    *   string formId: the id of the form;
    * }
    */
-  public function buildMenu( $params )
+  public function buildMenu($params)
   {
 
     $iconMenu          = $this->view->icon('control/menu.png'     ,'Menu'   );
@@ -45,10 +44,8 @@ class DaidalosProjects_Maintab_Menu
     $iconSearch        = $this->view->icon('control/search.png'   ,'Search'  );
     $iconBookmark      = $this->view->icon('control/bookmark.png' ,'Bookmark');
 
-
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport( $params );
-
+    $entries->support  = $this->entriesSupport($params);
 
     $this->content = <<<HTML
 <ul class="wgt-dropmenu" id="{$this->id}" style="z-index:500;height:16px;"  >
@@ -80,7 +77,7 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport( $params )
+  protected function entriesSupport($params)
   {
 
     $iconSupport = $this->view->icon('control/support.png'  ,'Support');

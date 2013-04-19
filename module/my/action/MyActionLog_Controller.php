@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -22,12 +21,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class MyActionLog_Controller
-  extends ControllerCrud
+class MyActionLog_Controller extends ControllerCrud
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * list with all callable methodes in this subcontroller
@@ -40,17 +38,17 @@ class MyActionLog_Controller
     'search',
   );
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // reports
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Ausgaben eines Listenelements
-   * 
+   *
    * @param TFlag $params
    * @return void
    */
-  public function listing( $params = null )
+  public function listing($params = null)
   {
 
     // resource laden
@@ -58,11 +56,9 @@ class MyActionLog_Controller
     $response  = $this->getResponse();
     $user      = $this->getUser();
 
-
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if( !($request->method( Request::GET)) )
-    {
+    if (!($request->method(Request::GET))) {
 
       // ausgabe einer fehlerseite und adieu
       $this->errorPage
@@ -79,27 +75,26 @@ class MyActionLog_Controller
         ),
         Error::METHOD_NOT_ALLOWED
       );
+
       return false;
 
     }
 
     // load request parameters an interpret as flags
-    $params  = $this->getListingFlags( $params );
+    $params  = $this->getListingFlags($params);
 
     // der contextKey wird benötigt um potentielle Konflikte in der UI
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
     $params->contextKey = 'my_task-listing';
-  
-    
+
     $access = new MyActionLog_Table_Access();
-    $access->load( $user->getProfileName(), $params );
+    $access->load($user->getProfileName(), $params);
 
      // access direkt übergeben
     $params->access = $access;
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->listing  )
-    {
+    if (!$access->listing) {
       // ausgabe einer fehlerseite und adieu
       $this->errorPage
       (
@@ -110,9 +105,10 @@ class MyActionLog_Controller
         ),
         Response::FORBIDDEN
       );
+
       return false;
     }
-    
+
     $view = $response->loadView
     (
       'my_task-listing',
@@ -120,9 +116,7 @@ class MyActionLog_Controller
       'displayListing'
     );
 
-
-    if( !$view )
-    {
+    if (!$view) {
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist
       $this->errorPage
@@ -134,6 +128,7 @@ class MyActionLog_Controller
         ),
         Response::NOT_IMPLEMENTED
       );
+
       return null;
     }
 
@@ -143,11 +138,11 @@ class MyActionLog_Controller
     $params->loadFullSize = true;
 
     // da wir das model hier nicht brauchen packen wir es direkt in die view
-    $view->setModel( $this->loadModel( 'MyActionLog_Table' ) );
-    $view->setModelCrud( $this->loadModel( 'MyActionLog_Crud' ) );
+    $view->setModel($this->loadModel('MyActionLog_Table'));
+    $view->setModelCrud($this->loadModel('MyActionLog_Crud'));
 
     // ok zusammenbauen der ausgabe
-    $error = $view->displayListing( $params );
+    $error = $view->displayListing($params);
 
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
     // ist der so schwer war, dass die View den Job abbrechen musste
@@ -156,9 +151,9 @@ class MyActionLog_Controller
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if( $error )
-    {
-      $this->errorPage( $error );
+    if ($error) {
+      $this->errorPage($error);
+
       return false;
     }
 
@@ -166,7 +161,7 @@ class MyActionLog_Controller
     return true;
 
   } // end public function listing */
-    
+
  /**
   * Die Suchefunktion, liefert Daten im Format passend zu Listmethode
   *
@@ -179,12 +174,12 @@ class MyActionLog_Controller
   *     der gleich type wie das Listenelement sein, für das die Suche angestoßen wurde
   *
   *   @get_param: int start, Offset für die Listenelemente. Wird absolut übergeben und nicht
-  *     mit multiplikator ( 50 anstelle von <strike>5 mal listengröße</strike> )
+  *     mit multiplikator (50 anstelle von <strike>5 mal listengröße</strike>)
   *
   *   @get_param: int qsize, Die Anzahl der zu Ladenten Einträge. Momentan wird alles > 500 auf 500 gekappt
   *     alles kleiner 0 wird auf den standardwert von aktuell 25 gesetzt
   *
-  *   @get_param: array(string fieldname => string [asc|desc] ) order, Die Daten für die Sortierung
+  *   @get_param: array(string fieldname => string [asc|desc]) order, Die Daten für die Sortierung
   *
   *   @get_param: char begin, Mit Begin wird ein Buchstabe übergeben, der verwendet wird die Listeelemente
   *     nach dem Anfangsbuchstaben zu filtern. Kann im Prinzip jedes beliebige Zeichen, also auch eine Zahl sein
@@ -201,7 +196,7 @@ class MyActionLog_Controller
   * @param TFlag $params benamte parameter
   * @return boolean
   */
-  public function search( $params = null )
+  public function search($params = null)
   {
 
     // resource laden
@@ -209,11 +204,9 @@ class MyActionLog_Controller
     $response  = $this->getResponse();
     $user      = $this->getUser();
 
-
     // prüfen ob die verwendete HTTP Methode für diesen service
     // überhaupt erlaub ist
-    if( !($request->method( Request::GET) || $request->method(Request::POST)) )
-    {
+    if (!($request->method(Request::GET) || $request->method(Request::POST))) {
 
       // ausgabe einer fehlerseite und adieu
       $this->errorPage
@@ -230,23 +223,23 @@ class MyActionLog_Controller
         ),
         Error::METHOD_NOT_ALLOWED
       );
+
       return false;
 
     }
 
     // laden der steuerungs parameter
-    $params  = $this->getListingFlags( $params );
+    $params  = $this->getListingFlags($params);
 
     // der contextKey wird benötigt um potentielle Konflikte in der UI
     // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
     $params->contextKey = 'my_task-listing';
-    
+
     $access = new MyActionLog_Table_Access();
-    $access->load( $user->getProfileName(), $params );
+    $access->load($user->getProfileName(), $params);
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->listing  )
-    {
+    if (!$access->listing) {
       // ausgabe einer fehlerseite und adieu
       $this->errorPage
       (
@@ -257,6 +250,7 @@ class MyActionLog_Controller
         ),
         Response::FORBIDDEN
       );
+
       return false;
     }
 
@@ -271,7 +265,7 @@ class MyActionLog_Controller
     // when we not append, then we need to load the full size for paging
     $params->loadFullSize = true;
 
-    $model   = $this->loadModel( 'MyActionLog_Table' );
+    $model   = $this->loadModel('MyActionLog_Table');
 
     $view = $response->loadView
     (
@@ -280,9 +274,7 @@ class MyActionLog_Controller
       'displaySearch'
     );
 
-
-    if( !$view )
-    {
+    if (!$view) {
       // ok scheins wurde ein view type angefragt der nicht für dieses
       // action methode implementiert ist
       $this->errorPage
@@ -294,12 +286,12 @@ class MyActionLog_Controller
         ),
         Response::NOT_IMPLEMENTED
       );
+
       return null;
     }
 
-    $view->setModel( $model );
-    $error =  $view->displaySearch($params );
-
+    $view->setModel($model);
+    $error =  $view->displaySearch($params);
 
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
     // ist der so schwer war, dass die View den Job abbrechen musste
@@ -308,10 +300,10 @@ class MyActionLog_Controller
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if( $error )
-    {
+    if ($error) {
 
-      $this->errorPage( $error );
+      $this->errorPage($error);
+
       return false;
     }
 

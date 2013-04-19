@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,12 +21,11 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputButtonImage
-  extends WgtInput
+class WgtInputButtonImage extends WgtInput
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * path to the icon
@@ -42,9 +41,9 @@ class WgtInputButtonImage
    */
   public $size = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * setter for the icon
@@ -52,31 +51,30 @@ class WgtInputButtonImage
    * @param string $icon
    * @param string $size
    */
-  public function setIcon( $icon  , $size = 'xsmall' )
+  public function setIcon($icon  , $size = 'xsmall')
   {
 
     $this->icon = $icon;
     $this->size = $size;
 
-  }//end public function setIcon( $icon )
+  }//end public function setIcon($icon)
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Logic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Parser for the input field
    * @param array $attributes
    * @return String
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array())
   {
 
-    if( $attributes ) 
-      $this->attributes = array_merge( $this->attributes, $attributes );
+    if ($attributes)
+      $this->attributes = array_merge($this->attributes, $attributes);
 
-    if( isset( $this->attributes['type'] ) )
-    {
+    if (isset($this->attributes['type'])) {
       unset($this->attributes['type']);
     }
 
@@ -90,5 +88,4 @@ class WgtInputButtonImage
   } // end public function build */
 
 } // end class WgtItemInput
-
 

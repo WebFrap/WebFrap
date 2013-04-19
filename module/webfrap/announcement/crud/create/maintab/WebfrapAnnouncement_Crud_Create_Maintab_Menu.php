@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,13 +21,12 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WbfsysAnnouncement_Crud_Create_Maintab_Menu
-  extends WgtDropmenu
+class WbfsysAnnouncement_Crud_Create_Maintab_Menu extends WgtDropmenu
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // menu: create
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
   /**
    * add a drop menu to the create window
    *
@@ -37,38 +36,31 @@ class WbfsysAnnouncement_Crud_Create_Maintab_Menu
    *   string formId: the id of the form;
    * }
    */
-  public function buildMenu( $params )
+  public function buildMenu($params)
   {
-  
+
     // benötigte resourcen laden
     $acl   = $this->getAcl();
     $view   = $this->getView();
 
-    $iconMenu    = $view->icon('control/menu.png',  'Menu');
-    $iconCreate    = $view->icon('control/create.png', 'Create');
-    $iconBookmark  = $view->icon('control/bookmark.png', 'Bookmark');
-    $iconClose     = $view->icon('control/close_tab.png', 'Close');
-
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport( $params );
-
+    $entries->support  = $this->entriesSupport($params);
 
     // prüfen ob der aktuelle benutzer überhaupt neue einträge anlegen darf
-    if( $params->access->insert )
-    {
+    if ($params->access->insert) {
 
       $entries->buttonInsert = <<<BUTTON
   <li class="wgt-root" >
-    <button 
+    <button
       class="wcm wcm_ui_button wgtac_create wcm_ui_tip-top"
-      title="Create the new Announcement" >{$iconCreate} {$view->i18n->l('Create','wbf.label')}</button>
+      title="Create the new Announcement" ><i class="icon-save" ></i> {$view->i18n->l('Create','wbf.label')}</button>
     <ul style="margin-top:-10px;" ></ul>
   </li>
 
   <li class="wgt-root" >
     <button
       class="wcm wcm_ui_button wgtac_create_a_close wcm_ui_tip-top"
-      title="Create the new Announcement and close the Tab after saving" >{$iconCreate} {$view->i18n->l('Create & Close','wbf.label')}</button>
+      title="Create the new Announcement and close the Tab after saving" ><i class="icon-save" ></i> {$view->i18n->l('Create & Close','wbf.label')}</button>
     <ul style="margin-top:-10px;" ></ul>
   </li>
 
@@ -76,19 +68,18 @@ BUTTON;
 
     }
 
-
     $this->content = <<<HTML
 <ul class="wcm wcm_ui_dropmenu wgt-dropmenu" id="{$this->id}" >
   <li class="wgt-root" >
-    <button class="wcm wcm_ui_button" >{$iconMenu} {$view->i18n->l('Menu','wbf.label')}</button>
+    <button class="wcm wcm_ui_button" ><i class="icon-reorder" ></i> {$view->i18n->l('Menu','wbf.label')} <i class="icon-angle-down" ></i></button>
     <ul style="margin-top:-10px;" >
       <li>
-        <p class="wgtac_bookmark" >{$iconBookmark} {$view->i18n->l('Bookmark','wbf.label')}</p>
+        <p class="wgtac_bookmark" ><i class="icon-bookmark" ></i> {$view->i18n->l('Bookmark','wbf.label')}</p>
       </li>
 {$entries->custom}
 {$entries->support}
       <li>
-        <p class="wgtac_close" >{$iconClose} {$view->i18n->l('Close','wbf.label')}</p>
+        <p class="wgtac_close" ><i class="icon-remove-sign" ></i> {$view->i18n->l('Close','wbf.label')}</p>
       </li>
     </ul>
   </li>
@@ -103,15 +94,12 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport( $params )
+  protected function entriesSupport($params)
   {
 
     $iconSupport         = $this->view->icon('control/support.png'      ,'Support');
-    $iconBug         = $this->view->icon('control/bug.png'      ,'Bug');
     $iconFaq         = $this->view->icon('control/faq.png'      ,'Faq');
     $iconHelp         = $this->view->icon('control/help.png'      ,'Help');
-
-
 
 
     $html = <<<HTML
@@ -120,16 +108,9 @@ HTML;
         <p>{$iconSupport} {$this->view->i18n->l('Support','wbf.label')}</p>
         <ul>
 
-
           <li><a class="wcm wcm_req_ajax" href="modal.php?c=Webfrap.Docu.open&amp;key=wbfsys_announcement-create" >{$iconHelp} {$this->view->i18n->l('Help','wbf.label')}</a></li>
 
-
-          <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Issue.create&amp;context=create" >{$iconBug} {$this->view->i18n->l('Bug','wbf.label')}</a></li>
-
-
           <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Faq.create&amp;context=create" >{$iconFaq} {$this->view->i18n->l('FAQ','wbf.label')}</a></li>
-
-
 
         </ul>
       </li>

@@ -20,12 +20,11 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputWindow
-  extends WgtInput
+class WgtInputWindow extends WgtInput
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -84,16 +83,16 @@ class WgtInputWindow
    */
   public $autocomplete = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter + Setter
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
    * @param $url
    * @return void
    */
-  public function setListUrl( $url )
+  public function setListUrl($url)
   {
     $this->selectionUrl = $url;
   }//end public function setListUrl */
@@ -103,7 +102,7 @@ class WgtInputWindow
    * @param $icon
    * @return void
    */
-  public function setListIcon( $icon )
+  public function setListIcon($icon)
   {
     $this->listIcon = $icon;
   }//end public function setListIcon */
@@ -113,7 +112,7 @@ class WgtInputWindow
    * @param $url
    * @return void
    */
-  public function setEntityUrl( $url )
+  public function setEntityUrl($url)
   {
     $this->showUrl = $url;
   }//end public function setEntityUrl */
@@ -123,7 +122,7 @@ class WgtInputWindow
    * @param $value
    * @return void
    */
-  public function setRefValue( $value )
+  public function setRefValue($value)
   {
     $this->refValue = $value;
   }//end public function setRefValue */
@@ -133,7 +132,7 @@ class WgtInputWindow
    * @param string $value
    * @return void
    */
-  public function setAutocomplete( $autocomplete )
+  public function setAutocomplete($autocomplete)
   {
     $this->autocomplete = $autocomplete;
   }//end public function setAutocomplete */
@@ -143,28 +142,28 @@ class WgtInputWindow
    * @param boolean $hide
    * @return void
    */
-  public function setHide( $hide = true )
+  public function setHide($hide = true)
   {
     $this->hide = $hide;
   }//end public function setHide */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Parser
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * build all data to a ui element
    * @param array $attributes
    * @return string
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array())
   {
 
-    if( $this->html )
+    if ($this->html)
       return $this->html;
 
-    if( $attributes )
-      $this->attributes = array_merge( $this->attributes, $attributes );
+    if ($attributes)
+      $this->attributes = array_merge($this->attributes, $attributes);
 
     // ist immer ein text attribute
     $this->attributes['type'] = 'hidden';
@@ -181,42 +180,31 @@ class WgtInputWindow
     $showAttr           = $this->attributes;
     $showAttr['id']     = $showAttr['id'].'-tostring';
     $showAttr['value']  = $this->conEntity?$this->conEntity->text():null;
-    $showAttr['name']   = substr( $this->attributes['name'], 0, -1  ).'-tostring]';
+    $showAttr['name']   = substr($this->attributes['name'], 0, -1  ).'-tostring]';
     $showAttr['class']  .= ' wgt-ignore';
-
 
     $codeAutocomplete = '';
 
     // nur readonly wenn autocomplete
-    if( !$this->autocomplete || $this->readOnly )
-    {
+    if (!$this->autocomplete || $this->readOnly) {
 
       $showAttr['readonly'] = 'readonly';
       $showAttr['class']  .= ' wgt-readonly';
-    }
-    else
-    {
+    } else {
       $codeAutocomplete = '<var id="var-'.$showAttr['id'].'" >'.$this->autocomplete.'</var>';
       $showAttr['class']  .= ' wcm wcm_ui_autocomplete';
     }
 
-    $iconMenu = $this->icon( 'control/selection.png', 'Window selector' );
-
-    if( $this->readOnly )
-    {
+    if ($this->readOnly) {
       $codeUnset  = "";
       $entryUnset = "";
-    }
-    else
-    {
+    } else {
 
       $codeUnset = ',
    "unset":"true"';
 
-      $iconUnset = $this->icon('control/delete.png', 'Unset');
-
       $entryUnset = <<<HTML
-      <li class="unset" ><a>{$iconUnset} Unset</a></li>
+      <li class="unset" ><a><i class="icon-remove" ></i> Unset</a></li>
 HTML;
 
     }
@@ -224,18 +212,16 @@ HTML;
     $codeOpen   = '';
     $entryOpen  = '';
 
-    if( $this->showUrl )
-    {
+    if ($this->showUrl) {
 
       $codeOpen = <<<HTML
 ,
    "open":"{$this->showUrl}&amp;rqtby=inp&amp;input={$attrHidden['id']}&amp;objid="
 HTML;
 
-      $iconOpen = $this->icon('control/entity.png', 'Open');
 
       $entryOpen = <<<HTML
-            <li class="open" ><a>{$iconOpen} Open</a></li>
+            <li class="open" ><a><i class="icon-eye-open" ></i> Open</a></li>
 HTML;
 
     }
@@ -243,20 +229,17 @@ HTML;
     $codeSelection  = '';
     $entrySelection = '';
 
-    if( $this->selectionUrl )
-    {
+    if ($this->selectionUrl) {
 
       $codeSelection = <<<HTML
 ,
    "selection":"{$this->selectionUrl}"
 HTML;
 
-      $iconAdd = $this->icon('control/add.png', 'Add');
-      $iconSearch = $this->icon('control/change.png', 'Change');
 
       $entrySelection = <<<HTML
-            <li class="add" ><a>{$iconAdd} Add</a></li>
-            <li class="change" ><a>{$iconSearch} Change</a></li>
+            <li class="add" ><a><i class="icon-plus-sign" ></i> Add</a></li>
+            <li class="change" ><a><i class="icon-random" ></i> Change</a></li>
 HTML;
 
     }
@@ -266,13 +249,12 @@ HTML;
     class="wcm wcm_control_selection wgt-button append"
     tabindex="-1"
     id="{$attrHidden['id']}-control"
-    wgt_drop_box="{$attrHidden['id']}-control-drop" >{$iconMenu}</button>
+    wgt_drop_box="{$attrHidden['id']}-control-drop" ><i class="icon-edit" ></i></button>
 
   <var id="{$attrHidden['id']}-control-cfg-selection" >{
    "element":"{$attrHidden['id']}"{$codeSelection}{$codeOpen}{$codeUnset}
   }</var>
 HTML;
-
 
     unset($showAttr['type']);
 
@@ -280,21 +262,20 @@ HTML;
     $required     = $this->required?'<span class="wgt-required">*</span>':'';
 
     $id = $this->attributes['id'];
-    $helpIcon = $this->renderDocu( $id );
+    $helpIcon = $this->renderDocu($id);
 
-    if( !$this->hide )
-    {
+    if (!$this->hide) {
       $html = '<div class="wgt-box input" id="wgt-box-'.$this->attributes['id'].'" >
         <div class="wgt-label" >
-        	<label  for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
-        	'.$helpIcon.'
+          <label  for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
+          '.$helpIcon.'
         </div>
         <div class="wgt-input '.$this->width.'" >
           <input
-          	type="hidden" class="'.$attrHidden['class'].'"
-          	value="'.$attrHidden['value'].'"
-          	id="'.$attrHidden['id'].'"
-          	name="'.$attrHidden['name'].'" />
+            type="hidden" class="'.$attrHidden['class'].'"
+            value="'.$attrHidden['value'].'"
+            id="'.$attrHidden['id'].'"
+            name="'.$attrHidden['name'].'" />
           <input type="text" '.$htmlShowAttr.' />'.$codeAutocomplete.'
           '.$buttonAppend.'
         </div>
@@ -307,15 +288,13 @@ HTML;
 
         <div class="wgt-clear tiny" >&nbsp;</div>
       </div>'.NL;
-    }
-    else
-    {
+    } else {
       $html = '<input
-      	type="hidden"
-      	class="'.$attrHidden['class'].'"
-      	value="'.$attrHidden['value'].'"
-      	id="'.$attrHidden['id'].'"
-      	name="'.$attrHidden['name'].'" />'.NL;
+        type="hidden"
+        class="'.$attrHidden['class'].'"
+        value="'.$attrHidden['value'].'"
+        id="'.$attrHidden['id'].'"
+        name="'.$attrHidden['name'].'" />'.NL;
     }
 
     $this->html = $html;
@@ -327,9 +306,8 @@ HTML;
   /**
    * @param string $attrId
    */
-  public function buildJavascript( $attrId )
+  public function buildJavascript($attrId)
   {
-
     return '';
 
   }//end public function buildJavascript */
@@ -341,22 +319,19 @@ HTML;
   public function buildAjaxArea()
   {
 
-    if(!isset($this->attributes['id']))
+    if (!isset($this->attributes['id']))
       return '';
 
-    if( !isset($this->attributes['value']) )
+    if (!isset($this->attributes['value']))
       $this->attributes['value'] = '';
 
     $this->editUrl = null;
 
-    if( $this->serializeElement )
-    {
+    if ($this->serializeElement) {
 
       $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="thml" ><![CDATA['
         .$this->element().']]></htmlArea>'.NL;
-    }
-    else
-    {
+    } else {
 
       $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="value" ><![CDATA['
         .$this->attributes['value'].']]></htmlArea>'.NL;
@@ -370,7 +345,5 @@ HTML;
 
   }//end public function buildAjaxArea
 
-
 }//end class WgtInputWindow
-
 

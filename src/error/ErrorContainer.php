@@ -8,18 +8,17 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
 /**
  * Hilfsklasse zum behandeln von Fehlern,
  * Wir hauptsächlich als Container für die Fehlercodes verwendet
- * 
+ *
  * @package WebFrap
  * @subpackage tech_core
  *
@@ -30,7 +29,6 @@ class ErrorContainer
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * Liste der Fehlermeldungen
@@ -45,21 +43,21 @@ class ErrorContainer
    */
   public $code   = Response::INTERNAL_ERROR;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Neue Fehlermeldung hinzufügen
    * @param string $message
    */
-  public function addMessage( $message )
+  public function addMessage($message)
   {
-    
+
     $this->messages[] = $message;
-    
+
   }//end public function addMessage */
-  
+
   /**
    * Liste mit allen Fehlermeldungen
    * @return array
@@ -81,14 +79,13 @@ class ErrorContainer
    * Die Fehler in das Response Objekt für eine Ausgabe schieben
    * @param LibResponseHttp $response
    */
-  public function publish( $response )
+  public function publish($response)
   {
-    
-    foreach( $this->messages as $message )
-    {
+
+    foreach ($this->messages as $message) {
       $response->addError($message);
     }
-    
+
   }//end public function publish */
-  
+
 }//end class ErrorContainer

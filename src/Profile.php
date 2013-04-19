@@ -8,21 +8,19 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage tech_core
  *
  */
-class Profile
-  extends Base
+class Profile extends Base
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attribute
@@ -72,7 +70,6 @@ class Profile
    * @param string
    */
   public $panelName  =  'Default';
-  
 
   /**
    * @param string
@@ -86,11 +83,11 @@ class Profile
   {
     return array();
   }//end public function __sleep */
-  
+
   /**
    * @return string
    */
-  public function getKey(  )
+  public function getKey()
   {
     return strtolower($this->key);
   }//end public function getKey */
@@ -98,7 +95,7 @@ class Profile
   /**
    * @param string $mainMenuName
    */
-  public function setMainMenuName( $mainMenuName )
+  public function setMainMenuName($mainMenuName)
   {
     $this->mainMenuName = $mainMenuName;
   }//end public function setMainMenuName */
@@ -106,7 +103,7 @@ class Profile
   /**
    * @param string $desktopName
    */
-  public function setDesktopMenuName( $desktopName )
+  public function setDesktopMenuName($desktopName)
   {
     $this->desktopName = $desktopName ;
   }//end public function setDesktopMenuName */
@@ -114,7 +111,7 @@ class Profile
   /**
    * @param string $navigationName
    */
-  public function setNavigationName( $navigationName )
+  public function setNavigationName($navigationName)
   {
     $this->navigationName = $navigationName ;
   }//end public function setNavigationName */
@@ -122,7 +119,7 @@ class Profile
   /**
    * @param string $menuBar
    */
-  public function setPanelName( $panelName )
+  public function setPanelName($panelName)
   {
     $this->panelName = $panelName ;
   }//end public function setPanelName */
@@ -133,16 +130,12 @@ class Profile
   public function getMainMenu()
   {
 
-    if( !$this->mainMenu )
-    {
+    if (!$this->mainMenu) {
       $className = 'WgtDesktopMainmenu'.$this->mainMenuName;
 
-      if( Webfrap::classLoadable( $className ) )
-      {
+      if (Webfrap::classLoadable($className)) {
         $this->mainMenu = new $className();
-      }
-      else
-      {
+      } else {
         $this->mainMenu = new WgtDesktopMainmenuDefault();
         $this->getResponse()->addError('Missing Mainmenu '.$this->mainMenuName.', fallback to default');
       }
@@ -157,16 +150,12 @@ class Profile
    */
   public function getDesktop()
   {
-    if(!$this->desktop)
-    {
+    if (!$this->desktop) {
       $className = 'WgtDesktop'.$this->desktopName;
 
-      if( Webfrap::classLoadable( $className ) )
-      {
+      if (Webfrap::classLoadable($className)) {
         $this->desktop = new $className();
-      }
-      else
-      {
+      } else {
         $this->desktop = new WgtDesktopDefault();
         $this->getResponse()->addError('Missing Desktop '.$this->desktopName.', fallback to default');
       }
@@ -182,16 +171,12 @@ class Profile
   public function getNavigation()
   {
 
-    if(!$this->navigation)
-    {
+    if (!$this->navigation) {
       $className = 'WgtDesktopNavigation'.$this->navigationName;
 
-      if( Webfrap::classLoadable( $className ) )
-      {
+      if (Webfrap::classLoadable($className)) {
         $this->navigation = new $className();
-      }
-      else
-      {
+      } else {
         $this->navigation = new WgtDesktopNavigationDefault();
         $this->getResponse()->addError('Missing Navigation '.$this->desktopName.', fallback to default');
       }
@@ -201,23 +186,18 @@ class Profile
 
   }//end public function getNavigation */
 
-
   /**
    * @return WgtPanel
    */
   public function getPanel()
   {
 
-    if(!$this->panel)
-    {
+    if (!$this->panel) {
       $className = 'WgtDesktopPanel'.$this->panelName;
 
-      if( Webfrap::classLoadable( $className ) )
-      {
+      if (Webfrap::classLoadable($className)) {
         $this->panel = new $className();
-      }
-      else
-      {
+      } else {
         $this->panel = new WgtDesktopPanelDefault();
         $this->getResponse()->addError('Missing Panel '.$this->desktopName.', fallback to default');
       }

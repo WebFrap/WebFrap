@@ -8,22 +8,18 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
-
 /**
  *
  */
-class DaidalosSystem_Query
-  extends LibSqlQuery
+class DaidalosSystem_Query extends LibSqlQuery
 {
-
 
   /**
    * Loading the tabledata from the database
@@ -34,10 +30,10 @@ class DaidalosSystem_Query
    *
    * @throws LibDb_Exception
    */
-  public function fetchUsersByKey( $key, $params = null )
+  public function fetchUsersByKey($key, $params = null)
   {
 
-    if(!$params)
+    if (!$params)
       $params = new TFlag();
 
     $this->sourceSize  = null;
@@ -47,8 +43,7 @@ class DaidalosSystem_Query
 
     $wheres = array();
 
-    foreach ($tmp as $value)
-    {
+    foreach ($tmp as $value) {
       $wheres[] = " upper(wbfsys_role_user.name) like upper('{$key}%')
         or upper(core_person.lastname) like upper('{$key}%')
         or upper(core_person.firstname) like upper('{$key}%') ";
@@ -59,8 +54,8 @@ class DaidalosSystem_Query
     $sql = <<<SQL
   SELECT
     wbfsys_role_user.name as id,
-    COALESCE ( '('||wbfsys_role_user.name||') ', '' ) || COALESCE ( core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '' ) as value,
-    COALESCE ( '('||wbfsys_role_user.name||') ', '' ) || COALESCE ( core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '' ) as label
+    COALESCE ('('||wbfsys_role_user.name||') ', '') || COALESCE (core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '') as value,
+    COALESCE ('('||wbfsys_role_user.name||') ', '') || COALESCE (core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '') as label
   FROM
     wbfsys_role_user
   JOIN
@@ -72,11 +67,9 @@ class DaidalosSystem_Query
   LIMIT 10;
 SQL;
 
-    $this->result = $db->select( $sql );
+    $this->result = $db->select($sql);
 
   }//end public function fetchUsersByKey */
-
-
 
 } // end class DaidalosDb_Controller
 

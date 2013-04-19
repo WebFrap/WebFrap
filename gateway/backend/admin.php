@@ -8,21 +8,19 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
-try
-{
+try {
 
   include './conf/bootstrap.php';
 
   // Buffer Output
-  if(BUFFER_OUTPUT)
+  if (BUFFER_OUTPUT)
     ob_start();
 
   $errors = '';
@@ -33,34 +31,30 @@ try
   // calling the main main function
   $webfrap->redirectByKey('default.action.admin');
   $errors = $webfrap->out();
-  $webfrap->shutdown( $errors );
+  $webfrap->shutdown($errors);
 
 } // ENDE TRY
-catch( Exception $exception )
-{
+catch(Exception $exception) {
   $extType = get_class($exception);
 
-  Error::addError
-  (
+  Error::addError(
     'Uncatched  Exception: '.$extType.' Message:  '.$exception->getMessage() ,
     null,
     $exception
   );
 
-  if( BUFFER_OUTPUT )
-  {
+  if (BUFFER_OUTPUT) {
     $errors .= ob_get_contents();
     ob_end_clean();
   }
 
-  if( !DEBUG )
-  {
-    if( isset($view) and is_object($view) )
-    {
-      $view->publishError( $exception->getMessage() , $errors );
-    }
-    else
-    {
+  if (!DEBUG) {
+    
+    $view = Webfrap::$env->getView();
+    
+    if (isset($view) and is_object($view)) {
+      $view->publishError($exception->getMessage() , $errors);
+    } else {
       View::printErrorPage
       (
         $exception->getMessage(),
@@ -68,9 +62,7 @@ catch( Exception $exception )
         $errors
       );
     }
-  }
-  else
-  {
+  } else {
     echo $errors;
   }
 

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
   * Das Ausgabemodul für die Seite
@@ -23,9 +22,9 @@
   */
 class View
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Konstantes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * doctype html4 Strict
@@ -61,6 +60,12 @@ class View
    * doctype xml1.1 frames
    */
   const XML1_1_STRICT     = 6;
+  
+  /**
+   * HTML 5
+   */
+  const HTML5     = 7;
+  
 
   /**
    * @param string
@@ -106,7 +111,7 @@ class View
    * @param string
    */
   const MAINWINDOW  = 'mainwindow';
-  
+
   /**
    * @param string
    */
@@ -116,7 +121,7 @@ class View
    * @param string
    */
   const DOCUMENT    = 'document';
-  
+
   /**
    * @param string
    */
@@ -131,7 +136,7 @@ class View
    * @param string
    */
   const PLAIN    = 'plain';
-  
+
   /**
    * @param string
    */
@@ -143,9 +148,9 @@ class View
    */
   const CONTENT_TYPE_TEXT = 'text/html';
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * sollen Informationen zum manipulieren des Menüs mitgeschickt werden
@@ -167,7 +172,7 @@ class View
    * @var boolean
    */
   public static $sendBody = true;
-  
+
   /**
    * soll der ajax Body gesendet werden
    *
@@ -258,10 +263,16 @@ class View
    * @var array
    */
   public static $searchPathIndex = array();
+  
+  /**
+   * Erzwingen eines Doctypes soweit nötig
+   * @var int
+   */
+  public static $docType = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Instance
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * ein Template Objekt der aktiven Template Klasse
@@ -269,14 +280,14 @@ class View
    */
   private static $instance = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Magic and Magicsimulation
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * 
+   *
    */
-  public static function init( )
+  public static function init()
   {
 
     $conf               = Conf::get('view');
@@ -293,28 +304,23 @@ class View
     self::$webIcons     = Session::status('web.icons');
     self::$webImages    = Session::status('web.theme').'images/';
 
-    if( !defined('PLAIN') )
-    {
+    if (!defined('PLAIN')) {
       self::$type = self::$type?:'Html';
       $className  = 'LibTemplate'.ucfirst(self::$type);
 
-      self::$instance = new $className( $conf );
+      self::$instance = new $className($conf);
 
       // Setting Head and Index
-      if( View::CONTENT_TYPE_TEXT == self::$instance->contentType )
-      {
+      if (View::CONTENT_TYPE_TEXT == self::$instance->contentType) {
 
         $user = User::getActive();
 
-        if( $user->getLogedIn() )
-        {
-          self::$instance->setIndex( $conf['index.user'] );
-          self::$instance->setHtmlHead( $conf['head.user'] );
-        }
-        else
-        {
-          self::$instance->setIndex( $conf['index.annon'] );
-          self::$instance->setHtmlHead( $conf['head.annon'] );
+        if ($user->getLogedIn()) {
+          self::$instance->setIndex($conf['index.user']);
+          self::$instance->setHtmlHead($conf['head.user']);
+        } else {
+          self::$instance->setIndex($conf['index.annon']);
+          self::$instance->setHtmlHead($conf['head.annon']);
         }
       }
     }
@@ -325,7 +331,7 @@ class View
    * @param string $type
    *
    */
-  public static function rebase( $type )
+  public static function rebase($type)
   {
 
     $conf               = Conf::get('view');
@@ -343,26 +349,22 @@ class View
     self::$webImages    = Session::status('web.theme').'images/';
 
     $className         = 'LibTemplate'.$type;
-    self::$instance     = new $className( $conf );
-    
-    Webfrap::$env->setView( self::$instance );
-    Webfrap::$env->setTpl( self::$instance );
-    Webfrap::$env->getResponse()->setTpl( self::$instance );
+    self::$instance     = new $className($conf);
+
+    Webfrap::$env->setView(self::$instance);
+    Webfrap::$env->setTpl(self::$instance);
+    Webfrap::$env->getResponse()->setTpl(self::$instance);
 
     // Setting Head and Index
-    if( View::CONTENT_TYPE_TEXT == self::$instance->contentType )
-    {
+    if (View::CONTENT_TYPE_TEXT == self::$instance->contentType) {
       $user = User::getActive();
 
-      if( $user->getLogedIn() )
-      {
-        self::$instance->setIndex( $conf['index.user'] );
-        self::$instance->setHtmlHead( $conf['head.user'] );
-      }
-      else
-      {
-        self::$instance->setIndex( $conf['index.annon'] );
-        self::$instance->setHtmlHead( $conf['head.annon'] );
+      if ($user->getLogedIn()) {
+        self::$instance->setIndex($conf['index.user']);
+        self::$instance->setHtmlHead($conf['head.user']);
+      } else {
+        self::$instance->setIndex($conf['index.annon']);
+        self::$instance->setHtmlHead($conf['head.annon']);
       }
     }
 
@@ -372,7 +374,7 @@ class View
    * clean closedown of the view
    *
    */
-  public static function shutdown( )
+  public static function shutdown()
   {
     self::$instance->shutdown();
     self::$instance = null;
@@ -383,17 +385,16 @@ class View
    * @return LibTemplateAjax
    * @deprecated use self::engine instead
    */
-  public static function getInstance( )
+  public static function getInstance()
   {
     return self::$instance;
   }//end public function getInstance */
-
 
   /**
    * request the activ template engine
    * @return LibTemplateAjax
    */
-  public static function engine(   )
+  public static function engine(  )
   {
     return self::$instance;
   }//end public function engine */
@@ -402,15 +403,14 @@ class View
    * request the active template engine
    * @return LibTemplateAjax
    */
-  public static function getActive(   )
+  public static function getActive(  )
   {
     return self::$instance;
   }//end public function getActive */
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // application logic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Setzen Aktiv Setzen einer neuen View sowie sofortige Rückgabe dieser View
@@ -418,7 +418,7 @@ class View
    * @param string $type
    * @return void
    */
-  public static function setType( $type )
+  public static function setType($type)
   {
     self::$type = ucfirst($type);
   } // end public static function setType */
@@ -427,9 +427,9 @@ class View
    * @param $file
    * @return unknown_type
    */
-  public static function setHtmlHead( $file )
+  public static function setHtmlHead($file)
   {
-    echo self::$instance->setHtmlHead( $file  );
+    echo self::$instance->setHtmlHead($file  );
   }//end public static function setHtmlHead */
 
   /**
@@ -438,25 +438,26 @@ class View
    * @param $params
    * @return unknown_type
    */
-  public static function includeTemplate( $file, $folder = null , $params = array() )
+  public static function includeTemplate($file, $folder = null , $params = array())
   {
-    echo self::$instance->includeTemplate( $file, $folder , $params );
+    echo self::$instance->includeTemplate($file, $folder , $params);
   }//end public static function includeTemplate */
-  
+
   /**
    * @param string $file ein einfacher filename
    * @param mixed $object irgend ein Object für das potentielle template
    * @return string
    */
-  public static function includeFile( $file, $object = null )
+  public static function includeFile($file, $object = null)
   {
-    
+
     ob_start();
     include $file;
     $content = ob_get_contents();
     ob_end_clean();
+
     return $content;
-    
+
   }//end public static function includeFile */
 
   /**
@@ -464,14 +465,11 @@ class View
    * @param $errorCode
    * @return unknown_type
    */
-  public static function printErrorPage( $errorMessage , $errorCode ,$toDump = null )
+  public static function printErrorPage($errorMessage , $errorCode ,$toDump = null)
   {
-    if( self::$instance )
-    {
-      self::$instance->printErrorPage( $errorMessage , $errorCode ,$toDump );
-    }
-    else
-    {
+    if (self::$instance) {
+      self::$instance->printErrorPage($errorMessage , $errorCode ,$toDump);
+    } else {
       echo $errorMessage.'<br />';
       echo Debug::dumpToString($toDump);
     }

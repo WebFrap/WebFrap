@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,7 +22,7 @@
  */
 class WgtTplCheckboxMatrix
 {
-  
+
   /**
    * @var LibTemplate $view
    * @var string $id
@@ -31,22 +31,21 @@ class WgtTplCheckboxMatrix
    * @var array $entries
    * @var array $active
    */
-  public static function render( $view, $id, $formId, $nameEntries, $entries, $active = null )
+  public static function render($view, $id, $formId, $nameEntries, $entries, $active = null)
   {
 
     $codeEntries = '';
-    foreach( $entries as $entry )
-    {
-      
+    foreach ($entries as $entry) {
+
       $checked = '';
-      
-      if( $active && isset( $active->{$entry['id']} ) && $active->{$entry['id']} )
+
+      if ($active && isset($active->{$entry['id']}) && $active->{$entry['id']})
         $checked = ' checked="checked" ';
-      
+
       $codeEntries .= <<<HTML
     <div class="entry" >
-    	<label>{$entry['label']}</label>
-    	<div><input 
+      <label>{$entry['label']}</label>
+      <div><input
       type="checkbox"
       {$checked}
       name="{$nameEntries}[{$entry['id']}]"
@@ -55,22 +54,20 @@ class WgtTplCheckboxMatrix
     </div>
 
 HTML;
-      
+
     }
-    
+
     $code = <<<HTML
-    
+
   <div id="{$id}" class="wgt-checkbox-matrix" >
     {$codeEntries}
   </div>
-    
+
 HTML;
-    
+
     return $code;
 
   }//end public static function render */
 
-
 }//end class WgtTplCheckboxMatrix
-
 

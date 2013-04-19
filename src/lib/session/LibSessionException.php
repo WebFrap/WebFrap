@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -20,7 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibSessionException
-  extends WebfrapFlow_Exception
+class LibSessionException extends WebfrapService_Exception
 {
+
 }

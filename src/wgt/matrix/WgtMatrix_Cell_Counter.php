@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @lang de:
  *
@@ -26,12 +25,12 @@
 class WgtMatrix_Cell_Counter
  extends WgtMatrix_Cell
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
-	 * Type des cell values
+   * Type des cell values
    * @var string
    */
   public $type = 'counter';
@@ -39,9 +38,9 @@ class WgtMatrix_Cell_Counter
   /**
    * @param array $data
    */
-  public function render( $data )
+  public function render($data)
   {
-    return count( $data ).' Items';
+    return count($data).' Items';
   }//end public function render */
 
 }//end class WgtMatrix_Cell_Counter

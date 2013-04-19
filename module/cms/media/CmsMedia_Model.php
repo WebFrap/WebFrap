@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,12 +22,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class CmsMedia_Model
-  extends Model
+class CmsMedia_Model extends Model
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var WbfsysMediathek_Entity
@@ -38,58 +37,57 @@ class CmsMedia_Model
    * @var array
    */
   public $images = array();
-  
+
   /**
    * @var array
    */
   public $subImages = array();
-  
-////////////////////////////////////////////////////////////////////////////////
+
+/*//////////////////////////////////////////////////////////////////////////////
 // getter & setter
-////////////////////////////////////////////////////////////////////////////////
-  
-  /**
-   * @param string $key
-   */
-  public function getImgSubs( $key )
-  {
-    
-    if( isset( $this->subImages[$key] ) )
-      return $this->subImages[$key];
-    else 
-      return array();
-    
-  }//end public function getImgSubs */
-  
-////////////////////////////////////////////////////////////////////////////////
-// Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param string $key
    */
-  public function loadMediathekByKey( $key )
+  public function getImgSubs($key)
   {
-    
+
+    if (isset($this->subImages[$key]))
+      return $this->subImages[$key];
+    else
+      return array();
+
+  }//end public function getImgSubs */
+
+/*//////////////////////////////////////////////////////////////////////////////
+// Methodes
+//////////////////////////////////////////////////////////////////////////////*/
+
+  /**
+   * @param string $key
+   */
+  public function loadMediathekByKey($key)
+  {
+
     $orm = $this->getOrm();
-    
-    $this->mediaThek = $orm->getByKey( 'WbfsysMediathek', $key );
-    
-    if( $this->mediaThek )
-    {
-      $this->loadImages( $this->mediaThek->getId() );
+
+    $this->mediaThek = $orm->getByKey('WbfsysMediathek', $key);
+
+    if ($this->mediaThek) {
+      $this->loadImages($this->mediaThek->getId());
     }
 
   }//end public function loadMediathekByKey */
-  
-////////////////////////////////////////////////////////////////////////////////
+
+/*//////////////////////////////////////////////////////////////////////////////
 // Image Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param int $mediaThekId
    */
-  public function loadImages( $mediaThekId )
+  public function loadImages($mediaThekId)
   {
 
     $db = $this->getDb();
@@ -105,7 +103,7 @@ SELECT
   wbfsys_file.rowid as wbfsys_file_rowid,
   wbfsys_file.name as wbfsys_file_name,
   wbfsys_file.description as wbfsys_file_description
-  
+
 FROM
   wbfsys_image
     LEFT JOIN
@@ -125,27 +123,26 @@ WHERE
 
 SQL;
 
-    $this->images = $db->select( $sql )->getAll();
- 
+    $this->images = $db->select($sql)->getAll();
+
     $ids = array();
-    foreach( $this->images as $img )
-    {
+    foreach ($this->images as $img) {
       $ids[] = $img['wbfsys_image_rowid'];
     }
-    
-    $this->loadSubImages(  $ids  );
+
+    $this->loadSubImages( $ids  );
 
   }//end public function getImages */
 
   /**
    * @param array $ids
    */
-  protected function loadSubImages( $ids )
+  protected function loadSubImages($ids)
   {
 
     $db = $this->getDb();
-    
-    $whereCond = implode( ', ', $ids );
+
+    $whereCond = implode(', ', $ids);
 
     $sql = <<<SQL
 
@@ -157,26 +154,24 @@ SELECT
   wbfsys_file.name as wbfsys_file_name,
   wbfsys_file.rowid as wbfsys_file_rowid,
   wbfsys_file.description as wbfsys_file_description
-  
+
 FROM
   wbfsys_image
       wbfsys_file
     ON
       wbfsys_file.rowid = wbfsys_image.id_file
 WHERE
-  wbfsys_image.id_parent = IN( {$whereCond} );
+  wbfsys_image.id_parent = IN({$whereCond});
 
 SQL;
 
-    $images = $db->select( $sql )->getAll();
-    
-    foreach( $images as $img )
-    {
+    $images = $db->select($sql)->getAll();
+
+    foreach ($images as $img) {
       $this->subImages[$img['wbfsys_image_id_parent']][] = $img;
     }
 
   }//end protected function loadSubImages */
-
 
 } // end class CmsMedia_Model
 

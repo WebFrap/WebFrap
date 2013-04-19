@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -25,21 +25,19 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-interface ITObject
-  extends ArrayAccess
+interface ITObject extends ArrayAccess
 {
 
   /**
    * @param string $key
    * @param string $value
    */
-  public function __set( $key , $value );
+  public function __set($key , $value);
 
   /**
    * @param string $key
    */
-  public function __get( $key );
-
+  public function __get($key);
 
 } // end interface ITObject
 

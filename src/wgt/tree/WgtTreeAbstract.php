@@ -8,25 +8,23 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
 /**
  * class WgtTreeAbstract
  * @package WebFrap
  * @subpackage tech_core
  */
-abstract class WgtTreeAbstract
-  extends WgtAbstract
+abstract class WgtTreeAbstract extends WgtAbstract
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var int
@@ -68,14 +66,14 @@ abstract class WgtTreeAbstract
    */
   public $deleteUrl      = array();
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
    */
-  public function setStart( $start )
+  public function setStart($start)
   {
     $this->startPos = $start;
   }//end public function setStart */
@@ -88,17 +86,15 @@ abstract class WgtTreeAbstract
     return $this->startPos;
   }//end public function getStart */
 
-
   /**
    * set the icon for the tree
    *
    * @param string $icon
    */
-  public function setIcon( $icon  )
+  public function setIcon($icon  )
   {
     $this->icon = View::$iconsWeb.'xsmall/'.$icon;
   }//end public function setIcon */
-
 
 }// end abstract class WgtTreeAbstract
 

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,25 +21,24 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibBuildCreateFile
-  extends LibBuildAction
+class LibBuildCreateFile extends LibBuildAction
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
    * @return boolean
    */
-  public function execute(  )
+  public function execute()
   {
 
     $name = $this->args[1];
-    return SFilesystem::createFolder( $name, true, true );
+
+    return SFilesystem::createFolder($name, true, true);
 
   }//end public function execute */
-
 
 } // end class LibBuildCreateFile
 

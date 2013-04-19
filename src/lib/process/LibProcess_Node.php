@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  *
@@ -25,16 +24,22 @@
  */
 class LibProcess_Node
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
+  
+  /**
+   * Backlink zum Prozess
+   * @var string
+   */
+  public $process = null;
 
   /**
    * Key des Projektknotens
    * @var string
    */
   public $key = null;
-  
+
   /**
    * Key der aktuellen Projekt Phase
    * @var string
@@ -71,18 +76,21 @@ class LibProcess_Node
    * @var array
    */
   public $data = array();
-  
-////////////////////////////////////////////////////////////////////////////////
+
+/*//////////////////////////////////////////////////////////////////////////////
 // Standard Konstruktor
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   *
-   * @param array $nodeData
+   * @param Process $process der dazugehörige Prozess
+   * @param array $nodeData die Daten des Nodes
+   * @param string $key der Key des Nodes
    */
-  public function __construct( array $nodeData, $key = null )
+  public function __construct($process, array $nodeData, $key = null)
   {
     
+    $this->process = $process;
+
     $this->data = $nodeData;
     $this->key = $key;
 
@@ -105,11 +113,21 @@ class LibProcess_Node
     $this->phaseKey  = isset($nodeData['phase'])
       ? $nodeData['phase']
       : null;
-    
-      
+
   }//end public function __construct */
+  
+  
+  /**
+   * @param string $key
+   * @return boolean
+   */
+  public function display($key)
+  {
+    return isset($this->data['display'][$key]) 
+      ? $this->data['display'][$key]
+      : true;
+      
+  }//end public function display */
 
 }//end class LibProcess_Node
-
-
 

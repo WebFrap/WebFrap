@@ -8,25 +8,23 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
 /**
  *
  * @package WebFrap
  * @subpackage tech_core
  */
-abstract class WgtInputAbstract
-  extends WgtAbstract
+abstract class WgtInputAbstract extends WgtAbstract
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Das Label zum Inputelement
@@ -40,9 +38,9 @@ abstract class WgtInputAbstract
    */
   public $required = false;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -50,18 +48,18 @@ abstract class WgtInputAbstract
    * @param boolean $required
    * @return unknown_type
    */
-  public function setLabel( $label, $required = false )
+  public function setLabel($label, $required = false)
   {
     $this->label    = $label;
     $this->required = $required;
-  }//end public function setLabel( $label, $required = false )
+  }//end public function setLabel($label, $required = false)
 
  /**
   * @param $data
   * @param $value
   * @return void
   */
-  public function setData( $data , $value = null )
+  public function setData($data , $value = null)
   {
 
     $this->attributes['value'] = $data;
@@ -74,16 +72,16 @@ abstract class WgtInputAbstract
    * @param array $value
    * @return void
    */
-  public function addData( $key , $value = null )
+  public function addData($key , $value = null)
   {
-    $this->setData( $key );
+    $this->setData($key);
   }//end public function addData */
 
  /**
   * @param mixed
   * @return void
   */
-  public function getData( )
+  public function getData()
   {
     return isset($this->attributes['value'])?$this->attributes['value']:null;
   }// end public function getData */
@@ -92,7 +90,7 @@ abstract class WgtInputAbstract
   * @param mixed
   * @return void
   */
-  public function value( )
+  public function value()
   {
     return isset($this->attributes['value'])?$this->attributes['value']:null;
   }// end public function value */
@@ -102,7 +100,6 @@ abstract class WgtInputAbstract
    * @param array $attributes
    * @return string
    */
-  public abstract function build($attributes = array());
-
+  abstract public function build($attributes = array());
 
 } // end class WgtInputAbstract

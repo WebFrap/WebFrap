@@ -1,33 +1,30 @@
 <?php
 /*@interface.header@*/
 
-
-try
-{
+try {
 
   include './conf/bootstrap.php';
 
   // Buffer Output
-  if( BUFFER_OUTPUT )
+  if (BUFFER_OUTPUT)
     ob_start();
 
   $errors = '';
 
-  View::setType( 'Html' );
+  View::setType('Html');
   $webfrap = Webfrap::init();
-  
-  View::engine()->setIndex( 'plain_data' );
+
+  View::engine()->setIndex('plain_data');
 
   // calling the main main function
 
   $webfrap->main();
   $errors = $webfrap->out();
-  $webfrap->shutdown( $errors );
+  $webfrap->shutdown($errors);
 
 } // ENDE TRY
-catch( Exception $exception )
-{
-  $extType = get_class( $exception );
+catch(Exception $exception) {
+  $extType = get_class($exception);
 
   Error::addError
   (
@@ -36,23 +33,19 @@ catch( Exception $exception )
     $exception
   );
 
-  if( BUFFER_OUTPUT )
-  {
+  if (BUFFER_OUTPUT) {
     $errors .= ob_get_contents();
     ob_end_clean();
   }
 
-  if( !DEBUG )
-  {
+  if (!DEBUG) {
     View::printErrorPage
     (
       $exception->getMessage(),
       '500',
       $errors
     );
-  }
-  else
-  {
+  } else {
     echo $errors;
   }
 

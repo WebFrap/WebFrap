@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -22,12 +21,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapEditor_Controller
-  extends Controller
+class WebfrapEditor_Controller extends Controller
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * list with all callable methodes in this subcontroller
@@ -46,30 +44,26 @@ class WebfrapEditor_Controller
    */
   protected $defaultAction = 'display';
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @return void
    */
-  public function display( )
+  public function display()
   {
 
-    if(!$this->view->isType( View::SUBWINDOW ))
-    {
+    if (!$this->view->isType(View::SUBWINDOW)) {
       $this->errorPage('Invalid Request');
     }
 
     $view = $this->view->newWindow('WebfrapMainMenu', 'Default');
     $view->setTitle('Calendar');
 
-    $view->setTemplate( 'webfrap/base/calendar' );
-
+    $view->setTemplate('webfrap/base/calendar');
 
   }//end public function display */
-
-
 
 }//end class ControllerWebfrapEditor
 

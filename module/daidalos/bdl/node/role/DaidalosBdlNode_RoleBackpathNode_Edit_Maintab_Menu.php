@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,12 +21,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdlNode_RoleBackpathNode_Edit_Maintab_Menu
-  extends DaidalosBdl_Mvcbase_BackpathNode_Edit_Maintab_Menu
+class DaidalosBdlNode_RoleBackpathNode_Edit_Maintab_Menu extends DaidalosBdl_Mvcbase_BackpathNode_Edit_Maintab_Menu
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Der domainkey
@@ -34,14 +33,13 @@ class DaidalosBdlNode_RoleBackpathNode_Edit_Maintab_Menu
    * @var string
    */
   public $domainKey = 'role';
-  
+
   /**
    * Domain Class Part
    * eg: Role
    * @var string
    */
   public $domainClass = 'Role';
-
 
 }//end class DaidalosBdlNode_RoleBackpathNode_Edit_Maintab_Menu */
 

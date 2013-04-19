@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Dummy class for Extentions
@@ -23,8 +22,7 @@
  * @package WebFrap
  * @subpackage Core
  */
-class ExampleAjax_Ajax_View
-  extends LibTemplateAjaxView
+class ExampleAjax_Ajax_View extends LibTemplateAjaxView
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -41,7 +39,7 @@ class ExampleAjax_Ajax_View
    *
    * @param TArray $params
    */
-  public function displayData1( $params )
+  public function displayData1($params)
   {
 
     $area = $this->newArea('newArea');
@@ -65,7 +63,7 @@ class ExampleAjax_Ajax_View
    *
    * @param TArray $params
    */
-  public function displayNewClass( $params )
+  public function displayNewClass($params)
   {
 
     $area = $this->newArea('newArea');
@@ -85,7 +83,7 @@ class ExampleAjax_Ajax_View
    *
    * @param TArray $params
    */
-  public function displayToggleClass( $params )
+  public function displayToggleClass($params)
   {
 
     $jsCode =<<<JS
@@ -94,11 +92,8 @@ class ExampleAjax_Ajax_View
 
 JS;
 
-    $this->addJsCode( $jsCode );
+    $this->addJsCode($jsCode);
 
   }//end public function displayToggleClass */
-
-
-
 
 } // end class ExampleAjax_Ajax_View

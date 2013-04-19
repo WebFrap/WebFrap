@@ -22,9 +22,9 @@
  */
 class Debug
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -69,23 +69,23 @@ class Debug
    */
   protected static $callCounter = array();
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Enter description here...
    *
    * @param string $message
    */
-  public static function logDebugTrace( $message = null  )
+  public static function logDebugTrace($message = null  )
   {
     // Der Trace Session anhängen
 
-    if( !DEBUG )
+    if (!DEBUG)
       return null;
 
-    if( $message )
+    if ($message)
       self::$traces[] = "<p>$message</p>\n".Debug::backtrace();
     else
       self::$traces[] = Debug::backtrace();
@@ -97,17 +97,16 @@ class Debug
    *
    * @param mixed $toDump
    */
-  public static function appendLogDump( $toDump   )
+  public static function appendLogDump($toDump   )
   {
 
-    if( !DEBUG )
+    if (!DEBUG)
       return null;
 
     // Der Trace Session anhängen
-    if( Log::$levelTrace )
-    {
+    if (Log::$levelTrace) {
       self::$dumps[count(self::$traces) -1] .=
-        "<h4>Dump:</h4><pre>".self::dumpToString( $toDump )."</pre>";
+        "<h4>Dump:</h4><pre>".self::dumpToString($toDump)."</pre>";
     }
 
   }//end public static function appendLogDumpt */
@@ -118,17 +117,17 @@ class Debug
    * @param string $message
    * @param mixed $toDump
    */
-  public static function logDump( $message , $toDump   )
+  public static function logDump($message , $toDump   )
   {
 
-    if( !DEBUG )
+    if (!DEBUG)
       return null;
 
     // Der Trace Session anhängen
     self::$dumps[] = array
     (
       'message'=> $message,
-      'dump' => "<pre>".self::dumpToString( $toDump )."</pre>"
+      'dump' => "<pre>".self::dumpToString($toDump)."</pre>"
     );
 
   }//end public static function logDump  */
@@ -136,10 +135,10 @@ class Debug
   /**
    * @param string $file
    */
-  public static function logFile( $file   )
+  public static function logFile($file   )
   {
 
-    if( !DEBUG )
+    if (!DEBUG)
       return null;
 
     self::$files[] = $file;
@@ -150,14 +149,14 @@ class Debug
    *
    * @param unknown_type $message
    */
-  public static function debugDie( $message = null , $dump = null )
+  public static function debugDie($message = null , $dump = null)
   {
 
-    if( !DEBUG )
+    if (!DEBUG)
       return null;
 
     echo '<pre>'.self::backtrace().'</pre>';
-    echo self::output( $dump , $message );
+    echo self::output($dump , $message);
     exit;
 
   }//end public static function debugDie */
@@ -168,10 +167,10 @@ class Debug
    * @param string $message
    * @param mixed $data
    */
-  public static function end( $message  )
+  public static function end($message  )
   {
 
-    if( !DEBUG )
+    if (!DEBUG)
       return null;
 
     $metadata = Debug::getCallposition();
@@ -179,7 +178,7 @@ class Debug
     $file = isset($metadata['file'])?$metadata['file']:'unkown file';
     $line = isset($metadata['line'])?$metadata['line']:'unkown line';
 
-    throw new Debug_Exception( 'Debug Stop: '.$message .' file: '.$file.' line: '.$line );
+    throw new Debug_Exception('Debug Stop: '.$message .' file: '.$file.' line: '.$line);
 
   }//end public static function end */
 
@@ -188,10 +187,10 @@ class Debug
   * @param String $title Der Title des Dumps
   * @return  String
   */
-  public static function output( $varToDump , $title = 'anon dump' )
+  public static function output($varToDump , $title = 'anon dump')
   {
 
-    if( !DEBUG )
+    if (!DEBUG)
       return null;
 
     ob_start();
@@ -208,10 +207,10 @@ class Debug
    * @param $toDump
    * @return unknown_type
    */
-  public static function xmlPath( $child )
+  public static function xmlPath($child)
   {
 
-    if( !DEBUG )
+    if (!DEBUG)
       return null;
 
     $path = '';
@@ -219,14 +218,13 @@ class Debug
 
     $parents = $child->xpath('./ancestor::*');
 
-    foreach( $parents as $node )
-    {
+    foreach ($parents as $node) {
 
       $nodeName = $node->getName();
 
       $path .= $node->getName();
 
-      if( in_array( $nodeName, array('entity','ref','management','widget') ) )
+      if (in_array($nodeName, array('entity','ref','management','widget')))
         $path .= '[@name="'.$node['name'].'"]';
 
       $path .= '/';
@@ -243,10 +241,10 @@ class Debug
    * @param $toDump
    * @return unknown_type
    */
-  public static function dump( $toDump )
+  public static function dump($toDump)
   {
 
-    if( !DEBUG )
+    if (!DEBUG)
       return null;
 
     return '<pre>'.self::dumpToString($toDump).'</pre>';
@@ -258,24 +256,21 @@ class Debug
    * @param string $fileName
    * @param mixed $toDump
    */
-  public static function dumpFile( $fileName, $toDump, $forceFull = false )
+  public static function dumpFile($fileName, $toDump, $forceFull = false)
   {
 
-    if( !DEBUG )
+    if (!DEBUG)
       return null;
 
     $dumpPath = PATH_GW.'tmp/';
 
-    if( !file_exists( $dumpPath.$fileName.'.dump' ) )
+    if (!file_exists($dumpPath.$fileName.'.dump'))
        SFilesystem::touchFileFolder($dumpPath.$fileName.'.dump');
 
-    if( is_string( $toDump ) )
-    {
-      file_put_contents( $dumpPath.$fileName.'.dump', 'string: '.$toDump );
-    }
-    else
-    {
-      file_put_contents( $dumpPath.$fileName.'.dump', self::dumpToString( $toDump, $forceFull ) );
+    if (is_string($toDump)) {
+      file_put_contents($dumpPath.$fileName.'.dump', 'string: '.$toDump);
+    } else {
+      file_put_contents($dumpPath.$fileName.'.dump', self::dumpToString($toDump, $forceFull));
     }
 
   }//end public static function dump */
@@ -286,10 +281,10 @@ class Debug
   * @param mixed $toDump Variable die gedupmt werden soll
   * @return String
   */
-  public static function getDump( $toDump )
+  public static function getDump($toDump)
   {
 
-    if( !DEBUG )
+    if (!DEBUG)
       return null;
 
     ob_start();
@@ -301,127 +296,89 @@ class Debug
 
   }//end public static function getDump */
 
-
  /**
   * Ausgabe eines Debugtraces
   * @param mixed $toDump Variable die gedupmt werden soll
   * @return String
   */
-  public static function dumpToString( $toDump, $force = false )
+  public static function dumpToString($toDump, $force = false)
   {
 
-    if( !DEBUG )
+    if (!DEBUG)
       return null;
 
     /**/
-    if( $force )
-    {
+    if ($force) {
       ob_start();
       var_dump($toDump);
       $content = ob_get_contents();
       ob_end_clean();
+
       return $content;
     }
 
-
-    if( is_object( $toDump ) )
-    {
-      if( $toDump instanceof DOMNode )
-      {
-        if( Log::$levelDebug )
-        {
+    if (is_object($toDump)) {
+      if ($toDump instanceof DOMNode) {
+        if (Log::$levelDebug) {
           $toDump = simplexml_import_dom($toDump);
           $content = 'DOMNode: '.htmlentities($toDump->asXml());
-        }
-        else
-        {
+        } else {
           $content = 'DOMNode '.$toDump->nodeName;
         }
-      }
-      else if( $toDump instanceof SimpleXmlElement )
-      {
-        if( Log::$levelDebug )
-        {
+      } elseif ($toDump instanceof SimpleXmlElement) {
+        if (Log::$levelDebug) {
           $toDump = simplexml_import_dom($toDump);
           $content = 'DOMNode: '.htmlentities($toDump->asXml());
-        }
-        else
-        {
+        } else {
           $content = 'SimpleXmlElement: ';
         }
-      }
-      else if( $toDump instanceof Webfrap_Exception )
-      {
+      } elseif ($toDump instanceof Webfrap_Exception) {
         $content = $toDump->dump();
-      }
-      else if( $toDump instanceof Exception )
-      {
+      } elseif ($toDump instanceof Exception) {
         $content = 'Exception: '.get_class($toDump).' '.$toDump->getMessage();
-      }
-      else if( method_exists( $toDump , 'getDebugDump' ) )
-      {
+      } elseif (method_exists($toDump , 'getDebugDump')) {
         $className  = get_class($toDump);
         $content    = self::dumpToString($toDump->getDebugDump());
-      }
-      else
-      {
+      } else {
 
         $content = 'Object: '.get_class($toDump);
         /*
-        if( Log::$levelDebug )
-        {
+        if (Log::$levelDebug) {
           ob_start();
           var_dump($toDump);
           $content = ob_get_contents();
           ob_end_clean();
-        }
-        else
-        {
+        } else {
           $content = 'Object: '.get_class($toDump);
         }
         */
       }
-    }
-    else if( is_array( $toDump ) )
-    {
+    } elseif (is_array($toDump)) {
 
-      if( Log::$levelDebug )
-      {
+      if (Log::$levelDebug) {
         $content = self::rawDump($toDump);
-      }
-      else if( Log::$levelVerbose )
-      {
+      } elseif (Log::$levelVerbose) {
         $content = 'array: size: '.count($toDump).' keys: '.implode(array_keys($toDump),',').NL;
 
-        foreach( $toDump as $key => $data )
-        {
+        foreach ($toDump as $key => $data) {
           $content .= '@attr['.$key.']'.Debug::dumpToString($data).';';
         }
-      }
-      else
-      {
+      } else {
         $content = 'array: size: '.count($toDump).' keys: '.implode(array_keys($toDump),',').NL;
       }
 
-    }
-    else if( is_scalar( $toDump ) )
-    {
-      $content = 'scalar: size: '.strlen((string)$toDump).NL;
+    } elseif (is_scalar($toDump)) {
+      $content = 'scalar: size: '.strlen((string) $toDump).NL;
       $content .= $toDump;
 
-    }
-    else
-    {
+    } else {
 
-      if( Log::$levelDebug )
-      {
+      if (Log::$levelDebug) {
         ob_start();
         var_dump($toDump);
         $content = ob_get_contents();
         ob_end_clean();
-      }
-      else
-      {
+      } else {
         $content = 'GOT Whatever to dump: '.gettype($toDump);
       }
 
@@ -431,112 +388,83 @@ class Debug
 
   }//end public static function dumpToString */
 
-
   /**
    * Ausgabe eines Debugtraces
    * @param mixed $toDump Variable die gedupmt werden soll
    * @return String
    */
-  public static function rawDump( $toDump )
+  public static function rawDump($toDump)
   {
 
-    if( !DEBUG )
+    if (!DEBUG)
       return null;
 
     ob_start();
     var_dump($toDump);
     $content = ob_get_contents();
     ob_end_clean();
+
     return $content;
 
   }//end public static function rawDump */
-
 
   /** Ausgabe eines Debugtraces
   * @param mixed $toDump Variable die gedupmt werden soll
   * @return String
   */
-  public static function dumpFull( $toDump )
+  public static function dumpFull($toDump)
   {
 
-    if( !DEBUG )
+    if (!DEBUG)
       return null;
 
-    if( is_object( $toDump ) )
-    {
-      if( $toDump instanceof DOMNode )
-      {
-        if( Log::$levelDebug )
-        {
+    if (is_object($toDump)) {
+      if ($toDump instanceof DOMNode) {
+        if (Log::$levelDebug) {
           $toDump = simplexml_import_dom($toDump);
           $content = 'DOMNode: '.htmlentities($toDump->asXml());
-        }
-        else
-        {
+        } else {
           $content = 'DOMNode '.$toDump->nodeName;
         }
-      }
-      else if( $toDump instanceof SimpleXmlElement )
-      {
-        if( Log::$levelDebug )
-        {
+      } elseif ($toDump instanceof SimpleXmlElement) {
+        if (Log::$levelDebug) {
           $toDump = simplexml_import_dom($toDump);
           $content = 'DOMNode: '.htmlentities($toDump->asXml());
-        }
-        else
-        {
+        } else {
           $content = 'SimpleXmlElement: ';
         }
-      }
-      else if( $toDump instanceof Webfrap_Exception )
-      {
+      } elseif ($toDump instanceof Webfrap_Exception) {
         $content = $toDump->dump();
-      }
-      else if( $toDump instanceof Exception )
-      {
+      } elseif ($toDump instanceof Exception) {
         $content = 'Exception: '.get_class($toDump).' '.$toDump->getMessage();
-      }
-      else if( method_exists( $toDump , 'getDebugDump' ) )
-      {
+      } elseif (method_exists($toDump , 'getDebugDump')) {
         $className  = get_class($toDump);
         $content    = self::dumpToString($toDump->getDebugDump());
-      }
-      else
-      {
+      } else {
         ob_start();
         var_dump($toDump);
         $content = ob_get_contents();
         ob_end_clean();
       }
-    }
-    else if( is_array( $toDump ) )
-    {
+    } elseif (is_array($toDump)) {
 
       $content = 'array: size: '.count($toDump).NL;
 
-      foreach( $toDump as $key => $data )
-      {
+      foreach ($toDump as $key => $data) {
         $content .= '@attr['.$key.']'.Debug::dumpFull($data).';';
       }
 
-    }
-    else if( is_scalar( $toDump ) )
-    {
-      $content = 'scalar: size: '.strlen((string)$toDump).NL;
+    } elseif (is_scalar($toDump)) {
+      $content = 'scalar: size: '.strlen((string) $toDump).NL;
       $content .= $toDump;
-    }
-    else
-    {
+    } else {
 
-      if( Log::$levelDebug )
-      {
+      if (Log::$levelDebug) {
         ob_start();
         var_dump($toDump);
         $content = ob_get_contents();
         ob_end_clean();
-      }
-      else
-      {
+      } else {
         $content = 'GOT Whatever to dump: '.gettype($toDump);
       }
 
@@ -552,7 +480,7 @@ class Debug
    * @param unknown_type $anz
    * @deprecated
    * /
-  public static function addLoc( $anz )
+  public static function addLoc($anz)
   {
     self::$loc += $anz;
     ++self::$incFiles;
@@ -585,7 +513,7 @@ class Debug
    */
   public static function getIncludedFiles()
   {
-    return array_merge( get_included_files() ) ;
+    return array_merge(get_included_files()) ;
   }//end public static function getIncludedFiles */
 
   /**
@@ -605,27 +533,22 @@ class Debug
   *   zurückgegeben  werden
   * @return mixed
   */
-  public static function backtrace( $asArray = false )
+  public static function backtrace($asArray = false)
   {
     $backTrace = debug_backtrace();
 
     $trace = '';
 
-    if( $asArray  )
-    {
+    if ($asArray) {
       $trace = array();
-      foreach ( $backTrace as $trss )
-      {
-        if(isset($trss['file']))
+      foreach ($backTrace as $trss) {
+        if (isset($trss['file']))
           $trace[] = $trss['file'].' : '.(isset($trss['function'])?$trss['function']:null).' : '.$trss['line'] .NL;
       }
-    }
-    else
-    {
+    } else {
       $trace = '';
-      foreach ( $backTrace as $trss )
-      {
-        if(isset($trss['file']))
+      foreach ($backTrace as $trss) {
+        if (isset($trss['file']))
           $trace .= $trss['file'].' : '.(isset($trss['function'])?$trss['function']:null).' : '.$trss['line'] .NL;
       }
     }
@@ -634,15 +557,14 @@ class Debug
 
   }//end public static function backtrace */
 
-
   /**
    * @param array
    * @return dump the backtrace in a better readable format
    */
-  public static function backtraceToTable( $traces = null )
+  public static function backtraceToTable($traces = null)
   {
 
-    if(!$traces)
+    if (!$traces)
       $traces = debug_backtrace();
 
     array_shift($traces);
@@ -661,8 +583,7 @@ class Debug
 <tbody>
 CODE;
 
-    foreach( $traces as $key => $value )
-    {
+    foreach ($traces as $key => $value) {
 
       /*
         'file' => string '/var/www/WorkspaceWebFrap/WebFrap/src/lib/LibTemplate.php' (length=74)
@@ -675,21 +596,15 @@ CODE;
       $table .= '<td>'.(isset($value['file'])?$value['file']:'?').'</td>';
       $table .= '<td>'.(isset($value['line'])?$value['line']:'?').'</td>';
 
-      if( !isset($value['class']) )
-      {
+      if (!isset($value['class'])) {
         $table .= '<td>'.$value['function'].'</td>';
-      }
-      else
-      {
+      } else {
         $table .= '<td>'.$value['class'].$value['type'].$value['function'].'</td>';
       }
 
-      if( !isset($value['args']) )
-      {
+      if (!isset($value['args'])) {
         $table .= '<td></td>';
-      }
-      else
-      {
+      } else {
 
         $table .= '<td>
         <table>
@@ -703,53 +618,36 @@ CODE;
           <tbody>
               ';
 
-        foreach( $value['args'] as $numArg => $argValue )
-        {
+        foreach ($value['args'] as $numArg => $argValue) {
           $type = gettype($argValue);
 
           $table .='<tr>';
           $table .='<td>'.$numArg.'</td>';
           $table .='<td>'.$type.'</td>';
 
-          if( is_scalar($argValue) )
-          {
-            if( is_string($argValue) )
-            {
+          if (is_scalar($argValue)) {
+            if (is_string($argValue)) {
               $table .='<td>'.htmlentities($argValue).'</td>';
-            }
-            else
-            {
+            } else {
               $table .='<td>'.$argValue.'</td>';
             }
 
-          }
-          else if( is_array($argValue) )
-          {
+          } elseif (is_array($argValue)) {
             $table .='<td>size:'.count($argValue).'</td>';
-          }
-          else if( is_object($argValue) )
-          {
+          } elseif (is_object($argValue)) {
 
-            if( $argValue instanceof DOMNode  )
-            {
-              if( method_exists( $argValue,'hasAttribute') && $argValue->hasAttribute('name') )
-              {
+            if ($argValue instanceof DOMNode) {
+              if (method_exists($argValue,'hasAttribute') && $argValue->hasAttribute('name')) {
                 $table .='<td>DOMNode: '.$argValue->nodeName.' name: '.$argValue->getAttribute('name').'</td>';
-              }
-              else
-              {
+              } else {
                 $table .='<td>DOMNode: '.$argValue->nodeName.'</td>';
               }
 
-            }
-            else
-            {
+            } else {
               $table .='<td>class: '.get_class($argValue).'</td>';
             }
 
-          }
-          else
-          {
+          } else {
             $table .='<td></td>';
           }
 
@@ -759,10 +657,10 @@ CODE;
         $table .='</tbody></table>';
       }
 
-
     }
 
     $table .= '</tbody></table>';
+
     return $table;
 
   }//end public function backtraceToTable */
@@ -771,28 +669,27 @@ CODE;
    *
    * @return unknown_type
    */
-  public static function getCallerPosition( $asArrary = false )
+  public static function getCallerPosition($asArrary = false)
   {
 
     $backTrace = debug_backtrace();
     $meth = $backTrace[2];
     $line = $backTrace[1];
 
-    if( $asArrary )
+    if ($asArrary)
       return array('file' => $meth['file'] , 'line' => $line['line']  );
     else
       return $meth['file'].' : '.$line['line'].NL;
 
   }//end public static function getCallerPosition */
 
-
-  public static function getCaller( $level = 2 )
+  public static function getCaller($level = 2)
   {
 
     $backTrace = debug_backtrace();
     $meth = $backTrace[$level];
 
-    if( isset($meth['class']) )
+    if (isset($meth['class']))
       return $meth['class'].'::'.$meth['function'].NL;
 
     else
@@ -803,10 +700,11 @@ CODE;
   /**
    *
    */
-  public static function getCallposition( )
+  public static function getCallposition()
   {
 
     $backTrace = debug_backtrace();
+
     return isset($backTrace[2])?$backTrace[2]:'??';
 
   }//end public static function getCallposition */
@@ -818,18 +716,15 @@ CODE;
    * @param mixed $data
    * @deprecated
    * /
-  public static function debugConsole( $message , $data = null )
+  public static function debugConsole($message , $data = null)
   {
 
     $entry = array();
     $entry[] = $message;
 
-    if( is_scalar($data) )
-    {
+    if (is_scalar($data)) {
       $entry[] = $data;
-    }
-    else
-    {
+    } else {
       $entry[] = Debug::dumpToString($data);
     }
 
@@ -846,27 +741,25 @@ CODE;
    * @param mixed $data
    * @param string $trace
    */
-  public static function console( $message, $data = null, $trace = null, $force = false )
+  public static function console($message, $data = null, $trace = null, $force = false)
   {
 
-    if( !$force )
-    {
-      if( !DEBUG && !DEBUG_CONSOLE )
+    if (!$force) {
+      if (!DEBUG && !DEBUG_CONSOLE)
         return;
     }
 
-    if( defined('STDOUT') )
-      fputs( STDOUT, 'DEBUG: '.$message.NL );
+    if (defined('STDOUT'))
+      fputs(STDOUT, 'DEBUG: '.$message.NL);
 
-    if( !file_exists(PATH_GW.'log') )
-    {
-      if(!class_exists('SFilesystem'))
+    if (!file_exists(PATH_GW.'log')) {
+      if (!class_exists('SFilesystem'))
         include PATH_FW.'src/s/SFilesystem.php';
 
       SFilesystem::mkdir(PATH_GW.'log');
     }
 
-    if(defined('WBF_CONSOLE_LOG'))
+    if (defined('WBF_CONSOLE_LOG'))
       $logFile = WBF_CONSOLE_LOG;
     else
       $logFile = 'console.html';
@@ -874,36 +767,43 @@ CODE;
     $entry = array();
     $entry[0] = $message;
 
-    if( $trace === true )
+    if ($trace === true)
       $trace = Debug::backtrace();
 
-    if( is_scalar($data) )
-    {
-      $entry[1] = $data.(string)$trace;
-    }
-    else
-    {
-      $entry[1] = Debug::dumpToString($data, $force).(string)$trace;
+    if (is_scalar($data)) {
+      $entry[1] = $data.(string) $trace;
+    } else {
+      $entry[1] = Debug::dumpToString($data, $force).(string) $trace;
     }
 
-    //SFiles::write( PATH_GW.'log/'.$logFile, 'MESSAGE: '.$message, 'a' );
-    //SFiles::write( PATH_GW.'log/'.$logFile, $entry[1], 'a' );
+    //SFiles::write(PATH_GW.'log/'.$logFile, 'MESSAGE: '.$message, 'a');
+    //SFiles::write(PATH_GW.'log/'.$logFile, $entry[1], 'a');
 
-    if( DEBUG_CONSOLE )
-    {
+    if (DEBUG_CONSOLE) {
       self::$console[] = $entry;
     }
 
-    if( 'cli' === View::$type )
+    if ('cli' === View::$type)
       echo $message.NL;
 
     // need to check
-    if( DEBUG )
-    {
-      self::logDump( $message , $data );
+    if (DEBUG) {
+      self::logDump($message , $data);
     }
 
   }//end public static function console */
+
+  /**
+   * Console with debug trace
+   * @param string $message
+   * @param mixed $data
+   * @param boolean $force enforce a full dump
+   */
+  public static function tconsole($message, $data = null, $force = false)
+  {
+    return self::console($message, $data, true, $force);
+
+  }//end public static function tconsole */
 
   /**
    * Enter description here...
@@ -911,35 +811,30 @@ CODE;
    * @param string $message
    * @param mixed $data
    */
-  public static function point( $key , $data = null  )
+  public static function point($key , $data = null  )
   {
 
-    if( !DEBUG )
+    if (!DEBUG)
       return null;
 
     self::$callCounter[$key][] = true;
 
     $entry = array();
-    $entry[] = 'POINT: '.$key.': '.count( self::$callCounter[$key] ) ;
+    $entry[] = 'POINT: '.$key.': '.count(self::$callCounter[$key]) ;
 
-    if( is_scalar($data) )
-    {
+    if (is_scalar($data)) {
       $dump = $data.' called by '.self::backtraceToTable();
-    }
-    else
-    {
+    } else {
       $dump = Debug::dumpToString($data).' called by '.self::backtraceToTable();
     }
 
     $entry[] = $dump;
 
-    if( DEBUG_CONSOLE )
-    {
+    if (DEBUG_CONSOLE) {
       self::$console[] = $entry;
     }
 
-    if( DEBUG )
-    {
+    if (DEBUG) {
       self::logDump($key , $data);
     }
 
@@ -951,7 +846,7 @@ CODE;
    * @param string $message
    * @param mixed $data
    */
-  public static function resetPoint( $key   )
+  public static function resetPoint($key   )
   {
 
     self::$callCounter[$key] = array();
@@ -965,16 +860,15 @@ CODE;
   public static function consoleHtml()
   {
 
-    if( !DEBUG )
+    if (!DEBUG)
       return null;
 
     $html = '';
 
     $time = time();
 
-    if( DEBUG )
-    {
-      $renderDur = Webfrap::getDuration( Webfrap::$scriptStart );
+    if (DEBUG) {
+      $renderDur = Webfrap::getDuration(Webfrap::$scriptStart);
       $html .= '<h3>Render Duration: '.$renderDur.'</h3>';
       ++$time;
 
@@ -983,14 +877,13 @@ CODE;
       ++$time;
     }
 
-    foreach( self::$console as $entry )
-    {
+    foreach (self::$console as $entry) {
       $html .= '<h3 onclick="$S(\'#wgtIdDebug_'.trim($time).'\').toggle()" style="cursor:pointer;" >'.Validator::sanitizeHtml($entry[0]).'</h3>';
       $html .= '<pre style="display:none;" id="wgtIdDebug_'.trim($time).'" >'.$entry[1].'</pre>';
       ++$time;
     }
 
-    SFiles::write( PATH_GW.'tmp/debug_dump.html', $html );
+    SFiles::write(PATH_GW.'tmp/debug_dump.html', $html);
 
     return $html;
 
@@ -1002,21 +895,20 @@ CODE;
   public static function consoleSave()
   {
 
-    if( !DEBUG )
+    if (!DEBUG)
       return null;
 
     $html = '';
 
     $time = time();
 
-    foreach( self::$console as $entry )
-    {
+    foreach (self::$console as $entry) {
       $html .= 'ENTRY: '.$time.' '.$entry[0].NL;
       $html .= $entry[1];
       ++$time;
     }
 
-    SFiles::write( PATH_GW.'log/console.log' , $html );
+    SFiles::write(PATH_GW.'log/console.log' , $html);
 
   }//end public static function consoleHtml */
 
@@ -1046,7 +938,6 @@ CODE;
     $_SESSION['BUFFERD_OUT']  = null;
 
   }//end public static function clean */
-
 
 }//end class Debug
 

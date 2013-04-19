@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapDocu_Widget
-  extends WgtWidget
+class WebfrapDocu_Widget extends WgtWidget
 {
   /**
    * @param string $containerId die Id des Tab Containers in dem das Widget platziert wird
@@ -31,7 +30,7 @@ class WebfrapDocu_Widget
    *
    * @return void
    */
-  public function asTab( $containerId, $tabId, $tabSize = 'medium' )
+  public function asTab($containerId, $tabId, $tabSize = 'medium')
   {
 
     // benötigte resourcen laden
@@ -43,22 +42,21 @@ class WebfrapDocu_Widget
 
     $profile  = $user->getProfileName();
 
-    $params   = new TFlagListing( $request );
-    
+    $params   = new TFlagListing($request);
+
     $content = '';
-    
-    $loader = new ExtensionLoader( 'index', 'data/docu/' );
+
+    $loader = new ExtensionLoader('index', 'data/docu/');
 
     $html = <<<HTML
     <div id="{$tabId}" class="wgt_tab {$tabSize} {$containerId}" title="Docu"  >
       <div class="wgt-panel title" ><h2>Docu</h2></div>
 HTML;
 
-    foreach( $loader as $file )
-    {
-      $html .= View::includeFile( PATH_GW.'data/docu/index/'.$file, $this ) ;
+    foreach ($loader as $file) {
+      $html .= View::includeFile(PATH_GW.'data/docu/index/'.$file, $this) ;
     }
-    
+
     $html .=<<<HTML
       <div class="wgt-clear small" ></div>
     </div>
@@ -73,7 +71,7 @@ HTML;
    * @param string $tabSize
    * @return void
    */
-  public function embed( $tabId, $tabSize = 'medium' )
+  public function embed($tabId, $tabSize = 'medium')
   {
     // benötigte resourcen laden
     $user     = $this->getUser();
@@ -84,21 +82,20 @@ HTML;
 
     $profile  = $user->getProfileName();
 
-    $params   = new TFlagListing( $request );
+    $params   = new TFlagListing($request);
 
-    
-    $loader = new ExtensionLoader( 'index', 'data/docu/' );
+
+    $loader = new ExtensionLoader('index', 'data/docu/');
 
     $html = <<<HTML
     <div id="{$tabId}" class="wgt_tab {$tabSize} {$containerId}" title="Docu"  >
       <div class="wgt-panel title" ><h2>Docu</h2></div>
 HTML;
 
-    foreach( $loader as $file )
-    {
-      $html .= View::includeFile( PATH_GW.'data/docu/index/'.$file, $this ) ;
+    foreach ($loader as $file) {
+      $html .= View::includeFile(PATH_GW.'data/docu/index/'.$file, $this) ;
     }
-    
+
     $html .=<<<HTML
       <div class="wgt-clear small" ></div>
     </div>
@@ -112,42 +109,41 @@ HTML;
    * @param TFlag $params
    * @return TFlag
    */
-  protected function getSearchFlags( $params = null )
+  protected function getSearchFlags($params = null)
   {
 
     $request = $this->getRequest();
 
-    if( !$params )
-      $params = new TFlagListing( $request );
+    if (!$params)
+      $params = new TFlagListing($request);
 
     // start position of the query and size of the table
     $params->start
-      = $request->param('start', Validator::INT );
+      = $request->param('start', Validator::INT);
 
     // stepsite for query (limit) and the table
-    if( !$params->qsize = $request->param( 'qsize', Validator::INT ) )
+    if (!$params->qsize = $request->param('qsize', Validator::INT))
       $params->qsize = Wgt::$defListSize;
 
     // order for the multi display element
     $params->order
-      = $request->param( 'order', Validator::CNAME );
+      = $request->param('order', Validator::CNAME);
 
     // target for a callback function
     $params->target
-      = $request->param( 'target', Validator::CKEY  );
+      = $request->param('target', Validator::CKEY  );
 
     // target for some ui element
     $params->targetId
-      = $request->param( 'target_id', Validator::CKEY  );
+      = $request->param('target_id', Validator::CKEY  );
 
     // append ist das flag um in listenelementen die einträge
     // anhängen zu lassen anstelle den body zu pagen
-    if( $append = $request->param( 'append', Validator::BOOLEAN ) )
+    if ($append = $request->param('append', Validator::BOOLEAN))
       $params->append  = $append;
 
     // flag for beginning seach filter
-    if( $text = $request->param( 'begin', Validator::TEXT ) )
-    {
+    if ($text = $request->param('begin', Validator::TEXT)) {
       // whatever is comming... take the first char
       $params->begin = $text[0];
     }

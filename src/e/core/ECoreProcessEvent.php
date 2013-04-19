@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -52,7 +52,6 @@ class ECoreProcessEvent
 
   const ON_REOPEN       = 15;
 
-
   /**
    * Key map
    * @var array
@@ -74,7 +73,6 @@ class ECoreProcessEvent
   self::ON_FINISH       => 'onFinish',
   self::ON_REOPEN       => 'onReopen',
   );
-
 
 }//end class ECoreProcessEvent
 

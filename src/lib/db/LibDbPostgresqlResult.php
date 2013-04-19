@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -19,26 +19,25 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibDbPostgresqlResult
-  extends LibDbResult
+class LibDbPostgresqlResult extends LibDbResult
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Der Standard Fetch Mode
    */
   protected $fetchMode  = PGSQL_ASSOC;
-  
+
   /**
    * @var array
    */
   protected $tableMetaData  = array();
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Constantes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Holen der Daten als Assoziativer Array
@@ -55,12 +54,9 @@ class LibDbPostgresqlResult
    */
   const fetchBoth       = PGSQL_BOTH;
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Special Queries
-////////////////////////////////////////////////////////////////////////////////
-
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Löschen eines Ausführplans in der Datenbank
@@ -69,10 +65,10 @@ class LibDbPostgresqlResult
    * @return void
    * @throws LibDb_Exception
    */
-  public function deallocate( )
+  public function deallocate()
   {
-    $db = $this->dbObject->deallocate( $this );
-  } // end public function deallocate( )
+    $db = $this->dbObject->deallocate($this);
+  } // end public function deallocate()
 
   /**
    * Ausführen einer Vorbereiteten Datenbankabfrage
@@ -81,10 +77,10 @@ class LibDbPostgresqlResult
    * @param   array Values Ein Array mit den Daten
    * @throws  LibDb_Exception
    */
-  public function executeQuery( $values = array() )
+  public function executeQuery($values = array())
   {
-    return $this->dbObject->executeQuery( $this , $values , $this->single );
-  } // end public function executeQuery( $values = array() )
+    return $this->dbObject->executeQuery($this , $values , $this->single);
+  } // end public function executeQuery($values = array())
 
   /**
    * Ausführen einer Vorbereiteten Datenbankabfrage
@@ -93,27 +89,26 @@ class LibDbPostgresqlResult
    * @param   array Values Ein Array mit den Daten
    * @throws  LibDb_Exception
    */
-  public function executeAction( $values = array(), $getNewId = false )
+  public function executeAction($values = array(), $getNewId = false)
   {
-    return $this->dbObject->executeAction( $this , $values , $getNewId );
-  } // end public function executeAction( $values = array(), $getNewId = false )
-
+    return $this->dbObject->executeAction($this , $values , $getNewId);
+  } // end public function executeAction($values = array(), $getNewId = false)
 
   /**
    * Auslesen des letzten Abfrageergebnisses
    * @return array
    */
-  public function getAll( )
+  public function getAll()
   {
 
     $res = array();
     $this->pos = 0;
 
-    while ( $this->row = pg_fetch_assoc( $this->result ) )
+    while ($this->row = pg_fetch_assoc($this->result))
       $res[] = $this->row;
 
-    if( DEBUG )
-      Debug::console( 'Query: '.$this->numQuery.' dur:'.$this->duration.', '.$this->name, $res  );
+    if (DEBUG)
+      Debug::console('Query: '.$this->numQuery.' dur:'.$this->duration.', '.$this->name, $res  );
 
     return $res;
 
@@ -125,13 +120,13 @@ class LibDbPostgresqlResult
    * @param string $colName
    * @return array
    */
-  public function getColumn( $colName )
+  public function getColumn($colName)
   {
 
     $rows = array();
     $this->pos = 0;
 
-    while ( $this->row = pg_fetch_assoc( $this->result ) )
+    while ($this->row = pg_fetch_assoc($this->result))
       $rows[] = $this->row[$colName];
 
     return $rows;
@@ -143,17 +138,16 @@ class LibDbPostgresqlResult
    *
    * @return array
    */
-  public function get( )
+  public function get()
   {
 
-    if( !$this->row = pg_fetch_assoc( $this->result ) )
-    {
+    if (!$this->row = pg_fetch_assoc($this->result)) {
       $this->pos = null;
+
       return array();
-    }
-    else
-    {
+    } else {
       ++ $this->pos;
+
       return $this->row;
     }
 
@@ -164,32 +158,30 @@ class LibDbPostgresqlResult
    * @param string $key
    * @return array
    */
-  public function getField( $key )
+  public function getField($key)
   {
 
-    if( !$this->row = pg_fetch_assoc( $this->result ) )
-    {
+    if (!$this->row = pg_fetch_assoc($this->result)) {
       $this->pos = null;
+
       return null;
-    }
-    else
-    {
+    } else {
       ++ $this->pos;
+
       return $this->row[$key];
     }
 
   } // end public function getField */
-  
 
   /**
    * Das Nächste Result Abfragen
    *
    * @return array
    */
-  public function load( )
+  public function load()
   {
 
-    $this->row = pg_fetch_assoc( $this->result );
+    $this->row = pg_fetch_assoc($this->result);
     $this->pos = 0;
 
   } // end public function load */
@@ -199,15 +191,12 @@ class LibDbPostgresqlResult
    *
    * @return array
    */
-  public function getQSize( )
+  public function getQSize()
   {
 
-    if( !$this->row = pg_fetch_assoc( $this->result ) )
-    {
+    if (!$this->row = pg_fetch_assoc($this->result)) {
       return 0;
-    }
-    else
-    {
+    } else {
       return isset($this->row['size'])?$this->row['size']:0;
     }
 
@@ -216,26 +205,26 @@ class LibDbPostgresqlResult
   /**
    * Das Result der letzten Afrage leeren
    */
-  public function freeResult( )
+  public function freeResult()
   {
-    pg_free_result( $this->result );
+    pg_free_result($this->result);
+
     return true;
   } // end public function clearResult */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter for Query Metadata
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Die Numrows der Letzten Aktion abfragen
    *
    * @return int
    */
-  public function getNumRows( )
+  public function getNumRows()
   {
-    if( is_null($this->numRows) )
-    {
-      $this->numRows = pg_num_rows( $this->result );
+    if (is_null($this->numRows)) {
+      $this->numRows = pg_num_rows($this->result);
     }
 
     return $this->numRows;
@@ -246,69 +235,55 @@ class LibDbPostgresqlResult
    *
    * @return int
    */
-  public function getAffectedRows( )
+  public function getAffectedRows()
   {
-    return pg_affected_rows( $this->result );
+    return pg_affected_rows($this->result);
   } // end public function getAffectedRows */
-  
-  
-  
+
   /**
    * @return int
    */
-  public function getNumFields( )
+  public function getNumFields()
   {
-    if( is_null($this->numFields) )
-    {
-      $this->numFields = pg_num_fields( $this->result );
+    if (is_null($this->numFields)) {
+      $this->numFields = pg_num_fields($this->result);
     }
 
     return $this->numFields;
-    
+
   } // end public function getNumFields */
-  
-  
-  
+
   /**
    * @param string $key
    */
-  public function getFieldName( $key )
+  public function getFieldName($key)
   {
-    
-    if( $key <= ($this->getNumFields()) && $key>=0 )
-    {
-      $fieldName = pg_field_name( $this->result, $key );
-      
+
+    if ($key <= ($this->getNumFields()) && $key>=0) {
+      $fieldName = pg_field_name($this->result, $key);
+
       return $fieldName;
-    }
-    else 
-    {
+    } else {
       return false;
     }
-    
+
   } // end public function getFieldName */
-  
-  
+
   /**
    * @param string $key
    */
-  public function getFieldType( $key )
+  public function getFieldType($key)
   {
-    
-    if( $key <= ($this->getNumFields()) && $key>=0 )
-    {
-      $fieldType = pg_field_type( $this->result, $key );
-      
+
+    if ($key <= ($this->getNumFields()) && $key>=0) {
+      $fieldType = pg_field_type($this->result, $key);
+
       return $fieldType;
-    }
-    else 
-    {
+    } else {
       return false;
     }
-    
+
   } // end public function getFieldType */
-
-
 
 } //end class LibDbPostgresqlResult
 

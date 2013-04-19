@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * de:
  * {
@@ -80,6 +79,12 @@ class ContextListing
   public $colConditions = null;
 
   /**
+   * Conditions für die query
+   * @var array / null wenn leer
+   */
+  public $conditions = null;
+
+  /**
    * Variable für Sortierinformationen
    * @var array / null wenn leer
    */
@@ -91,9 +96,27 @@ class ContextListing
    */
   public $filter = null;
 
-////////////////////////////////////////////////////////////////////////////////
+  /**
+   * Search Fields
+   * @var array
+   */
+  public $searchFields = array();
+
+  /**
+   * Search Fields
+   * @var array
+   */
+  public $searchFieldsStack = array();
+
+  /**
+   * Extended Search filter
+   * @var array
+   */
+  public $extSearch = array();
+
+/*//////////////////////////////////////////////////////////////////////////////
 // Protected data
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * de:
@@ -114,31 +137,46 @@ class ContextListing
    */
   protected $actionExt = null;
 
-////////////////////////////////////////////////////////////////////////////////
+  /**
+   * @var ValidSearchBuilder
+   */
+  protected $extSearchValidator = null;
+
+
+/*//////////////////////////////////////////////////////////////////////////////
 // Magic Functions
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param LibRequestHttp $request
    */
-  public function __construct( $request )
+  public function __construct($request, $extSearchValidator = null)
   {
 
     $this->filter = new TFlag();
 
-    $filters = $request->param( 'filter', Validator::BOOLEAN );
+    $filters = $request->param('filter', Validator::BOOLEAN);
 
-    if( $filters )
-    {
-      foreach( $filters as $key => $value  )
-      {
+    if ($filters) {
+      foreach ($filters as $key => $value) {
         $this->filter->$key = $value;
       }
     }
 
-    $this->interpretRequest( $request );
+
+    if ($request->paramExists('as')) {
+      if ($extSearchValidator)
+        $this->extSearchValidator = $extSearchValidator;
+      else
+        $this->extSearchValidator = new ValidSearchBuilder();
+    }
+
+    $this->interpretRequest($request);
+    $this->interpretCustomSearch($request);
 
   } // end public function __construct */
+
+
 
   /**
    * virtual __set
@@ -147,7 +185,7 @@ class ContextListing
    * @param string $key
    * @param string $value
    */
-  public function __set( $key , $value )
+  public function __set($key , $value)
   {
     $this->content[$key] = $value;
   }// end public function __set */
@@ -159,7 +197,7 @@ class ContextListing
    * @param string $key
    * @return string
    */
-  public function __get( $key )
+  public function __get($key)
   {
     return isset($this->content[$key])
       ? $this->content[$key]
@@ -171,49 +209,52 @@ class ContextListing
    * Enter description here ...
    * @param LibRequestHttp $request
    */
-  public function interpretRequest( $request )
+  public function interpretRequest($request)
   {
 
+    if( $request->paramExists('as') ) {
+      $this->interpretExtendedSearch($request);
+    }
 
     // the publish type, like selectbox, tree, table..
-    if( $publish  = $request->param( 'publish', Validator::CNAME ) )
+    if ($publish  = $request->param('publish', Validator::CNAME))
       $this->publish   = $publish;
 
     // über den ltype können verschiedene listenvarianten gewählt werden
     // diese müssen jedoch vorhanden / implementiert sein
-    if( $ltype   = $request->param( 'ltype', Validator::CNAME ) )
+    if ($ltype   = $request->param('ltype', Validator::CNAME))
       $this->ltype    = $ltype;
 
     // input type
-    if( $input = $request->param( 'input', Validator::CKEY ) )
+    if ($input = $request->param('input', Validator::CKEY))
       $this->input    = $input;
 
     // input type
-    if( $suffix = $request->param( 'suffix', Validator::CKEY ) )
+    if ($suffix = $request->param('suffix', Validator::CKEY))
       $this->suffix    = $suffix;
 
     // append entries
-    if( $append = $request->param( 'append', Validator::BOOLEAN ) )
+    if ($append = $request->param('append', Validator::BOOLEAN))
       $this->append    = $append;
 
     // startpunkt des pfades für die acls
-    if( $aclRoot = $request->param( 'a_root', Validator::CKEY ) )
+    if ($aclRoot = $request->param('a_root', Validator::CKEY))
       $this->aclRoot    = $aclRoot;
 
     // die id des Datensatzes von dem aus der Pfad gestartet wurde
-    if( $aclRootId = $request->param( 'a_root_id', Validator::INT ) )
+    if ($aclRootId = $request->param('a_root_id', Validator::INT))
       $this->aclRootId    = $aclRootId;
 
     // der key des knotens auf dem wir uns im pfad gerade befinden
-    if( $aclKey = $request->param( 'a_key', Validator::CKEY ) )
+    if ($aclKey = $request->param('a_key', Validator::CKEY))
       $this->aclKey    = $aclKey;
 
     // der name des knotens
-    if( $aclNode = $request->param( 'a_node', Validator::CKEY ) )
+    if ($aclNode = $request->param('a_node', Validator::CKEY))
       $this->aclNode    = $aclNode;
 
     // an welchem punkt des pfades befinden wir uns?
-    if( $aclLevel = $request->param( 'a_level', Validator::INT ) )
+    if ($aclLevel = $request->param('a_level', Validator::INT))
       $this->aclLevel  = $aclLevel;
 
     // per default
@@ -221,37 +262,35 @@ class ContextListing
 
       // start position of the query and size of the table
     $this->offset
-      = $request->param('offset', Validator::INT );
+      = $request->param('offset', Validator::INT);
 
     // start position of the query and size of the table
     $this->start
-      = $request->param('start', Validator::INT );
+      = $request->param('start', Validator::INT);
 
-    if( $this->offset )
-    {
-      if( !$this->start )
+    if ($this->offset) {
+      if (!$this->start)
         $this->start = $this->offset;
     }
 
     // stepsite for query (limit) and the table
-    if( !$this->qsize = $request->param('qsize', Validator::INT ) )
+    if (!$this->qsize = $request->param('qsize', Validator::INT))
       $this->qsize = Wgt::$defListSize;
 
     // order for the multi display element
     $this->order
-      = $request->param('order', Validator::CNAME );
+      = $request->param('order', Validator::CNAME);
 
     // target for a callback function
     $this->target
-      = $request->param( 'target', Validator::CKEY  );
+      = $request->param('target', Validator::CKEY  );
 
     // target for some ui element
     $this->targetId
-      = $request->param( 'target_id', Validator::CKEY  );
+      = $request->param('target_id', Validator::CKEY  );
 
     // flag for beginning seach filter
-    if( $text = $request->param( 'begin', Validator::TEXT  ) )
-    {
+    if ($text = $request->param('begin', Validator::TEXT  )) {
       // whatever is comming... take the first char
       $this->begin = $text[0];
     }
@@ -259,25 +298,88 @@ class ContextListing
     // the model should add all inputs in the ajax request, not just the text
     // converts per default to false, thats ok here
     $this->fullLoad
-      = $request->param( 'full_load', Validator::BOOLEAN );
+      = $request->param('full_load', Validator::BOOLEAN);
 
     // exclude whatever
     $this->exclude
-      = $request->param( 'exclude', Validator::CKEY  );
+      = $request->param('exclude', Validator::CKEY  );
 
     // keyname to tageting ui elements
     $this->keyName
-      = $request->param( 'key_name', Validator::CKEY  );
+      = $request->param('key_name', Validator::CKEY  );
 
     // the activ id, mostly needed in exlude calls
     $this->objid
-      = $request->param( 'objid', Validator::EID  );
+      = $request->param('objid', Validator::EID  );
 
     // order for the multi display element
     $this->mask
-      = $request->param( 'mask', Validator::CNAME );
+      = $request->param('mask', Validator::CNAME);
 
   }//end public function interpretRequest */
+
+
+  /**
+   * Interpretieren von Extended Search Parametern
+   * @param LibRequestHttp $request
+   */
+  public function interpretExtendedSearch($request)
+  {
+
+    $extSearchFields = $request->param('as');
+
+    if (!$extSearchFields)
+      return;
+
+    if (!$this->searchFieldsStack) {
+      foreach ($this->searchFields as $searchFields) {
+        foreach ($searchFields as $sKey => $sData) {
+          $this->searchFieldsStack[$sKey] = $sData;
+        }
+      }
+    }
+
+    Debug::console('got search fields',$extSearchFields);
+
+    foreach ($extSearchFields as $fKey => $extField) {
+
+      if (!isset($this->searchFieldsStack[$extField['field']])) {
+        // field not exists
+        continue;
+      }
+
+      $validField = $this->extSearchValidator->validate($extField, $this->searchFieldsStack[$extField['field']]);
+
+      if ($validField) {
+
+        if (isset($extField['parent'])) {
+
+          if (!isset($this->extSearch[$extField['parent']]->sub)  )
+            $this->extSearch[$extField['parent']]->sub = array();
+
+          $this->extSearch[$extField['parent']]->sub[] = (object)$validField;
+
+        } else {
+
+          $this->extSearch[$fKey] = (object)$validField;
+
+        }
+      } else {
+        Debug::console($extField['field'].' was invalid ');
+      }
+
+    }//end foreach
+
+  }//end public function interpretExtendedSearch */
+
+  /**
+   * Interpretieren der Custom Search / Order Flags
+   * @param LibRequestHttp $request
+   */
+  public function interpretCustomSearch($request)
+  {
+
+  }//end public function interpretCustomSearch */
 
   /**
    * @return string
@@ -285,25 +387,25 @@ class ContextListing
   public function toUrlExt()
   {
 
-    if( $this->urlExt )
+    if ($this->urlExt)
       return $this->urlExt;
 
-    if( $this->aclRoot )
+    if ($this->aclRoot)
       $this->urlExt .= '&amp;a_root='.$this->aclRoot;
 
-    if( $this->aclRootId )
+    if ($this->aclRootId)
       $this->urlExt .= '&amp;a_root_id='.$this->aclRootId;
 
-    if( $this->aclKey )
+    if ($this->aclKey)
       $this->urlExt .= '&amp;a_key='.$this->aclKey;
 
-    if( $this->aclNode )
+    if ($this->aclNode)
       $this->urlExt .= '&amp;a_node='.$this->aclNode;
 
-    if( $this->aclLevel )
+    if ($this->aclLevel)
       $this->urlExt .= '&amp;a_level='.$this->aclLevel;
 
-    if( $this->mask )
+    if ($this->mask)
       $this->urlExt .= '&amp;mask='.$this->mask;
 
     return $this->urlExt;
@@ -316,30 +418,45 @@ class ContextListing
   public function toActionExt()
   {
 
-    if( $this->actionExt )
+    if ($this->actionExt)
       return $this->actionExt;
 
-    if( $this->aclRoot )
+    if ($this->aclRoot)
       $this->actionExt .= '&a_root='.$this->aclRoot;
 
-    if( $this->aclRootId )
+    if ($this->aclRootId)
       $this->actionExt .= '&a_root_id='.$this->aclRootId;
 
-    if( $this->aclKey )
+    if ($this->aclKey)
       $this->actionExt .= '&a_key='.$this->aclKey;
 
-    if( $this->aclNode )
+    if ($this->aclNode)
       $this->actionExt .= '&a_node='.$this->aclNode;
 
-    if( $this->aclLevel )
+    if ($this->aclLevel)
       $this->actionExt .= '&a_level='.$this->aclLevel;
 
-    if( $this->mask )
+    if ($this->mask)
       $this->actionExt .= '&mask='.$this->mask;
 
     return $this->actionExt;
 
   }//end public function toActionExt */
+
+  /**
+   * @param Context $context
+   */
+  public function importAcl($context)
+  {
+
+    // startpunkt des pfades für die acls
+    $this->aclRoot   = $context->aclRoot;
+    $this->aclRootId = $context->aclRootId;
+    $this->aclKey    = $context->aclKey;
+    $this->aclNode   = $context->aclNode;
+    $this->aclLevel   = $context->aclLevel;
+
+  }//end public function importAcl */
 
   /**
    * de:
@@ -349,19 +466,19 @@ class ContextListing
    *
    *   @example
    *   <code>
-   *   if( $params->existingButNull )
+   *   if ($params->existingButNull)
    *     echo "will not be reached when key exists but ist null" // false;
    *
-   *   if( $params->exists('existingButNull') )
+   *   if ($params->exists('existingButNull'))
    *      echo "will be reached when key exists but ist null" // true;
    *
    *   </code>
    * }
    * @param string $key
    */
-  public function exists( $key )
+  public function exists($key)
   {
-    return array_key_exists( $key , $this->content );
+    return array_key_exists($key , $this->content);
   }//end public function exists */
 
 } // end class TFlagListing

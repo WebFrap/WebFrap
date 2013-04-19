@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,10 +21,9 @@
  */
 class LibSqlStack
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Felder die abgefragt werden sollen
@@ -49,7 +48,6 @@ class LibSqlStack
    * @var array
    */
   public $joinIndex    = array();
-
 
   /**
    * Limit der Abfrage
@@ -110,9 +108,9 @@ class LibSqlStack
    */
   public $singleRow = false;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Constructor and Magic Functions
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Standardkonstruktor bekommt den Namen der Query übergeben
@@ -123,7 +121,7 @@ class LibSqlStack
    * @param bool[optional] Cache Kann gecached werden
    * @return void
    */
-  public function __construct( $name )
+  public function __construct($name)
   {
     $this->name = $name;
   } // end public function __construct */
@@ -133,13 +131,10 @@ class LibSqlStack
    */
   public function __toString()
   {
-    try
-    {
-      if(!$this->sql)
+    try {
+      if (!$this->sql)
         $this->build();
-    }
-    catch( LibDb_Exception $e )
-    {
+    } catch (LibDb_Exception $e) {
       // return an empty query to no provocate an php error
       return '';
     }
@@ -147,10 +142,9 @@ class LibSqlStack
     return $this->sql;
   }//end public function __toString */
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Criteria Methods
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * setzten ob es eine Singelrow oder Multirow Query ist
@@ -158,9 +152,10 @@ class LibSqlStack
    * @param bool Single
    * @return
    */
-  public function single( $single = true )
+  public function single($single = true)
   {
     $this->singleRow = $single;
+
     return $this;
   } // end public function single */
 
@@ -170,7 +165,7 @@ class LibSqlStack
    * @param array/string $cols Die abzufragenden Cols
    * @return LibSqlCriteria
    */
-  public function count( $cols = array( Db::PK ) )
+  public function count($cols = array(Db::PK))
   {
 
     $this->cols = array($cols) ;
@@ -188,9 +183,9 @@ class LibSqlStack
    * Enter description here ...
    * @param string $key
    */
-  public function isJoined( $key )
+  public function isJoined($key)
   {
-    return isset( $this->joinIndex[$key] );
+    return isset($this->joinIndex[$key]);
   }//end public function isJoined */
 
   /**
@@ -199,13 +194,13 @@ class LibSqlStack
    * @param array/string $cols Die abzufragenden Cols
    * @return LibSqlCriteria
    */
-  public function select( $cols )
+  public function select($cols)
   {
 
-    if( is_array( $cols ) )
+    if (is_array($cols))
       $this->cols = $cols;
 
-    else if( is_string($cols) )
+    else if (is_string($cols))
       $this->cols = array($cols);
 
     return $this;
@@ -217,13 +212,13 @@ class LibSqlStack
    * @param array/string $cols the cols to add to the query
    * @return LibSqlCriteria
    */
-  public function selectAlso( $cols )
+  public function selectAlso($cols)
   {
 
-    if( is_array( $cols ) )
-      $this->cols = array_merge( $this->cols , $cols );
+    if (is_array($cols))
+      $this->cols = array_merge($this->cols , $cols);
 
-    else if( is_string($cols) )
+    else if (is_string($cols))
       $this->cols[] = $cols;
 
     return $this;
@@ -235,12 +230,13 @@ class LibSqlStack
    * @param string $table
    * @return LibSqlCriteria
    */
-  public function from( $table )
+  public function from($table)
   {
 
     $this->joinIndex[$table] = true;
 
     $this->table = $table;
+
     return $this;
   } // end public function table */
 
@@ -253,63 +249,59 @@ class LibSqlStack
    * @param string[optional] $where
    * @return LibSqlCriteria
    */
-  public function joinOn( $src, $srcField, $target, $targetField, $where = null, $alias = null )
+  public function joinOn($src, $srcField, $target, $targetField, $where = null, $alias = null)
   {
 
     $key = $alias?$alias:$target;
 
-    if( isset( $this->joinIndex[$key] ) )
-    {
+    if (isset($this->joinIndex[$key])) {
       Log::warn('tried to join an allready joined table, that can be an error');
+
       return $this;
-    }
-    else
-    {
+    } else {
       $this->joinIndex[$key] = true;
     }
 
+    $this->joinOn[] = array(null, $src, $srcField, $target, $targetField, $where, $alias);
 
-    $this->joinOn[] = array( null, $src, $srcField, $target, $targetField, $where, $alias );
     return $this;
 
   } // end public function joinOn */
 
-  public function leftJoinOn( $src, $srcField, $target, $targetField, $where = null, $alias = null )
+  public function leftJoinOn($src, $srcField, $target, $targetField, $where = null, $alias = null)
   {
 
     $key = $alias?$alias:$target;
 
-    if( isset( $this->joinIndex[$key] ) )
-    {
+    if (isset($this->joinIndex[$key])) {
       Log::warn('tried to join an allready joined table, that can be an error');
+
       return $this;
-    }
-    else
-    {
+    } else {
       $this->joinIndex[$key] = true;
     }
 
-    $this->joinOn[] = array( 'LEFT', $src, $srcField, $target, $targetField, $where, $alias );
+    $this->joinOn[] = array('LEFT', $src, $srcField, $target, $targetField, $where, $alias);
+
     return $this;
 
   } // end public function leftJoinOn */
 
-  public function rightJoinOn( $src, $srcField, $target, $targetField, $where = null, $alias = null )
+  public function rightJoinOn($src, $srcField, $target, $targetField, $where = null, $alias = null)
   {
 
     $key = $alias?$alias:$target;
 
-    if( isset( $this->joinIndex[$key] ) )
-    {
+    if (isset($this->joinIndex[$key])) {
       Log::warn('tried to join an allready joined table, that can be an error');
+
       return $this;
-    }
-    else
-    {
+    } else {
       $this->joinIndex[$key] = true;
     }
 
-    $this->joinOn[] = array( 'RIGHT', $src, $srcField, $target, $targetField, $where, $alias );
+    $this->joinOn[] = array('RIGHT', $src, $srcField, $target, $targetField, $where, $alias);
+
     return $this;
 
   } // end public function rightJoinOn */
@@ -320,17 +312,16 @@ class LibSqlStack
    * @param array Order
    * @return LibSqlCriteria
    */
-  public function orderBy( $order )
+  public function orderBy($order)
   {
 
-    if( is_array($order) )
+    if (is_array($order))
       $this->order = $order;
 
-    elseif( is_string( $order ) )
-      $this->order = array( $order );
+    elseif (is_string($order))
+      $this->order = array($order);
 
     return $this;
-
 
   } // end public function orderBy */
 
@@ -341,10 +332,10 @@ class LibSqlStack
    * @param array Where
    * @return LibSqlCriteria
    */
-  public function where( $where  , $connect = 'and' )
+  public function where($where  , $connect = 'and')
   {
 
-    if(!$this->where)
+    if (!$this->where)
       $this->where = $where;
 
     else
@@ -359,15 +350,15 @@ class LibSqlStack
    * @param $connect
    * @return unknown_type
    */
-  public function whereIn( $in  , $connect = 'and' )
+  public function whereIn($in  , $connect = 'and')
   {
 
-    if(!$in)
+    if (!$in)
       return $this;
 
-    $where =  $this->table.'.'.WBF_DB_KEY.'  IN( '.implode(',',$in).' ) ';
+    $where =  $this->table.'.'.WBF_DB_KEY.'  IN('.implode(',',$in).') ';
 
-    if(!$this->where)
+    if (!$this->where)
       $this->where = $where;
 
     else
@@ -382,15 +373,15 @@ class LibSqlStack
    * @param $connect
    * @return unknown_type
    */
-  public function whereNotIn( $in  , $connect = 'and' )
+  public function whereNotIn($in  , $connect = 'and')
   {
 
-    if(!$in)
+    if (!$in)
       return $this;
 
-    $where =  $this->table.'.'.WBF_DB_KEY.' NOT IN( '.implode(',',$in).' ) ';
+    $where =  $this->table.'.'.WBF_DB_KEY.' NOT IN('.implode(',',$in).') ';
 
-    if(!$this->where)
+    if (!$this->where)
       $this->where = $where;
 
     else
@@ -406,21 +397,19 @@ class LibSqlStack
    * @param array Where
    * @return LibSqlCriteria
    */
-  public function whereKeyHasValue( $wheres  , $connect = 'and' )
+  public function whereKeyHasValue($wheres  , $connect = 'and')
   {
 
     $tmpWheres = array();
 
-    foreach( $wheres as $key => $value )
-    {
+    foreach ($wheres as $key => $value) {
       $tmpWheres[] = ' '.$key.' = '.$value.' ';
     }
 
-    $where = implode( 'and' , $tmpWheres );
+    $where = implode('and' , $tmpWheres);
 
-    if( '' != trim( $where ) )
-    {
-      if(!$this->where)
+    if ('' != trim($where)) {
+      if (!$this->where)
         $this->where = $where;
 
       else
@@ -436,10 +425,10 @@ class LibSqlStack
    * @param array Where
    * @return LibSqlCriteria
    */
-  public function andIs( $where )
+  public function andIs($where)
   {
 
-    if(!$this->where)
+    if (!$this->where)
       $this->where = $where;
     else
       $this->where .= ' and '.$where;
@@ -453,14 +442,13 @@ class LibSqlStack
    * @param array Where
    * @return LibSqlCriteria
    */
-  public function andNot( $where )
+  public function andNot($where)
   {
 
-    if(!$this->where)
+    if (!$this->where)
       $this->where =  ' not '.$where;
     else
       $this->where .= ' and not '.$where;
-
 
     return $this;
   } // end public function andNot */
@@ -471,10 +459,10 @@ class LibSqlStack
    * @param array Where
    * @return LibSqlCriteria
    */
-  public function orIs( $where )
+  public function orIs($where)
   {
 
-    if(!$this->where)
+    if (!$this->where)
       $this->where =  $where;
     else
       $this->where .= ' or '.$where;
@@ -482,17 +470,16 @@ class LibSqlStack
     return $this;
   } // end public function orIs */
 
-
   /**
    * setzten der Where Bedingungen
    *
    * @param array Where
    * @return LibSqlCriteria
    */
-  public function orNot( $where )
+  public function orNot($where)
   {
 
-    if(!$this->where)
+    if (!$this->where)
       $this->where =  ' or '.$where;
     else
       $this->where .= ' or not '.$where;
@@ -506,13 +493,13 @@ class LibSqlStack
    * @param array Group
    * @return LibSqlCriteria
    */
-  public function groupBy( $group )
+  public function groupBy($group)
   {
 
-    if( is_array( $group ) )
-      $this->group = array_merge( $this->group , $group );
+    if (is_array($group))
+      $this->group = array_merge($this->group , $group);
 
-    elseif( is_string($group) )
+    elseif (is_string($group))
       $this->group = array($group);
 
     return $this;
@@ -524,13 +511,13 @@ class LibSqlStack
    * @param array Having
    * @return LibSqlCriteria
    */
-  public function having( $having )
+  public function having($having)
   {
 
-    if( is_array( $having ) )
-      $this->having = array_merge( $this->having , $having );
+    if (is_array($having))
+      $this->having = array_merge($this->having , $having);
 
-    elseif( is_string($having) )
+    elseif (is_string($having))
       $this->having = array($having);
 
     return $this;
@@ -543,9 +530,10 @@ class LibSqlStack
    * @param int $Offset Optional Offset, Ab wo soll weiter ausgegeben werden
    * @return LibSqlCriteria
    */
-  public function limit( $limit )
+  public function limit($limit)
   {
     $this->limit = $limit;
+
     return $this;
   } // end public function limit */
 
@@ -556,9 +544,10 @@ class LibSqlStack
    * @param int $Offset Optional Offset, Ab wo soll weiter ausgegeben werden
    * @return LibSqlCriteria
    */
-  public function offset( $offset )
+  public function offset($offset)
   {
     $this->offset = $offset;
+
     return $this;
   } // end public function offset */
 
@@ -569,15 +558,16 @@ class LibSqlStack
    * @param int $Offset Optional Offset, Ab wo soll weiter ausgegeben werden
    * @return LibSqlCriteria
    */
-  public function prepare( $name )
+  public function prepare($name)
   {
     $this->name = $name;
+
     return $this;
   } // end public function prepare */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Sql Parser Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * das generiert sql zurückgeben
@@ -592,17 +582,17 @@ class LibSqlStack
    *
    * @return string
    */
-  public function build( $db = null )
+  public function build($db = null)
   {
 
-    if(!$db)
+    if (!$db)
       $db = Db::getParser();
 
     $this->sql = $db->buildSelect($this);
+
     return $this->sql;
 
   }//end public function build */
-
 
 }//end class LibSqlCriteria
 

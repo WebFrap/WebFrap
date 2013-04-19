@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,27 +21,26 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class ShopFront_MenuCategory_Query
-  extends LibSqlTreeQuery
-{ 
-////////////////////////////////////////////////////////////////////////////////
+class ShopFront_MenuCategory_Query extends LibSqlTreeQuery
+{
+/*//////////////////////////////////////////////////////////////////////////////
 // query elements table
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
  /**
    * @return void wird im bei Fehlern exceptions, ansonsten war alles ok
    *
    * @throws LibDb_Exception bei technischen Problemen wie zB. keine Verbindung
    *   zum Datenbank server, aber auch fehlerhafte sql queries
    */
-  public function fetchRoot( )
+  public function fetchRoot()
   {
 
     $this->data = null;
-    
+
     $sql = <<<SQL
-    
-    SELECT 
+
+    SELECT
       rowid,
       name,
       access_key,
@@ -50,25 +49,25 @@ class ShopFront_MenuCategory_Query
       shop_article_category
     WHERE
       is_active = TRUE
-      and id_parent is null;    
+      and id_parent is null;
 SQL;
 
-    $this->result = $this->getDb()->select( $sql );
+    $this->result = $this->getDb()->select($sql);
 
   }//end public function fetchRoot */
-  
+
  /**
    * @return void wird im bei Fehlern exceptions, ansonsten war alles ok
    *
    * @throws LibDb_Exception bei technischen Problemen wie zB. keine Verbindung
    *   zum Datenbank server, aber auch fehlerhafte sql queries
    */
-  public function fetchTree( )
+  public function fetchTree()
   {
-    
+
     $sql = <<<SQL
-    
-    SELECT 
+
+    SELECT
       rowid,
       name,
       access_key,
@@ -77,22 +76,18 @@ SQL;
       shop_article_category
     WHERE
       is_active = TRUE
-      and id_parent is null;    
+      and id_parent is null;
 SQL;
 
-    $this->result = $this->getDb()->select( $sql );
-    
-    foreach( $this->result as $entry )
-    {
-      if( $entry['id_parent'] )
-      {
+    $this->result = $this->getDb()->select($sql);
+
+    foreach ($this->result as $entry) {
+      if ($entry['id_parent']) {
         $this->childs[$entry['id_parent']][] = $entry;
-      }
-      else
-      {
+      } else {
         $this->data[] = $entry;
       }
-      
+
     }
 
   }//end public function fetchRoot */

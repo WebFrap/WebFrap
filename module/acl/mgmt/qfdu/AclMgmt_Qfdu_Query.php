@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,12 +26,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Qfdu_Query
-  extends LibSqlQuery
+class AclMgmt_Qfdu_Query extends LibSqlQuery
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // fetch methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
  /**
    * Loading the tabledata from the database
@@ -41,10 +40,10 @@ class AclMgmt_Qfdu_Query
    *
    * @throws LibDb_Exception
    */
-  public function fetchAreaGroups( $areaId, $params = null )
+  public function fetchAreaGroups($areaId, $params = null)
   {
 
-    if(!$params)
+    if (!$params)
       $params = new TFlag();
 
     $this->sourceSize  = null;
@@ -66,12 +65,12 @@ class AclMgmt_Qfdu_Query
   WHERE
     wbfsys_security_access.id_area = {$areaId}
     and
-      ( wbfsys_security_access.partial = 0 or wbfsys_security_access.partial is null )
+      (wbfsys_security_access.partial = 0)
   ORDER BY
-  	value;
+    value;
 SQL;
 
-    $this->result = $db->select( $sql );
+    $this->result = $db->select($sql);
 
   }//end public function fetchAreaGroups */
 
@@ -85,27 +84,26 @@ SQL;
    *
    * @throws LibDb_Exception
    */
-  public function fetchUsersByKey( $areaId, $key, $params = null )
+  public function fetchUsersByKey($areaId, $key, $params = null)
   {
 
-    if(!$params)
+    if (!$params)
       $params = new TFlag();
 
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    $tmp = explode( ',', $key );
+    $tmp = explode(',', $key);
 
     $wheres = array();
 
-    foreach( $tmp as $value )
-    {
-        
-      $safeVal = $db->addSlashes( trim( $value ) );
-      
-      if( '' == $safeVal )
+    foreach ($tmp as $value) {
+
+      $safeVal = $db->addSlashes(trim($value));
+
+      if ('' == $safeVal)
         continue;
-    
+
       $wheres[] = " upper(wbfsys_role_user.name) like upper('{$safeVal}%')
         or upper(core_person.lastname) like upper('{$safeVal}%')
         or upper(core_person.firstname) like upper('{$safeVal}%') ";
@@ -116,8 +114,8 @@ SQL;
     $sql = <<<SQL
   SELECT
     wbfsys_role_user.rowid as id,
-    COALESCE ( '('||wbfsys_role_user.name||') ', '' ) || COALESCE ( core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '' ) as value,
-    COALESCE ( '('||wbfsys_role_user.name||') ', '' ) || COALESCE ( core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '' ) as label
+    COALESCE ('('||wbfsys_role_user.name||') ', '') || COALESCE (core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '') as value,
+    COALESCE ('('||wbfsys_role_user.name||') ', '') || COALESCE (core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '') as label
   FROM
     wbfsys_role_user
   JOIN
@@ -142,12 +140,12 @@ SQL;
                 wbfsys_group_users.id_area IS null
             )
             AND
-              ( wbfsys_group_users.partial = 0 OR wbfsys_group_users.partial IS null )
+              (wbfsys_group_users.partial = 0)
     )
   LIMIT 10;
 SQL;
 
-    $this->result = $db->select( $sql );
+    $this->result = $db->select($sql);
 
   }//end public function fetchUsersByKey */
 
@@ -162,26 +160,25 @@ SQL;
    *
    * @throws LibDb_Exception
    */
-  public function fetchTargetEntityByKey( $areaId, $key, $params = null )
+  public function fetchTargetEntityByKey($areaId, $key, $params = null)
   {
 
-    if( !$params )
+    if (!$params)
       $params = new TFlag();
 
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    $tmp = explode( ',', $key );
+    $tmp = explode(',', $key);
 
     $wheres = array();
 
-    foreach( $tmp as $value )
-    {
-      $safeVal = $db->addSlashes( trim( $value ) );
-      
-      if( '' == trim( $safeVal ) )
+    foreach ($tmp as $value) {
+      $safeVal = $db->addSlashes(trim($value));
+
+      if ('' == trim($safeVal))
         continue;
-    
+
       $wheres[] = " upper(enterprise_employee.rowid) like upper('{$safeVal}%') ";
     }
 
@@ -199,7 +196,7 @@ SQL;
   LIMIT 10;
 SQL;
 
-    $this->result = $db->select( $sql );
+    $this->result = $db->select($sql);
 
   }//end public function fetchTargetEntityByKey */
 

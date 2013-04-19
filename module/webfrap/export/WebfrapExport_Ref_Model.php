@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,12 +22,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapExport_Ref_Model
-  extends MvcModel_Domain
+class WebfrapExport_Ref_Model extends MvcModel_Domain
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param DomainSimpleSubNode $variant
@@ -35,28 +34,27 @@ class WebfrapExport_Ref_Model
    * @param DomainSimpleSubNode $refNode
    * @return LibAclPermission
    */
-  public function injectAccessContainer( $variant, $context, $refNode, $refId )
+  public function injectAccessContainer($variant, $context, $refNode, $refId)
   {
-    
+
     $user      = $this->getUser();
-    
+
     $classKey  = $this->domainNode->domainKey.'_Ref_'.$refNode->mask.'_'.$variant->mask;
     $className = $classKey.'_Access';
-    
+
     // if the requested access container not exists, we can assume this request
     // was invalid
-    if( !Webfrap::classLoadable( $className ) )
-      throw new ServiceNotExists_Exception( $className );
+    if (!Webfrap::classLoadable($className))
+      throw new ServiceNotExists_Exception($className);
 
-    $access = new $className( null, null, $this );
-    $access->load( $user->getProfileName(), $context, $refId );
+    $access = new $className(null, null, $this);
+    $access->load($user->getProfileName(), $context, $refId);
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
     /*
-    if( !$access->listing )
-    {
+    if (!$access->listing) {
       $response = $this->getResponse();
-      
+
       // ausgabe einer fehlerseite und adieu
       throw new InvalidRequest_Exception
       (
@@ -66,7 +64,7 @@ class WebfrapExport_Ref_Model
           'wbf.message',
           array
           (
-            'resource'  => $response->i18n->l( $this->domainNode->label, $this->domainNode->domainI18n.'.label' )
+            'resource'  => $response->i18n->l($this->domainNode->label, $this->domainNode->domainI18n.'.label')
           )
         ),
         Response::FORBIDDEN
@@ -76,17 +74,17 @@ class WebfrapExport_Ref_Model
 
     // der Access Container des Users für die Resource wird als flag übergeben
     $context->access = $access;
-    
+
   }//end public function injectAccessContainer */
-  
+
   /**
    * @param int $refId
    * @param LibAclPermission $access
    * @param string $context
    */
-  public function search( $refId, $access, $context )
+  public function search($refId, $access, $context)
   {
-    
+
   }//end public function search */
 
   /**
@@ -94,20 +92,20 @@ class WebfrapExport_Ref_Model
    * @param LibAclPermission $access
    * @param string $context
    */
-  public function searchAll( $refId, $access, $context )
+  public function searchAll($refId, $access, $context)
   {
-    
+
   }//end public function searchAll */
-  
+
   /**
    * @param int $refId
    * @param array $ids
    * @param LibAclPermission $access
    * @param string $context
    */
-  public function searchByIds( $refId, $ids, $access, $context )
+  public function searchByIds($refId, $ids, $access, $context)
   {
-    
+
   }//end public function searchByIds
 
 } // end class WebfrapExport_Model */

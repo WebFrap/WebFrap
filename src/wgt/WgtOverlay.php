@@ -15,16 +15,15 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage wgt
  */
 class WgtOverlay
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   public $id = null;
 
@@ -41,22 +40,22 @@ class WgtOverlay
    * @param WgtMaintab $view
    * @param WgtDropmenu $menu
    */
-  public function render( $view, $showLabel = true, $menu = null )
+  public function render($view, $showLabel = true, $menu = null)
   {
 
     $icon = '';
-    if( $this->icon )
-      $icon = $view->icon( $this->icon, $this->label );
+    if ($this->icon)
+      $icon = $view->icon($this->icon, $this->label);
 
     $label = '';
-    if( $this->label && $showLabel )
+    if ($this->label && $showLabel)
       $label = $this->label;
 
     $html = <<<HTML
 
     <button
         class="wcm wcm_ui_dropform wcm_ui_tip-top wgt-button ui-state-default"
-      	tabindex="-1"
+        tabindex="-1"
         id="{$this->id}"
         tooltip="{$this->tooltip}"
       >{$icon}{$label}</button>
@@ -71,7 +70,5 @@ HTML;
 
   }//end public function renderActions */
 
-
 } // end class WgtControlOverlay
-
 

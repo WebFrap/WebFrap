@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -23,12 +23,11 @@
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  * @licence BSD
  */
-class WebfrapStatsSso_Graph_Query
-  extends LibSqlQuery
+class WebfrapStatsSso_Graph_Query extends LibSqlQuery
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // query elements table
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
  /**
    * Loading the tabledata from the database
@@ -37,19 +36,19 @@ class WebfrapStatsSso_Graph_Query
    *
    * @throws LibDb_Exception
    */
-  public function fetch( $start )
+  public function fetch($start)
   {
 
     $db     = $this->getDb();
 
     $matrix = array();
 
-    $dateStart  = new DateTime( $start );
-    $dateEnd    = new DateTime( $start );
+    $dateStart  = new DateTime($start);
+    $dateEnd    = new DateTime($start);
     $dateEnd->add(new DateInterval('P1Y'));
 
     $interval   = new DateInterval('P1M');
-    $periods    = new DatePeriod( $dateStart, $interval , $dateEnd );
+    $periods    = new DatePeriod($dateStart, $interval , $dateEnd);
 
     // fillup
 // date_trunc('month', usage.m_time_created)::date as period,
@@ -62,28 +61,26 @@ class WebfrapStatsSso_Graph_Query
     coalesce(flag_sso,false) as flag_sso
   FROM
     wbfsys_protocol_usage usage
-  	
+
   where
     usage.m_time_created >= '{$dateStart->format('Y-m-d')}'
     and usage.m_time_created < '{$dateEnd->format('Y-m-d')}'
   group by
-    coalesce(flag_sso,false) 
-    
+    coalesce(flag_sso,false)
+
   ;
 SQL;
 
     $data = $db->select($sql)->getAll();
-    foreach( $data as $row )
-    {
+    foreach ($data as $row) {
       $matrix[$row['flag_sso']] = $row['num_sso'];
     }
-    
+
     Debug::dumpFile('sso_dump.html', $matrix);
 
     $this->data = $matrix;
 
   }//end public function fetch */
-
 
 }// end class WebfrapStatsBrowser_Graph_Query
 

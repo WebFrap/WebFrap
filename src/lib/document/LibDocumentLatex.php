@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * Latex rednerer Klasse für das Webfrap Templatesystem
@@ -68,7 +66,7 @@ abstract class LibDocumentLatex
    *
    * @param string $filename
    */
-  public function setSaveFilename( $filename )
+  public function setSaveFilename($filename)
   {
 
     $this->saveFilename = $filename;
@@ -78,7 +76,7 @@ abstract class LibDocumentLatex
   /**
    * @param string $tmpFolder
    */
-  public function setTmpFolder( $tmpFolder )
+  public function setTmpFolder($tmpFolder)
   {
 
     $this->tmpFolder = $tmpFolder;
@@ -88,7 +86,7 @@ abstract class LibDocumentLatex
   /**
    * @param LibTemplateDocument $tplObject
    */
-  public function setTpl( $tplObject )
+  public function setTpl($tplObject)
   {
 
     $this->tpl = $tplObject;
@@ -98,18 +96,16 @@ abstract class LibDocumentLatex
   /**
    * @param string $texFile
    */
-  public function setTexFile( $texFile )
+  public function setTexFile($texFile)
   {
 
     $this->texFile = $texFile;
 
   }//end public function setTexFile */
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // Build Logik
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * Bauen eines Texfiles mit der injecteten View
@@ -122,20 +118,19 @@ abstract class LibDocumentLatex
 
   }//end public function build */
 
-
   /**
    * Bauen eines Texfiles mit der injecteten View
    */
   public function buildTemplate()
   {
 
-    if( !$this->tmpFolder )
+    if (!$this->tmpFolder)
       $this->tmpFolder = PATH_GW.'tmp/latext/'.Webfrap::tmpFolder().'/';
 
-    SFilesystem::mkdir( $this->tmpFolder );
+    SFilesystem::mkdir($this->tmpFolder);
 
-    $this->tpl->buildIndexTemplate( );
-    $this->tpl->savePage( $this->tmpFolder.$this->texFile.'.tex' );
+    $this->tpl->buildIndexTemplate();
+    $this->tpl->savePage($this->tmpFolder.$this->texFile.'.tex');
 
   }//end public function buildTemplate */
 
@@ -145,7 +140,7 @@ abstract class LibDocumentLatex
   public function buildDocument()
   {
 
-    $process = new LibSystemProcess(  );
+    $process = new LibSystemProcess();
 
     // -output-directory
 
@@ -159,9 +154,8 @@ abstract class LibDocumentLatex
       $this->tmpFolder
     );
 
-    if( $this->saveFilename )
-    {
-      SFilesystem::copy( $this->tmpFolder.$this->texFile.'.tex' ,  $this->saveFilename );
+    if ($this->saveFilename) {
+      SFilesystem::copy($this->tmpFolder.$this->texFile.'.tex' ,  $this->saveFilename);
     }
 
   }//end public function buildDocument */
@@ -170,10 +164,10 @@ abstract class LibDocumentLatex
    * Das generierte File über die View versenden
    * @param LibTemplateDocument $tpl
    */
-  public function sendFile( $tpl = null )
+  public function sendFile($tpl = null)
   {
 
-    if( !$tpl )
+    if (!$tpl)
       $tpl = $this->tpl;
 
     $file = $this->tpl->sendFile();
@@ -195,20 +189,20 @@ abstract class LibDocumentLatex
    * Das generierte File über die View versenden
    * @param LibTemplateDocument $tpl
    */
-  public function copy( $target )
+  public function copy($target)
   {
 
-    SFilesystem::copy( $this->tmpFolder.$this->texFile.'.pdf' ,  $target );
+    SFilesystem::copy($this->tmpFolder.$this->texFile.'.pdf' ,  $target);
 
   }//end public function copy */
 
   /**
    * Die Temporären Daten die beim erstellen des PDFs erstellt wurden löschen
    */
-  public function cleanTmp(  )
+  public function cleanTmp()
   {
 
-    SFilesystem::delete( $this->tmpFolder );
+    SFilesystem::delete($this->tmpFolder);
 
   }//end public function cleanTmp */
 

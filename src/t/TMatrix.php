@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Ein Array Objekt für Simple Daten
@@ -24,58 +23,51 @@
 class TMatrix
   implements ITObject, Iterator, Countable
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   protected $pool = array();
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Magic Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Standard Konstruktor
    * Nimmt beliebig viele Elemente oder einen einzigen Array
    */
-  public function __construct( )
+  public function __construct()
   {
 
-    if( $anz = func_num_args() )
-    {
-      if( $anz == 1 and is_array(func_get_arg(0)) )
-      {
+    if ($anz = func_num_args()) {
+      if ($anz == 1 and is_array(func_get_arg(0))) {
         $this->pool = func_get_arg(0);
-      }
-      else
-      {
+      } else {
         // hier kommt auf jeden fall ein Array
         $this->pool = func_get_args();
       }
     }
 
-  }//end public function __construct( )
+  }//end public function __construct()
 
   /**
    * Zugriff Auf die Elemente per magic set
    * @param string $key
    * @param mixed $value
    */
-  public function __set( $key , $value )
+  public function __set($key , $value)
   {
 
     $tmp = explode('_',$key);
 
-    if( count($tmp) == 0 )
-    {
+    if (count($tmp) == 0) {
       $this->pool[$key]  = $value;
-    }
-    else
-    {
+    } else {
       $this->pool[$tmp[0]][$tmp[1]] = $value;
     }
 
-  }// end of public function __set( $key , $value )
+  }// end of public function __set($key , $value)
 
   /**
    * Zugriff Auf die Elemente per magic get
@@ -83,25 +75,21 @@ class TMatrix
    * @param string $key
    * @return mixed
    */
-  public function __get( $key )
+  public function __get($key)
   {
     $tmp = explode('_',$key);
 
-    if( count($tmp) == 0 )
-    {
+    if (count($tmp) == 0) {
       return isset($this->pool[$tmp[0]])?$this->pool[$tmp[0]]:null;
-    }
-    else
-    {
+    } else {
       return isset($this->pool[$tmp[0]][$tmp[1]])?$this->pool[$tmp[0]][$tmp[1]]:null;
     }
 
-  }// end of public function __get( $key )
+  }// end of public function __get($key)
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Interface: ArrayAccess
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   public function offsetSet($offset, $value)
   {
@@ -123,9 +111,9 @@ class TMatrix
     return isset($this->pool[$offset])?true:false;
   }//end public function offsetExists($offset)
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Interface: Iterator
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   public function current ()
   {
@@ -152,9 +140,9 @@ class TMatrix
     return current($this->pool)? true:false;
   }//end public function valid ()
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Interface: Countable
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   public function count()
   {

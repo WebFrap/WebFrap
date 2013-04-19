@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * class WgtItemInput
@@ -22,28 +21,23 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputSearchCheckbox
-  extends WgtInput
+class WgtInputSearchCheckbox extends WgtInput
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param string
    * @deprecated
    */
-  public function setChecked( $activ )
+  public function setChecked($activ)
   {
 
-    if( $activ )
-    {
+    if ($activ) {
       $this->attributes['checked'] = "checked";
-    }
-    else
-    {
-      if(isset($this->attributes['checked']))
-      {
+    } else {
+      if (isset($this->attributes['checked'])) {
         unset($this->attributes['checked']);
       }
     }
@@ -53,35 +47,31 @@ class WgtInputSearchCheckbox
   /**
    * @param string
    */
-  public function setActive( $activ = true )
+  public function setActive($activ = true)
   {
 
-    if( $activ )
-    {
+    if ($activ) {
       $this->attributes['checked'] = "checked";
-    }
-    else
-    {
-      if(isset($this->attributes['checked']))
-      {
+    } else {
+      if (isset($this->attributes['checked'])) {
         unset($this->attributes['checked']);
       }
     }
 
-  }//end public function setActive( $activ = true )
+  }//end public function setActive($activ = true)
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Logic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
    * @return unknown_type
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array())
   {
 
-    if($attributes) $this->attributes = array_merge($this->attributes,$attributes);
+    if ($attributes) $this->attributes = array_merge($this->attributes,$attributes);
 
     // ist immer ein text attribute
     $this->attributes['type']= 'checkbox';
@@ -98,21 +88,18 @@ class WgtInputSearchCheckbox
 
     return $html;
 
-  } // end public function build( )
+  } // end public function build()
 
   /**
    * Dummybuildr
    *
    * @return string
    */
-  public function buildAjax( )
+  public function buildAjax()
   {
-
     return '<input '.$this->asmAttributes().' />';
 
-  } // end public function buildAjax( )
-
+  } // end public function buildAjax()
 
 }//end class WgtInputCheckbox
-
 

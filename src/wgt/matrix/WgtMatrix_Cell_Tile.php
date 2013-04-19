@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @lang de:
  *
@@ -26,12 +25,12 @@
 class WgtMatrix_Cell_Tile
  extends WgtMatrix_Cell
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
-	 * Type des cell values
+   * Type des cell values
    * @var string
    */
   public $type = 'tile';
@@ -70,7 +69,7 @@ class WgtMatrix_Cell_Tile
    * Content
    * @var string
    */
-  public $contentField = null;
+  public $contentFields = array();
 
   /**
    * Bottom Field
@@ -81,49 +80,53 @@ class WgtMatrix_Cell_Tile
   /**
    * @param array $data
    */
-  public function render( $dataList )
+  public function render($dataList)
   {
 
     $html = '';
 
-    foreach( $dataList as $node )
-    {
+    foreach ($dataList as $node) {
 
       $bottomCode = '';
-      if( $this->bottomField )
+      if ($this->bottomField)
         $bottomCode = '<div class="bottom" >'.$node[$this->bottomField].'</div>';
 
       $contentCode = '';
-      if( $this->contentField )
-      {
-        $contentCode = '<div class="full" >'.$node[$this->contentField].'</div>';
-      }
-      else
-      {
+      if ($this->contentFields) {
+        $contentCode = '<div class="full" >';
+        foreach ($this->contentFields as $key => $label) {
+          $contentCode .= '<div class="wgt-tile-kv" ><label>'.$label.'</label>'
+            .'<span>'.$node[$key].'</span></div>'.NL;
+        }
+
+        $contentCode .= '</div>';
+      } else {
         $contentCode = '<div class="left" >';
-        foreach( $this->leftFields as $key => $label )
-        {
-          $contentCode .= '<div class="wgt-tile-kv" ><label>'.$label.'</label><span>'.$node[$this->contentField].'</span></div>'.NL;
+        foreach ($this->leftFields as $key => $label) {
+          $contentCode .= '<div class="wgt-tile-kv" ><label>'.$label.'</label>'
+            .'<span>'.$node[$key].'</span></div>'.NL;
         }
         $contentCode .= '</div>';
 
         $contentCode .= '<div class="right" >';
-        foreach( $this->rightFields as $key => $label )
-        {
-          $contentCode .= '<div class="wgt-tile-kv" ><label>'.$label.'</label><span>'.$node[$this->contentField].'</span></div>'.NL;
+        foreach ($this->rightFields as $key => $label) {
+          $contentCode .= '<div class="wgt-tile-kv" ><label>'.$label.'</label>'
+            .'<span>'.$node[$key].'</span></div>'.NL;
         }
         $contentCode .= '</div>';
       }
 
       $html .= <<<HTML
-	<div class="wgt-tile" >
-		<h3><a
-			class="wcm wcm_req_ajax"
-			href="{$this->openUrl}{$node[$this->keyField]}" >{$node[$this->labelField]}</a></h3>
-		{$contentCode}
-		{$bottomCode}
-	<div>
+  <div class="wgt-tile ui-widget-content ui-corner-all" >
+    <h3><a
+      class="wcm wcm_req_ajax"
+      href="{$this->openUrl}{$node[$this->keyField]}" >{$node[$this->titleField]}</a></h3>
+    {$contentCode}
+    {$bottomCode}
+    <div class="wgt-clear" >&nbsp;</div>
+  </div>
 HTML;
+
     }
 
     return $html;

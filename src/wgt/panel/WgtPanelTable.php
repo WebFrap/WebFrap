@@ -8,22 +8,20 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
 /**
  * Basisklasse für Table Panels
- * 
+ *
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtPanelTable
-  extends WgtPanel
+class WgtPanelTable extends WgtPanel
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -58,23 +56,23 @@ class WgtPanelTable
    * @var string
    */
   public $searchFieldSize = 'large';
-  
+
   /**
-   * 
+   *
    * @var array
    */
   public $menuButtons = array();
-  
+
   /**
    * @var array
    */
   public $filterButtons = array();
- 
+
   /**
    * @var WgtPanel
    */
   public $filterPanel = null;
-  
+
   /**
    * @var boolean
    */
@@ -90,23 +88,22 @@ class WgtPanelTable
    *
    * @param WgtTable $table
    */
-  public function __construct( $table = null )
+  public function __construct($table = null)
   {
 
-    if( $table )
-    {
+    if ($table) {
       $this->tableId    = $table->id;
       $this->searchForm = $table->searchForm;
-      
+
       // das access objekt der table mit übernehmen
-      if( $table->access )
+      if ($table->access)
         $this->access = $table->access;
-      
-      $table->setPanel( $this );
+
+      $table->setPanel($this);
     }
 
   }//end public function __construct */
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // getter & setter
 //////////////////////////////////////////////////////////////////////////////*/
@@ -114,22 +111,21 @@ class WgtPanelTable
   /**
    * @param  $panel
    */
-  public function setFilterPanel( $panel )
+  public function setFilterPanel($panel)
   {
     $this->filterPanel = $panel;
   }//end public function setFilterPanel */
 
-  
 /*//////////////////////////////////////////////////////////////////////////////
 // build method
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @return string
    */
   public function render()
   {
-    
+
     $this->setUp();
 
     $html = '';
@@ -138,17 +134,15 @@ class WgtPanelTable
     $html .= $this->panelMenu();
     $html .= $this->panelButtons();
 
-    if( $this->subPannel )
-    {
-      foreach( $this->subPannel as $subPanel )
-      {
-        if( is_string($subPanel) )
+    if ($this->subPannel) {
+      foreach ($this->subPannel as $subPanel) {
+        if (is_string($subPanel))
           $html .= $subPanel;
-        else 
+        else
           $html .= $subPanel->render();
       }
     }
-    
+
     return $html;
 
   }//end public function render */
@@ -158,17 +152,16 @@ class WgtPanelTable
    */
   public function build()
   {
-    
     return $this->render();
 
   }//end public function build */
-  
+
   /**
    * set up the panel data
    */
   public function setUp()
   {
-    
+
   }//end public function setUp */
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -188,58 +181,51 @@ class WgtPanelTable
    *   1 => string, Label des Buttons
    *   2 => string, URL oder Javascript Code, je nach Button Type
    *   3 => string, Icon
-   *   4 => string, css classes ( optional )
-   *   5 => string, i18n key für das label ( optional )
+   *   4 => string, css classes (optional)
+   *   5 => string, i18n key für das label (optional)
    *   6 => int,  das benötigtes zugriffslevel @see Acl::$accessLevels
    *   7 => int,  maximales zugriffslevel @see Acl::$accessLevels
    * }
    *
    */
-  public function addMenuButton( $key, $buttonData )
+  public function addMenuButton($key, $buttonData)
   {
-    
+
     $this->menuButtons[$key] = $buttonData;
-    
+
   }//end public function addMenuButton */
-  
+
   /**
    *
    */
-  public function panelMenu( )
+  public function panelMenu()
   {
-    
+
     $i18n = $this->getI18n();
 
     $html = '';
     $panelClass = '';
     $title = '';
-    
-    if( $this->title )
-    {
+
+    if ($this->title) {
       $panelClass = ' title';
       $title = '<div class="left" style="width:40%"  ><h2 style="margin-bottom:0px;" >'.$this->title.'</h2></div>';
     }
-    
 
-    if( $this->searchKey )
-    {
+    if ($this->searchKey) {
       $html .= '<div class="wgt-panel'.$panelClass.'" >';
-      
+
       $html .= $title;
-      
-      $iconSearch   = $this->icon( 'control/search.png', 'Search' );
-      $iconReset    = $this->icon( 'control/reset.png', 'Reset' );
-      $iconInfo     = $this->icon( 'control/info.png', 'Info' );
+
+      $iconInfo     = $this->icon('control/info.png', 'Info');
 
       $buttonAdvanced = '';
       $customButtons  = '';
-      
-      if( $this->advancedSearch )
-      {
-        $iconAdvanced = $this->icon('control/show_advanced.png','Search Advanced');
-        
+
+      if ($this->advancedSearch) {
+
         //{$i18n->l('Advanced Search','wbf.label')}
-        
+
         $buttonAdvanced = <<<HTML
       <button
         onclick="\$S('#wgt-search-table-{$this->searchKey}-advanced').toggle();\$UI.resetForm('{$this->searchForm}');return false;"
@@ -247,48 +233,47 @@ class WgtPanelTable
         tabindex="-1"
         title="Extended search"
         >
-        {$iconAdvanced} 
+        <i class="icon-filter" ></i>
       </button>
 
 HTML;
       }
-      
-      if( $this->menuButtons )
-      {
-        $customButtons = $this->buildButtons( $this->menuButtons );
+
+      if ($this->menuButtons) {
+        $customButtons = $this->buildButtons($this->menuButtons);
       }
 
       $html .= <<<HTML
-      
+
       {$customButtons}
       <div class="right" >
         <strong>Search</strong>
-        <input 
-          type="text" 
-          name="free_search" 
-          id="wgt-search-table-{$this->searchKey}" 
+        <input
+          type="text"
+          name="free_search"
+          id="wgt-search-table-{$this->searchKey}"
           class="{$this->searchFieldSize} wcm wcm_req_search wgt-no-save fparam-{$this->searchForm}" />
-  
-        <button 
-          onclick="\$R.form('{$this->searchForm}',null,{search:true});return false;" 
+
+        <button
+          onclick="\$R.form('{$this->searchForm}',null,{search:true});return false;"
           title="Search"
           class="wgt-button inline wcm wcm_ui_tip"
           tabindex="-1" >
-          {$iconSearch}
+          <i class="icon-search" ></i>
         </button>
 {$buttonAdvanced}
-        <button 
-          onclick="\$S('table#{$this->tableId}-table').grid('cleanFilter');\$UI.resetForm('{$this->searchForm}');\$R.form('{$this->searchForm}');return false;" 
-          title="Reset" 
+        <button
+          onclick="\$S('table#{$this->tableId}-table').grid('cleanFilter');\$UI.resetForm('{$this->searchForm}');\$R.form('{$this->searchForm}');return false;"
+          title="Reset"
           class="wgt-button right wcm wcm_ui_tip"
           tabindex="-1" >
-          {$iconReset}
+          <i class="icon-minus-sign"></i>
         </button>
 
       </div>
-  
+
 HTML;
-      
+
       //$html .= '<div class="wgt-clear xxsmall" >&nbsp;</div>';
       $html .= '</div>';
     }
@@ -305,29 +290,25 @@ HTML;
 
     $html = '';
 
-    if( $this->buttons || $this->filterButtons )
-    {
+    if ($this->buttons || $this->filterButtons) {
       $html .= '<div class="wgt-panel" >';
-      
-      if( $this->buttons )
-      {
+
+      if ($this->buttons) {
         $html .= '<div class="left" >';
         $html .= $this->buildButtons();
         $html .= '</div>';
       }
-      
-      if( $this->filterButtons )
-      {
+
+      if ($this->filterButtons) {
         $html .= '<div class="right" ><div class="left" ><strong>Filters&nbsp;|&nbsp;</strong></div>';
-        $html .= $this->buildButtons( $this->filterButtons );
+        $html .= $this->buildButtons($this->filterButtons);
         $html .= '</div>';
       }
-      
-      if( $this->filterPanel )
-      {
-        $html .= $this->filterPanel->render(  );
+
+      if ($this->filterPanel) {
+        $html .= $this->filterPanel->render();
       }
-      
+
       $html .= '</div>';
     }
 
@@ -335,7 +316,5 @@ HTML;
 
   }//end public function panelButtons */
 
-
 } // end class WgtPanelTable
-
 

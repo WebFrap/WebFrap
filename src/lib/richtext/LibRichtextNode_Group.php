@@ -8,24 +8,22 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibRichtextNode_Group
-  extends LibRichtextNode
+class LibRichtextNode_Group extends LibRichtextNode
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var string
@@ -33,5 +31,4 @@ class LibRichtextNode_Group
   public $key = 'group';
 
 }//end class LibRichtextNode_Group
-
 

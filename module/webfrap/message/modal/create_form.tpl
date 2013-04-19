@@ -75,8 +75,8 @@ HTML;
         <?php  $cntForm->selectboxByKey
         ( 
           'Confidentiality Level', 
-          'id_confidentiality', 
-          'WbfsysConfidentialityLevel_Selectbox', 
+          'confidential', 
+          'WbfsysConfidentiality_Selectbox', 
           $confidentialData->getAll(),
           $orm->getIdByKey( 'WbfsysConfidentialityLevel', 'public' ) 
         ); ?>

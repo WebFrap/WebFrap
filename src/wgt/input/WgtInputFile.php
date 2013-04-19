@@ -15,15 +15,13 @@
 *
 *******************************************************************************/
 
-
 /**
  * class WgtItemInput
  * Objekt zum generieren einer Inputbox
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputFile
-  extends WgtInput
+class WgtInputFile extends WgtInput
 {
 
   /**
@@ -34,7 +32,7 @@ class WgtInputFile
   /**
    * @param string $link
    */
-  public function setLink( $link )
+  public function setLink($link)
   {
     $this->link = $link;
   }//end public function setLink */
@@ -43,22 +41,21 @@ class WgtInputFile
    *
    * @return unknown_type
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array())
   {
 
-    if($attributes)
+    if ($attributes)
       $this->attributes = array_merge($this->attributes,$attributes);
 
     // ist immer ein text attribute
     $this->attributes['type'] = 'text';
     $value = null;
 
-    if( isset( $this->attributes['value'] ) )
-    {
+    if (isset($this->attributes['value'])) {
       $value = $this->attributes['value'];
     }
 
-    if($this->link)
+    if ($this->link)
       $this->texts->afterInput = '<p><a href="'.$this->link.'" target="new_download" >'.$value.'</a></p>';
 
     $id       = $this->getId();
@@ -66,7 +63,7 @@ class WgtInputFile
     $fName    = $this->attributes['name'];
 
     $required = $this->required?'<span class="wgt-required">*</span>':'';
-    $icon     = Wgt::icon('control/upload.png', 'xsmall', 'Upload' );
+    $icon     = Wgt::icon('control/upload.png', 'xsmall', 'Upload');
 
     $this->attributes['class'] = isset($this->attributes['class'])
       ? $this->attributes['class'].' wgt-ignore wgt-overlay'
@@ -79,15 +76,15 @@ class WgtInputFile
       ? 'asgd-'.$this->assignedForm
       : '';
 
-    $helpIcon = $this->renderDocu( $id );
+    $helpIcon = $this->renderDocu($id);
 
     $html = <<<HTML
     <div class="wgt-box input" id="wgt-box-{$id}" >
       {$this->texts->topBox}
       <div class="wgt-label" ><label
-      	for="{$id}" >{$this->texts->beforeLabel}{$this->label}{$this->texts->afterLabel} {$required}{$this->texts->endLabel}</label>
+        for="{$id}" >{$this->texts->beforeLabel}{$this->label}{$this->texts->afterLabel} {$required}{$this->texts->endLabel}</label>
       {$this->texts->middleBox}
-      	{$helpIcon}
+        {$helpIcon}
       </div>
       <div
         class="wgt-input {$this->width}"
@@ -97,8 +94,8 @@ class WgtInputFile
           type="file"
           name="{$fName}"
           id="{$id}" />{$this->element()}<button
-          	class="wgt-button append wgt-overlay"
-          	tabindex="-1"  >{$icon}</button>{$this->texts->afterInput}</div>
+            class="wgt-button append wgt-overlay"
+            tabindex="-1"  >{$icon}</button>{$this->texts->afterInput}</div>
       {$this->texts->bottomBox}
       <div class="wgt-clear tiny" >&nbsp;</div>
     </div>
@@ -109,8 +106,5 @@ HTML;
 
   } // end public function build */
 
-
-
 } // end class WgtItemFile
-
 

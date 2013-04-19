@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -16,8 +16,6 @@
 *******************************************************************************/
 
 /**
- * Abstract Class For SysExtention Controllers
- *
  * @package WebFrap
  * @subpackage tech_core
  */
@@ -25,20 +23,20 @@ interface IEvent
 {
 
   /**
+   * @param string $event
    * fire an event
-   *
    */
-  public function fireEvent( $event );
+  public function fireEvent($event);
 
   /**
-   * Enter description here...
-   *
+   * @param string $event
+   * @param string $eventName
+   * @param string $action
    */
-  public static function addEvent( $event , $eventName , $action );
+  public static function addEvent($event , $eventName , $action);
+  
   /**
-   * Enter description here...
-   *
    */
-  public static function saveEvent( );
+  public static function saveEvent();
 
 } // end interface IEvent

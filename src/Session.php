@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -34,9 +34,9 @@ session_set_save_handler
  */
 class Session
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var LibSessionPhp
@@ -45,7 +45,7 @@ class Session
 
   /**
    * Id of the actual session
-   * 
+   *
    * @var string
    */
   protected static $sessionId   = null;
@@ -65,15 +65,15 @@ class Session
   protected static $sessionType = null;
 
   /**
-   * The Name of the Session ( Session cookie ) 
-   * 
+   * The Name of the Session (Session cookie)
+   *
    * @var string
    */
   protected static $name = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Magic Functions
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -95,7 +95,7 @@ class Session
   public function __destruct()
   {
     self::$session->close();
-    
+
   }//end private function __construct */
 
   /**
@@ -105,24 +105,23 @@ class Session
   public static function getInstance()
   {
 
-    if( is_null( self::$session ) )
-      throw new WebfrapFlow_Exception('Session not yet started!');
+    if (is_null(self::$session))
+      throw new WebfrapSys_Exception('Session not yet started!');
 
     return self::$session;
 
   }//end public static function getInstance */
 
-
   /**
    * get the active session object
-   * 
+   *
    * @return LibSessionPhp
    */
   public static function getActive()
   {
 
-    if( is_null( self::$session ) )
-      throw new WebfrapFlow_Exception( 'Session not yet started!' );
+    if (is_null(self::$session))
+      throw new WebfrapSys_Exception('Session not yet started!');
 
     return self::$session;
 
@@ -132,58 +131,47 @@ class Session
    * @param Base $env
    * @return void
    */
-  public static function init( $env = null )
+  public static function init($env = null)
   {
 
-    if( $env && $confObj = $env->getConf(  ) )
-    {
-      $sessionConf = $confObj->getConf( 'session' );
+    if ($env && $confObj = $env->getConf()) {
+      $sessionConf = $confObj->getConf('session');
+    } else {
+      $sessionConf = Conf::get('session');
     }
-    else 
-    {
-      $sessionConf = Conf::get( 'session' );
-    }
-    
 
-    self::$sessionType      = isset($sessionConf['type'])?$sessionConf['type']:'Php';
-    self::$name             = isset($sessionConf['name'])?$sessionConf['name']:'WEBFRAP_SID';
-    self::$sessionSavePath  = isset($sessionConf['path'])?$sessionConf['path']:null;
+    self::$sessionType     = isset($sessionConf['type'])?$sessionConf['type']:'Php';
+    self::$name           = isset($sessionConf['name'])?$sessionConf['name']:'WEBFRAP_SID';
+    self::$sessionSavePath = isset($sessionConf['path'])?$sessionConf['path']:null;
 
     self::start();
 
     // Session muss vorhanden sein
-    if( ! isset( $_SESSION['WBF_STATUS'] ) )
-    {
-      
-      if( !$confObj )
+    if (!isset($_SESSION['WBF_STATUS'])) {
+
+      if (!$confObj)
         $confObj = Conf::getActive();
 
       $confObj->status['serveros']   = php_uname('s');
       $confObj->status['serverarch'] = php_uname('m');
-      $confObj->status['lang']       = Conf::get('i18n','lang' );
+      $confObj->status['lang']       = Conf::get('i18n','lang');
 
-      if(!isset( $confObj->status['def_lang'] ))
-        $confObj->status['def_lang'] = Conf::get('i18n','lang' );
+      if (!isset($confObj->status['def_lang']))
+        $confObj->status['def_lang'] = Conf::get('i18n','lang');
 
       $_SESSION['WBF_STATUS'] = $confObj->status;
-    }
-    else
-    {
+    } else {
       self::$session->wakeup = true;
     }
 
-    if( isset($_SESSION['DEBUG_MODE'])  )
-    {
+    if (isset($_SESSION['DEBUG_MODE'])) {
       Log::getActive()->enableDebugging();
-    }
-    elseif( isset($_GET['enable_debug']) )
-    {
+    } elseif (isset($_GET['enable_debug'])) {
 
-      if( !$confObj )
+      if (!$confObj)
         $confObj = Conf::getActive();
-        
-      if( isset($confObj->status['enable_debugpwd']) &&  $confObj->status['enable_debugpwd'] == $_GET['enable_debug'] )
-      {
+
+      if (isset($confObj->status['enable_debugpwd']) &&  $confObj->status['enable_debugpwd'] == $_GET['enable_debug']) {
         $_SESSION['DEBUG_MODE'] = true;
         Log::getActive()->enableDebugging();
       }
@@ -191,18 +179,18 @@ class Session
 
   }//end public static function init */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param string $name
    */
-  public static function setName( $name  )
+  public static function setName($name)
   {
-    
+
     self::$name = $name;
-    
+
   }//end public function setName */
 
   /**
@@ -210,9 +198,8 @@ class Session
    */
   public static function getName()
   {
-    
     return self::$name;
-    
+
   }//end public function getName */
 
   /**
@@ -220,11 +207,11 @@ class Session
    * @param string[optional] $value
    * @return void
    */
-  public static function setStatus( $key , $value = null )
+  public static function setStatus($key , $value = null)
   {
-    
-    if( is_array( $key ) )
-      $_SESSION['WBF_STATUS'] = array_merge( $_SESSION['WBF_STATUS'] , $key );
+
+    if (is_array($key))
+      $_SESSION['WBF_STATUS'] = array_merge($_SESSION['WBF_STATUS'] , $key);
 
     else
       $_SESSION['WBF_STATUS'][$key] = $value;
@@ -236,13 +223,13 @@ class Session
    * @param string[optional] $value
    * @return void
    */
-  public static function status( $key = null )
+  public static function status($key = null)
   {
-    
-    if( !$key && isset($_SESSION['WBF_STATUS']) )
+
+    if (!$key && isset($_SESSION['WBF_STATUS']))
       return $_SESSION['WBF_STATUS'];
 
-    elseif( isset($_SESSION['WBF_STATUS'][$key]) )
+    elseif (isset($_SESSION['WBF_STATUS'][$key]))
       return $_SESSION['WBF_STATUS'][$key];
 
     else
@@ -253,11 +240,11 @@ class Session
   /**
    * @param string $sessionId
    */
-  public static function setSessionId( $sessionId )
+  public static function setSessionId($sessionId)
   {
-    
+
     self::$sessionId = $sessionId;
-    
+
   }//end public function setSessionId */
 
   /**
@@ -265,19 +252,18 @@ class Session
    */
   public static function getSessionId()
   {
-    
     return self::$sessionId;
-    
+
   }//end public function getSessionId */
 
   /**
    * @param string $savePath
    */
-  public static function setSessionSavePath( $savePath )
+  public static function setSessionSavePath($savePath)
   {
-    
+
     self::$sessionSavePath = $savePath;
-    
+
   }//end public function setSessionSavePath */
 
   /**
@@ -285,19 +271,18 @@ class Session
    */
   public static function getSessionSavePath()
   {
-    
     return self::$sessionSavePath;
-    
+
   }//end public function getSessionSavePath */
 
   /**
    * @param string $sessionType
    */
-  public static function setSessionType( $sessionType )
+  public static function setSessionType($sessionType)
   {
-    
+
     self::$sessionType = $sessionType;
-    
+
   }//end public function setSessionType */
 
   /**
@@ -305,14 +290,13 @@ class Session
    */
   public static function getSessionType()
   {
-    
     return self::$sessionType;
-    
+
   }//end public function getSessionType */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Logic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * start a new session
@@ -326,8 +310,7 @@ class Session
 
     Debug::console('start session '.$className);
 
-    self::$session->start
-    (
+    self::$session->start(
       self::$name ,
       self::$sessionId ,
       self::$sessionSavePath
@@ -342,8 +325,7 @@ class Session
   public static function close()
   {
 
-    if( is_null(self::$session) )
-    {
+    if (is_null(self::$session)) {
       return;
     }
 
@@ -357,9 +339,8 @@ class Session
    */
   public static function destroy()
   {
-    
-    if( is_null(self::$session) )
-    {
+
+    if (is_null(self::$session)) {
       return;
     }
 
@@ -373,16 +354,15 @@ class Session
    */
   public static function cleanLogs()
   {
-    
+
     // Leeren der PHP Logfiles in der Session
     $_SESSION['SCREENLOG']     = array();
     $_SESSION['PHPLOG']        = array();
     $_SESSION['TRACES']        = array();
     $_SESSION['DUMPS']         = array();
     $_SESSION['BUFFERD_OUT']   = '';
-    
-  }//end public static function cleanLogs */
 
+  }//end public static function cleanLogs */
 
 }//end class Session
 

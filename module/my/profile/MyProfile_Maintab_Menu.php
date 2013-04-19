@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -36,13 +36,12 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyProfile_Maintab_Menu
-  extends WgtDropmenu
+class MyProfile_Maintab_Menu extends WgtDropmenu
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // menu: create
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
   /**
    * add a drop menu to the create window
    *
@@ -52,9 +51,9 @@ class MyProfile_Maintab_Menu
    *   string formId: the id of the form;
    * }
    */
-  public function buildMenu( $params )
+  public function buildMenu($params)
   {
-  
+
     // benötigte resourcen laden
     $acl   = $this->getAcl();
     $view   = $this->getView();
@@ -65,16 +64,15 @@ class MyProfile_Maintab_Menu
     $iconClose     = $view->icon('control/close.png', 'Close');
 
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport( $params );
-
+    $entries->support  = $this->entriesSupport($params);
 
     // prüfen ob der aktuelle benutzer überhaupt neue einträge anlegen darf
-    //if( $params->access->insert )
+    //if ($params->access->insert)
     //{
 
       $entries->buttonSend = <<<BUTTON
   <li class="wgt-root" >
-    <button 
+    <button
       class="wcm wcm_ui_button wgtac_create wcm_ui_tip-top"
       title="{$view->i18n->l('Send the Message','wbf.label')}" >{$iconSend} {$view->i18n->l('Send','wbf.label')}</button>
     <ul style="margin-top:-10px;" ></ul>
@@ -83,7 +81,6 @@ class MyProfile_Maintab_Menu
 BUTTON;
 
     //}
-
 
     $this->content = <<<HTML
 <ul class="wcm wcm_ui_dropmenu wgt-dropmenu" id="{$this->id}" >
@@ -108,13 +105,13 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport( $params )
+  protected function entriesSupport($params)
   {
 
-    $iconSupport  = $this->view->icon( 'control/support.png'  ,'Support');
-    $iconBug      = $this->view->icon( 'control/bug.png'      ,'Bug');
-    $iconFaq      = $this->view->icon( 'control/faq.png'      ,'Faq');
-    $iconHelp     = $this->view->icon( 'control/help.png'     ,'Help');
+    $iconSupport  = $this->view->icon('control/support.png'  ,'Support');
+    $iconBug      = $this->view->icon('control/bug.png'      ,'Bug');
+    $iconFaq      = $this->view->icon('control/faq.png'      ,'Faq');
+    $iconHelp     = $this->view->icon('control/help.png'     ,'Help');
 
 
     $html = <<<HTML

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Dummy class for Extentions
@@ -23,13 +22,12 @@
  * @package WebFrap
  * @subpackage Core
  */
-class Error_Controller
-  extends Controller
+class Error_Controller extends Controller
 {
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
 /**
    * Enter description here...
@@ -45,9 +43,9 @@ class Error_Controller
    */
   protected $errorMessage = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Run Method
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * the controll function sends an error message to the user
@@ -55,15 +53,16 @@ class Error_Controller
    * @param string $aktion
    * @return void
    */
-  public function run( $aktion = null )
+  public function run($aktion = null)
   {
 
+    $response = $this->getResponse();
     $view = $response->loadView('error-message', 'Error');
 
-    $view->display( $this->errorTitle, $this->errorMessage  );
+    $view->display($this->errorTitle, $this->errorMessage  );
 
     /*
-    $this->view->setTemplate( 'error/message' );
+    $this->view->setTemplate('error/message');
 
     $this->view->addVar
     (array
@@ -75,16 +74,16 @@ class Error_Controller
 
   }//end public function run */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter Method
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Setter for title
    *
    * @param string $title
    */
-  public function setErrorTitle( $title )
+  public function setErrorTitle($title)
   {
 
     $this->errorTitle = $title;
@@ -95,7 +94,7 @@ class Error_Controller
    *
    * @param string $message
    */
-  public function setErrorMessage( $message )
+  public function setErrorMessage($message)
   {
     $this->errorMessage = $message;
   }//end public function setErrorMessage */
@@ -105,10 +104,10 @@ class Error_Controller
    * @param unknown_type $message
    * @return void
    */
-  public function displayError( $type, $data = array()  )
+  public function displayError($type, $data = array()  )
   {
 
-    $this->$type( $data );
+    $this->$type($data);
 
   }
 
@@ -117,12 +116,12 @@ class Error_Controller
    * Enter description here ...
    * @param unknown_type $data
    */
-  public function displayException( $data = array() )
+  public function displayException($data = array())
   {
-    
+
     $response = $this->getResponse();
-    
-    $view = $response->loadView( 'error-message', 'Error','displayException', View::MODAL );
+
+    $view = $response->loadView('error-message', 'Error','displayException', View::MODAL);
     $view->displayException($data[0]);
 
   }//end public function displayException */
@@ -132,12 +131,12 @@ class Error_Controller
    * Enter description here ...
    * @param unknown_type $data
    */
-  public function displayEnduserError( $data = array() )
+  public function displayEnduserError($data = array())
   {
-    
+
     $response = $this->getResponse();
 
-    $view = $response->loadView('error-message', 'Error' );
+    $view = $response->loadView('error-message', 'Error');
     $view->displayEnduserError($data[0]);
 
   }//end public function displayEnduserError */

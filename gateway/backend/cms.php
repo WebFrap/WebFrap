@@ -8,41 +8,38 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
+try {
 
-try
-{
-  
   // Sicher stellen, dass nur Cms Controller aufgerufen werden können
-  define( 'WBF_CONTROLLER_PREFIX', '_Cms' );
+  define('WBF_CONTROLLER_PREFIX', '_Cms');
 
   include './conf/bootstrap.php';
 
   // Buffer Output
-  if(BUFFER_OUTPUT)
+  if (BUFFER_OUTPUT)
     ob_start();
 
   $errors = '';
 
-  View::setType( 'Html' );
+  View::setType('Html');
   $webfrap = Webfrap::init();
 
   // calling the main main function
 
   $webfrap->main();
   $errors = $webfrap->out();
-  $webfrap->shutdown( $errors );
+  $webfrap->shutdown($errors);
 
 } // ENDE TRY
-catch( Exception $exception )
-{
-  $extType = get_class( $exception );
+catch(Exception $exception) {
+  $extType = get_class($exception);
 
   Error::addError
   (
@@ -51,23 +48,19 @@ catch( Exception $exception )
     $exception
   );
 
-  if( BUFFER_OUTPUT )
-  {
+  if (BUFFER_OUTPUT) {
     $errors .= ob_get_contents();
     ob_end_clean();
   }
 
-  if( !DEBUG )
-  {
+  if (!DEBUG) {
     View::printErrorPage
     (
       $exception->getMessage(),
       '500',
       $errors
     );
-  }
-  else
-  {
+  } else {
     echo $errors;
   }
 

@@ -8,22 +8,19 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
-
 /**
  * class WgtTreeMenu
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtTreeMenu
-  extends WgtMenu
+class WgtTreeMenu extends WgtMenu
 {
 
   /**
@@ -34,19 +31,18 @@ class WgtTreeMenu
 
     $html = '';
 
-    foreach( $this->data as $node )
-    {
+    foreach ($this->data as $node) {
       $html .= '<li><a class="wcm wcm_req_ajax" href="'.$node[WgtMenu::ACTION].'" >';
 
-      if($node[WgtMenu::ICON])
-        $html .= Wgt::icon( $node[WgtMenu::ICON] , 'xsmall' , $node[WgtMenu::TITLE] );
+      if ($node[WgtMenu::ICON])
+        $html .= Wgt::icon($node[WgtMenu::ICON] , 'xsmall' , $node[WgtMenu::TITLE]);
 
       $html .= $node[WgtMenu::TEXT];
 
       $html .= '</a></li>';
     }
 
-    return $this->decorateMenu( $html );
+    return $this->decorateMenu($html);
 
   }//end public function build */
 
@@ -58,17 +54,15 @@ class WgtTreeMenu
 
   }//end public function buildAjax */
 
-
   /**
    * @param $menu
    */
-  protected function decorateMenu( $menu )
+  protected function decorateMenu($menu)
   {
 
     $html = '<ul class="wgt_menu_tree" >';
     $html .= $menu;
     $html .= '</ul>';
-
 
     return $html;
   }//end protected function decorateMenu */

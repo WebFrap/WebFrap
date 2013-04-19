@@ -20,12 +20,11 @@
  * @author sono
  *
  */
-abstract class WgtTreetable
-  extends WgtTable
+abstract class WgtTreetable extends WgtTable
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attribute
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -35,9 +34,9 @@ abstract class WgtTreetable
 
   public $type = 'treetable';
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // method
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -50,15 +49,14 @@ abstract class WgtTreetable
     // $S(\'form#'.$this->searchForm.'\').data(\'size\',$S(this).val());
 
     //$onchange = 'onchange="$S(\'form#'.$this->searchForm.'\').data(\'qsize\',$S(this).val());$R.form(\''.$this->searchForm.'\');"';
-    $onchange = 'onchange="$S(\'table#'.$this->id.'-table\').grid( \'pageSize\', \''.$this->searchForm.'\',this)"';
+    $onchange = 'onchange="$S(\'table#'.$this->id.'-table\').grid(\'pageSize\', \''.$this->searchForm.'\',this)"';
 
-    if( !$sizes = Conf::status( 'ui.listing.numEntries' ) )
+    if (!$sizes = Conf::status('ui.listing.numEntries'))
       $sizes = array(10,25,50,100,250,500);
 
     $menu = '<select class="wgt-no-save small" '.$onchange.' >';
 
-    foreach( $sizes as $size )
-    {
+    foreach ($sizes as $size) {
       $selected = ($size==$this->stepSize)?'selected="selected"':'';
       $menu .= '<option value="'.$size.'" '.$selected.' >'.$size.'</option>';
     }

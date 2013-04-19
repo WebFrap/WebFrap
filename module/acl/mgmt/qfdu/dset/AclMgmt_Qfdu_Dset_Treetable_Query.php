@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,21 +26,20 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Qfdu_Dset_Treetable_Query
-  extends LibSqlQuery
+class AclMgmt_Qfdu_Dset_Treetable_Query extends LibSqlQuery
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var DomainNode
    */
   public $domainNode = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /** build criteria, interpret conditions and load data
    *
@@ -53,10 +52,10 @@ class AclMgmt_Qfdu_Dset_Treetable_Query
    *
    * @throws LibDb_Exception
    */
-  public function fetch( $groupId, $userId, $areaId, $condition = null, $context = null )
+  public function fetch($groupId, $userId, $areaId, $condition = null, $context = null)
   {
 
-    if( !$context )
+    if (!$context)
       $context = new TFlag();
 
     $context->qsize = -1;
@@ -65,38 +64,36 @@ class AclMgmt_Qfdu_Dset_Treetable_Query
     $db                = $this->getDb();
 
     $criteria  = $db->orm->newCriteria();
-    $dsetEntiy = $db->orm->newEntity( $this->domainNode->srcKey );
-    
+    $dsetEntiy = $db->orm->newEntity($this->domainNode->srcKey);
+
     $textKeys = $dsetEntiy->textKeys();
     $tableKey = $dsetEntiy->getTable();
     $fieldKeys = array();
-    
-    if( $textKeys )
-    {
-      foreach( $textKeys as $fieldName )
-      {
+
+    if ($textKeys) {
+      foreach ($textKeys as $fieldName) {
         $fieldKeys[] = "{$tableKey}.{$fieldName}";
       }
     }
-    
+
     $ids = new TFlag();
     $ids->groupId = $groupId;
     $ids->userId = $userId;
     $ids->areaId = $areaId;
 
-    $this->setCols( $criteria, $tableKey, $fieldKeys );
-    $this->setTables( $criteria, $tableKey );
-    $this->appendConditions( $criteria, $condition, $ids, $tableKey, $fieldKeys, $context );
-    $this->checkLimitAndOrder( $criteria, $tableKey, $fieldKeys, $context );
+    $this->setCols($criteria, $tableKey, $fieldKeys);
+    $this->setTables($criteria, $tableKey);
+    $this->appendConditions($criteria, $condition, $ids, $tableKey, $fieldKeys, $context);
+    $this->checkLimitAndOrder($criteria, $tableKey, $fieldKeys, $context);
 
 
     // Run Query und save the result
-    $this->result     = $db->orm->select( $criteria );
-    $this->calcQuery  = $criteria->count( 'count(DISTINCT group_users.id_group) as '.Db::Q_SIZE, true );
+    $this->result     = $db->orm->select($criteria);
+    $this->calcQuery  = $criteria->count('count(DISTINCT group_users.id_group) as '.Db::Q_SIZE, true);
 
   }//end public function fetch */
-  
-  /** 
+
+  /**
    * build criteria, interpret conditions and load data
    *
    * @param int $areaId
@@ -106,10 +103,10 @@ class AclMgmt_Qfdu_Dset_Treetable_Query
    *
    * @throws LibDb_Exception
    */
-  public function fetchListUser( $userId, $areaId, $condition = null, $context = null )
+  public function fetchListUser($userId, $areaId, $condition = null, $context = null)
   {
 
-    if( !$context )
+    if (!$context)
       $context = new TFlag();
 
     $context->qsize = -1;
@@ -118,39 +115,37 @@ class AclMgmt_Qfdu_Dset_Treetable_Query
     $db                = $this->getDb();
 
     $criteria  = $db->orm->newCriteria();
-    $dsetEntiy = $db->orm->newEntity( $this->domainNode->srcKey );
-    
+    $dsetEntiy = $db->orm->newEntity($this->domainNode->srcKey);
+
     $textKeys = $dsetEntiy->textKeys();
     $tableKey = $dsetEntiy->getTable();
     $fieldKeys = array();
-    
-    if( $textKeys )
-    {
-      foreach( $textKeys as $fieldName )
-      {
+
+    if ($textKeys) {
+      foreach ($textKeys as $fieldName) {
         $fieldKeys[] = "{$tableKey}.{$fieldName}";
       }
     }
-    
+
     $ids = new TFlag();
     $ids->userId = $userId;
     $ids->areaId = $areaId;
-    
-    $context->groupBy = 'user';
-    
 
-    $this->setColsListUser( $criteria, $tableKey, $fieldKeys );
-    $this->setTables( $criteria, $tableKey );
-    $this->appendConditions( $criteria, $condition, $ids, $tableKey, $fieldKeys, $context );
-    $this->checkLimitAndOrder( $criteria, $tableKey, $fieldKeys, $context );
+    $context->groupBy = 'user';
+
+
+    $this->setColsListUser($criteria, $tableKey, $fieldKeys);
+    $this->setTables($criteria, $tableKey);
+    $this->appendConditions($criteria, $condition, $ids, $tableKey, $fieldKeys, $context);
+    $this->checkLimitAndOrder($criteria, $tableKey, $fieldKeys, $context);
 
     // Run Query und save the result
-    $this->result     = $db->orm->select( $criteria );
-    $this->calcQuery  = $criteria->count( 'count(DISTINCT group_users.id_user) as '.Db::Q_SIZE, true );
+    $this->result     = $db->orm->select($criteria);
+    $this->calcQuery  = $criteria->count('count(DISTINCT group_users.id_user) as '.Db::Q_SIZE, true);
 
   }//end public function fetchListUser */
-  
-  /** 
+
+  /**
    * build criteria, interpret conditions and load data
    *
    * @param int $areaId
@@ -160,45 +155,43 @@ class AclMgmt_Qfdu_Dset_Treetable_Query
    *
    * @throws LibDb_Exception
    */
-  public function fetchListDset( $areaId, $condition = null, $context = null )
+  public function fetchListDset($areaId, $condition = null, $context = null)
   {
 
-    if( !$context )
+    if (!$context)
       $context = new TFlag();
 
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
     $criteria  = $db->orm->newCriteria();
-    $dsetEntiy = $db->orm->newEntity( $this->domainNode->srcKey );
-    
+    $dsetEntiy = $db->orm->newEntity($this->domainNode->srcKey);
+
     $textKeys = $dsetEntiy->textKeys();
     $tableKey = $dsetEntiy->getTable();
     $fieldKeys = array();
-    
-    if( $textKeys )
-    {
-      foreach( $textKeys as $fieldName )
-      {
+
+    if ($textKeys) {
+      foreach ($textKeys as $fieldName) {
         $fieldKeys[] = "{$tableKey}.{$fieldName}";
       }
     }
-    
+
     $ids = new TFlag();
     $ids->areaId = $areaId;
-    
-    $context->groupBy = 'dset';
-    
 
-    $this->setColsListDset( $criteria, $tableKey, $fieldKeys );
-    $this->setTables( $criteria, $tableKey );
-    $this->appendConditions( $criteria, $condition, $ids, $tableKey, $fieldKeys, $context );
-    $this->checkLimitAndOrder( $criteria, $tableKey, $fieldKeys, $context );
+    $context->groupBy = 'dset';
+
+
+    $this->setColsListDset($criteria, $tableKey, $fieldKeys);
+    $this->setTables($criteria, $tableKey);
+    $this->appendConditions($criteria, $condition, $ids, $tableKey, $fieldKeys, $context);
+    $this->checkLimitAndOrder($criteria, $tableKey, $fieldKeys, $context);
 
 
     // Run Query und save the result
-    $this->result     = $db->orm->select( $criteria );
-    $this->calcQuery  = $criteria->count( 'count(DISTINCT group_users.vid) as '.Db::Q_SIZE, true );
+    $this->result     = $db->orm->select($criteria);
+    $this->calcQuery  = $criteria->count('count(DISTINCT group_users.vid) as '.Db::Q_SIZE, true);
 
   }//end public function fetchListDset */
 
@@ -213,21 +206,17 @@ class AclMgmt_Qfdu_Dset_Treetable_Query
    * @param Entity $dsetEntiy
    * @return void
    */
-  public function setCols( $criteria, $tableKey, $textKeys )
+  public function setCols($criteria, $tableKey, $textKeys)
   {
 
     $colSql = '';
-    
-    if( $textKeys )
-    {
-      $colSql = implode( " || ', ' ||  ", $textKeys ).' as dset_text ';
-    }
-    else 
-    {
+
+    if ($textKeys) {
+      $colSql = implode(" || ', ' ||  ", $textKeys).' as dset_text ';
+    } else {
       $colSql = "'{$this->domainNode->label}: ' || {$tableKey}.rowid as dset_text ";
     }
-    
-    
+
     $cols = array
     (
       "group_users.rowid as entry_id",
@@ -236,7 +225,7 @@ class AclMgmt_Qfdu_Dset_Treetable_Query
       $tableKey.".rowid as dset_rowid",
       $colSql
     );
-    $criteria->select( $cols );
+    $criteria->select($cols);
 
   }//end public function setCols */
 
@@ -251,7 +240,7 @@ class AclMgmt_Qfdu_Dset_Treetable_Query
    * @param Entity $dsetEntiy
    * @return void
    */
-  public function setColsListUser( $criteria, $tableKey, $textKeys )
+  public function setColsListUser($criteria, $tableKey, $textKeys)
   {
 
     $colSql = '';
@@ -259,34 +248,30 @@ class AclMgmt_Qfdu_Dset_Treetable_Query
     (
       $tableKey.".rowid"
     );
-    
-    if( $textKeys )
-    {
-      $colSql = implode( " || ', ' ||  ", $textKeys ).' as dset_text ';
-      
-      foreach( $textKeys as $textKey )
-      {
+
+    if ($textKeys) {
+      $colSql = implode(" || ', ' ||  ", $textKeys).' as dset_text ';
+
+      foreach ($textKeys as $textKey) {
         $groupBy[] = $textKey;
       }
-    }
-    else 
-    {
+    } else {
       $colSql = "'{$this->domainNode->label}: ' || {$tableKey}.rowid as dset_text ";
     }
-    
-    
+
+
     $cols = array
     (
       $tableKey.".rowid as dset_rowid",
       $colSql,
-      "count( distinct group_users.id_group ) as num_groups"
+      "count(distinct group_users.id_group) as num_groups"
     );
-    $criteria->select( $cols );
+    $criteria->select($cols);
 
-    $criteria->groupBy( $groupBy );
-    
+    $criteria->groupBy($groupBy);
+
   }//end public function setColsListUser */
-  
+
  /** inject the requested cols in the criteria
    *
    * to add more cols overwrite this method, or create more methods that also
@@ -298,7 +283,7 @@ class AclMgmt_Qfdu_Dset_Treetable_Query
    * @param Entity $dsetEntiy
    * @return void
    */
-  public function setColsListDset( $criteria, $tableKey, $textKeys )
+  public function setColsListDset($criteria, $tableKey, $textKeys)
   {
 
     $colSql = '';
@@ -306,34 +291,29 @@ class AclMgmt_Qfdu_Dset_Treetable_Query
     (
       $tableKey.".rowid"
     );
-    
-    if( $textKeys )
-    {
-      $colSql = implode( " || ', ' ||  ", $textKeys ).' as dset_text ';
-      
-      foreach( $textKeys as $textKey )
-      {
+
+    if ($textKeys) {
+      $colSql = implode(" || ', ' ||  ", $textKeys).' as dset_text ';
+
+      foreach ($textKeys as $textKey) {
         $groupBy[] = $textKey;
       }
-    }
-    else 
-    {
+    } else {
       $colSql = "'{$this->domainNode->label}: ' || {$tableKey}.rowid as dset_text ";
     }
-    
-    
+
     $cols = array
     (
       $tableKey.".rowid as dset_rowid",
       $colSql,
-      "count( distinct group_users.vid ) as num_users"
+      "count(distinct group_users.vid) as num_users"
     );
-    $criteria->select( $cols );
+    $criteria->select($cols);
 
-    $criteria->groupBy( $groupBy );
-    
+    $criteria->groupBy($groupBy);
+
   }//end public function setColsListDset */
-  
+
  /**
    * inject the table an join conditions in the criteria object
    * to append new join conditions overwrite this method, or create a second
@@ -343,10 +323,10 @@ class AclMgmt_Qfdu_Dset_Treetable_Query
    * @param string $tableKey
    * @return void
    */
-  public function setTables( $criteria, $tableKey )
+  public function setTables($criteria, $tableKey)
   {
 
-    $criteria->from( 'wbfsys_group_users group_users', 'group_users' );
+    $criteria->from('wbfsys_group_users group_users', 'group_users');
 
     $criteria->join
     (
@@ -354,9 +334,8 @@ class AclMgmt_Qfdu_Dset_Treetable_Query
         JOIN '.$tableKey.'
           ON group_users.vid = '.$tableKey.'.rowid
       ',
-      array( $tableKey )
+      array($tableKey)
     );
-
 
   }//end public function setTables */
 
@@ -381,120 +360,99 @@ class AclMgmt_Qfdu_Dset_Treetable_Query
    * @return void
    */
   public function appendConditions
-  ( 
-    $criteria, $condition, 
-    $ids, $tableKey, 
+  (
+    $criteria, $condition,
+    $ids, $tableKey,
     $textKeys, $context
   )
   {
 
-    if( isset( $condition['free'] ) && trim( $condition['free'] ) != ''  )
-    {
+    if (isset($condition['free']) && trim($condition['free']) != ''  ) {
 
-      if( ctype_digit( $condition['free'] ) )
-      {
+      if (ctype_digit($condition['free'])) {
         $criteria->where
         (
-          '(  '.$tableKey.'.rowid = \''.$condition['free'].'\' )'
+          '( '.$tableKey.'.rowid = \''.$condition['free'].'\')'
         );
-      }
-      else
-      {
-      
-        if( strpos( $condition['free'], ',' ) )
-        {
-        
-          $parts = explode( ',', $condition['free'] );
-          
-          foreach( $parts as $part )
-          {
-          
-            $part = trim( $part );
-            
+      } else {
+
+        if (strpos($condition['free'], ',')) {
+
+          $parts = explode(',', $condition['free']);
+
+          foreach ($parts as $part) {
+
+            $part = trim($part);
+
             // prüfen, dass der string nicht leer ist
-            if( '' == trim( $part ) )
+            if ('' == trim($part))
               continue;
 
             $tmp = array();
-            
-            foreach( $textKeys as $tKey )
-            {
-              $tmp[] = "(  upper({$tKey}) like upper('%{$part}%') )";
+
+            foreach ($textKeys as $tKey) {
+              $tmp[] = "( upper({$tKey}) like upper('%{$part}%'))";
             }
-              
-            $criteria->where( '( '.implode( ' OR ', $tmp ).' )' );
-          
+
+            $criteria->where('('.implode(' OR ', $tmp).')');
+
           }
-        
-        }
-        else
-        {
-        
+
+        } else {
+
           $part = $condition['free'];
-        
+
           $tmp = array();
-          
-          foreach( $textKeys as $tKey )
-          {
-            $tmp[] = "(  upper({$tKey}) like upper('%{$part}%') )";
+
+          foreach ($textKeys as $tKey) {
+            $tmp[] = "( upper({$tKey}) like upper('%{$part}%'))";
           }
-            
-          $criteria->where( '( '.implode( ' OR ', $tmp ).' )' );
+
+          $criteria->where('('.implode(' OR ', $tmp).')');
 
         }
-      
+
       }
 
     }//end if
-    
-    if( 'user' == $context->groupBy )
-    {
+
+    if ('user' == $context->groupBy) {
 
       $criteria->where
       (
-        "group_users.id_area = {$ids->areaId} 
-        	AND group_users.id_user = {$ids->userId}
-          AND 
-          ( 
-          	group_users.partial = 0 
-          	OR  
-          	group_users.partial is null 
+        "group_users.id_area = {$ids->areaId}
+          AND group_users.id_user = {$ids->userId}
+          AND
+          (
+            group_users.partial = 0
           )"
       );
-    
-    }
-    else if( 'dset' == $context->groupBy )
-    {
+
+    } elseif ('dset' == $context->groupBy) {
 
       $criteria->where
       (
-        "group_users.id_area = {$ids->areaId} 
-          AND 
-          ( 
-          	group_users.partial = 0 
-          	OR  
-          	group_users.partial is null 
+        "group_users.id_area = {$ids->areaId}
+          AND
+          (
+            group_users.partial = 0
           )"
       );
-    
-    }
-    else 
-    {
+
+    } else {
       $criteria->where
       (
-        "group_users.id_area = {$ids->areaId} 
-        	AND group_users.id_group = {$ids->groupId}
-        	AND group_users.id_user = {$ids->userId}
-          AND 
-          ( 
-          	group_users.partial = 0 
-          	OR  
-          	group_users.partial is null 
+        "group_users.id_area = {$ids->areaId}
+          AND group_users.id_group = {$ids->groupId}
+          AND group_users.id_user = {$ids->userId}
+          AND
+          (
+            group_users.partial = 0
           )"
       );
-      
+
     }
-    
+
     // and NOT group_users.vid IS NULL
 
   }//end public function appendConditions */
@@ -511,51 +469,39 @@ class AclMgmt_Qfdu_Dset_Treetable_Query
    * @param TArray $context
    * @return void
    */
-  public function checkLimitAndOrder( $criteria, $tableKey, $textKeys, $context  )
+  public function checkLimitAndOrder($criteria, $tableKey, $textKeys, $context  )
   {
-    
-    if( $textKeys )
-    {
-      // check if there is a given order
-      $criteria->orderBy( current($textKeys) );
-    }
-    else 
-    {
-      $criteria->orderBy( "{$tableKey}.rowid" );
-    }
 
+    if ($textKeys) {
+      // check if there is a given order
+      $criteria->orderBy(current($textKeys));
+    } else {
+      $criteria->orderBy("{$tableKey}.rowid");
+    }
 
     // Check the offset
-    if( $context->start )
-    {
-      if( $context->start < 0 )
+    if ($context->start) {
+      if ($context->start < 0)
         $context->start = 0;
-    }
-    else
-    {
+    } else {
       $context->start = null;
     }
-    $criteria->offset( $context->start );
+    $criteria->offset($context->start);
 
     // Check the limit
-    if( -1 == $context->qsize )
-    {
+    if (-1 == $context->qsize) {
       // no limit if -1
       $context->qsize = null;
-    }
-    else if( $context->qsize )
-    {
+    } elseif ($context->qsize) {
       // limit must not be bigger than max, for no limit use -1
-      if( $context->qsize > Wgt::$maxListSize )
+      if ($context->qsize > Wgt::$maxListSize)
         $context->qsize = Wgt::$maxListSize;
-    }
-    else
-    {
+    } else {
       // if limit 0 or null use the default limit
       $context->qsize = Wgt::$defListSize;
     }
 
-    $criteria->limit( $context->qsize );
+    $criteria->limit($context->qsize);
 
   }//end public function checkLimitAndOrder */
 

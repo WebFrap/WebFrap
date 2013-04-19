@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,9 +22,9 @@
 class LibFormatterMoney
 {
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
     /**
    * Enter description here...
@@ -68,9 +68,9 @@ class LibFormatterMoney
    */
   protected $size           =  2;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Magic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -83,12 +83,11 @@ class LibFormatterMoney
   $size = 2
   )
   {
-    if(Log::$levelVerbose)
+    if (Log::$levelVerbose)
       Log::create($this);
 
-    if( $money )
-    {
-      $this->setMoneyLanguage( $money );
+    if ($money) {
+      $this->setMoneyLanguage($money);
     }
 
     $this->separatorDec = $separatorDec;
@@ -97,21 +96,18 @@ class LibFormatterMoney
 
   }//end public function __construct
 
-
   /**
    *
    */
   public function __toString()
   {
-
     return $this->formatToEnglish();
 
   }//end public function __toString */
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Singleton
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @return LibFormatterMoney
@@ -119,23 +115,21 @@ class LibFormatterMoney
   public static function getInstance()
   {
 
-    if( is_null( self::$instance) )
-    {
+    if (is_null(self::$instance)) {
       self::$instance = new LibFormatterMoney();
     }
 
     return self::$instance;
 
   }//end public static function getInstance */
-  
+
  /**
    * @return LibFormatterMoney
    */
   public static function getActive()
   {
 
-    if( is_null( self::$instance) )
-    {
+    if (is_null(self::$instance)) {
       self::$instance = new LibFormatterMoney();
     }
 
@@ -143,17 +137,16 @@ class LibFormatterMoney
 
   }//end public static function getActive */
 
-  
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param string $separatorDec
    * @param string $separatorTh
    * @param int $size
    */
-  public function setFormat( $separatorDec = ',', $separatorTh = '.' , $size = 2 )
+  public function setFormat($separatorDec = ',', $separatorTh = '.' , $size = 2)
   {
     $this->separatorDec = $separatorDec;
     $this->separatorTh  = $separatorTh;
@@ -161,17 +154,16 @@ class LibFormatterMoney
 
   }//end public function setFormat
 
-
   /**
    * @param int $money
    */
-  public function setMoneyLanguage( $money )
+  public function setMoneyLanguage($money)
   {
     $this->moneyLanguage = $money;
-    $rawDec = explode( $this->separatorDec , $money );
+    $rawDec = explode($this->separatorDec , $money);
 
     $englishMoney = isset($rawDec[1]) ? '.'.$rawDec[1] : '';
-    $englishMoney = str_replace( $this->separatorTh , '' , $rawDec[0] ).$englishMoney;
+    $englishMoney = str_replace($this->separatorTh , '' , $rawDec[0]).$englishMoney;
 
     $this->moneyEnglish = $englishMoney;
 
@@ -180,14 +172,14 @@ class LibFormatterMoney
   /**
    *
    */
-  public function setMoneyEnglish( $englishMoney )
+  public function setMoneyEnglish($englishMoney)
   {
     $this->moneyEnglish = $englishMoney;
   }//end public function setMoneyEnglish
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Logic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -200,10 +192,9 @@ class LibFormatterMoney
   /**
    * @return float
    */
-  public function formatToLanguage( $money = null )
+  public function formatToLanguage($money = null)
   {
-    if(!$money)
-    {
+    if (!$money) {
       $money = $this->moneyEnglish;
     }
 
@@ -220,9 +211,9 @@ class LibFormatterMoney
   /**
    * @param string $money
    */
-  public static function format( $money )
+  public static function format($money)
   {
-    if(!self::$instance)
+    if (!self::$instance)
       self::getActive();
 
     return self::$instance->formatToLanguage($money);

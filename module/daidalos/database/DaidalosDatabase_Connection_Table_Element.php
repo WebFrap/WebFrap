@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -20,14 +20,11 @@
  * @package WebFrap
  * @subpackage ModGenf
  */
-class DaidalosDatabase_Connection_Table_Element
-  extends WgtTable
+class DaidalosDatabase_Connection_Table_Element extends WgtTable
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Logic
-////////////////////////////////////////////////////////////////////////////////
-
-
+//////////////////////////////////////////////////////////////////////////////*/
 
  /**
    * Generieren einer Tabelle ohne Template
@@ -35,9 +32,8 @@ class DaidalosDatabase_Connection_Table_Element
    * @param string $Class Der Datenbanktype
    * @return
    */
-  public function build( )
+  public function build()
   {
-
 
     // Creating the Head
     $head = '<thead>'.NL;
@@ -60,16 +56,14 @@ class DaidalosDatabase_Connection_Table_Element
     $body = '<tbody>'.NL;
 
     $num = 1;
-    foreach( $this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
       $rowid = $this->name."_row_$key";
 
       $body .= "<tr class=\"row$num\" id=\"$rowid\" >";
 
       $urlConf = 'index.php?c=Daidalos.Projects.genMask&amp;objid='.urlencode($key);
       $linkConf = '<a title="GenMask"  class="wcm wcm_req_ajax wgt_info" href="'.$urlConf.'">'
-        .Wgt::icon('daidalos/bdl_mask.png' , 'xsmall' , 'build' ).'</a>';
-
+        .Wgt::icon('daidalos/bdl_mask.png' , 'xsmall' , 'build').'</a>';
 
       $body .= '<td valign="top" >'.$key.'</td>'.NL;
       $body .= '<td valign="top" >'.$row['class'].'</td>'.NL;
@@ -83,14 +77,13 @@ class DaidalosDatabase_Connection_Table_Element
       $body .= '</tr>'.NL;
 
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors)
         $num = 1;
 
     }// ENDE FOREACH
 
     $body .= "</tbody>".NL;
     //\ Generieren des Bodys
-
 
     $html ='<table id="table_'.$this->name.'" class="wgt-table" >'.NL;
     $html .= $head;
@@ -100,8 +93,6 @@ class DaidalosDatabase_Connection_Table_Element
     return $html;
 
   }//end public function build */
-
-
 
 } // end class DaidalosDatabase_Connection_Table_Element
 

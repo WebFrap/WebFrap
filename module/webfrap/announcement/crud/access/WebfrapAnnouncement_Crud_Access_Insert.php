@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,14 +21,13 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapAnnouncement_Crud_Access_Insert
-  extends LibAclPermission
+class WebfrapAnnouncement_Crud_Access_Insert extends LibAclPermission
 {
   /**
    * @param TFlag $params
    * @param WbfsysMessage_Entity $entity
    */
-  public function loadDefault( $params, $entity = null )
+  public function loadDefault($params, $entity = null)
   {
 
     // laden der benötigten Resource Objekte
@@ -38,8 +37,7 @@ class WebfrapAnnouncement_Crud_Access_Insert
     // dann befinden wir uns im root und brauchen keine pfadafrage
     // um potentielle fehler abzufangen wird auch direkt der richtige Root gesetzt
     // nicht das hier einer einen falschen pfad injected
-    if( is_null( $params->aclRoot ) || 1 == $params->aclLevel )
-    {
+    if (is_null($params->aclRoot) || 1 == $params->aclLevel) {
       $params->isAclRoot     = true;
       $params->aclRoot       = 'mgmt-wbfsys_message';
       $params->aclRootId     = null;
@@ -50,8 +48,7 @@ class WebfrapAnnouncement_Crud_Access_Insert
 
     // wenn wir in keinem pfad sind nehmen wir einfach die normalen
     // berechtigungen
-    if( $params->isAclRoot )
-    {
+    if ($params->isAclRoot) {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt einen acl container
       $acl->getPermission
@@ -61,9 +58,7 @@ class WebfrapAnnouncement_Crud_Access_Insert
         true,     // alle relativen Rollen laden
         $this    // dieses objekt soll als container verwendet werden
       );
-    }
-    else
-    {
+    } else {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt das zugriffslevel
       $acl->getPathPermission
@@ -79,8 +74,6 @@ class WebfrapAnnouncement_Crud_Access_Insert
         $this  // sich selbst als container mit übergeben
       );
     }
-    
-
 
   }//end public function loadDefault */
 

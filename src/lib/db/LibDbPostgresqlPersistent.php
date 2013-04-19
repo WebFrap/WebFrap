@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -19,12 +19,11 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibDbPostgresqlPersistent
-  extends LibDbPostgresql
+class LibDbPostgresqlPersistent extends LibDbPostgresql
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Holen der Daten als Assoziativer Array
@@ -41,9 +40,9 @@ class LibDbPostgresqlPersistent
    */
   const fetchBoth       = PGSQL_BOTH;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Erstellen einer Datenbankverbindung
@@ -53,7 +52,6 @@ class LibDbPostgresqlPersistent
    */
   protected function connect()
   {
-
 
     $pgsql_con_string = 'host='.$this->conf['dbhost']
       .' port='.$this->conf['dbport']
@@ -66,24 +64,21 @@ class LibDbPostgresqlPersistent
     $this->databaseName = $this->conf['dbname'];
     $this->dbUser = $this->conf['dbuser'];
     $this->dbPwd  = $this->conf['dbpwd'];
-    
-    
-    if(DEBUG)
-    {
+
+    if (DEBUG) {
       $pgsql_con_debug = 'host='.$this->conf['dbhost']
         .' port='.$this->conf['dbport']
         .' dbname='.$this->conf['dbname']
         .' user='.$this->conf['dbuser']
         .' password=******************';
-      
-      Debug::console( 'PG: Constring '.$pgsql_con_debug );
+
+      Debug::console('PG: Constring '.$pgsql_con_debug);
     }
 
-    if(Log::$levelConfig)
-      Log::config( 'DbVerbindungsparameter: '. $pgsql_con_string );
+    if (Log::$levelConfig)
+      Log::config('DbVerbindungsparameter: '. $pgsql_con_string);
 
-    if( !$this->connectionRead = pg_pconnect( $pgsql_con_string ))
-    {
+    if (!$this->connectionRead = pg_pconnect($pgsql_con_string)) {
 
       throw new LibDb_Exception
       (
@@ -95,17 +90,12 @@ class LibDbPostgresqlPersistent
 
     $this->connectionWrite = $this->connectionRead;
 
-    if( $this->schema  )
-    {
-      $this->setSearchPath( $this->schema );
-    }
-    else if( isset( $this->conf['dbschema'] ) )
-    {
+    if ($this->schema) {
+      $this->setSearchPath($this->schema);
+    } elseif (isset($this->conf['dbschema'])) {
       $this->schema = $this->conf['dbschema'];
-      $this->setSearchPath( $this->conf['dbschema'] );
-    }
-    else
-    {
+      $this->setSearchPath($this->conf['dbschema']);
+    } else {
       $this->schema = 'public';
     }
 
@@ -121,19 +111,15 @@ class LibDbPostgresqlPersistent
   protected function dissconnect()
   {
 
-    if( is_resource(  $this->connectionRead ) )
-    {
-      pg_close( $this->connectionRead );
+    if (is_resource( $this->connectionRead)) {
+      pg_close($this->connectionRead);
     }
 
-    if( is_resource(  $this->connectionWrite ) )
-    {
-      pg_close( $this->connectionWrite );
+    if (is_resource( $this->connectionWrite)) {
+      pg_close($this->connectionWrite);
     }
 
   } // end protected function dissconnect()
-
-
 
 } //end class LibDbPostgresqlPersistent
 

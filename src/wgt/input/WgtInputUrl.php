@@ -20,15 +20,14 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputUrl
-  extends WgtInput
+class WgtInputUrl extends WgtInput
 {
 
   /**
    *
    * @return unknown_type
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array())
   {
 
     // ist immer ein text attribute
@@ -45,10 +44,10 @@ class WgtInputUrl
   public function buildAjaxArea()
   {
 
-    if(!isset($this->attributes['id']))
+    if (!isset($this->attributes['id']))
       return '';
 
-    if( !isset($this->attributes['value']) )
+    if (!isset($this->attributes['value']))
       $this->attributes['value'] = '';
 
     $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="value" ><![CDATA['
@@ -59,5 +58,4 @@ class WgtInputUrl
   }//end public function buildAjaxArea */
 
 } // end class WgtInputUrl
-
 

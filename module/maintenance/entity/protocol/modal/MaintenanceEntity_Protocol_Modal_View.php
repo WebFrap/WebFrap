@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MaintenanceEntity_Protocol_Modal_View
-  extends WgtModal
+class MaintenanceEntity_Protocol_Modal_View extends WgtModal
 {
 
   /**
@@ -35,24 +34,24 @@ class MaintenanceEntity_Protocol_Modal_View
    * @var int in px
    */
   public $width   = 950 ;
-  
+
   /**
    * Die Höhe des Modal Elements
    * @var int in px
    */
   public $height   = 650 ;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Display Methodes
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
  /**
   * the default edit form
   * @param DomainNode $domainNode
   * @param TFlag $params
   * @return boolean
   */
-  public function displayEntity( $domainNode, $params )
+  public function displayEntity($domainNode, $params)
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -63,33 +62,33 @@ class MaintenanceEntity_Protocol_Modal_View
     );
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText);
 
     // set the window status text
-    $this->setLabel( $i18nText );
+    $this->setLabel($i18nText);
 
     // set the from template
-    $this->setTemplate( 'maintenance/modal/entity/protocol_entity' );
+    $this->setTemplate('maintenance/modal/entity/protocol_entity');
 
     // create
-    $table = new WebfrapProtocol_Table_Element( 'tableProtocol', $this );
-    $table->setData( $this->model->getEntityProtocol( $domainNode, $params ) );
-    
-    
-    $table->setPagingId( 'wgt-from-'.$domainNode->domainName.'-maint-search' );
+    $table = new WebfrapProtocol_Table_Element('tableProtocol', $this);
+    $table->setData($this->model->getEntityProtocol($domainNode, $params));
+
+
+    $table->setPagingId('wgt-from-'.$domainNode->domainName.'-maint-search');
 
     // create panel
-    $tabPanel = new WgtPanelTable( $table );
+    $tabPanel = new WgtPanelTable($table);
 
-    $tabPanel->title = $this->i18n->l( $domainNode->label, $domainNode->domainI18n.'.label' ) ;
+    $tabPanel->title = $this->i18n->l($domainNode->label, $domainNode->domainI18n.'.label') ;
     $tabPanel->searchKey = $domainNode->domainName.'-maint-search';
-    
-    $table->buildProtocolEntityHtml();
-    $this->addElement( 'tableProtocol', $table  );
-    //$this->addMenuProtocolEntity( $params );
-    //$this->addActionsProtocolEntity( $params );
 
-    $this->addVar( 'context', 'protocol' );
+    $table->buildProtocolEntityHtml();
+    $this->addElement('tableProtocol', $table  );
+    //$this->addMenuProtocolEntity($params);
+    //$this->addActionsProtocolEntity($params);
+
+    $this->addVar('context', 'protocol');
 
     // ok kein fehler aufgetreten
     return null;
@@ -103,7 +102,7 @@ class MaintenanceEntity_Protocol_Modal_View
   * @param TFlag $params
   * @return boolean
   */
-  public function displayDataset( $domainNode, $objid, $params )
+  public function displayDataset($domainNode, $objid, $params)
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -114,33 +113,33 @@ class MaintenanceEntity_Protocol_Modal_View
     );
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText);
 
     // set the window status text
-    $this->setLabel( $i18nText );
+    $this->setLabel($i18nText);
 
     // set the from template
-    $this->setTemplate( 'maintenance/modal/entity/protocol_dataset' );
+    $this->setTemplate('maintenance/modal/entity/protocol_dataset');
 
     // create
-    $table = new WebfrapProtocol_Table_Element( 'tableProtocol', $this );
-    $table->setData( $this->model->getDatasetProtocol( $domainNode, $objid, $params ) );
-    
-    
-    $table->setPagingId( 'wgt-from-enterprise_company-maint-search' );
+    $table = new WebfrapProtocol_Table_Element('tableProtocol', $this);
+    $table->setData($this->model->getDatasetProtocol($domainNode, $objid, $params));
+
+
+    $table->setPagingId('wgt-from-enterprise_company-maint-search');
 
     // create panel
-    $tabPanel = new WgtPanelTable( $table );
+    $tabPanel = new WgtPanelTable($table);
 
-    $tabPanel->title = $this->i18n->l( 'Protocol Company', 'enterprise.company.label' ) ;
+    $tabPanel->title = $this->i18n->l('Protocol Company', 'enterprise.company.label') ;
     $tabPanel->searchKey = 'enterprise_company-maint-search';
-    
+
     $table->buildProtocolEntityHtml();
 
-    //$this->addMenuProtocolEntity( $params );
-    //$this->addActionsProtocolEntity( $params );
+    //$this->addMenuProtocolEntity($params);
+    //$this->addActionsProtocolEntity($params);
 
-    $this->addVar( 'context', 'protocol' );
+    $this->addVar('context', 'protocol');
 
     // ok kein fehler aufgetreten
     return null;

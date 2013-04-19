@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,58 +21,55 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-abstract class WgtWidget
-  extends PBase
+abstract class WgtWidget extends PBase
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * sub Modul Extention
    * @var array
    */
   protected $models       = array();
-  
+
   /**
    * Enter description here ...
    * @var string
    */
   protected $jsCode       = null;
-  
+
   /**
    * Der ID key des elements
    * @var string
    */
   public $idKey       = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Constructor and other Magics
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @return string
    */
   public function getIdKey()
   {
-    
-    if( is_null( $this->idKey ) )
+
+    if (is_null($this->idKey))
       $this->idKey = Webfrap::uniqKey();
-      
+
     return $this->idKey;
-    
+
   }//end public function getIdKey */
-  
+
   /**
    * @param string $idKey
    */
-  public function setIdKey( $idKey )
+  public function setIdKey($idKey)
   {
     $this->idKey = $idKey;
   }//end public function setIdKey */
-  
+
   /**
    * request the default action of the ControllerClass
    *
@@ -81,29 +78,26 @@ abstract class WgtWidget
    *
    * @return Model
    */
-  protected function loadModel( $modelKey , $key = null )
+  protected function loadModel($modelKey , $key = null)
   {
 
-    if(!$key)
+    if (!$key)
       $key = $modelKey;
 
     $modelName    = $modelKey.'_Model';
     $modelNameOld = 'Model'.$modelKey;
 
-
-    if( !isset( $this->models[$key]  ) )
-    {
-      if(!Webfrap::classLoadable($modelName))
-      {
+    if (!isset($this->models[$key]  )) {
+      if (!Webfrap::classLoadable($modelName)) {
 
         $modelName = $modelNameOld;
 
-        if(!Webfrap::classLoadable($modelName))
+        if (!Webfrap::classLoadable($modelName))
           throw new Controller_Exception('Internal Error','Failed to load Submodul: '.$modelName);
 
       }
 
-      $this->models[$key] = new $modelName( $this );
+      $this->models[$key] = new $modelName($this);
 
     }
 
@@ -117,16 +111,16 @@ abstract class WgtWidget
    * @param string $key
    * @return Model
    */
-  protected function getModel( $key )
+  protected function getModel($key)
   {
 
-    if( isset( $this->models[$key] ) )
+    if (isset($this->models[$key]))
       return $this->models[$key];
     else
       return null;
 
   }//protected function getModel */
-  
+
   /**
    * Methode wir beim initialisieren des Widgest aufgerufen
    */
@@ -134,7 +128,6 @@ abstract class WgtWidget
   {
     return $this->jsCode;
   }//end public function getJscode */
-
 
   /**
    * Methode wir beim initialisieren des Widgest aufgerufen
@@ -147,7 +140,7 @@ abstract class WgtWidget
   /**
    * Methode wird nach dem Rendern des Widgets aufgerufen
    */
-  public function shutdown(){}
+  public function shutdown() {}
 
 } // end abstract class WgtWidget
 

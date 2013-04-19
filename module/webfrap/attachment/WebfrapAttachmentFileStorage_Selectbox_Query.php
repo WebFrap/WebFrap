@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -23,39 +21,38 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapAttachmentFileStorage_Selectbox_Query
-  extends LibSqlQuery
+class WebfrapAttachmentFileStorage_Selectbox_Query extends LibSqlQuery
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
-    
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
+
+/*//////////////////////////////////////////////////////////////////////////////
 // Query Methodes
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
   /**
    * Fetch method for the WbfsysFileStorage Selectbox
    * @return void
    */
-  public function fetchSelectbox( $refId )
+  public function fetchSelectbox($refId)
   {
 
     $db = $this->getDb();
 
-    if( !$this->criteria )
+    if (!$this->criteria)
       $criteria = $db->orm->newCriteria();
     else
       $criteria = $this->criteria;
 
-    $criteria->select( array
+    $criteria->select(array
     (
       'wbfsys_file_storage.rowid as id',
       'wbfsys_file_storage.name || \': \' || wbfsys_file_storage.link as value'
      ));
 
-    $criteria->from( 'wbfsys_file_storage' );
-    
+    $criteria->from('wbfsys_file_storage');
+
     $criteria->joinOn
     (
       'wbfsys_file_storage',
@@ -64,15 +61,13 @@ class WebfrapAttachmentFileStorage_Selectbox_Query
       'id_storage'
     );
 
+    $criteria->orderBy('wbfsys_file_storage.name ');
+    $criteria->where("wbfsys_entity_file_storage.vid = {$refId}");
 
-    $criteria->orderBy( 'wbfsys_file_storage.name ' );
-    $criteria->where( "wbfsys_entity_file_storage.vid = {$refId}" );
-
-
-    $this->result = $db->orm->select( $criteria );
+    $this->result = $db->orm->select($criteria);
 
   }//end public function fetchSelectbox */
-  
+
   /**
    * Laden einer einzelnen Zeile,
    * Wird benötigt wenn der aktive Wert durch die Filter gerutscht ist.
@@ -83,30 +78,28 @@ class WebfrapAttachmentFileStorage_Selectbox_Query
    * @param int $entryId
    * @return void
    */
-  public function fetchSelectboxEntry( $entryId )
+  public function fetchSelectboxEntry($entryId)
   {
-  
+
     // wenn keine korrekte id > 0 übergeben wurde müssen wir gar nicht erst
     // nach einträgen suchen
-    if( !$entryId )
+    if (!$entryId)
       return array();
-  
+
     $db = $this->getDb();
 
     $criteria = $db->orm->newCriteria();
 
-    $criteria->select( array
+    $criteria->select(array
     (
       'DISTINCT wbfsys_file_storage.rowid as id',
       'wbfsys_file_storage.name as value'
      ));
-    $criteria->from( 'wbfsys_file_storage' );
+    $criteria->from('wbfsys_file_storage');
 
+    $criteria->where("wbfsys_file_storage.rowid = '{$entryId}'"  );
 
-
-    $criteria->where( "wbfsys_file_storage.rowid = '{$entryId}'"  );
-
-    return $db->orm->select( $criteria )->get();
+    return $db->orm->select($criteria)->get();
 
   }//end public function fetchSelectboxEntry */
 
@@ -119,31 +112,29 @@ class WebfrapAttachmentFileStorage_Selectbox_Query
    * @param int $entryId
    * @return void
    */
-  public function fetchSelectboxEntries( $entryIds )
+  public function fetchSelectboxEntries($entryIds)
   {
-    
+
     // wenn der array leer ist müssen wir nicht weiter prüfen
-    if( !$entryIds )
+    if (!$entryIds)
       return array();
-  
+
     $db = $this->getDb();
 
     $criteria = $db->orm->newCriteria();
 
-    $criteria->select( array
+    $criteria->select(array
     (
       'DISTINCT wbfsys_file_storage.rowid as id',
       'wbfsys_file_storage.name as value'
      ));
-    $criteria->from( 'wbfsys_file_storage' );
+    $criteria->from('wbfsys_file_storage');
 
+    $criteria->where("wbfsys_file_storage.rowid IN ('".implode("', '", $entryIds)."')"  );
 
-
-    $criteria->where( "wbfsys_file_storage.rowid IN ( '".implode("', '", $entryIds )."' )"  );
-
-    return $db->orm->select( $criteria )->getAll();
+    return $db->orm->select($criteria)->getAll();
 
   }//end public function fetchSelectboxEntries */
-  
+
 }//end class WebfrapAttachmentFileStorage_Selectbox_Query
 

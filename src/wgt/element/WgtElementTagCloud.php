@@ -15,18 +15,16 @@
 *
 *******************************************************************************/
 
-
 /**
  * Eine Tagcloud
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtElementTagCloud
-  extends WgtAbstract
+class WgtElementTagCloud extends WgtAbstract
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var string
@@ -59,16 +57,16 @@ class WgtElementTagCloud
    */
   public $refId = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * default constructor
    *
    * @param int $name the name of the wgt object
    */
-  public function __construct( $name = null, $view = null )
+  public function __construct($name = null, $view = null)
   {
 
     $this->texts  = new TArray();
@@ -76,8 +74,8 @@ class WgtElementTagCloud
     $this->name   = $name;
     $this->init();
 
-    if( $view )
-      $view->addElement( $name, $this );
+    if ($view)
+      $view->addElement($name, $this);
 
   } // end public function __construct */
 
@@ -85,11 +83,10 @@ class WgtElementTagCloud
    * @param TFlag $params
    * @return string
    */
-  public function render( $params = null )
+  public function render($params = null)
   {
 
-
-    if( $this->html )
+    if ($this->html)
       return $this->html;
 
     $codeEntr = '';
@@ -98,10 +95,8 @@ class WgtElementTagCloud
      * title:
      * content:
      */
-    if( $this->data )
-    {
-      foreach( $this->data as $entry )
-      {
+    if ($this->data) {
+      foreach ($this->data as $entry) {
 
         $codeEntr .= <<<HTML
 
@@ -112,31 +107,29 @@ HTML;
       }
     }
 
-    $id       = $this->getId( );
-    $iconAdd  = $this->icon( 'control/add.png', 'Add' );
+    $id       = $this->getId();
 
     $settings = array();
 
-    if( $this->refId )
+    if ($this->refId)
       $settings[] = '"refid":"'.$this->refId.'"';
 
-    if( $this->urlAutoComplete )
+    if ($this->urlAutoComplete)
       $settings[] = '"url_auto_complete":"'.SFormatStrings::cleanCC($this->urlAutoComplete).'"';
 
-    if( $this->urlCreate )
+    if ($this->urlCreate)
       $settings[] = '"url_tag_create":"'.SFormatStrings::cleanCC($this->urlCreate).'"';
 
-    if( $this->urlDisconnect )
+    if ($this->urlDisconnect)
       $settings[] = '"url_tag_disconnect":"'.SFormatStrings::cleanCC($this->urlDisconnect).'"';
 
-    $codeSetings = '{'.implode( ',', $settings ).'}';
+    $codeSetings = '{'.implode(',', $settings).'}';
 
 
     $settingsAuto  = '';
     $classAuto     = '';
 
-    if( $this->urlAutoComplete )
-    {
+    if ($this->urlAutoComplete) {
       $urlAutoComplete = SFormatStrings::cleanCC($this->urlAutoComplete);
 
       $settingsAuto = <<<HTML
@@ -175,9 +168,9 @@ HTML;
             {$settingsAuto}
 
             <button
-            	id="{$id}-trigger"
-            	tabindex="-1"
-            	class="wgt-button c_cntrl_add append wgt-overlay embed" >{$iconAdd}</button>
+              id="{$id}-trigger"
+              tabindex="-1"
+              class="wgt-button c_cntrl_add append wgt-overlay embed" ><i class="icon-plus-sign" ></i></button>
           </div>
         </td>
       </tr>
@@ -193,11 +186,9 @@ HTML;
 
 HTML;
 
-
     return $html;
 
   } // end public function render */
 
 } // end class WgtElementTagcloud
-
 

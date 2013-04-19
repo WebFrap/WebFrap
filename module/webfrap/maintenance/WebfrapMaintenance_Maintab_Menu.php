@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,15 +21,14 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapMaintenance_Maintab_Menu
-  extends WgtDropmenu
+class WebfrapMaintenance_Maintab_Menu extends WgtDropmenu
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * 
+   *
    * Enter description here ...
    * @var unknown_type
    */
@@ -39,32 +38,32 @@ class WebfrapMaintenance_Maintab_Menu
    * build the window menu
    * @param TArray $params
    */
-  public function buildMenu( $params )
+  public function buildMenu($params)
   {
 
-    $iconMenu         = $this->view->icon( 'control/menu.png'   , 'Menu'    );
-    $iconMisc         = $this->view->icon( 'control/misc.png'   , 'Misc'    );
-    $iconClose        = $this->view->icon( 'control/close.png'  , 'Close'   );
-    $iconEntity       = $this->view->icon( 'control/entity.png' , 'Entity'  );
-    $iconSearch       = $this->view->icon( 'control/search.png' , 'Search'  );
+    $iconMenu         = $this->view->icon('control/menu.png'   , 'Menu'    );
+    $iconMisc         = $this->view->icon('control/misc.png'   , 'Misc'    );
+    $iconClose        = $this->view->icon('control/close.png'  , 'Close'   );
+    $iconEntity       = $this->view->icon('control/entity.png' , 'Entity'  );
+    $iconSearch       = $this->view->icon('control/search.png' , 'Search'  );
 
     $entries = new TArray();
 
     $this->content = <<<HTML
-    
+
   <div class="inline" >
-    <button 
+    <button
       class="wcm wcm_control_dropmenu wgt-button"
       tabindex="-1"
-      id="{$this->id}-control" 
+      id="{$this->id}-control"
       wgt_drop_box="{$this->id}"  >{$iconMenu} {$this->view->i18n->l('Menu','wbf.label')}</button>
       <var id="{$this->id}-control-cfg-dropmenu"  >{"triggerEvent":"click"}</var>
   </div>
-    
+
   <div class="wgt-dropdownbox" id="{$this->id}" >
     <ul>
       <li>
-        <a class="wgtac_close" >{$iconClose} {$this->view->i18n->l( 'Close', 'wbf.label' )}</a>
+        <a class="wgtac_close" >{$iconClose} {$this->view->i18n->l('Close', 'wbf.label')}</a>
       </li>
     </ul>
   </div>
@@ -80,7 +79,7 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport( $params )
+  protected function entriesSupport($params)
   {
 
     $iconSupport   = $this->view->icon('control/support.png'  ,'Support');

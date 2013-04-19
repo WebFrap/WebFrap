@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -36,13 +36,13 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MaintenanceDb_Index_Stats_Maintab_Menu
-  extends WgtDropmenu
+class MaintenanceDb_Index_Stats_Maintab_Menu extends WgtDropmenu
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // menu: create
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
+
   /**
    * add a drop menu to the create window
    *
@@ -52,95 +52,61 @@ class MaintenanceDb_Index_Stats_Maintab_Menu
    *   string formId: the id of the form;
    * }
    */
-  public function buildMenu( $params )
+  public function buildMenu($params)
   {
-  
+
     // benötigte resourcen laden
-    $acl     = $this->getAcl();
+    $acl   = $this->getAcl();
     $view   = $this->getView();
 
-    $iconMenu      = $view->icon(  'control/menu.png',  'Menu');
-    $iconRebuild   = $view->icon(  'maintenance/rebuild_index.png', 'Rebuild Index');
-    $iconBookmark  = $view->icon(  'control/bookmark.png', 'Bookmark');
-    $iconClose     = $view->icon(  'control/close.png', 'Close');
-
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport( $params );
-
-
-    // prüfen ob der aktuelle benutzer überhaupt neue einträge anlegen darf
-    //if( $params->access->maintenance )
-    {
-
-      $entries->buttonInsert = <<<BUTTON
-
-
-BUTTON;
-
-    }
-
 
     $this->content = <<<HTML
-<ul class="wcm wcm_ui_dropmenu wgt-dropmenu" id="{$this->id}" >
-  <li class="wgt-root" >
-    <button class="wcm wcm_ui_button" >{$iconMenu} {$view->i18n->l('Menu','wbf.label')}</button>
-    <ul style="margin-top:-10px;" >
-      <li>
-        <p class="wgtac_bookmark" >{$iconBookmark} {$view->i18n->l('Bookmark','wbf.label')}</p>
-      </li>
-{$entries->custom}
-{$entries->support}
-      <li>
-        <p class="wgtac_close" >{$iconClose} {$view->i18n->l('Close','wbf.label')}</p>
-      </li>
-    </ul>
-  </li>
-  <li class="wgt-root" >
-    <button 
+<div class="inline" >
+  <button
+    class="wcm wcm_control_dropmenu wgt-button"
+    id="{$this->id}-control"
+    wgt_drop_box="{$this->id}_dropmenu"  ><i class="icon-reorder" ></i> {$view->i18n->l('Menu','wbf.label')}</button>
+  <var id="{$this->id}-control-cfg-dropmenu"  >{"triggerEvent":"mouseover","closeOnLeave":"true","align":"right"}</var>
+</div>
+
+<div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
+  <ul>
+    <li>
+      <a class="wgtac_bookmark" ><i class="icon-bookmark" ></i> {$view->i18n->l('Bookmark', 'wbf.label')}</a>
+    </li>
+  </ul>
+  <ul>
+    <li>
+      <a class="deeplink" ><i class="icon-info-sign" ></i> {$view->i18n->l('Support', 'wbf.label')}</a>
+      <span>
+      <ul>
+        <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Faq.create&amp;context=menu" ><i class="icon-info-sign" ></i> {$view->i18n->l('Faq', 'wbf.label')}</a></li>
+      </ul>
+      </span>
+    </li>
+    <li>
+      <a class="wgtac_close" ><i class="icon-remove-sign" ></i> {$view->i18n->l('Close','wbf.label')}</a>
+    </li>
+  </ul>
+</div>
+
+<div class="wgt-panel-control" >
+	<button
       class="wcm wcm_ui_button wgtac_recreate wcm_ui_tip-top"
-      title="{$view->i18n->l('Recreate the index','wbf.label')}" >{$iconRebuild} {$view->i18n->l('Recreate index','wbf.label')}</button>
-    <ul style="margin-top:-10px;" ></ul>
-  </li>  
-  <li class="wgt-root" >
-    <button 
+      title="{$view->i18n->l('Recreate the index','wbf.label')}" ><i class="icon-refresh" ></i> {$view->i18n->l('Recreate index','wbf.label')}</button>
+</div>
+
+<div class="wgt-panel-control" >
+  <button
       class="wcm wcm_ui_button wgtac_search_form wcm_ui_tip-top"
-      title="{$view->i18n->l('Open search form','wbf.label')}" >{$iconRebuild} {$view->i18n->l('Search','wbf.label')}</button>
-    <ul style="margin-top:-10px;" ></ul>
-  </li>
-{$entries->customButton}
-</ul>
+      title="{$view->i18n->l('Open search form','wbf.label')}" ><i class="icon-refresh" ></i> {$view->i18n->l('Search','wbf.label')}</button>
+</div>
+
 HTML;
 
   }//end public function buildMenu */
 
-  /**
-   * build the window menu
-   * @param TArray $params
-   */
-  protected function entriesSupport( $params )
-  {
-
-    $iconSupport    = $this->view->icon('control/support.png'  ,'Support');
-    $iconBug        = $this->view->icon('control/bug.png'     ,'Bug');
-    $iconFaq        = $this->view->icon('control/faq.png'     ,'Faq');
-    $iconHelp       = $this->view->icon('control/help.png'    ,'Help');
-
-    $html = <<<HTML
-
-      <li>
-        <p>{$iconSupport} {$this->view->i18n->l('Support','wbf.label')}</p>
-        <ul>
-          <li><a class="wcm wcm_req_ajax" href="modal.php?c=Webfrap.Docu.open&amp;key=wbfsys_message-create" >{$iconHelp} {$this->view->i18n->l('Help','wbf.label')}</a></li>
-          <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Issue.create&amp;context=create" >{$iconBug} {$this->view->i18n->l('Bug','wbf.label')}</a></li>
-          <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Faq.create&amp;context=create" >{$iconFaq} {$this->view->i18n->l('FAQ','wbf.label')}</a></li>
-        </ul>
-      </li>
-
-HTML;
-
-    return $html;
-    
-  }//end public function entriesSupport */
 
 }//end class MaintenanceDb_Index_Stats_Maintab_Menu
 

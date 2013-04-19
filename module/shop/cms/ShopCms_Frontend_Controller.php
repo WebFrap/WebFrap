@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -36,19 +36,17 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class ShopCms_Frontend_Controller
-  extends ControllerFrontend
+class ShopCms_Frontend_Controller extends ControllerFrontend
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var boolean
    */
   protected $fullAccess         = true;
-  
+
   /**
    * @var array
    */
@@ -56,57 +54,55 @@ class ShopCms_Frontend_Controller
   (
     'page' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'html' )
+      'method'    => array('GET'),
+      'views'      => array('html')
     ),
   );
-  
-////////////////////////////////////////////////////////////////////////////////
-// Methoden
-////////////////////////////////////////////////////////////////////////////////
 
+/*//////////////////////////////////////////////////////////////////////////////
+// Methoden
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @return void
    */
-  public function service_page( )
+  public function service_page()
   {
 
     $view     = $this->getView();
     $request  = $this->getRequest();
-    
-    /* @var $model ShopFront_Model */
-    $baseModel = $this->loadModel( 'ShopFront' );
-    
-    $storeId = $request->param( 'store', Validator::EID );
-    
-    if( $storeId )
-      $baseModel->setStoreId( $storeId );
-    else 
-      $storeId = $baseModel->getDefStoreId();
-    
-    $pageKey = $request->param( 'page', Validator::CKEY ) ;
-    
-    $model = $this->getCmsModel( );
 
-    $body = new ShopCms_Page_Body( $this->getView() );
+    /* @var $model ShopFront_Model */
+    $baseModel = $this->loadModel('ShopFront');
+
+    $storeId = $request->param('store', Validator::EID);
+
+    if ($storeId)
+      $baseModel->setStoreId($storeId);
+    else
+      $storeId = $baseModel->getDefStoreId();
+
+    $pageKey = $request->param('page', Validator::CKEY) ;
+
+    $model = $this->getCmsModel();
+
+    $body = new ShopCms_Page_Body($this->getView());
     $body->pageKey = $pageKey;
-    $body->setModel( $model );
-    
+    $body->setModel($model);
+
     $frontend = new ShopFront_Frontend();
-    $frontend->setModel( $baseModel );
-    
-    $frontend->render( $view, $body );
+    $frontend->setModel($baseModel);
+
+    $frontend->render($view, $body);
 
   }//end public function service_page */
-
 
   /**
    * @return ShopCms_Frontend_Model
    */
   public function getCmsModel()
   {
-    return $this->loadModel( 'ShopCms_Frontend' );
+    return $this->loadModel('ShopCms_Frontend');
   }//end public function getCmsModel */
 
 }//end class ShopFront_Controller

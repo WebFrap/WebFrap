@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,12 +21,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapPeople_Ajax_View
-  extends LibTemplateAjaxView
+class WebfrapPeople_Ajax_View extends LibTemplateAjaxView
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // display methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * automcomplete for the user roles
@@ -41,16 +40,15 @@ class WebfrapPeople_Ajax_View
    *
    * @return void
    */
-  public function displayAutocomplete( $key, $params )
+  public function displayAutocomplete($key, $params)
   {
 
     $view = $this->getTplEngine();
-    $view->setRawJsonData( $this->model->getUsersByKey( $key, $params ) );
+    $view->setRawJsonData($this->model->getUsersByKey($key, $params));
 
     return null;
 
   }//end public function displayAutocomplete */
 
- 
 } // end class WbfsysAnnouncement_Acl_Qfdu_Ajax_View */
 

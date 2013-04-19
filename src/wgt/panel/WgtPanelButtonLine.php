@@ -15,19 +15,17 @@
 *
 *******************************************************************************/
 
-
 /**
  * Basisklasse für Table Panels
  *
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtPanelButtonLine
-  extends WgtPanelElement
+class WgtPanelButtonLine extends WgtPanelElement
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var string
@@ -38,6 +36,7 @@ class WgtPanelButtonLine
    * @var Entity
    */
   public $entity = null;
+  
 
 /*//////////////////////////////////////////////////////////////////////////////
 // build method
@@ -46,7 +45,7 @@ class WgtPanelButtonLine
   /**
    * @var Base $env
    */
-  public function __construct( $env )
+  public function __construct($env)
   {
     $this->env = $env;
   }//end public function __construct */
@@ -57,7 +56,7 @@ class WgtPanelButtonLine
   public function render()
   {
 
-    $iconEdit = $this->icon( 'control/edit.png', 'Edit' );
+    $iconEdit = $this->icon('control/edit.png', 'Edit');
 
     $this->setUp();
 
@@ -73,8 +72,5 @@ class WgtPanelButtonLine
 
   }//end public function render */
 
-
-
 }//end class WgtPanelButtonLine
-
 

@@ -8,20 +8,18 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage Daidalos
  */
-class DaidalosSearch_Controller
-  extends Controller
+class DaidalosSearch_Controller extends Controller
 {
 
   /**
@@ -33,30 +31,27 @@ class DaidalosSearch_Controller
     'form','search'
   );
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @return void
    */
-  public function form( )
+  public function form()
   {
 
-    if( $this->tplEngine->isType( View::WINDOW ) )
-    {
+    if ($this->tplEngine->isType(View::WINDOW)) {
       $view = $this->tplEngine->newWindow('DeveloperSearch', 'Default');
-    }
-    else
-    {
+    } else {
       $view = $this->tplEngine;
     }
 
     $model = $this->loadModel('DaidalosSearch');
-    $view->setModel( $model );
+    $view->setModel($model);
 
     $view->setTitle('Search Form');
-    $view->setTemplate( 'daidalos/search/search_form' );
+    $view->setTemplate('daidalos/search/search_form');
 
   } // end public function form
 
@@ -69,38 +64,31 @@ class DaidalosSearch_Controller
     $httpRequest  = $this->getRequest();
     $view         = $this->tplEngine->newSubView('table_searchresult');
 
-    $view->setPosition( '#search_results' );
-    $view->setTemplate( 'daidalos/search/search_result' );
+    $view->setPosition('#search_results');
+    $view->setTemplate('daidalos/search/search_result');
 
     $model = $this->loadModel('DaidalosSearch');
 
-    $pattern = $httpRequest->data( 'keyword', Validator::TEXT );
-    $endings = $httpRequest->data( 'endings', Validator::TEXT );
-    $projects = $httpRequest->data( 'projects', Validator::TEXT );
-
+    $pattern = $httpRequest->data('keyword', Validator::TEXT);
+    $endings = $httpRequest->data('endings', Validator::TEXT);
+    $projects = $httpRequest->data('projects', Validator::TEXT);
 
     $seachFolders = array();
 
-    if( $projects )
-    {
-      foreach ( $projects as $project )
-      {
+    if ($projects) {
+      foreach ($projects as $project) {
         $seachFolders[] = PATH_ROOT.'/'.$project.'/';
       }
 
-      $model->search( $seachFolders, $pattern, $endings );
+      $model->search($seachFolders, $pattern, $endings);
 
-    }
-    else
-    {
-      $model->search( PATH_GW, $pattern, $endings );
+    } else {
+      $model->search(PATH_GW, $pattern, $endings);
     }
 
-
-    $view->setModel( $model );
+    $view->setModel($model);
 
   }//end public function search */
-
 
 } // end class DaidalosSearch_Controller
 

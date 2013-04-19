@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,19 +22,17 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputHidden
-  extends WgtInput
+class WgtInputHidden extends WgtInput
 {
 
   /**
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array())
   {
 
-    if($attributes) $this->attributes = array_merge($this->attributes,$attributes);
+    if ($attributes) $this->attributes = array_merge($this->attributes,$attributes);
 
-    if( isset( $this->attributes['type'] ) )
-    {
+    if (isset($this->attributes['type'])) {
       unset($this->attributes['type']);
     }
 
@@ -42,19 +40,19 @@ class WgtInputHidden
 
     return $html;
 
-  } // end public function build( )
+  } // end public function build()
 
   /**
    * (non-PHPdoc)
    * @see src/wgt/WgtAbstract#buildAjax()
    */
-  public function buildAjax( )
+  public function buildAjax()
   {
 
-    if(!isset($this->attributes['id']))
+    if (!isset($this->attributes['id']))
       return '';
 
-    if( !isset($this->attributes['value']) )
+    if (!isset($this->attributes['value']))
       $this->attributes['value'] = '';
 
     $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="value" ><![CDATA['
@@ -62,10 +60,7 @@ class WgtInputHidden
 
     return $html;
 
-  } // end public function buildAjax( )
-
-
+  } // end public function buildAjax()
 
 } // end class WgtItemHidden
-
 

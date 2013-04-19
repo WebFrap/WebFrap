@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -22,13 +21,12 @@
  * @author Dominik Bonsch <db@s-db.de>
  * @copyright Softwareentwicklung Dominik Bonsch <db@s-db.de>
  */
-class WebfrapProtocol_Table
-  extends WgtTable
+class WebfrapProtocol_Table extends WgtTable
 {
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * the html id of the table tag, this id can be used to replace the table
@@ -90,9 +88,9 @@ class WebfrapProtocol_Table
     ),
   );
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // context: table
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * the default table buildr method. This Method will be called when the
@@ -100,14 +98,14 @@ class WebfrapProtocol_Table
    *
    * @return string
    */
-  public function buildProtocolEntityHtml( )
+  public function buildProtocolEntityHtml()
   {
 
     // if we have html we can assume that the table was allready buildd
     // so we return just the html and stop here
     // this behaviour enables you to call a specific buildr method from outside
     // of the view, but then get the html of the called build method
-    if( $this->html )
+    if ($this->html)
       return $this->html;
 
     $this->numCols = 4;
@@ -135,9 +133,8 @@ class WebfrapProtocol_Table
       <span class="label" >'.$this->view->i18n->l('message','wbfsys.protocol_message.label.table_head_message').'</span>
     </th>'.NL;
 
-
     // the default navigation col
-    $head .= '<th style="width:70px;">'.$this->i18n->l( 'Nav.', 'wbf.label'  ).'</th>'.NL;
+    $head .= '<th style="width:70px;">'.$this->i18n->l('Nav.', 'wbf.label'  ).'</th>'.NL;
 
     $head .= '</tr>'.NL;
     $head .= '</thead>'.NL;
@@ -148,26 +145,23 @@ class WebfrapProtocol_Table
 
     // simple switch method to create collored rows
     $num = 1;
-    foreach( $this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
 
       $objid       = $row['wbfsys_protocol_message_'.Db::PK];
       $rowid       = $this->id.'_row_'.$objid;
-      $navigation  = $this->buildActions( $objid );
+      $navigation  = $this->rowMenu($objid, $row);
 
       $body .= '<tr class="row'.$num.'" id="'.$rowid.'" >'.NL;
-
 
       $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['core_person_firstname']).' '.Validator::sanitizeHtml($row['core_person_lastname']).'</td>'.NL;
       $body .= '<td valign="top" >'.Validator::sanitizeHtml($row['wbfsys_protocol_message_context']).'</td>'.NL;
       $body .= '<td valign="top" >'.$row['wbfsys_protocol_message_message'].'</td>'.NL;
 
-
       $body .= '<td valign="top" style="text-align:center;" >'.$navigation.'</td>'.NL;
       $body .= '</tr>'.NL;
 
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors)
         $num = 1;
 
     } //end foreach
@@ -177,7 +171,7 @@ class WebfrapProtocol_Table
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if( $this->insertMode )
+    if ($this->insertMode)
       $this->html .= '<div id="'.$this->id.'" >'.NL;
 
     $this->html .= '<table id="'.$this->id.'_table" class="wgt-table" >'.NL;
@@ -190,8 +184,7 @@ class WebfrapProtocol_Table
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if( $this->insertMode )
-    {
+    if ($this->insertMode) {
       $this->html .= '</div>'.NL;
 
       $this->html .= '<script type="application/javascript" >'.NL;
@@ -209,29 +202,27 @@ class WebfrapProtocol_Table
    *
    * @return String
    */
-  public function buildProtocolEntityAjax( )
+  public function buildProtocolEntityAjax()
   {
-
 
     // if we have html we can assume that the table was allready buildd
     // so we return just the html and stop here
     // this behaviour enables you to call a specific buildr method from outside
     // of the view, but then get the html of the called build method
-    if( $this->html )
+    if ($this->html)
       return $this->html;
 
     $body = '';
 
-    foreach( $this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
 
       $objid       = $row['demo_entity1_'.Db::PK];
 
       $rowid       = $this->id.'_row_'.$objid;
-      $navigation  = $this->buildActions( $objid  );
+      $navigation  = $this->rowMenu($objid, $row  );
 
       // is this an insert or an update area
-      if( $this->insertMode )
+      if ($this->insertMode)
         $body .= '<htmlArea selector="table#'.$this->id.'_table>tbody" action="append" ><![CDATA[<tr id="'.$rowid.'" >'.NL;
       else
         $body .= '<htmlArea selector="tr#'.$rowid.'" action="html" ><![CDATA[';
@@ -240,7 +231,7 @@ class WebfrapProtocol_Table
       $body .= '<td valign="top" class="ignore" style="text-align:center;" >'.$navigation.'</td>'.NL;
 
       // is this an insert or an update area
-      if( $this->insertMode )
+      if ($this->insertMode)
         $body .= '</tr>]]></htmlArea>'.NL;
       else
         $body .= ']]></htmlArea>'.NL;
@@ -250,7 +241,6 @@ class WebfrapProtocol_Table
     $this->html = $body;
 
     return $this->html;
-
 
   }//end public function buildProtocolEntityAjax */
 
@@ -265,9 +255,6 @@ class WebfrapProtocol_Table
     $html .= '    <div class="full" >';
     $html .= '     <div class="menu left" style="width:100px;" >';
     $html .=         $this->menuTableSize();
-    $html .= '     </div>';
-    $html .= '     <div class="menu"  style="text-align:center;margin:0px auto;width:350px;" >';
-    $html .=         $this->pagingMenu( $this->url['paging'][1]  );
     $html .= '     </div>';
     $html .= '     <div class="right menu"  >';
     $html .=         $this->menuNumEntries();

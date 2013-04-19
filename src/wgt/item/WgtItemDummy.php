@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -29,16 +29,14 @@ class WgtItemDummy
    */
   public $message = null;
 
-
   /**
    * Den Constructor
    * @param string $Message Die Fehlermeldung
    *
    * @return void
    */
-  public function __construct( $Message )
+  public function __construct($Message)
   {
-
 
     $this->message = $Message;
 
@@ -48,13 +46,10 @@ class WgtItemDummy
    *
    * @return String
    */
-  public function build( )
+  public function build()
   {
-
     return $this->message;
   } // end of member function build
 
-
 } // end of WgtItemDummy
-
 

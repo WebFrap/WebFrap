@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,8 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyMessage_Widget_Table_Ajax_View
-  extends LibTemplateAjaxView
+class MyMessage_Widget_Table_Ajax_View extends LibTemplateAjaxView
 {
  /**
   * de:
@@ -34,13 +33,13 @@ class MyMessage_Widget_Table_Ajax_View
   * @param TFlag $params benamte parameter
   * @return boolean
   */
-  public function displayInsert( $params )
+  public function displayInsert($params)
   {
 
-    $ui = $this->loadUi( 'MyMessage_Widget_Table' );
-    $ui->setModel( $this->model );
+    $ui = $this->loadUi('MyMessage_Widget_Table');
+    $ui->setModel($this->model);
 
-    $ui->listEntry( $params->access, $params, true );
+    $ui->listEntry($params->access, $params, true);
 
     // kein fehler? alles bestens
     return null;
@@ -56,13 +55,13 @@ class MyMessage_Widget_Table_Ajax_View
   * @param TFlag $params benamte parameter
   * @return boolean
   */
-  public function displayUpdate( $params )
+  public function displayUpdate($params)
   {
 
-    $ui = $this->loadUi( 'MyMessage_Widget_Table' );
-    $ui->setModel( $this->model );
+    $ui = $this->loadUi('MyMessage_Widget_Table');
+    $ui->setModel($this->model);
 
-    $ui->listEntry( $params->access, $params, false );
+    $ui->listEntry($params->access, $params, false);
 
     // kein fehler? alles bestens
     return null;

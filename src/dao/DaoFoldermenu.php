@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Data Access Object zum laden des Menüs aus den conf Dateien
@@ -22,12 +21,11 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class DaoFoldermenu
-  extends Dao
+class DaoFoldermenu extends Dao
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 //  Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Der erste anzugeigenden Eintrag des Menüs
@@ -75,16 +73,15 @@ class DaoFoldermenu
    * @var string
    */
   public $title   = null;
-  
+
   /**
    * @var string
    */
   public $label   = null;
-  
-////////////////////////////////////////////////////////////////////////////////
-// Static Attributes
-////////////////////////////////////////////////////////////////////////////////
 
+/*//////////////////////////////////////////////////////////////////////////////
+// Static Attributes
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -92,16 +89,15 @@ class DaoFoldermenu
    */
   protected static $pool = array();
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Constructor
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
    * @param string $files
    */
-  public function __construct( $files, $interface = 'maintab.php' )
+  public function __construct($files, $interface = 'maintab.php')
   {
 
     $this->interface = $interface;
@@ -114,54 +110,50 @@ class DaoFoldermenu
 
     $title = null;
     $label = null;
-    
-    foreach( $files as $file )
-      include $file->getName( true );
 
-    if( $title )
+    foreach ($files as $file)
+      include $file->getName(true);
+
+    if ($title)
       $this->title = $title;
-      
-    if( $label )
+
+    if ($label)
       $this->label = $label;
-      
+
   }//end public function __construct */
 
   /**
    * Zusammenführen von bereits geladenen und neuen menüdaten
    */
-  public function merge( $data )
+  public function merge($data)
   {
 
-    if( $data->firstEntry )
+    if ($data->firstEntry)
       $this->firstEntry = $data->firstEntry;
 
-    if($data->folders)
-    {
-      $this->folders = array_merge( $this->folders, $data->folders );
+    if ($data->folders) {
+      $this->folders = array_merge($this->folders, $data->folders);
     }
 
-    if($data->files)
-    {
-      $this->files = array_merge( $this->files, $data->files );
+    if ($data->files) {
+      $this->files = array_merge($this->files, $data->files);
     }
 
-    if($data->crumbs)
-    {
+    if ($data->crumbs) {
       $this->crumbs = $data->crumbs;
     }
-    
-    if( $data->title )
+
+    if ($data->title)
       $this->title = $data->title;
-      
-    if( $data->label )
+
+    if ($data->label)
       $this->label = $data->label;
 
   }//end public function merge */
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Static Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -169,13 +161,13 @@ class DaoFoldermenu
    * @param boolean $all
    * @return DaoFoldermenu
    */
-  public static function get( $menuName, $all = false  )
+  public static function get($menuName, $all = false  )
   {
 
-    if(DEBUG)
+    if (DEBUG)
       Debug::console('menu name '.$menuName);
 
-    if(isset(self::$pool[$menuName]))
+    if (isset(self::$pool[$menuName]))
       return self::$pool[$menuName];
     else
       return self::load($menuName, $all);
@@ -188,32 +180,31 @@ class DaoFoldermenu
    * @param boolean $all should the system search in every conf folder or use the first menu it finds
    * @return array
    */
-  public static function load( $menuName , $all = false )
+  public static function load($menuName , $all = false)
   {
 
     //self::$pool[$menuName] = array();
 
-    foreach( Conf::$confPath as $path )
-    {
+    foreach (Conf::$confPath as $path) {
 
       $menuPath = $path.'/menu/'.$menuName.'/';
 
-      if( !file_exists( $menuPath ) )
+      if (!file_exists($menuPath))
         continue;
 
-      $folder   = new LibFilesystemFolder( $menuPath );
-      $menuData = new DaoFoldermenu( $folder->getFiles() );
+      $folder   = new LibFilesystemFolder($menuPath);
+      $menuData = new DaoFoldermenu($folder->getFiles());
 
-      if(DEBUG)
-        Debug::console( 'load menu '.$menuName.' from '.$menuPath ,$menuData );
+      if (DEBUG)
+        Debug::console('load menu '.$menuName.' from '.$menuPath ,$menuData);
 
-      if( isset( self::$pool[$menuName] ) )
-        self::$pool[$menuName]->merge( $menuData );
+      if (isset(self::$pool[$menuName]))
+        self::$pool[$menuName]->merge($menuData);
       else
         self::$pool[$menuName] = $menuData ;
 
        // break after found data
-       if( !$all )
+       if (!$all)
         break;
     }
 
@@ -222,7 +213,6 @@ class DaoFoldermenu
       : array();
 
   }//end public static function load */
-
 
 }//end class DaoFoldermenu
 

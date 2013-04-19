@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -22,19 +21,18 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class MyActionLog_Table_Maintab_View
-  extends WgtMaintab
+class MyActionLog_Table_Maintab_View extends WgtMaintab
 {
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
     /**
     * @var MyTask_Table_Model
     */
     public $model = null;
-    
+
     /**
     * @var MyTask_Crud_Model
     */
@@ -44,39 +42,36 @@ class MyActionLog_Table_Maintab_View
     * @var MyTask_Table_Ui
     */
     public $ui = null;
-    
-////////////////////////////////////////////////////////////////////////////////
-// getter & setter
-////////////////////////////////////////////////////////////////////////////////
 
-  
+/*//////////////////////////////////////////////////////////////////////////////
+// getter & setter
+//////////////////////////////////////////////////////////////////////////////*/
+
     /**
      * @setter self::crudModel
      * @param MyTask_Crud_Model $crudModel
      */
-    public function setModelCrud( $crudModel )
+    public function setModelCrud($crudModel)
     {
-      
+
       $this->crudModel = $crudModel;
-      
+
     }//end public function setModelCrud */
-    
+
     /**
      * @getter self::crudModel
      * @return MyTask_Crud_Model
      */
-    public function getModelCrud( )
+    public function getModelCrud()
     {
-  
       return $this->crudModel;
-      
-    }//end public function getModelCrud */
-    
 
-////////////////////////////////////////////////////////////////////////////////
+    }//end public function getModelCrud */
+
+/*//////////////////////////////////////////////////////////////////////////////
 // list display methodes
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
  /**
   * de:
   *
@@ -85,14 +80,14 @@ class MyActionLog_Table_Maintab_View
   * @param TFlag $params benamte parameter
   * @return boolean
   */
-  public function displayListing( $params )
+  public function displayListing($params)
   {
 
     // laden der benötigten resourcen
     $request = $this->getRequest();
 
     // setzen des templates
-    $this->setTemplate( 'my/task/maintab/listing' );
+    $this->setTemplate('my/task/maintab/listing');
 
     // fetch the i18n text only one time
     $i18nText = $this->i18n->l
@@ -108,28 +103,27 @@ class MyActionLog_Table_Maintab_View
     // such formular ID und Aktion müssen gesetzt werden
     // sie können von auserhalb übergeben werden, wenn nicht vorhanden
     // muss eine standard action sowie eine standard id gesetzt werden
-    if( !$params->searchFormAction )
+    if (!$params->searchFormAction)
       $params->searchFormAction = 'index.php?c=Project.Project.search';
 
-    if( !$params->searchFormId )
+    if (!$params->searchFormId)
       $params->searchFormId = 'wgt-form-table-project_project-search';
 
     // set search form erweitert die Action anhand der in params mit
     // übergebene flags und schiebt formAction und formId in den VAR index
     // der aktuellen view
-    $this->setSearchFormData( $params );
+    $this->setSearchFormData($params);
 
     /// addMenu erstellt das dropdown menü und schiebt es dann in die view
-    $this->addMenuListing( $params );
-    $this->addActionsListing( $params );
+    $this->addMenuListing($params);
+    $this->addActionsListing($params);
 
     // über publish kann definiert werden, dass mit dem schliesen des listen
     // elements der inhalt eines bestimmten UI-Elements neu geladen werden muss
     // Diese Feature wird unter anderem dazu verwendet editierbare Selectboxen
     // zu erstellen
     // target, field and targetId. If not this was an invalid request
-    if( 'selectbox' === $params->publish )
-    {
+    if ('selectbox' === $params->publish) {
 
       $onClose = <<<BUTTONJS
 
@@ -138,24 +132,24 @@ class MyActionLog_Table_Maintab_View
 BUTTONJS;
 
       // on close the calling selectbox has to be updated
-      $this->addEvent( 'onclose' , 'refreshSelectbox' , $onClose );
+      $this->addEvent('onclose' , 'refreshSelectbox' , $onClose);
 
       // clean the targetId to no affect the id of the table
       $params->targetId = null;
     }
-    
+
     $crudUi = $this->loadUi('MyTask_Crud');
-    $crudUi->setModel( $this->crudModel );
-    $crudUi->createForm( $params );
-    
-    
+    $crudUi->setModel($this->crudModel);
+    $crudUi->createForm($params);
+
+
     $ui = $this->loadUi('MyTask_Table');
 
     // Das Listenelement wird erstellt
     // ACLs werden im Model weiter ausgewertet
     $ui->createListItem
     (
-      $this->model->search( $params ),
+      $this->model->search($params),
       $params
     );
 /*
@@ -173,10 +167,10 @@ BUTTONJS;
 
   }//end public function displayListing */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // context table
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
   /**
    * de:
    *
@@ -184,7 +178,7 @@ BUTTONJS;
    *
    * @param TFlag $params benamte parameter
    */
-  public function addMenuListing( $params )
+  public function addMenuListing($params)
   {
 
     $menu     = $this->newMenu
@@ -195,7 +189,7 @@ BUTTONJS;
 
     // wir übernehmen einfach die ID des Maintabs und hängen dropmenu dran
     $menu->id = $this->id.'_dropmenu';
-    $menu->buildMenu( $params );
+    $menu->buildMenu($params);
 
     return true;
 
@@ -214,7 +208,7 @@ BUTTONJS;
    *   LibAclContainer access: Container mit den aktiven ACL Informationen
    * }
    */
-  public function addActionsListing( $params )
+  public function addActionsListing($params)
   {
 
     // en:
@@ -232,11 +226,11 @@ BUTTONJS;
     $code = <<<BUTTONJS
 
     // close tab
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       self.close();
     });
 
-    self.getObject().find(".wgtac_search").click(function(){
+    self.getObject().find(".wgtac_search").click(function() {
       \$R.form('{$params->searchFormId}', null, {search:true});
     });
 
@@ -244,19 +238,18 @@ BUTTONJS;
 BUTTONJS;
 
     // create code wird ohne creatbutton auch nicht benötigt
-    if( $params->access->insert )
-    {
+    if ($params->access->insert) {
       $code .= <<<BUTTONJS
-    self.getObject().find(".wgtac_new").click(function(){
+    self.getObject().find(".wgtac_new").click(function() {
        \$S('#wgt-form-my_task-table-crud').show();
     });
-    
-    self.getObject().find(".wgtac_create").click(function(){
-      \$R.form( '{$params->formId}' );
+
+    self.getObject().find(".wgtac_create").click(function() {
+      \$R.form('{$params->formId}');
       \$S('#wgt-form-my_task-table-crud').hide();
     });
-    
-    self.getObject().find(".wgtac_cancel").click(function(){
+
+    self.getObject().find(".wgtac_cancel").click(function() {
        \$S('#wgt-form-my_task-table-crud').hide();
     });
 

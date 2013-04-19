@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,7 +22,7 @@
  */
 class WgtTplButtonList
 {
-  
+
   /**
    * @var LibTemplate $view
    * @var string $id
@@ -31,48 +31,42 @@ class WgtTplButtonList
    * @var string $nameEntries
    * @var array $entries
    */
-  public static function render( $view, $id, $inpId, $formId, $nameEntries, $entries )
+  public static function render($view, $id, $inpId, $formId, $nameEntries, $entries)
   {
-    
-    $iconDel = $view->icon( 'control/delete.png', 'Delete'  );
-    
-    
+
+    $iconDel = $view->icon('control/delete.png', 'Delete'  );
+
     $codeEntries = '';
-    foreach( $entries as $entry )
-    {
-      
+    foreach ($entries as $entry) {
+
       $codeEntries .= <<<HTML
-    <li><input 
-      type="hidden" 
+    <li><input
+      type="hidden"
       name="{$nameEntries}[{$entry['id']}]"
       class="asgd-{$formId}"
-      value="{$entry['value']}" /><button 
-        class="wgt-button" >{$entry['label']}</button><button 
-        class="wgt-button append" 
+      value="{$entry['value']}" /><button
+        class="wgt-button" >{$entry['label']}</button><button
+        class="wgt-button append"
         onclick="\$S(this).parentX('li').remove();" >{$iconDel}</button></li>
 
 HTML;
-      
+
     }
-    
+
     $code = <<<HTML
-    
+
   <ul id="{$id}" class="wcm wcm_widget_inputlist" >
     {$codeEntries}
   </ul>
   <var id="{$id}-cfg-inplist" >
   {"input":"{$inpId}"}
   </var>
-    
+
 HTML;
-    
+
     return $code;
 
   }//end public static function render */
-  
- 
-
 
 }//end class WgtTplButtonList
-
 

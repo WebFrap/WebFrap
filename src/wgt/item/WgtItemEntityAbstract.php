@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,9 +21,9 @@
  */
 abstract class WgtItemEntityAbstract
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * the entity Name
@@ -76,9 +76,9 @@ abstract class WgtItemEntityAbstract
    */
   public $data = array();
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter, Setter, Adder, Remover
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * set the entity name for the comment
@@ -87,8 +87,8 @@ abstract class WgtItemEntityAbstract
    */
   public function setEntity($entity)
   {
-    if(Log::$levelDebug)
-      Log::start( __file__ , __line__ ,__method__ ,array($entity) );
+    if (Log::$levelDebug)
+      Log::start(__file__ , __line__ ,__method__ ,array($entity));
 
     $this->entity = $entity;
   }//end public function setTable($table)
@@ -100,8 +100,8 @@ abstract class WgtItemEntityAbstract
    */
   public function setVid($vid)
   {
-    if(Log::$levelDebug)
-      Log::start( __file__ , __line__ ,__method__ ,array($vid) );
+    if (Log::$levelDebug)
+      Log::start(__file__ , __line__ ,__method__ ,array($vid));
 
     $this->vid = $vid;
   }//end public function setVid($vid)
@@ -113,8 +113,8 @@ abstract class WgtItemEntityAbstract
    */
   public function setNameSpace($nameSpace)
   {
-    if(Log::$levelDebug)
-      Log::start( __file__ , __line__ ,__method__ ,array($nameSpace) );
+    if (Log::$levelDebug)
+      Log::start(__file__ , __line__ ,__method__ ,array($nameSpace));
 
     $this->nameSpace = $nameSpace;
   }//end public function setNameSpace($nameSpace)
@@ -124,40 +124,40 @@ abstract class WgtItemEntityAbstract
    *
    * @param boolean $flag
    */
-  public function setMultiLingual( $flag = true )
+  public function setMultiLingual($flag = true)
   {
 
     $this->multiLingual = $flag;
 
-  }//end public function setMultiLingual( $flag = true )
+  }//end public function setMultiLingual($flag = true)
 
   /**
    * Enter description here...
    *
    */
-  public function setEditAble( $flag = true )
+  public function setEditAble($flag = true)
   {
     $this->editAble = $flag;
-  }//end public function setEditAble( $flag = true )
+  }//end public function setEditAble($flag = true)
 
   /**
    * set
    *
    */
-  public function setPreId( $preId )
+  public function setPreId($preId)
   {
     $this->preId = $preId;
-  }//end public function setPreId( $preId )
+  }//end public function setPreId($preId)
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Logic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Enter description here...
    *
    */
-  protected abstract function load();
+  abstract protected function load();
 
   /**
    * build the item to html
@@ -183,8 +183,7 @@ abstract class WgtItemEntityAbstract
    * public function build the tabs
    * @return string
    */
-  public abstract function build( );
+  abstract public function build();
 
 } // end class WgtItemEntityAbstract
-
 

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,20 +22,26 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class TestRunner_Controller
-  extends Controller
+class TestRunner_Controller extends Controller
 {
 
   /**
-   *
-   * Enter description here ...
    * @var array
    */
-  protected $callAble = array
+  protected $options           = array
   (
-    'help',
-    'folder',
-    'file',
+    'help' => array
+    (
+      'views'      => array('cli')
+    ),
+    'folder' => array
+    (
+      'views'      => array('cli')
+    ),
+    'file' => array
+    (
+      'views'      => array('cli')
+    ),
   );
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -45,17 +51,14 @@ class TestRunner_Controller
   /**
    *
    */
-  public function folder()
+  public function service_folder($request, $response)
   {
 
     $view   = $response->loadView('test-report', 'TestRunner');
     $model  = $this->loadModel('TestRunner');
-    $view->setModel( $model );
+    $view->setModel($model);
 
-    $request = $this->getRequest();
-
-    if( $folder = $request->param( 'folder', Validator::TEXT ) )
-    {
+    if ($folder = $request->param('folder', Validator::TEXT)) {
       $view->displayFolder($folder);
     }
 
@@ -66,19 +69,15 @@ class TestRunner_Controller
   /**
    *
    */
-  public function file()
+  public function service_file($request, $response)
   {
 
     $view   = $response->loadView('test-report', 'TestRunner');
     $model  = $this->loadModel('TestRunner');
     $view->setModel($model);
 
-    $request = $this->getRequest();
-
-
-    if( $file = $request->param( 'file', Validator::TEXT ) )
-    {
-      $view->displayFile( $file );
+    if ($file = $request->param('file', Validator::TEXT)) {
+      $view->displayFile($file);
     }
 
     return true;
@@ -88,7 +87,7 @@ class TestRunner_Controller
   /**
    *
    */
-  public function help()
+  public function service_help($request, $response)
   {
 
     $view   = $response->loadView('test-help', 'TestRunner');

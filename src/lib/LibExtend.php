@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -32,11 +31,10 @@ class LibExtend
    * @param unknown_type $arguments
    * @return unknown_type
    */
-  public function __call( $param, $arguments = array() )
+  public function __call($param, $arguments = array())
   {
 
   }//end public function __call
-
 
 } // end class LibExtend
 

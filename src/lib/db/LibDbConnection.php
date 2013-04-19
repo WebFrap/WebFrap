@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -23,9 +23,9 @@
  */
 abstract class LibDbConnection
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Constantes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * fetch as assoc array
@@ -42,17 +42,16 @@ abstract class LibDbConnection
    */
   const fetchBoth         = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Public Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * The ORM Layer in the WebFrap Database Layer
    * @var LibDbOrm
    */
   public $orm                  = null;
-  
-  
+
   /**
    * name of the connected Database
    *
@@ -64,40 +63,40 @@ abstract class LibDbConnection
    * Databaseconf
    */
   public $schema            = null;
-  
+
   /**
    * Die Connection URL
    * @var string
    */
   public $dbUrl      = null;
-  
+
   /**
    * Der Port der Datenbank
    * @var string
    */
   public $dbPort      = null;
-  
+
   /**
    * Der aktive User
    * @var string
    */
   public $dbUser      = null;
-  
+
   /**
    * Der aktive User
    * @var string
    */
   public $dbPwd      = null;
-  
+
   /**
    * Zeit die für Datenbankabfragen aufgewendet wurde
    * @var string
    */
   public $queryTime      = 0;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Protected Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * the datbase resource id for the read connection
@@ -146,7 +145,6 @@ abstract class LibDbConnection
    */
   protected $lastQuery         = null;
 
-
   /**
    * array with the database connection parameters
    * @var array
@@ -170,25 +168,24 @@ abstract class LibDbConnection
    */
   protected $protocol            = null;
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Constructor
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Default Constructor
    * creating the connection to the database
    */
-  public function __construct( $conf )
+  public function __construct($conf)
   {
 
     $this->conf = $conf;
-    $this->orm = new LibDbOrm( $this, $this->builderType  );
+    $this->orm = new LibDbOrm($this, $this->builderType  );
 
     // Verbindung zur Datenbank erstellen
     $this->connect();
-    
-    //Message::addMessage( "Called Database Connection ".Debug::backtrace() );
+
+    //Message::addMessage("Called Database Connection ".Debug::backtrace());
 
     // Counter auf 0 setzte
     $this->counter = 0;
@@ -204,7 +201,6 @@ abstract class LibDbConnection
     $this->dissconnect();
   }//end public function __destruct */
 
-
   /**
    * To String Methode, implementiert für bessere Fehlermeldungen
    * @return string
@@ -214,25 +210,24 @@ abstract class LibDbConnection
     return 'Database Connection: ' .$this->databaseName .' Type: '.$this->getParserType();
   }//end public function __toString */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter Methodes
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * setter for logger
    * @param LibProtocolFile $protocol
    */
-  public function close(  )
+  public function close()
   {
     $this->dissconnect();
   }//end public function close */
-  
+
   /**
    * setter for logger
    * @param LibProtocolFile $protocol
    */
-  public function setProtocol( $protocol )
+  public function setProtocol($protocol)
   {
     $this->protocol = $protocol;
   }//end public function setProtocol */
@@ -251,14 +246,14 @@ abstract class LibDbConnection
    * @param string Schema Das aktive Schema
    * @return bool
    */
-  abstract public function setSearchPath( $schema );
+  abstract public function setSearchPath($schema);
 
   /**
    * request the activ search path from the database if exists
    *
    * @return string
    */
-  public function getSearchPath( )
+  public function getSearchPath()
   {
     return $this->schema;
   } // end public function getSearchPath */
@@ -267,7 +262,7 @@ abstract class LibDbConnection
    * create a unique key for prepared queries
    * @return string
    */
-  public function createKey( )
+  public function createKey()
   {
     return 'wgt-'.rand();
   } // end public function createKey */
@@ -277,7 +272,7 @@ abstract class LibDbConnection
    * @param  string $fetchMode
    * @return void
    */
-  public function setFetchMode( $fetchMode )
+  public function setFetchMode($fetchMode)
   {
     $this->fetchMode = $fetchMode;
   } // end public function setFetchMode */
@@ -287,7 +282,7 @@ abstract class LibDbConnection
    *
    * @return int
    */
-  public function getNumQuerys( )
+  public function getNumQuerys()
   {
     return $this->counter;
   } // end public function getNumQuerys */
@@ -304,7 +299,7 @@ abstract class LibDbConnection
    * @return LibSqlQuery
    * @throws LibDb_Exception Wenn die angefragte Query nicht existiert
    */
-  public function newQuery( $name  )
+  public function newQuery($name  )
   {
 
     $defClassName = $name.'_Query';
@@ -313,29 +308,19 @@ abstract class LibDbConnection
     $defClassNameOld = 'Query'.$name;
     $dbClassNameOld  = $defClassName.$this->builderType;
 
-    if( Webfrap::classLoadable($dbClassName) )
-    {
-      return new $dbClassName( null, $this );
-    }
-    else if( Webfrap::classLoadable($defClassName) )
-    {
-      return new $defClassName( null, $this );
-    }
-    else if( Webfrap::classLoadable($dbClassNameOld) )
-    {
-      return new $dbClassNameOld( null, $this );
-    }
-    elseif( Webfrap::classLoadable($defClassNameOld) )
-    {
-      return new $defClassNameOld( null, $this );
-    }
-    else
-    {
+    if (Webfrap::classLoadable($dbClassName)) {
+      return new $dbClassName(null, $this);
+    } elseif (Webfrap::classLoadable($defClassName)) {
+      return new $defClassName(null, $this);
+    } elseif (Webfrap::classLoadable($dbClassNameOld)) {
+      return new $dbClassNameOld(null, $this);
+    } elseif (Webfrap::classLoadable($defClassNameOld)) {
+      return new $defClassNameOld(null, $this);
+    } else {
 
-      throw new LibDb_Exception
-      (
+      throw new LibDb_Exception(
         'Requested nonexisting Query: '.$defClassName.'. Please check the loadpath of WebFrap, or if this Class exists.'
-      );
+       );
 
     }
 
@@ -346,49 +331,48 @@ abstract class LibDbConnection
    * @return LibSqlFilter
    * @throws LibDb_Exception wenn der angefragte Filter nicht existiert
    */
-  public function newFilter( $name  )
+  public function newFilter($name  )
   {
 
     $defClassName = $name.'_Filter';
     $dbClassName  = $defClassName.'_'.$this->builderType;
 
-    if( Webfrap::classLoadable($dbClassName) )
-    {
-      return new $dbClassName( null, $this );
-    }
-    elseif( Webfrap::classLoadable($defClassName) )
-    {
-      return new $defClassName( null, $this );
-    }
-    else
-    {
+    if (Webfrap::classLoadable($dbClassName)) {
 
+      return new $dbClassName(null, $this);
+    
+    } elseif (Webfrap::classLoadable($defClassName)) {
+
+      return new $defClassName(null, $this);
+    
+    } else {
+      
       return null;
-
-      throw new LibDb_Exception
-      (
+      
+      /*
+      throw new LibDb_Exception(
         'Requested nonexisting Filter: '.$defClassName.'. '
         .'Please check the loadpath of WebFrap, or if this Class exists.'
       );
+      */
 
     }
 
   }//end public function newFilter */
-  
+
   /**
    * Ein Leeres Datenbank Result zurückgeben
-   * 
+   *
    * Wird verwendet, wenn von vorne herein klar ist, das ein Datenbank Query
    * so oder so keine Daten zurück geben würde.
-   * 
+   *
    * Zb eine Leere IN Query
-   * 
+   *
    * @return LibDbEmptyResult
    */
-  public function getEmptyResult(  )
+  public function getEmptyResult()
   {
-
-    return new LibDbEmptyResult( );
+    return new LibDbEmptyResult();
 
   }//end public function getEmptyResult */
 
@@ -400,12 +384,11 @@ abstract class LibDbConnection
   {
 
     // initialize the orm just when it is requested
-    if( !$this->orm )
-      $this->orm = new LibDbOrm
-        ( 
-          $this, $this->builderType, 
-          $this->databaseName, $this->schema  
-        );
+    if (!$this->orm)
+      $this->orm = new LibDbOrm(
+        $this, $this->builderType,
+        $this->databaseName, $this->schema
+      );
 
     return $this->orm;
 
@@ -420,7 +403,6 @@ abstract class LibDbConnection
   {
     return ucfirst($this->builderType);
   }//end public function getParserType */
-
 
   /**
    * Den namen des DBMS types für die aktuelle Connection erfragen
@@ -448,34 +430,33 @@ abstract class LibDbConnection
   {
     return $this->schema;
   }//end  public function getSchemaName */
-  
+
   /**
    * @return LibDbAdminPostgresql
    */
   public function getManager()
   {
-
-    return new LibDbAdminPostgresql( $this );
+    return new LibDbAdminPostgresql($this);
 
   }//end public function getManager */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Logic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param string $string
    */
-  public function dbArrayToArray( $string   )
+  public function dbArrayToArray($string   )
   {
 
     // erstes und letztes zeichen ignorieren
-    $string = substr( $string , 1 , -1 );
+    $string = substr($string , 1 , -1);
 
-    if( strpos( '"', $string ) === false )
-      return explode( ',' , $string );
+    if (strpos('"', $string) === false)
+      return explode(',' , $string);
 
-    if(!$length = strlen($string))
+    if (!$length = strlen($string))
       return null;
 
     $open = false;
@@ -486,45 +467,37 @@ abstract class LibDbConnection
     $value = '';
 
     // über den string itterieren
-    for( $pos = 0; $pos < $length ; ++$pos )
-    {
+    for ($pos = 0; $pos < $length ; ++$pos) {
 
       $char = $string[$pos];
 
       // escapes einbaun
-      if( $char == '\\' )
-      {
+      if ($char == '\\') {
         $ignoreNext = true;
         continue;
       }
       // end escapes
 
-      if( $char == '"' && !$ignoreNext )
-      {
+      if ($char == '"' && !$ignoreNext) {
         // abschnitt is abgeschlossen
-        if( $open )
-        {
+        if ($open) {
           // zuordnen und escape entfernen
-          $array[] = str_replace( '\"' , '"'  , $value ) ;
+          $array[] = str_replace('\"' , '"'  , $value) ;
           $value = '';
           $open = false;
-        }
-        else // neuer abschnitt beginnt
-        {
+        } else { // neuer abschnitt beginnt
           $open = true;
         }
-      }
-      else
-      {
+      } else {
         // wenn offen dann an value anhängen
-        if( $open )
+        if ($open)
           $value .= $char;
 
       }
 
       $ignoreNext = false;
 
-    }//end foreach( $string as $char )
+    }//end foreach ($string as $char)
 
     return $array;
 
@@ -533,14 +506,14 @@ abstract class LibDbConnection
   /**
    * eine art explode mit escape für kommas
    */
-  public function dbStringToArray( $string   )
+  public function dbStringToArray($string   )
   {
 
     // erstes und letztes zeichen ignorieren
-    $string = substr( $string , 1 , -1 );
+    $string = substr($string , 1 , -1);
 
-    if( strpos( '"', $string ) === false )
-      return explode( ',' , $string );
+    if (strpos('"', $string) === false)
+      return explode(',' , $string);
 
     $length = strlen($string);
 
@@ -552,35 +525,29 @@ abstract class LibDbConnection
     $value = '';
 
     // über den string itterieren
-    for( $pos = 0; $pos < $length ; ++$pos )
-    {
+    for ($pos = 0; $pos < $length ; ++$pos) {
 
       $char = $string[$pos];
 
-      if( $char == "\\" )
-      {
+      if ($char == "\\") {
         $ignoreNext = true;
         continue;
       }
 
       // end escapes
 
-      if( $char == ';' &&  !$ignoreNext )
-      {
+      if ($char == ';' &&  !$ignoreNext) {
         $array[] = $value;
         $value = '';
-      }
-      else
-      {
+      } else {
         $value .= $char;
       }
 
       $ignoreNext = false;
 
+    }//end foreach ($string as $char)
 
-    }//end foreach( $string as $char )
-
-    if( trim($value)  != '' )
+    if (trim($value)  != '')
       $array[] = $value;
 
     return $array;
@@ -591,16 +558,15 @@ abstract class LibDbConnection
    * @param string $datas
    * @return array
    */
-  public function dbArrayToString( $datas )
+  public function dbArrayToString($datas)
   {
 
     $serialized = '{';
 
     $tmp = array();
 
-    foreach( $datas as $data )
-    {
-      $data = str_replace( array( '"',"'" ), array( '\"', "\'" )   , $data  );
+    foreach ($datas as $data) {
+      $data = str_replace(array('"',"'"), array('\"', "\'")   , $data  );
       $tmp[] = '"'.$data.'"';
     }
 
@@ -610,27 +576,26 @@ abstract class LibDbConnection
     return $serialized;
 
   }//end public function dbArrayToString */
-  
-////////////////////////////////////////////////////////////////////////////////
+
+/*//////////////////////////////////////////////////////////////////////////////
 // Cache
-////////////////////////////////////////////////////////////////////////////////
-  
+//////////////////////////////////////////////////////////////////////////////*/
+
   /**
-   * 
+   *
    */
   public function saveCache()
   {
-    
+
     // speichern des ORM Caches
-    if( $this->orm )
+    if ($this->orm)
       $this->orm->saveCache();
-    
-    
+
   }//end public function saveCache */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Abstract Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * send a select query to the database
@@ -638,7 +603,7 @@ abstract class LibDbConnection
    * @param mixed   $sql a select query as string or object
    * @return LibDbResult
    */
-  abstract public function select( $sql );
+  abstract public function select($sql);
 
   /**
    * send an insert statement to the tatabase
@@ -649,7 +614,7 @@ abstract class LibDbConnection
    * @param string $dropEmptyWhitespace the name of the tablepk
    * @return LibDbResult
    */
-  abstract public function insert( $sql , $tableName, $tablePk  );
+  abstract public function insert($sql , $tableName, $tablePk  );
 
   /**
    * Ein Updatestatement an die Datenbank schicken
@@ -658,7 +623,7 @@ abstract class LibDbConnection
    * @param bool Send Soll gesendet oder gewartet werden
    * @return LibDbResult
    */
-  abstract public function update( $sql );
+  abstract public function update($sql);
 
   /**
    * Ein Deletestatement and die Datenbank schicken
@@ -666,7 +631,7 @@ abstract class LibDbConnection
    * @param res $sql Sql Ein Aktion Object
    * @return LibDbResult
    */
-  abstract public function delete( $sql  );
+  abstract public function delete($sql  );
 
   /**
    * Senden einer Datenbankabfrage zum erstellen eines Ausführplans
@@ -675,7 +640,7 @@ abstract class LibDbConnection
    * @param string Der Fertige SQL Code
    * @return void
    */
-  abstract public function prepareSelect( $name,  $sqlstring  );
+  abstract public function prepareSelect($name,  $sqlstring  );
 
     /**
    * Senden einer Datenbankabfrage zum erstellen eines Ausführplans
@@ -684,7 +649,7 @@ abstract class LibDbConnection
    * @param string Der Fertige SQL Code
    * @return void
    */
-  abstract public function prepareInsert( $name,  $sqlstring  );
+  abstract public function prepareInsert($name,  $sqlstring  );
 
   /**
    * Senden einer Datenbankabfrage zum erstellen eines Ausführplans
@@ -693,7 +658,7 @@ abstract class LibDbConnection
    * @param string Der Fertige SQL Code
    * @return void
    */
-  abstract public function prepareUpdate( $name,  $sqlstring  );
+  abstract public function prepareUpdate($name,  $sqlstring  );
 
   /**
    * Senden einer Datenbankabfrage zum erstellen eines Ausführplans
@@ -702,7 +667,7 @@ abstract class LibDbConnection
    * @param string Der Fertige SQL Code
    * @return void
    */
-  abstract public function prepareDelete( $name,  $sqlstring  );
+  abstract public function prepareDelete($name,  $sqlstring  );
 
   /**
    * Löschen eines Ausführplans in der Datenbank
@@ -710,7 +675,7 @@ abstract class LibDbConnection
    * @param string Name Name der Abfrage die gelöscht werden soll
    * @return
    */
-  abstract public function deallocate( $name );
+  abstract public function deallocate($name);
 
   /**
    * Ausführen einer Vorbereiteten Datenbankabfrage
@@ -720,7 +685,7 @@ abstract class LibDbConnection
    * @param bool[optional] $returnit, Sollen die Datensätze Zurückgegeben werden
    * @return
    */
-  abstract public function executeQuery( $name,  $values = null, $returnIt = true );
+  abstract public function executeQuery($name,  $values = null, $returnIt = true);
 
     /**
    * Ausführen einer Vorbereiteten Datenbankabfrage
@@ -730,7 +695,7 @@ abstract class LibDbConnection
    * @param bool[optional] $returnit, Sollen die Datensätze Zurückgegeben werden
    * @return
    */
-  abstract public function executeAction( $name,  $values = null, $getNewId = false );
+  abstract public function executeAction($name,  $values = null, $getNewId = false);
 
   /**
    * Durchreichen einer reinen SQL Abfrage
@@ -739,7 +704,7 @@ abstract class LibDbConnection
    * @param bool Returnit soll die Afrage nur gesendet werden oder gleich das Ergebnis zurück?
    * @return array
    */
-  abstract public function query( $sql );
+  abstract public function query($sql);
 
   /**
    * Durchreichen einer reinen SQL Abfrage
@@ -747,49 +712,49 @@ abstract class LibDbConnection
    * @param string Sql Die SQL Abfragen
    * @return int
    */
-  abstract public function crud( $sql , $insertId = null , $table = null );
+  abstract public function crud($sql , $insertId = null , $table = null);
 
   /**
    * send a ddl query as create and alter table, but also create user etc
    *
    * @param string $sql
    */
-  abstract public function ddlQuery( $sql );
+  abstract public function ddlQuery($sql);
 
   /**
    * Starten einer Transaktion
    *
    * @return
    */
-  abstract public function begin( $write = true );
+  abstract public function begin($write = true);
 
   /**
    * Transaktion wegen Fehler abbrechen
    *
    * @return
    */
-  abstract public function rollback( $write = true );
+  abstract public function rollback($write = true);
 
   /**
    * Transaktion erfolgreich Abschliesen
    *
    * @return
    */
-  abstract public function commit( $write = true );
+  abstract public function commit($write = true);
 
   /**
    * Funktion zum einfachen durchleiten einer logquery in die Datenbank
    *
    * @return
    */
-  abstract public function logQuery( $sql );
+  abstract public function logQuery($sql);
 
   /**
    * Den Status des Results Checken
    *
    * @return
    */
-  abstract public function checkStatus( );
+  abstract public function checkStatus();
 
   /**
    * Erstellen einer Datenbankverbindung
@@ -813,7 +778,7 @@ abstract class LibDbConnection
    * @param mixed $value
    * @return array
    */
-  abstract public function addSlashes( $value );
+  abstract public function addSlashes($value);
 
 } // end abstract class DbAbstract
 

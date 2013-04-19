@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,9 +22,9 @@
 class LibDeveloperClassindexer
 {
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var string
@@ -37,12 +37,11 @@ class LibDeveloperClassindexer
    */
   protected $classIndex = array();
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
-  public function __construct( $folder = null )
+  public function __construct($folder = null)
   {
     $this->folder = $folder;
   }//end public function __construct */
@@ -51,15 +50,14 @@ class LibDeveloperClassindexer
    * @param string $folder
    * @return void
    */
-  public function setFolder( $folder )
+  public function setFolder($folder)
   {
     $this->folder = $folder;
   }//end public function setFolder */
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Logic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
   * Hauptfunktion zum generieren des Baums
@@ -71,7 +69,7 @@ class LibDeveloperClassindexer
   public function build()
   {
 
-    $this->genSubTree( new LibFilesystemFolder( $this->folder )  );
+    $this->genSubTree(new LibFilesystemFolder($this->folder)  );
 
     return $this->classIndex;
 
@@ -85,24 +83,19 @@ class LibDeveloperClassindexer
   * @var LibFilesystemFolder
   * @return void
   */
-  public function genSubTree( $fObject )
+  public function genSubTree($fObject)
   {
 
-
-    foreach( $fObject->getFiles() as $file )
-    {
+    foreach ($fObject->getFiles() as $file) {
       $this->classIndex[$file->getPlainFilename()] =
-        "PATH_WBF.'". str_replace(PATH_WBF,'',$file->getName(true) )."'" ;
+        "PATH_WBF.'". str_replace(PATH_WBF,'',$file->getName(true))."'" ;
     }
 
-    foreach( $fObject->getFolders() as $folder )
-    {
-      $this->genSubTree( $folder );
+    foreach ($fObject->getFolders() as $folder) {
+      $this->genSubTree($folder);
     }
-
 
   } //end public function genSubTree */
-
 
 }//end class LibDeveloperClassindexer
 

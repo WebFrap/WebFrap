@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Exception to throw if you want to throw an unspecific Exception inside the
@@ -25,12 +24,11 @@
  * @package WebFrap
  * @subpackage Example
  */
-class Example_Query
-  extends LibSqlQuery
+class Example_Query extends LibSqlQuery
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
 
   /**
@@ -40,7 +38,7 @@ class Example_Query
    *
    * @throws LibDb_Exception
    */
-  public function fetchAutocomplete( $key )
+  public function fetchAutocomplete($key)
   {
 
     $this->sourceSize  = null;
@@ -55,12 +53,12 @@ class Example_Query
     project_activity
 
   WHERE
-    upper(project_activity.name) like upper('{$db->addSlashes( $key )}%')
+    upper(project_activity.name) like upper('{$db->addSlashes($key)}%')
   LIMIT 10
 
 SQL;
 
-    $this->result = $db->select( $sql );
+    $this->result = $db->select($sql);
 
   }//end public function fetchAutocomplete */
 

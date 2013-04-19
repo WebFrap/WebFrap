@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -55,9 +55,9 @@ abstract class WgtMenu
    */
   const ICON    = 5;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * the data array
@@ -112,16 +112,15 @@ abstract class WgtMenu
    */
   public $sort     = true;
 
-
   /**
    *
    * @var boolean
    */
   public $firstEntry  = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Magic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * constructor
@@ -129,11 +128,11 @@ abstract class WgtMenu
    * @param string $source
    * @return string
    */
-  public function __construct( $name , $source = null )
+  public function __construct($name , $source = null)
   {
     $this->name = $name;
 
-    if($source)
+    if ($source)
       $this->source = $source;
 
     $this->id = 'wgt_menu_'.$name;
@@ -150,16 +149,16 @@ abstract class WgtMenu
     return $this->build();
   }//end public function __toString */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Logic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * setter for the menu id
    *
    * @param string $id
    */
-  public function setId( $id )
+  public function setId($id)
   {
     $this->menuId = $id;
   }//end public function setId */
@@ -167,11 +166,10 @@ abstract class WgtMenu
   /**
    * @param array $data
    */
-  public function setData( $data )
+  public function setData($data)
   {
     $this->data = $data;
   }//end public function setData */
-
 
   /**
    * build the menu to html
@@ -179,16 +177,12 @@ abstract class WgtMenu
    */
   public function toHtml()
   {
-    if( $this->assembled )
-    {
+    if ($this->assembled) {
       return $this->html;
-    }
-    else
-    {
-      return $this->build( );
+    } else {
+      return $this->build();
     }
   }//end public function toHtml */
-
 
   /**
    * set the number of Menupoints in one row
@@ -196,7 +190,7 @@ abstract class WgtMenu
    * @param boolean $loadAll
    * @return void
    */
-  public function setSource( $source, $loadAll = false )
+  public function setSource($source, $loadAll = false)
   {
     $this->source   = $source;
     $this->loadAll  = $loadAll;
@@ -206,33 +200,32 @@ abstract class WgtMenu
    * Enter description here...
    *
    */
-  public function load( )
+  public function load()
   {
 
-    if( !$this->source )
+    if (!$this->source)
       $name = $this->name;
     else
       $name = $this->source;
 
-    foreach( Conf::$confPath as $path )
-    {
+    foreach (Conf::$confPath as $path) {
 
       $menuPath = $path.'/menu/'.$name.'/';
 
-      if(!file_exists($menuPath))
+      if (!file_exists($menuPath))
         continue;
 
-      $folder = new LibFilesystemFolder( $menuPath );
+      $folder = new LibFilesystemFolder($menuPath);
 
       $files = $folder->getFiles();
 
-      Debug::console( 'files' , $files );
+      Debug::console('files' , $files);
 
-      foreach( $files as $file )
+      foreach ($files as $file)
         include $file->getName(true);
 
        // break after found data
-       if(!$this->loadAll)
+       if (!$this->loadAll)
         break;
     }
 

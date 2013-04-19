@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -36,13 +36,12 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MaintenanceDbConsistency_Maintab_Menu
-  extends WgtDropmenu
+class MaintenanceDbConsistency_Maintab_Menu extends WgtDropmenu
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // menu: create
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
   /**
    * add a drop menu to the create window
    *
@@ -52,35 +51,34 @@ class MaintenanceDbConsistency_Maintab_Menu
    *   string formId: the id of the form;
    * }
    */
-  public function buildMenu( $params )
+  public function buildMenu($params)
   {
-  
+
     // benötigte resourcen laden
     $acl   = $this->getAcl();
     $view   = $this->getView();
 
-    $iconMenu    = $view->icon('control/menu.png',  'Menu' );
-    $iconExecute    = $view->icon('control/exec.png', 'Send' );
-    $iconBookmark  = $view->icon('control/bookmark.png', 'Bookmark' );
-    $iconClose     = $view->icon('control/close.png', 'Close' );
+    $iconMenu    = $view->icon('control/menu.png',  'Menu');
+    $iconExecute    = $view->icon('control/exec.png', 'Send');
+    $iconBookmark  = $view->icon('control/bookmark.png', 'Bookmark');
+    $iconClose     = $view->icon('control/close.png', 'Close');
 
     $iconSupport         = $view->icon('control/support.png'      ,'Support');
     $iconBug         = $view->icon('control/bug.png'      ,'Bug');
     $iconFaq         = $view->icon('control/faq.png'      ,'Faq');
     $iconHelp         = $view->icon('control/help.png'      ,'Help');
-   
-    $entries = new TArray();
 
+    $entries = new TArray();
 
     $this->content = <<<HTML
 <div class="inline" >
-  <button 
+  <button
     class="wcm wcm_control_dropmenu wgt-button"
-    id="{$this->id}-control" 
+    id="{$this->id}-control"
     wgt_drop_box="{$this->id}_dropmenu"  >{$iconMenu} {$view->i18n->l('Menu','wbf.label')}</button>
   <var id="{$this->id}-control-cfg-dropmenu"  >{"triggerEvent":"mouseover","closeOnLeave":"true","align":"right"}</var>
 </div>
-    
+
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
   <ul>
     <li>
@@ -104,7 +102,7 @@ class MaintenanceDbConsistency_Maintab_Menu
 </div>
 
 <div class="wgt-panel-control" >
-  <button 
+  <button
       class="wcm wcm_ui_button wgtac_run_all wcm_ui_tip-top"
       title="{$view->i18n->l('Run All','wbf.label')}" >{$iconExecute} {$view->i18n->l('Run All','wbf.label')}</button>
 </div>
@@ -113,36 +111,7 @@ HTML;
 
   }//end public function buildMenu */
 
-  /**
-   * build the window menu
-   * @param TArray $params
-   */
-  protected function entriesSupport( $params )
-  {
 
-
-
-
-    $html = <<<HTML
-
-      <li>
-        <p>{$iconSupport} {$this->view->i18n->l('Support','wbf.label')}</p>
-        <ul>
-
-          <li><a class="wcm wcm_req_ajax" href="modal.php?c=Webfrap.Docu.open&amp;key=wbfsys_message-create" >{$iconHelp} {$this->view->i18n->l('Help','wbf.label')}</a></li>
-
-          <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Issue.create&amp;context=create" >{$iconBug} {$this->view->i18n->l('Bug','wbf.label')}</a></li>
-
-          <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Faq.create&amp;context=create" >{$iconFaq} {$this->view->i18n->l('FAQ','wbf.label')}</a></li>
-
-        </ul>
-      </li>
-
-HTML;
-
-    return $html;
-    
-  }//end public function entriesSupport */
 
 }//end class MaintenanceDbConsistency_Maintab_Menu
 

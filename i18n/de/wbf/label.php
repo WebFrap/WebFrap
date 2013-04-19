@@ -5,10 +5,9 @@
 *
 *******************************************************************************/
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Some Words and Descriptions
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
 $this->l['wbf.label']['Author']      = 'Autor';
 $this->l['wbf.label']['Copyright']   = 'Copyright';
@@ -46,10 +45,6 @@ $this->l['wbf.label']['Entries']       = 'Entries';
 $this->l['wbf.label']['Description']       = 'Description';
 $this->l['wbf.label']['Group']       = 'Group';
 
-
-
-
-
 $this->l['wbf.label']['List Type']  = 'List Type';
 $this->l['wbf.label']['Table']      = 'Table';
 $this->l['wbf.label']['Masks']      = 'Masks';
@@ -61,7 +56,6 @@ $this->l['wbf.label']['Full Export Excel']  = 'Full Export Excel';
 $this->l['wbf.label']['Full Export XML']    = 'Full Export XML';
 $this->l['wbf.label']['Compare']            = 'Vergleichern';
 $this->l['wbf.label']['Save & Close']       = 'Save & Close';
-
 
 $this->l['wbf.label']['ACLs']               = 'ACLs';
 $this->l['wbf.label']['ACLs Entity']        = 'ACLs Entity';
@@ -77,13 +71,10 @@ $this->l['wbf.label']['References Access']               = 'References Access';
 
 $this->l['wbf.label']['Qualified Users']               = 'Qualified Users';
 
-
 $this->l['wbf.label']['Back']     = 'Zurück';
 $this->l['wbf.label']['Category'] = 'Kategorie';
 $this->l['wbf.label']['Pos.']     = 'Pos.';
 $this->l['wbf.label']['Nav.']     = 'Nav.';
-
-
 
 $this->l['wbf.lable']['Back to Start']    = 'Zum Anfang';
 $this->l['wbf.lable']['{@X@} Entries back']    = '{@X@} Einträge zurück';

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -20,12 +20,11 @@
  * @author sono
  *
  */
-abstract class WgtTreeNavigation
-  extends WgtAbstract
+abstract class WgtTreeNavigation extends WgtAbstract
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attribute
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -33,9 +32,9 @@ abstract class WgtTreeNavigation
    */
   public $acl = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // method
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @return LibAclAdapter
@@ -43,20 +42,19 @@ abstract class WgtTreeNavigation
   public function getAcl()
   {
 
-    if( !$this->acl )
+    if (!$this->acl)
       $this->acl = Webfrap::$env->getAcl();
 
     return $this->acl;
 
   }//end public function getAcl */
 
-
   /**
    * @return string
    */
   public function getId()
   {
-    if( is_null($this->id) )
+    if (is_null($this->id))
       $this->id = 'wgtid_'.WebFrap::uniqid();
 
     return $this->id;
@@ -68,7 +66,7 @@ abstract class WgtTreeNavigation
    * @param $id
    * @return unknown_type
    */
-  public function setId( $id )
+  public function setId($id)
   {
     $this->id = $id;
   }//end public function setId */
@@ -80,13 +78,13 @@ abstract class WgtTreeNavigation
   public function build()
   {
 
-    if( $this->html )
+    if ($this->html)
       return $this->html;
 
-    if( count($this->data) == 0 )
-    {
+    if (count($this->data) == 0) {
       $this->html .= '<ul id="'.$this->id.'" class="wgt_tree" >'.NL;
       $this->html .= '</ul>'.NL;
+
       return $this->html;
     }
 
@@ -94,9 +92,7 @@ abstract class WgtTreeNavigation
 
     $html .= '<ul id="'.$this->id.'" class="wgt_tree" >'.NL;
 
-
-    foreach( $this->data as $id => $row )
-    {
+    foreach ($this->data as $id => $row) {
 
       $entry    = $this->buildTreeNode($row);
 
@@ -117,6 +113,7 @@ HTML;
 
 
     $this->html = $html;
+
     return $this->html;
 
   }//end public function build */
@@ -127,23 +124,21 @@ HTML;
    *
    * @return String
    */
-  public function buildAjaxNode( $parentNode )
+  public function buildAjaxNode($parentNode)
   {
 
-    if( $this->html )
+    if ($this->html)
       return $this->html;
 
     $html = '';
 
-    if( $this->ajaxInsert )
-    {
+    if ($this->ajaxInsert) {
 
         $html .= <<<HTML
       <htmlArea selector="ul#{$parentNode}" action="append" ><![CDATA[
 HTML;
 
-      foreach( $this->data as $id => $row )
-      {
+      foreach ($this->data as $id => $row) {
 
         $entry  = $this->buildTreeNode($row);
 
@@ -162,14 +157,12 @@ HTML;
 
 
     }//end if
-    else
-    {
+    else {
         $html .= <<<HTML
       <htmlArea selector="ul#{$parentNode}" action="replace" ><![CDATA[
 HTML;
 
-      foreach( $this->data as $id => $row )
-      {
+      foreach ($this->data as $id => $row) {
 
         $entry  = $this->buildTreeNode($row);
 
@@ -193,7 +186,5 @@ HTML;
     return $this->html;
 
   }//end public function buildAjaxNode */
-
-
 
 }//end class WgtTree

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -18,20 +18,19 @@
 /**
  * serializer to json
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage core/serializer
  */
-class LibSerializerDbtoxml
-  extends LibSerializerAbstract
+class LibSerializerDbtoxml extends LibSerializerAbstract
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // constaten
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   public $counter = 0;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * instance of the
@@ -40,9 +39,9 @@ class LibSerializerDbtoxml
    */
   private static $instance = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Singleton
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @return LibSerializerDbtoxml
@@ -50,32 +49,31 @@ class LibSerializerDbtoxml
   public static function getInstance()
   {
 
-    if(is_null(self::$instance))
+    if (is_null(self::$instance))
       self::$instance = new LibSerializerDbtoxml();
 
     return self::$instance;
 
   }//end public static function getInstance()
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // serializer
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * serialize to json
    * @return string
    */
-  public function serializeDb( $tableName , array $data , $meta , $encoding = null )
+  public function serializeDb($tableName , array $data , $meta , $encoding = null)
   {
 
-    if( !isset($data[0]) )
+    if (!isset($data[0]))
       $data[0] = array();
 
     $db = Db::getActive();
 
-    $encode =  strpos( 'utf8' , $encoding ) ? false:true;
-    $charset =  strpos( 'utf8' , $encoding ) ? 'UTF-8':'ISO-8859-15';
-
+    $encode =  strpos('utf8' , $encoding) ? false:true;
+    $charset =  strpos('utf8' , $encoding) ? 'UTF-8':'ISO-8859-15';
 
     $keys = array_keys($data[0]);
 
@@ -83,45 +81,35 @@ class LibSerializerDbtoxml
     $xml .= '<db>'.NL;
     $xml .= '<cols>'.NL;
 
-    foreach( $keys as $key )
-    {
+    foreach ($keys as $key) {
       $m = $meta[$key] == true ?'t':'f';
       $xml .= '<c t="'.$m.'" >'.$key.'</c>'.NL;
     }
 
-
     $xml .= '</cols>'.NL;
 
     $xml .= '<rows>'.NL;
-    foreach($data as $row)
-    {
+    foreach ($data as $row) {
 
       $xml .= '<r>';
       $pos = 0;
-      foreach($row as $val )
-      {
+      foreach ($row as $val) {
 
-        $val = $this->clear( $val , $encode ); // html_entity_decode($val,ENT_QUOTES);
+        $val = $this->clear($val , $encode); // html_entity_decode($val,ENT_QUOTES);
 
         /*
-        if( $meta[$key] == true )
-        {
+        if ($meta[$key] == true) {
           $xml .= '<v><![CDATA['.html_entity_decode($val,ENT_QUOTES,$charset).']]></v>';
-        }
-        else
-        {
+        } else {
           $xml .= '<v>'.html_entity_decode($val,ENT_QUOTES,$charset).'</v>';
         }
         */
 
         ++$this->counter;
 
-        if( $meta[$keys[$pos]]  )
-        {
+        if ($meta[$keys[$pos]]) {
           $xml .= '<v><![CDATA['.$val.']]></v>';
-        }
-        else
-        {
+        } else {
           $xml .= '<v>'.$val.'</v>';
         }
 
@@ -144,14 +132,13 @@ class LibSerializerDbtoxml
   /**
    *
    */
-  public function serialize( $data = array() ){}
+  public function serialize($data = array()) {}
 
   /**
    *
    */
-  protected function clear( $val , $encode )
+  protected function clear($val , $encode)
   {
-
 
     //$val = html_entity_decode($val,ENT_QUOTES);
     //$val = $encode?utf8_encode($val):$val;
@@ -165,7 +152,7 @@ class LibSerializerDbtoxml
     'Ã¶' => 'ö',
     );
 
-    return str_replace(  array_keys($replace), array_values($replace) , $val );
+    return str_replace( array_keys($replace), array_values($replace) , $val);
 
   }
 

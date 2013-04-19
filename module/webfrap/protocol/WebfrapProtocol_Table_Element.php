@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,13 +21,12 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapProtocol_Table_Element
-  extends WgtTable
+class WebfrapProtocol_Table_Element extends WgtTable
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
   /**
    * the html id of the table tag, this id can be used to replace the table
    * or table contents via ajax interface.
@@ -35,7 +34,7 @@ class WebfrapProtocol_Table_Element
    * @var string $id
    */
   public $id   = 'wgt_table-webfrap_protocol';
-  
+
   /**
    * the most likley class of a given query object
    *
@@ -49,7 +48,6 @@ class WebfrapProtocol_Table_Element
    * @var string $namespace
    */
   public $namespace   = 'WbfsysProtocolAccess';
- 
 
   /**
    * @var string
@@ -61,7 +59,7 @@ class WebfrapProtocol_Table_Element
   */
   public function loadUrl()
   {
-  
+
     $this->url  = array
     (
       'paging'  => array
@@ -74,38 +72,37 @@ class WebfrapProtocol_Table_Element
       (
         Wgt::ACTION_SEP
       ),
-  
+
     );
 
   }//end public function loadUrl */
-    
-////////////////////////////////////////////////////////////////////////////////
+
+/*//////////////////////////////////////////////////////////////////////////////
 // Context: Table
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
   /**
    * parse the table
    *
    * @return string
    */
-  public function buildProtocolEntityHtml( )
-  {    
+  public function buildProtocolEntityHtml()
+  {
     $conf = $this->getConf();
 
     // if we have html we can assume that the table was allready parsed
     // so we return just the html and stop here
     // this behaviour enables you to call a specific parser method from outside
     // of the view, but then get the html of the called parse method
-    if( $this->html )
+    if ($this->html)
       return $this->html;
-      
-    if( DEBUG )
+
+    if (DEBUG)
       $renderStart = Webfrap::startMeasure();
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if( $this->insertMode )
-    {
+    if ($this->insertMode) {
       $this->html .= '<div id="'.$this->id.'" class="wgt-grid wgt-border" >'.NL;
       $this->html .= '<var id="'.$this->id.'-table-cfg-grid" >{
         "height":"'.$this->bodyHeight.'",
@@ -115,7 +112,7 @@ class WebfrapProtocol_Table_Element
 
       $this->html .= '<table id="'.$this->id
         .'-table" class="wgt-grid wcm wcm_widget_grid hide-head" >'.NL;
-        
+
       $this->html .= $this->buildThead();
     }
 
@@ -123,8 +120,7 @@ class WebfrapProtocol_Table_Element
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if( $this->insertMode )
-    {
+    if ($this->insertMode) {
       $this->html .= '</table>';
 
       $this->html .= $this->buildTableFooter();
@@ -135,9 +131,9 @@ class WebfrapProtocol_Table_Element
       $this->html .= '</script>'.NL;
 
     }
-    
-    if( DEBUG )
-      Debug::console( "table ".__METHOD__." {$this->id} rendertime: ".Webfrap::getDuration($renderStart) );
+
+    if (DEBUG)
+      Debug::console("table ".__METHOD__." {$this->id} rendertime: ".Webfrap::getDuration($renderStart));
 
     return $this->html;
 
@@ -147,18 +143,18 @@ class WebfrapProtocol_Table_Element
    * create the head for the table
    * @return string
    */
-  public function buildThead( )
+  public function buildThead()
   {
     $this->numCols = 2;
 
-    if( $this->enableNav )
+    if ($this->enableNav)
       ++ $this->numCols;
 
     // Creating the Head
     $html = '<thead>'.NL;
     $html .= '<tr>'.NL;
 
-    $html .= '<th style="width:30px;" class="pos" >'.$this->view->i18n->l( 'Pos.', 'wbf.label'  ).'</th>'.NL;
+    $html .= '<th style="width:30px;" class="pos" >'.$this->view->i18n->l('Pos.', 'wbf.label'  ).'</th>'.NL;
     $html .= '<th style="width:150px;" >Time</th>'.NL;
     $html .= '<th style="width:180px;" >User</th>'.NL;
     $html .= '<th style="width:70px;" >Type</th>'.NL;
@@ -167,7 +163,6 @@ class WebfrapProtocol_Table_Element
     $html .= '</tr>'.NL;
     $html .= '</thead>'.NL;
     //\ Creating the Head
-
     return $html;
 
   }//end public function buildThead */
@@ -176,12 +171,10 @@ class WebfrapProtocol_Table_Element
    * create the body for the table
    * @return string
    */
-  public function buildTbody( )
+  public function buildTbody()
   {
 
     $conf = $this->getConf();
-
-
 
     // create the table body
     $body = '<tbody>'.NL;
@@ -189,35 +182,31 @@ class WebfrapProtocol_Table_Element
     // simple switch method to create collored rows
     $num = 1;
     $pos = 1;
-    foreach( $this->data as $key => $row )
-    {
+    foreach ($this->data as $key => $row) {
 
       $objid       = $row['wbfsys_protocol_message_rowid'];
       $rowid       = $this->id.'_row_'.$objid;
 
-      
       $body .= '<tr class="wcm wcm_ui_highlight row'.$num.' node-'.$objid.'" '
 .' id="'.$rowid.'" >'.NL;
-        
+
       $body .= '<td valign="top" class="pos" name="slct['.$objid.']" style="text-align:right;" >'.$pos.'</td>'.NL;
-        
+
       $body .= '<td valign="top" style="text-align:right;"  >'.$row['wbfsys_protocol_m_time_created'].'</td>'.NL;
       $body .= '<td valign="top"  >'.$row['core_person_lastname'].', '.$row['core_person_firstname'].'</td>'.NL;
       $body .= '<td valign="top"  >'.$row['wbfsys_protocol_message_context'].'</td>'.NL;
       $body .= '<td valign="top"  >'.$row['wbfsys_protocol_message_message'].'</td>'.NL;
-      
-      
+
       $body .= '</tr>'.NL;
-      
+
       $pos ++;
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors)
         $num = 1;
 
     } //end foreach
 
-    if( $this->dataSize > ($this->start + $this->stepSize) )
-    {
+    if ($this->dataSize > ($this->start + $this->stepSize)) {
       $body .= '<tr class="wgt-block-appear" >'
         .'<td class="pos" >&nbsp;</td>'
         .'<td colspan="'.$this->numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  >'
@@ -228,7 +217,6 @@ class WebfrapProtocol_Table_Element
 
     $body .= '</tbody>'.NL;
     //\ Create the table body
-
     return $body;
 
   }//end public function buildTbody */
@@ -238,45 +226,37 @@ class WebfrapProtocol_Table_Element
    *
    * @return string
    */
-  public function buildAjax( )
+  public function buildAjax()
   {
     // if we have html we can assume that the table was allready parsed
     // so we return just the html and stop here
     // this behaviour enables you to call a specific parser method from outside
     // of the view, but then get the html of the called parse method
-    if( $this->xml )
+    if ($this->xml)
       return $this->xml;
-
 
     $this->numCols = 2;
 
-    if( $this->enableNav )
+    if ($this->enableNav)
       ++ $this->numCols;
 
-
-    if( $this->appendMode )
-    {
+    if ($this->appendMode) {
       $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="append" ><![CDATA['.NL;
-    }
-    else
-    {
+    } else {
       $body = '';
     }
 
-    foreach( $this->data as $key => $row   )
-    {
-      $body .= $this->buildAjaxTbody( $row );
+    foreach ($this->data as $key => $row) {
+      $body .= $this->buildAjaxTbody($row);
     }//end foreach
 
-    if( $this->appendMode )
-    {
+    if ($this->appendMode) {
       $numCols = 2;
 
-      if( $this->enableNav )
+      if ($this->enableNav)
         ++ $numCols;
 
-      if( $this->dataSize > ( $this->start + $this->stepSize ) )
-      {
+      if ($this->dataSize > ($this->start + $this->stepSize)) {
         $body .= '<tr class="wgt-block-appear" ><td class="pos" ></td><td colspan="'.$numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  ><var>'.($this->start + $this->stepSize).'</var>'.$this->image('wgt/bar-loader.gif','loader').' Loading the next '.$this->stepSize.' entries.</td></tr>';
       }
 
@@ -294,60 +274,47 @@ class WebfrapProtocol_Table_Element
    * @param array $row
    * @return string
    */
-  public function buildAjaxTbody( $row  )
+  public function buildAjaxTbody($row  )
   {
 
     $objid = $row['webfrap_protocol_rowid'];
     $rowid = $this->id.'_row_'.$objid;
 
-
     $conf = $this->getConf();
-
 
     $body = '';
 
-
     // is this an insert or an update area
-    if( $this->insertMode )
-    {
+    if ($this->insertMode) {
       $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="prepend" >'
         .'<![CDATA[<tr '
-        .' wgt_eid="'.$objid.'" ' 
+        .' wgt_eid="'.$objid.'" '
         .' class="wcm wcm_ui_highlight  node-'.$objid.'" '
         .' id="'.$rowid.'" >'.NL;
-    }
-    else if( $this->appendMode )
-    {
+    } elseif ($this->appendMode) {
       $body = '<tr id="'.$rowid.'" '
         .' wgt_eid="'.$objid.'" '
         .' class="wcm wcm_ui_highlight  node-'.$objid.'" >'.NL;
-    }
-    else
-    {
+    } else {
       $body = '<htmlArea selector="tr#'.$rowid.'" action="html" ><![CDATA[';
     }
 
-    $body .= '<td valign="top" class="pos" name="slct['.$objid.']" style="text-align:right;" >'.$pos.'</td>'.NL;
-        
+    $body .= '<td valign="top" class="pos" name="slct['.$objid.']" style="text-align:right;" >1</td>'.NL;
+
     $body .= '<td valign="top" style="text-align:right;"  >'.$row['wbfsys_protocol_m_time_created'].'</td>'.NL;
     $body .= '<td valign="top"  >'.$row['core_person_lastname'].', '.$row['core_person_firstname'].'</td>'.NL;
     $body .= '<td valign="top"  >'.$row['wbfsys_protocol_message_context'].'</td>'.NL;
     $body .= '<td valign="top"  >'.$row['wbfsys_protocol_message_message'].'</td>'.NL;
 
     // is this an insert or an update area
-    if( $this->insertMode )
-    {
+    if ($this->insertMode) {
       $body .= '</tr>]]></htmlArea>'.NL;
-    }
-    else if( $this->appendMode )
-    {
+    } elseif ($this->appendMode) {
       $body .= '</tr>'.NL;
-    }
-    else
-    {
+    } else {
       $body .= ']]></htmlArea>'.NL;
     }
-    
+
     return $body;
 
   }//end public function buildAjaxTbody */

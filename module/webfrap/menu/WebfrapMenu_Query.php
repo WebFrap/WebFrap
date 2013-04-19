@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,12 +21,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapMenu_Query
-  extends LibSqlQuery
+class WebfrapMenu_Query extends LibSqlQuery
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // queries
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
  /**
    * Loading the tabledata from the database
@@ -36,7 +35,7 @@ class WebfrapMenu_Query
    *
    * @throws LibDb_Exception
    */
-  public function fetchMenuEntries( $menuKey , $params = null )
+  public function fetchMenuEntries($menuKey , $params = null)
   {
 
     $this->sourceSize   = null;
@@ -60,13 +59,10 @@ order by
 
 CODE;
 
-
     // Run Query und save the result
-    $this->result     = $db->select( $query );
+    $this->result     = $db->select($query);
 
   }//end public function fetchMenuEntries */
-
-
 
 }//end class WebfrapMenu_Query
 

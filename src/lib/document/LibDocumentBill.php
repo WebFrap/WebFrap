@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -22,20 +21,17 @@
  * @author Tobias Schmidt-Tudl <tobias.schmidt-tudl@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class LibDocumentBill
-  extends LibDocumentLetter
+class LibDocumentBill extends LibDocumentLetter
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // attribute
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * Währung der Rechnung
    * @var string
    */
   public $currency  = null;
-
-
 
 }//end class LibDocumentBillSimple
 

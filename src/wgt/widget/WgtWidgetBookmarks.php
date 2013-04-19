@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -22,10 +21,8 @@
  * @author Dominik Bonsch
  * @copyright Dominik Bonsch <dominik.bonsch@webfrap.net>
  */
-class WgtWidgetBookmarks
-  extends WgtWidget
+class WgtWidgetBookmarks extends WgtWidget
 {
-
 
   /**
    * @param string $containerId
@@ -33,7 +30,7 @@ class WgtWidgetBookmarks
    * @param string $tabSize
    * @return void
    */
-  public function asTab( $containerId, $tabId, $tabSize = 'medium' )
+  public function asTab($containerId, $tabId, $tabSize = 'medium')
   {
 
     $db       = $this->getDb();
@@ -41,9 +38,9 @@ class WgtWidgetBookmarks
     $view     = $this->getView();
 
     $query = $db->newQuery('WebfrapBookmark');
-    $query->fetch( $this->getUser()->getId() );
+    $query->fetch($this->getUser()->getId());
 
-    $table = $view->newItem( 'widgetDesktopBookmark' , 'TableWebfrapBookmark' );
+    $table = $view->newItem('widgetDesktopBookmark' , 'TableWebfrapBookmark');
     $table->setData($query);
     $table->setId('wbf_desktop_bookmark');
 
@@ -73,5 +70,4 @@ HTML;
   }//end public function asTab */
 
 } // end class WgtWidgetBookmarks
-
 

@@ -21,15 +21,14 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapDocu_Page_Model
-  extends Model
+class WebfrapDocu_Page_Model extends Model
 {
 
   /**
    * @param string $key
    * @return WebfrapDocu_Page_Data
    */
-  public function getInfoPage( $key )
+  public function getInfoPage($key)
   {
 
     $session = $this->getSession();
@@ -37,23 +36,23 @@ class WebfrapDocu_Page_Model
 
     $lang = $session->getStatus('activ.language');
 
-    if( !$lang )
+    if (!$lang)
       $lang = Conf::status('activ.language');
 
     $page  = $orm->get
     (
       'WbfsysDocuTree',
-      "access_key='{$key}' and (id_lang IN( "
+      "access_key='{$key}' and (id_lang IN("
         ." select rowid from wbfsys_language where UPPER(access_key) = UPPER('{$lang}') "
-        ." ) or id_lang is null ) "
+        .") or id_lang is null) "
     );
 
-    if( !$page )
+    if (!$page)
       return null;
 
-    $subPages = $orm->getListWhere( 'WbfsysDocuTree', 'm_parent='.$page );
+    $subPages = $orm->getListWhere('WbfsysDocuTree', 'm_parent='.$page);
 
-    $pageData = new WebfrapDocu_Page_Data( $page, $subPages );
+    $pageData = new WebfrapDocu_Page_Data($page, $subPages);
 
     return $pageData;
 

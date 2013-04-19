@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $iconReceiver = $this->icon( 'control/receiver.png', 'Receiver' );
 $iconDelete = $this->icon( 'control/delete.png', 'Delete' );
@@ -40,15 +40,15 @@ $iconDelete = $this->icon( 'control/delete.png', 'Delete' );
             onclick="$R.get('subwindow.php?c=Webfrap.People.selection&callback=appendPersonSelection');return false;"    >
             <?php echo $iconReceiver ?>
           </button>
-            
+
            <ul id="wgt-value-box" class="wgt-value-box" >
-           
+
            </ul>
 
         </div>
        </div>
     </div>
-  
+
     <?php // echo $ITEM->inputMyMessagePriority?>
   </div>
 
@@ -77,13 +77,13 @@ $iconDelete = $this->icon( 'control/delete.png', 'Delete' );
 
     var theId = 'wgt-value-box-entry-'+ui.item.id;
 
-    var listElement = '<li id="'+theId+'" class="wgt-corner" >'
+    var listElement = '<li id="'+theId+'" class="ui-corner" >'
      + ui.item.label+'&nbsp;&nbsp;'
      + '<button class="wgt-button" onclick="$S(\'#'+theId+'\').remove();" ><?php echo $iconDelete ?></button>'
-     + '<input name="receiver[]" id="wgt-input-list-of-receiver-entry-'+ui.item.id+'" ' 
+     + '<input name="receiver[]" id="wgt-input-list-of-receiver-entry-'+ui.item.id+'" '
      +' type="hidden" value="'+ui.item.id+'" class="asgd-<?php echo $VAR->formId?>" />'
      +'</li>';
-    
+
     $S('#wgt-value-box').append( listElement );
 
   });

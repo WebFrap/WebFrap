@@ -8,24 +8,21 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
-
 /**
  *
  */
-class DaidalosSystem_Ajax_View
-  extends LibTemplateAjaxView
+class DaidalosSystem_Ajax_View extends LibTemplateAjaxView
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * automcomplete for the user roles
@@ -40,15 +37,13 @@ class DaidalosSystem_Ajax_View
    *
    * @return void
    */
-  public function displayAutocomplete(  $key, $params )
+  public function displayAutocomplete( $key, $params)
   {
 
     $view = $this->getTplEngine();
-    $view->setRawJsonData( $this->model->getUsersByKey( $key, $params) );
+    $view->setRawJsonData($this->model->getUsersByKey($key, $params));
 
   }//end public function displayAutocomplete */
-
-
 
 } // end class DaidalosSystem_Ajax_View
 

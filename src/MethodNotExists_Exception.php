@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,52 +21,22 @@
  * @subpackage tech_core
  *
  */
-class MethodNotExists_Exception
-  extends WebfrapFlow_Exception
+class MethodNotExists_Exception extends WebfrapSys_Exception
 {
-  
+
   /**
+   * @param string $object
    * @param string $message
-   * @param string $debugMessage
-   * @param int $errorKey
+   * @param string $arguments
    */
-  public function __construct( $method, $arguments, $debugMessage = 'Internal Error', $errorKey = Response::INTERNAL_ERROR  )
+  public function __construct($object, $method, $arguments = array())
   {
 
-    $message = 'Method '.$method.' not exists.';
-    
-    if( is_object($message) )
-    {
-      
-      if( DEBUG && 'Internal Error' != $debugMessage )
-        parent::__construct( $debugMessage );
-      else
-        parent::__construct( 'Multiple Errors' );
-      
-      $this->error = $message;
-        
-      $this->debugMessage = $debugMessage;
-      $this->errorKey     = $message->getId();
-  
-      Error::addException( $debugMessage, $this );
-    }
-    else 
-    {
-      if( DEBUG && 'Internal Error' != $debugMessage && !is_numeric($debugMessage) )
-        parent::__construct( $debugMessage );
-      else
-        parent::__construct( $message );
-        
-      $this->debugMessage = $debugMessage;
-      $this->errorKey     = $errorKey;
-  
-      Error::addException( $message , $this );
-    }
+    $message = 'The method '.$method.' not exists on class '.get_class($object).' args: '.implode(', ', array_keys($arguments)) ;
 
+    parent::__construct($message);
 
   }//end public function __construct */
-  
-}//end class MethodNotExists_Exception 
 
-
+}//end class MethodNotExists_Exception
 

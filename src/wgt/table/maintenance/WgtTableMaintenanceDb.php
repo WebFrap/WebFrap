@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -22,12 +21,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WgtTableMaintenanceDb
-  extends WgtTable
+class WgtTableMaintenanceDb extends WgtTable
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * the id of the table
@@ -35,8 +33,6 @@ class WgtTableMaintenanceDb
    * @var string $id
    */
   public $id       = 'wgt-table_maintenance_backup_db';
-
-
 
   /**
    * List with all URLS
@@ -75,19 +71,19 @@ class WgtTableMaintenanceDb
 
   );
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // buildr methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * build the table
    *
    * @return String
    */
-  public function build( )
+  public function build()
   {
 
-    if( $this->html )
+    if ($this->html)
       return $this->html;
 
     $this->numCols = 2;
@@ -96,12 +92,12 @@ class WgtTableMaintenanceDb
     $head = '<thead>'.NL;
     $head .= '<tr>'.NL;
 
-    $head .= '<th>'.I18n::s( 'name', 'maintenance.text.name'  ).'</th>'.NL;
-    $head .= '<th>'.I18n::s( 'driver', 'maintenance.text.driver'  ).'</th>'.NL;
-    $head .= '<th>'.I18n::s( 'server', 'maintenance.text.server'  ).'</th>'.NL;
-    $head .= '<th>'.I18n::s( 'database', 'maintenance.text.database'  ).'</th>'.NL;
-    $head .= '<th>'.I18n::s( 'schema', 'maintenance.text.schema'  ).'</th>'.NL;
-    $head .= '<th style="width:70px;">'.I18n::s( 'nav', 'wbf.text.tableNav'  ).'</th>'.NL;
+    $head .= '<th>'.I18n::s('name', 'maintenance.text.name'  ).'</th>'.NL;
+    $head .= '<th>'.I18n::s('driver', 'maintenance.text.driver'  ).'</th>'.NL;
+    $head .= '<th>'.I18n::s('server', 'maintenance.text.server'  ).'</th>'.NL;
+    $head .= '<th>'.I18n::s('database', 'maintenance.text.database'  ).'</th>'.NL;
+    $head .= '<th>'.I18n::s('schema', 'maintenance.text.schema'  ).'</th>'.NL;
+    $head .= '<th style="width:70px;">'.I18n::s('nav', 'wbf.text.tableNav'  ).'</th>'.NL;
 
     $head .= '</tr>'.NL;
     $head .= '</thead>'.NL;
@@ -114,12 +110,11 @@ class WgtTableMaintenanceDb
 
     // Welcher Rowtyp soll ausgegeben werden
     $num = 1;
-    foreach( $this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
       //$objid  = $row['wbfsys_bookmark_'.Db::PK];
 
       $rowid      = $this->id.'_row_'.$key;
-      $navigation = $this->buildActions( $key );
+      $navigation = $this->rowMenu($key, $row);
 
 /*
 'class'     => 'PostgresqlPersistent',
@@ -143,7 +138,7 @@ class WgtTableMaintenanceDb
       $body .= '</tr>'.NL;
 
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors)
         $num = 1;
 
     } // ENDE FOREACH
@@ -151,7 +146,7 @@ class WgtTableMaintenanceDb
     $body .= '</tbody>'.NL;
     //\ Create the table body
 
-    if(!$this->replace )
+    if (!$this->replace)
       $this->html .= '<div id="'.$this->id.'" >'.NL;
 
     $this->html .= '<table id="'.$this->id.'_table" class="wgt-table" >'.NL;
@@ -161,14 +156,13 @@ class WgtTableMaintenanceDb
 
     $this->html .= '<tfoot class="ui-widget-footer" >'.NL;
     $this->html .= '<tr><td colspan="'.$this->numCols.'" >'.NL;
-    $this->html .= $this->pagingMenu( $this->url['paging'][1]  );
+    $this->html .= $this->pagingMenu($this->url['paging'][1]  );
     $this->html .= '</td></tr>'.NL;
     $this->html .= '</tfoot>'.NL;
 
     $this->html .= '</table>';
 
-    if( !$this->replace )
-    {
+    if (!$this->replace) {
       $this->html .= '</div>'.NL;
 
       $this->html .= '<script type="application/javascript" >'.NL;
@@ -185,24 +179,23 @@ class WgtTableMaintenanceDb
    *
    * @return String
    */
-  public function buildAjaxRows( )
+  public function buildAjaxRows()
   {
 
-    if( $this->html )
+    if ($this->html)
       return $this->html;
 
     $body = '';
 
-    foreach( $this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
 
       $objid = $row['wbfsys_bookmark_'.Db::PK];
 
       $rowid       = $this->id.'_row_'.$objid;
-      $navigation  = $this->buildActions( $objid );
+      $navigation  = $this->rowMenu($objid, $row);
 
-      if( $this->ajaxInsert )
-        $body .= '<htmlArea selector="table#'.$this->id.'_table>tbody" action="append" ><![CDATA[<tr id="'.$rowid.'" >'.NL;
+      if ($this->ajaxInsert)
+        $body .= '<htmlArea selector="table#'.$this->id.'_table>tbody:first" action="append" ><![CDATA[<tr id="'.$rowid.'" >'.NL;
       else
         $body .= '<htmlArea selector="tr#'.$rowid.'" action="html" ><![CDATA[';
 
@@ -210,20 +203,18 @@ class WgtTableMaintenanceDb
 
       $body .= '<td valign="top" class="ignore" style="text-align:center;" >'.$navigation.'</td>'.NL;
 
-      if( $this->ajaxInsert )
+      if ($this->ajaxInsert)
         $body .= '</tr>]]></htmlArea>'.NL;
       else
         $body .= ']]></htmlArea>'.NL;
 
     }//end foreach
 
-
     $this->html = $body;
 
     return $this->html;
 
   }//end public function buildAjaxRows */
-
 
 }//end class WgtTableWbfsysBookmarkGenf
 

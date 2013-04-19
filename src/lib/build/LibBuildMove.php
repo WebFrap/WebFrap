@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,27 +21,25 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibBuildMove
-  extends LibBuildAction
+class LibBuildMove extends LibBuildAction
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
    * @param unknown_type $node
    * @return unknown_type
    */
-  public function execute( )
+  public function execute()
   {
 
     $source = $this->args[0];
     $target = $this->args[1];
 
-    return SFilesystem::move( $source, $target );
+    return SFilesystem::move($source, $target);
   }//end public function execute */
-
 
 } // end class LibBuildMove
 

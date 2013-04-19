@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -23,9 +23,9 @@
  */
 class WgtMaintabCloser
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -33,15 +33,15 @@ class WgtMaintabCloser
    */
   public $id       = null ;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // magic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * tt
    * @todo some error handling here!!!
    */
-  public function __get( $key )
+  public function __get($key)
   {
     return null;
   }
@@ -50,7 +50,7 @@ class WgtMaintabCloser
    * tt
    * @todo some error handling here!!!
    */
-  public function __set( $key , $value )
+  public function __set($key , $value)
   {
 
   }
@@ -59,7 +59,7 @@ class WgtMaintabCloser
    * tt
    * @todo some error handling here!!!
    */
-  public function __call( $name , $args )
+  public function __call($name , $args)
   {
 
   }//end public function __call */
@@ -69,10 +69,9 @@ class WgtMaintabCloser
    *
    * @param unknown_type $id
    */
-  public function __construct( $id = null )
+  public function __construct($id = null)
   {
-    if($id)
-    {
+    if ($id) {
       $this->id = $id;
     }
 
@@ -82,12 +81,11 @@ class WgtMaintabCloser
    * the buildr method
    * @return string
    */
-  public function build( )
+  public function build()
   {
-
     return '<tab id="'.$this->id.'" close="true" ></tab>'.NL;
 
-  }//end public function build( )
+  }//end public function build()
 
 }//end class WgtMaintabCloser
 

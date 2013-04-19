@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,21 +26,20 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclUser_Treetable_Query
-  extends LibSqlQuery
+class AclUser_Treetable_Query extends LibSqlQuery
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var DomainNode
    */
   public $domainNode = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /** build criteria, interpret conditions and load data
    *
@@ -52,38 +51,38 @@ class AclUser_Treetable_Query
    *
    * @throws LibDb_Exception
    */
-  public function fetch( $groupId, $areaId, $condition = null, $context = null )
+  public function fetch($groupId, $areaId, $condition = null, $context = null)
   {
 
-    if( !$context )
+    if (!$context)
       $context = new TFlag();
 
     $context->qsize = -1;
 
     $this->sourceSize  = null;
     $db                = $this->getDb();
-    
+
     $ids = new TFlag();
     $ids->groupId = $groupId;
     $ids->areaId = $areaId;
-    
+
     $context->groupBy = 'group';
 
     $criteria = $db->orm->newCriteria();
 
-    $this->setCols( $criteria );
-    $this->setTables( $criteria );
-    $this->appendConditions( $criteria, $condition, $ids, $context  );
-    $this->checkLimitAndOrder( $criteria, $context );
+    $this->setCols($criteria);
+    $this->setTables($criteria);
+    $this->appendConditions($criteria, $condition, $ids, $context  );
+    $this->checkLimitAndOrder($criteria, $context);
 
 
     // Run Query und save the result
-    $this->result     = $db->orm->select( $criteria );
-    $this->calcQuery  = $criteria->count( 'count(DISTINCT group_users.rowid) as '.Db::Q_SIZE );
+    $this->result     = $db->orm->select($criteria);
+    $this->calcQuery  = $criteria->count('count(DISTINCT group_users.rowid) as '.Db::Q_SIZE);
 
   }//end public function fetch */
-  
-  /** 
+
+  /**
    * build criteria, interpret conditions and load data
    *
    * @param int $areaId
@@ -93,10 +92,10 @@ class AclUser_Treetable_Query
    *
    * @throws LibDb_Exception
    */
-  public function fetchListUser( $areaId, $condition = null, $context = null )
+  public function fetchListUser($areaId, $condition = null, $context = null)
   {
 
-    if( !$context )
+    if (!$context)
       $context = new TFlag();
 
     $context->qsize = -1;
@@ -107,22 +106,22 @@ class AclUser_Treetable_Query
 
     $ids = new TFlag();
     $ids->areaId = $areaId;
-    
+
     $criteria = $db->orm->newCriteria();
 
-    $this->setCols( $criteria );
-    $this->setTables( $criteria );
-    $this->appendConditions( $criteria, $condition, $ids, $context  );
-    $this->checkLimitAndOrder( $criteria, $context );
+    $this->setCols($criteria);
+    $this->setTables($criteria);
+    $this->appendConditions($criteria, $condition, $ids, $context  );
+    $this->checkLimitAndOrder($criteria, $context);
 
 
     // Run Query und save the result
-    $this->result     = $db->orm->select( $criteria );
-    $this->calcQuery  = $criteria->count( 'count(DISTINCT group_users.rowid) as '.Db::Q_SIZE, true );
+    $this->result     = $db->orm->select($criteria);
+    $this->calcQuery  = $criteria->count('count(DISTINCT group_users.rowid) as '.Db::Q_SIZE, true);
 
   }//end public function fetchListUser */
-  
-  /** 
+
+  /**
    * build criteria, interpret conditions and load data
    *
    * @param int $areaId
@@ -132,10 +131,10 @@ class AclUser_Treetable_Query
    *
    * @throws LibDb_Exception
    */
-  public function fetchListDset( $vid, $areaId, $condition = null, $context = null )
+  public function fetchListDset($vid, $areaId, $condition = null, $context = null)
   {
 
-    if( !$context )
+    if (!$context)
       $context = new TFlag();
 
     $context->qsize = -1;
@@ -144,22 +143,22 @@ class AclUser_Treetable_Query
     $db                = $this->getDb();
 
     $criteria = $db->orm->newCriteria();
-    
+
     $ids = new TFlag();
     $ids->dsetId = $vid;
     $ids->areaId = $areaId;
-    
+
     $context->groupBy = 'dset';
 
-    $this->setColsDset( $criteria );
-    $this->setTables( $criteria );
-    $this->appendConditions( $criteria, $condition, $ids, $context );
-    $this->checkLimitAndOrder( $criteria, $context );
+    $this->setColsDset($criteria);
+    $this->setTables($criteria);
+    $this->appendConditions($criteria, $condition, $ids, $context);
+    $this->checkLimitAndOrder($criteria, $context);
 
 
     // Run Query und save the result
-    $this->result     = $db->orm->select( $criteria );
-    $this->calcQuery  = $criteria->count( 'count(DISTINCT group_users.rowid) as '.Db::Q_SIZE );
+    $this->result     = $db->orm->select($criteria);
+    $this->calcQuery  = $criteria->count('count(DISTINCT group_users.rowid) as '.Db::Q_SIZE);
 
   }//end public function fetchListDset */
 
@@ -173,12 +172,12 @@ class AclUser_Treetable_Query
    * @param LibSqlCriteria $criteria
    * @return void
    */
-  public function setCols( $criteria )
+  public function setCols($criteria)
   {
 
     $cols = array
     (
-      "role_user.name || ' &lt;' || 
+      "role_user.name || ' &lt;' ||
       COALESCE
       (
         person.lastname || ', ' || person.firstname,
@@ -195,10 +194,10 @@ class AclUser_Treetable_Query
 //      "'' as group_users_date_end",
 //      "group_users.date_start as group_users_date_start",
 //      "group_users.date_end as group_users_date_end",
-      'count( distinct group_users.vid ) as num_dsets'
+      'count(distinct group_users.vid) as num_dsets'
     );
-    $criteria->select( $cols, true );
-    
+    $criteria->select($cols, true);
+
     $criteria->groupBy(array(
       'role_user_rowid',
       'role_user_name',
@@ -211,7 +210,7 @@ class AclUser_Treetable_Query
     ));
 
   }//end public function setCols */
-  
+
  /** inject the requested cols in the criteria
    *
    * to add more cols overwrite this method, or create more methods that also
@@ -222,12 +221,12 @@ class AclUser_Treetable_Query
    * @param LibSqlCriteria $criteria
    * @return void
    */
-  public function setColsDset( $criteria )
+  public function setColsDset($criteria)
   {
 
     $cols = array
     (
-      "role_user.name || ' &lt;' || 
+      "role_user.name || ' &lt;' ||
       COALESCE
       (
         person.lastname || ', ' || person.firstname,
@@ -244,10 +243,10 @@ class AclUser_Treetable_Query
 //      "'' as group_users_date_end",
 //      "group_users.date_start as group_users_date_start",
 //      "group_users.date_end as group_users_date_end",
-      'count( distinct group_users.id_group ) as num_groups'
+      'count(distinct group_users.id_group) as num_groups'
     );
-    $criteria->select( $cols, true );
-    
+    $criteria->select($cols, true);
+
     $criteria->groupBy(array(
       'role_user_rowid',
       'role_user_name',
@@ -269,10 +268,10 @@ class AclUser_Treetable_Query
    * @param LibSqlCriteria $criteria
    * @return void
    */
-  public function setTables( $criteria )
+  public function setTables($criteria)
   {
 
-    $criteria->from( 'wbfsys_group_users group_users', 'group_users' );
+    $criteria->from('wbfsys_group_users group_users', 'group_users');
 
     $criteria->join
     (
@@ -283,7 +282,7 @@ class AclUser_Treetable_Query
           core_person person
             ON person.rowid = role_user.id_person
       ',
-      array( 'role_user', 'person' )
+      array('role_user', 'person')
     );
 
 
@@ -308,7 +307,7 @@ class AclUser_Treetable_Query
    * @return void
    */
   public function appendConditions
-  ( 
+  (
     $criteria,
     $condition,
     $ids,
@@ -316,109 +315,90 @@ class AclUser_Treetable_Query
   )
   {
 
-    if( isset( $condition['free'] ) && trim( $condition['free'] ) != ''  )
-    {
+    if (isset($condition['free']) && trim($condition['free']) != ''  ) {
 
-      if( ctype_digit( $condition['free'] ) )
-      {
+      if (ctype_digit($condition['free'])) {
         $criteria->where
         (
-          '(  group_users.rowid = \''.$condition['free'].'\' )'
+          '( group_users.rowid = \''.$condition['free'].'\')'
         );
-      }
-      else
-      {
-      
-        if( strpos( $condition['free'], ',' ) )
-        {
-        
-          $parts = explode( ',', $condition['free'] );
-          
-          foreach( $parts as $part )
-          {
-          
-            $part = trim( $part );
-            
+      } else {
+
+        if (strpos($condition['free'], ',')) {
+
+          $parts = explode(',', $condition['free']);
+
+          foreach ($parts as $part) {
+
+            $part = trim($part);
+
             // prüfen, dass der string nicht leer ist
-            if( '' == trim( $part ) )
+            if ('' == trim($part))
               continue;
-              
+
             $criteria->where
             (
               '(
-                (  upper(role_user.name) like upper(\''.$part.'%\') )
+                ( upper(role_user.name) like upper(\''.$part.'%\'))
                 OR
-                (  upper(person.firstname) like upper(\''.$part.'%\') )
+                ( upper(person.firstname) like upper(\''.$part.'%\'))
                 OR
-                (  upper(person.lastname) like upper(\''.$part.'%\') )
+                ( upper(person.lastname) like upper(\''.$part.'%\'))
                )
               '
             );
-          
+
           }
-        
-        }
-        else
-        {
-        
+
+        } else {
+
           $part = $condition['free'];
-        
+
           $criteria->where
           (
             '(
-              (  upper(role_user.name) like upper(\''.$part.'%\') )
+              ( upper(role_user.name) like upper(\''.$part.'%\'))
               OR
-              (  upper(person.firstname) like upper(\''.$part.'%\') )
+              ( upper(person.firstname) like upper(\''.$part.'%\'))
               OR
-              (  upper(person.lastname) like upper(\''.$part.'%\') )
+              ( upper(person.lastname) like upper(\''.$part.'%\'))
              )
             '
           );
-        
+
         }
-      
+
       }
 
     }//end if
-    
-    if( 'user' == $context->groupBy )
-    {
+
+    if ('user' == $context->groupBy) {
       $criteria->where
       (
-        "group_users.id_area = {$ids->areaId} 
-          AND 
-          ( 
-          	group_users.partial = 0 
-          	OR  
-          	group_users.partial is null 
+        "group_users.id_area = {$ids->areaId}
+          AND
+          (
+            group_users.partial = 0
           )"
       );
-    }
-    elseif( 'dset' == $context->groupBy  )
-    {
+    } elseif ('dset' == $context->groupBy) {
       $criteria->where
       (
-        "group_users.id_area = {$ids->areaId} 
-        	AND group_users.vid = {$ids->dsetId}
-          AND 
-          ( 
-          	group_users.partial = 0 
-          	OR  
-          	group_users.partial is null 
+        "group_users.id_area = {$ids->areaId}
+          AND group_users.vid = {$ids->dsetId}
+          AND
+          (
+            group_users.partial = 0
           )"
       );
-    }
-    else 
-    {
+    } else {
       $criteria->where
       (
-        "group_users.id_area = {$ids->areaId} 
-        	AND group_users.id_group = {$ids->groupId}
-          AND 
-          ( 
-          	group_users.partial = 0 
-          	OR  
-          	group_users.partial is null 
+        "group_users.id_area = {$ids->areaId}
+          AND group_users.id_group = {$ids->groupId}
+          AND
+          (
+            group_users.partial = 0
           )"
       );
     }
@@ -427,8 +407,6 @@ class AclUser_Treetable_Query
 
   }//end public function appendConditions */
 
-
-  
  /** check for limits, offset and order
    *
    * this method checks if there are parameters to manipulate the query result
@@ -441,43 +419,35 @@ class AclUser_Treetable_Query
    * @param TArray $context
    * @return void
    */
-  public function checkLimitAndOrder( $criteria, $context  )
+  public function checkLimitAndOrder($criteria, $context  )
   {
 
     // check if there is a given order
-    $criteria->orderBy( 'person.lastname' );
+    $criteria->orderBy('person.lastname');
 
     // Check the offset
-    if( $context->start )
-    {
-      if( $context->start < 0 )
+    if ($context->start) {
+      if ($context->start < 0)
         $context->start = 0;
-    }
-    else
-    {
+    } else {
       $context->start = null;
     }
-    $criteria->offset( $context->start );
+    $criteria->offset($context->start);
 
     // Check the limit
-    if( -1 == $context->qsize )
-    {
+    if (-1 == $context->qsize) {
       // no limit if -1
       $context->qsize = null;
-    }
-    else if( $context->qsize )
-    {
+    } elseif ($context->qsize) {
       // limit must not be bigger than max, for no limit use -1
-      if( $context->qsize > Wgt::$maxListSize )
+      if ($context->qsize > Wgt::$maxListSize)
         $context->qsize = Wgt::$maxListSize;
-    }
-    else
-    {
+    } else {
       // if limit 0 or null use the default limit
       $context->qsize = Wgt::$defListSize;
     }
 
-    $criteria->limit( $context->qsize );
+    $criteria->limit($context->qsize);
 
   }//end public function checkLimitAndOrder */
 

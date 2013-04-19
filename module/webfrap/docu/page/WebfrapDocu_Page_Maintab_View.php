@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapDocu_Page_Maintab_View
-  extends WgtMaintab
+class WebfrapDocu_Page_Maintab_View extends WgtMaintabCustom
 {
 
   /**
@@ -30,38 +29,36 @@ class WebfrapDocu_Page_Maintab_View
    */
   public $model = null;
 
-////////////////////////////////////////////////////////////////////////////////
-// Methoden
-////////////////////////////////////////////////////////////////////////////////
+  /**
+   */
+  public $overflowY = 'auto';
 
+/*//////////////////////////////////////////////////////////////////////////////
+// Methoden
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param string $key
    * @param TFlag $params
    * @return void
    */
-  public function displayPage( $key,  $params )
+  public function displayPage($key,  $params)
   {
 
+    $this->setLabel('Docu');
+    $this->setTitle('Docu');
 
-    $this->setLabel( 'Docu' );
-    $this->setTitle( 'Docu' );
+    $pageData = $this->model->getInfoPage($key);
 
-
-    $pageData = $this->model->getInfoPage( $key );
-
-    if( !$pageData )
-    {
-      $this->setTemplate( 'webfrap/docu/page/maintab/missing', true );
-    }
-    else
-    {
-      $this->addVar( 'pageData', $pageData );
-      $this->setTemplate( 'webfrap/docu/page/maintab/as_'.$pageData->template, true );
+    if (!$pageData) {
+      $this->setTemplate('webfrap/docu/page/maintab/missing', true);
+    } else {
+      $this->addVar('pageData', $pageData);
+      $this->setTemplate('webfrap/docu/page/maintab/as_'.$pageData->template, true);
     }
 
     $params = new TArray();
-    $this->addMenu( $key, $params );
+    $this->addMenu($key, $params);
 
   }//end public function displayPage */
 
@@ -74,7 +71,7 @@ class WebfrapDocu_Page_Maintab_View
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $key, $params )
+  public function addMenu($key, $params)
   {
 
     $menu     = $this->newMenu
@@ -84,9 +81,9 @@ class WebfrapDocu_Page_Maintab_View
     );
 
     $menu->id = $this->id.'_dropmenu';
-    $menu->buildMenu( $key, $params );
+    $menu->buildMenu($key, $params);
 
-    $menu->injectActions( $this, $params );
+    $menu->injectActions($this, $params);
 
   }//end public function addMenu */
 

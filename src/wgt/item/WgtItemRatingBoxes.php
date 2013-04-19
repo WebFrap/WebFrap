@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -19,19 +19,18 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtItemRatingBoxes
-  extends WgtItemAbstract
+class WgtItemRatingBoxes extends WgtItemAbstract
 {
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   protected $activ = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // getter and Setter
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -44,17 +43,16 @@ class WgtItemRatingBoxes
   /**
    *
    */
-  public function build( )
+  public function build()
   {
 
-
     // Deliverd in Time
-    $radio = new WgtItemRadiobox( 'temp'.$this->name );
-    $radio->setActive( $this->activ );
-    $radio->addAttributes( $this->attributes );
+    $radio = new WgtItemRadiobox('temp'.$this->name);
+    $radio->setActive($this->activ);
+    $radio->addAttributes($this->attributes);
 
     $radioN = $radio->addRadio();
-    $radioN->addTdAttributes( 'class' , 'wgtRadionNotRated' );
+    $radioN->addTdAttributes('class' , 'wgtRadionNotRated');
     $radioN->addAttributes
     (
     array
@@ -67,7 +65,7 @@ class WgtItemRatingBoxes
     );
 
     $radioG = $radio->addRadio();
-    $radioG->addTdAttributes('class' , 'wgtRadionGodRated' );
+    $radioG->addTdAttributes('class' , 'wgtRadionGodRated');
     $radioG->addAttributes
     (
     array
@@ -80,7 +78,7 @@ class WgtItemRatingBoxes
     );
 
     $radioA = $radio->addRadio();
-    $radioA->addTdAttributes('class' , 'wgtRadionAverageRated' );
+    $radioA->addTdAttributes('class' , 'wgtRadionAverageRated');
     $radioA->addAttributes
     (
     array
@@ -93,7 +91,7 @@ class WgtItemRatingBoxes
     );
 
     $radioB = $radio->addRadio();
-    $radioB->addTdAttributes('class' , 'wgtRadionBadRated' );
+    $radioB->addTdAttributes('class' , 'wgtRadionBadRated');
     $radioB->addAttributes
     (
     array
@@ -107,7 +105,7 @@ class WgtItemRatingBoxes
 
     return $radio->toHtml();
 
-  }//end public function build( )
+  }//end public function build()
 
 }//end class WgtItemRatingBoxes
 

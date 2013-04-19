@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -23,12 +21,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapNavigation_Maintab_Menu
-  extends WgtDropmenu
+class WebfrapNavigation_Maintab_Menu extends WgtDropmenu
 {
 
   /**
-   * 
+   *
    * Enter description here ...
    * @var unknown_type
    */
@@ -38,14 +35,14 @@ class WebfrapNavigation_Maintab_Menu
    * build the window menu
    * @param TArray $params
    */
-  public function buildMenu( $params )
+  public function buildMenu($params)
   {
 
-    $iconMenu         = $this->view->icon( 'control/menu.png'   , 'Menu'    );
-    $iconMisc         = $this->view->icon( 'control/misc.png'   , 'Misc'    );
-    $iconClose        = $this->view->icon( 'control/close.png'  , 'Close'   );
-    $iconEntity       = $this->view->icon( 'control/entity.png' , 'Entity'  );
-    $iconSearch       = $this->view->icon( 'control/search.png' , 'Search'  );
+    $iconMenu         = $this->view->icon('control/menu.png'   , 'Menu'    );
+    $iconMisc         = $this->view->icon('control/misc.png'   , 'Misc'    );
+    $iconClose        = $this->view->icon('control/close.png'  , 'Close'   );
+    $iconEntity       = $this->view->icon('control/entity.png' , 'Entity'  );
+    $iconSearch       = $this->view->icon('control/search.png' , 'Search'  );
 
     $entries = new TArray();
 
@@ -64,7 +61,7 @@ class WebfrapNavigation_Maintab_Menu
 HTML;
 
     $this->content .= $this->crumbs;
-        
+
     $this->content .= <<<HTML
 <div class="right" >
   <input
@@ -84,12 +81,11 @@ HTML;
   >
     {$iconSearch} Search
   </button>
-  
+
 </div>
 HTML;
 
   }//end public function buildMenu */
-
 
   /**
    * just add the code for the edit ui controlls
@@ -100,7 +96,7 @@ HTML;
    *   string formId: the id of the form;
    * }
    */
-  public function addActions(  $params )
+  public function addActions( $params)
   {
 
     // add the button action for save in the window
@@ -109,7 +105,7 @@ HTML;
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       self.close();
     });
 

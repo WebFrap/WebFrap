@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,13 +26,12 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MaintenanceEntity_Model
-  extends Model
+class MaintenanceEntity_Model extends Model
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // protocol
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
   /**
    * create a table item for the entity
    *
@@ -40,14 +39,14 @@ class MaintenanceEntity_Model
    * @param TFlag $params named parameters
    * @return WebfrapProtocol_Query
    */
-  public function getEntityProtocol( $domainNode, $params  )
+  public function getEntityProtocol($domainNode, $params  )
   {
 
     $db = $this->getDb();
 
     // if not create a default method an just fetch
-    $query = $db->newQuery( 'WebfrapProtocol' );
-    $query->fetchEntityProtocol( $domainNode->domainKey, $params );
+    $query = $db->newQuery('WebfrapProtocol');
+    $query->fetchEntityProtocol($domainNode->domainKey, $params);
 
     return $query;
 
@@ -60,14 +59,14 @@ class MaintenanceEntity_Model
    * @param TFlag $params named parameters
    * @return WebfrapProtocol_Query
    */
-  public function getDatasetProtocol( $domainNode, $objid, $params  )
+  public function getDatasetProtocol($domainNode, $objid, $params  )
   {
 
     $db = $this->getDb();
 
     // if not create a default method an just fetch
-    $query = $db->newQuery( 'WebfrapProtocol' );
-    $query->fetchDatasetProtocol( $domainNode->domainKey, $objid, $params );
+    $query = $db->newQuery('WebfrapProtocol');
+    $query->fetchDatasetProtocol($domainNode->domainKey, $objid, $params);
 
     return $query;
 

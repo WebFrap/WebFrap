@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,26 +22,22 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class CmsBlogFront_Model
-  extends Model
+class CmsBlogFront_Model extends Model
 {
 
   /**
    * @param string $accessKey
    * @return CmsPage_Entity
    */
-  public function getPage( $accessKey )
+  public function getPage($accessKey)
   {
 
     $orm = $this->getOrm();
 
-    if( ctype_digit($accessKey) )
-    {
-      $entityPage = $orm->get( 'CmsPage', $accessKey );
-    }
-    else 
-    {
-      $entityPage = $orm->getByKey( 'CmsPage', $accessKey );
+    if (ctype_digit($accessKey)) {
+      $entityPage = $orm->get('CmsPage', $accessKey);
+    } else {
+      $entityPage = $orm->getByKey('CmsPage', $accessKey);
     }
 
     return $entityPage;
@@ -52,23 +48,22 @@ class CmsBlogFront_Model
    * @param CmsPage_Entity $page
    * @return Entity
    */
-  public function getTemplate( $page )
+  public function getTemplate($page)
   {
 
     $orm = $this->getOrm();
 
-    $entityTemplate = $orm->get( 'CmsTemplate', $page->id_template );
+    $entityTemplate = $orm->get('CmsTemplate', $page->id_template);
 
     return $entityTemplate;
 
   }//end public function getTemplate */
 
-
   /**
    * @param CmsTemplate_Entity $tplNode
    * @return Entity
    */
-  public function getMenus( $tplNode )
+  public function getMenus($tplNode)
   {
 
     $db = $this->getDb();
@@ -93,20 +88,19 @@ SQL;
 
     $result = $db->select($sql);
 
-    foreach( $result as $row )
-    {
+    foreach ($result as $row) {
       $tmp[$row['key']] = $row['content'];
     }
 
     return $tmp;
 
   }//end public function getMenus */
-  
+
   /**
    * @param CmsTemplate_Entity $tplNode
    * @return array
    */
-  public function getAreas( $tplNode )
+  public function getAreas($tplNode)
   {
 
     $db = $this->getDb();
@@ -131,8 +125,7 @@ SQL;
 
     $result = $db->select($sql);
 
-    foreach( $result as $row )
-    {
+    foreach ($result as $row) {
       $tmp[$row['key']] = $row['content'];
     }
 
@@ -145,7 +138,7 @@ SQL;
    * @param CmsTemplate_Entity $tplNode
    * @return Entity
    */
-  public function getTexts( $tplNode )
+  public function getTexts($tplNode)
   {
 
     $db = $this->getDb();
@@ -170,16 +163,13 @@ SQL;
 
     $result = $db->select($sql);
 
-    foreach( $result as $row )
-    {
+    foreach ($result as $row) {
       $tmp[$row['key']] = $row['content'];
     }
 
     return $tmp;
 
   }//end public function getTexts */
-
-
 
 } // end class CmsFront_Model
 

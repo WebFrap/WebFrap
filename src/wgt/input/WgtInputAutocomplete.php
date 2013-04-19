@@ -21,12 +21,11 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputAutocomplete
-  extends WgtInput
+class WgtInputAutocomplete extends WgtInput
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -41,15 +40,15 @@ class WgtInputAutocomplete
    */
   protected $loadUrl = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * setter method for the url
    * @param string $url the url from witch the selectbos tries to load the data
    */
-  public function setUrl( $url )
+  public function setUrl($url)
   {
     $this->loadUrl = $url;
   }//end blic function setUrl */
@@ -58,7 +57,7 @@ class WgtInputAutocomplete
    * setter method for the url
    * @param string $type
    */
-  public function setType( $type )
+  public function setType($type)
   {
     $this->type = $type;
   }//end blic function setType */
@@ -69,31 +68,30 @@ class WgtInputAutocomplete
    * @param string $service
    * @param string $action
    */
-  public function setLoadParam( $service , $action )
+  public function setLoadParam($service , $action)
   {
     $this->loadUrl = 'json.php?serv='.$service.'&amp;action=Autocomplete'.$action;
   }//end public function setLoadParam  */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Parser Methodes
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Parser for the input field
    *
    * @return String
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array())
   {
 
-    if($attributes)
+    if ($attributes)
       $this->attributes = array_merge($this->attributes,$attributes);
 
-    if( !isset($this->attributes['id']) )
+    if (!isset($this->attributes['id']))
       $this->attributes['id'] = 'wgtid_item-'.Webfrap::uniqid();
 
-    if( isset($this->attributes['class']) )
+    if (isset($this->attributes['class']))
       $this->attributes['class'] .= ' wcm wcm_ui_autocomplete';
     else
       $this->attributes['class'] = 'wcm wcm_ui_autocomplete';
@@ -102,7 +100,7 @@ class WgtInputAutocomplete
 
     $id = $this->attributes['id'];
 
-    $helpIcon = $this->renderDocu( $id );
+    $helpIcon = $this->renderDocu($id);
 
     $required = $this->required?'<span class="wgt-required">*</span>':'';
 
@@ -114,7 +112,7 @@ class WgtInputAutocomplete
 
     return $html;
 
-  } // end public function build( )
+  } // end public function build()
 
   /**
    * Enter description here...
@@ -131,5 +129,4 @@ class WgtInputAutocomplete
   }//end public function buildAjax()
 
 } // end class WgtItemAutocomplete
-
 

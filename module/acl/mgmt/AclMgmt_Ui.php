@@ -26,21 +26,20 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Ui
-  extends MvcUi
+class AclMgmt_Ui extends MvcUi
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var DomainNode
    */
   public $domainNode = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // CRUD Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * create an edit formular
@@ -48,22 +47,22 @@ class AclMgmt_Ui
    * @param TFlag $params named parameters
    * @return void
    */
-  public function editForm( $objid, $params )
+  public function editForm($objid, $params)
   {
 
-    $entityWbfsysSecurityArea = $this->model->getEntityWbfsysSecurityArea( $objid );
+    $entityWbfsysSecurityArea = $this->model->getEntityWbfsysSecurityArea($objid);
 
     $fields = $this->model->getEditFields();
     $fields['security_area'][] = 'rowid';
 
     $params->fieldsWbfsysSecurityArea = $fields['security_area'];
 
-    $formWbfsysSecurityArea = $this->view->newForm( 'AclMgmt_SecurityArea' );
-    $formWbfsysSecurityArea->setNamespace( $params->namespace );
-    $formWbfsysSecurityArea->setAssignedForm( $params->formId );
-    $formWbfsysSecurityArea->setPrefix( 'WbfsysSecurityArea' );
-    $formWbfsysSecurityArea->setKeyName( 'security_area' );
-    $formWbfsysSecurityArea->setSuffix( $entityWbfsysSecurityArea->getid() );
+    $formWbfsysSecurityArea = $this->view->newForm('AclMgmt_SecurityArea');
+    $formWbfsysSecurityArea->setNamespace($params->namespace);
+    $formWbfsysSecurityArea->setAssignedForm($params->formId);
+    $formWbfsysSecurityArea->setPrefix('WbfsysSecurityArea');
+    $formWbfsysSecurityArea->setKeyName('security_area');
+    $formWbfsysSecurityArea->setSuffix($entityWbfsysSecurityArea->getid());
     $formWbfsysSecurityArea->createForm
     (
       $entityWbfsysSecurityArea,
@@ -74,9 +73,9 @@ class AclMgmt_Ui
 
   }//end public function editForm */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Listing Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * create a table item for the entity
@@ -87,7 +86,7 @@ class AclMgmt_Ui
    *
    * @return AclMgmt_Table_Element
    */
-  public function createListItem( $data, $access, $params  )
+  public function createListItem($data, $access, $params  )
   {
 
     $view = $this->getView();
@@ -101,11 +100,11 @@ class AclMgmt_Ui
     $table->domainNode = $this->domainNode;
 
     // use the query as datasource for the table
-    $table->setData( $data );
+    $table->setData($data);
 
     // den access container dem listenelement übergeben
-    $table->setAccess( $access );
-    $table->setAccessPath( $params, $params->aclKey, $params->aclNode );
+    $table->setAccess($access);
+    $table->setAccessPath($params, $params->aclKey, $params->aclNode);
 
     $table->setTitle
     (
@@ -115,7 +114,7 @@ class AclMgmt_Ui
         $this->domainNode->domainI18n.'.label'
       )
     );
-    $table->setSearchKey( $this->domainNode->aclDomainKey.'-acl' );
+    $table->setSearchKey($this->domainNode->aclDomainKey.'-acl');
 
     // set the offset to set the paging menu correct
     $table->start    = $params->start;
@@ -124,21 +123,20 @@ class AclMgmt_Ui
     $table->stepSize = $params->qsize;
 
     // check if there is a filter for the first char
-    if( $params->begin )
+    if ($params->begin)
       $table->begin  = $params->begin;
 
     // if there is a given tableId for the html id of the the table replace
     // the default id with it
-    if( $params->targetId )
-      $table->setId( $params->targetId );
+    if ($params->targetId)
+      $table->setId($params->targetId);
 
-    $table->addActions( array(  'tree', 'inheritance', 'sep',  'delete' ) );
+    $table->addActions(array( 'tree', 'inheritance', 'sep',  'delete'));
 
-    $table->setPagingId( $params->searchFormId );
-    $table->setSaveForm( $params->formId );
+    $table->setPagingId($params->searchFormId);
+    $table->setSaveForm($params->formId);
 
-    if( $params->ajax )
-    {
+    if ($params->ajax) {
       // refresh the table in ajax requests
       $table->refresh    = true;
 
@@ -148,7 +146,7 @@ class AclMgmt_Ui
     }
 
     // create the panel
-    $tabPanel = new WgtPanelTable( $table );
+    $tabPanel = new WgtPanelTable($table);
 
     $tabPanel->title = $this->view->i18n->l
     (
@@ -156,14 +154,13 @@ class AclMgmt_Ui
       'wbf.lable',
       array
       (
-        'label' => $view->i18n->l( $this->domainNode->label, $this->domainNode->domainI18n.'.label' )
+        'label' => $view->i18n->l($this->domainNode->label, $this->domainNode->domainI18n.'.label')
       )
     );
     $tabPanel->searchKey  = $this->domainNode->aclDomainKey.'_acl';
 
 
-    if( $params->append  )
-    {
+    if ($params->append) {
       $table->setAppendMode(true);
       $table->buildAjax();
 
@@ -172,23 +169,20 @@ class AclMgmt_Ui
   \$S('table#{$table->id}-table').grid('syncColWidth');
 
 WGTJS;
-      $this->view->addJsCode( $jsCode );
+      $this->view->addJsCode($jsCode);
 
 
-    }
-    else
-    {
+    } else {
       // if this is an ajax request and we replace the body, we need also
       // to change the displayed found "X" entries in the footer
-      if( $params->ajax )
-      {
+      if ($params->ajax) {
         $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('setNumEntries',{$table->dataSize}).grid('syncColWidth');
 
 WGTJS;
 
-        $this->view->addJsCode( $jsCode );
+        $this->view->addJsCode($jsCode);
 
       }
 
@@ -207,7 +201,7 @@ WGTJS;
    * @param array $params named parameters
    * @return void
    */
-  public function listEntry( $access, $params, $insert = false )
+  public function listEntry($access, $params, $insert = false)
   {
 
     // laden der benötigten resourcen
@@ -221,32 +215,31 @@ WGTJS;
       $view
     );
 
-    $table->addData( $this->model->getEntryDataAccess( $this->view, $params ) );
+    $table->addData($this->model->getEntryDataAccess($this->view, $params));
 
     // den access container dem listenelement übergeben
-    $table->setAccess( $access );
-    $table->setAccessPath( $params, $params->aclKey, $params->aclNode );
+    $table->setAccess($access);
+    $table->setAccessPath($params, $params->aclKey, $params->aclNode);
 
     // if a table id is given use it for the table
-    if( $params->targetId  )
+    if ($params->targetId  )
       $table->id = $params->targetId;
 
-    $table->setPagingId( $params->searchFormId );
+    $table->setPagingId($params->searchFormId);
 
     // add the id to the form
-    if( !$params->formId )
+    if (!$params->formId)
       $params->formId = 'wgt-form-'.$this->domainNode->aclDomainKey.'-acl-update';
 
-    $table->setSaveForm( $params->formId );
+    $table->setSaveForm($params->formId);
 
-    $table->addActions( array( 'inheritance', 'delete' ) );
+    $table->addActions(array('inheritance', 'delete'));
 
     $table->insertMode = $insert;
 
-    $this->view->setPageFragment( 'rowSecurityAccess', $table->buildAjax( ) );
+    $this->view->setPageFragment('rowSecurityAccess', $table->buildAjax());
 
-    if( $insert )
-    {
+    if ($insert) {
 
       $jsCode = <<<WGTJS
 
@@ -254,9 +247,7 @@ WGTJS;
 
 WGTJS;
 
-    }
-    else
-    {
+    } else {
 
       $jsCode = <<<WGTJS
 
@@ -266,7 +257,7 @@ WGTJS;
 
     }
 
-    $view->addJsCode( $jsCode );
+    $view->addJsCode($jsCode);
 
     return $table;
 
@@ -278,16 +269,16 @@ WGTJS;
    *
    * @return void
    */
-  public function searchForm( )
+  public function searchForm()
   {
 
     $entityWbfsysSecurityAccess  = $this->model->getEntityWbfsysSecurityAccess();
     $fieldsWbfsysSecurityAccess  = $entityWbfsysSecurityAccess->getSearchCols();
 
-    $formWbfsysSecurityAccess    = $this->view->newForm( 'WbfsysSecurityAccess' );
-    $formWbfsysSecurityAccess->setNamespace( 'WbfsysSecurityAccess' );
-    $formWbfsysSecurityAccess->setPrefix( 'WbfsysSecurityAccess' );
-    $formWbfsysSecurityAccess->setKeyName( 'security_access' );
+    $formWbfsysSecurityAccess    = $this->view->newForm('WbfsysSecurityAccess');
+    $formWbfsysSecurityAccess->setNamespace('WbfsysSecurityAccess');
+    $formWbfsysSecurityAccess->setPrefix('WbfsysSecurityAccess');
+    $formWbfsysSecurityAccess->setKeyName('security_access');
     $formWbfsysSecurityAccess->createSearchForm
     (
       $entityWbfsysSecurityAccess,

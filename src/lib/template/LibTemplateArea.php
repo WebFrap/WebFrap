@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * Template Areas ermöglichen das Ersezten von HTML Blöcken im Browser anhand
@@ -26,7 +24,7 @@
  * set content direct
  * <code>
  * // create new area from the active view
- * $area = $view->newArea( 'keyToIdentifyAreaInTheTpl' );
+ * $area = $view->newArea('keyToIdentifyAreaInTheTpl');
  * $area->action = 'html';
  * $area->position = '#jueryId';
  * $area->setContent('<p>new content if the node with the id: jueryId</p>');
@@ -36,7 +34,7 @@
  * use as template container
  * <code>
  * // create new area from the active view
- * $area = $view->newArea( 'keyToIdentifyAreaInTheTpl' );
+ * $area = $view->newArea('keyToIdentifyAreaInTheTpl');
  * $area->action = 'html';
  * $area->position = '#jueryId';
  *
@@ -49,12 +47,11 @@
  * @subpackage tech_core
  * @author Dominik Alexander Bonsch <dominik.bonsch@webfrap.net>
  */
-class LibTemplateArea
-  extends LibTemplateAjax
+class LibTemplateArea extends LibTemplateAjax
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * type wird intern verwendet
@@ -63,8 +60,5 @@ class LibTemplateArea
    */
   public $type         = 'area';
 
-  
-
 } // end class LibTemplateArea
-
 

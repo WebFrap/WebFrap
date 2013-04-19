@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * class LibDb_Exception
@@ -22,12 +21,11 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibDb_Exception
-  extends WebfrapFlow_Exception
+class LibDb_Exception extends Io_Exception
 {
-  
+
   public $sql = null;
-  
+
   /**
    *
    * @param string $message
@@ -35,62 +33,56 @@ class LibDb_Exception
    * @param int $errorKey
    */
   public function __construct
-  ( 
-    $message, 
-    $debugMessage = 'Internal Error', 
-    $errorKey = Response::INTERNAL_ERROR, 
+  (
+    $message,
+    $debugMessage = 'Internal Error',
+    $errorKey = Response::INTERNAL_ERROR,
     $sql = null,
-    $numQuery = -1
+    $numQuery = -1,
+    $report = true
   )
   {
-    
-    
-    if( DEBUG && $sql )
-      Debug::console(  "QUERY {$numQuery} FAILED: ".$sql );
-    
+
+    if (DEBUG && $sql)
+      Debug::console( "QUERY {$numQuery} FAILED: ".$sql);
+
     $this->sql = $sql;
-    
-    if( is_object( $message ) )
-    {
-      
-      if( DEBUG && 'Internal Error' != $debugMessage )
-        parent::__construct( $debugMessage );
+
+    if (is_object($message)) {
+
+      if (DEBUG && 'Internal Error' != $debugMessage)
+        parent::__construct($debugMessage);
       else
-        parent::__construct( 'Multiple Errors' );
-      
+        parent::__construct('Multiple Errors');
+
       $this->error = $message;
-        
+
       $this->debugMessage = $debugMessage;
       $this->errorKey     = $message->getId();
-  
-      Error::addException( $debugMessage, $this );
-    }
-    else 
-    {
-      if( DEBUG && 'Internal Error' != $debugMessage && !is_numeric($debugMessage) )
-        parent::__construct( $debugMessage );
+
+      Error::addException($debugMessage, $this);
+    } else {
+      if (DEBUG && 'Internal Error' != $debugMessage && !is_numeric($debugMessage))
+        parent::__construct($debugMessage);
       else
-        parent::__construct( $message );
-        
+        parent::__construct($message);
+
       $this->debugMessage = $debugMessage;
       $this->errorKey     = $errorKey;
-  
-      Error::addException( $message , $this );
+
+      Error::addException($message , $this);
     }
 
-
   }//end public function __construct */
-  
+
   /**
-   * @return string 
+   * @return string
    */
   public function getSql()
   {
-    
     return $this->sql;
-    
-  }//end public function getSql */
-  
-}//end class LibDb_Exception
 
+  }//end public function getSql */
+
+}//end class LibDb_Exception
 

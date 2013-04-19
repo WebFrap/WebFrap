@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -24,8 +24,7 @@ final class SWbf
 
   /** Privater Konstruktor zum Unterbinde von Instanzen
    */
-  private function __construct(){}
-
+  private function __construct() {}
 
   /**
    * Enter description here...
@@ -33,12 +32,10 @@ final class SWbf
    * @param string $version
    * @return string
    */
-  public static function versionToString( $version )
+  public static function versionToString($version)
   {
     return str_replace('.','x',$version);
   }//end public static function versionToString */
 
-
 }// end final class SWbf
-
 

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,18 +21,17 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibBuildCreateCache
-  extends LibBuildAction
+class LibBuildCreateCache extends LibBuildAction
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
    * @return boolean
    */
-  public function execute(  )
+  public function execute()
   {
 
     ///TODO implement me
@@ -41,11 +40,9 @@ class LibBuildCreateCache
     $type        = $this->args[2];
     $depth       = $this->args[3];
 
-
     return true;
 
   }//end public function execute */
-
 
 } // end class LibBuildCreateFile
 

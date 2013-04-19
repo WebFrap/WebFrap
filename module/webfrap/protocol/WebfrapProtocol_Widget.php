@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -20,12 +20,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  *
  */
-class WebfrapProtocol_Widget
-  extends WgtWidget
+class WebfrapProtocol_Widget extends WgtWidget
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param LibTemplate $view
@@ -33,7 +32,7 @@ class WebfrapProtocol_Widget
    * @param string $tabSize
    * @return void
    */
-  public function asTab( $containerId, $tabId, $tabSize = 'medium' )
+  public function asTab($containerId, $tabId, $tabSize = 'medium')
   {
 
     $user     = $this->getUser();
@@ -56,7 +55,7 @@ class WebfrapProtocol_Widget
 
     $tableProtocol = $view->newItem('tableWbfsysProtocolMessage','WebfrapProtocol_Table');
     $tableProtocol->setId('wgt-table_widget_protocol');
-    $tableProtocol->setData( $query );
+    $tableProtocol->setData($query);
     $tableProtocol->addAttributes(array
     (
       'style' => 'width:99%;'
@@ -83,14 +82,13 @@ HTML;
 
   }//end public function asTab */
 
-
   /**
    * @param LibTemplate $view
    * @param string $tabId
    * @param string $tabSize
    * @return void
    */
-  public function runReload( $view, $tabSize = 'medium' )
+  public function runReload($view, $tabSize = 'medium')
   {
 
     $condition    = array();
@@ -102,19 +100,16 @@ HTML;
     $params       = $this->getSearchFlags();
 
     /*
-    if( $httpRequest->method('POST')  )
-    {
-      if( $free = $httpRequest->param('free_search' , Validator::TEXT) )
+    if ($httpRequest->method('POST')  ) {
+      if ($free = $httpRequest->param('free_search' , Validator::TEXT))
         $condition['free'] = $free;
 
-      if( !$fieldsWbfsysProtocolMessage = $this->getRegisterd('search_fields_wbfsys_protocol_message') )
-      {
+      if (!$fieldsWbfsysProtocolMessage = $this->getRegisterd('search_fields_wbfsys_protocol_message')) {
          $fieldsWbfsysProtocolMessage   = $orm->getSearchCols('WbfsysProtocolMessage');
       }
 
-      if( $refs = $httpRequest->dataSearchIds( 'search_wbfsys_protocol_message' ) )
-      {
-        $fieldsWbfsysProtocolMessage = array_unique( array_merge
+      if ($refs = $httpRequest->dataSearchIds('search_wbfsys_protocol_message')) {
+        $fieldsWbfsysProtocolMessage = array_unique(array_merge
         (
           $fieldsWbfsysProtocolMessage,
           $refs
@@ -123,34 +118,34 @@ HTML;
 
       $filterWbfsysProtocolMessage     = $httpRequest->checkSearchInput
       (
-        $orm->getValidationData( 'WbfsysProtocolMessage', $fieldsWbfsysProtocolMessage ),
-        $orm->getErrorMessages( 'WbfsysProtocolMessage'  ),
+        $orm->getValidationData('WbfsysProtocolMessage', $fieldsWbfsysProtocolMessage),
+        $orm->getErrorMessages('WbfsysProtocolMessage'  ),
         'search_wbfsys_protocol_message'
       );
       $condition['wbfsys_protocol_message'] = $filterWbfsysProtocolMessage->getData();
 
-      if( $mRoleCreate = $httpRequest->param( 'search_wbfsys_protocol_message', Validator::EID, 'm_role_create'   ) )
+      if ($mRoleCreate = $httpRequest->param('search_wbfsys_protocol_message', Validator::EID, 'm_role_create'   ))
         $condition['wbfsys_protocol_message']['m_role_create'] = $mRoleCreate;
 
-      if( $mRoleChange = $httpRequest->param( 'search_wbfsys_protocol_message', Validator::EID, 'm_role_change'   ) )
+      if ($mRoleChange = $httpRequest->param('search_wbfsys_protocol_message', Validator::EID, 'm_role_change'   ))
         $condition['wbfsys_protocol_message']['m_role_change'] = $mRoleChange;
 
-      if( $mTimeCreatedBefore = $httpRequest->param( 'search_wbfsys_protocol_message', Validator::DATE, 'm_time_created_before'   ) )
+      if ($mTimeCreatedBefore = $httpRequest->param('search_wbfsys_protocol_message', Validator::DATE, 'm_time_created_before'   ))
         $condition['wbfsys_protocol_message']['m_time_created_before'] = $mTimeCreatedBefore;
 
-      if( $mTimeCreatedAfter = $httpRequest->param( 'search_wbfsys_protocol_message', Validator::DATE, 'm_time_created_after'   ) )
+      if ($mTimeCreatedAfter = $httpRequest->param('search_wbfsys_protocol_message', Validator::DATE, 'm_time_created_after'   ))
         $condition['wbfsys_protocol_message']['m_time_created_after'] = $mTimeCreatedAfter;
 
-      if( $mTimeChangedBefore = $httpRequest->param( 'search_wbfsys_protocol_message', Validator::DATE, 'm_time_changed_before'   ) )
+      if ($mTimeChangedBefore = $httpRequest->param('search_wbfsys_protocol_message', Validator::DATE, 'm_time_changed_before'   ))
         $condition['wbfsys_protocol_message']['m_time_changed_before'] = $mTimeChangedBefore;
 
-      if( $mTimeChangedAfter = $httpRequest->param( 'search_wbfsys_protocol_message}', Validator::DATE, 'm_time_changed_after'   ) )
+      if ($mTimeChangedAfter = $httpRequest->param('search_wbfsys_protocol_message}', Validator::DATE, 'm_time_changed_after'   ))
         $condition['wbfsys_protocol_message']['m_time_changed_after'] = $mTimeChangedAfter;
 
-      if( $mRowid = $httpRequest->param( 'search_wbfsys_protocol_message', Validator::EID, 'm_rowid'   ) )
+      if ($mRowid = $httpRequest->param('search_wbfsys_protocol_message', Validator::EID, 'm_rowid'   ))
         $condition['wbfsys_protocol_message']['m_rowid'] = $mRowid;
 
-      if( $mUuid = $httpRequest->param( 'search_wbfsys_protocol_message', Validator::TEXT, 'm_uuid'    ) )
+      if ($mUuid = $httpRequest->param('search_wbfsys_protocol_message', Validator::TEXT, 'm_uuid'    ))
         $condition['wbfsys_protocol_message']['m_uuid'] = $mUuid;
 
     }
@@ -179,26 +174,24 @@ HTML;
     $table->stepSize = $params->qsize;
 
     // check if there is a filter for the first char
-    if( $params->begin )
+    if ($params->begin)
       $table->begin    = $params->begin;
 
     // if there is a given tableId for the html id of the the table replace
     // the default id with it
-    $table->setId( 'wgt-table_widget_protocol' );
+    $table->setId('wgt-table_widget_protocol');
 
     $acl = $this->getAcl();
 
-    if( $acl->access( array('wbfsys/protocol_message:edit') ) )
-    {
+    if ($acl->access(array('wbfsys/protocol_message:edit'))) {
       $actions[] = 'edit';
     }
 
-    if( $acl->access( array('wbfsys/protocol_message:delete') ) )
-    {
+    if ($acl->access(array('wbfsys/protocol_message:delete'))) {
       $actions[] = 'delete';
     }
 
-    $table->addActions( $actions );
+    $table->addActions($actions);
 
     // for paging use the default search form, to enshure to keep the order
     // and to page in search results if there was any search
@@ -217,29 +210,27 @@ HTML;
 
   }//end public function runReload */
 
-
   /**
    * @param TFlowFlag $flowFlags
    * @return TFlowFlag
    */
-  protected function getSearchFlags( $flowFlags = null )
+  protected function getSearchFlags($flowFlags = null)
   {
 
-    if( !$flowFlags )
+    if (!$flowFlags)
       $flowFlags = new TFlowFlag();
-
 
     // start position of the query and size of the table
     $flowFlags->start
-      = $this->request->get('start', Validator::INT );
+      = $this->request->get('start', Validator::INT);
 
     // stepsite for query (limit) and the table
-    if( !$flowFlags->qsize = $this->request->get('qsize', Validator::INT ) )
+    if (!$flowFlags->qsize = $this->request->get('qsize', Validator::INT))
       $flowFlags->qsize = Wgt::$defListSize;
 
     // order for the multi display element
     $flowFlags->order
-      = $this->request->get('order', Validator::CNAME );
+      = $this->request->get('order', Validator::CNAME);
 
     // target for a callback function
     $flowFlags->target
@@ -250,12 +241,10 @@ HTML;
       = $this->request->get('targetId', Validator::CKEY  );
 
     // flag for beginning seach filter
-    if( $text = $this->request->get('begin', Validator::TEXT  ) )
-    {
+    if ($text = $this->request->get('begin', Validator::TEXT  )) {
       // whatever is comming... take the first char
       $flowFlags->begin = $text[0];
     }
-
 
     return $flowFlags;
 

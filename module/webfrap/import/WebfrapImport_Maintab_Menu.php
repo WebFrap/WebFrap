@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,12 +21,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapImport_Maintab_Menu
-  extends WgtDropmenu
+class WebfrapImport_Maintab_Menu extends WgtDropmenu
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * add a drop menu to the create window
@@ -37,7 +36,7 @@ class WebfrapImport_Maintab_Menu
    *   string formId: the id of the form;
    * }
    */
-  public function buildMenu( $params )
+  public function buildMenu($params)
   {
 
     $iconMenu      = $this->view->icon('control/menu.png'      ,'Menu');
@@ -45,19 +44,18 @@ class WebfrapImport_Maintab_Menu
     $iconSearch    = $this->view->icon('control/search.png'    ,'Search');
     $iconBookmark  = $this->view->icon('control/bookmark.png'  ,'Bookmark');
 
-
     $entries = new TArray();
-    //$entries->support  = $this->entriesSupport( $params );
+    //$entries->support  = $this->entriesSupport($params);
 
     $this->content = <<<HTML
-    
+
   <div class="inline" >
-    <button 
+    <button
       class="wcm wcm_widget_dropmenu wgt-button"
-      id="{$this->id}-control" 
+      id="{$this->id}-control"
       wgt_drop_box="{$this->id}"  >{$iconMenu} {$this->view->i18n->l('Menu','wbf.label')}</button>
   </div>
-  
+
   <div class="wgt-dropdownbox" id="{$this->id}" >
     <ul>
       <li>
@@ -86,7 +84,7 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport( $params )
+  protected function entriesSupport($params)
   {
 
     $iconSupport   = $this->view->icon('control/support.png'  ,'Support');

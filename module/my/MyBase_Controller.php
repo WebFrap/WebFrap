@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -22,12 +21,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class MyBase_Controller
-  extends Controller
+class MyBase_Controller extends Controller
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * list with all callable methodes in this subcontroller
@@ -46,61 +44,51 @@ class MyBase_Controller
    */
   protected $defaultAction = 'menu';
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @return void
    */
-  public function menu( )
+  public function menu()
   {
 
-    if( $this->view->isType( View::SUBWINDOW ) )
-    {
+    if ($this->view->isType(View::SUBWINDOW)) {
       $view = $this->view->newWindow('WebfrapMainMenu', 'Default');
       $view->setTitle('Reports');
-    }
-    else
-    {
+    } else {
       $view = $this->view;
     }
 
-    $view->setTemplate( 'webfrap/menu/modmenu'  );
+    $view->setTemplate('webfrap/menu/modmenu'  );
 
-    $modMenu = $view->newItem( 'modMenu', 'MenuFolder'  );
-    $modMenu->setData( DaoFoldermenu::get('report/overview',true) );
+    $modMenu = $view->newItem('modMenu', 'MenuFolder'  );
+    $modMenu->setData(DaoFoldermenu::get('report/overview',true));
 
   } // end public function menu */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // reports
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @return void
    */
-  public function persons( )
+  public function persons()
   {
 
-    if( $this->view->isType( View::SUBWINDOW ) )
-    {
+    if ($this->view->isType(View::SUBWINDOW)) {
       $view = $this->view->newWindow('ReportDisplay', 'Default');
       $view->setTitle('Person Reports');
-      $view->setModel( $this->model );
-    }
-    else
-    {
+      $view->setModel($this->model);
+    } else {
       $view = $this->view;
     }
 
-    $view->setTemplate( 'report/base/persons'  );
-
+    $view->setTemplate('report/base/persons'  );
 
   } // end public function menu */
-
 
 }//end class MyBase_Controller
 

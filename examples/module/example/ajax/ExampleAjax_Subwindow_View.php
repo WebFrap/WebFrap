@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Dummy class for Extentions
@@ -23,8 +22,7 @@
  * @package WebFrap
  * @subpackage Core
  */
-class ExampleAjax_Subwindow_View
-  extends WgtWindowDefault
+class ExampleAjax_Subwindow_View extends WgtWindowDefault
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
@@ -35,7 +33,7 @@ class ExampleAjax_Subwindow_View
    *
    * @param TArray $params
    */
-  public function displayExample( $params )
+  public function displayExample($params)
   {
 
     // in den view objekten wird das template mit this gesetz
@@ -57,7 +55,7 @@ class ExampleAjax_Subwindow_View
    *
    * @param TArray $params
    */
-  public function displayLayout( $params )
+  public function displayLayout($params)
   {
 
     $this->setTemplate('example/layout_elements');
@@ -69,13 +67,12 @@ class ExampleAjax_Subwindow_View
    *
    * @param TArray $params
    */
-  public function displayForm( $params )
+  public function displayForm($params)
   {
 
     $this->setTemplate('example/forms_overview');
     $this->setTitle('Example Forms');
 
   }//end public function displayForm */
-
 
 } // end class ExampleAjax_Subwindow_View

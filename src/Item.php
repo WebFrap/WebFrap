@@ -8,32 +8,30 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
 /**
   * Das Ausgabemodul für die Seite
  * @package WebFrap
  * @subpackage tech_core
   */
-class Item
-  extends BaseChild
+class Item extends BaseChild
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attribute
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * sub Modul Extention
    * @var array
    */
   protected $models         = array();
-  
+
   /**
    * @var Model
    */
@@ -45,65 +43,61 @@ class Item
    */
   protected $itemName = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // getter & setter
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param string $name
    * @param LibTemplateHtml $view
    */
-  public function __construct( $name, $view )
+  public function __construct($name, $view)
   {
 
     $this->env = $view;
-    $this->setView( $view );
-    
+    $this->setView($view);
+
     $this->itemName = $name;
-    
-    //$view->addItem( $name, $this );
+
+    //$view->addItem($name, $this);
 
   }//end public function __construct */
-  
-////////////////////////////////////////////////////////////////////////////////
+
+/*//////////////////////////////////////////////////////////////////////////////
 // getter & setter
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param Model $model
    */
-  public function setModel( $model )
+  public function setModel($model)
   {
     $this->model = $model;
   }//end public function setModel */
-  
+
   /**
    * Eine Modelklasse laden
-   * 
+   *
    * @param string $modelName
    * @param string $key
-   * 
+   *
    * @return Model
-   * @throws Item_Exception wenn das angefragt Modell nicht existiert
+   * @throws WebfrapSys_Exception wenn das angefragt Modell nicht existiert
    */
-  public function loadModel( $modelName , $key = null)
+  public function loadModel($modelName , $key = null)
   {
 
-    if( !$key )
+    if (!$key)
       $key = $modelName;
 
     $modelClass    = $modelName.'_Model';
 
-    if( !isset( $this->models[$key]  ) )
-    {
-      if( Webfrap::classLoadable( $modelClass ) )
-      {
-        $model = new $modelClass( $this );
+    if (!isset($this->models[$key]  )) {
+      if (Webfrap::classLoadable($modelClass)) {
+        $model = new $modelClass($this);
         $this->models[$key] = $model;
-      }
-      else
-      {
-        throw new Item_Exception
+      } else {
+        throw new WebfrapSys_Exception
         (
           'Internal Error',
           'Failed to load Submodul: '.$modelClass
@@ -133,23 +127,21 @@ class Item
    *
    * @param string $uiName
    * @return Ui ein UI Container
-   * @throws Item_Exception
+   * @throws WebfrapSys_Exception
    */
-  public function loadUi( $uiName )
+  public function loadUi($uiName)
   {
 
-    $uiName       = ucfirst( $uiName );
+    $uiName       = ucfirst($uiName);
     $className    = $uiName.'_Ui';
 
-    if( Webfrap::classLoadable( $className ) )
-    {
-      $ui = new $className( $this );
-      $ui->setView( $this->getView() );
+    if (Webfrap::classLoadable($className)) {
+      $ui = new $className($this);
+      $ui->setView($this->getView());
+
       return $ui;
-    }
-    else
-    {
-      throw new Item_Exception
+    } else {
+      throw new WebfrapSys_Exception
       (
         'Internal Error',
         'Failed to load ui: '.$uiName
@@ -164,7 +156,7 @@ class Item
    * @param string $key
    * @return WgtForm
    */
-  public function newForm( $key , $type = null  )
+  public function newForm($key , $type = null  )
   {
 
     $type = $type
@@ -174,16 +166,14 @@ class Item
     $className    = $type.'_Form';
     $classNameOld = 'WgtForm'.$type;
 
-
-    if( !WebFrap::classLoadable($className) )
-    {
+    if (!WebFrap::classLoadable($className)) {
       // fall back to old name convention
       $className = $classNameOld;
-      if( !WebFrap::classLoadable($className) )
+      if (!WebFrap::classLoadable($className))
         throw new LibTemplate_Exception('Requested noexisting form '.$type);
     }
 
-    $form = new $className( $this->getView() );
+    $form = new $className($this->getView());
 
     return $form;
 

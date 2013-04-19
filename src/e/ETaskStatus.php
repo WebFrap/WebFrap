@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -22,9 +21,9 @@
  */
 class ETaskStatus
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // constantes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var int
@@ -60,16 +59,15 @@ class ETaskStatus
    * @var int
    */
   const DELETED = 7;
- 
-////////////////////////////////////////////////////////////////////////////////
+
+/*//////////////////////////////////////////////////////////////////////////////
 // Labels
-////////////////////////////////////////////////////////////////////////////////
-  
+//////////////////////////////////////////////////////////////////////////////*/
+
   /**
    * @var array
    */
-  public static $labels = array
-  (
+  public static $labels = array(
     self::OPEN      => 'Open',
     self::RUNNING   => 'Running',
     self::WAITING   => 'Waiting',
@@ -78,18 +76,17 @@ class ETaskStatus
     self::DISABLED  => 'Disabled',
     self::DELETED   => 'Deleted',
   );
-  
+
   /**
    * @param string $key
    * @return string
    */
-  public static function label( $key )
+  public static function label($key)
   {
-    
-    return isset( self::$labels[$key] ) 
+    return isset(self::$labels[$key])
       ? self::$labels[$key]
       : self::$labels[self::OPEN]; // no status? so it's open
-      
+
   }//end public static function label */
 
 }//end class ETaskType

@@ -1,8 +1,8 @@
 <?php
 
 $this->crumbs = array(
-  array( 'Root', $this->interface.'?c=Webfrap.Navigation.explorer','control/desktop.png'),
-  array( 'System', $this->interface.'?c=Webfrap.Base.menu&amp;menu=maintenance','control/folder.png'),
+  array('Root', $this->interface.'?c=Webfrap.Navigation.explorer','control/desktop.png'),
+  array('System', $this->interface.'?c=Webfrap.Base.menu&amp;menu=maintenance','control/folder.png'),
 );
 
 $this->firstEntry = array
@@ -10,7 +10,7 @@ $this->firstEntry = array
   'menu-system-maintenance-root',
    Wgt::MAIN_TAB,
   '..',
-  I18n::s( 'Root', 'wbf.label'  ),
+  I18n::s('Root', 'wbf.label'  ),
   'maintab.php?c=Webfrap.Navigation.explorer',
   'places/folder_up.png',
 );
@@ -44,8 +44,6 @@ $this->folders[] = array
   'maintab.php?c=Webfrap.System_Conf.overview',
   'utilities/conf.png',
 );
-
-
 
 $this->folders[] = array
 (
@@ -176,6 +174,18 @@ $this->files[] = array
   'maintab.php?c=Webfrap.Editor.Workspace',
   'utilities/i18n.png',
 );
+
+$this->files[] = array
+(
+  'menu-system-maintenance-components',
+  Wgt::MAIN_TAB,
+  'System Components',
+  'System Components',
+  'maintab.php?c=Webfrap.SystemComponents.overview',
+  //'maintab.php?c=Webfrap.Datasources.explorer',
+  'utilities/structure.png',
+);
+
 
 $this->files[] = array
 (

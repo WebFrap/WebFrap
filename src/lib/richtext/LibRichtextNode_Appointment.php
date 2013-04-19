@@ -8,24 +8,22 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibRichtextNode_Appointment
-  extends LibRichtextNode
+class LibRichtextNode_Appointment extends LibRichtextNode
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var string
@@ -33,5 +31,4 @@ class LibRichtextNode_Appointment
   public $key = 'appointment';
 
 }//end class LibRichtextNode_Appointment
-
 

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,9 +22,9 @@
  */
 class WbsError
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Serializer
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -32,7 +32,6 @@ class WbsError
    */
   public static function asXml()
   {
-
 
     header('Cache-Control: no-cache, must-revalidate'); //Don't Cache!
     header('Expires: Mon, 26 Jul 1997 05:00:00 GMT'); //If you cache either, think i'm fkn to old to cache!
@@ -70,9 +69,9 @@ class WbsError
   {
 
     $this->serialized = LibSerializerSoap::getInstance()->serialize($this->data);
+
     return $this->serialized;
   }//end public function asSoap()
-
 
 }//end class WbsError
 

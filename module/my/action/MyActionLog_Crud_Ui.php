@@ -21,8 +21,7 @@
  * @author Dominik Bonsch <db@s-db.de>
  * @copyright Softwareentwicklung Dominik Bonsch <db@s-db.de>
  */
-class MyActionLog_Crud_Ui
-  extends MvcUi
+class MyActionLog_Crud_Ui extends MvcUi
 {
 
   /**
@@ -31,9 +30,9 @@ class MyActionLog_Crud_Ui
   */
   protected $model = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // form methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * create fill all ui elements in the view for a model specific form
@@ -41,19 +40,17 @@ class MyActionLog_Crud_Ui
    * @param TFlag $params named parameters
    * @return null / Error im Fehlerfall
    */
-  public function createForm( $params )
+  public function createForm($params)
   {
 
     $view  = $this->getView();
     $orm   = $this->getOrm();
 
-
     //management wbfsys_task src wbfsys_task
     $fields = $this->model->getCreateFields();
 
-    if( !$params->fieldsMyActionLog )
-    {
-      if(isset($fields['my_task']))
+    if (!$params->fieldsMyActionLog) {
+      if (isset($fields['my_task']))
         $params->fieldsMyActionLog = $fields['my_task'];
       else
         $params->fieldsMyActionLog = array();
@@ -73,7 +70,6 @@ class MyActionLog_Crud_Ui
       $params->fieldsMyActionLog
     );
 
-
     return null;
 
   }//end public function createForm */
@@ -85,18 +81,17 @@ class MyActionLog_Crud_Ui
    * @param TFlag $params named parameters
    * @return void
    */
-  public function editForm(  $objid, $params )
+  public function editForm( $objid, $params)
   {
 
     $view = $this->getView();
 
-    $entityMyActionLog = $this->model->getEntityWbfsysActionLog( $objid );
+    $entityMyActionLog = $this->model->getEntityWbfsysActionLog($objid);
 
     $fields = $this->model->getEditFields();
 
-    if( !$params->fieldsMyActionLog )
-    {
-      if(isset($fields['wbfsys_task']))
+    if (!$params->fieldsMyActionLog) {
+      if (isset($fields['wbfsys_task']))
         $params->fieldsMyActionLog = $fields['wbfsys_task'];
       else
         $params->fieldsMyActionLog = array();
@@ -108,8 +103,7 @@ class MyActionLog_Crud_Ui
     $formMyActionLog->setPrefix('WbfsysActionLog');
     $formMyActionLog->setKeyName('wbfsys_task');
     $formMyActionLog->setSuffix($entityMyActionLog->getid());
-    if( $params->readOnly )
-    {
+    if ($params->readOnly) {
       $formMyActionLog->setReadOnly(true);
     }
 
@@ -118,8 +112,6 @@ class MyActionLog_Crud_Ui
       $entityMyActionLog,
       $params->fieldsMyActionLog
     );
-
-
 
     return true;
 
@@ -132,7 +124,7 @@ class MyActionLog_Crud_Ui
    * @param TFlag $params named parameters
    * @return void
    */
-  public function ajaxForm( $entityMyActionLog, $params  )
+  public function ajaxForm($entityMyActionLog, $params  )
   {
 
     // laden der benötigten resourcen
@@ -142,21 +134,21 @@ class MyActionLog_Crud_Ui
     // the ajax view should send the inputs as adressed values
     $params->refresh  = true;
 
-    if( !$params->categories )
+    if (!$params->categories)
       $params->categories = array();
 
-    if( !$params->fieldsMyActionLog )
-      $params->fieldsMyActionLog = $entityMyActionLog->getCols( $params->categories );
+    if (!$params->fieldsMyActionLog)
+      $params->fieldsMyActionLog = $entityMyActionLog->getCols($params->categories);
 
     $formMyActionLog = $view->newForm('WbfsysActionLog');
 
-    if($params->keyName)
+    if ($params->keyName)
       $formMyActionLog->setKeyName($params->keyName);
 
-    if($params->suffix)
+    if ($params->suffix)
       $formMyActionLog->setSuffix($params->suffix);
 
-    if($params->input)
+    if ($params->input)
       $formMyActionLog->setTarget($params->input);
 
     $formMyActionLog->createForm
@@ -170,9 +162,9 @@ class MyActionLog_Crud_Ui
 
   }//end public function ajaxForm */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // value methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * fetch the text value for an entity and deploy it to a given input element
@@ -182,14 +174,14 @@ class MyActionLog_Crud_Ui
    * @param TFlag $params named parameters
    * @return void
    */
-  public function textByKey( $entityMyActionLog, $params )
+  public function textByKey($entityMyActionLog, $params)
   {
 
     // laden der benötigten resourcen
     $view = $this->getView();
 
     // push the to string information to the text field
-    $replaceItemText = $view->newInput( 'textWbfsysActionLog', 'Text' );
+    $replaceItemText = $view->newInput('textWbfsysActionLog', 'Text');
     $replaceItemText->addAttributes(array
     (
       'id'    => 'wgt-input-'.$params->input.'-tostring',
@@ -200,7 +192,7 @@ class MyActionLog_Crud_Ui
     // and not the complete ui element
     $replaceItemText->refresh = 'value';
 
-    $replaceItem = $view->newInput( 'idWbfsysActionLog', 'Text' );
+    $replaceItem = $view->newInput('idWbfsysActionLog', 'Text');
     $replaceItem->addAttributes(array
     (
       'id'    => 'wgt-input-'.$params->input,
@@ -220,7 +212,7 @@ class MyActionLog_Crud_Ui
    * @param TFlag $params named parameters
    * @return void
    */
-  public function item( $view, $field, $params )
+  public function item($view, $field, $params)
   {
 
     $entityMyActionLog = new WbfsysActionLog_Entity();

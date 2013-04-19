@@ -1,19 +1,20 @@
 <?php
+
 /*******************************************************************************
-*
-* @author      : Dominik Bonsch <dominik.bonsch@webfrap.net>
-* @date        :
-* @copyright   : Webfrap Developer Network <contact@webfrap.net>
-* @project     : Webfrap Web Frame Application
-* @projectUrl  : http://webfrap.net
-*
-* @licence     : BSD License see: LICENCE/BSD Licence.txt
-*
-* @version: @package_version@  Revision: @package_revision@
-*
-* Changes:
-*
-*******************************************************************************/
+ *
+ * @author      : Dominik Bonsch <dominik.bonsch@webfrap.net>
+ * @date        :
+ * @copyright   : Webfrap Developer Network <contact@webfrap.net>
+ * @project     : Webfrap Web Frame Application
+ * @projectUrl  : http://webfrap.net
+ *
+ * @licence     : BSD License see: LICENCE/BSD Licence.txt
+ *
+ * @version: @package_version@  Revision: @package_revision@
+ *
+ * Changes:
+ *
+ *******************************************************************************/
 
 /**
  * class Controller
@@ -21,67 +22,60 @@
  * @package WebFrap
  * @subpackage wgt
  */
-abstract class WgtDesktop
-  extends Base
+abstract class WgtDesktop extends Base
 {
-////////////////////////////////////////////////////////////////////////////////
-// Attributes
-////////////////////////////////////////////////////////////////////////////////
 
+  /*//////////////////////////////////////////////////////////////////////////////
+// Attributes
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * sub Modul Extention
    * @var array
    */
-  protected $models       = array();
+  protected $models = array();
 
-////////////////////////////////////////////////////////////////////////////////
+  /*//////////////////////////////////////////////////////////////////////////////
 // Constructor and other Magics
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * request the default action of the ControllerClass
    * @return Model
    */
-  protected function loadModel( $modelName , $key = null )
+  protected function loadModel ($modelName, $key = null)
   {
 
-    if( !$key )
+    if (! $key)
       $key = $modelName;
 
-    $modelName = 'Model'.$modelName;
-    if( !isset( $this->models[$key]  ) )
-    {
-      if(Webfrap::classLoadable($modelName))
-      {
+    $modelName = 'Model' . $modelName;
+    if (! isset($this->models[$key])) {
+      if (Webfrap::classLoadable($modelName)) {
         $this->models[$key] = new $modelName();
-      }
-      else
-      {
-        throw new Controller_Exception('Internal Error','Failed to load Submodul: '.$modelName);
+      } else {
+        throw new Controller_Exception('Internal Error', 'Failed to load Submodul: ' . $modelName);
       }
     }
 
     return $this->models[$key];
 
-  }//end protected function loadModel */
+  } //end protected function loadModel */
 
   /**
    *
    * @param $key
    * @return Model
    */
-  protected function getModel( $key )
+  protected function getModel ($key)
   {
 
-    if( isset( $this->models[$key] ) )
+    if (isset($this->models[$key]))
       return $this->models[$key];
     else
       return null;
 
-  }//public function protected */
-
+  } //public function protected */
 
   /**
    * Function for reinitializing after wakeup. Is Neccesary caus we can't use
@@ -89,10 +83,10 @@ abstract class WgtDesktop
    * @param array $data
    * @return void
    */
-  public function init( $data = array() )
+  public function init ($data = array())
   {
 
-    $this->initDesktop( $data );
+    $this->initDesktop($data);
 
   } // end public function init */
 
@@ -101,7 +95,7 @@ abstract class WgtDesktop
    *
    * @return void
    */
-  public function shutdown( )
+  public function shutdown ()
   {
 
     $this->shutdownDesktop();
@@ -112,9 +106,10 @@ abstract class WgtDesktop
    *
    * Enter description here ...
    */
-  protected  function initDesktop( $data = array() )
+  protected function initDesktop ($data = array())
   {
-    foreach( $data as $name => $value )
+
+    foreach ($data as $name => $value)
       $this->$name = $value;
 
     $this->initDesktop();
@@ -126,11 +121,10 @@ abstract class WgtDesktop
    *
    * Enter description here ...
    */
-  protected  function shutdownDesktop()
+  protected function shutdownDesktop ()
   {
 
   }
-
 
 } // end abstract class WgtDesktop
 

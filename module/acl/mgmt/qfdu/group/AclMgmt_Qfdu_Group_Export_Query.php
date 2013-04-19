@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,21 +26,20 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Qfdu_Group_Export_Query
-  extends LibSqlQuery
+class AclMgmt_Qfdu_Group_Export_Query extends LibSqlQuery
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var DomainNode
    */
   public $domainNode = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /** build criteria, interpret conditions and load data
    *
@@ -51,10 +50,10 @@ class AclMgmt_Qfdu_Group_Export_Query
    *
    * @throws LibDb_Exception
    */
-  public function fetch( $areaId, $condition = null, $context = null )
+  public function fetch($areaId, $condition = null, $context = null)
   {
 
-    if( !$context )
+    if (!$context)
       $context = new Context();
 
     $context->qsize = -1;
@@ -63,32 +62,30 @@ class AclMgmt_Qfdu_Group_Export_Query
     $db                = $this->getDb();
 
     $criteria  = $db->orm->newCriteria();
-    $dsetEntiy = $db->orm->newEntity( $this->domainNode->srcKey );
-    
+    $dsetEntiy = $db->orm->newEntity($this->domainNode->srcKey);
+
     $textKeys = $dsetEntiy->textKeys();
     $tableKey = $dsetEntiy->getTable();
     $fieldKeys = array();
-    
-    if( $textKeys )
-    {
-      foreach( $textKeys as $fieldName )
-      {
+
+    if ($textKeys) {
+      foreach ($textKeys as $fieldName) {
         $fieldKeys[] = "{$tableKey}.{$fieldName}";
       }
     }
 
-    $this->setCols( $criteria, $tableKey, $fieldKeys );
-    $this->setTables( $criteria, $tableKey );
-    $this->appendConditions( $criteria, $areaId, $context  );
+    $this->setCols($criteria, $tableKey, $fieldKeys);
+    $this->setTables($criteria, $tableKey);
+    $this->appendConditions($criteria, $areaId, $context  );
 
 
     // Run Query und save the result
-    $this->result     = $db->orm->select( $criteria );
-    $this->calcQuery  = $criteria->count( 'count(DISTINCT group_users.rowid) as '.Db::Q_SIZE );
+    $this->result     = $db->orm->select($criteria);
+    $this->calcQuery  = $criteria->count('count(DISTINCT group_users.rowid) as '.Db::Q_SIZE);
 
   }//end public function fetch */
-  
- 
+
+
 
  /** inject the requested cols in the criteria
    *
@@ -102,17 +99,14 @@ class AclMgmt_Qfdu_Group_Export_Query
    * @param array $textKeys
    * @return void
    */
-  public function setCols( $criteria, $tableKey, $textKeys )
+  public function setCols($criteria, $tableKey, $textKeys)
   {
-    
+
     $colSql = '';
-    
-    if( $textKeys )
-    {
-      $colSql = implode( " || ', ' ||  ", $textKeys ).' as dset_text ';
-    }
-    else 
-    {
+
+    if ($textKeys) {
+      $colSql = implode(" || ', ' ||  ", $textKeys).' as dset_text ';
+    } else {
       $colSql = "'{$this->domainNode->label}: ' || {$tableKey}.rowid as dset_text ";
     }
 
@@ -121,7 +115,7 @@ class AclMgmt_Qfdu_Group_Export_Query
       'group_users.date_start as date_start',
       'group_users.date_end as date_end',
       'role_group.name as "role_group_name"',
-			"role_user.name || ' <' || 
+      "role_user.name || ' <' ||
       COALESCE
       (
         person.lastname || ', ' || person.firstname,
@@ -134,28 +128,26 @@ class AclMgmt_Qfdu_Group_Export_Query
       $colSql
     );
 
-    $criteria->select( $cols, true );
-    
+    $criteria->select($cols, true);
+
      // check if there is a given order
     $criteria->orderBy
-    ( array(
-    	'role_group.name',
+    (array(
+      'role_group.name',
       'full_name',
       'dset_text',
     ));
-    
 
     $this->structure = array
     (
-      'role_group_name' => array( 'Group', 'text', 40 ),
-      'full_name' => array( 'User', 'text', 40 ),
-      'dset_text' => array( $this->domainNode->label, 'text', 40 ),
-      'date_start' => array( 'Start', 'date', 10 ),
-      'date_end' => array( 'End', 'date', 10 ),
+      'role_group_name' => array('Group', 'text', 40),
+      'full_name' => array('User', 'text', 40),
+      'dset_text' => array($this->domainNode->label, 'text', 40),
+      'date_start' => array('Start', 'date', 10),
+      'date_end' => array('End', 'date', 10),
     );
-    
+
   }//end public function setCols */
- 
 
  /**
    * inject the table an join conditions in the criteria object
@@ -164,22 +156,22 @@ class AclMgmt_Qfdu_Group_Export_Query
    *
    * @param LibSqlCriteria $criteria
    * @param string $tableKey
-   * 
+   *
    * @return void
    */
-  public function setTables( $criteria, $tableKey )
+  public function setTables($criteria, $tableKey)
   {
 
-    $criteria->from( 'wbfsys_group_users group_users', 'group_users' );
+    $criteria->from('wbfsys_group_users group_users', 'group_users');
 
     $criteria->join
     (
       'JOIN wbfsys_role_group role_group
           ON group_users.id_group = role_group.rowid
       ',
-      array( 'role_group' )
+      array('role_group')
     );
-    
+
     $criteria->join
     (
       '
@@ -189,16 +181,16 @@ class AclMgmt_Qfdu_Group_Export_Query
           core_person person
             ON person.rowid = role_user.id_person
       ',
-      array( 'role_user', 'person' )
+      array('role_user', 'person')
     );
-    
+
     $criteria->join
     (
       '
         LEFT JOIN '.$tableKey.'
           ON group_users.vid = '.$tableKey.'.rowid
       ',
-      array( $tableKey )
+      array($tableKey)
     );
 
   }//end public function setTables */
@@ -220,18 +212,16 @@ class AclMgmt_Qfdu_Group_Export_Query
    * @param TFlag $context
    * @return void
    */
-  public function appendConditions( $criteria, $areaId, $context )
+  public function appendConditions($criteria, $areaId, $context)
   {
 
     $criteria->where
     (
-      "group_users.id_area={$areaId} 
-        and ( group_users.partial = 0 or group_users.partial is null ) "
+      "group_users.id_area={$areaId}
+        and (group_users.partial = 0) "
     );
 
   }//end public function appendConditions */
-
-
 
 } // end class AclMgmt_Qfdu_Group_Export_Query */
 

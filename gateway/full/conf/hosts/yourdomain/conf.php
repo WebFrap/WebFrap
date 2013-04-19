@@ -15,39 +15,32 @@
 *
 *******************************************************************************/
 
-
 $serverAddress = (isset($_SERVER['HTTPS']) && 'on' == $_SERVER['HTTPS']) ?'https://' :'http://';
 $serverAddress .= $_SERVER['SERVER_NAME'];
 
-if( isset( $_SERVER['HTTPS'] ) && 'on' == $_SERVER['HTTPS'] )
-{
-  if( $_SERVER['SERVER_PORT'] != '443' )
-  {
+if (isset($_SERVER['HTTPS']) && 'on' == $_SERVER['HTTPS']) {
+  if ($_SERVER['SERVER_PORT'] != '443') {
     $serverAddress .= ':'.$_SERVER['SERVER_PORT'];
   }
-}
-else
-{
-  if( $_SERVER['SERVER_PORT'] != '80' )
-  {
+} else {
+  if ($_SERVER['SERVER_PORT'] != '80') {
     $serverAddress .= ':'.$_SERVER['SERVER_PORT'];
   }
 }
 
-$serverAddress .= '/'.mb_substr( $_SERVER['REQUEST_URI'] , 0 , strrpos($_SERVER['REQUEST_URI'],'/')+1 );
+$serverAddress .= '/'.mb_substr($_SERVER['REQUEST_URI'] , 0 , strrpos($_SERVER['REQUEST_URI'],'/')+1);
 
 $length = strlen($serverAddress);
 
-if( '/' != $serverAddress[($length-1)] )
+if ('/' != $serverAddress[($length-1)])
   $serverAddress .= '/';
 
-if( !defined('WEB_GW') )
-  define( 'WEB_GW', $serverAddress );
+if (!defined('WEB_GW'))
+  define('WEB_GW', $serverAddress);
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Data for Configuration
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
 /*
  * Standard System Statis
@@ -124,7 +117,6 @@ $this->initClasses = array
   'User'      ,  // the active user object
   'View'      ,  // template enginge
 );//end initClasses
-
 
 /*
  * Kofiguration für die Datenbank Verbindung
@@ -304,5 +296,4 @@ $this->modules['log'] = array
   ),
 
 );//end $this->modules['log'] = array
-
 

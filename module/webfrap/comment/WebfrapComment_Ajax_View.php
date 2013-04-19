@@ -22,12 +22,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapComment_Ajax_View
-  extends LibTemplateAjaxView
+class WebfrapComment_Ajax_View extends LibTemplateAjaxView
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // display methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Render des Suchergebnisses und übergabe in die ajax response
@@ -35,24 +34,22 @@ class WebfrapComment_Ajax_View
    * @param int $parent
    * @param array $entry
    */
-  public function displayAdd( $context, $parent, $entry )
+  public function displayAdd($context, $parent, $entry)
   {
 
     $tpl = $this->getTplEngine();
 
     $pageFragment = new WgtAjaxArea();
-    $pageFragment->selector = '#wgt-comment_tree-'.$context->element.'-cnt-'.(int)$parent;
+    $pageFragment->selector = '#wgt-comment_tree-'.$context->element.'-cnt-'.(int) $parent;
     $pageFragment->action = 'append';
 
     $commentElement = new WgtElementCommentTree();
-    $commentElement->setId( $context->element );
+    $commentElement->setId($context->element);
     $commentElement->context = $context;
 
+    $pageFragment->setContent($commentElement->renderAjaxAddEntry($context->element, $entry));
 
-    $pageFragment->setContent( $commentElement->renderAjaxAddEntry( $context->element, $entry ) );
-
-    $tpl->setArea( 'comment_entry', $pageFragment );
-
+    $tpl->setArea('comment_entry', $pageFragment);
 
   }//end public function displayAdd */
 
@@ -61,7 +58,7 @@ class WebfrapComment_Ajax_View
    * @param WebfrapComment_Context $context
    * @param string $entry
    */
-  public function displayUpdate( $context, $entry )
+  public function displayUpdate($context, $entry)
   {
 
     $tpl = $this->getTplEngine();
@@ -71,31 +68,28 @@ class WebfrapComment_Ajax_View
     $pageFragment->action = 'replace';
 
     $commentElement = new WgtElementCommentTree();
-    $commentElement->setId( $elementId );
+    $commentElement->setId('wgt-comment_tree-'.$context->element);
 
+    $pageFragment->setContent($commentElement->renderAjaxUpdateEntry($context->element, $entry));
 
-    $pageFragment->setContent( $commentElement->renderAjaxUpdateEntry( $context->element, $entry ) );
-
-    $tpl->setArea( 'comment_entry', $pageFragment );
-
+    $tpl->setArea('comment_entry', $pageFragment);
 
   }//end public function displayAdd */
-
 
   /**
    * @param TFlag $params
    */
-  public function displayOverlay( $element, $dKey, $objid )
+  public function displayOverlay($element, $dKey, $objid)
   {
 
-    $item_Comment = new WgtElementCommentTree( );
+    $item_Comment = new WgtElementCommentTree();
     $item_Comment->view = $this;
     $item_Comment->label = 'Comments';
 
     $item_Comment->width = 735;
 
     /* @var $tagModel WebfrapComment_Model  */
-    $item_Comment->setData( $this->model->getCommentTree( $objid ) );
+    $item_Comment->setData($this->model->getCommentTree($objid));
     $item_Comment->refId = $objid;
     $item_Comment->refMask = $dKey;
     $item_Comment->access = new TArray();
@@ -103,7 +97,7 @@ class WebfrapComment_Ajax_View
     //$item_Comment->access = $params->accessComment;
     $item_Comment->render();
 
-    $this->setReturnData( '<div class="wgt-space" >'.$item_Comment->render().'</div>', 'html' );
+    $this->setReturnData($item_Comment->render(), 'html');
 
   }//end public function displayOverlay */
 

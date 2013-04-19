@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -20,18 +20,17 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputSumfield
-  extends WgtInput
+class WgtInputSumfield extends WgtInput
 {
 
   /**
    *
    * @return unknown_type
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array())
   {
 
-    if($attributes)
+    if ($attributes)
       $this->attributes = array_merge($this->attributes,$attributes);
 
     // ist immer ein text attribute
@@ -58,10 +57,10 @@ class WgtInputSumfield
   public function buildAjaxArea()
   {
 
-    if(!isset($this->attributes['id']))
+    if (!isset($this->attributes['id']))
       return '';
 
-    if( !isset($this->attributes['value']) )
+    if (!isset($this->attributes['value']))
       $this->attributes['value'] = '';
 
     $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="value" ><![CDATA['
@@ -71,7 +70,5 @@ class WgtInputSumfield
 
   }//end public function buildAjaxArea */
 
-
 } // end class WgtInputSumfield
-
 
