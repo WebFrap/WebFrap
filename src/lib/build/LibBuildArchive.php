@@ -53,7 +53,7 @@ class LibBuildArchive extends LibBuildAction
       return false;
     }
 
-    return $repoObj->$action($node);
+    return $repoObj->$action();
 
   }//end public function execute */
 
