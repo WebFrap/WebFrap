@@ -2,23 +2,18 @@
 /*@interface.header@*/
 
 // used to set modes like testmode
-if( isset($_GET['wbf_mode']) && ctype_alnum($_GET['wbf_mode']) )
-  setcookie( 'wbf_mode', $_GET['wbf_mode'] );
+if (isset($_GET['wbf_mode']) && ctype_alnum($_GET['wbf_mode']))
+  setcookie('wbf_mode', $_GET['wbf_mode']);
 
-if( isset($_SESSION['sys_mode']) && file_exists('./conf/hosts/'.$_SERVER['SERVER_NAME'].'/path-'.$_COOKIE['wbf_mode'].'.php'))
-{
+if (isset($_SESSION['sys_mode']) && file_exists('./conf/hosts/'.$_SERVER['SERVER_NAME'].'/path-'.$_COOKIE['wbf_mode'].'.php')) {
   include './conf/hosts/'.$_SERVER['SERVER_NAME'].'/path-'.$_COOKIE['wbf_mode'].'.php';
-}
-elseif( file_exists('./conf/hosts/'.$_SERVER['SERVER_NAME'].'/path.php') )
-{
+} elseif (file_exists('./conf/hosts/'.$_SERVER['SERVER_NAME'].'/path.php')) {
   include './conf/hosts/'.$_SERVER['SERVER_NAME'].'/path.php';
-}
-else
-{
+} else {
   include './conf/path.php';
 }
 
-error_reporting( E_ALL | E_STRICT );
+error_reporting(E_ALL | E_STRICT);
 
 // load the bootstrap files where it is shure that they will be embed
 include PATH_FW.'src/Webfrap.php';
@@ -103,7 +98,6 @@ include PATH_FW.'src/lib/template/LibTemplatePresenter.php';
 include PATH_FW.'src/lib/template/LibTemplateHtml.php';
 include PATH_FW.'src/lib/template/LibTemplateAjax.php';
 
-
 // register all used autoload methodes
 spl_autoload_register('Webfrap::indexAutoload');
 spl_autoload_register('Webfrap::pathAutoload');
@@ -125,7 +119,6 @@ Conf::$confPath[]         = PATH_GW.'conf/';
 Webfrap::loadModulePath();
 Webfrap::loadGmodPath();
 
-
 // Framework Path
 Webfrap::$autoloadPath[]    = PATH_FW.'src/';  // search path for code / classes
 Webfrap::$autoloadPath[]    = PATH_FW.'module/';  // search path for code / classes
@@ -135,25 +128,18 @@ I18n::$i18nPath[]           = PATH_FW.'i18n/'; // search path for i18n files
 Conf::$confPath[]           = PATH_FW.'conf/'; // search path for configuration files
 
 // load the activ indexes and class files from the conf
-if( !isset( $_GET['c'] ) )
-{
-  Webfrap::loadClassIndex( 'default' );
+if (!isset($_GET['c'])) {
+  Webfrap::loadClassIndex('default');
+} else {
+  Webfrap::loadClassIndex($_GET['c']);
 }
-else
-{
-  Webfrap::loadClassIndex( $_GET['c'] );
-}
-
 
 // set custom handlers
 
-//if( defined( 'WBF_ERROR_HANDLER' ) )
-//  set_error_handler( WBF_ERROR_HANDLER );
-
-
+//if (defined('WBF_ERROR_HANDLER'))
+//  set_error_handler(WBF_ERROR_HANDLER);
 
 // clean the logs if in debug mode
-if( DEBUG )
+if (DEBUG)
   Log::cleanDebugLog();
-
 

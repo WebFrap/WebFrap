@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -29,7 +29,7 @@ class WgtIcon
    * @param string $name
    *
    */
-  public static function big( $name )
+  public static function big($name)
   {
     return $name;
   }//end public static function big */

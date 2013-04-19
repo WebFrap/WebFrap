@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -22,14 +21,13 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class MyActionLog_Table_Access
-  extends LibAclPermission
+class MyActionLog_Table_Access extends LibAclPermission
 {
   /**
    * @param TFlag $params
    * @param MyTask_Entity $entity
    */
-  public function loadDefault( $params, $entity = null )
+  public function loadDefault($params, $entity = null)
   {
 
     // laden der benötigten Resource Objekte
@@ -39,8 +37,7 @@ class MyActionLog_Table_Access
     // dann befinden wir uns im root und brauchen keine pfadafrage
     // um potentielle fehler abzufangen wird auch direkt der richtige Root gesetzt
     // nicht das hier einer einen falschen pfad injected
-    if( is_null($params->aclRoot) || 1 == $params->aclLevel  )
-    {
+    if (is_null($params->aclRoot) || 1 == $params->aclLevel  ) {
       $params->isAclRoot     = true;
       $params->aclRoot       = 'mgmt-project_project';
       $params->aclRootId     = null;
@@ -51,8 +48,7 @@ class MyActionLog_Table_Access
 
     // wenn wir in keinem pfad sind nehmen wir einfach die normalen
     // berechtigungen
-    if( $params->isAclRoot )
-    {
+    if ($params->isAclRoot) {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt einen acl container
       $acl->getPermission
@@ -62,9 +58,7 @@ class MyActionLog_Table_Access
         true,     // keine Kinder laden
         $this     // dieses objekt soll als container verwendet werden
       );
-    }
-    else
-    {
+    } else {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt das zugriffslevel
       $acl->getPathPermission
@@ -88,7 +82,7 @@ class MyActionLog_Table_Access
    * @param string $condition
    * @param TFlag $params
    */
-  public function fetchListTableDefault( $query, $condition, $params )
+  public function fetchListTableDefault($query, $condition, $params)
   {
 
     // laden der benötigten Resource Objekte
@@ -101,10 +95,9 @@ class MyActionLog_Table_Access
     // erstellen der Acl criteria und befüllen mit den relevanten cols
     $criteria  = $orm->newCriteria();
 
-    $criteria->select( array( 'project_project.rowid as rowid' )  );
+    $criteria->select(array('project_project.rowid as rowid')  );
 
-    if( !$this->defLevel )
-    {
+    if (!$this->defLevel) {
       $greatest = <<<SQL
 
   acls."acl-level"
@@ -113,9 +106,7 @@ SQL;
 
       $joinType = ' ';
 
-    }
-    else
-    {
+    } else {
 
       $greatest = <<<SQL
 
@@ -128,42 +119,39 @@ SQL;
 SQL;
 
       $joinType = ' LEFT ';
-      
+
     }
 
-    $criteria->selectAlso( $greatest  );
+    $criteria->selectAlso($greatest  );
 
-    $query->setTables( $criteria );
-    $query->appendConditions( $criteria, $condition, $params  );
-    $query->checkLimitAndOrder( $criteria, $params );
-    $query->appendFilter( $criteria, $params );
+    $query->setTables($criteria);
+    $query->appendConditions($criteria, $condition, $params  );
+    $query->checkLimitAndOrder($criteria, $params);
+    $query->appendFilter($criteria, $params);
 
     $criteria->join
     (
       " {$joinType} JOIN
         {$acl->sourceRelation} as acls
         ON
-          acls.\"acl-area\" IN( 'mod-project', 'mgmt-project_project' )
+          acls.\"acl-area\" IN('mod-project', 'mgmt-project_project')
             AND acls.\"acl-user\" = {$userId}
             AND acls.\"acl-vid\" = project_project.rowid ",
       'acls'
     );
-    
-    $tmp = $orm->select( $criteria );
+
+    $tmp = $orm->select($criteria);
     $ids = array();
-    
-    foreach( $tmp as $row )
-    {
+
+    foreach ($tmp as $row) {
       $ids[$row['rowid']] = $row['acl-level'];
     }
-    
-    $query->setCalcQuery( $criteria, $params );
-    
+
+    $query->setCalcQuery($criteria, $params);
+
     return $ids;
 
   }//end public function fetchListTableDefault */
-
- 
 
 }//end class MyTask_Table_Access
 

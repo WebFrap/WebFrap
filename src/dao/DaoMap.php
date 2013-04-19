@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Data Access Object zum laden der Daten aus einer Conf Map
@@ -22,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class DaoMap
-  extends Dao
+class DaoMap extends Dao
 {
 
   /**
@@ -37,10 +35,10 @@ class DaoMap
    * @param $mapName
    * @return unknown_type
    */
-  public static function getMap( $mapName )
+  public static function getMap($mapName)
   {
 
-    if(isset(self::$pool[$mapName]))
+    if (isset(self::$pool[$mapName]))
       return self::$pool[$mapName];
     else
       return DaoMap::load($mapName);
@@ -52,10 +50,10 @@ class DaoMap
    * @param $mapName
    * @return unknown_type
    */
-  public static function get( $mapName )
+  public static function get($mapName)
   {
 
-    if(isset(self::$pool[$mapName]))
+    if (isset(self::$pool[$mapName]))
       return self::$pool[$mapName];
     else
       return DaoMap::load($mapName);
@@ -67,24 +65,22 @@ class DaoMap
    * @param unknown_type $mapName
    * @return unknown_type
    */
-  public static function load( $mapName )
+  public static function load($mapName)
   {
 
-    foreach( Conf::$confPath as $path )
-    {
+    foreach (Conf::$confPath as $path) {
 
-      if( !$this->source )
+      if (!$this->source)
         $menuPath = $path.'/menu/'.$this->name.'/';
       else
         $menuPath = $path.'/menu/'.$this->source.'/';
 
-
-      if(!file_exists($menuPath))
+      if (!file_exists($menuPath))
         continue;
 
-      $folder = new LibFilesystemFolder( $menuPath );
+      $folder = new LibFilesystemFolder($menuPath);
 
-      foreach( $folder->getFiles() as $file )
+      foreach ($folder->getFiles() as $file)
         include $file->getName(true);
 
        // break after found data
@@ -92,7 +88,6 @@ class DaoMap
     }
 
   }//end public static function load
-
 
 }//end class DaoNative
 

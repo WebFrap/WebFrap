@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -23,37 +21,36 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapNavigation_Maintab
-  extends WgtMaintab
+class WebfrapNavigation_Maintab extends WgtMaintab
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param string $menuName
    * @param TFlag $params
-   * 
+   *
    * @return void
    */
-  public function display( $menuName, $params )
+  public function display($menuName, $params)
   {
 
-    $this->setLabel( 'Explorer' );
-    $this->setTitle( 'Root' );
+    $this->setLabel('Explorer');
+    $this->setTitle('Root');
 
-    $this->setTemplate( 'webfrap/navigation/maintab/modmenu'  );
+    $this->setTemplate('webfrap/navigation/maintab/modmenu'  );
 
-    $modMenu = $this->newItem( 'modMenu', 'MenuFolder' );
+    $modMenu = $this->newItem('modMenu', 'MenuFolder');
     $modMenu->setData
     (
-      DaoFoldermenu::get( 'webfrap/root',true ),
+      DaoFoldermenu::get('webfrap/root',true),
       'maintab.php'
     );
 
     $params = new TArray();
-    $this->addMenuMenu( $modMenu, $params );
-    $this->addActions( $params );
+    $this->addMenuMenu($modMenu, $params);
+    $this->addActions($params);
 
   }//end public function display */
 
@@ -67,7 +64,7 @@ class WebfrapNavigation_Maintab
    * }
    * @param TFlag $params
    */
-  public function addMenuMenu( $modMenu, $params )
+  public function addMenuMenu($modMenu, $params)
   {
 
     $menu     = $this->newMenu
@@ -76,12 +73,11 @@ class WebfrapNavigation_Maintab
       'WebfrapNavigation'
     );
     $menu->id = $this->id.'_dropmenu';
-    
+
     $menu->crumbs = $modMenu->buildCrumbs();
-    $menu->buildMenu( $params );
+    $menu->buildMenu($params);
 
   }//end public function addMenuMenu */
-
 
   /**
    * just add the code for the edit ui controlls
@@ -92,7 +88,7 @@ class WebfrapNavigation_Maintab
    *   string formId: the id of the form;
    * }
    */
-  public function addActions(  $params )
+  public function addActions( $params)
   {
 
     // add the button action for save in the window
@@ -101,7 +97,7 @@ class WebfrapNavigation_Maintab
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       self.close();
     });
 

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -23,14 +23,13 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MaintenanceEntity_Dataset_Access
-  extends LibAclPermission
+class MaintenanceEntity_Dataset_Access extends LibAclPermission
 {
   /**
    * @param TFlag $params
    * @param EnterpriseCompany_Entity $entity
    */
-  public function loadDefault( $params, $entity = null )
+  public function loadDefault($params, $entity = null)
   {
 
     // laden der benötigten Resource Objekte
@@ -41,8 +40,7 @@ class MaintenanceEntity_Dataset_Access
     // dann befinden wir uns im root und brauchen keine pfadafrage
     // um potentielle fehler abzufangen wird auch direkt der richtige Root gesetzt
     // nicht das hier einer einen falschen pfad injected
-    if( is_null($params->aclRoot) || 1 == $params->aclLevel  )
-    {
+    if (is_null($params->aclRoot) || 1 == $params->aclLevel  ) {
       $params->isAclRoot     = true;
       $params->aclRoot       = 'mgmt-enterprise_company';
       $params->aclRootId     = null;
@@ -53,8 +51,7 @@ class MaintenanceEntity_Dataset_Access
 
     // wenn wir in keinem pfad sind nehmen wir einfach die normalen
     // berechtigungen
-    if( $params->isAclRoot )
-    {
+    if ($params->isAclRoot) {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt einen acl container
       $acl->getPermission
@@ -64,9 +61,7 @@ class MaintenanceEntity_Dataset_Access
         false,     // keine Kinder laden
         $this     // dieses objekt soll als container verwendet werden
       );
-    }
-    else
-    {
+    } else {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt das zugriffslevel
       $acl->getPathPermission

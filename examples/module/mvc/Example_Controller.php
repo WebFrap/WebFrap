@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,13 +26,12 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class Example_Controller
-  extends Controller
+class Example_Controller extends Controller
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // methodes
-////////////////////////////////////////////////////////////////////////////////
-  
+//////////////////////////////////////////////////////////////////////////////*/
+
   /**
    * @var array
    */
@@ -40,26 +39,26 @@ class Example_Controller
   (
     'openarea' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'modal' )
+      'method'    => array('GET'),
+      'views'      => array('modal')
     ),
   );
-  
-////////////////////////////////////////////////////////////////////////////////
+
+/*//////////////////////////////////////////////////////////////////////////////
 // methodes
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
  /**
   * create an new window with an edit form for the enterprise_company entity
   * @param LibRequestHttp $request
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_openArea( $request, $response )
+  public function service_openArea($request, $response)
   {
-    
+
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFlags( $request );
+    $params  = $this->getFlags($request);
 
     // create a window
     $view   = $this->loadView
@@ -69,12 +68,10 @@ class Example_Controller
       'displayOpen',
       View::AJAX
     );
-    $view->setModel( $this->loadModel( 'GroupwareMessage' ) );
+    $view->setModel($this->loadModel('GroupwareMessage'));
 
-   $view->displayOpen( $domainNode, $params );
+   $view->displayOpen($domainNode, $params);
 
   }//end public function service_showMeta */
-
-
 
 } // end class MaintenanceEntity_Controller

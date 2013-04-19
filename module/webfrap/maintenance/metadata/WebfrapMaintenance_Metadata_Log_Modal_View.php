@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,32 +21,31 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapMaintenance_Metadata_Log_Modal_View
-  extends WgtModal
+class WebfrapMaintenance_Metadata_Log_Modal_View extends WgtModal
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
     /**
     * @var WebfrapMaintenance_Metadata_Model
     */
     public $model = null;
-    
+
     /**
      * @var int
      */
     public $width = 600;
-    
+
     /**
      * @var int
      */
     public $height = 500;
-    
-////////////////////////////////////////////////////////////////////////////////
+
+/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
  /**
   * Methode zum befüllen des WbfsysMessage Create Forms
   * mit Inputelementen
@@ -56,7 +55,7 @@ class WebfrapMaintenance_Metadata_Log_Modal_View
   * @param TFlag $params
   * @return Error im Fehlerfall sonst null
   */
-  public function displayLog(  )
+  public function displayLog()
   {
 
     $i18nLabel = $this->i18n->l
@@ -66,11 +65,11 @@ class WebfrapMaintenance_Metadata_Log_Modal_View
     );
 
     // Setzen des Labels und des Titles, sowie diverser Steuerinformationen
-    $this->setTitle( $i18nLabel );
-    $this->setLabel( $i18nLabel );
+    $this->setTitle($i18nLabel);
+    $this->setLabel($i18nLabel);
 
     // set the form template
-    $this->setTemplate( 'webfrap/maintenance/metadata/clean_log', true );
+    $this->setTemplate('webfrap/maintenance/metadata/clean_log', true);
 
   }//end public function displayLog */
 

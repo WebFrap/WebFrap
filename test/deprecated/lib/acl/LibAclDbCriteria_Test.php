@@ -8,21 +8,18 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
-
 /**
  * @package WebFrapUnit
  * @subpackage WebFrap
  */
-class LibAclDbCriteria_Test
-  extends LibTestUnit
+class LibAclDbCriteria_Test extends LibTestUnit
 {
 
   /**
@@ -56,8 +53,8 @@ class LibAclDbCriteria_Test
     $this->user->setDb($this->db);
 
     $this->populateDatabase();
-    $this->acl->setUser( $this->user );
-    $this->acl->setDb( $this->db );
+    $this->acl->setUser($this->user);
+    $this->acl->setDb($this->db);
 
   }//end public function setUp */
 
@@ -136,7 +133,6 @@ class LibAclDbCriteria_Test
     $group5->level      = 0;
     $orm->insert($group5);
 
-
     // user roles
     $user1 = new WbfsysRoleUser_Entity;
     $user1->name  = 'user_1';
@@ -162,7 +158,6 @@ class LibAclDbCriteria_Test
     $areaMod1->id_level_delete  = 100;
     $areaMod1->id_level_admin   = 100;
     $orm->insert($areaMod1);
-
 
     $areaMod2 = new WbfsysSecurityArea_Entity;
     $areaMod2->access_key       = 'mod-2';
@@ -232,7 +227,6 @@ class LibAclDbCriteria_Test
           'vid'       =>  $text5
         ),
 
-
         array
         (
           'id_user'   =>  $user2,
@@ -278,13 +272,11 @@ class LibAclDbCriteria_Test
       )
     );
 
-
   }//end protected function populateDatabase */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // role tests
 //////////////////////////////////////////////////////////////////////////////*/
-
 
   /**
    * voller zugriff erlaubt durch modulrechte
@@ -311,7 +303,6 @@ class LibAclDbCriteria_Test
     $this->assertEquals('Es wurden 3 Datensätze erwartet', 3, count($data));
 
   }//end public function testAccessModule */
-
 
   /**
    * voller zugriff erlaubt durch modulrechte

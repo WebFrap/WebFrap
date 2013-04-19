@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -144,15 +144,15 @@ class LibTemplateHtmlHead
   protected $openWindow       = null;
 
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // magic methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * the contstructor
    * @param array $conf the configuration loaded from the conf
    */
-  public function __construct( $conf = array() )
+  public function __construct($conf = array())
   {
      $this->theme = 'default';
 
@@ -160,20 +160,20 @@ class LibTemplateHtmlHead
       ? $conf['doctype']
       : View::XML1_TRANS;
 
-     $this->setDoctype( $doctype );
+     $this->setDoctype($doctype);
 
      // Wenn es keinen neuen gibt bleibt alles beim alten
      $this->contentType = isset($conf['contentType'])
       ? $conf['contentType']
       : $this->contentType;
 
-     parent::__construct ($conf );
+     parent::__construct ($conf);
 
    }// end public function __construct */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Setting a doctype for the Page
@@ -192,10 +192,9 @@ class LibTemplateHtmlHead
    *   <li>View::XML1_1_STRICT</li>
    * </ul>
    */
-  public function setDoctype( $doctype )
+  public function setDoctype($doctype)
   {
-    switch( $doctype )
-    {
+    switch ($doctype) {
       case View::HTML4_STRICT :
       {
         $this->doctype = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
@@ -262,10 +261,10 @@ class LibTemplateHtmlHead
    * @param bool $Aktiv Sollen die Defaultmetas ausgegeben werden
    * @return void
    */
-  public function setDefaultMetas( $activ = false )
+  public function setDefaultMetas($activ = false)
   {
     $this->defMetas = $activ;
-  } // end public function setDefaultMetas( $activ = false )
+  } // end public function setDefaultMetas($activ = false)
 
 
   /**
@@ -274,7 +273,7 @@ class LibTemplateHtmlHead
    * @param string Name Name der neuen Css Datei
    * @return void
    */
-  public function setMainCss( $name )
+  public function setMainCss($name)
   {
     $this->mainCss = $name;
   } // end public function setMainCss */
@@ -300,7 +299,7 @@ class LibTemplateHtmlHead
    *  <li>script-type (application/javascript)</li>
    *  <li>style-type (text/css)</li>
    *  <li>refresh (5; URL=http://de.meios.de/)</li>
-   *  <li>language ( de )</li>
+   *  <li>language (de)</li>
    *  <li>cookie (cookiename=cookiewert; expires=Sun, 01 Jan 2006 00:00:00
    *     GMT; path=/;)</li>
    *  <li>expires (0)</li>
@@ -308,18 +307,17 @@ class LibTemplateHtmlHead
    *  <li>pragma (no-cache)</li>
    *  <li>norobots</li>
    *  <li>allrobots</li>
-   *  <li>robots ( follow,index)</li>
+   *  <li>robots (follow,index)</li>
    * </ul>
    *
    * @param string Type Txpe der HTML Metadaten
    * @param string Content Inhalt der Metadaten falls vorhanden
    * @return
    */
-  public function addMeta( $type,  $content = null )
+  public function addMeta($type,  $content = null)
   {
 
-    switch( $type )
-    {
+    switch ($type) {
 
       case 'description':
       { // Hinzufügen einer Beschreibung für die Seite
@@ -352,54 +350,54 @@ class LibTemplateHtmlHead
       } // ENDE CASE
 
       case 'revisit':
-      { // Wann wurde Diese Seite erstellt ( content='1 weeks' )
+      { // Wann wurde Diese Seite erstellt (content='1 weeks')
         $this->metas[] = '<meta name="revisit-after" content="'.$content.'" />'.NL;
         break;
       } // ENDE CASE
 
-        // Wann wurde Diese Seite erstellt ( content='#php::QNet Staff - http://www.php-q.net/' )
+        // Wann wurde Diese Seite erstellt (content='#php::QNet Staff - http://www.php-q.net/')
       case 'publisher':
       {
         $this->metas[] = '<meta name="publisher" content="'.$content.'" />'.NL;
         break;
       } // ENDE CASE
 
-      // Copyright ( Content='Copyright (c) 2005 meios.de (Dominik Bonsch)' )
+      // Copyright (Content='Copyright (c) 2005 meios.de (Dominik Bonsch)')
       case 'copyright':
       {
           $this->metas[] = '<meta name="copyright" content="'.$content.'" />'.NL;
         break;
       } // ENDE CASE
 
-        // Für wen ist diese Seite bestimmt ( content='alle'
+        // Für wen ist diese Seite bestimmt (content='alle'
       case 'audience':
       {
         $this->metas[] = '<meta name="audience" content="'.$content.'" />'.NL;
         break;
       } // ENDE CASE
 
-        // email des Erstellers der Seite ( content='ollum@meios.de' )
+        // email des Erstellers der Seite (content='ollum@meios.de')
       case 'publisher-email':
       {
         $this->metas[] = '<meta name="publisher-email" content="'.$content.'" />'.NL;
         break;
       } // ENDE CASE
 
-        // URL der Seite zum genauen identifizieren ( content='http://www.meios.de' )
+        // URL der Seite zum genauen identifizieren (content='http://www.meios.de')
       case 'identifier-url':
       {
         $this->metas[] = '<meta name="identifier-url" content="'.$content.'" />'.NL;
         break;
       } // ENDE CASE
 
-        // TITEL der Seite ( content='Hallo ich bin der TITEL' )
+        // TITEL der Seite (content='Hallo ich bin der TITEL')
       case 'page-topic':
       {
         $this->metas[] = '<meta name="page-topic" content="'.$content.'" />'.NL;
         break;
       } // ENDE CASE
 
-        // um welche Art von Seite handelt es sich ( content='Unterseite/Homepage' )
+        // um welche Art von Seite handelt es sich (content='Unterseite/Homepage')
       case 'page-type':
       {
         $this->metas[] = '<meta name="page-type" content="'.$content.'" />'.NL;
@@ -408,11 +406,10 @@ class LibTemplateHtmlHead
 
         // Http Equive Tags
 
-        // Festlegen des ContentTypes ( content='text/html; charset=ISO-8859-1' )
+        // Festlegen des ContentTypes (content='text/html; charset=ISO-8859-1')
       case 'content-type':
       {
-        if( $content != '' )
-        {
+        if ($content != '') {
 
           $contenTyp  = $this->tplConf['contentype'];
           $charSet    = $this->tplConf['charset'];
@@ -422,21 +419,21 @@ class LibTemplateHtmlHead
         break;
       } // ENDE CASE
 
-        // Festlegen des Scripttypes auf der Seite ( content='application/javascript' )
+        // Festlegen des Scripttypes auf der Seite (content='application/javascript')
       case 'script-type':
       {
         $this->metas[] = '<meta http-equiv="content-script-type"  content="'.$content.'" />'.NL;
         break;
       } // ENDE CASE
 
-        // Festlegen des Styletypes auf der Seite ( content='text/css' )
+        // Festlegen des Styletypes auf der Seite (content='text/css')
       case 'style-type':
       {
         $this->metas[] = '<meta http-equiv="content-style-type"  content="'.$content.'" />'.NL;
         break;
       } // ENDE CASE
 
-        // Ein Metarefresh einbauen ( content='5; URL=http://de.selfhtml.org/' )
+        // Ein Metarefresh einbauen (content='5; URL=http://de.selfhtml.org/')
       case 'refresh':
       {
         $this->metas[] = '<meta http-equiv="refresh" content="'.$content.'" />'.NL;
@@ -444,33 +441,33 @@ class LibTemplateHtmlHead
       } // ENDE CASE
 
       case 'language':
-      { // Die Sprache auf der Seite ( content='de' )
+      { // Die Sprache auf der Seite (content='de')
         $this->metas[] = '<meta http-equiv="content-language" content="'.$content.'" />'.NL;
         break;
       } // ENDE CASE
 
-        // setzen eines Cookies per HTML ( content='cookiename=cookiewert; expires=Sun, 01 Jan 2006 00:00:00 GMT; path=/;' )
+        // setzen eines Cookies per HTML (content='cookiename=cookiewert; expires=Sun, 01 Jan 2006 00:00:00 GMT; path=/;')
       case 'cookie':
       {
         $this->metas[] = '<meta http-equiv="set-cookie"  content="'.$content.'" />'.NL;
         break;
       } // ENDE CASE
 
-        // Wann ist das Haltbarkeitsdatum des Inhalts abgelaufen ( content='0' )
+        // Wann ist das Haltbarkeitsdatum des Inhalts abgelaufen (content='0')
       case 'expires':
       {
         $this->metas[] = '<meta http-equiv="expires"  content="'.$content.'" />'.NL;
         break;
       } // ENDE CASE
 
-        // Wann ist das Haltbarkeitsdatum des Inhalts abgelaufen ( content='no-cache' )
+        // Wann ist das Haltbarkeitsdatum des Inhalts abgelaufen (content='no-cache')
       case 'cache-control':
       {
         $this->metas[] = '<meta http-equiv="cache-control" content="'.$content.'" />'.NL;
         break;
       } // ENDE CASE
 
-        // Wann ist das Haltbarkeitsdatum des Inhalts abgelaufen ( content='no-cache' )
+        // Wann ist das Haltbarkeitsdatum des Inhalts abgelaufen (content='no-cache')
       case 'pragma':
       {
         $this->metas[] = '<meta http-equiv="pragma" content="'.$content.'" />'.NL;
@@ -531,7 +528,7 @@ class LibTemplateHtmlHead
    * @param string $name Name der Js Datei die eingebunden werden soll
    * @return void
    */
-  public function addJsFile( $name )
+  public function addJsFile($name)
   {
     $this->fileJs[$name] = $name;
   } // end public function addJsFile */
@@ -539,15 +536,12 @@ class LibTemplateHtmlHead
   /**
   * @param string/array $key
   */
-  public function addJsItem( $key  )
+  public function addJsItem($key  )
   {
 
-    if( is_array($key) )
-    {
-      $this->jsItems     = array_merge( $this->jsItems, $key );
-    }
-    else
-    {
+    if (is_array($key)) {
+      $this->jsItems     = array_merge($this->jsItems, $key);
+    } else {
       $this->jsItems[]   = $key;
     }
 
@@ -558,7 +552,7 @@ class LibTemplateHtmlHead
    * @param string $jsCode
    * @return void
    */
-  public function addJsCode( $jsCode )
+  public function addJsCode($jsCode)
   {
     $this->jsCode[] = $jsCode;
   }//end public function addJsCode */
@@ -569,7 +563,7 @@ class LibTemplateHtmlHead
    * @param string Name Name der CSS Datei die eingebunden werden soll
    * @return void
    */
-  public function addCssFile( $name )
+  public function addCssFile($name)
   {
     $this->fileStyles[] = $name;
   } // end public function addCssFile */
@@ -580,7 +574,7 @@ class LibTemplateHtmlHead
    * @param string Url eines Rss Feed
    * @return void
    */
-  public function addNewsfeed( $url )
+  public function addNewsfeed($url)
   {
     $this->rssFeed[] = $url;
   } // end public function addNewsfeed */
@@ -589,7 +583,7 @@ class LibTemplateHtmlHead
    * @var boolean[optional] $breakOut should the System break out of a frame
    * @return void
    */
-  public function setNoFrameload( $breakOut = true )
+  public function setNoFrameload($breakOut = true)
   {
     $this->killFrames = $breakOut;
   }//end public function setBreakOut */
@@ -600,10 +594,10 @@ class LibTemplateHtmlHead
    * @param int $errorCode ErrorCode
    * @return void
    */
-  public function setErrorPage( $title , $message , $httpCode = 500 )
+  public function setErrorPage($title , $message , $httpCode = 500)
   {
 
-    $this->setTemplate( 'error/message' );
+    $this->setTemplate('error/message');
     $this->var->content['errorTitle']     = $title;
     $this->var->content['errorMessage']   = $message;
     ///TODO implement Http Error Codes
@@ -616,7 +610,7 @@ class LibTemplateHtmlHead
    * @param string $Icon Pfad zum Icon das in der Url des Browser geladen werden soll
    * @return void
    */
-  public function setUrlicon( $icon )
+  public function setUrlicon($icon)
   {
     $this->urlIcon = $icon;
   } // end public function setUrlicon */
@@ -627,7 +621,7 @@ class LibTemplateHtmlHead
    * @param string $Icon Pfad zum Icon das in der Url des Browser geladen werden soll
    * @return void
    */
-  public function getUrlicon( )
+  public function getUrlicon()
   {
     return $this->urlIcon;
   } // end public function getUrlico */
@@ -636,7 +630,7 @@ class LibTemplateHtmlHead
    *
    * @param $status
    */
-  public function setHttpStatus( $status )
+  public function setHttpStatus($status)
   {
     $this->httpStatus = $status;
   }//end public function setHttpStatus */
@@ -645,13 +639,10 @@ class LibTemplateHtmlHead
    *
    * @param $status
    */
-  public function openWindow( $resource )
+  public function openWindow($resource)
   {
     $this->openWindow = $resource;
   }//end public function openWindow */
-
-
-
 
 } // end class LibTemplateHtml
 

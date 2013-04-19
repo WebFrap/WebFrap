@@ -21,12 +21,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapDocu_Page_Maintab_Menu
-  extends WgtDropmenu
+class WebfrapDocu_Page_Maintab_Menu extends WgtDropmenu
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * add a drop menu to the create window
@@ -37,16 +36,15 @@ class WebfrapDocu_Page_Maintab_Menu
    *   string formId: the id of the form;
    * }
    */
-  public function buildMenu( $key, $params )
+  public function buildMenu($key, $params)
   {
 
-    $iconMenu          = $this->view->icon( 'control/menu.png'     ,'Menu'   );
-    $iconClose         = $this->view->icon( 'control/close.png'    ,'Close'   );
-    $iconSearch        = $this->view->icon( 'control/search.png'   ,'Search'  );
-    $iconBookmark      = $this->view->icon( 'control/bookmark.png' ,'Bookmark');
-    $iconSave          = $this->view->icon( 'control/save.png' ,'Save' );
-    $iconRefresh       = $this->view->icon( 'control/refresh.png' ,'Refresh' );
-
+    $iconMenu          = $this->view->icon('control/menu.png'     ,'Menu'   );
+    $iconClose         = $this->view->icon('control/close.png'    ,'Close'   );
+    $iconSearch        = $this->view->icon('control/search.png'   ,'Search'  );
+    $iconBookmark      = $this->view->icon('control/bookmark.png' ,'Bookmark');
+    $iconSave          = $this->view->icon('control/save.png' ,'Save');
+    $iconRefresh       = $this->view->icon('control/refresh.png' ,'Refresh');
 
     $entries = new TArray();
 
@@ -54,15 +52,13 @@ class WebfrapDocu_Page_Maintab_Menu
 
     $crumbs = array();
     $path   = array();
-    foreach( $tmp as $cData )
-    {
+    foreach ($tmp as $cData) {
       $path[] = $cData;
-      $crumbs[implode('-',$path)] = SParserString::subToName( $cData );
+      $crumbs[implode('-',$path)] = SParserString::subToName($cData);
     }
 
     $crumbMenu = new WgtControlCrumb();
-    $crumbMenu->setPathCrumb( $crumbs, 'maintab.php?c=Webfrap.Docu.page&page=' );
-
+    $crumbMenu->setPathCrumb($crumbs, 'maintab.php?c=Webfrap.Docu.page&page=');
 
     $this->content = <<<HTML
 
@@ -92,8 +88,6 @@ HTML;
 
   }//end public function buildMenu */
 
-
-
   /**
    * just add the code for the edit ui controls
    *
@@ -107,9 +101,8 @@ HTML;
    *     services
    * }
    */
-  public function injectActions( $view, $params )
+  public function injectActions($view, $params)
   {
-
 
     // add the button action for save in the window
     // the code will be binded direct on a window object and is removed
@@ -117,14 +110,13 @@ HTML;
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       self.close();
     });
 
 BUTTONJS;
 
-
-    $view->addJsCode( $code );
+    $view->addJsCode($code);
 
   }//end public function injectActions */
 

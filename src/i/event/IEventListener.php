@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  *
@@ -28,8 +27,7 @@ interface IEventListener
    * Enter description here...
    *
    */
-  public static function triggerAction( $action , $dbo );
-
+  public static function triggerAction($action , $dbo);
 
 } // end interface IEventListener
 

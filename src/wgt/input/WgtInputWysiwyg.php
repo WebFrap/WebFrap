@@ -15,19 +15,17 @@
 *
 *******************************************************************************/
 
-
 /**
  * class WgtItemWysiwyg
  * Objekt zum generieren einer Textarea
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputWysiwyg
-  extends WgtInput
+class WgtInputWysiwyg extends WgtInput
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Der Modus des WYSIWYG Editors
@@ -44,79 +42,75 @@ class WgtInputWysiwyg
    * @param string $name
    * @return string
    */
-  public function __construct( $name )
+  public function __construct($name)
   {
-    parent::__construct( $name );
+    parent::__construct($name);
 
-    $this->attributes = array( 'cols' => '' , 'rows' => '' );
+    $this->attributes = array('cols' => '' , 'rows' => '');
 
-  }//end public function __construct( $name )
+  }//end public function __construct($name)
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * (non-PHPdoc)
    * @see src/wgt/WgtAbstract#setData()
    */
-  public function setData( $data , $value = null  )
+  public function setData($data , $value = null  )
   {
     $this->data = $data;
-  }// end public function setData( $data )
+  }// end public function setData($data)
 
   /**
    * (non-PHPdoc)
    * @see src/wgt/WgtAbstract#addData()
    */
-  public function addData( $data , $value = null  )
+  public function addData($data , $value = null  )
   {
     $this->data = $data;
-  }//end public function addData( $data )
+  }//end public function addData($data)
 
   /**
    * (non-PHPdoc)
    * @see src/wgt/WgtAbstract#getData()
    */
-  public function getData( $key = null  )
+  public function getData($key = null  )
   {
     return $this->data;
-  }//end public function getData( $data )
+  }//end public function getData($data)
 
   /**
    * @param string $mode
    */
-  public function setMode( $mode  )
+  public function setMode($mode  )
   {
     $this->mode = $mode;
   }//end public function setMode */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Parser Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @return array
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array())
   {
 
-    if( $attributes )
+    if ($attributes)
       $this->attributes = array_merge($this->attributes,$attributes);
 
-    if( $this->full )
-    {
+    if ($this->full) {
       $class = 'full';
       $style = 'height:325px;';
-    }
-    else
-    {
+    } else {
       $class = 'newline';
       $style = 'height:325px;';
     }
 
-    if(isset($this->attributes['class']))
+    if (isset($this->attributes['class']))
       $this->attributes['class'] .= ' wcm wcm_ui_wysiwyg';
     else
       $this->attributes['class'] = 'wcm wcm_ui_wysiwyg large-height';
@@ -130,14 +124,12 @@ class WgtInputWysiwyg
         : ''
       );
 
-
     $docu = $this->renderDocu($this->attributes['id']);
-
 
     $html = '<div class="wgt-box input" id="wgt-box-'.$this->attributes['id'].'" >
       <div class="wgt-label" >
-      	<label for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
-      	'.$docu.'
+        <label for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
+        '.$docu.'
       </div>
       <div class="wgt-input '.$class.'" style="'.$style.'" >
         <textarea '.$attributes.' >'.$this->data.'</textarea>'.$htmlMode.'
@@ -153,15 +145,12 @@ class WgtInputWysiwyg
    * (non-PHPdoc)
    * @see src/wgt/WgtAbstract#buildAjax()
    */
-  public function buildAjax( )
+  public function buildAjax()
   {
 
-    if(isset($this->attributes['class']))
-    {
+    if (isset($this->attributes['class'])) {
       $this->attributes['class'] .= ' wcm wcm_ui_wysiwyg';
-    }
-    else
-    {
+    } else {
       $this->attributes['class'] = ' wcm wcm_ui_wysiwyg';
     }
 
@@ -177,10 +166,10 @@ class WgtInputWysiwyg
    * (non-PHPdoc)
    * @see src/wgt/WgtAbstract#buildAjax()
    */
-  public function element( )
+  public function element()
   {
 
-    if(isset($this->attributes['class']))
+    if (isset($this->attributes['class']))
       $this->attributes['class'] .= ' wcm wcm_ui_wysiwyg';
     else
       $this->attributes['class'] = 'wcm wcm_ui_wysiwyg large-height';

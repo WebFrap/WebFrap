@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * de:
@@ -42,9 +41,9 @@ class ContextFilter
    */
   protected $content = array();
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Magic Functions
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * virtual __set
@@ -53,7 +52,7 @@ class ContextFilter
    * @param string $key
    * @param string $value
    */
-  public function __set( $key , $value )
+  public function __set($key , $value)
   {
     $this->content[$key] = $value;
   }// end public function __set */
@@ -65,13 +64,12 @@ class ContextFilter
    * @param string $key
    * @return string
    */
-  public function __get( $key )
+  public function __get($key)
   {
     return isset($this->content[$key])
       ? $this->content[$key]
       : null;
   }// end public function __get */
-
 
   /**
    * de:
@@ -81,20 +79,20 @@ class ContextFilter
    *
    *   @example
    *   <code>
-   *   if( $params->existingButNull )
+   *   if ($params->existingButNull)
    *     echo "will not be reached when key exists but ist null" // false;
    *
-   *   if( $params->exists('existingButNull') )
+   *   if ($params->exists('existingButNull'))
    *      echo "will be reached when key exists but ist null" // true;
    *
    *   </code>
    * }
    * @param string $key
    */
-  public function exists( $key )
+  public function exists($key)
   {
-    return array_key_exists( $key , $this->content );
+    return array_key_exists($key , $this->content);
   }//end public function exists */
 
-} // end class Context
+} // end class ContextFilter
 

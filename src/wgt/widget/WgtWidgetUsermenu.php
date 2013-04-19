@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -22,26 +21,24 @@
  * @author Dominik Bonsch
  * @copyright Dominik Bonsch <dominik.bonsch@webfrap.net>
  */
-class WgtWidgetUsermenu
-  extends WgtWidget
+class WgtWidgetUsermenu extends WgtWidget
 {
-
 
   /**
    * @param string $tabId
    * @param string $tabSize
    * @return void
    */
-  public function asTab( $containerId, $tabId, $tabSize = 'medium' )
+  public function asTab($containerId, $tabId, $tabSize = 'medium')
   {
 
     $user     = $this->getUser();
     $view     = $this->getView();
 
     $profile = $user->getProfileName();
-    $modMenu = $view->newItem( 'widgetUserMenu', 'MenuFolder' );
+    $modMenu = $view->newItem('widgetUserMenu', 'MenuFolder');
 
-    $modMenu->setData( DaoFoldermenu::get('profile/'.strtolower($profile)) );
+    $modMenu->setData(DaoFoldermenu::get('profile/'.strtolower($profile)));
     $modMenu->setId('wbf_desktop_usermenu');
 
     $html = <<<HTML
@@ -56,5 +53,4 @@ HTML;
   }//end public function asTab */
 
 } // end class WgtWidgetUsermenu
-
 

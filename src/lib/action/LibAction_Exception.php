@@ -8,23 +8,20 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage tech_core
  *
  */
-class LibAction_Exception
-  extends Lib_Exception
+class LibAction_Exception extends Lib_Exception
 {
+
 }
-
-
 

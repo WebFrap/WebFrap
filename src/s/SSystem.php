@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -24,19 +24,17 @@ final class SSystem
 
   /** Privater Konstruktor zum Unterbinde von Instanzen
    */
-  private function __construct(){}
-
+  private function __construct() {}
 
   /**
    * @param string $command
    * @return string
    */
-  public static function call( $command )
+  public static function call($command)
   {
 
     $result = '';
-    if ($proc = popen("($command)2>&1","r"))
-    {
+    if ($proc = popen("($command)2>&1","r")) {
       while (!feof($proc))
         $result .= fgets($proc, 1000);
 
@@ -48,5 +46,4 @@ final class SSystem
   }//end public static function call */
 
 }// end final class SSystem
-
 

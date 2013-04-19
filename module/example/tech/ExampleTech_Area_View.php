@@ -15,37 +15,31 @@
 *
 *******************************************************************************/
 
-
-
 /**
  * @package WebFrap
  * @subpackage ModEnterprise
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class ExampleTech_Area_View
-  extends LibTemplateAreaView
+class ExampleTech_Area_View extends LibTemplateAreaView
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param string $menuName
    * @return void
    */
-  public function displayArea( $areaKey  )
+  public function displayArea($areaKey  )
   {
 
-    $this->setTemplate( 'example/tech/tpl/'.str_replace('.', '/', $areaKey)  , true  );
+    $this->setTemplate('example/tech/tpl/'.str_replace('.', '/', $areaKey)  , true  );
 
     $this->position = '#wgt-area-tech-example-content';
     $this->action = 'html';
 
   }//end public function displayTree */
-
-
 
 }//end class WebfrapNavigation_Maintab
 

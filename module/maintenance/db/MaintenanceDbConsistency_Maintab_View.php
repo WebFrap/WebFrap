@@ -36,21 +36,20 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MaintenanceDbConsistency_Maintab_View
-  extends WgtMaintab
+class MaintenanceDbConsistency_Maintab_View extends WgtMaintabCustom
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
     /**
     * @var MyMessage_Crud_Model
     */
     public $model = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
  /**
   * Methode zum befüllen des WbfsysMessage Create Forms
@@ -61,7 +60,7 @@ class MaintenanceDbConsistency_Maintab_View
   * @param TFlag $params
   * @return Error im Fehlerfall sonst null
   */
-  public function display( $params )
+  public function display($params)
   {
 
     // laden der benötigten Resource Objekte
@@ -75,27 +74,27 @@ class MaintenanceDbConsistency_Maintab_View
     );
 
     // Setzen des Labels und des Titles, sowie diverser Steuerinformationen
-    $this->setTitle( $i18nLabel );
-    $this->setLabel( $i18nLabel  );
-    //$this->setTabId( 'wgt-tab-form-my_message-create' );
+    $this->setTitle($i18nLabel);
+    $this->setLabel($i18nLabel  );
+    //$this->setTabId('wgt-tab-form-my_message-create');
 
     // set the form template
-    $this->setTemplate( 'maintenance/db/list', true );
+    $this->setTemplate('maintenance/db/list', true);
 
-    $extensionLoader = new ExtensionLoader( 'fix_db' );
-    $this->addVar( 'extensions', $extensionLoader );
+    $extensionLoader = new ExtensionLoader('fix_db');
+    $this->addVar('extensions', $extensionLoader);
 
     // Setzen von Viewspezifischen Control Flags
     $params->viewType  = 'maintab';
     $params->viewId    = $this->getId();
 
     // Setzen der letzten metadaten
-    $this->addVar( 'params', $params );
-    $this->addVar( 'context', 'list' );
+    $this->addVar('params', $params);
+    $this->addVar('context', 'list');
 
     // Menü und Javascript Logik erstellen
-    $this->addMenu( $params );
-    $this->addActions( $params );
+    $this->addMenu($params);
+    $this->addActions($params);
 
     // kein fehler aufgetreten? bestens also geben wir auch keinen zurück
     return null;
@@ -111,7 +110,7 @@ class MaintenanceDbConsistency_Maintab_View
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $params )
+  public function addMenu($params)
   {
 
     $menu     = $this->newMenu
@@ -120,10 +119,10 @@ class MaintenanceDbConsistency_Maintab_View
       'MaintenanceDbConsistency'
     );
     $menu->id = $this->id.'_dropmenu';
-    $menu->setAcl( $this->getAcl() );
-    $menu->setModel( $this->model );
+    $menu->setAcl($this->getAcl());
+    $menu->setModel($this->model);
 
-    $menu->buildMenu( $params );
+    $menu->buildMenu($params);
 
     return true;
 
@@ -140,7 +139,7 @@ class MaintenanceDbConsistency_Maintab_View
    *   string formId: the id of the form;
    * }
    */
-  public function addActions( $params )
+  public function addActions($params)
   {
 
     // add the button actions for create in the window
@@ -149,18 +148,18 @@ class MaintenanceDbConsistency_Maintab_View
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-self.getObject().find(".wgtac_run_all").click(function(){
+self.getObject().find(".wgtac_run_all").click(function() {
   \$R.get('ajax.php?c=Maintenance.DbConsistency.fixAll');
 });
 
 // close tab
-self.getObject().find(".wgtac_close").click(function(){
+self.getObject().find(".wgtac_close").click(function() {
   self.close();
 });
 
 BUTTONJS;
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code);
 
   }//end public function addActions */
 

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -34,7 +34,6 @@ interface ILogAppender
    * @param Exception  message Die eigentliche Logmeldung
    * @return void
    */
-  public function logline( $time,  $level,  $file,  $line,  $message, $exception );
-
+  public function logline($time,  $level,  $file,  $line,  $message, $exception);
 
 } // end interface ILogAppender

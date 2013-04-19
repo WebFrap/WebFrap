@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,13 +26,12 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class ExampleElementKnowhow_Controller
-  extends Controller
+class ExampleElementKnowhow_Controller extends Controller
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // methodes
-////////////////////////////////////////////////////////////////////////////////
-  
+//////////////////////////////////////////////////////////////////////////////*/
+
   /**
    * @var array
    */
@@ -40,28 +39,28 @@ class ExampleElementKnowhow_Controller
   (
     'open' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
   );
-  
-////////////////////////////////////////////////////////////////////////////////
+
+/*//////////////////////////////////////////////////////////////////////////////
 // methodes
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
  /**
   * create an new window with an edit form for the enterprise_company entity
   * @param LibRequestHttp $request
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_open( $request, $response )
+  public function service_open($request, $response)
   {
-    
+
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFlags( $request );
-    
-    $key = $request->param( 'node', Validator::TEXT );
+    $params  = $this->getFlags($request);
+
+    $key = $request->param('node', Validator::TEXT);
 
     // create a window
     /* @var $view ExampleWebfrapKnowhow_Maintab_View  */
@@ -71,10 +70,9 @@ class ExampleElementKnowhow_Controller
       'ExampleElementKnowhow',
       'displayExample'
     );
-    $view->setModel( $this->loadModel( 'WebfrapKnowhowNode' ) );
-    $view->displayExample( $params );
+    $view->setModel($this->loadModel('WebfrapKnowhowNode'));
+    $view->displayExample($params);
 
   }//end public function service_open */
-
 
 } // end class ExampleElementAttachmet_Controller

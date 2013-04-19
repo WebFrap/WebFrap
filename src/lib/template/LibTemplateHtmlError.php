@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -23,9 +21,9 @@
  */
 class LibTemplateHtmlError
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Enter description here...
@@ -62,16 +60,16 @@ class LibTemplateHtmlError
    */
   protected static $template = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * name of the index
    *
    * @param string $index
    */
-  public static function setIndex( $index )
+  public static function setIndex($index)
   {
 
     self::$index = $index;
@@ -82,16 +80,16 @@ class LibTemplateHtmlError
    *
    * @param string $template
    */
-  public static function setTemplate( $template, $inCode = false )
+  public static function setTemplate($template, $inCode = false)
   {
 
     self::$template = $template;
-    
+
   }//end  public static function setTemplate */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Print Error Pages
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Enter description here...
@@ -99,21 +97,18 @@ class LibTemplateHtmlError
    * @param string $errorMessage
    * @param int $errorCode
    */
-  public static function printErrorPageXml( $errorMessage , $errorCode = null )
+  public static function printErrorPageXml($errorMessage , $errorCode = null)
   {
 
     self::$errorMessage = $errorMessage;
 
-    if($errorCode)
-    {
+    if ($errorCode) {
       self::$errorCode = $errorCode;
     }
 
+    $filename = $this->templatePath(self::$index , 'index');
 
-    $filename = $this->templatePath( self::$index , 'index' );
-
-    if( file_exists( $filename ) and is_readable($filename) )
-    {
+    if (file_exists($filename) and is_readable($filename)) {
 
       $TITLE         = self::$title;
       $ERROR_MESSAGE = self::$errorMessage;
@@ -126,9 +121,7 @@ class LibTemplateHtmlError
       ob_end_clean();
 
       echo $content;
-    }
-    else
-    {
+    } else {
       Error::addError
       (
       'failed to load the body'
@@ -136,7 +129,6 @@ class LibTemplateHtmlError
 
       echo '<service><error>!FATAL ERROR!: '.$errorMessage.'</error></service>';
     }
-
 
   }//end public static function printErrorPage */
 
@@ -146,21 +138,18 @@ class LibTemplateHtmlError
    * @param string $errorMessage
    * @param int $errorCode
    */
-  public static function printErrorPage( $errorMessage , $errorCode = null , $data = null )
+  public static function printErrorPage($errorMessage , $errorCode = null , $data = null)
   {
-
 
     self::$errorMessage = $errorMessage;
 
-    if($errorCode)
-    {
+    if ($errorCode) {
       self::$errorCode = $errorCode;
     }
 
-    $filename = $this->templatePath( self::$index , 'index' );
+    $filename = $this->templatePath(self::$index , 'index');
 
-    if( file_exists( $filename ) and is_readable($filename) )
-    {
+    if (file_exists($filename) and is_readable($filename)) {
 
       $TITLE         = self::$title;
       $ERROR_MESSAGE = self::$errorMessage;
@@ -174,16 +163,13 @@ class LibTemplateHtmlError
       ob_end_clean();
 
       echo $content;
-    }
-    else
-    {
+    } else {
       Error::addError
       (
       'failed to load the body'
       );
       echo '<h1>!FATAL ERROR! failed to load index !FATAL ERROR!</h1>';
     }
-
 
   }//end public static function printErrorPage */
 
@@ -193,17 +179,16 @@ class LibTemplateHtmlError
    * @param string $template
    * @return string
    */
-  public static function includeBody( $template )
+  public static function includeBody($template)
   {
 
-    if(!$filename = $this->bodyPath($template))
-    {
-      Error::addError('failed to load the body template: '.$template );
+    if (!$filename = $this->bodyPath($template)) {
+      Error::addError('failed to load the body template: '.$template);
+
       return '<p class="wgt-box error">failed to load the body</p>';
     }
 
-    if( file_exists( $filename ) and is_readable($filename) )
-    {
+    if (file_exists($filename) and is_readable($filename)) {
 
       $TITLE         = self::$title;
       $ERROR_MESSAGE = self::$errorMessage;
@@ -213,10 +198,9 @@ class LibTemplateHtmlError
       include $filename;
       $content = ob_get_contents();
       ob_end_clean();
+
       return $content;
-    }
-    else
-    {
+    } else {
       Error::addError
       (
       'failed to load the body'

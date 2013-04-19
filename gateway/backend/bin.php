@@ -8,26 +8,24 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
-try
-{
+try {
 
   include './conf/bootstrap.php';
 
   // Buffer Output
-  if(BUFFER_OUTPUT)
+  if (BUFFER_OUTPUT)
     ob_start();
 
   $errors = '';
 
-  View::setType( View::BINARY );
+  View::setType(View::BINARY);
   Webfrap::init();
 
   $webfrap = Webfrap::init();
@@ -36,11 +34,10 @@ try
   $webfrap->main();
 
   $errors = $webfrap->out();
-  $webfrap->shutdown( $errors );
+  $webfrap->shutdown($errors);
 
 } // ENDE TRY
-catch( Exception $exception )
-{
+catch(Exception $exception) {
   $extType = get_class($exception);
 
   Error::addError
@@ -50,30 +47,25 @@ catch( Exception $exception )
     $exception
   );
 
-  if( BUFFER_OUTPUT )
-  {
+  if (BUFFER_OUTPUT) {
     $errors .= ob_get_contents();
     ob_end_clean();
   }
 
-  if( !DEBUG )
-  {
-    if( isset($view) and is_object($view) )
-    {
-      $view->publishError( $exception->getMessage() , $errors );
-    }
-    else
-    {
-      View::printErrorPage
-      (
+  if (!DEBUG) {
+    
+    $view = Webfrap::$env->getView();
+    
+    if (isset($view) and is_object($view)) {
+      $view->publishError($exception->getMessage() , $errors);
+    } else {
+      View::printErrorPage(
         $exception->getMessage(),
         '500',
         $errors
       );
     }
-  }
-  else
-  {
+  } else {
     echo $errors;
   }
 

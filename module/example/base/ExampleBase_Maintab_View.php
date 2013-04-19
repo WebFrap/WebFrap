@@ -15,20 +15,17 @@
 *
 *******************************************************************************/
 
-
-
 /**
  * @package WebFrap
  * @subpackage ModEnterprise
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class ExampleBase_Maintab_View
-  extends WgtMaintab
+class ExampleBase_Maintab_View extends WgtMaintabCustom
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   public $crumbs = '';
 
@@ -36,17 +33,16 @@ class ExampleBase_Maintab_View
    * @param string $menuName
    * @return void
    */
-  public function displayMenu( $menuName, $params  )
+  public function displayMenu($menuName, $params  )
   {
 
-
-    $this->setTemplate( 'webfrap/navigation/maintab/modmenu'  );
+    $this->setTemplate('webfrap/navigation/maintab/modmenu'  );
 
     $className = 'ElementMenu'.ucfirst($params->menuType) ;
 
-    $modMenu = $this->newItem( 'modMenu', $className );
+    $modMenu = $this->newItem('modMenu', $className);
 
-    $menuData = DaoFoldermenu::get( 'example/'.$menuName, true );
+    $menuData = DaoFoldermenu::get('example/'.$menuName, true);
     $modMenu->setData
     (
       $menuData,
@@ -54,19 +50,19 @@ class ExampleBase_Maintab_View
     );
     $this->crumbs = $modMenu->buildCrumbs();
 
-    if( $modMenu->title  )
-      $this->setTitle( $menuData->title );
+    if ($modMenu->title  )
+      $this->setTitle($menuData->title);
     else
       $this->setTitle('Webfrap Menu');
 
-    if( $modMenu->label  )
-      $this->setLabel( $menuData->label );
+    if ($modMenu->label  )
+      $this->setLabel($menuData->label);
     else
-      $this->setLabel( 'Webfrap Menu' );
+      $this->setLabel('Webfrap Menu');
 
     $params = new TArray();
-    $this->addMenu( $params );
-    $this->addActions( $params );
+    $this->addMenu($params);
+    $this->addActions($params);
 
   }//end public function displayMenu */
 
@@ -79,7 +75,7 @@ class ExampleBase_Maintab_View
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $params )
+  public function addMenu($params)
   {
 
     // benötigte resourcen laden
@@ -88,10 +84,8 @@ class ExampleBase_Maintab_View
     $access = $params->access;
 
     $iconMisc         = $this->icon('control/misc.png'      ,'Misc');
-    $iconClose         = $this->icon('control/close.png'      ,'Close');
     $iconEntity         = $this->icon('control/entity.png'      ,'Entity');
     $iconSearch         = $this->icon('control/search.png'      ,'Search');
-
 
     $entries = new TArray();
 
@@ -107,7 +101,7 @@ class ExampleBase_Maintab_View
     <button
       class="wcm wcm_control_dropmenu wgt-button"
       id="{$menu->id}-control"
-      wgt_drop_box="{$menu->id}"  ><div class="left" >{$this->i18n->l('Menu','wbf.label')}</div><div class="right" ><span class="ui-icon ui-icon-triangle-1-s right"  > </span></div></button>
+      wgt_drop_box="{$menu->id}"  ><i class="icon-reorder" ></i> {$this->i18n->l('Menu','wbf.label')} <i class="icon-angle-down" ></i></button>
       <var id="{$menu->id}-control-cfg-dropmenu"  >{"triggerEvent":"click"}</var>
   </div>
 
@@ -118,7 +112,7 @@ class ExampleBase_Maintab_View
     </ul>
     <ul>
       <li>
-        <a class="wgtac_close" >{$iconClose} {$this->i18n->l( 'Close', 'wbf.label' )}</a>
+        <a class="wgtac_close" ><i class="icon-remove-circle" ></i> {$this->i18n->l('Close', 'wbf.label')}</a>
       </li>
     </ul>
 
@@ -159,13 +153,13 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport( $menu )
+  protected function entriesSupport($menu)
   {
 
-    $iconSupport    = $this->icon( 'control/support.png' ,'Support' );
-    $iconBug        = $this->icon( 'control/bug.png'     ,'Bug' );
-    $iconFaq        = $this->icon( 'control/faq.png'     ,'Faq' );
-    $iconHelp       = $this->icon( 'control/help.png'    ,'Help' );
+    $iconSupport    = $this->icon('control/support.png' ,'Support');
+    $iconBug        = $this->icon('control/bug.png'     ,'Bug');
+    $iconFaq        = $this->icon('control/faq.png'     ,'Faq');
+    $iconHelp       = $this->icon('control/help.png'    ,'Help');
 
     $html = <<<HTML
 
@@ -174,14 +168,14 @@ HTML;
         <span>
           <ul>
             <li><a
-            	class="wcm wcm_req_ajax"
-            	href="modal.php?c=Webfrap.Docu.open&amp;key=wbfsys_message-create" >{$iconHelp} {$this->i18n->l('Help','wbf.label')}</a></li>
+              class="wcm wcm_req_ajax"
+              href="modal.php?c=Webfrap.Docu.open&amp;key=wbfsys_message-create" >{$iconHelp} {$this->i18n->l('Help','wbf.label')}</a></li>
             <li><a
-            	class="wcm wcm_req_ajax"
-            	href="modal.php?c=Wbfsys.Issue.create&amp;context=create" >{$iconBug} {$this->i18n->l('Bug','wbf.label')}</a></li>
+              class="wcm wcm_req_ajax"
+              href="modal.php?c=Wbfsys.Issue.create&amp;context=create" >{$iconBug} {$this->i18n->l('Bug','wbf.label')}</a></li>
             <li><a
-            	class="wcm wcm_req_ajax"
-            	href="modal.php?c=Wbfsys.Faq.create&amp;context=create" >{$iconFaq} {$this->i18n->l('FAQ','wbf.label')}</a></li>
+              class="wcm wcm_req_ajax"
+              href="modal.php?c=Wbfsys.Faq.create&amp;context=create" >{$iconFaq} {$this->i18n->l('FAQ','wbf.label')}</a></li>
           </ul>
         </span>
       </li>
@@ -191,7 +185,6 @@ HTML;
     return $html;
 
   }//end public function entriesSupport */
-
 
   /**
    * this method is for adding the buttons in a create window
@@ -204,7 +197,7 @@ HTML;
    *   string formId: the id of the form;
    * }
    */
-  public function addActions(  )
+  public function addActions()
   {
 
     // add the button actions for create in the window
@@ -214,16 +207,15 @@ HTML;
     $code = <<<BUTTONJS
 
 // close tab
-self.getObject().find(".wgtac_close").click(function(){
+self.getObject().find(".wgtac_close").click(function() {
   self.close();
 });
 
 BUTTONJS;
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code);
 
   }//end public function addActions */
-
 
 }//end class WebfrapNavigation_Maintab
 

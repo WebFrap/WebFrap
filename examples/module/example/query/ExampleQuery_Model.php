@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,37 +22,34 @@
  * @author Dominik Bonsch <db@s-db.de>
  * @copyright Softwareentwicklung Dominik Bonsch <db@s-db.de>
  */
-class ExampleQuery_Model
-  extends Model
+class ExampleQuery_Model extends Model
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // methodes
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
  /**
   * @return LibDbResult
   */
-  public function runQuery( )
+  public function runQuery()
   {
 
     $db = $this->getDb();
     $orm = $this->getOrm();
-    
-    $textPublic = $orm->newEntity( 'WbfsysText' );
+
+    $textPublic = $orm->newEntity('WbfsysText');
     $textPublic->access_key = 'text_public';
-    $orm->insert( $textPublic );
-    
+    $orm->insert($textPublic);
+
     $query =<<<QUERY
-    
+
   select * from project_project_status;
-    
+
 QUERY;
-    
-    return $db->select( $query )->getAll();
+
+    return $db->select($query)->getAll();
 
   }//end public function displayQuery */
-
-
 
 }//end class ExampleMessage_Model
 

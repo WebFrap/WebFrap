@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -19,76 +19,69 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibVerificationPam
-  extends LibVerificationAdapter
+class LibVerificationPam extends LibVerificationAdapter
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
-  
   /**
    *
    * @param string $login
    * @param string $pwd
    * @return boolean
    */
-  public function verificate( $login , $password = null )
+  public function verificate($login , $password = null)
   {
 
-    if( '' == trim($login) )
-    {
-      Message::addError(I18n::s('Got no username', 'wbf.message' ));
+    if ('' == trim($login)) {
+      Message::addError(I18n::s('Got no username', 'wbf.message'));
+
       return false;
     }
 
-    if( !$this->nopwd && '' == trim($password) )
-    {
-      Message::addError(I18n::s('Got no password', 'wbf.message' ));
+    if (!$this->nopwd && '' == trim($password)) {
+      Message::addError(I18n::s('Got no password', 'wbf.message'));
+
       return false;
     }
 
-    if( !$this->dataSource )
+    if (!$this->dataSource)
       $orm = Db::getOrm();
     else
       $orm = $this->dataSource;
 
-    try
-    {
-      if( !$role = $orm->get( 'WbfsysRoleUser', " upper(name) = '".strtoupper($login)."' " ) )
-      {
-        Message::addError( I18n::s( 'No User with that name', 'wbf.message' ) );
+    try {
+      if (!$role = $orm->get('WbfsysRoleUser', " upper(name) = '".strtoupper($login)."' ")) {
+        Message::addError(I18n::s('No User with that name', 'wbf.message'));
+
         return false;
       }
-    }
-    catch( LibDb_Exception $exc )
-    {
+    } catch (LibDb_Exception $exc) {
       return false;
     }
 
-    if( $role->getBoolean( 'inactive' ) )
-    {
-      Message::addError( I18n::s( 'This account is inactive', 'wbf.message' ) );
+    if ($role->getBoolean('inactive')) {
+      Message::addError(I18n::s('This account is inactive', 'wbf.message'));
+
       return false;
     }
 
-    if( $this->nopwd )
-    {
+    if ($this->nopwd) {
       return true;
     }
 
-    $dbPwd = $role->getData( 'password' ) ;
+    $dbPwd = $role->getData('password') ;
 
-    if( $dbPwd != $password )
-    {
-      Message::addError(I18n::s('Invalid password', 'wbf.message' ));
+    if ($dbPwd != $password) {
+      Message::addError(I18n::s('Invalid password', 'wbf.message'));
+
       return false;
     }
 
     return true;
 
   }//end public function verificate */
-  
 
 } // end class LibVerificationPam
 

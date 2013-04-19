@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,13 +21,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapNavigation_LastAccess_Query
-  extends LibSqlQuery
+class WebfrapNavigation_LastAccess_Query extends LibSqlQuery
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // queries
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
  /**
    * Laden der Einträge auf welche zuletzt zugegriffen wurde
@@ -37,7 +35,7 @@ class WebfrapNavigation_LastAccess_Query
    *
    * @throws LibDb_Exception
    */
-  public function fetchLastAccessed( $userId, $areaId = null, $mask = null )
+  public function fetchLastAccessed($userId, $areaId = null, $mask = null)
   {
 
     $this->sourceSize   = null;
@@ -52,22 +50,20 @@ class WebfrapNavigation_LastAccess_Query
       'wbfsys_protocol_message.mask  as mask'
     );
 
-    $criteria->select( $cols, true );
+    $criteria->select($cols, true);
 
     $criteria->from('wbfsys_protocol_message');
 
-    $this->checkLimitAndOrder( $criteria, $params );
+    $this->checkLimitAndOrder($criteria, new TFlag());
 
     // Run Query und save the result
-    $this->result     = $db->orm->select( $criteria );
+    $this->result     = $db->orm->select($criteria);
 
   }//end public function fetchLastAccessed */
 
-
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // append query parts
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
  /**
    * Loading the tabledata from the database
@@ -75,47 +71,38 @@ class WebfrapNavigation_LastAccess_Query
    * @param $params
    * @return void
    */
-  public function checkLimitAndOrder( $criteria, $params  )
+  public function checkLimitAndOrder($criteria, $params  )
   {
 
     // check if there is a given order
-    if( $params->order )
-      $criteria->orderBy( $params->order );
+    if ($params->order)
+      $criteria->orderBy($params->order);
     else // if not use the default
       $criteria->orderBy('wbfsys_protocol_message.m_time_created desc');
 
-
     // Check the offset
-    if( $params->start )
-    {
-      if( $params->start < 0)
+    if ($params->start) {
+      if ($params->start < 0)
         $params->start = 0;
-    }
-    else
-    {
+    } else {
       $params->start = null;
     }
-    $criteria->offset( $params->start );
+    $criteria->offset($params->start);
 
     // Check the limit
-    if( -1 == $params->qsize )
-    {
+    if (-1 == $params->qsize) {
       // no limit if -1
       $params->qsize = null;
-    }
-    else if( $params->qsize )
-    {
+    } elseif ($params->qsize) {
       // limit must not be bigger than max, for no limit use -1
-      if( $params->qsize > Wgt::$maxListSize )
+      if ($params->qsize > Wgt::$maxListSize)
         $params->qsize = Wgt::$maxListSize;
-    }
-    else
-    {
+    } else {
       // if limit 0 or null use the default limit
       $params->qsize = 10;
     }
 
-    $criteria->limit( $params->qsize );
+    $criteria->limit($params->qsize);
 
   }//end public function checkLimitAndOrder */
 

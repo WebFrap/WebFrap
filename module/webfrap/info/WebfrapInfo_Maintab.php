@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -23,27 +21,26 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapInfo_Maintab
-  extends WgtMaintab
+class WebfrapInfo_Maintab extends WgtMaintab
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param string $menuName
    * @return void
    */
-  public function displayLegend( $params )
+  public function displayLegend($params)
   {
 
-    $this->setLabel( 'Legend' );
-    $this->setTitle( 'Legend' );
+    $this->setLabel('Legend');
+    $this->setTitle('Legend');
 
-    $this->setTemplate( 'info/legend'  );
+    $this->setTemplate('info/legend'  );
 
-    $this->addMenuMenu( $params );
-    $this->addActions( $params );
+    $this->addMenuMenu($params);
+    $this->addActions($params);
 
   }//end public function displayLegend */
 
@@ -56,7 +53,7 @@ class WebfrapInfo_Maintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenuMenu( $params )
+  public function addMenuMenu($params)
   {
 
     $menu     = $this->newMenu
@@ -65,13 +62,11 @@ class WebfrapInfo_Maintab
       'WebfrapInfo'
     );
     $menu->id = $this->id.'_dropmenu';
-    $menu->setAcl( $this->getAcl() );
-    
+    $menu->setAcl($this->getAcl());
 
-    $menu->buildMenu( $params );
+    $menu->buildMenu($params);
 
   }//end public function addMenuMenu */
-
 
   /**
    * just add the code for the edit ui controlls
@@ -82,7 +77,7 @@ class WebfrapInfo_Maintab
    *   string formId: the id of the form;
    * }
    */
-  public function addActions(  $params )
+  public function addActions( $params)
   {
 
     // add the button action for save in the window
@@ -91,7 +86,7 @@ class WebfrapInfo_Maintab
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       self.close();
     });
 

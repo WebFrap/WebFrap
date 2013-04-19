@@ -8,21 +8,19 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage Core
  *
  */
-class User_Stub
-  extends User
+class User_Stub extends User
 {
 
   /**
@@ -38,7 +36,7 @@ class User_Stub
    * Enter description here ...
    * @param unknown_type $id
    */
-  public function setId( $id )
+  public function setId($id)
   {
     $this->userId = $id;
   }//ebd public function setId */
@@ -46,7 +44,7 @@ class User_Stub
   /**
    * @param string $key
    */
-  public  function switchUser( $key )
+  public function switchUser($key)
   {
     $this->clean();
     $this->loadUserData($key);

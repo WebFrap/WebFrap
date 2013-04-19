@@ -15,19 +15,17 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage Core
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class ExampleBase_Controller
-  extends Controller
+class ExampleBase_Controller extends Controller
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Mit den Options wird der zugriff auf die Service Methoden konfiguriert
@@ -50,35 +48,32 @@ class ExampleBase_Controller
   (
     'menu' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
   );
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_menu( $request, $response )
+  public function service_menu($request, $response)
   {
-
 
     $params   = new TArray();
 
-    $menuName = $request->param( 'menu', Validator::CNAME );
-    $menuType = $request->param( 'mtype', Validator::CNAME );
+    $menuName = $request->param('menu', Validator::CNAME);
+    $menuType = $request->param('mtype', Validator::CNAME);
 
-    if( !$menuName )
+    if (!$menuName)
       $menuName = 'default';
 
-    if( $menuType )
+    if ($menuType)
       $params->menuType = $menuType;
     else
       $params->menuType = 'explorer';
@@ -86,15 +81,14 @@ class ExampleBase_Controller
     /* @var $view ExampleBase_Maintab_View  */
     $view = $response->loadView
     (
-    	'example-menu',
+      'example-menu',
       'ExampleBase',
       'displayMenu'
     );
 
-    $view->displayMenu( $menuName, $params );
+    $view->displayMenu($menuName, $params);
 
   }//end public function service_menu */
-
 
 }//end class ExampleBase_Controller
 

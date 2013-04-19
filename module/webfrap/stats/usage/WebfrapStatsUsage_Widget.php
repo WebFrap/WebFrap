@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -20,12 +20,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  *
  */
-class WebfrapStatsUsage_Widget
-  extends WgtWidget
+class WebfrapStatsUsage_Widget extends WgtWidget
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var WebfrapStatsUsage_Widget_Query
@@ -44,22 +43,21 @@ class WebfrapStatsUsage_Widget
    */
   public $height = 550;
 
-
   /**
    * @param LibTemplate $view
    * @param string $tabId
    * @param string $tabSize
    * @return void
    */
-  public function render( $tabId, $tabSize = 'medium' )
+  public function render($tabId, $tabSize = 'medium')
   {
 
     $user         = $this->getUser();
     $view         = $this->getView();
     $httpRequest  = $this->getRequest();
 
-    $chartType  = $httpRequest->param( 'graph', Validator::CNAME );
-    $startDate  = $httpRequest->param( 'start', Validator::DATE );
+    $chartType  = $httpRequest->param('graph', Validator::CNAME);
+    $startDate  = $httpRequest->param('start', Validator::DATE);
 
     $startDate = date('Y').'-01-01';
 
@@ -75,9 +73,9 @@ class WebfrapStatsUsage_Widget
       'class'     => 'medium cursor',
     ));
     $selectbox->setWidth('medium');
-    $selectbox->setFirstfree( 'Select an Entity' );
+    $selectbox->setFirstfree('Select an Entity');
 
-    $selectbox->setData( $this->query->fetchSelectbox() );
+    $selectbox->setData($this->query->fetchSelectbox());
     $selectbox->setActive($entityKey);
 
     $boxWidth   = $this->width - 122;
@@ -146,28 +144,27 @@ HTML;
    * @param string $tabSize
    * @return void
    */
-  public function runLoad( $tabSize = 'medium'  )
+  public function runLoad($tabSize = 'medium'  )
   {
 
     $user         = $this->getUser();
     $view         = $this->getView();
     $httpRequest  = $this->getRequest();
 
-    $tabId      = $httpRequest->param(  'target',Validator::CKEY  );
-    $size       = $httpRequest->data(  'size',Validator::CNAME  );
-    
-    $chartType  = $httpRequest->data(  'graph',Validator::CNAME  );
-    $entityKey  = $httpRequest->data(  'entity',Validator::CNAME  );
-    $startDate  = $httpRequest->data(  'start',Validator::DATE  );
-    
-    $width      = $httpRequest->param(  'width',Validator::INT  );
-    $height     = $httpRequest->param(  'height',Validator::INT  );
+    $tabId      = $httpRequest->param( 'target',Validator::CKEY  );
+    $size       = $httpRequest->data( 'size',Validator::CNAME  );
 
-    $json = $this->load( $entityKey, $startDate );
+    $chartType  = $httpRequest->data( 'graph',Validator::CNAME  );
+    $entityKey  = $httpRequest->data( 'entity',Validator::CNAME  );
+    $startDate  = $httpRequest->data( 'start',Validator::DATE  );
+
+    $width      = $httpRequest->param( 'width',Validator::INT  );
+    $height     = $httpRequest->param( 'height',Validator::INT  );
+
+    $json = $this->load($entityKey, $startDate);
 
 
-    if( !$width || !$height )
-    {
+    if (!$width || !$height) {
       $width  = $this->width;
       $height = $this->height;
     }
@@ -202,14 +199,14 @@ HTML;
    * @param string $entityKey
    * @param string $startDate
    */
-  public function load( $entityKey , $startDate )
+  public function load($entityKey , $startDate)
   {
 
     Debug::console("$entityKey , $startDate");
 
     $query  = new StatsEntity_Widget_Query();
     $this->query = $query;
-    $data   = $query->fetch( $entityKey, $startDate );
+    $data   = $query->fetch($entityKey, $startDate);
 
     //Message::addMessage('fkn test');
 
@@ -219,8 +216,7 @@ HTML;
     $labels[] = 'Entries Created';
     $labels[] = 'Entries Changed';
 
-    foreach( $data as $period => $row )
-    {
+    foreach ($data as $period => $row) {
       $key          = date('M',strtotime($period));
       $values[$key] = array
       (
@@ -231,8 +227,7 @@ HTML;
 
     $jsonData = array();
 
-    foreach( $values as $period => $entries )
-    {
+    foreach ($values as $period => $entries) {
       $tmp = '{"label": "'.$period.'",';
       $tmp .= '"values":['.implode(',',$entries).']}';
       $jsonData[] = $tmp;
@@ -241,12 +236,11 @@ HTML;
     $json = '{';
     $json .= '"label": ["'.implode('", "', $labels).'"],';
     $json .= '"values": [';
-    $json .= implode( ',', $jsonData );
+    $json .= implode(',', $jsonData);
     $json .= ']}';
 
     return $json;
 
   }//end public function load */
-
 
 }//end class ProjectChartBookings_Widget

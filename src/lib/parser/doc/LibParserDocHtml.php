@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,9 +22,9 @@
  */
 class LibParserDocHtml
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Output File Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /** The master template
    * @var string
@@ -76,15 +76,15 @@ class LibParserDocHtml
    */
   protected $compiled        = false;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // magic methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
    * @return
    */
-  public function __construct( )
+  public function __construct()
   {
 
      $this->var         = new TDataObject();
@@ -93,21 +93,17 @@ class LibParserDocHtml
 
      $wbf = Webfrap::getActive();
 
-     if( $theme = $wbf->getSysStatus('systemplate') )
-     {
+     if ($theme = $wbf->getSysStatus('systemplate')) {
        $this->theme = $theme;
-     }
-     else
-     {
+     } else {
        $this->theme  = 'default';
      }
 
-
    }// end public function __construct
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter und Setter
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
    /**
     * Name des zu verwendenten Templates festlegen
@@ -115,7 +111,7 @@ class LibParserDocHtml
     * @param string $template Name des Maintemplates
     * @return void
     */
-   public function setTheme( $template )
+   public function setTheme($template)
    {
 
      $this->theme = $template;
@@ -128,10 +124,10 @@ class LibParserDocHtml
     * @param string Index Name des Indextemplates
     * @return bool
     */
-   public function setIndex( $index = 'default' )
+   public function setIndex($index = 'default')
    {
-     if( Log::$levelDebug )
-      Log::start( __file__ , __line__ , __method__,array($index) );
+     if (Log::$levelDebug)
+      Log::start(__file__ , __line__ , __method__,array($index));
 
      $this->indexTemplate = $index;
 
@@ -140,10 +136,10 @@ class LibParserDocHtml
    /**
     *
     */
-   public function setTemplate( $template , $folder = null )
+   public function setTemplate($template , $folder = null)
    {
-     if( Log::$levelDebug )
-      Log::start( __file__ , __line__ , __method__,array($template , $folder) );
+     if (Log::$levelDebug)
+      Log::start(__file__ , __line__ , __method__,array($template , $folder));
 
      $sub = is_null($folder) ? '' : $folder.'/';
 
@@ -158,18 +154,15 @@ class LibParserDocHtml
    * @param string Data Die Daten für ein bestimmtes Feld
    * @return void
    */
-  public function addVar( $key, $data = null )
+  public function addVar($key, $data = null)
   {
-     if( Log::$levelDebug )
-      Log::start( __file__ , __line__ , __method__,array($key, $data) );
+     if (Log::$levelDebug)
+      Log::start(__file__ , __line__ , __method__,array($key, $data));
 
-    if( is_scalar($key) )
-    {
+    if (is_scalar($key)) {
       $this->var->content[$key] = $data;
-    }
-    elseif( is_array($key) )
-    {
-      $this->var->content = array_merge( $this->var->content, $key );
+    } elseif (is_array($key)) {
+      $this->var->content = array_merge($this->var->content, $key);
     }
 
   } // end of member function addVar
@@ -181,30 +174,25 @@ class LibParserDocHtml
    * @param string Data Die Daten für ein bestimmtes Feld
    * @return WgtItemAbstract
    */
-  public function addItem( $key, $type , $subtype = 'Item' )
+  public function addItem($key, $type , $subtype = 'Item')
   {
-    if( Log::$levelDebug )
-      Log::start( __file__ , __line__ , __method__,array($key, $type , $subtype) );
+    if (Log::$levelDebug)
+      Log::start(__file__ , __line__ , __method__,array($key, $type , $subtype));
 
-    if( isset($this->object->content[$key]) )
-    {
+    if (isset($this->object->content[$key])) {
       return $this->object->content[$key];
-    }
-    else
-    {
+    } else {
       $className = 'Wgt'.ucfirst($subtype).ucfirst($type);
 
-      if( !WebFrap::loadable($className) )
-      {
+      if (!WebFrap::loadable($className)) {
         throw new WgtItemNotFound_Exception
         (
         'Class '.$className.' was not found'
         );
-      }
-      else
-      {
+      } else {
         $object = new $className($key);
         $this->object->content[$key] = $object;
+
         return $object;
       }
     }
@@ -214,29 +202,25 @@ class LibParserDocHtml
   /**
    *
    */
-  public function setItem( $key, $type , $subtype = 'Item' )
+  public function setItem($key, $type , $subtype = 'Item')
   {
 
-    if( is_object($type) )
-    {
+    if (is_object($type)) {
       $this->object->content[$key] = $type;
+
       return true;
-    }
-    else
-    {
+    } else {
       $className = 'Wgt'.ucfirst($subtype).ucfirst($type);
 
-      if( !class_exists($className) )
-      {
+      if (!class_exists($className)) {
         throw new WgtItemNotFound_Exception
         (
         'Class '.$className.' was not found'
         );
-      }
-      else
-      {
+      } else {
         $object = new $className($key);
         $this->object->content[$key] = $object;
+
         return $object;
       }
     }
@@ -246,14 +230,12 @@ class LibParserDocHtml
   /**
    *
    */
-  public function includeBody( $template )
+  public function includeBody($template)
   {
-
 
     $filename = TEMPLATE_PATH.'modules/'.$template.'.tpl';
 
-    if( file_exists( $filename ) and is_readable($filename) )
-    {
+    if (file_exists($filename) and is_readable($filename)) {
       $TITLE     = $this->title;
       $VAR       = $this->var;
       $ITEM      = $this->objectHtml;
@@ -267,30 +249,25 @@ class LibParserDocHtml
       ob_end_clean();
 
       return $content;
-    }
-    else
-    {
+    } else {
       Error::report('failed to load the body');
 
       return '<p style="errorMessage">failed to load the body '.$filename.'</p>';
     }
-
 
   }// end public function includeTemplate
 
   /**
    *
    */
-  public function includeTemplate( $template, $folder = null )
+  public function includeTemplate($template, $folder = null)
   {
-
 
     $sub = is_null($folder) ? 'base/' : $folder.'/';
 
     $filename = TEMPLATE_PATH.'modules/'.$sub.$template.'.tpl';
 
-    if( file_exists( $filename ) and is_readable($filename) )
-    {
+    if (file_exists($filename) and is_readable($filename)) {
 
       $VAR       = $this->var;
       $ITEM      = $this->objectHtml;
@@ -303,12 +280,9 @@ class LibParserDocHtml
       ob_end_clean();
 
       return $content;
-    }
-    else
-    {
+    } else {
       return '<p style="errorMessage">The requested template does not exist.</p>';
     }
-
 
   }// end public function includeTemplate
 
@@ -318,11 +292,8 @@ class LibParserDocHtml
   public function buildObjects()
   {
 
-
-    foreach( $this->object->content as $key => $object )
-    {
-      if(is_object($object))
-      {
+    foreach ($this->object->content as $key => $object) {
+      if (is_object($object)) {
         $this->objectHtml->content[$key] = $object->toHtml();
       }
     }
@@ -347,15 +318,14 @@ class LibParserDocHtml
   /**
    * @return void
    */
-  public function build( )
+  public function build()
   {
 
     $filename = TEMPLATE_PATH.'index/'.$this->indexTemplate.'.tpl';
 
     $this->buildObjects();
 
-    if( file_exists( $filename ) )
-    {
+    if (file_exists($filename)) {
 
       $VAR       = $this->var;
       $ITEM      = $this->objectHtml;
@@ -368,12 +338,10 @@ class LibParserDocHtml
       $content = ob_get_contents();
       ob_end_clean();
 
-    }
-    else
-    {
+    } else {
       Error::report
       (
-        'Index Template not exists: '.$filename
+        'Index Template does not exist: '.$filename
       );
 
       $content = '<p style="errorMessage">Wrong Index Template</p>';
@@ -384,7 +352,6 @@ class LibParserDocHtml
     return  $this->assembledBody;
 
   }//end public function build
-
 
 } // end class LibParserDocHtml
 

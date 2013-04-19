@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage Mvc
  */
-abstract class MvcModule
-  extends BaseChild
+abstract class MvcModule extends BaseChild
 {
 
   /**
@@ -52,33 +51,30 @@ abstract class MvcModule
    */
   protected $modName                = null;
 
-
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Magic Functions
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * default constructor
    * @param Base $env
    */
-  public function __construct( $env = null )
+  public function __construct($env = null)
   {
-    
-    if( !$env )
-    {
+
+    if (!$env) {
       $env = Webfrap::getActive();
     }
-    
+
     $this->env = $env;
 
-    $this->modName =  substr( get_class($this), 0 , -7 );
+    $this->modName =  substr(get_class($this), 0 , -7);
 
   } // end public function __construct  */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Logic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @return Controller
@@ -102,10 +98,10 @@ abstract class MvcModule
    *
    * @return void
    */
-  public function init( $data = array() )
+  public function init($data = array())
   {
 
-    foreach( $data as $name => $value )
+    foreach ($data as $name => $value)
       $this->$name = $value;
 
     // Main fungiert hier gleichzeitig noch als pseudo Wakeup Funktion
@@ -117,18 +113,17 @@ abstract class MvcModule
 
     self::$instance = $this;
 
-    try
-    {
-      $this->setController( );
+    try {
+      $this->setController();
+
       return true;
-    }
-    catch( Security_Exception $exc )
-    {
+    } catch (Security_Exception $exc) {
       $this->modulErrorPage
       (
         $exc->getMessage(),
         $exc->getMessage()
       );
+
       return false;
     }
 
@@ -139,19 +134,19 @@ abstract class MvcModule
    *
    * @return void
    */
-  protected function setController( $name = null )
+  protected function setController($name = null)
   {
 
     $request    = $this->getRequest();
     $response   = $this->getResponse();
 
-    if( !$name  )
-      $name = $request->param( 'mex', Validator::CNAME );
+    if (!$name  )
+      $name = $request->param('mex', Validator::CNAME);
 
-    if( DEBUG )
-      Debug::console( 'Controller name '.$name.' Modname ' .$this->modName );
+    if (DEBUG)
+      Debug::console('Controller name '.$name.' Modname ' .$this->modName);
 
-    if( !$name )
+    if (!$name)
       $name = $this->defaultControllerName;
 
     $classname    = $this->modName.ucfirst($name).WBF_CONTROLLER_PREFIX.'_Controller';
@@ -159,21 +154,16 @@ abstract class MvcModule
 
     ///TODO den default model kram muss ich hier mal kicken
     /// der ist nur noch wegen kompatibilitäts problemen drin
-    if( WebFrap::loadable( $classname ) )
-    {
-      $this->controller = new $classname( $this );
-      $this->controller->setDefaultModel( $this->modName.ucfirst($name) );
+    if (WebFrap::loadable($classname)) {
+      $this->controller = new $classname($this);
+      $this->controller->setDefaultModel($this->modName.ucfirst($name));
       $this->controllerName = $classname;
-    }
-    else  if( WebFrap::loadable($classnameOld) )
-    {
+    } else  if (WebFrap::loadable($classnameOld)) {
       $classname = $classnameOld;
-      $this->controller = new $classname( $this );
-      $this->controller->setDefaultModel( $this->modName.ucfirst($name) );
+      $this->controller = new $classname($this);
+      $this->controller->setDefaultModel($this->modName.ucfirst($name));
       $this->controllerName = $classname;
-    }
-    else
-    {
+    } else {
 
       // Create a Error Page
       $this->modulErrorPage
@@ -191,42 +181,38 @@ abstract class MvcModule
 
   } // end protected function setController  */
 
-
   /**
    * run the controller
    *
    * @return void
    */
-  protected function runController( )
+  protected function runController()
   {
 
     $request   = $this->getRequest();
     $response  = $this->getResponse();
 
-    try
-    {
+    try {
 
-      if( !$this->initModul( ) )
-        throw new Webfrap_Exception( 'Failed to initialize Modul' );
+      if (!$this->initModul())
+        throw new Webfrap_Exception('Failed to initialize Modul');
 
       // no controller? asume init allready reported an error
-      if( !$this->controller )
+      if (!$this->controller)
         return false;
 
       // Initialisieren der Extention
-      if( !$this->controller->initController( ) )
-        throw new Webfrap_Exception( 'Failed to initialize Controller' );
+      if (!$this->controller->initController())
+        throw new Webfrap_Exception('Failed to initialize Controller');
 
       // Run the mainpart
-      $this->controller->run( $request->param( 'do', Validator::CNAME ) );
+      $this->controller->run($request->param('do', Validator::CNAME));
 
       // shout down the extension
-      $this->controller->shutdownController( );
-      $this->shutdownModul( );
+      $this->controller->shutdownController();
+      $this->shutdownModul();
 
-    }
-    catch( Exception $exc )
-    {
+    } catch (Exception $exc) {
 
       Error::report
       (
@@ -234,15 +220,14 @@ abstract class MvcModule
         (
           'Module Error: '.$exc->getMessage(),
           'wbf.message' ,
-          array( $exc->getMessage() )
+          array($exc->getMessage())
         ),
         $exc
       );
 
       $type = get_class($exc);
 
-      if( Log::$levelDebug )
-      {
+      if (Log::$levelDebug) {
         // Create a Error Page
         $this->modulErrorPage
         (
@@ -250,40 +235,33 @@ abstract class MvcModule
           '<pre>'.Debug::dumpToString($exc).'</pre>'
         );
 
-      }
-      else
-      {
-        switch($type)
-        {
+      } else {
+        switch ($type) {
           case 'Security_Exception':
           {
             $this->modulErrorPage
             (
-              $response->i18n->l( 'Access Denied', 'wbf.message'  ),
-              $response->i18n->l(  'Access Denied', 'wbf.message'  )
+              $response->i18n->l('Access Denied', 'wbf.message'  ),
+              $response->i18n->l( 'Access Denied', 'wbf.message'  )
             );
             break;
           }
           default:
           {
 
-            if( Log::$levelDebug )
-            {
+            if (Log::$levelDebug) {
               $this->modulErrorPage
               (
                 'Exception '.$type.' not catched ',
                 Debug::dumpToString($exc)
               );
-            }
-            else
-            {
+            } else {
               $this->modulErrorPage
               (
-                $response->i18n->l(  'Sorry Internal Error', 'wbf.message'  ),
-                $response->i18n->l(  'Sorry Internal Error', 'wbf.message'  )
+                $response->i18n->l( 'Sorry Internal Error', 'wbf.message'  ),
+                $response->i18n->l( 'Sorry Internal Error', 'wbf.message'  )
               );
             }
-
 
             break;
           }//end efault:
@@ -292,7 +270,7 @@ abstract class MvcModule
 
       }//end else
 
-    }//end catch( Exception $exc )
+    }//end catch(Exception $exc)
 
   } // end protected function runController */
 
@@ -313,21 +291,19 @@ abstract class MvcModule
 
   }//end protected function shutdownModul */
 
-
   /**
    * @param string $errorTitle
    * @param string $errorMessage
    */
-  protected function modulErrorPage( $errorTitle , $errorMessage )
+  protected function modulErrorPage($errorTitle , $errorMessage)
   {
 
     $response = $this->getResponse();
     $view     = $this->getView();
 
+    $response->addError($errorTitle);
 
-    $response->addError( $errorTitle );
-
-    $view->setTemplate( 'error/message' );
+    $view->setTemplate('error/message');
     $view->addVar
     (
       array

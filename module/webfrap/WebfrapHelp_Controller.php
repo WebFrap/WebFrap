@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -22,12 +21,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapHelp_Controller
-  extends Controller
+class WebfrapHelp_Controller extends Controller
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * list with all callable methodes in this subcontroller
@@ -46,29 +44,26 @@ class WebfrapHelp_Controller
    */
   protected $defaultAction = 'start';
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @return void
    */
-  public function start( )
+  public function start()
   {
 
-    if(!$this->view->isType( View::WINDOW ))
-    {
+    if (!$this->view->isType(View::WINDOW)) {
       $this->errorPage('Invalid Request');
     }
 
     $view = $this->view->newWindow('WbfSysHelp', 'Default');
     $view->setTitle('Help System');
 
-    $view->setTemplate( 'base/help/start' );
+    $view->setTemplate('base/help/start');
 
   }//end public function start */
-
-
 
 }//end class ControllerWebfrapHelp
 

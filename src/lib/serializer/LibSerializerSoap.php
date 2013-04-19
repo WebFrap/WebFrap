@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -18,15 +18,14 @@
 /**
  * serializer to xml
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage core/serializer
  */
-class LibSerializerSoap
-  extends LibSerializerAbstract
+class LibSerializerSoap extends LibSerializerAbstract
 {
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * instance of the serializer
@@ -41,10 +40,9 @@ class LibSerializerSoap
    */
   protected $data      = array();
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Singleton
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @return ObjSerializerXml
@@ -56,17 +54,13 @@ class LibSerializerSoap
 /* (non-PHPdoc)
  * @see LibSerializerAbstract::serialize()
  */
-  public function serialize( $data = null )
+  public function serialize($data = null)
   {
 
     // TODO Auto-generated method stub
-    
+
   }
 //end public static function getInstance()
 
-
-
-
 } // end class ObjSerializerSoap
-
 

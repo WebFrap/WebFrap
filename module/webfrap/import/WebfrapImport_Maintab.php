@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,35 +21,34 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapImport_Maintab
-  extends WgtMaintab
+class WebfrapImport_Maintab extends WgtMaintab
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param string $menuName
    * @return void
    */
-  public function displayMenu( $menuName, $params )
+  public function displayMenu($menuName, $params)
   {
 
     $this->setLabel('Import');
     $this->setTitle('Import');
 
-    $this->setTemplate( 'webfrap/navigation/maintab/modmenu' );
+    $this->setTemplate('webfrap/navigation/maintab/modmenu');
 
-    $modMenu = $this->newItem( 'modMenu', 'MenuFolder' );
+    $modMenu = $this->newItem('modMenu', 'MenuFolder');
     $modMenu->setData
     (
-      DaoFoldermenu::get( 'webfrap/import/'.$menuName, true ),
+      DaoFoldermenu::get('webfrap/import/'.$menuName, true),
       'maintab.php'
     );
 
     $params = new TArray();
-    $this->addMenuMenu( $modMenu, $params );
-    
+    $this->addMenuMenu($modMenu, $params);
+
   }//end public function displayMenu */
 
   /**
@@ -61,7 +60,7 @@ class WebfrapImport_Maintab
    *   string formId: the id of the form;
    * }
    */
-  public function addMenuMenu( $modMenu, $params )
+  public function addMenuMenu($modMenu, $params)
   {
 
     $menu     = $this->newMenu
@@ -71,7 +70,7 @@ class WebfrapImport_Maintab
     );
     $menu->id = $this->id.'_dropmenu';
     $menu->crumbs = $modMenu->buildCrumbs();
-    $menu->buildMenu( $params );
+    $menu->buildMenu($params);
 
   }//end public function addMenuMenu */
 

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,10 +21,9 @@
  * @subpackage tech_core
  *
  */
-class LibProtocolReport
-  extends LibProtocolFile
+class LibProtocolReport extends LibProtocolFile
 {
-  
+
   protected $numCols = null;
 
   /**
@@ -32,7 +31,7 @@ class LibProtocolReport
    */
   public function open()
   {
-    
+
     $html = <<<HTML
 <html>
   <head>
@@ -42,16 +41,16 @@ class LibProtocolReport
     <table>
 HTML;
 
-    $this->write( $html );
-    
+    $this->write($html);
+
   }//end public function open */
-  
+
   /**
    * @return string
    */
   public function close()
   {
-    
+
     $html = <<<HTML
       </tbody>
     </table>
@@ -59,20 +58,20 @@ HTML;
 </html>
 HTML;
 
-    $this->write( $html );
-    
+    $this->write($html);
+
   }//end public function close */
-  
+
   /**
    * @param array $cols
    */
-  public function head( array $cols )
+  public function head(array $cols)
   {
-    
-    $this->numCols = count( $cols );
-    
-    $cHtml = "          <th>".implode( "</th>".NL."          <th>", $cols )."</th>";
-    
+
+    $this->numCols = count($cols);
+
+    $cHtml = "          <th>".implode("</th>".NL."          <th>", $cols)."</th>";
+
     $html = <<<HTML
       <thead>
         <tr>
@@ -82,14 +81,14 @@ HTML;
       <tbody>
 HTML;
 
-    $this->write( $html );
-    
+    $this->write($html);
+
   }//end public function head */
-  
+
   /**
    * @param string $title
    */
-  public function paragraph( $title )
+  public function paragraph($title)
   {
 
     $html = <<<HTML
@@ -102,18 +101,18 @@ HTML;
       <tbody>
 HTML;
 
-    $this->write( $html );
-    
+    $this->write($html);
+
   }//end public function paragraph */
-  
+
   /**
    * @param array $cols
    */
-  public function entry( array $cols )
+  public function entry(array $cols)
   {
-    
-    $cHtml = "          <td>".implode( "</td>".NL."          <td>", $cols )."</td>";
-    
+
+    $cHtml = "          <td>".implode("</td>".NL."          <td>", $cols)."</td>";
+
     $html = <<<HTML
       <tr>
 {$cHtml}
@@ -121,10 +120,9 @@ HTML;
 
 HTML;
 
-    $this->write( $html );
-    
-  }//end public function entry */
+    $this->write($html);
 
+  }//end public function entry */
 
 } // end LibProtocolReport
 

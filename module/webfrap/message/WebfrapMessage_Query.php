@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Exception to throw if you want to throw an unspecific Exception inside the
@@ -25,12 +24,11 @@
  * @package WebFrap
  * @subpackage Example
  */
-class WebfrapMessage_Query
-  extends LibSqlQuery
+class WebfrapMessage_Query extends LibSqlQuery
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
 
   /**
@@ -40,7 +38,7 @@ class WebfrapMessage_Query
    *
    * @throws LibDb_Exception
    */
-  public function fetchAutocomplete( $key )
+  public function fetchAutocomplete($key)
   {
 
     $this->sourceSize  = null;
@@ -50,20 +48,20 @@ class WebfrapMessage_Query
   SELECT
     wbfsys_role_user_rowid as id,
     wbfsys_role_user_name || ' <' || core_person_lastname || ', ' || core_person_firstname || '>'  as value
-    
+
   FROM
     view_person_role
 
   WHERE
-    UPPER(wbfsys_role_user_name) like UPPER('{$db->addSlashes( $key )}%')
-    	OR UPPER(core_person_lastname) like UPPER('{$db->addSlashes( $key )}%')
-    	OR UPPER(core_person_lastname) like UPPER('{$db->addSlashes( $key )}%')
-    	
+    UPPER(wbfsys_role_user_name) like UPPER('{$db->addSlashes($key)}%')
+      OR UPPER(core_person_lastname) like UPPER('{$db->addSlashes($key)}%')
+      OR UPPER(core_person_lastname) like UPPER('{$db->addSlashes($key)}%')
+
   LIMIT 10
 
 SQL;
 
-    $this->result = $db->select( $sql );
+    $this->result = $db->select($sql);
 
   }//end public function WebfrapMessage_Query */
 

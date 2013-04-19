@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,9 +21,9 @@
  */
 abstract class LibImageThumbAdapter
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var array
@@ -51,49 +51,44 @@ abstract class LibImageThumbAdapter
    */
   public $maxWidth   = 100;
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Magic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Enter description here...
    *
    */
-  public function __construct( $origName = null, $thumbName  = null, $maxWidth = null, $maxHeight = null)
+  public function __construct($origName = null, $thumbName  = null, $maxWidth = null, $maxHeight = null)
   {
 
-    if( $origName )
-    {
+    if ($origName) {
       $this->origName = $origName;
     }
 
-    if( $thumbName )
-    {
+    if ($thumbName) {
       $this->thumbName = $thumbName;
     }
 
-    if( $maxWidth )
-    {
+    if ($maxWidth) {
       $this->maxWidth = $maxWidth;
     }
 
-    if( $maxHeight )
-    {
+    if ($maxHeight) {
       $this->maxHeight = $maxHeight;
     }
 
   }//end public function __construct
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Enter description here...
    *
    */
-  public function setOrigname( $origName )
+  public function setOrigname($origName)
   {
     $this->origName = $origName;
 
@@ -103,7 +98,7 @@ abstract class LibImageThumbAdapter
    * Enter description here...
    *
    */
-  public function setThumbName( $thumbName )
+  public function setThumbName($thumbName)
   {
     $this->thumbName = $thumbName;
 
@@ -113,7 +108,7 @@ abstract class LibImageThumbAdapter
    * Enter description here...
    *
    */
-  public function setMaxHeight( $maxHeight )
+  public function setMaxHeight($maxHeight)
   {
     $this->maxHeight = $maxHeight;
 
@@ -123,23 +118,21 @@ abstract class LibImageThumbAdapter
    * Enter description here...
    *
    */
-  public function setMaxWidth( $maxWidth )
+  public function setMaxWidth($maxWidth)
   {
     $this->maxWidth = $maxWidth;
 
   }//end public function setMaxWidth
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Logic
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Enter description here...
    *
    */
-  public abstract function genThumb( );
+  abstract public function genThumb();
 
 }// end abstract class LibImageThumbAdapter
 
-?>

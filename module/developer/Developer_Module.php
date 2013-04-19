@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -20,40 +20,38 @@
  * @package WebFrap
  * @subpackage ModuleDeveloper
  */
-class Developer_Module
-  extends Module
+class Developer_Module extends Module
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var string the default Extention to load
    */
   protected $defaultControllerName = 'Base';
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
     /**
    * Main function
    *
    * @return void
    */
-  public function main( )
+  public function main()
   {
 
     $view = View::getActive();
     $view->setTitle('WebFrap Developer');
 
-    if( $view->isType( View::HTML ) )
-    {
-      $menu = $view->newItem ( 'mainMenu' ,'MenuSimplebar'  );
-      $menu->setData( DaoMenu::get('gateway/navigation') );
+    if ($view->isType(View::HTML)) {
+      $menu = $view->newItem ('mainMenu' ,'MenuSimplebar'  );
+      $menu->setData(DaoMenu::get('gateway/navigation'));
     }
 
-    $this->runController( );
+    $this->runController();
 
   }//end public function main */
 

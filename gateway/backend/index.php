@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 // dirty hack
 header("HTTP/1.0 200 OK");
@@ -31,7 +29,7 @@ $index = array
   'webservice' => 'webservice',
 );
 
-if( isset($index[$indexFile]) )
+if (isset($index[$indexFile]))
   include $index[$indexFile].'.php';
 else
   include 'html.php';

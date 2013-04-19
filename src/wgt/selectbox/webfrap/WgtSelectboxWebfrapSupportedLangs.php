@@ -8,20 +8,18 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtSelectboxWebfrapSupportedLangs
-  extends WgtSelectboxHardcoded
+class WgtSelectboxWebfrapSupportedLangs extends WgtSelectboxHardcoded
 {
 
   /**
@@ -38,11 +36,9 @@ class WgtSelectboxWebfrapSupportedLangs
    */
   protected $data = array
   (
-  'de'       =>  array( 'value' => 'Deutsch'   ),
-  'en'       =>  array( 'value' => 'English'   ),
+  'de'       =>  array('value' => 'Deutsch'   ),
+  'en'       =>  array('value' => 'English'   ),
   );
 
-
 } // end class WgtSelectboxWebfrapSupportedLangs
-
 

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,12 +26,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Qfdu_Multi_Model
-  extends Model
+class AclMgmt_Qfdu_Multi_Model extends Model
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // getter & setter methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * multi save action, with this action you can save multiple entries
@@ -41,7 +40,7 @@ class AclMgmt_Qfdu_Multi_Model
    * @param TFlag $params named parameters
    * @return void
    */
-  public function update( $params   )
+  public function update($params   )
   {
 
     $orm  = $this->getOrm();
@@ -49,17 +48,15 @@ class AclMgmt_Qfdu_Multi_Model
     $view = $this->getView();
     $response = $this->getResponse();
 
-    try
-    {
+    try {
       // start a transaction in the database
       $db->begin();
 
       // for insert there has to be a list of values that have to be saved
-      $listWbfsysGroupUsers = $this->getRegisterd( 'listWbfsysGroupUsers' );
+      $listWbfsysGroupUsers = $this->getRegisterd('listWbfsysGroupUsers');
 
-      if( is_null( $listWbfsysGroupUsers ) )
-      {
-        throw new Model_Exception
+      if (is_null($listWbfsysGroupUsers)) {
+        throw new WebfrapSys_Exception
         (
           'Internal Error',
           'listWbfsysGroupUsers was not registered'
@@ -68,10 +65,8 @@ class AclMgmt_Qfdu_Multi_Model
 
       $entityTexts = array();
 
-      foreach( $listWbfsysGroupUsers as $entityWbfsysGroupUsers )
-      {
-        if(!$orm->update( $entityWbfsysGroupUsers) )
-        {
+      foreach ($listWbfsysGroupUsers as $entityWbfsysGroupUsers) {
+        if (!$orm->update($entityWbfsysGroupUsers)) {
           $entityText = $entityWbfsysGroupUsers->text();
           $response->addError
           (
@@ -79,15 +74,12 @@ class AclMgmt_Qfdu_Multi_Model
             (
               'Failed to save Area: '.$entityText,
               'enterprise.employee.message',
-              array( $entityText )
+              array($entityText)
             )
           );
-        }
-        else
-        {
+        } else {
           $text = $entityWbfsysGroupUsers->text();
-          if( trim($text) == '' )
-          {
+          if (trim($text) == '') {
             $text = 'Assignment: '.$entityWbfsysGroupUsers->getid();
           }
 
@@ -95,29 +87,25 @@ class AclMgmt_Qfdu_Multi_Model
         }
       }
 
-      $textSaved = implode( $entityTexts,', ' );
+      $textSaved = implode($entityTexts,', ');
       $this->getResponse()->addMessage
       (
         $view->i18n->l
         (
           'Successfully saved: '.$textSaved,
           'enterprise.employee.message',
-          array( $textSaved )
+          array($textSaved)
         )
       );
 
       // everything ok
       $db->commit();
 
-    }
-    catch( LibDb_Exception $e )
-    {
-      $response->addError( $e->getMessage() );
+    } catch (LibDb_Exception $e) {
+      $response->addError($e->getMessage());
       $db->rollback();
-    }
-    catch( Model_Exception $e )
-    {
-      $response->addError( $e->getMessage() );
+    } catch (WebfrapSys_Exception $e) {
+      $response->addError($e->getMessage());
     }
 
     // check if there were any errors, if not fine
@@ -130,29 +118,27 @@ class AclMgmt_Qfdu_Multi_Model
    * @param TFlag $params named parameters
    * @return boolean
    */
-  public function fetchUpdateData( $params  )
+  public function fetchUpdateData($params  )
   {
 
     $httpRequest = $this->getRequest();
     $orm         = $this->getOrm();
 
-    try
-    {
+    try {
 
       // if the validation fails report
       $listWbfsysGroupUsers = $httpRequest->validateMultiUpdate
       (
         'WbfsysGroupUsers',
         'group_users',
-        array( 'date_start', 'date_end' )
+        array('date_start', 'date_end')
       );
 
-      $this->register( 'listWbfsysGroupUsers', $listWbfsysGroupUsers );
+      $this->register('listWbfsysGroupUsers', $listWbfsysGroupUsers);
+
       return true;
 
-    }
-    catch( InvalidInput_Exception $e )
-    {
+    } catch (InvalidInput_Exception $e) {
       return false;
     }
 

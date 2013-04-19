@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,36 +21,31 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapEditor_Workspace_Maintab_View
-  extends WgtMaintab
+class WebfrapEditor_Workspace_Maintab_View extends WgtMaintabCustom
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
-  
   /**
    * @param string $nodeKey
    * @param int $containerId
    * @return void
    */
-  public function displayWorkspace(   )
+  public function displayWorkspace(  )
   {
-    
+
     /* @var $model WebfrapKnowhowNode_Model */
     $model = $this->model;
 
-    $this->setLabel( "Wbf Workspace" );
-    $this->setTitle( "Wbf Workspace" );
+    $this->setLabel("Wbf Workspace");
+    $this->setTitle("Wbf Workspace");
 
+    $this->setTemplate('webfrap/editor/maintab/workspace_tree');
 
-    $this->setTemplate( 'webfrap/editor/maintab/workspace_tree' );
-    
- 
-    $this->addMenu(  );
+    $this->addMenu();
 
   }//end public function displayForm */
-
 
   /**
    * add a drop menu to the create window
@@ -61,37 +56,35 @@ class WebfrapEditor_Workspace_Maintab_View
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu(  )
+  public function addMenu()
   {
 
-    $iconMenu          = $this->icon( 'control/menu.png'     ,'Menu'   );
-    $iconClose         = $this->icon( 'control/close.png'    ,'Close'   );
-    $iconSearch        = $this->icon( 'control/search.png'   ,'Search'  );
-    $iconBookmark      = $this->icon( 'control/bookmark.png' ,'Bookmark');
-    $iconSave          = $this->icon( 'control/save.png' ,'Save' );
-    $iconRefresh       = $this->icon( 'control/refresh.png' ,'Refresh' );
-    
-    $iconSupport   = $this->icon( 'control/support.png'  ,'Support' );
-    $iconBug       = $this->icon( 'control/bug.png'      ,'Bug' );
-    $iconFaq       = $this->icon( 'control/faq.png'      ,'Faq' );
-    $iconHelp      = $this->icon( 'control/help.png'     ,'Help' );
-    
- 
-    $menu     = $this->newMenu( $this->id.'_dropmenu' );
-    
+    $iconMenu          = '<i class="icon-reorder" ></i>';
+    $iconClose         = $this->icon('control/close.png'    ,'Close'   );
+    $iconSearch        = $this->icon('control/search.png'   ,'Search'  );
+    $iconBookmark      = $this->icon('control/bookmark.png' ,'Bookmark');
+    $iconSave          = $this->icon('control/save.png' ,'Save');
+    $iconRefresh       = $this->icon('control/refresh.png' ,'Refresh');
+
+    $iconSupport   = $this->icon('control/support.png'  ,'Support');
+    $iconBug       = $this->icon('control/bug.png'      ,'Bug');
+    $iconFaq       = $this->icon('control/faq.png'      ,'Faq');
+    $iconHelp      = $this->icon('control/help.png'     ,'Help');
+
+    $menu     = $this->newMenu($this->id.'_dropmenu');
+
     $menu->id = $this->id.'_dropmenu';
 
-
     $menu->content = <<<HTML
-    
+
 <div class="inline" >
-  <button 
+  <button
     class="wcm wcm_control_dropmenu wgt-button"
-    id="{$this->id}-control" 
+    id="{$this->id}-control"
     wgt_drop_box="{$this->id}_dropmenu"  >{$iconMenu} {$this->i18n->l('Menu','wbf.label')}</button>
   <var id="{$this->id}-control-cfg-dropmenu"  >{"triggerEvent":"mouseover","closeOnLeave":"true","align":"right"}</var>
 </div>
-    
+
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
   <ul>
     <li>
@@ -120,11 +113,9 @@ class WebfrapEditor_Workspace_Maintab_View
 
 HTML;
 
-
-    $this->injectActions( $menu );
+    $this->injectActions($menu);
 
   }//end public function addMenu */
-  
 
   /**
    * just add the code for the edit ui controls
@@ -139,7 +130,7 @@ HTML;
    *     services
    * }
    */
-  public function injectActions( $menu )
+  public function injectActions($menu)
   {
 
     // add the button action for save in the window
@@ -149,22 +140,19 @@ HTML;
 
     $code = <<<BUTTONJS
 
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       self.close();
     });
-    
-    self.getObject().find(".wgtac_refresh").click(function(){
-    	self.close();
+
+    self.getObject().find(".wgtac_refresh").click(function() {
+      self.close();
       \$R.get('maintab.php?c=Webfrap.Editor.workspace');
     });
 
 
 BUTTONJS;
 
-
-
-
-    $this->addJsCode( $code );
+    $this->addJsCode($code);
 
   }//end public function injectActions */
 

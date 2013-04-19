@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  *
@@ -23,8 +22,7 @@
  * @subpackage tech_core
  *
  */
-class TFlagForm
-  extends TFlag
+class TFlagForm extends TFlag
 {
 
   public $publish       = null;
@@ -53,7 +51,6 @@ class TFlagForm
   public $aclLevel      = null;
 
   public $aclNode       = null;
-
 
 } // end class TFlagForm
 

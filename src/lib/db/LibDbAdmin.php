@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,9 +21,9 @@
  */
 class LibDbAdmin
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
   * @var string
@@ -64,10 +64,10 @@ class LibDbAdmin
   * @var string
   */
   const INDEX_TYPE      = 'index';
-  
-////////////////////////////////////////////////////////////////////////////////
+
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var LibDbConnection
@@ -153,13 +153,13 @@ class LibDbAdmin
   /**
    * @var array<string:string>
    */
-  public  $quotesMap = array();
+  public $quotesMap = array();
 
   /**
    *
    * @var array<string:string>
   */
-  public  $typeValidMap  = array
+  public $typeValidMap  = array
   (
     'boolean'   => 'boolean'  ,
     'bytea'     => 'bytea'  ,
@@ -178,31 +178,27 @@ class LibDbAdmin
     'uuid'      => 'uuid'     ,
   );
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param string $type
    * @return LibDbAdmin
    */
-  public static function getInstance( $type = null )
+  public static function getInstance($type = null)
   {
 
-    if( !$type )
-    {
-      if(!isset(self::$metaPool['parent']))
+    if (!$type) {
+      if (!isset(self::$metaPool['parent']))
         self::$metaPool['parent'] = new LibDbAdmin();
 
       return self::$metaPool['parent'];
-    }
-    else
-    {
+    } else {
 
       $type = ucfirst($type);
 
-      if(!isset(self::$metaPool[$type]))
-      {
+      if (!isset(self::$metaPool[$type])) {
         $className = 'LibDbAdmin'.$type;
         self::$metaPool[$type] = new $className();
       }
@@ -215,11 +211,10 @@ class LibDbAdmin
   /**
    * @param LibDbConnection $db
    */
-  public function __construct( $db = null )
+  public function __construct($db = null)
   {
 
-    if( $db )
-    {
+    if ($db) {
       $this->db           = $db;
 
       $this->dbName       = $db->getDatabaseName();
@@ -228,15 +223,15 @@ class LibDbAdmin
 
   }//end public function __construct */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter && Setter
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param string $dbName
    * @return void
    */
-  public function setDbName( $dbName )
+  public function setDbName($dbName)
   {
     $this->dbName = $dbName;
   }//end public function setDbName */
@@ -245,25 +240,25 @@ class LibDbAdmin
    * @param string $schemaName
    * @return void
    */
-  public function setSchemaName( $schemaName )
+  public function setSchemaName($schemaName)
   {
 
     $this->schemaName = $schemaName;
-    
+
   }//end public function setSchemaName */
 
   /**
    * @param string $schemaName
    * @return void
    */
-  public function setSearchpath( $schemaName )
+  public function setSearchpath($schemaName)
   {
 
-    if( $this->createPatch )
+    if ($this->createPatch)
       $this->sqlPatch .= 'SET search_path = "'.$schemaName.'", pg_catalog; '.NL;
 
-    if( $this->syncDb  )
-      $this->db->setSearchPath( $schemaName );
+    if ($this->syncDb  )
+      $this->db->setSearchPath($schemaName);
 
     $this->schemaName = $schemaName;
 
@@ -273,7 +268,7 @@ class LibDbAdmin
    * @param string $tableName
    * @return void
    */
-  public function setTableName( $tableName )
+  public function setTableName($tableName)
   {
     $this->tableName = $tableName;
   }//end public function setTableName */
@@ -282,7 +277,7 @@ class LibDbAdmin
    * @param string $owner
    * @return void
    */
-  public function setOwner( $owner )
+  public function setOwner($owner)
   {
     $this->owner = $owner;
   }//end public function setOwner */
@@ -290,7 +285,7 @@ class LibDbAdmin
   /**
    * @param boolean $sync
    */
-  public function setSyncFlag( $sync = true )
+  public function setSyncFlag($sync = true)
   {
     $this->syncDb = $sync;
   }//end public function setSyncFlag */
@@ -299,7 +294,7 @@ class LibDbAdmin
    * @param boolean $patch
    * @return void
    */
-  public function setPatchFlag( $patch = true )
+  public function setPatchFlag($patch = true)
   {
     $this->createPatch = $patch;
   }//end public function setPatchFlag */
@@ -317,38 +312,35 @@ class LibDbAdmin
    *
    * @param string $flag
    */
-  public function setMultiSeq( $flag = true )
+  public function setMultiSeq($flag = true)
   {
-    
+
     $this->muliSeq = $flag;
-    
+
   }//end public function setMultiSeq */
 
   /**
    * @return array
    */
-  public function getMultiple( )
+  public function getMultiple()
   {
-    
     return $this->multiple;
-    
+
   }//end public function getMultiple */
 
   /**
    * @return array
    */
-  public function getQuotesMap( )
+  public function getQuotesMap()
   {
-    
     return $this->quotesMap;
-    
-  }//end public function getQuotesMap */
 
+  }//end public function getQuotesMap */
 
   /**
    * @return array
    */
-  public function getNameMapping( )
+  public function getNameMapping()
   {
     return $this->nameMapping;
   }//end public function getNameMapping */
@@ -356,7 +348,7 @@ class LibDbAdmin
   /**
    * @return array
    */
-  public function getTypeVaild( )
+  public function getTypeVaild()
   {
     return $this->typeVaild;
   }//end public function getTypeVaild */

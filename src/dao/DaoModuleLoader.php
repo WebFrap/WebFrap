@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Data Access Object zum laden der Daten aus einer Conf Map
@@ -22,8 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class DaoModuleLoader
-  extends Dao
+class DaoModuleLoader extends Dao
 {
 
   /**
@@ -35,13 +33,13 @@ class DaoModuleLoader
    * @param string $mapName
    * @return []
    */
-  public static function getModList( $mapName, $modName )
+  public static function getModList($mapName, $modName)
   {
 
-    if( isset(self::$pool[$mapName.'/'.$modName]) )
+    if (isset(self::$pool[$mapName.'/'.$modName]))
       return self::$pool[$mapName.'/'.$modName];
     else
-      return DaoModuleLoader::load( $mapName, $modName);
+      return DaoModuleLoader::load($mapName, $modName);
 
   }//end public static function getModList
 
@@ -49,13 +47,13 @@ class DaoModuleLoader
    * @param string $mapName
    * @return []
    */
-  public static function get( $mapName, $modName )
+  public static function get($mapName, $modName)
   {
 
-    if( isset(self::$pool[$mapName.'/'.$modName]) )
+    if (isset(self::$pool[$mapName.'/'.$modName]))
       return self::$pool[$mapName.'/'.$modName];
     else
-      return DaoModuleLoader::load( $mapName, $modName );
+      return DaoModuleLoader::load($mapName, $modName);
 
   }//end public static function get
 
@@ -64,24 +62,21 @@ class DaoModuleLoader
    * @param string $modName
    * @return array
    */
-  public static function load( $mapName, $modName )
+  public static function load($mapName, $modName)
   {
-    
+
     $subModules  = array();
     $modules     = array();
 
     ///TODO find a solution how to add a hirachie
-    if( is_dir( PATH_GW.'conf/include/'.$mapName )  )
-    {
-      $dModules = opendir( PATH_GW.'conf/include/'.$mapName );
+    if (is_dir(PATH_GW.'conf/include/'.$mapName)  ) {
+      $dModules = opendir(PATH_GW.'conf/include/'.$mapName);
 
-      if( $dModules )
-      {
-         while( $mod = readdir($dModules) )
-         {
-            if( $mod[0] == '.' )
+      if ($dModules) {
+         while ($mod = readdir($dModules)) {
+            if ($mod[0] == '.')
               continue;
-              
+
             $subModules[] =  $mod;
          }
 
@@ -89,39 +84,34 @@ class DaoModuleLoader
          closedir($dModules);
       }
     }
-    
-    foreach( $subModules as $subMod )
-    {
-      if( is_dir( PATH_ROOT.$subMod.'/conf/include/'.$modName ) )
-      {
-        $dModules = opendir( PATH_ROOT.$subMod.'/conf/include/'.$modName  );
-        
-        Debug::console( 'MOD '.PATH_ROOT.$subMod.'/conf/include/'.$modName );
 
-        if( $dModules )
-        {
-           while( $mod = readdir($dModules) )
-           {
-              if( $mod[0] == '.' )
+    foreach ($subModules as $subMod) {
+      if (is_dir(PATH_ROOT.$subMod.'/conf/include/'.$modName)) {
+        $dModules = opendir(PATH_ROOT.$subMod.'/conf/include/'.$modName  );
+
+        Debug::console('MOD '.PATH_ROOT.$subMod.'/conf/include/'.$modName);
+
+        if ($dModules) {
+           while ($mod = readdir($dModules)) {
+              if ($mod[0] == '.')
                 continue;
-                
-              Debug::console( 'MOD '.$mod );
-       
+
+              Debug::console('MOD '.$mod);
+
               $modules[] =  $mod;
            }
-  
+
            // close the directory
            closedir($dModules);
         }
       }
     }
-    
+
     self::$pool[$mapName.'/'.$modName] = $modules;
-    
+
     return $modules;
 
   }//end public static function load */
-
 
 }//end class DaoModuleLoader
 

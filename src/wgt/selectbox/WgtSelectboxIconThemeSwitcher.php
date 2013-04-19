@@ -8,24 +8,22 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtSelectboxIconThemeSwitcher
-  extends WgtSelectboxHardcoded
+class WgtSelectboxIconThemeSwitcher extends WgtSelectboxHardcoded
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    */
@@ -34,13 +32,12 @@ class WgtSelectboxIconThemeSwitcher
 
     $this->data = array
     (
-      'default' => array( 'value' => 'Default' )
+      'default' => array('value' => 'Default')
     );
 
     $this->activ = 'default';
 
   }//end public function load */
-
 
 } // end class WgtSelectboxIconThemeSwitcher
 

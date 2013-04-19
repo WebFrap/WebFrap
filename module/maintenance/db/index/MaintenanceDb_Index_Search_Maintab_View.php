@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -36,22 +36,21 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MaintenanceDb_Index_Search_Maintab_View
-  extends WgtMaintab
+class MaintenanceDb_Index_Search_Maintab_View extends WgtMaintabCustom
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
     /**
     * @var MaintenanceDb_Index
     */
     public $model = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
  /**
   * Methode zum befüllen des WbfsysMessage Create Forms
   * mit Inputelementen
@@ -61,7 +60,7 @@ class MaintenanceDb_Index_Search_Maintab_View
   * @param TFlag $params
   * @return Error im Fehlerfall sonst null
   */
-  public function displayForm( $params )
+  public function displayForm($params)
   {
 
     // laden der benötigten Resource Objekte
@@ -74,21 +73,19 @@ class MaintenanceDb_Index_Search_Maintab_View
     );
 
     // Setzen des Labels und des Titles, sowie diverser Steuerinformationen
-    $this->setTitle( $i18nLabel );
-    $this->setLabel( $i18nLabel  );
-
+    $this->setTitle($i18nLabel);
+    $this->setLabel($i18nLabel  );
 
     // set the form template
-    $this->setTemplate( 'maintenance/db_index/maintab/search_form' );
-    
+    $this->setTemplate('maintenance/db/index/maintab/search_form', true);
+
     // Setzen von Viewspezifischen Control Flags
     $params->viewType  = 'maintab';
     $params->viewId    = $this->getId();
 
-
     // Menü und Javascript Logik erstellen
-    $this->addMenu( $params );
-    $this->addActions( $params );
+    $this->addMenu($params);
+    $this->addActions($params);
 
     // kein fehler aufgetreten? bestens also geben wir auch keinen zurück
     return null;
@@ -104,21 +101,21 @@ class MaintenanceDb_Index_Search_Maintab_View
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $params )
+  public function addMenu($params)
   {
-  
+
     // benötigte resourcen laden
     $acl     = $this->getAcl();
     $view   = $this->getView();
 
-    $iconMenu      = $view->icon(  'control/menu.png',  'Menu');
-    $iconRebuild   = $view->icon(  'maintenance/rebuild_index.png', 'Rebuild Index');
-    $iconBookmark  = $view->icon(  'control/bookmark.png', 'Bookmark');
-    $iconClose     = $view->icon(  'control/close.png', 'Close');
+    $iconMenu      = $view->icon( 'control/menu.png',  'Menu');
+    $iconRebuild   = $view->icon( 'maintenance/rebuild_index.png', 'Rebuild Index');
+    $iconBookmark  = $view->icon( 'control/bookmark.png', 'Bookmark');
+    $iconClose     = $view->icon( 'control/close.png', 'Close');
     $iconSearch    = $view->icon('control/search.png','Search');
 
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport( $params );
+    $entries->support  = $this->entriesSupport($params);
 
     $menu          = $this->newMenu($this->id.'_dropmenu');
     $menu->content = <<<HTML
@@ -136,15 +133,14 @@ class MaintenanceDb_Index_Search_Maintab_View
       </li>
     </ul>
   </li>
-  
-  <li class="wgt-root" >
-  <form 
-    method="get" 
-    id="wgt-form-maintenance-db_index-search" 
-    action="ajax.php?c=Maintenance.Db_Index.search" />
-  
 
-    <input 
+  <li class="wgt-root" >
+  <form
+    method="get"
+    id="wgt-form-maintenance-db_index-search"
+    action="ajax.php?c=Maintenance.Db_Index.search" />
+
+    <input
       type="text"
       class="wcm wcm_req_search wgt-no-save fparam-wgt-form-maintenance-db_index-search xxlarge"
       name="key"
@@ -164,7 +160,7 @@ HTML;
    * build the window menu
    * @param TArray $params
    */
-  protected function entriesSupport( $params )
+  protected function entriesSupport($params)
   {
 
     $iconSupport    = $this->icon('control/support.png'  ,'Support');
@@ -186,7 +182,7 @@ HTML;
 HTML;
 
     return $html;
-    
+
   }//end public function entriesSupport */
 
   /**
@@ -200,7 +196,7 @@ HTML;
    *   string formId: the id of the form;
    * }
    */
-  public function addActions( $params )
+  public function addActions($params)
   {
 
     // add the button actions for create in the window
@@ -210,17 +206,17 @@ HTML;
     $code = <<<BUTTONJS
 
 // close tab
-self.getObject().find(".wgtac_close").click(function(){
+self.getObject().find(".wgtac_close").click(function() {
   self.close();
 });
 
-self.getObject().find(".wgtac_search").click(function(){
+self.getObject().find(".wgtac_search").click(function() {
   \$R.form('ajax.php?c=Maintenance.Db_Index.search');
 });
 
 BUTTONJS;
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code);
 
   }//end public function addActions */
 

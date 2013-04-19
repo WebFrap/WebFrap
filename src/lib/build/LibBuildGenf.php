@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,30 +21,29 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibBuildGenf
-  extends LibBuildAction
+class LibBuildGenf extends LibBuildAction
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
    * @param unknown_type $node
    * @return unknown_type
    */
-  public function execute( )
+  public function execute()
   {
 
     $action         = $this->args[0];
 
-    if( !method_exists( $this , $action ) )
-    {
-      Error::addError('Requested invalid Genf Action: '.$action.'sn . Please Check you Buildconfiguration.' );
+    if (!method_exists($this , $action)) {
+      Error::addError('Requested invalid Genf Action: '.$action.'sn . Please Check you Buildconfiguration.');
+
       return false;
     }
 
-    return $repoObj->$action( $node );
+    return $repoObj->$action($node);
 
   }//end public function execute */
 

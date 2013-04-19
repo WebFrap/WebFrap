@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,7 +22,7 @@
  */
 class WgtTplRangeMatrix
 {
-  
+
   /**
    * @var LibTemplate $view
    * @var string $id
@@ -31,61 +31,55 @@ class WgtTplRangeMatrix
    * @var string $nameEntries
    * @var array $entries
    */
-  public static function render( 
-    $view, 
-    $start,  $end,  $step, 
-    $id, 
-    $nameEntries, 
-    $formId, 
-    $active = null 
+  public static function render(
+    $view,
+    $start,  $end,  $step,
+    $id,
+    $nameEntries,
+    $formId,
+    $active = null
   )
   {
 
     $entries = range($start, $end, $step);
-    
+
     $codeEntries = '';
-    foreach( $entries as $entry )
-    {
+    foreach ($entries as $entry) {
 
       $codeChecked = '';
       $codeActive = '';
-      if( isset( $active->{$entry} ) && $active->{$entry} )
-      {
+      if (isset($active->{$entry}) && $active->{$entry}) {
         $codeChecked = ' checked="checked" ';
         $codeActive = "ui-state-active";
       }
-      
+
       $codeEntries .= <<<HTML
-    <div class="cell" ><input 
-      type="checkbox" 
+    <div class="cell" ><input
+      type="checkbox"
       name="{$nameEntries}[{$entry}]"
       {$codeChecked}
       class="hidden {$formId}"
-      value="{$entry}" /><button 
+      value="{$entry}" /><button
         class="wgt-button {$codeActive}"
         wgt_key="{$nameEntries}[{$entry}]" >{$entry}</button></div>
 
 HTML;
-      
+
     }
-    
+
     $code = <<<HTML
-    
-  <div 
-  	id="{$id}" 
-  	class="wcm wcm_ui_button_check_matrix wgt-matrix" >
+
+  <div
+    id="{$id}"
+    class="wcm wcm_ui_button_check_matrix wgt-matrix" >
     {$codeEntries}
   </div>
-    
+
 HTML;
-    
+
     return $code;
 
   }//end public static function render */
-  
- 
-
 
 }//end class WgtTplRangeMatrix
-
 

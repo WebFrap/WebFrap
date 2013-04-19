@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -22,14 +21,13 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosGen_Cli_View
-  extends LibTemplateCli
+class DaidalosGen_Cli_View extends LibTemplateCli
 {
-  
+
   /**
    * @param TFlag $params
    */
-  public function displayGen( $params )
+  public function displayGen($params)
   {
 
     $out = $this->getResponse();
@@ -38,7 +36,6 @@ class DaidalosGen_Cli_View
     $out->writeln('');
 
   }//end public function displayGen */
-
 
 } // end class DaidalosGen_Cli_View
 

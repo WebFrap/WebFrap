@@ -24,13 +24,11 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtMaintab
-  extends LibTemplatePublisher
+class WgtMaintab extends LibTemplatePublisher
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Public Attributes
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
 /*
 <window resizable="resizable" movable="movable" id="wgt_window_FormEnterpriseCompany" planet="" >
@@ -46,7 +44,8 @@ class WgtMaintab
         <button text="Retire">
           <action>
                 <![CDATA[
-      return function(){
+
+      return function() {
         //self == Current window
 
       }
@@ -87,13 +86,25 @@ class WgtMaintab
    */
   public $title   = null ;
 
-
   /**
    * @lang de:
    * Kann das Tab Element vom User in Client später geschlossen werden
    * @var boolean
    */
   public $closeable  = true ;
+
+  /**
+   * Wenn true wird der close button rechts oben nicht mit generiert
+   * @var boolean
+   */
+  public $closeCustom = false;
+
+  /**
+   * Flag was mit nicht passenden inhalt passieren soll.
+   * Bei Grids brauchen wir z.B Hidden
+   * @var string
+   */
+  public $overflowY      = 'hidden';
 
   /**
    * @var string
@@ -114,7 +125,7 @@ class WgtMaintab
   public $maskActions   = array();
 
   /**
-   * Panel, dass links neben dem close button ( auf der rechten seite ) platziert wird
+   * Panel, dass links neben dem close button (auf der rechten seite  ) platziert wird
    * @var WgtPanelButtonLine
    */
   public $rightPanel = null;
@@ -157,16 +168,16 @@ class WgtMaintab
    */
   protected $jsItems       = array();
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Constructors and Magic Functions
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * default constructor
    *
    * @param int $name the name of the wgt object
    */
-  public function __construct( $name, $env = null )
+  public function __construct($name, $env = null  )
   {
 
     $this->name = $name;
@@ -176,15 +187,13 @@ class WgtMaintab
     $this->url         = new TDataObject();
     $this->funcs       = new TTrait();
 
-    if( $env )
+    if ($env  )
       $this->env = $env;
     else
       $this->env = Webfrap::getActive();
 
     // overwriteable empty init method
     $this->init();
-
-
 
   }//end public function __construct */
 
@@ -197,9 +206,9 @@ class WgtMaintab
     return $this->build();
   }// end public function __toString */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * get the id of the wgt object
@@ -210,7 +219,7 @@ class WgtMaintab
 
     // wenn keine id existiert fällt das objekt automatisch auf einen generiert
     // unique id zurück
-    if( !is_null( $this->id ) )
+    if (!is_null($this->id  )  )
       return $this->id;
     else
       return 'wgt-tab-'.uniqid();
@@ -224,9 +233,9 @@ class WgtMaintab
    * @param string $append
    * @return void
    */
-  public function setTitle( $title, $size = 75, $append = '...' )
+  public function setTitle($title, $size = 75, $append = '...'  )
   {
-    $this->title = SParserString::shortLabel( $title, $size, $append );
+    $this->title = SParserString::shortLabel($title, $size, $append  );
   } // end public function setTitle */
 
   /**
@@ -235,15 +244,15 @@ class WgtMaintab
    * @param int $size
    * @param string $append
    */
-  public function setLabel( $label, $size = 35, $append = '...' )
+  public function setLabel($label, $size = 35, $append = '...'  )
   {
-    $this->label = SParserString::shortLabel( $label, $size, $append );
+    $this->label = SParserString::shortLabel($label, $size, $append  );
   }//end public function setLabel */
 
   /**
    * @param string $tabId
    */
-  public function setTabId( $tabId )
+  public function setTabId($tabId  )
   {
     $this->tabId = $tabId;
   }//end public function setTabId */
@@ -253,9 +262,10 @@ class WgtMaintab
    * @param WgtPanelElementSearch $element
    * @return WgtPanelElementSearch
    */
-  public function setSearchElement( $element )
+  public function setSearchElement($element  )
   {
     $this->searchElement = $element;
+
     return $element;
   } // end public function setSearchElement */
 
@@ -264,9 +274,10 @@ class WgtMaintab
    * @param WgtPanelElementFilter $element
    * @return WgtPanelElementFilter
    */
-  public function setFilterElement( $element )
+  public function setFilterElement($element  )
   {
     $this->filterElement = $element;
+
     return $element;
   } // end public function setFilterElement */
 
@@ -276,15 +287,14 @@ class WgtMaintab
    * @param string $button
    * @return void
    */
-  public function setBookmark(  $title, $url, $role = null )
+  public function setBookmark($title, $url, $role = null  )
   {
 
-    $this->bookmark = array
-    (
+    $this->bookmark = array(
       'title'   => $title,
       'url'     => $url,
       'role'    => $role,
-    );
+     );
 
   }//end public function newButton */
 
@@ -294,9 +304,10 @@ class WgtMaintab
    * @param string $button
    * @return void
    */
-  public function addButton( $button )
+  public function addButton($button  )
   {
     $this->buttons[$button->name] = $button;
+
     return $button;
   }//end public function addButton */
 
@@ -306,13 +317,14 @@ class WgtMaintab
    * @param string $button
    * @return void
    */
-  public function newButton( $name, $type = null )
+  public function newButton($name, $type = null  )
   {
 
     $button       = new WgtButton;
     $button->name = $name;
 
     $this->buttons[$button->name] = $button;
+
     return $button;
 
   }//end public function newButton */
@@ -323,57 +335,49 @@ class WgtMaintab
    *
    * @return WgtDropmenu
    */
-  public function newMenu( $name, $type = null )
+  public function newMenu($name, $type = null  )
   {
 
-    if( $type )
-    {
+    if ($type) {
 
       $className  = ucfirst($type).'_Maintab_Menu';
 
-      if( !Webfrap::classLoadable($className) )
-      {
+      if (!Webfrap::classLoadable($className)  ) {
         throw new LibTemplate_Exception('requested nonexisting menu '.$type);
       }
 
-      $button     = new $className( $this );
-    }
-    else
-    {
-      $button     = new WgtDropmenu( $this );
+      $button     = new $className($this  );
+    } else {
+      $button     = new WgtDropmenu($this  );
     }
 
     $button->name = $name;
 
     // ACLs und die view werden direkt übergeben
     // Bei einer sauberen Implementierung der Architektur werden beide Objekte
-    // in ca. 99% der Fälle benötigt ( +1% fehlerquote )
-    $button->setAcl( $this->getAcl() );
-    $button->setView( $this );
+    // in ca. 99% der Fälle benötigt (+1% fehlerquote  )
+    $button->setAcl($this->getAcl()  );
+    $button->setView($this  );
 
     $this->buttons[$button->name] = $button;
+
     return $button;
 
   }//end public function newMenu */
 
-
   /**
   * @param string/array $key
   */
-  public function addJsItem( $key  )
+  public function addJsItem($key   )
   {
 
-    if( is_array($key) )
-    {
-      $this->jsItems     = array_merge( $this->jsItems, $key );
-    }
-    else
-    {
+    if (is_array($key)  ) {
+      $this->jsItems     = array_merge($this->jsItems, $key  );
+    } else {
       $this->jsItems[]   = $key;
     }
 
   }//end public function addJsItem */
-
 
   /**
    *
@@ -383,12 +387,12 @@ class WgtMaintab
   {
 
     // if empty we need no Buttons
-    if( !$this->buttons )
+    if (!$this->buttons  )
       return '';
 
     $html = '<div class="buttons left" >';
 
-    foreach( $this->buttons as /* @var $button WgtButton */ $button )
+    foreach ($this->buttons as /* @var $button WgtButton */ $button  )
       $html .= $button->buildMaintab();
 
     $html .= '</div>';
@@ -397,30 +401,36 @@ class WgtMaintab
 
   }//end public function buildButtons */
 
-////////////////////////////////////////////////////////////////////////////////
-// Logic
-////////////////////////////////////////////////////////////////////////////////
+  /**
+   * @param string $name
+   * @param string $code
+   */
+  public function addEvent( $name, $code )
+  {
 
+  }//end public function addEvent */
+
+/*//////////////////////////////////////////////////////////////////////////////
+// Logic
+//////////////////////////////////////////////////////////////////////////////*/
 
   /** the buildr method
    * @return string
    */
-  public function build( )
+  public function build()
   {
 
     $id       = $this->getId();
 
-    $content  = $this->includeTemplate( $this->template  );
+    $content  = $this->includeTemplate($this->template   );
 
     $jsCode   = '';
-    if( $this->jsCode )
-    {
+    if ($this->jsCode) {
 
       $this->assembledJsCode = '';
 
-      foreach( $this->jsCode as $jsCode )
-      {
-        if( is_object($jsCode) )
+      foreach ($this->jsCode as $jsCode) {
+        if (is_object($jsCode)  )
           $this->assembledJsCode .= $jsCode->getJsCode();
         else
           $this->assembledJsCode .= $jsCode;
@@ -433,53 +443,52 @@ class WgtMaintab
 
     $buttons = '';
 
-    foreach( $this->buttons as /* @var $button WgtButton */ $button )
+    foreach ($this->buttons as /* @var $button WgtButton */ $button  )
       $buttons .= $button->buildMaintab();
 
     $maskActions = '';
 
-    foreach( $this->maskActions as /* @var $maskAction WgtButton */ $maskAction )
+    foreach ($this->maskActions as /* @var $maskAction WgtButton */ $maskAction  )
       $maskActions .= $maskAction->buildAction();
-    
-   /* 
-    $this->rightPanel = new WgtPanelButtonLine_Dset( $this );
+
+   /*
+    $this->rightPanel = new WgtPanelButtonLine_Dset($this  );
     $this->rightPanel->flags->comments = true;
     $this->rightPanel->flags->history = true;
     $this->rightPanel->flags->tags = true;
+    $this->rightPanel->flags->messages = true;
+    */
 
-    $this->rightPanel->entity = $this->var->entity;
+    if ($this->rightPanel  ) {
 
-    if( $this->rightPanel )
-      $maskActions = $this->rightPanel->render( $this );
-   */
+      if ($this->var->entity  )
+        $this->rightPanel->entity = $this->var->entity;
+
+
+      if ($this->rightPanel  )
+        $maskActions .= $this->rightPanel->render($this  );
+    }
+
 
     $tabs    = '';
 
-    if( '' != trim($this->tabId)  )
-    {
+    if ('' != trim($this->tabId)   ) {
 
       $themePath = View::$themeWeb;
 
       $tabTitle = '';
 
-      if( $this->title || $this->searchElement )
-      {
-        if( $this->title )
-        {
-          if( $this->searchElement )
-          {
+      if ($this->title || $this->searchElement) {
+        if ($this->title) {
+          if ($this->searchElement) {
             $tabTitle = '<div class="wgt-panel title left" style="width:100%" >'
               .'<div class="wl2 left" style="height:30px;" ><h2>'.$this->title.'</h2></div>'
               .$this->searchElement->render()
               .'</div><!-- end wgt-panel title left 100 -->';
-          }
-          else
-          {
+          } else {
             $tabTitle = '<div class="wgt-panel title left" style="width:100%" ><h2>'.$this->title.'</h2></div><!-- end wgt-panel title left -->';
           }
-        }
-        else
-        {
+        } else {
           $tabTitle = '<div class="wgt-panel left" style="width:100%" >'.$this->searchElement->render().'</div><!-- end wgt-panel left -->';
         }
       }
@@ -500,56 +509,50 @@ class WgtMaintab
   </div><!-- end wgt-panel maintab -->
 HTML;
 
-    }
-    else
-    {
+    } else {
 
       $tabTitle = '';
-      if( $this->title || $this->searchElement )
-      {
-        if( $this->title )
-        {
-          if( $this->searchElement )
-          {
+      if ($this->title || $this->searchElement) {
+        if ($this->title) {
+          if ($this->searchElement) {
             $tabTitle = '<div class="wgt-panel title left" style="width:100%" >'
               .'<div class="wl2 left" style="height:30px;" >'
               .'<h2>'.$this->title.'</h2>'
               .'</div>'
               .$this->searchElement->render()
               .'</div><!-- end search element -->';
-          }
-          else
-          {
+          } else {
             $tabTitle = '<div class="wgt-panel title left" style="width:100%" ><h2>'.$this->title.'</h2></div><!-- end wgt-panel title left -->';
           }
-        }
-        else
-        {
+        } else {
           $tabTitle = '<div class="wgt-panel left" style="width:100%" >'.$this->searchElement->render().'</div><!-- end wgt-panel left -->';
         }
       }
 
       $filters = '';
-      if( $this->filterElement )
-      {
+      if ($this->filterElement) {
         $filters = '<div class="right inner" >'.$this->filterElement->render().'</div><!-- end filter -->';
       }
 
-      $icClose = $this->icon('control/close_tab.png', 'close' );
-      //
+      $buttonClose = '';
+      if (!$this->closeCustom  ) {
+        $buttonClose = <<<HTML
+          <button
+            class="wcm wcm_ui_tip-left wgt-button wgtac_close"
+            tabindex="-1"
+            tooltip="Close the active tab"  ><i class="icon-remove-circle" ></i></button>
+HTML;
+      }
 
       $panel = <<<HTML
     <div class="wgt-panel maintab" >
       <div class="wgt-panel head" >
         {$buttons}
-        {$filters}
         <div class="right" >
-        	{$maskActions}
-          <button
-          	class="wcm wcm_ui_tip-left wgt-button wgtac_close"
-          	tabindex="-1"
-          	tooltip="Close the active tab"  >{$icClose}</button>
+          {$maskActions}
+          {$buttonClose}
         </div>
+        {$filters}
       </div><!-- end tab wgt-panel head-->
       {$tabTitle}<!-- end tab title -->
     </div>
@@ -581,42 +584,38 @@ HTML;
     $bottom = '';
 
     ///TODO xml entitie replacement auslager
-    $title = str_replace( array('&','<','>','"',"'"), array('&amp;','&lt;','&gt;','&quot;','&#039;'), $this->title);
-    $label = str_replace( array('&','<','>','"',"'"), array('&amp;','&lt;','&gt;','&quot;','&#039;'), $this->label);
+    $title = str_replace(array('&','<','>','"',"'"), array('&amp;','&lt;','&gt;','&quot;','&#039;'), $this->title);
+    $label = str_replace(array('&','<','>','"',"'"), array('&amp;','&lt;','&gt;','&quot;','&#039;'), $this->label);
 
-    if( DEBUG )
-    {
+    if (DEBUG) {
       ob_start();
       $checkXml = new DOMDocument();
 
-      if( $this instanceof LibTemplateAjax )
+      if ($this instanceof LibTemplateAjax  )
         $checkXml->loadHTML($this->compiled);
 
       $errors = ob_get_contents();
       ob_end_clean();
 
-      if( '' !== trim($errors) )
-      {
+      if ('' !== trim($errors)) {
 
         $this->getResponse()->addWarning('Invalid XML Response');
 
-        SFiles::write
-        (
+        SFiles::write(
           PATH_GW.'log/maintab_xml_errors.html',
           $errors.'<pre>'.htmlentities("{$panel}<div class=\"wgt-content maintab\" >{$content}</div>{$bottom}").'</pre>'
-        );
-        SFiles::write
-        (
+         );
+        SFiles::write(
           PATH_GW.'log/maintab_xml_errors_'.date('Y-md-H-i_s').'.html',
           $errors.'<pre>'.htmlentities("{$panel}<div class=\"wgt-content maintab\" >{$content}</div>{$bottom}").'</pre>'
-        );
+         );
       }
     }
 
     return <<<CODE
 
     <tab id="{$id}" label="{$label}" title="{$title}" {$closeAble}  >
-      <body><![CDATA[{$panel}<div class="wgt-content maintab" >{$content}</div>{$bottom}]]></body>
+      <body><![CDATA[{$panel}<div class="wgt-content maintab" style="overflow-y:{$this->overflowY};" >{$content}</div>{$bottom}]]></body>
       {$jsCode}
     </tab>
 
@@ -626,7 +625,6 @@ CODE;
 
   }//end public function build */
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // emppty default methodes, more or less optional
 //////////////////////////////////////////////////////////////////////////////*/
@@ -635,24 +633,24 @@ CODE;
    *
    * @return void
    */
-  public function compile(){}
+  public function compile() {}
 
   /**
    *
    * @return void
    */
-  public function init(){}
+  public function init() {}
 
   /**
    *
    * @return void
    */
-  public function publish(){}
+  public function publish() {}
 
   /**
    *
    */
-  protected function buildMessages(){}
+  protected function buildMessages() {}
 
 } // end class WgtMaintab
 

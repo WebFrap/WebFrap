@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,12 +21,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosDbBackup_Maintab_Menu
-  extends WgtDropmenu
+class DaidalosDbBackup_Maintab_Menu extends WgtDropmenu
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * add a drop menu to the create window
@@ -37,34 +36,32 @@ class DaidalosDbBackup_Maintab_Menu
    *   string formId: the id of the form;
    * }
    */
-  public function buildMenu( $key, $params )
+  public function buildMenu($key, $params)
   {
 
-    $iconMenu          = $this->view->icon( 'control/menu.png'     ,'Menu'   );
-    $iconClose         = $this->view->icon( 'control/close.png'    ,'Close'   );
-    $iconSearch        = $this->view->icon( 'control/search.png'   ,'Search'  );
-    $iconBookmark      = $this->view->icon( 'control/bookmark.png' ,'Bookmark');
-    $iconBackup        = $this->view->icon( 'daidalos/backup.png' ,'Backup' );
-    $iconSupport       = $this->view->icon( 'control/support.png'  ,'Support' );
-    $iconBug           = $this->view->icon( 'control/bug.png'      ,'Bug' );
-    $iconFaq           = $this->view->icon( 'control/faq.png'      ,'Faq' );
-    $iconHelp          = $this->view->icon( 'control/help.png'     ,'Help' );
-    
+    $iconMenu          = $this->view->icon('control/menu.png'     ,'Menu'   );
+    $iconClose         = $this->view->icon('control/close.png'    ,'Close'   );
+    $iconSearch        = $this->view->icon('control/search.png'   ,'Search'  );
+    $iconBookmark      = $this->view->icon('control/bookmark.png' ,'Bookmark');
+    $iconBackup        = $this->view->icon('daidalos/backup.png' ,'Backup');
+    $iconSupport       = $this->view->icon('control/support.png'  ,'Support');
+    $iconBug           = $this->view->icon('control/bug.png'      ,'Bug');
+    $iconFaq           = $this->view->icon('control/faq.png'      ,'Faq');
+    $iconHelp          = $this->view->icon('control/help.png'     ,'Help');
 
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport( $params );
-
+    $entries->support  = $this->entriesSupport($params);
 
     $this->content = <<<HTML
-    
+
 <div class="inline" >
-  <button 
+  <button
     class="wcm wcm_control_dropmenu wgt-button"
-    id="{$this->id}-control" 
+    id="{$this->id}-control"
     wgt_drop_box="{$this->id}_dropmenu"  >{$iconMenu} {$this->i18n->l('Menu','wbf.label')}</button>
   <var id="{$this->id}-control-cfg-dropmenu"  >{"triggerEvent":"mouseover","closeOnLeave":"true","align":"right"}</var>
 </div>
-    
+
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
   <ul>
     <li>
@@ -95,9 +92,6 @@ HTML;
 
   }//end public function buildMenu */
 
-
-  
-  
   /**
    * just add the code for the edit ui controls
    *
@@ -111,9 +105,8 @@ HTML;
    *     services
    * }
    */
-  public function injectActions( $view, $key, $params )
+  public function injectActions($view, $key, $params)
   {
-
 
     // add the button action for save in the window
     // the code will be binded direct on a window object and is removed
@@ -121,18 +114,17 @@ HTML;
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       self.close();
     });
-    
-    self.getObject().find(".wgtac_start_backup").click(function(){
-      \$R.form( 'wgt-form-daidalos_db_backup-{$key}' );
+
+    self.getObject().find(".wgtac_start_backup").click(function() {
+      \$R.form('wgt-form-daidalos_db_backup-{$key}');
     });
 
 BUTTONJS;
 
-
-    $view->addJsCode( $code );
+    $view->addJsCode($code);
 
   }//end public function injectActions */
 

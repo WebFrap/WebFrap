@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -23,9 +23,9 @@
 abstract class LibDbResult
   implements Iterator, Countable
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * database connection result
@@ -73,7 +73,7 @@ abstract class LibDbResult
    * @var array
    */
   protected $numRows        = null;
-  
+
   /**
    * @var int
    */
@@ -83,35 +83,35 @@ abstract class LibDbResult
    * @var array
    */
   protected $data     = array();
-  
+
   /**
    * Die Nummer der Query
    * @var int
    */
   public $numQuery = null;
-  
+
   /**
    * Dauer der Query in sekunden
    * @var int
    */
   public $duration = null;
-  
-////////////////////////////////////////////////////////////////////////////////
+
+/*//////////////////////////////////////////////////////////////////////////////
 // Constructor
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Default Constructor
    * creating the connection to the database
-   * 
+   *
    * @param LibDbResult $result
    * @param LibDbConnection $dbObject
    * @param string $name
    */
   public function __construct
-  ( 
-    $result, 
-    $dbObject, 
+  (
+    $result,
+    $dbObject,
     $name = 'tmp',
     $numQuery = -1,
     $duration = -1
@@ -121,10 +121,10 @@ abstract class LibDbResult
     $this->result   = $result;
     $this->dbObject = $dbObject;
     $this->name     = $name;
-    
+
     $this->numQuery = $numQuery;
     $this->duration = $duration;
-    
+
     $this->pos      = 0;
 
   } // end public function __construct */
@@ -139,16 +139,16 @@ abstract class LibDbResult
     $this->freeResult();
   }//end public function __destruct
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * set at fetch mode for the database
    * @param  string $fetchMode
    * @return void
    */
-  public function setFetchMode( $fetchMode )
+  public function setFetchMode($fetchMode)
   {
     $this->fetchMode = $fetchMode;
 
@@ -166,7 +166,7 @@ abstract class LibDbResult
   /**
    * @return array
    */
-  public function get( )
+  public function get()
   {
     return array();
   }//end public function getName
@@ -188,9 +188,9 @@ abstract class LibDbResult
 
   }//end public function getName
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Interface: Iterator
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -217,7 +217,7 @@ abstract class LibDbResult
    */
   public function next()
   {
-    return $this->get( );
+    return $this->get();
   }//end public function next ()
 
   /**
@@ -237,17 +237,15 @@ abstract class LibDbResult
    */
   public function valid ()
   {
-    if( 0 === $this->pos )
+    if (0 === $this->pos)
       $this->get();
 
     return !is_null($this->pos);
   }//end public function valid ()
-  
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Interface: Countable
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Zählen wieviele Einträge gefunden wurden
@@ -255,9 +253,8 @@ abstract class LibDbResult
    */
   public function count()
   {
-    return $this->getNumRows( );
+    return $this->getNumRows();
   }//end public function count()
-
 
 }//end abstract class LibDbResult
 

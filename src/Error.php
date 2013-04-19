@@ -8,19 +8,18 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
 /**
  * de:
  * Hilfsklasse zum behandeln von Fehlern,
  * Wir hauptsächlich als Container für die Fehlercodes verwendet
- * 
+ *
  * @package WebFrap
  * @subpackage tech_core
  *
@@ -37,25 +36,24 @@ class Error
 // @see http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
 //////////////////////////////////////////////////////////////////////////////*/
 
-  
   /**
    *  Missing relevant parts of the request like the objid
    * @var int
    */
   const INVALID_REQUEST = 400;
-  
+
   /**
    *  Missing relevant parts of the request like the objid
    * @var int
    */
   const INVALID_REQUEST_MSG = 'This request was invalid.';
-  
+
   /**
    *  The syntax of the request was not understood by the server.
    * @var int
    */
   const BAD_REQUEST = 400;
-  
+
   /**
    *  The syntax of the request was not understood by the server.
    * @var int
@@ -67,7 +65,7 @@ class Error
    * @var int
    */
   const NOT_AUTHORIZED = 401;
-  
+
   /**
    * The request needs user authentication
    * @var int
@@ -91,7 +89,7 @@ class Error
    * @var int
    */
   const NOT_FOUND = 404;
-  
+
   /**
    * Requested resource not exists
    * @var int
@@ -103,7 +101,7 @@ class Error
    * @var int
    */
   const METHOD_NOT_ALLOWED = 405;
-  
+
   /**
    * The Request method is not allowed for this request
    * @var int
@@ -120,14 +118,13 @@ class Error
    * @var int
    */
   const CONFLICT = 409;
-  
-  
+
   /**
    * Der Request wurde nicht ausgeführt da constraints dies verhindert haben
    * @var int
    */
   const PRECONDITION_FAILED = 412;
-  
+
   /**
    * Der Request des Clients kann nicht ausgeführt werden, da dieser in seiner
    * Region illegal wäre
@@ -143,11 +140,20 @@ class Error
    * @var int
    */
   const INTERNAL_ERROR = 500;
-  
+
   /**
    * @var string
    */
-  const INTERNAL_ERROR_MSG = 'Sorry, something went wrong. Please try again. If persists contact the support.';
+  const INTERNAL_ERROR_MSG = <<<HTML
+The system detected a potential problem during execution of your request.
+This seems to be a bug that will be fixed.<br />
+The problem was logged and the system administrator was notified.
+We will take care of this issue as soon as possible.<br />
+In urgent cases contact your system support and describe exactly what you need
+to do. In some cases there are easy workarounds especially for important use cases.
+<br />
+We apologize for the inconvenience.
+HTML;
 
   /**
    * en:
@@ -160,16 +166,34 @@ class Error
    * @var int
    */
   const NOT_IMPLEMENTED = 501;
-  
+
   /**
    * @var string
    */
   const NOT_IMPLEMENTED_MSG = 'Sorry, the requested configuration is not yet implemented.';
 
 
-////////////////////////////////////////////////////////////////////////////////
+  /**
+   * Standard Fehlermeldungen für abgefangene Bugs an Systembenutzer
+   * Technische Details können wir hier weglassen, da die Anwender
+   * in der Regel so oder so keine Bugs begeben können
+   *
+   * @var string
+   */
+  const PROGRAM_BUG = <<<HTML
+The system detected a potential problem during the execution of your request.
+This is NOT your fault, it seems to be a bug that need to be fixed.<br />
+The Problem was logged and the system maintainer was noticed.
+We will take care for this issue as soon as possible.<br />
+In urgent cases contact your the system support and describe exactly what you need
+to do. Sometimes there are easy workarounds especially for important use cases.
+<br />
+Sorry for the inconveniences.
+HTML;
+
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * en:
@@ -187,7 +211,7 @@ class Error
    * @var string
    */
   public $debugMessage   = null;
-  
+
   /**
    * de:
    * Der Fehler Type
@@ -227,40 +251,37 @@ class Error
    */
   protected static $lastError = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // constructor
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * de:
    * erstellen eines neuen Fehlers
-   * 
+   *
    * @param string $message
    * @param string $debugMessage
    * @param int $errorKey
    * @param mixed $toDump
    */
-  public function construct( $message, $debugMessage = null, $errorKey = Response::INTERNAL_ERROR, $toDump = null )
+  public function construct($message, $debugMessage = null, $errorKey = Response::INTERNAL_ERROR, $toDump = null)
   {
 
-    if( is_object($message) && $message instanceof Webfrap_Exception  )
-    {
+    if (is_object($message) && $message instanceof Webfrap_Exception  ) {
       $this->message      = $message->getMessage();
       $this->debugMessage = $message->getDebugMessage();
       $this->errorKey     = $message->getErrorKey();
-    }
-    else 
-    {
+    } else {
       $this->message      = $message;
       $this->debugMessage = $debugMessage;
       $this->errorKey     = $errorKey;
     }
-    
+
   }//end public function construct */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @return string
@@ -269,7 +290,7 @@ class Error
   {
     return $this->message;
   }//end public function getMessage */
-  
+
   /**
    * @return string
    */
@@ -286,7 +307,7 @@ class Error
   {
     return $this->errorKey;
   }//end public function getCode */
-  
+
   /**
    * @return int
    */
@@ -295,10 +316,9 @@ class Error
     return $this->errorKey;
   }//end public function getErrorKey */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * add an error to the system
@@ -308,7 +328,7 @@ class Error
    * @deprecated Exceptions bitte direkt werfen, diese funktion bringt keinen Mehrwert
    *    erhöht aber unsinniger weise die laufzeitabstraktion
    */
-  public static function report( $message, $toDump = null )
+  public static function report($message, $toDump = null)
   {
 
     $metadata = Debug::getCallposition();
@@ -322,25 +342,22 @@ class Error
     self::$lastError->message   = $message;
     self::$lastError->toDump    = $toDump;
 
-    $trace = Debug::backtraceToTable( );
+    $trace = Debug::backtraceToTable();
 
-    Debug::console( 'ERROR: '.$file.' '.$line.': '.$message , $toDump, $trace  );
+    Debug::console('ERROR: '.$file.' '.$line.': '.$message , $toDump, $trace  );
 
-    if($toDump)
-    {
-      $message .= Debug::getDump( $toDump );
+    if ($toDump) {
+      $message .= Debug::getDump($toDump);
     }
 
     // eine Debugtrace ausgeben wenn auf Tracing geschaltet ist
-    $message .= Debug::backtrace( );
+    $message .= Debug::backtrace();
 
-    Log::error( $message );
+    Log::error($message);
 
     return self::$lastError;
 
   }//end public static function report */
-
-
 
   /**
    * add an error to the system
@@ -351,7 +368,7 @@ class Error
    * @throws Exception
    * @return void
    */
-  public static function addError( $message, $exception = null, $toDump = null )
+  public static function addError($message, $exception = null, $toDump = null)
   {
 
     $metadata = Debug::getCallposition();
@@ -367,38 +384,30 @@ class Error
     self::$lastError->toDump    = $toDump;
 
     // if theres a exeption the exception handels the output of the errors
-    if( $exception )
-    {
-      if( WebFrap::loadable($exception) )
-      {
+    if ($exception) {
+      if (WebFrap::loadable($exception)) {
         throw new $exception($message);
-      }
-      else
-      {
-        throw new WebfrapFlow_Exception
+      } else {
+        throw new WebfrapSys_Exception
         (
           'Thrown nonexisting exception: '.$exception.' with message: '.$message
         );
       }
-    }
-    else // else we have to handle the error output
-    {
+    } else { // else we have to handle the error output
 
-      if(!$toDump)
+      if (!$toDump)
         $toDump = $metadata;
 
-      Debug::console( 'ERROR: '.$file.' '.$line.': '.$message , $toDump );
+      Debug::console('ERROR: '.$file.' '.$line.': '.$message , $toDump);
 
-      Log::error(  $file , $line , $message );
+      Log::error( $file , $line , $message);
 
       // eine Debugtrace ausgeben wenn auf Tracing geschaltet ist
-      if(Log::$levelTrace)
-      {
-        Debug::logDebugTrace( $message );
-        if($toDump)
-        {
-          if(Log::$levelDebug)
-            Debug::appendLogDump( $toDump );
+      if (Log::$levelTrace) {
+        Debug::logDebugTrace($message);
+        if ($toDump) {
+          if (Log::$levelDebug)
+            Debug::appendLogDump($toDump);
         }
       }
     }
@@ -406,7 +415,6 @@ class Error
     return self::$lastError;
 
   }//end public static function addError */
-
 
   /**
    * add an error to the system
@@ -417,7 +425,7 @@ class Error
    * @throws Exception
    * @return void
    */
-  public static function addVisualError( $message, $exception = null, $toDump = null )
+  public static function addVisualError($message, $exception = null, $toDump = null)
   {
 
     $metadata = Debug::getCallposition();
@@ -434,40 +442,32 @@ class Error
     Message::addError($message);
 
     // if theres a exeption the exception handels the output of the errors
-    if( $exception )
-    {
-      if( WebFrap::loadable($exception) )
-      {
+    if ($exception) {
+      if (WebFrap::loadable($exception)) {
         throw new $exception($message);
-      }
-      else
-      {
-        throw new WebfrapFlow_Exception
+      } else {
+        throw new WebfrapSys_Exception
         (
           'Thrown nonexisting exception: '.$exception.' with message: '.$message
         );
       }
-    }
-    else // else we have to handle the error output
-    {
-      Debug::console( 'ERROR: '.$file.' '.$line.' '.$message , $toDump );
-      Log::error(  $file , $line , $message );
+    } else { // else we have to handle the error output
+      Debug::console('ERROR: '.$file.' '.$line.' '.$message , $toDump);
+      Log::error( $file , $line , $message);
 
       // eine Debugtrace ausgeben wenn auf Tracing geschaltet ist
-      if(Log::$levelTrace)
-      {
-        Debug::logDebugTrace( $message );
-        if($toDump)
-        {
-          if(Log::$levelDebug)
-            Debug::appendLogDump( $toDump );
+      if (Log::$levelTrace) {
+        Debug::logDebugTrace($message);
+        if ($toDump) {
+          if (Log::$levelDebug)
+            Debug::appendLogDump($toDump);
         }
       }
     }
 
   }//end public static function addError */
 
-  public static function addWarning( $message,  $toDump = null )
+  public static function addWarning($message,  $toDump = null)
   {
 
     $metadata = Debug::getCallposition();
@@ -475,15 +475,14 @@ class Error
     $line = $metadata['line'];
 
     // if theres a exeption the exception handels the output of the errors
-    if(!$toDump)
+    if (!$toDump)
       $toDump = $metadata;
     else
       Debug::console('TRACE for: '.$message,$metadata);
 
-    Debug::console( 'WARN: '.$file.' '.$line.': '.$message , $toDump );
+    Debug::console('WARN: '.$file.' '.$line.': '.$message , $toDump);
 
-    Log::warn(  $file , $line , $message );
-
+    Log::warn( $file , $line , $message);
 
   }//end public static function addWarning */
 
@@ -495,44 +494,37 @@ class Error
    * werden
    * @return void
    */
-  public static function addException( $message, $exception = null  )
+  public static function addException($message, $exception = null  )
   {
-    
-    if( is_object($message) )
-    {
+
+    if (is_object($message)) {
       $exception = $message;
       $message   = $exception->getMessage();
     }
-      
+
     $backTrace  = $exception->getTraceAsString();
-    
-    if( isset( $backTrace[1] ) )
-    {
+
+    if (isset($backTrace[1])) {
       $metadata   = $backTrace[1];
-      
-      if( isset($metadata['file']) )
-      {
+
+      if (isset($metadata['file'])) {
         $file       = $metadata['file'];
         $line       = $metadata['line'];
-      }
-      else 
-      {
+      } else {
         $file = -1;
         $line = -1;
       }
-    }
-    else 
-    {
+    } else {
       $file = -2;
       $line = -2;
     }
 
-    if( Log::$levelTrace )
-      Debug::console( get_class($exception).': '.$file.' '.$line.' : '.$message, $backTrace );
+    if (Log::$levelTrace)
+      Debug::console(get_class($exception).': '.$file.' '.$line.' : '.$message, $backTrace);
     else
-      Debug::console( get_class($exception).': '.$file.' '.$line.' : '.$message, $backTrace  );
+      Debug::console(get_class($exception).': '.$file.' '.$line.' : '.$message, $backTrace  );
 
-    Log::error(  $file , $line , $message );
+    Log::error( $file , $line , $message);
 
   }//end public static function addError */
 
@@ -541,26 +533,25 @@ class Error
    * @param $exception
    * @param $toDump
    */
-  public static function cachtableError( $message , $exception = null, $toDump = null )
+  public static function cachtableError($message , $exception = null, $toDump = null)
   {
 
-    $caller = Debug::getCallerPosition( true );
+    $caller = Debug::getCallerPosition(true);
 
     $file = $caller['file'];
     $line = $caller['line'];
 
-    Debug::console( 'ERROR: '.$file.' '.$line.' '.$message , $toDump );
+    Debug::console('ERROR: '.$file.' '.$line.' '.$message , $toDump);
 
-    Log::error(  $file , $line , $message );
+    Log::error( $file , $line , $message);
 
     // eine Debugtrace ausgeben wenn auf Tracing geschaltet ist
-    if(Log::$levelDebug)
-      Debug::logDebugTrace( $message );
+    if (Log::$levelDebug)
+      Debug::logDebugTrace($message);
 
-    if( $toDump )
-    {
-      if(Log::$levelDebug)
-        Debug::appendLogDump( $toDump );
+    if ($toDump) {
+      if (Log::$levelDebug)
+        Debug::appendLogDump($toDump);
 
     }
 
@@ -571,15 +562,11 @@ class Error
     self::$lastError->exception = $exception;
     self::$lastError->toDump  = $toDump;
 
-    if( $exception )
-    {
-      if( WebFrap::loadable($exception) )
-      {
+    if ($exception) {
+      if (WebFrap::loadable($exception)) {
         throw new $exception($message);
-      }
-      else
-      {
-        throw new WebfrapFlow_Exception
+      } else {
+        throw new WebfrapSys_Exception
         (
         'Thrown nonexisting exception: '.$exception.' with message: '.$message
         );
@@ -594,15 +581,15 @@ class Error
    * @throws Exception
    * @return void
    */
-  public static function addFatalError(  $message ,  $toDump = null )
+  public static function addFatalError( $message ,  $toDump = null)
   {
 
-    $caller = Debug::getCallerPosition( true );
+    $caller = Debug::getCallerPosition(true);
 
     $file = $caller['file'];
     $line = $caller['line'];
 
-    Log::logLine( 'fatal' , $file , $line , $message );
+    Log::logLine('fatal' , $file , $line , $message);
 
     self::$lastError = new TDataObject();
     self::$lastError->file      = $file;
@@ -612,16 +599,15 @@ class Error
     self::$lastError->toDump    = $toDump;
 
     // eine Debugtrace ausgeben wenn auf Tracing geschaltet ist
-    if(Log::$levelTrace)
-      Debug::logDebugTrace( $message );
+    if (Log::$levelTrace)
+      Debug::logDebugTrace($message);
 
-    if($toDump)
-    {
-      if(Log::$levelDebug)
-       Debug::appendLogDump( $toDump );
+    if ($toDump) {
+      if (Log::$levelDebug)
+       Debug::appendLogDump($toDump);
     }
 
-    throw new WebfrapFlow_Exception($message);
+    throw new WebfrapSys_Exception($message);
 
   }//end public static function addFatalError */
 
@@ -632,12 +618,12 @@ class Error
    * @param int $line
    * @param string $message
    */
-  public static function errorLog( $file ,  $line , $message )
+  public static function errorLog($file ,  $line , $message)
   {
-    if(Log::$levelTrace)
-      Debug::logDebugTrace( $message );
+    if (Log::$levelTrace)
+      Debug::logDebugTrace($message);
 
-    Log::logLine( 'error' , $file , $line , $message );
+    Log::logLine('error' , $file , $line , $message);
 
   }//end public static function errorLog */
 
@@ -647,16 +633,15 @@ class Error
    * @param $line
    * @param $message
    */
-  public static function errorLogAt( $name, $file , $line , $message )
+  public static function errorLogAt($name, $file , $line , $message)
   {
 
-    if( $log = Log::factoryGet( $name ));
-    {
+    if ($log = Log::factoryGet($name)) {;
 
-      if($log->logTrace)
-        Debug::logDebugTrace( $message );
+      if ($log->logTrace)
+        Debug::logDebugTrace($message);
 
-      $log->error( $file , $line , $message );
+      $log->error($file , $line , $message);
     }
 
   }//end public static function errorLogAt */
@@ -671,10 +656,10 @@ class Error
    */
   public static function fatalErrorLog($file , $line ,$message)
   {
-    if(Log::$levelTrace)
-      Debug::logDebugTrace( $message );
+    if (Log::$levelTrace)
+      Debug::logDebugTrace($message);
 
-    Log::logLine( 'fatal' , $file , $line , $message );
+    Log::logLine('fatal' , $file , $line , $message);
 
   }//end public static function fatalErrorLog */
 
@@ -682,10 +667,10 @@ class Error
    * @param $toDump
    * @return void
    */
-  public static function appendErrorDump( $toDump )
+  public static function appendErrorDump($toDump)
   {
 
-    Debug::appendLogDump( $toDump );
+    Debug::appendLogDump($toDump);
 
   }//end public static function appendErrorDump */
 
@@ -693,10 +678,10 @@ class Error
    * @param $toDump
    * @return void
    * /
-  public static function coreDump( $toDump )
+  public static function coreDump($toDump)
   {
 
-    Debug::appendLogDump( $toDump );
+    Debug::appendLogDump($toDump);
 
   }//end public static function coreDump */
 

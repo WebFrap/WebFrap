@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Ein Array Objekt für Simple Daten
@@ -24,9 +23,9 @@
 class TString
   implements ArrayAccess, Iterator, Countable
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * default is empty
@@ -34,20 +33,20 @@ class TString
   protected $data = '';
 
   /**
-   * 
+   *
    * @var int
    */
   protected $iteratorPos = 0;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Magic Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Standard Konstruktor
    * Nimmt beliebig viele Elemente oder einen einzigen Array
    */
-  public function __construct( $data = '' )
+  public function __construct($data = '')
   {
     $this->data = $data;
 
@@ -61,42 +60,42 @@ class TString
     return $this->data;
   }//end public function __toString */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
-  public function lower(  )
+  public function lower()
   {
-    return new TString( strtolower( $this->data ) );
+    return new TString(strtolower($this->data));
   }
 
-  public function upper(  )
+  public function upper()
   {
-    return new TString( strtoupper( $this->data ) );
+    return new TString(strtoupper($this->data));
   }
 
-  public function split( $delimiter, $offset = null  )
+  public function split($delimiter, $offset = null  )
   {
 
-    if( $offset )
-      $tmp = explode( $delimiter , $this->data , $offset );
+    if ($offset)
+      $tmp = explode($delimiter , $this->data , $offset);
     else
-      $tmp = explode( $delimiter , $this->data  );
+      $tmp = explode($delimiter , $this->data  );
 
-    if(!$tmp)
+    if (!$tmp)
       return array();
 
     $tmp2 = array();
-    foreach( $tmp as $text )
-      $tmp2 = new TString( $text );
+    foreach ($tmp as $text)
+      $tmp2 = new TString($text);
 
     return $tmp2;
 
   }//end public function split
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Interface: ArrayAccess
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @see ArrayAccess:offsetSet
@@ -104,13 +103,14 @@ class TString
   public function offsetSet($offset, $value)
   {
 
-    if(!ctype_digit($offset))
-    {
+    if (!ctype_digit($offset)) {
       Error::addError("Invalid offset Type");
+
       return false;
     }
 
     $this->data[$offset] = $value;
+
     return true;
 
   }//end public function offsetSet */
@@ -121,9 +121,9 @@ class TString
   public function offsetGet($offset)
   {
 
-    if(!ctype_digit($offset))
-    {
+    if (!ctype_digit($offset)) {
       Error::addError("Invalid offset Type");
+
       return null;
     }
 
@@ -136,9 +136,9 @@ class TString
   public function offsetUnset($offset)
   {
 
-    if(!ctype_digit($offset))
-    {
+    if (!ctype_digit($offset)) {
       Error::addError("Invalid offset Type");
+
       return false;
     }
 
@@ -151,18 +151,18 @@ class TString
   public function offsetExists($offset)
   {
 
-    if(!ctype_digit($offset))
-    {
+    if (!ctype_digit($offset)) {
       Error::addError("Invalid offset Type");
+
       return false;
     }
 
     return isset($this->data[$offset])?true:false;
   }//end public function offsetExists */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Interface: Iterator
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @see Iterator::current
@@ -186,6 +186,7 @@ class TString
   public function next ()
   {
     ++$this->iteratorPos;
+
     return $this->current();
   }//end public function next */
 
@@ -205,9 +206,9 @@ class TString
     return isset($this->data[$this->iteratorPos])?true:false;
   }//end public function valid */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Interface: Countable
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @see Countable::count

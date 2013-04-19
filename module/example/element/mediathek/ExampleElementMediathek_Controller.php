@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -25,13 +25,12 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class ExampleElementMediathek_Controller
-  extends Controller
+class ExampleElementMediathek_Controller extends Controller
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // methodes
-////////////////////////////////////////////////////////////////////////////////
-  
+//////////////////////////////////////////////////////////////////////////////*/
+
   /**
    * @var array
    */
@@ -39,26 +38,26 @@ class ExampleElementMediathek_Controller
   (
     'open' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
   );
-  
-////////////////////////////////////////////////////////////////////////////////
+
+/*//////////////////////////////////////////////////////////////////////////////
 // methodes
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
  /**
   * create an new window with an edit form for the enterprise_company entity
   * @param LibRequestHttp $request
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_open( $request, $response )
+  public function service_open($request, $response)
   {
-    
+
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = $this->getFlags( $request );
+    $params  = $this->getFlags($request);
 
     // create a window
     $view   = $response->loadView
@@ -67,11 +66,10 @@ class ExampleElementMediathek_Controller
       'ExampleElementMediathek',
       'displayExample'
     );
-    $view->setModel( $this->loadModel( 'WebfrapMediathek' ) );
+    $view->setModel($this->loadModel('WebfrapMediathek'));
 
-   $view->displayExample(  $params );
+   $view->displayExample( $params);
 
   }//end public function service_open */
-
 
 } // end class ExampleElementMediathek_Controller

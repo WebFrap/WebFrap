@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,22 +21,21 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class CmsMedia_Maintab_View
-  extends WgtMaintab
+class CmsMedia_Maintab_View extends WgtMaintabCustom
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
     /**
     * @var CmsMedia_Model
     */
     public $model = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
  /**
   * Methode zum befüllen des WbfsysMessage Create Forms
   * mit Inputelementen
@@ -46,7 +45,7 @@ class CmsMedia_Maintab_View
   * @param TFlag $params
   * @return Error im Fehlerfall sonst null
   */
-  public function displayDev( $params )
+  public function displayDev($params)
   {
 
     // laden der benötigten Resource Objekte
@@ -60,17 +59,16 @@ class CmsMedia_Maintab_View
     );
 
     // Setzen des Labels und des Titles, sowie diverser Steuerinformationen
-    $this->setTitle( $i18nLabel );
-    $this->setLabel( $i18nLabel  );
-    //$this->setTabId( 'wgt-tab-form-my_message-create' );
+    $this->setTitle($i18nLabel);
+    $this->setLabel($i18nLabel  );
+    //$this->setTabId('wgt-tab-form-my_message-create');
 
     // set the form template
-    $this->setTemplate( 'cms/media/maintab/dev' );
-
+    $this->setTemplate('cms/media/maintab/dev');
 
     // Menü und Javascript Logik erstellen
-    $this->addMenu( $params );
-    $this->addActions( $params );
+    $this->addMenu($params);
+    $this->addActions($params);
 
     // kein fehler aufgetreten? bestens also geben wir auch keinen zurück
     return null;
@@ -86,7 +84,7 @@ class CmsMedia_Maintab_View
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $params )
+  public function addMenu($params)
   {
 
     $menu     = $this->newMenu
@@ -95,10 +93,10 @@ class CmsMedia_Maintab_View
       'CmsMedia'
     );
     $menu->id = $this->id.'_dropmenu';
-    $menu->setAcl( $this->getAcl() );
-    $menu->setModel( $this->model );
+    $menu->setAcl($this->getAcl());
+    $menu->setModel($this->model);
 
-    $menu->buildMenu( $params );
+    $menu->buildMenu($params);
 
     return true;
 
@@ -115,7 +113,7 @@ class CmsMedia_Maintab_View
    *   string formId: the id of the form;
    * }
    */
-  public function addActions( $params )
+  public function addActions($params)
   {
 
     // add the button actions for create in the window
@@ -125,13 +123,13 @@ class CmsMedia_Maintab_View
     $code = <<<BUTTONJS
 
 // close tab
-self.getObject().find(".wgtac_close").click(function(){
+self.getObject().find(".wgtac_close").click(function() {
   self.close();
 });
 
 BUTTONJS;
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code);
 
   }//end public function addActions */
 

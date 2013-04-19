@@ -8,21 +8,18 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
-
 /**
  * @package WebFrap
  * @subpackage Core
  */
-class DaidalosProjects_Model
-  extends Model
+class DaidalosProjects_Model extends Model
 {
 
   protected $dataSource = null;
@@ -37,8 +34,7 @@ class DaidalosProjects_Model
 
     $projects = array();
 
-    foreach( $xml->body->workspace->project as $project )
-    {
+    foreach ($xml->body->workspace->project as $project) {
       $projects[] = trim($project['name']);
     }
 
@@ -56,8 +52,7 @@ class DaidalosProjects_Model
 
     $galaxies = array();
 
-    foreach( $xml->body->galaxies->galaxy as $galaxy )
-    {
+    foreach ($xml->body->galaxies->galaxy as $galaxy) {
       $galaxies[] = trim($galaxy['name']);
     }
 
@@ -75,9 +70,8 @@ class DaidalosProjects_Model
 
     $galaxies = array();
 
-    foreach( $xml->body->galaxies->galaxy as $galaxy )
-    {
-      $galaxies[] = array( 'id'=>trim($galaxy['name']),'value'=>trim($galaxy['name']) ) ;
+    foreach ($xml->body->galaxies->galaxy as $galaxy) {
+      $galaxies[] = array('id'=>trim($galaxy['name']),'value'=>trim($galaxy['name'])) ;
     }
 
     return $galaxies;
@@ -94,8 +88,7 @@ class DaidalosProjects_Model
 
     $projects = array();
 
-    foreach( $xml->body->workspace->project as $project )
-    {
+    foreach ($xml->body->workspace->project as $project) {
       $projects[] = trim($project['name']);
     }
 
@@ -103,24 +96,23 @@ class DaidalosProjects_Model
 
   }//end public function getProjects */
 
-
   /**
    * @return array
    */
   public function getDataSource()
   {
 
-    if(!$this->dataSource)
-      $this->dataSource = simplexml_load_file( PATH_GW.'/data/bdl/workspace/projects.xml' );
+    if (!$this->dataSource)
+      $this->dataSource = simplexml_load_file(PATH_GW.'/data/bdl/workspace/projects.xml');
 
     return $this->dataSource;
 
   }//end public function getDataSource */
-  
+
   /**
    * @return void
    */
-  public function getProjectMap( )
+  public function getProjectMap()
   {
 
     $data = array();

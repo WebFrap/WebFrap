@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -19,12 +19,11 @@
  * @package WebFrap
  * @subpackage wgt
  */
-abstract class WgtDesktopMainmenu
-  extends WgtDesktopElement
+abstract class WgtDesktopMainmenu extends WgtDesktopElement
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * sub Modul Extention
@@ -32,9 +31,9 @@ abstract class WgtDesktopMainmenu
    */
   protected $models       = array();
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Constructor and other Magics
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * (non-PHPdoc)
@@ -59,21 +58,17 @@ abstract class WgtDesktopMainmenu
    * @param string $key
    * @return Model
    */
-  protected function loadModel( $modelName , $key = null )
+  protected function loadModel($modelName , $key = null)
   {
 
-    if( !$key )
+    if (!$key)
       $key = $modelName;
 
     $modelName = 'Model'.$modelName;
-    if( !isset( $this->models[$key]  ) )
-    {
-      if( Webfrap::classLoadable($modelName) )
-      {
+    if (!isset($this->models[$key]  )) {
+      if (Webfrap::classLoadable($modelName)) {
         $this->models[$key] = new $modelName();
-      }
-      else
-      {
+      } else {
         throw new Controller_Exception('Internal Error','Failed to load Submodul: '.$modelName);
       }
     }
@@ -86,10 +81,10 @@ abstract class WgtDesktopMainmenu
    * @param string $key
    * @return Model
    */
-  protected function getModel( $key )
+  protected function getModel($key)
   {
 
-    if( isset( $this->models[$key] ) )
+    if (isset($this->models[$key]))
       return $this->models[$key];
     else
       return null;
@@ -100,10 +95,9 @@ abstract class WgtDesktopMainmenu
    * (non-PHPdoc)
    * @see WgtDesktopElement::image()
    */
-  public function image( $name, $param, $flag )
+  public function image($name, $param, $flag)
   {
-
-    return Wgt::image( $name, $param, $flag );
+    return Wgt::image($name, $param, $flag);
 
   }//end public function image */
 

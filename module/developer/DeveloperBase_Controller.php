@@ -8,80 +8,67 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
-
 /**
  * @package WebFrap
  * @subpackage ModDeveloper
  */
-class DeveloperBase_Controller
-  extends Controller
+class DeveloperBase_Controller extends Controller
 {
 
   protected $defaultAction = 'menu';
-
 
   protected $callAble = array
   (
     'menu','sandbox'
   );
 
-
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @return void
    */
-  public function menu( )
+  public function menu()
   {
 
-    if( $this->view->isType( View::WINDOW ) )
-    {
+    if ($this->view->isType(View::WINDOW)) {
       $view = $this->view->newWindow('WebfrapMainMenu', 'Default');
 
       $view->setStatus('Developer Tools');
-    }
-    else
-    {
+    } else {
       $view = $this->view;
     }
 
     $view->setTitle('Menu Developer Tools');
-    $view->setTemplate( 'webfrap/menu/modmenu' );
+    $view->setTemplate('webfrap/menu/modmenu');
 
     $menuName = $this->request->get('menu',Validator::CNAME);
 
-    if( !$menuName )
+    if (!$menuName)
       $menuName = 'default';
 
-    $modMenu = $view->newItem( 'modMenu', 'MenuFolder' );
-    $modMenu->setData( DaoFoldermenu::get( 'daidalos/'.$menuName, true ) );
+    $modMenu = $view->newItem('modMenu', 'MenuFolder');
+    $modMenu->setData(DaoFoldermenu::get('daidalos/'.$menuName, true));
 
   }//end public function menu */
-
 
   /**
    * @return void
    */
-  public function sandbox( )
+  public function sandbox()
   {
 
-    if( $this->view->isType( View::WINDOW ) )
-    {
+    if ($this->view->isType(View::WINDOW)) {
       $view = $this->view->newWindow('WbfDevSandbox', 'Default');
-    }
-    else
-    {
+    } else {
       $view = $this->view;
     }
 
@@ -89,10 +76,9 @@ class DeveloperBase_Controller
 
     $template = $this->request->get('key','text');
 
-    $view->setTemplate( 'sandbox/'.str_replace('.','/',$template));
+    $view->setTemplate('sandbox/'.str_replace('.','/',$template));
 
   } // end public function sandbox
-
 
 } // end class DeveloperBase_Controller
 

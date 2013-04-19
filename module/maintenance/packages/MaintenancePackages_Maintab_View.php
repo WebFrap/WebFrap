@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -22,18 +21,17 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class MaintenancePackages_Maintab_View
-  extends WgtMaintab
+class MaintenancePackages_Maintab_View extends WgtMaintabCustom
 {
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // form export methodes
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
  /**
   * @param TFlag $params
   */
-  public function displayList( $params )
+  public function displayList($params)
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -44,30 +42,27 @@ class MaintenancePackages_Maintab_View
     );
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText);
 
     // set the window status text
-    $this->setLabel( $i18nText );
+    $this->setLabel($i18nText);
 
-    $this->addVar( 'caches', $this->model->getCaches() );
-    
+    $this->addVar('caches', $this->model->getCaches());
+
     // set the from template
-    $this->setTemplate( 'maintenance/packages/maintab/list_packages' );
+    $this->setTemplate('maintenance/packages/maintab/list_packages');
 
-    $this->addMenu( $params );
-    $this->addActions( $params );
-    
+    $this->addMenu($params);
+    $this->addActions($params);
 
     // kein fehler aufgetreten
     return null;
 
   }//end public function displayList */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // protocol for entities
-////////////////////////////////////////////////////////////////////////////////
-    
- 
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * add a drop menu to the create window
@@ -78,20 +73,19 @@ class MaintenancePackages_Maintab_View
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $params )
+  public function addMenu($params)
   {
 
     $i18n         = $this->getI18n();
-  
-    $iconMenu     = $this->icon( 'control/menu.png'      ,'Menu');
-    $iconSupport  = $this->icon( 'control/support.png'      ,'Support');
-    $iconHelp     = $this->icon( 'control/help.png'      ,'Help');
-    $iconClose    = $this->icon( 'control/close.png'      ,'Close');
-    $iconEdit     = $this->icon( 'control/edit.png'      ,'Edit');
-    $iconBug      = $this->icon( 'control/bug.png'      ,'Bug');
-    
-    $iconRefresh    = $this->icon( 'control/refresh.png'      ,'Refresh');
 
+    $iconMenu     = $this->icon('control/menu.png'      ,'Menu');
+    $iconSupport  = $this->icon('control/support.png'      ,'Support');
+    $iconHelp     = $this->icon('control/help.png'      ,'Help');
+    $iconClose    = $this->icon('control/close.png'      ,'Close');
+    $iconEdit     = $this->icon('control/edit.png'      ,'Edit');
+    $iconBug      = $this->icon('control/bug.png'      ,'Bug');
+
+    $iconRefresh    = $this->icon('control/refresh.png'      ,'Refresh');
 
     $menu          = $this->newMenu($this->id.'_dropmenu');
     $menu->content = <<<HTML
@@ -136,7 +130,7 @@ HTML;
    *   string formId: the id of the form;
    * }
    */
-  public function addActions( $params )
+  public function addActions($params)
   {
 
     // add the button actions for create in the window
@@ -144,23 +138,21 @@ HTML;
     // on close
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
-    
-self.getObject().find(".wgtac_clean_cache").click(function(){
+
+self.getObject().find(".wgtac_clean_cache").click(function() {
   \$R.delete('ajax.php?c=Maintenance.Cache.cleanAll');
 });
 
 // close tab
-self.getObject().find(".wgtac_close").click(function(){
+self.getObject().find(".wgtac_close").click(function() {
   self.close();
 });
 
 BUTTONJS;
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code);
 
   }//end public function addActions */
-
-
 
 }//end class MaintenanceCache_Maintab_View
 

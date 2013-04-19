@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -28,18 +27,18 @@ class LibDbAdminMysql
    */
   protected $db = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
-  public function __construct( $db )
+  public function __construct($db)
   {
     $this->db = $db;
   }
 
   /**
    */
-  public function getDatabases( )
+  public function getDatabases()
   {
 
     $sql = <<<SQL
@@ -53,7 +52,7 @@ SQL;
 
   /**
    */
-  public function getDbTables( $dbName  )
+  public function getDbTables($dbName  )
   {
 
     $sql = <<<SQL
@@ -64,7 +63,7 @@ SQL;
 
   }//end public function getDatabases */
 
-  public function getTableQuotes( $dbName , $table  )
+  public function getTableQuotes($dbName , $table  )
   {
 
     $quotes = array
@@ -102,9 +101,8 @@ SQL;
 
     $meta = array();
 
-    foreach( $results as $row )
+    foreach ($results as $row)
       $meta[$row['name']] = $quotes[$row['type']];
-
 
     return $meta;
 

@@ -15,18 +15,16 @@
 *
 *******************************************************************************/
 
-
 /**
  *
  * @package WebFrap
  * @subpackage tech_core
  */
-abstract class WgtInput
-  extends WgtAbstract
+abstract class WgtInput extends WgtAbstract
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Das Label zum Inputelement
@@ -39,6 +37,12 @@ abstract class WgtInput
    * @var boolean
    */
   public $required  = false;
+
+  /**
+   * Flag ob auf dem Feld ein Unique Constraint liegt
+   * @var boolean
+   */
+  public $unqiue  = false;
 
   /**
    *
@@ -107,9 +111,9 @@ abstract class WgtInput
    */
   public $docu = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * default constructor
@@ -117,7 +121,7 @@ abstract class WgtInput
    * @param int $name the name of the wgt object
    * @param LibTemplate $view
    */
-  public function __construct( $name = null, $view = null )
+  public function __construct($name = null, $view = null)
   {
 
     $this->texts  = new TArray();
@@ -125,17 +129,16 @@ abstract class WgtInput
     $this->name   = $name;
     $this->init();
 
-    if( $view )
-      $view->addElement( $name, $this );
+    if ($view)
+      $view->addElement($name, $this);
 
   } // end public function __construct */
-
 
   /**
    * @param string $key
    * @param string $text
    */
-  public function setText( $key , $text )
+  public function setText($key , $text)
   {
     $this->texts->$key = $text;
   }//end public function setText */
@@ -143,7 +146,7 @@ abstract class WgtInput
   /**
    * @param string $class
    */
-  public function addInputClass( $class )
+  public function addInputClass($class)
   {
     $this->classes[$class] = $class;
   }//end public function addInputClass */
@@ -151,7 +154,7 @@ abstract class WgtInput
   /**
    * @param string $class
    */
-  public function hasInputClass( $class )
+  public function hasInputClass($class)
   {
     return isset($this->classes[$class]);
   }//end public function addInputClass */
@@ -159,10 +162,10 @@ abstract class WgtInput
   /**
    * @param string $class
    */
-  public function removeInputClass( $class )
+  public function removeInputClass($class)
   {
 
-    if( isset($this->classes[$class]) )
+    if (isset($this->classes[$class]))
       unset($this->classes[$class]);
 
   }//end public function removeInputClass */
@@ -173,12 +176,12 @@ abstract class WgtInput
    * @param boolean $required
    * @return void
    */
-  public function setLabel( $label, $required = null )
+  public function setLabel($label, $required = null)
   {
 
     $this->label    = $label;
 
-    if( !is_null($required) )
+    if (!is_null($required))
       $this->required = $required;
 
   }//end public function setLabel */
@@ -187,7 +190,7 @@ abstract class WgtInput
    * @param string $formId
    * @param string $prefix
    */
-  public function setAssignedForm( $formId, $prefix = 'asgd-' )
+  public function setAssignedForm($formId, $prefix = 'asgd-')
   {
     $this->assignedForm = $prefix.$formId;
   }//end public function setAssignedForm */
@@ -196,18 +199,15 @@ abstract class WgtInput
   * @param boolean $required
   * @return void
   */
-  public function setRequired( $required = true )
+  public function setRequired($required = true)
   {
 
-    if( $required )
-    {
+    if ($required) {
       $this->classes['wcm'] = 'wcm';
       $this->classes['wcm_valid_required'] = 'wcm_valid_required';
-    }
-    else
-    {
-      if( isset( $this->classes['wcm_valid_required'] ) )
-        unset( $this->classes['wcm_valid_required'] );
+    } else {
+      if (isset($this->classes['wcm_valid_required']))
+        unset($this->classes['wcm_valid_required']);
     }
 
     $this->required = $required;
@@ -215,24 +215,56 @@ abstract class WgtInput
   }// end public function setRequired */
 
  /**
-  * @param boolean $required
+  * @param boolean $unique
   * @return void
   */
-  public function setValidator( $validator )
+  public function setUnique($unique = true)
+  {
+
+    if ($unique) {
+      $this->classes['wcm'] = 'wcm';
+      $this->classes['wcm_valid_unique'] = 'wcm_valid_unique';
+    } else {
+      if (isset($this->classes['wcm_valid_unique']))
+        unset($this->classes['wcm_valid_unique']);
+    }
+
+    $this->unqiue = $unique;
+
+  }// end public function setRequired */
+
+ /**
+  * Setzen des Validators
+  * @param boolean $validator
+  * @param boolean $required
+  * @param boolean $unique
+  * @return void
+  */
+  public function setValidator($validator, $required = false, $unique = false)
   {
 
     $this->classes['wcm'] = 'wcm';
-    $this->classes['wcm_valid_'.$validator] = 'wcm_valid_'.$validator;
+
+    // kann auch unique sein wenn nur required oder unique gesetzt werden soll
+    if ($validator)
+      $this->classes['wcm_valid_'.$validator] = 'wcm_valid_'.$validator;
+
+    if($unique)
+      $this->classes['wcm_valid_unique'] = 'wcm_valid_unique';
+
+    if($required)
+      $this->classes['wcm_valid_required'] = 'wcm_valid_required';
 
     $this->required = $required;
-  }// end public function setRequired */
+
+  }// end public function setValidator */
 
  /**
   * @param string $data
   * @param string $value
   * @return void
   */
-  public function setData( $data , $value = null )
+  public function setData($data , $value = null)
   {
     $this->attributes['value'] = $data;
   }// end public function setData */
@@ -243,30 +275,28 @@ abstract class WgtInput
    * @param array $value
    * @return void
    */
-  public function addData( $key , $value = null )
+  public function addData($key , $value = null)
   {
-    $this->setData( $key );
+    $this->setData($key);
   }//end public function addData */
 
  /**
   * @param mixed
   * @return void
   */
-  public function getData( $key = null )
+  public function getData($key = null)
   {
-
     return isset($this->attributes['value'])
       ? $this->attributes['value']
       : null;
 
   }// end public function getData */
 
-
  /**
   * @param mixed
   * @return void
   */
-  public function setActive( $active = true )
+  public function setActive($active = true)
   {
     $this->activ = $active;
   }// end public function setActive */
@@ -274,7 +304,7 @@ abstract class WgtInput
  /**
   * @return string the value of the input field
   */
-  public function value( )
+  public function value()
   {
     return isset($this->attributes['value'])?$this->attributes['value']:null;
   }// end public function value */
@@ -284,39 +314,35 @@ abstract class WgtInput
    *
    * @param boolean $readOnly
    */
-  public function setReadOnly( $readOnly = true )
+  public function setReadOnly($readOnly = true)
   {
 
     $this->readOnly = $readOnly;
 
-    if( $readOnly )
-    {
+    if ($readOnly) {
       //$this->attributes['disabled'] = 'disabled';
       $this->attributes['readonly'] = 'readonly';
-    }
-    else
-    {
+    } else {
       /*
-      if( isset($this->attributes['disabled']) )
+      if (isset($this->attributes['disabled']))
         unset($this->attributes['disabled']);
       */
 
-      if( isset($this->attributes['readonly']) )
+      if (isset($this->attributes['readonly']))
         unset($this->attributes['readonly']);
     }
 
   }//end public function setReadOnly */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // buildr
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
  /**
   * @return string
   */
-  public function element( )
+  public function element()
   {
-
     return '<input '.$this->asmAttributes().' />';
   }// end public function element */
 
@@ -324,17 +350,17 @@ abstract class WgtInput
    * @param array
    * @return string
    */
-  public function renderElement( $attributes = array() )
+  public function renderElement($attributes = array())
   {
 
-    if( $attributes )
-      $this->attributes = array_merge( $this->attributes, $attributes );
+    if ($attributes)
+      $this->attributes = array_merge($this->attributes, $attributes);
 
     // ist immer ein text attribute
-    if( !isset($this->attributes['type']) )
+    if (!isset($this->attributes['type']))
       $this->attributes['type'] = 'text';
 
-    return $this->element( );
+    return $this->element();
 
   }//end public function renderElement */
 
@@ -352,14 +378,14 @@ abstract class WgtInput
 
   }//end public function buildLabel */
 
-  public function renderDocu( $id )
+  public function renderDocu($id)
   {
 
-    if( $this->docu )
-    {
-       return '<span class="wcm wcm_ui_dropform" id="wgt-input-help-'.$id.'" >'.Wgt::icon( 'control/help.png', 'xsmall' ).'<var>{"size":"small","button":""}</var></span>'
+    if ($this->docu) {
+       return '<span class="wcm wcm_ui_dropform" id="wgt-input-help-'.$id.'" ><i class="icon-info-sign" ></i><var>{"size":"small","button":""}</var></span>'
          .'<div class="wgt-input-help-'.$id.' hidden" ><div class="wgt-panel title" ><h2>Help</h2></div><div class="wgt-space" >'.$this->docu.'</div></div>';
     }
+
     return null;
   }
 
@@ -367,27 +393,27 @@ abstract class WgtInput
    * @param array
    * @return string
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array())
   {
 
-    if( $attributes )
+    if ($attributes)
       $this->attributes = array_merge($this->attributes,$attributes);
 
     // ist immer ein text attribute
-    if( !isset($this->attributes['type']) )
+    if (!isset($this->attributes['type']))
       $this->attributes['type'] = 'text';
 
     $id = $this->getId();
 
     $required = $this->required?'<span class="wgt-required">*</span>':'';
 
-    $helpIcon = $this->renderDocu( $id );
+    $helpIcon = $this->renderDocu($id);
 
     $html = <<<HTML
     <div class="wgt-box input" id="wgt-box-{$id}" >
       {$this->texts->topBox}
       <div class="wgt-label" ><label
-      	for="{$id}" >{$this->texts->beforeLabel}{$this->label}{$this->texts->afterLabel} {$required}{$this->texts->endLabel}
+        for="{$id}" >{$this->texts->beforeLabel}{$this->label}{$this->texts->afterLabel} {$required}{$this->texts->endLabel}
       </label>{$helpIcon}</div>
       {$this->texts->middleBox}
       <div class="wgt-input {$this->width}" >{$this->texts->beforInput}{$this->element()}{$this->texts->afterInput}</div>
@@ -402,26 +428,22 @@ HTML;
 
   }//end public function build */
 
-
   /**
    * @return string
    */
   public function buildAjaxArea()
   {
 
-    if( !isset($this->attributes['id']) )
+    if (!isset($this->attributes['id']))
       return '';
 
-    if( !isset($this->attributes['value']) )
+    if (!isset($this->attributes['value']))
       $this->attributes['value'] = '';
 
-    if( $this->serializeElement )
-    {
+    if ($this->serializeElement) {
       $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="thml" ><![CDATA['
         .$this->element().']]></htmlArea>'.NL;
-    }
-    else
-    {
+    } else {
       $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="value" ><![CDATA['
         .$this->attributes['value'].']]></htmlArea>'.NL;
     }
@@ -430,61 +452,52 @@ HTML;
 
   }//end public function buildAjaxArea */
 
-
   /**
    * build the attributes
    * @param array $attributes
    * @return string
    */
-  protected function asmAttributes( $attributes = array(), $setType = true )
+  protected function asmAttributes($attributes = array(), $setType = true)
   {
 
-    if( !$attributes )
-    {
+    if (!$attributes) {
       $attributes = $this->attributes;
-    }
-    else
-    {
-      $attributes = array_merge( $this->attributes, $attributes );
+    } else {
+      $attributes = array_merge($this->attributes, $attributes);
     }
 
-    if( $attributes && $setType )
+    if ($attributes && $setType)
       $this->attributes['type'] = $this->type;
 
-    if( !isset($attributes['class']) )
-    {
+    if (!isset($attributes['class'])) {
       $attributes['class'] = '';
     }
 
-    if( $this->readOnly )
-    {
+    if ($this->readOnly) {
       $attributes['readonly'] = 'readonly';
       $this->classes['wgt-readonly'] = 'wgt-readonly';
     }
 
-    if( $this->required )
-    {
+    if ($this->required) {
       $this->classes['wcm'] = 'wcm';
       $this->classes['wcm_valid_required'] = 'wcm_valid_required';
     }
 
-    if( $this->classes )
-    {
-      $attributes['class'] = implode( ' ', $this->classes ).' '.$attributes['class'];
+    if ($this->classes) {
+      $attributes['class'] = implode(' ', $this->classes).' '.$attributes['class'];
     }
 
     $html = '';
 
-    if( !isset($attributes['id']) )
+    if (!isset($attributes['id']))
       $attributes['id'] = 'wgt-input-'.uniqid();
 
-    foreach( $attributes as $key => $value )
+    foreach ($attributes as $key => $value)
       $html .= $key.'="'.$value.'" ';
 
     return $html;
 
   }// end protected function asmAttributes */
-
 
 }//end class WgtInput
 

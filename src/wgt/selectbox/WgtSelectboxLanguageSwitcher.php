@@ -8,30 +8,28 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtSelectboxLanguageSwitcher
-  extends WgtSelectboxHardcoded
+class WgtSelectboxLanguageSwitcher extends WgtSelectboxHardcoded
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    */
   public function load()
   {
-    
+
     $db   = Webfrap::$env->getDb();
     $conf = Webfrap::$env->getConf();
 
@@ -44,20 +42,18 @@ from
 where
   is_syslang = true;
 SQL;
-    
-    $res = $db->select( $sql );
+
+    $res = $db->select($sql);
 
     $this->data =  array();
 
-    foreach( $res as $lang )
-    {
-      $this->data[$lang['short']] = array( 'value' => ucfirst($lang['name']) );
+    foreach ($res as $lang) {
+      $this->data[$lang['short']] = array('value' => ucfirst($lang['name']));
     }
 
     $this->activ = $conf->getStatus('activ.language');
 
   }//end public function load()
-
 
 } // end class WgtSelectboxLanguageSwitcher
 

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,13 +21,12 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtMenuCrumbmenu
-  extends WgtAbstract
+class WgtMenuCrumbmenu extends WgtAbstract
 {
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var string Parsername
@@ -41,10 +40,9 @@ class WgtMenuCrumbmenu
 
   public $id = 'wgt_crumbmenu';
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Enter description here...
@@ -54,18 +52,15 @@ class WgtMenuCrumbmenu
    * @param string $title
    * @return WgtMenuEntryAbstract
    */
-  public function newCrumb( $text , $url = null , $class = null , $type = 'Crumb' )
+  public function newCrumb($text , $url = null , $class = null , $type = 'Crumb')
   {
 
-    if( is_object($text) )
-    {
+    if (is_object($text)) {
       $entry = $text;
-    }
-    else
-    {
+    } else {
       $className = 'WgtMenu'.$type;
 
-      $entry = new $className( 'navmenuentry' );
+      $entry = new $className('navmenuentry');
       $entry->text = $text;
       $entry->data = $url;
       $entry->class = $class;
@@ -87,32 +82,32 @@ class WgtMenuCrumbmenu
   /**
    * @return void
    */
-  public function setParser( $buildr )
+  public function setParser($buildr)
   {
     $this->buildrName = $buildr;
   }//end public function setParser
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Logic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
    * @return string
    */
-  public function build( )
+  public function build()
   {
 
     $html = '<ul class="wgtMenu crumb" >'.NL;
 
-    foreach( $this->data as $menuPoint )
+    foreach ($this->data as $menuPoint)
       $html .= $menuPoint->build().NL;
 
     $html .= '</ul>'.NL;
 
     return $html;
 
-  } // end public function defaultParser( )
+  } // end public function defaultParser()
 
   /**
    * (non-PHPdoc)

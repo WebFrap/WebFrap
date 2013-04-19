@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,14 +21,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapPeople_Query_Postgresql
-  extends LibSqlQuery
+class WebfrapPeople_Query_Postgresql extends LibSqlQuery
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // fetch methodes
-////////////////////////////////////////////////////////////////////////////////
-
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Loading the tabledata from the database
@@ -39,10 +36,10 @@ class WebfrapPeople_Query_Postgresql
    *
    * @throws LibDb_Exception
    */
-  public function fetchByKey( $key, $params = null )
+  public function fetchByKey($key, $params = null)
   {
 
-    if( !$params )
+    if (!$params)
       $params = new TFlag();
 
     $this->sourceSize  = null;
@@ -52,8 +49,7 @@ class WebfrapPeople_Query_Postgresql
 
     $wheres = array();
 
-    foreach( $tmp as $value )
-    {
+    foreach ($tmp as $value) {
       $wheres[] = " upper(wbfsys_role_user.name) like upper('{$db->addSlashes($key)}%')
         or upper(core_person.lastname) like upper('{$db->addSlashes($key)}%')
         or upper(core_person.firstname) like upper('{$db->addSlashes($key)}%') ";
@@ -64,8 +60,8 @@ class WebfrapPeople_Query_Postgresql
     $sql = <<<SQL
   SELECT
     wbfsys_role_user.rowid as id,
-    COALESCE ( '('||wbfsys_role_user.name||') ', '' ) || COALESCE ( core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '' ) as value,
-    COALESCE ( '('||wbfsys_role_user.name||') ', '' ) || COALESCE ( core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '' ) as label
+    COALESCE ('('||wbfsys_role_user.name||') ', '') || COALESCE (core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '') as value,
+    COALESCE ('('||wbfsys_role_user.name||') ', '') || COALESCE (core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '') as label
   FROM
     wbfsys_role_user
   JOIN
@@ -77,11 +73,9 @@ class WebfrapPeople_Query_Postgresql
   LIMIT 15;
 SQL;
 
-    $this->result = $db->select( $sql );
+    $this->result = $db->select($sql);
 
   }//end public function fetchByKey */
-
-
 
 } // end class WebfrapPeople_Query_Postgresql */
 

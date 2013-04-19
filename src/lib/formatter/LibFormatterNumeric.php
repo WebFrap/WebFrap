@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,9 +21,9 @@
  */
 class LibFormatterNumeric
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var LibFormatterNumeric
@@ -64,17 +64,17 @@ class LibFormatterNumeric
    */
   protected $negativ           = false;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Magic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
    */
-  public function __construct( $i18n = null, $precision = 2 )
+  public function __construct($i18n = null, $precision = 2)
   {
 
-    if( !$i18n )
+    if (!$i18n)
       $i18n = I18n::getActive();
 
     $this->size         = $precision;
@@ -92,35 +92,33 @@ class LibFormatterNumeric
 
   }//end public function __toString
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Half Singleton
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Enter description here...
    * @return LibFormatterNumeric
-   * @deprecated 
+   * @deprecated
    */
   public static function getInstance()
   {
 
-    if( is_null( self::$instance ) )
-    {
+    if (is_null(self::$instance)) {
       self::$instance = new LibFormatterNumeric();
     }
 
     return self::$instance;
 
   }//end public static function getInstance
-  
+
   /**
    * @return LibFormatterNumeric
    */
   public static function getActive()
   {
 
-    if( is_null( self::$instance ) )
-    {
+    if (is_null(self::$instance)) {
       self::$instance = new LibFormatterNumeric();
     }
 
@@ -129,52 +127,52 @@ class LibFormatterNumeric
   }//end public static function getActive */
 
   /**
-   * 
+   *
    * @param string $separatorDec
    * @param string $separatorTh
    * @param int $size
-   * 
+   *
    * @return LibFormatterNumeric
    */
-  public static function langFormatter( $separatorDec = ',', $separatorTh = '.', $size = 2 )
+  public static function langFormatter($separatorDec = ',', $separatorTh = '.', $size = 2)
   {
 
     $obj = new LibFormatterNumeric();
-    $obj->setFormat( $separatorDec, $separatorTh, $size );
+    $obj->setFormat($separatorDec, $separatorTh, $size);
 
     return $obj;
 
   }//end public static function getLang
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param string $separatorDec
    * @param string $separatorTh
    * @param string $size
    */
-  public function setFormat( $separatorDec = ',', $separatorTh = '.' , $size = 2 )
+  public function setFormat($separatorDec = ',', $separatorTh = '.' , $size = 2)
   {
-    
+
     $this->separatorDec = $separatorDec;
     $this->separatorTh  = $separatorTh;
     $this->size         = $size;
-    
+
   }//end public function setFormat */
 
   /**
    * @param string $numeric
    */
-  public function setNumericLanguage( $numeric )
+  public function setNumericLanguage($numeric)
   {
 
     $this->negativ = false;
 
-    $numeric = trim( $numeric );
+    $numeric = trim($numeric);
 
-    if( '-' == $numeric[0] )
+    if ('-' == $numeric[0])
       $this->negativ = true;
 
     $this->numericLanguage = $numeric;
@@ -182,71 +180,63 @@ class LibFormatterNumeric
     $catchablePatterns = array('(?:[0-9]*)(?:e[+-]?[0-9]+)?');
     $regex = '/(' .implode(')|(', $catchablePatterns) . ')/i';
     $flags = PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE ;
-    $rawMatches = preg_split( $regex, trim($numeric), -1, $flags);
+    $rawMatches = preg_split($regex, trim($numeric), -1, $flags);
 
-    if( in_array( $this->separatorDec ,  $rawMatches )  )
-    {
+    if (in_array($this->separatorDec ,  $rawMatches)  ) {
 
       $num = '';
 
-      $end = array_pop( $rawMatches );
+      $end = array_pop($rawMatches);
 
-      if( !ctype_digit( $end ) )
-      {
+      if (!ctype_digit($end)) {
         $end = '00';
       }
 
       $num = '';
 
-      foreach( $rawMatches as $match )
-      {
+      foreach ($rawMatches as $match) {
 
-        if( ctype_digit($match) )
+        if (ctype_digit($match))
           $num .= $match;
 
-        $this->numericEnglish = (float)( ( $this->negativ?'-':'' ).$num.'.'.$end );
+        $this->numericEnglish = (float) (($this->negativ?'-':'').$num.'.'.$end);
 
       }
 
-    }
-    else
-    {
+    } else {
       $num = '';
 
-      foreach( $rawMatches as $match )
-      {
+      foreach ($rawMatches as $match) {
 
-        if( ctype_digit( $match ) )
+        if (ctype_digit($match))
           $num .= $match;
 
-        $this->numericEnglish = (float)( ($this->negativ?'-':'').$num.'.00' );
+        $this->numericEnglish = (float) (($this->negativ?'-':'').$num.'.00');
 
       }
     }
-
 
   }//end public function setNumericLanguage */
 
   /**
    * @param string $english
    */
-  public function setNumericEnglish( $english )
+  public function setNumericEnglish($english)
   {
     $this->numericEnglish = $english;
   }//end public function setnumericEnglish */
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Logic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param $numeric
    */
-  public function formatToEnglish( $numeric = null )
+  public function formatToEnglish($numeric = null)
   {
 
-    if( !is_null( $numeric ) )
+    if (!is_null($numeric))
       $this->setNumericLanguage($numeric);
 
     return $this->numericEnglish;
@@ -256,10 +246,10 @@ class LibFormatterNumeric
   /**
    * @param $numeric
    */
-  public function formatToLanguage( $numeric = null )
+  public function formatToLanguage($numeric = null)
   {
-    
-    if( is_null( $numeric ) )
+
+    if (is_null($numeric))
      $numeric = $this->numericEnglish;
 
     return number_format

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Abstract Class For SysExtention Controllers
@@ -30,7 +29,6 @@ interface IAction
    * @param mixed $input
    * @return boolean
    */
-  public static function run( $input );
-
+  public static function run($input);
 
 } // end interface IAction

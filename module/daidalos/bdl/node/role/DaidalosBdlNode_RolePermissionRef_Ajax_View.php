@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,12 +21,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdlNode_RolePermissionRef_Ajax_View
-  extends DaidalosBdl_Mvcbase_PermissionRef_Ajax_View
+class DaidalosBdlNode_RolePermissionRef_Ajax_View extends DaidalosBdl_Mvcbase_PermissionRef_Ajax_View
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Der domainkey
@@ -34,13 +33,13 @@ class DaidalosBdlNode_RolePermissionRef_Ajax_View
    * @var string
    */
   public $domainKey = 'role';
-  
+
   /**
    * Domain Class Part
    * eg: Profile
    * @var string
    */
   public $domainClass = 'Role';
-  
+
 }//end class DaidalosBdlNode_RolePermissionRef_Ajax_View
 

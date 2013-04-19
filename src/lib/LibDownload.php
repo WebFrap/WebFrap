@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -23,9 +23,9 @@
 class LibDownload
 {
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Singleton Pattern
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Enter description here...
@@ -36,27 +36,21 @@ class LibDownload
 
     $request = Request::getActive();
 
-    if(!$type = $request->param('type'))
-    {
+    if (!$type = $request->param('type')) {
       throw new Io_Exception('Invalid Donwload Type');
     }
 
     $classname = 'LibDownload'.ucfirst($type);
 
-    if( WebFrap::loadable($classname) &&  $classname != 'LibDownloadAdapter' )
-    {
+    if (WebFrap::loadable($classname) &&  $classname != 'LibDownloadAdapter') {
       $download = new $classname();
-    }
-    else
-    {
+    } else {
       throw new Io_Exception('Invalid Donwload Type');
     }
 
     return $download;
 
-
   }//end public function getInstance()
-
 
 } // end class LibDownload
 

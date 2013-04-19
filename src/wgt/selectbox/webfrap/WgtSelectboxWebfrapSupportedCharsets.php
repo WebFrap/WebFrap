@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtSelectboxWebfrapSupportedCharsets
-  extends WgtSelectboxHardcoded
+class WgtSelectboxWebfrapSupportedCharsets extends WgtSelectboxHardcoded
 {
 
   /**
@@ -37,10 +36,8 @@ class WgtSelectboxWebfrapSupportedCharsets
    */
   protected $data = array
   (
-  'utf-8'       =>  array( 'value' => 'utf-8'   ),
+  'utf-8'       =>  array('value' => 'utf-8'   ),
   );
 
-
 } // end class WgtSelectboxWebfrapSupportedCharsets
-
 

@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  *
@@ -54,9 +53,9 @@ class WgtCookie
    */
   protected $secure  = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Magic Functions
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param string $name Name of the Cookie
@@ -73,68 +72,67 @@ class WgtCookie
        $this->path    = $path;
        $this->domain  = $domain;
        $this->secure  = $secure;
-  }//end public function __construct( $name )
+  }//end public function __construct($name)
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
-  public function setName( $data )
+  public function setName($data)
   {
     $this->name = $data;
   }
 
-  public function getName( )
+  public function getName()
   {
     return $this->name;
   }
 
-  public function setValue( $data )
+  public function setValue($data)
   {
     $this->value = $data;
   }
 
-  public function getValue( )
+  public function getValue()
   {
     return $this->value;
   }
 
-  public function setExpire( $data )
+  public function setExpire($data)
   {
     $this->expire = $data;
   }
 
-  public function getExpire( )
+  public function getExpire()
   {
     return $this->expire;
   }
 
-  public function setPath( $data )
+  public function setPath($data)
   {
     $this->path = $data;
   }
 
-  public function getPath( )
+  public function getPath()
   {
     return $this->path;
   }
 
-  public function setDomain( $data )
+  public function setDomain($data)
   {
     $this->domain = $data;
   }
 
-  public function getDomain( )
+  public function getDomain()
   {
     return $this->domain;
   }
-
 
   /**
    * @param int $data
    * @return void
    */
-  public function setSecure( $data )
+  public function setSecure($data)
   {
     $this->secure = $data;
   }
@@ -142,21 +140,21 @@ class WgtCookie
   /**
    * @return int
    */
-  public function getSecure( )
+  public function getSecure()
   {
     return $this->secure;
   }//end public function getSecure
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Logic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @return void
    */
   public function setCookie()
   {
-     if(!setcookie
+     if (!setcookie
      (
        $this->name ,
        $this->value,
@@ -168,7 +166,7 @@ class WgtCookie
      {
        Error::addError
        (
-       		'Wasn\'t able to set Cookie '.$this->name
+           'Wasn\'t able to set Cookie '.$this->name
        );
      }
 

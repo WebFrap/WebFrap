@@ -8,31 +8,28 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
-
 /**
  * class ControllerAdmintoolsPostgres
  * Extention zum anzeigen dieverser Systemdaten
  */
-class DaidalosSystem_Maintab_View
-  extends WgtMaintab
+class DaidalosSystem_Maintab_View extends WgtMaintabCustom
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
    * @param TFlag $params
    */
-  public function displayEditor( $params )
+  public function displayEditor($params)
   {
 
     $this->setLabel('Status Editor');
@@ -41,7 +38,6 @@ class DaidalosSystem_Maintab_View
     $this->setTemplate('daidalos/status_editior');
 
   }//emnd public function displayEditor
-
 
 } // end class DaidalosDb_Controller
 

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,21 +26,20 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Qfdu_Dset_Ajax_View
-  extends LibTemplateAjaxView
+class AclMgmt_Qfdu_Dset_Ajax_View extends LibTemplateAjaxView
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
-  
+//////////////////////////////////////////////////////////////////////////////*/
+
   /**
    * @var DomainNode
    */
   public $domainNode = null;
-    
-////////////////////////////////////////////////////////////////////////////////
+
+/*//////////////////////////////////////////////////////////////////////////////
 // display methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * automcomplete for the user roles
@@ -56,11 +55,11 @@ class AclMgmt_Qfdu_Dset_Ajax_View
    *
    * @return void
    */
-  public function displayAutocomplete( $areaId, $key, $context )
+  public function displayAutocomplete($areaId, $key, $context)
   {
 
     $view = $this->getTplEngine();
-    $view->setRawJsonData( $this->model->getUsersByKey( $areaId, $key, $context ) );
+    $view->setRawJsonData($this->model->getUsersByKey($areaId, $key, $context));
 
     return null;
 
@@ -78,11 +77,11 @@ class AclMgmt_Qfdu_Dset_Ajax_View
    * @param string $key the search key from the autocomplete field
    * @param TArray $context useriput / control flags
    */
-  public function displayAutocompleteEntity( $areaId, $key, $context )
+  public function displayAutocompleteEntity($areaId, $key, $context)
   {
 
     $view = $this->getTplEngine();
-    $view->setRawJsonData( $this->model->getEntitiesByKey( $areaId, $key, $context ) );
+    $view->setRawJsonData($this->model->getEntitiesByKey($areaId, $key, $context));
 
     return null;
 
@@ -97,13 +96,13 @@ class AclMgmt_Qfdu_Dset_Ajax_View
    * @param string $areaId the rowid of the activ area
    * @param TArray $context useriput / control flags
    */
-  public function displayConnect( $entityAssign, $context )
+  public function displayConnect($entityAssign, $context)
   {
-    
-    $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu_Dset' );
+
+    $ui = $this->tplEngine->loadUi('AclMgmt_Qfdu_Dset');
     $ui->domainNode = $this->domainNode;
-    $ui->setModel( $this->model );
-    $ui->setView( $this->getView() );
+    $ui->setModel($this->model);
+    $ui->setView($this->getView());
 
 
     // ok it's definitly an ajax request
@@ -111,7 +110,7 @@ class AclMgmt_Qfdu_Dset_Ajax_View
 
     $ui->createListItem
     (
-      $this->model->loadListByDset_Dsets( $context, $entityAssign->getId() ),
+      $this->model->loadListByDset_Dsets($context, $entityAssign->getId()),
       $context->access,
       $context
     );
@@ -127,21 +126,20 @@ class AclMgmt_Qfdu_Dset_Ajax_View
    * @param int $areaId the rowid of the activ area
    * @param TArray $context control flags
    */
-  public function displaySearch( $context )
+  public function displaySearch($context)
   {
 
-    $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu_Dset' );
+    $ui = $this->tplEngine->loadUi('AclMgmt_Qfdu_Dset');
     $ui->domainNode = $this->domainNode;
-    $ui->setModel( $this->model );
-    $ui->setView( $this->getView() );
-
+    $ui->setModel($this->model);
+    $ui->setView($this->getView());
 
     // ok it's definitly an ajax request
     $context->ajax = true;
 
     $ui->createListItem
     (
-      $this->model->loadListByDset_Dsets( $context ),
+      $this->model->loadListByDset_Dsets($context),
       $context->access,
       $context
     );
@@ -149,7 +147,7 @@ class AclMgmt_Qfdu_Dset_Ajax_View
     return null;
 
   }//end public function displaySearch */
-  
+
   /**
    * search pushes a rendered listing element body to the client, that replaces
    * the existing body
@@ -157,17 +155,17 @@ class AclMgmt_Qfdu_Dset_Ajax_View
    * @param int $areaId the rowid of the activ area
    * @param TArray $context control flags
    */
-  public function displayLoadGridUsers( $dsetId, $context )
+  public function displayLoadGridUsers($dsetId, $context)
   {
-    
+
     /* @var $ui  AclMgmt_Qfdu_Dset_Ui  */
-    $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu_Dset' );
+    $ui = $this->tplEngine->loadUi('AclMgmt_Qfdu_Dset');
     $ui->domainNode = $this->domainNode;
-    $ui->setModel( $this->model );
-    $ui->setView( $this->getTpl() );
+    $ui->setModel($this->model);
+    $ui->setView($this->getTpl());
 
     // add the id to the form
-    if( !$context->searchFormId )
+    if (!$context->searchFormId)
       $context->searchFormId = 'wgt-form-table-'.$this->domainNode->domainName.'-acl-tdset-search';
 
     // ok it's definitly an ajax request
@@ -182,7 +180,7 @@ class AclMgmt_Qfdu_Dset_Ajax_View
     return null;
 
   }//end public function displayLoadGridUsers */
-  
+
   /**
    * search pushes a rendered listing element body to the client, that replaces
    * the existing body
@@ -191,17 +189,17 @@ class AclMgmt_Qfdu_Dset_Ajax_View
    * @param int $dsetId
    * @param TArray $context control flags
    */
-  public function displayLoadGridGroups( $userId, $dsetId, $context )
+  public function displayLoadGridGroups($userId, $dsetId, $context)
   {
-    
+
     /* @var $ui  AclMgmt_Qfdu_Dset_Ui  */
-    $ui = $this->tplEngine->loadUi( 'AclMgmt_Qfdu_Dset' );
+    $ui = $this->tplEngine->loadUi('AclMgmt_Qfdu_Dset');
     $ui->domainNode = $this->domainNode;
-    $ui->setModel( $this->model );
-    $ui->setView( $this->getTpl() );
+    $ui->setModel($this->model);
+    $ui->setView($this->getTpl());
 
     // add the id to the form
-    if( !$context->searchFormId )
+    if (!$context->searchFormId)
       $context->searchFormId = 'wgt-form-table-'.$this->domainNode->domainName.'-acl-tdset-search';
 
     // ok it's definitly an ajax request

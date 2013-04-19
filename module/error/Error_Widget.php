@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -22,10 +21,8 @@
  * @author Dominik Bonsch
  * @copyright Dominik Bonsch <dominik.bonsch@webfrap.net>
  */
-class Error_Widget
-  extends WgtWidget
+class Error_Widget extends WgtWidget
 {
-
 
   /**
    * @param LibTemplate $view
@@ -33,7 +30,7 @@ class Error_Widget
    * @param string $tabSize
    * @return void
    */
-  public function asTab( $view, $tabId, $tabSize = 'medium' )
+  public function asTab($view, $tabId, $tabSize = 'medium')
   {
 
     $html = <<<HTML
@@ -54,11 +51,11 @@ HTML;
    * @param string $tabSize
    * @return void
    */
-  public function reload( $view, $tabId )
+  public function reload($view, $tabId)
   {
 
     $html = <<<HTML
-    <div id="{$tabId}" class="wgt_tab {$tabSize}" title="error"  >
+    <div id="{$tabId}" class="wgt_tab medium" title="error"  >
       <h2>The Widget you requested was not loadable</h2>
       <div class="wgt-clear small"></div>
     </div>
@@ -69,5 +66,4 @@ HTML;
   }//end public function asTab */
 
 } // end class Error_Widget
-
 

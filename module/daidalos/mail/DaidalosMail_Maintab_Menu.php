@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,12 +21,11 @@
  * @author Malte Schirmacher <malte.schirmacher@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosMail_Maintab_Menu
-  extends WgtDropmenu
+class DaidalosMail_Maintab_Menu extends WgtDropmenu
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * add a drop menu to the create window
@@ -37,20 +36,18 @@ class DaidalosMail_Maintab_Menu
    *   string formId: the id of the form;
    * }
    */
-  public function buildMenu(  $params )
+  public function buildMenu( $params)
   {
 
-    $iconMenu          = $this->view->icon( 'control/menu.png'     ,'Menu'   );
-    $iconClose         = $this->view->icon( 'control/close.png'    ,'Close'   );
-    $iconSearch        = $this->view->icon( 'control/search.png'   ,'Search'  );
-    $iconBookmark      = $this->view->icon( 'control/bookmark.png' ,'Bookmark');
-    $iconBackup        = $this->view->icon( 'daidalos/backup.png' ,'Backup' );
-    $iconSave        = $this->view->icon( 'control/save.png' ,'Save' );
-
+    $iconMenu          = $this->view->icon('control/menu.png'     ,'Menu'   );
+    $iconClose         = $this->view->icon('control/close.png'    ,'Close'   );
+    $iconSearch        = $this->view->icon('control/search.png'   ,'Search'  );
+    $iconBookmark      = $this->view->icon('control/bookmark.png' ,'Bookmark');
+    $iconBackup        = $this->view->icon('daidalos/backup.png' ,'Backup');
+    $iconSave        = $this->view->icon('control/save.png' ,'Save');
 
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport( $params );
-
+    $entries->support  = $this->entriesSupport($params);
 
     $this->content = <<<HTML
 <ul class="wcm wcm_ui_dropmenu wgt-dropmenu" id="{$this->id}"  >
@@ -76,13 +73,13 @@ HTML;
   /**
    * @param TFlag $params
    */
-  protected function entriesSupport( $params )
+  protected function entriesSupport($params)
   {
 
-    $iconSupport = $this->view->icon( 'control/support.png'  ,'Support' );
-    $iconBug     = $this->view->icon( 'control/bug.png'      ,'Bug' );
-    $iconFaq     = $this->view->icon( 'control/faq.png'      ,'Faq' );
-    $iconHelp    = $this->view->icon( 'control/help.png'     ,'Help' );
+    $iconSupport = $this->view->icon('control/support.png'  ,'Support');
+    $iconBug     = $this->view->icon('control/bug.png'      ,'Bug');
+    $iconFaq     = $this->view->icon('control/faq.png'      ,'Faq');
+    $iconHelp    = $this->view->icon('control/help.png'     ,'Help');
 
     $html = <<<HTML
 
@@ -99,8 +96,7 @@ HTML;
     return $html;
 
   }//end public function entriesSupport */
-  
-  
+
   /**
    * just add the code for the edit ui controls
    *
@@ -114,9 +110,8 @@ HTML;
    *     services
    * }
    */
-  public function injectActions( $view, $params )
+  public function injectActions($view, $params)
   {
-
 
     // add the button action for save in the window
     // the code will be binded direct on a window object and is removed
@@ -124,15 +119,14 @@ HTML;
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       self.close();
     });
 
 
 BUTTONJS;
 
-
-    $view->addJsCode( $code );
+    $view->addJsCode($code);
 
   }//end public function injectActions */
 

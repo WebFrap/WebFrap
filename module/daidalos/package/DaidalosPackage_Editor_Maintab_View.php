@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -22,24 +21,22 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosPackage_Editor_Maintab_View
-  extends WgtMaintab
+class DaidalosPackage_Editor_Maintab_View extends WgtMaintabCustom
 {
 
-  
   /**
    * @var DaidalosPackage_Model
    */
   public $model = null;
-  
-////////////////////////////////////////////////////////////////////////////////
+
+/*//////////////////////////////////////////////////////////////////////////////
 // form export methodes
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
  /**
   * @param TFlag $params
   */
-  public function displayEditor( $key, $params )
+  public function displayEditor($key, $params)
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -50,33 +47,31 @@ class DaidalosPackage_Editor_Maintab_View
     );
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText);
 
     // set the window status text
-    $this->setLabel( $i18nText );
+    $this->setLabel($i18nText);
 
-    $this->addVar( 'package', $this->model->getPackageFile( $key, $params->type ) );
-    $this->addVar( 'packages', $this->model->getPackageList( $key, $params->type ) );
-    $this->addVar( 'packageKey', $key );
-    $this->addVar( 'type', $params->type );
-    
-    $this->setTabId( 'wgt-tab-form-daidalos_package-'.$key );
-    
+    $this->addVar('package', $this->model->getPackageFile($key, $params->type));
+    $this->addVar('packages', $this->model->getPackageList($key, $params->type));
+    $this->addVar('packageKey', $key);
+    $this->addVar('type', $params->type);
+
+    $this->setTabId('wgt-tab-form-daidalos_package-'.$key);
+
     // set the from template
-    $this->setTemplate( 'daidalos/package/maintab/form_edit' );
+    $this->setTemplate('daidalos/package/maintab/form_edit');
 
-    $this->addMenu( $key, $params );
+    $this->addMenu($key, $params);
 
     // kein fehler aufgetreten
     return null;
 
   }//end public function displayList */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // protocol for entities
-////////////////////////////////////////////////////////////////////////////////
-    
- 
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * add a drop menu to the create window
@@ -87,20 +82,20 @@ class DaidalosPackage_Editor_Maintab_View
    *   string formId: the id of the form;
    * }
    */
-  protected function addMenu( $key, $params )
+  protected function addMenu($key, $params)
   {
 
     $i18n         = $this->getI18n();
-  
-    $iconMenu     = $this->icon( 'control/menu.png'      ,'Menu');
-    $iconSupport  = $this->icon( 'control/support.png'      ,'Support');
-    $iconHelp     = $this->icon( 'control/help.png'      ,'Help');
-    $iconClose    = $this->icon( 'control/close.png'      ,'Close');
-    $iconSave     = $this->icon( 'control/save.png'      ,'Save');
-    $iconBug      = $this->icon( 'control/bug.png'      ,'Bug');
 
-    $iconSync      = $this->icon( 'control/sync.png'      ,'Sync');
-    $iconBuild     = $this->icon( 'daidalos/build.png'      ,'Build');
+    $iconMenu     = $this->icon('control/menu.png'      ,'Menu');
+    $iconSupport  = $this->icon('control/support.png'      ,'Support');
+    $iconHelp     = $this->icon('control/help.png'      ,'Help');
+    $iconClose    = $this->icon('control/close.png'      ,'Close');
+    $iconSave     = $this->icon('control/save.png'      ,'Save');
+    $iconBug      = $this->icon('control/bug.png'      ,'Bug');
+
+    $iconSync      = $this->icon('control/sync.png'      ,'Sync');
+    $iconBuild     = $this->icon('daidalos/build.png'      ,'Build');
 
     $menu          = $this->newMenu($this->id.'_dropmenu');
     $menu->content = <<<HTML
@@ -138,7 +133,7 @@ class DaidalosPackage_Editor_Maintab_View
 </ul>
 HTML;
 
-    $this->addActions( $key, $params );
+    $this->addActions($key, $params);
 
   }//end protected function addMenu */
 
@@ -153,7 +148,7 @@ HTML;
    *   string formId: the id of the form;
    * }
    */
-  protected function addActions( $key, $params )
+  protected function addActions($key, $params)
   {
 
     // add the button actions for create in the window
@@ -163,27 +158,25 @@ HTML;
     $code = <<<BUTTONJS
 
 // close tab
-self.getObject().find(".wgtac_close").click(function(){
+self.getObject().find(".wgtac_close").click(function() {
   self.close();
 });
 
-self.getObject().find(".wgtac_save").click(function(){
+self.getObject().find(".wgtac_save").click(function() {
   \$R.form('wgt-form-daidalos_package_edit-{$key}');
   //self.close();
 });
 
-self.getObject().find(".wgtac_build_package").click(function(){
+self.getObject().find(".wgtac_build_package").click(function() {
   \$S('#wgt-modal-daidalos-package-{$key}').modal();
   //self.close();
 });
 
 BUTTONJS;
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code);
 
   }//end protected function addActions */
-
-
 
 }//end class MaintenanceCache_Maintab_View
 

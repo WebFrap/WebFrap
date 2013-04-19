@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,41 +21,37 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyMessage_Table_Model
-  extends Model
+class MyMessage_Table_Model extends Model
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
-    
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
+
+/*//////////////////////////////////////////////////////////////////////////////
 // getter for the entities
-////////////////////////////////////////////////////////////////////////////////
-        
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
   /**
   * Erfragen der Haupt Entity unabhängig vom Maskenname
   * @param int $objid
   * @return WbfsysMessage_Entity
   */
-  public function getEntity( $objid = null )
+  public function getEntity($objid = null)
   {
-
-    return $this->getEntityMyMessage( $objid );
+    return $this->getEntityMyMessage($objid);
 
   }//end public function getEntity */
-    
+
   /**
   * Setzen der Haupt Entity, unabhängig vom Maskenname
   * @param WbfsysMessage_Entity $entity
   */
-  public function setEntity( $entity )
+  public function setEntity($entity)
   {
 
-    $this->setEntityMyMessage( $entity );
+    $this->setEntityMyMessage($entity);
 
   }//end public function setEntity */
-
 
   /**
   * returns the activ main entity with data, or creates a empty one
@@ -63,24 +59,21 @@ class MyMessage_Table_Model
   * @param int $objid
   * @return WbfsysMessage_Entity
   */
-  public function getEntityMyMessage( $objid = null )
+  public function getEntityMyMessage($objid = null)
   {
 
     $response = $this->getResponse();
-  
-    if( !$entityMyMessage = $this->getRegisterd( 'main_entity' ) )
-      $entityMyMessage = $this->getRegisterd( 'entityMyMessage' );
+
+    if (!$entityMyMessage = $this->getRegisterd('main_entity'))
+      $entityMyMessage = $this->getRegisterd('entityMyMessage');
 
     //entity wbfsys_message
-    if( !$entityMyMessage )
-    {
+    if (!$entityMyMessage) {
 
-      if( !is_null( $objid ) )
-      {
+      if (!is_null($objid)) {
         $orm = $this->getOrm();
 
-        if( !$entityMyMessage = $orm->get( 'WbfsysMessage', $objid) )
-        {
+        if (!$entityMyMessage = $orm->get('WbfsysMessage', $objid)) {
           $response->addError
           (
             $response->i18n->l
@@ -89,27 +82,23 @@ class MyMessage_Table_Model
               'wbfsys.message.message'
             )
           );
+
           return null;
         }
 
-        $this->register( 'entityMyMessage', $entityMyMessage );
-        $this->register( 'main_entity', $entityMyMessage);
+        $this->register('entityMyMessage', $entityMyMessage);
+        $this->register('main_entity', $entityMyMessage);
 
-      }
-      else
-      {
+      } else {
         $entityMyMessage   = new WbfsysMessage_Entity() ;
-        $this->register( 'entityMyMessage', $entityMyMessage );
-        $this->register( 'main_entity', $entityMyMessage);
+        $this->register('entityMyMessage', $entityMyMessage);
+        $this->register('main_entity', $entityMyMessage);
       }
 
-    }
-    elseif( $objid && $objid != $entityMyMessage->getId() )
-    {
+    } elseif ($objid && $objid != $entityMyMessage->getId()) {
       $orm = $this->getOrm();
 
-      if( !$entityMyMessage = $orm->get( 'WbfsysMessage', $objid) )
-      {
+      if (!$entityMyMessage = $orm->get('WbfsysMessage', $objid)) {
         $response->addError
         (
           $response->i18n->l
@@ -118,28 +107,28 @@ class MyMessage_Table_Model
             'wbfsys.message.message'
           )
         );
+
         return null;
       }
 
-      $this->register( 'entityMyMessage', $entityMyMessage);
-      $this->register( 'main_entity', $entityMyMessage);
+      $this->register('entityMyMessage', $entityMyMessage);
+      $this->register('main_entity', $entityMyMessage);
     }
 
     return $entityMyMessage;
 
   }//end public function getEntityMyMessage */
 
-
   /**
   * returns the activ main entity with data, or creates a empty one
   * and returns it instead
   * @param WbfsysMessage_Entity $entity
   */
-  public function setEntityMyMessage( $entity )
+  public function setEntityMyMessage($entity)
   {
 
-    $this->register( 'entityMyMessage', $entity );
-    $this->register( 'main_entity', $entity );
+    $this->register('entityMyMessage', $entity);
+    $this->register('main_entity', $entity);
 
   }//end public function setEntityMyMessage */
 
@@ -149,7 +138,7 @@ class MyMessage_Table_Model
    * @param TFlag $params named parameters
    * @return boolean
    */
-  public function getEntryData( $params )
+  public function getEntryData($params)
   {
 
     $orm   = $this->getOrm();
@@ -158,19 +147,16 @@ class MyMessage_Table_Model
 
     $data['my_message']  = $this->getEntityMyMessage();
 
-
     $tabData = array();
 
-    foreach( $data as $tabName => $ent )
-    {
+    foreach ($data as $tabName => $ent) {
       // prüfen ob etwas gefunden wurde
-      if( !$ent )
-      {
-        Debug::console( "Missing Entity for Reference: ".$tabName );
+      if (!$ent) {
+        Debug::console("Missing Entity for Reference: ".$tabName);
         continue;
       }
 
-      $tabData = array_merge( $tabData , $ent->getAllData( $tabName ) );
+      $tabData = array_merge($tabData , $ent->getAllData($tabName));
 
     }
 
@@ -178,20 +164,20 @@ class MyMessage_Table_Model
 
   }// end public function getEntryData */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // context: table
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
   /**
    * Suchfunktion für das Listen Element
-   * 
+   *
    * Wenn suchparameter übergeben werden, werden diese automatisch in die
    * Query eingebaut, ansonsten wird eine plain query ausgeführt
    *
    * Berechtigungen werden bei bedarf berücksichtigt
    *
    * Am Ende wird ein geladenes Query Objekt zurückgegeben, über welches
-   * ( wie über einen Array ) itteriert werden kann
+   * (wie über einen Array) itteriert werden kann
    *
    * @param LibAclContainer $access
    * @param TFlag $params named parameters
@@ -199,36 +185,32 @@ class MyMessage_Table_Model
    *
    * @return LibSqlQuery
    *
-   * @throws LibDb_Exception 
+   * @throws LibDb_Exception
    *    wenn die Query fehlschlägt
-   *    Datenbank Verbindungsfehler... etc ( siehe meldung )
+   *    Datenbank Verbindungsfehler... etc (siehe meldung)
    */
-  public function search( $access, $params, $condition = array() )
+  public function search($access, $params, $condition = array())
   {
 
     // laden der benötigten resourcen
     $view         = $this->getView();
     $httpRequest = $this->getRequest();
     $response    = $this->getResponse();
-    
+
     $db          = $this->getDb();
     $orm         = $db->getOrm();
     $user        = $this->getUser();
 
-
-
     // freitext suche
-    if( $free = $httpRequest->param( 'free_search' , Validator::TEXT ) )
-      $condition['free'] = $db->addSlashes( trim( $free ) );
+    if ($free = $httpRequest->param('free_search' , Validator::TEXT))
+      $condition['free'] = $db->addSlashes(trim($free));
 
-      if( !$fieldsWbfsysMessage = $this->getRegisterd( 'search_fields_wbfsys_message' ) )
-      {
-         $fieldsWbfsysMessage   = $orm->getSearchCols( 'WbfsysMessage' );
+      if (!$fieldsWbfsysMessage = $this->getRegisterd('search_fields_wbfsys_message')) {
+         $fieldsWbfsysMessage   = $orm->getSearchCols('WbfsysMessage');
       }
 
-      if( $refs = $httpRequest->dataSearchIds( 'search_wbfsys_message' ) )
-      {
-        $fieldsWbfsysMessage = array_unique( array_merge
+      if ($refs = $httpRequest->dataSearchIds('search_wbfsys_message')) {
+        $fieldsWbfsysMessage = array_unique(array_merge
         (
           $fieldsWbfsysMessage,
           $refs
@@ -237,79 +219,73 @@ class MyMessage_Table_Model
 
       $filterWbfsysMessage     = $httpRequest->checkSearchInput
       (
-        $orm->getValidationData( 'WbfsysMessage', $fieldsWbfsysMessage ),
-        $orm->getErrorMessages( 'WbfsysMessage'  ),
+        $orm->getValidationData('WbfsysMessage', $fieldsWbfsysMessage),
+        $orm->getErrorMessages('WbfsysMessage'  ),
         'search_wbfsys_message'
       );
       $condition['wbfsys_message'] = $filterWbfsysMessage->getData();
 
-      if( $mRoleCreate = $httpRequest->data( 'search_wbfsys_message', Validator::EID, 'm_role_create'   ) )
+      if ($mRoleCreate = $httpRequest->data('search_wbfsys_message', Validator::EID, 'm_role_create'   ))
         $condition['wbfsys_message']['m_role_create'] = $mRoleCreate;
 
-      if( $mRoleChange = $httpRequest->data( 'search_wbfsys_message', Validator::EID, 'm_role_change'   ) )
+      if ($mRoleChange = $httpRequest->data('search_wbfsys_message', Validator::EID, 'm_role_change'   ))
         $condition['wbfsys_message']['m_role_change'] = $mRoleChange;
 
-      if( $mTimeCreatedBefore = $httpRequest->data( 'search_wbfsys_message', Validator::DATE, 'm_time_created_before'   ) )
+      if ($mTimeCreatedBefore = $httpRequest->data('search_wbfsys_message', Validator::DATE, 'm_time_created_before'   ))
         $condition['wbfsys_message']['m_time_created_before'] = $mTimeCreatedBefore;
 
-      if( $mTimeCreatedAfter = $httpRequest->data( 'search_wbfsys_message', Validator::DATE, 'm_time_created_after'   ) )
+      if ($mTimeCreatedAfter = $httpRequest->data('search_wbfsys_message', Validator::DATE, 'm_time_created_after'   ))
         $condition['wbfsys_message']['m_time_created_after'] = $mTimeCreatedAfter;
 
-      if( $mTimeChangedBefore = $httpRequest->data( 'search_wbfsys_message', Validator::DATE, 'm_time_changed_before'   ) )
+      if ($mTimeChangedBefore = $httpRequest->data('search_wbfsys_message', Validator::DATE, 'm_time_changed_before'   ))
         $condition['wbfsys_message']['m_time_changed_before'] = $mTimeChangedBefore;
 
-      if( $mTimeChangedAfter = $httpRequest->data( 'search_wbfsys_message}', Validator::DATE, 'm_time_changed_after'   ) )
+      if ($mTimeChangedAfter = $httpRequest->data('search_wbfsys_message}', Validator::DATE, 'm_time_changed_after'   ))
         $condition['wbfsys_message']['m_time_changed_after'] = $mTimeChangedAfter;
 
-      if( $mRowid = $httpRequest->data( 'search_wbfsys_message', Validator::EID, 'm_rowid'   ) )
+      if ($mRowid = $httpRequest->data('search_wbfsys_message', Validator::EID, 'm_rowid'   ))
         $condition['wbfsys_message']['m_rowid'] = $mRowid;
 
-      if( $mUuid = $httpRequest->data( 'search_wbfsys_message', Validator::TEXT, 'm_uuid'    ) )
+      if ($mUuid = $httpRequest->data('search_wbfsys_message', Validator::TEXT, 'm_uuid'    ))
         $condition['wbfsys_message']['m_uuid'] = $mUuid;
 
-    $query = $db->newQuery( 'WbfsysMessage_Table' );
+    $query = $db->newQuery('WbfsysMessage_Table');
 
-    if( $params->dynFilters )
-    {
-      foreach( $params->dynFilters as $dynFilter  )
-      {
-        try 
-        {
+    if ($params->dynFilters) {
+      foreach ($params->dynFilters as $dynFilter) {
+        try {
           $filter = $db->newFilter
-          ( 
-            'WbfsysMessage_Table_'.SParserString::subToCamelCase( $dynFilter ) 
+          (
+            'WbfsysMessage_Table_'.SParserString::subToCamelCase($dynFilter)
           );
-          
-          if( $filter )
-            $query->inject( $filter, $params );
-        }
-        catch( LibDb_Exception $e )
-        {
-          $response->addError( "Requested nonexisting filter ".$dynFilter ); 
+
+          if ($filter)
+            $query->inject($filter, $params);
+        } catch (LibDb_Exception $e) {
+          $response->addError("Requested nonexisting filter ".$dynFilter);
         }
 
       }
     }
-      
+
     // per exclude können regeln übergeben werden um bestimmte datensätze
     // auszublenden
-    // wird häufig verwendet um bereits zugewiesenen datensätze aus zu blenden    
-    if( $params->exclude )
-    {
+    // wird häufig verwendet um bereits zugewiesenen datensätze aus zu blenden
+    if ($params->exclude) {
 
-      $tmp = explode( '-', $params->exclude );
+      $tmp = explode('-', $params->exclude);
 
       $conName   = $tmp[0];
       $srcId     = $tmp[1];
       $targetId  = $tmp[2];
 
       $excludeCond = ' wbfsys_message.rowid NOT IN '
-      .'( select '.$targetId .' from '.$conName.' where '.$srcId.' = '.$params->objid.' ) ';
+      .'(select '.$targetId .' from '.$conName.' where '.$srcId.' = '.$params->objid.') ';
 
-      $query->setCondition( $excludeCond );
+      $query->setCondition($excludeCond);
 
     }
-      
+
     // wenn der user nur teilberechtigungen hat, müssen die ACLs direkt beim
     // lesen der Daten berücksichtigt werden
     if
@@ -319,12 +295,12 @@ class MyMessage_Table_Model
     {
 
       $validKeys  = $access->fetchListIds
-      ( 
-        $user->getProfileName(), 
-        $query, 
+      (
+        $user->getProfileName(),
+        $query,
         'table',
-        $condition, 
-        $params 
+        $condition,
+        $params
       );
 
       $query->fetchInAcls
@@ -333,14 +309,12 @@ class MyMessage_Table_Model
         $params
       );
 
-    }
-    else
-    {
+    } else {
 
       // da die rechte scheins auf die komplette datenquelle vergeben wurden
       // kann hier auch einfach mit der ganzen quelle geladen werden
       // es wird davon ausgegangen, dass ein standard level definiert wurde
-      // wenn kein standard level definiert wurde, werden die daten nur 
+      // wenn kein standard level definiert wurde, werden die daten nur
       // aufgelistet ohne weitere interaktions möglichkeit
       $query->fetch
       (
@@ -349,10 +323,6 @@ class MyMessage_Table_Model
       );
 
     }
-
-
-
-
 
     return $query;
 
@@ -365,23 +335,21 @@ class MyMessage_Table_Model
    * @param TFlag $params named parameters
    * @return boolean
    */
-  public function fetchSearchParams( $params, $id = null  )
+  public function fetchSearchParams($params, $id = null  )
   {
 
     $httpRequest = $this->getRequest();
     $orm         = $this->getOrm();
     $view        = $this->getView();
-    
+
     $response    = $this->getResponse();
 
-    try
-    {
+    try {
 
       //management  wbfsys_message source wbfsys_message
-      $entityMyMessage = $orm->newEntity( 'WbfsysMessage' );
+      $entityMyMessage = $orm->newEntity('WbfsysMessage');
 
-      if( !$params->fieldsWbfsysMessage )
-      {
+      if (!$params->fieldsWbfsysMessage) {
         $params->fieldsWbfsysMessage  = $entityMyMessage->getCols
         (
           $params->categories
@@ -398,15 +366,13 @@ class MyMessage_Table_Model
 
       // register the entity in the mode registry
       $this->register
-      ( 
-        'entityMyMessage', 
-        $entityMyMessage 
+      (
+        'entityMyMessage',
+        $entityMyMessage
        );
 
       return !$response->hasErrors();
-    }
-    catch( InvalidInput_Exception $e )
-    {
+    } catch (InvalidInput_Exception $e) {
       return false;
     }
 
@@ -418,27 +384,24 @@ class MyMessage_Table_Model
    * @param LibTemplateWindow $view
    * @return boolean
    */
-  public function searchForm( $view )
+  public function searchForm($view)
   {
 
     $searchFields = $this->getSearchFields();
-  
 
     //entity wbfsys_message
-    if(!$entityMyMessage = $this->getRegisterd( 'entityMyMessage' ) )
-    {
+    if (!$entityMyMessage = $this->getRegisterd('entityMyMessage')) {
       $entityMyMessage   = new WbfsysMessage_Entity() ;
     }
 
-    $formWbfsysMessage    = $view->newForm( 'WbfsysMessage' );
-    $formWbfsysMessage->setNamespace( 'WbfsysMessage' );
-    $formWbfsysMessage->setPrefix( 'WbfsysMessage' );
+    $formWbfsysMessage    = $view->newForm('WbfsysMessage');
+    $formWbfsysMessage->setNamespace('WbfsysMessage');
+    $formWbfsysMessage->setPrefix('WbfsysMessage');
     $formWbfsysMessage->createSearchForm
     (
       $entityMyMessage,
-      ( isset($searchFields['wbfsys_message'])?$searchFields['wbfsys_message']:array() )
+      (isset($searchFields['wbfsys_message'])?$searchFields['wbfsys_message']:array())
     );
-
 
   }//end public function searchForm */
 
@@ -448,7 +411,6 @@ class MyMessage_Table_Model
    */
   public function getSearchFields()
   {
-
     return array
     (
       'wbfsys_message' => array
@@ -459,14 +421,13 @@ class MyMessage_Table_Model
     );
 
   }//end public function getSearchFields */
-  
-  
+
   /**
    * the update method of the model
    * @param TFlag $params named parameters
    * @return boolean
    */
-  public function archive( $params )
+  public function archive($params)
   {
 
     // laden der resourcen
@@ -475,10 +436,8 @@ class MyMessage_Table_Model
     $db       = $this->getDb();
     $orm      = $db->getOrm();
 
-    try
-    {
-      if( !$entityMyMessage = $this->getRegisterd( 'entityMyMessage' ) )
-      {
+    try {
+      if (!$entityMyMessage = $this->getRegisterd('entityMyMessage')) {
         return new Error
         (
           $response->i18n->l
@@ -491,15 +450,14 @@ class MyMessage_Table_Model
           (
             'The expected Entity with the key {@key@} was not in the registry',
             'wbf.message',
-            array( 'key' => 'entityMyMessage' )
+            array('key' => 'entityMyMessage')
           )
         );
       }
-      
-      $archStatusId = $orm->getIdByKey( 'WbfsysMessageStatus', 'archived' );
 
-      if( !$orm->update( $entityMyMessage ) )
-      {
+      $archStatusId = $orm->getIdByKey('WbfsysMessageStatus', 'archived');
+
+      if (!$orm->update($entityMyMessage)) {
         $entityText = $entityMyMessage->text();
 
         // hier wird erst mal nur eine meldung gemacht,
@@ -518,9 +476,7 @@ class MyMessage_Table_Model
           )
         );
 
-      }
-      else
-      {
+      } else {
         $entityText = $entityMyMessage->text();
 
         $response->addMessage
@@ -538,7 +494,6 @@ class MyMessage_Table_Model
 
         $saveSrc = false;
 
-
         $this->protocol
         (
           'edited Message: '.$entityText,
@@ -546,21 +501,16 @@ class MyMessage_Table_Model
           $entityMyMessage
         );
 
-
-
-        if( $saveSrc )
-          $orm->update( $entityMyMessage );
+        if ($saveSrc)
+          $orm->update($entityMyMessage);
 
       }
-    }
-    catch( LibDb_Exception $e )
-    {
-      return new Error( $e, Response::INTERNAL_ERROR );
+    } catch (LibDb_Exception $e) {
+      return new Error($e, Response::INTERNAL_ERROR);
     }
 
     // prüfen ob fehler in der message queue gelandet sind
-    if( $response->hasErrors() )
-    {
+    if ($response->hasErrors()) {
       // wenn ja geben wir dem controller ein Fehlerojekt zurück
       // das er behandeln soll
       return new Error
@@ -572,9 +522,7 @@ class MyMessage_Table_Model
         ),
         Response::INTERNAL_ERROR
       );
-    }
-    else
-    {
+    } else {
       return null;
     }
 

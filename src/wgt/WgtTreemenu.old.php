@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -19,12 +19,11 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtTreemenu
-  extends WgtMenuAbstract
+class WgtTreemenu extends WgtMenuAbstract
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * the name of the submenu
@@ -33,19 +32,19 @@ class WgtTreemenu
    */
   protected $subMenuName = 'SubMenu';
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // logic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Enter description here...
    *
    * @param unknown_type $name
    */
-  public function setSubmenuName( $name )
+  public function setSubmenuName($name)
   {
     $this->subMenuName = $name ;
-  }//end public function setSubmenuName( $name )
+  }//end public function setSubmenuName($name)
 
   /**
    * @return string
@@ -53,13 +52,11 @@ class WgtTreemenu
   public function build()
   {
 
-
     $this->load();
 
     $html = '<ul class="wgt-menu sidebar" >';
 
-    foreach( $this->data as $entry )
-    {
+    foreach ($this->data as $entry) {
       $html .= '
       <li>
         <a href="'.TUrl::asUrl($entry[0],$entry[1],$entry[2]).'">'.$entry[3].'</a>
@@ -77,13 +74,12 @@ class WgtTreemenu
   public function buildJs()
   {
 
-
     $this->load();
 
     $template = Webfrap::getSysStatus('systemplate');
     $baseFolder = View::$webIcons.'/xsmall/';
 
-    $html = '$S(document).ready(function(){ '.NL;
+    $html = '$S(document).ready(function() { '.NL;
 
     $html .= '
   // create menubar
@@ -95,23 +91,19 @@ class WgtTreemenu
   extendMainmenuWebfrap(); '.NL;
 
     $html .= ' var mBarWid'.$this->name
-      .' = $S("div#'.$this->menuId.'").getMenubar().createWidgetMenu( null, dummy, true );'.NL;
+      .' = $S("div#'.$this->menuId.'").getMenubar().createWidgetMenu(null, dummy, true);'.NL;
 
     $html .= 'var mBarWidSub'.$this->name
-      .' = mBarWid'.$this->name.'.createSubmenu( "'.$this->subMenuName.'", "", dummy );'.NL;
+      .' = mBarWid'.$this->name.'.createSubmenu("'.$this->subMenuName.'", "", dummy);'.NL;
 
-    foreach( $this->data as $entry )
-    {
-      if( isset($entry[4]) and trim($entry[4]) != '' )
-      {
+    foreach ($this->data as $entry) {
+      if (isset($entry[4]) and trim($entry[4]) != '') {
         $icon = $baseFolder.$entry[4];
-      }
-      else
-      {
+      } else {
         $icon = '';
       }
 
-      $html .= 'mBarWidSub'.$this->name.'.addButton( "'.$entry[3].'", "'.$icon.'", "'.TUrl::asUrl($entry[0],$entry[1],$entry[2]).'" );'.NL;
+      $html .= 'mBarWidSub'.$this->name.'.addButton("'.$entry[3].'", "'.$icon.'", "'.TUrl::asUrl($entry[0],$entry[1],$entry[2]).'");'.NL;
     }
 
     $html .= '});'.NL;
@@ -126,30 +118,25 @@ class WgtTreemenu
   public function buildJsFunction()
   {
 
-
     $this->load();
 
     $template   = Webfrap::getSysStatus('systemplate');
     $baseFolder = View::$webIcons.'/xsmall/';
 
-    $html = NL.'function extendMainmenu'.$this->name.'(){ '.NL;
+    $html = NL.'function extendMainmenu'.$this->name.'() { '.NL;
     $html .= ' var mBarWid'.$this->name
-      .' = $S("div#'.$this->menuId.'").getMenubar().createWidgetMenu( null, dummy, true );'.NL;
+      .' = $S("div#'.$this->menuId.'").getMenubar().createWidgetMenu(null, dummy, true);'.NL;
     $html .= 'var mBarWidSub'.$this->name
-      .' = mBarWid'.$this->name.'.createSubmenu( "'.$this->subMenuName.'", "", dummy );'.NL;
+      .' = mBarWid'.$this->name.'.createSubmenu("'.$this->subMenuName.'", "", dummy);'.NL;
 
-    foreach( $this->data as $entry )
-    {
-      if( isset($entry[4]) and trim($entry[4]) != '' )
-      {
+    foreach ($this->data as $entry) {
+      if (isset($entry[4]) and trim($entry[4]) != '') {
         $icon = $baseFolder.$entry[4];
-      }
-      else
-      {
+      } else {
         $icon = '';
       }
 
-      $html .= 'mBarWidSub'.$this->name.'.addButton( "'.$entry[3].'", "'.$icon.'", "'.TUrl::asUrl($entry[0],$entry[1],$entry[2]).'" );'.NL;
+      $html .= 'mBarWidSub'.$this->name.'.addButton("'.$entry[3].'", "'.$icon.'", "'.TUrl::asUrl($entry[0],$entry[1],$entry[2]).'");'.NL;
     }
 
     $html .= '}'.NL;
@@ -167,7 +154,5 @@ class WgtTreemenu
     return '';
   }
 
-
 } // end class WgtMenuMainmenu
-
 

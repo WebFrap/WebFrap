@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -24,7 +24,6 @@ class LibLogSyslog
   implements LibLogAdapter
 {
 
-
   protected static $mapping = array
   (
   'TRACE'     => LOG_DEBUG,
@@ -39,14 +38,13 @@ class LibLogSyslog
   'FATAL'     => LOG_ALERT
   );
 
-
   /**
    * (non-PHPdoc)
    * @see src/i/ILogAppender#logline()
    */
-  public function logline( $time, $level, $file, $line, $message, $exception )
+  public function logline($time, $level, $file, $line, $message, $exception)
   {
-    syslog( self::$mapping[$level] , $time."\t".$file."\t".$line."\t".$message );
+    syslog(self::$mapping[$level] , $time."\t".$file."\t".$line."\t".$message);
   } // end public function logline */
 
 } // end class LibLogSyslog

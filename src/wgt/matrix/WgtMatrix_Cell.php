@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
 /**
  * @lang de:
  *
@@ -26,6 +25,10 @@
 abstract class WgtMatrix_Cell
 {
 
+  /**
+   * Type der Cell
+   * @var string
+   */
   public $type = '';
 
   /**
@@ -34,10 +37,13 @@ abstract class WgtMatrix_Cell
    */
   public $env = null;
 
-  public function render( $data )
+  /**
+   * @param array $data
+   */
+  public function render($data)
   {
 
-  }
+  }//end public function render */
 
 }//end class WgtMatrix_Cell
 

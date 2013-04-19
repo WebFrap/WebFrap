@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -20,12 +20,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  *
  */
-class WgtTreeMessage
-  extends WgtTree
+class WgtTreeMessage extends WgtTree
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -33,14 +32,14 @@ class WgtTreeMessage
    */
   public $width = 650;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param array $entry
    */
-  protected function buildTreeNode( $entry )
+  protected function buildTreeNode($entry)
   {
 
     $title        = $entry['title'];
@@ -52,13 +51,12 @@ class WgtTreeMessage
   <div style="width:{$this->width}px;" >
     <span class="date" >{$date}</span>
     <span class="title" >{$title}</span>
-    <span class="name" >{$from}</span>
+    <span class="name" >{$senderName}</span>
   </div>
 HTML;
 
     return $html;
 
   }//end protected function buildTreeNode */
-
 
 }//end class WgtTreeMessage

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtItemTreemenu
-  extends WgtItemAbstract
+class WgtItemTreemenu extends WgtItemAbstract
 {
 
   /** Parser zum generieren eines Treemenus
@@ -28,9 +27,10 @@ class WgtItemTreemenu
    * @return
 
    */
-  public function build( )
+  public function build()
   {
     $this->genMenuroot();
+
     return $this->html;
   } // end of member function build
 
@@ -48,7 +48,7 @@ class WgtItemTreemenu
 
     $this->html .= "<ul>\n
                     <li>\n";
-    $this->genSubmenu( $idlang , 0 );
+    $this->genSubmenu($idlang , 0);
     $this->html .= "</li>\n
                     </ul>\n";
 
@@ -63,36 +63,34 @@ class WgtItemTreemenu
   * @param Int Pos Die Id des Vaterordners
   * @return void
   */
-  public function genSubmenu( $Lang , $Pos )
+  public function genSubmenu($Lang , $Pos)
   {
 
-    if( isset($this->data[$Lang][$Pos]) )
-    {
+    if (isset($this->data[$Lang][$Pos])) {
       $Data = $this->data[$Lang][$Pos];
         asort($Data);
         $this->html .= "<ul>\n";
-        foreach( $Data as $obj ){
-          if( is_object($obj)){
+        foreach ($Data as $obj) {
+          if (is_object($obj)) {
 
           $id = $obj->getId();
           $titel = " title=\"Id: $id Titel: ". $obj->getData("menutext")."\" " ;
 
           $src = trim($obj->getData("menuicon"));
-          if( $src != "" ){
+          if ($src != "") {
             $icon = "<img src=\"".$obj->getData("menuicon")."\" alt=\"".
               $obj->getData("menuiconalt")."\" class=\"xsmall\" />";
-          }else{
+          } else {
             $icon = "";
           }
 
           $url = trim($obj->getData("menulink"));
-          if( $url != ""){
+          if ($url != "") {
             $text = "<a href=\"".$obj->getData($url)."\">".
               $obj->getData("menutext")."</a>";
           }
           $text = "<a $titel href=\"".$obj->getData($url)."\">".
             $obj->getData("menutext")."$icon</a>";
-
 
           $workon = "<a title=\"Eintrag bearbeiten\" href=\"./sys,action-".
             "WorkonMenu-identry-$id,Eintrag-bearbeiten.html\">workon</a>";
@@ -100,18 +98,17 @@ class WgtItemTreemenu
           $delete = "<a title=\"Eintrag löschen\" href=\"./sys,action-".
             "DeleteEntry-identry-$id,Eintrag-loeschen.html\">delete</a>";
 
-
           $this->html .= "<li>\n";
           $this->html .= "$text \n $workon \n $delete \n";
 
-          $this->genSubmenu( $Lang , $obj->getId() );
+          $this->genSubmenu($Lang , $obj->getId());
           $this->html .= "</li>\n";
           }
         } // Ende Foreach
         $this->html .= "</ul>\n";
     }
 
-  } // Ende  function Submenu( $id )
+  } // Ende  function Submenu($id)
 
 } // end class WgtItemTreemenu
 

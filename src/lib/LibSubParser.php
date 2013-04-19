@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,9 +21,9 @@
  */
 class LibSubParser
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attribute
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -37,21 +37,20 @@ class LibSubParser
    */
   protected $lexer      = null;
 
-
   /**
    * @var Tarray
    */
   protected $flag      = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param LibParserRegistry $registry
    * @param LibLexer $lexer
    */
-  public function __construct( $registry ,  $lexer )
+  public function __construct($registry ,  $lexer)
   {
 
     $this->registry     = $registry;
@@ -64,7 +63,7 @@ class LibSubParser
   /**
    * @param string $key
    */
-  public function __get( $key )
+  public function __get($key)
   {
     return $this->registry->$key;
   }//end public function __get */
@@ -72,7 +71,7 @@ class LibSubParser
   /**
    * @param LibGenfName $name
    */
-  public function setName( $name )
+  public function setName($name)
   {
     $this->registry->setName($name);
   }//end public function setName */
@@ -80,7 +79,7 @@ class LibSubParser
   /**
    * @return LibGenfName
    */
-  public function getName(  )
+  public function getName()
   {
     return $this->registry->getName();
   }//end public function getName */
@@ -88,16 +87,15 @@ class LibSubParser
   /**
    * @return string
    */
-  public function line( $code )
+  public function line($code)
   {
     return $this->registry->ws.$code.NL;
   }//end public function line */
 
-
   /**
    * @return sline
    */
-  public function sLine( $code )
+  public function sLine($code)
   {
     return $this->registry->ws.$code;
   }//end public function line */
@@ -105,7 +103,7 @@ class LibSubParser
   /**
    * @return string
    */
-  public function cLine( $code )
+  public function cLine($code)
   {
     return $code.NL;
   }//end public function cline */
@@ -113,7 +111,7 @@ class LibSubParser
   /**
    * @return string
    */
-  public function nl(  )
+  public function nl()
   {
     return NL;
   }//end public function cline */
@@ -121,7 +119,7 @@ class LibSubParser
   /**
    * @return string
    */
-  public function string( $code )
+  public function string($code)
   {
     return '"'.$code.'"';
   }//end public function string */
@@ -130,7 +128,7 @@ class LibSubParser
    *
    * Enter description here ...
    */
-  public function wsInc(  )
+  public function wsInc()
   {
     $this->registry->wsInc();
   }//end public function wsInc */
@@ -139,16 +137,10 @@ class LibSubParser
    *
    * Enter description here ...
    */
-  public function wsDec(  )
+  public function wsDec()
   {
     $this->registry->wsDec();
   }//end public function wsDec */
 
 } // end class LibParser
-
-
-
-
-
-
 

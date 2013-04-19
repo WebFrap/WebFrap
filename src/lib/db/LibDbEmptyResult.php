@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -19,21 +19,20 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibDbEmptyResult
-  extends LibDbResult
+class LibDbEmptyResult extends LibDbResult
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Der Standard Fetch Mode
    */
   protected $fetchMode  = PGSQL_ASSOC;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Constantes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Holen der Daten als Assoziativer Array
@@ -50,19 +49,17 @@ class LibDbEmptyResult
    */
   const fetchBoth       = PGSQL_BOTH;
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Special Queries
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * 
+   *
    */
   public function __construct()
   {
-    
+
   }
-  
 
   /**
    * Löschen eines Ausführplans in der Datenbank
@@ -71,10 +68,10 @@ class LibDbEmptyResult
    * @return void
    * @throws LibDb_Exception
    */
-  public function deallocate( )
+  public function deallocate()
   {
 
-  }// end public function deallocate( )
+  }// end public function deallocate()
 
   /**
    * Ausführen einer Vorbereiteten Datenbankabfrage
@@ -83,10 +80,10 @@ class LibDbEmptyResult
    * @param   array Values Ein Array mit den Daten
    * @throws  LibDb_Exception
    */
-  public function executeQuery( $values = array() )
+  public function executeQuery($values = array())
   {
     return array();
-  }// end public function executeQuery( $values = array() )
+  }// end public function executeQuery($values = array())
 
   /**
    * Ausführen einer Vorbereiteten Datenbankabfrage
@@ -95,11 +92,10 @@ class LibDbEmptyResult
    * @param   array Values Ein Array mit den Daten
    * @throws  LibDb_Exception
    */
-  public function executeAction( $values = array(), $getNewId = false )
+  public function executeAction($values = array(), $getNewId = false)
   {
     return null;
-  }// end public function executeAction( $values = array(), $getNewId = false )
-
+  }// end public function executeAction($values = array(), $getNewId = false)
 
   /**
    * Auslesen des letzten Abfrageergebnisses
@@ -107,12 +103,11 @@ class LibDbEmptyResult
    * @param int $Mode
    * @return array
    */
-  public function getAll( )
+  public function getAll()
   {
-
     return array();
 
-  }// end public function getAll( $mode = null )
+  }// end public function getAll($mode = null)
 
   /**
    * Alle Felder einer Column auslesen
@@ -120,9 +115,8 @@ class LibDbEmptyResult
    * @param string $colName
    * @return array
    */
-  public function getColumn( $colName )
+  public function getColumn($colName)
   {
-
     return array();
 
   }// end public function getColumn */
@@ -132,9 +126,8 @@ class LibDbEmptyResult
    *
    * @return array
    */
-  public function get( )
+  public function get()
   {
-
     return array();
 
   }// end public function get */
@@ -144,9 +137,8 @@ class LibDbEmptyResult
    *
    * @return array
    */
-  public function getField( $key )
+  public function getField($key)
   {
-
     return null;
 
   }// end public function getField */
@@ -156,7 +148,7 @@ class LibDbEmptyResult
    *
    * @return array
    */
-  public function load( )
+  public function load()
   {
 
   }// end public function load */
@@ -166,7 +158,7 @@ class LibDbEmptyResult
    *
    * @return array
    */
-  public function getQSize( )
+  public function getQSize()
   {
     return 0;
   }// end public function getRow */
@@ -174,21 +166,21 @@ class LibDbEmptyResult
   /**
    * Das Result der letzten Afrage leeren
    */
-  public function freeResult( )
+  public function freeResult()
   {
     return true;
   }// end public function clearResult */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter for Query Metadata
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Die Numrows der Letzten Aktion abfragen
    *
    * @return int
    */
-  public function getNumRows( )
+  public function getNumRows()
   {
     return 0;
   }// end public function getNumRows */
@@ -198,14 +190,14 @@ class LibDbEmptyResult
    *
    * @return int
    */
-  public function getAffectedRows( )
+  public function getAffectedRows()
   {
     return 0;
   }// end public function getAffectedRows */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Interface: Iterator
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *

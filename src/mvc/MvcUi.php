@@ -15,7 +15,6 @@
 *
 *******************************************************************************/
 
-
  /**
   * A ui block with the configuration of one ore more ui elements
   * Is used to configurate list elements or form masks
@@ -25,12 +24,11 @@
   * @package WebFrap
   * @subpackage Mvc
   */
-class MvcUi
-  extends BaseChild
+class MvcUi extends BaseChild
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attribute
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Normaly only one model is required,
@@ -40,42 +38,39 @@ class MvcUi
    */
   protected $model = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // getter & setter
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param MvcModel $model
    */
-  public function setModel( $model )
+  public function setModel($model)
   {
     $this->model = $model;
   }//end public function setModel */
 
-
   /**
    * @param Base $env
    */
-  public function __construct( $env = null, $view = null )
+  public function __construct($env = null, $view = null)
   {
 
-    if( !$env )
+    if (!$env)
       $env = Webfrap::getActive();
 
     $this->env = $env;
 
-    if( $view )
+    if ($view)
       $this->view = $view;
-    else
-    {
-      if( $env instanceof LibTemplate  )
+    else {
+      if ($env instanceof LibTemplate  )
         $this->view = $env;
-      else 
+      else
         $this->view = $env->getTpl();
     }
 
   }//end public function __construct */
-
 
 }//end class MvcUi
 

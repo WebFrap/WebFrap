@@ -21,30 +21,31 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapMessage_Show_Maintab_View
-  extends WgtMaintab
+class WebfrapMessage_Show_Maintab_View extends WgtMaintab
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param TFlag $params
    * @return void
    */
-  public function displayShow(  $params )
+  public function displayShow( $params)
   {
 
     $message = $this->model->getMessageNode();
 
-    $this->setLabel( 'Message: '.$message->title );
-    $this->setTitle( 'Message: '.$message->title );
+    $this->setLabel('Message: '.$message->title);
+    $this->setTitle('Message: '.$message->title);
 
-    $this->addVar( 'msgNode', $message );
-    $this->setTemplate( 'webfrap/message/maintab/show_page', true );
+    $this->addVar('msgNode', $message);
+    $this->addVar('refs', $this->model->loadMessageReferences($message->msg_id));
+    $this->addVar('attachments', $this->model->loadMessageAttachments($message->msg_id));
+    $this->addVar('checklist', $this->model->loadMessageChecklist($message->msg_id));
+    $this->setTemplate('webfrap/message/maintab/show_page', true);
 
-    $this->addMenu( $params );
+    $this->addMenu($params,$message);
 
   }//end public function displayShow */
 
@@ -57,22 +58,10 @@ class WebfrapMessage_Show_Maintab_View
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $params )
+  public function addMenu($params,$message)
   {
 
-    $iconMenu          = $this->icon( 'control/menu.png'     ,'Menu'   );
-    $iconClose         = $this->icon( 'control/close.png'    ,'Close'   );
-    $iconSearch        = $this->icon( 'control/search.png'   ,'Search'  );
-    $iconBookmark      = $this->icon( 'control/bookmark.png' ,'Bookmark');
-    $iconSupport   = $this->icon( 'control/support.png'  ,'Support' );
-    $iconBug       = $this->icon( 'control/bug.png'      ,'Bug' );
-    $iconFaq       = $this->icon( 'control/faq.png'      ,'Faq' );
-    $iconHelp      = $this->icon( 'control/help.png'     ,'Help' );
-
-    $iconForward   = $this->icon( 'message/forward.png' ,'Forward' );
-    $iconReply  = $this->icon( 'message/reply.png' ,'Reply' );
-
-    $menu     = $this->newMenu( $this->id.'_dropmenu' );
+    $menu     = $this->newMenu($this->id.'_dropmenu');
 
     $menu->id = $this->id.'_dropmenu';
 
@@ -82,46 +71,53 @@ class WebfrapMessage_Show_Maintab_View
   <button
     class="wcm wcm_control_dropmenu wgt-button"
     id="{$this->id}_dropmenu-control"
-    wgt_drop_box="{$this->id}_dropmenu"  >{$iconMenu} {$this->i18n->l('Menu','wbf.label')}</button>
+    wgt_drop_box="{$this->id}_dropmenu"  ><i class="icon-reorder" ></i> {$this->i18n->l('Menu','wbf.label')}</button>
 </div>
 
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
   <ul>
     <li>
-      <a class="wgtac_bookmark" >{$iconBookmark} {$this->i18n->l('Bookmark', 'wbf.label')}</a>
+      <a class="wgtac_bookmark" ><i class="icon-bookmark" ></i> {$this->i18n->l('Bookmark', 'wbf.label')}</a>
     </li>
   </ul>
   <ul>
     <li>
-      <a class="deeplink" >{$iconSupport} {$this->i18n->l('Support', 'wbf.label')}</a>
+      <a class="deeplink" ><i class="icon-info-sign" ></i> {$this->i18n->l('Support', 'wbf.label')}</a>
       <span>
       <ul>
-        <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Issue.create&amp;context=menu" >{$iconBug} {$this->i18n->l('Bug', 'wbf.label')}</a></li>
-        <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Faq.create&amp;context=menu" >{$iconFaq} {$this->i18n->l('Faq', 'wbf.label')}</a></li>
+        <li><a
+        	class="wcm wcm_req_ajax"
+        	href="modal.php?c=Wbfsys.Faq.create&amp;context=menu" ><i class="icon-question-sign" ></i> {$this->i18n->l('Faq', 'wbf.label')}</a></li>
       </ul>
       </span>
     </li>
     <li>
-      <a class="wgtac_close" >{$iconClose} {$this->i18n->l('Close','wbf.label')}</a>
+      <a class="wgtac_close" ><i class="icon-remove-circle" ></i> {$this->i18n->l('Close','wbf.label')}</a>
     </li>
   </ul>
 </div>
 
 <div class="wgt-panel-control" >
-  <button class="wgt-button wgtac_forward" >{$iconForward} {$this->i18n->l('Forward','wbf.label')}</button>
+  <button
+  	class="wgt-button wgtac_forward" ><i class="icon-share-alt" ></i> {$this->i18n->l('Forward','wbf.label')}</button>
 </div>
 
 <div class="wgt-panel-control" >
-  <button class="wgt-button wgtac_reply" >{$iconReply} {$this->i18n->l('Reply','wbf.label')}</button>
+  <button
+  	class="wgt-button wgtac_reply" ><i class="icon-reply" ></i> {$this->i18n->l('Reply','wbf.label')}</button>
 </div>
 
+<div class="wgt-panel-control" >
+  <button
+  	class="wgt-button wgtac_save save_first"
+  	id="wgt-btn-show-msg-save-{$message->msg_id}" ><i class="icon-save" ></i> {$this->i18n->l('Save','wbf.label')}</button>
+</div>
 
 HTML;
 
-    $this->injectActions( $menu, $params );
+    $this->injectActions($menu, $params);
 
   }//end public function addMenu */
-
 
   /**
    * just add the code for the edit ui controls
@@ -136,7 +132,7 @@ HTML;
    *     services
    * }
    */
-  public function injectActions( $menu, $params )
+  public function injectActions($menu, $params)
   {
 
     $message = $this->model->getMessageNode();
@@ -148,24 +144,26 @@ HTML;
     $code = <<<BUTTONJS
 
     // close tab
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       \$S('#{$this->id}_dropmenu-control').dropdown('remove');
       self.close();
     });
 
-    self.getObject().find(".wgtac_forward").click( function(){
-      \$R.get( 'maintab.php?c=Webfrap.Message.formForward&objid={$message->msg_id}',{success:function(){ self.close(); }} );
+    self.getObject().find(".wgtac_forward").click(function() {
+      \$R.get('maintab.php?c=Webfrap.Message.formForward&objid={$message->msg_id}',{success:function() { self.close(); }});
     });
 
-    self.getObject().find(".wgtac_reply").click( function(){
-      \$R.get( 'maintab.php?c=Webfrap.Message.formReply&objid={$message->msg_id}',{success:function(){ self.close(); }} );
+    self.getObject().find(".wgtac_reply").click(function() {
+      \$R.get('maintab.php?c=Webfrap.Message.formReply&objid={$message->msg_id}',{success:function() { self.close(); }});
     });
 
+   self.getObject().find(".wgtac_save").click(function() {
+      \$R.form('wgt-form-msg-show-save-{$message->msg_id}');
+   });
 
 BUTTONJS;
 
-
-    $this->addJsCode( $code );
+    $this->addJsCode($code);
 
   }//end public function injectActions */
 

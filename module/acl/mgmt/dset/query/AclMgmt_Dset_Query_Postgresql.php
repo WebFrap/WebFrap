@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,11 +26,10 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Dset_Query_Postgresql
-  extends LibSqlQuery
-{////////////////////////////////////////////////////////////////////////////////
+class AclMgmt_Dset_Query_Postgresql extends LibSqlQuery
+{/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Loading the tabledata from the database
@@ -40,10 +39,10 @@ class AclMgmt_Dset_Query_Postgresql
    *
    * @throws LibDb_Exception
    */
-  public function fetchGroups( $areaid, $params = null )
+  public function fetchGroups($areaid, $params = null)
   {
 
-    if(!$params)
+    if (!$params)
       $params = new TFlag();
 
     $this->sourceSize  = null;
@@ -67,7 +66,7 @@ class AclMgmt_Dset_Query_Postgresql
 
 SQL;
 
-    $this->data = $db->select( $sql )->getAll();
+    $this->data = $db->select($sql)->getAll();
 
   }//end public function fetchAreaGroups */
 
@@ -81,10 +80,10 @@ SQL;
    *
    * @throws LibDb_Exception
    */
-  public function fetchUsersByKey( $areaId, $key, $params = null )
+  public function fetchUsersByKey($areaId, $key, $params = null)
   {
 
-    if(!$params)
+    if (!$params)
       $params = new TFlag();
 
     $this->sourceSize  = null;
@@ -94,14 +93,13 @@ SQL;
 
     $wheres = array();
 
-    foreach( $tmp as $value )
-    {
-    
-      $safeVal = $db->addSlashes( trim( $value ) );
-      
-      if( '' == $safeVal )
+    foreach ($tmp as $value) {
+
+      $safeVal = $db->addSlashes(trim($value));
+
+      if ('' == $safeVal)
         continue;
-    
+
       $wheres[] = " upper(wbfsys_role_user.name) like upper('{$safeVal}%')
         or upper(core_person.lastname) like upper('{$safeVal}%')
         or upper(core_person.firstname) like upper('{$safeVal}%') ";
@@ -112,8 +110,8 @@ SQL;
     $sql = <<<SQL
   SELECT
     wbfsys_role_user.rowid as id,
-    COALESCE ( '('||wbfsys_role_user.name||') ', '' ) || COALESCE ( core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '' ) as value,
-    COALESCE ( '('||wbfsys_role_user.name||') ', '' ) || COALESCE ( core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '' ) as label
+    COALESCE ('('||wbfsys_role_user.name||') ', '') || COALESCE (core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '') as value,
+    COALESCE ('('||wbfsys_role_user.name||') ', '') || COALESCE (core_person.lastname || ', ' || core_person.firstname, core_person.lastname, core_person.firstname, '') as label
 
   FROM
     wbfsys_role_user
@@ -141,7 +139,7 @@ SQL;
   LIMIT 10;
 SQL;
 
-    $this->result = $db->select( $sql );
+    $this->result = $db->select($sql);
 
   }//end public function fetchUsersByKey */
 

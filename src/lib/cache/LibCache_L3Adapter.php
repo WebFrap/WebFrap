@@ -21,15 +21,13 @@
  */
 abstract class LibCache_L3Adapter
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   public $type = null;
 
-
   public $level = 3;
-
 
   /**
    * bereits geholte daten
@@ -43,23 +41,22 @@ abstract class LibCache_L3Adapter
    */
   protected $expire = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Magic Functions
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * default constructor
    *
    */
-  public function __construct( $xml  )
+  public function __construct($xml  )
   {
 
+  } //end public function __construct($xml)
 
-  } //end public function __construct( $xml )
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Logic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * checken if the cached element is still valid from the duration
@@ -67,12 +64,12 @@ abstract class LibCache_L3Adapter
    * @param int
    * @return bool
    */
-  public function checkTime( $elementTime, $duration )
+  public function checkTime($elementTime, $duration)
   {
-    if( CACHE::INFINITY ==  $duration )
+    if (CACHE::INFINITY ==  $duration)
       return true;
 
-    return ( $elementTime > (time() - $duration ) );
+    return ($elementTime > (time() - $duration));
 
   }//end public function checkTime */
 
@@ -83,14 +80,14 @@ abstract class LibCache_L3Adapter
    * @param string[optinal] $area name of the area to test
    * @return bool
    */
-  abstract public function exists( $key  );
+  abstract public function exists($key  );
 
   /**
    * check if we have enough space in the cache
    *
    * @return bool
    */
-  abstract public function enoughFree( );
+  abstract public function enoughFree();
 
   /**
    * add Data to the cache
@@ -100,7 +97,7 @@ abstract class LibCache_L3Adapter
    * @param string Area Die zu verwendente Subarea
    * @return bool
    */
-  abstract public function add( $key,  $data );
+  abstract public function add($key,  $data);
 
   /**
    * Einen bestimmten Wert im cache updaten bzw ersetzen
@@ -110,7 +107,7 @@ abstract class LibCache_L3Adapter
    * @param string Area Die zu verwendente Subarea
    * @return bool
    */
-  abstract public function replace( $key, $data );
+  abstract public function replace($key, $data);
 
   /**
    * Ein Objekt aus dem cache anfragen
@@ -119,7 +116,7 @@ abstract class LibCache_L3Adapter
    * @param string Area Die zu verwendente Subarea
    * @return string
    */
-  abstract public function get( $key, $time = Cache::MEDIUM  );
+  abstract public function get($key, $time = Cache::MEDIUM  );
 
   /**
    * Ein Objekt aus dem cache löschen
@@ -128,16 +125,14 @@ abstract class LibCache_L3Adapter
    * @param string Area Die zu verwendente Subarea
    * @return bool
    */
-  abstract public function remove( $key  );
-
+  abstract public function remove($key  );
 
   /**
    * Den cache komplett leeren
    *
    * @return bool
    */
-  abstract public function clean( );
+  abstract public function clean();
 
 } // end abstract class LibCacheAdapter
-
 

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -32,11 +32,10 @@ class LibLogCollector
    * (non-PHPdoc)
    * @see src/i/ILogAppender#logline()
    */
-  public function logline( $time,  $level,  $file,  $line,  $message, $exception )
+  public function logline($time,  $level,  $file,  $line,  $message, $exception)
   {
-    self::$loglines[] = array( $time,  $level,  $file, $line, $message );
+    self::$loglines[] = array($time,  $level,  $file, $line, $message);
   } // end public function logline */
-
 
 } // end class LibLogCollector
 

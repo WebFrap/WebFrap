@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -36,85 +36,82 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class ShopBasket_Model
-  extends Model
+class ShopBasket_Model extends Model
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Enthält die IDs der Artikel welche im  Warenkorb gelandet sind
    * @var array
    */
   private $basket = null;
-  
-////////////////////////////////////////////////////////////////////////////////
+
+/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param Base $env
    */
-  public function __construct( $env = null )
+  public function __construct($env = null)
   {
-    parent::__construct( $env );
-    
-    if( isset($_SESSION['shop_basket_data']) )
+    parent::__construct($env);
+
+    if (isset($_SESSION['shop_basket_data']))
       $this->basket = $_SESSION['shop_basket_data'];
-    else 
-    {
+    else {
       $this->basket = array();
       $_SESSION['shop_basket_data'] = array();
     }
 
   }//end public function __construct */
-  
+
   /**
    * Einen neuen Artikel zum Warenkorb hinzufügen
    * @param int $artId
    * @param int $numArt
    */
-  public function addArticle( $artId, $numArt = 1 )  
+  public function addArticle($artId, $numArt = 1)
   {
-    
+
     $this->basket[$artId] = $numArt;
-    
+
   }//end public function addArticle */
-  
+
   /**
    * Alle Artikel im Warenkorb updaten
    * @param array $articles
    */
-  public function updateArticles( $articles )  
+  public function updateArticles($articles)
   {
-    
+
     $this->basket = $articles;
-    
+
   }//end public function addArticle */
-  
+
   /**
    * Einen Artikel aus dem Warenkorb entfernen
    * @param int $artId
    */
-  public function removeArticle( $artId )  
+  public function removeArticle($artId)
   {
-    
-    if( isset( $this->basket[$artId] ) )
-      unset( $this->basket[$artId] );
-    
+
+    if (isset($this->basket[$artId]))
+      unset($this->basket[$artId]);
+
   }//end public function removeArticle */
-  
+
   /**
    * Speichern des Warenkorbs in der Session
    */
-  public function save(  )  
+  public function save()
   {
-    
-    $_SESSION['shop_basket_data'] = $this->basket;
-    
-  }//end public function save */
 
+    $_SESSION['shop_basket_data'] = $this->basket;
+
+  }//end public function save */
 
 }//end class ShopBasket_Model
 

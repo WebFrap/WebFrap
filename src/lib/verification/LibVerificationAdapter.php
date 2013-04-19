@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,9 +21,9 @@
  */
 abstract class LibVerificationAdapter
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -36,7 +36,7 @@ abstract class LibVerificationAdapter
    * @var User
    */
   protected $user       = null;
-  
+
   /**
    *
    * @var LibMessagePool
@@ -51,16 +51,16 @@ abstract class LibVerificationAdapter
    */
   protected $nopwd      = false;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // setter
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * set a datasource
    * @param mixed
    * @return void
    */
-  public function setDatasource( $datasource )
+  public function setDatasource($datasource)
   {
     $this->dataSource = $datasource;
   }//end public function setDatasource */
@@ -70,7 +70,7 @@ abstract class LibVerificationAdapter
    * @param User $user
    * @return void
    */
-  public function setUser( $user )
+  public function setUser($user)
   {
     $this->user = $user;
   }//end public function setUser */
@@ -80,40 +80,39 @@ abstract class LibVerificationAdapter
    * @param boolean $nopwd
    * @return void
    */
-  public function passwordNotRequired( $nopwd = true )
+  public function passwordNotRequired($nopwd = true)
   {
     $this->nopwd = $nopwd;
   }//end public function passwordNotRequired */
-  
 
   /**
    * @setter self::$message
    * @param LibMessagePool $message
    */
-  public function setMessage( LibMessagePool $message )
+  public function setMessage(LibMessagePool $message)
   {
-    
+
     $this->message = $message;
-    
+
   }//end public function setMessage */
-  
+
   /**
    * @getter self::$message
    * @return LibMessagePool
    */
-  public function getMessage( )
+  public function getMessage()
   {
-    
-    if( !$this->message )
+
+    if (!$this->message)
       $this->message = Message::getActive();
-    
+
     return $this->message;
-    
+
   }//end public function getMessage */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -121,7 +120,7 @@ abstract class LibVerificationAdapter
    * @param string $pwd
    * @return boolean
    */
-  abstract public function verificate( $login , $pwd = null );
+  abstract public function verificate($login , $pwd = null);
 
 } // end class LibVerificationAdapter
 

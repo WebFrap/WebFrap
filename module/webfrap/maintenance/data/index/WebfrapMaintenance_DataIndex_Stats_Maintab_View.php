@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,22 +21,21 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapMaintenance_DataIndex_Stats_Maintab_View
-  extends WgtMaintab
+class WebfrapMaintenance_DataIndex_Stats_Maintab_View extends WgtMaintabCustom
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
     /**
     * @var WebfrapMaintenance_DataIndex_Model
     */
     public $model = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
  /**
   * Methode zum befüllen des WbfsysMessage Create Forms
   * mit Inputelementen
@@ -46,7 +45,7 @@ class WebfrapMaintenance_DataIndex_Stats_Maintab_View
   * @param TFlag $params
   * @return Error im Fehlerfall sonst null
   */
-  public function displayStats( $params )
+  public function displayStats($params)
   {
 
     // laden der benötigten Resource Objekte
@@ -59,22 +58,21 @@ class WebfrapMaintenance_DataIndex_Stats_Maintab_View
     );
 
     // Setzen des Labels und des Titles, sowie diverser Steuerinformationen
-    $this->setTitle( $i18nLabel );
-    $this->setLabel( $i18nLabel  );
-    
-    $this->addVar( 'modules', $this->model->getModules() );
+    $this->setTitle($i18nLabel);
+    $this->setLabel($i18nLabel  );
+
+    $this->addVar('modules', $this->model->getModules());
 
     // set the form template
-    $this->setTemplate( 'webfrap/maintenance/data_index/maintab/stats' );
-    
+    $this->setTemplate('webfrap/maintenance/data_index/maintab/stats');
+
     // Setzen von Viewspezifischen Control Flags
     $params->viewType  = 'maintab';
     $params->viewId    = $this->getId();
 
-
     // Menü und Javascript Logik erstellen
-    $this->addMenu( $params );
-    $this->addActions( $params );
+    $this->addMenu($params);
+    $this->addActions($params);
 
     // kein fehler aufgetreten? bestens also geben wir auch keinen zurück
     return null;
@@ -90,7 +88,7 @@ class WebfrapMaintenance_DataIndex_Stats_Maintab_View
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $params )
+  public function addMenu($params)
   {
 
     $menu     = $this->newMenu
@@ -99,10 +97,10 @@ class WebfrapMaintenance_DataIndex_Stats_Maintab_View
       'WebfrapMaintenance_DataIndex_Stats'
     );
     $menu->id = $this->id.'_dropmenu';
-    $menu->setAcl( $this->getAcl() );
-    $menu->setModel( $this->model );
+    $menu->setAcl($this->getAcl());
+    $menu->setModel($this->model);
 
-    $menu->buildMenu( $params );
+    $menu->buildMenu($params);
 
     return true;
 
@@ -119,7 +117,7 @@ class WebfrapMaintenance_DataIndex_Stats_Maintab_View
    *   string formId: the id of the form;
    * }
    */
-  public function addActions( $params )
+  public function addActions($params)
   {
 
     // add the button actions for create in the window
@@ -129,13 +127,13 @@ class WebfrapMaintenance_DataIndex_Stats_Maintab_View
     $code = <<<BUTTONJS
 
 // close tab
-self.getObject().find(".wgtac_close").click(function(){
+self.getObject().find(".wgtac_close").click(function() {
   self.close();
 });
 
 BUTTONJS;
 
-    $this->addJsCode( $code );
+    $this->addJsCode($code);
 
   }//end public function addActions */
 

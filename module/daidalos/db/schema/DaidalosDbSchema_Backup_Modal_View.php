@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,12 +21,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosDbSchema_Backup_Modal_View
-  extends WgtModal
+class DaidalosDbSchema_Backup_Modal_View extends WgtModal
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param string $dbKey
@@ -34,21 +33,19 @@ class DaidalosDbSchema_Backup_Modal_View
    * @param TFlag $params
    * @return void
    */
-  public function displayBackups( $dbName, $schemaName, $params )
+  public function displayBackups($dbName, $schemaName, $params)
   {
 
-    $this->setTitle( 'Tables for Db: '.$dbName.' Schema: '.$schemaName );
+    $this->setTitle('Tables for Db: '.$dbName.' Schema: '.$schemaName);
 
-    $this->addVar( 'dbName', $dbName );
-    $this->addVar( 'schemaName', $schemaName );
-    
-    $this->addVar( 'dumps', $this->model->getSchemaBackups( $dbName, $schemaName ) );
-    
-    $this->setTemplate( 'daidalos/db/schema/modal/list_backups' );
+    $this->addVar('dbName', $dbName);
+    $this->addVar('schemaName', $schemaName);
+
+    $this->addVar('dumps', $this->model->getSchemaBackups($dbName, $schemaName));
+
+    $this->setTemplate('daidalos/db/schema/modal/list_backups');
 
   }//end public function displayBackups */
-
- 
 
 }//end class DaidalosDbSchema_Backup_Modal_View
 

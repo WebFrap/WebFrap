@@ -8,24 +8,22 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class Error_Cli_View
-  extends LibTemplateCli
+class Error_Cli_View extends LibTemplateCli
 {
 
-  public function displayException( $exception )
+  public function displayException($exception)
   {
 
     $out = $this->getResponse();
@@ -34,11 +32,11 @@ class Error_Cli_View
     $out->writeln('');
 
     $out->writeln($exception->getMessage());
-    $out->writeln((string)$exception);
+    $out->writeln((string) $exception);
 
   }
 
-  public function displayEnduserError( $exception )
+  public function displayEnduserError($exception)
   {
 
     $out = $this->getResponse();
@@ -47,7 +45,7 @@ class Error_Cli_View
     $out->writeln('');
 
     $out->writeln($exception->getMessage());
-    $out->writeln((string)$exception);
+    $out->writeln((string) $exception);
 
   }
 

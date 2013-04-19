@@ -15,15 +15,13 @@
 *
 *******************************************************************************/
 
-
 /**
  * Basisklasse für Table Panels
  *
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtPanelElementSearch_Splitted
-  extends WgtPanelElement
+class WgtPanelElementSearch_Splitted extends WgtPanelElement
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -87,11 +85,10 @@ class WgtPanelElementSearch_Splitted
    *
    * @param WgtTable $table
    */
-  public function __construct( $table = null )
+  public function __construct($table = null)
   {
 
-    if( $table )
-    {
+    if ($table) {
       $this->tableId    = $table->id;
       $this->searchForm = $table->searchForm;
     }
@@ -101,7 +98,7 @@ class WgtPanelElementSearch_Splitted
   /**
    * @param WgtPanelElementFilter $filters
    */
-  public function setFilter( WgtPanelElementFilter $filters )
+  public function setFilter(WgtPanelElementFilter $filters)
   {
 
     $this->filters = $filters;
@@ -132,12 +129,11 @@ class WgtPanelElementSearch_Splitted
 // panel methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
-
   /**
    * @param boolean $flagButtonText
    * @return string
    */
-  public function renderSearchArea( $flagButtonText = false )
+  public function renderSearchArea($flagButtonText = false)
   {
 
     $i18n = $this->getI18n();
@@ -145,20 +141,15 @@ class WgtPanelElementSearch_Splitted
     $html         = '';
     $panelClass   = '';
 
-    if( $this->searchKey )
-    {
+    if ($this->searchKey) {
 
-      $iconSearch   = $this->icon( 'control/search.png', 'Search' );
-      $iconReset    = $this->icon( 'control/reset.png', 'Reset' );
-      $iconInfo     = $this->icon( 'control/info.png', 'Info' );
+      $iconInfo     = $this->icon('control/info.png', 'Info');
 
       $buttonAdvanced = '';
       $customButtons  = '';
 
-      //if( $this->advancedSearch )
-      if( false )
-      {
-        $iconAdvanced = $this->icon('control/show_advanced.png','Extended Search');
+      //if ($this->advancedSearch)
+      if (false) {
 
         $textAdvSearch = " {$i18n->l('Extended search','wbf.label')}";
 
@@ -169,25 +160,24 @@ class WgtPanelElementSearch_Splitted
         wgt_doc_src="wgt-search-{$this->context}-{$this->searchKey}-control-ext_search-docu"
         wgt_doc_cnt="wgt-search-{$this->context}-{$this->searchKey}-control-docu_cont"
         >
-        {$iconAdvanced} {$textAdvSearch}
+				<i class="icon-filter" ></i> {$textAdvSearch}
       </a>
      </li>
 
 HTML;
       }
 
-      $textSearchUF = " {$i18n->l( 'Search &amp; Filter', 'wbf.label' )}";
-      $textSearch   = " {$i18n->l( 'Search', 'wbf.label' )}";
+      $textSearchUF = " {$i18n->l('Search &amp; Filter', 'wbf.label')}";
+      $textSearch   = " {$i18n->l('Search', 'wbf.label')}";
 
       $setFocus = '';
-      if( $this->focus )
+      if ($this->focus)
         $setFocus = ' wcm_ui_focus';
 
       $htmlFilters = '';
 
       $codeFilter = '';
-      if( $this->filters )
-      {
+      if ($this->filters) {
         $htmlFilters = $this->filters->render();
         $codeFilter = "<span class=\"wcm wcm_ui_tip-top\" tooltip=\"numer of active filters / number of filters\" >"
           ."(<span id=\"wgt-search-{$this->context}-{$this->searchKey}-numfilter\" >{$this->filters->numFilterActive}</span>"
@@ -219,12 +209,12 @@ HTML;
             title="Search"
             class="wgt-button splitted wcm wcm_ui_tip"
             tabindex="-1" >
-            {$iconSearch}
+            <i class="icon-search" ></i>
           </button><button
             class="wgt-button append ui-state-default"
             tabindex="-1"
             id="wgt-search-{$this->context}-{$this->searchKey}-dcon"
-            wgt_drop_box="wgt-search-{$this->context}-{$this->searchKey}-dropbox" ><span class="ui-icon ui-icon-triangle-1-s" style="height:10px;" > </span></button>
+            wgt_drop_box="wgt-search-{$this->context}-{$this->searchKey}-dropbox" ><i class="icon-angle-down" ></i></button>
 
         </div>
 
@@ -235,8 +225,8 @@ HTML;
       </div>
 
       <div
-      	class="wgt-dropdownbox"
-      	id="wgt-search-{$this->context}-{$this->searchKey}-dropbox"  >
+        class="wgt-dropdownbox"
+        id="wgt-search-{$this->context}-{$this->searchKey}-dropbox"  >
         <ul>
           {$buttonAdvanced}
           <li><a
@@ -244,7 +234,7 @@ HTML;
             wgt_doc_src="wgt-search-{$this->context}-{$this->searchKey}-control-reset-docu"
             wgt_doc_cnt="wgt-search-{$this->context}-{$this->searchKey}-control-docu_cont"
             class="wcm wcm_ui_docu_tip" >
-            {$iconReset} Reset search
+            <i class="icon-minus-sign"></i> Reset search
           </a></li>
         </ul>
         {$htmlFilters}
@@ -253,7 +243,7 @@ HTML;
             <p id="wgt-search-{$this->context}-{$this->searchKey}-control-docu_cont" ></p>
           </li>
         </ul>
-    	</div>
+      </div>
 
 HTML;
 
@@ -263,7 +253,5 @@ HTML;
 
   }//end public function renderSearchArea */
 
-
 }//end class WgtPanelElementSearch_Splitted
-
 

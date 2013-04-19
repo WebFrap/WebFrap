@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,10 +21,8 @@
  * @subpackage tech_core
  * @author dominik alexander bonsch <dominik.bonsch@webfrap.net>
  */
-class WgtMenuBuilder_ButtonSet
-  extends WgtMenuBuilder
+class WgtMenuBuilder_ButtonSet extends WgtMenuBuilder
 {
-
 
 }//end class WgtMenuBuilder_ButtonSet
 

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -41,19 +41,19 @@ class LibLogDatabase
   /**
    * laden der Datenbank Verbindung im Constructor
    */
-  public function __construct( $conf )
+  public function __construct($conf)
   {
     // Datenbankverbindung zum loggen anfordern
-    $this->db = Db::connection( $conf['connection'] );
+    $this->db = Db::connection($conf['connection']);
   } // end public function __construct */
 
   /**
    * (non-PHPdoc)
    * @see src/i/ILogAppender#logline()
    */
-  public function logline( $time,  $level,  $file,  $line, $message, $exception )
+  public function logline($time,  $level,  $file,  $line, $message, $exception)
   {
-    $this->db->logQuery( $time, $level, $file, $line, $message );
+    $this->db->logQuery($time, $level, $file, $line, $message);
   }// end public function logline */
 
 } // end class LibLogDatabase

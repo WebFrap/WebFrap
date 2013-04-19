@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,37 +21,35 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdlModeller_Maintab_View
-  extends WgtMaintab
+class DaidalosBdlModeller_Maintab_View extends WgtMaintabCustom
 {
-  
+
   /**
    * @var DaidalosBdlModeller_Model
    */
   public $model = null;
-  
-////////////////////////////////////////////////////////////////////////////////
-// Methoden
-////////////////////////////////////////////////////////////////////////////////
 
-  
+/*//////////////////////////////////////////////////////////////////////////////
+// Methoden
+//////////////////////////////////////////////////////////////////////////////*/
+
   /**
    * @param TFlag $params
    * @return void
    */
-  public function displayList(  $params )
+  public function displayList( $params)
   {
 
-    $this->setLabel( 'BDL Modeller' );
-    $this->setTitle( 'BDL Modeller' );
+    $this->setLabel('BDL Modeller');
+    $this->setTitle('BDL Modeller');
 
-    $this->addVar( 'repos', $this->model->getRepos( ) );
-    $this->addVar( 'projects', $this->model->getProjects( ) );
+    $this->addVar('repos', $this->model->getRepos());
+    $this->addVar('projects', $this->model->getProjects());
 
-    $this->setTemplate( 'daidalos/bdl/modeller/maintab/list' );
+    $this->setTemplate('daidalos/bdl/modeller/maintab/list');
 
     $params = new TArray();
-    $this->addMenu( $params );
+    $this->addMenu($params);
 
   }//end public function displayList */
 
@@ -64,7 +62,7 @@ class DaidalosBdlModeller_Maintab_View
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $params )
+  public function addMenu($params)
   {
 
     $menu     = $this->newMenu
@@ -72,11 +70,11 @@ class DaidalosBdlModeller_Maintab_View
       $this->id.'_dropmenu',
       'DaidalosBdlModeller'
     );
-    
+
     $menu->id = $this->id.'_dropmenu';
-    $menu->buildMenu(  $params );
-    
-    $menu->injectActions( $this,$params );
+    $menu->buildMenu( $params);
+
+    $menu->injectActions($this,$params);
 
   }//end public function addMenu */
 

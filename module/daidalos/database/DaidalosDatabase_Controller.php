@@ -8,24 +8,22 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage Core
  */
-class DaidalosDatabase_Controller
-  extends Controller
+class DaidalosDatabase_Controller extends Controller
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var string
@@ -35,34 +33,30 @@ class DaidalosDatabase_Controller
     'listconnections',
   );
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 //Logic: Meta Model
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
    */
-  public function listConnections( $params = null )
+  public function listConnections($params = null)
   {
 
-    $params = $this->getFlags( $this->getRequest() );
+    $params = $this->getFlags($this->getRequest());
+    $response = $this->getResponse();
 
-    $view   = $response->loadView
-    (
-      'wgt-view-daidalos_projects-list', 
+    $view   = $response->loadView(
+      'wgt-view-daidalos_projects-list',
       'DaidalosDatabase'
     );
-    
 
-    $model  = $this->loadModel( 'DaidalosDatabase' );
+    $model  = $this->loadModel('DaidalosDatabase');
 
-    $view->setModel( $model );
-    $view->displayList( $params );
+    $view->setModel($model);
+    $view->displayList($params);
 
   }//end public function listConnections */
-
 
 }//end class DaidalosDatabase_Controller
 

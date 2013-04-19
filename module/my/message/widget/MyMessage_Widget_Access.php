@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -23,14 +23,13 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyMessage_Widget_Access
-  extends LibAclPermission
+class MyMessage_Widget_Access extends LibAclPermission
 {
   /**
    * @param TFlag $params
    * @param WbfsysMessage_Entity $entity
    */
-  public function loadDefault( $params, $entity = null )
+  public function loadDefault($params, $entity = null)
   {
 
     // laden der benötigten Resource Objekte
@@ -45,7 +44,7 @@ class MyMessage_Widget_Access
    * @param string $condition
    * @param TFlag $params
    */
-  public function fetchListTableDefault( $query, $condition, $params )
+  public function fetchListTableDefault($query, $condition, $params)
   {
 
     // laden der benötigten Resource Objekte
@@ -58,10 +57,9 @@ class MyMessage_Widget_Access
     // erstellen der Acl criteria und befüllen mit den relevanten cols
     $criteria  = $orm->newCriteria();
 
-    $criteria->select( array( 'wbfsys_message.rowid as rowid' )  );
+    $criteria->select(array('wbfsys_message.rowid as rowid')  );
 
-    if( !$this->defLevel )
-    {
+    if (!$this->defLevel) {
       $greatest = <<<SQL
 
   acls."acl-level"
@@ -70,9 +68,7 @@ SQL;
 
       $joinType = ' ';
 
-    }
-    else
-    {
+    } else {
 
       $greatest = <<<SQL
 
@@ -85,37 +81,36 @@ SQL;
 SQL;
 
       $joinType = ' LEFT ';
-      
+
     }
 
-    $criteria->selectAlso( $greatest  );
+    $criteria->selectAlso($greatest  );
 
-    $query->setTables( $criteria );
-    $query->appendConditions( $criteria, $condition, $params  );
-    $query->checkLimitAndOrder( $criteria, $params );
-    $query->appendFilter( $criteria, $condition, $params );
+    $query->setTables($criteria);
+    $query->appendConditions($criteria, $condition, $params  );
+    $query->checkLimitAndOrder($criteria, $params);
+    $query->appendFilter($criteria, $condition, $params);
 
     $criteria->join
     (
       " {$joinType} JOIN
         {$acl->sourceRelation} as acls
         ON
-          UPPER(acls.\"acl-area\") IN( UPPER('mod-wbfsys'), UPPER('mgmt-wbfsys_message') )
+          UPPER(acls.\"acl-area\") IN(UPPER('mod-wbfsys'), UPPER('mgmt-wbfsys_message'))
             AND acls.\"acl-user\" = {$userId}
             AND acls.\"acl-vid\" = wbfsys_message.rowid ",
       'acls'
     );
-    
-    $tmp = $orm->select( $criteria );
+
+    $tmp = $orm->select($criteria);
     $ids = array();
-    
-    foreach( $tmp as $row )
-    {
+
+    foreach ($tmp as $row) {
       $ids[$row['rowid']] = $row['acl-level'];
     }
-    
-    $query->setCalcQuery( $criteria, $params );
-    
+
+    $query->setCalcQuery($criteria, $params);
+
     return $ids;
 
   }//end public function fetchListTableDefault */

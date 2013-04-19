@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapComment_Modal_View
-  extends WgtModal
+class WebfrapComment_Modal_View extends WgtModal
 {
 
   /**
@@ -35,45 +34,44 @@ class WebfrapComment_Modal_View
    * @var int in px
    */
   public $width   = 450 ;
-  
+
   /**
    * Die Höhe des Modal Elements
    * @var int in px
    */
   public $height   = 380 ;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Display Methodes
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
  /**
   * the default edit form
   * @param TFlag $params
   * @return boolean
   */
-  public function displayDialog( $params )
+  public function displayDialog($params)
   {
 
     // fetch the i18n text for title, status and bookmark
     $i18nText = 'Know How Ref';
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText);
 
     // set the window status text
-    $this->setLabel( $i18nText );
+    $this->setLabel($i18nText);
 
     // set the from template
-    $this->setTemplate( 'webfrap/knowhow_node/modal/dialog' );
+    $this->setTemplate('webfrap/knowhow_node/modal/dialog');
 
-    
-    $this->addVar( 'context', 'protocol' );
+
+    $this->addVar('context', 'protocol');
 
     // ok kein fehler aufgetreten
     return null;
 
   }//end public function displayDialog */
-
 
 }//end class WebfrapComment_Modal_View
 

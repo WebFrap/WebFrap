@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -20,47 +20,46 @@
  * @subpackage tech_core
  *
  */
-abstract class Process
-  extends PBase
+abstract class Process extends PBase
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Constants
-////////////////////////////////////////////////////////////////////////////////
-  
+//////////////////////////////////////////////////////////////////////////////*/
+
   /**
    * Process is Running
    * @var int
    */
   const STATE_RUNNING = 0;
-  
+
   /**
    * Process is inactiv but not dead
    * @var int
    */
   const STATE_PAUSE = 1;
-  
+
   /**
    * Process is terminated
    * @var int
    */
   const STATE_TERMINATED = 2;
-  
+
   /**
    * Process was completed as planned
    * @var int
    */
   const STATE_COMPLETED = 3;
-  
-////////////////////////////////////////////////////////////////////////////////
+
+/*//////////////////////////////////////////////////////////////////////////////
 // Public Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Der aktuell aktive Status eines Prozesses
    * @var WbfsysProcessStatus_Entity
    */
   public $activStatus = null;
-  
+
   /**
    * Process state
    * @var int
@@ -117,13 +116,13 @@ abstract class Process
    * @var array
    */
   public $edges       = array();
-  
+
   /**
    * States Metadata
    * @var array
    */
   public $states       = null;
-  
+
   /**
    * States Metadata
    * @var stdClass json data
@@ -162,7 +161,6 @@ abstract class Process
    */
   public $responsibles = array();
 
-
   /**
    * Name der Entity Klasse
    *
@@ -176,13 +174,20 @@ abstract class Process
    */
   public $processUrl = null;
 
-////////////////////////////////////////////////////////////////////////////////
+  /**
+   * Definieren ob der Prozess einen übergeordneten Runningstate hat
+   * 
+   * @var boolean
+   */
+  public $hasRunningState = true;
+  
+/*//////////////////////////////////////////////////////////////////////////////
 // Domain & Flow Data
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Die Entity für die Prozess Instanz.
-   * Für Prozessinstanzen wird immer eine Entity und ein Prozesstype ( der Name )
+   * Für Prozessinstanzen wird immer eine Entity und ein Prozesstype (der Name)
    * benötigt
    *
    * @var Entity
@@ -196,9 +201,9 @@ abstract class Process
    */
   public $params = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Protected Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Die passende Security Area
@@ -213,21 +218,18 @@ abstract class Process
    */
   protected $relativeId  = null;
 
-
   /**
    * Alle möglichen security areas
    * @var array
    */
-  protected  $areas  = array
-  (
+  protected $areas  = array(
   );
 
   /**
    * liste mit den relativen ids
    * @var array
    */
-  protected  $ids  = array
-  (
+  protected $ids  = array(
   );
 
   /**
@@ -236,9 +238,9 @@ abstract class Process
    */
   protected $model  = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Constructor
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Im Konstruktor werden die Edges geladen
@@ -246,32 +248,32 @@ abstract class Process
    * @param LibDbConnection $db wird benötigt um die Prozessdaten zu laden
    *
    */
-  public function __construct( $db = null )
+  public function __construct($db = null)
   {
 
-    if( !$db )
-      $db = $this->getDb( );
+    if (!$db)
+      $db = $this->getDb();
 
     // persistenz layer zum laden und speichern von Prozess relevanten Daten
-    $this->loadProcessModel( $db );
+    $this->loadProcessModel($db);
 
     // laden des access containers soweit vorhanden
-    $this->loadAccess( );
+    $this->loadAccess();
 
     // bauen der Responsibles
-    $this->buildResponsibles( );
+    $this->buildResponsibles();
 
     // erstellen der Datenstruktur für die Phasen
-    $this->buildPhases( );
+    $this->buildPhases();
 
     // erstellen der Datenstruktur für die States
-    $this->buildStates( );
+    $this->buildStates();
 
     // bauen der Nodes datenstruktur
-    $this->buildNodes( );
+    $this->buildNodes();
 
     // bauen der Edge datenstruktur
-    $this->buildEdges( );
+    $this->buildEdges();
 
   }//end public function __construct */
 
@@ -280,12 +282,12 @@ abstract class Process
    */
   public function __toString()
   {
-    return trim( $this->processId );
+    return trim($this->processId);
   }//end public function __toString */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Setter
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Setter mit Check auf die korrekte entity
@@ -293,52 +295,44 @@ abstract class Process
    * @param Entity $entity
    *
    */
-  public function setEntity( $entity )
+  public function setEntity($entity)
   {
-
-    if( !is_object( $entity ) || !$entity instanceof Entity )
-      throw new LibProcess_Exception( "Tried to set an invalid entity to the process ".$this->debugData() );
+    if (!is_object($entity) || !$entity instanceof Entity)
+      throw new LibProcess_Exception("Tried to set an invalid entity to the process ".$this->debugData());
 
     $this->entity = $entity;
-    $this->model->setEntity( $entity );
-
+    $this->model->setEntity($entity);
+    
   }//end public function setEntity */
 
   /**
    * @return Entity
    */
-  public function getEntity( )
+  public function getEntity()
   {
-
     return $this->entity;
-
   }//end public function getEntity */
-  
 
   /**
    * @param string $key
    * @return string
    */
-  public function getAreaByKey( $key )
+  public function getAreaByKey($key)
   {
-
-    return isset( $this->areas[$key] )
+    return isset($this->areas[$key])
       ? $this->areas[$key]
       : null;
-
   }//end public function getAreaByKey */
-  
+
   /**
    * @param string $key
    * @return string
    */
-  public function getIdByKey( $key )
+  public function getIdByKey($key)
   {
-
-    return isset( $this->ids[$key] )
+    return isset($this->ids[$key])
       ? $this->ids[$key]
       : null;
-
   }//end public function getIdByKey */
 
   /**
@@ -347,19 +341,16 @@ abstract class Process
    *
    * @param array $userRoles
    */
-  public function setUserRoles( $userRoles )
+  public function setUserRoles($userRoles)
   {
-
     $this->userRoles = $userRoles;
-
   }//end public function setUserRoles */
-
 
   /**
    * @see Process::$processId
    * @param int $processId
    */
-  public function setProcessId( $processId )
+  public function setProcessId($processId)
   {
     $this->processId = $processId;
   }//end public function setProcessId */
@@ -367,11 +358,9 @@ abstract class Process
   /**
    * @param WbfsysProcess_Entity
    */
-  public function getProcessId( )
+  public function getProcessId()
   {
-
     return $this->processId;
-
   }//end public function getProcessId */
 
   /**
@@ -379,17 +368,20 @@ abstract class Process
    */
   public function getActiveNode()
   {
-    return new LibProcess_Node( $this->nodes[$this->activKey], $this->activKey );
+
+    $activeKey = isset($this->nodes[$this->activKey])?$this->activKey:current(array_keys($this->nodes));
+
+    return new LibProcess_Node($this, $this->nodes[$activeKey], $activeKey);
+
   }//end public function getActiveNode */
 
   /**
    * @return LibProcess_Node
    */
-  public function getNode( $key )
+  public function getNode($key)
   {
-    return new LibProcess_Node( $this->nodes[$key], $key );
+    return new LibProcess_Node($this, $this->nodes[$key], $key);
   }//end public function getNode */
-
 
   /**
    * Laden der aktuell vorhandenen Edges
@@ -399,9 +391,11 @@ abstract class Process
   public function getActiveEdges()
   {
 
-    if( !$this->activKey )
-      throw new LibProcess_Exception( "Process Status not yet loaded ".$this->debugData() );
-    
+    if (!$this->activKey)
+      throw new LibProcess_Exception("Process Status not yet loaded ".$this->debugData());
+      
+    Debug::console('get active edges');
+
     /* @var $acl LibAclAdapter_Db */
     $acl   = $this->getAcl();
     $user  = $this->getUser();
@@ -410,128 +404,117 @@ abstract class Process
 
     $edges = array();
 
-    if( !isset( $this->edges[$this->activKey] ) )
+    if (!isset($this->edges[$this->activKey]))
       return array();
 
-    foreach( $this->edges[$this->activKey] as $key => $edge )
-    {
+    foreach ($this->edges[$this->activKey] as $key => $edgeNode) {
 
-      $edge = new LibProcess_Edge( $key, $edge );
+      $edge = new LibProcess_Edge($key, $edgeNode);
 
       $accessFlag = false;
 
-      if( !$edge->hasProfile( $profileName ) )
+      if (!$edge->hasProfile($profileName))
         continue;
 
-      if( !$edge->access )
-      {
+      if (!$edge->access) {
         $accessFlag = true;
       }
 
-      foreach( $edge->access as $access  )
-      {
+      foreach ($edge->access as $access) {
 
         // wenn die access flag auf true ist brauchen wir nicht weiter zu machen
-        if( $accessFlag )
+        if ($accessFlag)
           break;
 
-        switch( $access['type'] )
-        {
+        switch ($access['type']) {
           case Acl::OWNER:
           {
-            if ( $this->entity->isOwner( $user ) )
-            {
+            if ($this->entity->isOwner($user)) {
               $accessFlag = true;
             }
 
             break;
           }
-          case Acl::PROFILE:
-          {
+          case Acl::PROFILE: {
 
-            if( !isset( $access['profiles'] ) )
-              throw new LibProcess_Exception( "Missing Profiles in Profile Check ".$this->debugData().' '.$edge->debugData() );
+            if (!isset($access['profiles']))
+              throw new LibProcess_Exception("Missing Profiles in Profile Check ".$this->debugData().' '.$edge->debugData());
 
-            if ( in_array( $profileName, $access['profiles'] ) )
-            {
+            if (in_array($profileName, $access['profiles'])) {
               $accessFlag = true;
             }
 
             break;
           }
-          case Acl::ROLE:
-          {
+          case Acl::ROLE: {
 
-            if( !isset( $access['roles'] ) )
-              throw new LibProcess_Exception( "Missing Roles in Role Check ".$this->debugData().' '.$edge->debugData() );
+            if (!isset($access['roles']))
+              throw new LibProcess_Exception("Missing Roles in Role Check ".$this->debugData().' '.$edge->debugData());
 
             $roles = $access['roles'];
 
-            $area  = ( isset( $access['area'] ) && isset( $this->areas[$access['area']] ) )
+            $area  = (isset($access['area']) && isset($this->areas[$access['area']]))
               ? $this->areas[$access['area']]
               : null;
 
-            $id  = ( isset( $access['id'] ) && isset( $this->ids[$access['id']] ) )
+            $id  = (isset($access['id']) && isset($this->ids[$access['id']]))
               ? $this->ids[$access['id']]
               : null;
 
-            if( $acl->hasRole( $roles, $area, $id ) )
-            {
+            if ($acl->hasRole($roles, $area, $id)) {
+              Debug::console( "edge: {$key} has role: ".implode(',',$roles).' a: '.$area.' id: '.$id );
               $accessFlag = true;
             }
 
             break;
           }
-          case Acl::ROLE_SOMEWHERE:
-          {
+          case Acl::ROLE_SOMEWHERE: {
 
-            if( !isset( $access['roles'] ) )
-              throw new LibProcess_Exception( "Missing Roles in Role Somewhere Check ".$this->debugData().' '.$edge->debugData() );
+            if (!isset($access['roles']))
+              throw new LibProcess_Exception("Missing Roles in Role Somewhere Check ".$this->debugData().' '.$edge->debugData());
 
             $roles = $access['roles'];
 
-            $area  = isset( $access['area'] ) && isset($this->areas[$access['area']])
+            $area  = isset($access['area']) && isset($this->areas[$access['area']])
               ? $this->areas[$access['area']]
               : null;
 
-            if ( $acl->hasRoleSomewhere( $roles, $area  ) )
-            {
+            if ($acl->hasRoleSomewhere($roles, $area)) {
               $accessFlag = true;
             }
 
             break;
           }
-          default:
-          {
-            throw new LibProcess_Exception( "Got unsupported Access Check in ".$this->debugData().' '.$edge->debugData() );
+          default: {
+            
+            throw new LibProcess_Exception("Got unsupported Access Check in ".$this->debugData().' '.$edge->debugData());
           }
         }
       }
 
       // so wenn die Standard Checks nicht ausreichen kann noch eine Access
       // check Object injected werde
-      if( !$accessFlag && $this->access  )
-      {
-        
+      if (!$accessFlag && $this->access) {
+
         ///@todo checken wann wir ein objekt bekommen, welches dieses methode implementieren sollte
         /// es aber nicht tut
-        if( method_exists($this->access, 'checkEdgeAccess') )
-        {
-          if( !$this->access->checkEdgeAccess( $this, $edge, $this->entity ) )
+        if (method_exists($this->access, 'checkEdgeAccess')) {
+          if (!$this->access->checkEdgeAccess($this, $edge, $this->entity)) {
             continue;
-          else
+          } else {
+            Debug::console("By checkEdgeAcess");
             $accessFlag = true;
-        }
-        else 
-        {
-          Debug::console( 'Tried to checkEdgeAccess but the method not exists on '.get_class($this->access) );
+          }
+        } else {
+          Debug::console('Tried to checkEdgeAccess but the method not exists on '.get_class($this->access));
+          continue;
         }
 
       }
 
-      if( $accessFlag )
-      {
+      if ($accessFlag) {
         $edges[] = $edge;
+        Debug::console('added edge: '.$edge->label );
       }
 
     }
@@ -539,7 +522,6 @@ abstract class Process
     return $edges;
 
   }//end public function getActiveEdges */
-
 
   /**
    * Laden der zu anzeigenden Slides im Process Dropdown
@@ -549,36 +531,33 @@ abstract class Process
   public function getActiveSlices()
   {
 
-    if( !isset( $this->nodes[$this->activKey]['slices'] ) )
-    {
+    if (!isset($this->nodes[$this->activKey]['slices'])) {
       return array();
     }
 
     $slices = array();
     $rawSlices = $this->nodes[$this->activKey]['slices'];
 
-    foreach( $rawSlices as $rawSlice )
-    {
+    foreach ($rawSlices as $rawSlice) {
 
       $className = 'LibProcessSlice_'.ucfirst($rawSlice['type']);
 
-      if( Webfrap::classLoadable($className) )
-      {
-        $slices[] = new $className( $this, $rawSlice );
-      }
-      else
-      {
-        Debug::console( "Missing Slice ".ucfirst($rawSlice['type']) );
-        $this->getResponse()->addWarning( "Sorry an error happened, this page could not be displayed as originally planed" );
+      if (Webfrap::classLoadable($className)) {
+        
+        $slices[] = new $className($this, $rawSlice);
+        
+      } else {
+        
+        Debug::console("Missing Slice ".ucfirst($rawSlice['type']));
+        $this->getResponse()->addWarning("Sorry an error happened, this page could not be displayed as originally planed");
       }
 
     }
 
     return $slices;
 
-
   }//end public function getActiveSlices */
-  
+
   /**
    * Laden der zu anzeigenden Slides im Process Dropdown
    *
@@ -587,87 +566,77 @@ abstract class Process
   public function getActiveStates()
   {
 
-    if( !isset( $this->nodes[$this->activKey]['states'] ) )
-    {
+    if (!isset($this->nodes[$this->activKey]['states'])) {
       return array();
     }
 
     $states = array();
     $stateKeys = $this->nodes[$this->activKey]['states'];
 
-    foreach( $stateKeys as $key )
-    {
-      
-      if( isset( $this->states[$key['name']] ) )
+    foreach ($stateKeys as $key) {
+
+      if (isset($this->states[$key['name']]))
         $states[$key['name']] = $this->states[$key['name']];
-      else 
-        Debug::console( "Missing phase {$key['name']}" );
+      else
+        Debug::console("Missing phase {$key['name']}");
 
     }
 
     return $states;
-
 
   }//end public function getActiveStates */
 
   /**
    * @return array<LibMessageReceiver>
    */
-  public function getActiveResponsibles( )
+  public function getActiveResponsibles()
   {
 
-    if( !isset( $this->nodes[$this->activKey]['responsible'] ) )
-    {
-      Debug::console( "Active Key {$this->activKey} has no responsible" );
-      return array( );
+    if (!isset($this->nodes[$this->activKey]['responsible'])) {
+      Debug::console("Active Key {$this->activKey} has no responsible");
+
+      return array();
     }
 
-    $message       = $this->getMessage( );
+    $message       = $this->getMessage();
     $responsibles  = array();
 
     $dataResp = $this->nodes[$this->activKey]['responsible'];
 
-    foreach( $dataResp as $resp )
-    {
+    foreach ($dataResp as $resp) {
 
-      if( !isset($resp['type']) )
-      {
-        Debug::console( 'Missing type for responsible',  $resp );
+      if (!isset($resp['type'])) {
+        Debug::console('Missing type for responsible',  $resp);
         continue;
       }
 
+      switch ($resp['type']) {
+        case Acl::ROLE: {
 
-      switch( $resp['type'] )
-      {
-        case Acl::ROLE:
-        {
-
-          if( !isset( $resp['roles'] ) )
-            throw new LibProcess_Exception( "Missing Roles in Role Check ".$this->debugData() );
+          if (!isset($resp['roles']))
+            throw new LibProcess_Exception("Missing Roles in Role Check ".$this->debugData());
 
           $roles = $resp['roles'];
 
-          $area  = isset( $resp['area'] ) && isset( $this->areas[$resp['area']] )
+          $area  = isset($resp['area']) && isset($this->areas[$resp['area']])
             ? $this->areas[$resp['area']]
             : null;
 
-          $id  = isset( $resp['id'] ) && isset( $this->ids[$resp['id']] )
+          $id  = isset($resp['id']) && isset($this->ids[$resp['id']])
             ? $this->ids[$resp['id']]
             : null;
 
-          $responsibles[] = new LibMessage_Receiver_Group( $roles, $area, $id );
+          $responsibles[] = new LibMessage_Receiver_Group($roles, $area, $id);
 
           break;
         }
-        case Acl::PROFILE:
-        {
+        case Acl::PROFILE: {
           // nothing
           break;
         }
-        case Acl::OWNER:
-        {
+        case Acl::OWNER: {
 
-          $responsibles[] = new LibMessage_Receiver_User( $this->entity->owner( true ) );
+          $responsibles[] = new LibMessage_Receiver_User($this->entity->owner(true));
           break;
         }
 
@@ -675,8 +644,8 @@ abstract class Process
         case Acl::ROLE_SOMEWHERE:
         {
 
-          if( !isset($access['roles']) )
-            throw new LibProcess_Exception( "Missing Roles in Role Somewhere Check ".$this->debugData().' '.$edge->debugData() );
+          if (!isset($access['roles']))
+            throw new LibProcess_Exception("Missing Roles in Role Somewhere Check ".$this->debugData().' '.$edge->debugData());
 
           $roles = $access['roles'];
 
@@ -684,49 +653,48 @@ abstract class Process
             ? $this->areas[$access['area']]
             : null;
 
-          if ( $acl->hasRoleSomewhere( $roles, $area  ) )
-          {
+          if ($acl->hasRoleSomewhere($roles, $area  )) {
             $accessFlag = true;
           }
 
           break;
         }
         */
-        default:
-        {
-          throw new LibProcess_Exception
-          (
+        default: {
+          
+          throw new LibProcess_Exception(
+          
             "Got unsupported Access Check in ".$this->debugData()
           );
         }
       }
     }
 
-    Debug::console( "Load responsibles for active Key {$this->activKey} ".count($responsibles) );
+    Debug::console("Load responsibles for active Key {$this->activKey} ".count($responsibles));
 
     $message = $this->getMessage();
 
-    return $message->getReceivers( $responsibles, Message::CHANNEL_MAIL );
+    return $message->getReceivers($responsibles, Message::CHANNEL_MAIL);
 
   }//end public function getActiveResponsibles */
-  
+
   /**
    * @param string $key
    * @return array
    */
-  public function getResponsible( $key )
+  public function getResponsible($key)
   {
-    
-    if( isset( $this->responsibles[$key] ) )
+
+    if (isset($this->responsibles[$key]))
       return $this->responsibles[$key];
-    
+
     return null;
-    
+
   }//end public function getResponsible */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Check Logik die helfen soll stabilen Code zu schreiben
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * prüfen ob eine bestimmte Kante existiert
@@ -735,10 +703,10 @@ abstract class Process
    * @param string $newNode
    * @return boolean true wenn existiert
    */
-  public function edgeExists( $actualNode, $newNode )
+  public function edgeExists($actualNode, $newNode)
   {
-
-    return isset( $this->edges[$actualNode][$newNode] );
+    
+    return isset($this->edges[$actualNode][$newNode]);
 
   }//end public function edgeExists */
 
@@ -747,19 +715,17 @@ abstract class Process
    *
    * @param array $edgeRoles
    */
-  public function checkUserAccess( $edge  )
+  public function checkUserAccess($edge  )
   {
 
     $access     = false;
     $edgeRoles  = array();
 
-    if( isset( $edge['roles'] ) )
+    if (isset($edge['roles']))
       $edgeRoles = $edge['roles'];
 
-    foreach( $this->userRoles as $userRole )
-    {
-      if( in_array( $userRole, $edgeRoles ) )
-      {
+    foreach ($this->userRoles as $userRole) {
+      if (in_array($userRole, $edgeRoles)) {
         $access = true;
         break;
       }
@@ -769,9 +735,9 @@ abstract class Process
 
   }//end public function checkUserAccess */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Build Logik für die Datenstrukturen des Prozesses
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Methode zum erstellen der Edges Datenstruktur
@@ -793,7 +759,7 @@ abstract class Process
           'type'      => 'forward',
           'icon'      => '',
           'color'     => '',
-          'roles'     => array( 'project_manager' ),
+          'roles'     => array('project_manager'),
           'actions'   => array
           (
             'default' => 'action_node1_node2_default'
@@ -856,13 +822,14 @@ abstract class Process
           'test',
           'test_2',
         ),
-        'description'  => 'New'
+        'description'  => 'New',
+        'display' = array()
       ),
     );
     */
 
   }//end public function buildPhases */
-  
+
   /**
    * Methode zum erstellen der Nodes Datenstruktur
    * Diese Methode ist nötig da sonst nicht mit klassen und selbstreferenzen
@@ -902,22 +869,19 @@ abstract class Process
    * Laden des Datenmodells für den Prozess
    * @param LibDbConnection $db
    */
-  public function loadProcessModel( $db  )
+  public function loadProcessModel($db  )
   {
 
     $conType    = $db->getConnectionDbms();
 
     $className  = 'LibProcess_Model_'.$conType;
 
-    if( Webfrap::classLoadable( $className ) )
-    {
-      $this->model = $className( $db );
-    }
-    else
-    {
+    if (Webfrap::classLoadable($className)) {
+      $this->model = $className($db);
+    } else {
       // wenn kein dbms spezifisches process modell vorhanden ist
       // fallback auf das default process model
-      $this->model = new LibProcess_Model( $this, $db );
+      $this->model = new LibProcess_Model($this, $db);
     }
 
   }//end  public function loadProcessModel */
@@ -934,13 +898,13 @@ abstract class Process
   /**
    * Extrahieren der Prozessbezogenen Daten aus dem User Request
    */
-  public function fetchRequest(   )
+  public function fetchRequest(  )
   {
-    
+
     /*
      * Setzt auf dem Model die Werte:
      * - requestedEdge
-     * - processData['comment'] 
+     * - processData['comment']
      */
     $this->model->fetchProcessRequestData();
 
@@ -949,13 +913,13 @@ abstract class Process
   /**
    * laden
    */
-  public function fetchServiceRequest(   )
+  public function fetchServiceRequest(  )
   {
-    
+
     /*
      * Setzt auf dem Model die Werte:
      * - requestedEdge
-     * - processData['comment'] 
+     * - processData['comment']
      */
     $this->model->fetchProcessServiceRequest();
 
@@ -965,18 +929,15 @@ abstract class Process
    * Den user Comment bekommen
    * @return string
    */
-  public function getUserComment( )
+  public function getUserComment()
   {
 
     $comment = $this->model->getRequestComment();
     $commentBlock = '';
 
-    if( !$comment )
-    {
+    if (!$comment) {
       return '';
-    }
-    else
-    {
+    } else {
       ///BAD CODE!
       $commentBlock = '<div class="comment" >';
       $commentBlock .= '<p>Please take care of the following comment(s) entered by the sender.<p>';
@@ -1001,75 +962,67 @@ abstract class Process
    *
    * @return string
    */
-  public function trigger( $position, $params, $changeStatus = false )
+  public function trigger($position, $params, $changeStatus = false)
   {
 
-    if( $this->model->requestedEdge )
-    {
+    if ($this->model->requestedEdge) {
       $this->newNode    = $this->model->requestedEdge;
-    }
-    else
-    {
+    } else {
       $this->newNode    = $this->oldKey;
     }
 
-
-    if( !isset( $this->nodes[$this->newNode] )  )
-    {
-      throw new LibProcess_Exception( 'Invalid actual node '.$this->newNode.' in '.$this->debugData() );
+    if (!isset($this->nodes[$this->newNode])) {
+      throw new LibProcess_Exception('Invalid actual node '.$this->newNode.' in '.$this->debugData());
     }
 
-    if( !isset( $this->edges[$this->oldKey][$this->newNode] )  )
-    {
+    if (!isset($this->edges[$this->oldKey][$this->newNode])  ) {
       // es existiert kein pfad, also muss nichts gemacht werden
       // also kann nichts fehl schlagen => alles bestens
 
       // schlägt auch dann fehl wenn es eine methode geben würde die
       // zum aufruf passt
-      Debug::console( "no PATH this->edges[$this->oldKey][$this->newNode] " );
+      Debug::console("no PATH this->edges[$this->oldKey][$this->newNode] ");
+
       return null;
     }
 
     /*
-    if( !$this->checkUserAccess( $this->edges[$this->activKey][$this->newNode]['roles'] ) )
-    {
-      throw new LibProcess_Exception( 'User has no permission to move on' );
+    if (!$this->checkUserAccess($this->edges[$this->activKey][$this->newNode]['roles'])) {
+      throw new LibProcess_Exception('User has no permission to move on');
     }
     */
 
-    if( isset( $this->edges[$this->oldKey][$this->newNode]['actions'][$position] ) )
-    {
+    if (isset($this->edges[$this->oldKey][$this->newNode]['actions'][$position])) {
 
       $action = 'action_'.SParserString::subToCamelCase($this->edges[$this->oldKey][$this->newNode]['actions'][$position]);
 
-      Debug::console( "try to call  $action" );
+      Debug::console("try to call  $action");
 
       // ok das sollte nicht passieren
-      if( !method_exists( $this, $action ) )
-        throw new LibProcess_Exception( 'Called nonexisting action! '.$action.' '.$this->debugData() );
+      if (!method_exists($this, $action))
+        throw new LibProcess_Exception('Called nonexisting action! '.$action.' '.$this->debugData());
 
-      Debug::console( "call  $action" );
+      Debug::console("call  $action");
 
-      if( $error = $this->{$action}( $params ) )
+      if ($error = $this->{$action}($params))
         return $error;
 
-    }
-    else
-    {
+    } else {
+      
       $tmp1 = $this->edges[$this->oldKey];
       $tmp2 = $tmp1[$this->newNode];
       $tmp3 = $tmp2['actions'];
-      
-      if( isset( $tmp3[$position] ) )
+
+      if (isset($tmp3[$position]))
         $tmp4 = $tmp3[$position];
-      else 
+      else
         $tmp4 = 'for '.$position;
-        
-      Debug::console( "no action ".$tmp4 );
+
+      Debug::console("no action ".$tmp4);
     }
 
-    if( $changeStatus )
-      $this->model->changeStatus( $this->newNode, $params );
+    if ($changeStatus)
+      $this->model->changeStatus($this->newNode, $params);
 
     return null;
 
@@ -1080,177 +1033,161 @@ abstract class Process
    * @param string $position
    * @param Tflag $params
    */
-  public function call( $type, $position, $params )
+  public function call($type, $position, $params)
   {
 
     $action = $type.'_'.$position;
 
     // müssen nicht existieren
-    if( !method_exists( $this, $action ) )
+    if (!method_exists($this, $action))
       return null;
 
-    return $this->{$action}( $params );
+    return $this->{$action}($params);
 
   }//end public function call */
-  
+
   /**
    * Validate kann nur aufgerufen werden wenn der Prozess vorher geladen wurde
    * und wenn die Prozesselemente aus den Request bereits ausgewertet wurden, bzw
    * Pfadinformationen gesetzt wurden.
-   * 
+   *
    * @param Tflag $params
    * @param boolean $validateNode Soll nur der Node oder eine Edge validiert werden
    */
-  public function validate( $params = null, $validateNode = false )
+  public function validate($params = null, $validateNode = false)
   {
-    
-    if( !$this->model->activKey )
-      throw new LibProcess_Exception( 'Process needs to be initialized to call validate!' );
-      
-    
-    if( !$this->model->requestedEdge && $validateNode )
-    {
-      
-      if( isset( $this->nodes[$this->model->activKey]['constraints'] )  )
-      {
+
+    if (!$this->model->activKey)
+      throw new LibProcess_Exception('Process needs to be initialized to call validate!');
+
+    if (!$this->model->requestedEdge && $validateNode) {
+
+      if (isset($this->nodes[$this->model->activKey]['constraints'])) {
         $constraints = $this->nodes[$this->model->activKey]['constraints'];
-      }
-      else 
-      {
+      } else {
         return null;
       }
 
-    }
-    else 
-    {
-      
-      if( isset( $this->edges[$this->oldKey][$this->model->requestedEdge]['constraints'] ) )
-      {
+    } else {
+
+      if (isset($this->edges[$this->oldKey][$this->model->requestedEdge]['constraints'])) {
         $constraints = $this->edges[$this->oldKey][$this->model->requestedEdge]['constraints'];
-      }
-      else 
-      {
+      } else {
         return null;
       }
 
     }
-
 
     $response = $this->getResponse();
-    
+
     /* @var $respContext LibResponseContext */
     $respContext = $response->createContext();
-    
-    foreach( $constraints as  $constraint )
-    {
-      
-      $action = 'constraint_'.SParserString::subToCamelCase( $constraint );
-      
+
+    foreach ($constraints as  $constraint) {
+
+      $action = 'constraint_'.SParserString::subToCamelCase($constraint);
+
       /// TODO Error handling
-      if( !method_exists( $this, $action ) )
-      {
-        Debug::console( 'Missing Constraint '.$constraint );
+      if (!method_exists($this, $action)) {
+        
+        $logger = LibProtocol_SystemError::getDefault();
+        $logger->write(
+          'Missing Constraint '.$constraint,
+          Debug::backtrace(),
+          $this->getRequest(),
+          null,
+          $this->entity
+        );
+        Debug::console('Missing Constraint '.$constraint);
         continue;
       }
-        
-      $respContext = $this->$action( $respContext );
-      
+
+      $respContext = $this->$action($respContext);
+
     }
-    
-    if( !$respContext->hasError )
+
+    if (!$respContext->hasError)
       return null;
-      
+
     return $respContext;
 
   }//end public function validate */
-  
+
   /**
    * Validate kann nur aufgerufen werden wenn der Prozess vorher geladen wurde
    * und wenn die Prozesselemente aus den Request bereits ausgewertet wurden, bzw
    * Pfadinformationen gesetzt wurden.
-   * 
+   *
    * @param Tflag $params
    * @param boolean $validateNode Soll nur der Node oder eine Edge validiert werden
    */
-  public function injectValidationInForm( $form, $mainKey )
+  public function injectValidationInForm($form, $mainKey)
   {
-    
-    if( !$this->model->activKey )
-      throw new LibProcess_Exception( 'Process needs to be initialized to call validate!' );
-      
+
+    if (!$this->model->activKey)
+      throw new LibProcess_Exception('Process needs to be initialized to call validate!');
+
     $constraints = array();
-      
+
     // injecten der constraints auf dem aktuellen status
-    if( isset( $this->nodes[$this->model->activKey]['constraints'] )  )
-    {
+    if (isset($this->nodes[$this->model->activKey]['constraints'])  ) {
       $constraints = $this->nodes[$this->model->activKey]['constraints'];
-      
-      foreach( $constraints as  $constraint )
-      {
-        
-        $action = 'injectFormConstraint_'.SParserString::subToCamelCase( $constraint );
-        
+
+      foreach ($constraints as  $constraint) {
+
+        $action = 'injectFormConstraint_'.SParserString::subToCamelCase($constraint);
+
         /// TODO Error handling
-        if( !method_exists( $this, $action ) )
-        {
-          Debug::console( 'Missing Constraint Injector '.$constraint );
+        if (!method_exists($this, $action)) {
+          Debug::console('Missing Constraint Injector '.$constraint);
           continue;
         }
-          
-        $this->$action( $form, $mainKey );
-        
+
+        $this->$action($form, $mainKey);
+
       }
-      
+
     }
 
+    if (isset($this->edges[$this->activKey])) {
 
-    if( isset( $this->edges[$this->activKey] ) )
-    {
-      
-      foreach( $this->edges[$this->activKey] as $edgeKey => $edge )
-      {
-        
+      foreach ($this->edges[$this->activKey] as $edgeKey => $edge) {
+
         // wenn wir constraints haben
-        if( isset( $edge['constraints'] )  )
-        {
+        if (isset($edge['constraints'])  ) {
           $constraints = $edge['constraints'];
-            
-          Debug::console( 'GOT CONSTRAINTS '. implode( ',', $edge['constraints'] ) );
-        
-          foreach( $constraints as  $constraint )
-          {
-            
-            $action = 'injectFormConstraint_'.SParserString::subToCamelCase( $constraint );
-            
+
+          Debug::console('GOT CONSTRAINTS '. implode(',', $edge['constraints']));
+
+          foreach ($constraints as  $constraint) {
+
+            $action = 'injectFormConstraint_'.SParserString::subToCamelCase($constraint);
+
             /// TODO Error handling
-            if( !method_exists( $this, $action ) )
-            {
-              Debug::console( 'Missing Constraint Injector '.$constraint );
+            if (!method_exists($this, $action)) {
+              Debug::console('Missing Constraint Injector '.$constraint);
               continue;
             }
-              
-            $this->$action( $form,  $mainKey, $edge['label'], $edge['description'] );
-            
+
+            $this->$action($form,  $mainKey, $edge['label'], $edge['description']);
+
           }
-          
+
         }
-        
+
       }
-      
+
     }
 
-
   }//end public function injectValidationInForm */
-  
 
   /**
    * @param string $nodeKey
    * @param TFlag $params
    */
-  public function move( $nodeKey, $params = null )
+  public function move($nodeKey, $params = null)
   {
-
-    return $this->changeStatus( $nodeKey, 'change', $params, false );
+    return $this->changeStatus($nodeKey, 'change', $params, false);
 
   }//end public function move */
 
@@ -1263,131 +1200,115 @@ abstract class Process
    *
    * @return string
    */
-  public function changeStatus( $nodeKey, $position = 'change', $params = null, $pathRequired = true )
+  public function changeStatus($nodeKey, $position = 'change', $params = null, $pathRequired = true)
   {
 
-    if( is_null($params) )
-    {
+    if (is_null($params)) {
       $params = new TFlag();
     }
 
-    
-    Debug::console( "Change from {$this->oldKey} to {$nodeKey} " );
-    
+    Debug::console("Change from {$this->oldKey} to {$nodeKey} ");
 
-    if( !isset( $this->nodes[$nodeKey] )  )
-    {
-      throw new LibProcess_Exception( 'Invalid actual node '.$nodeKey.' in Process '.$this->debugData() );
+    if (!isset($this->nodes[$nodeKey])  ) {
+      throw new LibProcess_Exception('Invalid actual node '.$nodeKey.' in Process '.$this->debugData());
     }
 
     $this->newNode = $nodeKey;
 
-    if( !isset( $this->edges[$this->oldKey][$nodeKey] )  )
-    {
+    if (!isset($this->edges[$this->oldKey][$nodeKey])  ) {
       // es existiert kein pfad, also muss nichts gemacht werden
       // also kann nichts fehl schlagen => alles bestens
 
       // schlägt auch dann fehl wenn es eine methode geben würde die
       // zum aufruf passt
-      Debug::console( "No PATH this->edges[$this->oldKey][$nodeKey] " );
-      if( $pathRequired )
-      {
-        throw new LibProcess_Exception
-        (
+      Debug::console("No PATH this->edges[$this->oldKey][$nodeKey] ");
+      if ($pathRequired) {
+        throw new LibProcess_Exception(
           'Tried to change the status from '.$this->oldKey.' '.$nodeKey.' without path in Process '.$this->debugData()
         );
       }
 
     }
 
-
-
     ///TODO User Permission checken?
     /*
-    if( !$this->checkUserAccess( $this->edges[$this->activKey][$this->newNode]['roles'] ) )
-    {
-      throw new LibProcess_Exception( 'User has no permission to move on' );
+    if (!$this->checkUserAccess($this->edges[$this->activKey][$this->newNode]['roles'])) {
+      throw new LibProcess_Exception('User has no permission to move on');
     }
     */
 
-    if( isset( $this->edges[$this->oldKey][$this->newNode]['actions'][$position] ) )
-    {
+    if (isset($this->edges[$this->oldKey][$this->newNode]['actions'][$position])) {
 
       $action = 'action_'.SParserString::subToCamelCase($this->edges[$this->oldKey][$this->newNode]['actions'][$position]);
 
-      //Debug::console( "try to call  $action" );
+      //Debug::console("try to call  $action");
 
       // ok das sollte nicht passieren
-      if( !method_exists( $this, $action ) )
-        throw new LibProcess_Exception( 'Called nonexisting action! '.$action.' in Process '. $this->debugData() );
+      if (!method_exists($this, $action))
+        throw new LibProcess_Exception('Called nonexisting action! '.$action.' in Process '. $this->debugData());
 
-      //Debug::console( "call  $action" );
+      //Debug::console("call  $action");
 
       // wenn ein fehler objekt zurückgegeben wird, wird der schritt abgebrochen
-      if( $error = $this->{$action}( $params ) )
+      if ($error = $this->{$action}($params))
         return $error;
 
-    }
-    else
-    {
-      Debug::console( "No action $this->edges[$this->oldKey][$this->newNode]['actions'][$position] " );
+    } else {
+      Debug::console("No action $this->edges[$this->oldKey][$this->newNode]['actions'][$position] ");
     }
 
-    $this->model->changeStatus( $nodeKey, $params );
+    $this->model->changeStatus($nodeKey, $params);
 
     return null;
 
   }//end public function changeStatus */
-  
-  
+
  /**
    * Den Prozess state changen
    * @param int $state
    */
-  public function changePState( $state = null )
+  public function changePState($state = null)
   {
-    
-    if( is_null( $state ) )
+
+    if (is_null($state))
       $state = $this->model->changePState;
-      
-    if( is_null( $state ) )
-      return;
-    
-    if( $this->state === $state )
+
+    if (is_null($state))
       return;
 
-    $this->model->changePState( $state );
+    if ($this->state === $state)
+      return;
+
+    $this->model->changePState($state);
     $this->state = $state;
 
     return null;
 
   }//end public function changePState */
-  
+
  /**
    * Den Prozess state changen
    * @param stdClass $state
    */
-  public function saveStates( $states )
+  public function saveStates($states)
   {
-    
-    Debug::console( '$states$states', $states );
-    
-    $states = (array)$states;
-    
-    foreach( $states as $key => $state )
-    {
+
+    Debug::console('$states$states', $states);
+
+    $states = (array) $states;
+
+    foreach ($states as $key => $state) {
       $this->statesData->{$key} = $state;
     }
-    
-    $orm = $this->getOrm();
-    $this->activStatus->state = json_encode( $this->statesData );
 
-    $orm->save( $this->activStatus );
-    
+    $orm = $this->getOrm();
+    $this->activStatus->state = json_encode($this->statesData);
+
+    $orm->save($this->activStatus);
+
     return null;
 
   }//end public function saveStates */
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Init & Close
@@ -1400,15 +1321,15 @@ abstract class Process
    * @param Entity $entity
    * @param TFlag $params
    */
-  public function init( $entity = null, $params = null )
+  public function init($entity = null, $params = null)
   {
 
-    if( $entity )
-      $this->model->setEntity( $entity );
+    if ($entity)
+      $this->model->setEntity($entity);
 
-    $keys = array_keys( $this->nodes );
+    $keys = array_keys($this->nodes);
 
-    $this->model->initProcess( $keys[0], $params );
+    $this->model->initProcess($keys[0], $params);
 
   }//end public function init */
 
@@ -1418,15 +1339,15 @@ abstract class Process
    * @param Entity $entity
    * @param TFag $params
    */
-  public function load( $entity, $params )
+  public function load($entity, $params)
   {
 
     $this->params = $params;
 
-    $this->setEntity( $entity );
+    $this->setEntity($entity);
 
-    if( !$this->model->loadStatus( $entity ) )
-      $this->model->initProcess( $this->defaultNode, $params );
+    if (!$this->model->loadStatus($entity))
+      $this->model->initProcess($this->defaultNode, $params);
 
   }//end public function load */
 
@@ -1436,12 +1357,12 @@ abstract class Process
    * @param int $statusId
    * @param TFag $params
    */
-  public function loadByStatus( $statusId, $params )
+  public function loadByStatus($statusId, $params)
   {
 
     $this->params = $params;
 
-    $this->model->loadStatusById( $statusId, $params  );
+    $this->model->loadStatusById($statusId, $params  );
 
   }//end public function loadByStatus */
 
@@ -1451,16 +1372,16 @@ abstract class Process
    * @param Entity $entity
    * @param TFlag $params
    */
-  public function close( $entity = null, $params = null )
+  public function close($entity = null, $params = null)
   {
 
-    if( $entity )
-      $this->model->setEntity( $entity );
+    if ($entity)
+      $this->model->setEntity($entity);
 
-    if( !$this->model->loadStatus(  ) )
-      $this->model->initProcess( $this->defaultNode, $params );
+    if (!$this->model->loadStatus())
+      $this->model->initProcess($this->defaultNode, $params);
 
-    $this->model->closeProcess( $this->closeNode, $params  );
+    $this->model->closeProcess($this->closeNode, $params  );
 
   }//end public function close */
 
@@ -1470,41 +1391,38 @@ abstract class Process
    * @param Entity $entity
    * @param TFlag $params
    */
-  public function delete( $entity = null, $params = null )
+  public function delete($entity = null, $params = null)
   {
 
-    if( $entity )
-      $this->model->setEntity( $entity );
+    if ($entity)
+      $this->model->setEntity($entity);
 
-    if( !$this->model->loadStatus(  ) )
+    if (!$this->model->loadStatus())
       return;
 
-    $this->model->deleteProcess( $params  );
+    $this->model->deleteProcess($params  );
 
   }//end public function delete */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Build Address
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
    * @param array $resp
    * @return IReceiver
    */
-  protected function buildReceiver( $resp )
+  protected function buildReceiver($resp)
   {
 
-    switch ( $resp['type']  )
-    {
-      case Acl::ROLE:
-      {
-        return $this->buildGroupReceiver( $resp );
+    switch ($resp['type']) {
+      case Acl::ROLE: {
+        return $this->buildGroupReceiver($resp);
         break;
       }
-      default:
-      {
-        throw new LibProcess_Exception( 'Tried to build a nonexisting receiver type: '.$resp['type'].' in Process '. $this->debugData() );
+      default: {
+        throw new LibProcess_Exception('Tried to build a nonexisting receiver type: '.$resp['type'].' in Process '. $this->debugData());
         break;
       }
     }
@@ -1512,48 +1430,47 @@ abstract class Process
   }//end protected function buildReceiver */
 
   /**
-   *
    * @param array $resp
    * @return IReceiver
    */
-  protected function buildGroupReceiver( $resp )
+  protected function buildGroupReceiver($resp)
   {
 
-    if( !isset( $resp['roles'] ) )
-      throw new LibProcess_Exception( "Missing Roles in Role Check ".$this->debugData() );
+    if (!isset($resp['roles']))
+      throw new LibProcess_Exception("Missing Roles in Role Check ".$this->debugData());
 
     $roles = $resp['roles'];
 
-    $area  = isset( $resp['area'] ) && isset( $this->areas[$resp['area']] )
+    $area  = isset($resp['area']) && isset($this->areas[$resp['area']])
       ? $this->areas[$resp['area']]
       : null;
 
-    $id  = isset( $resp['id'] ) && isset( $this->ids[$resp['id']] )
+    $id  = isset($resp['id']) && isset($this->ids[$resp['id']])
       ? $this->ids[$resp['id']]
       : null;
 
     $else = array();
 
-    if( $resp['else'] )
-    {
-      foreach( $resp['else'] as $receiver )
-      {
-        $else[] = $this->buildReceiver( $receiver );
+    if ($resp['else']) {
+      foreach ($resp['else'] as $receiver) {
+        $else[] = $this->buildReceiver($receiver);
       }
     }
 
-    return new LibMessage_Receiver_Group( $roles, $area, $id, $else );
+    return new LibMessage_Receiver_Group($roles, $area, $id, $else);
 
   }//end protected function buildGroupReceiver */
-  
+
+  /**
+   */
   public function owner()
   {
-    $this->entity->owner( true );
-  }
+    $this->entity->owner(true);
+  }//end public function owner */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Debug Data
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Methode zum bereitstellen notwendiger Debugdaten

@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * @package WebFrap
@@ -23,16 +21,14 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapNavigation_Model
-  extends Model
+class WebfrapNavigation_Model extends Model
 {
-  
-  
+
   /**
    * @param string $key
    * @param TArray $params
    */
-  public function searchEntriesAutocomplete( $key, $params )
+  public function searchEntriesAutocomplete($key, $params)
   {
 
     $db     = $this->getDb();
@@ -47,7 +43,6 @@ class WebfrapNavigation_Model
     return $query->getAll();
 
   }//end public function searchEntriesAutocomplete */
-
 
 }//end class WebfrapNavigation_Model
 

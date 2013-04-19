@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,29 +21,27 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosProjects_Maintab_View
-  extends WgtMaintab
+class DaidalosProjects_Maintab_View extends WgtMaintabCustom
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param string $menuName
    * @return void
    */
-  public function display( $request, $params )
+  public function display($request, $params)
   {
 
     $this->setLabel('Daidalos');
     $this->setTitle('Daidalos');
 
-
-    $this->setTemplate( 'daidalos/projects/table' );
-    $table = $this->newItem( 'tableCompilation' , 'DaidalosProjects_Table' );
+    $this->setTemplate('daidalos/projects/table');
+    $table = $this->newItem('tableCompilation' , 'DaidalosProjects_Table');
 
     $params = new TArray();
-    $this->addMenuMenu( $params );
+    $this->addMenuMenu($params);
 
   }//end public function display */
 
@@ -56,7 +54,7 @@ class DaidalosProjects_Maintab_View
    *   string formId: the id of the form;
    * }
    */
-  public function addMenuMenu( $params )
+  public function addMenuMenu($params)
   {
 
     $menu     = $this->newMenu
@@ -65,7 +63,7 @@ class DaidalosProjects_Maintab_View
       'DaidalosProjects'
     );
     $menu->id = $this->id.'_dropmenu';
-    $menu->buildMenu( $params );
+    $menu->buildMenu($params);
 
   }//end public function addMenuMenu */
 

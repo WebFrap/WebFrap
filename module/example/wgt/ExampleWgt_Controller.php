@@ -15,19 +15,17 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage Core
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class ExampleWgt_Controller
-  extends Controller
+class ExampleWgt_Controller extends Controller
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Mit den Options wird der zugriff auf die Service Methoden konfiguriert
@@ -50,39 +48,42 @@ class ExampleWgt_Controller
   (
     'tree' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab' )
+      'method'    => array('GET'),
+      'views'      => array('maintab')
     ),
     'area' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'area' )
+      'method'    => array('GET'),
+      'views'      => array('area')
+    ),
+    'dump' => array
+    (
+      'method'    => array('GET','POST','PUT'),
+      'views'      => array('area')
     ),
   );
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_tree( $request, $response )
+  public function service_tree($request, $response)
   {
 
     /* @var $view ExampleBase_Maintab_View  */
     $view = $response->loadView
     (
-    	'example-wgt-tree',
+      'example-wgt-tree',
       'ExampleWgt',
       'displayTree'
     );
 
-    $view->displayTree( );
+    $view->displayTree();
 
   }//end public function service_tree */
 
@@ -91,23 +92,41 @@ class ExampleWgt_Controller
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_area( $request, $response )
+  public function service_area($request, $response)
   {
-    
-    $area = $request->param( 'area', Validator::TEXT );
+
+    $area = $request->param('area', Validator::TEXT);
 
     /* @var $view ExampleBase_Maintab_View  */
     $view = $response->loadView
     (
-    	'example-wgt-area-'.str_replace( '.', '_', $area ),
+      'example-wgt-area-'.str_replace('.', '_', $area),
       'ExampleWgt',
       'displayArea'
     );
 
-    $view->displayArea( $area );
+    $view->displayArea($area);
 
   }//end public function service_area */
-  
+
+  /**
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return void
+   */
+  public function service_dump($request, $response)
+  {
+
+    /* @var $view ExampleBase_Maintab_View  */
+    $view = $response->loadView(
+      'example-wgt-area-console',
+      'ExampleWgt',
+      'displayConsole'
+    );
+
+    $view->displayConsole($request);
+
+  }//end public function service_area */
 
 }//end class ExampleBase_Controller
 

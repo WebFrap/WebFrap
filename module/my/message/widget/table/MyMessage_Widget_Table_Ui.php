@@ -22,12 +22,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class MyMessage_Widget_Table_Ui
-  extends MvcUi
+class MyMessage_Widget_Table_Ui extends MvcUi
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Listing Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
  /**
   * just deliver changed table rows per ajax interface
@@ -38,12 +37,12 @@ class MyMessage_Widget_Table_Ui
   *   // Parameter die ausgewertet werden, oder weitergeleitet
   *
   *   @param: int start, Offset für die Listenelemente. Wird absolut übergeben und nicht
-  *     mit multiplikator ( 50 anstelle von <strike>5 mal listengröße</strike> )
+  *     mit multiplikator (50 anstelle von <strike>5 mal listengröße</strike>)
   *
   *   @param: int qsize, Die Anzahl der zu Ladenten Einträge. Momentan wird alles > 500 auf 500 gekappt
   *     alles kleiner 0 wird auf den standardwert von aktuell 25 gesetzt
   *
-  *   @param: array(string fieldname => string [asc|desc] ) order, Die Daten für die Sortierung
+  *   @param: array(string fieldname => string [asc|desc]) order, Die Daten für die Sortierung
   *
   *   @param: char begin, Mit Begin wird ein Buchstabe übergeben, der verwendet wird die Listeelemente
   *     nach dem Anfangsbuchstaben zu filtern. Kann im Prinzip jedes beliebige Zeichen, also auch eine Zahl sein
@@ -74,53 +73,46 @@ class MyMessage_Widget_Table_Ui
   * @param boolean [default=false] $insert
   * @return void
   */
-  public function listEntry( $access, $params, $insert = false  )
+  public function listEntry($access, $params, $insert = false  )
   {
 
     $view = $this->getView();
 
-    $table = new MyMessage_Widget_Table_Element( null, $view );
+    $table = new MyMessage_Widget_Table_Element(null, $view);
 
-    $table->addData( $this->model->getEntryData( $params ) );
+    $table->addData($this->model->getEntryData($params));
 
     // den access container dem listenelement übergeben
-    $table->setAccess( $access );
-    $table->setAccessPath( $params, $params->aclKey, $params->aclNode );
+    $table->setAccess($access);
+    $table->setAccessPath($params, $params->aclKey, $params->aclNode);
 
     // if a table id is given use it for the table
-    if( $params->targetId  )
+    if ($params->targetId  )
       $table->id = $params->targetId;
 
-
-    if( !is_null($params->listingActions) )
-    {
-      $table->addActions( $params->listingActions );
-    }
-    else
-    {
+    if (!is_null($params->listingActions)) {
+      $table->addActions($params->listingActions);
+    } else {
       $actions   = array();
 
       $actions[] = 'edit';
       $actions[] = 'delete';
 
-      $table->addActions( $actions );
+      $table->addActions($actions);
     }
 
     $table->insertMode = $insert;
 
-    if( !$params->noParse )
-      $view->setAreaContent( 'tabRowWbfsysMessage', $table->buildAjax() );
+    if (!$params->noParse)
+      $view->setAreaContent('tabRowWbfsysMessage', $table->buildAjax());
 
-    if( $insert )
-    {
+    if ($insert) {
       $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('renderRowLayout').grid('incEntries');
 
 WGTJS;
-    }
-    else
-    {
+    } else {
       $jsCode = <<<WGTJS
 
   \$S('table#{$table->id}-table').grid('renderRowLayout');
@@ -128,7 +120,7 @@ WGTJS;
 WGTJS;
     }
 
-    $view->addJsCode( $jsCode );
+    $view->addJsCode($jsCode);
 
     return $table;
 
@@ -143,7 +135,7 @@ WGTJS;
    * @param TFlag $params
    * @return void
    */
-  public function searchForm(  $model, $params = null )
+  public function searchForm( $model, $params = null)
   {
 
     // laden der benötigten resourcen
@@ -152,16 +144,15 @@ WGTJS;
     $entityWbfsysMessage  = $model->getEntityWbfsysMessage();
     $fieldsWbfsysMessage  = $entityWbfsysMessage->getSearchCols();
 
-    $formWbfsysMessage    = $view->newForm( 'WbfsysMessage' );
-    $formWbfsysMessage->setNamespace( 'WbfsysMessage' );
-    $formWbfsysMessage->setPrefix( 'WbfsysMessage' );
-    $formWbfsysMessage->setKeyName( 'wbfsys_message' );
+    $formWbfsysMessage    = $view->newForm('WbfsysMessage');
+    $formWbfsysMessage->setNamespace('WbfsysMessage');
+    $formWbfsysMessage->setPrefix('WbfsysMessage');
+    $formWbfsysMessage->setKeyName('wbfsys_message');
     $formWbfsysMessage->createSearchForm
     (
       $entityWbfsysMessage,
       $fieldsWbfsysMessage
     );
-
 
   }//end public function searchForm */
 

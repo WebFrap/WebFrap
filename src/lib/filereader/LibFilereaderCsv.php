@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -19,12 +19,11 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibFilereaderCsv
-  extends LibFilereader
+class LibFilereaderCsv extends LibFilereader
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -56,18 +55,17 @@ class LibFilereaderCsv
    */
   public $escape    = '\\';
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param string $filename
    */
-  public function load( $filename )
+  public function load($filename)
   {
 
-    if( !$this->resource = fopen( $filename , 'r' ) )
-    {
+    if (!$this->resource = fopen($filename , 'r')) {
       throw new Io_Exception('failed to open csv resource: '.$filename);
     }
 
@@ -79,15 +77,14 @@ class LibFilereaderCsv
    */
   public function close()
   {
-    if( is_resource($this->resource) )
+    if (is_resource($this->resource))
      fclose($this->resource);
-     
+
   }//end public function close
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Interface: Iterator
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @see Iterator::current
@@ -111,10 +108,10 @@ class LibFilereaderCsv
   public function next()
   {
     ++$this->pos;
-    $this->actual = fgetcsv( $this->resource, 0, $this->delimiter, $this->enclosure, $this->escape );
-    
+    $this->actual = fgetcsv($this->resource, 0, $this->delimiter, $this->enclosure, $this->escape);
+
     return $this->actual;
-    
+
   }//end public function next */
 
   /**
@@ -123,11 +120,11 @@ class LibFilereaderCsv
   public function rewind()
   {
     --$this->pos;
-    fseek( $this->resource, $this->pos);
-    $this->actual = fgetcsv( $this->resource, 0, $this->delimiter, $this->enclosure, $this->escape );
-    
+    fseek($this->resource, $this->pos);
+    $this->actual = fgetcsv($this->resource, 0, $this->delimiter, $this->enclosure, $this->escape);
+
     return $this->actual;
-    
+
   }//end public function rewind */
 
   /**
@@ -135,11 +132,9 @@ class LibFilereaderCsv
    */
   public function valid()
   {
-    
     return $this->actual? true:false;
-    
-  }//end public function valid */
 
+  }//end public function valid */
 
 } // end class LibFilesystemFile
 

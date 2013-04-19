@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,43 +21,40 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class DaidalosBdlNode_ProfileBackpathNode_Create_Maintab_View
-  extends WgtMaintab
+class DaidalosBdlNode_ProfileBackpathNode_Create_Maintab_View extends WgtMaintabCustom
 {
-  
+
   /**
    * @var DaidalosBdlNode_ProfileBackpath_Model
    */
   public $model = null;
-  
-////////////////////////////////////////////////////////////////////////////////
-// Methoden
-////////////////////////////////////////////////////////////////////////////////
 
-  
+/*//////////////////////////////////////////////////////////////////////////////
+// Methoden
+//////////////////////////////////////////////////////////////////////////////*/
+
   /**
    * @param TFlag $params
    * @return void
    */
-  public function displayCreate( $path, $params )
+  public function displayCreate($path, $params)
   {
 
-    $this->setLabel( 'Create Backpath Node' );
-    $this->setTitle( 'Create Backpath Node' );
+    $this->setLabel('Create Backpath Node');
+    $this->setTitle('Create Backpath Node');
 
-    $this->addVar( 'key', $this->model->modeller->key );
-    $this->addVar( 'bdlFile', $this->model->modeller->bdlFileName );
-    $this->addVar( 'path', $path );
-    
-    $this->setTabId( 'wgt-tab-daidalos-bdl_profile-create-backpath-node' );
-    
-    $this->setTemplate( 'daidalos/bdl/node/profile/backpath_node/maintab/create' );
+    $this->addVar('key', $this->model->modeller->key);
+    $this->addVar('bdlFile', $this->model->modeller->bdlFileName);
+    $this->addVar('path', $path);
+
+    $this->setTabId('wgt-tab-daidalos-bdl_profile-create-backpath-node');
+
+    $this->setTemplate('daidalos/bdl/node/profile/backpath_node/maintab/create');
 
     $params = new TArray();
-    $this->addMenu( $params );
+    $this->addMenu($params);
 
   }//end public function displayCreate */
-
 
   /**
    * add a drop menu to the create window
@@ -68,7 +65,7 @@ class DaidalosBdlNode_ProfileBackpathNode_Create_Maintab_View
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $params )
+  public function addMenu($params)
   {
 
     $menu     = $this->newMenu
@@ -76,11 +73,11 @@ class DaidalosBdlNode_ProfileBackpathNode_Create_Maintab_View
       $this->id.'_dropmenu',
       'DaidalosBdlNode_ProfileBackpathNode_Create'
     );
-    
+
     $menu->id = $this->id.'_dropmenu';
-    $menu->buildMenu(  $params );
-    
-    $menu->injectActions( $this, $params );
+    $menu->buildMenu( $params);
+
+    $menu->injectActions($this, $params);
 
   }//end public function addMenu */
 

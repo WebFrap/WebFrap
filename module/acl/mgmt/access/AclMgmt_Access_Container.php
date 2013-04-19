@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -23,18 +23,17 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Access_Container
-  extends LibAclPermission
+class AclMgmt_Access_Container extends LibAclPermission
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @var DomainNode
    */
   public $domainNode = null;
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Constructor
 //////////////////////////////////////////////////////////////////////////////*/
@@ -54,9 +53,9 @@ class AclMgmt_Access_Container
    * {
    *   @see LibAclPermission::$refBaseLevel
    * }
-   * 
+   *
    * @param DomainNode $domainNode
-   * 
+   *
    */
   public function __construct
   (
@@ -67,27 +66,26 @@ class AclMgmt_Access_Container
   )
   {
 
-    if( !$env )
-    {
+    if (!$env) {
       $env = Webfrap::$env;
     }
-    
+
     $this->env = $env;
-    
+
     $this->levels = Acl::$accessLevels;
 
-    if( !is_null( $level ) )
-      $this->setPermission( $level, $refBaseLevel );
-      
+    if (!is_null($level))
+      $this->setPermission($level, $refBaseLevel);
+
     $this->domainNode = $domainNode;
 
   }//end public function __construct */
-  
+
   /**
    * @param TFlag $params
    * @param Entity $entity
    */
-  public function loadDefault( $params, $entity = null )
+  public function loadDefault($params, $entity = null)
   {
 
     // laden der benötigten Resource Objekte
@@ -95,8 +93,7 @@ class AclMgmt_Access_Container
 
     // wenn keine acl root übergeben wird, da befinden wir uns an dem
     // startpunkt für einen potentiell vorhandenen rechte pfad
-    if( is_null( $params->aclRoot )  )
-    {
+    if (is_null($params->aclRoot)  ) {
       $params->isAclRoot     = true;
       $params->aclRoot       = $this->domainNode->aclBaseKey;
       $params->aclRootId     = null;
@@ -107,8 +104,7 @@ class AclMgmt_Access_Container
 
     // wenn wir in keinem pfad sind nehmen wir einfach die normalen
     // berechtigungen
-    if( $params->isAclRoot )
-    {
+    if ($params->isAclRoot) {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt einen acl container
       $access = $acl->getPermission
@@ -118,9 +114,7 @@ class AclMgmt_Access_Container
         false,     // keine rechte der referenzen laden
         $this     // dieses objekt soll als container verwendet werden
       );
-    }
-    else
-    {
+    } else {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt das zugriffslevel
       $acl->getPathPermission

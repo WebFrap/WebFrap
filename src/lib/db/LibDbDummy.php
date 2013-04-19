@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -19,12 +19,11 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibDbDummy
-  extends LibDbConnection
+class LibDbDummy extends LibDbConnection
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Der Standard Fetch Mode
@@ -53,20 +52,19 @@ class LibDbDummy
    */
   protected $builderType = 'Dummy';
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Application Logic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Wiederherstellen der Verbindung nach dem Serialisieren
    *
    * @return
    */
-  public function wakeup( )
+  public function wakeup()
   {
 
-
-  } // end public function wakeup( )
+  } // end public function wakeup()
 
   /**
    * Eine Selectquery an die Datenbank
@@ -76,11 +74,10 @@ class LibDbDummy
    * @param bool[optional] $send, Soll die Anfrage Assynchron gesendet werden
    * @return
    */
-  public function select( $sql , $returnit = true , $singleRow = false )
+  public function select($sql , $returnit = true , $singleRow = false)
   {
 
-
-  } // end public function select( $sql , $returnit = true , $singleRow = false )
+  } // end public function select($sql , $returnit = true , $singleRow = false)
 
   /**
    * send an insert Request to the Database
@@ -90,10 +87,10 @@ class LibDbDummy
    * @param string $tablePk
    * @return int
    */
-  public function insert( $sql , $tableName = null, $tablePk = null )
+  public function insert($sql , $tableName = null, $tablePk = null)
   {
 
-  } // end public function insert( $sql , $tableName = null, $tablePk = null )
+  } // end public function insert($sql , $tableName = null, $tablePk = null)
 
   /**
    * Ein Updatestatement an die Datenbank schicken
@@ -101,11 +98,10 @@ class LibDbDummy
    * @param String $sql Ein Aktion Object
    * @return int
    */
-  public function update( $sql  )
+  public function update($sql  )
   {
 
-
-  } // end public function update( $sql  )
+  } // end public function update($sql  )
 
   /**
    * Ein Deletestatement and die Datenbank schicken
@@ -113,11 +109,10 @@ class LibDbDummy
    * @param res Sql Ein Aktion Object
    * @return
    */
-  public function delete( $sql )
+  public function delete($sql)
   {
 
-
-  } // end public function delete( $sql )
+  } // end public function delete($sql)
 
   /**
    * Setzten des Aktiven Schemas
@@ -125,12 +120,10 @@ class LibDbDummy
    * @param string Schema Das aktive Schema
    * @return bool
    */
-  public function setSearchPath( $schema )
+  public function setSearchPath($schema)
   {
-
-
     return true;
-  } // end public function setSearchPath( $schema )
+  } // end public function setSearchPath($schema)
 
   /**
    * Senden einer Datenbankabfrage zum erstellen eines Ausführplans
@@ -140,10 +133,10 @@ class LibDbDummy
    * @return void
    * @throws LibDb_Exception
    */
-  public function prepareSelect( $name,  $sqlstring = null )
+  public function prepareSelect($name,  $sqlstring = null)
   {
 
-  } // end public function prepareSelect( $name,  $sqlstring = null )
+  } // end public function prepareSelect($name,  $sqlstring = null)
 
   /**
    * Ein Insert Statement an die Datenbank schicken
@@ -151,10 +144,10 @@ class LibDbDummy
    * @param res Sql Ein Aktion Object
    * @return int
    */
-  public function prepareInsert( $name,  $sqlstring = null )
+  public function prepareInsert($name,  $sqlstring = null)
   {
 
-  } // end public function prepareInsert( $name,  $sqlstring = null )
+  } // end public function prepareInsert($name,  $sqlstring = null)
 
   /**
    * Ein Updatestatement an die Datenbank schicken
@@ -163,11 +156,10 @@ class LibDbDummy
    * @param boolean Send
    * @return int
    */
-  public function prepareUpdate( $name,  $sqlstring = null )
+  public function prepareUpdate($name,  $sqlstring = null)
   {
 
-
-  } // end public function prepareUpdate( $name,  $sqlstring = null )
+  } // end public function prepareUpdate($name,  $sqlstring = null)
 
   /**
    * Ein Deletestatement and die Datenbank schicken
@@ -175,10 +167,10 @@ class LibDbDummy
    * @param res Sql Ein Aktion Object
    * @return
    */
-  public function prepareDelete( $name,  $sqlstring = null  )
+  public function prepareDelete($name,  $sqlstring = null  )
   {
 
-  } // end public function prepareDelete( $name,  $sqlstring = null  )
+  } // end public function prepareDelete($name,  $sqlstring = null  )
 
   /**
    * Löschen eines Ausführplans in der Datenbank
@@ -187,10 +179,10 @@ class LibDbDummy
    * @return void
    * @throws LibDb_Exception
    */
-  public function deallocate( $name )
+  public function deallocate($name)
   {
 
-  } // end public function deallocate( $name )
+  } // end public function deallocate($name)
 
   /**
    * Ausführen einer Vorbereiteten Datenbankabfrage
@@ -199,10 +191,10 @@ class LibDbDummy
    * @param   array Values Ein Array mit den Daten
    * @throws  LibDb_Exception
    */
-  public function executeQuery( $name,  $values = null, $returnIt = true, $single = false )
+  public function executeQuery($name,  $values = null, $returnIt = true, $single = false)
   {
 
-  } // end public function executeQuery( $name,  $values = null, $returnIt = true, $single = false )
+  } // end public function executeQuery($name,  $values = null, $returnIt = true, $single = false)
 
   /**
    * Ausführen einer Vorbereiteten Datenbankabfrage
@@ -211,12 +203,12 @@ class LibDbDummy
    * @param   array Values Ein Array mit den Daten
    * @throws  LibDb_Exception
    */
-  public function executeAction( $name,  $values = null, $getNewId = false )
+  public function executeAction($name,  $values = null, $getNewId = false)
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(__file__,__line__,__method__,array($name, $values, $getNewId));
 
-  } // end public function executeAction( $name,  $values = null, $getNewId = false )
+  } // end public function executeAction($name,  $values = null, $getNewId = false)
 
   /**
    * a raw sql query
@@ -227,12 +219,12 @@ class LibDbDummy
    * @throws  LibDb_Exception
    * @return array
    */
-  public function query( $sql, $returnit = true, $single = false )
+  public function query($sql, $returnit = true, $single = false)
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(__file__,__line__,__method__,array($sql, $returnit, $single));
 
-  } // end public function query( $sql, $returnit = true, $single = false )
+  } // end public function query($sql, $returnit = true, $single = false)
 
   /**
    * execute a sql
@@ -241,12 +233,12 @@ class LibDbDummy
    * @throws  LibDb_Exception
    * @return mixed
    */
-  public function exec( $sql , $insertId = null , $table = null  )
+  public function exec($sql , $insertId = null , $table = null  )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(__file__,__line__,__method__,array($sql , $insertId, $table));
 
-  } // end public function exec( $sql  )
+  } // end public function exec($sql  )
 
   /**
    * Enter description here...
@@ -254,11 +246,11 @@ class LibDbDummy
    * @param unknown_type $sql
    * @return unknown
    */
-  public function ddlQuery( $sql )
+  public function ddlQuery($sql)
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(__file__,__line__,__method__);
-  }//end public function ddlQuery( $sql )
+  }//end public function ddlQuery($sql)
 
   /**
    * Catche des Datenbankresults nach einer Executeanweisung
@@ -266,12 +258,12 @@ class LibDbDummy
    * @throws LibDb_Exception
    * @return void
    */
-  public function getResult( )
+  public function getResult()
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(__file__,__line__,__method__);
 
-  } // end public function getResult( )
+  } // end public function getResult()
 
   /**
    * Auslesen des letzten Abfrageergebnisses
@@ -279,12 +271,12 @@ class LibDbDummy
    * @param int $Mode
    * @return array
    */
-  public function getAll( $mode = null )
+  public function getAll($mode = null)
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(__file__,__line__,__method__,array($mode));
 
-  } // end public function getAll( $mode = null )
+  } // end public function getAll($mode = null)
 
   /**
    * Das Nächste Result Abfragen
@@ -292,45 +284,45 @@ class LibDbDummy
    * @return array
 
    */
-  public function getRow( $mode = null )
+  public function getRow($mode = null)
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(__file__,__line__,__method__,array($mode));
 
-  } // end public function getRow( $mode = null )
+  } // end public function getRow($mode = null)
 
   /**
    * Das Result der letzten Afrage leeren
    *
    * @return
    */
-  public function clearResult( )
+  public function clearResult()
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(__file__,__line__,__method__);
 
-  } // end public function clearResult( )
+  } // end public function clearResult()
 
   /**
    * Die Numrows der Letzten Aktion abfragen
    *
    * @return int
    */
-  public function getNumRows( )
+  public function getNumRows()
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(__file__,__line__,__method__);
 
-  } // end public function getNumRows( )
+  } // end public function getNumRows()
 
   /**
    * Die Affected Rows der letzen Query erfragen
    *
    * @return int
    */
-  public function getAffectedRows( )
+  public function getAffectedRows()
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(__file__,__line__,__method__);
 
   } // end of member function getAffectedRows
@@ -340,36 +332,36 @@ class LibDbDummy
    *
    * @return string
    */
-  public function getNotice( )
+  public function getNotice()
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(__file__,__line__,__method__);
 
-  } // end public function getNotice( )
+  } // end public function getNotice()
 
   /**
    * Fehlermeldungen des Datenbanksystems abfragen
    *
    * @return string
    */
-  public function getError( )
+  public function getError()
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(__file__,__line__,__method__);
 
-  } // end public function getError( )
+  } // end public function getError()
 
   /**
    * Starten einer Transaktion
    *
    * @return
    */
-  public function begin( $write = true )
+  public function begin($write = true)
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(__file__,__line__,__method__);
 
-  } // end public function begin( )
+  } // end public function begin()
 
   /**
    * Transaktion wegen Fehler abbrechen
@@ -378,10 +370,10 @@ class LibDbDummy
    */
   public function rollback($write = true   )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(__file__,__line__,__method__);
 
-  } // end public function rollback( )
+  } // end public function rollback()
 
   /**
    * Transaktion erfolgreich Abschliesen
@@ -390,32 +382,32 @@ class LibDbDummy
    */
   public function commit($write = true  )
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(__file__,__line__,__method__);
 
-  } // end public function commit( )
+  } // end public function commit()
 
   /**
    * Funktion zum einfachen durchleiten einer logquery in die Datenbank
    *
    * @return
    */
-  public function logQuery( $sql )
+  public function logQuery($sql)
   {
 
-  } // end public function logQuery( $sql )
+  } // end public function logQuery($sql)
 
   /**
    * Den Status des Results Checken
    *
    * @return
    */
-  public function checkStatus( )
+  public function checkStatus()
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(__file__,__line__,__method__);
 
-  } // end public function checkStatus( )
+  } // end public function checkStatus()
 
   /**
    * Erstellen einer Datenbankverbindung
@@ -425,7 +417,7 @@ class LibDbDummy
    */
   public function connect()
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(__file__,__line__,__method__);
 
   } // end protected function connect()
@@ -438,7 +430,7 @@ class LibDbDummy
    */
   public function dissconnect()
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(__file__,__line__,__method__);
 
   } // end of member function dissconnect
@@ -450,14 +442,14 @@ class LibDbDummy
    * @param array Daten
    * @return array
    */
-  public function convertData( $table , $daten , $prepare = false )
+  public function convertData($table , $daten , $prepare = false)
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(__file__,__line__,__method__,array($table , $daten , $prepare));
 
     return $daten;
 
-  } // end protected function convertData( $table , $daten , $prepare = false )
+  } // end protected function convertData($table , $daten , $prepare = false)
 
   /**
    * Erstellen einer Datenbankverbindung
@@ -465,28 +457,22 @@ class LibDbDummy
    * @param res Sql Ein Select Object
    * @return
    */
-  public function addSlashes( $value )
+  public function addSlashes($value)
   {
-    if(Log::$levelDebug)
+    if (Log::$levelDebug)
       Log::start(__file__,__line__,__method__,array($value));
 
-    if( get_magic_quotes_gpc() )
-    {
+    if (get_magic_quotes_gpc()) {
       return $value;
-    }
-    else
-    {
-      if(is_array($value))
-      {
+    } else {
+      if (is_array($value)) {
         $tmp = array();
-        foreach($value as $key => $data )
-        {
-          $tmp[$key] = $this->addSlashes( $data );
+        foreach ($value as $key => $data) {
+          $tmp[$key] = $this->addSlashes($data);
         }
         $value = $tmp;
-      }else
-      {
-        $value = addslashes( $value );
+      } else {
+        $value = addslashes($value);
       }
     }
 
@@ -496,12 +482,12 @@ class LibDbDummy
 /* (non-PHPdoc)
    * @see LibDbConnection::crud()
    */
-  public function crud($sql, $insertId = null, $table = null) {
+  public function crud($sql, $insertId = null, $table = null)
+  {
     // TODO Auto-generated method stub
-    
-  }
- // end public function addSlashes( $value )
 
+  }
+ // end public function addSlashes($value)
 
 } //end class DbDummy
 

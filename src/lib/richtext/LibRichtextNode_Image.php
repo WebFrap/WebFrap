@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -20,12 +20,11 @@
  * @subpackage tech_core
  *
  */
-class LibRichtextNode_Image
-  extends LibRichtextNode
+class LibRichtextNode_Image extends LibRichtextNode
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var string
@@ -33,5 +32,4 @@ class LibRichtextNode_Image
   public $key = 'image';
 
 }//end class LibRichtextNode_Image
-
 

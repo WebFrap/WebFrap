@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -36,18 +36,17 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class ShopFront_Article_Controller
-  extends ControllerFrontend
+class ShopFront_Article_Controller extends ControllerFrontend
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var boolean
    */
   protected $fullAccess         = true;
-  
+
   /**
    * @var array
    */
@@ -55,62 +54,57 @@ class ShopFront_Article_Controller
   (
     'loadaccessoires' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('GET'),
+      'views'      => array('ajax')
     ),
     'loadtests' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('GET'),
+      'views'      => array('ajax')
     ),
     'loadquestions' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('GET'),
+      'views'      => array('ajax')
     ),
     'loadsimilar' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'ajax' )
+      'method'    => array('GET'),
+      'views'      => array('ajax')
     ),
   );
-  
-////////////////////////////////////////////////////////////////////////////////
+
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @return void
    */
-  public function service_loadAccessoires( )
+  public function service_loadAccessoires()
   {
 
     $view    = $this->getView();
     $request = $this->getRequest();
-    
-    
+
     /* @var $model ShopFront_Model */
-    $model = $this->loadModel( 'ShopFront' );
-    
-    $storeId = $request->param( 'store', Validator::EID );
-    
-    if( $storeId )
-      $model->setStoreId( $storeId );
-    else 
+    $model = $this->loadModel('ShopFront');
+
+    $storeId = $request->param('store', Validator::EID);
+
+    if ($storeId)
+      $model->setStoreId($storeId);
+    else
       $storeId = $model->getDefStoreId();
 
-    
     $body = new ShopFront_Start_Body();
-    
+
     $frontend = new ShopFront_Frontend();
-    $frontend->setModel( $model );
-    
-    $frontend->render( $view, $body );
+    $frontend->setModel($model);
+
+    $frontend->render($view, $body);
 
   }//end public function service_loadAccessoires */
-  
-  
-
 
 }//end class ShopFront_Article_Controller
 

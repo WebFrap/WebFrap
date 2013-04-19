@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,21 +26,20 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Dset_Ajax_View
-  extends LibTemplateAjaxView
+class AclMgmt_Dset_Ajax_View extends LibTemplateAjaxView
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
-  
+//////////////////////////////////////////////////////////////////////////////*/
+
    /**
     * @var DomainNode
     */
     public $domainNode = null;
-  
-////////////////////////////////////////////////////////////////////////////////
+
+/*//////////////////////////////////////////////////////////////////////////////
 // display methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * search pushes a rendered listing element body to the client, that replaces
@@ -50,26 +49,26 @@ class AclMgmt_Dset_Ajax_View
    * @param int $areaId the rowid of the activ area
    * @param TArray $params control flags
    */
-  public function displaySearch( $dsetId, $areaId, $params )
+  public function displaySearch($dsetId, $areaId, $params)
   {
 
-    $ui = $this->tpl->loadUi( 'AclMgmt_Dset' );
+    $ui = $this->tpl->loadUi('AclMgmt_Dset');
     $ui->domainNode = $this->domainNode;
-    $ui->setModel( $this->model );
-    $ui->setView( $this->tpl );
+    $ui->setModel($this->model);
+    $ui->setView($this->tpl);
 
     // add the id to the form
     $params->searchFormId = 'wgt-form-table-'.$this->domainNode->aclDomainKey.'-acl-dset-search';
 
     // fetch the entity object an push it in the view
-    $domainEntity = $this->model->getEntity( $dsetId );
+    $domainEntity = $this->model->getEntity($dsetId);
 
     // ok it's definitly an ajax request
     $params->ajax = true;
 
     $ui->createListItem
     (
-      $this->model->searchQualifiedUsers( $dsetId, $areaId, $params ),
+      $this->model->searchQualifiedUsers($dsetId, $areaId, $params),
       $domainEntity,
       $areaId,
       $params->access,
@@ -94,11 +93,11 @@ class AclMgmt_Dset_Ajax_View
    *
    * @return void
    */
-  public function displayAutocompleteUsers( $areaId, $key, $params )
+  public function displayAutocompleteUsers($areaId, $key, $params)
   {
 
     $view = $this->getTplEngine();
-    $view->setRawJsonData( $this->model->getUsersByKey( $areaId, $key, $params) );
+    $view->setRawJsonData($this->model->getUsersByKey($areaId, $key, $params));
 
     // kein fehler? alles klar
     return null;
@@ -114,15 +113,15 @@ class AclMgmt_Dset_Ajax_View
    * @param string $areaId the rowid of the activ area
    * @param TArray $params useriput / control flags
    */
-  public function displayConnect( $params )
+  public function displayConnect($params)
   {
-    
-    /* @var $ui AclMgmt_Dset_Ui  */
-    $ui = $this->tpl->loadUi( 'AclMgmt_Dset' );
-    $ui->domainNode = $this->domainNode;
-    $ui->setModel( $this->model );
 
-    $ui->listEntry( $params->access, $params, true );
+    /* @var $ui AclMgmt_Dset_Ui  */
+    $ui = $this->tpl->loadUi('AclMgmt_Dset');
+    $ui->domainNode = $this->domainNode;
+    $ui->setModel($this->model);
+
+    $ui->listEntry($params->access, $params, true);
 
     // kein fehler? alles klar
     return null;

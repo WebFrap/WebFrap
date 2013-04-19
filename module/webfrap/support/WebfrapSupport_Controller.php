@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -22,12 +21,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapNavigation_Controller
-  extends ControllerCrud
+class WebfrapNavigation_Controller extends ControllerCrud
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * list with all callable methodes in this subcontroller
@@ -47,19 +45,17 @@ class WebfrapNavigation_Controller
    */
   protected $defaultAction = 'about';
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @return void
    */
-  public function explorer( )
+  public function explorer()
   {
 
-    switch( $this->tplEngine->type )
-    {
+    switch ($this->tplEngine->type) {
       case View::SUBWINDOW:
       {
         // use window view
@@ -96,16 +92,15 @@ class WebfrapNavigation_Controller
       }
     }
 
-    $view->display('root', new TArray() );
-
+    $view->display('root', new TArray());
 
   } // end public function menu */
-  
+
   /**
    * @param TFlag $params
    * @return void
    */
-  public function search( $params = null )
+  public function search($params = null)
   {
 
     // benötigte resourcen laden
@@ -114,15 +109,14 @@ class WebfrapNavigation_Controller
     $user      = $this->getUser();
 
     // load request parameters an interpret as flags
-    $params = $this->getListingFlags( $params );
+    $params = $this->getListingFlags($params);
 
     /*
     $access = new WbfsysBan_Acl_Access_Container();
-    $access->load( $user->getProfileName(),  $params );
+    $access->load($user->getProfileName(),  $params);
 
     // ok wenn er nichtmal lesen darf, dann ist hier direkt schluss
-    if( !$access->admin )
-    {
+    if (!$access->admin) {
       // ausgabe einer fehlerseite und adieu
       $this->errorPage
       (
@@ -137,22 +131,22 @@ class WebfrapNavigation_Controller
         ),
         Response::FORBIDDEN
       );
+
       return false;
     }
 
     // der Access Container des Users für die Resource wird als flag übergeben
     $params->access = $access;
     */
-    
-    $searchKey  = $this->request->param( 'key', Validator::TEXT );
 
-    $model = $this->loadModel( 'WebfrapNavigation' );
+    $searchKey  = $this->request->param('key', Validator::TEXT);
 
-    $view   = $this->tplEngine->loadView( 'WebfrapNavigation_Ajax' );
-    $view->setModel( $model );
+    $model = $this->loadModel('WebfrapNavigation');
 
-    $error = $view->displayAutocomplete( $searchKey, $params );
+    $view   = $this->tplEngine->loadView('WebfrapNavigation_Ajax');
+    $view->setModel($model);
 
+    $error = $view->displayAutocomplete($searchKey, $params);
 
     // Die Views geben eine Fehlerobjekt zurück, wenn ein Fehler aufgetreten
     // ist der so schwer war, dass die View den Job abbrechen musste
@@ -161,9 +155,9 @@ class WebfrapNavigation_Controller
     // Standardmäßig entscheiden wir uns mal dafür diese dem User auch Zugänglich
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
-    if( $error )
-    {
-      $this->errorPage( $error );
+    if ($error) {
+      $this->errorPage($error);
+
       return false;
     }
 
@@ -171,8 +165,6 @@ class WebfrapNavigation_Controller
     return true;
 
   } // end public function search */
-
-
 
 }//end class ControllerWebfrapBase
 

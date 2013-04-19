@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -22,12 +21,11 @@
  * @author Dominik Bonsch <db@s-db.de>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapSession_Controller
-  extends Controller
+class WebfrapSession_Controller extends Controller
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * list with all callable methodes in this subcontroller
@@ -39,32 +37,25 @@ class WebfrapSession_Controller
     'switchprofile'
   );
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @return void
    */
-  public function switchProfile( )
+  public function switchProfile()
   {
 
     $profile = $this->getRequest()->get('profile',Validator::CNAME);
 
     $user = $this->getUser();
 
-    if( $user->hasProfile($profile) )
-    {
+    if ($user->hasProfile($profile)) {
       $user->switchProfile($profile);
     }
 
-
-
-
   } // end public function menu */
-
-
 
 }//end class ControllerWebfrapSession
 

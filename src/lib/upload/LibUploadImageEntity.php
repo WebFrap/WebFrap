@@ -8,23 +8,19 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibUploadImageEntity
-  extends LibUploadEntity
+class LibUploadImageEntity extends LibUploadEntity
 {
-
-
 
   /**
    *
@@ -32,7 +28,7 @@ class LibUploadImageEntity
   public function save()
   {
 
-    Debug::console( 'In save of file upload' );
+    Debug::console('In save of file upload');
 
     $id       = $this->entity->getId();
 
@@ -42,12 +38,12 @@ class LibUploadImageEntity
 
     //$this->newpath = $filePath;
     //$this->newname = $id;
-    Debug::console('in save name'.$id.' path:'.$filePath );
+    Debug::console('in save name'.$id.' path:'.$filePath);
 
-    $this->copy( $id, $filePath );
+    $this->copy($id, $filePath);
 
     $this->cleanThumbs();
-    
+
   }//end public function save */
 
   /**
@@ -63,9 +59,9 @@ class LibUploadImageEntity
     $filePath .= SParserString::idToPath($id);
 
     // thumbs löschen bei neuem upload
-    SFilesystem::delete( $filePath );
+    SFilesystem::delete($filePath);
 
   }//end public function cleanThumbs */
-  
+
 } // end class LibUploadEntity
 

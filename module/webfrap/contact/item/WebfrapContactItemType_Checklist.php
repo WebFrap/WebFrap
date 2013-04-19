@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -23,11 +22,8 @@
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  * @licence BSD
  */
-class WebfrapContactItemType_Checklist
-  extends WgtInputCheckboxList
+class WebfrapContactItemType_Checklist extends WgtInputCheckboxList
 {
-  
 
-  
 } // end class WebfrapContactItemType_Selectbox
 

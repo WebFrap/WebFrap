@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -23,14 +23,13 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapPeople_Access_List_Container
-  extends LibAclPermission
+class WebfrapPeople_Access_List_Container extends LibAclPermission
 {
   /**
    * @param TFlag $params
    * @param WbfsysRoleUser_Entity $entity
    */
-  public function loadDefault( $params, $entity = null )
+  public function loadDefault($params, $entity = null)
   {
 
     // laden der benötigten Resource Objekte
@@ -40,8 +39,7 @@ class WebfrapPeople_Access_List_Container
     // dann befinden wir uns im root und brauchen keine pfadafrage
     // um potentielle fehler abzufangen wird auch direkt der richtige Root gesetzt
     // nicht das hier einer einen falschen pfad injected
-    if( is_null($params->aclRoot) || 1 == $params->aclLevel  )
-    {
+    if (is_null($params->aclRoot) || 1 == $params->aclLevel  ) {
       $params->isAclRoot     = true;
       $params->aclRoot       = 'mgmt-wbfsys_role_user';
       $params->aclRootId     = null;
@@ -52,8 +50,7 @@ class WebfrapPeople_Access_List_Container
 
     // wenn wir in keinem pfad sind nehmen wir einfach die normalen
     // berechtigungen
-    if( $params->isAclRoot )
-    {
+    if ($params->isAclRoot) {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt einen acl container
       $acl->getPermission
@@ -63,9 +60,7 @@ class WebfrapPeople_Access_List_Container
         true,     // keine Kinder laden
         $this     // dieses objekt soll als container verwendet werden
       );
-    }
-    else
-    {
+    } else {
       // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
       // direkt das zugriffslevel
       $acl->getPathPermission
@@ -89,7 +84,7 @@ class WebfrapPeople_Access_List_Container
    * @param string $condition
    * @param TFlag $params
    */
-  public function fetchListTableDefault( $query, $condition, $params )
+  public function fetchListTableDefault($query, $condition, $params)
   {
 
     // laden der benötigten Resource Objekte
@@ -102,10 +97,9 @@ class WebfrapPeople_Access_List_Container
     // erstellen der Acl criteria und befüllen mit den relevanten cols
     $criteria  = $orm->newCriteria();
 
-    $criteria->select( array( 'wbfsys_role_user.rowid as rowid' )  );
+    $criteria->select(array('wbfsys_role_user.rowid as rowid')  );
 
-    if( !$this->defLevel )
-    {
+    if (!$this->defLevel) {
       $greatest = <<<SQL
 
   acls."acl-level"
@@ -114,9 +108,7 @@ SQL;
 
       $joinType = ' ';
 
-    }
-    else
-    {
+    } else {
 
       $greatest = <<<SQL
 
@@ -129,37 +121,36 @@ SQL;
 SQL;
 
       $joinType = ' LEFT ';
-      
+
     }
 
-    $criteria->selectAlso( $greatest  );
+    $criteria->selectAlso($greatest  );
 
-    $query->setTables( $criteria );
-    $query->appendConditions( $criteria, $condition, $params  );
-    $query->checkLimitAndOrder( $criteria, $params );
-    $query->appendFilter( $criteria, $condition, $params );
+    $query->setTables($criteria);
+    $query->appendConditions($criteria, $condition, $params  );
+    $query->checkLimitAndOrder($criteria, $params);
+    $query->appendFilter($criteria, $condition, $params);
 
     $criteria->join
     (
       " {$joinType} JOIN
         {$acl->sourceRelation} as acls
         ON
-          UPPER(acls.\"acl-area\") IN( UPPER('mod-wbfsys'), UPPER('mgmt-wbfsys_role_user') )
+          UPPER(acls.\"acl-area\") IN(UPPER('mod-wbfsys'), UPPER('mgmt-wbfsys_role_user'))
             AND acls.\"acl-user\" = {$userId}
             AND acls.\"acl-vid\" = wbfsys_role_user.rowid ",
       'acls'
     );
-    
-    $tmp = $orm->select( $criteria );
+
+    $tmp = $orm->select($criteria);
     $ids = array();
-    
-    foreach( $tmp as $row )
-    {
+
+    foreach ($tmp as $row) {
       $ids[$row['rowid']] = $row['acl-level'];
     }
-    
-    $query->setCalcQuery( $criteria, $params );
-    
+
+    $query->setCalcQuery($criteria, $params);
+
     return $ids;
 
   }//end public function fetchListTableDefault */

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtSelectboxWebfrapInstype
-  extends WgtSelectboxHardcoded
+class WgtSelectboxWebfrapInstype extends WgtSelectboxHardcoded
 {
 
   /**
@@ -37,11 +36,9 @@ class WgtSelectboxWebfrapInstype
    */
   protected $data = array
   (
-  'dev_multi'       =>  array( 'value' => 'developer multiuser'   ),
-  'prod_multi'      =>  array( 'value' => 'production multiuser'   ),
+  'dev_multi'       =>  array('value' => 'developer multiuser'   ),
+  'prod_multi'      =>  array('value' => 'production multiuser'   ),
   );
 
-
 } // end class WgtSelectboxWebfrapInstype
-
 

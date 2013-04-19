@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,19 +21,18 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibBuildCreate
-  extends LibBuildAction
+class LibBuildCreate extends LibBuildAction
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
    * @param unknown_type $node
    * @return unknown_type
    */
-  public function execute(  )
+  public function execute()
   {
 
     $type         = $this->args[0];
@@ -46,20 +45,19 @@ class LibBuildCreate
       $repoPwd      = $node[5];
     */
 
-
     $className = 'LibBuildCreate'.ucfirst($type);
 
-    if(!WebFrap::classLoadable($className))
-    {
-      Error::addError('Requested invalid Create Type: '.$type.'. Please Check you Buildconfiguration.' );
+    if (!WebFrap::classLoadable($className)) {
+      Error::addError('Requested invalid Create Type: '.$type.'. Please Check you Buildconfiguration.');
+
       return false;
     }
 
-    $repoObj = new $className( $this->args );
+    $repoObj = new $className($this->args);
+
     return $repoObj->execute();
 
   }//end public function execute */
-
 
 } // end class LibBuildCreate
 

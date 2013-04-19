@@ -8,24 +8,22 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage Developer
  */
-class LibHighlightCode
-  extends LibVendorGeshi
+class LibHighlightCode extends LibVendorGeshi
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -51,45 +49,45 @@ class LibHighlightCode
    */
   public $language = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
    * @param $code
    * @return unknown_type
    */
-  public function __construct( $code = null , $language = null )
+  public function __construct($code = null , $language = null)
   {
     $this->code = $code;
     $this->language = $language;
-  }//end public function __construct( $code = null , $language = null )
+  }//end public function __construct($code = null , $language = null)
 
   /**
    * @param string $code
    */
-  public function setCode( $code )
+  public function setCode($code)
   {
     $this->code = $code;
-  }//end public function setCode( $code )
+  }//end public function setCode($code)
 
   /**
    *
    * @param string $language
    */
-  public function setLanguage( $language )
+  public function setLanguage($language)
   {
     $this->language = $language;
-  }//end public function setLanguage( $language )
+  }//end public function setLanguage($language)
 
   /**
    * @return string
    */
-  public function getHighlighted( )
+  public function getHighlighted()
   {
     return $this->highlighted;
-  }//end public function setHighlighted( )
+  }//end public function setHighlighted()
 
   /**
    *
@@ -97,16 +95,17 @@ class LibHighlightCode
    * @param $language
    * @return unknown_type
    */
-  public function parse( $code = null , $language = null )
+  public function parse($code = null , $language = null)
   {
 
-    if( !$code )  $code = $this->code;
-    if( !$language ) $language = $this->language;
+    if (!$code)  $code = $this->code;
+    if (!$language) $language = $this->language;
 
-    $this->highlighted = $this->highlightCode( $code , $language );
+    $this->highlighted = $this->highlightCode($code , $language);
+
     return $this->highlighted;
 
-  }//end public function parse( $code = null )
+  }//end public function parse($code = null)
 
   /**
    *
@@ -114,13 +113,13 @@ class LibHighlightCode
    * @param $language
    * @return unknown_type
    */
-  public static function highlight( $code, $language )
+  public static function highlight($code, $language)
   {
 
-    if(!self::$instance) self::$instance = new LibHighlightCode();
-      return self::$instance->parse( $code, $language );
+    if (!self::$instance) self::$instance = new LibHighlightCode();
+      return self::$instance->parse($code, $language);
 
-  }//end public function parse( $code = null )
+  }//end public function parse($code = null)
 
 } // end class LibHighlightCode
 

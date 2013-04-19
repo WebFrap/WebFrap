@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,12 +21,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class ExampleGraphArea_Widget
-  extends WgtWidget
+class ExampleGraphArea_Widget extends WgtWidget
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param LibTemplate $view
@@ -34,7 +33,7 @@ class ExampleGraphArea_Widget
    * @param string $tabSize
    * @return void
    */
-  public function asTab( $view, $tabId, $tabSize = 'medium' )
+  public function asTab($view, $tabId, $tabSize = 'medium')
   {
 
     $user     = $this->getUser();
@@ -60,7 +59,6 @@ class ExampleGraphArea_Widget
     project_project.start_end => '{$now}'
 
 SQL;
-
 
     $html = <<<HTML
     <div id="{$tabId}" class="wgt_tab {$tabSize} wcm wcm_chart_area" title="protocol"  >
@@ -110,6 +108,5 @@ HTML;
     return $html;
 
   }//end public function asTab */
-
 
 }//end class ExampleGrapArea_Widget

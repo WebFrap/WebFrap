@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,20 +21,20 @@
  */
 abstract class LibImageAdapter
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var string
    */
   public $imagePath = null;
-  
+
   /**
    * @var string
    */
   public $imageName = null;
-  
+
   /**
    * Pfad zu einem Fehlerimage, das geladen wird, wenn das Original Bild
    * nicht geladen werden konnte
@@ -42,13 +42,13 @@ abstract class LibImageAdapter
    * @var string
    */
   public $pathErrorImage = null;
-  
+
   /**
    * Ist true wenn das Error Image geladen wurde
    * @var boolen
    */
   public $errorState = false;
-  
+
   /**
    * Die Bild Resource
    * @var string
@@ -59,27 +59,27 @@ abstract class LibImageAdapter
    * @var int
    */
   public $width = null;
-  
+
   /**
    * @var int
    */
   public $height = null;
-  
+
   /**
    * @var string
    */
   public $type = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Logic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    */
-  public abstract function open( $imagePath );
+  abstract public function open($imagePath);
 
   /**
    */
-  //public abstract function genThumb( );
+  //public abstract function genThumb();
 
 }// end abstract class LibImageThumbAdapter

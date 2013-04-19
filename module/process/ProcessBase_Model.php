@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -22,8 +21,7 @@
  * @author Dominik Bonsch
  * @copyright Dominik Bonsch <dominik.bonsch@webfrap.net>
  */
-class ProcessBase_Model
-  extends Model
+class ProcessBase_Model extends Model
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -60,7 +58,7 @@ class ProcessBase_Model
   /**
    * @param int $processId
    */
-  public function setProcessId( $processId )
+  public function setProcessId($processId)
   {
     $this->processId =  $processId;
   }//end public function setProcessId */
@@ -68,7 +66,7 @@ class ProcessBase_Model
   /**
    * @param string $entityKey
    */
-  public function setEntityKey( $entityKey )
+  public function setEntityKey($entityKey)
   {
     $this->entityKey =  $entityKey;
   }//end public function setEntityKey */
@@ -76,7 +74,7 @@ class ProcessBase_Model
   /**
    * @param int $entityId
    */
-  public function setEntityId( $entityId )
+  public function setEntityId($entityId)
   {
     $this->entityId =  $entityId;
   }//end public function setEntityId */
@@ -85,19 +83,18 @@ class ProcessBase_Model
    * @param string $entityKey
    * @param int $entityId
    */
-  public function loadEntity( $entityKey, $entityId )
+  public function loadEntity($entityKey, $entityId)
   {
 
     $this->entityKey =  $entityKey;
     $this->entityId  =  $entityId;
 
-    $entityKey    = SParserString::subToCamelCase( $this->entityKey );
+    $entityKey    = SParserString::subToCamelCase($this->entityKey);
     $this->entity = $this->getDb()->getOrm()->get
     (
       $entityKey,
       $this->entityId
     );
-
 
   }//end public function loadEntity */
 
@@ -105,11 +102,11 @@ class ProcessBase_Model
    * @param int $processId
    * @return ProcessBase_Query
    */
-  public function getProcessEdges( $processId )
+  public function getProcessEdges($processId)
   {
 
-    $query = $this->getDb()->newQuery( 'ProcessBase' );
-    $query->fetchProcessEdges( $processId );
+    $query = $this->getDb()->newQuery('ProcessBase');
+    $query->fetchProcessEdges($processId);
 
     return $query;
 
@@ -118,13 +115,12 @@ class ProcessBase_Model
   /**
    * @return Entity
    */
-  public function getEntity(  )
+  public function getEntity()
   {
 
-    if( !$this->entity )
-    {
+    if (!$this->entity) {
 
-      $entityKey = SParserString::subToCamelCase( $this->entityKey );
+      $entityKey = SParserString::subToCamelCase($this->entityKey);
       $this->entity = $this->getDb()->getOrm()->get
       (
         $entityKey,
@@ -138,5 +134,4 @@ class ProcessBase_Model
   }//end public function getEntity */
 
 } // end class ProcessBase_Model
-
 

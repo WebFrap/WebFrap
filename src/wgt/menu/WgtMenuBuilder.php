@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -60,7 +60,7 @@ class WgtMenuBuilder
    * @var string
    */
   public $accessPath = null;
-  
+
   /**
    * Url componente für den Access pfad
    * @var string
@@ -80,13 +80,13 @@ class WgtMenuBuilder
    * @var int
    */
   public $refId    = null;
-  
+
   /**
    * Flag ob die Labels mitgerendert werden sollen
    * @var boolean
    */
   public $renderLabel = false;
-  
+
   /**
    * Die Controlflags
    * @var TFlag
@@ -98,15 +98,15 @@ class WgtMenuBuilder
    * @param array $buttons
    * @param array $actions
    */
-  public function __construct( $view, $buttons = array(), $actions = array() )
+  public function __construct($view, $buttons = array(), $actions = array())
   {
 
     $this->view = $view;
 
-    if( $buttons )
+    if ($buttons)
      $this->buttons = $buttons;
 
-    if( $actions )
+    if ($actions)
      $this->actions = $actions;
 
   }//end public function __construct */
@@ -115,102 +115,92 @@ class WgtMenuBuilder
    * @param string $key der key über welchen der Button addresiert werden kann
    * @param array|string|WgtButton $buttonData der Button
    */
-  public function addButton( $key, $buttonData )
+  public function addButton($key, $buttonData)
   {
     $this->buttons[$key] = $buttonData;
   }//end public function addButton */
-  
+
   /**
    * @return string
    */
   public function getAccessPath()
   {
-    
      return '&amp;target_id='.$this->parentId
       .$this->accessPath
       .($this->refId?'&amp;refid='.$this->refId:null);
-      
+
   }//end public function getAccessPath */
-  
+
   /**
    * @return string
    */
   public function getJsAccessPath()
   {
-    
      return '&target_id='.$this->parentId
       .$this->jsAccessPath
       .($this->refId?'&refid='.$this->refId:null);
-      
+
   }//end public function getJsAccessPath */
-  
+
   /**
    * @param int $objid
    * @param array $row
    * @return string
    */
-  public function getActionUrl( $id, $row )
+  public function getActionUrl($id, $row, $value = null)
   {
-    
+
     $urlExt = '&amp;target_id='.$this->parentId
       .$this->accessPath
       .($this->refId?'&amp;refid='.$this->refId:null);
+
+    $actions = array('edit', 'show');
+
+    foreach ($actions as $action) {
       
-    $actions = array( 'edit', 'show' );
-    
-    foreach( $actions as $action )
-    {
-      if( !isset( $this->buttons[$action] ) )
+      if (!isset($this->buttons[$action]))
         continue;
-        
+
       $button = $this->buttons[$action];
-      
+
       // prüfen ob dem Button eine Check Function mitgegeben wurde
-      if( isset( $button[Wgt::BUTTON_CHECK] ) )
-      {
-        if( !$button[Wgt::BUTTON_CHECK]( $row, $id, $value, $this->access ) )
-        {
+      if (isset($button[Wgt::BUTTON_CHECK])) {
+        if (!$button[Wgt::BUTTON_CHECK]($row, $id, $value, $this->access)) {
           continue;
         }
       }
-      
-      // prüfen ob alle nötigen daten für die acls vorhanden sind
-      if( isset($button[Wgt::BUTTON_ACCESS]) )
-      {
-        // prüfen ob zeilenbasierte rechte vorhanden sind
-        if( isset( $row['acl-level']  ) )
-        {
 
-          if( $row['acl-level']  <  $button[Wgt::BUTTON_ACCESS] )
-          {
+      // prüfen ob alle nötigen daten für die acls vorhanden sind
+      if (isset($button[Wgt::BUTTON_ACCESS])) {
+        
+        // prüfen ob zeilenbasierte rechte vorhanden sind
+        if (isset($row['acl-level']  )) {
+
+          if ($row['acl-level']  <  $button[Wgt::BUTTON_ACCESS]) {
             continue;
           }
-          if( isset($button[Wgt::BUTTON_MAX_ACCESS]) && $row['acl-level'] >= $button[Wgt::BUTTON_MAX_ACCESS] )
-          {
-            continue;
-          }
-            
-          return $this->buttons[$action][2].$id.$urlExt;
           
-        }
+          if (isset($button[Wgt::BUTTON_MAX_ACCESS]) && $row['acl-level'] >= $button[Wgt::BUTTON_MAX_ACCESS]) {
+            continue;
+          }
+
+          return $this->buttons[$action][2].$id.$urlExt;
+        
         // prüfen auf globale rechte
-        elseif( $this->access  )
-        {
+        } elseif ($this->access) {
           
-          if( $this->access->level  <  $button[Wgt::BUTTON_ACCESS] )
-          {
-            continue;
-          }
-          if( isset($button[Wgt::BUTTON_MAX_ACCESS]) && $this->access->level >= $button[Wgt::BUTTON_MAX_ACCESS] )
-          {
+          if ($this->access->level  <  $button[Wgt::BUTTON_ACCESS]) {
             continue;
           }
           
+          if (isset($button[Wgt::BUTTON_MAX_ACCESS]) && $this->access->level >= $button[Wgt::BUTTON_MAX_ACCESS]) {
+            continue;
+          }
+
           return $this->buttons[$action][2].$id.$urlExt;
         }
-      }
-      else
-      {
+        
+      } else {
         // ok keine rechte dann bauen wir das menü einfach so und gehen
         // davon aus, dass keine rechte benötigt werden oder die
         // beim setzen der actions schon geprüft wurden
@@ -218,8 +208,7 @@ class WgtMenuBuilder
       }
 
     }
-  
-      
+
     return null;
 
   }//end public function getActionUrl */
@@ -233,81 +222,69 @@ class WgtMenuBuilder
    * @param string $value
    * @return string
    */
-  public function buildRowMenu( $row, $id = null, $value = null  )
+  public function buildRowMenu($row, $id = null, $value = null  )
   {
     $html = '';
 
-    foreach( $this->actions as $action  )
-    {
-      
-      if( isset( $this->buttons[$action] ) )
-      {
+    foreach ($this->actions as $action) {
+
+      if (isset($this->buttons[$action])) {
         $button = $this->buttons[$action];
-        
+
         // prüfen ob dem Button eine Check Function mitgegeben wurde
-        if( isset( $button[Wgt::BUTTON_CHECK] ) )
-        {
-          if( !$button[Wgt::BUTTON_CHECK]( $row, $id, $value, $this->access ) )
-          {
+        if (isset($button[Wgt::BUTTON_CHECK])) {
+          if (!$button[Wgt::BUTTON_CHECK]($row, $id, $value, $this->access)) {
             continue;
           }
         }
 
         // prüfen ob alle nötigen daten für die acls vorhanden sind
-        if( isset($button[Wgt::BUTTON_ACCESS]) )
-        {
+        if (isset($button[Wgt::BUTTON_ACCESS])) {
+          
           // prüfen ob zeilenbasierte rechte vorhanden sind
-          if( isset( $row['acl-level']  ) )
-          {
+          if (isset($row['acl-level']  )) {
 
-            if( $row['acl-level']  <  $button[Wgt::BUTTON_ACCESS] )
-            {
+            if ($row['acl-level']  <  $button[Wgt::BUTTON_ACCESS]) {
               continue;
             }
-            if( isset($button[Wgt::BUTTON_MAX_ACCESS]) && $row['acl-level'] >= $button[Wgt::BUTTON_MAX_ACCESS] )
-            {
-              continue;
-            }
-              
-            $html .= $this->buildButton( $button, $row, $id, $value );
             
+            if (isset($button[Wgt::BUTTON_MAX_ACCESS]) && $row['acl-level'] >= $button[Wgt::BUTTON_MAX_ACCESS]) {
+              continue;
+            }
+
+            $html .= $this->buildButton($button, $row, $id, $value);
+
           }
           // prüfen auf globale rechte
-          elseif( $this->access  )
-          {
-            
-            if( $this->access->level  <  $button[Wgt::BUTTON_ACCESS] )
-            {
+          elseif ($this->access) {
+
+            if ($this->access->level  <  $button[Wgt::BUTTON_ACCESS]) {
               continue;
             }
-            if( isset($button[Wgt::BUTTON_MAX_ACCESS]) && $this->access->level >= $button[Wgt::BUTTON_MAX_ACCESS] )
-            {
+            if (isset($button[Wgt::BUTTON_MAX_ACCESS]) && $this->access->level >= $button[Wgt::BUTTON_MAX_ACCESS]) {
               continue;
             }
+
+            $html .= $this->buildButton($button, $row, $id, $value);
             
-            $html .= $this->buildButton( $button, $row, $id, $value );
+          } else {
+            
+            Debug::console("NO ACCESS DATA! ".$action) ;
           }
-          else 
-          {
-            Debug::console( "NO ACCESS DATA! ".$action ) ;
-          }
-        }
-        else
-        {
-          
+        } else {
+
           // ok keine rechte dann bauen wir das menü einfach so und gehen
           // davon aus, dass keine rechte benötigt werden oder die
           // beim setzen der actions schon geprüft wurden
-          $html .= $this->buildButton( $button, $row, $id, $value );
+          $html .= $this->buildButton($button, $row, $id, $value);
         }
 
-      }
-      else 
-      {
-        Debug::console( "MISSING ACTION ".$action );
+      } else {
+        
+        Debug::console("MISSING ACTION ".$action);
       }
 
-    }    
+    }
 
     return $html;
 
@@ -319,65 +296,58 @@ class WgtMenuBuilder
    *
    * @return string
    */
-  public function buildContextMenu(  )
+  public function buildContextMenu()
   {
-    
+
     $html = '<ul id="'.$this->parentId.'-cmenu" class="wgt_context_menu" style="display:none;" >'.NL;
 
-    foreach( $this->actions as $action  )
-    {
-      
-      if( isset( $this->buttons[$action] ) )
-      {
+    foreach ($this->actions as $action) {
+
+      if (isset($this->buttons[$action])) {
         $button = $this->buttons[$action];
-        
-        $html .= $this->renderContextEntry( $action, $button );
 
-      }
-      else 
-      {
-        Debug::console( "MISSING ACTION ".$action );
+        $html .= $this->renderContextEntry($action, $button);
+
+      } else {
+        Debug::console("MISSING ACTION ".$action);
       }
 
-    }    
-    
+    }
+
     $html .= '</ul>';
 
     return $html;
 
   }//end public function buildContextMenu */
-  
+
   /**
    * @lang de:
    * Builder Methode für das Menü
    *
    * @return string
    */
-  public function buildContextLogic(  )
+  public function buildContextLogic()
   {
-
-    $entries = array();
+  
+    return '';
     
+    $entries = array();
 
-    foreach( $this->actions as $action  )
-    {
-      
-      if( isset( $this->buttons[$action] ) )
-      {
+    foreach ($this->actions as $action) {
+
+      if (isset($this->buttons[$action])) {
         $button = $this->buttons[$action];
-        
-        if( $entry = $this->remderContextLogic( $action, $button ) )
+
+        if ($entry = $this->remderContextLogic($action, $button))
           $entries[] = $entry;
 
-      }
-      else 
-      {
-        Debug::console( "MISSING ACTION ".$action );
+      } else {
+        Debug::console("MISSING ACTION ".$action);
       }
 
-    }    
-    
-    $htmlEntries = implode( ','.NL, $entries );
+    }
+
+    $htmlEntries = implode(','.NL, $entries);
 
     $html = <<<HTML
       \$S('#{$this->parentId}-cmenu').data('wgt-context-action',{
@@ -388,7 +358,7 @@ HTML;
     return $html;
 
   }//end public function buildContextLogic */
-  
+
   /**
    * @lang de:
    * Builder Methode für das Menü
@@ -398,81 +368,64 @@ HTML;
    * @param string $value
    * @return string
    */
-  public function getRowActions( $row, $id = null, $value = null  )
+  public function getRowActions($row, $id = null, $value = null  )
   {
     $actions = array();
 
-    foreach( $this->actions as $action  )
-    {
-      
-      if( isset( $this->buttons[$action] ) )
-      {
+    foreach ($this->actions as $action) {
+
+      if (isset($this->buttons[$action])) {
         $button = $this->buttons[$action];
-        
+
         // prüfen ob dem Button eine Check Function mitgegeben wurde
-        if( isset( $button[Wgt::BUTTON_CHECK] ) )
-        {
-          if( !$button[Wgt::BUTTON_CHECK]( $row, $id, $value, $this->access ) )
-          {
+        if (isset($button[Wgt::BUTTON_CHECK])) {
+          if (!$button[Wgt::BUTTON_CHECK]($row, $id, $value, $this->access)) {
             continue;
           }
         }
 
         // prüfen ob alle nötigen daten für die acls vorhanden sind
-        if( isset($button[Wgt::BUTTON_ACCESS]) )
-        {
+        if (isset($button[Wgt::BUTTON_ACCESS])) {
           // prüfen ob zeilenbasierte rechte vorhanden sind
-          if( isset( $row['acl-level']  ) )
-          {
+          if (isset($row['acl-level']  )) {
 
-            if( $row['acl-level']  <  $button[Wgt::BUTTON_ACCESS] )
-            {
+            if ($row['acl-level']  <  $button[Wgt::BUTTON_ACCESS]) {
               continue;
             }
-            if( isset($button[Wgt::BUTTON_MAX_ACCESS]) && $row['acl-level'] >= $button[Wgt::BUTTON_MAX_ACCESS] )
-            {
+            if (isset($button[Wgt::BUTTON_MAX_ACCESS]) && $row['acl-level'] >= $button[Wgt::BUTTON_MAX_ACCESS]) {
               continue;
             }
-              
+
             $actions[] = $action;
-            
+
           }
           // prüfen auf globale rechte
-          elseif( $this->access  )
-          {
-            
-            if( $this->access->level  <  $button[Wgt::BUTTON_ACCESS] )
-            {
+          elseif ($this->access) {
+
+            if ($this->access->level  <  $button[Wgt::BUTTON_ACCESS]) {
               continue;
             }
-            if( isset($button[Wgt::BUTTON_MAX_ACCESS]) && $this->access->level >= $button[Wgt::BUTTON_MAX_ACCESS] )
-            {
+            if (isset($button[Wgt::BUTTON_MAX_ACCESS]) && $this->access->level >= $button[Wgt::BUTTON_MAX_ACCESS]) {
               continue;
             }
-            
+
             $actions[] = $action;
+          } else {
+            Debug::console("NO ACCESS DATA! ".$action) ;
           }
-          else 
-          {
-            Debug::console( "NO ACCESS DATA! ".$action ) ;
-          }
-        }
-        else
-        {
-          
+        } else {
+
           // ok keine rechte dann bauen wir das menü einfach so und gehen
           // davon aus, dass keine rechte benötigt werden oder die
           // beim setzen der actions schon geprüft wurden
           $actions[] = $action;
         }
 
-      }
-      else 
-      {
-        Debug::console( "MISSING ACTION ".$action );
+      } else {
+        Debug::console("MISSING ACTION ".$action);
       }
 
-    }    
+    }
 
     return $actions;
 
@@ -482,39 +435,33 @@ HTML;
    *
    * @return string
    */
-  protected function buildButtons(  )
+  protected function buildButtons()
   {
 
     $html = '';
 
-    foreach( $this->buttons as $button  )
-    {
+    foreach ($this->buttons as $button) {
 
-            
-      if( is_object($button) )
-      {
-        
+
+      if (is_object($button)) {
+
         $html .= $button->render().NL;
+
+      } elseif (is_string($button)) {
         
-      }
-      elseif( is_string($button) )
-      {
         $html .= $button.NL;
-      }
-      else if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_AJAX_GET )
-      {
-        $html .= Wgt::urlTag
-        (
+      } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_AJAX_GET) {
+        
+        $html .= Wgt::urlTag(
           $button[Wgt::BUTTON_ACTION],
-          Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ),
+          Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL]),
           array(
             'class'=> $button[Wgt::BUTTON_PROP],
             'title'=> $this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N])
           )
         ).NL;
-      }
-      else if(  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_URL )
-      {
+        
+      } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_URL) {
 
         $url = $button[Wgt::BUTTON_ACTION];
 
@@ -523,18 +470,15 @@ HTML;
           .' target="_blank" '
           .' class="wgt-button '.$button[Wgt::BUTTON_PROP].'" '
           .' title="'.$this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'.
-            Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] )
+            Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL])
           .'</a>'.NL; // ' '.$button[Wgt::BUTTON_LABEL].
 
-      }
-      else if(  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_GET )
-      {
+      } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_GET) {
 
         $url = $button[Wgt::BUTTON_ACTION];
-        
+
         $confirm = '';
-        if( isset( $button[Wgt::BUTTON_CONFIRM] ) )
-        {
+        if (isset($button[Wgt::BUTTON_CONFIRM])) {
           $confirm = ',{confirm:\''.htmlentities($button[Wgt::BUTTON_CONFIRM]).'\'}';
         }
 
@@ -542,12 +486,10 @@ HTML;
           .' onclick="$R.get(\''.$url.'\''.$confirm.');return false;" '
           .' class="'.$button[Wgt::BUTTON_PROP].'" '
           .' title="'.$this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'.
-            Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] )
+            Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL])
           .'</button>'.NL; // ' '.$button[Wgt::BUTTON_LABEL].
 
-      }
-      else if(  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_JS )
-      {
+      } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_JS) {
 
         $html .= '<button '
           .' onclick="'.$button[Wgt::BUTTON_ACTION].';return false;" '
@@ -565,13 +507,11 @@ HTML;
             ).$button[Wgt::BUTTON_LABEL]
           .'</button>'.NL; // ' '.$button[Wgt::BUTTON_LABEL].
 
-      }
-      else if(  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_SEP )
-      {
+      } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_SEP) {
+        
         $html .= '&nbsp;|&nbsp;';
-      }
-      else
-      {
+      
+      } else {
 
         $html .= '<button '
           .' onclick="'.$button[Wgt::BUTTON_ACTION].';return false;" '
@@ -581,12 +521,12 @@ HTML;
             $button[Wgt::BUTTON_LABEL],
             $button[Wgt::BUTTON_I18N]
           ).'" >'.
-            Wgt::icon
-            (
-              $button[Wgt::BUTTON_ICON],
-              'xsmall',
-              $button[Wgt::BUTTON_LABEL]
-            ).$button[Wgt::BUTTON_LABEL]
+          Wgt::icon
+          (
+            $button[Wgt::BUTTON_ICON],
+            'xsmall',
+            $button[Wgt::BUTTON_LABEL]
+          ).$button[Wgt::BUTTON_LABEL]
           .'</button>'.NL; // ' '.$button[Wgt::BUTTON_LABEL].
       }
 
@@ -604,36 +544,32 @@ HTML;
    * @param int $value
    */
   public function buildCustomButtons
-  ( 
-    $buttons, 
-    $actions, 
-    $id = null, 
+  (
+    $buttons,
+    $actions,
+    $id = null,
     $value = null,
     $accessFunc = null,
-    $row = array() 
-  )
-  {
+    $row = array()
+  ) {
 
     $html = '';
 
-    foreach( $actions as $action )
-    {
+    foreach ($actions as $action) {
 
-      if( !isset($buttons[$action]) )
+      if (!isset($buttons[$action]))
         continue;
-      
+
       $button = $buttons[$action];
-      
+
       // prüfen ob dem Button eine Check Function mitgegeben wurde
-      if( isset( $button[Wgt::BUTTON_CHECK] ) )
-      {
-        if( !$button[Wgt::BUTTON_CHECK]( $row, $id, $value, $this->params ) )
-        {
+      if (isset($button[Wgt::BUTTON_CHECK])) {
+        if (!$button[Wgt::BUTTON_CHECK]($row, $id, $value, $this->params)) {
           continue;
         }
       }
-        
-      $html .= $this->buildButton( $button, array(), $id, $value );
+
+      $html .= $this->buildButton($button, array(), $id, $value);
     }
 
     return $html;
@@ -646,7 +582,7 @@ HTML;
    * @param int $id
    * @return string
    */
-  function buildButton( $button, $row = array(), $id = null, $value = null, $addClass = null, $menuType = 'buttons' )
+  public function buildButton($button, $row = array(), $id = null, $value = null, $addClass = null, $menuType = 'buttons')
   {
 
     $html = '';
@@ -655,8 +591,7 @@ HTML;
       .$this->accessPath
       .($this->refId?'&amp;refid='.$this->refId:null);
 
-    if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_AJAX_GET )
-    {
+    if ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_AJAX_GET) {
 
       $html .= Wgt::urlTag
       (
@@ -666,10 +601,10 @@ HTML;
           $button[Wgt::BUTTON_ICON],
           'xsmall',
           $button[Wgt::BUTTON_LABEL]
-        ).( $this->renderLabel ? ' '.$button[Wgt::BUTTON_LABEL]:'' ),
+        ).($this->renderLabel ? ' '.$button[Wgt::BUTTON_LABEL]:''),
         array
         (
-          'class'=> $button[Wgt::BUTTON_PROP].( $addClass? ' '.$addClass:'' ),
+          'class'=> $button[Wgt::BUTTON_PROP].($addClass? ' '.$addClass:''),
           'title'=> $this->view->i18n->l
           (
             $button[Wgt::BUTTON_LABEL],
@@ -678,9 +613,7 @@ HTML;
         )
       );
 
-    }
-    else if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_URL )
-    {
+    } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_URL) {
 
       $html .= Wgt::urlTag
       (
@@ -690,10 +623,10 @@ HTML;
           $button[Wgt::BUTTON_ICON],
           'xsmall',
           $button[Wgt::BUTTON_LABEL]
-        ).( $this->renderLabel ? ' '.$button[Wgt::BUTTON_LABEL]:'' ),
+        ).($this->renderLabel ? ' '.$button[Wgt::BUTTON_LABEL]:''),
         array
         (
-          'class'  => 'wgt-button '.$button[Wgt::BUTTON_PROP].( $addClass? ' '.$addClass:'' ),
+          'class'  => 'wgt-button '.$button[Wgt::BUTTON_PROP].($addClass? ' '.$addClass:''),
           'target' => '_blank',
           'title'  => $this->view->i18n->l
           (
@@ -703,25 +636,20 @@ HTML;
         )
       );
 
-    }
-    else if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_DELETE )
-    {
+    } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_DELETE) {
 
       $url = $button[Wgt::BUTTON_ACTION].$id.$urlExt;
-      
+
       $confirm = '';
-      if( isset( $button[Wgt::BUTTON_CONFIRM] ) )
-      {
+      if (isset($button[Wgt::BUTTON_CONFIRM])) {
         $confirm = htmlentities($button[Wgt::BUTTON_CONFIRM]);
-      }
-      else 
-      {
+      } else {
         $confirm = 'Please confirm to delete this entry.';
       }
 
       $html .= '<button '
         .' onclick="$R.del(\''.$url.'\',{confirm:\''.$confirm.'\'});return false;" '
-        .' class="wgt-button '.$button[Wgt::BUTTON_PROP].( $addClass? ' '.$addClass:'' ).'" tabindex="-1" '
+        .' class="wgt-button '.$button[Wgt::BUTTON_PROP].($addClass? ' '.$addClass:'').'" tabindex="-1" '
         .' title="'.$this->view->i18n->l
           (
             $button[Wgt::BUTTON_LABEL],
@@ -732,24 +660,21 @@ HTML;
             $button[Wgt::BUTTON_ICON],
             'xsmall',
             $button[Wgt::BUTTON_LABEL]
-          ).( $this->renderLabel ? ' '.$button[Wgt::BUTTON_LABEL]:'' )
+          ).($this->renderLabel ? ' '.$button[Wgt::BUTTON_LABEL]:'')
         .'</button>'; //' '.$button[Wgt::BUTTON_LABEL].
 
-    }
-    else if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_GET )
-    {
+    } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_GET) {
 
       $url = $button[Wgt::BUTTON_ACTION].$id.$urlExt;
-      
+
       $confirm = '';
-      if( isset( $button[Wgt::BUTTON_CONFIRM] ) )
-      {
+      if (isset($button[Wgt::BUTTON_CONFIRM])) {
         $confirm = ',{confirm:\''.htmlentities($button[Wgt::BUTTON_CONFIRM]).'\'}';
       }
 
       $html .= '<button '
         .' onclick="$R.get(\''.$url.'\''.$confirm.');return false;" '
-        .' class="wgt-button '.$button[Wgt::BUTTON_PROP].( $addClass? ' '.$addClass:'' ).'" tabindex="-1" '
+        .' class="wgt-button '.$button[Wgt::BUTTON_PROP].($addClass? ' '.$addClass:'').'" tabindex="-1" '
         .' title="'.$this->view->i18n->l
           (
             $button[Wgt::BUTTON_LABEL],
@@ -760,43 +685,36 @@ HTML;
             $button[Wgt::BUTTON_ICON],
             'xsmall',
             $button[Wgt::BUTTON_LABEL]
-          ).( $this->renderLabel ? ' '.$button[Wgt::BUTTON_LABEL]:'' )
+          ).($this->renderLabel ? ' '.$button[Wgt::BUTTON_LABEL]:'')
         .'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
 
-    }
-    else if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_POST )
-    {
+    } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_POST) {
 
       $url = $button[Wgt::BUTTON_ACTION].$id.$urlExt;
-      
+
       $buttonParams = array();
 
-      $bParams = isset($button[Wgt::BUTTON_PARAMS]) 
+      $bParams = isset($button[Wgt::BUTTON_PARAMS])
         ? $button[Wgt::BUTTON_PARAMS]
         : array();
-      
-      if( $bParams )
-      {
-        foreach( $bParams as $pName => $pValueKey )
-        {
+
+      if ($bParams) {
+        foreach ($bParams as $pName => $pValueKey) {
           $buttonParams[] = "'".$pName."':'".addslashes($row[$pValueKey])."'";
         }
-        $bParamsBody = implode( ',', $buttonParams );
-      }
-      else 
-      {
+        $bParamsBody = implode(',', $buttonParams);
+      } else {
         $bParamsBody = '';
       }
-      
+
       $confirm = '';
-      if( isset( $button[Wgt::BUTTON_CONFIRM] ) )
-      {
+      if (isset($button[Wgt::BUTTON_CONFIRM])) {
         $confirm = ',{confirm:\''.htmlentities($button[Wgt::BUTTON_CONFIRM]).'\'}';
       }
 
       $html .= '<button '
         .' onclick="$R.post(\''.$url.'\',{'.$bParamsBody.'}'.$confirm.');return false;" '
-        .' class="wgt-button '.$button[Wgt::BUTTON_PROP].( $addClass? ' '.$addClass:'' ).'" tabindex="-1" '
+        .' class="wgt-button '.$button[Wgt::BUTTON_PROP].($addClass? ' '.$addClass:'').'" tabindex="-1" '
         .' title="'.$this->view->i18n->l
           (
             $button[Wgt::BUTTON_LABEL],
@@ -807,43 +725,36 @@ HTML;
             $button[Wgt::BUTTON_ICON],
             'xsmall',
             $button[Wgt::BUTTON_LABEL]
-          ).( $this->renderLabel ? ' '.$button[Wgt::BUTTON_LABEL]:'' )
+          ).($this->renderLabel ? ' '.$button[Wgt::BUTTON_LABEL]:'')
         .'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
 
-    }
-    else if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_PUT )
-    {
+    } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_PUT) {
 
       $url = $button[Wgt::BUTTON_ACTION].$id.$urlExt;
-      
+
       $buttonParams = array();
 
-      $bParams = isset($button[Wgt::BUTTON_PARAMS]) 
+      $bParams = isset($button[Wgt::BUTTON_PARAMS])
         ? $button[Wgt::BUTTON_PARAMS]
         : array();
-      
-      if( $bParams )
-      {
-        foreach( $bParams as $pName => $pValueKey )
-        {
+
+      if ($bParams) {
+        foreach ($bParams as $pName => $pValueKey) {
           $buttonParams[] = "'".$pName."':'".addslashes($row[$pValueKey])."'";
         }
-        $bParamsBody = implode( ',', $buttonParams );
-      }
-      else 
-      {
+        $bParamsBody = implode(',', $buttonParams);
+      } else {
         $bParamsBody = '';
       }
-      
+
       $confirm = '';
-      if( isset( $button[Wgt::BUTTON_CONFIRM] ) )
-      {
+      if (isset($button[Wgt::BUTTON_CONFIRM])) {
         $confirm = ',{confirm:\''.htmlentities($button[Wgt::BUTTON_CONFIRM]).'\'}';
       }
 
       $html .= '<button '
         .' onclick="$R.put(\''.$url.'\',{'.$bParamsBody.'}'.$confirm.');return false;" '
-        .' class="wgt-button '.$button[Wgt::BUTTON_PROP].( $addClass? ' '.$addClass:'' ).'" tabindex="-1" '
+        .' class="wgt-button '.$button[Wgt::BUTTON_PROP].($addClass? ' '.$addClass:'').'" tabindex="-1" '
         .' title="'.$this->view->i18n->l
           (
             $button[Wgt::BUTTON_LABEL],
@@ -854,32 +765,27 @@ HTML;
             $button[Wgt::BUTTON_ICON],
             'xsmall',
             $button[Wgt::BUTTON_LABEL]
-          ).( $this->renderLabel ? ' '.$button[Wgt::BUTTON_LABEL]:'' )
+          ).($this->renderLabel ? ' '.$button[Wgt::BUTTON_LABEL]:'')
         .'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
 
-    }
-    else if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_JS )
-    {
+    } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_JS) {
 
       //$url = .$id.'&amp;target_id='.$this->parentId.($this->refId?'&amp;refid='.$this->refId:null);
       //$button[Wgt::BUTTON_ACTION]
       // $S(this).parentX(\'table\').parent().data(\''.$button[Wgt::BUTTON_ACTION].'\')
-      
-      $onClick = str_replace( array( '{$parentId}', '{$id}' ), array( $this->parentId, $id ),  $button[Wgt::BUTTON_ACTION] ); 
 
-      if( $id )
-      {
+      $onClick = str_replace(array('{$parentId}', '{$id}'), array($this->parentId, $id),  $button[Wgt::BUTTON_ACTION]);
+
+      if ($id) {
         $html .= '<button '
           .'onclick="'.$onClick.';return false;" '
-          .'class="wgt-button '.$button[Wgt::BUTTON_PROP].( $addClass? ' '.$addClass:'' ).'" tabindex="-1" '
+          .'class="wgt-button '.$button[Wgt::BUTTON_PROP].($addClass? ' '.$addClass:'').'" tabindex="-1" '
           .'title="'.$this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'.
-          Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).( $this->renderLabel ? ' '.$button[Wgt::BUTTON_LABEL]:'' ).'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
-      }
-      else
-      {
+          Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL]).($this->renderLabel ? ' '.$button[Wgt::BUTTON_LABEL]:'').'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
+      } else {
         $html .= '<button '
           .'onclick="'.$button[Wgt::BUTTON_ACTION].'();return false;" '
-          .'class="wgt-button '.$button[Wgt::BUTTON_PROP].( $addClass? ' '.$addClass:'' ).'" tabindex="-1" '
+          .'class="wgt-button '.$button[Wgt::BUTTON_PROP].($addClass? ' '.$addClass:'').'" tabindex="-1" '
           .'title="'.$this->view->i18n->l
           (
             $button[Wgt::BUTTON_LABEL],
@@ -890,30 +796,23 @@ HTML;
             $button[Wgt::BUTTON_ICON],
             'xsmall',
             $button[Wgt::BUTTON_LABEL]
-          ).( $this->renderLabel ? ' '.$button[Wgt::BUTTON_LABEL]:'' ).'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
+          ).($this->renderLabel ? ' '.$button[Wgt::BUTTON_LABEL]:'').'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
       }
 
-    }
-    else if(  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_CHECKBOX )
-    {
+    } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_CHECKBOX) {
       $html .= '<input class="wgt-no-save" value="'.$id.'" />';
-    }
-    else if(  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_SEP )
-    {
+    } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_SEP) {
 
-      if( 'dropdown' == $menuType )
+      if ('dropdown' == $menuType)
         $html .= '<li class="seperator" ></li>';
-      else 
+      else
         $html .= '&nbsp;|&nbsp;';
-        
-    }
-    else
-    {
-      if( $id )
-      {
+
+    } else {
+      if ($id) {
         $html .= '<button  '
           .' onclick="'.$button[Wgt::BUTTON_ACTION]."('".$id."');".'" '
-          .' class="wgt-button '.$button[Wgt::BUTTON_PROP].( $addClass? ' '.$addClass:'' ).'" tabindex="-1" '
+          .' class="wgt-button '.$button[Wgt::BUTTON_PROP].($addClass? ' '.$addClass:'').'" tabindex="-1" '
           .' title="'.$this->view->i18n->l
             (
               $button[Wgt::BUTTON_LABEL],
@@ -926,12 +825,10 @@ HTML;
               $button[Wgt::BUTTON_LABEL]
             ).' '.$button[Wgt::BUTTON_LABEL]
           .'</button>';
-      }
-      else
-      {
+      } else {
         $html .= '<button  '
           .' onclick="'.$button[Wgt::BUTTON_ACTION]."();".'" '
-          .' class="wgt-button '.$button[Wgt::BUTTON_PROP].( $addClass? ' '.$addClass:'' ).'" tabindex="-1" '
+          .' class="wgt-button '.$button[Wgt::BUTTON_PROP].($addClass? ' '.$addClass:'').'" tabindex="-1" '
           .' title="'.$this->view->i18n->l
             (
               $button[Wgt::BUTTON_LABEL],
@@ -946,12 +843,11 @@ HTML;
           .'</button>';
       }
     }
-
 
     return $html;
 
   }//end public function buildButton */
-  
+
   /**
    * @param string $action
    * @param array $button
@@ -959,7 +855,7 @@ HTML;
    * @param int $id
    * @return string
    */
-  function renderContextAction( $action, $button, $row = array(), $id = null, $value = null )
+  public function renderContextAction($action, $button, $row = array(), $id = null, $value = null)
   {
 
     $html = '';
@@ -968,8 +864,7 @@ HTML;
       .$this->accessPath
       .($this->refId?'&amp;refid='.$this->refId:null);
 
-    if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_AJAX_GET )
-    {
+    if ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_AJAX_GET) {
 
       $html .= Wgt::urlTag
       (
@@ -991,9 +886,7 @@ HTML;
         )
       );
 
-    }
-    else if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_URL )
-    {
+    } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_URL) {
 
       $html .= Wgt::urlTag
       (
@@ -1016,19 +909,14 @@ HTML;
         )
       );
 
-    }
-    else if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_DELETE )
-    {
+    } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_DELETE) {
 
       $url = $button[Wgt::BUTTON_ACTION].$id.$urlExt;
-      
+
       $confirm = '';
-      if( isset( $button[Wgt::BUTTON_CONFIRM] ) )
-      {
+      if (isset($button[Wgt::BUTTON_CONFIRM])) {
         $confirm = htmlentities($button[Wgt::BUTTON_CONFIRM]);
-      }
-      else 
-      {
+      } else {
         $confirm = 'Please confirm to delete this entry.';
       }
 
@@ -1048,15 +936,12 @@ HTML;
           )
         .'</button>'; //' '.$button[Wgt::BUTTON_LABEL].
 
-    }
-    else if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_GET )
-    {
+    } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_GET) {
 
       $url = $button[Wgt::BUTTON_ACTION].$id.$urlExt;
-      
+
       $confirm = '';
-      if( isset( $button[Wgt::BUTTON_CONFIRM] ) )
-      {
+      if (isset($button[Wgt::BUTTON_CONFIRM])) {
         $confirm = ',{confirm:\''.htmlentities($button[Wgt::BUTTON_CONFIRM]).'\'}';
       }
 
@@ -1076,34 +961,27 @@ HTML;
           )
         .'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
 
-    }
-    else if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_POST )
-    {
+    } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_POST) {
 
       $url = $button[Wgt::BUTTON_ACTION].$id.$urlExt;
-      
+
       $buttonParams = array();
 
-      $bParams = isset($button[Wgt::BUTTON_PARAMS]) 
+      $bParams = isset($button[Wgt::BUTTON_PARAMS])
         ? $button[Wgt::BUTTON_PARAMS]
         : array();
-      
-      if( $bParams )
-      {
-        foreach( $bParams as $pName => $pValueKey )
-        {
+
+      if ($bParams) {
+        foreach ($bParams as $pName => $pValueKey) {
           $buttonParams[] = "'".$pName."':'".addslashes($row[$pValueKey])."'";
         }
-        $bParamsBody = implode( ',', $buttonParams );
-      }
-      else 
-      {
+        $bParamsBody = implode(',', $buttonParams);
+      } else {
         $bParamsBody = '';
       }
-      
+
       $confirm = '';
-      if( isset( $button[Wgt::BUTTON_CONFIRM] ) )
-      {
+      if (isset($button[Wgt::BUTTON_CONFIRM])) {
         $confirm = ',{confirm:\''.htmlentities($button[Wgt::BUTTON_CONFIRM]).'\'}';
       }
 
@@ -1123,34 +1001,29 @@ HTML;
           )
         .'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
 
-    }
-    else if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_PUT )
-    {
+    } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_PUT) {
 
       $url = $button[Wgt::BUTTON_ACTION].$id.$urlExt;
-      
+
       $buttonParams = array();
 
-      $bParams = isset($button[Wgt::BUTTON_PARAMS]) 
+      $bParams = isset($button[Wgt::BUTTON_PARAMS])
         ? $button[Wgt::BUTTON_PARAMS]
         : array();
-      
-      if( $bParams )
-      {
-        foreach( $bParams as $pName => $pValueKey )
-        {
+
+      if ($bParams) {
+        
+        foreach ($bParams as $pName => $pValueKey) {
           $buttonParams[] = "'".$pName."':'".addslashes($row[$pValueKey])."'";
         }
-        $bParamsBody = implode( ',', $buttonParams );
-      }
-      else 
-      {
+        $bParamsBody = implode(',', $buttonParams);
+        
+      } else {
         $bParamsBody = '';
       }
-      
+
       $confirm = '';
-      if( isset( $button[Wgt::BUTTON_CONFIRM] ) )
-      {
+      if (isset($button[Wgt::BUTTON_CONFIRM])) {
         $confirm = ',{confirm:\''.htmlentities($button[Wgt::BUTTON_CONFIRM]).'\'}';
       }
 
@@ -1170,26 +1043,21 @@ HTML;
           )
         .'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
 
-    }
-    else if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_JS )
-    {
+    } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_JS) {
 
       //$url = .$id.'&amp;target_id='.$this->parentId.($this->refId?'&amp;refid='.$this->refId:null);
       //$button[Wgt::BUTTON_ACTION]
       // $S(this).parentX(\'table\').parent().data(\''.$button[Wgt::BUTTON_ACTION].'\')
-      
-      $onClick = str_replace( array( '{$parentId}', '{$id}' ), array( $this->parentId, $id ),  $button[Wgt::BUTTON_ACTION] ); 
 
-      if( $id )
-      {
+      $onClick = str_replace(array('{$parentId}', '{$id}'), array($this->parentId, $id),  $button[Wgt::BUTTON_ACTION]);
+
+      if ($id) {
         $html .= '<button '
           .'onclick="'.$onClick.';return false;" tabindex="-1" '
           .'class="'.$button[Wgt::BUTTON_PROP].'" '
           .'title="'.$this->view->i18n->l($button[Wgt::BUTTON_LABEL],$button[Wgt::BUTTON_I18N]).'" >'.
-          Wgt::icon( $button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL] ).'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
-      }
-      else
-      {
+          Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL]).'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
+      } else {
         $html .= '<button '
           .'onclick="'.$button[Wgt::BUTTON_ACTION].'();return false;" tabindex="-1" '
           .'class="'.$button[Wgt::BUTTON_PROP].'" '
@@ -1206,19 +1074,12 @@ HTML;
           ).'</button>'; // ' '.$button[Wgt::BUTTON_LABEL].
       }
 
-    }
-    else if(  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_CHECKBOX )
-    {
+    } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_CHECKBOX) {
       $html .= '<input class="wgt-no-save" value="'.$id.'" />';
-    }
-    else if(  $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_SEP )
-    {
+    } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_SEP) {
       $html .= '&nbsp;|&nbsp;';
-    }
-    else
-    {
-      if( $id )
-      {
+    } else {
+      if ($id) {
         $html .= '<button  '
           .' onclick="'.$button[Wgt::BUTTON_ACTION]."('".$id."');".'" tabindex="-1" '
           .' class="'.$button[Wgt::BUTTON_PROP].'" '
@@ -1234,9 +1095,7 @@ HTML;
               $button[Wgt::BUTTON_LABEL]
             ).' '.$button[Wgt::BUTTON_LABEL]
           .'</button>';
-      }
-      else
-      {
+      } else {
         $html .= '<button  '
           .' onclick="'.$button[Wgt::BUTTON_ACTION]."();".'" tabindex="-1" '
           .' class="'.$button[Wgt::BUTTON_PROP].'" '
@@ -1255,18 +1114,17 @@ HTML;
       }
     }
 
-
     return $html;
 
   }//end public function buildButton */
-  
+
   /**
    * @param string $action
    * @param array $button
-   * 
+   *
    * @return string
    */
-  function remderContextLogic( $action, $button  )
+  public function remderContextLogic($action, $button  )
   {
 
     $html = '';
@@ -1276,131 +1134,113 @@ HTML;
       .($this->refId?'&amp;refid='.$this->refId:null);
 
     if
-    ( 
-      $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_AJAX_GET 
-        || $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_GET 
+    (
+      $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_AJAX_GET
+        || $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_GET
     )
     {
-      
+
       // $button[Wgt::BUTTON_ACTION].$id.$urlExt,
 
       $html  = <<<HTML
-      {$action}: function( el, pos, id ){
-        \$R.get( '{$button[Wgt::BUTTON_ACTION]}'+id+'{$urlExt}' );
+      {$action}: function(el, pos, id) {
+        \$R.get('{$button[Wgt::BUTTON_ACTION]}'+id+'{$urlExt}');
+
         return false;
       }
 HTML;
 
-    }
-    else if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_URL )
-    {
-      
+    } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_URL) {
+
       $html  = <<<HTML
-      {$action}: function( el, pos, id ){
-        window.open( '{$button[Wgt::BUTTON_ACTION]}'+id, '_blank' );
+      {$action}: function(el, pos, id) {
+        window.open('{$button[Wgt::BUTTON_ACTION]}'+id, '_blank');
+
         return false;
       }
 HTML;
 
-    }
-    else if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_DELETE )
-    {
+    } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_DELETE) {
 
       $url = $button[Wgt::BUTTON_ACTION]."'+id+'".$urlExt;
-      
+
       $confirm = '';
-      if( isset( $button[Wgt::BUTTON_CONFIRM] ) )
-      {
+      if (isset($button[Wgt::BUTTON_CONFIRM])) {
         $confirm = htmlentities($button[Wgt::BUTTON_CONFIRM]);
-      }
-      else 
-      {
+      } else {
         $confirm = 'Please confirm to delete this entry.';
       }
-      
+
       $html  = <<<HTML
-      {$action}: function( el, pos, id ){
+      {$action}: function(el, pos, id) {
         \$R.del('{$url}',{confirm:'{$confirm}'});
+
         return false;
       }
 HTML;
 
 
-    }
-    else if
-    ( 
-      $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_POST 
+    } elseif (
+      $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_POST
         || $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_PUT
-    )
-    {
+    ) {
 
       $url = $button[Wgt::BUTTON_ACTION]."'+id+'".$urlExt;
-      
+
       $buttonParams = array();
 
-      $bParams = isset($button[Wgt::BUTTON_PARAMS]) 
+      $bParams = isset($button[Wgt::BUTTON_PARAMS])
         ? $button[Wgt::BUTTON_PARAMS]
         : array();
-      
-      if( $bParams )
-      {
-        foreach( $bParams as $pName => $pValueKey )
-        {
+
+      if ($bParams) {
+        foreach ($bParams as $pName => $pValueKey) {
           $buttonParams[] = "'".$pName."':'{\${$pName}}'";
         }
-        $bParamsBody = implode( ',', $buttonParams );
-      }
-      else 
-      {
+        $bParamsBody = implode(',', $buttonParams);
+      } else {
         $bParamsBody = '';
       }
-      
+
       $confirm = '';
-      if( isset( $button[Wgt::BUTTON_CONFIRM] ) )
-      {
+      if (isset($button[Wgt::BUTTON_CONFIRM])) {
         $confirm = ',{confirm:\''.htmlentities($button[Wgt::BUTTON_CONFIRM]).'\'}';
       }
-      
-      $rqType = $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_PUT 
+
+      $rqType = $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_BUTTON_PUT
         ? 'put'
         : 'post';
 
       $html  = <<<HTML
-      {$action}: function( el, pos, id ){
+      {$action}: function(el, pos, id) {
         \$R.{$rqType}('{$url}',{$bParamsBody}{$confirm});
+
         return false;
       }
 HTML;
 
-    }
-    else if( $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_JS )
-    {
+    } elseif ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_JS) {
 
-      $onClick = str_replace( array( '{$parentId}', '{$id}' ), array( $this->parentId, "'+id+'" ),  $button[Wgt::BUTTON_ACTION] ); 
-      
+      $onClick = str_replace(array('{$parentId}', '{$id}'), array($this->parentId, "'+id+'"),  $button[Wgt::BUTTON_ACTION]);
+
       $html  = <<<HTML
-      {$action}: function( el, pos, id ){
+      {$action}: function(el, pos, id) { 
         {$onClick};
         return false;
       }
 HTML;
 
-    }
-    else if
-    (  
-      $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_CHECKBOX 
+    } else if (
+      $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_CHECKBOX
         || $button[Wgt::BUTTON_TYPE] == Wgt::ACTION_SEP
-    )
-    {
+    ) {
       $html = null;
-    }
-    else
-    {
-      
-      $onClick = str_replace( array( '{$parentId}', '{$id}' ), array( $this->parentId, "'+id+'" ),  $button[Wgt::BUTTON_ACTION] ); 
-      
+    } else {
+
+      $onClick = str_replace(array('{$parentId}', '{$id}'), array($this->parentId, "'+id+'"),  $button[Wgt::BUTTON_ACTION]);
+
       $html  = <<<HTML
-      {$action}: function( el, pos, id ){
+      {$action}: function(el, pos, id) { 
         {$onClick};
         return false;
       }
@@ -1411,40 +1251,32 @@ HTML;
     return $html;
 
   }//end public function remderContextLogic */
-  
-  
+
   /**
    * @param string $action
    * @param array $button
    * @return string
    */
-  function renderContextEntry( $action, $button )
+  public function renderContextEntry($action, $button)
   {
-    
-    if( Wgt::ACTION_SEP == $button[Wgt::BUTTON_TYPE] )
-    {
+
+    if (Wgt::ACTION_SEP == $button[Wgt::BUTTON_TYPE]) {
       return '</ul><ul>'.NL;
     }
-    
-    if( isset($button[Wgt::BUTTON_ICON]) )
-    {
-      $icon = Wgt::icon
-      (
+
+    if (isset($button[Wgt::BUTTON_ICON])) {
+      $icon = Wgt::icon(
         $button[Wgt::BUTTON_ICON],
         'xsmall',
         $button[Wgt::BUTTON_LABEL]
       );
-    }
-    else 
-    {
+    } else {
       $icon = '';
     }
-    
+
     //class="wgt-bgi '.$action.'"
     return '<li>'.$icon.'<a href="#'.$action.'">'.$button[Wgt::BUTTON_LABEL].'</a></li>'.NL;
 
   }//end public function renderContextEntry */
 
-
 }//end class WgtMenuBuilder
-

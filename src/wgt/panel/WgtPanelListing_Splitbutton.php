@@ -15,15 +15,13 @@
 *
 *******************************************************************************/
 
-
 /**
  * Basisklasse für Table Panels
  *
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtPanelListing_Splitbutton
-  extends WgtPanel
+class WgtPanelListing_Splitbutton extends WgtPanel
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -83,7 +81,7 @@ class WgtPanelListing_Splitbutton
   /**
    * @param WgtListing $element
    */
-  public function __construct( $element )
+  public function __construct($element)
   {
 
     $this->listType = $element->type;
@@ -111,7 +109,7 @@ class WgtPanelListing_Splitbutton
   /**
    *
    */
-  public function panelMenu( )
+  public function panelMenu()
   {
 
     $i18n = $this->getI18n();
@@ -120,42 +118,36 @@ class WgtPanelListing_Splitbutton
     $panelClass = '';
     $title = '';
 
-    if( $this->title )
-    {
+    if ($this->title) {
       $panelClass = ' title';
       $title = '<div class="left" style="width:40%"  ><h2 style="margin-bottom:0px;" >'.$this->title.'</h2></div>';
     }
 
-
-    if( $this->searchKey )
-    {
+    if ($this->searchKey) {
       $html .= '<div class="wgt-panel'.$panelClass.'" >';
 
       $html .= $title;
 
-      $iconSearch   = $this->icon( 'control/search.png', 'Search' );
-      $iconReset    = $this->icon( 'control/reset.png', 'Reset' );
-      $iconInfo     = $this->icon( 'control/info.png', 'Info' );
+      $iconInfo     = $this->icon('control/info.png', 'Info');
 
       $buttonAdvanced = '';
       $customButtons  = '';
 
-      $textSearchUF = " {$i18n->l( 'Search &amp; Filter', 'wbf.label' )}";
-      $textSearch   = " {$i18n->l( 'Search', 'wbf.label' )}";
+      $textSearchUF = " {$i18n->l('Search &amp; Filter', 'wbf.label')}";
+      $textSearch   = " {$i18n->l('Search', 'wbf.label')}";
 
       $setFocus = '';
-      if( $this->focus )
+      if ($this->focus)
         $setFocus = ' wcm_ui_focus';
 
       $htmlFilters = '';
-      if( $this->filterButtons )
-        $htmlFilters .= $this->buildButtons( $this->filterButtons );
+      if ($this->filterButtons)
+        $htmlFilters .= $this->buildButtons($this->filterButtons);
 
       $codeFilter = '';
 
-      if( $this->filterPanel )
-      {
-        $htmlFilters .= $this->filterPanel->render(  );
+      if ($this->filterPanel) {
+        $htmlFilters .= $this->filterPanel->render();
         $codeFilter = "<span class=\"wcm wcm_ui_tip-top\" tooltip=\"numer of active filters / number of filters\" >"
           ."(<span id=\"wgt-search-{$this->listType}-{$this->searchKey}-numfilter\" >"
           ."{$this->filterPanel->numFilterActive}</span>/<span>{$this->filterPanel->numFilter}</span>)</span>";
@@ -185,24 +177,24 @@ class WgtPanelListing_Splitbutton
             title="Search"
             class="wgt-button splitted wcm wcm_ui_tip"
             tabindex="-1" >
-            {$iconSearch}
+            <i class="icon-search" ></i>
           </button><button
             class="wgt-button append ui-state-default"
             tabindex="-1"
             id="wgt-search-{$this->listType}-{$this->searchKey}-dcon"
-            wgt_drop_box="wgt-search-{$this->listType}-{$this->searchKey}-dropbox" ><span class="ui-icon ui-icon-triangle-1-s" style="height:10px;" > </span></button>
+            wgt_drop_box="wgt-search-{$this->listType}-{$this->searchKey}-dropbox" ><i class="icon-angle-down" ></i></button>
 
         </div>
 
         <var
-        	id="wgt-search-{$this->listType}-{$this->searchKey}-control-cfg-split"
-        	>{"triggerEvent":"click","align":"right"}</var>
+          id="wgt-search-{$this->listType}-{$this->searchKey}-control-cfg-split"
+          >{"triggerEvent":"click","align":"right"}</var>
         <var
-        	id="wgt-search-{$this->listType}-{$this->searchKey}-control-reset-docu"
-        	>Reset the search form</var>
+          id="wgt-search-{$this->listType}-{$this->searchKey}-control-reset-docu"
+          >Reset the search form</var>
         <var
-        	id="wgt-search-{$this->listType}-{$this->searchKey}-control-ext_search-docu"
-        	>Open the advanced search</var>
+          id="wgt-search-{$this->listType}-{$this->searchKey}-control-ext_search-docu"
+          >Open the advanced search</var>
 
       </div>
 
@@ -214,7 +206,7 @@ class WgtPanelListing_Splitbutton
             wgt_doc_src="wgt-search-{$this->listType}-{$this->searchKey}-control-reset-docu"
             wgt_doc_cnt="wgt-search-{$this->listType}-{$this->searchKey}-control-docu_cont"
             class="wcm wcm_ui_docu_tip" >
-            {$iconReset} Reset search
+            <i class="icon-minus-sign"></i> Reset search
           </a></li>
         </ul>
         {$htmlFilters}
@@ -223,23 +215,20 @@ class WgtPanelListing_Splitbutton
             <p id="wgt-search-{$this->listType}-{$this->searchKey}-control-docu_cont" ></p>
           </li>
         </ul>
-    	</div><!-- end wgt-dropdownbox -->
+      </div><!-- end wgt-dropdownbox -->
 
-	  </div><!-- end wgt-panel -->
+    </div><!-- end wgt-panel -->
 
 HTML;
 
-    }
-    elseif( $this->title )
-    {
+    } elseif ($this->title) {
 
-      $iconInfo     = $this->icon( 'control/info.png', 'Info' );
+      $iconInfo     = $this->icon('control/info.png', 'Info');
 
       $html .= '<div class="wgt-panel'.$panelClass.'" >';
       $html .= $title;
 
-      if( $this->buttons )
-      {
+      if ($this->buttons) {
         $html .= '<div class="right" >';
         $html .= $this->buildButtons();
         $html .= '</div>';
@@ -263,18 +252,15 @@ HTML;
   public function panelButtons()
   {
 
-
-    if( !$this->searchKey )
+    if (!$this->searchKey)
       return '';
 
     $html = '';
 
-    if( $this->buttons )
-    {
+    if ($this->buttons) {
       $html .= '<div class="wgt-panel" >';
 
-      if( $this->buttons )
-      {
+      if ($this->buttons) {
         $html .= '<div class="left" >';
         $html .= $this->buildButtons();
         $html .= '</div>';
@@ -287,7 +273,5 @@ HTML;
 
   }//end public function panelButtons */
 
-
 } // end class WgtPanelListing_Splitbutton
-
 

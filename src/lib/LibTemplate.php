@@ -15,19 +15,17 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage tech_core
  * @author dominik alexander bonsch <dominik.bonsch@webfrap.net>
  *
  */
-abstract class LibTemplate
-  extends BaseChild
+abstract class LibTemplate extends BaseChild
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Output File Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Die Id des View Elements, wird zb. bei Maintabs und Windows bennötigt
@@ -66,7 +64,6 @@ abstract class LibTemplate
    * @var string
    */
   public $template      = null;
-
 
   /**
    * Befindet sich das Template beim Code oder
@@ -118,7 +115,7 @@ abstract class LibTemplate
   public $contextUrl = null;
 
   /**
-   * Der aktuelle Kontext ( sowas wie ein Environment mit Settings )
+   * Der aktuelle Kontext (sowas wie ein Environment mit Settings)
    * der View
    * @var Context
    */
@@ -141,9 +138,9 @@ abstract class LibTemplate
    */
   protected $parent     = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Data Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var TDataObject
@@ -155,7 +152,6 @@ abstract class LibTemplate
    */
   protected $object   = array();
 
-
   /**
    * Variable zum anhängen von Javascript Code
    * Aller Inline JS Code sollte am Ende der Html Datei stehen
@@ -165,7 +161,6 @@ abstract class LibTemplate
    * @var string
    */
   protected $jsCode           = array();
-
 
   /**
    * @var TDataObject
@@ -208,9 +203,9 @@ abstract class LibTemplate
    */
   protected $renderer   = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // data with assembled elements
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var string
@@ -241,9 +236,9 @@ abstract class LibTemplate
    */
   public $output           = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // cache attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * a default footer
@@ -265,10 +260,9 @@ abstract class LibTemplate
    */
   protected $keyCachePage     = null;
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // magic methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * de:
@@ -278,7 +272,7 @@ abstract class LibTemplate
    * @param array $conf der Konfigurationsabschnitt der View aus der Conf File
    * @param Base $env Die Aktive Environment für die View
    */
-  public function __construct( $conf = array(), $env = null )
+  public function __construct($conf = array(), $env = null)
   {
 
     $this->var     = new TDataObject();
@@ -288,13 +282,11 @@ abstract class LibTemplate
 
     $this->tplConf    = $conf;
 
-    if( !$env )
-    {
+    if (!$env) {
       $env = Webfrap::getActive();
     }
 
     $this->env = $env;
-
 
   }// end public function __construct */
 
@@ -320,23 +312,23 @@ abstract class LibTemplate
    * @param $name
    * @param $values
    * /
-  public function __call( $name, $values )
+  public function __call($name, $values)
   {
 
-    throw new LibTemplate_Exception( "You Tried to Call non existing Method: ".__CLASS__."::{$name}");
+    throw new LibTemplate_Exception("You Tried to Call non existing Method: ".__CLASS__."::{$name}");
 
   }//end public function __call */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter und Setter
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
    /**
     * the design to use
     * @param string $condition Name des Maintemplates
     * @return void
     */
-   public function setCondition( $condition )
+   public function setCondition($condition)
    {
      $this->condition = $condition;
    }//end public function setCondition*/
@@ -344,11 +336,11 @@ abstract class LibTemplate
    /**
     * @param Model $model
     */
-   public function setModel( $model )
+   public function setModel($model)
    {
      $this->model = $model;
 
-     if( $this->model->access )
+     if ($this->model->access)
        $this->access = $this->model->access;
 
    }//end public function setModel */
@@ -357,7 +349,7 @@ abstract class LibTemplate
     *
     * @param LibTemplate $parent
     */
-   public function setParent( $parent )
+   public function setParent($parent)
    {
      $this->parent = $parent;
    }//end public function setParent */
@@ -368,7 +360,7 @@ abstract class LibTemplate
    * @param string $title Titel Der in der HTML Seite zu zeigende Titel
    * @return void
    */
-  public function setTitle( $title )
+  public function setTitle($title)
   {
     $this->title = $title;
   } // end public function setTitle */
@@ -377,7 +369,7 @@ abstract class LibTemplate
    * request the title
    * @return string
    */
-  public function getTitle( )
+  public function getTitle()
   {
     return $this->title;
   } // end public function getTitle */
@@ -387,10 +379,10 @@ abstract class LibTemplate
    * @param string $fileName
    * @return void
    */
-  public function savePage( $fileName )
+  public function savePage($fileName)
   {
 
-    SFiles::write( $fileName , $this->compiled );
+    SFiles::write($fileName , $this->compiled);
 
   }//end public function savePage */
 
@@ -399,7 +391,6 @@ abstract class LibTemplate
    */
   public function getId()
   {
-
     return $this->id;
   }//end public function getId */
 
@@ -407,10 +398,9 @@ abstract class LibTemplate
    * @param boolean $forceHttps
    * @return string
    */
-  public function getServerAddress( $forceHttps = false )
+  public function getServerAddress($forceHttps = false)
   {
-
-    return Webfrap::$env->getRequest()->getServerAddress( $forceHttps );
+    return Webfrap::$env->getRequest()->getServerAddress($forceHttps);
   }//end public function getServerAddress */
 
   /**
@@ -418,7 +408,7 @@ abstract class LibTemplate
    * @param string $size
    * @return string
    */
-  public function iconPath( $name , $size = 'xsmall' )
+  public function iconPath($name , $size = 'xsmall')
   {
     return View::$iconsWeb.$size.'/'.$name;
   }//end public function iconPath */
@@ -429,23 +419,19 @@ abstract class LibTemplate
   * @param string/array $type Template Name des Maintemplates
   * @return void
   */
-  public function isType( $type  )
+  public function isType($type)
   {
 
-    if( is_array( $type ) )
-    {
+    if (is_array($type)) {
 
-      foreach( $type as $key )
-      {
-        if( $this->type === $key )
+      foreach ($type as $key) {
+        if ($this->type === $key)
           return true;
       }
 
      return false;
 
-    }
-    else
-    {
+    } else {
       return ($this->type === $type);
     }
 
@@ -468,14 +454,14 @@ abstract class LibTemplate
    * @param string $type
    * @return WgtRenderHtml
    */
-  public function getRenderer( $type  )
+  public function getRenderer($type)
   {
-    if ( isset($this->renderer[$type]) )
+    if (isset($this->renderer[$type]))
       return $this->renderer[$type];
 
-    $className = 'WgtRender'.SParserString::subToCamelCase( $type );
+    $className = 'WgtRender'.SParserString::subToCamelCase($type);
 
-    $this->renderer[$type] = new $className( $this );
+    $this->renderer[$type] = new $className($this);
 
     return $this->renderer[$type];
 
@@ -487,7 +473,7 @@ abstract class LibTemplate
   * @param string $template Name des Maintemplates
   * @return void
   */
-  public function setTheme( $template )
+  public function setTheme($template)
   {
     $this->theme = $template;
   } // end public function setTheme */
@@ -502,14 +488,13 @@ abstract class LibTemplate
     return $this->theme;
   }//end public function getTheme */
 
-
   /**
    * set the html content
    *
    * @param string $html
    * @return void
    */
-  public function setContent( $content )
+  public function setContent($content)
   {
     $this->compiled = $content;
   }//end public function setHtml */
@@ -520,7 +505,7 @@ abstract class LibTemplate
    * @param string Index Name des Indextemplates
    * @return bool
    */
-  public function setIndex( $index = 'default' )
+  public function setIndex($index = 'default')
   {
     $this->indexTemplate = $index;
   } // end public function setIndex */
@@ -539,7 +524,7 @@ abstract class LibTemplate
   * @param boolean $tplInCode since: 0.9.2,
   * @return void
   */
-  public function setTemplate( $template, $tplInCode = false  )
+  public function setTemplate($template, $tplInCode = false)
   {
 
     $this->template = $template;
@@ -562,14 +547,12 @@ abstract class LibTemplate
   public function getTemplatePath()
   {
 
-    if( $this->tplInCode )
+    if ($this->tplInCode)
       return PATH_GW.'/';
     else
       return PATH_GW.'templates/';
 
-
   }//end public function getTemplatePath */
-
 
 /*//////////////////////////////////////////////////////////////////////////////
 // UI
@@ -595,22 +578,21 @@ abstract class LibTemplate
    * @return Ui ein UI Container
    * @throws LibTemplate_Exception
    */
-  public function loadUi( $uiName )
+  public function loadUi($uiName)
   {
 
-    $uiName       = ucfirst( $uiName );
+    $uiName       = ucfirst($uiName);
     $className    = $uiName.'_Ui';
 
-    if( Webfrap::classLoadable( $className ) )
-    {
-      $ui = new $className( $this );
-      $ui->setView( $this );
+    if (Webfrap::classLoadable($className)) {
+      
+      $ui = new $className($this);
+      $ui->setView($this);
+
       return $ui;
-    }
-    else
-    {
-      throw new LibTemplate_Exception
-      (
+    } else {
+      
+      throw new LibTemplate_Exception(
         'Internal Error',
         'Failed to load ui: '.$uiName
       );
@@ -622,23 +604,23 @@ abstract class LibTemplate
    * setter for the ui
    * @param Ui $ui
    */
-  public function setUi( $ui )
+  public function setUi($ui)
   {
     $this->ui = $ui;
   }//end public function setUi */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Models können direkt an eine View übergeben
 // Das ermöglich einen direkten zugriff aus den Templates auf die Models
 // wenn der Use-Case eifach genug ist
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
    * @param string $key
    * @param Model $model
    */
-  public function addModel( $key , $model )
+  public function addModel($key , $model)
   {
     $this->models[$key] = $model;
   }//end public function addModel
@@ -648,28 +630,21 @@ abstract class LibTemplate
    * @return Model
    * @throws LibTemplate_Exception
    */
-  public function getModel( $modelKey, $key = null, $create = false )
+  public function getModel($modelKey, $key = null, $create = false)
   {
 
-    if( !$key )
+    if (!$key)
       $key = $modelKey;
-
 
     $modelName    = $modelKey.'_Model';
     $modelNameOld = 'Model'.$modelKey;
 
-    if( !isset( $this->models[$key]  ) )
-    {
-      if(Webfrap::classLoadable($modelName))
-      {
-        $this->models[$key] = new $modelName( $this );
-      }
-      else if(Webfrap::classLoadable($modelNameOld))
-      {
-        $this->models[$key] = new $modelNameOld( $this );
-      }
-      else
-      {
+    if (!isset($this->models[$key])) {
+      if (Webfrap::classLoadable($modelName)) {
+        $this->models[$key] = new $modelName($this);
+      } elseif (Webfrap::classLoadable($modelNameOld)) {
+        $this->models[$key] = new $modelNameOld($this);
+      } else {
         throw new LibTemplate_Exception('Internal Error','Failed to load Submodul: '.$modelName);
       }
     }
@@ -678,9 +653,9 @@ abstract class LibTemplate
 
   }//end public function getModel */
 
-  public function loadModel( $modelKey, $key = null )
+  public function loadModel($modelKey, $key = null)
   {
-    return $this->getModel( $modelKey, $key, true );
+    return $this->getModel($modelKey, $key, true);
   }
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -692,11 +667,10 @@ abstract class LibTemplate
    * @param $content
    * @return void
    */
-  public function setMainContent( $content )
+  public function setMainContent($content)
   {
     $this->assembledMainContent = $content;
   }//end public function setMainContent */
-
 
   /**
    * de:
@@ -709,10 +683,10 @@ abstract class LibTemplate
    * @param array $vars
    * @return void
    */
-  public function addVars( $vars )
+  public function addVars($vars)
   {
 
-    $this->var->content = array_merge( $this->var->content, $vars );
+    $this->var->content = array_merge($this->var->content, $vars);
 
   } // end public function addVars  */
 
@@ -723,20 +697,16 @@ abstract class LibTemplate
    * @param string $data Die Daten für ein bestimmtes Feld
    * @return void
    */
-  public function addVar( $key, $data = null )
+  public function addVar($key, $data = null)
   {
 
-    if( is_scalar($key) )
-    {
+    if (is_scalar($key)) {
       $this->var->content[$key] = $data;
-    }
-    elseif( is_array($key) )
-    {
-      $this->var->content = array_merge( $this->var->content, $key );
+    } elseif (is_array($key)) {
+      $this->var->content = array_merge($this->var->content, $key);
     }
 
   } // end public function addVar  */
-
 
   /**
    * Enter description here...
@@ -746,38 +716,34 @@ abstract class LibTemplate
    *
    * @return LibTemplatePhp
    */
-  public function newSubView( $key , $subName = null  )
+  public function newSubView($key , $subName = null)
   {
 
-    if( !isset($this->area->content[$key]) )
-    {
+    if (!isset($this->area->content[$key])) {
 
-      if( !is_null($subName) )
-      {
+      if (!is_null($subName)) {
         $className    = ucfirst($subName).'_View';
         $classNameOld = 'View'.ucfirst($subName);
 
-        if( !WebFrap::classLoadable($className) )
-        {
+        if (!WebFrap::classLoadable($className)) {
           $className = $classNameOld;
-          if( !WebFrap::classLoadable($className) )
-          {
-            throw new LibTemplate_Exception('Requested noexisting view '.ucfirst($subName) );
+          if (!WebFrap::classLoadable($className)) {
+            throw new LibTemplate_Exception('Requested noexisting view '.ucfirst($subName));
           }
         }
 
         $area = new $className();
-        $area->setI18n( $this->i18n );
-        $area->setUser( $this->user );
-        $area->setParent( $this );
+        $area->setI18n($this->i18n);
+        $area->setUser($this->user);
+        $area->setParent($this);
         $this->area->content[$key] = $area;
-      }
-      else
-      {
+      
+      } else {
+        
         $area = new LibTemplateAreaView();
-        $area->setI18n( $this->i18n );
-        $area->setUser( $this->user );
-        $area->setParent( $this );
+        $area->setI18n($this->i18n);
+        $area->setUser($this->user);
+        $area->setParent($this);
         $this->area->content[$key] = $area;
       }
 
@@ -793,18 +759,18 @@ abstract class LibTemplate
    * @param string $classKey
    * @return LibTemplateAreaView
    */
-  public function getMainArea( $key, $classKey   )
+  public function getMainArea($key, $classKey)
   {
 
     $className = $classKey.'_View';
 
-    if( !Webfrap::classLoadable( $className ) )
-      throw new LibTemplate_Exception( "View {$className} not exists" );
+    if (!Webfrap::classLoadable($className))
+      throw new LibTemplate_Exception("The requested View {$className} not exists");
 
     $area = new $className();
-    $area->setI18n( $this->i18n );
-    $area->setUser( $this->user );
-    $area->setParent( $this );
+    $area->setI18n($this->i18n);
+    $area->setUser($this->user);
+    $area->setParent($this);
     $this->area->content[$key] = $area;
 
     return $this->area->content[$key];
@@ -815,29 +781,25 @@ abstract class LibTemplate
    *
    * @param string $key
    * @param string $area
-   * 
+   *
    * @return LibTemplateAreaView
    */
-  public function newArea( $key, $area = null  )
+  public function newArea($key, $area = null)
   {
 
-    if( $area )
-    {
+    if ($area) {
       $this->area->content[$key] = $area;
-    }
-    elseif( !isset($this->area->content[$key]) )
-    {
+    } elseif (!isset($this->area->content[$key])) {
       $area = new LibTemplateAreaView();
-      $area->setI18n( $this->i18n );
-      $area->setUser( $this->user );
-      $area->setParent( $this );
+      $area->setI18n($this->i18n);
+      $area->setUser($this->user);
+      $area->setParent($this);
       $this->area->content[$key] = $area;
     }
 
     return $this->area->content[$key];
 
   } // end public function newArea */
-
 
   /**
    * Enter description here...
@@ -846,7 +808,7 @@ abstract class LibTemplate
    * @param string $content
    * @return LibTemplatePhp
    */
-  public function setArea( $key , $content  )
+  public function setArea($key , $content)
   {
 
     $this->area->content[$key] = $content;
@@ -860,7 +822,7 @@ abstract class LibTemplate
    * @param string $area
    * @return LibTemplatePhp
    */
-  public function setAreaContent( $key , $area  )
+  public function setAreaContent($key , $area)
   {
 
     $this->area->content[$key] = $area;
@@ -872,7 +834,7 @@ abstract class LibTemplate
    * @param string $key
    * @param string $content
    */
-  public function setPageFragment( $key, $content )
+  public function setPageFragment($key, $content)
   {
     $this->area->content[$key] = $content;
   }//end public function setPageFragment */
@@ -882,39 +844,32 @@ abstract class LibTemplate
    * @param string $key
    * @return LibTemplate
    */
-  public function getArea( $key  )
+  public function getArea($key)
   {
 
-    if( !isset($this->area->content[$key]) )
-    {
+    if (!isset($this->area->content[$key])) {
       $this->area->content[$key] = new LibTemplateAreaView();
+
       return $this->area->content[$key];
-    }
-    else
-    {
+    } else {
       return $this->area->content[$key];
     }
 
   } // end public function getArea  */
-
 
   /**
    *
    * @param   string $key
    * @param   function $func
    */
-  public function addFunction( $key , $func = null )
+  public function addFunction($key , $func = null)
   {
 
-    if( is_array($key) )
-    {
-      foreach( $key as $objKey => $funct )
-      {
+    if (is_array($key)) {
+      foreach ($key as $objKey => $funct) {
         $this->funcs->$objKey = $funct;
       }
-    }
-    else
-    {
+    } else {
       $this->funcs->$key = $func;
     }
 
@@ -927,10 +882,11 @@ abstract class LibTemplate
    * @param WgtForm $form
    * @return WgtForm
    */
-  public function addForm( $key , $form )
+  public function addForm($key , $form)
   {
 
     $this->forms[$key] = $form;
+
     return $form;
 
   } // end public function addForm */
@@ -941,7 +897,7 @@ abstract class LibTemplate
    * @param string $key
    * @return WgtForm
    */
-  public function newForm( $key , $type = null  )
+  public function newForm($key , $type = null)
   {
 
     $type = $type
@@ -951,18 +907,17 @@ abstract class LibTemplate
     $className    = $type.'_Form';
     $classNameOld = 'WgtForm'.$type;
 
-
-    if( !WebFrap::classLoadable($className) )
-    {
+    if (!WebFrap::classLoadable($className)) {
       // fall back to old name convention
       $className = $classNameOld;
-      if( !WebFrap::classLoadable($className) )
-        throw new LibTemplate_Exception( 'Requested noexisting form '.$type );
+      if (!WebFrap::classLoadable($className))
+        throw new LibTemplate_Exception('Requested noexisting form '.$type);
     }
 
-    $form = new $className( $this );
+    $form = new $className($this);
 
     $this->forms[$key] = $form;
+
     return $form;
 
   }//end public function newForm */
@@ -973,23 +928,23 @@ abstract class LibTemplate
    * @param string $key
    * @return WgtForm
    */
-  public function getForm( $key  )
+  public function getForm($key)
   {
 
-    if(isset($this->forms[$key]))
+    if (isset($this->forms[$key]))
       return $this->forms[$key];
 
     $type = ucfirst($key);
 
     $className    = $type.'_Form';
 
-    if( !WebFrap::classLoadable($className) )
-    {
-      throw new LibTemplate_Exception( 'Requested noexisting form '.$type );
+    if (!WebFrap::classLoadable($className)) {
+      throw new LibTemplate_Exception('Requested noexisting form '.$type);
     }
 
-    $form       = new $className( $this );
+    $form       = new $className($this);
     $this->forms[$key] = $form;
+
     return $form;
 
   }//end public function getForm */
@@ -1001,30 +956,25 @@ abstract class LibTemplate
    * @param string Data Die Daten für ein bestimmtes Feld
    * @return WgtItemAbstract
    */
-  public function newItem( $key, $type )
+  public function newItem($key, $type)
   {
 
-    if( isset( $this->object->content[$key] ) )
-    {
+    if (isset($this->object->content[$key])) {
       return $this->object->content[$key];
-    }
-    elseif( is_object( $type ) )
-    {
+    } elseif (is_object($type)) {
       $this->object->content[$key] = $type;
+
       return $type;
-    }
-    else
-    {
+    } else {
 
       $className     = $type;
       $classNameOld  = 'Wgt'.$type;
 
-      if( !WebFrap::loadable( $className ) )
-      {
+      if (!WebFrap::loadable($className)) {
         $className = $classNameOld;
 
-        if( !WebFrap::loadable( $className ) )
-          throw new WgtItemNotFound_Exception( 'Item '.$className.' is not loadable' );
+        if (!WebFrap::loadable($className))
+          throw new WgtItemNotFound_Exception('Item '.$className.' is not loadable');
       }
 
       $object        = new $className($key);
@@ -1033,15 +983,14 @@ abstract class LibTemplate
 
       $this->object->content[$key] = $object;
 
-      if(DEBUG)
-        Debug::console('Created Item: '.$className .' key: '.$key );
+      if (DEBUG)
+        Debug::console('Created Item: '.$className .' key: '.$key);
 
       return $object;
 
     }
 
   } // end public function newItem */
-
 
   /**
    * ein oder mehrere Items hinzufügen
@@ -1050,11 +999,11 @@ abstract class LibTemplate
    * @param string Data Die Daten für ein bestimmtes Feld
    * @return WgtItemAbstract
    */
-  public function addItem( $key ,  $item = null )
+  public function addItem($key ,  $item = null)
   {
 
-    if( is_array( $key ) )
-      $this->object->content = array_merge( $key , $this->object->content );
+    if (is_array($key))
+      $this->object->content = array_merge($key , $this->object->content);
     else
       $this->object->content[$key] = $item;
 
@@ -1066,15 +1015,14 @@ abstract class LibTemplate
    * @param string $key
    * @return object
    */
-  public function getItem( $key )
+  public function getItem($key)
   {
-    if( isset($this->object->content[$key]) )
+    if (isset($this->object->content[$key]))
       return $this->object->content[$key];
 
     else
       return null;
   }//end public function getItem */
-
 
   /**
    * Content für die Seite hinzufügen
@@ -1083,25 +1031,21 @@ abstract class LibTemplate
    * @param string Data Die Daten für ein bestimmtes Feld
    * @return WgtItemAbstract
    */
-  public function createElement( $key, $type )
+  public function createElement($key, $type)
   {
 
-    if( isset( $this->object->content[$key] ) )
-    {
+    if (isset($this->object->content[$key])) {
       return $this->object->content[$key];
-    }
-    elseif( is_object( $type ) )
-    {
+    } elseif (is_object($type)) {
       $this->object->content[$key] = $type;
+
       return $type;
-    }
-    else
-    {
+    } else {
 
       $className     = $type.'_Element';
 
-      if( !WebFrap::loadable($className) )
-        throw new WgtItemNotFound_Exception( 'Element '.$className.' is not loadable' );
+      if (!WebFrap::loadable($className))
+        throw new WgtItemNotFound_Exception('Element '.$className.' is not loadable');
 
       $object        = new $className($key);
       $object->view  = $this; // add back reference to the owning view
@@ -1109,8 +1053,8 @@ abstract class LibTemplate
 
       $this->object->content[$key] = $object;
 
-      if(DEBUG)
-        Debug::console('Created Element: '.$className .' key: '.$key );
+      if (DEBUG)
+        Debug::console('Created Element: '.$className .' key: '.$key);
 
       return $object;
 
@@ -1125,11 +1069,11 @@ abstract class LibTemplate
    * @param string Data Die Daten für ein bestimmtes Feld
    * @return WgtItemAbstract
    */
-  public function addElement( $key ,  $element = null )
+  public function addElement($key ,  $element = null)
   {
 
-    if( is_array($key) )
-      $this->object->content = array_merge($key , $this->object->content );
+    if (is_array($key))
+      $this->object->content = array_merge($key , $this->object->content);
     else
       $this->object->content[$key] = $element;
 
@@ -1142,30 +1086,25 @@ abstract class LibTemplate
    * @param string Data Die Daten für ein bestimmtes Feld
    * @return WgtWidget
    */
-  public function addWidget( $key, $type )
+  public function addWidget($key, $type)
   {
 
-    if( isset($this->var->content[$key]) )
-    {
+    if (isset($this->var->content[$key])) {
       return $this->var->content[$key];
-    }
-    elseif( is_object($type) )
-    {
+    } elseif (is_object($type)) {
       $this->var->content[$key] = $type;
+
       return $type;
-    }
-    else
-    {
+    } else {
 
       $className     = $type.'_Widget';
       $classNameOld  = 'WgtWidget'.$type;
 
-      if( !WebFrap::loadable($className) )
-      {
+      if (!WebFrap::loadable($className)) {
         $className = $classNameOld;
 
-        if( !WebFrap::loadable($className) )
-          throw new WgtItemNotFound_Exception( 'Widget '.$className.' is not loadable' );
+        if (!WebFrap::loadable($className))
+          throw new WgtItemNotFound_Exception('Widget '.$className.' is not loadable');
       }
 
       $object        = new $className($key);
@@ -1176,8 +1115,8 @@ abstract class LibTemplate
 
       $this->jsCode[$key] = $object;
 
-      if(DEBUG)
-        Debug::console('Created Widget: '.$className .' key: '.$key );
+      if (DEBUG)
+        Debug::console('Created Widget: '.$className .' key: '.$key);
 
       return $object;
 
@@ -1185,39 +1124,31 @@ abstract class LibTemplate
 
   } // end public function addWidget */
 
-
   /**
    *
    * @param string $key
    * @param string $type
    * @return WgtInput
    */
-  public function newInput( $key, $type )
+  public function newInput($key, $type)
   {
 
-    if( isset($this->object->content[$key]) )
-    {
+    if (isset($this->object->content[$key])) {
       return $this->object->content[$key];
-    }
-    elseif( is_object($type) )
-    {
+    } elseif (is_object($type)) {
       $this->object->content[$key] = $type;
+
       return $type;
-    }
-    else
-    {
+    } else {
       $className = 'WgtInput'.ucfirst($type);
 
-      if( !WebFrap::loadable($className) )
-      {
-        throw new WgtItemNotFound_Exception( 'Class '.$className.' was not found' );
-      }
-      else
-      {
+      if (!WebFrap::loadable($className)) {
+        throw new WgtItemNotFound_Exception('Class '.$className.' was not found');
+      } else {
         $object = new $className($key);
         $this->object->content[$key] = $object;
 
-        if(Log::$levelTrace)
+        if (Log::$levelTrace)
           Debug::console('Created Input: '.$className. ' key '.$key);
 
         return $object;
@@ -1233,48 +1164,40 @@ abstract class LibTemplate
    * @param string $type
    * @return WgtMaintab
    */
-  public function newMaintab( $name, $type = null )
+  public function newMaintab($name, $type = null)
   {
 
-    if( isset($this->tabs[$name]) )
-    {
+    if (isset($this->tabs[$name])) {
       return $this->tabs[$name];
-    }
-    elseif( is_object($type) )
-    {
+    } elseif (is_object($type)) {
       $this->tabs[$name] = $type;
+
       return $type;
-    }
-    else
-    {
-      if( $type )
-      {
+    } else {
+      if ($type) {
 
         $className  = ucfirst($type).'_Maintab_View';
-        if( !Webfrap::classLoadable($className) )
-        {
+        if (!Webfrap::classLoadable($className)) {
           $className  = ucfirst($type).'_Maintab';
-          if( !Webfrap::classLoadable($className) )
-          {
-            throw new LibTemplate_Exception('requested nonexisting tab '.$type );
+          if (!Webfrap::classLoadable($className)) {
+            throw new LibTemplate_Exception('requested nonexisting tab '.$type);
           }
         }
 
-        $tab = new $className( $name, $this);
+        $tab = new $className($name, $this);
 
-      }
-      else
-      {
-        $tab = new WgtMaintab( $name, $this );
+      } else {
+        $tab = new WgtMaintab($name, $this);
       }
 
       $tab->id = 'wgt_tab-'.$name;
-      $tab->setI18n( $this->i18n );
-      $tab->setUser( $this->user );
-      $tab->setAcl( $this->acl );
-      $tab->setParent( $this );
+      $tab->setI18n($this->i18n);
+      $tab->setUser($this->user);
+      $tab->setAcl($this->acl);
+      $tab->setParent($this);
 
       $this->tabs[$name] = $tab;
+
       return $tab;
     }
 
@@ -1285,15 +1208,54 @@ abstract class LibTemplate
    *
    * @param string $name
    */
-  public function closeTab( $name  )
+  public function closeTab($name)
   {
     $this->tabclose[$name] = new WgtMaintabCloser($name);
   } // end public function closeTab */
 
 
-////////////////////////////////////////////////////////////////////////////////
+  /**
+   *
+   * @param string $jsCode
+   * @return void
+   */
+  public function addJsCode($jsCode)
+  {
+    $this->jsCode[] = $jsCode;
+  }//end public function addJsCode */
+
+
+  /**
+   * Start Js Code
+   */
+  public function openJs()
+  {
+    ob_start();
+  }//end public function openJs */
+
+  /**
+   * Get the code from the 
+   */
+  public function closeJs()
+  {
+    $jsCode = trim(ob_get_contents());
+    // @ is required to prevent error for empty tags
+    // should normaly not happen, but it would not be an error if
+    // so ignore warnings
+    @ob_end_clean();
+
+    // remove <script></script>
+    /// TODO implement this less error-prone
+    $jsCode = substr($jsCode, 8, -9);
+
+    if ('' !== $jsCode)
+      $this->addJsCode($jsCode);
+
+  }//end public function closeJs */
+  
+/*//////////////////////////////////////////////////////////////////////////////
 // Parser Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Enter description here...
@@ -1302,17 +1264,16 @@ abstract class LibTemplate
    * @param string $content
    * @return string
    */
-  public function includeBody( $template , $content = null )
+  public function includeBody($template , $content = null)
   {
 
-    if( $content )
+    if ($content)
       return $content;
 
-    if( !$filename = $this->templatePath( $template, 'index' ) )
-    {
-      Error::report( 'failed to load the body '.$template );
+    if (!$filename = $this->templatePath($template, 'index')) {
+      Error::report('failed to load the body '.$template);
 
-      if(Log::$levelDebug)
+      if (Log::$levelDebug)
         return '<p class="wgt-box error">failed to load the body: '.$template.'</p>';
       else
         return '<p class="wgt-box error">failed to load the body '.$filename.' </p>';
@@ -1328,13 +1289,14 @@ abstract class LibTemplate
     $I18N      = $this->i18n;;
     $USER      = $this->user;
 
-    if(Log::$levelVerbose)
+    if (Log::$levelVerbose)
       Log::verbose("Loaded Body Template: $filename");
 
     ob_start();
     include $filename;
     $content = ob_get_contents();
     ob_end_clean();
+
     return $content;
 
   }// end public function includeBody */
@@ -1347,10 +1309,9 @@ abstract class LibTemplate
    *
    * @since 0.9.2
    */
-  public function includeContentTemplate( $template, $inCode = false, $PARAMS = array()  )
+  public function includeContentTemplate($template, $inCode = false, $PARAMS = array())
   {
-
-    return $this->includeTemplate( $template, 'content', $PARAMS, $inCode  );
+    return $this->includeTemplate($template, 'content', $PARAMS, $inCode);
 
   }//end public function includeContentTemplate */
 
@@ -1362,29 +1323,23 @@ abstract class LibTemplate
    * @param array $PARAMS
    * @return string
    */
-  public function includeTemplate( $template, $type = 'content', $PARAMS = array(), $inCode = false  )
+  public function includeTemplate($template, $type = 'content', $PARAMS = array(), $inCode = false)
   {
 
-    if( !$filename = $this->templatePath( $template , $type, $inCode ) )
-    {
+    if (!$filename = $this->templatePath($template , $type, $inCode)) {
 
-      Error::addError
-      (
-        'Failed to load the template :'.$template
-      );
+      Error::addError( 'Failed to load the template :'.$template );
 
-
-      if( DEBUG )
-      {
+      if (DEBUG) {
+        
         $error = '<p class="wgt-box error">template '.$template.' not exists</p>';
         $error .= '<pre>'.get_class($this).'<br />'.Debug::backtrace().'</pre>';
         return $error;
-      }
-      else
-      {
+        
+      } else {
+        
         return '<p class="wgt-box error">template '.$template.' not exists</p>';
       }
-
 
     }
 
@@ -1397,7 +1352,7 @@ abstract class LibTemplate
     $USER      = $this->user;
     $CONF      = $this->getConf();
 
-    if( Log::$levelVerbose )
+    if (Log::$levelVerbose)
       Log::verbose("Include Template: $filename ");
 
     ob_start();
@@ -1414,12 +1369,12 @@ abstract class LibTemplate
    * @param string $type
    * @param array $PARAMS
    */
-  public function includeAll( $template, $type = 'content', $PARAMS = array()  )
+  public function includeAll($template, $type = 'content', $PARAMS = array())
   {
 
-    if( !$listTemplates = $this->allTemplatePaths( $template , $type ) )
-    {
-      Error::report( 'Failed to load any template with the all key: '.$template );
+    if (!$listTemplates = $this->allTemplatePaths($template , $type)) {
+      Error::report('Failed to load any template with the all key: '.$template);
+
       return '<p class="wgt-box error">template all key <strong>'.$template.'</strong> not exists</p>';
     }
 
@@ -1432,10 +1387,9 @@ abstract class LibTemplate
     $USER = $this->user;
 
     ob_start();
-    foreach( $listTemplates as $filename )
-    {
-      if(Log::$levelVerbose)
-        Log::verbose( "Include Template: $filename" );
+    foreach ($listTemplates as $filename) {
+      if (Log::$levelVerbose)
+        Log::verbose("Include Template: $filename");
 
       include $filename;
       $content = ob_get_contents();
@@ -1455,25 +1409,22 @@ abstract class LibTemplate
    * @param array $PARAMS
    * @return string
    */
-  public function conditionTemplate( $template, $type = 'content', $condition = array(), $PARAMS = array()  )
+  public function conditionTemplate($template, $type = 'content', $condition = array(), $PARAMS = array())
   {
 
-    if( $condition )
-      $filename = $this->conditionPath( $template, $type , $condition);
+    if ($condition)
+      $filename = $this->conditionPath($template, $type , $condition);
     else
-      $filename = $this->templatePath( $template, $type );
+      $filename = $this->templatePath($template, $type);
 
-    if( !$filename )
-    {
-      Error::report(  'Failed to load the template :'.$template );
-      if( DEBUG )
-      {
+    if (!$filename) {
+      Error::report( 'Failed to load the template :'.$template);
+      if (DEBUG) {
         $error = '<p class="wgt-box error">template '.$template.' not exists</p>';
         $error .= '<pre>'.Debug::backtrace().'</pre>';
+
         return $error;
-      }
-      else
-      {
+      } else {
         return '<p class="wgt-box error">template '.$template.' not exists</p>';
       }
     }
@@ -1486,7 +1437,7 @@ abstract class LibTemplate
     $I18N      = $this->i18n;;
     $USER      = $this->user;
 
-    if(Log::$levelVerbose)
+    if (Log::$levelVerbose)
       Log::verbose("Include Template: $filename ");
 
     ob_start();
@@ -1505,21 +1456,18 @@ abstract class LibTemplate
    * @param array $PARAMS
    * @return unknown
    */
-  public function includeFile( $template, $PARAMS = array()  )
+  public function includeFile($template, $PARAMS = array())
   {
 
-    if( !file_exists( $template) )
-    {
-      Error::report( 'Failed to load the template :'.$template );
+    if (!file_exists($template)) {
+      Error::report('Failed to load the template :'.$template);
 
-      if( DEBUG )
-      {
+      if (DEBUG) {
         $error = '<p class="wgt-box error">template '.$template.' not exists</p>';
         $error .= '<pre>'.Debug::backtrace().'</pre>';
+
         return $error;
-      }
-      else
-      {
+      } else {
         return '<p class="wgt-box error">template '.$template.' not exists</p>';
       }
 
@@ -1550,31 +1498,24 @@ abstract class LibTemplate
    * @param array $PARAMS
    * @return string
    */
-  public function includeI18nFile( $template, $folder = null , $PARAMS = array()  )
+  public function includeI18nFile($template, $folder = null , $PARAMS = array())
   {
 
-    if( file_exists( $folder.Session::status('lang').'/'.$template ) )
-    {
+    if (file_exists($folder.Session::status('lang').'/'.$template)) {
       $fileName = $folder.Session::status('lang').'/'.$template;
-    }
-    elseif( file_exists( $folder.Session::status('def_lang').'/'.$template ) )
-    {
+    } elseif (file_exists($folder.Session::status('def_lang').'/'.$template)) {
       $fileName = $folder.Session::status('def_lang').'/'.$template;
-    }
-    else
-    {
-      Error::report( 'Failed to load the path:'.$folder.' template :'.$template );
+    } else {
+      Error::report('Failed to load the path:'.$folder.' template :'.$template);
 
       $fileName = $folder.Session::status('lang').'/'.$template;
 
-      if( DEBUG )
-      {
+      if (DEBUG) {
         $error = '<p class="wgt-box error">template '.$fileName.' not exists</p>';
         $error .= '<pre>'.Debug::backtrace().'</pre>';
+
         return $error;
-      }
-      else
-      {
+      } else {
         return '<p class="wgt-box error">template '.$fileName.' not exists</p>';
       }
 
@@ -1603,17 +1544,17 @@ abstract class LibTemplate
    * @param string $type
    * @param array $PARAMS
    */
-  public function subTemplate( $template, $type = 'content',  $PARAMS = array()  )
+  public function subTemplate($template, $type = 'content',  $PARAMS = array())
   {
 
-    if( !$filename = $this->templatePath( $template, $type  ) )
-    {
-      Error::report( 'Failed to load the template :'.$template );
+    if (!$filename = $this->templatePath($template, $type)) {
+      Error::report('Failed to load the template :'.$template);
+
       return '<p class="wgt-box error">template '.$template.' not exists</p>';
     }
 
-    if( Log::$levelVerbose )
-      Log::verbose( "Include Sub Template: $filename " );
+    if (Log::$levelVerbose)
+      Log::verbose("Include Sub Template: $filename ");
 
     $VAR       = $this->var;
     $ITEM      = $this->object;
@@ -1627,26 +1568,25 @@ abstract class LibTemplate
 
   }// end public function subTemplate */
 
-
   /**
    * @param string $template
    * @param array $condition
    * @param array $PARAMS
    */
-  public function buildMainContent( $template, $condition = null , $PARAMS = array()  )
+  public function buildMainContent($template, $condition = null , $PARAMS = array())
   {
 
-    if( $this->assembledMainContent )
+    if ($this->assembledMainContent)
       return $this->assembledMainContent;
 
-    if( !$condition )
+    if (!$condition)
       $condition = $this->condition;
 
-    if( $condition )
-      $this->assembledMainContent = $this->conditionTemplate( $template, 'content', $condition, $PARAMS );
+    if ($condition)
+      $this->assembledMainContent = $this->conditionTemplate($template, 'content', $condition, $PARAMS);
     else
-      $this->assembledMainContent = $this->includeTemplate( $template, 'content', $PARAMS );
-
+      $this->assembledMainContent = $this->includeTemplate($template, 'content', $PARAMS, $this->tplInCode );
+          
     return $this->assembledMainContent;
 
   }//end public function buildMainContent */
@@ -1654,27 +1594,26 @@ abstract class LibTemplate
   /**
    * @return void
    */
-  public function buildBody( )
+  public function buildBody()
   {
 
     // wenn ein file vorhanden ist aber kein template wird nicht gebaut
-    if( $this->file )
+    if ($this->file)
       return;
 
     // wenn der main content bereits vorhanden ist und kein index template
     // gesetzt wurd dann wird der content verwendet
-    if( !empty($this->assembledMainContent) && !$this->indexTemplate )
-    {
+    if (!empty($this->assembledMainContent) && !$this->indexTemplate) {
       $this->assembledBody = $this->assembledMainContent;
+
       return;
     }
 
     // wenn der komplette body schon da ist, ist auch schon alles erledigt
-    if( $this->assembledBody )
+    if ($this->assembledBody)
       return;
 
-    if( $filename = $this->templatePath( $this->indexTemplate , 'index' ) )
-    {
+    if ($filename = $this->templatePath($this->indexTemplate , 'index')) {
 
       $VAR       = $this->var;
       $ITEM      = $this->object;
@@ -1691,21 +1630,19 @@ abstract class LibTemplate
       $USER      = $this->user;
       $CONF      = $this->getConf();
 
-      if( Log::$levelVerbose )
-        Log::verbose( "Load Index Template: $filename " );
+      if (Log::$levelVerbose)
+        Log::verbose("Load Index Template: $filename ");
 
       ob_start();
       include $filename;
       $content = ob_get_contents();
       ob_end_clean();
 
-    }
-    else
-    {
-      Error::report( 'Index Template not exists: '.$this->indexTemplate );
+    } else {
+      Error::report('Index Template does not exist: '.$this->indexTemplate);
 
       ///TODO add some good error handler here
-      if( Log::$levelDebug )
+      if (Log::$levelDebug)
         $content = '<p class="wgt-box error">Wrong Index Template: '.$this->indexTemplate.' ('.$filename.')  </p>';
       else
         $content = '<p class="wgt-box error">Wrong Index Template '.$this->indexTemplate.' </p>';
@@ -1720,11 +1657,10 @@ abstract class LibTemplate
    * Das Indextemmplate bauen
    * @param boolean $force erzwingen, dass auf jeden fall gebaut wird
    */
-  public function buildIndexTemplate( $force = false )
+  public function buildIndexTemplate($force = false)
   {
 
-    if( $filename = $this->templatePath( $this->indexTemplate , 'index' ) )
-    {
+    if ($filename = $this->templatePath($this->indexTemplate , 'index')) {
 
       $VAR       = $this->var;
       $ITEM      = $this->object;
@@ -1741,21 +1677,19 @@ abstract class LibTemplate
       $USER      = $this->user;
       $CONF      = $this->getConf();
 
-      if( Log::$levelVerbose )
-        Log::verbose( "Load Index Template: $filename " );
+      if (Log::$levelVerbose)
+        Log::verbose("Load Index Template: $filename ");
 
       ob_start();
       include $filename;
       $content = ob_get_contents();
       ob_end_clean();
 
-    }
-    else
-    {
-      Error::report( 'Index Template not exists: '.$this->indexTemplate );
+    } else {
+      Error::report('Index Template does not exist: '.$this->indexTemplate);
 
       ///TODO add some good error handler here
-      if( Log::$levelDebug )
+      if (Log::$levelDebug)
         $content = '<p class="wgt-box error">Wrong Index Template: '.$this->indexTemplate.' ('.$filename.')  </p>';
       else
         $content = '<p class="wgt-box error">Wrong Index Template '.$this->indexTemplate.' </p>';
@@ -1773,18 +1707,18 @@ abstract class LibTemplate
    * @param $template
    * @param $folder
    */
-  public function showError( $errorMessage , $errorTitle = 'Error' , $template = 'error' , $folder = 'webfrap' )
+  public function showError($errorMessage , $errorTitle = 'Error' , $template = 'error' , $folder = 'webfrap')
   {
 
-    Error::report( 'Got Error:'. $errorMessage );
+    Error::report('Got Error:'. $errorMessage);
 
-    $this->addVar( array
+    $this->addVar(array
     (
       'errorTitle'    => $errorTitle,
       'errorMessage'  => $errorMessage,
-    ));
+  ));
 
-    $this->setTemplate( $folder.'/'.$template );
+    $this->setTemplate($folder.'/'.$template);
 
   } // end public function showError */
 
@@ -1811,9 +1745,9 @@ abstract class LibTemplate
 
   }// end public function cleanView */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Request Path
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Methode zum finden des passende Templates
@@ -1825,17 +1759,16 @@ abstract class LibTemplate
    * @param string $folder
    * @return string
    */
-  public function templatePath( $file , $type = 'content', $tplInCode = false )
+  public function templatePath($file , $type = 'content', $tplInCode = false)
   {
     // use the webfrap template
 
-    if( 'content' === $type || $tplInCode )
-      return WebFrap::templatePath(  $file , $type, ($this->tplInCode || $tplInCode) );
+    if ('content' === $type || $tplInCode)
+      return WebFrap::templatePath( $file , $type, ($this->tplInCode || $tplInCode));
     else
-      return WebFrap::templatePath(  $file , $type );
+      return WebFrap::templatePath( $file , $type);
 
   }//end public function templatePath */
-
 
   /**
    * de:
@@ -1848,7 +1781,7 @@ abstract class LibTemplate
    * @param string $folder
    * @return string
    */
-  public function allTemplatePaths( $file , $type = 'content' )
+  public function allTemplatePaths($file , $type = 'content')
   {
 
     $templates = array();
@@ -1856,25 +1789,22 @@ abstract class LibTemplate
     $tPath = View::$templatePath.'/'.$type.'/'.$file;
 
     // Zuerst den Standard Pfad checken
-    if( file_exists( $tPath ) )
-    {
-      $folder = new LibFilesystemFolder( $tPath );
+    if (file_exists($tPath)) {
+      $folder = new LibFilesystemFolder($tPath);
 
-      if( $files = $folder->getFilesByEnding( '.tpl'  ) )
-        $templates = array_merge( $templates, $files );
+      if ($files = $folder->getFilesByEnding('.tpl'))
+        $templates = array_merge($templates, $files);
     }
 
-    foreach( View::$searchPathTemplate as $path  )
-    {
+    foreach (View::$searchPathTemplate as $path) {
 
       $tmpPath = $path.'/'.$type.'/'.$file;
 
-      if( file_exists( $tmpPath ) )
-      {
-        $folder = new LibFilesystemFolder( $tmpPath  );
+      if (file_exists($tmpPath)) {
+        $folder = new LibFilesystemFolder($tmpPath);
 
-        if( $files = $folder->getFilesByEnding( '.tpl'  ) )
-          $templates = array_merge( $templates, $files );
+        if ($files = $folder->getFilesByEnding('.tpl'))
+          $templates = array_merge($templates, $files);
       }
 
     }
@@ -1884,7 +1814,6 @@ abstract class LibTemplate
 
   }//end public function allTemplatePaths */
 
-
   /**
    * Suchen eines Templates anhand von Conditions
    * @param string $template
@@ -1892,21 +1821,18 @@ abstract class LibTemplate
    * @param array $condition
    * @return string
    */
-  public function conditionPath( $template, $type = 'content', $condition = array() )
+  public function conditionPath($template, $type = 'content', $condition = array())
   {
 
-    foreach( View::$searchPathTemplate  as $folder )
-    {
+    foreach (View::$searchPathTemplate  as $folder) {
       $tmp = $condition;
-      while( $tmp )
-      {
+      while ($tmp) {
         $rek = implode('/',$tmp);
 
         $tmpPath = $folder.'/'.$type.'/'.$rek.'/'.$template.'.tpl';
 
-        if( file_exists( $tmpPath ) )
+        if (file_exists($tmpPath))
           return $tmpPath;
-
 
         array_pop($tmp);
       }
@@ -1925,29 +1851,25 @@ abstract class LibTemplate
    * @param string $file
    * @return string
    */
-  public function sysTemplatePath( $file )
+  public function sysTemplatePath($file)
   {
 
-    if( !$file )
+    if (!$file)
       return null;
 
     /*
-    if( file_exists(View::$templatePath.$file.'.tpl') )
-    {
-      if(Log::$levelDebug)
-        Log::debug("found Systemplate: ".View::$templatePath.$file.'.tpl' );
+    if (file_exists(View::$templatePath.$file.'.tpl')) {
+      if (Log::$levelDebug)
+        Log::debug("found Systemplate: ".View::$templatePath.$file.'.tpl');
 
       return View::$templatePath.$file.'.tpl';
     }
     */
 
-
-    foreach( View::$searchPathIndex as $path  )
-    {
-      if( file_exists( $path.'/'.$file.'.tpl') )
-      {
-        if( Log::$levelDebug )
-          Log::debug( "found Systemplate: ". $path.'/'.$file.'.tpl' );
+    foreach (View::$searchPathIndex as $path) {
+      if (file_exists($path.'/'.$file.'.tpl')) {
+        if (Log::$levelDebug)
+          Log::debug("found Systemplate: ". $path.'/'.$file.'.tpl');
 
         return $path.'/'.$file.'.tpl';
       }
@@ -1957,25 +1879,25 @@ abstract class LibTemplate
 
   }//end public function sysTemplatePath */
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Caching Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
    * @param string $key
    */
-  public function loadCachedPage( $key )
+  public function loadCachedPage($key)
   {
 
-    if( $content = $this->getCache()->get( 'content/'.$key, Cache::WEEK  ) )
-    {
+    if ($content = $this->getCache()->get('content/'.$key, Cache::WEEK)) {
       $this->compiled = $content;
+
       return true;
     }
 
     $this->keyCachePage = $key;
+
     return false;
 
   }//end public function loadCachedPage */
@@ -1984,19 +1906,19 @@ abstract class LibTemplate
    *
    * @param string $key
    */
-  public function resetCachedPage( $key )
+  public function resetCachedPage($key)
   {
-    return $this->cacheRemove( 'content/'.$key );
+    return $this->cacheRemove('content/'.$key);
   }//end public function resetCachedPage
 
   /**
    *
    * @param string $key
    */
-  public function writeCachedPage( $key , $content )
+  public function writeCachedPage($key , $content)
   {
 
-    $this->getCache()->add( 'content/'.$key , $content );
+    $this->getCache()->add('content/'.$key , $content);
 
   }//end public function writeCachedPage
 
@@ -2006,22 +1928,21 @@ abstract class LibTemplate
    * @param int $time
    * @return boolean
    */
-  public function cacheGet( $key, $time = Cache::MEDIUM  )
+  public function cacheGet($key, $time = Cache::MEDIUM)
   {
 
     $cache = $this->getCache();
 
     $cached = $cache->get($key, $time);
 
-    if( is_null( $cached ) )
-    {
+    if (is_null($cached)) {
       $this->cacheKey = $key;
       ob_start();
+
       return false;
-    }
-    else
-    {
+    } else {
       echo $cached;
+
       return true;
     }
 
@@ -2034,14 +1955,13 @@ abstract class LibTemplate
   public function cacheWrite()
   {
 
-    if( $this->cacheKey )
-    {
+    if ($this->cacheKey) {
       $cache = $this->getCache();
 
       $toCache = ob_get_contents();
       ob_end_clean();
 
-      $cache->add(  $this->cacheKey , $toCache );
+      $cache->add( $this->cacheKey , $toCache);
       echo $toCache;
     }
 
@@ -2052,10 +1972,10 @@ abstract class LibTemplate
    * @param $key
    * @return string
    */
-  public function cacheRemove( $key )
+  public function cacheRemove($key)
   {
     $cache = $this->getCache();
-    $cache->remove( $key );
+    $cache->remove($key);
 
   }//end public function cacheRemove */
 
@@ -2063,19 +1983,17 @@ abstract class LibTemplate
    * @param string $key
    * @param int $time
    */
-  public function bodyCacheGet( $key , $time = Cache::MEDIUM )
+  public function bodyCacheGet($key , $time = Cache::MEDIUM)
   {
     $cache = $this->getCache();
 
     $key = 'body/'.$key;
 
-    if( $cached = $cache->get($key, $time) )
-    {
+    if ($cached = $cache->get($key, $time)) {
       $this->assembledBody = $cached;
+
       return true;
-    }
-    else
-    {
+    } else {
       return false;
     }
 
@@ -2085,11 +2003,11 @@ abstract class LibTemplate
    * @param string $key
    * @param int $time
    */
-  public function bodyCacheWrite( $key , $time = null )
+  public function bodyCacheWrite($key , $time = null)
   {
     $cache = $this->getCache();
 
-    if( !$this->assembledBody )
+    if (!$this->assembledBody)
       $this->buildBody();
 
     $key = 'body/'.$key;
@@ -2102,7 +2020,7 @@ abstract class LibTemplate
    * @param string $key
    * @param int $time
    */
-  public function bodyCacheRemove( $key , $time = null )
+  public function bodyCacheRemove($key , $time = null)
   {
 
     $cache = $this->getCache();
@@ -2115,20 +2033,18 @@ abstract class LibTemplate
    * @param string $key
    * @param int $time
    */
-  public function contentCacheGet( $key , $time = Cache::MEDIUM )
+  public function contentCacheGet($key , $time = Cache::MEDIUM)
   {
 
     $cache = $this->getCache();
 
     $key = 'content/'.$key;
 
-    if( $cached = $cache->get($key, $time) )
-    {
+    if ($cached = $cache->get($key, $time)) {
       $this->assembledMainContent = $cached;
+
       return true;
-    }
-    else
-    {
+    } else {
       return false;
     }
 
@@ -2140,16 +2056,16 @@ abstract class LibTemplate
    * @param array $condition
    * @param array $PARAMS
    */
-  public function contentCacheWrite( $key , $template, $condition = null , $PARAMS = array()  )
+  public function contentCacheWrite($key , $template, $condition = null , $PARAMS = array())
   {
     $cache = $this->getCache();
 
-    if( !$this->assembledMainContent )
-      $this->buildMainContent( $template, $condition, $PARAMS );
+    if (!$this->assembledMainContent)
+      $this->buildMainContent($template, $condition, $PARAMS);
 
     $key = 'content/'.$key;
 
-    return $cache->add($key, $this->assembledMainContent );
+    return $cache->add($key, $this->assembledMainContent);
 
   }//end public function contentCacheWrite */
 
@@ -2157,7 +2073,7 @@ abstract class LibTemplate
    * @param string $key
    * @param string $time
    */
-  public function contentCacheRemove( $key , $time = null )
+  public function contentCacheRemove($key , $time = null)
   {
     $cache = $this->getCache();
 
@@ -2167,68 +2083,66 @@ abstract class LibTemplate
 
   }//end public function contentCacheRemove */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Context Setter
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * method to set the form data
    * @param TFlag $param
    */
-  public function setSaveFormData(  $param, $subkey = null )
+  public function setSaveFormData( $param, $subkey = null)
   {
 
     $this->setFormData($param->formAction, $param->formId, $param, $subkey);
 
   }//end public function setSaveFormData */
 
-  public function renderFormContext( $param, $subkey = null )
+  public function renderFormContext($param, $subkey = null)
   {
 
     $contextUrl = '';
 
     // flag if the new entry should be added with connection action or CRUD actions
-    if( $param->publish )
+    if ($param->publish)
       $contextUrl .= '&amp;publish='.$param->publish;
 
     // the id of the html table where the new entry has to be added
-    if( $param->targetId )
+    if ($param->targetId)
       $contextUrl .= '&amp;target_id='.$param->targetId;
 
     // target is a pointer to a js function that has to be called
-    if( $param->target )
+    if ($param->target)
       $contextUrl .= '&amp;target='.$param->target;
 
-    if( $param->input )
+    if ($param->input)
       $contextUrl .= '&amp;input='.$param->input;
 
-    if( $param->suffix )
+    if ($param->suffix)
       $contextUrl .= '&amp;suffix='.$param->suffix;
 
     // target is a pointer to a js function that has to be called
-    if( $param->refId )
+    if ($param->refId)
       $contextUrl .= '&amp;refid='.$param->refId;
 
     // target is a pointer to a js function that has to be called
-    if( $param->targetMask )
+    if ($param->targetMask)
       $contextUrl .= '&amp;mask='.$param->targetMask;
 
     // which view type was used, important to close the ui element eg.
-    if( $param->viewType )
+    if ($param->viewType)
       $contextUrl .= '&amp;view='.$param->viewType;
 
     // which view type was used, important to close the ui element eg.
-    if( $param->viewId )
+    if ($param->viewId)
       $contextUrl .= '&amp;view_id='.$param->viewId;
 
     // list type
-    if( $param->ltype )
+    if ($param->ltype)
       $contextUrl .= '&amp;ltype='.$param->ltype;
 
-    if( $param->refIds )
-    {
-      foreach( $param->refIds as $key => $value )
-      {
+    if ($param->refIds) {
+      foreach ($param->refIds as $key => $value) {
         $contextUrl .= '&amp;refids['.$key.']='.$value;
       }
     }
@@ -2236,29 +2150,29 @@ abstract class LibTemplate
 // ACLS
 
     // startpunkt des pfades für die acls
-    if( $param->aclRoot )
+    if ($param->aclRoot)
       $contextUrl .= '&amp;a_root='.$param->aclRoot;
 
-    if( $param->maskRoot )
+    if ($param->maskRoot)
       $contextUrl .= '&amp;m_root='.$param->maskRoot;
 
     // die id des Datensatzes von dem aus der Pfad gestartet wurde
-    if( $param->aclRootId )
+    if ($param->aclRootId)
       $contextUrl .= '&amp;a_root_id='.$param->aclRootId;
 
     // der key des knotens auf dem wir uns im pfad gerade befinden
-    if( $param->aclKey )
+    if ($param->aclKey)
       $contextUrl .= '&amp;a_key='.$param->aclKey;
 
     // der key des knotens auf dem wir uns im pfad gerade befinden
-    if( $param->aclLevel )
+    if ($param->aclLevel)
       $contextUrl .= '&amp;a_level='.$param->aclLevel;
 
     // der neue knoten
-    if( $param->aclNode )
+    if ($param->aclNode)
       $contextUrl .= '&amp;a_node='.$param->aclNode;
 
-    if( !$subkey )
+    if (!$subkey)
       $this->contextUrl = $contextUrl;
 
     return $contextUrl;
@@ -2269,10 +2183,10 @@ abstract class LibTemplate
    * method to set the form data
    * @param TFlag $param
    */
-  public function buildContextUrl( $param )
+  public function buildContextUrl($param)
   {
 
-    $this->renderFormContext( $param );
+    $this->renderFormContext($param);
 
   }//end public function buildContextUrl */
 
@@ -2280,47 +2194,46 @@ abstract class LibTemplate
    * method to set the form data
    * @param TFlag $param
    */
-  public function setFormData( $formAction, $formId, $param, $subkey = null )
+  public function setFormData($formAction, $formId, $param, $subkey = null)
   {
 
     // flag if the new entry should be added with connection action or CRUD actions
-    $formAction .= $this->renderFormContext( $param, $subkey );
+    $formAction .= $this->renderFormContext($param, $subkey);
 
     // add the action to the form
-    $this->addVar( 'formAction'.$subkey, $formAction );
+    $this->addVar('formAction'.$subkey, $formAction);
 
     // formId
-    $this->addVar( 'formId'.$subkey, $formId );
+    $this->addVar('formId'.$subkey, $formId);
 
   }//end public function setFormAction */
-
 
   /**
    * method to set the form data
    * @param TFlag $param
    */
-  public function setSearchFormData( $param, $subkey = null )
+  public function setSearchFormData($param, $subkey = null)
   {
 
     $formAction = $param->searchFormAction;
 
     // the id of the html table where the new entry has to be added
-    if( $param->targetId )
+    if ($param->targetId)
       $formAction .= '&amp;target_id='.$param->targetId;
 
     // flag if the new entry should be added with connection action or CRUD actions
-    if( $param->publish )
+    if ($param->publish)
       $formAction .= '&amp;publish='.$param->publish;
 
     // target is a pointer to a js function that has to be called
-    if( $param->target )
+    if ($param->target)
       $formAction .= '&amp;target='.$param->target;
 
-    if( $param->ltype )
+    if ($param->ltype)
       $formAction .= '&amp;ltype='.$param->ltype;
 
     // target is a pointer to a js function that has to be called
-    if( $param->input )
+    if ($param->input)
       $formAction .= '&amp;input='.$param->input;
 
     // suffix is used to prevent namecolisions in form objects for the same
@@ -2328,115 +2241,107 @@ abstract class LibTemplate
     // suffix is normaly the objid, "search" oder "create"
     // it has to be transported during selection / filter requests, else the
     // data method is not able to target the correct input elements
-    if( $param->suffix )
+    if ($param->suffix)
       $formAction .= '&amp;suffix='.$param->suffix;
 
     // they keyname is used to prevent naming colissions in forms
-    if( $param->keyName )
+    if ($param->keyName)
       $formAction .= '&amp;key_name='.$param->keyName;
 
     // they keyname is used to prevent naming colissions in forms
-    if( $param->fullLoad )
+    if ($param->fullLoad)
       $formAction .= '&amp;full_load=true';
 
     // check if there are things to exclude
-    if( $param->exclude )
+    if ($param->exclude)
       $formAction .= '&amp;exclude='.$param->exclude;
 
     // which view type was used, important to close the ui element eg.
-    if( $param->viewType )
+    if ($param->viewType)
       $formAction .= '&amp;view='.$param->viewType;
 
     // which view type was used, important to close the ui element eg.
-    if( $param->viewId )
+    if ($param->viewId)
       $formAction .= '&amp;view_id='.$param->viewId;
 
     // append objid
-    if( $param->objid )
+    if ($param->objid)
       $formAction .= '&amp;objid='.$param->objid;
 
-    if( $param->refIds )
-    {
-      foreach( $param->refIds as $key => $value )
-      {
+    if ($param->refIds) {
+      foreach ($param->refIds as $key => $value) {
         $formAction .= '&amp;refids['.$key.']='.$value;
       }
     }
 
-    if( $param->dynFilters )
-    {
-      foreach( $param->dynFilters as $value )
-      {
+    if ($param->dynFilters) {
+      foreach ($param->dynFilters as $value) {
         $formAction .= '&amp;dynfilter[]='.$value;
       }
     }
 
-
-
 // ACLS
 
     // startpunkt des pfades für die acls
-    if( $param->aclRoot )
+    if ($param->aclRoot)
       $formAction .= '&amp;a_root='.$param->aclRoot;
 
     // die id des Datensatzes von dem aus der Pfad gestartet wurde
-    if( $param->aclRootId )
+    if ($param->aclRootId)
       $formAction .= '&amp;a_root_id='.$param->aclRootId;
 
     // der key des knotens auf dem wir uns im pfad gerade befinden
-    if( $param->aclKey )
+    if ($param->aclKey)
       $formAction .= '&amp;a_key='.$param->aclKey;
 
     // der key des knotens auf dem wir uns im pfad gerade befinden
-    if( $param->aclLevel )
+    if ($param->aclLevel)
       $formAction .= '&amp;a_level='.$param->aclLevel;
 
     // der neue knoten
-    if( $param->aclNode )
+    if ($param->aclNode)
       $formAction .= '&amp;a_node='.$param->aclNode;
 
     // add the action to the form
-    $this->addVar( 'searchFormAction'.$subkey, $formAction );
+    $this->addVar('searchFormAction'.$subkey, $formAction);
 
     // check if there is a specific class for the crudform, if not use wcm wcm_req_ajax
-    if( !$param->searchFormClass )
+    if (!$param->searchFormClass)
       $param->searchFormClass = 'wcm wcm_req_ajax';
 
     // add the class to the form
-    $this->addVar( 'searchFormClass'.$subkey, $param->searchFormClass );
+    $this->addVar('searchFormClass'.$subkey, $param->searchFormClass);
 
     // formId
-    $this->addVar( 'searchFormId'.$subkey, $param->searchFormId );
-
+    $this->addVar('searchFormId'.$subkey, $param->searchFormId);
 
   }//end public function setFormAction */
-
 
   /**
    * method to set the form data
    * @param TFlag $param
    */
-  public function buildSearchFormAction( $formAction, $param  )
+  public function buildSearchFormAction($formAction, $param)
   {
 
     // the id of the html table where the new entry has to be added
-    if( $param->targetId )
+    if ($param->targetId)
       $formAction .= '&amp;target_id='.$param->targetId;
 
     // flag if the new entry should be added with connection action or CRUD actions
-    if( $param->publish )
+    if ($param->publish)
       $formAction .= '&amp;publish='.$param->publish;
 
     // target is a pointer to a js function that has to be called
-    if( $param->target )
+    if ($param->target)
       $formAction .= '&amp;target='.$param->target;
 
     // target is a pointer to a js function that has to be called
-    if( $param->input )
+    if ($param->input)
       $formAction .= '&amp;input='.$param->input;
 
     // they keyname is used to prevent naming colissions in forms
-    if( $param->keyName )
+    if ($param->keyName)
       $formAction .= '&amp;key_name='.$param->keyName;
 
     // suffix is used to prevent namecolisions in form objects for the same
@@ -2444,40 +2349,36 @@ abstract class LibTemplate
     // suffix is normaly the objid, "search" oder "create"
     // it has to be transported during selection / filter requests, else the
     // data method is not able to target the correct input elements
-    if( $param->suffix )
+    if ($param->suffix)
       $formAction .= '&amp;suffix='.$param->suffix;
 
-    if( $param->fullLoad )
+    if ($param->fullLoad)
       $formAction .= '&amp;full_load=true';
 
     // check if there are things to exclude
-    if( $param->exclude )
+    if ($param->exclude)
       $formAction .= '&amp;exclude='.$param->exclude;
 
     // which view type was used, important to close the ui element eg.
-    if( $param->viewType )
+    if ($param->viewType)
       $formAction .= '&amp;view='.$param->viewType;
 
     // which view type was used, important to close the ui element eg.
-    if( $param->viewId )
+    if ($param->viewId)
       $formAction .= '&amp;view_id='.$param->viewId;
 
     // append objid
-    if( $param->objid )
+    if ($param->objid)
       $formAction .= '&amp;objid='.$param->objid;
 
-    if( $param->refIds )
-    {
-      foreach( $param->refIds as $key => $value )
-      {
+    if ($param->refIds) {
+      foreach ($param->refIds as $key => $value) {
         $formAction .= '&amp;refids['.$key.']='.$value;
       }
     }
 
-    if( $param->dynFilters )
-    {
-      foreach( $param->dynFilters as $value )
-      {
+    if ($param->dynFilters) {
+      foreach ($param->dynFilters as $value) {
         $formAction .= '&amp;dynfilter[]='.$value;
       }
     }
@@ -2485,33 +2386,32 @@ abstract class LibTemplate
 // ACLS
 
     // startpunkt des pfades für die acls
-    if( $param->aclRoot )
+    if ($param->aclRoot)
       $formAction .= '&amp;a_root='.$param->aclRoot;
 
     // die id des Datensatzes von dem aus der Pfad gestartet wurde
-    if( $param->aclRootId )
+    if ($param->aclRootId)
       $formAction .= '&amp;a_root_id='.$param->aclRootId;
 
     // der key des knotens auf dem wir uns im pfad gerade befinden
-    if( $param->aclKey )
+    if ($param->aclKey)
       $formAction .= '&amp;a_key='.$param->aclKey;
 
     // der key des knotens auf dem wir uns im pfad gerade befinden
-    if( $param->aclLevel )
+    if ($param->aclLevel)
       $formAction .= '&amp;a_level='.$param->aclLevel;
 
     // der neue knoten
-    if( $param->aclNode )
+    if ($param->aclNode)
       $formAction .= '&amp;a_node='.$param->aclNode;
 
     return $formAction;
 
-
   }//end public function setFormAction */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Abstract Methods
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -2528,14 +2428,12 @@ abstract class LibTemplate
 // Veraltete Elemente die möglicherweise noch gebraucht werden
 //////////////////////////////////////////////////////////////////////////////*/
 
-
   /**
    * the activ html head tempate
    * @var string
    * @deprecated
    */
   public $htmlHead      = null;
-
 
   /**
    * @var View
@@ -2549,38 +2447,35 @@ abstract class LibTemplate
    * @return void
    * @deprecated
    */
-  public function setHtmlHead( $head )
+  public function setHtmlHead($head)
   {
     $this->htmlHead = $head;
   }//end public function setHtmlHead*/
-
 
   /**
    * @param string $key
    * @return LibTemplate
    */
-  public function loadView( $key )
+  public function loadView($key)
   {
 
     $className = $key.'_View';
 
-    if( !Webfrap::loadable($className) )
-    {
-      throw new LibTemplate_Exception('Requested nonexisting View '.$key );
+    if (!Webfrap::loadable($className)) {
+      throw new LibTemplate_Exception('Requested nonexisting View '.$key);
     }
 
-    $this->subView  = new $className( $this );
+    $this->subView  = new $className($this);
 
-    $this->subView->setI18n( $this->i18n );
-    $this->subView->setUser( $this->user );
-    $this->subView->setTplEngine( $this );
-    $this->subView->setView( $this );
-    $this->subView->setParent( $this );
+    $this->subView->setI18n($this->i18n);
+    $this->subView->setUser($this->user);
+    $this->subView->setTplEngine($this);
+    $this->subView->setView($this);
+    $this->subView->setParent($this);
 
     return $this->subView;
 
   }//end public function loadView */
-
 
 }//end abstract class LibTemplate
 

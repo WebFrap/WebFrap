@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,14 +26,13 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_SyncGroup_Query_Postgresql
-  extends LibSqlQuery
+class AclMgmt_SyncGroup_Query_Postgresql extends LibSqlQuery
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
-  /** 
+  /**
    * Laden aller assignten Gruppen
    *
    * @param int $areaId
@@ -41,18 +40,15 @@ class AclMgmt_SyncGroup_Query_Postgresql
    *
    * @throws LibDb_Exception
    */
-  public function fetch( $areaId )
+  public function fetch($areaId)
   {
 
     $this->sourceSize  = null;
     $db                = $this->getDb();
 
-    if( !$this->criteria )
-    {
+    if (!$this->criteria) {
       $criteria = $db->orm->newCriteria();
-    }
-    else
-    {
+    } else {
       $criteria = $this->criteria;
     }
 
@@ -64,14 +60,14 @@ class AclMgmt_SyncGroup_Query_Postgresql
       'wbfsys_security_access.date_end as "wbfsys_security_access_date_end"',
       'wbfsys_security_access.id_group as "wbfsys_security_access_id_group"'
     );
-    $criteria->select( $cols );
-    
-    $criteria->from( 'wbfsys_security_access' );
+    $criteria->select($cols);
 
-    $criteria->where( "id_area={$areaId} and partial = 0" );
+    $criteria->from('wbfsys_security_access');
+
+    $criteria->where("id_area={$areaId} and partial = 0");
 
     // Run Query und save the result
-    $this->result    = $db->orm->select( $criteria );
+    $this->result    = $db->orm->select($criteria);
 
   }//end public function fetch */
 

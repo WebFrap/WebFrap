@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,12 +26,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class AclMgmt_Qfdu_Group_Treetable_Element
-  extends WgtTreetable
+class AclMgmt_Qfdu_Group_Treetable_Element extends WgtTreetable
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * the html id of the table tag, this id can be used to replace the table
@@ -74,7 +73,7 @@ class AclMgmt_Qfdu_Group_Treetable_Element
    * @var DomainNode
    */
   public $domainNode  = null;
-  
+
   /**
    * Ist kein Single menu
    * @var boolean
@@ -87,43 +86,40 @@ class AclMgmt_Qfdu_Group_Treetable_Element
    * @param string $name the name of the wgt object
    * @param LibTemplate $view
    */
-  public function __construct( $domainNode, $name = null, $view = null )
+  public function __construct($domainNode, $name = null, $view = null)
   {
-    
+
     $this->domainNode = $domainNode;
     $this->name       = $name;
     $this->stepSize   = Wgt::$defListSize;
 
     // when a view is given we asume that the element should be injected
     // directly to the view
-    if( $view )
-    {
+    if ($view) {
       $this->view = $view;
       $this->i18n = $view->getI18n();
-      
-      if( $view->access )
+
+      if ($view->access)
         $this->access = $view->access;
 
-      if( $name )
-        $view->addElement( $name, $this );
-    }
-    else
-    {
+      if ($name)
+        $view->addElement($name, $this);
+    } else {
       $this->i18n     = I18n::getActive();
     }
-    
+
     $this->loadUrl();
 
   }//end public function __construct */
-  
+
  /**
   * initiales setup der urls
   */
   public function loadUrl()
   {
-    
+
     $this->id = 'wgt-treetable-'.$this->domainNode->domainName.'-acl-tgroup';
-  
+
     $this->url['group']      = array
     (
       'delete'  => array
@@ -160,9 +156,9 @@ class AclMgmt_Qfdu_Group_Treetable_Element
       (
         Wgt::ACTION_SEP
       ),
-  
+
     );
-    $this->actions['group'] = array( 'tree', 'inheritance', 'sep', 'delete' );
+    $this->actions['group'] = array('tree', 'inheritance', 'sep', 'delete');
 
     $this->url['user']  = array
     (
@@ -188,7 +184,7 @@ class AclMgmt_Qfdu_Group_Treetable_Element
         Acl::ADMIN
       ),
     );
-    $this->actions['user'] = array( 'delete' );
+    $this->actions['user'] = array('delete');
 
     $this->url['dset']  = array
     (
@@ -213,25 +209,22 @@ class AclMgmt_Qfdu_Group_Treetable_Element
         Acl::ADMIN
       ),
     );
-    $this->actions['dset'] = array( 'dset_mask', 'sep', 'delete' );
+    $this->actions['dset'] = array('dset_mask', 'sep', 'delete');
 
   }//end public function loadUrl */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param array $actions
    */
-  public function addUserActions( $actions )
+  public function addUserActions($actions)
   {
-    if( is_array( $actions ) )
-    {
-      $this->userActions = array_merge( $this->userActions, $actions );
-    }
-    else
-    {
+    if (is_array($actions)) {
+      $this->userActions = array_merge($this->userActions, $actions);
+    } else {
       $this->userActions[] = $actions;
     }
 
@@ -240,14 +233,11 @@ class AclMgmt_Qfdu_Group_Treetable_Element
   /**
    * @param array $actions
    */
-  public function addDatasetActions( $actions )
+  public function addDatasetActions($actions)
   {
-    if( is_array( $actions ) )
-    {
-      $this->datasetActions = array_merge( $this->datasetActions, $actions );
-    }
-    else
-    {
+    if (is_array($actions)) {
+      $this->datasetActions = array_merge($this->datasetActions, $actions);
+    } else {
       $this->datasetActions[] = $actions;
     }
 
@@ -259,45 +249,42 @@ class AclMgmt_Qfdu_Group_Treetable_Element
    * @param $value
    * @return void
    */
-  public function setData( $data , $value = null )
+  public function setData($data , $value = null)
   {
 
-    if( !$data )
+    if (!$data)
       return;
 
-    if( is_object( $data ) )
-    {
+    if (is_object($data)) {
       $this->data       = $data;
       $this->dataSize   = $data->getSourceSize();
       //$this->dataUser   = $data->users;
       //$this->dataEntity = $data->datasets;
-    }
-    else
-    {
+    } else {
       $this->data = $data;
     }
 
   }//end public function setData */
-  
+
   /**
    * set the table data
    * @param array $data
    * @return void
    */
-  public function setUserData( $data )
+  public function setUserData($data)
   {
 
     $this->dataUser = $data;
     //$this->dataSize = $data->getSourceSize();
 
   }//end public function setUserData */
-  
+
   /**
    * set the table data
    * @param array $data
    * @return void
    */
-  public function setDsetData( $data )
+  public function setDsetData($data)
   {
 
     $this->dataEntity = $data;
@@ -306,32 +293,31 @@ class AclMgmt_Qfdu_Group_Treetable_Element
   }//end public function setDsetData */
 
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Plain Html Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * parse the table
    *
    * @return string
    */
-  public function buildHtml( )
+  public function buildHtml()
   {
     // if we have html we can assume that the table was allready assembled
     // so we return just the html and stop here
     // this behaviour enables you to call a specific builder method from outside
     // of the view, but then get the html of the called parse method
-    if( $this->html )
+    if ($this->html)
       return $this->html;
-      
+
 
     $icons = array();
-    $icons['closed'] = $this->icon( 'control/closed.png', 'Closed' );
+    $icons['closed'] = $this->icon('control/closed.png', 'Closed');
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if( $this->insertMode )
-    {
+    if ($this->insertMode) {
       $this->html .= '<div id="'.$this->id.'" class="wgt-grid  wgt-border-top" >'.NL;
       $this->html .= $this->buildPanel();
       //wcm_ui_treetable
@@ -347,8 +333,7 @@ class AclMgmt_Qfdu_Group_Treetable_Element
 
     // check for replace is used to check if this table should be pushed via ajax
     // to the client, or if the table is placed direct into a template
-    if( $this->insertMode )
-    {
+    if ($this->insertMode) {
 
       $this->html .= '</table>';
       $this->html .= '<var id="'.$this->id.'-table-cfg-grid"  >{
@@ -356,8 +341,8 @@ class AclMgmt_Qfdu_Group_Treetable_Element
         "search_form":"'.$this->searchForm.'",
         "expandable":false,
         "load_urls":{
-        	"users" : "ajax.php?c=Acl.Mgmt_Qfdu_Group.loadUsers&dkey='.$this->domainNode->domainName.'&elid='.$this->id.'-table",
-        	"dsets" : "ajax.php?c=Acl.Mgmt_Qfdu_Group.loadDsets&dkey='.$this->domainNode->domainName.'&elid='.$this->id.'-table"
+          "users" : "ajax.php?c=Acl.Mgmt_Qfdu_Group.loadUsers&dkey='.$this->domainNode->domainName.'&elid='.$this->id.'-table",
+          "dsets" : "ajax.php?c=Acl.Mgmt_Qfdu_Group.loadDsets&dkey='.$this->domainNode->domainName.'&elid='.$this->id.'-table"
         }
       }</var>';
 
@@ -379,12 +364,12 @@ class AclMgmt_Qfdu_Group_Treetable_Element
    * create the head for the table
    * @return string
    */
-  public function buildThead( )
+  public function buildThead()
   {
 
     $this->numCols = 3;
 
-    if( $this->enableNav )
+    if ($this->enableNav)
       ++ $this->numCols;
 
     // Creating the Head
@@ -392,33 +377,32 @@ class AclMgmt_Qfdu_Group_Treetable_Element
     $html .= '<tr>'.NL;
 
     // check for multi selection
-    $html .= '<th style="width:40px;" class="pos" >'.$this->i18n->l( 'Pos:', 'wbf.label'  ).'</th>'.NL;
+    $html .= '<th style="width:40px;" class="pos" >'.$this->i18n->l('Pos:', 'wbf.label'  ).'</th>'.NL;
 
     $html .= '<th style="width:350px" >
       '.$this->view->i18n->l
       (
         'Group / User / {@label@}',
         'wbf.label',
-        array( 'label' => 'Employee' )
+        array('label' => 'Employee')
       ).'
     </th>'.NL;
 
     $html .= '<th style="width:125px" >
-      '.$this->view->i18n->l( 'Start', 'wbf.label' ).'
+      '.$this->view->i18n->l('Start', 'wbf.label').'
     </th>'.NL;
 
     $html .= '<th style="width:125px" >
-      '.$this->view->i18n->l( 'End', 'wbf.label' ).'
+      '.$this->view->i18n->l('End', 'wbf.label').'
     </th>'.NL;
 
     // the default navigation col
-    if( $this->enableNav )
-      $html .= '<th style="width:55px;">'.$this->view->i18n->l( 'Menu', 'wbf.label'  ).'</th>'.NL;
+    if ($this->enableNav)
+      $html .= '<th style="width:55px;">'.$this->view->i18n->l('Menu', 'wbf.label'  ).'</th>'.NL;
 
     $html .= '</tr>'.NL;
     $html .= '</thead>'.NL;
     //\ Creating the Head
-
     return $html;
 
   }//end public function buildThead */
@@ -427,23 +411,22 @@ class AclMgmt_Qfdu_Group_Treetable_Element
    * create the body for the table
    * @return string
    */
-  public function buildTbody( )
+  public function buildTbody()
   {
 
     $icons = array();
-    $icons['closed'] = $this->icon( 'control/closed.png', 'Closed' );
-    $icons['groups'] = $this->icon( 'control/group.png', 'Group' );
-    
+    $icons['closed'] = $this->icon('control/closed.png', 'Closed');
+    $icons['groups'] = $this->icon('control/group.png', 'Group');
+
     // create the table body
     $body = '<tbody>'.NL;
 
     // simple switch method to create collored rows
     $num = 1;
     $pos = 1;
-    
-    foreach( $this->data as $row   )
-    {
-      
+
+    foreach ($this->data as $row) {
+
       $groupId     = $row['role_group_rowid'];
       $objid       = $groupId;
       $rowid       = $this->id.'_row_'.$groupId;
@@ -458,11 +441,10 @@ class AclMgmt_Qfdu_Group_Treetable_Element
 
 
       $this->num ++;
-      if ( $this->num > $this->numOfColors )
+      if ($this->num > $this->numOfColors)
         $this->num = 1;
 
-      if( $this->enableNav )
-      {
+      if ($this->enableNav) {
         $navigation  = $this->rowMenu
         (
           $objid.'&group_id='.$groupId,
@@ -478,62 +460,58 @@ class AclMgmt_Qfdu_Group_Treetable_Element
 
       $pos ++;
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors)
         $num = 1;
 
     } //end foreach
 
     /*
-    if( $this->dataSize > ($this->start + $this->stepSize) )
-    {
+    if ($this->dataSize > ($this->start + $this->stepSize)) {
       $body .= '<tr><td colspan="'.$this->numCols.'" class="wcm wcm_action_appear '.$this->searchForm.' '.$this->id.'"  ><var>'.($this->start + $this->stepSize).'</var>Paging to the next '.$this->stepSize.' entries.</td></tr>';
     }
     */
 
     $body .= '</tbody>'.NL;
     //\ Create the table body
-
     return $body;
 
   }//end public function buildTbody */
-  
+
   /**
    * Rendern des User Blocks
    * @param int $groupId
    * @param ContextListing $context
    */
-  public function renderUserBlock( $groupId, $context )
+  public function renderUserBlock($groupId, $context)
   {
 
 
     $icons = array();
-    $icons['closed'] = $this->icon( 'control/closed.png', 'Closed' );
+    $icons['closed'] = $this->icon('control/closed.png', 'Closed');
     $icons['user'] = $this->icon('control/user.png','User');
-    
+
     $body = '<htmlArea selector="tr#'.$this->id.'_row_'
       .$groupId.'" action="after" ><![CDATA['.NL;
 
     $pos = 1;
-    $num = 1;  
-    
-    foreach( $this->dataUser as  $row )
-    {
+    $num = 1;
 
-      //if( $row['num_dsets'] )
-      if( true )
-      {
+    foreach ($this->dataUser as  $row) {
+
+      //if ($row['num_dsets'])
+      if (true) {
         $userId     = $row['role_user_rowid'];
         $objid      = $userId;
         $rowid      = $this->id.'_row_'.$groupId.'_'.$userId;
         $pRowid     = 'c-'.$this->id.'_row_'.$groupId.' group-'.$groupId;
 
         $body .= '<tr class="wcm wcm_ui_highlight row'.$num.' '.$pRowid.' wgt-border-top flag_partial" id="'.$rowid.'"  >'.NL;
-        
+
         $body .= '<td valign="top" class="pos" >'.$context->pRowPos.'.'.$pos.'</td>'.NL;
         $body .= '<td valign="top" class="ind1" >&nbsp;&nbsp;'
-          . '<span class="wgt-loader" wgt_source_key="dsets" wgt_param="&amp;group='.$groupId.'" wgt_eid="'.$userId.'" >'.$icons['closed'].'</span> '          
-          . '<a 
-              class="wcm wcm_req_ajax" 
+          . '<span class="wgt-loader" wgt_source_key="dsets" wgt_param="&amp;group='.$groupId.'" wgt_eid="'.$userId.'" >'.$icons['closed'].'</span> '
+          . '<a
+              class="wcm wcm_req_ajax"
               href="modal.php?c=Webfrap.ContactForm.formUser&amp;user_id='
                 .$row['role_user_rowid'].'&amp;d_src='.$this->domainNode->domainName.'" >'
                 .$row['user']
@@ -543,9 +521,9 @@ class AclMgmt_Qfdu_Group_Treetable_Element
                 .'</td>'.NL;
         $body .= '<td colspan="2" ></td>'.NL;
 
-     
+
         $navigation  = $this->rowMenu
-        ( 
+        (
           '0&user_id='.$userId.'&group_id='.$groupId,
           $row,
           null,
@@ -553,12 +531,10 @@ class AclMgmt_Qfdu_Group_Treetable_Element
           'user'
         );
         $body .= '<td valign="top"  class="nav_split"  >'.$navigation.'</td>'.NL;
-     
+
 
         $body .= '</tr>'.NL;
-      }
-      else
-      {
+      } else {
 
         $userId     = $row['role_user_rowid'];
         $objid      = $row['group_users_rowid'];
@@ -566,13 +542,13 @@ class AclMgmt_Qfdu_Group_Treetable_Element
         $pRowid     = 'child-of-'.$this->id.'_row_'.$groupId.' group-'.$groupId;
 
         $body .= '<tr class="wcm wcm_ui_highlight row'.$this->num.' '.$pRowid.' wgt-border-top" id="'.$rowid.'"  >'.NL;
-        
+
         $body .= '<td valign="top" class="pos" >'.$context->pRowPos.'.'.$pos.'</td>'.NL;
         $body .= '<td valign="top" class="ind1" >'
           . '<span class="wgt-loader" wgt_source_key="dsets" wgt_param="&amp;group='.$groupId.'" wgt_eid="'.$userId.'" >'.$icons['closed'].'</span> '
           . $this->icon('control/user.png','User').' '
-          . '<a 
-              class="wcm wcm_req_ajax" 
+          . '<a
+              class="wcm wcm_req_ajax"
               href="modal.php?c=Webfrap.ContactForm.formUser&amp;user_id='
                 .$row['role_user_rowid'].'&amp;d_src='.$this->domainNode->domainName.'" >'
                 .$row['user'].'</a>'
@@ -585,8 +561,8 @@ class AclMgmt_Qfdu_Group_Treetable_Element
             name="qfdu[group_users]['.$objid.'][date_start]"
             value="'.
             (
-              '' != trim( $row['group_users_date_start'] )
-                ? $this->view->i18n->date( $row['group_users_date_start'] )
+              '' != trim($row['group_users_date_start'])
+                ? $this->view->i18n->date($row['group_users_date_start'])
                 : ''
             ).'" /></td>'.NL;
 
@@ -598,68 +574,67 @@ class AclMgmt_Qfdu_Group_Treetable_Element
             name="qfdu[group_users]['.$objid.'][date_end]"
             value="'.
             (
-              '' != trim( $row['group_users_date_end'] )
-                ? $this->view->i18n->date( $row['group_users_date_end'] )
+              '' != trim($row['group_users_date_end'])
+                ? $this->view->i18n->date($row['group_users_date_end'])
                 : ''
             ).'" /></td>'.NL;
 
         $navigation  = $this->buildCustomButtons
-        ( 
-          $this->userButtons, 
-          array( 'clean', 'delete' ), 
-          $objid.'&group_id='.$groupId.'&user_id='.$userId.'&area_id='.$this->areaId 
+        (
+          $this->userButtons,
+          array('clean', 'delete'),
+          $objid.'&group_id='.$groupId.'&user_id='.$userId.'&area_id='.$this->areaId
         );
         $body .= '<td valign="top"  class="nav_split"  >'.$navigation.'</td>'.NL;
 
         $body .= '</tr>'.NL;
       }
-      
+
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors)
         $num = 1;
-        
+
       ++$pos;
 
     }
-    
+
     $body .= ']]></htmlArea>'.NL;
 
     return $body;
-    
+
   }//end public function renderUserBlock */
-  
+
   /**
    * Rendern des User Blocks
    * @param int $groupId
    * @param ContextListing $context
    */
-  public function renderDsetBlock( $groupId, $userId, $context )
+  public function renderDsetBlock($groupId, $userId, $context)
   {
 
     $body = '<htmlArea selector="tr#'.$this->id.'_row_'
       .$groupId.'_'.$userId.'" action="after" ><![CDATA['.NL;
 
     $pos = 1;
-    $num = 1;  
-    
+    $num = 1;
+
     $icons = array();
     $icons['dset'] = $this->icon('control/dset.png','Dset');
 
 
-    foreach( $this->dataEntity as $row )
-    {
+    foreach ($this->dataEntity as $row) {
 
       $objid       = $row['dset_rowid'];
       $rowid       = $this->id.'_row_'.$groupId.'_'.$userId.'_'.$objid;
       $pRowid      = 'c-'.$this->id.'_row_'.$groupId.'_'.$userId.' user-'.$userId.' group-'.$groupId;
 
       $body .= '<tr class="wcm wcm_ui_highlight row'.$num.' '.$pRowid.'" id="'.$rowid.'" >'.NL;
-      
+
       $body .= '<td valign="top" class="pos" >'.$context->pRowPos.'.'.$pos.'</td>'.NL;
       $body .= '<td valign="top" class="ind2" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
         .' <a href="maintab.php?c='.$this->domainNode->domainUrl.'.edit&amp;objid='.$row['dset_rowid'].'" '
         .' class="wcm wcm_req_ajax" >'.$row['dset_text'].' '.$icons['dset'].'</a></td>'.NL;
-      
+
         $body .= '<td valign="top" >'
         .'<input
             type="text"
@@ -668,8 +643,8 @@ class AclMgmt_Qfdu_Group_Treetable_Element
             name="qfdu[group_users]['.$objid.'][date_start]"
             value="'
             .(
-               '' != trim( $row['group_users_date_start'] )
-                ? $this->view->i18n->date( $row['group_users_date_start'] )
+               '' != trim($row['group_users_date_start'])
+                ? $this->view->i18n->date($row['group_users_date_start'])
                 : ''
             ).'" />'
         .'</td>'.NL;
@@ -682,20 +657,19 @@ class AclMgmt_Qfdu_Group_Treetable_Element
             name="qfdu[group_users]['.$objid.'][date_end]"
             value="'
           .(
-            '' != trim( $row['group_users_date_end'] )
-              ? $this->view->i18n->date( $row['group_users_date_end'] )
+            '' != trim($row['group_users_date_end'])
+              ? $this->view->i18n->date($row['group_users_date_end'])
               : ''
             ).'" />'
         .'</td>'.NL;
 
-      if( $this->enableNav )
-      {
+      if ($this->enableNav) {
         $navigation  = $this->rowMenu
-        ( 
+        (
           $row['entry_id'],
           $row,
-          null, 
-          null, 
+          null,
+          null,
           'dset'
         );
         $body .= '<td valign="top"  class="nav_split"  >'.$navigation.'</td>'.NL;
@@ -705,61 +679,55 @@ class AclMgmt_Qfdu_Group_Treetable_Element
 
       $pos ++;
       $num ++;
-      if ( $num > $this->numOfColors )
+      if ($num > $this->numOfColors)
         $num = 1;
-      
+
     }
 
     $body .= ']]></htmlArea>'.NL;
 
     return $body;
-    
+
   }//end public function renderDsetBlock */
 
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Ajax Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * parse the table
    *
    * @return string
    */
-  public function buildAjax( )
+  public function buildAjax()
   {
 
     // if we have html we can assume that the table was allready assembled
     // so we return just the html and stop here
     // this behaviour enables you to call a specific builder method from outside
     // of the view, but then get the html of the called parse method
-    if( $this->xml )
+    if ($this->xml)
       return $this->xml;
 
-    if( $this->appendMode )
-    {
+    if ($this->appendMode) {
       $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="prepend" ><![CDATA['.NL;
-    }
-    else
-    {
+    } else {
       $body = '';
     }
 
-    foreach( $this->data as $key => $row   )
-    {
-      $body .= $this->buildAjaxTbody( $row );
+    foreach ($this->data as $key => $row) {
+      $body .= $this->buildAjaxTbody($row);
     }//end foreach
 
-    if( $this->appendMode )
-    {
+    if ($this->appendMode) {
       $numCols = 2;
 
-      if( $this->enableNav )
+      if ($this->enableNav)
         ++ $numCols;
 
       /*
-      if( $this->dataSize > ($this->start + $this->stepSize) )
-      {
+      if ($this->dataSize > ($this->start + $this->stepSize)) {
         $body .= '<tr><td colspan="'.$numCols.'" class="wcm wcm_action_appear '
           .$this->searchForm.' '.$this->id.'"  ><var>'
           .($this->start + $this->stepSize)
@@ -775,7 +743,7 @@ class AclMgmt_Qfdu_Group_Treetable_Element
     return $this->xml;
 
   }//end public function buildAjax */
-  
+
 
 
   /**
@@ -783,28 +751,27 @@ class AclMgmt_Qfdu_Group_Treetable_Element
    *
    * @return string
    */
-  public function buildAjaxEntry( )
+  public function buildAjaxEntry()
   {
 
     // if we have html we can assume that the table was allready assembled
     // so we return just the html and stop here
     // this behaviour enables you to call a specific builder method from outside
     // of the view, but then get the html of the called parse method
-    if( $this->xml )
+    if ($this->xml)
       return $this->xml;
 
     // erst mal kein append mode, gehen wir mal davon aus
     // dass alles angezeigt werden kann
 
-    foreach( $this->data as $key => $row   )
-    {
+    foreach ($this->data as $key => $row) {
 
       $objid       = $key;
       $rowid       = $this->id.'_row_'.$objid;
 
       $body = '<htmlArea selector="table#'.$this->id.'-table>tbody" action="prepend" check="#'.$rowid.'" not="true" ><![CDATA['.NL;
       $body .= '<tr class="title" id="'.$rowid.'" >'.NL;
-      
+
       $body .= '<td valign="top" class="pos" >1</td>'.NL;
       $body .= '<td valign="top" colspan="3" >'.$row['role_group_name'].'</td>'.NL;
 
@@ -820,7 +787,7 @@ class AclMgmt_Qfdu_Group_Treetable_Element
 
       $body .= '</tr>]]></htmlArea>'.NL;
 
-      $body .= $this->buildAjaxUserNode( $key );
+      $body .= $this->buildAjaxUserNode($key);
 
     }//end foreach
 
@@ -835,21 +802,19 @@ class AclMgmt_Qfdu_Group_Treetable_Element
    * @param int $groupId
    * @return string
    */
-  public function buildAjaxUserNode( $groupId )
+  public function buildAjaxUserNode($groupId)
   {
 
-    if(!isset($this->dataUser[$groupId]))
+    if (!isset($this->dataUser[$groupId]))
       return '';
 
     $childs = $this->dataUser[$groupId];
 
     $body = '';
 
-    foreach( $childs as $key => $row )
-    {
+    foreach ($childs as $key => $row) {
 
-      if( isset($row['id']) )
-      {
+      if (isset($row['id'])) {
         $userId     = $row['id'];
         $objid      = $userId;
         $rowid      = $this->id.'_row_'.$groupId.'_'.$userId;
@@ -858,19 +823,18 @@ class AclMgmt_Qfdu_Group_Treetable_Element
         $body .= '<htmlArea selector="tr.#'.$this->id.'_row_'
           .$groupId.'" action="after" check="#'
           .$rowid.'" not="true" ><![CDATA['.NL;
-          
+
         $body .= '<tr class="row'.$this->num.' '.$pRowid.' wgt-border-top flag_partial" id="'.$rowid.'"  >'.NL;
-        
+
         $body .= '<td valign="top" class="pos" >1</td>'.NL;
         $body .= '<td valign="top" class="ind1" >'.$this->icon('control/user.png','User').' '.$row['name'].' (partial)</td>'.NL;
         $body .= '<td colspan="2"  ></td>'.NL;
 
-        if( $this->enableNav )
-        {
+        if ($this->enableNav) {
           $navigation  = $this->rowMenu
-          ( 
-            '0&group_id='.$groupId.'&user_id='.$userId, 
-            $row, 
+          (
+            '0&group_id='.$groupId.'&user_id='.$userId,
+            $row,
             null,
             null,
             'user'
@@ -879,9 +843,7 @@ class AclMgmt_Qfdu_Group_Treetable_Element
         }
 
         $body .= '</tr>]]></htmlArea>'.NL;
-      }
-      else
-      {
+      } else {
 
         $userId     = $row['role_user_rowid'];
         $objid      = $row['group_users_rowid'];
@@ -890,9 +852,9 @@ class AclMgmt_Qfdu_Group_Treetable_Element
 
         $body .= '<htmlArea selector="tr.#'.$this->id.'_row_'.$groupId
           .'" action="after" else="replace" check="#'.$rowid.'" not="true"  ><![CDATA['.NL;
-          
+
         $body .= '<tr class="row'.$this->num.' '.$pRowid.' wgt-border-top" id="'.$rowid.'"  >'.NL;
-        
+
         $body .= '<td valign="top" class="pos" >1</td>'.NL;
         $body .= '<td valign="top" >'.$this->icon('control/user.png','User').' '.$row['user'].'</td>'.NL;
         $body .= '<td valign="top" >'
@@ -903,8 +865,8 @@ class AclMgmt_Qfdu_Group_Treetable_Element
             name="qfdu[group_users]['.$objid.'][date_start]"
             value="'.
             (
-              '' != trim( $row['group_users_date_start'] )
-                ? $this->view->i18n->date( $row['group_users_date_start'] )
+              '' != trim($row['group_users_date_start'])
+                ? $this->view->i18n->date($row['group_users_date_start'])
                 : ''
             ).'" /></td>'.NL;
 
@@ -916,18 +878,17 @@ class AclMgmt_Qfdu_Group_Treetable_Element
             name="qfdu[group_users]['.$objid.'][date_end]"
             value="'.
             (
-              '' != trim( $row['group_users_date_end'] )
-                ? $this->view->i18n->date( $row['group_users_date_end'] )
+              '' != trim($row['group_users_date_end'])
+                ? $this->view->i18n->date($row['group_users_date_end'])
                 : ''
             ).'" /></td>'.NL;
 
 
-        if( $this->enableNav )
-        {
+        if ($this->enableNav) {
           $navigation  = $this->rowMenu
-          ( 
+          (
             $row['group_users_rowid'].'&group_id='.$groupId.'&user_id='.$userId,
-            $row, 
+            $row,
             null,
             null,
             'user'
@@ -940,10 +901,10 @@ class AclMgmt_Qfdu_Group_Treetable_Element
       }
 
       $this->num ++;
-      if ( $this->num > $this->numOfColors )
+      if ($this->num > $this->numOfColors)
         $this->num = 1;
 
-      $body .= $this->buildAjaxDatasetNode( $groupId, $userId );
+      $body .= $this->buildAjaxDatasetNode($groupId, $userId);
 
     }
 
@@ -955,18 +916,17 @@ class AclMgmt_Qfdu_Group_Treetable_Element
    * @param int $groupId
    * @param int $userId
    */
-  public function buildAjaxDatasetNode( $groupId, $userId  )
+  public function buildAjaxDatasetNode($groupId, $userId  )
   {
 
-    if( !isset( $this->dataEntity[$groupId][$userId] ) )
+    if (!isset($this->dataEntity[$groupId][$userId]))
       return '';
 
     $childs = $this->dataEntity[$groupId][$userId];
 
     $body = '';
 
-    foreach( $childs as $row )
-    {
+    foreach ($childs as $row) {
 
       $objid       = $row['group_users_rowid'];
       $rowid       = $this->id.'_row_'.$groupId.'_'.$userId.'_'.$objid;
@@ -975,9 +935,9 @@ class AclMgmt_Qfdu_Group_Treetable_Element
       $body = '<htmlArea selector="tr#'.$this->id.'_row_'.$groupId.'_'
         .$userId.'" action="after" check="#'.$rowid
         .'" else="replace" not="true" ><![CDATA['.NL;
-        
+
       $body .= '<tr class="row'.$this->num.' '.$pRowid.'" id="'.$rowid.'" >'.NL;
-      
+
       $body .= '<td valign="top" class="pos" >1</td>'.NL;
       $body .= '<td valign="top" class="ind2" >'.$this->icon('control/entity.png','Entity').' <a href="maintab.php?c=Enterprise.Employee.edit&amp;objid='.$row['enterprise_employee_rowid'].'" class="wcm wcm_req_ajax" >Employee: '.$row['enterprise_employee_rowid'].'</a></td>'.NL;
       $body .= '<td valign="top" >'
@@ -988,8 +948,8 @@ class AclMgmt_Qfdu_Group_Treetable_Element
             name="qfdu[group_users]['.$objid.'][date_start]"
             value="'
             .(
-               '' != trim( $row['group_users_date_start'] )
-                ? $this->view->i18n->date( $row['group_users_date_start'] )
+               '' != trim($row['group_users_date_start'])
+                ? $this->view->i18n->date($row['group_users_date_start'])
                 : ''
             ).'" />'
         .'</td>'.NL;
@@ -1002,16 +962,15 @@ class AclMgmt_Qfdu_Group_Treetable_Element
             name="qfdu[group_users]['.$objid.'][date_end]"
             value="'
           .(
-            '' != trim( $row['group_users_date_end'] )
-              ? $this->view->i18n->date( $row['group_users_date_end'] )
+            '' != trim($row['group_users_date_end'])
+              ? $this->view->i18n->date($row['group_users_date_end'])
               : ''
             ).'" />'
         .'</td>'.NL;
 
-      if( $this->enableNav )
-      {
+      if ($this->enableNav) {
         $navigation  = $this->rowMenu
-        ( 
+        (
           $objid,
           $row,
           null,
@@ -1024,7 +983,7 @@ class AclMgmt_Qfdu_Group_Treetable_Element
       $body .= '</tr>]]></htmlArea>'.NL;
 
       $this->num ++;
-      if ( $this->num > $this->numOfColors )
+      if ($this->num > $this->numOfColors)
         $this->num = 1;
 
     }
@@ -1033,22 +992,21 @@ class AclMgmt_Qfdu_Group_Treetable_Element
 
   }//end public function buildAjaxDatasetNode */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Helper Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * create a selectbox with the rights
    * @param string $active
    * @param int $name
    */
-  protected function selectRights( $active, $name )
+  protected function selectRights($active, $name)
   {
 
     $html = '<select name="'.$name.'" class="wcm wcm_ui_color_code prop_key_access full '.$this->editForm.'" >'.NL;
 
-    foreach( Acl::$accessLevels as  $label => $value )
-    {
+    foreach (Acl::$accessLevels as  $label => $value) {
       $checked = ($value==$active)?'selected="selected"':'';
       $html .= '<option '.$checked.' value="'.$value.'" >'.$label.'</option>'.NL;
     }
@@ -1065,39 +1023,38 @@ class AclMgmt_Qfdu_Group_Treetable_Element
    */
   public function buildTableFooter()
   {
-  
-  	$iconListMenu = $this->icon( 'control/menu2.png', 'List Menu' );
-  	$iconClean = $this->icon( 'control/clean.png', 'Clean' );
-  	//$iconDelete = $this->icon( 'control/delete.png', 'Delete Selection' );
-  	$iconExport = $this->icon( 'mimetypes/application-vnd.ms-excel.png', 'Export' );
+
+    $iconClean = $this->icon('control/clean.png', 'Clean');
+    //$iconDelete = $this->icon('control/delete.png', 'Delete Selection');
+    $iconExport = $this->icon('mimetypes/application-vnd.ms-excel.png', 'Export');
 
     $html = '<div class="wgt-panel wgt-border-top" >'.NL;
     $html .= ' <div class="right menu"  >';
     $html .=     $this->menuTableSize();
     $html .= ' </div>';
     $html .= ' <div class="menu" style="float:left;width:150px;" >';
-    
+
     // <li><a>{$iconDelete} Delete Selection</a></li>
-    
+
     $html .=   <<<HTML
-    
+
  <div id="{$this->id}-list-action" >
-	<button 
-		class="wcm wcm_control_dropmenu wgt-button" 
-		id="{$this->id}-list-action-cntrl"
-    tabindex="-1" 
-		wgt_drop_box="{$this->id}-list-action-menu" >{$iconListMenu} List Menu</button>
+  <button
+    class="wcm wcm_control_dropmenu wgt-button"
+    id="{$this->id}-list-action-cntrl"
+    tabindex="-1"
+    wgt_drop_box="{$this->id}-list-action-menu" ><i class="icon-list" ></i> List Menu</button>
   </div>
   <div class="wgt-dropdownbox" id="{$this->id}-list-action-menu" >
     <ul>
-      <li><a 
-      	class="wcm wcm_req_del"
-      	href="ajax.php?c=Acl.Mgmt_Qfdu.dropAllAssignments&amp;dkey={$this->domainNode->domainName}" >{$iconClean} Delete all</a></li>
-      <li><a 
-      	target="_document" 
-      	href="document.php?c=Acl.Mgmt_Qfdu_Group.export&amp;dkey={$this->domainNode->domainName}" >{$iconExport} Export</a></li>
-  	</ul>
- 	</div>
+      <li><a
+        class="wcm wcm_req_del"
+        href="ajax.php?c=Acl.Mgmt_Qfdu.dropAllAssignments&amp;dkey={$this->domainNode->domainName}" >{$iconClean} Delete all</a></li>
+      <li><a
+        target="_document"
+        href="document.php?c=Acl.Mgmt_Qfdu_Group.export&amp;dkey={$this->domainNode->domainName}" >{$iconExport} Export</a></li>
+    </ul>
+   </div>
   <var id="{$this->id}-list-action-cntrl-cfg-dropmenu"  >{"align":"left","valign":"top"}</var>
 
 HTML;
@@ -1105,7 +1062,7 @@ HTML;
 
     $html .= ' </div>';
     $html .= ' <div class="menu"  style="text-align:center;margin:0px auto;" >';
-    //$html .=     $this->menuCharFilter( );
+    //$html .=     $this->menuCharFilter();
     $html .= ' </div>';
     $html .= $this->metaInformations();
     $html .= '</div>'.NL;
@@ -1129,11 +1086,11 @@ HTML;
     return $html;
 
   }//end public function buildElementFooter */
-  
-////////////////////////////////////////////////////////////////////////////////
+
+/*//////////////////////////////////////////////////////////////////////////////
 // Deprecated
-////////////////////////////////////////////////////////////////////////////////
-  
+//////////////////////////////////////////////////////////////////////////////*/
+
 
   /**
    * @param int $groupId
@@ -1141,36 +1098,33 @@ HTML;
    * @return string
    * @deprecated
    */
-  public function buildUserNode( $groupId, $groupPos )
+  public function buildUserNode($groupId, $groupPos)
   {
 
-    if( !isset( $this->dataUser[$groupId] ) )
+    if (!isset($this->dataUser[$groupId]))
       return '';
 
     $childs = $this->dataUser[$groupId];
 
     $body = '';
-    
+
     $pos = 1;
 
-    foreach( $childs as $userId => $row )
-    {
+    foreach ($childs as $userId => $row) {
 
-      if( isset($row['id']) )
-      {
+      if (isset($row['id'])) {
         $rowid      = $this->id.'_row_'.$groupId.'_'.$userId;
         $pRowid     = 'child-of-'.$this->id.'_row_'.$groupId.' group-'.$groupId;
 
         $body .= '<tr class="row'.$this->num.' '.$pRowid.' wgt-border-top flag_partial" id="'.$rowid.'"  >'.NL;
-      
+
         $body .= '<td valign="top" class="pos" >'.$groupPos.'.'.$pos.'</td>'.NL;
         $body .= '<td valign="top" class="ind1" >'.$this->icon('control/user.png','User').' '.$row['name'].' (partial)</td>'.NL;
         $body .= '<td colspan="2"  ></td>'.NL;
 
-        if( $this->enableNav )
-        {
+        if ($this->enableNav) {
           $navigation  = $this->rowMenu
-          ( 
+          (
             '0&group_id='.$groupId.'&user_id='.$userId.'&area_id='.$this->areaId,
             $row,
             null,
@@ -1181,16 +1135,14 @@ HTML;
         }
 
         $body .= '</tr>'.NL;
-      }
-      else
-      {
+      } else {
         $objid      = $row['group_users_rowid'];
         $rowid      = $this->id.'_row_'.$groupId.'_'.$userId;
         $pRowid     = 'child-of-'.$this->id.'_row_'.$groupId.' group-'.$groupId;
 
 
         $body .= '<tr class="row'.$this->num.' '.$pRowid.' wgt-border-top" id="'.$rowid.'"  >'.NL;
-        
+
         $body .= '<td valign="top" class="pos" >'.$groupPos.'.'.$pos.'</td>'.NL;
         $body .= '<td valign="top" >'.$this->icon('control/user.png','User').' '.$row['user'].'</td>'.NL;
         $body .= '<td valign="top" >'
@@ -1201,8 +1153,8 @@ HTML;
             name="qfdu[group_users]['.$objid.'][date_start]"
             value="'.
             (
-               '' != trim( $row['group_users_date_start'] )
-                ?$this->view->i18n->date( $row['group_users_date_start'] )
+               '' != trim($row['group_users_date_start'])
+                ?$this->view->i18n->date($row['group_users_date_start'])
                 :''
             ).'" /></td>'.NL;
 
@@ -1214,24 +1166,23 @@ HTML;
             name="qfdu[group_users]['.$objid.'][date_end]"
             value="'.
             (
-              '' != trim( $row['group_users_date_end'] )
-                ?$this->view->i18n->date( $row['group_users_date_end'] )
+              '' != trim($row['group_users_date_end'])
+                ?$this->view->i18n->date($row['group_users_date_end'])
                 :''
             ).'" /></td>'.NL;
 
 
-        if( $this->enableNav )
-        {
-        
+        if ($this->enableNav) {
+
           $navigation  = $this->rowMenu
-          ( 
+          (
             $row['group_users_rowid'].'&group_id='.$groupId.'&user_id='.$userId.'&area_id='.$this->areaId,
             $row,
             null,
             null,
             'user'
           );
-          
+
           $body .= '<td valign="top"  class="nav_split"  >'.$navigation.'</td>'.NL;
         }
 
@@ -1239,11 +1190,11 @@ HTML;
       }
 
       $this->num ++;
-      if ( $this->num > $this->numOfColors )
+      if ($this->num > $this->numOfColors)
         $this->num = 1;
 
-      $body .= $this->buildDatasetNode( $groupId, $userId, $groupPos, $pos );
-      
+      $body .= $this->buildDatasetNode($groupId, $userId, $groupPos, $pos);
+
       ++$pos;
 
     }
@@ -1251,36 +1202,35 @@ HTML;
     return $body;
 
   }//end public function buildUserNode */
-  
+
 
   /**
    * @param int $groupId
    * @param int $userId
    */
-  public function buildDatasetNode( $groupId, $userId, $groupPos, $userPos  )
+  public function buildDatasetNode($groupId, $userId, $groupPos, $userPos  )
   {
 
-    if(!isset($this->dataEntity[$groupId][$userId]))
+    if (!isset($this->dataEntity[$groupId][$userId]))
       return '';
 
     $childs = $this->dataEntity[$groupId][$userId];
 
     $body = '';
-    
+
     $pos  = 1;
 
-    foreach( $childs as $row )
-    {
+    foreach ($childs as $row) {
 
       $objid       = $row['group_users_rowid'];
       $rowid       = $this->id.'_row_'.$objid;
       $pRowid      = 'child-of-'.$this->id.'_row_'.$groupId.'_'.$userId.' user-'.$userId.' group-'.$groupId;
 
       $body .= '<tr class="row'.$this->num.' '.$pRowid.'" id="'.$rowid.'" >'.NL;
-      
+
       $body .= '<td valign="top" class="pos" >'.$groupPos.'.'.$userPos.'.'.$pos.'</td>'.NL;
 
-      $body .= '<td valign="top" class="ind2" >'.$this->icon( 'control/entity.png', 'Entity' ).' <a href="maintab.php?c=Enterprise.Employee.edit&amp;objid='.$row['enterprise_employee_rowid'].'" class="wcm wcm_req_ajax" >Employee: '.$row['enterprise_employee_rowid'].'</a></td>'.NL;
+      $body .= '<td valign="top" class="ind2" >'.$this->icon('control/entity.png', 'Entity').' <a href="maintab.php?c=Enterprise.Employee.edit&amp;objid='.$row['enterprise_employee_rowid'].'" class="wcm wcm_req_ajax" >Employee: '.$row['enterprise_employee_rowid'].'</a></td>'.NL;
       $body .= '<td valign="top" >'
         .'<input
             type="text"
@@ -1288,8 +1238,8 @@ HTML;
             id="wgt-input-acl-enterprise_employee-qfdu-'.$objid.'-date_start"
             name="qfdu[group_users]['.$objid.'][date_start]" value="'.
             (
-              '' != trim( $row['group_users_date_start'] )
-                ?$this->view->i18n->date( $row['group_users_date_start'] )
+              '' != trim($row['group_users_date_start'])
+                ?$this->view->i18n->date($row['group_users_date_start'])
                 :''
             ).'" />'
         .'</td>'.NL;
@@ -1302,21 +1252,20 @@ HTML;
           name="qfdu[group_users]['.$objid.'][date_end]"
           value="'.
           (
-            '' != trim( $row['group_users_date_end'] )
-              ? $this->view->i18n->date( $row['group_users_date_end'] )
+            '' != trim($row['group_users_date_end'])
+              ? $this->view->i18n->date($row['group_users_date_end'])
               : ''
           ).'" />'
         .'</td>'.NL;
 
-      if( $this->enableNav )
-      {
+      if ($this->enableNav) {
         $navigation  = $this->rowMenu
-        ( 
-          $objid, 
-          $row, 
+        (
+          $objid,
+          $row,
           null,
           null,
-          'dset' 
+          'dset'
         );
         $body .= '<td valign="top"  class="nav_split"  >'.$navigation.'</td>'.NL;
       }
@@ -1324,9 +1273,9 @@ HTML;
       $body .= '</tr>'.NL;
 
       $this->num ++;
-      if ( $this->num > $this->numOfColors )
+      if ($this->num > $this->numOfColors)
         $this->num = 1;
-        
+
       ++$pos;
 
     }
@@ -1334,7 +1283,6 @@ HTML;
     return $body;
 
   }//end public function buildDatasetNode */
-  
 
 } // end class AclMgmt_Qfdu_Group_Treetable_Element */
 

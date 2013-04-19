@@ -40,8 +40,6 @@ $this->l['wbf.label']['Compare']            = 'Poredjenje';
 $this->l['wbf.label']['Save & Close']       = 'Sacuvati & Zatvoriti';
 $this->l['wbf.label']['Entries']            = 'Unosi';
 
-
-
 $this->l['wbf.label']['ACLs']               = 'ACL-i';
 $this->l['wbf.label']['ACLs Management']    = 'ACL Menadzment';
 $this->l['wbf.label']['ACLs Entity']        = 'ACL Entitet';
@@ -51,7 +49,6 @@ $this->l['wbf.label']['Groupbased Access for Sec-Area: {@label@}']       = 'Grup
 $this->l['wbf.label']['Inherit Rights']     = 'Naslediti Prava';
 $this->l['wbf.label']['Rights']             = 'Prava';
 
-
 $this->l['wbf.label']['Responsible']  = 'Odgovorni';
 $this->l['wbf.label']['Description']  = 'Opis';
 $this->l['wbf.label']['Action']       = 'Akcija';
@@ -59,8 +56,6 @@ $this->l['wbf.label']['Comment']      = 'Komentar';
 $this->l['wbf.label']['Is Required']  = 'Obavezno';
 $this->l['wbf.label']['History']      = 'Istorija';
 $this->l['wbf.label']['{@label@} Status: {@status@}']      = '{@label@} Status: {@status@}';
-
-
 
 $this->l['wbf.label']['Back']     = 'Nazad';
 $this->l['wbf.label']['Category'] = 'Kategorija';
@@ -88,7 +83,6 @@ $this->l['wbf.label']['Go to the last entry']
 $this->l['wbf.label']['Back to start']
   = 'Nazad na pocetak';
 
-
 $this->l['wbf.label']['UUID'] = 'UUID';
 $this->l['wbf.label']['IDI']  = 'IDI';
 
@@ -104,6 +98,4 @@ $this->l['wbf.label']['Changed After']  = 'Izmenjeno Posle';
 $this->l['wbf.label']['Add Export']     = 'Dodati Izvoz';
 $this->l['wbf.label']['Full Export Excel']  = 'Kompletan Izvoz Excel';
 $this->l['wbf.label']['Full Export XML']    = 'Kompletan Izvoz XML';
-
-
 

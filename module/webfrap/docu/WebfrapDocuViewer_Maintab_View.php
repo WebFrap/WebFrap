@@ -15,26 +15,28 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage Core
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapDocuViewer_Maintab_View
-  extends WgtMaintab
+class WebfrapDocuViewer_Maintab_View extends WgtMaintabCustom
 {
 
-////////////////////////////////////////////////////////////////////////////////
+  /**
+   */
+  public $overflowY = 'auto';
+
+/*//////////////////////////////////////////////////////////////////////////////
 // form export methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
  /**
   * @param WbfsysDocuPage $helpPage
   * @param TFlag $params
   */
-  public function displayShow( $helpPage, $params )
+  public function displayShow($helpPage, $params)
   {
 
     // fetch the i18n text for title, status and bookmark
@@ -49,30 +51,26 @@ class WebfrapDocuViewer_Maintab_View
     );
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText);
 
     // set the window status text
-    $this->setLabel( $i18nText );
+    $this->setLabel($i18nText);
 
-    $this->addVar( 'fileName', $helpPage );
+    $this->addVar('fileName', $helpPage);
 
     // set the from template
-    $this->setTemplate( 'webfrap/docu/maintab/docu_viewer', true );
+    $this->setTemplate('webfrap/docu/maintab/docu_viewer', true);
 
-
-    $this->addMenu( $helpPage, $params );
-
+    $this->addMenu($helpPage, $params);
 
     // kein fehler aufgetreten
     return null;
 
   }//end public function display */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // protocol for entities
-////////////////////////////////////////////////////////////////////////////////
-
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * add a drop menu to the create window
@@ -83,23 +81,23 @@ class WebfrapDocuViewer_Maintab_View
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $helpPage, $params )
+  public function addMenu($helpPage, $params)
   {
 
     $i18n         = $this->getI18n();
 
-    $iconMenu     = $this->icon( 'control/menu.png'      ,'Menu');
-    $iconSupport  = $this->icon( 'control/support.png'      ,'Support');
-    $iconHelp     = $this->icon( 'control/help.png'      ,'Help');
-    $iconClose    = $this->icon( 'control/close.png'      ,'Close');
-    $iconEdit     = $this->icon( 'control/edit.png'      ,'Edit');
-    $iconBug      = $this->icon( 'control/bug.png'      ,'Bug');
-    $iconBookmark      = $this->icon( 'control/bookmark.png'      ,'Bookmark');
-    $iconFaq      = $this->icon( 'control/faq.png'      ,'Faq');
+    $iconMenu     = '<i class="icon-reorder" ></i>';
+    $iconSupport  = $this->icon('control/support.png'      ,'Support');
+    $iconHelp     = $this->icon('control/help.png'      ,'Help');
+    $iconClose    = $this->icon('control/close.png'      ,'Close');
+    $iconEdit     = $this->icon('control/edit.png'      ,'Edit');
+    $iconBug      = $this->icon('control/bug.png'      ,'Bug');
+    $iconBookmark      = $this->icon('control/bookmark.png'      ,'Bookmark');
+    $iconFaq      = $this->icon('control/faq.png'      ,'Faq');
 
     $menu          = $this->newMenu($this->id.'_dropmenu');
 
-    $this->addActions( $helpPage, $params );
+    $this->addActions($helpPage, $params);
 
     $menu->content = <<<HTML
 
@@ -147,7 +145,7 @@ HTML;
    *   string formId: the id of the form;
    * }
    */
-  public function addActions( $helpPage, $params )
+  public function addActions($helpPage, $params)
   {
 
     // add the button action for save in the window
@@ -157,7 +155,7 @@ HTML;
     $code = <<<BUTTONJS
 
     // close tab
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       \$S('#{$this->id}_dropmenu-control').dropdown('remove');
       self.close();
     });
@@ -165,13 +163,9 @@ HTML;
 
 BUTTONJS;
 
-
-    $this->addJsCode( $code );
-
+    $this->addJsCode($code);
 
   }//end public function addActions */
-
-
 
 }//end class WebfrapDocu_Subwindow_View
 

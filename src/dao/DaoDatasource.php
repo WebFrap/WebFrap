@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Dao Class to Load the Menus from wherever.
@@ -23,13 +22,11 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class DaoDatasource
-  extends Dao
+class DaoDatasource extends Dao
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 //  Attributes
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -37,11 +34,9 @@ class DaoDatasource
    */
   public $data = array();
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Static Attributes
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -49,16 +44,15 @@ class DaoDatasource
    */
   protected static $pool = array();
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Constructor
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
    * @param array $data
    */
-  public function __construct( $data )
+  public function __construct($data)
   {
 
     $this->data = $data;
@@ -73,10 +67,9 @@ class DaoDatasource
     return $this->data;
   }//end public function getData */
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Static Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param string $sourceName
@@ -84,12 +77,12 @@ class DaoDatasource
    * @param string $path
    * @return DaoMenu
    */
-  public static function get( $sourceName, $all = false, $path = 'data'  )
+  public static function get($sourceName, $all = false, $path = 'data'  )
   {
-    if( isset(self::$pool[$sourceName]) )
+    if (isset(self::$pool[$sourceName]))
       return self::$pool[$sourceName];
     else
-      return self::load($sourceName, $all, $path );
+      return self::load($sourceName, $all, $path);
 
   }//end public static function get */
 
@@ -99,30 +92,28 @@ class DaoDatasource
    * @param string $path
    * @return array
    */
-  public static function load( $sourceName , $all = false, $path = 'data' )
+  public static function load($sourceName , $all = false, $path = 'data')
   {
 
     self::$pool[$sourceName] = array();
 
-
     $menuPath = PATH_GW.'/'.$path.'/'.$sourceName;
 
-    if( !file_exists($menuPath) )
-    {
+    if (!file_exists($menuPath)) {
       Debug::console('found no source: '.$menuPath);
+
       return;
     }
 
-    $folder   = new LibFilesystemFolder( $menuPath );
+    $folder   = new LibFilesystemFolder($menuPath);
 
-    $menuData = new DaoDatasource( $folder->getFiles() );
+    $menuData = new DaoDatasource($folder->getFiles());
 
     self::$pool[$sourceName] = $menuData ;
 
     return self::$pool[$sourceName];
 
   }//end public static function load */
-
 
 }//end class DaoDatasource
 

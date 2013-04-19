@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,9 +26,9 @@
 class TJsonArray
   implements ArrayAccess, Iterator, Countable
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * the array data body for the Array Object
@@ -43,25 +43,21 @@ class TJsonArray
    */
   protected $autoPointer = 0;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Magic Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Standard Konstruktor
    * Nimmt beliebig viele Elemente oder einen einzigen Array
    */
-  public function __construct( )
+  public function __construct()
   {
 
-    if( $anz = func_num_args() )
-    {
-      if( $anz == 1 and is_array(func_get_arg(0)) )
-      {
+    if ($anz = func_num_args()) {
+      if ($anz == 1 and is_array(func_get_arg(0))) {
         $this->pool = func_get_arg(0);
-      }
-      else
-      {
+      } else {
         // hier kommt auf jeden fall ein Array
         $this->pool = func_get_args();
       }
@@ -77,35 +73,27 @@ class TJsonArray
 
     $assembled = array();
 
-    foreach( $this->pool as $value )
-    {
-      if( is_object($value) )
-      {
-        $jsValue = (string)$value;
-      }
-      elseif( is_bool($value) )
-      {
+    foreach ($this->pool as $value) {
+      if (is_object($value)) {
+        $jsValue = (string) $value;
+      } elseif (is_bool($value)) {
         $jsValue = $value?'true':'false';
-      }
-      elseif( is_numeric($value) )
-      {
+      } elseif (is_numeric($value)) {
         $jsValue = $value;
-      }
-      else
-      {
-        $jsValue = '"'.str_replace(array('"','\\',"\n"), array('\"','\\\\',"\\n"), (string)$value).'"';
+      } else {
+        $jsValue = '"'.str_replace(array('"','\\',"\n"), array('\"','\\\\',"\\n"), (string) $value).'"';
       }
 
       $assembled[] = $jsValue;
     }
 
-    return '['.implode( ',', $assembled ).']';
+    return '['.implode(',', $assembled).']';
 
   }//end public function __toString */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Interface: ArrayAccess
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @see ArrayAccess:offsetSet
@@ -113,7 +101,7 @@ class TJsonArray
   public function offsetSet($offset, $value)
   {
 
-    if( is_null($offset) )
+    if (is_null($offset))
       $this->pool[] = $value;
     else
       $this->pool[$offset] = $value;
@@ -144,9 +132,9 @@ class TJsonArray
     return isset($this->pool[$offset])?true:false;
   }//end public function offsetExists */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Interface: Iterator
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @see Iterator::current
@@ -188,9 +176,9 @@ class TJsonArray
     return current($this->pool)? true:false;
   }//end public function valid */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Interface: Countable
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @see Countable::count
@@ -200,15 +188,14 @@ class TJsonArray
     return count($this->pool);
   }//end public function count */
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param mixed $entry
    */
-  public function append( $entry )
+  public function append($entry)
   {
     ++$this->autoPointer;
     $this->pool[] = $entry;
@@ -217,7 +204,7 @@ class TJsonArray
   /**
    * @return array
    */
-  public function asArray(  )
+  public function asArray()
   {
     return $this->pool;
   }//end public function asArray */
@@ -225,12 +212,10 @@ class TJsonArray
   /**
    * @param string $key
    */
-  public function exists( $key )
+  public function exists($key)
   {
-    return array_key_exists( $key , $this->pool );
+    return array_key_exists($key , $this->pool);
   }//end public function exists */
-
-
 
 }//end class TJsonArray
 

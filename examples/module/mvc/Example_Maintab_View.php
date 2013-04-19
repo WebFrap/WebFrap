@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -21,31 +21,29 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class Example_Maintab_View
-  extends WgtMaintab
+class Example_Maintab_View extends WgtMaintab
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methoden
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
-  
   /**
    * @param TFlag $params
    * @return void
    */
-  public function displayEditor(  $params )
+  public function displayEditor( $params)
   {
 
-    $this->setLabel( 'Label');
-    $this->setTitle( 'Title' );
+    $this->setLabel('Label');
+    $this->setTitle('Title');
 
-    $this->addVar( 'node', $this->model->node );
-    $this->addVar( 'key', $this->model->modeller->key );
-    $this->addVar( 'bdlFile', $this->model->modeller->bdlFileName );
+    $this->addVar('node', $this->model->node);
+    $this->addVar('key', $this->model->modeller->key);
+    $this->addVar('bdlFile', $this->model->modeller->bdlFileName);
 
-    $this->setTemplate( 'daidalos/bdl/node/profile/maintab/form' );
+    $this->setTemplate('daidalos/bdl/node/profile/maintab/form');
 
-    $this->addMenu( $params );
+    $this->addMenu($params);
 
   }//end public function displayEditor */
 
@@ -58,36 +56,35 @@ class Example_Maintab_View
    *   string formId: the id of the form;
    * }
    */
-  public function addMenu( $params )
+  public function addMenu($params)
   {
 
-    $iconMenu          = $this->icon( 'control/menu.png'     ,'Menu'   );
-    $iconClose         = $this->icon( 'control/close.png'    ,'Close'   );
-    $iconSearch        = $this->icon( 'control/search.png'   ,'Search'  );
-    $iconBookmark      = $this->icon( 'control/bookmark.png' ,'Bookmark');
-    $iconSave          = $this->icon( 'control/save.png' ,'Save' );
-    $iconRefresh       = $this->icon( 'control/refresh.png' ,'Refresh' );
-    
-    $iconSupport   = $this->icon( 'control/support.png'  ,'Support' );
-    $iconBug       = $this->icon( 'control/bug.png'      ,'Bug' );
-    $iconFaq       = $this->icon( 'control/faq.png'      ,'Faq' );
-    $iconHelp      = $this->icon( 'control/help.png'     ,'Help' );
-      
-    $menu     = $this->newMenu( $this->id.'_dropmenu' );
-    
+    $iconMenu          = '<i class="icon-reorder" ></i>';
+    $iconClose         = $this->icon('control/close.png'    ,'Close'   );
+    $iconSearch        = $this->icon('control/search.png'   ,'Search'  );
+    $iconBookmark      = $this->icon('control/bookmark.png' ,'Bookmark');
+    $iconSave          = $this->icon('control/save.png' ,'Save');
+    $iconRefresh       = $this->icon('control/refresh.png' ,'Refresh');
+
+    $iconSupport   = $this->icon('control/support.png'  ,'Support');
+    $iconBug       = $this->icon('control/bug.png'      ,'Bug');
+    $iconFaq       = $this->icon('control/faq.png'      ,'Faq');
+    $iconHelp      = $this->icon('control/help.png'     ,'Help');
+
+    $menu     = $this->newMenu($this->id.'_dropmenu');
+
     $menu->id = $this->id.'_dropmenu';
 
-
     $menu->content = <<<HTML
-    
+
 <div class="inline" >
-  <button 
+  <button
     class="wcm wcm_control_dropmenu wgt-button"
-    id="{$this->id}-control" 
+    id="{$this->id}-control"
     wgt_drop_box="{$this->id}_dropmenu"  >{$iconMenu} {$this->i18n->l('Menu','wbf.label')}</button>
   <var id="{$this->id}-control-cfg-dropmenu"  >{"triggerEvent":"mouseover","closeOnLeave":"true","align":"right"}</var>
 </div>
-    
+
 <div class="wgt-dropdownbox" id="{$this->id}_dropmenu" >
   <ul>
     <li>
@@ -109,18 +106,17 @@ class Example_Maintab_View
     </li>
   </ul>
 </div>
-  
+
 <div class="wgt-panel-control" >
   <button class="wgt-button wgtac_refresh" >{$iconRefresh} {$this->i18n->l('Refresh','wbf.label')}</button>
 </div>
 
 
 HTML;
-    
-    $this->injectActions( $menu, $params );
+
+    $this->injectActions($menu, $params);
 
   }//end public function addMenu */
-  
 
   /**
    * just add the code for the edit ui controls
@@ -135,7 +131,7 @@ HTML;
    *     services
    * }
    */
-  public function injectActions( $menu, $params )
+  public function injectActions($menu, $params)
   {
 
     // add the button action for save in the window
@@ -144,15 +140,14 @@ HTML;
     // all buttons with the class save will call that action
     $code = <<<BUTTONJS
 
-    self.getObject().find(".wgtac_close").click(function(){
+    self.getObject().find(".wgtac_close").click(function() {
       self.close();
     });
 
 
 BUTTONJS;
 
-
-    $this->addJsCode( $code );
+    $this->addJsCode($code);
 
   }//end public function injectActions */
 

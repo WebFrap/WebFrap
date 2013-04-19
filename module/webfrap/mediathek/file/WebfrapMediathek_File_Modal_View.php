@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -23,8 +23,7 @@
  * @copyright webfrap.net <contact@webfrap.net>
  * @licence BSD
  */
-class WebfrapMediathek_File_Modal_View
-  extends WgtModal
+class WebfrapMediathek_File_Modal_View extends WgtModal
 {
 
   /**
@@ -32,17 +31,17 @@ class WebfrapMediathek_File_Modal_View
    * @var int in px
    */
   public $width   = 600 ;
-  
+
   /**
    * Die Höhe des Modal Elements
    * @var int in px
    */
   public $height   = 300 ;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Display Methodes
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
  /**
   * Die create form
   * @param int $mediaId
@@ -50,25 +49,25 @@ class WebfrapMediathek_File_Modal_View
   * @param TFlag $params
   * @return void
   */
-  public function displayAdd( $mediaId, $elementId, $params = null )
+  public function displayAdd($mediaId, $elementId, $params = null)
   {
 
     // fetch the i18n text for title, status and bookmark
     $i18nText = 'Add File';
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText);
 
     // set the from template
-    $this->setTemplate( 'webfrap/mediathek/modal/form_file_add' );
-    
-    $this->addVars( array(
+    $this->setTemplate('webfrap/mediathek/modal/form_file_add');
+
+    $this->addVars(array(
       'mediaId'    => $mediaId,
       'elementKey' => $elementId,
     ));
 
   }//end public function displayAdd */
-  
+
  /**
   * the default edit form
   * @param string $imageId
@@ -78,19 +77,19 @@ class WebfrapMediathek_File_Modal_View
   * @param TFlag $params
   * @return void
   */
-  public function displayEdit( $imageId, $mediaId, $elementId, $fileNode, $params = null )
+  public function displayEdit($imageId, $mediaId, $elementId, $fileNode, $params = null)
   {
 
     // fetch the i18n text for title, status and bookmark
     $i18nText = 'Edit File';
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText);
 
     // set the from template
-    $this->setTemplate( 'webfrap/mediathek/modal/form_file_edit' );
-    
-    $this->addVars( array(
+    $this->setTemplate('webfrap/mediathek/modal/form_file_edit');
+
+    $this->addVars(array(
       'imageId'    => $imageId,
       'mediaId'    => $mediaId,
       'elementId'  => $elementId,
@@ -98,7 +97,6 @@ class WebfrapMediathek_File_Modal_View
     ));
 
   }//end public function displayEdit */
-
 
 }//end class WebfrapMediathek_File_Modal_View
 

@@ -8,23 +8,19 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
-
 /**
  * @package WebFrap
  * @subpackage tech_core
  */
-abstract class LibTemplatePublisher
-  extends LibTemplate
+abstract class LibTemplatePublisher extends LibTemplate
 {
-
 
   /**
    * @var array
@@ -43,10 +39,9 @@ abstract class LibTemplatePublisher
    */
   public $menu          = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter Methodes
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * (non-PHPdoc)
@@ -57,12 +52,9 @@ abstract class LibTemplatePublisher
     $this->model = $model;
   }//end public function setModel */
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // small html helper methodes
 //////////////////////////////////////////////////////////////////////////////*/
-  
-
 
   /**
    * request an icon
@@ -70,9 +62,9 @@ abstract class LibTemplatePublisher
    * @param string $alt
    * @return string
    */
-  public function icon( $name , $alt )
+  public function icon($name , $alt)
   {
-    return Wgt::icon( $name, 'xsmall', $alt );
+    return Wgt::icon($name, 'xsmall', $alt);
   }//end public function icon */
 
   /**
@@ -80,7 +72,7 @@ abstract class LibTemplatePublisher
    * @param string $active
    * @param string $value
    */
-  public function isChecked( $active , $value )
+  public function isChecked($active , $value)
   {
     return $active === $value? ' checked="checked" ':'';
   }
@@ -90,60 +82,22 @@ abstract class LibTemplatePublisher
    * @param string $active
    * @param string $value
    */
-  public function isSelected( $active , $value )
+  public function isSelected($active , $value)
   {
     return $active === $value? ' selected="selected" ':'';
   }
-
-  /**
-   *
-   * @param string $jsCode
-   * @return void
-   */
-  public function addJsCode( $jsCode )
-  {
-    $this->jsCode[] = $jsCode;
-  }//end public function addJsCode */
   
+
   /**
    *
    * @param string $active
    * @param string $value
    */
-  public function isActive( $active, $value )
+  public function isActive($active, $value)
   {
     return $active === $value? ' ui-state-active ':'';
-  }
-  
-  /**
-   * 
-   * Enter description here ...
-   */
-  public function openJs()
-  {
-    ob_start();
-  }//end public function openJs */
-  
-  /**
-   * 
-   * Enter description here ...
-   */
-  public function closeJs()
-  {
-    $jsCode = trim(ob_get_contents());
-    // @ is required to prevent error for empty tags
-    // should normaly not happen, but it would not be an error if 
-    // so ignore warnings
-    @ob_end_clean(); 
-    
-    // remove <script></script>
-    /// TODO implement this less error-prone 
-    $jsCode = substr($jsCode, 8, -9 );
-    
-    if( '' !== $jsCode )
-      $this->addJsCode( $jsCode );
-    
-  }//end public function closeJs */
+  }//end public function isActive 
+
 
 } // end class LibTemplateHtml
 

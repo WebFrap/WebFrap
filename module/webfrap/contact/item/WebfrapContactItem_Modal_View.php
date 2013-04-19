@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -26,8 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapContactItem_Modal_View
-  extends WgtModal
+class WebfrapContactItem_Modal_View extends WgtModal
 {
 
   /**
@@ -35,17 +34,17 @@ class WebfrapContactItem_Modal_View
    * @var int in px
    */
   public $width   = 630 ;
-  
+
   /**
    * Die Höhe des Modal Elements
    * @var int in px
    */
   public $height   = 280 ;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Display Methodes
-////////////////////////////////////////////////////////////////////////////////
-    
+//////////////////////////////////////////////////////////////////////////////*/
+
  /**
   * the default edit form
   * @param int $refId
@@ -53,26 +52,26 @@ class WebfrapContactItem_Modal_View
   * @param TFlag $params
   * @return void
   */
-  public function displayForm( $refId, $elementId, $params = null )
+  public function displayForm($refId, $elementId, $params = null)
   {
 
     // fetch the i18n text for title, status and bookmark
     $i18nText = 'Add Link';
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText);
 
     // set the from template
-    $this->setTemplate( 'webfrap/attachment/modal/form_add_link' );
+    $this->setTemplate('webfrap/attachment/modal/form_add_link');
 
-    $this->addVars( array(
+    $this->addVars(array(
       'refId' => $refId,
       'elementKey' => $elementId,
     ));
 
 
   }//end public function displayForm */
-  
+
    /**
   * the default edit form
   * @param int $attachId
@@ -81,25 +80,24 @@ class WebfrapContactItem_Modal_View
   * @param string $elementId
   * @return void
   */
-  public function displayEdit( $attachId, $refId, $fileNode, $elementId )
+  public function displayEdit($attachId, $refId, $fileNode, $elementId)
   {
 
     // fetch the i18n text for title, status and bookmark
     $i18nText = 'Edit Link';
 
     // set the window title
-    $this->setTitle( $i18nText );
+    $this->setTitle($i18nText);
 
     // set the from template
-    $this->setTemplate( 'webfrap/attachment/modal/form_edit_link' );
+    $this->setTemplate('webfrap/attachment/modal/form_edit_link');
 
-    $this->addVars( array(
+    $this->addVars(array(
       'attachmentId'   => $attachId,
       'refId'   => $refId,
       'link'       => $fileNode,
       'elementKey' => $elementId,
     ));
-
 
   }//end public function displayEdit */
 

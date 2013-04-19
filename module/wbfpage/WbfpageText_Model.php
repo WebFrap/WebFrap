@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * @package WebFrap
@@ -22,8 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WbfpageText_Model
-  extends Model
+class WbfpageText_Model extends Model
 {
 
   /**
@@ -35,7 +33,7 @@ class WbfpageText_Model
   /**
    * @return string
    */
-  public function text( $key )
+  public function text($key)
   {
     return isset($this->texts[$key])?$this->texts[$key]:'<!-- missing '.$key.' -->';
   }//end public function text */
@@ -44,7 +42,7 @@ class WbfpageText_Model
    * @param array $keys
    * @return array
    */
-  public function loadTexts( $keys )
+  public function loadTexts($keys)
   {
 
     $this->texts = array();
@@ -57,15 +55,13 @@ CODE;
 
     $result = $this->getDb()->select($query);
 
-    foreach( $result as $entry )
-    {
+    foreach ($result as $entry) {
       $this->texts[$entry['access_key']] = $entry['content'];
     }
 
     return $this->texts;
 
   }//end public function getTexts */
-
 
 }//end class WbfpageText_Model
 

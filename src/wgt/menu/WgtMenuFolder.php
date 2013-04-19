@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * A Menu that looks like a filesystem folder
@@ -22,12 +21,11 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtMenuFolder
-  extends WgtMenu
+class WgtMenuFolder extends WgtMenu
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -52,15 +50,15 @@ class WgtMenuFolder
    */
   public $crumbs = array();
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Logic
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * (non-PHPdoc)
    * @see src/wgt/WgtMenu#setData()
    */
-  public function setData( $data )
+  public function setData($data)
   {
     $this->data = $data;
   }//end public function setData */
@@ -72,14 +70,14 @@ class WgtMenuFolder
   {
 
     Debug::console('in build crumbs');
-    
-    if( $this->data )
+
+    if ($this->data)
       $crumbs = $this->data->crumbs;
-    else 
+    else
       $crumbs = array();
 
     /*
-    if(!$crumbs)
+    if (!$crumbs)
       return '';
     */
 
@@ -91,21 +89,18 @@ class WgtMenuFolder
 
     $entries = array();
 
-    foreach ( $crumbs as $crumb )
-    {
+    foreach ($crumbs as $crumb) {
 
       $text = $crumb[0];
       $url  = $crumb[1];
       $src  = $crumb[2];
       $icon = '';
 
-      if( '' != trim($src) )
-      {
+      if ('' != trim($src)) {
         $icon = '<img class="icon xsmall" '.
         ' src="'.$baseFolder.$src.'" '.
         ' alt="'.$text.'"  /> ';
       }
-
 
       $entries[] = '<li><a style="border:0px;" class="wcm wcm_req_ajax" href="'.$url.'" >'.$icon.$text.'</a></li>';
 
@@ -117,75 +112,62 @@ class WgtMenuFolder
 
     return $html;
 
-
   }//end public function buildCrumbs
 
   /**
    *
    * @return string
    */
-  public function build( )
+  public function build()
   {
 
     $this->baseFolder = View::$iconsWeb.'/medium/';
 
-    if(  $this->sort )
-    {
+    if ($this->sort) {
 
       $folders  = array();
       $files    = array();
 
-      if( isset($this->data->folders) && $this->data->folders )
-      {
-        foreach( $this->data->folders as $entry )
-        {
+      if (isset($this->data->folders) && $this->data->folders) {
+        foreach ($this->data->folders as $entry) {
           $folders[$entry[2]] = $entry;
         }
         ksort($folders);
       }
 
-      if( isset($this->data->files) && $this->data->files )
-      {
-        foreach( $this->data->files as $entry )
-        {
+      if (isset($this->data->files) && $this->data->files) {
+        foreach ($this->data->files as $entry) {
           $files[$entry[2]] = $entry;
         }
         ksort($files);
       }
 
-    }
-    else
-    {
-      
-      $folders = isset($this->data->folders)  
+    } else {
+
+      $folders = isset($this->data->folders)
         ? $this->data->folders
         : array();
-        
+
       $files   = isset($this->data->files)
         ? $this->data->files
         : array();
     }
 
-
-
     $html = '<div class="wgt-menu folder" >'.NL;
 
-    if( isset($this->data->firstEntry) && $this->data->firstEntry )
-    {
-      $html .= $this->renderListEntry( $this->data->firstEntry );
+    if (isset($this->data->firstEntry) && $this->data->firstEntry) {
+      $html .= $this->renderListEntry($this->data->firstEntry);
     }
 
     $pos = 0;
 
     // Generieren der Rows
-    foreach ( $folders as $entry )
-    {
-      $html .= $this->renderListEntry( $entry );
+    foreach ($folders as $entry) {
+      $html .= $this->renderListEntry($entry);
     }
 
-    foreach ( $files as $entry )
-    {
-      $html .= $this->renderListEntry( $entry );
+    foreach ($files as $entry) {
+      $html .= $this->renderListEntry($entry);
     }
 
     $html .= '</div>'.NL;
@@ -196,39 +178,45 @@ class WgtMenuFolder
 
   } // end  public function build */
 
-
-
   /**
    *
    * @return
    */
-  protected function renderListEntry( $pic )
+  protected function renderListEntry($pic)
   {
 
-    if( $pic[WgtMenu::ICON] != '' || trim($pic[WgtMenu::TEXT]) != '' )
-    {
+    if ($pic[WgtMenu::ICON] != '' || trim($pic[WgtMenu::TEXT]) != '') {
 
-      $text = trim( $pic[WgtMenu::TEXT] ) != '' ? $pic[WgtMenu::TEXT].'<br />' : '';
+      $text = trim($pic[WgtMenu::TEXT]) != '' ? $pic[WgtMenu::TEXT].'<br />' : '';
 
-      if( Wgt::ACTION == $pic[WgtMenu::TYPE] )
-      {
+      if (Wgt::ACTION == $pic[WgtMenu::TYPE]) {
         $link = $text.'<img class="icon large cursor" '.
                     ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
                     ' onclick="'.$pic[WgtMenu::ACTION].'" '.
                     ' alt="'.$pic[WgtMenu::TITLE].'" '.
                     ' title="'.$pic[WgtMenu::TITLE].'" />';
-      }
-      else if( Wgt::URL == $pic[WgtMenu::TYPE] )
-      {
+      } elseif (Wgt::URL == $pic[WgtMenu::TYPE]) {
         $icon = '<img class="icon large" '.
                     ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
                     ' alt="'.$pic[WgtMenu::TITLE].'" '.
                     ' title="'.$pic[WgtMenu::TITLE].'" />';
 
         $link = '<a style="border:0px;" href="'.$pic[WgtMenu::ACTION].'" >'.$icon.'<p>'.$text.'</p></a>';
-      }
-      else if( Wgt::AJAX == $pic[WgtMenu::TYPE] )
-      {
+      } elseif (Wgt::AJAX == $pic[WgtMenu::TYPE]) {
+        $icon = '<img class="icon large" '.
+                    ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
+                    ' alt="'.$pic[WgtMenu::TITLE].'" '.
+                    ' title="'.$pic[WgtMenu::TITLE].'" />';
+
+        $link = '<a class="wcm wcm_req_ajax" style="border:0px;" href="'.$pic[WgtMenu::ACTION].'" >'.$icon.'<p>'.$text.'</p></a>';
+      } elseif (Wgt::WINDOW == $pic[WgtMenu::TYPE]) {
+        $icon = '<img class="icon large" '.
+                    ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
+                    ' alt="'.$pic[WgtMenu::TITLE].'" '.
+                    ' title="'.$pic[WgtMenu::TITLE].'" />';
+
+        $link = '<a class="wcm wcm_req_ajax" style="border:0px;" href="'.$pic[WgtMenu::ACTION].'" >'.$icon.'<p>'.$text.'</p></a>';
+      } else {
         $icon = '<img class="icon large" '.
                     ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
                     ' alt="'.$pic[WgtMenu::TITLE].'" '.
@@ -236,28 +224,8 @@ class WgtMenuFolder
 
         $link = '<a class="wcm wcm_req_ajax" style="border:0px;" href="'.$pic[WgtMenu::ACTION].'" >'.$icon.'<p>'.$text.'</p></a>';
       }
-      else if( Wgt::WINDOW == $pic[WgtMenu::TYPE] )
-      {
-        $icon = '<img class="icon large" '.
-                    ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
-                    ' alt="'.$pic[WgtMenu::TITLE].'" '.
-                    ' title="'.$pic[WgtMenu::TITLE].'" />';
 
-        $link = '<a class="wcm wcm_req_ajax" style="border:0px;" href="'.$pic[WgtMenu::ACTION].'" >'.$icon.'<p>'.$text.'</p></a>';
-      }
-      else
-      {
-        $icon = '<img class="icon large" '.
-                    ' src="'.$this->baseFolder.$pic[WgtMenu::ICON].'" '.
-                    ' alt="'.$pic[WgtMenu::TITLE].'" '.
-                    ' title="'.$pic[WgtMenu::TITLE].'" />';
-
-        $link = '<a class="wcm wcm_req_ajax" style="border:0px;" href="'.$pic[WgtMenu::ACTION].'" >'.$icon.'<p>'.$text.'</p></a>';
-      }
-
-    }
-    else
-    {
+    } else {
       $link =  '&nbsp;';
     }
 
@@ -266,5 +234,4 @@ class WgtMenuFolder
   }//end protected function renderListEntry */
 
 } // end class WgtMenuFolder
-
 

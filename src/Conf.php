@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -23,9 +23,9 @@
  */
 class Conf
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // static attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * instance of the configuration object
@@ -51,10 +51,9 @@ class Conf
    */
   public static $confMaps   = array();
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Singleton Instance
@@ -63,7 +62,7 @@ class Conf
    */
   public static function getInstance()
   {
-    if(!self::$instance)
+    if (!self::$instance)
       self::init();
 
     return self::$instance;
@@ -76,7 +75,7 @@ class Conf
    */
   public static function getActive()
   {
-    if(!self::$instance)
+    if (!self::$instance)
       self::init();
 
     return self::$instance;
@@ -92,10 +91,9 @@ class Conf
   public static function init()
   {
 
-    if(!self::$instance)
-    {
+    if (!self::$instance) {
 
-      if(!defined( 'WBF_CONF_TYPE' ) )
+      if (!defined('WBF_CONF_TYPE'))
         $classname = 'LibConf';
       else
         $classname = 'LibConf'.WBF_CONF_TYPE;
@@ -106,13 +104,12 @@ class Conf
 
   }//end public static function init */
 
-
   /**
    * statische mappermethode um von der Instance
    * @param string $key
    * @return array
    */
-  public static function status( $key )
+  public static function status($key)
   {
     return isset(self::$instance->status[$key])
       ? self::$instance->status[$key]
@@ -124,7 +121,7 @@ class Conf
    * @param string $key
    * @return array
    */
-  public static function setStatus( $key , $value )
+  public static function setStatus($key , $value)
   {
     self::$instance->status[$key] = $value ;
   }//end public static function setStatus */
@@ -134,28 +131,27 @@ class Conf
    * @param string $key
    * @return array
    */
-  public static function get( $key  , $subKey = null )
+  public static function get($key  , $subKey = null)
   {
-    return self::$instance->getConf( $key , $subKey );
+    return self::$instance->getConf($key , $subKey);
   }//end public static function get */
 
   /**
    * @param string $key
    */
-  public static function getAppConf( $key )
+  public static function getAppConf($key)
   {
-    return self::$instance->getAppConf( $key  );
+    return self::$instance->getAppConf($key  );
   }//end public static function getModule */
-
 
   /**
    * statische mappermethode um von der Instance
    * @param string $key
    * @return array
    */
-  public static function objid( $key )
+  public static function objid($key)
   {
-    return self::$instance->getObjid( $key  );
+    return self::$instance->getObjid($key  );
   }//end public static function objid */
 
 }// end class Conf

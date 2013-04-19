@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -22,12 +22,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapPeople_Model
-  extends Model
+class WebfrapPeople_Model extends Model
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Search Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * de:
@@ -39,11 +38,11 @@ class WebfrapPeople_Model
    * @param TFlag $params
    * @return array
    */
-  public function getUsersByKey( $key, $params )
+  public function getUsersByKey($key, $params)
   {
 
     $db     = $this->getDb();
-    $query  = $db->newQuery( 'WebfrapPeople' );
+    $query  = $db->newQuery('WebfrapPeople');
 
     $query->fetchByKey
     (
@@ -54,10 +53,6 @@ class WebfrapPeople_Model
     return $query->getAll();
 
   }//end public function getUsersByKey */
-
-  
-
-
 
 } // end class WebfrapPeople_Model */
 

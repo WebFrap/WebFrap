@@ -9,11 +9,10 @@ for productiv use we recomment to use just the autload function and
 the notfounAutoload at the end
 */
 
-if(DEBUG)
+if (DEBUG)
   error_reporting(E_ALL | E_STRICT);
 else
   error_reporting(0);
-
 
 include PATH_FW.'src/Webfrap.php';
 include PATH_FW.'src/Debug.php';
@@ -65,10 +64,8 @@ View::$searchPathTemplate[]     = PATH_FW.'templates/default/';
 I18n::$i18nPath[]         = PATH_FW.'i18n/';
 Conf::$confPath[]         = PATH_FW.'conf/';
 
-Webfrap::loadClassIndex( 'task_planner' );
+Webfrap::loadClassIndex('task_planner');
 
-//set_error_handler( 'Webfrap::debugErrorHandler' );
+//set_error_handler('Webfrap::debugErrorHandler');
 Log::cleanDebugLog();
-
-
 

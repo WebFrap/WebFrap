@@ -15,17 +15,15 @@
 *
 *******************************************************************************/
 
-
 /**
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtElementProtocol
-  extends WgtAbstract
+class WgtElementProtocol extends WgtAbstract
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @var string
@@ -56,9 +54,9 @@ class WgtElementProtocol
    */
   public $width = 400;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * default constructor
@@ -66,19 +64,16 @@ class WgtElementProtocol
    * @param string $name
    * @param LibTemplate $view
    */
-  public function __construct( $name = null, $view = null )
+  public function __construct($name = null, $view = null)
   {
 
     $this->name   = $name;
     $this->init();
 
-    if( $view )
-    {
-      $view->addElement( $name, $this );
+    if ($view) {
+      $view->addElement($name, $this);
       $this->view = $view;
-    }
-    else
-    {
+    } else {
       $this->view = Webfrap::$env->getView();
     }
 
@@ -88,21 +83,19 @@ class WgtElementProtocol
    * @param TFlag $params
    * @return string
    */
-  public function render( $params = null )
+  public function render($params = null)
   {
 
-    if( $this->html )
+    if ($this->html)
       return $this->html;
 
-    $this->name = $this->getId( );
+    $this->name = $this->getId();
 
     $codeEntries = '';
 
-    foreach( $this->data as $entry )
-    {
-      $codeEntries .= $this->renderEntry( $entry );
+    foreach ($this->data as $entry) {
+      $codeEntries .= $this->renderEntry($entry);
     }
-
 
     $html = <<<HTML
 <div class="wgt-news-box" >
@@ -123,25 +116,25 @@ HTML;
    * @param array $entry
    * @return string
    */
-  public function renderEntry( $entry )
+  public function renderEntry($entry)
   {
 
-    $date = $this->view->i18n->timestamp( $entry['m_time_created'] );
+    $date = $this->view->i18n->timestamp($entry['m_time_created']);
 
     $html = <<<HTML
       <li class="entry" >
         <h3>
-        	{$entry['user_name']} &lt;{$entry['person_lastname']}, {$entry['person_firstname']}&gt;
-        	<span class="date">[{$date}]</span>
+          {$entry['user_name']} &lt;{$entry['person_lastname']}, {$entry['person_firstname']}&gt;
+          <span class="date">[{$date}]</span>
         </h3>
         <div class="thumb" >
-        	<img
-        		src="thumb.php?f=core_person-photo-{$entry['person_id']}&amp;s=xxsmall"
-        		alt="{$entry['user_name']}"
-        		style="max-width:48px;max-height:48px;" >
+          <img
+            src="thumb.php?f=core_person-photo-{$entry['person_id']}&amp;s=xxsmall"
+            alt="{$entry['user_name']}"
+            style="max-width:48px;max-height:48px;" >
         </div>
         <div class="content" >
-        	{$entry['log_content']}
+          {$entry['log_content']}
         </div>
         <div class="wgt-clear" ></div>
       </li>
@@ -151,7 +144,5 @@ HTML;
 
   }//end public function renderEntry */
 
-
 } // end class WgtElementProtocol
-
 

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -20,12 +20,11 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  *
  */
-class WgtWidgetProtocol
-  extends WgtWidget
+class WgtWidgetProtocol extends WgtWidget
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param string $containerId
@@ -33,7 +32,7 @@ class WgtWidgetProtocol
    * @param string $tabSize
    * @return void
    */
-  public function asTab( $containerId, $tabId, $tabSize = 'medium' )
+  public function asTab($containerId, $tabId, $tabSize = 'medium')
   {
 
     $user     = $this->getUser();
@@ -55,7 +54,7 @@ class WgtWidgetProtocol
 
     $tableProtocol = $view->newItem('TableWbfsysProtocolMessage','TableWbfsysProtocolMessage');
     $tableProtocol->setId('wgt-table_widget_protocol');
-    $tableProtocol->setData( $query );
+    $tableProtocol->setData($query);
     $tableProtocol->addAttributes(array
     (
       'style' => 'width:99%;'
@@ -81,6 +80,5 @@ HTML;
     return $html;
 
   }//end public function asTab */
-
 
 }//end class WgtTreeMessage

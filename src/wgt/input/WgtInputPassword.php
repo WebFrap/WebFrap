@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * class WgtItemAutocomplete
@@ -22,26 +21,24 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputPassword
-  extends WgtInput
+class WgtInputPassword extends WgtInput
 {
-
 
   /**
    * @return unknown_type
    */
-  public function build( $attributes = array() )
+  public function build($attributes = array())
   {
 
     $this->type = 'password';
 
-    if($attributes)
+    if ($attributes)
       $this->attributes = array_merge($this->attributes,$attributes);
 
     // ist immer ein text attribute
     $this->attributes['type']= 'password';
 
-    if( isset( $this->attributes['value'] ) )
+    if (isset($this->attributes['value']))
       unset($this->attributes['value']);
 
     $attributes = $this->asmAttributes();
@@ -50,7 +47,7 @@ class WgtInputPassword
     $attr['name'] = str_replace(array('[',']'),array('_','_repeat'),$attr['name']);
     $attr['id'] =  $attr['id'].'_repeat';
 
-    $attributesRep = $this->asmAttributes( $attr );
+    $attributesRep = $this->asmAttributes($attr);
 
     $required = $this->required?'<span class="wgt-required">*</span>':'';
 
@@ -64,20 +61,18 @@ class WgtInputPassword
 
     return $html;
 
-  } // end public function build( )
+  } // end public function build()
 
   /**
    * Parser for the input field
    *
    * @return String
    */
-  public function buildAjax( )
+  public function buildAjax()
   {
-
     return '';
 
-  } // end public function buildAjax( )
+  } // end public function buildAjax()
 
 } // end class WgtItemPassword
-
 

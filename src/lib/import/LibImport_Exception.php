@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -20,8 +20,7 @@
  * @subpackage tech_core
  *
  */
-class LibImport_Exception
-  extends LibFlow_Exception
+class LibImport_Exception extends LibFlow_Exception
 {
 
 }//end class LibImport_Exception

@@ -8,7 +8,7 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
@@ -19,13 +19,11 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibTemplateJson
-  extends LibTemplateHtml
+class LibTemplateJson extends LibTemplateHtml
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Public Methodes
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
@@ -49,16 +47,15 @@ class LibTemplateJson
     'body' => null
   );
 
-
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Parser Funktionen
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    *
    * @param array $data
    */
-  public function setDataBody( $data )
+  public function setDataBody($data)
   {
     $this->data['body'] = $data;
   }//end public function setDataBody */
@@ -69,10 +66,10 @@ class LibTemplateJson
    *
    * @return void
    */
-  public function buildPage( )
+  public function buildPage()
   {
 
-    if( $this->compiled )
+    if ($this->compiled)
       return;
 
     $this->compiled = '';
@@ -84,46 +81,36 @@ class LibTemplateJson
 
   } // end public function buildPage */
 
-
   /**
    * bauen bzw generieren der System und der Fehlermeldungen
    *
    * @return void
    */
-  protected function buildMessages( )
+  protected function buildMessages()
   {
 
     $pool = $this->getMessage();
 
     // Gibet Fehlermeldungen? Wenn ja dann Raus mit
-    if( $errors = $pool->getErrors() )
-    {
-      foreach( $errors as $error )
-      {
+    if ($errors = $pool->getErrors()) {
+      foreach ($errors as $error) {
         $this->data['head']['messages']['error'][] = $error;
       }
     }
 
-    if( $warnings = $pool->getWarnings() )
-    {
-      foreach( $warnings as $warn )
-      {
+    if ($warnings = $pool->getWarnings()) {
+      foreach ($warnings as $warn) {
         $this->data['head']['messages']['warning'][] = $warn;
       }
     }
 
-
-    if( $messages = $pool->getMessages() )
-    {
-      foreach( $messages as $message )
-      {
+    if ($messages = $pool->getMessages()) {
+      foreach ($messages as $message) {
         $this->data['head']['messages']['message'][] = $message;
       }
     }
 
-
   } // end protected function buildMessages */
-
 
 } // end class LibTemplateAjax */
 

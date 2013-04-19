@@ -8,14 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
-
 
 /**
  * Template Areas ermöglichen das Ersezten von HTML Blöcken im Browser anhand
@@ -26,7 +24,7 @@
  * set content direct
  * <code>
  * // create new area from the active view
- * $area = $view->newArea( 'keyToIdentifyAreaInTheTpl' );
+ * $area = $view->newArea('keyToIdentifyAreaInTheTpl');
  * $area->action = 'html';
  * $area->position = '#jueryId';
  * $area->setContent('<p>new content if the node with the id: jueryId</p>');
@@ -36,7 +34,7 @@
  * use as template container
  * <code>
  * // create new area from the active view
- * $area = $view->newArea( 'keyToIdentifyAreaInTheTpl' );
+ * $area = $view->newArea('keyToIdentifyAreaInTheTpl');
  * $area->action = 'html';
  * $area->position = '#jueryId';
  *
@@ -49,12 +47,11 @@
  * @subpackage tech_core
  * @author Dominik Alexander Bonsch <dominik.bonsch@webfrap.net>
  */
-class LibTemplateAreaView
-  extends LibTemplateHtml
+class LibTemplateAreaView extends LibTemplateHtml
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * type wird intern verwendet
@@ -117,23 +114,23 @@ class LibTemplateAreaView
   public $view      = null;
 
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // getter + setter Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @param string $position
    * @param string $content
    * @param string $action
    */
-  public function __construct( $position = null, $content = null, $action = 'html' )
+  public function __construct($position = null, $content = null, $action = 'html')
   {
 
     $this->position = $position;
     $this->action   = $action;
 
-    $this->setContent( $content );
-    
+    $this->setContent($content);
+
     parent::__construct();
 
   }//end public function __construct */
@@ -144,7 +141,7 @@ class LibTemplateAreaView
    * @param string $html
    * @return void
    */
-  public function setContent( $html )
+  public function setContent($html)
   {
     $this->compiled = $html;
   }//end public function setContent */
@@ -163,7 +160,7 @@ class LibTemplateAreaView
    * @param $action
    * @return string
    */
-  public function setAction( $action )
+  public function setAction($action)
   {
     $this->action = $action;
   }//end public function setAction */
@@ -182,7 +179,7 @@ class LibTemplateAreaView
    * @param $action
    * @return string
    */
-  public function setPosition( $position )
+  public function setPosition($position)
   {
     $this->position = $position;
   }//end public function setPosition */
@@ -199,7 +196,7 @@ class LibTemplateAreaView
    * @param $check
    * @return string
    */
-  public function setCheck( $check )
+  public function setCheck($check)
   {
     $this->check = $check;
   }//end public function setCheck */
@@ -218,14 +215,14 @@ class LibTemplateAreaView
    * @param boolean $check
    * @return void
    */
-  public function setCheckNot( $check )
+  public function setCheckNot($check)
   {
     $this->checkNot = $check;
   }//end public function setCheck */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Proxy Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * delegate js code in the parent view
@@ -236,9 +233,9 @@ class LibTemplateAreaView
     $this->parent->addJsCode($jsCode);
   }//end public function addJsCode */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // getter + setter Methodes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * build the page
@@ -246,25 +243,24 @@ class LibTemplateAreaView
    * @param array $PARAMS
    * @return string the assembled page
    */
-  public function build( $template = null , $PARAMS = array() )
+  public function build($template = null , $PARAMS = array())
   {
 
-    if( $this->compiled )
+    if ($this->compiled)
       return $this->compiled;
 
-    if(!$template)
+    if (!$template)
       $template = $this->template;
 
-    if( !$filename = $this->templatePath( $template  ) )
-    {
+    if (!$filename = $this->templatePath($template  )) {
 
       Error::report
       (
         'Failed to load the template :'.$template
       );
 
-      if( Log::$levelDebug )
-        return "<p class=\"wgt-box error\">Template: $template not exists.</p>";
+      if (Log::$levelDebug)
+        return "<p class=\"wgt-box error\">Template: $template does not exist.</p>";
       else
         return '<p class="wgt-box error">Error Code: 42</p>';
 
@@ -284,50 +280,48 @@ class LibTemplateAreaView
     ob_end_clean();
 
     $this->compiled = $content;
+
     return $this->compiled;
 
   } // end public function build
 
-  
+
   /**
    * @param string $template
    * @param array $PARAMS
-   * @return string 
+   * @return string
    */
-  public function render( $template = null , $PARAMS = array() )
+  public function render($template = null , $PARAMS = array())
   {
-    
-    return $this->build( $template, $PARAMS );
-    
+    return $this->build($template, $PARAMS);
+
   }//end public function render */
-  
+
   /**
    * Parser
    * @param string $template
    * @param array $PARAMS
    * @return String
    */
-  public function embed( $template , $PARAMS = array() )
+  public function embed($template , $PARAMS = array())
   {
 
-    if( $this->compiled )
+    if ($this->compiled)
       echo $this->compiled;
 
-    if( !$filename = $this->templatePath( $template ) )
-    {
+    if (!$filename = $this->templatePath($template)) {
 
-      Error::report( 'Failed to load the template :'.$template );
+      Error::report('Failed to load the template :'.$template);
 
-      if( Log::$levelDebug )
-        echo "<p class=\"wgt-box error\">Template: $template not exists.</p>";
+      if (Log::$levelDebug)
+        echo "<p class=\"wgt-box error\">Template: $template does not exist.</p>";
       else
         echo '<p class="wgt-box error">Error Code: 42</p>';
 
       return;
     }
 
-    if( file_exists( $filename ) and is_readable($filename) )
-    {
+    if (file_exists($filename) and is_readable($filename)) {
 
       $VAR       = $this->var;
       $ITEM      = $this->object;
@@ -342,28 +336,22 @@ class LibTemplateAreaView
       ob_end_clean();
 
       echo $this->compiled;
-    }
-    else
-    {
-      echo '!!!template not exists!!!';
+    } else {
+      echo '!!!Template does not exist!!!';
     }
 
   } // end public function embed
-
-
 
   /**
    *
    * @return void
    */
-  public function compile(){}
+  public function compile() {}
 
   /**
    *
    */
-  protected function buildMessages(){}
-
+  protected function buildMessages() {}
 
 } // end class LibTemplateArea
-
 

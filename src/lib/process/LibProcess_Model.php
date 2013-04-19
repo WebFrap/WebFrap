@@ -8,13 +8,12 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
-
 
 /**
  * Das Modell für den Prozess
@@ -29,19 +28,18 @@
  * @author Dominik Donsch <dominik.bonsch@webfrap.net>
  *
  */
-class LibProcess_Model
-  extends PBase
+class LibProcess_Model extends PBase
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Public Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Der aktuell aktive Status eines Prozesses
    * @var WbfsysProcessStatus_Entity
    */
   public $activStatus = null;
-  
+
   /**
    * Die ID des aktuellen Status
    * @var int
@@ -65,7 +63,6 @@ class LibProcess_Model
    * @var string
    */
   public $requestedEdge = null;
-  
 
   /**
    * Wird aus dem request gezogen
@@ -73,9 +70,9 @@ class LibProcess_Model
    */
   public $changePState = null;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Protected Attributes
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Der Name des Prozesses
@@ -106,18 +103,24 @@ class LibProcess_Model
    * @var array
    */
   protected $processData   = null;
+  
+  /**
+   * Flag zum verhindern, dass bei change status noch das standard change event getriggert wird
+   * @var array
+   */
+  protected $allreadyChanged   = false;
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // constructor
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Standad Konstruktor für das Prozess Modell
-   * @param Process $process 
+   * @param Process $process
    * @param LibDbConnection $db Die zu verwendente Datenbank Verbindung
-   * 
+   *
    */
-  public function __construct( $process, $db )
+  public function __construct($process, $db)
   {
 
     $this->process  = $process;
@@ -135,44 +138,42 @@ class LibProcess_Model
 
   }//end public function __construct */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // getter + setter methodes
-////////////////////////////////////////////////////////////////////////////////
-
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @setter LibProcess_Model::$entity
    * @param Entity $entity
    */
-  public function setEntity( $entity )
+  public function setEntity($entity)
   {
-    
+
     $this->entity = $entity;
 
   }//end public function setEntity */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // methoden
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * Laden des aktuellen Prozess Status
    * @param Entity $entity
    * @return void
    */
-  public function loadStatus( $entity = null )
+  public function loadStatus($entity = null)
   {
 
-    if( !$this->processId )
+    if (!$this->processId)
       $this->loadProcessId();
 
-    if( $entity )
+    if ($entity)
       $this->entity = $entity;
 
     // prüfen dass die entity vorhanden ist
-    if( !$this->entity || !$this->entity->getId() )
-    {
-      throw new LibProcess_Exception( 'It\'s not possible to load a process status without a valid Entity.' );
+    if (!$this->entity || !$this->entity->getId()) {
+      throw new LibProcess_Exception('It\'s not possible to load a process status without a valid Entity.');
     }
 
     $this->activStatus  = $this->db->orm->get
@@ -181,38 +182,37 @@ class LibProcess_Model
       "id_process={$this->processId} and vid={$this->entity}"
     );
 
-    if( !$this->activStatus )
-    {
+    if (!$this->activStatus) {
       return false;
     }
-    
+
     $this->activKey = $this->activStatus->actual_node_key;
 
     $this->process->activStatus = $this->activStatus;
     $this->process->oldKey      = $this->activKey;
     $this->process->activKey    = $this->activKey;
-    
-    $this->process->state = (int)$this->activStatus->running_state;
-    
-    if( '' !== trim($this->activStatus->state) )
-      $this->process->statesData  = json_decode( $this->activStatus->state );
-    else 
+
+    $this->process->state = (int) $this->activStatus->running_state;
+
+    if ('' !== trim($this->activStatus->state))
+      $this->process->statesData  = json_decode($this->activStatus->state);
+    else
       $this->process->statesData  = new stdClass();
-    
-    Debug::console( 'GOT RUNNING STATE '.$this->process->state );
+
+    Debug::console('GOT RUNNING STATE '.$this->process->state);
 
     return true;
 
   }//end public function loadStatus */
-  
+
   /**
    * Laden des aktuellen Prozess Status
    * @param int $statusId
    * @return void
    */
-  public function loadStatusById( $statusId )
+  public function loadStatusById($statusId)
   {
-    
+
     $orm = $this->getOrm();
 
     $this->activStatus = $orm->get
@@ -222,65 +222,60 @@ class LibProcess_Model
     );
 
     // prüfen dass die entity vorhanden ist
-    if( !$this->activStatus )
-    {
+    if (!$this->activStatus) {
       throw new LibProcess_Exception
-      ( 
+      (
         'Tried to load a process status by a nonexisting status id',
         'Tried to load a process status by a nonexisting status id: '.$statusId,
         Response::NOT_FOUND
       );
     }
-    
-    $this->processId = $this->activStatus->followLink( 'id_process' );
-    
-    if( !$this->processId )
-    {
+
+    $this->processId = $this->activStatus->followLink('id_process');
+
+    if (!$this->processId) {
       throw new LibProcess_Exception
-      ( 
+      (
         'Found no Process to this Status. This is a serious Error!',
         'Found no Process to the Status: "'.$statusId.'". This is a serious Error!',
         Response::INTERNAL_ERROR
       );
     }
-    
-    if( !$this->activStatus->vid )
-    {
+
+    if (!$this->activStatus->vid) {
       throw new LibProcess_Exception
-      ( 
+      (
         'Process Status is not connected to an entity',
         'Process Status: "'.$statusId.'". is not connected to an entity',
         Response::INTERNAL_ERROR
-      ); 
+      );
     }
 
-    
-    $this->entity = $orm->get( $this->process->entityKey, $this->activStatus->vid  );
-    if( !$this->entity )
-    {
+    $this->entity = $orm->get($this->process->entityKey, $this->activStatus->vid  );
+    if (!$this->entity) {
       throw new LibProcess_Exception
-      ( 
+      (
         'Found no Entity to this Status. This is a serious Error!',
         'Found no Entity to the Status: "'.$statusId.'". This is a serious Error!',
         Response::INTERNAL_ERROR
-      ); 
+      );
     }
 
-    $this->process->setProcessId( $this->processId );
-    $this->process->setEntity( $this->entity );
+    $this->process->setProcessId($this->processId);
+    $this->process->setEntity($this->entity);
 
     $this->activKey = $this->activStatus->actual_node_key;
 
     $this->process->activStatus = $this->activStatus;
     $this->process->oldKey      = $this->activKey;
     $this->process->activKey    = $this->activKey;
-    
-    if( '' !== trim($this->activStatus->state) )
-      $this->process->statesData  = json_decode( $this->activStatus->state );
-    else 
+
+    if ('' !== trim($this->activStatus->state))
+      $this->process->statesData  = json_decode($this->activStatus->state);
+    else
       $this->process->statesData  = new stdClass();
-    
-    $this->process->state = (int)$this->activStatus->running_state;
+
+    $this->process->state = (int) $this->activStatus->running_state;
 
     return true;
 
@@ -297,25 +292,24 @@ class LibProcess_Model
    *  Wenn die Entity keien Id hat
    *  loadProcessId wirft auch Exceptions wenn Fehler auftreten
    */
-  public function initProcess( $startNodeName, $params = null )
+  public function initProcess($startNodeName, $params = null)
   {
 
-    if( !$this->processId )
+    if (!$this->processId)
       $this->loadProcessId();
 
     // prüfen dass die entity vorhanden ist
-    if( !$this->entity || !$this->entity->getId() )
-    {
-      throw new LibProcess_Exception( 'It\'s not possible to initialize a Process without a valid Entity' );
+    if (!$this->entity || !$this->entity->getId()) {
+      throw new LibProcess_Exception('It\'s not possible to initialize a Process without a valid Entity');
     }
 
-    $this->activStatus = $this->db->orm->newEntity( 'WbfsysProcessStatus' );
+    $this->activStatus = $this->db->orm->newEntity('WbfsysProcessStatus');
 
     // orm laden
     $this->activStatus->id_process  = $this->processId;
     $this->activStatus->vid         = $this->entity;
 
-    $startNode = $this->getNodeByName( $startNodeName );
+    $startNode = $this->getNodeByName($startNodeName);
 
     $this->activStatus->id_start_node       = $startNode;
     $this->activStatus->id_last_node        = $startNode;
@@ -332,26 +326,24 @@ class LibProcess_Model
     $this->process->oldKey      = $this->activKey;
     $this->process->statesData  = new stdClass();
 
-    $this->db->orm->insert( $this->activStatus );
-    
-    if( $this->process->statusAttribute )
-    {
-      $this->entity->{$this->process->statusAttribute} = $startNode;
-      $this->db->orm->save( $this->entity );
-    }
-    
-    
+    $this->db->orm->insert($this->activStatus);
 
-    $step           = $this->db->orm->newEntity( 'WbfsysProcessStep' );
+    if ($this->process->statusAttribute) {
+      $this->entity->{$this->process->statusAttribute} = $startNode;
+      $this->db->orm->save($this->entity);
+    } else {
+      Debug::console("GOT NO STATUS ATTRIBUTE?!");
+    }
+
+    $step           = $this->db->orm->newEntity('WbfsysProcessStep');
     $step->id_to    = $this->activStatus->id_actual_node;
 
     $step->id_process_instance = $this->activStatus;
     $step->comment  = 'Process was initialized';
 
-    $this->db->orm->insert( $step );
+    $this->db->orm->insert($step);
 
   }//end public function initProcess */
-
 
   /**
    * Erstelle einer neuen Prozess Instanz
@@ -362,10 +354,9 @@ class LibProcess_Model
    *
    * @return WbfsysProcessNode_Entity den neuen Knoten zurückgeben
    */
-  public function closeProcess( $closeNodeName, $params )
+  public function closeProcess($closeNodeName, $params)
   {
-
-    return $this->changeStatus( $closeNodeName, $params, true );
+    return $this->changeStatus($closeNodeName, $params, true);
 
   }//end public function closeProcess */
 
@@ -373,7 +364,7 @@ class LibProcess_Model
    * Den Prozess löschen
    *
    */
-  public function deleteProcess( )
+  public function deleteProcess()
   {
 
   }//end public function deleteProcess */
@@ -393,18 +384,21 @@ class LibProcess_Model
    *  Wenn nötige Informationen fehlen oder nicht geladen werden können
    *  Details siehe Fehlermeldung
    */
-  public function changeStatus( $newNodeName, $params, $closeProcess = false )
+  public function changeStatus($newNodeName, $params, $closeProcess = false)
   {
+    
+    if($this->allreadyChanged)
+      return;
 
-    if( !$this->processId )
-      $this->loadProcessId( );
-      
+    if (!$this->processId)
+      $this->loadProcessId();
+
     $orm = $this->getOrm();
 
     // zuerst wird der step, also der prozessschritt erstellt
-    $newNode = $this->getNodeByName( $newNodeName );
+    $newNode = $this->getNodeByName($newNodeName);
 
-    $step           = $this->db->orm->newEntity( 'WbfsysProcessStep' );
+    $step           = $this->db->orm->newEntity('WbfsysProcessStep');
     $step->id_from  = $this->activStatus->id_actual_node;
     $step->id_to    = $newNode;
 
@@ -412,26 +406,22 @@ class LibProcess_Model
     $step->comment    = $this->getRequestComment();
     $step->rate       = $this->getRequestRating();
 
-    $this->db->orm->insert( $step );
+    $this->db->orm->insert($step);
 
     // danach wir der aktuelle Status des Knotens upgedatet
     $this->activStatus->id_last_node    = $this->activStatus->id_actual_node;
     $this->activStatus->id_actual_node  = $newNode;
     $this->activStatus->actual_node_key = $newNode->access_key;
 
-    if( $newNode->m_order > $this->activStatus->value_highest_node )
-    {
+    if ($newNode->m_order > $this->activStatus->value_highest_node) {
       $this->activStatus->value_highest_node = $newNode->m_order;
     }
-    
-    if( $newNode->id_phase )
-    {
-      $phaseNode = $orm->get('WbfsysProcessPhase', $newNode->id_phase );
+
+    if ($newNode->id_phase) {
+      $phaseNode = $orm->get('WbfsysProcessPhase', $newNode->id_phase);
       $this->activStatus->id_phase = $phaseNode;
       $this->activStatus->phase_key = $phaseNode->access_key;
-    }
-    else 
-    {
+    } else {
       // keine phase, sollte nur dann der fall sein wenn Prozesse keine
       // übergeordneten phasen haben
       $this->activStatus->id_phase  = null;
@@ -439,22 +429,21 @@ class LibProcess_Model
     }
 
     // prüfen ob der Prozess geschlossen werden soll
-    if( $closeProcess )
-    {
-      if( $newNode->is_end_node )
-      {
+    if ($closeProcess) {
+      if ($newNode->is_end_node) {
         $this->activStatus->id_end_node  = $newNode;
       }
     }
-    
-    if( $this->process->statusAttribute )
-    {
+
+    if ($this->process->statusAttribute) {
       $this->entity->{$this->process->statusAttribute} = $newNode;
-      $this->db->orm->update( $this->entity );
+      $this->db->orm->update($this->entity);
     }
 
-    $this->db->orm->update( $this->activStatus );
+    $this->db->orm->update($this->activStatus);
 
+    $this->allreadyChanged = true;
+    
     $this->activKey   = $newNodeName;
     $this->activNode  = $newNode;
     $this->process->activKey = $newNodeName;
@@ -462,7 +451,7 @@ class LibProcess_Model
     return $newNode;
 
   }//end public function changeStatus */
-  
+
   /**
    * den running state des Prozesses anpassen
    * @param int $state
@@ -470,23 +459,19 @@ class LibProcess_Model
    *  Wenn nötige Informationen fehlen oder nicht geladen werden können
    *  Details siehe Fehlermeldung
    */
-  public function changePState( $state )
+  public function changePState($state)
   {
 
-    Debug::console( "in change state $state" );
-    if( !$this->processId )
-      $this->loadProcessId( );
- 
-      
+    Debug::console("in change state $state");
+    if (!$this->processId)
+      $this->loadProcessId();
+
     $this->activStatus->running_state = $state;
-    
-    try 
-    {  
-      $this->db->orm->update( $this->activStatus );
-    }
-    catch( LibDb_Exception $e )
-    {
-      Debug::console( $e->getMessage() );
+
+    try {
+      $this->db->orm->update($this->activStatus);
+    } catch (LibDb_Exception $e) {
+      Debug::console($e->getMessage());
     }
 
   }//end public function changePState */
@@ -498,33 +483,29 @@ class LibProcess_Model
    * @throws LibProcess_Exception
    *  Wenn der Prozess fehlt
    */
-  protected function loadProcessId( )
+  protected function loadProcessId()
   {
 
-    if( !$this->process || '' == trim($this->process->name) )
-    {
+    if (!$this->process || '' == trim($this->process->name)) {
       throw new LibProcess_Exception('Failed to load Processid, the Process / Processname is missing');
     }
 
-    $this->processId  = $this->db->orm->getId( 'WbfsysProcess', "access_key='{$this->process->name}'" );
+    $this->processId  = $this->db->orm->getId('WbfsysProcess', "access_key='{$this->process->name}'");
 
-    if( !$this->processId  )
-    {
+    if (!$this->processId) {
 
       // Der Prozess scheint noch nicht in der Datenbank zu sein, also rein Damit
       $this->populateDatabase();
 
-      if( !$this->processId )
-      {
-        throw new LibProcess_Exception('Failed to load ProcessId, there is no Data for Process: '.$this->process->name );
+      if (!$this->processId) {
+        throw new LibProcess_Exception('Failed to load ProcessId, there is no Data for Process: '.$this->process->name);
       }
 
     }
 
-    $this->process->setProcessId( $this->processId );
+    $this->process->setProcessId($this->processId);
 
   }//end protected function loadProcessId */
-
 
   /**
    * Erfragen eines ProzessKnotens über den Namen
@@ -532,17 +513,16 @@ class LibProcess_Model
    * @param string $name
    * @return WbfsysProcessNode_Entity
    */
-  public function getNodeByName( $name )
+  public function getNodeByName($name)
   {
 
-    $node = $this->db->orm->get
-    (
+    $node = $this->db->orm->get(
       'WbfsysProcessNode',
       "access_key='{$name}' and id_process={$this->processId}"
     );
 
-    if( !$node )
-      $node = $this->createProcessNode( $name );
+    if (!$node)
+      $node = $this->createProcessNode($name);
 
     return $node;
 
@@ -559,28 +539,27 @@ class LibProcess_Model
    *  Wenn die Datenbank nicht den Erwartungen der hier verwedeten Struktur
    *  entspricht
    */
-  protected function populateDatabase(  )
+  protected function populateDatabase()
   {
 
     $orm = $this->getOrm();
 
-    $processEntity = $orm->newEntity( 'WbfsysProcess' );
+    $processEntity = $orm->newEntity('WbfsysProcess');
     $processEntity->name        = SParserString::subToName($this->process->name);
     $processEntity->access_key  = $this->process->name;
     $processEntity->description = $this->process->description;
 
-    $orm->insert( $processEntity );
+    $orm->insert($processEntity);
 
-    foreach( $this->process->nodes as $key => $node )
-    {
-      $processNode = $orm->newEntity( 'WbfsysProcessNode' );
+    foreach ($this->process->nodes as $key => $node) {
+      $processNode = $orm->newEntity('WbfsysProcessNode');
       $processNode->access_key  = $key;
       $processNode->label       = $node['label'];
       $processNode->description = isset($node['description'])?$node['description']:'';
       $processNode->m_order     = $node['order'];
       $processNode->id_process  = $processEntity;
 
-      $orm->insert( $processNode );
+      $orm->insert($processNode);
     }
 
     $this->processId = $processEntity->getId();
@@ -598,28 +577,28 @@ class LibProcess_Model
    *
    * @return WbfsysProcessNode_Entity
    */
-  protected function createProcessNode( $key )
+  protected function createProcessNode($key)
   {
 
     $orm    = $this->getOrm();
     $node   = $this->process->nodes[$key];
 
-    $processNode = $orm->newEntity( 'WbfsysProcessNode' );
+    $processNode = $orm->newEntity('WbfsysProcessNode');
     $processNode->access_key  = $key;
     $processNode->label       = $node['label'];
     $processNode->description = isset($node['description'])?$node['description']:'';
     $processNode->m_order     = $node['order'];
     $processNode->id_process  = $this->processId;
 
-    $orm->insert( $processNode );
+    $orm->insert($processNode);
 
     return $processNode;
 
   }//end protected function populateDatabase */
 
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // methoden
-////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////*/
 
   /**
    * @return void
@@ -629,19 +608,17 @@ class LibProcess_Model
 
     $request = $this->getRequest();
 
-    $this->processData['comment'] = $request->data
-    (
+    $this->processData['comment'] = $request->data(
       $this->process->name,
       Validator::TEXT,
       'comment'
     );
 
-    $this->requestedEdge = $request->param( 'process_edge', Validator::CNAME );
-    
-    $this->changePState = $request->param( 'process_state', Validator::INT );
+    $this->requestedEdge = $request->param('process_edge', Validator::CNAME);
+    $this->changePState = $request->param('process_state', Validator::INT);
 
   }//end public function fetchProcessRequestData */
-  
+
   /**
    * @return void
    */
@@ -650,25 +627,22 @@ class LibProcess_Model
 
     $request = $this->getRequest();
 
-    $this->processData['comment'] = $request->data
-    (
+    $this->processData['comment'] = $request->data(
       $this->process->name,
       Validator::TEXT,
       'comment'
     );
 
-    $this->requestedEdge = $request->param( 'status', Validator::CNAME );
+    $this->requestedEdge = $request->param('status', Validator::CNAME);
 
   }//end public function fetchProcessServiceRequest */
-
 
   /**
    * @return string
    */
   public function getRequestComment()
   {
-
-    return isset( $this->processData['comment'] )
+    return isset($this->processData['comment'])
       ? $this->processData['comment']
       : null;
 
@@ -679,13 +653,11 @@ class LibProcess_Model
    */
   public function getRequestRating()
   {
-
-    return isset( $this->processData['rating'] )
+    return isset($this->processData['rating'])
       ? $this->processData['rating']
       : null;
 
   }//end public function getRequestRating */
 
 }//end class LibProcess_Model
-
 

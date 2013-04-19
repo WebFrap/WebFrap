@@ -8,85 +8,77 @@
 * @projectUrl  : http://webfrap.net
 *
 * @licence     : BSD License see: LICENCE/BSD Licence.txt
-* 
+*
 * @version: @package_version@  Revision: @package_revision@
 *
 * Changes:
 *
 *******************************************************************************/
 
-
 /**
  * class ControllerAdmintoolsPostgres
  * Extention zum anzeigen dieverser Systemdaten
  */
-class DaidalosSupportUser_Controller
-  extends Controller
+class DaidalosSupportUser_Controller extends Controller
 {
-////////////////////////////////////////////////////////////////////////////////
+/*//////////////////////////////////////////////////////////////////////////////
 // Attributes
-////////////////////////////////////////////////////////////////////////////////
-  
+//////////////////////////////////////////////////////////////////////////////*/
+
   /**
    * Mit den Options wird der zugriff auf die Service Methoden konfiguriert
-   * 
+   *
    * method: Der Service kann nur mit den im Array vorhandenen HTTP Methoden
-   *   aufgerufen werden. Wenn eine falsche Methode verwendet wird, gibt das 
+   *   aufgerufen werden. Wenn eine falsche Methode verwendet wird, gibt das
    *   System automatisch eine "Method not Allowed" Fehlermeldung zurück
-   * 
+   *
    * views: Die Viewtypen die erlaubt sind. Wenn mit einem nicht definierten
    *   Viewtype auf einen Service zugegriffen wird, gibt das System automatisch
    *  eine "Invalid Request" Fehlerseite mit einer Detailierten Meldung, und der
    *  Information welche Services Viewtypen valide sind, zurück
-   *  
+   *
    * public: boolean wert, ob der Service auch ohne Login aufgerufen werden darf
    *   wenn nicht vorhanden ist die Seite per default nur mit Login zu erreichen
-   * 
+   *
    * @var array
    */
   protected $options           = array
   (
     'overview' => array
     (
-      'method'    => array( 'GET' ),
-      'views'      => array( 'maintab'  )
+      'method'    => array('GET'),
+      'views'      => array('maintab'  )
     ),
   );
-  
-  
-////////////////////////////////////////////////////////////////////////////////
-// Methodes
-////////////////////////////////////////////////////////////////////////////////
 
-  
-  
+/*//////////////////////////////////////////////////////////////////////////////
+// Methodes
+//////////////////////////////////////////////////////////////////////////////*/
+
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
    * @return void
    */
-  public function service_overview( $request, $response )
+  public function service_overview($request, $response)
   {
-    
-    $params = $this->getFlags( $request );
-    
+
+    $params = $this->getFlags($request);
+
     $view   = $response->loadView
     (
-      'daidalos_support_user-overview', 
+      'daidalos_support_user-overview',
       'DaidalosSupportUser',
       'display',
       View::MAINTAB
     );
 
-    $model  = $this->loadModel( 'DaidalosSupportUser' );
-    $view->setModel( $model );
+    $model  = $this->loadModel('DaidalosSupportUser');
+    $view->setModel($model);
 
-    $view->display( $request, $response, $params );
+    $view->display($request, $response, $params);
 
   }//end public function service_overview */
-  
-
-
 
 } // end class DaidalosSupportUser_Controller
 
