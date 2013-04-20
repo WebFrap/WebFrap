@@ -92,6 +92,11 @@ class LibAclManager_Db extends LibAclManager
       $partial->id_group      = $entityAccess->id_group;
       $partial->partial       = 1;
       $partial->access_level  = Acl::LISTING;
+      $partial->ref_access_level = Acl::DENIED;
+      $partial->message_level = Acl::DENIED;
+      $partial->priv_message_level = Acl::DENIED;
+      $partial->meta_level = Acl::DENIED;
+
       $orm->insertIfNotExists($partial, array('id_area', 'id_group', 'partial'));
 
     }
