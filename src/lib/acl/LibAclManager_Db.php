@@ -71,7 +71,7 @@ class LibAclManager_Db extends LibAclManager
 
     // per definition nicht partiell
     $entityAccess->partial       = 0;
-    $entityAccess->ref_access_level = $entityAccess->ref_access_level ? $entityAccess->ref_access_level: Acl::LISTING;
+    $entityAccess->ref_access_level = $entityAccess->ref_access_level ? $entityAccess->ref_access_level : Acl::LISTING;
     $entityAccess->message_level = $entityAccess->message_level ? $entityAccess->message_level: Acl::DENIED;
     $entityAccess->priv_message_level = $entityAccess->priv_message_level ? $entityAccess->priv_message_level : Acl::DENIED;
     $entityAccess->meta_level = $entityAccess->meta_level ? $entityAccess->meta_level : Acl::DENIED;
