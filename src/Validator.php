@@ -1039,9 +1039,7 @@ class Validator
     
     $purify = new LibVendorHtmlpurifier_ConfigSave();
     
-    $config = $purify->getConfig();
-
-    $sanitizer->config = $config;
+    $sanitizer->config = $purify->getConfig();
     
     $value = $sanitizer->purify($value);
     
@@ -1088,10 +1086,8 @@ class Validator
     $sanitizer = LibSanitizer::getHtmlSanitizer();
   
     $purify = new LibVendorHtmlpurifier_ConfigPublish();
-  
-    $config = $purify->getConfig();
-  
-    $sanitizer->config = $config;
+    
+    $sanitizer->config = $purify->getConfig();
   
     $value = $sanitizer->purify($value);
   
@@ -1138,10 +1134,8 @@ class Validator
     $sanitizer = LibSanitizer::getHtmlSanitizer();
   
     $purify = new LibVendorHtmlpurifier_ConfigFull();
-  
-    $config = $purify->getConfig();
-  
-    $sanitizer->config = $config;
+    
+    $sanitizer->config = $purify->getConfig();
   
     $value = $sanitizer->purify($value);
   
