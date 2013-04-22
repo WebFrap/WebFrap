@@ -88,7 +88,7 @@ HTML;
     $loader = new ExtensionLoader('index', 'data/docu/');
 
     $html = <<<HTML
-    <div id="{$tabId}" class="wgt_tab {$tabSize} {$containerId}" title="Docu"  >
+    <div id="{$tabId}" class="wgt_tab {$tabSize}" title="Docu"  >
       <div class="wgt-panel title" ><h2>Docu</h2></div>
 HTML;
 

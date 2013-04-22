@@ -64,8 +64,7 @@ class CmsGallery_Admin_Controller extends Controller
 
     $model    = $this->loadModel('CmsGallery_Admin');
 
-    $view     = $response->loadView
-    (
+    $view     = $response->loadView(
       'cms_gallery-admin-show',
       'CmsGallery_Admin',
        'displayGallery',

@@ -59,119 +59,25 @@ class WebfrapSettings_Search_Model extends Model
 
 
   /**
-   * @param int $messageId
-   * @param WebfrapMessage_Save_Request $rqtData
+   * @param WebfrapSettings_Save_Request $rqtData
    * @throws Per
    */
-  public function saveMessage($messageId, $rqtData)
+  public function saveSearch($rqtData)
   {
 
-    $orm = $this->getOrm();
-    $db = $this->getDb();
-    $user = $this->getUser();
+    $db     = $this->getDb();
+    $user   = $this->getUser();
+    $cache  = $this->getL1Cache();
 
-    foreach ($rqtData->aspects as $aspect) {
-      $msgAspect = $orm->newEntity('WbfsysMessageAspect');
-      $msgAspect->id_receiver = $user->getId();
-      $msgAspect->id_message = $messageId;
-      $msgAspect->aspect = $aspect;
-      $orm->insertIfNotExists($msgAspect, array('id_receiver','id_message','aspect'));
-    }
-
-    // die anderen löschen
-    $orm->deleteWhere(
-    	'WbfsysMessageAspect',
-    	" id_receiver={$user->getId()} AND id_message={$messageId} AND NOT aspect IN(".implode(', ',$rqtData->aspects).") "
+    $settingsLoader = new LibUserSettings($db, $user, $cache);
+    
+    $settingsLoader->saveNamedMaskSetting(
+      EUserSettingType::LISTING_SEARCH, 
+      $rqtData->name,
+      $rqtData->mask,
+      $rqtData
     );
-
-    $msgNode = $orm->get('WbfsysMessage',$messageId);
-
-
-
-    // task data speichern
-    if ($rqtData->hasTask) {
-
-      if($rqtData->taskId) {
-
-        $entTask = $orm->get('WbfsysTask', $rqtData->taskId);
-
-      } else {
-
-        $entTask = $orm->newEntity('WbfsysTask');
-        $entTask->id_message = $messageId;
-      }
-
-      $entTask->addData($rqtData->taskData);
-
-      $orm->save($entTask);
-
-    } else if($rqtData->taskId) {
-
-      $orm->delete('WbfsysTask',$rqtData->taskId);
-      $rqtData->receiverData['flag_action_required'] = false;
-
-    }
-
-    // appointment data speichern
-    if ($rqtData->hasAppointment) {
-
-      if($rqtData->appointId) {
-
-        $entAppoint = $orm->get('WbfsysAppointment', $rqtData->appointId);
-
-      } else {
-
-        $entAppoint = $orm->newEntity('WbfsysAppointment');
-        $entAppoint->id_message = $messageId;
-      }
-
-      $entAppoint->addData($rqtData->appointData);
-
-      $orm->save($entAppoint);
-
-    } else if ($rqtData->appointId) {
-
-      // wenn id vorhanden dann löschen
-      $orm->delete('WbfsysAppointment',$rqtData->appointId);
-      $rqtData->receiverData['flag_participation_required'] = false;
-    }
-
-
-    // task data speichern
-    $entRecv = $orm->get('WbfsysMessageReceiver', $rqtData->receiverId);
-    $entRecv->addData($rqtData->receiverData);
-    $orm->save($entRecv);
-
-    $mainAspect = 0;
-
-    if( in_array(EMessageAspect::MESSAGE, $rqtData->aspects) )
-      $mainAspect = EMessageAspect::MESSAGE;
-    elseif ( in_array(EMessageAspect::DOCUMENT, $rqtData->aspects) ) {
-      $mainAspect = EMessageAspect::DOCUMENT;
-    } else {
-      $mainAspect = EMessageAspect::DISCUSSION;
-    }
-
-    if( $msgNode->main_aspect != $mainAspect ) {
-      $msgNode->main_aspect = $mainAspect;
-      $msgNode->id_sender_status = EMessageStatus::UPDATED;
-
-      $orm->save($msgNode);
-    }
-
-    $tmpUSt = EMessageStatus::UPDATED;
-    $tmpASt = EMessageStatus::ARCHIVED;
-
-    // alle nicht archivierten oder gelöschten receiver updaten
-    $sql = <<<SQL
-UPDATE wbfsys_message_receiver
-	set status = {$tmpUSt}
-WHERE
-	id_message = {$messageId}
-	AND ( NOT status = {$tmpASt} OR flag_deleted  = true );
-SQL;
-
-    $db->update($sql);
+    
 
   }//ebnd public function saveMessage
 

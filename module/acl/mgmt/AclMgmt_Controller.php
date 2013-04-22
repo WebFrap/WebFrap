@@ -352,8 +352,7 @@ class AclMgmt_Controller extends MvcController_Domain
     $model->domainNode = $domainNode;
     $model->checkAccess($domainNode, $params);
 
-    $view   = $response->loadView
-    (
+    $view   = $response->loadView(
       $domainNode->domainName.'-acl-mgmt',
       'AclMgmt',
       'displayConnect'
@@ -379,10 +378,8 @@ class AclMgmt_Controller extends MvcController_Domain
     }
 
     if (!$model->checkUnique()) {
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
+      throw new InvalidRequest_Exception(
+        $response->i18n->l(
           'This Assignment allready exists!',
           'wbf.message'
         ),
@@ -412,14 +409,11 @@ class AclMgmt_Controller extends MvcController_Domain
     // check if there is a valid id for update
     if (!$id = $this->getOID('security_area')) {
       // wenn nicht ist die anfrage per definition invalide
-      throw new InvalidRequest_Exception
-      (
-        $response->i18n->l
-        (
+      throw new InvalidRequest_Exception(
+        $response->i18n->l(
           'The Request for {@service@} was invalid. ID was missing!',
           'wbf.message',
-          array
-          (
+          array(
             'service' => 'updateArea'
           )
         ),

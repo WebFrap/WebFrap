@@ -159,43 +159,37 @@ class WgtElementAttachmentList extends WgtAbstract
     $this->icons['file']   = $this->icon('control/attachment_file.png', 'File');
     $this->icons['edit'] = $this->icon('control/edit.png', 'Edit');
 
-    $this->icons['level_public'] = $this->icon
-    (
+    $this->icons['level_public'] = $this->icon(
       'confidentiality/public.png',
       'Public',
       'xsmall',
       array('class' => 'wcm wcm_ui_tip', 'tooltip'=>"Confidentiality Level Public")
     );
-    $this->icons['level_customer'] = $this->icon
-    (
+    $this->icons['level_customer'] = $this->icon(
       'confidentiality/customer.png',
       'Customer',
       'xsmall',
       array('class' => 'wcm wcm_ui_tip', 'tooltip'=>"Public")
      );
-    $this->icons['level_restricted'] = $this->icon
-    (
+    $this->icons['level_restricted'] = $this->icon(
       'confidentiality/restricted.png',
       'Restricted',
       'xsmall',
       array('class' => 'wcm wcm_ui_tip', 'tooltip'=>"Restricted")
      );
-    $this->icons['level_confidential'] = $this->icon
-    (
+    $this->icons['level_confidential'] = $this->icon(
       'confidentiality/confidential.png',
       'Confidential',
       'xsmall',
       array('class' => 'wcm wcm_ui_tip', 'tooltip'=>"Confidential")
      );
-    $this->icons['level_secret'] = $this->icon
-    (
+    $this->icons['level_secret'] = $this->icon(
       'confidentiality/secret.png',
       'Secret',
       'xsmall',
       array('class' => 'wcm wcm_ui_tip', 'tooltip'=>"Secret")
      );
-    $this->icons['level_top_secret'] = $this->icon
-    (
+    $this->icons['level_top_secret'] = $this->icon(
       'confidentiality/top_secret.png',
       'Top Secret',
       'xsmall',
@@ -629,7 +623,7 @@ HTML;
 
       $lastChar = substr($storageLink, -1) ;
 
-      if ($lastChar != '\\' && $lastChar != '/')
+      if ( '' != $lastChar && $lastChar != '\\' && $lastChar != '/')
         $storageLink .= '\\';
 
       $fileIcon = '<i class="icon-link"></i>';

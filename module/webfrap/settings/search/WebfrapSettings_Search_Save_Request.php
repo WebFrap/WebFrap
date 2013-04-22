@@ -38,7 +38,19 @@ class WebfrapSettings_Search_Save_Request extends Context
    * @var int
    */
   public $type = null;
+  
+  /**
+   * Der name der zu speichernden Konfiguration
+   * @var int
+   */
+  public $name = null;
 
+  /**
+   * Key der Maske der zu speichernden Konfiguration
+   * @var int
+   */
+  public $mask = null;
+  
   /**
    * @var TFlag
    */
@@ -56,6 +68,11 @@ class WebfrapSettings_Search_Save_Request extends Context
   */
   public $searchFieldsStack = array();
 
+  /**
+   * @var ValidSearchBuilder
+   */
+  public $extSearchValidator = null;
+  
   /**
    * Extended Search filter
    * @var array
@@ -79,7 +96,10 @@ class WebfrapSettings_Search_Save_Request extends Context
         $this->extSearchValidator = new ValidSearchBuilder();
     }
 
-    $this->interpretRequest($request);
+    $extSearchFields = $request->param('as');
+    
+    if ($extSearchFields)
+      $this->interpretRequest($request);
 
   } // end public function __construct */
 
@@ -101,18 +121,11 @@ class WebfrapSettings_Search_Save_Request extends Context
       }
     }
 
-    $this->vid = $request->param( 'vid', Validator::EID );
-    $this->type = $request->param( 'type', Validator::INT );
-
-    if ($extSearchValidator)
-      $this->extSearchValidator = $extSearchValidator;
-    else
-      $this->extSearchValidator = new ValidSearchBuilder();
+    $this->vid = $request->data( 'vid', Validator::EID );
+    $this->type = $request->data( 'type', Validator::INT );
+    $this->name = $request->data( 'filter_name', Validator::TEXT );
 
     $extSearchFields = $request->param('as');
-
-    if (!$extSearchFields)
-      return;
 
     if (!$this->searchFieldsStack) {
       foreach ($this->searchFields as $searchFields) {
@@ -145,7 +158,9 @@ class WebfrapSettings_Search_Save_Request extends Context
           $this->extSearch[$fKey] = (object)$validField;
 
         }
+        
       } else {
+        
         Debug::console($extField['field'].' was invalid ');
       }
 
@@ -153,6 +168,28 @@ class WebfrapSettings_Search_Save_Request extends Context
 
 
   }//end public function interpretRequest */
+  
+  /**
+   * @return int
+   */
+  public function getId()
+  {
+  
+    return $this->vid;
+  
+  }//end public function getId */
 
+  /**
+   * @return string
+   */
+  public function toJson()
+  {
+    
+    $jsonString = json_encode($this->extSearch);
+    
+    return $jsonString;
+    
+  }//end public function toJson */
+  
 }//end class WebfrapSettings_Search_Save_Request */
 

@@ -819,23 +819,20 @@ CODE;
   public function i18nLabel($label, $nodeKey, $labels)
   {
 
-    $iconAdd = $this->icon('control/add.png', 'Add');
-    $iconDel = $this->icon('control/delete.png', 'Delete');
+    $iconAdd = '<i class="icon-add-sub" ></i>';
+    $iconDel = '<i class="icon-remove" ></i>';
 
-    $addInput = WgtForm::input
-    (
+    $addInput = WgtForm::input(
       'Label',
       $this->domainKey.'-label-text',
       '',
-      array
-      (
+      array(
         'name'  => 'label[text]',
         'class' => 'medium wgte-text'
       )
     );
 
-    $langSelector = WgtForm::decorateInput
-    (
+    $langSelector = WgtForm::decorateInput(
         'Lang',
         'wgt-select-'.$this->domainKey.'-label-lang',
         <<<HTML
@@ -855,12 +852,12 @@ HTML
     foreach ($labels as $lang => $label) {
       $listLabels .= '<li class="lang-'.$lang.'" >'. WgtForm::input(
         'Lang '.Wgt::icon('flags/'.$lang.'.png', 'xsmall', array(), ''),
-        $idPrefix.'-label-'.$lang,
+        $this->domainKey.'-label-'.$lang,
         $label, array(
           'name'  => $nodeKey.'[label]['.$lang.']',
           'class' => 'medium lang-'.$lang
         ),
-        $formId,
+        $this->id,
         '<button class="wgt-button wgta-drop" tabindex="-1" wgt_lang="'.$lang.'" >'.$iconDel.'</button>'
       ).'</li>';
     }
@@ -909,23 +906,21 @@ CODE;
   public function i18nText($label, $nodeKey, $texts)
   {
 
-    $iconAdd = $this->icon('control/add.png', 'Add');
-    $iconDel = $this->icon('control/delete.png', 'Delete');
+    $iconAdd = '<i class="icon-add-sub" ></i>';
+    $iconDel = '<i class="icon-remove" ></i>';
 
     $i18nTexts = '';
 
     foreach ($texts as $lang => $text) {
 
-      $innerWysiwyg = $this->wysiwyg
-      (
+      $innerWysiwyg = $this->wysiwyg(
         $lang,
-        $idPrefix.'-'.$nodeKey.'-'.$lang,
+        $this->domainKey.'-'.$nodeKey.'-'.$lang,
         $text,
-        array
-        (
+        array(
           'name' => $nodeKey.'['.$lang.']'
-        ),
-        $formId,
+         ),
+        $this->id,
         null,
         true,
         true

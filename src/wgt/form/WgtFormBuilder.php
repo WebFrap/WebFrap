@@ -1481,12 +1481,12 @@ HTML
     foreach ($labels as $lang => $label) {
       $listLabels .= '<li class="lang-'.$lang.'" >'. WgtForm::input(
         'Lang '.Wgt::icon('flags/'.$lang.'.png', 'xsmall', array(), ''),
-        $idPrefix.'-label-'.$lang,
+        $this->domainKey.'-label-'.$lang,
         $label, array(
           'name'  => $nodeKey.'[label]['.$lang.']',
           'class' => 'medium lang-'.$lang
         ),
-        $formId,
+        $this->id,
         '<button class="wgt-button wgta-drop" wgt_lang="'.$lang.'" tabindex="-1" >'.$iconDel.'</button>'
       ).'</li>';
     }
@@ -1542,16 +1542,14 @@ CODE;
 
     foreach ($texts as $lang => $text) {
 
-      $innerWysiwyg = $this->wysiwyg
-      (
+      $innerWysiwyg = $this->wysiwyg(
         $lang,
-        $idPrefix.'-'.$nodeKey.'-'.$lang,
+        $this->domainKey.'-'.$nodeKey.'-'.$lang,
         $text,
-        array
-        (
+        array(
           'name' => $nodeKey.'['.$lang.']'
-        ),
-        $formId,
+         ),
+        $this->id,
         null,
         true,
         true

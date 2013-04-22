@@ -85,7 +85,25 @@ class WgtPanelElementSearch_Overlay extends WgtPanelElement
    * @var SearchData
    */
   public $searchFields = null;
+  
+  /**
+   * Vid wenn relativ zu einem Datensatz
+   * @var int
+   */
+  public $vid = null;
 
+  /**
+   * Type des settings
+   * @var int
+   */
+  public $type = EUserSettingType::LISTING_SEARCH;
+
+  /**
+   * Key der Maske für welche gespeichert wird.
+   * @var string
+   */
+  public $mask = null;
+  
 /*//////////////////////////////////////////////////////////////////////////////
 // constructor
 //////////////////////////////////////////////////////////////////////////////*/
@@ -287,13 +305,30 @@ HTML;
             	      type="text" 
             	      name="filter_name" 
             	      class="filter_name asgd-{$this->searchForm}" 
-            	      value="Send by Joe" /><button 
+            	      value="" /><button 
             	        class="wgt-button append wa_reset_filter" ><i class="icon-trash" ></i></button>
             	  </div>
               	<div class="right" >
               		<button class="wgt-button wa_save_filter" ><i class="icon-save" ></i> Save filter</button>
               	</div>
             	</div>
+            	
+            	<!-- metadaten -->
+            	<input 
+        	      type="hidden" 
+        	      name="vid" 
+        	      class="asgd-{$this->searchForm}" 
+        	      value="{$this->vid}" />
+            	<input 
+        	      type="hidden" 
+        	      name="type" 
+        	      class="asgd-{$this->searchForm}" 
+        	      value="{$this->type}" />
+            	<input 
+        	      type="hidden" 
+        	      name="mask" 
+        	      class="asgd-{$this->searchForm}" 
+        	      value="{$this->mask}" />
             	
           		<div style="max-height:250px;">
         				<table class="search-container" >

@@ -44,7 +44,7 @@ class WebfrapSyncSystem_Mail_Action extends Action
 
     $numMessages = $mailConnector->getNumMessages();
 
-    for ( $pos = 1; $numMessages <= $pos; $pos += 10 ) {
+    for ($pos = 1; $numMessages <= $pos; $pos += 10) {
 
       $messages = $mailConnector->getRange($pos,10);
 

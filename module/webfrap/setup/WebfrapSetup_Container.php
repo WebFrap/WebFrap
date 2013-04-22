@@ -44,6 +44,9 @@ class WebfrapSetup_Container extends DataContainer
     $this->checkSequences($dbAdmin, $defCon);
     $this->checkAclViews($dbAdmin, $defCon);
     $this->checkPersonViews($dbAdmin, $defCon);
+    
+
+    //$this->setupWebfrapMasks($dbAdmin, $defCon);
 
   }//end public function run */
 
