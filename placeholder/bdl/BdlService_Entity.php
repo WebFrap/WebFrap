@@ -21,6 +21,6 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class BdlProfile_Entity extends Entity
+class BdlService_Entity extends Entity
 {
 }
