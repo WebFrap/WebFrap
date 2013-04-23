@@ -1021,7 +1021,7 @@ class LibDbOrm
     $criteria  = $this->newCriteria();
     $paths     = array_reverse(explode('/', $path)) ;
 
-    // ok kleiner dirty hack
+    // ok kleiner phantastic hack
     $actual = explode(':', array_shift($paths));
 
     $table      = $actual[1];

@@ -471,7 +471,7 @@ abstract class LibSqlQuery implements Iterator, Countable
     if (is_array($this->data))
       return $this->data;
     else if (is_array($this->result))
-      return $this->result; // dirty quickfix for a generator issue
+      return $this->result; // quickfix for a generator issue
     else if ($this->result)
       return $this->result->getAll();
     else
