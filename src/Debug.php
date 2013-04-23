@@ -683,6 +683,9 @@ CODE;
 
   }//end public static function getCallerPosition */
 
+  /**
+   * 
+   */
   public static function getCaller($level = 2)
   {
 
@@ -690,10 +693,10 @@ CODE;
     $meth = $backTrace[$level];
 
     if (isset($meth['class']))
-      return $meth['class'].'::'.$meth['function'].NL;
+      return $meth['class'].'::'.$meth['function'].' : '.$meth['line'];
 
     else
-      return $meth['function'].NL;
+      return $meth['function'].' : '.$meth['line'];
 
   }//end public static function getCaller */
 
