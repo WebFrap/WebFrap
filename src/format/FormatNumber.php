@@ -30,6 +30,7 @@ class FormatNumber
   
   /**
    * @param float $number
+   * @param int $decimals
    */
   public static function format($number, $decimals = 2)
   {
