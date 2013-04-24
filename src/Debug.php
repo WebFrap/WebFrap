@@ -679,7 +679,7 @@ CODE;
     if ($asArrary)
       return array('file' => $meth['file'] , 'line' => $line['line']  );
     else
-      return $meth['file'].' : '.$line['line'].NL;
+      return $meth['file'].' : '.$line['line'];
 
   }//end public static function getCallerPosition */
 
