@@ -1300,8 +1300,7 @@ CODE;
     $value = null,
     $attributes = array(),
     $params = null
-  )
-  {
+  ) {
 
     $pNode = $this->prepareParams($params);
 
@@ -1311,12 +1310,14 @@ CODE;
     } else {
 
       $tmp = explode(',', $name);
+      $tmpId = str_replace(array('[',']'), array('-','-'), $tmp[0]);
 
       if (count($tmp) > 1) {
-        $id      = $tmp[0]."-".$tmp[1];
+
+        $id      = $tmpId."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
       } else {
-        $id      = $tmp[0];
+        $id      = $tmpId;
         $inpName = $tmp[0];
       }
 
@@ -1328,10 +1329,8 @@ CODE;
 
     $selectBoxNode = new $elementKey();
 
-    $selectBoxNode->addAttributes
-    (
-      array
-      (
+    $selectBoxNode->addAttributes(
+      array(
         'name'      => $name,
         'id'        => $id,
         'class'     => 'asgd-'.$this->id,
@@ -1376,8 +1375,7 @@ CODE;
     $value = null,
     $attributes = array(),
     $params = null
-  )
-  {
+  ) {
 
     $pNode = $this->prepareParams($params);
 

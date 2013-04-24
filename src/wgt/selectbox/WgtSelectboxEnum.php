@@ -153,7 +153,7 @@ class WgtSelectboxEnum extends WgtSelectbox
   public function build($attributes = array())
   {
 
-    $id   = $this->attributes['id'];
+    $id = $this->getId();
 
     if ($this->redirect) {
       if (!isset($this->attributes['id'])) {
