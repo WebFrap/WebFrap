@@ -33,19 +33,27 @@ class FormatDateDuration
    * @param string:Date $end
    * @param string $format
    */
-  public static function format($start, $end, $format = '%a')
+  public static function format($start, $end, $format = 'month')
   {
+    
+    $formData = array(
+      'day' => 1,
+      'week' => 7,
+      'month' => 30,
+      'year' => 365,
+    );
+    
     
     // wenn start oder ende fehlen, dann 0 per definition
     if (!$start ||!$end)
-      return '0'';
+      return '0';
     
     $startDate = new DateTime($start);
     $endDate = new DateTime($end);
     
     $dur = $startDate->diff($endDate);
     
-    return $dur->format($format);
+    return floor($dur->format('%a')/$formData[$format]) ;
     
   }//end public static function format */
 
