@@ -187,6 +187,26 @@ class LibTaskplanner extends BaseChild
     if ($hours == 5 && $minutes == 44) {
       $lastDayOfMonth = SDate::getMonthDays($year, $month);
       
+      $lastWeekdayOfMonth = date('N', strtotime(date($year . '-' . $month . '-' . $lastDayOfMonth)));
+      
+      $easter = getdate(easter_date());
+      $karfreitag = $easter['mday'] - 2;
+      
+      if ($lastWeekdayOfMonth == 6) {
+        $lastWorkingDay = $lastDayOfMonth - 1;
+      } elseif ($lastWeekdayOfMonth == 7) {
+        $lastWorkingDay = $lastDayOfMonth - 2;
+        if ($lastWorkingDay == $karfreitag && $month == $easter['mon']) {
+          $lastWorkingDay --;
+        }
+      } else {
+        $lastWorkingDay = $lastDayOfMonth;
+      }
+      
+      if ($monthDay == $lastWorkingDay) {
+        $types[] = ETaskType::MONTH_END_WORKDAY;
+      }
+      
       // Jedes Quartal
       if ($monthDay == 1) {
         // ETaskType: Every month start
