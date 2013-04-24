@@ -1405,10 +1405,8 @@ CODE;
 
     $selectBoxNode = new $elementKey();
 
-    $selectBoxNode->addAttributes
-    (
-      array
-      (
+    $selectBoxNode->addAttributes(
+      array(
         'name'      => $name,
         'id'        => $id,
         'class'     => 'asgd-'.$this->id,
