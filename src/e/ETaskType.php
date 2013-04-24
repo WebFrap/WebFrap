@@ -93,7 +93,7 @@ class ETaskType
    * @var int
    */
   const MONTH_END = 14;
-
+  
   /**
    * @var int
    */
@@ -123,6 +123,11 @@ class ETaskType
    * @var int
    */
   const YEAR_END = 20;
+  
+  /**
+   * @var int
+   */
+  const MONTH_END_WORKDAY = 21;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Labels
@@ -152,7 +157,8 @@ class ETaskType
     self::MONTH_6_START => 'Every half year start',
     self::MONTH_6_END   => 'Every half year end',
     self::YEAR_START    => 'Every year start',
-    self::YEAR_END      => 'Every year end'
+    self::YEAR_END      => 'Every year end',
+    self::MONTH_END_WORKDAY => 'Every month end (workday)'
   );
 
   /**
