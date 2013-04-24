@@ -16,7 +16,8 @@
 *******************************************************************************/
 
 /**
- *
+ * Die Dauer eines Vorgangs aus dem Start und Endedatum heraus berechnen
+ * 
  * @package WebFrap
  * @subpackage tech_core
  */
@@ -30,8 +31,9 @@ class FormatDateDuration
   /**
    * @param string:Date $start
    * @param string:Date $end
+   * @param string $format
    */
-  public static function format( $start, $end, $format = '%a')
+  public static function format($start, $end, $format = '%a')
   {
     
     // wenn start oder ende fehlen, dann 0 per definition
