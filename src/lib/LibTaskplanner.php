@@ -108,7 +108,6 @@ class LibTaskplanner extends BaseChild
   public function setupRequiredTasktypes ($currentDate)
   {
 
-    $seconds = $currentDate['seconds'];
     $minutes = $currentDate['minutes'];
     $hours = $currentDate['hours'];
     $weekDay = $currentDate['wday'];
