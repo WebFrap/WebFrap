@@ -74,7 +74,13 @@ class LibTaskplanner extends BaseChild
       $this->env = Webfrap::$env;
     }
     
-    $this->load($currentTimestamp);
+    if ($currentTimestamp) {
+      $this->currentTimestamp = $currentTimestamp;
+    } else {
+      $this->currentTimestamp = time();
+    }
+    
+    $this->load();
   }
 
   /**
@@ -84,15 +90,9 @@ class LibTaskplanner extends BaseChild
 	 *
 	 * @param int $currentTimestamp (Unix) Timestamp
 	 */
-  public function load ($currentTimestamp = null)
+  public function load ()
   {
 
-    if ($currentTimestamp) {
-      $this->currentTimestamp = $currentTimestamp;
-    } else {
-      $this->currentTimestamp = time();
-    }
-    
     $this->currentDate = getdate($this->currentTimestamp);
     
     $this->taskTypes = $this->setupRequiredTasktypes($this->currentDate);
@@ -122,7 +122,7 @@ class LibTaskplanner extends BaseChild
     $types = array();
     
     // **:**:00, Jeden Tag
-    if ($seconds == 0) {
+    if ($seconds >= 0) {
       
       // ETaskType: Every minute
       $types[] = ETaskType::MINUTE;
@@ -261,12 +261,6 @@ class LibTaskplanner extends BaseChild
   public function loadTypedTasks ($taskTypes, $currentDate)
   {
 
-    if ($taskTypes) {
-      $whereType = implode(', ', $taskTypes);
-    } else {
-      $whereType = ETaskType::MINUTE;
-    }
-    
     $whereStatus = ETaskStatus::OPEN;
     
     $db = $this->getDb();
@@ -288,16 +282,16 @@ JOIN
     ON plan.rowid = task.vid
 
 WHERE
+    task.status = {$whereStatus}
+    AND
 	(
 		task.type IN({$whereType})
-		AND '{$currentDate}' BETWEEN plan.timestamp_start
-		AND plan.timestamp_end
+		AND '{$currentDate}' BETWEEN plan.timestamp_start AND plan.timestamp_end
 	)
 	OR
 	(
 		task.type = {$tCustom}
 		AND task.task_time = '{$currentDate}'
-		AND task.status = {$whereStatus}
      )
 SQL;
     
