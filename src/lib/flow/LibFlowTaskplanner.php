@@ -128,7 +128,7 @@ class LibFlowTaskplanner extends LibFlow
       User::getActive()->login("system");
     }
     
-    $taskPlanner = new LibTaskplanner(Webfrap::$env, 1395846000);
+    $taskPlanner = new LibTaskplanner();
     
     $tasks = $taskPlanner->tasks;
     
