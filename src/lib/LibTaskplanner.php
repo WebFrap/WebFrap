@@ -63,7 +63,7 @@ class LibTaskplanner extends BaseChild
   /**
 	 * Konstruktor.
 	 * @param LibFlowApachemod $env
-	 * @param int $currentTimestamp (Unix) Timestamp
+	 * @param int $currentTimestamp Timestamp
 	 */
   public function __construct ($env = null, $currentTimestamp = null)
   {
@@ -84,11 +84,9 @@ class LibTaskplanner extends BaseChild
   }
 
   /**
-	 * Initialisiert den Taskplanner entweder mit einem übergebenen oder dem aktuellen Timestamp.
-	 * Je nach Timestamp werden dann die entsprechenden Tasks in das Array
-	 *  <code>$taskTypes</code> geladen.
+	 * Initialisiert den Taskplanner und ermittelt welche Typen von Tasks laufen sollen.
 	 *
-	 * @param int $currentTimestamp (Unix) Timestamp
+	 * @param int $currentTimestamp Timestamp
 	 */
   public function load ()
   {
@@ -104,7 +102,7 @@ class LibTaskplanner extends BaseChild
 	 * Bestimmt in Abhängigkeit von <code>$currentDate</code> welche Typen von Tasks gestartet werden müssen.
 	 * Tasks die zu den selben Zeitpunkten starten können, werden zeitversetzt gestartet.
 	 *
-	 * @param int $currentDate (Unix) Timestamp
+	 * @param int $currentDate Timestamp
 	 * @return array $types
 	 */
   public function setupRequiredTasktypes ($currentDate)
@@ -265,9 +263,9 @@ class LibTaskplanner extends BaseChild
     
     $whereStatus = ETaskStatus::OPEN;
     
-    $db = $this->getDb();
-    
     $tCustom = ETaskType::CUSTOM;
+    
+    $db = $this->getDb();
     
     $sql = <<<SQL
 SELECT
