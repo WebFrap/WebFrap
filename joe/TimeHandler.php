@@ -141,15 +141,9 @@ class MinuteHandler extends TimeHandler {
 		
 		foreach ( $this->rules as $rule => $result ) {
 			
-			if ($rule == 0) {
+			if ($minutes % $rule == 0) {
 				echo 'Now: ' . $time ['hours'] . ':' . $time ['minutes'] . '<br>';
-				echo 'every minute <br>';
-			} else {
-				
-				if ($minutes % $rule == 0) {
-					echo 'Now: ' . $time ['hours'] . ':' . $time ['minutes'] . '<br>';
-					echo 'Event: ' . $this->rules [$rule] . ' <br>';
-				}
+				echo 'Event: ' . $this->rules [$rule] . ' <br>';
 			}
 		}
 	}
@@ -163,15 +157,10 @@ class HourHandler extends TimeHandler {
 		$hours = $time ['hours'];
 		
 		foreach ( $this->rules as $rule => $result ) {
-			if ($rule == 0) {
+			
+			if ($hours % $rule == 0 && $minutes == 15) {
 				echo 'Now: ' . $time ['hours'] . ':' . $time ['minutes'] . '<br>';
-				echo 'Event every hour <br>';
-			} else {
-				
-				if ($hours % $rule == 0 && $minutes == 15) {
-					echo 'Now: ' . $time ['hours'] . ':' . $time ['minutes'] . '<br>';
-					echo 'Event: ' . $this->rules [$rule] . ' <br>';
-				}
+				echo 'Event: ' . $this->rules [$rule] . ' <br>';
 			}
 		}
 	}
@@ -221,7 +210,7 @@ class CusomTimeHandler extends TimeHandler {
 		
 		// 05:33:**
 		if ($hours == 5 && $minutes == 33) {
-			$lastDayOfMonth = date('t', mktime( 0, 0, 0, $month, 1,  $year));
+			$lastDayOfMonth = date ( 't', mktime ( 0, 0, 0, $month, 1, $year ) );
 			
 			$lastWeekdayOfMonth = date ( 'N', strtotime ( date ( $year . '-' . $month . '-' . $lastDayOfMonth ) ) );
 			
@@ -289,14 +278,14 @@ class CusomTimeHandler extends TimeHandler {
 $now = getdate ();
 
 $mHandler = new MinuteHandler ( array (
-		0 => TimeHandler::MINUTE,
+		1 => TimeHandler::MINUTE,
 		5 => TimeHandler::MINUTE_5,
 		15 => TimeHandler::MINUTE_15,
 		30 => TimeHandler::MINUTE_30 
 ) );
 
 $hHandler = new HourHandler ( array (
-		0 => TimeHandler::HOUR,
+		1 => TimeHandler::HOUR,
 		6 => TimeHandler::HOUR_6,
 		12 => TimeHandler::HOUR_12 
 ) );
