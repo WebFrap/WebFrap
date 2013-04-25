@@ -121,70 +121,70 @@ class LibTaskplanner extends BaseChild
     
     $types = array();
     
-    // **:**:00, Jeden Tag
-    if ($seconds >= 0) {
-      
-      // ETaskType: Every minute
-      $types[] = ETaskType::MINUTE;
-      
-      if ($minutes % 5 == 0) {
-        // ETaskType: Every 5 minutes
-        $types[] = ETaskType::MINUTE_5;
-      }
-      
-      if ($minutes % 15 == 0) {
-        // ETaskType: Every 15 minutes
-        $types[] = ETaskType::MINUTE_15;
-      }
-      
-      if ($minutes % 30 == 0) {
-        // ETaskType: Every 30 minutes
-        $types[] = ETaskType::MINUTE_30;
-      }
+    // Die Tasks im Bereich von Minuten können zu jeder Sekunde laufen. 
+    // Damit können verzögerungen besser ausgeglichen werden und $types ist niemals leer.
+    
+
+    // ETaskType: Every minute
+    $types[] = ETaskType::MINUTE;
+    
+    // ETaskType: Every 5 minutes
+    if ($minutes % 5 == 0) {
+      $types[] = ETaskType::MINUTE_5;
     }
     
-    // **:22, Jeden Tag
-    if ($minutes == 22) {
+    // ETaskType: Every 15 minutes
+    if ($minutes % 15 == 0) {
+      $types[] = ETaskType::MINUTE_15;
+    }
+    
+    // ETaskType: Every 30 minutes
+    if ($minutes % 30 == 0) {
+      $types[] = ETaskType::MINUTE_30;
+    }
+    
+    // **:11:**, Jeden Tag
+    if ($minutes == 11) {
       
       // ETaskType: Every hour
       $types[] = ETaskType::HOUR;
       
+      // ETaskType: Every 6 hours
       if ($hours % 6 == 0) {
-        // ETaskType: Every 6 hours
         $types[] = ETaskType::HOUR_6;
       }
       
+      // ETaskType: Every 12 hours
       if ($hours % 12 == 0) {
-        // ETaskType: Every 12 hours
         $types[] = ETaskType::HOUR_12;
       }
     }
     
-    // 02:22, Jeden Tag
+    // 02:22:**, Jeden Tag
     if ($hours == 2 && $minutes == 22) {
       
       // ETaskType: Every day
       $types[] = ETaskType::DAY;
       
+      // ETaskType: Every working day
       if ($weekDay > 0 && $weekDay < 6) {
-        // ETaskType: Every working day
         $types[] = ETaskType::WORK_DAY;
       }
       
+      // ETaskType: Every weekend
       if ($weekDay == 0 || $weekDay == 6) {
-        // ETaskType: Every weekend
         $types[] = ETaskType::WEEK_END;
       }
       
       // Mo alle 2 Wochen
+      // ETaskType: Every second week
       if ($weekDay == 1 && (($yearDay / 7) % 2) == 0) {
-        // ETaskType: Every second week
         $types[] = ETaskType::WEEK_2;
       }
     }
     
-    // 05:44
-    if ($hours == 5 && $minutes == 44) {
+    // 05:33:**
+    if ($hours == 5 && $minutes == 33) {
       $lastDayOfMonth = SDate::getMonthDays($year, $month);
       
       $lastWeekdayOfMonth = date('N', strtotime(date($year . '-' . $month . '-' . $lastDayOfMonth)));
