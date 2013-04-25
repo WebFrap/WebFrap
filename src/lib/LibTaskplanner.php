@@ -261,6 +261,8 @@ class LibTaskplanner extends BaseChild
   public function loadTypedTasks ($taskTypes, $currentDate)
   {
 
+    $whereType = implode(', ', $taskTypes);
+    
     $whereStatus = ETaskStatus::OPEN;
     
     $db = $this->getDb();
