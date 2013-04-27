@@ -32,20 +32,44 @@ abstract class Base
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
 
+  /**
+   * @var string
+   */
   const DB = 'Db';
 
+  /**
+   * @var string
+   */
   const CACHE = 'Cache';
 
+  /**
+   * @var string
+   */
   const REQUEST = 'Request';
 
+  /**
+   * @var string
+   */
   const RESPONSE = 'Response';
 
+  /**
+   * @var string
+   */
   const USER = 'User';
 
+  /**
+   * @var string
+   */
   const ACL = 'Acl';
 
+  /**
+   * @var string
+   */
   const INFO = 'Info';
 
+  /**
+   * @var string
+   */
   const CONF = 'Conf';
 
   /*//////////////////////////////////////////////////////////////////////////////
