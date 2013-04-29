@@ -261,6 +261,7 @@ class LibTaskplanner extends BaseChild
     $whereType = implode(', ', $taskTypes);
     
     $statusOpen = ETaskStatus::OPEN;
+    $statusDisabled = ETaskStatus::DISABLED; 
         
     $customType = ETaskType::CUSTOM;
     
@@ -290,11 +291,13 @@ WHERE
 	(
 		task.type IN({$whereType})
 		AND '{$currentDate}' BETWEEN plan.timestamp_start AND plan.timestamp_end
+		AND task.status <> {$statusDisabled}
 	)
 	OR
 	(
 		task.type IN({$customType})
 		AND task.task_time = '{$currentDate}'
+		AND task.status <> {$statusDisabled}
      )
 SQL;
     
