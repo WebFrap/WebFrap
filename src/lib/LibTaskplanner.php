@@ -262,10 +262,10 @@ class LibTaskplanner extends BaseChild
     $customType = ETaskType::CUSTOM;
     
     $statusOpen = ETaskStatus::OPEN;
-    $statusDisabled = ETaskStatus::DISABLED; 
-        
+    $statusDisabled = ETaskStatus::DISABLED;
+
     $db = $this->getDb();
-    
+
     $sql = <<<SQL
 SELECT
   plan.rowid as plan_id,

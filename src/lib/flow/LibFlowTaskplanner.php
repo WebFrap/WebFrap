@@ -317,9 +317,8 @@ class LibFlowTaskplanner extends LibFlow
     $orm->insert('WbfsysTaskLog', $logMessage);
     
     $orm->update('WbfsysPlannedTask', $taskId, array(
-    		'status' => $status
+        'status' => $status
     ));
-    
   }
 
   /**
