@@ -16,29 +16,31 @@
 *******************************************************************************/
 
 /**
- * Wird geworfen wenn eine nicht existierende Methode auf einer Classe 
- * mit __call / mapping aufgerufen wird
+ * Die Dauer eines Vorgangs aus dem Start und Endedatum heraus berechnen
  * 
  * @package WebFrap
  * @subpackage tech_core
- *
  */
-class MethodNotExists_Exception extends WebfrapSys_Exception
+class FormatNumber
 {
+/*//////////////////////////////////////////////////////////////////////////////
+// Attributes
+//////////////////////////////////////////////////////////////////////////////*/
 
+  
   /**
-   * @param string $object
-   * @param string $message
-   * @param string $arguments
+   * @param float $number
+   * @param int $decimals
    */
-  public function __construct($object, $method, $arguments = array())
+  public static function format($number, $decimals = 2)
   {
+    
+    // wenn start oder ende fehlen, dann 0 per definition
+    if (!$number)
+      $number = 0;
 
-    $message = 'The method '.$method.' not exists on class '.get_class($object).' args: '.implode(', ', array_keys($arguments)) ;
+    return number_format($number, $decimals);
+    
+  }//end public static function format */
 
-    parent::__construct($message);
-
-  }//end public function __construct */
-
-}//end class MethodNotExists_Exception
-
+} // end class FormatNumber

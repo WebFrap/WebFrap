@@ -102,6 +102,10 @@
           class="wcm wcm_req_ajax" >Simple Grid</a>
         </li>
         <li><a
+          href="area.php?c=Example.Wgt.area&area=listing.sum_grid"
+          class="wcm wcm_req_ajax" >Sum Grid</a>
+        </li>
+        <li><a
           href="area.php?c=Example.Wgt.area&area=listing.editable_grid"
           class="wcm wcm_req_ajax" >Editable Grid</a>
         </li>

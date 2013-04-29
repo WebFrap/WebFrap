@@ -865,16 +865,6 @@ abstract class Entity implements ArrayAccess
   *
   * @return string
   */
-  public function getIndexNameFields()
-  {
-    return static::$indexNameFields;
-  } // end public function getIndexNameFields */
-
- /**
-  * Getter für die Cols
-  *
-  * @return string
-  */
   public function getIndexTitleFields()
   {
     return static::$indexTitleFields;

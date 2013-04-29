@@ -1021,7 +1021,7 @@ class LibDbOrm
     $criteria  = $this->newCriteria();
     $paths     = array_reverse(explode('/', $path)) ;
 
-    // ok kleiner dirty hack
+    // ok kleiner phantastic hack
     $actual = explode(':', array_shift($paths));
 
     $table      = $actual[1];
@@ -1920,21 +1920,6 @@ SQL;
 
     try {
 
-      // name
-      $nameFields = $entity->getIndexNameFields();
-      if ($nameFields) {
-        if (count($nameFields) > 1) {
-          $nameTmp = array();
-          foreach ($nameFields as $field) {
-            $nameTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
-          }
-
-          $indexData['name'] = implode(', ', $nameTmp);
-        } else {
-          $indexData['name'] = isset($keyVal[$nameFields[0]])?$keyVal[$nameFields[0]]:'';
-        }
-      }
-
       // title
       $titleFields = $entity->getIndexTitleFields();
       if ($titleFields) {
@@ -2070,15 +2055,12 @@ SQL;
     $entity     = $this->newEntity($entityKey);
     $tableName  = $entity->getTable();
 
-    $nameFields   = $entity->getIndexNameFields();
     $titleFields  = $entity->getIndexTitleFields();
     $keyFields    = $entity->getIndexKeyFields();
     $descriptionFields = $entity->getIndexDescriptionFields();
 
-    $fields = array_merge
-    (
+    $fields = array_merge(
       array('rowid', Db::UUID, Db::TIME_CREATED),
-      $nameFields,
       $titleFields,
       $keyFields,
       $descriptionFields
@@ -2091,20 +2073,6 @@ SQL;
       foreach ($rows as $keyVal) {
 
         $indexData = array();
-
-        // name
-        if ($nameFields) {
-          if (count($nameFields) > 1) {
-            $nameTmp = array();
-            foreach ($nameFields as $field) {
-              $nameTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
-            }
-
-            $indexData['name'] = implode(', ', $nameTmp);
-          } else {
-            $indexData['name'] = isset($keyVal[$nameFields[0]])?$keyVal[$nameFields[0]]:'';
-          }
-        }
 
         // title
         if ($titleFields) {
@@ -2175,6 +2143,7 @@ SQL;
       }
 
     } catch (LibDb_Exception $exc) {
+      
       return null;
     }
 

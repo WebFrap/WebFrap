@@ -39,14 +39,12 @@ class WgtElementContextForm extends WgtAbstract
   public function render($params = null)
   {
 
-    if (!WBF_SHOW_MOCKUP)
-      return '';
+    return '';
 
     $user    = User::getActive();
     $db      = Db::getActive();
 
-    $contextForm = new WgtFormBuilder
-    (
+    $contextForm = new WgtFormBuilder(
       'ajax.php?c=Webfrap.ProfileContext.updateProfile',
       'context-profile',
       'put',
