@@ -260,9 +260,9 @@ class LibTaskplanner extends BaseChild
 
     $whereType = implode(', ', $taskTypes);
     
-    $whereStatus = ETaskStatus::OPEN;
-    
-    $tCustom = ETaskType::CUSTOM;
+    $statusOpen = ETaskStatus::OPEN;
+        
+    $customType = ETaskType::CUSTOM;
     
     $db = $this->getDb();
     
@@ -281,15 +281,19 @@ JOIN
     ON plan.rowid = task.vid
 
 WHERE
-    task.status = {$whereStatus}
-    AND
+	(
+		task.type IN({$whereType})
+		AND task.task_time = '{$currentDate}'
+		AND task.status = {$statusOpen}
+	)
+	OR
 	(
 		task.type IN({$whereType})
 		AND '{$currentDate}' BETWEEN plan.timestamp_start AND plan.timestamp_end
 	)
 	OR
 	(
-		task.type = {$tCustom}
+		task.type IN({$customType})
 		AND task.task_time = '{$currentDate}'
      )
 SQL;
