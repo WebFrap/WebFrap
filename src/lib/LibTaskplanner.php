@@ -184,22 +184,31 @@ class LibTaskplanner extends BaseChild
     if ($hours == 5 && $minutes == 33) {
       $lastDayOfMonth = SDate::getMonthDays($year, $month);
       
+      // Welches ist der letzte Wochentag des Monats?
       $lastWeekdayOfMonth = date('N', strtotime(date($year . '-' . $month . '-' . $lastDayOfMonth)));
       
+      // Wann ist Ostersonntag?
       $easter = getdate(easter_date());
+      
+      // Wann ist Karfreitag?
       $karfreitag = $easter['mday'] - 2;
       
       if ($lastWeekdayOfMonth == 6) {
+        // Wenn der letzte Tag des Monats ein Samstag ist, ist der letzte Arbeitstag der Freitag davor
         $lastWorkingDay = $lastDayOfMonth - 1;
       } elseif ($lastWeekdayOfMonth == 7) {
+        // Wenn der letzte Tag des Monats ein Sonntag ist, ist der letzte Arbeitstag der Freitag davor
         $lastWorkingDay = $lastDayOfMonth - 2;
         if ($lastWorkingDay == $karfreitag && $month == $easter['mon']) {
+          // Ist der lezte Arbeitstag der Karfreitag, ziehen wir noch einen Tag ab.
           $lastWorkingDay --;
         }
       } else {
+        // In jedem anderen Fall ist der letzte Tag des Monats auch der letzte Arbeitstag
         $lastWorkingDay = $lastDayOfMonth;
       }
       
+      // Letzter Tag im Monat
       if ($monthDay == $lastWorkingDay) {
         $types[] = ETaskType::MONTH_END_WORKDAY;
       }
@@ -222,7 +231,7 @@ class LibTaskplanner extends BaseChild
         $types[] = ETaskType::MONTH_3_END;
       }
       
-      // Jedes Halbjahr
+      // Jedes Halbjahr, erster Tag des Monats
       if ($monthDay == 1 && $month % 6 == 0) {
         // ETaskType: Every half year start
         $types[] = ETaskType::MONTH_6_START;
