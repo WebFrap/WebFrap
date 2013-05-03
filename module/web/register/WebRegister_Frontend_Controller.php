@@ -52,28 +52,23 @@ class WebRegister_Frontend_Controller extends ControllerFrontend
    */
   protected $options = array
   (
-    'listing' => array
-    (
+    'listing' => array(
       'method'    => array('GET'),
       'views'      => array('html')
     ),
-    'addarticle' => array
-    (
+    'addarticle' => array(
       'method'    => array('POST'),
       'views'      => array('ajax')
     ),
-    'removearticle' => array
-    (
+    'removearticle' => array(
       'method'    => array('DELETE'),
       'views'      => array('ajax')
     ),
-    'clear' => array
-    (
+    'clear' => array(
       'method'    => array('DELETE'),
       'views'      => array('ajax')
     ),
-    'update' => array
-    (
+    'update' => array(
       'method'    => array('PUT'),
       'views'      => array('ajax')
     ),
