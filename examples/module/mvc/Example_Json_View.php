@@ -26,7 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class Example_Json_View extends WgtModal
+class Example_Json_View extends LibTemplateServiceView
 {
 
   /**
