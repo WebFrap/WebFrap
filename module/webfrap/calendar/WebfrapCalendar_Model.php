@@ -77,7 +77,7 @@ class WebfrapCalendar_Model extends Model
    * @param WebfrapMessage_Table_Search_Request $params
    * @return array
    */
-  public function fetchEvents($params)
+  public function searchEvents($params)
   {
 
     $db = $this->getDb();
@@ -85,20 +85,28 @@ class WebfrapCalendar_Model extends Model
 
     /* @var $query WebfrapCalendar_Query */
     $query = $db->newQuery('WebfrapCalendar');
-    
-    Debug::console('$params->searchFields',$params->searchFields);
-    Debug::console('$params->extSearch',$params->extSearch);
-    
-    $query->extSearch($params->searchFieldsStack, $params->extSearch);
+
+    //$query->extSearch($params->searchFieldsStack, $params->extSearch);
 
     $query->fetch(
       $this->params->conditions,
       $params
     );
 
-    return $query;
+    $entries = array();
+    
+    foreach( $query as $entry ){
+      
+      if('t'==$entry['allDay'])
+        $entry['allDay'] = true;
+      else
+        $entry['allDay'] = false;
+      $entries[] = $entry;
+    }
+    
+    return $entries;
 
-  }//end public function fetchEvents */
+  }//end public function searchEvents */
 
   /**
    * @param int $msgId

@@ -35,7 +35,8 @@ class WebfrapCalendar_Controller extends Controller
   /**
    * @var array
    */
-  protected $options           = array(
+  protected $options = array(
+      
     'search' => array(
       'method'    => array('GET'),
       'views'      => array('ajax')
@@ -46,18 +47,22 @@ class WebfrapCalendar_Controller extends Controller
       'method'    => array('GET'),
       'views'      => array('modal', 'maintab')
     ),
+      
     'formshow' => array(
       'method'    => array('GET'),
       'views'      => array('modal', 'maintab')
     ),
+      
     'showmailcontent' => array(
       'method'    => array('GET'),
       'views'      => array('html')
     ),
+      
     'showpreview' => array(
       'method'    => array('GET'),
       'views'      => array('ajax')
     ),
+      
     'sendusermessage' => array(
       'method'    => array('POST'),
       'views'      => array('ajax')
@@ -177,13 +182,8 @@ class WebfrapCalendar_Controller extends Controller
     /* @var $model WebfrapCalendar_Model  */
     $model = $this->loadModel('WebfrapCalendar');
 
-    $userSettings = $model->loadSettings();
-
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = new WebfrapCalendar_Table_Search_Request($request, $userSettings);
-
-    if ($userSettings->changed)
-      $model->saveSettings($userSettings);
+    $params  = new WebfrapCalendar_Search_Request($request );
 
     $model->loadTableAccess($params);
 
@@ -195,10 +195,10 @@ class WebfrapCalendar_Controller extends Controller
     }
 
     // load the view object
-    /* @var $view WebfrapCalendar_List_Ajax_View */
+    /* @var $view WebfrapCalendar_Ajax_View */
     $view = $response->loadView(
-      'list-message_list',
-      'WebfrapCalendar_List',
+      'list-calendar_list',
+      'WebfrapCalendar',
       'displaySearch',
       View::AJAX
     );
@@ -210,6 +210,12 @@ class WebfrapCalendar_Controller extends Controller
     $view->displaySearch($params);
 
   }//end public function service_search */
+  
+  
+  
+  
+  
+  
 
  /**
   * Form zum erstellen einer neuen Message

@@ -110,8 +110,16 @@ class WebfrapCalendar_Query extends LibSqlQuery
   {
 
     $cols = array(
-      'wbfsys_message.rowid as "wbfsys_message_rowid"',
-      'wbfsys_message.title as "wbfsys_message_title"',
+      'wbfsys_message.rowid as "id"',
+      'wbfsys_message.title as "title"',
+      'appoint.timestamp_start as start',
+      'appoint.timestamp_end as end',
+      'appoint.flag_all_day as allDay',
+      /*
+      'extract(epoch from appoint.timestamp_start) as start',
+      'extract(epoch from appoint.timestamp_end) as end',
+      */
+        /*
       'wbfsys_message.message as "wbfsys_message_message"',
       'wbfsys_message.priority as "wbfsys_message_priority"',
       'wbfsys_message.stack_id as "wbfsys_message_stack_id"',
@@ -136,6 +144,7 @@ class WebfrapCalendar_Query extends LibSqlQuery
       'receiver.core_person_lastname as receiver_core_person_lastname',
       'receiver.core_person_firstname as receiver_core_person_firstname',
       'receiver.wbfsys_role_user_name as receiver_wbfsys_role_user_name',
+      */
     );
 
     $criteria->select($cols, true);
@@ -406,14 +415,7 @@ class WebfrapCalendar_Query extends LibSqlQuery
   public function checkLimitAndOrder($criteria, $condition, $params)
   {
 
-    // check if there is a given order
-    if ($condition['order']) {
-      $criteria->orderBy($condition['order']);
 
-    } else { // if not use the default
-      $criteria->orderBy('wbfsys_message.m_time_created desc');
-
-    }
 
     // Check the offset
     if ($params->start) {
@@ -422,7 +424,7 @@ class WebfrapCalendar_Query extends LibSqlQuery
     } else {
       $params->start = null;
     }
-    $criteria->offset($params->start);
+    //$criteria->offset($params->start);
 
     // Check the limit
     if (-1 == $params->qsize) {

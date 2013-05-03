@@ -27,51 +27,31 @@ class WebfrapCalendar_Ajax_View extends LibTemplatePlain
 /*//////////////////////////////////////////////////////////////////////////////
 // display methodes
 //////////////////////////////////////////////////////////////////////////////*/
-
+    
   /**
-   * Render des Suchergebnisses und übergabe in die ajax response
-   * @param string $elementId
+   * 
+   * @var WebfrapCalendar_Model
    */
-  public function displayOpen($elementId)
-  {
+  public $model = null;
 
-    $tpl = $this->getTplEngine();
-
-    $pageFragment = new WgtAjaxArea();
-    $pageFragment->selector = '#'.$elementId;
-    $pageFragment->action = 'replace';
-
-    $msgElement = new WgtElementMessageList();
-    $msgElement->setId($elementId);
-
-    $messagesRes = $this->model->loadMessages();
-
-    $pageFragment->setContent($msgElement->renderFull($messagesRes));
-
-    $tpl->setArea('message_list', $pageFragment);
-
-  }//end public function displayOpen */
   
   /**
-   * Render des Suchergebnisses und übergabe in die ajax response
-   * @param string $elementId
+   * Übergabe der Suchergebnisse
+   * @param array $entries
    */
-  public function displayMsgPreview( $msgNode )
+  public function displaySearch( $params )
   {
   
     $tpl = $this->getTplEngine();
-  
-    $pageFragment = new WgtAjaxArea();
-    $pageFragment->selector = '#wgt-message-list-show_messagebox';
-    $pageFragment->action = 'html';
-  
-    $pageFragment->addVar( 'message', $msgNode );
-    $pageFragment->setTemplate('webfrap/message/maintab/list_msgbox',true);
-    $pageFragment->render();
+    
+    
+    $entries = $this->model->searchEvents( $params );
+    
+    
+    $tpl->setRawJsonData($entries);
 
-    $tpl->setArea('message_list', $pageFragment);
   
-  }//end public function displayMsgPreview */  
+  }//end public function displaySearch */  
 
 
   /**
