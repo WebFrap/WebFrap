@@ -246,16 +246,35 @@ class WebfrapCalendar_Query extends LibSqlQuery
 
     }
 
+    if ($params->start && $params->end ) {
+      $criteria->where(
+        "(
+            (
+              appoint.timestamp_start >= '{$params->start}' AND appoint.timestamp_start <= '{$params->end}'
+            )
+            OR
+            (
+              appoint.timestamp_end <= '{$params->end}' AND appoint.timestamp_end >= '{$params->start}'
+            )
+        )");
+    }
+
+
+
     if ($condition) {
 
       if (is_string($condition)) {
+
         if (ctype_digit($condition)) {
           $criteria->where('wbfsys_message.rowid = '.$condition);
         } else {
           $criteria->where($condition);
         }
+
       } elseif (is_array($condition)) {
+
         $this->checkConditions($criteria, $condition);
+
       }
     }
 

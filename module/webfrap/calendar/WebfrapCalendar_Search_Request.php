@@ -25,7 +25,9 @@
 class WebfrapCalendar_Search_Request extends ContextListing
 {
 
+  public $start = null;
 
+  public $end = null;
 
   /**
    * Auswerten des Requests
@@ -42,7 +44,15 @@ class WebfrapCalendar_Search_Request extends ContextListing
     // search free
     $this->conditions['free'] = $request->param('free_search', Validator::SEARCH);
 
+    $start = $request->param('start', Validator::INT);
+    if(!$start)
+      $start = time();
+    $this->start = date('Y-m-d H:i:s',$start );
 
+    $end = $request->param('end', Validator::INT);
+    if(!$end)
+      $end = time()+2678400; // + 31 tage... gehen wir mal davon aus + ein monat
+    $this->end = date('Y-m-d H:i:s',$end );
 
 
   }//end public function interpretRequest */
