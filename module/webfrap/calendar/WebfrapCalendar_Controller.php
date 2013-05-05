@@ -36,10 +36,15 @@ class WebfrapCalendar_Controller extends Controller
    * @var array
    */
   protected $options = array(
-      
+
     'search' => array(
       'method'    => array('GET'),
       'views'      => array('ajax')
+    ),
+
+    'element' => array(
+        'method'    => array('GET'),
+        'views'      => array('modal', 'maintab')
     ),
 
     // message logic
@@ -47,22 +52,22 @@ class WebfrapCalendar_Controller extends Controller
       'method'    => array('GET'),
       'views'      => array('modal', 'maintab')
     ),
-      
+
     'formshow' => array(
       'method'    => array('GET'),
       'views'      => array('modal', 'maintab')
     ),
-      
+
     'showmailcontent' => array(
       'method'    => array('GET'),
       'views'      => array('html')
     ),
-      
+
     'showpreview' => array(
       'method'    => array('GET'),
       'views'      => array('ajax')
     ),
-      
+
     'sendusermessage' => array(
       'method'    => array('POST'),
       'views'      => array('ajax')
@@ -113,7 +118,7 @@ class WebfrapCalendar_Controller extends Controller
       'method'    => array('DELETE'),
       'views'      => array('ajax')
     ),
-    
+
     // archive
     'archivemessage' => array(
       'method'    => array('PUT'),
@@ -127,19 +132,19 @@ class WebfrapCalendar_Controller extends Controller
       'method'    => array('PUT'),
       'views'      => array('ajax')
     ),
-    
+
     // reopen einen archivierten Datensatz wieder öffnen
     'reopen' => array(
       'method'    => array('PUT'),
       'views'      => array('ajax')
     ),
-    
+
     // spam / ham
     'setspam' => array(
       'method'    => array('PUT'),
       'views'      => array('ajax')
     ),
-      
+
     // nachricht als gelesen markieren
     'markread' => array(
         'method'    => array('PUT'),
@@ -153,7 +158,7 @@ class WebfrapCalendar_Controller extends Controller
         'method'    => array('PUT'),
         'views'      => array('ajax')
     ),
-    
+
     // references
     'addref' => array(
       'method'    => array('PUT'),
@@ -210,12 +215,48 @@ class WebfrapCalendar_Controller extends Controller
     $view->displaySearch($params);
 
   }//end public function service_search */
-  
-  
-  
-  
-  
-  
+
+  /**
+   * Form zum erstellen einer neuen Message
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return boolean
+   */
+  public function service_element($request, $response)
+  {
+
+    // prüfen ob irgendwelche steuerflags übergeben wurde
+    $params  = $this->getFlags($request);
+
+    $model = $this->loadModel('WebfrapCalendar');
+    $model->loadTableAccess($params);
+
+    if (!$model->access->listing) {
+      throw new InvalidRequest_Exception(
+          Response::FORBIDDEN_MSG,
+          Response::FORBIDDEN
+      );
+    }
+
+    // load the view object
+    $view   = $response->loadView(
+        'form-calendar-element',
+        'WebfrapCalendar_Element',
+        'displayElement'
+    );
+
+    // request bearbeiten
+    /* @var $model WebfrapCalendar_Model */
+    $model = $this->loadModel('WebfrapCalendar');
+    $view->setModel($model);
+
+    $view->displayElement($params);
+
+  }//end public function service_element */
+
+
+
+
 
  /**
   * Form zum erstellen einer neuen Message
@@ -342,7 +383,7 @@ class WebfrapCalendar_Controller extends Controller
     $view->displayContent($params);
 
   }//end public function service_showMailContent */
-  
+
 
   /**
    * Form zum anschauen einer Nachricht
@@ -352,25 +393,25 @@ class WebfrapCalendar_Controller extends Controller
    */
   public function service_showPreview($request, $response)
   {
-  
+
     // prüfen ob irgendwelche steuerflags übergeben wurde
     $params  = $this->getFlags($request);
-  
+
     $msgId = $request->param('objid', Validator::EID);
-  
+
     /* @var $model WebfrapCalendar_Model */
     $model = $this->loadModel('WebfrapCalendar');
     $model->loadTableAccess($params);
-  
+
     if (!$model->access->access) {
       throw new InvalidRequest_Exception(
           Response::FORBIDDEN_MSG,
           Response::FORBIDDEN
       );
     }
-  
+
     $msgNode = $model->loadMessage($msgId);
-  
+
     // load the view object
     /* @var $view WebfrapCalendar_Ajax_View */
     $view   = $response->loadView(
@@ -379,14 +420,14 @@ class WebfrapCalendar_Controller extends Controller
         'displayMsgPreview'
     );
     $view->setModel($model);
-  
+
     $view->displayMsgPreview($msgNode);
-  
+
   }//end public function service_showPreview */
 
- 
-  
-  
+
+
+
   /**
    *
    * @param LibRequestHttp $request
@@ -415,11 +456,11 @@ class WebfrapCalendar_Controller extends Controller
         Response::FORBIDDEN
       );
     }
-    
+
     $model->saveMessage($msgId, $rqtData);
 
   }//end public function service_saveMessage */
-  
+
   /**
    *
    * @param LibRequestHttp $request
@@ -448,7 +489,7 @@ class WebfrapCalendar_Controller extends Controller
         Response::FORBIDDEN
       );
     }
-    
+
     if( 100 == $flagSpam) {
       //wenn spam dann löschen
       $this->getTpl()->addJsCode(<<<JS
@@ -458,11 +499,11 @@ class WebfrapCalendar_Controller extends Controller
 JS
       );
     }
-    
+
     $model->setSpam($msgId, $flagSpam, $rqtData);
 
   }//end public function service_saveMessage */
-  
+
   /**
    *
    * @param LibRequestHttp $request
@@ -809,7 +850,7 @@ JS
     }
 
     $linkId = $model->addRef($msgId,$refId);
-    
+
     /* @var $view WebfrapCalendar_Ajax_View */
     $view   = $response->loadView(
       'message-update-ref',
@@ -821,7 +862,7 @@ JS
     $view->displayAddRef($linkId,$msgId);
 
   }//end public function service_addRef */
-  
+
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -847,7 +888,7 @@ JS
     }
 
     $model->delRef($delId);
-    
+
     /* @var $view WebfrapCalendar_Ajax_View */
     $view   = $response->loadView(
       'message-del-ref',
@@ -859,7 +900,7 @@ JS
     $view->displayDelRef($delId);
 
   }//end public function service_addRef */
-  
 
-  
+
+
 } // end class WebfrapCalendar_Controller

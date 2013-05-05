@@ -21,7 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapMessage_List_Maintab_View extends WgtMaintab
+class WebfrapCalendar_Element_Maintab_View extends WgtMaintab
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden
@@ -31,96 +31,15 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
    * @param WebfrapMessage_Table_Search_Request $params
    * @return void
    */
-  public function displayList($params)
+  public function displayList($userRqt)
   {
 
-    $this->setLabel('My Communications &amp; Tasks');
-    $this->setTitle('My Communications &amp; Tasks');
+    $this->setLabel('Callendar');
+    $this->setTitle('Callendar');
 
-    //$this->addVar('node', $this->model->node);
+    $this->setTemplate('webfrap/calendar/maintab/element', true);
 
-    // benötigte resourcen laden
-    $user     = $this->getUser();
-    $acl      = $this->getAcl();
-    $request  = $this->getRequest();
-
-    $access = $params->access;
-
-    $params->qsize  = 50;
-
-    // die query muss für das paging und eine korrekte anzeige
-    // die anzahl der gefundenen datensätze ermitteln
-    $params->loadFullSize = true;
-
-    $params->searchFormId = 'wgt-form-webfrap-groupware-search';
-
-    $this->addVar('settings', $params->settings);
-
-    $data = $this->model->fetchMessages($params);
-
-    $table = new WebfrapMessage_Table_Element('messageList', $this);
-    $table->setId('wgt-table-webfrap-groupware_message');
-    $table->access = $params->access;
-
-    $table->setData($data);
-    $table->addAttributes(array(
-      'style' => 'width:99%;'
-    ));
-
-    $table->setPagingId($params->searchFormId);
-
-
-    $table->buildHtml();
-
-    // Über Listenelemente können Eigene Panelcontainer gepackt werden
-    // hier verwenden wir ein einfaches Standardpanel mit Titel und
-    // simplem Suchfeld
-    $tabPanel = new WgtPanelTable($table);
-
-    //$tabPanel->title = $view->i18n->l('Tasks', 'project.task.label');
-    //$tabPanel->searchKey = 'project_task';
-
-    // display the toggle button for the extended search
-    //$tabPanel->advancedSearch = true;
-
-    // search element im maintab
-    /* @var $searchElement WgtPanelElementSearch_Overlay */
-    $searchElement = $this->setSearchElement(new WgtPanelElementSearch_Overlay($table));
-    $searchElement->searchKey = 'my_message';
-    $searchElement->searchFieldSize = 'xlarge';
-    //$searchElement->advancedSearch = true;
-    $searchElement->focus = true;
-
-
-    $searchElement->setSearchFields($params->searchFields);
-
-    // Ein Panel für die Filter hinzufügen
-    // Die Filteroptionen befinden sich im Panel
-    // Die UI Klasse wird als Environment übergeben
-    $filterSubPanel = new WebfrapMessage_List_SubPanel_Filter($this);
-
-    // Search Form wird benötigt um die Filter an das passende Suchformular zu
-    // binden
-    $filterSubPanel->setSearchForm($params->searchFormId);
-
-
-
-    // Setzen der Filterzustände, werden aus der URL ausgelesen
-    $filterSubPanel->setFilterStatus($params->settings);
-
-    // Access wird im Panel als Rechte Container verwendet
-    $filterSubPanel->setAccess($access);
-    $filterSubPanel->searchKey = $searchElement->searchKey;
-
-    // Jetzt wird das SubPanel in den Suchen Splittbutton integriert
-    $searchElement->setFilter($filterSubPanel);
-
-
-    // templates
-
-    $this->setTemplate('webfrap/message/maintab/list', true);
-
-    $this->addMenu($params);
+    $this->addMenu($userRqt);
 
   }//end public function displayList */
 
@@ -135,10 +54,6 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
    */
   public function addMenu($params)
   {
-
-    $iconLtChat    = $this->icon('groupware/group_chat.png'      ,'Chat');
-    $iconLtFull    = $this->icon('groupware/group_full.png'      ,'Full');
-    $iconLtHead    = $this->icon('groupware/group_head.png'     ,'Head');
 
     $menu     = $this->newMenu($this->id.'_dropmenu');
 
@@ -165,7 +80,9 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
       <a class="deeplink" ><i class="icon-info-sign" ></i> {$this->i18n->l('Support', 'wbf.label')}</a>
       <span>
       <ul>
-        <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Faq.create&amp;context=menu" ><i class="icon-question-sign" ></i> {$this->i18n->l('Faq', 'wbf.label')}</a></li>
+        <li><a
+        	class="wcm wcm_req_ajax"
+        	href="modal.php?c=Wbfsys.Faq.create&amp;context=menu" ><i class="icon-question-sign" ></i> {$this->i18n->l('Faq', 'wbf.label')}</a></li>
       </ul>
       </span>
     </li>
@@ -184,8 +101,7 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
       id="wgt-mentry-groupware-data-mail"
       value="maintab.php?c=Webfrap.Message.messageList"
       class="{$this->id}-maskswitcher"
-      name="nav-boxtype"
-      checked="checked" /><label
+      name="nav-boxtype" /><label
         for="wgt-mentry-groupware-data-mail"
         class="wcm wcm_ui_tip-top"
         tooltip="Show the messages"  ><i class="icon-envelope-alt" ></i></label>
@@ -203,6 +119,7 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
       id="wgt-mentry-groupware-data-calendar"
       value="maintab.php?c=Webfrap.Calendar.element"
       class="{$this->id}-maskswitcher"
+      checked="checked"
       name="nav-boxtype" /><label
         for="wgt-mentry-groupware-data-calendar"
         class="wcm wcm_ui_tip-top"
@@ -210,18 +127,33 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
   </div>
 </div>
 
-<div class="wgt-panel-control" >
+<div
+  id="{$this->id}-cruddrop"
+  class="wcm wcm_control_split_button inline" style="margin-left:3px;"  >
+
   <button
-  	class="wgt-button wgtac_new_msg" ><i
-  		class="icon-plus-sign" ></i> {$this->i18n->l('New Message','wbf.label')}</button>
+    class="wcm wcm_ui_tip-top wgt-button wgtac_create  splitted"
+    tabindex="-1"
+      ><i class="icon-plus-sign" ></i> {$this->i18n->l('Create','wbf.label')}</button><button
+    id="{$this->id}-cruddrop-split"
+    class="wgt-button append"
+    tabindex="-1"
+    style="margin-left:-4px;"
+    wgt_drop_box="{$this->id}-cruddropbox" ><i class="icon-angle-down" ></i></button>
+
 </div>
 
-<div class="wgt-panel-control" >
-  <button
-  	class="wgt-button wgtac_refresh" ><i
-  		class="icon-refresh" ></i> {$this->i18n->l('Check for Messages','wbf.label')}</button>
-</div>
+<div class="wgt-dropdownbox" id="{$this->id}-cruddropbox" >
 
+  <ul>
+    <li><a
+      class="wcm wgtac_search_con wcm_ui_tip-top"
+      title="Search for Persons and connect with them" ><i class="icon-plus-sign" ></i> {$this->i18n->l('Search & Connect','wbf.label')}</a></li>
+    <li>
+  </ul>
+
+  <var id="{$this->id}-cruddrop-cfg"  >{"triggerEvent":"click","align":"right"}</var>
+</div>
 
 
 HTML;
@@ -256,16 +188,16 @@ HTML;
       self.close();
     });
 
-    self.getObject().find(".wgtac_new_msg").click(function() {
-      \$R.get('maintab.php?c=Webfrap.Message.formNew');
+    self.getObject().find(".wgtac_create").click(function() {
+      \$R.get('modal.php?c=Webfrap.Contact.formNew');
     });
 
-    self.getObject().find(".wgtac_refresh,.wgtac_search").click(function() {
-      \$R.form('wgt-form-webfrap-groupware-search');
+    self.getObject().find(".wgtac_search_con").click(function() {
+      \$R.get('maintab.php?c=Webfrap.Contact.selection');
     });
 
-    self.getObject().find('.wgt-mentry-my_message-boxtype').change(function() {
-      \$R.form('wgt-form-webfrap-groupware-search');
+    self.getObject().find(".wgtac_refresh").click(function() {
+      \$R.form('wgt-form-webfrap-contact-search');
     });
 
 
