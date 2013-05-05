@@ -5,7 +5,7 @@
     <fieldset style="width:350px;" >
       <legend><?php echo $I18N->l('Forgot Password','wbf.label'); ?></legend>
       <form method="post" action="index.php?c=Webfrap.Auth.forgotPasswd" >
-        
+
         <?php if( $VAR->error ) { ?>
           <div class="wgt-box error" ><?php echo $VAR->error ?></div>
         <?php } ?>
@@ -36,14 +36,14 @@
             <input type="submit" class="wgt-button" value="<?php echo $I18N->l('Request Change','wbf.base.label'); ?>" />
           </div>
         </div>
-        
+
         <div class="wgt-clear small" ></div>
-        
+
         <div class="full text_center" >
           <a href="index.php?c=Webfrap.Auth.form" >Zurück zum Login</a>
         </div>
-        
-        
+
+
         <div class="wgt-clear small" ></div>
 
       </form>

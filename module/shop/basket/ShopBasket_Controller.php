@@ -121,6 +121,7 @@ class ShopBasket_Controller extends ControllerFrontend
 
     $view    = $this->getView();
     $request = $this->getRequest();
+    $response = $this->getResponse();
 
     /* @var $model ShopFront_Model */
     $model = $this->loadModel('ShopFront');
@@ -162,6 +163,7 @@ class ShopBasket_Controller extends ControllerFrontend
 
     $view    = $this->getView();
     $request = $this->getRequest();
+    $response = $this->getResponse();
 
     /* @var $model ShopFront_Model */
     $model = $this->loadModel('ShopFront');
@@ -190,7 +192,7 @@ class ShopBasket_Controller extends ControllerFrontend
     $shopBasket->removeArticle($articleId);
     $shopBasket->save();
 
-    $view->displayAddArticle($articleId, $numOrder);
+    //$view->displayAddArticle($articleId, $numOrder);
 
   }//end public function service_removeArticle */
 
@@ -202,6 +204,7 @@ class ShopBasket_Controller extends ControllerFrontend
 
     $view    = $this->getView();
     $request = $this->getRequest();
+    $response = $this->getResponse();
 
     /* @var $model ShopFront_Model */
     $model = $this->loadModel('ShopFront');
@@ -243,6 +246,7 @@ class ShopBasket_Controller extends ControllerFrontend
 
     $view    = $this->getView();
     $request = $this->getRequest();
+    $response = $this->getResponse();
 
     /* @var $model ShopFront_Model */
     $model = $this->loadModel('ShopFront');
