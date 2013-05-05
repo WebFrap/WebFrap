@@ -97,6 +97,8 @@ class WebfrapCalendar_Model extends Model
 
     foreach( $query as $entry ){
 
+      $entry['id'] = (int)$entry['id'];
+
       if('t'==$entry['allday'])
         $entry['allDay'] = true;
       else
