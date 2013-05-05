@@ -28,10 +28,10 @@ class WebfrapCalendar_Element_Maintab_View extends WgtMaintab
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * @param WebfrapMessage_Table_Search_Request $params
+   * @param WebfrapCalendar_Element_Search_Request $params
    * @return void
    */
-  public function displayList($userRqt)
+  public function displayElement($userRqt)
   {
 
     $this->setLabel('Callendar');
@@ -41,7 +41,7 @@ class WebfrapCalendar_Element_Maintab_View extends WgtMaintab
 
     $this->addMenu($userRqt);
 
-  }//end public function displayList */
+  }//end public function displayElement */
 
   /**
    * add a drop menu to the create window
