@@ -202,7 +202,6 @@ HTML;
 
 
     self.getObject().find('.{$this->id}-maskswitcher').change(function() {
-      self.close();
       \$R.get(\$S(this).val());
     });
 

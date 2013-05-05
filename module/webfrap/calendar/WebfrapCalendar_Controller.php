@@ -240,9 +240,9 @@ class WebfrapCalendar_Controller extends Controller
 
     // load the view object
     $view   = $response->loadView(
-        'form-calendar-element',
-        'WebfrapCalendar_Element',
-        'displayElement'
+      'webfrap-groupware-list',
+      'WebfrapCalendar_Element',
+      'displayElement'
     );
 
     // request bearbeiten
