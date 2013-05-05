@@ -46,6 +46,7 @@ class DaidalosAcl_Controller extends Controller
   {
 
     $params = $this->getFlags($this->getRequest());
+    $response = $this->getResponse();
 
     $view   = $response->loadView('wgt-view-daidalos_acl-form', 'DaidalosAcl');
 

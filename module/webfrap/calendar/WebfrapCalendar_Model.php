@@ -99,10 +99,22 @@ class WebfrapCalendar_Model extends Model
 
       $entry['id'] = (int)$entry['id'];
 
-      if('t'==$entry['allday'])
+      if(  $entry['deadline'] ){
+
         $entry['allDay'] = true;
-      else
-        $entry['allDay'] = false;
+        $entry['start'] = $entry['deadline'];
+        $entry['backgroundColor'] = '#FFDCA8';
+        $entry['textColor'] = '#661212';
+        $entry['editable'] = false;
+
+      } else {
+        if('t'==$entry['allday'])
+          $entry['allDay'] = true;
+        else
+          $entry['allDay'] = false;
+      }
+
+
       $entries[] = $entry;
     }
 

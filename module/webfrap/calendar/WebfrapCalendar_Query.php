@@ -115,6 +115,7 @@ class WebfrapCalendar_Query extends LibSqlQuery
       'appoint.timestamp_start as start',
       'appoint.timestamp_end as end',
       'appoint.flag_all_day as allday',
+      'task.deadline',
       /*
       'extract(epoch from appoint.timestamp_start) as start',
       'extract(epoch from appoint.timestamp_end) as end',
@@ -255,6 +256,10 @@ class WebfrapCalendar_Query extends LibSqlQuery
             OR
             (
               appoint.timestamp_end <= '{$params->end}' AND appoint.timestamp_end >= '{$params->start}'
+            )
+            OR
+            (
+              task.deadline >= '{$params->start}' AND task.deadline <= '{$params->end}'
             )
         )");
     }
