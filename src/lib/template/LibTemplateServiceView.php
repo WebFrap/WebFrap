@@ -77,8 +77,6 @@ class LibTemplateServiceView extends LibTemplate
 
     $this->tpl->setTemplate($template, $inCode);
 
-    Debug::dumpFile('BBBBBBBBBBBBBBBBBBBBb', 'f');
-
   }//end public function setTemplate */
 
   /**

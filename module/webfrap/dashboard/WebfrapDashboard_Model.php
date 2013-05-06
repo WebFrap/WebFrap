@@ -214,7 +214,6 @@ SQL;
    * @return ArrayIterator
    */
   public function loadNews(
-      
     $type = EWbfsysAnnouncementType::ANNOUNCEMENT,
     $limit = 10,
     $offset = 0

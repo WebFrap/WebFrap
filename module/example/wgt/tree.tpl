@@ -2,7 +2,7 @@
 
 ?>
 
-<div 
+<div
 	class="wgt-space"
 	style="position:absolute;top:0px;left:0px;bottom:200px;width:200px;overflow:auto;" >
 	<h3>Menu</h3>
@@ -127,6 +127,10 @@
               href="area.php?c=Example.Wgt.area&area=layout.accordion"
               class="wcm wcm_req_ajax" >Accordion</a>
             </li>
+            <li><a
+              href="area.php?c=Example.Wgt.area&area=layout.calendar"
+              class="wcm wcm_req_ajax" >Calendar</a>
+            </li>
           </ul>
         </li>
 				<li><span>Tab heads</span>
@@ -204,9 +208,9 @@ id="wgt-area-example-content" >
 Content
 </div>
 
-<div 
+<div
 	id="wgt-area-tech-example-rqtdata"
-	class="wgt-border-top wgt-space" 
+	class="wgt-border-top wgt-space"
 	style="position:absolute;left:0px;bottom:0px;right:0px;height:200px;"
 	 >
 <h2>Console</h2>

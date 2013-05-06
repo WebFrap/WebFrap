@@ -26,7 +26,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapMessage_Controller extends Controller
+class WebfrapCalendar_Controller extends Controller
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // methodes
@@ -35,14 +35,16 @@ class WebfrapMessage_Controller extends Controller
   /**
    * @var array
    */
-  protected $options           = array(
-    'messagelist' => array(
-      'method'    => array('GET'),
-      'views'      => array('maintab')
-    ),
-    'searchlist' => array(
+  protected $options = array(
+
+    'search' => array(
       'method'    => array('GET'),
       'views'      => array('ajax')
+    ),
+
+    'element' => array(
+        'method'    => array('GET'),
+        'views'      => array('modal', 'maintab')
     ),
 
     // message logic
@@ -50,18 +52,22 @@ class WebfrapMessage_Controller extends Controller
       'method'    => array('GET'),
       'views'      => array('modal', 'maintab')
     ),
+
     'formshow' => array(
       'method'    => array('GET'),
       'views'      => array('modal', 'maintab')
     ),
+
     'showmailcontent' => array(
       'method'    => array('GET'),
       'views'      => array('html')
     ),
+
     'showpreview' => array(
       'method'    => array('GET'),
       'views'      => array('ajax')
     ),
+
     'sendusermessage' => array(
       'method'    => array('POST'),
       'views'      => array('ajax')
@@ -170,69 +176,19 @@ class WebfrapMessage_Controller extends Controller
 //////////////////////////////////////////////////////////////////////////////*/
 
  /**
-  * create an new window with an edit form for the enterprise_company entity
   * @param LibRequestHttp $request
   * @param LibResponseHttp $response
   * @return boolean
   */
-  public function service_messageList($request, $response)
-  {
-
-    /* @var $model WebfrapMessage_Model  */
-    $model = $this->loadModel('WebfrapMessage');
-
-    $userSettings = $model->loadSettings();
-
-    // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = new WebfrapMessage_Table_Search_Request($request, $userSettings);
-
-    if ($userSettings->changed)
-      $model->saveSettings($userSettings);
-
-    $model->params = $params;
-    $model->loadTableAccess($params);
-
-    if (!$model->access->listing) {
-      throw new InvalidRequest_Exception (
-        Response::FORBIDDEN_MSG,
-        Response::FORBIDDEN
-      );
-    }
-
-    // load the view object
-    /* @var $view WebfrapMessage_List_Maintab_View  */
-    $view = $response->loadView(
-      'webfrap-groupware-list',
-      'WebfrapMessage_List',
-      'displayList',
-      View::MAINTAB
-    );
-
-    $view->setModel($model);
-    $view->displayList($params);
-
-  }//end public function service_messageList */
-
- /**
-  * create an new window with an edit form for the enterprise_company entity
-  * @param LibRequestHttp $request
-  * @param LibResponseHttp $response
-  * @return boolean
-  */
-  public function service_searchList($request, $response)
+  public function service_search($request, $response)
   {
 
 
-    /* @var $model WebfrapMessage_Model  */
-    $model = $this->loadModel('WebfrapMessage');
-
-    $userSettings = $model->loadSettings();
+    /* @var $model WebfrapCalendar_Model  */
+    $model = $this->loadModel('WebfrapCalendar');
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
-    $params  = new WebfrapMessage_Table_Search_Request($request, $userSettings);
-
-    if ($userSettings->changed)
-      $model->saveSettings($userSettings);
+    $params  = new WebfrapCalendar_Search_Request($request );
 
     $model->loadTableAccess($params);
 
@@ -244,10 +200,10 @@ class WebfrapMessage_Controller extends Controller
     }
 
     // load the view object
-    /* @var $view WebfrapMessage_List_Ajax_View */
+    /* @var $view WebfrapCalendar_Ajax_View */
     $view = $response->loadView(
-      'list-message_list',
-      'WebfrapMessage_List',
+      'list-calendar_list',
+      'WebfrapCalendar',
       'displaySearch',
       View::AJAX
     );
@@ -258,7 +214,49 @@ class WebfrapMessage_Controller extends Controller
 
     $view->displaySearch($params);
 
-  }//end public function service_searchList */
+  }//end public function service_search */
+
+  /**
+   * Form zum erstellen einer neuen Message
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return boolean
+   */
+  public function service_element($request, $response)
+  {
+
+    // prüfen ob irgendwelche steuerflags übergeben wurde
+    $params  = $this->getFlags($request);
+
+    $model = $this->loadModel('WebfrapCalendar');
+    $model->loadTableAccess($params);
+
+    if (!$model->access->listing) {
+      throw new InvalidRequest_Exception(
+          Response::FORBIDDEN_MSG,
+          Response::FORBIDDEN
+      );
+    }
+
+    // load the view object
+    $view   = $response->loadView(
+      'webfrap-groupware-list',
+      'WebfrapCalendar_Element',
+      'displayElement'
+    );
+
+    // request bearbeiten
+    /* @var $model WebfrapCalendar_Model */
+    $model = $this->loadModel('WebfrapCalendar');
+    $view->setModel($model);
+
+    $view->displayElement($params);
+
+  }//end public function service_element */
+
+
+
+
 
  /**
   * Form zum erstellen einer neuen Message
@@ -272,7 +270,7 @@ class WebfrapMessage_Controller extends Controller
     // prüfen ob irgendwelche steuerflags übergeben wurde
     $params  = $this->getFlags($request);
 
-    $model = $this->loadModel('WebfrapMessage');
+    $model = $this->loadModel('WebfrapCalendar');
     $model->loadTableAccess($params);
 
     if (!$model->access->listing) {
@@ -285,13 +283,13 @@ class WebfrapMessage_Controller extends Controller
     // load the view object
     $view   = $response->loadView(
       'form-messages-new',
-      'WebfrapMessage_New',
+      'WebfrapCalendar_New',
       'displayNew'
     );
 
     // request bearbeiten
-    /* @var $model WebfrapMessage_Model */
-    $model = $this->loadModel('WebfrapMessage');
+    /* @var $model WebfrapCalendar_Model */
+    $model = $this->loadModel('WebfrapCalendar');
     $view->setModel($model);
 
     $view->displayNew($params);
@@ -312,8 +310,8 @@ class WebfrapMessage_Controller extends Controller
 
     $msgId = $request->param('objid', Validator::EID);
 
-    /* @var $model WebfrapMessage_Model */
-    $model = $this->loadModel('WebfrapMessage');
+    /* @var $model WebfrapCalendar_Model */
+    $model = $this->loadModel('WebfrapCalendar');
     $model->loadTableAccess($params);
 
     if (!$model->access->access) {
@@ -337,7 +335,7 @@ class WebfrapMessage_Controller extends Controller
     // load the view object
     $view = $response->loadView(
       'form-messages-show-'.$msgId,
-      'WebfrapMessage_Show',
+      'WebfrapCalendar_Show',
       'displayShow'
     );
     $view->setModel($model);
@@ -360,8 +358,8 @@ class WebfrapMessage_Controller extends Controller
 
     $msgId = $request->param('objid', Validator::EID);
 
-    /* @var $model WebfrapMessage_Model */
-    $model = $this->loadModel('WebfrapMessage');
+    /* @var $model WebfrapCalendar_Model */
+    $model = $this->loadModel('WebfrapCalendar');
     $model->loadTableAccess($params);
 
     if (!$model->access->access) {
@@ -376,7 +374,7 @@ class WebfrapMessage_Controller extends Controller
     // load the view object
     $view   = $response->loadView(
       'form-messages-show-'.$msgId,
-      'WebfrapMessage',
+      'WebfrapCalendar',
       'displayContent',
       View::HTML
     );
@@ -401,8 +399,8 @@ class WebfrapMessage_Controller extends Controller
 
     $msgId = $request->param('objid', Validator::EID);
 
-    /* @var $model WebfrapMessage_Model */
-    $model = $this->loadModel('WebfrapMessage');
+    /* @var $model WebfrapCalendar_Model */
+    $model = $this->loadModel('WebfrapCalendar');
     $model->loadTableAccess($params);
 
     if (!$model->access->access) {
@@ -415,10 +413,10 @@ class WebfrapMessage_Controller extends Controller
     $msgNode = $model->loadMessage($msgId);
 
     // load the view object
-    /* @var $view WebfrapMessage_Ajax_View */
+    /* @var $view WebfrapCalendar_Ajax_View */
     $view   = $response->loadView(
         'messages-preview-'.$msgId,
-        'WebfrapMessage',
+        'WebfrapCalendar',
         'displayMsgPreview'
     );
     $view->setModel($model);
@@ -427,47 +425,7 @@ class WebfrapMessage_Controller extends Controller
 
   }//end public function service_showPreview */
 
-  /**
-   * Standard Service für Autoloadelemente wie zb. Window Inputfelder
-   * Über diesen Service kann analog zu dem Selection / Search Service
-   * Eine gefilterte Liste angefragt werden um Zuweisungen zu vereinfachen
-   *
-   * @param LibRequestHttp $request
-   * @param LibResponseHttp $response
-   * @return void
-   */
-  public function service_loadUser($request, $response)
-  {
 
-    // resource laden
-    $user     = $this->getUser();
-    $acl      = $this->getAcl();
-
-
-    // load request parameters an interpret as flags
-    $params = $this->getFlags($request);
-
-    // der contextKey wird benötigt um potentielle Konflikte in der UI
-    // bei der Anzeige von mehreren Windows oder Tabs zu vermeiden
-    $params->contextKey = 'message-user-autocomplete';
-
-    $view  = $response->loadView(
-      'message-user-ajax',
-      'WebfrapMessage',
-      'displayUserAutocomplete',
-      View::AJAX
-    );
-    /* @var $model Example_Model */
-    $model  = $this->loadModel('WebfrapMessage');
-    //$model->setAccess($access);
-    $view->setModel($model);
-
-    $searchKey  = $this->request->param('key', Validator::TEXT);
-
-    $view->displayUserAutocomplete($searchKey, $params);
-
-
-  }//end public function service_loadUser */
 
 
   /**
@@ -485,11 +443,11 @@ class WebfrapMessage_Controller extends Controller
 
 
     // load request parameters an interpret as flags
-    $rqtData = new WebfrapMessage_Save_Request($request);
+    $rqtData = new WebfrapCalendar_Save_Request($request);
     $msgId = $request->param('objid',Validator::EID);
 
-  	/* @var $model WebfrapMessage_Model */
-    $model = $this->loadModel('WebfrapMessage');
+  	/* @var $model WebfrapCalendar_Model */
+    $model = $this->loadModel('WebfrapCalendar');
     $model->loadTableAccess($rqtData);
 
     if (!$model->access->access) {
@@ -521,8 +479,8 @@ class WebfrapMessage_Controller extends Controller
     $msgId = $request->param('objid',Validator::EID);
     $flagSpam = $request->param('spam',Validator::INT);
 
-  	/* @var $model WebfrapMessage_Model */
-    $model = $this->loadModel('WebfrapMessage');
+  	/* @var $model WebfrapCalendar_Model */
+    $model = $this->loadModel('WebfrapCalendar');
     $model->loadTableAccess($rqtData);
 
     if (!$model->access->access) {
@@ -574,8 +532,8 @@ JS
     if ($resContext->hasError)
       throw new InvalidRequest_Exception();
 
-    /* @var $model WebfrapMessage_Model */
-    $model  = $this->loadModel('WebfrapMessage');
+    /* @var $model WebfrapCalendar_Model */
+    $model  = $this->loadModel('WebfrapCalendar');
 
     $model->deleteMessage($messageId);
 
@@ -607,8 +565,8 @@ JS
     if ($resContext->hasError)
       throw new InvalidRequest_Exception();
 
-    /* @var $model WebfrapMessage_Model */
-    $model  = $this->loadModel('WebfrapMessage');
+    /* @var $model WebfrapCalendar_Model */
+    $model  = $this->loadModel('WebfrapCalendar');
 
     $model->deleteAllMessage();
 
@@ -644,8 +602,8 @@ JS
 
     $msgIds = $request->param('slct', Validator::EID);
 
-    /* @var $model WebfrapMessage_Model */
-    $model  = $this->loadModel('WebfrapMessage');
+    /* @var $model WebfrapCalendar_Model */
+    $model  = $this->loadModel('WebfrapCalendar');
     $model->deleteSelection($msgIds);
 
     $entries = array();
@@ -676,7 +634,7 @@ JS
     $userId  = $request->data('receiver', Validator::EID);
 
     /* @var $model WebfrapContactForm_Model */
-    $model = $this->loadModel('WebfrapMessage');
+    $model = $this->loadModel('WebfrapCalendar');
 
     $mgsData = new TDataObject();
     $mgsData->subject = $request->data('subject', Validator::TEXT);
@@ -712,8 +670,8 @@ JS
 
     $msgId = $request->param('objid', Validator::EID);
 
-    /* @var $model WebfrapMessage_Model */
-    $model = $this->loadModel('WebfrapMessage');
+    /* @var $model WebfrapCalendar_Model */
+    $model = $this->loadModel('WebfrapCalendar');
     $model->loadTableAccess($params);
 
     if (!$model->access->access) {
@@ -730,10 +688,10 @@ JS
     $view   = $response->loadView
     (
       'form-messages-forward-'.$msgId,
-      'WebfrapMessage_Forward',
+      'WebfrapCalendar_Forward',
       'displayForm'
     );
-    $view->setModel($this->loadModel('WebfrapMessage'));
+    $view->setModel($this->loadModel('WebfrapCalendar'));
 
     $view->displayForm($params);
 
@@ -752,8 +710,8 @@ JS
 
     $msgId = $request->param('objid', Validator::EID);
 
-    /* @var $model WebfrapMessage_Model */
-    $model = $this->loadModel('WebfrapMessage');
+    /* @var $model WebfrapCalendar_Model */
+    $model = $this->loadModel('WebfrapCalendar');
     $model->loadTableAccess($params);
 
     if (!$model->access->access) {
@@ -793,8 +751,8 @@ JS
 
     $msgId = $request->param('objid', Validator::EID);
 
-    /* @var $model WebfrapMessage_Model */
-    $model = $this->loadModel('WebfrapMessage');
+    /* @var $model WebfrapCalendar_Model */
+    $model = $this->loadModel('WebfrapCalendar');
     $model->loadTableAccess($params);
 
     if (!$model->access->access) {
@@ -809,10 +767,10 @@ JS
     // load the view object
     $view   = $response->loadView(
       'form-messages-reply-'.$msgId,
-      'WebfrapMessage_Reply',
+      'WebfrapCalendar_Reply',
       'displayForm'
      );
-    $view->setModel($this->loadModel('WebfrapMessage'));
+    $view->setModel($this->loadModel('WebfrapCalendar'));
 
     $view->displayForm($params);
 
@@ -832,8 +790,8 @@ JS
 
     $msgId = $request->param('objid', Validator::EID);
 
-    /* @var $model WebfrapMessage_Model */
-    $model = $this->loadModel('WebfrapMessage');
+    /* @var $model WebfrapCalendar_Model */
+    $model = $this->loadModel('WebfrapCalendar');
     $model->loadTableAccess($params);
 
     if (!$model->access->access) {
@@ -847,7 +805,7 @@ JS
     $receiverId  = $request->data('receiver', Validator::EID);
 
     /* @var $model WebfrapContactForm_Model */
-    $model = $this->loadModel('WebfrapMessage');
+    $model = $this->loadModel('WebfrapCalendar');
 
     $msgData = new TDataObject();
     $msgData->subject = $request->data('subject', Validator::TEXT);
@@ -880,8 +838,8 @@ JS
     $msgId = $request->param('msg', Validator::EID);
     $refId = $request->param('ref', Validator::EID);
 
-    /* @var $model WebfrapMessage_Model */
-    $model = $this->loadModel('WebfrapMessage');
+    /* @var $model WebfrapCalendar_Model */
+    $model = $this->loadModel('WebfrapCalendar');
     $model->loadTableAccess($params);
 
     if (!$model->access->access) {
@@ -893,10 +851,10 @@ JS
 
     $linkId = $model->addRef($msgId,$refId);
 
-    /* @var $view WebfrapMessage_Ajax_View */
+    /* @var $view WebfrapCalendar_Ajax_View */
     $view   = $response->loadView(
       'message-update-ref',
-      'WebfrapMessage',
+      'WebfrapCalendar',
       'displayAddRef'
      );
     $view->setModel($model);
@@ -918,8 +876,8 @@ JS
 
     $delId = $request->param('delid', Validator::EID);
 
-    /* @var $model WebfrapMessage_Model */
-    $model = $this->loadModel('WebfrapMessage');
+    /* @var $model WebfrapCalendar_Model */
+    $model = $this->loadModel('WebfrapCalendar');
     $model->loadTableAccess($params);
 
     if (!$model->access->access) {
@@ -931,10 +889,10 @@ JS
 
     $model->delRef($delId);
 
-    /* @var $view WebfrapMessage_Ajax_View */
+    /* @var $view WebfrapCalendar_Ajax_View */
     $view   = $response->loadView(
       'message-del-ref',
-      'WebfrapMessage',
+      'WebfrapCalendar',
       'displayDelRef'
      );
     $view->setModel($model);
@@ -943,164 +901,6 @@ JS
 
   }//end public function service_addRef */
 
-////////////////////////////////////////////////////////////////////////////////
-// Archive
-////////////////////////////////////////////////////////////////////////////////
 
-  /**
-   *
-   * @param LibRequestHttp $request
-   * @param LibResponseHttp $response
-   * @return void
-   */
-  public function service_archiveMessage($request, $response)
-  {
 
-    // resource laden
-    $user       = $this->getUser();
-    $acl        = $this->getAcl();
-    $tpl        = $this->getTpl();
-    $resContext = $response->createContext();
-
-    // load request parameters an interpret as flags
-    $params = $this->getFlags($request);
-
-    $messageId  = $request->param('objid', Validator::EID);
-
-    $resContext->assertNotNull(
-      'Missing the Message ID',
-      $messageId
-    );
-
-    if ($resContext->hasError)
-      throw new InvalidRequest_Exception();
-
-    /* @var $model WebfrapMessage_Model */
-    $model  = $this->loadModel('WebfrapMessage');
-
-    $model->archiveMessage($messageId);
-
-    //wgt-table-webfrap-groupware_message_row_
-    $tpl->addJsCode(<<<JS
-    \$S('#wgt-table-webfrap-groupware_message_row_{$messageId}').remove();
-JS
-    );
-
-  }//end public function service_archiveMessage */
-
-  /**
-   * Standard Service für Autoloadelemente wie zb. Window Inputfelder
-   * Über diesen Service kann analog zu dem Selection / Search Service
-   * Eine gefilterte Liste angefragt werden um Zuweisungen zu vereinfachen
-   *
-   * @param LibRequestHttp $request
-   * @param LibResponseHttp $response
-   * @return void
-   */
-  public function service_archiveAll($request, $response)
-  {
-
-    // resource laden
-    $user       = $this->getUser();
-    $acl        = $this->getAcl();
-    $tpl        = $this->getTpl();
-
-    $params = $this->getFlags($request);
-
-    /* @var $model WebfrapMessage_Model */
-    $model = $this->loadModel('WebfrapMessage');
-    $model->loadTableAccess($params);
-
-    if (!$model->access->access) {
-      throw new InvalidRequest_Exception(
-        'Access denied',
-        Response::FORBIDDEN
-      );
-    }
-
-    $model->archiveAllMessage();
-
-    //wgt-table-webfrap-groupware_message_row_
-    $tpl->addJsCode(<<<JS
-
-    \$S('table#wgt-table-webfrap-groupware_message-table tbody').html('');
-
-JS
-    );
-
-  }//end public function service_archiveAll */
-
-  /**
-   * Standard Service für Autoloadelemente wie zb. Window Inputfelder
-   * Über diesen Service kann analog zu dem Selection / Search Service
-   * Eine gefilterte Liste angefragt werden um Zuweisungen zu vereinfachen
-   *
-   * @param LibRequestHttp $request
-   * @param LibResponseHttp $response
-   * @return void
-   */
-  public function service_archiveSelection($request, $response)
-  {
-
-    // resource laden
-    $user       = $this->getUser();
-    $acl        = $this->getAcl();
-    $tpl        = $this->getTpl();
-
-    // load request parameters an interpret as flags
-    $params = $this->getFlags($request);
-
-    $msgIds = $request->param('slct', Validator::EID);
-
-    /* @var $model WebfrapMessage_Model */
-    $model  = $this->loadModel('WebfrapMessage');
-    $model->archiveSelection($msgIds);
-
-    $entries = array();
-
-    foreach ($msgIds as $msgId) {
-      $entries[] = "#wgt-table-webfrap-groupware_message_row_".$msgId;
-    }
-
-    $jsCode = "\$S('".implode(', ',$entries)."').remove();";
-
-    $tpl->addJsCode($jsCode);
-
-  }//end public function service_archiveSelection */
-
-  /**
-   *
-   * @param LibRequestHttp $request
-   * @param LibResponseHttp $response
-   * @return void
-   */
-  public function service_reopen($request, $response)
-  {
-
-    // resource laden
-    $user       = $this->getUser();
-    $acl        = $this->getAcl();
-    $tpl        = $this->getTpl();
-    $resContext = $response->createContext();
-
-    // load request parameters an interpret as flags
-    $params = $this->getFlags($request);
-
-    $messageId  = $request->param('objid', Validator::EID);
-
-    $resContext->assertNotNull(
-      'Missing the Message ID',
-      $messageId
-    );
-
-    if ($resContext->hasError)
-      throw new InvalidRequest_Exception();
-
-    /* @var $model WebfrapMessage_Model */
-    $model  = $this->loadModel('WebfrapMessage');
-
-    $model->archiveMessage($messageId, false);
-
-  }//end public function service_reopen */
-
-} // end class WebfrapMessage_Controller
+} // end class WebfrapCalendar_Controller

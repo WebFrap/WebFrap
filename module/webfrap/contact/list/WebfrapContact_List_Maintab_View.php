@@ -38,7 +38,7 @@ class WebfrapContact_List_Maintab_View extends WgtMaintab
     $this->setTitle('Contacts');
 
     $this->setTemplate('webfrap/contact/maintab/list', true);
-    
+
     $this->addVar( 'contacts', $this->model->fetchContacts($userRqt)  );
 
     $this->addMenu($userRqt);
@@ -82,8 +82,8 @@ class WebfrapContact_List_Maintab_View extends WgtMaintab
       <a class="deeplink" ><i class="icon-info-sign" ></i> {$this->i18n->l('Support', 'wbf.label')}</a>
       <span>
       <ul>
-        <li><a 
-        	class="wcm wcm_req_ajax" 
+        <li><a
+        	class="wcm wcm_req_ajax"
         	href="modal.php?c=Wbfsys.Faq.create&amp;context=menu" ><i class="icon-question-sign" ></i> {$this->i18n->l('Faq', 'wbf.label')}</a></li>
       </ul>
       </span>
@@ -92,6 +92,41 @@ class WebfrapContact_List_Maintab_View extends WgtMaintab
       <a class="wgtac_close" ><i class="icon-remove-circle" ></i> {$this->i18n->l('Close','wbf.label')}</a>
     </li>
   </ul>
+</div>
+
+<div class="wgt-panel-control" >
+  <div
+    class="wcm wcm_control_buttonset wgt-button-set"
+    id="wgt-mentry-groupware-data" >
+    <input
+      type="radio"
+      id="wgt-mentry-groupware-data-mail"
+      value="maintab.php?c=Webfrap.Message.messageList"
+      class="{$this->id}-maskswitcher"
+      name="nav-boxtype" /><label
+        for="wgt-mentry-groupware-data-mail"
+        class="wcm wcm_ui_tip-top"
+        tooltip="Show the messages"  ><i class="icon-envelope-alt" ></i></label>
+    <input
+      type="radio"
+      id="wgt-mentry-groupware-data-contact"
+      value="maintab.php?c=Webfrap.Contact.list"
+      class="{$this->id}-maskswitcher"
+      checked="checked"
+      name="nav-boxtype"  /><label
+        for="wgt-mentry-groupware-data-contact"
+        class="wcm wcm_ui_tip-top"
+        tooltip="Show the contacts" ><i class="icon-user" ></i></label>
+    <input
+      type="radio"
+      id="wgt-mentry-groupware-data-calendar"
+      value="maintab.php?c=Webfrap.Calendar.element"
+      class="{$this->id}-maskswitcher"
+      name="nav-boxtype" /><label
+        for="wgt-mentry-groupware-data-calendar"
+        class="wcm wcm_ui_tip-top"
+        tooltip="Show Calendar" ><i class="icon-calendar" ></i></label>
+  </div>
 </div>
 
 <div
@@ -165,6 +200,11 @@ HTML;
 
     self.getObject().find(".wgtac_refresh").click(function() {
       \$R.form('wgt-form-webfrap-contact-search');
+    });
+
+
+    self.getObject().find('.{$this->id}-maskswitcher').change(function() {
+      \$R.get(\$S(this).val());
     });
 
 

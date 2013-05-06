@@ -46,11 +46,13 @@ abstract class WgtDesktop extends Base
   protected function loadModel ($modelName, $key = null)
   {
 
-    if (! $key)
+    if (!$key)
       $key = $modelName;
 
     $modelName = 'Model' . $modelName;
+
     if (! isset($this->models[$key])) {
+
       if (Webfrap::classLoadable($modelName)) {
         $this->models[$key] = new $modelName();
       } else {

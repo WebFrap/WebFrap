@@ -32,18 +32,15 @@ class WebfrapNavigation_Controller extends ControllerCrud
    */
   protected $options           = array
   (
-    'explorer' => array
-    (
+    'explorer' => array(
       'method'  => array('GET'),
       'views'   => array('maintab', 'modal')
     ),
-    'search' => array
-    (
+    'search' => array(
       'method'  => array('GET'),
       'views'   => array('ajax')
     ),
-    'searchlist' => array
-    (
+    'searchlist' => array(
       'method'  => array('GET'),
       'views'   => array('ajax')
     ),
@@ -61,8 +58,7 @@ class WebfrapNavigation_Controller extends ControllerCrud
   public function service_explorer($request, $response)
   {
 
-    $view = $response->loadView
-    (
+    $view = $response->loadView(
       'WebfrapMainMenu',
       'WebfrapNavigation',
       'display'
@@ -81,7 +77,8 @@ class WebfrapNavigation_Controller extends ControllerCrud
   } // end public function service_explorer */
 
   /**
-   * @param TFlag $params
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
    * @return void
    */
   public function service_search($request, $response)
@@ -138,8 +135,8 @@ class WebfrapNavigation_Controller extends ControllerCrud
     // zu machen und übergeben den Fehler der ErrorPage welche sich um die
     // korrekte Ausgabe kümmert
     if ($error) {
-      $this->errorPage($error);
 
+      $this->errorPage($error);
       return false;
     }
 
@@ -149,7 +146,8 @@ class WebfrapNavigation_Controller extends ControllerCrud
   } // end public function search */
 
   /**
-   * @param TFlag $params
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
    * @return void
    */
   public function service_searchList($request, $response)

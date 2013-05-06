@@ -322,25 +322,6 @@ class DaidalosProjects_Controller extends Controller
 
   }//end public function createDbPatch */
 
-  /**
-   * @return void
-   */
-  public function newProject()
-  {
-
-    if ( $this->view->isType(View::WINDOW)) {
-      // create a window
-      $view = $this->view->newWindow('FormularBdlProject');
-      $view->setStatus('New Project');
-    } else {
-      $view = $this->view;
-    }
-
-    $view->setTemplate('bdl/FormProject'  );
-    $record = new RecordBdlProject();
-    $view->addVar('record',$record);
-
-  }//end public function tableModel */
 
   /**
    *

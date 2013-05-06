@@ -90,6 +90,7 @@ class WebfrapAnnouncement_Table_Model extends Model
         $this->register('main_entity', $entityWebfrapAnnouncement);
 
       } else {
+
         $entityWebfrapAnnouncement   = new WbfsysAnnouncement_Entity() ;
         $this->register('entityWebfrapAnnouncement', $entityWebfrapAnnouncement);
         $this->register('main_entity', $entityWebfrapAnnouncement);
