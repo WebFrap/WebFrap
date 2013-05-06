@@ -45,6 +45,16 @@ class WebfrapMessage_Controller extends Controller
       'views'      => array('ajax')
     ),
 
+    // mini overlay
+    'minilist' => array(
+      'method'    => array('GET'),
+      'views'      => array('ajax')
+    ),
+    'minisearch' => array(
+      'method'    => array('GET'),
+      'views'      => array('ajax')
+    ),
+      
     // message logic
     'formnew' => array(
       'method'    => array('GET'),
@@ -259,6 +269,95 @@ class WebfrapMessage_Controller extends Controller
     $view->displaySearch($params);
 
   }//end public function service_searchList */
+  
+  /**
+   * create an new window with an edit form for the enterprise_company entity
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return boolean
+   */
+  public function service_miniList($request, $response)
+  {
+  
+    /* @var $model WebfrapMessage_Model  */
+    $model = $this->loadModel('WebfrapMessage');
+  
+    $userSettings = $model->loadSettings();
+  
+    // prüfen ob irgendwelche steuerflags übergeben wurde
+    $params  = new WebfrapMessage_Table_Search_Request($request, $userSettings);
+  
+    if ($userSettings->changed)
+      $model->saveSettings($userSettings);
+  
+    $model->params = $params;
+    $model->loadTableAccess($params);
+  
+    if (!$model->access->listing) {
+      throw new InvalidRequest_Exception (
+          Response::FORBIDDEN_MSG,
+          Response::FORBIDDEN
+      );
+    }
+  
+    // load the view object
+    /* @var $view WebfrapMessage_List_Maintab_View  */
+    $view = $response->loadView(
+        'webfrap-message-mini_list',
+        'WebfrapMessage_MiniList',
+        'displayElement'
+    );
+  
+    $view->setModel($model);
+    $view->displayElement($params);
+  
+  }//end public function service_miniList */
+  
+  
+  /**
+   * create an new window with an edit form for the enterprise_company entity
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return boolean
+   */
+  public function service_miniSearch($request, $response)
+  {
+  
+  
+    /* @var $model WebfrapMessage_Model  */
+    $model = $this->loadModel('WebfrapMessage');
+  
+    $userSettings = $model->loadSettings();
+  
+    // prüfen ob irgendwelche steuerflags übergeben wurde
+    $params  = new WebfrapMessage_Table_Search_Request($request, $userSettings);
+  
+    if ($userSettings->changed)
+      $model->saveSettings($userSettings);
+  
+    $model->loadTableAccess($params);
+  
+    if (!$model->access->listing) {
+      throw new InvalidRequest_Exception(
+          Response::FORBIDDEN_MSG,
+          Response::FORBIDDEN
+      );
+    }
+  
+    // load the view object
+    /* @var $view WebfrapMessage_List_Ajax_View */
+    $view = $response->loadView(
+        'search-message_mini_list',
+        'WebfrapMessage_MiniList',
+        'displaySearch',
+        View::AJAX
+    );
+  
+    $view->setModel($model);
+    $model->params = $params;
+    $view->displaySearch($params);
+  
+  }//end public function service_miniSearch */
 
  /**
   * Form zum erstellen einer neuen Message
