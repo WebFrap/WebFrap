@@ -92,6 +92,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
 
   }//end public function fetch */
 
+
  /**
    * Injecten der zu ladenden Columns in die SQL Query
    * Wenn bereits Colums vorhanden waren werden diese komplett
