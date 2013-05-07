@@ -27,66 +27,66 @@ class WebfrapMessage_MiniList_Ajax_View extends LibTemplateAjaxView
 /*//////////////////////////////////////////////////////////////////////////////
 // display methodes
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * Render des Suchergebnisses und übergabe in die ajax response
    * @param string $elementId
    */
   public function displayElement($params)
   {
-  
+
     // benötigte resourcen laden
     $user     = $this->getUser();
     $acl      = $this->getAcl();
     $request  = $this->getRequest();
-  
+
     $params->qsize  = 50;
     $params->elementId = 'wgt-grid-webfrap-messages-mini_list';
-  
+
     // die query muss für das paging und eine korrekte anzeige
     // die anzahl der gefundenen datensätze ermitteln
     $params->loadFullSize = true;
-  
+
     $params->searchFormId = 'wgt-form-webfrap-messages-mini_list-search';
-  
+
     $data = $this->model->fetchMessages($params);
-    
+
     $tpl = $this->getTplEngine();
-    
+
     $pageFragment = new WgtAjaxArea();
     $pageFragment->selector = '#wgt-navigation-message-mini_list';
     $pageFragment->action = 'replace';
-    
+
     $pageFragment->addVar( 'data', $data );
     $pageFragment->addVar( 'params', $params );
     $pageFragment->setTemplate('webfrap/message/mini/element',true);
     $pageFragment->render();
-    
+
     $tpl->setArea('message-mini_list', $pageFragment);
-  
+
     if ($params->append) {
-  
+
       $jsCode = <<<WGTJS
-  
+
   \$S('table#{$params->elementId}-table').grid('renderRowLayout').grid('syncColWidth');
-  
+
 WGTJS;
       $this->addJsCode($jsCode);
-  
+
     } else {
-  
+
       $jsCode = <<<WGTJS
-  
-  \$S('table#{$params->elementId}-table').grid('renderRowLayout').grid('syncColWidth').grid('setNumEntries', {$data->dataSize});
-  
+
+  \$S('table#{$params->elementId}-table').grid('renderRowLayout').grid('syncColWidth').grid('setNumEntries', {$data->getSourceSize()});
+
 WGTJS;
-  
+
       $this->addJsCode($jsCode);
-  
+
     }
 
   }//end public function displayElement */
-  
+
 
   /**
    * Render des Suchergebnisses und übergabe in die ajax response
