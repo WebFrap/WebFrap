@@ -22,7 +22,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
-class WebfrapMessage_Table_Query extends LibSqlQuery
+class WebfrapMessage_MiniList_Query extends LibSqlQuery
 {
 
  /**
@@ -117,24 +117,17 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
       'wbfsys_message.spam_level as "wbfsys_message_spam_level"',
       'wbfsys_message.message_id as "wbfsys_message_message_id"',
       'wbfsys_message.main_aspect as "wbfsys_message_main_aspect"',
-      'wbfsys_message.id_refer as "wbfsys_message_id_refer"',
       'wbfsys_message.id_sender as "wbfsys_message_id_sender"',
       'wbfsys_message.id_sender_status as "wbfsys_message_id_sender_status"',
       'wbfsys_message.m_role_create as "wbfsys_message_m_role_create"',
       'wbfsys_message.m_time_created as "wbfsys_message_m_time_created"',
-      'wbfsys_message_receiver.vid as "wbfsys_message_id_receiver"',
-      'wbfsys_message_receiver.status as "wbfsys_message_receiver_status"',
-      'wbfsys_message_receiver.flag_action_required as "receiver_action_required"',
       'task.flag_urgent',
       'task.deadline',
       'task.rowid as task_id',
       'appoint.rowid as appoint_id',
       'sender.core_person_lastname',
       'sender.core_person_firstname',
-      'sender.wbfsys_role_user_name',
-      'receiver.core_person_lastname as receiver_core_person_lastname',
-      'receiver.core_person_firstname as receiver_core_person_firstname',
-      'receiver.wbfsys_role_user_name as receiver_wbfsys_role_user_name',
+      'sender.wbfsys_role_user_name'
     );
 
     $criteria->select($cols, true);
@@ -174,7 +167,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
       null,
       'wbfsys_message_receiver'
     );
-    
+
     // action
     $criteria->leftJoinOn(
       'wbfsys_message', 'rowid',
@@ -182,7 +175,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
       null,
       'task'
     );
-    
+
     $criteria->leftJoinOn(
       'wbfsys_message', 'rowid',
       'wbfsys_appointment', 'id_message',
@@ -198,13 +191,6 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
       'wbfsys_message_aspect'
     );
 
-    // der receiver
-    $criteria->joinOn(
-      'wbfsys_message_receiver', 'vid',
-      'view_person_role', 'wbfsys_role_user_rowid',
-      null,
-      'receiver'
-    );
 
   }//end public function setTables */
 
@@ -334,39 +320,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
        }
 
     }//end if
-      // search conditions for  wbfsys_message
-      if (isset($condition['wbfsys_message'])) {
-        $whereCond = $condition['wbfsys_message'];
 
-        if (isset($whereCond['title']) && trim($whereCond['title']) != '')
-          $criteria->where(' wbfsys_message.title = \''.$whereCond['title'].'\' ');
-
-        // append meta information
-        if (isset($whereCond['m_role_create']) && trim($whereCond['m_role_create']) != '')
-          $criteria->where(' wbfsys_message.m_role_create = '.$whereCond['m_role_create'].' ');
-
-        if (isset($whereCond['m_role_change']) && trim($whereCond['m_role_change']) != '')
-          $criteria->where(' wbfsys_message.m_role_change = '.$whereCond['m_role_change'].' ');
-
-        if (isset($whereCond['m_time_created_before']) && trim($whereCond['m_time_created_before']) != '')
-          $criteria->where(' wbfsys_message.m_time_created <= \''.$whereCond['m_time_created_before'].'\' ');
-
-        if (isset($whereCond['m_time_created_after']) && trim($whereCond['m_time_created_after']) != '')
-          $criteria->where(' wbfsys_message.m_time_created >= \''.$whereCond['m_time_created_after'].'\' ');
-
-        if (isset($whereCond['m_time_changed_before']) && trim($whereCond['m_time_changed_before']) != '')
-          $criteria->where(' wbfsys_message.m_time_changed <= \''.$whereCond['m_time_changed_before'].'\' ');
-
-        if (isset($whereCond['m_time_changed_after']) && trim($whereCond['m_time_changed_after']) != '')
-          $criteria->where(' wbfsys_message.m_time_changed >= \''.$whereCond['m_time_changed_after'].'\' ');
-
-        if (isset($whereCond['m_rowid']) && trim($whereCond['m_rowid']) != '')
-          $criteria->where(' wbfsys_message.rowid >= \''.$whereCond['m_rowid'].'\' ');
-
-        if (isset($whereCond['m_uuid']) && trim($whereCond['m_uuid']) != '')
-          $criteria->where(' wbfsys_message.m_uuid >= \''.$whereCond['m_uuid'].'\' ');
-
-      }//end if (isset ($condition['wbfsys_message']))
 
   }//end public function checkConditions */
 
@@ -483,105 +437,18 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
     $db = $this->getDb();
     $user = $this->getUser();
     $userId = $user->getId();
-    
-    $filterSpam = ' wbfsys_message.spam_level < 51 ';
-    $filterSender = ' AND wbfsys_message.id_sender_status < '.EMessageStatus::ARCHIVED;
+
+    $criteria->where(' wbfsys_message.spam_level < 51 ');
+
+    $criteria->where('wbfsys_message.flag_draft = false');
+
+    // nur inbox
     $filterReceiver = ' AND wbfsys_message_receiver.status < '.EMessageStatus::ARCHIVED;
-    
-
-    if (isset($condition['filters']['channel'])) {
-
-      if (!$condition['filters']['channel']->inbox && !$condition['filters']['channel']->outbox) {
-        $condition['filters']['channel']->inbox = true;
-      }
-      
-      if( $condition['filters']['channel']->archive ) {
-        $filterSender = $filterReceiver = "";
-      }
-      
-      if( !$condition['filters']['channel']->unsolicited ) {
-        $criteria->where($filterSpam);
-      }
-      
-      if( !$condition['filters']['channel']->draft ) {
-        $criteria->where('wbfsys_message.flag_draft = false');
-      } else {
-        $criteria->where('wbfsys_message.flag_draft = true');
-      }
-
-      if ($condition['filters']['channel']->inbox) {
-
-        // beide anzeigen
-        if ($condition['filters']['channel']->outbox) {
-
-          $criteria->where(
-          	"(( ( wbfsys_message.id_sender = ".$userId." AND NOT wbfsys_message.flag_sender_deleted = true {$filterSender} ) "
-              ." OR ( wbfsys_message_receiver.vid = ".$userId." AND NOT wbfsys_message_receiver.flag_deleted = true {$filterReceiver} ) ) "
-              ." AND wbfsys_message_aspect.id_receiver = ".$userId.")"
-          );
-
-        } else {
-          
-          // nur inbox
-          $criteria->where(
-          	"( wbfsys_message_receiver.vid = ".$userId
-              ." AND wbfsys_message_aspect.id_receiver = ".$userId
-              ." AND NOT wbfsys_message_receiver.flag_deleted = true {$filterReceiver} )"
-          );
-        }
-
-      } elseif ($condition['filters']['channel']->outbox) {
-
-        // nur outbox
-        $criteria->where("wbfsys_message.id_sender = ".$userId.$filterSender );
-      }
-
-
-    } else {
-      // nur die inbox anzeigen
-      $criteria->where(
-      	"(wbfsys_message_receiver.vid = ".$userId
-          ." AND wbfsys_message_aspect.id_receiver = ".$userId
-          ." AND wbfsys_message_receiver.flag_deleted = false {$filterReceiver} )"
-      );
-    }
-    
-    // status filter
-    $statusFilter = array();
-  
-    if (isset($condition['filters']['status'])) {
-
-      if( $condition['filters']['status']->new )
-        $statusFilter[] = "wbfsys_message_receiver.status = ".EMessageStatus::IS_NEW;
-        
-      if( $condition['filters']['status']->important )
-        $statusFilter[] = "wbfsys_message.priority > ".EPriority::HIGH;
-        
-      if( $condition['filters']['status']->urgent )
-        $statusFilter[] = "task.flag_urgent = true ";
-        
-      if( $condition['filters']['status']->overdue )
-        $statusFilter[] = " task.deadline < now() ";
-      
-    }
-    
-    if($statusFilter)
-      $criteria->where( "(".implode( 'OR ', $statusFilter ).")" );
-    
-
-
-    if (isset($condition['aspects'])) {
-
-      if (!$condition['aspects'])
-        $condition['aspects'] = array(EMessageAspect::MESSAGE);
-        
-      $aspects = array_unique($condition['aspects']);
-
-      $criteria->where("wbfsys_message_aspect.aspect IN(".implode(',', $aspects).") ");
-    }
-    else {
-      $criteria->where("wbfsys_message_aspect.aspect = ".EMessageAspect::MESSAGE);
-    }
+    $criteria->where(
+    	"( wbfsys_message_receiver.vid = ".$userId
+        ." AND wbfsys_message_aspect.id_receiver = ".$userId
+        ." AND NOT wbfsys_message_receiver.flag_deleted = true {$filterReceiver} )"
+    );
 
 
   }//end public function appendFilter */

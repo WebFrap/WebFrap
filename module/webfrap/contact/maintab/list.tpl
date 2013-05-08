@@ -6,8 +6,35 @@ $menuBuilder->access = $this->model->access;
 $menuBuilder->setup();
 
 ?>
+
+<!-- Menu -->
 <div 
-  style="position:absolute;top:0px;left:0px;right:0px;bottom:200px;padding:15px;overflow:auto;" 
+  style="position:absolute;top:0px;left:0px;bottom:0px;width:199px;overflow:auto;" 
+  class="wgt-border-right" >
+  <div class="wgt-panel" ><h2>Adressbooks</h2></div>
+  
+  <div id="wgt-tree-contact-navigation" >
+    <ul id="wgt-tree-contact-navigation-tree" class="wgt-tree wgt-space" >
+      
+      <li><input
+        type="checkbox"
+        name="channel[inbox]"
+        class="fparam-wgt-form-webfrap-groupware-search" /> <a><strong>Company List</strong></a></li>
+      <li><input
+        type="checkbox"
+        name="channel[inbox]"
+        class="fparam-wgt-form-webfrap-groupware-search" /> <a><strong>Team List</strong></a></li>
+      <li><input
+        type="checkbox"
+        name="channel[inbox]"
+        class="fparam-wgt-form-webfrap-groupware-search" /> <a><strong>Personal List</strong></a></li>
+    </ul>
+  </div>
+</div>
+
+<!-- Main Content -->
+<div 
+  style="position:absolute;top:0px;left:200px;right:0px;bottom:200px;padding:15px;overflow:auto;" 
   class="wgt-border-bottom" >
 
   <?php for( $i = 0; $i < 10; ++ $i ){ ?>
