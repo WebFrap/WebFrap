@@ -49,7 +49,7 @@ class WebfrapMessage_MiniList_Ajax_View extends LibTemplateAjaxView
 
     $params->searchFormId = 'wgt-form-webfrap-messages-mini_list-search';
 
-    $data = $this->model->fetchMessages($params);
+    $data = $this->model->fetchMiniListMessages($params);
 
     $tpl = $this->getTplEngine();
 
