@@ -70,6 +70,7 @@ class DaidalosDeployDocu_Model extends Model
     ));
 
     $this->syncDocu_Root($orm, $repos  );
+    $this->syncDocu_ArchNode($orm, $repos, 'root', 'Root'  );
     $this->syncDocu_ArchNode($orm, $repos, 'profile', 'Profiles'  );
     $this->syncDocu_ArchNode($orm, $repos, 'module', 'Modules'  );
     $this->syncDocu_ArchNode($orm, $repos, 'service', 'Services'  );
