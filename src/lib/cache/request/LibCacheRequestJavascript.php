@@ -50,7 +50,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
     $map = array();
     include PATH_GW.'/conf/include/javascript/files.map.php';
 
-    if (!isset($map[$file])  ) {
+    if (!isset($map[$file])) {
       header('HTTP/1.0 404 Not Found');
 
       return;
@@ -80,8 +80,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
 
     if (isset($_SERVER['HTTP_ACCEPT_ENCODING'])
       && strstr ($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')
-    )
-    {
+    ) {
       // Tell the browser the content is compressed with gzip
       header ("Content-Encoding: gzip");
       $out = $encoded;
@@ -109,15 +108,13 @@ class LibCacheRequestJavascript extends LibCacheRequest
 
     $files  = array();
     $jsconf = null; // wird im include gesetzt
-    $minify = true;
+    $minify = true; // kann im include überschrieben werden
 
-    if
-    (
+    if(
       isset($_SERVER['HTTP_ACCEPT_ENCODING'])
         && strstr ($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')
         && !DEBUG
-    )
-    {
+    ) {
       $sendEncoded = true;
     } else {
       $sendEncoded = false;
@@ -148,7 +145,9 @@ class LibCacheRequestJavascript extends LibCacheRequest
         echo file_get_contents(PATH_GW.$this->folder.'/list/'.$list.'.gz'  );
         exit();
       }
+
     } else {
+
       if (is_file(PATH_GW.$this->folder.'/list/'.$list.'.plain')) {
         $metadata = json_decode(file_get_contents(PATH_GW.$this->folder.'/list/'.$list.'.plain.meta'));
 
