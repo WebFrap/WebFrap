@@ -60,12 +60,12 @@ class View
    * doctype xml1.1 frames
    */
   const XML1_1_STRICT     = 6;
-  
+
   /**
    * HTML 5
    */
   const HTML5     = 7;
-  
+
 
   /**
    * @param string
@@ -263,7 +263,7 @@ class View
    * @var array
    */
   public static $searchPathIndex = array();
-  
+
   /**
    * Erzwingen eines Doctypes soweit nötig
    * @var int
