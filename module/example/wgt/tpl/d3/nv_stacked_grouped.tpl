@@ -1,4 +1,4 @@
-<h2>Simple Chart</h2>
+<h2>Stacked/Grouped Multi-Bar Chart</h2>
 
 
 <div
