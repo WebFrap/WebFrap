@@ -79,7 +79,7 @@ class DaidalosAcl_Controller extends Controller
     $model  = $this->loadModel('DaidalosAcl');
     $model->updateArea($this->getRequest());
 
-  }//end public function updateAcl */
+  }//end public function service_updateAcl */
 
   /**
    *
@@ -94,7 +94,7 @@ class DaidalosAcl_Controller extends Controller
 
     $response->addMessage('Dissabled all Users');
 
-  }//end public function deactivateAllUsers */
+  }//end public function service_deactivateAllUsers */
 
 }//end class DaidalosAcl_Controller
 
