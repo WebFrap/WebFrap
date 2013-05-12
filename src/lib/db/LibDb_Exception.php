@@ -32,16 +32,14 @@ class LibDb_Exception extends Io_Exception
    * @param string $debugMessage
    * @param int $errorKey
    */
-  public function __construct
-  (
+  public function __construct (
     $message,
     $debugMessage = 'Internal Error',
     $errorKey = Response::INTERNAL_ERROR,
     $sql = null,
     $numQuery = -1,
     $report = true
-  )
-  {
+  ) {
 
     if (DEBUG && $sql)
       Debug::console( "QUERY {$numQuery} FAILED: ".$sql);
@@ -61,7 +59,9 @@ class LibDb_Exception extends Io_Exception
       $this->errorKey     = $message->getId();
 
       Error::addException($debugMessage, $this);
+
     } else {
+
       if (DEBUG && 'Internal Error' != $debugMessage && !is_numeric($debugMessage))
         parent::__construct($debugMessage);
       else
@@ -80,6 +80,7 @@ class LibDb_Exception extends Io_Exception
    */
   public function getSql()
   {
+
     return $this->sql;
 
   }//end public function getSql */
