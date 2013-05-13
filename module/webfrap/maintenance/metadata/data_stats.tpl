@@ -14,7 +14,7 @@
         <td class="pos" ><?php echo $pos ?></td>
         <td><?php echo $table['name'] ?></td>
         <td><?php echo $table['access_key'] ?></td>
-        <td><?php echo $process['description']  ?></td>
+        <td><?php echo $table['description']  ?></td>
         <td><?php echo $this->listMenu->renderActions( $this->listMenu->listActions, $table ) ?></td>
       </tr>
     <?php } ?>
