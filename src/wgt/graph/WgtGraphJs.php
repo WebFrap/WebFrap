@@ -19,41 +19,35 @@
  * @package WebFrap
  * @subpackage wgt/graph
  */
-abstract class WgtGraph
+class WgtGraphJs extends WgtGraph
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
 
-  /**
-   * die HTML ID des Graphen
-   * @var string
-   */
-  public $graphId = null;
 
   /**
-   * Nur beim Serverseitigen rendern nötig
-   * @var unknown
+   * Der Render Type des Graphen
+   * @var string
    */
-  protected $graph = null;
+  public $graphType = null;
+
+  /**
+   * Die Daten die gerendert werden sollen
+   * @var string
+   */
+  protected $data = null;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
 
-  public function setGraphId($graphId)
+
+  public function setData($data)
   {
-    $this->graphId = $graphId;
+    $this->data = $data;
   }
 
-  public function create(){
-
-  }
-
-  public function publish()
-  {
-
-  }
 
   /**
    * Die ID des formulars welches zum updaten der Graphen benötigt wird
