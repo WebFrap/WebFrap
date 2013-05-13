@@ -38,15 +38,46 @@ class WgtGraphJs extends WgtGraph
    */
   protected $data = null;
 
+  /**
+   * In welcher Box soll der Graph angezeigt werden
+   * @var string
+   */
+  public $boxId = null;
+
+  /**
+   * Die id des Updateforms
+   * @var string
+   */
+  public $formId = null;
+
+////////////////////////////////////////////////////////////////////////////////
+// Constructor
+////////////////////////////////////////////////////////////////////////////////
+
+  /**
+   * @param string $formId
+   * @param string $boxId
+   * @param array $data
+   */
+  public function __construct( $formId, $boxId = null, $data = null)
+  {
+    $this->formId = $formId;
+    $this->boxId = $boxId;
+    $this->data = $data;
+  }//end public function __construct */
+
 ////////////////////////////////////////////////////////////////////////////////
 // Methodes
 ////////////////////////////////////////////////////////////////////////////////
 
 
+  /**
+   * @param string $data
+   */
   public function setData($data)
   {
     $this->data = $data;
-  }
+  }//end public function setData */
 
 
   /**

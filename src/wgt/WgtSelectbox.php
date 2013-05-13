@@ -215,8 +215,6 @@ class WgtSelectbox extends WgtInput
 
     $this->data = $data;
 
-    Debug::console("Set Data " , $data);
-
   }// end public function setData */
 
 
