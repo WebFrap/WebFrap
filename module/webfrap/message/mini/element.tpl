@@ -54,9 +54,10 @@ $iconPrio[50] = '<i class="icon-flag max" title="max priority" ></i>';
             : '';
 
         // action required
+        /*
         echo  ( 't' == $entry['receiver_action_required'])
         ? '<i class="icon-exclamation-sign attention" title="Your action is required" ></i> '
-            : '';
+            : '';*/
 
         // urgent
         echo  ( 't' == $entry['flag_urgent'])

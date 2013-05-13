@@ -89,6 +89,10 @@
           href="area.php?c=Example.Wgt.area&area=d3.show_reel_chart"
           class="wcm wcm_req_ajax" >Show Reel</a>
         </li>
+        <li><a
+          href="area.php?c=Example.Wgt.area&area=d3.nv_simple_line"
+          class="wcm wcm_req_ajax" >Nv Line Simple</a>
+        </li>
       </ul>
     </li>
     <li><span>Listing Elements</span>

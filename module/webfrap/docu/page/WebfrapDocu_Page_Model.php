@@ -34,13 +34,15 @@ class WebfrapDocu_Page_Model extends Model
     $session = $this->getSession();
     $orm   = $this->getOrm();
 
-    $lang = $session->getStatus('activ.language');
+    $lang = $session->getStatus('docu.language');
+
+    if (!$lang)
+      $lang = Conf::status('docu.language');
 
     if (!$lang)
       $lang = Conf::status('activ.language');
 
-    $page  = $orm->get
-    (
+    $page  = $orm->get(
       'WbfsysDocuTree',
       "access_key='{$key}' and (id_lang IN("
         ." select rowid from wbfsys_language where UPPER(access_key) = UPPER('{$lang}') "
@@ -50,9 +52,9 @@ class WebfrapDocu_Page_Model extends Model
     if (!$page)
       return null;
 
-    $subPages = $orm->getListWhere('WbfsysDocuTree', 'm_parent='.$page);
+    $subPages = $orm->getListWhere('WbfsysDocuTree', 'm_parent='.$page );
 
-    $pageData = new WebfrapDocu_Page_Data($page, $subPages);
+    $pageData = new WebfrapDocu_Page_Data($page, $subPages, $lang);
 
     return $pageData;
 
