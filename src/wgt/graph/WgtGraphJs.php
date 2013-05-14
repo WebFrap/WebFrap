@@ -96,7 +96,7 @@ class WgtGraphJs extends WgtGraph
    * @param string $active
    * @return string
    */
-  protected function renderSelectOptions( $data, $active )
+  protected function renderSelectOptions($data, $active = null)
   {
 
     $html = '';
@@ -108,7 +108,11 @@ class WgtGraphJs extends WgtGraph
         $checked = ' checked="checked" ';
       }
 
-      $html .= '<option value="'.$value.'" '.$checked.' >'.$label.'</option>';
+      if (is_array($label))
+        $html .= '<option value="'.$value.'" '.$checked.' >'.$label[0].'</option>';
+      else
+        $html .= '<option value="'.$value.'" '.$checked.' >'.$label.'</option>';
+
 
     }
 
