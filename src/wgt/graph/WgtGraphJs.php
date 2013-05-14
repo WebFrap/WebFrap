@@ -50,6 +50,13 @@ class WgtGraphJs extends WgtGraph
    */
   public $formId = null;
 
+  /**
+   * Wird benötigt wenn der Graph referenzen in relation zu einem Datensatz
+   * visualisiert
+   * @var int
+   */
+  public $refId = null;
+
 ////////////////////////////////////////////////////////////////////////////////
 // Constructor
 ////////////////////////////////////////////////////////////////////////////////
