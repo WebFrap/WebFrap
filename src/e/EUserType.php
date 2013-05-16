@@ -36,15 +36,30 @@ class EUserType
    * @var int
    */
   const USER = 2;
-  
+
+  /**
+   * @var int
+   */
   const MACHINE = 3;
-  
+
+  /**
+   * @var int
+   */
   const ORGANISATION = 4;
-  
+
+  /**
+   * @var int
+   */
   const BUIZ_NODE =5;
-  
+
+  /**
+   * @var int
+   */
   const BOT = 6;
-  
+
+  /**
+   * @var int
+   */
   const SPIDER = 7;
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -55,11 +70,13 @@ class EUserType
    * @var array
    */
   public static $labels = array(
-    self::MESSAGES     => 'Messages',
-    self::LISTING      => 'Listing',
-    self::LISTING_SEARCH  => 'Listing Search',
-    self::LISTING_REF  => 'Listing Ref',
-    self::SELECTION    => 'Selection',
+    self::SYSTEM     => 'System',
+    self::USER      => 'User',
+    self::MACHINE  => 'Machine',
+    self::ORGANISATION  => 'Organisation',
+    self::BUIZ_NODE    => 'BuizNode',
+    self::BOT    => 'Bot',
+    self::SPIDER    => 'Spider',
   );
 
   /**
