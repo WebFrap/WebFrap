@@ -19,7 +19,7 @@
  * Statischer Table renderer
  *
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage wgt
  */
 class WgtRndTable
 {
