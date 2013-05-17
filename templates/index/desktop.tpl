@@ -7,11 +7,11 @@
   <div id="wbf-menu">
 
     <!-- menu -->
-    <?php  if( is_string($this->menu) ){ ?>
+    <?php if(is_string($this->menu)){ ?>
       <?php echo $this->includeTemplate( $this->menu , 'menu' )?>
-    <?php  } elseif( is_object($this->menu) ) { ?>
+    <?php } elseif(is_object($this->menu)) { ?>
       <?php echo $this->menu?>
-    <?php  }?>
+    <?php } ?>
     <!-- end menu -->
 
   </div>
@@ -30,9 +30,6 @@
 
   </div>
 
-
-
 </div>
-
 
 <?php echo $this->includeTemplate( 'window' , 'index' ) ?>
