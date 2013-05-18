@@ -19,7 +19,7 @@
  * Acl Rechte Container über den alle Berechtigungen geladen werden
  *
  * @package WebFrap
- * @subpackage Groupware
+ * @subpackage webfrap/groupware
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */

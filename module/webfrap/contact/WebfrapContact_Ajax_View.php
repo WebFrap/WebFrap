@@ -21,30 +21,33 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapContact_New_Modal_View extends WgtModal
+class WebfrapContact_Ajax_View extends LibTemplatePlain
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
 
-  public $width = 830;
-
-  public $height = 600;
-
   /**
    * @param string $menuName
    * @return void
    */
-  public function displayNew($params)
+  public function displayNew( $params = null )
   {
 
-    $this->setStatus('Create Contact');
-    $this->setTitle('Create Contact');
 
-    $this->setTemplate('webfrap/contact/tpl/form_new', true  );
+    $tpl = $this->getTplEngine();
 
+    $pageFragment = new WgtAjaxArea();
+    $pageFragment->selector = '#webfrap-desktop-contact-form';
+    $pageFragment->action = 'html';
+
+    $pageFragment->setTemplate( 'webfrap/contact/tpl/form_new', true);
+
+    $tpl->setArea('new_contact', $pageFragment);
+
+    $tpl->addJsCode("\$S('#webfrap-desktop-contact-form').show();");
 
   }//end public function displayNew */
 
-}//end class WebfrapContact_New_Modal_View
+}//end class WebfrapContact_Ajax_View
 

@@ -17,7 +17,7 @@
 
 /**
  * @package WebFrap
- * @subpackage Groupware
+ * @subpackage webfrap/groupware
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
@@ -37,7 +37,7 @@ class WebfrapContact_New_Maintab_View extends WgtMaintab
     $this->setLabel('Create Contact');
     $this->setTitle('Create Contact');
 
-    $this->setTemplate('webfrap/contact/maintab/form_new', true);
+    $this->setTemplate('webfrap/contact/tpl/form_new', true);
 
     $this->addMenu($params);
 
