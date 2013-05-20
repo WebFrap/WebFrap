@@ -130,10 +130,8 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $sendTo = 'wgt-input-'.$this->keyName.($this->suffix?'-'.$this->suffix:'').'-tostring';
 
     $inputToString = $this->view->newInput('input'.$this->prefix.'ToString' , 'Text');
-    $inputToString->addAttributes
-    (
-      array
-      (
+    $inputToString->addAttributes(
+      array(
         'name'  => $this->keyName.'[id_'.$this->keyName.'-tostring]',
         'id'    => $sendTo,
         'value' => $this->entity->text(),
@@ -777,7 +775,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdLevelListing->setReadOnly($this->isReadOnly('id_level_listing'));
       $inputIdLevelListing->setLabel
       (
-        $this->view->i18n->l('Level Listing', 'wbfsys.security_area.label'),
+        $this->view->i18n->l('Listing', 'wbfsys.security_area.label'),
         $this->entity->required('id_level_listing')
       );
 
@@ -790,7 +788,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
         $inputIdLevelListing->editUrl = 'index.php?c=Wbfsys.SecurityLevel.listing&amp;target='.$this->namespace.'&amp;field=id_level_listing&amp;publish=selectbox&amp;suffix='.$this->suffix.'&amp;input_id=wgt-input-'.$this->keyName.'_id_level_listing'.$this->suffix;
       }
       // set an empty first entry
-      $inputIdLevelListing->setFirstFree('No Level Listing selected');
+      $inputIdLevelListing->setFirstFree('No Listing selected');
 
       $queryIdLevelListing = $this->db->newQuery('WbfsysSecurityLevel_Selectbox');
       $queryIdLevelListing->fetchSelectbox();
@@ -844,7 +842,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdLevelAccess->setReadOnly($this->isReadOnly('id_level_access'));
       $inputIdLevelAccess->setLabel
       (
-        $this->view->i18n->l('Level Access', 'wbfsys.security_area.label'),
+        $this->view->i18n->l('Access', 'wbfsys.security_area.label'),
         $this->entity->required('id_level_access')
       );
 
@@ -911,7 +909,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdLevelInsert->setReadOnly($this->isReadOnly('id_level_insert'));
       $inputIdLevelInsert->setLabel
       (
-        $this->view->i18n->l('Level Insert', 'wbfsys.security_area.label'),
+        $this->view->i18n->l('Insert', 'wbfsys.security_area.label'),
         $this->entity->required('id_level_insert')
       );
 
@@ -978,7 +976,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdLevelUpdate->setReadOnly($this->isReadOnly('id_level_update'));
       $inputIdLevelUpdate->setLabel
       (
-        $this->view->i18n->l('Level Update', 'wbfsys.security_area.label'),
+        $this->view->i18n->l('Update', 'wbfsys.security_area.label'),
         $this->entity->required('id_level_update')
       );
 
@@ -1045,7 +1043,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdLevelDelete->setReadOnly($this->isReadOnly('id_level_delete'));
       $inputIdLevelDelete->setLabel
       (
-        $this->view->i18n->l('Level Delete', 'wbfsys.security_area.label'),
+        $this->view->i18n->l('Delete', 'wbfsys.security_area.label'),
         $this->entity->required('id_level_delete')
       );
 
@@ -1112,7 +1110,7 @@ class AclMgmt_SecurityArea_Form extends WgtForm
       $inputIdLevelAdmin->setReadOnly($this->isReadOnly('id_level_admin'));
       $inputIdLevelAdmin->setLabel
       (
-        $this->view->i18n->l('Level Admin', 'wbfsys.security_area.label'),
+        $this->view->i18n->l('Admin', 'wbfsys.security_area.label'),
         $this->entity->required('id_level_admin')
       );
 
