@@ -49,7 +49,12 @@
             <ul>
               <li><a href="content.php?page=WebFrap:webfrap.architecture.mvc.view.maintab" target="main" class="clink" >Maintab</a></li>
               <li><a href="content.php?page=WebFrap:webfrap.architecture.mvc.view.html" target="main" class="clink" >Html</a></li>
+              <li><a href="content.php?page=WebFrap:webfrap.architecture.mvc.view.modal" target="main" class="clink" >Modal</a></li>
+              <li><a href="content.php?page=WebFrap:webfrap.architecture.mvc.view.ajax" target="main" class="clink" >Ajax</a></li>
+              <li><a href="content.php?page=WebFrap:webfrap.architecture.mvc.view.service" target="main" class="clink" >Service</a></li>
+              <li><a href="content.php?page=WebFrap:webfrap.architecture.mvc.view.html_print" target="main" class="clink" >Html Print</a></li>
               <li><a href="content.php?page=WebFrap:webfrap.architecture.mvc.view.page" target="main" class="clink" >Page</a></li>
+              <li><a href="content.php?page=WebFrap:webfrap.architecture.mvc.view.cli" target="main" class="clink" >Cli</a></li>
             </ul>
           </li>
           <li class="closed" >
@@ -132,6 +137,7 @@
           <li><a href="content.php?page=WebFrap:webfrap.template.adapter.ajax" target="main" class="clink" >Cli</a></li>
           <li><a href="content.php?page=WebFrap:webfrap.template.adapter.document" target="main" class="clink" >Document</a></li>
           <li><a href="content.php?page=WebFrap:webfrap.template.adapter.html" target="main" class="clink" >Html</a></li>
+          <li><a href="content.php?page=WebFrap:webfrap.template.adapter.html_print" target="main" class="clink" >Html Print</a></li>
           <li><a href="content.php?page=WebFrap:webfrap.template.adapter.json" target="main" class="clink" >Json</a></li>
           <li><a href="content.php?page=WebFrap:webfrap.template.adapter.mail" target="main" class="clink" >Mail</a></li>
           <li><a href="content.php?page=WebFrap:webfrap.template.adapter.page" target="main" class="clink" >Page</a></li>
