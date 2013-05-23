@@ -1,4 +1,5 @@
 <?php
+
 /*******************************************************************************
 *
 * @author      : Dominik Bonsch <dominik.bonsch@webfrap.net>
@@ -21,10 +22,10 @@
  */
 class ETaskType
 {
-/*//////////////////////////////////////////////////////////////////////////////
+  /*//////////////////////////////////////////////////////////////////////////////
 // Constantes
 //////////////////////////////////////////////////////////////////////////////*/
-
+  
   /**
    * @var int
    */
@@ -89,6 +90,7 @@ class ETaskType
    * @var int
    */
   const MONTH_START = 13;
+
   /**
    * @var int
    */
@@ -124,48 +126,50 @@ class ETaskType
    */
   const YEAR_END = 20;
 
-/*//////////////////////////////////////////////////////////////////////////////
+  /**
+   * @var int
+   */
+  const MONTH_END_WORKDAY = 21;
+  
+  /*//////////////////////////////////////////////////////////////////////////////
 // Labels
 //////////////////////////////////////////////////////////////////////////////*/
-
+  
   /**
    * @var array
    */
-  public static $labels = array
-  (
-    self::CUSTOM     => 'Custom',
-    self::MINUTE     => 'Every minute',
-    self::MINUTE_5   => 'Every 5 minutes',
-    self::MINUTE_15  => 'Every 15 minutes',
-    self::MINUTE_30  => 'Every 30 minutes',
-    self::HOUR       => 'Every hour',
-    self::HOUR_6     => 'Every 6 hours',
-    self::HOUR_12    => 'Every 12 hours',
-    self::DAY        => 'Every day',
-    self::WORK_DAY   => 'Every working day',
-    self::WEEK_END   => 'Every weekend',
-    self::WEEK_2     => 'Every second week',
-    self::MONTH_START => 'Every month start',
-    self::MONTH_END  => 'Every month end',
-    self::MONTH_3_START => 'Every quater start',
-    self::MONTH_3_END   => 'Every quater end',
-    self::MONTH_6_START => 'Every half year start',
-    self::MONTH_6_END   => 'Every half year end',
-    self::YEAR_START    => 'Every year start',
-    self::YEAR_END      => 'Every year end'
+  public static $labels = array(
+      self::CUSTOM => 'Custom', 
+      self::MINUTE => 'Every minute', 
+      self::MINUTE_5 => 'Every 5 minutes', 
+      self::MINUTE_15 => 'Every 15 minutes', 
+      self::MINUTE_30 => 'Every 30 minutes', 
+      self::HOUR => 'Every hour', 
+      self::HOUR_6 => 'Every 6 hours', 
+      self::HOUR_12 => 'Every 12 hours', 
+      self::DAY => 'Every day', 
+      self::WORK_DAY => 'Every working day', 
+      self::WEEK_END => 'Every weekend', 
+      self::WEEK_2 => 'Every second week', 
+      self::MONTH_START => 'Every month start', 
+      self::MONTH_END => 'Every month end', 
+      self::MONTH_END_WORKDAY => 'Every month end (workday)', 
+      self::MONTH_3_START => 'Every quater start', 
+      self::MONTH_3_END => 'Every quater end', 
+      self::MONTH_6_START => 'Every half year start', 
+      self::MONTH_6_END => 'Every half year end', 
+      self::YEAR_START => 'Every year start', 
+      self::YEAR_END => 'Every year end'
   );
 
   /**
    * @param string $key
    * @return string
    */
-  public static function label($key)
+  public static function label ($key)
   {
-    return isset(self::$labels[$key])
-      ? self::$labels[$key]
-      : self::$labels[self::CUSTOM]; // per default custom
 
-  }//end public static function label */
-
+    return isset(self::$labels[$key]) ? self::$labels[$key] : self::$labels[self::CUSTOM]; // per default custom
+  } //end public static function label */
 }//end class ETaskType
 

@@ -335,4 +335,3 @@ class WgtSelectboxEnum extends WgtSelectbox
   }//end public function build */
 
 } // end class WgtSelectboxEnum
-

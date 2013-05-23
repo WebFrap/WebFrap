@@ -84,6 +84,18 @@ class Validator
    * @var string
    */
   const HTML        = 'Html';
+  
+  /**
+   * Validatormapping
+   * @var string
+   */
+  const HTML_PUBLISH        = 'HtmlPublish';
+  
+  /**
+   * Validatormapping
+   * @var string
+   */
+  const HTML_FULL        = 'HtmlFull';
 
   /**
    * Validatormapping
@@ -1021,11 +1033,16 @@ class Validator
 
       return false;
     }
-
+   
     // sanitize HTML
     $sanitizer = LibSanitizer::getHtmlSanitizer();
-    $value = $sanitizer->sanitize($value);
-
+    
+    $purify = new LibVendorHtmlpurifier_ConfigSave();
+    
+    $sanitizer->config = $purify->getConfig();
+    
+    $value = $sanitizer->purify($value);
+    
     $this->data[$key]     = $value;
 
     if ($notNull) {
@@ -1049,6 +1066,102 @@ class Validator
 
   }//end function addHtml
 
+  /**
+   * @param string $key
+   * @param scalar $value
+   * @param boolean $notNull
+   * @param int $maxSize
+   * @param int $minSize
+   */
+  public function addHtmlPublish($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  {
+    if (!$notNull and trim($value) == '') {
+      $this->data[$key]     = null;
+      $this->invalid[$key]  = false;
+  
+      return false;
+    }
+     
+    // sanitize HTML
+    $sanitizer = LibSanitizer::getHtmlSanitizer();
+  
+    $purify = new LibVendorHtmlpurifier_ConfigPublish();
+    
+    $sanitizer->config = $purify->getConfig();
+  
+    $value = $sanitizer->purify($value);
+  
+    $this->data[$key]     = $value;
+  
+    if ($notNull) {
+      if (trim($value) == ''  )
+        return 'empty';
+    }
+  
+    if ($maxSize) {
+      if (strlen($this->data[$key]) > $maxSize)
+        return 'max';
+    }
+  
+    if ($minSize) {
+      if (strlen($this->data[$key]) < $minSize)
+        return 'min';
+    }
+  
+    $this->invalid[$key]  = false;
+  
+    return false;
+  
+  }
+  
+  /**
+   * @param string $key
+   * @param scalar $value
+   * @param boolean $notNull
+   * @param int $maxSize
+   * @param int $minSize
+   */
+  public function addHtmlFull($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  {
+    if (!$notNull and trim($value) == '') {
+      $this->data[$key]     = null;
+      $this->invalid[$key]  = false;
+  
+      return false;
+    }
+     
+    // sanitize HTML
+    $sanitizer = LibSanitizer::getHtmlSanitizer();
+  
+    $purify = new LibVendorHtmlpurifier_ConfigFull();
+    
+    $sanitizer->config = $purify->getConfig();
+  
+    $value = $sanitizer->purify($value);
+  
+    $this->data[$key]     = $value;
+  
+    if ($notNull) {
+      if (trim($value) == ''  )
+        return 'empty';
+    }
+  
+    if ($maxSize) {
+      if (strlen($this->data[$key]) > $maxSize)
+        return 'max';
+    }
+  
+    if ($minSize) {
+      if (strlen($this->data[$key]) < $minSize)
+        return 'min';
+    }
+  
+    $this->invalid[$key]  = false;
+  
+    return false;
+  
+  }
+  
   /**
    * @param string $key
    * @param scalar $value
@@ -1951,7 +2064,7 @@ class Validator
    */
   public static function sanitizeHtml($input)
   {
-
+    
     if (is_null($input)) {
       return '';
     } elseif (is_array($input)) {
@@ -1999,7 +2112,7 @@ class Validator
    */
   public static function sanitizeHtmlAttribute($input)
   {
-
+    
     if (is_null($input)) {
       return '';
     } elseif (is_array($input)) {
