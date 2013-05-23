@@ -40,6 +40,7 @@ class WebfrapContact_Ajax_View extends LibTemplatePlain
     $pageFragment = new WgtAjaxArea();
     $pageFragment->selector = '#webfrap-desktop-contact-form';
     $pageFragment->action = 'html';
+    $pageFragment->setModel($this->loadModel('WebfrapContact'));
 
     $pageFragment->setTemplate( 'webfrap/contact/tpl/form_new', true);
 
