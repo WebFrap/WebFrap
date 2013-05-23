@@ -293,7 +293,11 @@ class LibFlowTaskplanner extends LibFlow
     if (isset($this->hardStatus)) {
       $status = $this->hardStatus;
     } else {
-      $status = $this->softStatus;
+      if (isset($this->softStatus)) {
+        $status = $this->softStatus;
+      } else {
+        $status = ETaskStatus::OPEN;
+      }
     }
     
     $orm = $this->getOrm();
