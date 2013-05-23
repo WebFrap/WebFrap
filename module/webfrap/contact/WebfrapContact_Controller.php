@@ -22,7 +22,7 @@
 
  *
  * @package WebFrap
- * @subpackage Groupware
+ * @subpackage webfrap/groupware
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
@@ -43,7 +43,7 @@ class WebfrapContact_Controller extends Controller
     ),
     'formnew' => array(
       'method'    => array('GET'),
-      'views'      => array('modal')
+      'views'      => array('ajax')
     ),
     'insert' => array(
       'method'    => array('POST'),
@@ -133,7 +133,7 @@ class WebfrapContact_Controller extends Controller
     // create a window
     $view   = $response->loadView(
       'form-messages-new',
-      'WebfrapContact_New',
+      'WebfrapContact',
       'displayNew'
     );
 

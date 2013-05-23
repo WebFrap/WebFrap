@@ -37,9 +37,42 @@ class WebfrapContact_List_Maintab_View extends WgtMaintab
     $this->setLabel('Contacts');
     $this->setTitle('Contacts');
 
-    $this->setTemplate('webfrap/contact/maintab/list', true);
+    $this->setTemplate('webfrap/contact/tpl/list', true);
 
     $this->addVar( 'contacts', $this->model->fetchContacts($userRqt)  );
+
+    // Über Listenelemente können Eigene Panelcontainer gepackt werden
+    // hier verwenden wir ein einfaches Standardpanel mit Titel und
+    // simplem Suchfeld
+    $tabPanel = new WgtPanelTable();
+    /* @var $searchElement WgtPanelElementSearch_Overlay */
+    $searchElement = $this->setSearchElement(new WgtPanelElementSearch_Overlay());
+    $searchElement->searchKey = 'my_contact';
+    $searchElement->searchFieldSize = 'xlarge';
+    //$searchElement->advancedSearch = true;
+    $searchElement->focus = true;
+
+
+    $searchElement->setSearchFields($userRqt->searchFields);
+
+    // Ein Panel für die Filter hinzufügen
+    // Die Filteroptionen befinden sich im Panel
+    // Die UI Klasse wird als Environment übergeben
+    $filterSubPanel = new WebfrapContact_List_SubPanel_Filter($this);
+
+    // Search Form wird benötigt um die Filter an das passende Suchformular zu
+    // binden
+    $filterSubPanel->setSearchForm($userRqt->searchFormId);
+
+    // Setzen der Filterzustände, werden aus der URL ausgelesen
+    $filterSubPanel->setFilterStatus($userRqt->settings);
+
+    // Access wird im Panel als Rechte Container verwendet
+    //$filterSubPanel->setAccess($access);
+    $filterSubPanel->searchKey = $searchElement->searchKey;
+
+    // Jetzt wird das SubPanel in den Suchen Splittbutton integriert
+    $searchElement->setFilter($filterSubPanel);
 
     $this->addMenu($userRqt);
 
@@ -191,7 +224,7 @@ HTML;
     });
 
     self.getObject().find(".wgtac_create").click(function() {
-      \$R.get('modal.php?c=Webfrap.Contact.formNew');
+      \$R.get('ajax.php?c=Webfrap.Contact.formNew');
     });
 
     self.getObject().find(".wgtac_search_con").click(function() {

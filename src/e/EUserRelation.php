@@ -100,5 +100,5 @@ class EUserRelation
   }//end public static function label */
 
 
-}//end class EUserType
+}//end class EUserRelation
 

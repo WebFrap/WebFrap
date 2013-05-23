@@ -85,11 +85,11 @@ class LibRequestPhp
   {
 
     if (!isset($_POST[$key])) {
-      
+
       return null;
-      
+
     } else {
-      
+
       return new LibRequestSubrequest(
         $this,
         $_POST[$key],
@@ -197,7 +197,7 @@ class LibRequestPhp
   */
   public function get($key = null, $validator = null, $message = null)
   {
-    
+
     return $this->param($key, $validator, $message);
 
   } // end public function get */
@@ -236,7 +236,7 @@ class LibRequestPhp
     } else {
       return false;
     }
-    
+
   } // end public function paramExists */
 
   /**
@@ -1947,8 +1947,13 @@ class LibRequestPhp
    * @param array $fields
    * @param array $required
    */
-  public function validateMultiSave($entityName, $keyName, $fields = array(), $required = array())
-  {
+  public function validateMultiSave(
+    $entityName,
+    $keyName,
+    $fields = array(),
+    $required = array(),
+    $defaults = array()
+  ) {
 
     $orm      = $this->getOrm();
 
@@ -1970,13 +1975,19 @@ class LibRequestPhp
       if (array_key_exists(Db::PK, $data)) {
         unset($data[Db::PK]);
       }//end if
-      
+
       if (is_numeric($rowid)) {
         $tpObj->setId((int) $rowid);
       } else { //end if
         $tpObj->tmpId = $rowid;
       }
-        
+
+      if ($defaults) {
+        foreach ($defaults as $defKey => $defValue) {
+          $tpObj->$defKey = $defValue;
+        }
+      }
+
       $tpObj->addData($data);
       $entityList[$rowid] = $tpObj;
 
@@ -2007,12 +2018,12 @@ class LibRequestPhp
 
     if (preg_match('/opera/', $userAgent)) {
       $this->browserInfo['name'] = 'opera';
+    } elseif (preg_match('/chrome/', $userAgent)) {
+      $this->browserInfo['name'] = 'chrome';
     } elseif (preg_match('/webkit/', $userAgent)) {
       $this->browserInfo['name'] = 'safari';
     } elseif (preg_match('/msie/', $userAgent)) {
       $this->browserInfo['name'] = 'msie';
-    } elseif (preg_match('/chrome/', $userAgent)) {
-      $this->browserInfo['name'] = 'chrome';
     } elseif (preg_match('/firefox/', $userAgent)) {
       $this->browserInfo['name'] = 'firefox';
     } elseif (preg_match('/mozilla/', $userAgent) && !preg_match('/compatible/', $userAgent)) {

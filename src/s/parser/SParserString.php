@@ -346,8 +346,7 @@ final class SParserString
    */
   public static function nameToAccessKey($name)
   {
-    $clean = array
-    (
+    $clean = array(
       '&'  => '_',
       '-'  => '_',
       ' '  => '_',
@@ -364,10 +363,8 @@ final class SParserString
     $tmp  = explode('(',$name);
     $tmp2 = explode(',',$tmp[0]);
 
-    $key = mb_strtolower
-    (
-      str_replace
-      (
+    $key = mb_strtolower(
+      str_replace(
         array_keys($clean) ,
         array_values($clean) ,
         trim($tmp2[0])
