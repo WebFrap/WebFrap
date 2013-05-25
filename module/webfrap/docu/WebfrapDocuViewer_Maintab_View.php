@@ -40,12 +40,10 @@ class WebfrapDocuViewer_Maintab_View extends WgtMaintabCustom
   {
 
     // fetch the i18n text for title, status and bookmark
-    $i18nText = $this->i18n->l
-    (
+    $i18nText = $this->i18n->l(
       'Docu for: {@label@}',
       'wbf.label',
-      array
-      (
+      array(
         'label' => $helpPage
       )
     );
