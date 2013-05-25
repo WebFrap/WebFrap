@@ -107,14 +107,14 @@ class LibDbOrm
    * @var LibDbConnection
    */
   public $db   = null;
-  
+
   /**
    * the database connection object
    *
    * @var LibDbConnection
    */
   public $user   = null;
-  
+
   /**
    * Das Resultset der letzen Query
    * Vorsicht wird bei jeder neuen query überschieben
@@ -261,7 +261,7 @@ class LibDbOrm
   {
     return $this->sqlBuilder;
   }//end public function getQueryBuilder */
-  
+
   /**
    * @param User $user
    */
@@ -269,18 +269,18 @@ class LibDbOrm
   {
     $this->user = $user;
   }//end public function setUser */
-  
+
   /**
    * @return User
    */
   public function getUser()
   {
-    
+
     if (!$this->user)
       $this->user = Webfrap::$env->getUser();
-    
+
     return $this->user;
-    
+
   }//end public function getUser */
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -501,7 +501,7 @@ class LibDbOrm
           if (trim($value) == '' && $dropEmptyWhitespace) {
             $tmp[$key] = Db::NULL;
           } else {
-            $tmp[$key] = "'".$this->db->addSlashes($value)."'";
+            $tmp[$key] = "'".$this->db->escape($value)."'";
           }
         } else {
           if (trim($value) == '' && $dropEmptyWhitespace) {
@@ -529,7 +529,7 @@ class LibDbOrm
    */
   public function escape($value)
   {
-    return $this->db->addSlashes($value);
+    return $this->db->escape($value);
   }//end public function escape */
 
   /**
@@ -693,11 +693,11 @@ class LibDbOrm
    */
   public function getCols($entityKey, $categories = null)
   {
-    
+
     $entity = $this->getMetadata($entityKey);
 
     return $entity->getCols($categories);
-    
+
   }//end public function getCols */
 
   /**
@@ -1591,7 +1591,7 @@ SQL;
       throw new LibDb_Exception('insertIfNotExists entity empty');
 
     $handleArray = false;
-    
+
     /*
     if (!is_object($entity)) {
       // $keyVal
@@ -1606,7 +1606,7 @@ SQL;
 
     } else
     */
-    
+
     if ($entity instanceof LibSqlCriteria) {
       $keyVal     = $entity->values;
       $tableName  = $entity->table;
@@ -1664,9 +1664,9 @@ SQL;
       }
 
       $sqlstring = $this->sqlBuilder->buildInsertIfNotExistsQuery(
-        $keyVal, 
-        $tableName, 
-        $duplicateKeys, 
+        $keyVal,
+        $tableName,
+        $duplicateKeys,
         $dropEmptyWhitespace
       );
 
@@ -2143,7 +2143,7 @@ SQL;
       }
 
     } catch (LibDb_Exception $exc) {
-      
+
       return null;
     }
 

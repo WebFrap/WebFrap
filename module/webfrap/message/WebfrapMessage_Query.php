@@ -53,9 +53,9 @@ class WebfrapMessage_Query extends LibSqlQuery
     view_person_role
 
   WHERE
-    UPPER(wbfsys_role_user_name) like UPPER('{$db->addSlashes($key)}%')
-      OR UPPER(core_person_lastname) like UPPER('{$db->addSlashes($key)}%')
-      OR UPPER(core_person_lastname) like UPPER('{$db->addSlashes($key)}%')
+    UPPER(wbfsys_role_user_name) like UPPER('{$db->escape($key)}%')
+      OR UPPER(core_person_lastname) like UPPER('{$db->escape($key)}%')
+      OR UPPER(core_person_lastname) like UPPER('{$db->escape($key)}%')
 
   LIMIT 10
 

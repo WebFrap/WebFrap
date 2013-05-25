@@ -238,7 +238,7 @@ class WebfrapAnnouncement_Table_Model extends Model
 
     // freitext suche
     if ($free = $httpRequest->param('free_search' , Validator::TEXT))
-      $condition['free'] = $db->addSlashes(trim($free));
+      $condition['free'] = $db->escape(trim($free));
 
     if (!$fieldsWbfsysAnnouncement = $this->getRegisterd('search_fields_wbfsys_announcement')) {
        $fieldsWbfsysAnnouncement   = $orm->getSearchCols('WbfsysAnnouncement');
