@@ -21,6 +21,10 @@
         	href="area.php?c=Example.Wgt.area&area=control.buttonset"
         	class="wcm wcm_req_ajax" >Buttonset</a>
         </li>
+        <li><a
+        	href="area.php?c=Example.Wgt.area&area=control.check_switcher"
+        	class="wcm wcm_req_ajax" >Checkbox Switcher</a>
+        </li>
 			</ul>
 		</li>
     <li><span>d3 charts</span>
