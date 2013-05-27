@@ -275,7 +275,7 @@ class WebfrapMessage_MiniList_Query extends LibSqlQuery
               if ('' ==  $part)
                 continue;
 
-              $safePart = $db->addSlashes($part);
+              $safePart = $db->escape($part);
 
               if ('@' == $safePart[0]) {
                 $safePart = substr($safePart, 1);
@@ -297,7 +297,7 @@ class WebfrapMessage_MiniList_Query extends LibSqlQuery
            }
 
          } else {
-           $safePart = $db->addSlashes($condition['free']) ;
+           $safePart = $db->escape($condition['free']) ;
 
            if ('@' == $safePart[0]) {
              $safePart = substr($safePart, 1);

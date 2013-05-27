@@ -99,7 +99,7 @@ SQL;
 
     foreach ($tmp as $value) {
 
-      $safeVal = $db->addSlashes(trim($value));
+      $safeVal = $db->escape(trim($value));
 
       if ('' == $safeVal)
         continue;
@@ -174,7 +174,7 @@ SQL;
     $wheres = array();
 
     foreach ($tmp as $value) {
-      $safeVal = $db->addSlashes(trim($value));
+      $safeVal = $db->escape(trim($value));
 
       if ('' == trim($safeVal))
         continue;

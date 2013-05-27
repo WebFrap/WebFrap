@@ -96,7 +96,7 @@ SQL;
 
     $this->settings[$key] = $data;
 
-    $jsonString = $this->db->addSlashes($data->toJson());
+    $jsonString = $this->db->escape($data->toJson());
 
     if ($data->id) {
       $this->db->orm()->update('WbfsysUserSetting', $data->id, array('jdata',$jsonString));

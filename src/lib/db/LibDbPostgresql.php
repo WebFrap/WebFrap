@@ -1362,7 +1362,8 @@ class LibDbPostgresql extends LibDbConnection
    * Erstellen einer Datenbankverbindung
    *
    * @param res Sql Ein Select Object
-   * @return
+   * @return string
+   * @deprecated use escape
    */
   public function addSlashes($value)
   {
@@ -1385,6 +1386,34 @@ class LibDbPostgresql extends LibDbConnection
     return $value;
 
   } // end public function addSlashes */
+
+  /**
+   * Erstellen einer Datenbankverbindung
+   *
+   * @param res Sql Ein Select Object
+   * @return
+   */
+  public function escape($value)
+  {
+
+    if (get_magic_quotes_gpc()) {
+      $this->firstStripThenAddSlashes($value);
+    } else {
+      if (is_array($value)) {
+        $tmp = array();
+
+        foreach ($value as $key => $data)
+          $tmp[$key] = $this->addSlashes($data);
+
+        $value = $tmp;
+      } else {
+        $value = pg_escape_string($this->connectionWrite,  $value);
+      }
+    }
+
+    return $value;
+
+  } // end public function escape */
 
   /**
    * Erstellen einer Datenbankverbindung

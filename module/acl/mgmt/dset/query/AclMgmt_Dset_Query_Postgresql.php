@@ -95,7 +95,7 @@ SQL;
 
     foreach ($tmp as $value) {
 
-      $safeVal = $db->addSlashes(trim($value));
+      $safeVal = $db->escape(trim($value));
 
       if ('' == $safeVal)
         continue;

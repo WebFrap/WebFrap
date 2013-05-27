@@ -201,7 +201,7 @@ SQL;
 
             foreach ($parts as $part) {
 
-              $safeVal = $db->addSlashes(trim($part));
+              $safeVal = $db->escape(trim($part));
 
               // prüfen, dass der string nicht leer ist
               if ('' == trim($safeVal))
@@ -225,7 +225,7 @@ SQL;
 SQL;
 
          } else {
-           $safeVal = $db->addSlashes($condition['free']);
+           $safeVal = $db->escape($condition['free']);
 
            // hier haben wir nur einen Check, daher einfach hardcoded abfragen
            $sqlUsers .= <<<SQL
