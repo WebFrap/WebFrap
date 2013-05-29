@@ -563,6 +563,10 @@ HTML;
                   style="width:120px"
                   wgt_sort_name="file[created]" >Created</th>
                 <th
+                  style="width:150px"
+                  wgt_sort_name="file[description]"
+                  wgt_search="input:file[description]" >Description</th>
+                <th
                   style="width:50px;">Nav.</th>
               </tr>
             </thead>
@@ -693,6 +697,7 @@ HTML;
         wgt_eid="{$entry['user_id']}"
         title="{$entry['lastname']}, {$entry['firstname']}" >{$entry['user_name']}</span></td>
       <td class="no_oflw" >{$timeCreated}</td>
+      <td class="no_oflw" >{$entry['description']}</td>
       <td class="nav" >{$menuCode}</td>
     </tr>
 
