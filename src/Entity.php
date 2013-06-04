@@ -173,12 +173,19 @@ abstract class Entity implements ArrayAccess
    * @var LibDbOrm
    */
   public $orm           = null;
-  
+
   /**
    * Die Temporäre ID
    * @var string
    */
   public $tmpId          = null;
+
+  /**
+   * Entities die mitgespeichert werden sollen wenn diese Entity gespeichert wurde
+   * danach wird die liste geleert
+   * @var [{src_id string,entity Entity,target_id string}]
+   */
+  public $lateBindings = array();
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Interface: ArrayAccess
@@ -266,7 +273,7 @@ abstract class Entity implements ArrayAccess
 
       $this->orm = $orm;
     } else {
-      
+
       $this->orm = Db::getOrm();
     }
 
@@ -302,7 +309,7 @@ abstract class Entity implements ArrayAccess
    */
   public function __get($key)
   {
-    
+
     return $this->offsetGet($key);
 
   }//end public function __get */
@@ -581,7 +588,7 @@ abstract class Entity implements ArrayAccess
       return $cols;
 
     } else {
-      
+
       Error::report('Requested invalid '.$catKeys);
       return array();
     }
@@ -608,7 +615,7 @@ abstract class Entity implements ArrayAccess
   {
     return isset(static::$cols[$colKey]);
   }//end public function hasCol */
-  
+
   /**
    * Getter für die Cols
    * @param string/array $catKeys if converts to false, always return all fields
@@ -616,11 +623,11 @@ abstract class Entity implements ArrayAccess
    */
   public function isColUnique($colKey)
   {
-    
+
     return in_array($colKey,static::$uniqueCols);
-    
+
   }//end public function isColUnique */
-  
+
 
   /**
    *
@@ -801,7 +808,7 @@ abstract class Entity implements ArrayAccess
     $data = array();
 
     foreach ($keys as $key) {
-      
+
       if (!isset(static::$cols[$key])) {
 
         Debug::console(get_class($this).'::'.$key, static::$cols);
@@ -809,7 +816,7 @@ abstract class Entity implements ArrayAccess
         throw new LibDb_Exception(
 					'asked for wrong Validation data: '.$key . ' in '.get_class($this)
         );
-        
+
       } else {
         $data[$key] = static::$cols[$key];
       }
@@ -1237,6 +1244,14 @@ abstract class Entity implements ArrayAccess
   }//end public function getPostSave */
 
   /**
+   * @param Entity $entity
+   */
+  public function saveAfter( $entity )
+  {
+    $this->postSave[] = $entity;
+  }//end public function saveAfter */
+
+  /**
    * setzen der Default werte
    */
   public function fillupDefault()
@@ -1420,7 +1435,7 @@ abstract class Entity implements ArrayAccess
     $colKeys = array_keys(static::$cols);
 
     if ($preTab) {
-      
+
       foreach ($colKeys as $key) {
         $data[$preTab.'_'.$key] = isset($this->data[$key])
           ? $this->data[$key]
@@ -1428,9 +1443,9 @@ abstract class Entity implements ArrayAccess
       }
 
       $data[$preTab.'_rowid'] = $this->id;
-      
+
     } else {
-      
+
       foreach ($colKeys as $key) {
         $data[static::$table.'_'.$key] = isset($this->data[$key])
           ? $this->data[$key]
@@ -1459,21 +1474,22 @@ abstract class Entity implements ArrayAccess
       $this->synchronized = false;
       if ($value instanceof Entity) {
         if ('rowid' === $key) {
-          
-          $this->postSave[] = $value; ///TODO checken ob das nicht lieber eine Exception sein sollte
-        
+
+          // speichern der entity nachdem diese entity gespeichert wurde
+          $this->postSave[] = $value;
+
         } else {
-          
+
           $this->singleRef[$key] = $value;
 
           if (!isset($this->data[$key])) {
-            
+
             $this->savedData[$key] = null;
             $this->data[$key] = $value;
           } else {
             // wenn neu können wir auf jeden fall von einer Änderung ausgehen
             if ($value->isNew() || $this->data[$key] !== (string) $value) {
-              
+
               $this->savedData[$key] = $this->data[$key];
               $this->data[$key] = $value;
             }
@@ -1483,11 +1499,11 @@ abstract class Entity implements ArrayAccess
       } else {
 
         if (!isset($this->data[$key])) {
-          
+
           $this->savedData[$key] = null;
           $this->data[$key] = $value;
         } else {
-          
+
           $this->savedData[$key] = $this->data[$key];
           $this->data[$key] = $value;
         }
@@ -1500,12 +1516,12 @@ abstract class Entity implements ArrayAccess
     } else {
 
       if (!isset($this->data[$key])) {
-        
+
         $this->synchronized    = false;
         $this->savedData[$key] = null;
         $this->data[$key]      = $value;
       } elseif ($this->data[$key] !== (string) $value) {
-        
+
         $this->synchronized    = false;
         $this->savedData[$key] = $this->data[$key];
         $this->data[$key]      = $value;
