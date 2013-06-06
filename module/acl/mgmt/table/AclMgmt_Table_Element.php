@@ -112,16 +112,6 @@ class AclMgmt_Table_Element extends WgtTable
         'wbf.label',
         Acl::ADMIN
       ),
-      'inheritance'  => array
-      (
-        Wgt::ACTION_BUTTON_GET,
-        'ACL Graph',
-        'maintab.php?c=Acl.Mgmt_Path.showGraph&dkey='.$this->domainNode->domainName.'&amp;objid=',
-        'control/acl_inheritance.png',
-        '',
-        'wbf.label',
-        Acl::ADMIN
-      ),
       'tree'  => array
       (
         Wgt::ACTION_BUTTON_GET,

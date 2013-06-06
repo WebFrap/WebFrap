@@ -27,15 +27,11 @@ class WgtCrudForm
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   *
-   * Enter description here ...
    * @var string
    */
   public $prefix   = null;
 
   /**
-   *
-   * Enter description here ...
    * @var string
    */
   public $suffix   = null;

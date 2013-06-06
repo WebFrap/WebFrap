@@ -2263,9 +2263,9 @@ SQL;
       $entity->synchronized();
 
       $postSave = $entity->getPostSave();
-      foreach ($postSave as $postEntiy) {
+      foreach ($postSave as /* @var Entity $postEntiy */ $postEntiy) {
         // we asume that the entity is allready appended
-        $postEntiy->save();
+        $this->save($postEntiy);
       }
 
       if ($entity->hasIndex())

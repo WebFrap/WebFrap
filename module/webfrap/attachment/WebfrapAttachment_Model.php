@@ -363,7 +363,7 @@ SQL;
     $typeFilterJoins = '';
     $typeFilterWhere = '';
 
-    if ($this->maskFilter) {
+    if ($this->context->maskFilter) {
 
       $typeFilterJoins = <<<SQL
 
@@ -375,12 +375,12 @@ SQL;
 
 SQL;
 
-      if ($this->fetchUntyped) {
+      if ($this->context->fetchUntyped) {
         $typeFilterWhere = <<<SQL
 
   AND
     (
-      UPPER(wbfsys_management.access_key) = UPPER('{$this->maskFilter}')
+      UPPER(wbfsys_management.access_key) = UPPER('{$this->context->maskFilter}')
       OR
       file.id_type is null
     )
@@ -389,17 +389,17 @@ SQL;
       } else {
         $typeFilterWhere = <<<SQL
 
-  UPPER(wbfsys_management.access_key) = UPPER('{$this->maskFilter}')
+  UPPER(wbfsys_management.access_key) = UPPER('{$this->context->maskFilter}')
 
 SQL;
 
       }
 
-    } elseif ($this->typeFilter) {
+    } elseif ($this->context->typeFilter) {
 
-      $searchKey =  "UPPER('".implode("'), UPPER('", $this->typeFilter)."')" ;
+      $searchKey =  "UPPER('".implode("'), UPPER('", $this->context->typeFilter)."')" ;
 
-      if ($this->fetchUntyped) {
+      if ($this->context->fetchUntyped) {
         $typeFilterWhere = <<<SQL
 
   AND

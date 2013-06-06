@@ -76,6 +76,12 @@ abstract class WgtInput extends WgtAbstract
   public $texts     = null;
 
   /**
+   * Zusätzliche Klassen auf der Box
+   * @var array
+   */
+  public $boxClasses = array();
+
+  /**
    * s
    * @var string
    */
@@ -409,8 +415,10 @@ abstract class WgtInput extends WgtAbstract
 
     $helpIcon = $this->renderDocu($id);
 
+    $boxClasses = implode(' ',$this->boxClasses);
+
     $html = <<<HTML
-    <div class="wgt-box input" id="wgt-box-{$id}" >
+    <div class="wgt-box input {$boxClasses}" id="wgt-box-{$id}" >
       {$this->texts->topBox}
       <div class="wgt-label" ><label
         for="{$id}" >{$this->texts->beforeLabel}{$this->label}{$this->texts->afterLabel} {$required}{$this->texts->endLabel}

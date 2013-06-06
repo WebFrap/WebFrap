@@ -113,20 +113,8 @@ class AclMgmt_Dset_Treetable_Element extends WgtTreetable
 
     $this->id = 'wgt-treetable-'.$this->domainNode->aclDomainKey.'-acl-dset';
 
-    $this->url['group']      = array
-    (
-      'inheritance'  => array
-      (
-        Wgt::ACTION_BUTTON_GET,
-        'ACL Graph',
-        'maintab.php?c=Acl.Mgmt_Path.showGraph&amp;dkey='.$this->domainNode->domainName.'&amp;objid=',
-        'icon-sitemap',
-        '',
-        'wbf.label',
-        Acl::ADMIN
-      ),
-      'tree'  => array
-      (
+    $this->url['group']      = array(
+      'tree'  => array(
         Wgt::ACTION_BUTTON_GET,
         'Reference ACLs',
         'maintab.php?c=Acl.Mgmt_Tree.showGraph&amp;dkey='.$this->domainNode->domainName.'&amp;objid=',
@@ -135,8 +123,7 @@ class AclMgmt_Dset_Treetable_Element extends WgtTreetable
         'wbf.inheritance',
         Acl::ADMIN
       ),
-      'delete'  => array
-      (
+      'delete'  => array(
         Wgt::ACTION_DELETE,
         'Delete',
         'index.php?c=Acl.Mgmt_Dset.cleanGroup&amp;dkey='.$this->domainNode->domainName.'&amp;objid=',
@@ -145,18 +132,15 @@ class AclMgmt_Dset_Treetable_Element extends WgtTreetable
         'wbf.label',
         Acl::ADMIN
       ),
-      'sep'  => array
-      (
+      'sep'  => array(
         Wgt::ACTION_SEP
       ),
 
     );
     $this->actions['group'] = array('tree', 'inheritance', 'sep', 'delete');
 
-    $this->url['user']  = array
-    (
-      'delete'  => array
-      (
+    $this->url['user']  = array(
+      'delete'  => array(
         Wgt::ACTION_DELETE,
         'Delete',
         'index.php?c=Acl.Mgmt_Dset.deleteUser&amp;dkey='.$this->domainNode->domainName.'&amp;objid=',
