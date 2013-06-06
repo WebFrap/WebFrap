@@ -101,6 +101,8 @@ class ContextListing
    * @var TFlag
    */
   public $dynFilters = array();
+  
+  public $refIds = null;
 
   /**
    * Search Fields
@@ -170,11 +172,11 @@ class ContextListing
     }
 		
     // dynamische filter
-    $dynFilters = $request->param('dfilter', Validator::BOOLEAN);
-    if ($dynFilters) {
-      foreach ($dynFilters as $key => $value) {
-        $this->dynFilters->$key = $value;
-    	}
+    $this->dynFilters = $request->param('dynfilter', Validator::TEXT);
+    $this->refIds = $request->paramList('refids', Validator::INT  );
+    
+    if (!$this->refIds) {
+    	$this->refIds = new TArray();
     }
 
     if ($request->paramExists('as')) {
