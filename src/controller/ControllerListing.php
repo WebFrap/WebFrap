@@ -77,7 +77,7 @@ class ControllerListing extends Controller
   protected function getListingFlags ($request = null)
   {
 
-    if (! $request)
+    if (!$request)
       $request = Webfrap::$env->getRequest();
 
     return new ContextListing($request);
@@ -91,7 +91,7 @@ class ControllerListing extends Controller
   protected function getTabFlags ($request = null)
   {
 
-    if (! $request)
+    if (!$request)
       $request = Webfrap::$env->getRequest();
 
     return new ContextTab($request);

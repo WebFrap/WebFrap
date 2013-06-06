@@ -97,6 +97,12 @@ class ContextListing
   public $filter = null;
 
   /**
+   * Eine List mit Filtern
+   * @var TFlag
+   */
+  public $dynFilters = array();
+
+  /**
    * Search Fields
    * @var array
    */
@@ -162,7 +168,14 @@ class ContextListing
         $this->filter->$key = $value;
       }
     }
-
+		
+    // dynamische filter
+    $dynFilters = $request->param('dfilter', Validator::BOOLEAN);
+    if ($dynFilters) {
+      foreach ($dynFilters as $key => $value) {
+        $this->dynFilters->$key = $value;
+    	}
+    }
 
     if ($request->paramExists('as')) {
       if ($extSearchValidator)
@@ -339,7 +352,7 @@ class ContextListing
       }
     }
 
-    Debug::console('got search fields',$extSearchFields);
+    //Debug::console('got search fields',$extSearchFields);
 
     foreach ($extSearchFields as $fKey => $extField) {
 
