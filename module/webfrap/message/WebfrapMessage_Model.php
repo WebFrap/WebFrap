@@ -635,9 +635,10 @@ FROM
 JOIN
 	wbfsys_message_receiver recv
 		ON recv.id_message = msg.rowid
-having count(recv.rowid) = 0
 WHERE
 	msg.id_sender = {$userID}
+GROUP BY msg.rowid
+HAVING count(recv.rowid) = 0
 SQL;
 
 
