@@ -97,6 +97,14 @@ class ContextListing
   public $filter = null;
 
   /**
+   * Eine List mit Filtern
+   * @var TFlag
+   */
+  public $dynFilters = array();
+  
+  public $refIds = null;
+
+  /**
    * Search Fields
    * @var array
    */
@@ -162,7 +170,14 @@ class ContextListing
         $this->filter->$key = $value;
       }
     }
-
+		
+    // dynamische filter
+    $this->dynFilters = $request->param('dynfilter', Validator::TEXT);
+    $this->refIds = $request->paramList('refids', Validator::INT  );
+    
+    if (!$this->refIds) {
+    	$this->refIds = new TArray();
+    }
 
     if ($request->paramExists('as')) {
       if ($extSearchValidator)
@@ -339,7 +354,7 @@ class ContextListing
       }
     }
 
-    Debug::console('got search fields',$extSearchFields);
+    //Debug::console('got search fields',$extSearchFields);
 
     foreach ($extSearchFields as $fKey => $extField) {
 
