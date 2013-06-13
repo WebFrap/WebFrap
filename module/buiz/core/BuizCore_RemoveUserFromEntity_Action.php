@@ -22,7 +22,7 @@
  * @package WebFrap
  * @subpackage webfrap.core.procedures
  */
-class BuizCore_AssignUserToEntity_Action extends Action
+class BuizCore_RemoveUserFromEntity_Action extends Action
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Public Attributes
@@ -37,7 +37,7 @@ class BuizCore_AssignUserToEntity_Action extends Action
    * 
    * @return boolean, true wenn ein neues assignment angelegt wurde
    */
-  public function assign($domainNode, $srcId, $targetId, $env = null)
+  public function drop($domainNode, $srcId, $targetId, $env = null)
   {
     
     $orm = $this->getOrm();
@@ -64,7 +64,7 @@ class BuizCore_AssignUserToEntity_Action extends Action
 
     return true;
     
-  }//end public function assign */
+  }//end public function drop */
   
 
 } // end class BuizCore_AssignUserToEntity_Action

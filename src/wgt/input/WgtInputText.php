@@ -51,7 +51,7 @@ class WgtInputText extends WgtInput
       $this->attributes['value'] = '';
       
     $refresh = '';
-    if($this->refresh)
+    if($this->refresh&&is_string($this->refresh))
       $refresh = $this->refresh;
     else 
       $refresh = 'value';

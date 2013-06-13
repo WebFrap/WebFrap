@@ -239,6 +239,10 @@ class ContextListing
     // diese müssen jedoch vorhanden / implementiert sein
     if ($ltype   = $request->param('ltype', Validator::CNAME))
       $this->ltype    = $ltype;
+      
+		// wird bei selection und data verwendet
+    if ($ltype   = $request->param('context', Validator::CNAME))
+      $this->context    = $ltype;
 
     // input type
     if ($input = $request->param('input', Validator::CKEY))
