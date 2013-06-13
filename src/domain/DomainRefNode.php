@@ -48,6 +48,18 @@ class DomainRefNode
    * @var string
    */
   public $srcName = null;
+  
+
+  /**
+   * @var string
+   */
+  public $srcId = null;
+  
+
+  /**
+   * @var string
+   */
+  public $srcRefId = null;
 
   /**
    * @example project_activity
@@ -60,6 +72,19 @@ class DomainRefNode
    * @var string
    */
   public $targetName = null;
+  
+
+  /**
+   * @var string
+   */
+  public $targetId = null;
+  
+
+  /**
+   * @var string
+   */
+  public $targetRefId = null;
+  
 
   /**
    * @example Project

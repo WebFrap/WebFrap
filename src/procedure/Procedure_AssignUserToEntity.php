@@ -16,7 +16,9 @@
 *******************************************************************************/
 
 /**
- * Assign
+ * 
+ * Many To Many referenz
+ * 
  * @package WebFrap
  * @subpackage webfrap.core.procedures
  */
@@ -25,56 +27,44 @@ class Procedure_AssignUserToEntity extends Action
 /*//////////////////////////////////////////////////////////////////////////////
 // Public Attributes
 //////////////////////////////////////////////////////////////////////////////*/
-  
-	/**
-	 * @var string
-	 */
-  public $tableName = null;
-  
-	/**
-	 * @var string
-	 */
-  public $srcKey = null;
-  
-  /**
-	 * @var string
-	 */
-  public $userKey = null;
-
+ 
  
   /**
-   * @param int $sourceId
-   * @param int $userId
+   * @param DomainRefNode $domainNode
+   * @param int $srcId
+   * @param int $targetId
    * 
    * @return boolean, true wenn ein neues assignment angelegt wurde
    */
-  public function assign($sourceId, $userId)
+  public function assign($domainNode, $srcId, $targetId, $env = null)
   {
     
     $orm = $this->getOrm();
     
-    $conKey = SFormatStrings::subToCamelCase($this->tableName);
+    $conKey = SFormatStrings::subToCamelCase($domainNode->connectionName);
+    
+    $srcKey = $domainNode->srcId;
+    $targetKey = $domainNode->targetId;
     
     
     $conEntity = $orm->getWhere(
       $conKey, 
-      " $this->srcKey = {$sourceId} AND $this->userKey = {$userId} " 
+      " {$srcKey} = {$srcId} AND {$targetKey} = {$targetId} " 
     );
     
-    if($conEntity)
+    if ($conEntity)
     	return false;
 		
     $conEntity = $orm->newEntity($conKey);
-    $conEntity->{$this->srcKey} = $sourceId;
-    $conEntity->{$this->userKey} = $userId;
+    $conEntity->{$srcKey} = $srcId;
+    $conEntity->{$targetKey} = $targetId;
     
     $orm->save($conEntity);
     
     return true;
     
-    
   }//end public function assign */
   
 
-} // end abstract class Procedure_AssignUser
+} // end abstract class Procedure_AssignUserToEntity
 
