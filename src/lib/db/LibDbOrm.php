@@ -863,8 +863,10 @@ class LibDbOrm
 
     // check if the entity is allready loaded and in the pool
     if (ctype_digit($id) && $obj = $this->getFromPool($entityKey, $id)) {
+
       return $obj;
     } elseif (is_object($id)) {
+
       $id = $id->getId();
     } elseif ($this->useConditionCache &&  $obj = $this->getSearchIndex($entityKey, $id)) {// check if the entity is already in the search index
 
@@ -1836,6 +1838,14 @@ SQL;
         $value->save();
       }
     }
+
+    $postSave = $entity->getPostSave();
+    foreach ($postSave as /* @var Entity $postEntiy */ $postEntiy) {
+      // we asume that the entity is allready appended
+      $this->save($postEntiy);
+    }
+
+
 
     return $entity;
 

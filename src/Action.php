@@ -46,7 +46,7 @@ class Action extends BaseChild
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * @param unknown_type $env
+   * @param PBase $env
    */
   public function __construct($env)
   {
@@ -64,9 +64,9 @@ class Action extends BaseChild
   public static function getActionContainer($key, $classname)
   {
 
-    if (! isset(self::$pool[$key])) {
+    if (!isset(self::$pool[$key])) {
 
-      if (! Webfrap::classLoadable($classname)) {
+      if (!Webfrap::classLoadable($classname)) {
 
         throw new LibAction_Exception('Requested nonexisting Action: ' . $classname . ' key ' . $key);
 
@@ -94,7 +94,7 @@ class Action extends BaseChild
   public static function check($actionObj, $methodName)
   {
 
-    if (! $actionObj)
+    if (!$actionObj)
       return false;
 
    // ok ist ein action object und unterstützt die methode
@@ -141,12 +141,12 @@ class Action extends BaseChild
   public function loadModel($modelKey, $key = null)
   {
 
-    if (! $key)
+    if (!$key)
       $key = $modelKey;
 
     $modelName = $modelKey . '_Model';
 
-    if (! isset($this->models[$key])) {
+    if (!isset($this->models[$key])) {
       if (Webfrap::classLoadable($modelName)) {
         $model = new $modelName($this);
 

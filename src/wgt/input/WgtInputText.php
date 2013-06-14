@@ -49,8 +49,14 @@ class WgtInputText extends WgtInput
 
     if (!isset($this->attributes['value']))
       $this->attributes['value'] = '';
+      
+    $refresh = '';
+    if($this->refresh&&is_string($this->refresh))
+      $refresh = $this->refresh;
+    else 
+      $refresh = 'value';
 
-    $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="value" ><![CDATA['
+    $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="'.$refresh.'" ><![CDATA['
       .($this->attributes['value']).']]></htmlArea>'.NL;
 
     return $html;
