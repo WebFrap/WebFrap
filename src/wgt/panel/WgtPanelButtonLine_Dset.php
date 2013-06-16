@@ -31,16 +31,20 @@ class WgtPanelButtonLine_Dset extends WgtPanelButtonLine
    * @var TArray
    */
   public $flags = null;
-  
 
+  /**
+   * Settings Rederer
+   * @var
+   */
+  public $settings = null;
 
   /**
    * @var Base $env
    */
   public function __construct($env)
   {
-    $this->env = $env;
 
+    $this->env = $env;
     $this->flags = new TArray();
 
   }//end public function __construct */
@@ -55,6 +59,10 @@ class WgtPanelButtonLine_Dset extends WgtPanelButtonLine
 
     $this->setUp();
     $html = '';
+
+    if ($this->settings) {
+      $html .= $this->renderSettings();
+    }
 
     if ($this->flags->comments) {
       $html .= $this->renderComment();
@@ -79,6 +87,27 @@ class WgtPanelButtonLine_Dset extends WgtPanelButtonLine
     return $html;
 
   }//end public function render */
+
+
+  /**
+   * @return
+   */
+  protected function renderSettings()
+  {
+
+    $html = <<<HTML
+<button
+  id="{$this->id}-settings"
+  class="wgt-button wcm wcm_ui_dropform wcm_ui_tip"
+  tooltip="Settings"
+  tabindex="-1" ><i class="icon-cog" ></i>
+  <var>{"url":"ajax.php?c=Webfrap.Comment.overlayDset&amp;objid={$this->entity}&amp;dkey={$this->dKey}{$this->accessPath}","size":"big","noBorder":"true"}</var>
+</button>
+HTML;
+
+    return $html;
+
+  }//end protected function renderSettings */
 
   /**
    * @return
