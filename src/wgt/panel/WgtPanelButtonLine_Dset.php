@@ -45,6 +45,7 @@ class WgtPanelButtonLine_Dset extends WgtPanelButtonLine
   {
 
     $this->env = $env;
+    $this->id = $env->id;
     $this->flags = new TArray();
 
   }//end public function __construct */
@@ -95,17 +96,8 @@ class WgtPanelButtonLine_Dset extends WgtPanelButtonLine
   protected function renderSettings()
   {
 
-    $html = <<<HTML
-<button
-  id="{$this->id}-settings"
-  class="wgt-button wcm wcm_ui_dropform wcm_ui_tip"
-  tooltip="Settings"
-  tabindex="-1" ><i class="icon-cog" ></i>
-  <var>{"url":"ajax.php?c=Webfrap.Comment.overlayDset&amp;objid={$this->entity}&amp;dkey={$this->dKey}{$this->accessPath}","size":"big","noBorder":"true"}</var>
-</button>
-HTML;
 
-    return $html;
+    return $this->settings->render();
 
   }//end protected function renderSettings */
 

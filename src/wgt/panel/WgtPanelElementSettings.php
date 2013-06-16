@@ -39,6 +39,11 @@ class WgtPanelElementSettings extends WgtPanelElement
    */
   public $fields = array();
 
+  /**
+   * @var Model
+   */
+  public $model = null;
+
 /*//////////////////////////////////////////////////////////////////////////////
 // public interface attributes
 //////////////////////////////////////////////////////////////////////////////*/
@@ -46,16 +51,16 @@ class WgtPanelElementSettings extends WgtPanelElement
   /**
    * default constructor
    *
+   * @param array $entities
+   * @param array $fields
    * @param LibTemplate $view
-   * @param int $name the name of the wgt object
    */
-  public function __construct($fields = array(), $view = null )
+  public function __construct($model, $view)
   {
-  	
-  	$this->env = Webfrap::$env;
-    $this->fields = $fields;
 
-    $this->view = $view?$view:WebFrap::$env->getTpl();
+    $this->env = Webfrap::$env;
+    $this->model = $model;
+    $this->view = $view;
     $this->init();
 
   } // end public function __construct */
@@ -84,7 +89,7 @@ class WgtPanelElementSettings extends WgtPanelElement
 HTML;
 
       foreach ($this->fields as $nameKey => $field) {
-        $html .= '<li><input type="checkbox" name="'.$nameKey.'" '.implode(' ',$field[1]).'  /><label>'.$field[0].'</label></li>'.NL;
+        $html .= '<li><input type="checkbox" name="'.$nameKey.'" '.Wgt::asmAttributes($field[1]).'  /><label>'.$field[0].'</label></li>'.NL;
       }
 
     $html .= <<<HTML
