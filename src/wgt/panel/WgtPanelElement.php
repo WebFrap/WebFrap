@@ -66,10 +66,21 @@ class WgtPanelElement
    * @var TArray
    */
   public $accessPath = null;
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // getter & setter
 //////////////////////////////////////////////////////////////////////////////*/
+
+  /**
+   * @var Base $env
+   */
+  public function __construct()
+  {
+
+    $this->env = Webfrap::$env;
+
+  }//end public function __construct */
+
 
   /**
    * @return LibI18nPhp
@@ -78,7 +89,7 @@ class WgtPanelElement
   {
 
     if (!$this->i18n)
-      $this->i18n = I18n::getActive();
+      $this->i18n = $this->env->getI18n();
 
     return $this->i18n;
 
@@ -90,7 +101,7 @@ class WgtPanelElement
   public function getUser()
   {
     if (!$this->user)
-      $this->user = User::getActive();
+      $this->user = $this->env->getUser();
 
     return $this->user;
 
@@ -102,7 +113,7 @@ class WgtPanelElement
   public function getDb()
   {
     if (!$this->db)
-      $this->db = Db::getActive();
+      $this->db = $this->env->getDb();
 
     return $this->db;
 
@@ -114,7 +125,7 @@ class WgtPanelElement
   public function getAcl()
   {
     if (!$this->acl)
-      $this->acl = Acl::getActive();
+      $this->acl = $this->env->getAcl();
 
     return $this->acl;
 

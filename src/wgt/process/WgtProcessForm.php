@@ -920,7 +920,7 @@ HTML;
         if ($statusData->phaseKey &&  $statusData->phaseKey == $phaseName) {
           $active = ' ui-state-active';
         }
-        
+
         // überspringen wenn nicht im pfad
         if (isset($phaseData['display']['path']) && !$phaseData['display']['path'] &&!$active)
           continue;
@@ -965,12 +965,12 @@ HTML;
 
         // überspringen wenn nicht im pfad
         if (isset($nodeData['display']['path']) && !$nodeData['display']['path']) {
-          
+
           if ($statusData->key !== $nodeKey)
             continue;
         }
-        
-        
+
+
         Debug::console("{$statusData->phaseKey}, {$nodeData['phase']}, {$nodeData['label']}");
 
         if ($nodeData['phase'] !== $statusData->phaseKey && $nodeData['preview'] !== $statusData->phaseKey)
@@ -1009,7 +1009,7 @@ HTML;
    */
   protected function renderStatusDropdownList($process, $params)
   {
-    
+
     // hat keinen status
     if (!$process->hasRunningState)
       return '';
@@ -1085,7 +1085,7 @@ HTML;
     // hat keinen status
     if (!$process->hasRunningState)
       return '';
-    
+
     $iconPStL = array();
     $iconPStL[0]   = '<i class="icon-ok icon-2x wgt-cursor-pointer" ></i>';
     $iconPStL[1]   = '<i class="icon-warning-sign icon-2x wgt-cursor-pointer" ></i>';
