@@ -429,7 +429,7 @@ HTML;
           <input
             type="text"
             name="skey"
-            class="fparam-wgt-form-attachment-{$idKey}-search large" /><button
+            class="wcm wcm_req_search fparam-wgt-form-attachment-{$idKey}-search large" /><button
             onclick="\$R.form('wgt-form-attachment-{$idKey}-search');"
             class="wgt-button append"
             tabindex="-1" ><i class="icon-search" ></i></button>
