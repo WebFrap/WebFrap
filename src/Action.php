@@ -48,9 +48,12 @@ class Action extends BaseChild
   /**
    * @param PBase $env
    */
-  public function __construct($env)
+  public function __construct($env = null)
   {
 
+  	if(!$env)
+  		$env = Webfrap::$env;
+  	
     $this->env = $env;
 
   } //end public function __construct */

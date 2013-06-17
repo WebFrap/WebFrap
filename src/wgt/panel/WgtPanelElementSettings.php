@@ -51,7 +51,8 @@ class WgtPanelElementSettings extends WgtPanelElement
    */
   public function __construct($fields = array(), $view = null )
   {
-
+  	
+  	$this->env = Webfrap::$env;
     $this->fields = $fields;
 
     $this->view = $view?$view:WebFrap::$env->getTpl();
