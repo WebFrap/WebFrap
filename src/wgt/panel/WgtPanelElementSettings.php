@@ -81,21 +81,20 @@ class WgtPanelElementSettings extends WgtPanelElement
         class="wcm wcm_ui_dropform wcm_ui_tip-top wgt-button"
         id="{$this->id}-settings"
         title="Click to edit the Settings"
-      ><i class="icon-cog" ></i><var>{"size":"big"}</var></button>
-
-    <div class="{$this->id}-settings hidden" >
-      <h3>Settings</h3>
+      ><i class="icon-cog" ></i><var>{"size":"big"}</var></button><div class="{$this->id}-settings hidden" >
+      <div class="wgt-space" >
+      <h2>Settings</h2>
       <ul>
 HTML;
 
       foreach ($this->fields as $nameKey => $field) {
-        $html .= '<li><input type="checkbox" name="'.$nameKey.'" '.Wgt::asmAttributes($field[1]).'  /><label>'.$field[0].'</label></li>'.NL;
+        $html .= '<li><input type="checkbox" name="'.$nameKey.'" '.Wgt::asmAttributes($field[1]).'  />&nbsp;&nbsp;<label>'.$field[0].'</label></li>'.NL;
       }
 
     $html .= <<<HTML
       </ul>
+      </div>
     </div>
-
 HTML;
 
     return $html;
