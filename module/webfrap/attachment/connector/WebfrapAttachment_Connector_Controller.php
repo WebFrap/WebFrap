@@ -82,7 +82,7 @@ class WebfrapAttachment_Connector_Controller extends Controller
   public function service_create($request, $response)
   {
 
-    $context = new WebfrapAttachment_Context($request);
+    $context = new WebfrapAttachment_Request($request);
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel('WebfrapAttachment');
@@ -116,7 +116,7 @@ class WebfrapAttachment_Connector_Controller extends Controller
   public function service_edit($request, $response)
   {
 
-    $context = new WebfrapAttachment_Context($request);
+    $context = new WebfrapAttachment_Request($request);
 
     $objid   = $request->param('objid', Validator::EID);
 
@@ -162,7 +162,7 @@ class WebfrapAttachment_Connector_Controller extends Controller
   public function service_delete($request, $response)
   {
 
-    $context = new WebfrapAttachment_Context($request);
+    $context = new WebfrapAttachment_Request($request);
 
     $id       = $request->param('objid', Validator::EID);
 
@@ -199,7 +199,7 @@ class WebfrapAttachment_Connector_Controller extends Controller
   public function service_formUploadFiles($request, $response)
   {
 
-    $context = new WebfrapAttachment_Context($request);
+    $context = new WebfrapAttachment_Request($request);
 
     /* @var $model WebfrapAttachment_Model */
     $model = $this->loadModel('WebfrapAttachment');
@@ -232,7 +232,7 @@ class WebfrapAttachment_Connector_Controller extends Controller
   public function service_uploadFile($request, $response)
   {
 
-    $context = new WebfrapAttachment_Context($request);
+    $context = new WebfrapAttachment_Request($request);
 
     // refid
 
@@ -284,7 +284,7 @@ class WebfrapAttachment_Connector_Controller extends Controller
   public function service_saveFile($request, $response)
   {
 
-    $context = new WebfrapAttachment_Context($request);
+    $context = new WebfrapAttachment_Request($request);
 
     // refid
     $attachId  = $request->param('attachid', Validator::EID);

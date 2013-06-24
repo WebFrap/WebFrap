@@ -122,7 +122,7 @@ class WgtElementAttachmentList extends WgtAbstract
   protected $defAction = '';
 
   /**
-   * @var WebfrapAttachment_Context
+   * @var WebfrapAttachment_Request
    */
   public $context = null;
 
@@ -134,7 +134,7 @@ class WgtElementAttachmentList extends WgtAbstract
    * default constructor
    *
    * @param int $name the name of the wgt object
-   * @param WebfrapAttachment_Context $context
+   * @param WebfrapAttachment_Request $context
    * @param LibTemplate $view
    * @param array $flags
    */
@@ -514,6 +514,27 @@ HTML;
 
       }
     }
+    
+    // filetypes for the search
+    if($this->context->maskFilter){
+      /* @var $queryFileTypes WebfrapAttachmentFileType_Selectbox_Query */
+      $queryFileTypes = Webfrap::$env->getDb()->newQuery('WebfrapAttachmentFileType_Selectbox');
+      $queryFileTypes->fetchSelectbox($this->context->maskFilter);
+      $dataFileTypes = $queryFileTypes->getAll();
+      
+      
+      $stackFileTypes = array();
+      foreach ($dataFileTypes as $data) {
+        $stackFileTypes[] = '<option value="'.$data['id'].'" >'.$data['value'].'</option>';
+      }
+    } else {
+      $stackFileTypes = array();
+    }
+    
+    $htmlTSelect = '<script id="'.$this->id.'-srchtpl-table-type"  type="text/html" >'.NL;
+    $htmlTSelect .= implode('' , $stackFileTypes);
+    $htmlTSelect .= '</script>'.NL;
+    
 
 
     $dataSize = count($this->data);
@@ -527,13 +548,16 @@ HTML;
           method="get"
           action="{$this->urlSearch}{$this->defUrl}"
           id="wgt-form-attachment-{$idKey}-search" ></form>
+          
+{$htmlTSelect}
 
         <div id="wgt-grid-attachment-{$idKey}" class="wgt-grid" >
 
-          <var id="wgt-grid-attachment-{$idKey}-cfg-grid" >{
+          <var id="wgt-grid-attachment-{$idKey}-table-cfg-grid" >{
           "height":"large",
           "search_form":"wgt-form-attachment-{$idKey}-search",
-          "search_able":"true"}</var>
+          "search_able":true,
+  				"select_able":false}</var>
 
           <table
             id="wgt-grid-attachment-{$idKey}-table"
@@ -545,27 +569,27 @@ HTML;
                 <th style="width:50px" >T/C</th>
                 <th
                   style="width:270px"
-                  wgt_sort_name="file[name]"
+                  wgt_sort_name="order[file_name]"
                   wgt_sort="asc"
-                  wgt_search="input:file[name]"  >Name</th>
+                  wgt_search="text:search[file_name]"  >Name</th>
                 <th
                   style="width:100px"
-                  wgt_sort_name="file[id_type]"
-                  wgt_search="input:file[id_type]" >File Type</th>
+                  wgt_sort_name="order[file_type]"
+                  wgt_search="select:search-file_type[]" 
+                  wgt_ms_key="{$this->id}-srchtpl-table-type" >File Type</th>
                 <th
                   style="width:100px"
-                  wgt_sort_name="file[size]" >Size</th>
+                  wgt_sort_name="order[file_size]" >Size</th>
                 <th
                   style="width:120px"
-                  wgt_sort_name="file[owner]"
-                  wgt_search="input:file[owner]" >Owner</th>
+                  wgt_sort_name="order[file_owner]"
+                  wgt_search="text:search[file_owner]" >Owner</th>
                 <th
                   style="width:120px"
-                  wgt_sort_name="file[created]" >Created</th>
+                  wgt_sort_name="order[file_created]" >Created</th>
                 <th
-                  style="width:150px"
-                  wgt_sort_name="file[description]"
-                  wgt_search="input:file[description]" >Description</th>
+                  style="width:180px"
+                  wgt_search="text:search[file_description]" >Description</th>
                 <th
                   style="width:50px;">Nav.</th>
               </tr>

@@ -42,7 +42,7 @@ class WebfrapAttachment_Connector_Modal_View extends WgtModal
 
  /**
   * the default edit form
-  * @param WebfrapAttachment_Context $context
+  * @param WebfrapAttachment_Request $context
   * @return void
   */
   public function displayCreate($context)
