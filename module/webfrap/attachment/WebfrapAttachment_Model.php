@@ -357,6 +357,7 @@ class WebfrapAttachment_Model extends Model
   {
 
     $db = $this->getDb();
+    $wheres = array();
 
     $condEntry  = '';
     $condAttach = '';
@@ -372,8 +373,8 @@ class WebfrapAttachment_Model extends Model
     $condSearch = '';
     if ($searchString) {
 
-      $condSearch = <<<SQL
-      AND(
+      $wheres[] = <<<SQL
+      (
         UPPER(file.name) like UPPER('%{$searchString}%')
           OR UPPER(file.link) like UPPER('%{$searchString}%')
       )
@@ -389,7 +390,7 @@ SQL;
       $typeFilterJoins = <<<SQL
       
   LEFT JOIN wbfsys_file_profile_type pt 
-    ON pt.id_type = wbfsys_file_type.rowid
+    ON pt.id_type = file_type.rowid
           
   LEFT JOIN wbfsys_file_profile prof 
     ON prof.rowid = pt.id_profile
@@ -397,9 +398,8 @@ SQL;
 SQL;
 
       if ($this->context->fetchUntyped) {
-        $typeFilterWhere = <<<SQL
+        $wheres[] = <<<SQL
 
-  AND
     (
       UPPER(pt.access_key) = UPPER('{$this->context->maskFilter}')
       OR
@@ -408,9 +408,9 @@ SQL;
 
 SQL;
       } else {
-        $typeFilterWhere = <<<SQL
+        $wheres[] = <<<SQL
 
-  AND UPPER(pt.access_key) = UPPER('{$this->context->maskFilter}')
+  UPPER(pt.access_key) = UPPER('{$this->context->maskFilter}')
 
 SQL;
 
@@ -421,9 +421,8 @@ SQL;
       $searchKey =  "UPPER('".implode("'), UPPER('", $this->context->typeFilter)."')" ;
 
       if ($this->context->fetchUntyped) {
-        $typeFilterWhere = <<<SQL
+        $wheres[] = <<<SQL
 
-  AND
     (
       UPPER(file_type.access_key) IN({$searchKey})
       OR
@@ -433,9 +432,9 @@ SQL;
 SQL;
       } else {
 
-        $typeFilterWhere = <<<SQL
+        $wheres[] = <<<SQL
 
-  AND UPPER(file_type.access_key) IN({$searchKey})
+  UPPER(file_type.access_key) IN({$searchKey})
 
 SQL;
       }
@@ -468,10 +467,10 @@ SQL;
     }
     
     if ($searchStack) {
-      $sqlSearch = ' AND ( '.implode(' AND ', $searchStack).' ) ';
-    } else {
-      $sqlSearch = '';
-    }
+      $wheres[]  = ' AND ( '.implode(' AND ', $searchStack).' ) ';
+    } 
+    
+    $sqlWhere = implode( ' AND ', $wheres);
 
     $sql = <<<SQL
 SELECT
@@ -517,11 +516,7 @@ LEFT JOIN
 {$typeFilterJoins}
 
 WHERE
-  {$condAttach}
-  {$condEntry}
-  {$condSearch}
-  {$typeFilterWhere}
-  {$sqlSearch}
+  {$sqlWhere}
 ORDER BY
   {$sqlOrder};
 
