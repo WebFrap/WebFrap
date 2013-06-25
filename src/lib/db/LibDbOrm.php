@@ -1561,15 +1561,26 @@ SQL;
   public function save($entity)
   {
 
-    if (!is_object($entity) || !$entity instanceof Entity) {
+    if (is_object($entity)) {
+      
+      if($entity instanceof Entity){
+        if ($entity->isNew()) {
+          return $this->insert($entity);
+        } else {
+          return $this->update($entity);
+        }
+      } else if ($entity instanceof LibUploadEntity) {
+        
+        $entity->save();
+        
+      }  else {
+        Debug::console('invalid data in save', $entity);
+        throw new LibDb_Exception('Got invalid data for save!');
+      }
+   
+    } else {
       Debug::console('invalid data in save', $entity);
       throw new LibDb_Exception('Got invalid data for save!');
-    }
-
-    if ($entity->isNew()) {
-      return $this->insert($entity);
-    } else {
-      return $this->update($entity);
     }
 
   }//end public function save */
