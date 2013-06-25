@@ -67,7 +67,7 @@ class WebfrapAttachmentFileType_Selectbox_Query extends LibSqlQuery
     );
 
     $criteria->orderBy('wbfsys_file_type.name ');
-    $criteria->where("UPPER(wbfsys_file_profile.access_key) = UPPER('{$refId}')");
+    $criteria->where("UPPER(wbfsys_file_profile.access_key) = UPPER('{$profileKey}')");
 
     $this->result = $db->orm->select($criteria);
 

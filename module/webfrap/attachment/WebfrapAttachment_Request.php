@@ -89,6 +89,7 @@ class WebfrapAttachment_Request extends ContextListing
     // order for the multi display element
     $this->search = $request->param('search', Validator::SEARCH);
     
+    $this->searchType = $request->param('search-file_type', Validator::INT);
     
   }//end public function interpretRequest */
 

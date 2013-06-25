@@ -363,9 +363,9 @@ class WebfrapAttachment_Model extends Model
     $condAttach = '';
 
     if ($refId) {
-      $condAttach = " attach.vid = {$refId}";
+      $wheres[] = " attach.vid = {$refId}";
     } elseif ($entryId) {
-      $condEntry = " attach.rowid = {$entryId}";
+      $wheres[] = " attach.rowid = {$entryId}";
     } else {
       return array();
     }
@@ -401,7 +401,7 @@ SQL;
         $wheres[] = <<<SQL
 
     (
-      UPPER(pt.access_key) = UPPER('{$this->context->maskFilter}')
+      UPPER(prof.access_key) = UPPER('{$this->context->maskFilter}')
       OR
       file.id_type is null
     )
@@ -410,7 +410,7 @@ SQL;
       } else {
         $wheres[] = <<<SQL
 
-  UPPER(pt.access_key) = UPPER('{$this->context->maskFilter}')
+  UPPER(prof.access_key) = UPPER('{$this->context->maskFilter}')
 
 SQL;
 
@@ -438,6 +438,15 @@ SQL;
 
 SQL;
       }
+    }
+    
+    if ($this->context->searchType) {
+      
+      $typesFilter = implode(', ',$this->context->searchType);
+      
+      $wheres[] = <<<SQL
+      file.id_type IN({$typesFilter}) 
+SQL;
     }
     
     $orderStack = array();
