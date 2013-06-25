@@ -642,12 +642,13 @@ HTML;
         ." target=\"wgt_dms\" rel=\"nofollow\" >{$fileName}</a>";
 
     } else {
-
+      
       if ('' != trim($entry['storage_link'])) {
         $storageLink = 'file:\\\\\\'.trim($entry['storage_link']) ;
       } else {
         $storageLink = '';
       }
+      $storageName = $entry['storage_name'];
 
       $lastChar = substr($storageLink, -1) ;
 
@@ -665,7 +666,7 @@ HTML;
 
       //$fileName = str_replace('//', '/', $fileName) ;
 
-      $link = "<a href=\"{$storageLink}{$fileName}\" target=\"wgt_dms\" rel=\"nofollow\" >{$storageLink}{$fileName}</a>";
+      $link = "<a href=\"{$storageLink}\" >{$storageName}: </a><a href=\"{$storageLink}{$fileName}\" target=\"wgt_dms\" rel=\"nofollow\" >{$fileName}</a>";
 
     }
 
