@@ -127,7 +127,7 @@ FROM
   wbfsys_tag tag
 WHERE
   NOT tag.rowid IN(select ref.id_tag from wbfsys_tag_reference ref where ref.vid = {$refId})
-  AND upper(tag.name) like upper('{$db->addSlashes($key)}%')
+  AND upper(tag.name) like upper('{$db->escape($key)}%')
 ORDER BY
   tag.name
 LIMIT 10;

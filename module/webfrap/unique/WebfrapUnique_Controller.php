@@ -37,7 +37,7 @@ class WebfrapUnique_Controller extends Controller
       'views'      => array('ajax')
     ),
   );
-  
+
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden
@@ -60,9 +60,9 @@ class WebfrapUnique_Controller extends Controller
     $orm     = $this->getOrm();
     $db     = $this->getDb();
     $acl      = $this->getAcl();
-    
+
     $dkey = $request->param('dkey',Validator::CNAME);
-    
+
     $domainNode = DomainNode::getNode($dkey);
 
     // check the permissions
@@ -79,13 +79,13 @@ class WebfrapUnique_Controller extends Controller
         Response::FORBIDDEN
       );
     }
-    
+
     $fName   = $request->param('fname',Validator::CNAME);
     $chkVal  = $request->param('val',Validator::SEARCH);
     $objid  = $request->param('objid',Validator::EID);
-    
+
     $domainEnt = $orm->newEntity($domainNode->srcKey);
-    
+
     if (!$domainEnt->isColUnique($fName)) {
         throw new InvalidRequest_Exception(
         $response->i18n->l(
@@ -95,23 +95,23 @@ class WebfrapUnique_Controller extends Controller
         Response::FORBIDDEN
       );
     }
-    
+
     $extWhere = '';
-    if($objid)
+    if ($objid)
       $extWhere = ' AND NOT rowid = '.$objid;
-    
+
     $isUnique = $db->select(
-    	"SELECT count({$fName}) as num FROM {$domainEnt->getTable()}  where {$fName} = '{$db->addSlashes($chkVal)}' {$extWhere}"
+    	"SELECT count({$fName}) as num FROM {$domainEnt->getTable()}  where {$fName} = '{$db->escape($chkVal)}' {$extWhere}"
     )->getField('num');
 
-  
+
     // setzen des Erfolgstatus im Response objekt
     // Das ist der wert, der als HTTP Header zurückgegeben wird
     $tpl = $this->getTpl();
     $tpl->setJsonData($isUnique);
 
   }//end public function service_unique */
-  
+
 
 }//end class WebfrapUnique_Controller
 

@@ -97,6 +97,14 @@ class ContextListing
   public $filter = null;
 
   /**
+   * Eine List mit Filtern
+   * @var TFlag
+   */
+  public $dynFilters = array();
+  
+  public $refIds = null;
+
+  /**
    * Search Fields
    * @var array
    */
@@ -162,7 +170,14 @@ class ContextListing
         $this->filter->$key = $value;
       }
     }
-
+		
+    // dynamische filter
+    $this->dynFilters = $request->param('dynfilter', Validator::TEXT);
+    $this->refIds = $request->paramList('refids', Validator::INT  );
+    
+    if (!$this->refIds) {
+    	$this->refIds = new TArray();
+    }
 
     if ($request->paramExists('as')) {
       if ($extSearchValidator)
@@ -205,8 +220,7 @@ class ContextListing
   }// end public function __get */
 
   /**
-   *
-   * Enter description here ...
+   * Extrahieren der für diesen Kontext relevanten parameter aus dem Benutzer Request
    * @param LibRequestHttp $request
    */
   public function interpretRequest($request)
@@ -224,6 +238,10 @@ class ContextListing
     // diese müssen jedoch vorhanden / implementiert sein
     if ($ltype   = $request->param('ltype', Validator::CNAME))
       $this->ltype    = $ltype;
+      
+		// wird bei selection und data verwendet
+    if ($ltype   = $request->param('context', Validator::CNAME))
+      $this->context    = $ltype;
 
     // input type
     if ($input = $request->param('input', Validator::CKEY))
@@ -339,7 +357,7 @@ class ContextListing
       }
     }
 
-    Debug::console('got search fields',$extSearchFields);
+    //Debug::console('got search fields',$extSearchFields);
 
     foreach ($extSearchFields as $fKey => $extField) {
 

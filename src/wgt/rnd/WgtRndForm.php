@@ -19,7 +19,7 @@
  * Render Element für Form Elemente
  *
  * @package WebFrap
- * @subpackage tech_core
+ * @subpackage wgt
  */
 class WgtRndForm
 {
@@ -69,6 +69,7 @@ class WgtRndForm
     return '<input type="checkbox" name="'.$name.'" '.$checked.' '.$attr.' '.$ro.' />';
 
   }//end public static function checkbox */
+
 
   /**
    * create a selectbox
@@ -368,6 +369,31 @@ CODE;
     $select .= '</select>'.NL;
 
     return $select;
+
+  }//end public static function selectbox */
+
+  /**
+   * @param array $options
+   * @param string $active
+   * @return string
+   */
+  public static function selectOptions($options, $active = null)
+  {
+
+    $html = '';
+
+    foreach( $options as $value => $label ){
+
+      $checked = '';
+      if( $active === $value ){
+        $checked = ' checked="checked" ';
+      }
+
+      $html .= '<option value="'.$value.'" '.$checked.' >'.$label.'</option>';
+
+    }
+
+    return $html;
 
   }//end public static function selectbox */
 

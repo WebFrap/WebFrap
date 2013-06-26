@@ -17,7 +17,7 @@
 
 /**
  * @package WebFrap
- * @subpackage Maintenance
+ * @subpackage webfrap/groupware
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
@@ -26,7 +26,7 @@ class WebfrapContact_Save_Request extends Context
 /*//////////////////////////////////////////////////////////////////////////////
 // Aspects
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @var true
    */
@@ -40,31 +40,31 @@ class WebfrapContact_Save_Request extends Context
    * @var int
    */
   public $contactId = null;
-  
+
   /**
    * @var int
    */
   public $person = array();
-  
+
   /**
    * @var int
    */
   public $contact = array();
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Methoden
 //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * @param LibRequestHttp $request
    */
   public function interpretRequest($request)
   {
-    
 
-    $this->personId = $request->data('person_id',Validator::EID); 
-    $this->contactId = $request->data('contact_id',Validator::EID); 
-    
+
+    $this->personId = $request->data('person_id',Validator::EID);
+    $this->contactId = $request->data('contact_id',Validator::EID);
+
     $personFields = array(
       'firstname',
       'lastname',
@@ -76,7 +76,7 @@ class WebfrapContact_Save_Request extends Context
       'id_preflang',
       'id_nationality'
     );
-    
+
     $contactFields = array(
       'description'
     );
@@ -85,65 +85,65 @@ class WebfrapContact_Save_Request extends Context
 
       //management  project_activity source project_activity
       if ($this->personId) {
-        
+
         $this->person = $orm->get('CorePerson',$this->personId);
-        
+
         // if the validation fails report
         $httpRequest->validateUpdate(
           $entityPerson,
           'person',
           $personFields
         );
-        
+
       } else {
-        
+
         $entityPerson = $orm->newEntity('CorePerson');
-        
+
         // if the validation fails report
         $httpRequest->validateInsert(
           $entityPerson,
           'person',
           $personFields
         );
-        
+
       }
-      
+
       //management  project_activity source project_activity
       if ($this->contactId) {
-        
+
         $this->contact = $orm->get('WbfsysContact',$this->contactId);
-        
+
         // if the validation fails report
         $httpRequest->validateUpdate(
           $this->contact,
           'contact',
           $contactFields
         );
-        
+
       } else {
-        
+
         $this->contact = $orm->newEntity('WbfsysContact');
-        
+
         // if the validation fails report
         $httpRequest->validateInsert(
           $this->contact,
           'contact',
           $contactFields
         );
-        
+
         $this->contact->id_person = $entityPerson;
-        
+
       }
 
       $this->hasErrors = $this->getResponse()->hasErrors();
-      
+
     } catch(InvalidInput_Exception $e) {
-      
+
       return null;
     }
-    
+
     $this->interpretRequestAcls($request);
-    
+
   }//end public function interpretRequest */
 
 }//end class WebfrapMessage_Save_Request */

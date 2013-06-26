@@ -46,7 +46,7 @@ class WgtSelectboxEnum extends WgtSelectbox
    * @var array
    */
   public $layouts = array();
-  
+
   /**
    * @var string
    */
@@ -64,8 +64,6 @@ class WgtSelectboxEnum extends WgtSelectbox
   }//end public function __construct($name)
 
   /**
-   * Enter description here...
-   *
    */
   public function init()
   {
@@ -153,7 +151,7 @@ class WgtSelectboxEnum extends WgtSelectbox
   public function build($attributes = array())
   {
 
-    $id   = $this->attributes['id'];
+    $id = $this->getId();
 
     if ($this->redirect) {
       if (!isset($this->attributes['id'])) {
@@ -173,7 +171,7 @@ class WgtSelectboxEnum extends WgtSelectbox
         $this->attributes['class'] = $this->semanticClass;
       }
     }
-    
+
 
     $this->attributes['class'] = isset($this->attributes['class'])
       ? $this->attributes['class'].' wcm wcm_widget_selectbox '.$this->width
@@ -190,7 +188,7 @@ class WgtSelectboxEnum extends WgtSelectbox
     $helpIcon = $this->renderDocu($id);
 
     if (is_array($this->activ)  ) {
-      
+
       foreach ($this->data as $id => $value) {
 
         $optClass  = '';
@@ -211,9 +209,14 @@ class WgtSelectboxEnum extends WgtSelectbox
 
         $select .= '<option '.$selected.$optClass.' value="'.$id.'" >'.$value.'</option>'.NL;
       }
-      
+
     } else {
-      
+
+      if(!is_array($this->data)){
+        Debug::console("Enum had no array data");
+        $this->data = array();
+      }
+
       foreach ($this->data as $id => $value) {
 
         $optClass  = '';
@@ -269,7 +272,7 @@ class WgtSelectboxEnum extends WgtSelectbox
         $this->attributes['class'] = $this->semanticClass;
       }
     }
-    
+
     $this->attributes['class'] = isset($this->attributes['class'])
       ? $this->attributes['class'].' wcm wcm_widget_selectbox '.$this->width
       : 'wcm wcm_widget_selectbox '.$this->width;
@@ -283,9 +286,9 @@ class WgtSelectboxEnum extends WgtSelectbox
       $select .= '<option value=" " >'.$this->firstFree.'</option>'.NL;
 
      $selected = '';
-      
+
     if (is_array($this->activ) ) {
-      
+
       foreach ($this->data as $id => $value) {
 
         $optClass  = '';
@@ -302,9 +305,9 @@ class WgtSelectboxEnum extends WgtSelectbox
 
         $select .= '<option '.$selected.$optClass.' value="'.$id.'" >'.$value.'</option>'.NL;
       }
-    
+
     } else {
-      
+
       foreach ($this->data as $id => $value) {
 
         $optClass = '';
@@ -330,4 +333,3 @@ class WgtSelectboxEnum extends WgtSelectbox
   }//end public function build */
 
 } // end class WgtSelectboxEnum
-

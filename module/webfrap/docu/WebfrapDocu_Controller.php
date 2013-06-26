@@ -44,30 +44,24 @@ class WebfrapDocu_Controller extends Controller
    *
    * @var array
    */
-  protected $options           = array
-  (
-    'open' => array
-    (
+  protected $options = array(
+    'open' => array(
       'method'    => array('GET'),
       'views'      => array('modal', 'maintab')
     ),
-    'edit' => array
-    (
+    'edit' => array(
       'method'    => array('GET'),
       'views'      => array('modal', 'maintab')
     ),
-    'save' => array
-    (
+    'save' => array(
       'method'    => array('PUT'),
       'views'      => array('ajax')
     ),
-    'menu' => array
-    (
+    'menu' => array(
       'method'    => array('GET'),
       'views'      => array('maintab')
     ),
-    'page' => array
-    (
+    'page' => array(
       'method'    => array('GET'),
       'views'      => array('maintab')
     ),
@@ -95,8 +89,7 @@ class WebfrapDocu_Controller extends Controller
 
     $fileKey = str_replace('-', '/', $key);
 
-    $view = $response->loadView
-    (
+    $view = $response->loadView(
       $key.'-help',
       'WebfrapDocuViewer',
       'displayShow',
@@ -121,8 +114,7 @@ class WebfrapDocu_Controller extends Controller
 
     if (!$key) {
       // ohne key kann nichts angezeigt werden
-      throw new InvalidRequest_Exception
-      (
+      throw new InvalidRequest_Exception(
         'Missing a valid key',
         Response::BAD_REQUEST
       );
@@ -137,8 +129,7 @@ class WebfrapDocu_Controller extends Controller
       $mask = $orm->getByKey('WbfsysMask', $key);
       if (!$mask) {
         // ohne key kann nichts angezeigt werden
-        throw new InvalidRequest_Exception
-        (
+        throw new InvalidRequest_Exception(
           'Create a new help page is only allowed for existing Masks',
           Error::NOT_FOUND
         );
@@ -153,8 +144,7 @@ class WebfrapDocu_Controller extends Controller
 
     }
 
-    $view = $response->loadView
-    (
+    $view = $response->loadView(
       $key.'-help',
       'WebfrapDocu',
       'displayShow',
@@ -179,8 +169,7 @@ class WebfrapDocu_Controller extends Controller
 
     if (!$key) {
       // ohne key kann nichts angezeigt werden
-      throw new InvalidRequest_Exception
-      (
+      throw new InvalidRequest_Exception(
         'Missing a valid key',
         Response::BAD_REQUEST
       );
@@ -195,8 +184,7 @@ class WebfrapDocu_Controller extends Controller
       $mask = $orm->getByKey('WbfsysMask', $key);
       if (!$mask) {
         // ohne key kann nichts angezeigt werden
-        throw new InvalidRequest_Exception
-        (
+        throw new InvalidRequest_Exception(
           'Create a new help page is only allowed for existing Masks',
           Error::NOT_FOUND
         );
@@ -211,8 +199,7 @@ class WebfrapDocu_Controller extends Controller
 
     }
 
-    $view = $response->loadView
-    (
+    $view = $response->loadView(
       $key.'-help' ,
       'WebfrapDocu_Edit',
       'displayForm',
@@ -238,8 +225,7 @@ class WebfrapDocu_Controller extends Controller
 
     if (!$key) {
       // ohne key kann nichts angezeigt werden
-      throw new InvalidRequest_Exception
-      (
+      throw new InvalidRequest_Exception(
         'Missing a valid key',
         Response::BAD_REQUEST
       );
@@ -255,8 +241,7 @@ class WebfrapDocu_Controller extends Controller
         $mask = $orm->getByKey('WbfsysMask', $key);
         if (!$mask) {
           // ohne key kann nichts angezeigt werden
-          throw new InvalidRequest_Exception
-          (
+          throw new InvalidRequest_Exception(
             'Create a new help page is only allowed for existing Masks',
             Error::NOT_FOUND
           );
@@ -278,10 +263,12 @@ class WebfrapDocu_Controller extends Controller
       $response->addMessage("Saved");
 
     } catch (Exception $e) {
+      
       $response->addError("Failed to save the Help Page. Sorry :-(");
     }
 
     if ($request->paramExists('show')) {
+      
       $view = $response->loadView($key.'-help' , 'WebfrapDocu', 'displayShow',  View::SUBWINDOW);
 
       if (!$view)
@@ -301,11 +288,9 @@ class WebfrapDocu_Controller extends Controller
   {
 
     $params = $this->getFlags($request);
-
     $key = $request->param('key', Validator::CKEY);
 
-    $view   = $response->loadView
-    (
+    $view   = $response->loadView(
       'webfrap_docu_menu',
       'WebfrapDocu_Menu',
       'displayMenu',
@@ -333,8 +318,7 @@ class WebfrapDocu_Controller extends Controller
 
     $model  = $this->loadModel('WebfrapDocu_Page');
 
-    $view   = $response->loadView
-    (
+    $view   = $response->loadView(
       'webfrap_docu_page',
       'WebfrapDocu_Page',
       'displayPage',

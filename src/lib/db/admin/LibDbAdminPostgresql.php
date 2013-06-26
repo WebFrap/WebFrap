@@ -1498,8 +1498,7 @@ SQL;
 
 
     if (!$dbData = $this->getColumnData($colName, $tableName, $dbName, $schemaName)) {
-      throw new LibDb_Exception
-      (
+      throw new LibDb_Exception(
         'Requested Column '.$colName.' for Table: '.$tableName.' in Schema: '.$schemaName.' Database: '.$dbName.' not exists'
       );
     }
@@ -2080,8 +2079,23 @@ SQL;
 
     $colName = $attribute->name();
 
-    $data = array
-    (
+    $checkNegativ = array(
+      'integer',
+      'int2' ,
+      'smallint'  ,
+      'bigint'  ,
+      'int8'  ,
+      'numeric' ,
+    );
+
+
+    if( in_array($type,$checkNegativ) ){
+      if($default && $default < 0){
+        $default = "($default)";
+      }
+    }
+
+    $data = array(
       LibDbAdmin::COL_NAME        => $colName,
       LibDbAdmin::COL_DEFAULT     => $default,
       LibDbAdmin::COL_NULL_ABLE   => $nullAble,

@@ -151,12 +151,12 @@ class LibCacheRequestAppTheme extends LibCacheRequestCss
     foreach ($variables as $key => $val  )
       $tmpVar['@{'.$key.'}'] = $val;
     */
-    
+
     if (!file_exists(PATH_GW.'conf/include/app_theme/'.$list.'.list.php')) {
       echo "";
       return;
     }
-      
+
 
     $icons  = View::$webIcons;
     $images = View::$webImages;
@@ -190,13 +190,11 @@ class LibCacheRequestAppTheme extends LibCacheRequestCss
       file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.gz.md5' ,  $encodedEtag);
     }
 
-    if
-    (
+    if(
       isset($_SERVER['HTTP_ACCEPT_ENCODING'])
         && strstr ($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')
         && $encode
-    )
-    {
+    ) {
       // Tell the browser the content is compressed with gzip
       header ("Content-Encoding: gzip");
       $out = $encoded;

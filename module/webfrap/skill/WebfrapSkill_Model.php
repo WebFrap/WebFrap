@@ -128,7 +128,7 @@ FROM
   core_skill skill
 WHERE
   NOT skill.rowid IN(select ref.id_skill from core_skill_requirement ref where ref.vid = {$refId})
-  AND upper(skill.name) like upper('{$db->addSlashes($key)}%')
+  AND upper(skill.name) like upper('{$db->escape($key)}%')
 ORDER BY
   skill.name
 LIMIT 10;

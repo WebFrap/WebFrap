@@ -89,6 +89,18 @@ class Validator
    * Validatormapping
    * @var string
    */
+  const HTML_PUBLISH        = 'HtmlPublish';
+
+  /**
+   * Validatormapping
+   * @var string
+   */
+  const HTML_FULL        = 'HtmlFull';
+
+  /**
+   * Validatormapping
+   * @var string
+   */
   const JSON        = 'Json';
 
   /**
@@ -203,7 +215,7 @@ class Validator
    *
    * @var unknown_type
    */
-  const VALIDATE_MAIL = "/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_]+([.][A-z0-9_]+)*[.][A-z]{2,4}$/";
+  const VALIDATE_MAIL = "/^[^0-9][A-z0-9_]+([.][A-z0-9_]+)*[@][A-z0-9_-]+([.][A-z0-9_-]+)*[.][A-z]{2,4}$/";
 
   /**
    *
@@ -1024,7 +1036,12 @@ class Validator
 
     // sanitize HTML
     $sanitizer = LibSanitizer::getHtmlSanitizer();
-    $value = $sanitizer->sanitize($value);
+
+    $purify = new LibVendorHtmlpurifier_ConfigSave();
+
+    $sanitizer->config = $purify->getConfig();
+
+    $value = $sanitizer->purify($value);
 
     $this->data[$key]     = $value;
 
@@ -1048,6 +1065,102 @@ class Validator
     return false;
 
   }//end function addHtml
+
+  /**
+   * @param string $key
+   * @param scalar $value
+   * @param boolean $notNull
+   * @param int $maxSize
+   * @param int $minSize
+   */
+  public function addHtmlPublish($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  {
+    if (!$notNull and trim($value) == '') {
+      $this->data[$key]     = null;
+      $this->invalid[$key]  = false;
+
+      return false;
+    }
+
+    // sanitize HTML
+    $sanitizer = LibSanitizer::getHtmlSanitizer();
+
+    $purify = new LibVendorHtmlpurifier_ConfigPublish();
+
+    $sanitizer->config = $purify->getConfig();
+
+    $value = $sanitizer->purify($value);
+
+    $this->data[$key]     = $value;
+
+    if ($notNull) {
+      if (trim($value) == ''  )
+        return 'empty';
+    }
+
+    if ($maxSize) {
+      if (strlen($this->data[$key]) > $maxSize)
+        return 'max';
+    }
+
+    if ($minSize) {
+      if (strlen($this->data[$key]) < $minSize)
+        return 'min';
+    }
+
+    $this->invalid[$key]  = false;
+
+    return false;
+
+  }
+
+  /**
+   * @param string $key
+   * @param scalar $value
+   * @param boolean $notNull
+   * @param int $maxSize
+   * @param int $minSize
+   */
+  public function addHtmlFull($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  {
+    if (!$notNull and trim($value) == '') {
+      $this->data[$key]     = null;
+      $this->invalid[$key]  = false;
+
+      return false;
+    }
+
+    // sanitize HTML
+    $sanitizer = LibSanitizer::getHtmlSanitizer();
+
+    $purify = new LibVendorHtmlpurifier_ConfigFull();
+
+    $sanitizer->config = $purify->getConfig();
+
+    $value = $sanitizer->purify($value);
+
+    $this->data[$key]     = $value;
+
+    if ($notNull) {
+      if (trim($value) == ''  )
+        return 'empty';
+    }
+
+    if ($maxSize) {
+      if (strlen($this->data[$key]) > $maxSize)
+        return 'max';
+    }
+
+    if ($minSize) {
+      if (strlen($this->data[$key]) < $minSize)
+        return 'min';
+    }
+
+    $this->invalid[$key]  = false;
+
+    return false;
+
+  }
 
   /**
    * @param string $key
@@ -1440,7 +1553,7 @@ class Validator
 
     $this->data[$key] = $value;
 
-    if (!preg_match(self::VALIDATE_MAIL, $value)) {
+    if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
       $this->invalid[$key]  = 'wrong';
 
       return 'wrong';

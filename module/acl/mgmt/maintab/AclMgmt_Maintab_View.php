@@ -91,12 +91,10 @@ class AclMgmt_Maintab_View extends WgtMaintab
     $this->setTemplate('acl/mgmt/maintab/main_group_rights', true);
 
     // fetch the i18n text only one time
-    $i18nText = $this->i18n->l
-    (
+    $i18nText = $this->i18n->l(
       'ACL Entity {@label@}',
       'wbf.label',
-      array
-      (
+      array(
         'label' => $this->i18n->l($this->domainNode->label, $this->domainNode->domainI18n.'.label')
       )
     );
@@ -126,16 +124,14 @@ class AclMgmt_Maintab_View extends WgtMaintab
     $ui->domainNode = $this->domainNode;
 
     // inject the table item in the template system
-    $ui->createListItem
-    (
+    $ui->createListItem(
       $this->model->search($areaId, $access, $params),
       $access,
       $params
     );
 
     // create the form elements and inject them in the templatesystem
-    $ui->editForm
-    (
+    $ui->editForm(
       $areaId,
       $params
     );

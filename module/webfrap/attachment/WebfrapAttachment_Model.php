@@ -77,16 +77,39 @@ class WebfrapAttachment_Model extends Model
 
   /**
    * Context Container
-   * @var WebfrapAttachment_Context
+   * @var WebfrapAttachment_Request
    */
   public $context = null;
+  
+  /**
+   * Context Container
+   * @var array
+   */
+  protected $orderFields = array(
+    'file_name' => 'file.name',
+    'file_type' => 'file_type.name',
+    'file_size' => 'file.file_size',
+    'file_owner' => 'person.wbfsys_role_user_name',
+    'file_created' => 'attach.m_time_created'
+  );
+  
+  /**
+   * Context Container
+   * @var array
+   */
+  protected $searchFields = array(
+      'file_name' => 'file.name',
+      'file_type' => 'file_type.name',
+      'file_owner' => 'person.wbfsys_role_user_name',
+      'file_description' => 'file.description'
+  );
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * @param WebfrapAttachment_Context $context
+   * @param WebfrapAttachment_Request $context
    */
   public function setProperties($context)
   {
@@ -266,8 +289,7 @@ class WebfrapAttachment_Model extends Model
 
     $orm = $this->getOrm();
 
-    $fileNode = $orm->getWhere
-    (
+    $fileNode = $orm->getWhere(
       'WbfsysFile',
       "rowid in(select wea.id_file from wbfsys_entity_attachment wea where wea.rowid = {$attachmentId})"
     );
@@ -335,14 +357,15 @@ class WebfrapAttachment_Model extends Model
   {
 
     $db = $this->getDb();
+    $wheres = array();
 
     $condEntry  = '';
     $condAttach = '';
 
     if ($refId) {
-      $condAttach = " attach.vid = {$refId}";
+      $wheres[] = " attach.vid = {$refId}";
     } elseif ($entryId) {
-      $condEntry = " attach.rowid = {$entryId}";
+      $wheres[] = " attach.rowid = {$entryId}";
     } else {
       return array();
     }
@@ -350,11 +373,10 @@ class WebfrapAttachment_Model extends Model
     $condSearch = '';
     if ($searchString) {
 
-      $condSearch = <<<SQL
-      and
+      $wheres[] = <<<SQL
       (
-        upper(file.name) like upper('%{$searchString}%')
-          or upper(file.link) like upper('%{$searchString}%')
+        UPPER(file.name) like UPPER('%{$searchString}%')
+          OR UPPER(file.link) like UPPER('%{$searchString}%')
       )
 SQL;
 
@@ -363,46 +385,44 @@ SQL;
     $typeFilterJoins = '';
     $typeFilterWhere = '';
 
-    if ($this->maskFilter) {
+    if ($this->context->maskFilter) {
 
       $typeFilterJoins = <<<SQL
-
-  LEFT JOIN wbfsys_vref_file_type
-    wbfsys_file_type.rowid = wbfsys_vref_file_type.id_type
-
-  JOIN wbfsys_management
-    wbfsys_vref_file_type.vid = wbfsys_management.rowid
+      
+  LEFT JOIN wbfsys_file_profile_type pt 
+    ON pt.id_type = file_type.rowid
+          
+  LEFT JOIN wbfsys_file_profile prof 
+    ON prof.rowid = pt.id_profile
 
 SQL;
 
-      if ($this->fetchUntyped) {
-        $typeFilterWhere = <<<SQL
+      if ($this->context->fetchUntyped) {
+        $wheres[] = <<<SQL
 
-  AND
     (
-      UPPER(wbfsys_management.access_key) = UPPER('{$this->maskFilter}')
+      UPPER(prof.access_key) = UPPER('{$this->context->maskFilter}')
       OR
       file.id_type is null
     )
 
 SQL;
       } else {
-        $typeFilterWhere = <<<SQL
+        $wheres[] = <<<SQL
 
-  UPPER(wbfsys_management.access_key) = UPPER('{$this->maskFilter}')
+  UPPER(prof.access_key) = UPPER('{$this->context->maskFilter}')
 
 SQL;
 
       }
 
-    } elseif ($this->typeFilter) {
+    } elseif ($this->context->typeFilter) {
 
-      $searchKey =  "UPPER('".implode("'), UPPER('", $this->typeFilter)."')" ;
+      $searchKey =  "UPPER('".implode("'), UPPER('", $this->context->typeFilter)."')" ;
 
-      if ($this->fetchUntyped) {
-        $typeFilterWhere = <<<SQL
+      if ($this->context->fetchUntyped) {
+        $wheres[] = <<<SQL
 
-  AND
     (
       UPPER(file_type.access_key) IN({$searchKey})
       OR
@@ -412,13 +432,54 @@ SQL;
 SQL;
       } else {
 
-        $typeFilterWhere = <<<SQL
+        $wheres[] = <<<SQL
 
-  AND UPPER(file_type.access_key) IN({$searchKey})
+  UPPER(file_type.access_key) IN({$searchKey})
 
 SQL;
       }
     }
+    
+    if ($this->context->searchType) {
+      
+      $typesFilter = implode(', ',$this->context->searchType);
+      
+      $wheres[] = <<<SQL
+      file.id_type IN({$typesFilter}) 
+SQL;
+    }
+    
+    $orderStack = array();
+    
+    if ($this->context->order) {
+      foreach ($this->context->order as $oKey => $oDir) {
+        if(''==$oDir)
+          continue;
+        $orderStack[] =  $this->orderFields[$oKey]." ".$oDir;
+      }
+    }
+    
+    if ($orderStack) {
+      $sqlOrder = implode(', ', $orderStack);
+    } else {
+      $sqlOrder = 'attach.m_time_created desc';
+    }
+    
+    $searchStack = array();
+    
+    if ($this->context->search) {
+      foreach ($this->context->search as $oKey => $oDir) {
+        if(''==$oDir)
+          continue;
+        $searchStack[] =  'UPPER('.$this->searchFields[$oKey].") LIKE UPPER('%".$oDir."%')";
+      }
+    }
+    
+    if ($searchStack) {
+      $wheres[]  = ' AND ( '.implode(' AND ', $searchStack).' ) ';
+    } 
+    
+    $sqlWhere = implode( ' AND ', $wheres);
 
     $sql = <<<SQL
 SELECT
@@ -464,12 +525,9 @@ LEFT JOIN
 {$typeFilterJoins}
 
 WHERE
-  {$condAttach}
-  {$condEntry}
-  {$condSearch}
-  {$typeFilterWhere}
+  {$sqlWhere}
 ORDER BY
-  attach.m_time_created desc;
+  {$sqlOrder};
 
 SQL;
 
@@ -482,6 +540,45 @@ SQL;
 
   }//end public function getAttachmentList */
 
+  /**
+   * @param string $key
+   * @return arry
+   */
+  public function loadProfileTypes($key)
+  {
+    
+    $db = $this->getDb();
+    
+    $sql = <<<SQL
+SELECT
+  type.rowid,
+  type.access_key,
+  type.name
+FROM wbfsys_file_type type
+JOIN wbfsys_file_profile_type pt 
+  ON pt.id_type = type.rowid
+JOIN wbfsys_file_profile prof 
+  ON prof.rowid = pt.id_profile
+WHERE UPPER(prof.access_key) = UPPER('{$key}');
+        
+    
+SQL;
+    
+    $res = $db->select($sql);
+    
+    $data = $res->getAll();
+    
+    $this->typeFilter = array();
+    
+    foreach ($data as $row) {
+      $this->typeFilter[] = $row['access_key'];
+    }
+    
+    
+    return $res->getAll();
+    
+  }//end public function loadProfileTypes */
+  
 /*//////////////////////////////////////////////////////////////////////////////
 // Repository Management Logic
 //////////////////////////////////////////////////////////////////////////////*/

@@ -8,8 +8,7 @@ $this->crumbs = array(
 
 if ($acl->hasRole('developer')) {
 
-  $this->firstEntry = array
-  (
+  $this->firstEntry = array(
     'menu_webfrap_root',
     Wgt::MAIN_TAB,
     '..',
@@ -18,8 +17,7 @@ if ($acl->hasRole('developer')) {
     'places/folder_up.png',
   );
 
-  $this->files[] = array
-  (
+  $this->files[] = array(
     'menu_mod_daidalos_database',
     Wgt::MAIN_TAB,
     'Database',
@@ -28,8 +26,7 @@ if ($acl->hasRole('developer')) {
     'utilities/db.png',
   );
 
-  $this->files[] = array
-  (
+  $this->files[] = array(
     'menu_mod_daidalos_bdl_modeller',
     Wgt::MAIN_TAB,
     'BDL Modeller',
@@ -38,8 +35,7 @@ if ($acl->hasRole('developer')) {
     'utilities/modeller.png',
   );
 
-  $this->files[] = array
-  (
+  $this->files[] = array(
     'menu_developer_example',
     Wgt::MAIN_TAB,
     'Coding Examples',

@@ -22,7 +22,7 @@
 
  *
  * @package WebFrap
- * @subpackage Groupware
+ * @subpackage webfrap/groupware
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
@@ -36,14 +36,14 @@ class WebfrapContact_Controller extends Controller
    * @var array
    */
   protected $options           = array(
-  
+
     'list' => array(
       'method'    => array('GET'),
       'views'      => array('maintab')
     ),
     'formnew' => array(
       'method'    => array('GET'),
-      'views'      => array('modal')
+      'views'      => array('ajax')
     ),
     'insert' => array(
       'method'    => array('POST'),
@@ -81,7 +81,7 @@ class WebfrapContact_Controller extends Controller
 
     // prüfen ob irgendwelche steuerflags übergeben wurde
     $usrRqt  = new WebfrapContact_List_Request($request);
-    
+
     /* @var $model WebfrapContact_Model */
     $model = $this->loadModel('WebfrapContact');
     $model->loadTableAccess($usrRqt);
@@ -95,11 +95,11 @@ class WebfrapContact_Controller extends Controller
 
     /* @var $view WebfrapContact_List_Maintab_View */
     $view = $response->loadView(
-      'webfrap-contact-list',
+      'webfrap-groupware-list',
       'WebfrapContact_List',
       'displayList'
     );
-    
+
     $view->setModel($model);
 
     $view->displayList($usrRqt);
@@ -133,7 +133,7 @@ class WebfrapContact_Controller extends Controller
     // create a window
     $view   = $response->loadView(
       'form-messages-new',
-      'WebfrapContact_New',
+      'WebfrapContact',
       'displayNew'
     );
 
@@ -143,8 +143,8 @@ class WebfrapContact_Controller extends Controller
     $view->displayNew($params);
 
   }//end public function service_formNew */
-  
-  
+
+
  /**
   * Form zum anschauen einer Nachricht
   * @param LibRequestHttp $request
@@ -181,27 +181,27 @@ class WebfrapContact_Controller extends Controller
     $view->displayEntry($params, true);
 
   }//end public function service_insert */
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
  /**
   * Form zum anschauen einer Nachricht
@@ -254,7 +254,7 @@ class WebfrapContact_Controller extends Controller
   }//end public function service_formShow */
 
 
- 
+
 
   /**
    * Standard Service für Autoloadelemente wie zb. Window Inputfelder

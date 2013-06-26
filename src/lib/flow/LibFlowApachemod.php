@@ -111,8 +111,7 @@ class LibFlowApachemod extends Base
     }
 
     if (defined('MODE_MAINTENANCE')) {
-      $map = array
-      (
+      $map = array(
         Request::MOD  => 'Maintenance',
         Request::CON  => 'Base',
         Request::RUN  => 'message'
@@ -125,18 +124,19 @@ class LibFlowApachemod extends Base
     $this->checkRedirect();
 
     if ($command = $request->param('c', Validator::TEXT)) {
+
       $tmp = explode('.',$command);
-      $map = array
-      (
+      $map = array(
         Request::MOD  => $tmp[0],
         Request::CON  => $tmp[1],
         Request::RUN  => $tmp[2]
       );
       $request->addParam($map);
+
     } elseif ($command = $request->data('c', Validator::TEXT)) {
+
       $tmp = explode('.',$command);
-      $map = array
-      (
+      $map = array(
         Request::MOD  => $tmp[0],
         Request::CON  => $tmp[1],
         Request::RUN  => $tmp[2]
@@ -167,8 +167,7 @@ class LibFlowApachemod extends Base
     }
 
     if (defined('MODE_MAINTENANCE')) {
-      $map = array
-      (
+      $map = array(
         Request::MOD  => 'Maintenance',
         Request::CON  => 'Base',
         Request::RUN  => 'message'
@@ -182,8 +181,7 @@ class LibFlowApachemod extends Base
 
     if ($command = $request->param('c', Validator::TEXT  )) {
       $tmp = explode('.',$command);
-      $map = array
-      (
+      $map = array(
         Request::MOD  => $tmp[0],
         Request::CON  => $tmp[1],
         Request::RUN  => $tmp[2]
@@ -191,8 +189,7 @@ class LibFlowApachemod extends Base
       $request->addParam($map);
     } elseif ($command = $request->data('c', Validator::TEXT)) {
       $tmp = explode('.',$command);
-      $map = array
-      (
+      $map = array(
         Request::MOD  => $tmp[0],
         Request::CON  => $tmp[1],
         Request::RUN  => $tmp[2]
@@ -236,8 +233,7 @@ class LibFlowApachemod extends Base
 
       if (!$user->getLogedIn()) {
         $tmp = explode('.',$session->getStatus('tripple.annon'));
-        $map = array
-        (
+        $map = array(
           Request::MOD  => $tmp[0],
           Request::CON  => $tmp[1],
           Request::RUN  => $tmp[2]
@@ -245,6 +241,7 @@ class LibFlowApachemod extends Base
         $httpRequest->addParam($map);
 
         $sysClass = $tmp[0];
+
       } else {
         $tmp = explode('.',$session->getStatus('tripple.user'));
         $map = array

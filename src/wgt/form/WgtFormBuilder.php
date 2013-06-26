@@ -1300,8 +1300,7 @@ CODE;
     $value = null,
     $attributes = array(),
     $params = null
-  )
-  {
+  ) {
 
     $pNode = $this->prepareParams($params);
 
@@ -1311,12 +1310,14 @@ CODE;
     } else {
 
       $tmp = explode(',', $name);
+      $tmpId = str_replace(array('[',']'), array('-','-'), $tmp[0]);
 
       if (count($tmp) > 1) {
-        $id      = $tmp[0]."-".$tmp[1];
+
+        $id      = $tmpId."-".$tmp[1];
         $inpName = $tmp[0]."[{$tmp[1]}]";
       } else {
-        $id      = $tmp[0];
+        $id      = $tmpId;
         $inpName = $tmp[0];
       }
 
@@ -1328,10 +1329,8 @@ CODE;
 
     $selectBoxNode = new $elementKey();
 
-    $selectBoxNode->addAttributes
-    (
-      array
-      (
+    $selectBoxNode->addAttributes(
+      array(
         'name'      => $name,
         'id'        => $id,
         'class'     => 'asgd-'.$this->id,
@@ -1376,8 +1375,7 @@ CODE;
     $value = null,
     $attributes = array(),
     $params = null
-  )
-  {
+  ) {
 
     $pNode = $this->prepareParams($params);
 
@@ -1407,10 +1405,8 @@ CODE;
 
     $selectBoxNode = new $elementKey();
 
-    $selectBoxNode->addAttributes
-    (
-      array
-      (
+    $selectBoxNode->addAttributes(
+      array(
         'name'      => $name,
         'id'        => $id,
         'class'     => 'asgd-'.$this->id,
@@ -1481,12 +1477,12 @@ HTML
     foreach ($labels as $lang => $label) {
       $listLabels .= '<li class="lang-'.$lang.'" >'. WgtForm::input(
         'Lang '.Wgt::icon('flags/'.$lang.'.png', 'xsmall', array(), ''),
-        $idPrefix.'-label-'.$lang,
+        $this->domainKey.'-label-'.$lang,
         $label, array(
           'name'  => $nodeKey.'[label]['.$lang.']',
           'class' => 'medium lang-'.$lang
         ),
-        $formId,
+        $this->id,
         '<button class="wgt-button wgta-drop" wgt_lang="'.$lang.'" tabindex="-1" >'.$iconDel.'</button>'
       ).'</li>';
     }
@@ -1542,16 +1538,14 @@ CODE;
 
     foreach ($texts as $lang => $text) {
 
-      $innerWysiwyg = $this->wysiwyg
-      (
+      $innerWysiwyg = $this->wysiwyg(
         $lang,
-        $idPrefix.'-'.$nodeKey.'-'.$lang,
+        $this->domainKey.'-'.$nodeKey.'-'.$lang,
         $text,
-        array
-        (
+        array(
           'name' => $nodeKey.'['.$lang.']'
-        ),
-        $formId,
+         ),
+        $this->id,
         null,
         true,
         true
@@ -1712,4 +1706,3 @@ CODE;
   }//end public function prepareParams */
 
 }//end class WgtFormBuilder
-

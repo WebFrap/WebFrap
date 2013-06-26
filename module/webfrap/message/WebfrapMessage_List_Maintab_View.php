@@ -43,7 +43,7 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
     $user     = $this->getUser();
     $acl      = $this->getAcl();
     $request  = $this->getRequest();
-    
+
     $access = $params->access;
 
     $params->qsize  = 50;
@@ -91,31 +91,31 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
     //$searchElement->advancedSearch = true;
     $searchElement->focus = true;
 
-    
+
     $searchElement->setSearchFields($params->searchFields);
-    
+
     // Ein Panel für die Filter hinzufügen
     // Die Filteroptionen befinden sich im Panel
     // Die UI Klasse wird als Environment übergeben
     $filterSubPanel = new WebfrapMessage_List_SubPanel_Filter($this);
-    
+
     // Search Form wird benötigt um die Filter an das passende Suchformular zu
     // binden
     $filterSubPanel->setSearchForm($params->searchFormId);
-    
 
-    
+
+
     // Setzen der Filterzustände, werden aus der URL ausgelesen
     $filterSubPanel->setFilterStatus($params->settings);
-    
+
     // Access wird im Panel als Rechte Container verwendet
     $filterSubPanel->setAccess($access);
     $filterSubPanel->searchKey = $searchElement->searchKey;
-          
+
     // Jetzt wird das SubPanel in den Suchen Splittbutton integriert
     $searchElement->setFilter($filterSubPanel);
-    
-    
+
+
     // templates
 
     $this->setTemplate('webfrap/message/maintab/list', true);
@@ -175,31 +175,40 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
   </ul>
 </div>
 
-<!--
 <div class="wgt-panel-control" >
-  <div id="wgt-mentry-swlt-message" >
-
-    <button
-      id="wgt-mentry-swlt-message-head"
-      class="wgtac_view_table wgt-button"  >
-      {$iconLtChat}
-    </button>
-    <button
-      id="wgt-mentry-swlt-message-full"
-      class="wgtac_view_treetable wgt-button"
-      style="margin-left:-6px;" >
-      {$iconLtFull}
-    </button>
-    <button
-      id="wgt-mentry-swlt-message-chat"
-      class="wgtac_view_treetable wgt-button"
-      style="margin-left:-6px;" >
-      {$iconLtHead}
-    </button>
-
+  <div
+    class="wcm wcm_control_buttonset wgt-button-set"
+    id="wgt-mentry-groupware-data" >
+    <input
+      type="radio"
+      id="wgt-mentry-groupware-data-mail"
+      value="maintab.php?c=Webfrap.Message.messageList"
+      class="{$this->id}-maskswitcher"
+      name="nav-boxtype"
+      checked="checked" /><label
+        for="wgt-mentry-groupware-data-mail"
+        class="wcm wcm_ui_tip-top"
+        tooltip="Show the messages"  ><i class="icon-envelope-alt" ></i></label>
+    <input
+      type="radio"
+      id="wgt-mentry-groupware-data-contact"
+      value="maintab.php?c=Webfrap.Contact.list"
+      class="{$this->id}-maskswitcher"
+      name="nav-boxtype"  /><label
+        for="wgt-mentry-groupware-data-contact"
+        class="wcm wcm_ui_tip-top"
+        tooltip="Show the contacts" ><i class="icon-user" ></i></label>
+    <input
+      type="radio"
+      id="wgt-mentry-groupware-data-calendar"
+      value="maintab.php?c=Webfrap.Calendar.element"
+      class="{$this->id}-maskswitcher"
+      name="nav-boxtype" /><label
+        for="wgt-mentry-groupware-data-calendar"
+        class="wcm wcm_ui_tip-top"
+        tooltip="Show Calendar" ><i class="icon-calendar" ></i></label>
   </div>
 </div>
--->
 
 <div class="wgt-panel-control" >
   <button
@@ -258,6 +267,12 @@ HTML;
     self.getObject().find('.wgt-mentry-my_message-boxtype').change(function() {
       \$R.form('wgt-form-webfrap-groupware-search');
     });
+
+
+    self.getObject().find('.{$this->id}-maskswitcher').change(function() {
+      \$R.get(\$S(this).val());
+    });
+
 
 BUTTONJS;
 

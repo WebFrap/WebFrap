@@ -131,7 +131,7 @@ class AclMgmt_Ui extends MvcUi
     if ($params->targetId)
       $table->setId($params->targetId);
 
-    $table->addActions(array( 'tree', 'inheritance', 'sep',  'delete'));
+    $table->addActions(array( 'tree', 'sep',  'delete'));
 
     $table->setPagingId($params->searchFormId);
     $table->setSaveForm($params->formId);

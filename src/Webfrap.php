@@ -1086,6 +1086,7 @@ class Webfrap
             Webfrap::$autoloadPath[] = PATH_ROOT.$mod.'/module/';
 
             if (!$srcOnly) {
+            	//View::$searchPathTemplate[] = PATH_ROOT.$mod.'/module/';
               View::$searchPathTemplate[] = PATH_ROOT.$mod.'/templates/';
               I18n::$i18nPath[] = PATH_ROOT.$mod.'/i18n/';
               Conf::$confPath[] = PATH_ROOT.$mod.'/conf/';

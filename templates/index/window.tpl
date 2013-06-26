@@ -1,48 +1,64 @@
-<?php 
+<?php
 
 define( 'TPL_START', '<?php echo' );
 define( 'TPL_END',   '?>'  );
 
 ?>
 
-<div 
-  class="box_template wgt-editlayer border" 
-  contenteditable="true" 
+<div
+  class="box_template wgt-editlayer border"
+  contenteditable="true"
   id="wgt-edit-field-text" ></div>
-<div 
-  class="box_template wgt-editlayer number border" 
-  contenteditable="true" 
+<div
+  class="box_template wgt-editlayer number border"
+  contenteditable="true"
   id="wgt-edit-field-number"  ></div>
-<div 
-  class="box_template wgt-editlayer" 
+<div
+  class="box_template wgt-editlayer"
   id="wgt-edit-field-select" ></div>
-<div 
-  class="box_template wgt-editlayer" 
+<div
+  class="box_template wgt-editlayer"
   id="wgt-edit-field-window" ></div>
-<div 
-  class="box_template wgt-editlayer" 
-  id="wgt-edit-field-check" ><input type="checkbox" /></div>
-<div 
-  class="box_template wgt-editlayer border" 
-  contenteditable="true" 
-  id="wgt-edit-field-date" style="overflow:hidden;" ><input 
-    type="text" 
-    class="wcm wcm_list_date" 
-    style="border:0px;width:100%;margin:0px;padding:0px;overflow:hidden;" 
+<div
+  class="box_template wgt-editlayer"
+  id="wgt-edit-field-element" ></div>
+<div
+  class="box_template wgt-editlayer"
+  id="wgt-edit-field-check" style="text-align:center;" ><input type="checkbox" /></div>
+<div
+  class="box_template wgt-editlayer border"
+  contenteditable="true"
+  id="wgt-edit-field-date" style="overflow:hidden;" ><input
+    type="text"
+    class="wcm wcm_list_date"
+    style="border:0px;width:100%;margin:0px;padding:0px;overflow:hidden;"
     /></div>
-<div class="box_template wgt-editlayer"  style="overflow:hidden;" contenteditable="true" id="wgt-edit-field-datetime" ><input 
-  type="text" 
-  class="wcm wcm_list_date_timepicker" 
-  style="border:0px;width:100%;margin:0px;padding:0px;overflow:hidden;" 
+<div 
+  class="box_template wgt-editlayer"  
+  style="overflow:hidden;" 
+  contenteditable="true" 
+  id="wgt-edit-field-datetime" ><input
+    type="text"
+    class="wcm wcm_list_date_timepicker"
+    style="border:0px;width:100%;margin:0px;padding:0px;overflow:hidden;"
   /></div>
-<div class="box_template wgt-editlayer border" contenteditable="true" id="wgt-edit-field-money" ><input 
-  type="text" 
-  style="border:0px;width:100%;margin:0px;padding:0px;" 
+<div 
+  class="box_template wgt-editlayer"  
+  style="overflow:hidden;" 
+  contenteditable="true" 
+  id="wgt-edit-field-time" ><input
+    type="text"
+    class="wcm wcm_list_timepicker"
+    style="border:0px;width:100%;margin:0px;padding:0px;overflow:hidden;"
+      /></div>
+<div class="box_template wgt-editlayer border" contenteditable="true" id="wgt-edit-field-money" ><input
+  type="text"
+  style="border:0px;width:100%;margin:0px;padding:0px;"
   /><button
     class="wgt-button append just-annotate"
-    tabindex="-1"  ><i 
+    tabindex="-1"  ><i
       class="icon-money" ></i></button></div>
-      
+
 <?php
 // TODO move that into a builder class?
 $slctBoolean = new WebfrapSearchTypeBoolean_Selectbox();
@@ -91,8 +107,8 @@ $slctTextStrict->setId('wgt-select-astype-{$dkey}-{$pos}');
 	</td>
 	<td class="value" style="text-align:left;" ></td>
 	<td class="cntrl" style="text-align:right;" >
-		<button 
-			class="wa_search_add wgt-button" ><i class="icon-plus-sign" ></i></button><button 
+		<button
+			class="wa_search_add wgt-button" ><i class="icon-plus-sign" ></i></button><button
 				class="wa_remove_line wgt-button" ><i class="icon-remove-sign" ></i></button>
 	</td>
 </tr>
@@ -121,8 +137,8 @@ $slctTextStrict->setId('wgt-select-astype-{$dkey}-{$pos}');
 		<input type="text" />
 	</td>
 	<td class="cntrl" style="text-align:right;" >
-		<button 
-			class="wa_search_add wgt-button" ><i class="icon-plus-sign" ></i></button><button 
+		<button
+			class="wa_search_add wgt-button" ><i class="icon-plus-sign" ></i></button><button
 				class="wa_remove_line wgt-button" ><i class="icon-remove-sign" ></i></button>
 	</td>
 </tr>
@@ -152,8 +168,8 @@ $slctTextStrict->setId('wgt-select-astype-{$dkey}-{$pos}');
 		<input type="text" />
 	</td>
 	<td class="cntrl" style="text-align:right;" >
-		<button 
-			class="wa_search_add wgt-button" ><i class="icon-plus-sign" ></i></button><button 
+		<button
+			class="wa_search_add wgt-button" ><i class="icon-plus-sign" ></i></button><button
 				class="wa_remove_line wgt-button" ><i class="icon-remove-sign" ></i></button>
 	</td>
 </tr>
@@ -183,8 +199,8 @@ $slctTextStrict->setId('wgt-select-astype-{$dkey}-{$pos}');
 		<input type="text" />
 	</td>
 	<td class="cntrl" style="text-align:right;" >
-		<button 
-			class="wa_search_add wgt-button" ><i class="icon-plus-sign" ></i></button><button 
+		<button
+			class="wa_search_add wgt-button" ><i class="icon-plus-sign" ></i></button><button
 				class="wa_remove_line wgt-button" ><i class="icon-remove-sign" ></i></button>
 	</td>
 </tr>
@@ -215,8 +231,8 @@ $slctTextStrict->setId('wgt-select-astype-{$dkey}-{$pos}');
 		<input name="as[{$pos}][value]" type="text" />
 	</td>
 	<td class="cntrl" style="text-align:right;" >
-		<button 
-			class="wa_search_add wgt-button" ><i class="icon-plus-sign" ></i></button><button 
+		<button
+			class="wa_search_add wgt-button" ><i class="icon-plus-sign" ></i></button><button
 				class="wa_remove_line wgt-button" ><i class="icon-remove-sign" ></i></button>
 	</td>
 </tr>
@@ -247,8 +263,8 @@ $slctTextStrict->setId('wgt-select-astype-{$dkey}-{$pos}');
 		<input type="text" />
 	</td>
 	<td class="cntrl" style="text-align:right;" >
-		<button 
-			class="wa_search_add wgt-button" ><i class="icon-plus-sign" ></i></button><button 
+		<button
+			class="wa_search_add wgt-button" ><i class="icon-plus-sign" ></i></button><button
 				class="wa_remove_line wgt-button" ><i class="icon-remove-sign" ></i></button>
 	</td>
 </tr>

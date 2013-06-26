@@ -252,6 +252,12 @@ class Wgt
   const CLASS_PREFIX    = 'wgt_';
 
   const LIST_SIZE_CHUNK = 50;
+  
+  /**
+   * Standard target für links welche in externen fenstern geöffnet werden
+   * @var string
+   */
+  const EXTERN_WIN_NAME    = '__extern__';
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Else

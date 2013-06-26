@@ -45,7 +45,7 @@ SELECT
   title
   FROM
     wbfsys_know_how_node
-  WHERE UPPER(access_key) = upper('{$db->addSlashes($this->value)}');
+  WHERE UPPER(access_key) = upper('{$db->escape($this->value)}');
 SQL;
 
     $data = $db->select($sql)->get();

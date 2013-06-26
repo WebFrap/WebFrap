@@ -269,7 +269,7 @@ abstract class LibSqlQuery implements Iterator, Countable
 
     return $this->acl;
   }//end public function getAcl */
-  
+
 
   /**
    * load the database Object
@@ -317,21 +317,21 @@ abstract class LibSqlQuery implements Iterator, Countable
     $queryPart->inject($this->criteria, $params);
 
   }//end public function inject */
-  
+
   /**
    * @param array $searchFields
    * @param array $searchCond
    */
   public function extSearch($searchFields,$searchCond)
   {
-  
+
     if (!$this->criteria)
       $this->criteria = $this->getDb()->orm->newCriteria();
-    
+
     $advancedSearch = new LibSqlConditions($this->getDb());
 
     $advancedSearch->inject($this->criteria, $searchFields, $searchCond);
-  
+
   }//end public function inject */
 
   /**
@@ -471,7 +471,7 @@ abstract class LibSqlQuery implements Iterator, Countable
     if (is_array($this->data))
       return $this->data;
     else if (is_array($this->result))
-      return $this->result; // dirty quickfix for a generator issue
+      return $this->result; // quickfix for a generator issue
     else if ($this->result)
       return $this->result->getAll();
     else
@@ -601,7 +601,7 @@ abstract class LibSqlQuery implements Iterator, Countable
     }
 
     if ('in' != $extCond[self::OPERATOR]) {
-      $value = $this->db->addSlashes($extCond[self::VALUE]);
+      $value = $this->db->escape($extCond[self::VALUE]);
     } else {
       $value = $extCond[self::VALUE];
     }
@@ -652,7 +652,7 @@ abstract class LibSqlQuery implements Iterator, Countable
           if ($isCS) {
 
             foreach ($value as $vNode) {
-              $tmp[] = "UPPER('".$this->db->addSlashes($vNode)."')";
+              $tmp[] = "UPPER('".$this->db->escape($vNode)."')";
             }
 
             $sql .= " IN(".implode(', ', $tmp).") ";

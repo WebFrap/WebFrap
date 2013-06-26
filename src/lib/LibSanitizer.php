@@ -37,18 +37,18 @@ class LibSanitizer
   {
 
     if (!self::$htmlAdapter) {
-      self::$htmlAdapter = new LibSanitizer_Rudimental();
+      //self::$htmlAdapter = new LibSanitizer_Rudimental();
 
-      /*
+      
       if (Webfrap::classLoadable('LibVendorHtmlpurifier')) {
         // best solution!
-        //self::$htmlAdapter = new LibVendor_Htmlpurifier();
-        self::$htmlAdapter = new LibSanitizer_Rudimental();
+        self::$htmlAdapter = new LibVendorHtmlpurifier();
+        //self::$htmlAdapter = new LibSanitizer_Rudimental();
       } else {
         // well let's hope your users like you :-(
         self::$htmlAdapter = new LibSanitizer_Rudimental();
       }
-      */
+      
     }
 
     return self::$htmlAdapter;

@@ -92,6 +92,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
 
   }//end public function fetch */
 
+
  /**
    * Injecten der zu ladenden Columns in die SQL Query
    * Wenn bereits Colums vorhanden waren werden diese komplett
@@ -173,7 +174,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
       null,
       'wbfsys_message_receiver'
     );
-    
+
     // action
     $criteria->leftJoinOn(
       'wbfsys_message', 'rowid',
@@ -181,7 +182,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
       null,
       'task'
     );
-    
+
     $criteria->leftJoinOn(
       'wbfsys_message', 'rowid',
       'wbfsys_appointment', 'id_message',
@@ -288,7 +289,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
               if ('' ==  $part)
                 continue;
 
-              $safePart = $db->addSlashes($part);
+              $safePart = $db->escape($part);
 
               if ('@' == $safePart[0]) {
                 $safePart = substr($safePart, 1);
@@ -310,7 +311,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
            }
 
          } else {
-           $safePart = $db->addSlashes($condition['free']) ;
+           $safePart = $db->escape($condition['free']) ;
 
            if ('@' == $safePart[0]) {
              $safePart = substr($safePart, 1);
@@ -482,26 +483,26 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
     $db = $this->getDb();
     $user = $this->getUser();
     $userId = $user->getId();
-    
+
     $filterSpam = ' wbfsys_message.spam_level < 51 ';
     $filterSender = ' AND wbfsys_message.id_sender_status < '.EMessageStatus::ARCHIVED;
     $filterReceiver = ' AND wbfsys_message_receiver.status < '.EMessageStatus::ARCHIVED;
-    
+
 
     if (isset($condition['filters']['channel'])) {
 
       if (!$condition['filters']['channel']->inbox && !$condition['filters']['channel']->outbox) {
         $condition['filters']['channel']->inbox = true;
       }
-      
+
       if( $condition['filters']['channel']->archive ) {
         $filterSender = $filterReceiver = "";
       }
-      
+
       if( !$condition['filters']['channel']->unsolicited ) {
         $criteria->where($filterSpam);
       }
-      
+
       if( !$condition['filters']['channel']->draft ) {
         $criteria->where('wbfsys_message.flag_draft = false');
       } else {
@@ -520,7 +521,7 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
           );
 
         } else {
-          
+
           // nur inbox
           $criteria->where(
           	"( wbfsys_message_receiver.vid = ".$userId
@@ -544,36 +545,36 @@ class WebfrapMessage_Table_Query extends LibSqlQuery
           ." AND wbfsys_message_receiver.flag_deleted = false {$filterReceiver} )"
       );
     }
-    
+
     // status filter
     $statusFilter = array();
-  
+
     if (isset($condition['filters']['status'])) {
 
       if( $condition['filters']['status']->new )
         $statusFilter[] = "wbfsys_message_receiver.status = ".EMessageStatus::IS_NEW;
-        
+
       if( $condition['filters']['status']->important )
         $statusFilter[] = "wbfsys_message.priority > ".EPriority::HIGH;
-        
+
       if( $condition['filters']['status']->urgent )
         $statusFilter[] = "task.flag_urgent = true ";
-        
+
       if( $condition['filters']['status']->overdue )
         $statusFilter[] = " task.deadline < now() ";
-      
+
     }
-    
+
     if($statusFilter)
       $criteria->where( "(".implode( 'OR ', $statusFilter ).")" );
-    
+
 
 
     if (isset($condition['aspects'])) {
 
       if (!$condition['aspects'])
         $condition['aspects'] = array(EMessageAspect::MESSAGE);
-        
+
       $aspects = array_unique($condition['aspects']);
 
       $criteria->where("wbfsys_message_aspect.aspect IN(".implode(',', $aspects).") ");

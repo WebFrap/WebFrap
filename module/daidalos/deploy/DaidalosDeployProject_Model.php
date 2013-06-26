@@ -95,13 +95,13 @@ class DaidalosDeployProject_Model extends Model
   {
 
     try {
-      
+
       $state = $this->load($entity, $deployConf, $params, $env);
       $this->createBackups();
       SFilesystem::delete($this->deployTmp);
-      
+
     } catch (Exception $e) {
-      
+
       SFilesystem::delete($this->deployTmp);
     }
 
@@ -256,7 +256,7 @@ SQL;
 
 SQL;
 
-    $data = $db->select($sql);
+    $data = $db->select($sqlModules);
 
     $ids = array();
 
@@ -312,7 +312,7 @@ SQL;
 
 SQL;
 
-    $data = $db->select($sql);
+    $data = $db->select($sqlModules);
 
     foreach ($data as $row) {
       $this->modules[$row['repo_module']]->repos[] = new DaidalosRcsNode_Envelop($row);

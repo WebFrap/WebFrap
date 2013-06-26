@@ -147,10 +147,8 @@ class AclMgmt_Model extends Model
    */
   public function getEditFields()
   {
-    return array
-    (
-      'security_area' => array
-      (
+    return array(
+      'security_area' => array(
         'id_ref_listing',
         'id_ref_access',
         'id_ref_insert',
@@ -333,8 +331,7 @@ class AclMgmt_Model extends Model
 
     $entityWbfsysSecurityAccess = new WbfsysSecurityAccess_Entity;
 
-    $fields = array
-    (
+    $fields = array(
       'id_group',
       'id_area',
       'access_level',
@@ -342,8 +339,7 @@ class AclMgmt_Model extends Model
       'date_end',
     );
 
-    $httpRequest->validateUpdate
-    (
+    $httpRequest->validateUpdate(
       $entityWbfsysSecurityAccess,
       'security_access',
       $fields,
@@ -356,6 +352,7 @@ class AclMgmt_Model extends Model
     // angenommen
     if (is_null($entityWbfsysSecurityAccess->access_level))
       $entityWbfsysSecurityAccess->access_level = 1;
+
 
     $this->register('entityWbfsysSecurityAccess', $entityWbfsysSecurityAccess);
 
@@ -398,8 +395,9 @@ class AclMgmt_Model extends Model
 
       $entityWbfsysSecurityAccess->access_level  = 1;
       $entityWbfsysSecurityAccess->ref_access_level  = 1;
-      $entityWbfsysSecurityAccess->message_level  = 0;
-      $entityWbfsysSecurityAccess->meta_level  = 0;
+      $entityWbfsysSecurityAccess->message_level  = Acl::DENIED;
+      $entityWbfsysSecurityAccess->priv_message_level  = Acl::DENIED;
+      $entityWbfsysSecurityAccess->meta_level  = Acl::DENIED;
 
       if (!$orm->insert($entityWbfsysSecurityAccess)) {
         $entityText = $entityWbfsysSecurityAccess->text();
@@ -422,8 +420,9 @@ class AclMgmt_Model extends Model
         $partialMod->partial       = 1;
         $partialMod->access_level  = 1;
         $partialMod->ref_access_level  = 1;
-        $partialMod->meta_level  = 1;
-        $partialMod->message_level  = 1;
+        $partialMod->meta_level  = Acl::DENIED;
+        $partialMod->priv_message_level  = Acl::DENIED;
+        $partialMod->message_level  = Acl::DENIED;
         $orm->insertIfNotExists($partialMod, array('id_area', 'id_group', 'partial'));
 
 
@@ -433,25 +432,23 @@ class AclMgmt_Model extends Model
         $partialEntity->partial        = 1;
         $partialEntity->access_level   = 1;
         $partialEntity->ref_access_level  = 1;
-        $partialEntity->meta_level  = 1;
-        $partialEntity->message_level  = 1;
+        $partialEntity->meta_level  = Acl::DENIED;
+        $partialEntity->message_level  = Acl::DENIED;
+        $partialEntity->priv_message_level  = Acl::DENIED;
         $orm->insertIfNotExists($partialEntity, array('id_area','id_group','partial'));
 
 
         $entityText = $entityWbfsysSecurityAccess->text();
 
-        $response->addMessage
-        (
-          $response->i18n->l
-          (
+        $response->addMessage(
+          $response->i18n->l(
             'Successfully updated {@key@}',
             'wbf.message',
             array('key' => $entityText)
           )
         );
 
-        $this->protocol
-        (
+        $this->protocol(
           'Edited : '.$entityText,
           'edit',
           $entityWbfsysSecurityAccess
@@ -463,10 +460,8 @@ class AclMgmt_Model extends Model
     }
 
     if ($response->hasErrors()) {
-      return new Error
-      (
-        $response->i18n->l
-        (
+      return new Error(
+        $response->i18n->l(
           'Sorry, something went wrong!',
           'wbf.message'
         ),

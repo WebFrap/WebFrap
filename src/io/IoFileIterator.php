@@ -206,7 +206,7 @@ class IoFileIterator
 
       $current = readdir($this->fRes);
 
-      // dirty.... so what?
+      // .... so what?
       if ('.' == $current  )
         continue;
 

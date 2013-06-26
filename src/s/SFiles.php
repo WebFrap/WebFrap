@@ -139,10 +139,8 @@ class SFiles
   {
 
     if (!is_writeable($fileName)) {
-      throw new Io_Exception
-      (
-        I18n::s
-        (
+      throw new Io_Exception(
+        I18n::s(
           'The File {@filename@} was not writeable',
           'wbf.message',
           array('filename' => $fileName)
@@ -150,11 +148,9 @@ class SFiles
       );
     }
 
-    file_put_contents
-    (
+    file_put_contents(
       $fileName,
-      str_replace
-      (
+      str_replace(
         $oldData,
         $newData,
         file_get_contents($fileName)

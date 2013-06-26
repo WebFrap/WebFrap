@@ -174,8 +174,7 @@ class ContextDomainListing
   }// end public function __get */
 
   /**
-   *
-   * Enter description here ...
+   * Extrahieren der für diesen Kontext relevanten parameter aus dem Benutzer Request
    * @param LibRequestHttp $request
    */
   public function interpretRequest($request)

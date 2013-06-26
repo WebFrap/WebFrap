@@ -31,16 +31,21 @@ class WgtPanelButtonLine_Dset extends WgtPanelButtonLine
    * @var TArray
    */
   public $flags = null;
-  
 
+  /**
+   * Settings Rederer
+   * @var
+   */
+  public $settings = null;
 
   /**
    * @var Base $env
    */
   public function __construct($env)
   {
-    $this->env = $env;
 
+    $this->env = $env;
+    $this->id = $env->id;
     $this->flags = new TArray();
 
   }//end public function __construct */
@@ -55,6 +60,10 @@ class WgtPanelButtonLine_Dset extends WgtPanelButtonLine
 
     $this->setUp();
     $html = '';
+
+    if ($this->settings) {
+      $html .= $this->renderSettings();
+    }
 
     if ($this->flags->comments) {
       $html .= $this->renderComment();
@@ -79,6 +88,18 @@ class WgtPanelButtonLine_Dset extends WgtPanelButtonLine
     return $html;
 
   }//end public function render */
+
+
+  /**
+   * @return
+   */
+  protected function renderSettings()
+  {
+
+
+    return $this->settings->render();
+
+  }//end protected function renderSettings */
 
   /**
    * @return

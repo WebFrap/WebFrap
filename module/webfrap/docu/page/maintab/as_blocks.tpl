@@ -1,4 +1,4 @@
-
+<?php echo $VAR->pageData->content; ?>
 
 <?php foreach( $VAR->pageData->slices as $slice ){ ?>
   <div
