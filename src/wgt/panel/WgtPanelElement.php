@@ -89,7 +89,8 @@ class WgtPanelElement
   {
 
     if (!$this->i18n)
-      $this->i18n = $this->env->getI18n();
+      //$this->i18n = $this->env->getI18n();
+    $this->i18n = I18n::getActive();
 
     return $this->i18n;
 
