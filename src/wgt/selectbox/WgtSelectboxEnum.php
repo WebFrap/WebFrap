@@ -64,8 +64,6 @@ class WgtSelectboxEnum extends WgtSelectbox
   }//end public function __construct($name)
 
   /**
-   * Enter description here...
-   *
    */
   public function init()
   {

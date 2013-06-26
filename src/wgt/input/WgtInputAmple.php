@@ -20,48 +20,19 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class WgtInputAmple extends WgtInput
+class WgtInputAmple extends WgtSelectboxEnum
 {
 
-  /**
-   *
-   * @return unknown_type
+   /**
+   * Laden der Daten
+   * @return void
    */
-  public function build($attributes = array())
+  public function init()
   {
 
-    // ist immer ein text attribute
-    $this->attributes['type'] = 'text';
+    $this->data = EAmple::$labels;
 
-    return parent::build();
-
-  } // end public function build */
-
-  /**
-   * (non-PHPdoc)
-   * @see src/wgt/WgtAbstract#buildAjaxArea()
-   */
-  public function buildAjaxArea()
-  {
-
-    if (!isset($this->attributes['id']))
-      return '';
-
-    if (!isset($this->attributes['value']))
-      $this->attributes['value'] = '';
-      
-    $refresh = '';
-    if($this->refresh&&is_string($this->refresh))
-      $refresh = $this->refresh;
-    else 
-      $refresh = 'value';
-
-    $html = '<htmlArea selector="input#'.$this->attributes['id'].'" action="'.$refresh.'" ><![CDATA['
-      .($this->attributes['value']).']]></htmlArea>'.NL;
-
-    return $html;
-
-  }//end public function buildAjaxArea */
+  }//end function init */
 
 } // end class WgtInputAmple
 

@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibSqlCriteria
-  implements ISqlParser
+class LibSqlCriteria implements ISqlParser
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // const
