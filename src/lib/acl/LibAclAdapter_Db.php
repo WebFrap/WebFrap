@@ -307,8 +307,7 @@ class LibAclAdapter_Db extends LibAclAdapter
     $key,
     $entity     = null,
     $roles      = array()
-)
-  {
+  ) {
 
     if (DEBUG)
       Debug::console("getLevel {$key}");
