@@ -77,7 +77,12 @@ class Context
    * @var boolean
    */
   public $isInvalid  = false;
-  
+
+  /**
+   * @var string
+   */
+  public $order = array();
+
   /**
    * de:
    * {
@@ -146,9 +151,9 @@ class Context
   {
 
     $this->interpretRequestAcls($request);
-    
+
   }//end public function interpretRequest */
-  
+
   /**
    * @param LibRequestHttp $request
    */
