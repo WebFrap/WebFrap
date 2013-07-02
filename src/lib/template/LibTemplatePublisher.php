@@ -28,11 +28,6 @@ abstract class LibTemplatePublisher extends LibTemplate
   protected $cookies  = array();
 
   /**
-   * @var Model
-   */
-  protected $model  = null;
-
-  /**
    * de:
    * Dropmenu builder für die Maintab, Subwindow etc View Elemente
    * @var WgtDropmenu

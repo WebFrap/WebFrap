@@ -543,7 +543,7 @@ abstract class Pbase
         return null;
       }
       
-      $this->providers[] = new $cn($this);
+      $this->providers[$key] = new $cn($this);
     }
 
     return $this->providers[$key];

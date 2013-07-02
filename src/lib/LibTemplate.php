@@ -191,7 +191,7 @@ abstract class LibTemplate extends BaseChild
   /**
    * @var Model
    */
-  protected $model    = null;
+  public $model    = null;
 
   /**
    * @var array

@@ -127,19 +127,18 @@ abstract class BaseChild
   public $user         = null;
 
   /**
-   *
-   * Enter description here ...
    * @var LibTemplate
    */
   public $view         = null;
 
   /**
-   *
-   * Enter description here ...
    * @var Message
    */
   public $message      = null;
   
+  /**
+   * @var Data Providers
+   */
   public $providers = array();
   
 
