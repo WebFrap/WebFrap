@@ -139,6 +139,9 @@ abstract class BaseChild
    * @var Message
    */
   public $message      = null;
+  
+  public $providers = array();
+  
 
   /**
    * de:
@@ -672,6 +675,31 @@ abstract class BaseChild
     return $this->message;
 
   }//end public function getMessage
+  
+  /**
+   * @return Provider
+   */
+  public function getProvider($key, $class = null)
+  {
+  
+    if (!isset($this->providers[$key])) {
+      $this->providers[$key] = $this->env->getProvider($key, $class);
+    }
+  
+    return $this->providers[$key];
+  
+  }//end public function getProvider */
+  
+  /**
+   * @param string $key
+   * @param Provider $obj
+   */
+  public function setProvider($key, $obj)
+  {
+  
+    $this->providers[$key] = $obj;
+  
+  }//end public function getProvider */
 
 } // end abstract class BaseChild
 
