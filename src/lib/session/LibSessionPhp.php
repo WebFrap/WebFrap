@@ -230,6 +230,32 @@ class LibSessionPhp
 
   }//end public function getContext */
 
+
+  /**
+   * @param string $key
+   * @return void
+   */
+  public function resetContext($key)
+  {
+
+  	if (isset($_SESSION['WBF_CONTEXT'][$key]))
+  		unset($_SESSION['WBF_CONTEXT'][$key]);
+
+
+  }//end public function resetContext */
+
+
+  /**
+   * @return void
+   */
+  public function resetAllContexts()
+  {
+
+  	$_SESSION['WBF_CONTEXT'] = array();
+
+
+  }//end public function resetAllContexts */
+
   /**
    * Enter description here...
    *
