@@ -27,15 +27,16 @@ class LibSessionPhp
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   *
-   * Enter description here ...
    * @var boolean
    */
   public $wakeup = false;
 
   /**
-   * Enter description here...
-   *
+   * @var array
+   */
+  public $context = array();
+
+  /**
    * @param string $key
    * @param mixed $value
    */
@@ -45,8 +46,6 @@ class LibSessionPhp
   }// end of public function __set($key , $value)
 
   /**
-   * Enter description here...
-   *
    * @param string $key
    * @return mixed
    */
@@ -60,10 +59,9 @@ class LibSessionPhp
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   *
    * @param $offset
    * @param $value
-   * @return unknown_type
+   * @return string
    */
   public function offsetSet($offset, $value)
   {
@@ -81,7 +79,6 @@ class LibSessionPhp
   }//end public function offsetGet($offset)
 
   /**
-   *
    * @param $offset
    * @return unknown_type
    */
@@ -91,7 +88,6 @@ class LibSessionPhp
   }//end public function offsetUnset($offset)
 
   /**
-   *
    * @param $offset
    * @return unknown_type
    */
@@ -105,7 +101,7 @@ class LibSessionPhp
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * Enter description here...
+   * Starten der Session
    *
    * @param string $name
    * @param string $sessionId
@@ -139,7 +135,6 @@ class LibSessionPhp
   }//end public function start */
 
   /**
-   * Enter description here...
    * @return void
    */
   public function close()
@@ -148,7 +143,6 @@ class LibSessionPhp
   }//end public function close()
 
   /**
-   * Enter description here...
    * @return void
    */
   public function destroy()
@@ -169,6 +163,7 @@ class LibSessionPhp
    */
   public function setStatus($key , $value = null)
   {
+
     if (is_array($key))
       $_SESSION['WBF_STATUS'] = array_merge($_SESSION['WBF_STATUS'] , $key);
 
@@ -186,6 +181,7 @@ class LibSessionPhp
    */
   public function getStatus($key = null)
   {
+
     if (!$key && isset($_SESSION['WBF_STATUS']))
       return $_SESSION['WBF_STATUS'];
 
@@ -196,6 +192,43 @@ class LibSessionPhp
       return null;
 
   }//end public function getStatus($key)
+
+  /**
+   *
+   * @param string / array $key
+   * @param string[optional] $value
+   * @return void
+   */
+  public function setContext($key , $value = null)
+  {
+
+  	if (is_array($key))
+  		$_SESSION['WBF_CONTEXT'] = array_merge($_SESSION['WBF_CONTEXT'] , $key);
+
+  	else
+  		$_SESSION['WBF_CONTEXT'][$key] = $value;
+
+  }//end public function setContext */
+
+  /**
+   *
+   * @param string $key
+   * @param string[optional] $value
+   * @return void
+   */
+  public function getContext($key = null)
+  {
+
+  	if (!$key && isset($_SESSION['WBF_CONTEXT']))
+  		return $_SESSION['WBF_CONTEXT'];
+
+  	elseif (isset($_SESSION['WBF_CONTEXT'][$key]))
+  	return $_SESSION['WBF_CONTEXT'][$key];
+
+  	else
+  		return null;
+
+  }//end public function getContext */
 
   /**
    * Enter description here...
@@ -215,8 +248,6 @@ class LibSessionPhp
   }//end public function add
 
   /**
-   * Enter description here...
-   *
    * @param string $key
    * @param string[optional] $value
    * @return void
@@ -227,8 +258,6 @@ class LibSessionPhp
   }//end public function append($key , $value = null)
 
   /**
-   * Enter description here...
-   *
    * @param string $key
    * @param string $value[optional]
    * @return mixed
@@ -250,8 +279,6 @@ class LibSessionPhp
   }//end public function exists
 
   /**
-   * Enter description here...
-   *
    * @param string $key
    * @return void
    */
