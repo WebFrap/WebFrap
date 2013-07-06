@@ -74,6 +74,7 @@ class LibRequestPhp
       Debug::console('Data POST' , $_POST);
       Debug::console('Data FILES' , $_FILES);
       Debug::console('Data COOKIE' , $_COOKIE);
+      Debug::console('Data SERVER' , $_SERVER);
     }
 
   }//end public function init */
