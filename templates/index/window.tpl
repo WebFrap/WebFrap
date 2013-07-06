@@ -21,9 +21,6 @@ define( 'TPL_END',   '?>'  );
   id="wgt-edit-field-window" ></div>
 <div
   class="box_template wgt-editlayer"
-  id="wgt-edit-field-element" ></div>
-<div
-  class="box_template wgt-editlayer"
   id="wgt-edit-field-check" style="text-align:center;" ><input type="checkbox" /></div>
 <div
   class="box_template wgt-editlayer border"
