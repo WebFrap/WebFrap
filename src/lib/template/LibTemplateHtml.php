@@ -189,7 +189,7 @@ class LibTemplateHtml extends LibTemplatePresenter
      $doctype     = isset($conf['doctype'])
       ? $conf['doctype']
       : View::XML1_TRANS;
-     
+
      if (View::$docType) {
        $doctype = View::$docType;
      }
@@ -228,9 +228,9 @@ class LibTemplateHtml extends LibTemplatePresenter
    */
   public function setDoctype($doctype)
   {
-    
+
     switch ($doctype) {
-      
+
       case View::HTML4_STRICT : {
         $this->doctype = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
         "http://www.w3.org/TR/html4/strict.dtd">
@@ -244,14 +244,14 @@ class LibTemplateHtml extends LibTemplatePresenter
 <html>';
         break;
       }
-      
+
       case View::HTML4_FRAME : {
         $this->doctype = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN"
         "http://www.w3.org/TR/html4/frameset.dtd">
 <html>';
         break;
       }
-      
+
       case View::XML1_STRICT : {
         $this->doctype = '<?xml version="1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
@@ -259,7 +259,7 @@ class LibTemplateHtml extends LibTemplatePresenter
 <html xmlns="http://www.w3.org/1999/xhtml">';
         break;
       }
-      
+
       case View::XML1_TRANS : {
         $this->doctype = '<?xml version="1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -267,7 +267,7 @@ class LibTemplateHtml extends LibTemplatePresenter
 <html xmlns="http://www.w3.org/1999/xhtml">';
         break;
       }
-      
+
       case View::XML1_FRAME : {
         $this->doctype = '<?xml version="1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN"
@@ -275,7 +275,7 @@ class LibTemplateHtml extends LibTemplatePresenter
 <html xmlns="http://www.w3.org/1999/xhtml">';
         break;
       }
-      
+
       case View::XML1_1_STRICT: {
         $this->doctype = '<?xml version="1.0" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
@@ -283,7 +283,7 @@ class LibTemplateHtml extends LibTemplatePresenter
 <html xmlns="http://www.w3.org/1999/xhtml">';
         break;
       }
-      
+
       case View::HTML5: {
         $this->doctype = '<!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -292,7 +292,7 @@ class LibTemplateHtml extends LibTemplatePresenter
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->';
         break;
       }
-      
+
     } // ENDE SWITCH
 
   } // end public function setDoctype */
@@ -821,7 +821,7 @@ class LibTemplateHtml extends LibTemplatePresenter
       ob_end_clean();
 
     } else {
-      
+
       Error::report('Index Template does not exist: '.$this->indexTemplate);
 
       ///TODO add some good error handler here
@@ -1079,6 +1079,11 @@ HTML;
     if ($this->killFrames)
       $this->compiled .= '<base target="_top" />'.NL;
 
+    if (isset($this->tplConf['base'])) {
+      $this->compiled .= '<base href="'.$this->tplConf['base'].'" />'.NL;
+
+    }
+
     $this->compiled .= '</head>'.NL;
     $this->compiled .= '<body>'.NL;
 
@@ -1117,7 +1122,7 @@ HTML;
       $this->assembledJsCode = '';
 
       foreach ($this->jsCode as $jsCode) {
-        
+
         if (is_object($jsCode)) {
           $this->assembledJsCode .= $jsCode->getJsCode();
         } else {
@@ -1164,23 +1169,23 @@ CODE;
 
     // Gibet Fehlermeldungen? Wenn ja dann Raus mit
     if ($errors = $messageObject->getErrors()) {
-      
+
       $html .= '<div id="wgt-box_error" class="wgt-box error">'.NL;
 
       foreach ($errors as $error)
         $html .= $error.'<br />'.NL;
 
       $html .= '</div>';
-    
+
     } else {
-      
+
       $html .= '<div style="display:none;" id="wgt-box_error" class="wgt-box error"></div>'.NL;
     }
 
 
     // Gibet Systemmeldungen? Wenn ja dann Raus mit
     if ($warnings = $messageObject->getWarnings()) {
-      
+
       $html .= '<div  id="wgt-box_warning" class="wgt-box warning">'.NL;
 
       foreach ($warnings as $warn)
