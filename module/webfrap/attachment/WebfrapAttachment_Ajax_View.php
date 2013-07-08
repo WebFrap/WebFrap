@@ -29,7 +29,7 @@ class WebfrapAttachment_Ajax_View extends LibTemplatePlain
 
   /**
    * Render des Suchergebnisses und übergabe in die ajax response
-   * @param WebfrapAttachment_Context $context
+   * @param WebfrapAttachment_Request $context
    * @param Entity $attachNode
    */
   public function renderAddEntry($entry, $context)
@@ -63,7 +63,7 @@ WGTJS;
    * Render des Suchergebnisses und übergabe in die ajax response
    * @param int $objid
    * @param array $entry
-   * @param WebfrapAttachment_Context $context
+   * @param WebfrapAttachment_Request $context
    */
   public function renderUpdateEntry($objid, $entry, $context  )
   {
@@ -94,7 +94,7 @@ WGTJS;
 
   /**
    * @param int $attachId
-   * @param WebfrapAttachment_Context $context
+   * @param WebfrapAttachment_Request $context
    */
   public function renderRemoveEntry( $attachId, $context)
   {
@@ -120,7 +120,7 @@ WGTJS;
   /**
    * Render des Suchergebnisses und übergabe in die ajax response
    * @param array $data
-   * @param WebfrapAttachment_Context $context
+   * @param WebfrapAttachment_Request $context
    */
   public function renderSearch($data, $context)
   {
@@ -159,7 +159,7 @@ WGTJS;
   /**
    * Render des Suchergebnisses und übergabe in die ajax response
    * @param array $entry
-   * @param WebfrapAttachment_Context $context
+   * @param WebfrapAttachment_Request $context
    */
   public function renderAddStorageEntry($entry, $context)
   {
@@ -193,7 +193,7 @@ WGTJS;
    * Render des Suchergebnisses und übergabe in die ajax response
    * @param string $storageId
    * @param array $entry
-   * @param WebfrapAttachment_Context $context
+   * @param WebfrapAttachment_Request $context
    */
   public function renderUpdateStorageEntry($storageId,  $entry, $context)
   {
@@ -223,7 +223,7 @@ WGTJS;
 
   /**
    * @param int $storageId
-   * @param WebfrapAttachment_Context $context
+   * @param WebfrapAttachment_Request $context
    */
   public function renderRemoveStorageEntry( $storageId, $context)
   {

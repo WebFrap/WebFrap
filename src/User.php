@@ -650,7 +650,7 @@ class User extends BaseChild
 
     $profile = $this->getProfile();
 
-    return $profile->label;
+    return ucfirst($profile->label);
 
   }//end public function getProfileLabel */
 

@@ -21,7 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapAttachment_Context extends ContextListing
+class WebfrapAttachment_Request extends ContextListing
 {
 
   /**
@@ -72,6 +72,25 @@ class WebfrapAttachment_Context extends ContextListing
     if ($typeFilter = $request->param('type_filter', Validator::CKEY))
       $this->typeFilter  = $typeFilter;
 
+    
+    // listing stuff
+    // start position of the query and size of the table
+    $this->offset
+	    = $request->param('offset', Validator::INT);
+
+    
+    // stepsite for query (limit) and the table
+    if (!$this->qsize = $request->param('qsize', Validator::INT))
+    	$this->qsize = Wgt::$defListSize;
+    
+    // order for the multi display element
+    $this->order = $request->param('order', Validator::CNAME);
+    
+    // order for the multi display element
+    $this->search = $request->param('search', Validator::SEARCH);
+    
+    $this->searchType = $request->param('search-file_type', Validator::INT);
+    
   }//end public function interpretRequest */
 
   /**
@@ -170,5 +189,5 @@ class WebfrapAttachment_Context extends ContextListing
 
   }//end public function toActionExt */
 
-} // end class WebfrapAttachment_Context */
+} // end class WebfrapAttachment_Request */
 

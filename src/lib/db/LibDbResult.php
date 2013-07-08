@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-abstract class LibDbResult
-  implements Iterator, Countable
+abstract class LibDbResult implements Iterator, Countable
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

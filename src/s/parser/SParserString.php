@@ -229,7 +229,8 @@ final class SParserString
   }//end public static function subToUrl */
 
   /**
-   *
+   * @param string $str
+   * @param boolean $shift
    */
   public static function subToName($str , $shift = false)
   {

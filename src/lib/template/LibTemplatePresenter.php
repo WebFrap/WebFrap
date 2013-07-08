@@ -23,11 +23,6 @@ abstract class LibTemplatePresenter extends LibTemplate
 {
 
   /**
-   * @var Model
-   */
-  protected $model  = null;
-
-  /**
    * de:
    * Dropmenu builder für die Maintab, Subwindow etc View Elemente
    * @var WgtDropmenu

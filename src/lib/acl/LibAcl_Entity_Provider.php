@@ -16,23 +16,19 @@
 *******************************************************************************/
 
 /**
- * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
- * @copyright Webfrap Developer Network <contact@webfrap.net>
+ * Standard Query Objekt zum laden der Benutzer anhand der Rolle
+ *
+ *
+ *
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibConfigHttpApache extends LibConfig
+class LibAcl_Entity_Provider extends Provider
 {
 /*//////////////////////////////////////////////////////////////////////////////
-// Constances
+// Attributes
 //////////////////////////////////////////////////////////////////////////////*/
 
-  /**
-   * @param LibGenftreeNodeUniversePostgresql $conf
-   */
-  public function buildConf($conf)
-  {
 
-  }//end public function buildConf */
+} // end class LibAcl_Entity_Provider
 
-} // end class LibConfigHttpApache

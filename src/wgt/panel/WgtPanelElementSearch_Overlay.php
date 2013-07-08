@@ -38,7 +38,7 @@ class WgtPanelElementSearch_Overlay extends WgtPanelElement
    * @var string
    */
   public $searchForm = null;
-  
+
   /**
    * Service mit dem eine aktuelle Filter / Suchkonfiguration gespeichert werden kann
    * @var string
@@ -80,12 +80,12 @@ class WgtPanelElementSearch_Overlay extends WgtPanelElement
    * @var string
    */
   public $context = 'table';
-  
+
   /**
    * @var SearchData
    */
   public $searchFields = null;
-  
+
   /**
    * Vid wenn relativ zu einem Datensatz
    * @var int
@@ -103,7 +103,7 @@ class WgtPanelElementSearch_Overlay extends WgtPanelElement
    * @var string
    */
   public $mask = null;
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // constructor
 //////////////////////////////////////////////////////////////////////////////*/
@@ -117,6 +117,7 @@ class WgtPanelElementSearch_Overlay extends WgtPanelElement
   public function __construct($table = null)
   {
 
+  	$this->env = Webfrap::$env;
     if ($table) {
       $this->tableId    = $table->id;
       $this->searchForm = $table->searchForm;
@@ -133,7 +134,7 @@ class WgtPanelElementSearch_Overlay extends WgtPanelElement
     $this->filters = $filters;
 
   }//end public function setFilter */
-  
+
   /**
    * @param string|array $fields
    * @param boolean $isJson
@@ -145,7 +146,7 @@ class WgtPanelElementSearch_Overlay extends WgtPanelElement
       $this->searchFields = json_decode($fields);
     else
       $this->searchFields = $fields;
-      
+
   }//end public function setSearchFields */
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -180,7 +181,7 @@ class WgtPanelElementSearch_Overlay extends WgtPanelElement
   {
 
     $i18n = $this->getI18n();
-    
+
     $iconClose   = $this->icon('control/close_overlay.png', 'Close', 'small');
 
     $html         = '';
@@ -227,9 +228,9 @@ HTML;
           ."/<span>{$this->filters->numFilter}</span>)</span>";
 
       }
-      
+
       $selectboxFields = $this->renderAdvancedSearchFieldsSelectbox();
-  
+
       $html .= <<<HTML
 
       <div class="right" >
@@ -249,7 +250,7 @@ HTML;
             id="wgt-search-{$this->context}-{$this->searchKey}-con"
             title="Open the extended search"
           ><i class="icon-angle-down" ></i><var>{"size":"big"}</var></button>
-    
+
       	<div class="wgt-search-{$this->context}-{$this->searchKey}-con hidden" >
 
           <div>
@@ -259,26 +260,26 @@ HTML;
               <h2>Search</h2>
               <div class="right" ><a class="wgtac_close_overlay" href="#close-search" >{$iconClose}</a></div>
             </div>
-            
+
             <div class="wgt-space" style="min-height:150px;max-height:250px;" >
-            
-              <div class="left half" >   
+
+              <div class="left half" >
               	<h3>Filter</h3>
 {$htmlFilters}
               	<div class="wgt-clear" ></div>
-              </div>            
-              
+              </div>
+
               <div class="half right" >
               	<h3 style="width:150px;float:left;" >Custom Filter</h3>
 
               	<div class="wgt-clear" >&nbsp;</div>
-              	
+
               	<ul class="wgt-tree" >
               		<li>
-              			<button class="wgt-button" ><i class="icon-filter" ></i> Urgent</button> 
+              			<button class="wgt-button" ><i class="icon-filter" ></i> Urgent</button>
               			| <button class="wgt-button" ><i class="icon-remove" ></i></button>
               		</li>
-              		<li><button class="wgt-button ui-state-active" ><i class="icon-filter" ></i> Send by Joe</button> 
+              		<li><button class="wgt-button ui-state-active" ><i class="icon-filter" ></i> Send by Joe</button>
               			| <button class="wgt-button" ><i class="icon-remove" ></i></button>
               		</li>
               		<li><button class="wgt-button" ><i class="icon-filter" ></i> Project X 2012</button>
@@ -288,48 +289,48 @@ HTML;
               </div>
 
     				</div>
-    				
+
             <div class="wgt-clear small wgt-border-bottom" >&nbsp;</div>
-            
+
             <div id="wgt-box-extsrch-{$this->context}-{$this->searchKey}" class="wcm wcm_ui_search_builder wgt-space" style="height:300px;" >
             	<var id="wgt-box-extsrch-{$this->context}-{$this->searchKey}-cfg-sb" >
 							{"dkey":"{$this->context}-{$this->searchKey}","search_form":"{$this->searchForm}","save_service":"{$this->saveService}"}
             	</var>
-            	
+
             	<div class="wgt-panel" >
             	  <div class="left bw15" >
             	    <h3>Extended search</h3>
             	  </div>
             	  <div class="inline bw25" >
-            	    <label>Filter Name:</label> <input 
-            	      type="text" 
-            	      name="filter_name" 
-            	      class="filter_name asgd-{$this->searchForm}" 
-            	      value="" /><button 
+            	    <label>Filter Name:</label> <input
+            	      type="text"
+            	      name="filter_name"
+            	      class="filter_name asgd-{$this->searchForm}"
+            	      value="" /><button
             	        class="wgt-button append wa_reset_filter" ><i class="icon-trash" ></i></button>
             	  </div>
               	<div class="right" >
               		<button class="wgt-button wa_save_filter" ><i class="icon-save" ></i> Save filter</button>
               	</div>
             	</div>
-            	
+
             	<!-- metadaten -->
-            	<input 
-        	      type="hidden" 
-        	      name="vid" 
-        	      class="asgd-{$this->searchForm}" 
+            	<input
+        	      type="hidden"
+        	      name="vid"
+        	      class="asgd-{$this->searchForm}"
         	      value="{$this->vid}" />
-            	<input 
-        	      type="hidden" 
-        	      name="type" 
-        	      class="asgd-{$this->searchForm}" 
+            	<input
+        	      type="hidden"
+        	      name="type"
+        	      class="asgd-{$this->searchForm}"
         	      value="{$this->type}" />
-            	<input 
-        	      type="hidden" 
-        	      name="mask" 
-        	      class="asgd-{$this->searchForm}" 
+            	<input
+        	      type="hidden"
+        	      name="mask"
+        	      class="asgd-{$this->searchForm}"
         	      value="{$this->mask}" />
-            	
+
           		<div style="max-height:250px;">
         				<table class="search-container" >
             			<thead>
@@ -344,34 +345,34 @@ HTML;
             				</tr>
             			</thead>
                   <tbody>
-                  
+
             			</tbody>
                 </table>
             	</div>
-            	
-    				
+
+
       				<div class="wgt-clear small" >&nbsp;</div>
-  
+
             	<div class="left" >{$selectboxFields}</div>
               <div class="inline">&nbsp;&nbsp; <button class="wa_add_line wgt-button" ><i class="icon-plus-sign"></i></button></div>
-            
+
               <div class="wgt-clear small">&nbsp;</div>
 
     				</div>
 
-            	
-    				
+
+
           </div>
-          
+
           <div class="wgt-clear small wgt-border-bottom" >&nbsp;</div>
           <div class="wgt-clear tiny" >&nbsp;</div>
-          
+
           <div class="full wgt-space" style="text-align:right" >
           	<button class="wgt button wgtac_search" ><i class="icon-search" ></i> Search</button>
           </div>
 
         </div> <!-- end dropdown -->
-        
+
       </div><!-- end panel right ->
 
 HTML;
@@ -381,34 +382,34 @@ HTML;
     return $html;
 
   }//end public function renderSearchArea */
-  
-  
+
+
   /**
    * @return string
    */
   protected function renderAdvancedSearchFieldsSelectbox()
   {
-    
+
     $select = '<select class="wd-fields wcm wcm_widget_selectbox" >';
-    
+
     // first free
     $select .= '<option></option>';
-    
+
     foreach ( $this->searchFields as $category => $catFields ) {
-      
+
       $select .= '<optgroup label="'.$category.'">';
-      
+
       foreach ( $catFields as $catKey => $catData ) {
         $select .= '<option value="'.$catKey.'" type="'.strtolower($catData[1]).'" >'.$catData[0].'</option>';
       }
-      
+
       $select .= '</optgroup>';
     }
-    
+
     $select .= '</select>';
-    
+
     return $select;
-    
+
   }//end protected function renderAdvancedSearchFieldsSelectbox */
 
 }//end class WgtPanelElementSearch_Splitted

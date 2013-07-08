@@ -79,8 +79,7 @@ class Webfrap
    * Autoload methods
    * @var array
    */
-  protected static $autoload     = array
-  (
+  protected static $autoload     = array(
     'Webfrap::autoload' => true
   );
 
@@ -496,6 +495,7 @@ class Webfrap
    */
   public static function loadable($classname)
   {
+
     try {
       if (class_exists($classname,true) || interface_exists($classname,true))
         return true;
@@ -514,6 +514,7 @@ class Webfrap
    */
   public static function addAutoload($autoload)
   {
+
     if (!isset(self::$autoload[$autoload])) {
       spl_autoload_register($autoload);
       self::$autoload[$autoload] = true;
@@ -552,8 +553,7 @@ class Webfrap
 
     // append class index
     $index = '<?php
-  Webfrap::$classIndex = array
-  ('.NL;
+  Webfrap::$classIndex = array('.NL;
 
     foreach (self::$classIndex as $class => $path)
       $index .= "    '$class' => '$path',".NL;
@@ -562,8 +562,7 @@ class Webfrap
 
     // append template index
     $index .= '
-  Webfrap::$tplIndex = array
-  ('.NL;
+  Webfrap::$tplIndex = array('.NL;
 
     foreach (self::$tplIndex as $key => $path)
       $index .= "    '$key' => '$path',".NL;
@@ -607,10 +606,12 @@ class Webfrap
         $package = '';
 
         if (file_exists($path.$classname.'.php')) {
-          include $path.$classname.'.php' ;
 
+          include $path.$classname.'.php' ;
           return;
+
         } else {
+
           // 3 Stufen Packages
           $level = 0;
           for ($pos = 1 ; $pos < $length  ; ++$pos) {
@@ -711,8 +712,7 @@ class Webfrap
   public static function errorHandler($errno,$errstr,$errfile,$errline,$errDump)
   {
 
-    $errorType = array
-    (
+    $errorType = array(
       E_ERROR            => 'ERROR',
       E_WARNING          => 'WARNING',
       E_PARSE            => 'PARSING_ERROR',
@@ -1086,6 +1086,7 @@ class Webfrap
             Webfrap::$autoloadPath[] = PATH_ROOT.$mod.'/module/';
 
             if (!$srcOnly) {
+            	//View::$searchPathTemplate[] = PATH_ROOT.$mod.'/module/';
               View::$searchPathTemplate[] = PATH_ROOT.$mod.'/templates/';
               I18n::$i18nPath[] = PATH_ROOT.$mod.'/i18n/';
               Conf::$confPath[] = PATH_ROOT.$mod.'/conf/';

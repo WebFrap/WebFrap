@@ -16,23 +16,23 @@
 *******************************************************************************/
 
 /**
- * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
- * @copyright Webfrap Developer Network <contact@webfrap.net>
+ * Objekt zum generieren einer Inputbox
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibConfigHttpApache extends LibConfig
+class WgtInputAmple extends WgtSelectboxEnum
 {
-/*//////////////////////////////////////////////////////////////////////////////
-// Constances
-//////////////////////////////////////////////////////////////////////////////*/
 
-  /**
-   * @param LibGenftreeNodeUniversePostgresql $conf
+   /**
+   * Laden der Daten
+   * @return void
    */
-  public function buildConf($conf)
+  public function init()
   {
 
-  }//end public function buildConf */
+    $this->data = EAmple::$labels;
 
-} // end class LibConfigHttpApache
+  }//end function init */
+
+} // end class WgtInputAmple
+

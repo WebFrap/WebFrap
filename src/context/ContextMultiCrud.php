@@ -41,6 +41,12 @@ class ContextMultiCrud extends Context
    * @var boolean
    */
   public $refId = null;
+  
+  /**
+   * Sortierung
+   * @var array
+   */
+  public $order = array();
 
   /**
    * Interpret the Userinput Flags

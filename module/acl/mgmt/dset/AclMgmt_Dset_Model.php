@@ -33,9 +33,8 @@ class AclMgmt_Dset_Model extends AclMgmt_Model
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   *
-   * Enter description here ...
-   * @var unknown_type
+   * Die Entity der Connection Tabelle
+   * @var Entity
    */
   public $conEntity = null;
 
