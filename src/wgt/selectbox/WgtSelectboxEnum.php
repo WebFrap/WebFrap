@@ -86,7 +86,21 @@ class WgtSelectboxEnum extends WgtSelectbox
 
     return $this->data[$key];
 
-  }//end public function getData($key = null)
+  }//end public function getData */
+  
+  /**
+   * @type getter
+   * @param string $key
+   * {
+   *   @default null only for compatibility to <class>WgtInput</class>
+   * }
+   */
+  public function getListData()
+  {
+
+    return $this->data;
+  
+  }//end public function getListData */
 
   /**
    * Checken ob für den Status ein Icon hinterlegt wurde
