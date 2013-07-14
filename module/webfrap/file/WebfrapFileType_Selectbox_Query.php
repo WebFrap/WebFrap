@@ -67,11 +67,12 @@ SQL;
     else
       $criteria = $this->criteria;
 
-    $criteria->select(array
-    (
-      'DISTINCT wbfsys_file_type.rowid as id',
-      'wbfsys_file_type.name as value'
-     ));
+    $criteria->select(array(
+	      'wbfsys_file_type.rowid as id',
+	      'wbfsys_file_type.name as value',
+	      'wbfsys_file_type.description as content'
+    	),true
+    );
 
     $criteria->from('wbfsys_file_type');
 
@@ -80,20 +81,20 @@ SQL;
       $searchKey =  "UPPER('".implode("'), UPPER('", $maskKey)."')" ;
       $criteria->where("UPPER(wbfsys_file_type.access_key) IN({$searchKey})");
     } elseif ($hasReferences) {
-      $criteria->joinOn
-      (
+
+      $criteria->joinOn(
         'wbfsys_file_type', 'rowid',
         'wbfsys_vref_file_type', 'id_type'
       );
-      $criteria->joinOn
-      (
+      $criteria->joinOn(
         'wbfsys_vref_file_type', 'vid',
         'wbfsys_management', 'rowid'
       );
       $criteria->where("UPPER(wbfsys_management.access_key) = UPPER('{$maskKey}')");
 
     } else {
-      $criteria->where('wbfsys_file_type.flag_global = true');
+
+      $criteria->where('wbfsys_file_type.flag_global = TRUE');
     }
 
     $criteria->orderBy('wbfsys_file_type.name ');
@@ -124,11 +125,11 @@ SQL;
 
     $criteria = $db->orm->newCriteria();
 
-    $criteria->select(array
-    (
+    $criteria->select(array(
       'DISTINCT wbfsys_file_type.rowid as id',
-      'wbfsys_file_type.name as value'
-     ));
+      'wbfsys_file_type.name as value',
+      'wbfsys_file_type.description as content'
+    ));
     $criteria->from('wbfsys_file_type');
 
     $criteria->where("wbfsys_file_type.rowid = '{$entryId}'"  );
@@ -160,7 +161,8 @@ SQL;
     $criteria->select(array
     (
       'DISTINCT wbfsys_file_type.rowid as id',
-      'wbfsys_file_type.name as value'
+      'wbfsys_file_type.name as value',
+      'wbfsys_file_type.description as content'
      ));
     $criteria->from('wbfsys_file_type');
 
