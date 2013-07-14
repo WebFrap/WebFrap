@@ -21,7 +21,7 @@
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapFileType_Selectbox extends WgtSelectbox
+class WebfrapFileType_Selectbox extends WgtSelectboxTabhead
 {
 
 } // end class WbfsysFileType_Selectbox

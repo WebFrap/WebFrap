@@ -42,7 +42,9 @@ $simpleTabDesc->data = $typeData->getAll();
           	 'Type',
           	 'id_type',
           	 'WebfrapFileType_Selectbox',
-             $typeData->getAll()
+             $typeData->getAll(),
+          	 null,
+          	 array('class'=>'wcm wcm_ui_selection_tab','wgt_body'=>'wbf-attachment-add-link-type')
           ); ?>
           <?php $uplForm->selectboxByKey(
           		'Storage',
