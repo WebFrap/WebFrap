@@ -130,9 +130,16 @@ abstract class Entity implements ArrayAccess
   protected $synchronized   = true;
 
   /**
+   * pool for objects that have to be saved before this entity
+   *
+   * @var [Entity]
+   */
+  protected $preSave       = array();
+
+  /**
    * pool for objects that hase to be saved after save
    *
-   * @var array<entity>
+   * @var [Entity]
    */
   protected $postSave       = array();
 
@@ -1245,11 +1252,30 @@ abstract class Entity implements ArrayAccess
 
   /**
    * @param Entity $entity
+   * @param string $refIdKey
    */
-  public function saveAfter( $entity )
+  public function saveAfter($entity, $refIdKey = null)
   {
     $this->postSave[] = $entity;
   }//end public function saveAfter */
+
+  /**
+   * @getter
+   * @return array<array<scalar(int/uuid):Entity>>
+   */
+  public function getPreSave()
+  {
+  	return $this->preSave;
+  }//end public function getPreSave */
+
+  /**
+   * @param Entity $entity
+   * @param string $refIdKey
+   */
+  public function saveBefore($entity, $refIdKey = null)
+  {
+  	$this->preSave[] = $entity;
+  }//end public function saveBefore */
 
   /**
    * setzen der Default werte
