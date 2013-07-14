@@ -44,6 +44,11 @@ class WgtPanelElementSettings extends WgtPanelElement
    */
   public $model = null;
 
+  /**
+   * @var [Entity]
+   */
+  public $entities = array();
+
 /*//////////////////////////////////////////////////////////////////////////////
 // public interface attributes
 //////////////////////////////////////////////////////////////////////////////*/
@@ -88,7 +93,9 @@ class WgtPanelElementSettings extends WgtPanelElement
 HTML;
 
       foreach ($this->fields as $nameKey => $field) {
-        $html .= '<li><input type="checkbox" name="'.$nameKey.'" '.Wgt::asmAttributes($field[1]).'  />&nbsp;&nbsp;<label>'.$field[0].'</label></li>'.NL;
+
+
+        $html .= '<li><input type="checkbox" name="'.$nameKey.'" '.Wgt::asmAttributes($field[1]).' '.$this->entities[$field[1]['wgt_acc_src']]->getChecked($field[1]['wgt_acc_attr']).'  />&nbsp;&nbsp;<label>'.$field[0].'</label></li>'.NL;
       }
 
     $html .= <<<HTML
