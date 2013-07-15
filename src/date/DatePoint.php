@@ -16,13 +16,14 @@
 *******************************************************************************/
 
 /**
+ *
  * @package WebFrap
- * @subpackage core_data
- * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
- * @copyright Webfrap Developer Network <contact@webfrap.net>
+ * @subpackage tech_core
+ *
+ * @author domnik alexander bonsch <dominik.bonsch@webfrap.net>
  */
-class WebfrapFileType_Selectbox extends WgtSelectboxTabhead
+class DatePoint
 {
 
-} // end class WbfsysFileType_Selectbox
 
+}//end class DatePoint

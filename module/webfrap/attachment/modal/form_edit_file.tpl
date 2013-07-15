@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $uplForm = new WgtFormBuilder
 (
@@ -15,59 +15,59 @@ $typeData->fetchSelectbox( $VAR->typeFilter );
 $confidentialData = $uplForm->loadQuery( 'WbfsysConfidentialityLevel_Selectbox' );
 $confidentialData->fetchSelectbox();
 
+$simpleTabDesc = new WgtSimpleTabContainer($this,'wbf-attachment-edit-file-type');
+$simpleTabDesc->data = $typeData->getAll();
+
+
 ?>
 
 
 <fieldset>
   <legend>Upload File</legend>
-  
+
   <?php $uplForm->hidden
-    ( 
-      'objid', 
+    (
+      'objid',
      $VAR->file->getId()
     ); ?>
-  
+
   <table style="width:100%;" >
     <tr>
       <td colspan="2" >
         <?php $uplForm->upload( 'File', 'file', $VAR->file->name,  array(), array('size'=>'large') ); ?>
-        
+
       </td>
     </tr>
     <tr>
-      <td valign="top" >
+      <td valign="top" style="width:330px;" >
         <?php $uplForm->selectboxByKey
-        ( 
-        	'Type', 
-        	'type', 
-        	'WebfrapFileType_Selectbox', 
+        (
+        	'Type',
+        	'type',
+        	'WebfrapFileType_Selectbox',
          $typeData->getAll(),
-         $VAR->file->id_type  
+         $VAR->file->id_type,
+         array('class'=>'wcm wcm_ui_selection_tab','wgt_body'=>'wbf-attachment-edit-file-type')
         ); ?>
-        
+
         <?php $uplForm->selectboxByKey
-        ( 
-        		'Confidentiality Level', 
-        		'id_confidentiality', 
-        		'WbfsysConfidentialityLevel_Selectbox', 
+        (
+        		'Confidentiality Level',
+        		'id_confidentiality',
+        		'WbfsysConfidentialityLevel_Selectbox',
           $confidentialData->getAll()  ,
-           $VAR->file->id_confidentiality  
+           $VAR->file->id_confidentiality
         ); ?>
       </td>
       <td valign="top" >
-        <?php /* $uplForm->checkbox
-        ( 
-        	 'Versioning', 
-        	 'version', 
-        	 ($VAR->file->flag_versioning?'true':'false') 
-        ); */ ?>
+       	<?php echo $simpleTabDesc->render() ?>
       </td>
     </tr>
     <tr>
       <td colspan="2" >
         <?php $uplForm->textarea
-        ( 
-        	 'Description', 
+        (
+        	 'Description',
         	 'description',
           $VAR->file->getSecure('description'),
           array(),array( 'size' => 'xlarge_nl' )
@@ -83,5 +83,5 @@ $confidentialData->fetchSelectbox();
     </tr>
   </table>
 
-  
+
 </fieldset>

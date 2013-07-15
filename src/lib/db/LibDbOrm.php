@@ -1562,7 +1562,7 @@ SQL;
   {
 
     if (is_object($entity)) {
-      
+
       if($entity instanceof Entity){
         if ($entity->isNew()) {
           return $this->insert($entity);
@@ -1570,14 +1570,14 @@ SQL;
           return $this->update($entity);
         }
       } else if ($entity instanceof LibUploadEntity) {
-        
+
         $entity->save();
-        
+
       }  else {
         Debug::console('invalid data in save', $entity);
         throw new LibDb_Exception('Got invalid data for save!');
       }
-   
+
     } else {
       Debug::console('invalid data in save', $entity);
       throw new LibDb_Exception('Got invalid data for save!');
@@ -1791,6 +1791,12 @@ SQL;
     }
 
     try {
+
+    	$preSave = $entity->getPreSave();
+    	foreach ($preSave as /* @var Entity $postEntiy */ $preEntiy) {
+    		// we asume that the entity is allready appended
+    		$this->save($preEntiy);
+    	}
 
 
       $userId     = $this->getUser()->getId();

@@ -31,7 +31,7 @@ class WgtFormBuilder
    * @var string $keyName
    */
   public $id   = null;
-  
+
 
   /**
    * Data Key
@@ -106,10 +106,10 @@ class WgtFormBuilder
    * @param boolean $cout
    */
   public function __construct(
-    $view, 
-    $action, 
-    $domainKey, 
-    $method = 'post', 
+    $view,
+    $action,
+    $domainKey,
+    $method = 'post',
     $cout = true
   ) {
 
@@ -187,7 +187,7 @@ CODE;
    */
   public function close()
   {
-    
+
     return $this->out('</form>');
 
   }//end public static function close */
@@ -716,10 +716,10 @@ CODE;
     $pNode = $this->prepareParams($params);
 
     if (isset($attributes['id'])) {
-      
+
       $id      = $attributes['id'];
       $inpName = $name;
-      
+
     } else {
 
       $tmp = explode(',', $name);
@@ -1324,18 +1324,22 @@ CODE;
       $attributes['id']     = "wgt-input-{$id}";
     }
 
+    if(!isset($attributes['name'])){
+    	$attributes['name'] = $name;
+    }
+
+    if(!isset($attributes['class'])){
+    	$attributes['class'] = 'asgd-'.$this->id;
+    } else {
+    	$attributes['class'] .= ' asgd-'.$this->id;
+    }
+
     if (!Webfrap::classLoadable($elementKey))
       return '<!-- Missing '.$elementKey.' -->';
 
     $selectBoxNode = new $elementKey();
 
-    $selectBoxNode->addAttributes(
-      array(
-        'name'      => $name,
-        'id'        => $id,
-        'class'     => 'asgd-'.$this->id,
-      )
-    );
+    $selectBoxNode->addAttributes($attributes);
     $selectBoxNode->setWidth('medium');
 
     $selectBoxNode->assignedForm = $this->id;
@@ -1677,8 +1681,7 @@ CODE;
    * @param string $size
    * @param string $appendText
    */
-  public function prepareParams
-  (
+  public function prepareParams(
     $params,
     $size = 'medium',
     $appendText = ''

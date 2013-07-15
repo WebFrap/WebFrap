@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $orm = $this->getOrm();
 $uplForm = new WgtFormBuilder
@@ -10,7 +10,7 @@ $uplForm = new WgtFormBuilder
 );
 $uplForm->form();
 
-
+/* @var $typeData WebfrapFileType_Selectbox_Query */
 $typeData = $uplForm->loadQuery( 'WebfrapFileType_Selectbox' );
 $typeData->fetchSelectbox( $VAR->typeFilter );
 
@@ -20,12 +20,16 @@ $storageData->fetchSelectbox( $VAR->refId );
 $confidentialData = $uplForm->loadQuery( 'WbfsysConfidentialityLevel_Selectbox' );
 $confidentialData->fetchSelectbox();
 
+$simpleTabDesc = new WgtSimpleTabContainer($this,'wbf-attachment-add-link-type');
+$simpleTabDesc->data = $typeData->getAll();
+
+
 ?>
 
 
 <fieldset>
   <legend>Add Link</legend>
-  
+
     <table style="width:100%" >
       <tr>
         <td colspan="2" >
@@ -33,39 +37,38 @@ $confidentialData->fetchSelectbox();
         </td>
       </tr>
       <tr>
-        <td valign="top" >
-          <?php $uplForm->selectboxByKey
-          ( 
-          	 'Type', 
-          	 'id_type', 
-          	 'WebfrapFileType_Selectbox', 
-            $typeData->getAll()  
+        <td valign="top" style="width:330px;" >
+          <?php $uplForm->selectboxByKey(
+          	 'Type',
+          	 'id_type',
+          	 'WebfrapFileType_Selectbox',
+             $typeData->getAll(),
+          	 null,
+          	 array('class'=>'wcm wcm_ui_selection_tab','wgt_body'=>'wbf-attachment-add-link-type')
           ); ?>
-          <?php $uplForm->selectboxByKey
-          ( 
-          		'Storage', 
-          		'id_storage', 
-          		'WbfsysFileStorage_Selectbox', 
-            $storageData->getAll()  
+          <?php $uplForm->selectboxByKey(
+          		'Storage',
+          		'id_storage',
+          		'WbfsysFileStorage_Selectbox',
+            $storageData->getAll()
           ); ?>
-          <?php $uplForm->selectboxByKey
-          ( 
-          		'Confidentiality Level', 
-          		'id_confidentiality', 
-          		'WbfsysConfidentialityLevel_Selectbox', 
+          <?php $uplForm->selectboxByKey(
+          		'Confidentiality Level',
+          		'id_confidentiality',
+          		'WbfsysConfidentialityLevel_Selectbox',
             $confidentialData->getAll(),
-            $orm->getIdByKey( 'WbfsysConfidentialityLevel', 'restricted' ) 
+            $orm->getIdByKey( 'WbfsysConfidentialityLevel', 'restricted' )
           ); ?>
-          <?php $uplForm->textarea
-          ( 
-          		'Description', 
+          <?php $uplForm->textarea(
+          		'Description',
           		'description',
             null,
             array(),
-            array( 'size' => 'xlarge_nl' ) 
+            array( 'size' => 'xlarge_nl' )
           ); ?>
         </td>
         <td valign="top" >
+        	<?php echo $simpleTabDesc->render() ?>
         </td>
       </tr>
       <tr>

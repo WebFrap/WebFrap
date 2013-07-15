@@ -15,14 +15,22 @@
 *
 *******************************************************************************/
 
-/**
- * @package WebFrap
- * @subpackage core_data
- * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
- * @copyright Webfrap Developer Network <contact@webfrap.net>
- */
-class WebfrapFileType_Selectbox extends WgtSelectboxTabhead
+
+class ERelevance_Selectbox extends WgtSelectboxEnum
 {
+/*//////////////////////////////////////////////////////////////////////////////
+// Methodes
+//////////////////////////////////////////////////////////////////////////////*/
 
-} // end class WbfsysFileType_Selectbox
+  /**
+   * Laden der Daten
+   * @return void
+   */
+  public function init()
+  {
 
+    $this->data = ERelevance::$labels;
+
+  }//end function init */
+
+}// end class ERelevance_Selectbox

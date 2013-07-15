@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 $orm = $this->getOrm();
 $uplForm = new WgtFormBuilder
@@ -17,35 +17,38 @@ $typeData->fetchSelectbox( $VAR->typeFilter );
 $confidentialData = $uplForm->loadQuery( 'WbfsysConfidentialityLevel_Selectbox' );
 $confidentialData->fetchSelectbox();
 
+$simpleTabDesc = new WgtSimpleTabContainer($this,'wbf-attachment-add-file-type');
+$simpleTabDesc->data = $typeData->getAll();
+
 ?>
 
 <fieldset>
   <legend>Upload File</legend>
-  
+
   <table style="width:100%;" >
     <tr>
       <td colspan="2" ><?php $uplForm->upload( 'File', 'file' ); ?></td>
     </tr>
     <tr>
-      <td valign="top" >
-        <?php $uplForm->selectboxByKey
-        ( 
-        		'Type', 
-        		'type', 
-        		'WebfrapFileType_Selectbox', 
-          $typeData->getAll()  
+      <td valign="top" style="width:330px;" >
+        <?php $uplForm->selectboxByKey(
+          'Type',
+          'type',
+          'WebfrapFileType_Selectbox',
+          $typeData->getAll(),
+          null,
+          array('class'=>'wcm wcm_ui_selection_tab','wgt_body'=>'wbf-attachment-add-file-type')
         ); ?>
-        <?php $uplForm->selectboxByKey
-        ( 
-        		'Confidentiality Level', 
-        		'id_confidentiality', 
-        		'WbfsysConfidentialityLevel_Selectbox', 
+        <?php $uplForm->selectboxByKey(
+          'Confidentiality Level',
+          'id_confidentiality',
+          'WbfsysConfidentialityLevel_Selectbox',
           $confidentialData->getAll(),
-          $orm->getIdByKey( 'WbfsysConfidentialityLevel', 'restricted' )   
+          $orm->getIdByKey( 'WbfsysConfidentialityLevel', 'restricted' )
         ); ?>
       </td>
       <td valign="top" >
-        <?php /* $uplForm->checkbox( 'Versioning', 'version', 'false' ); */ ?>
+        <?php echo $simpleTabDesc->render() ?>
       </td>
     </tr>
     <tr>
@@ -54,13 +57,13 @@ $confidentialData->fetchSelectbox();
       </td>
     </tr>
     <tr>
-    	<td></td>
+      <td></td>
       <td valign="bottom" align="right" >
-      	<br />
+        <br />
         <?php $uplForm->submit( 'Upload', '$S.modal.close();' ); ?>
       </td>
     </tr>
   </table>
 
-  
+
 </fieldset>

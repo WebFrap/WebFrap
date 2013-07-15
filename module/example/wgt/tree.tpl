@@ -127,6 +127,14 @@
         </li>
       </ul>
     </li>
+    <li><span>Util</span>
+      <ul>
+        <li><a
+          href="area.php?c=Example.Wgt.area&area=util.formular.parser"
+          class="wcm wcm_req_ajax" >Formular Parser</a>
+        </li>
+      </ul>
+    </li>
 		<li><span>ui</span>
 			<ul>
         <li><span>Layout Elements</span>

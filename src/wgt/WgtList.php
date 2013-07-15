@@ -398,7 +398,7 @@ abstract class WgtList extends WgtAbstract
     $this->editForm = 'asgd-'.$saveForm;
 
   }//end public function setSaveForm */
-  
+
   /**
    *
    * @param string $saveForm
@@ -1102,8 +1102,7 @@ abstract class WgtList extends WgtAbstract
     $html = '';
 
     if ($button[Wgt::BUTTON_TYPE] == Wgt::ACTION_AJAX_GET) {
-      $html .= Wgt::urlTag
-      (
+      $html .= Wgt::urlTag(
         $button[Wgt::BUTTON_ACTION].$id.'&amp;target_id='.$this->id.($this->refId?'&amp;refid='.$this->refId:null),
         Wgt::icon($button[Wgt::BUTTON_ICON] ,'xsmall', $button[Wgt::BUTTON_LABEL]),
         array(

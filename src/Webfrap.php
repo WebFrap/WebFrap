@@ -656,6 +656,41 @@ class Webfrap
       include Webfrap::$classIndex[$classname];
 
   } //function public static function indexAutoload */
+  
+  /**
+   * Die Autoload Methode versucht anhand des Namens der Klassen den Pfad
+   * zu erraten in dem sich die Datei befindet
+   *
+   * Dies Methode ist relativ Langsam und sollte nur beim Entwickeln genutzt
+   * werden, Produktivsystemen geht das extrem auf die Performance
+   *
+   *
+   * @param string $classname Name der Klasse
+   */
+  public static function namespaceAutoload($classname)
+  {
+  
+    $length = strlen($classname);
+    $requireMe = null;
+  
+    $relPath = str_replace("\\", "/", $classname).".php";
+    
+    foreach (Webfrap::$autoloadPath as $path) {
+  
+      $file = $path.$relPath;
+      
+      if (file_exists($file)) {
+        Debug::logFile($file);
+        self::$classIndex[$classname] = $file;
+        self::$indexChanged           = true;
+        include $file;
+      
+        return;
+      }
+
+    }//end foreach (Webfrap::$autoloadPath as $path)
+  
+  } //function public static function namespaceAutoload */
 
   /**
    * Fallback Autoload Methode wenn die klasse nicht gefunden wird

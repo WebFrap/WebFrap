@@ -514,15 +514,15 @@ HTML;
 
       }
     }
-    
+
     // filetypes for the search
     if($this->context->maskFilter){
       /* @var $queryFileTypes WebfrapAttachmentFileType_Selectbox_Query */
       $queryFileTypes = Webfrap::$env->getDb()->newQuery('WebfrapAttachmentFileType_Selectbox');
       $queryFileTypes->fetchSelectbox($this->context->maskFilter);
       $dataFileTypes = $queryFileTypes->getAll();
-      
-      
+
+
       $stackFileTypes = array();
       foreach ($dataFileTypes as $data) {
         $stackFileTypes[] = '<option value="'.$data['id'].'" >'.$data['value'].'</option>';
@@ -530,11 +530,11 @@ HTML;
     } else {
       $stackFileTypes = array();
     }
-    
+
     $htmlTSelect = '<script id="'.$this->id.'-srchtpl-table-type"  type="text/html" >'.NL;
     $htmlTSelect .= implode('' , $stackFileTypes);
     $htmlTSelect .= '</script>'.NL;
-    
+
 
 
     $dataSize = count($this->data);
@@ -548,7 +548,7 @@ HTML;
           method="get"
           action="{$this->urlSearch}{$this->defUrl}"
           id="wgt-form-attachment-{$idKey}-search" ></form>
-          
+
 {$htmlTSelect}
 
         <div id="wgt-grid-attachment-{$idKey}" class="wgt-grid" >
@@ -575,7 +575,7 @@ HTML;
                 <th
                   style="width:100px"
                   wgt_sort_name="order[file_type]"
-                  wgt_search="select:search-file_type[]" 
+                  wgt_search="select:search-file_type[]"
                   wgt_ms_key="{$this->id}-srchtpl-table-type" >File Type</th>
                 <th
                   style="width:100px"
@@ -642,7 +642,7 @@ HTML;
         ." target=\"wgt_dms\" rel=\"nofollow\" >{$fileName}</a>";
 
     } else {
-      
+
       if ('' != trim($entry['storage_link'])) {
         $storageLink = 'file:\\\\\\'.trim($entry['storage_link']) ;
       } else {
@@ -658,7 +658,6 @@ HTML;
       $fileIcon = '<i class="icon-link"></i>';
       $fileName = str_replace('\\\\', '\\', trim($entry['file_link'])) ;
 
-      // FUCK YOU BASTARD IE NOOBS DIE!!!! DIIIEEEEEE! DIIIIIIEEEEEEE!!!!!!! FUCKERS!
       $firstChar = substr($fileName, 0, 1) ;
 
       if ($firstChar == '\\')
@@ -666,7 +665,11 @@ HTML;
 
       //$fileName = str_replace('//', '/', $fileName) ;
 
-      $link = "<a href=\"{$storageLink}\" >{$storageName}: </a><a href=\"{$storageLink}{$fileName}\" target=\"wgt_dms\" rel=\"nofollow\" >{$fileName}</a>";
+      if($storageLink){
+      	$link = "<a href=\"{$storageLink}\" >{$storageName}: </a><a href=\"{$storageLink}{$fileName}\" target=\"wgt_dms\" rel=\"nofollow\" >{$fileName}</a>";
+      } else {
+      	$link = "<a href=\"{$storageLink}{$fileName}\" target=\"wgt_dms\" rel=\"nofollow\" >{$fileName}</a>";
+      }
 
     }
 

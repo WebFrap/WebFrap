@@ -47,7 +47,8 @@ class WebfrapAttachmentFileType_Selectbox_Query extends LibSqlQuery
 
     $criteria->select(array(
       'wbfsys_file_type.rowid as id',
-      'wbfsys_file_type.name as value'
+      'wbfsys_file_type.name as value',
+      'wbfsys_file_type.description as content'
     ));
 
     $criteria->from('wbfsys_file_type');
@@ -58,7 +59,7 @@ class WebfrapAttachmentFileType_Selectbox_Query extends LibSqlQuery
       'wbfsys_file_profile_type',
       'id_type'
     );
-    
+
     $criteria->joinOn(
       'wbfsys_file_profile_type',
       'id_profile',
@@ -95,10 +96,10 @@ class WebfrapAttachmentFileType_Selectbox_Query extends LibSqlQuery
 
     $criteria = $db->orm->newCriteria();
 
-    $criteria->select(array
-    (
+    $criteria->select(array(
       'DISTINCT wbfsys_file_storage.rowid as id',
-      'wbfsys_file_storage.name as value'
+      'wbfsys_file_storage.name as value',
+      'wbfsys_file_type.description as content'
      ));
     $criteria->from('wbfsys_file_storage');
 
@@ -131,7 +132,8 @@ class WebfrapAttachmentFileType_Selectbox_Query extends LibSqlQuery
     $criteria->select(array
     (
       'DISTINCT wbfsys_file_storage.rowid as id',
-      'wbfsys_file_storage.name as value'
+      'wbfsys_file_storage.name as value',
+      'wbfsys_file_type.description as content'
      ));
     $criteria->from('wbfsys_file_storage');
 
