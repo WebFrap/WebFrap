@@ -2913,7 +2913,7 @@ SQL;
         return $ids;
     }
 
-    // laden der benötigten resourcen
+    // laden der mvc/utils adapter Objekte
     $db        = $this->getDb();
     $orm       = $db->getOrm();
 

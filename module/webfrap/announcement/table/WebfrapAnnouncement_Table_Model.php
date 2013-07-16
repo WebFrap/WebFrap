@@ -227,7 +227,7 @@ class WebfrapAnnouncement_Table_Model extends Model
   public function search($access, $params, $condition = array())
   {
 
-    // laden der benötigten resourcen
+    // laden der mvc/utils adapter Objekte
     $view         = $this->getView();
     $httpRequest = $this->getRequest();
     $response    = $this->getResponse();

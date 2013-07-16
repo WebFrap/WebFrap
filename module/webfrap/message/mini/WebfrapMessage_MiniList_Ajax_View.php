@@ -35,7 +35,7 @@ class WebfrapMessage_MiniList_Ajax_View extends LibTemplateAjaxView
   public function displayElement($params)
   {
 
-    // benötigte resourcen laden
+    // laden der mvc/utils adapter Objekte
     $user     = $this->getUser();
     $acl      = $this->getAcl();
     $request  = $this->getRequest();
@@ -95,7 +95,7 @@ WGTJS;
   public function displaySearch($params)
   {
 
-    // benötigte resourcen laden
+    // laden der mvc/utils adapter Objekte
     $user     = $this->getUser();
     $acl      = $this->getAcl();
     $request  = $this->getRequest();

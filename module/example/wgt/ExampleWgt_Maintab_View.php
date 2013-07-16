@@ -58,7 +58,7 @@ class ExampleWgt_Maintab_View extends WgtMaintabCustom
   public function addMenu()
   {
 
-    // benötigte resourcen laden
+    // laden der mvc/utils adapter Objekte
     $acl    = $this->getAcl();
     $user   = $this->getUser();
 

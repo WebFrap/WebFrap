@@ -204,7 +204,7 @@ WGTJS;
   public function listEntry($access, $params, $insert = false)
   {
 
-    // laden der benötigten resourcen
+    // laden der mvc/utils adapter Objekte
     $view = $this->getView();
 
     /* @var $table AclMgmt_Table_Element */

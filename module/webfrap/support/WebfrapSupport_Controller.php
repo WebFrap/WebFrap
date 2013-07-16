@@ -103,7 +103,7 @@ class WebfrapNavigation_Controller extends ControllerCrud
   public function search($params = null)
   {
 
-    // benötigte resourcen laden
+    // laden der mvc/utils adapter Objekte
     $request   = $this->getRequest();
     $response  = $this->getResponse();
     $user      = $this->getUser();

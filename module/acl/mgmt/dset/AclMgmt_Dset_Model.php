@@ -344,7 +344,7 @@ class AclMgmt_Dset_Model extends AclMgmt_Model
   public function connect($params)
   {
 
-    // laden der benötigten resourcen
+    // laden der mvc/utils adapter Objekte
     $db        = $this->getDb();
     $orm       = $db->getOrm();
     $response  = $this->getResponse();

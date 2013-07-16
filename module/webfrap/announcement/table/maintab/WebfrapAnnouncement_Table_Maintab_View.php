@@ -59,7 +59,7 @@ class WebfrapAnnouncement_Table_Maintab_View extends WgtMaintab
   public function displayListing($params)
   {
 
-    // laden der benötigten resourcen
+    // laden der mvc/utils adapter Objekte
     $request  = $this->getRequest();
     $access   = $params->access;
 

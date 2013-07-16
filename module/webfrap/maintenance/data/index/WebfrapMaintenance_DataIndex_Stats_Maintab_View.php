@@ -48,7 +48,7 @@ class WebfrapMaintenance_DataIndex_Stats_Maintab_View extends WgtMaintabCustom
   public function displayStats($params)
   {
 
-    // laden der benötigten Resource Objekte
+    // laden der mvc/utils adapter Objekte
     $request = $this->getRequest();
 
     $i18nLabel = $this->i18n->l

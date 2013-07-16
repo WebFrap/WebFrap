@@ -30,7 +30,7 @@ class WebfrapAnnouncement_Crud_Access_Delete extends LibAclPermission
   public function loadDefault($params, $entity = null)
   {
 
-    // laden der benötigten Resource Objekte
+    // laden der mvc/utils adapter Objekte
     $acl = $this->getAcl();
 
     // wenn keine pfadinformationen übergeben werden oder wir in level 1 sind
