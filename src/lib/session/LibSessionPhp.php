@@ -204,7 +204,6 @@ class LibSessionPhp
 
   	if (is_array($key))
   		$_SESSION['WBF_CONTEXT'] = array_merge($_SESSION['WBF_CONTEXT'] , $key);
-
   	else
   		$_SESSION['WBF_CONTEXT'][$key] = $value;
 
@@ -221,10 +220,8 @@ class LibSessionPhp
 
   	if (!$key && isset($_SESSION['WBF_CONTEXT']))
   		return $_SESSION['WBF_CONTEXT'];
-
   	elseif (isset($_SESSION['WBF_CONTEXT'][$key]))
-  	return $_SESSION['WBF_CONTEXT'][$key];
-
+  		return $_SESSION['WBF_CONTEXT'][$key];
   	else
   		return null;
 
