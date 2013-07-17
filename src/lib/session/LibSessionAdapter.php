@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-abstract class LibSessionAdapter
-    implements ArrayAccess
+abstract class LibSessionAdapter implements ArrayAccess
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Magic Methodes
@@ -78,11 +77,9 @@ abstract class LibSessionAdapter
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * Enter description here...
-   *
-   * @param unknown_type $name
-   * @param unknown_type $sessionId
-   * @param unknown_type $sessionSavePath
+   * @param string $name
+   * @param string $sessionId
+   * @param string $sessionSavePath
    * @return void
    */
   abstract public function start($name, $sessionId = null , $sessionSavePath = null);
@@ -128,7 +125,7 @@ abstract class LibSessionAdapter
       $this->session[$key][] = $value;
     }
 
-  }
+  }//end public function append */
 
   /**
    * Enter description here...
@@ -140,7 +137,7 @@ abstract class LibSessionAdapter
   abstract public function get($key)
   {
     return isset($this->session[$key])?$this->session[$key]:null;
-  }
+  }//end abstract public function get */
 
   /**
    * Enter description here...
