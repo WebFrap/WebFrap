@@ -1012,7 +1012,7 @@ abstract class LibParserSqlAbstract
         throw new LibDb_Exception(I18n::s('got no table','wbf.message'));
       }
     } else {
-      $sql .= ' FROM '. $obj->table .' ';
+      $sql .= ' FROM '. $obj->table .' '.$obj->as.' ';
     }
 
     // Die Joins falls vorhanden generieren

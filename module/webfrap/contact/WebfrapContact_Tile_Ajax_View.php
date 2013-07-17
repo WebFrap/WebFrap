@@ -18,7 +18,7 @@
 /**
  *
  * @package WebFrap
- * @subpackage Groupware
+ * @subpackage webfrap/groupware
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
@@ -38,7 +38,7 @@ class WebfrapContact_Tile_Ajax_View extends LibTemplateAjaxView
     $tpl = $this->getTplEngine();
 
     $pageFragment = new WgtAjaxArea();
-    
+
     if ($insert) {
       $pageFragment->selector = '#wgt-tiles-contact';
       $pageFragment->action = 'prepend';
@@ -48,11 +48,11 @@ class WebfrapContact_Tile_Ajax_View extends LibTemplateAjaxView
     }
 
     $pageFragment->setContent(<<<HTML
-  <li id="wgt-entry-msg-attach-{$this->model->attachment->getId()}" ><a 
+  <li id="wgt-entry-msg-attach-{$this->model->attachment->getId()}" ><a
       target="attach"
-      href="file.php?f=wbfsys_file-name-{$this->model->file->getId()}&n={$encName}" 
-      >{$this->model->file->name}</a><a 
-      class="wcm wcm_req_del" 
+      href="file.php?f=wbfsys_file-name-{$this->model->file->getId()}&n={$encName}"
+      >{$this->model->file->name}</a><a
+      class="wcm wcm_req_del"
       title="Please confirm you want to delete this Attachment"
       href="ajax.php?c=Webfrap.Message_Attachment.delete&delid={$this->model->attachment->getId()}"  ><i class="icon-remove" ></i></a></li>
 HTML
@@ -63,7 +63,7 @@ HTML
 
   }//end public function displayEntry */
 
-  
+
   /**
    * @param int $delId
    */
@@ -71,12 +71,12 @@ HTML
   {
 
     $tpl = $this->getTplEngine();
-    
+
     $tpl->addJsCode( <<<JSCODE
 	\$S('#wgt-tiles-contact-tile-{$delId}').remove();
 JSCODE
     );
- 
+
   }//end public function displayDelete */
 
 } // end class WebfrapContact_Tile_Ajax_View */

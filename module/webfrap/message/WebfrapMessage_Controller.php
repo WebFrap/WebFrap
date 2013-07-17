@@ -45,6 +45,16 @@ class WebfrapMessage_Controller extends Controller
       'views'      => array('ajax')
     ),
 
+    // mini overlay
+    'minilist' => array(
+      'method'    => array('GET'),
+      'views'      => array('ajax')
+    ),
+    'minisearch' => array(
+      'method'    => array('GET'),
+      'views'      => array('ajax')
+    ),
+
     // message logic
     'formnew' => array(
       'method'    => array('GET'),
@@ -112,7 +122,7 @@ class WebfrapMessage_Controller extends Controller
       'method'    => array('DELETE'),
       'views'      => array('ajax')
     ),
-    
+
     // archive
     'archivemessage' => array(
       'method'    => array('PUT'),
@@ -126,19 +136,19 @@ class WebfrapMessage_Controller extends Controller
       'method'    => array('PUT'),
       'views'      => array('ajax')
     ),
-    
+
     // reopen einen archivierten Datensatz wieder öffnen
     'reopen' => array(
       'method'    => array('PUT'),
       'views'      => array('ajax')
     ),
-    
+
     // spam / ham
     'setspam' => array(
       'method'    => array('PUT'),
       'views'      => array('ajax')
     ),
-      
+
     // nachricht als gelesen markieren
     'markread' => array(
         'method'    => array('PUT'),
@@ -152,7 +162,7 @@ class WebfrapMessage_Controller extends Controller
         'method'    => array('PUT'),
         'views'      => array('ajax')
     ),
-    
+
     // references
     'addref' => array(
       'method'    => array('PUT'),
@@ -202,7 +212,7 @@ class WebfrapMessage_Controller extends Controller
     // load the view object
     /* @var $view WebfrapMessage_List_Maintab_View  */
     $view = $response->loadView(
-      'list-message_list',
+      'webfrap-groupware-list',
       'WebfrapMessage_List',
       'displayList',
       View::MAINTAB
@@ -259,6 +269,95 @@ class WebfrapMessage_Controller extends Controller
     $view->displaySearch($params);
 
   }//end public function service_searchList */
+
+  /**
+   * create an new window with an edit form for the enterprise_company entity
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return boolean
+   */
+  public function service_miniList($request, $response)
+  {
+
+    /* @var $model WebfrapMessage_Model  */
+    $model = $this->loadModel('WebfrapMessage');
+
+    $userSettings = $model->loadSettings();
+
+    // prüfen ob irgendwelche steuerflags übergeben wurde
+    $params  = new WebfrapMessage_Table_Search_Request($request, $userSettings);
+
+    if ($userSettings->changed)
+      $model->saveSettings($userSettings);
+
+    $model->params = $params;
+    $model->loadTableAccess($params);
+
+    if (!$model->access->listing) {
+      throw new InvalidRequest_Exception (
+        Response::FORBIDDEN_MSG,
+        Response::FORBIDDEN
+      );
+    }
+
+    // load the view object
+    /* @var $view WebfrapMessage_List_Maintab_View  */
+    $view = $response->loadView(
+      'webfrap-message-mini_list',
+      'WebfrapMessage_MiniList',
+      'displayElement'
+    );
+
+    $view->setModel($model);
+    $view->displayElement($params);
+
+  }//end public function service_miniList */
+
+
+  /**
+   * create an new window with an edit form for the enterprise_company entity
+   * @param LibRequestHttp $request
+   * @param LibResponseHttp $response
+   * @return boolean
+   */
+  public function service_miniSearch($request, $response)
+  {
+
+
+    /* @var $model WebfrapMessage_Model  */
+    $model = $this->loadModel('WebfrapMessage');
+
+    $userSettings = $model->loadSettings();
+
+    // prüfen ob irgendwelche steuerflags übergeben wurde
+    $params  = new WebfrapMessage_Table_Search_Request($request, $userSettings);
+
+    if ($userSettings->changed)
+      $model->saveSettings($userSettings);
+
+    $model->loadTableAccess($params);
+
+    if (!$model->access->listing) {
+      throw new InvalidRequest_Exception(
+          Response::FORBIDDEN_MSG,
+          Response::FORBIDDEN
+      );
+    }
+
+    // load the view object
+    /* @var $view WebfrapMessage_List_Ajax_View */
+    $view = $response->loadView(
+        'search-message_mini_list',
+        'WebfrapMessage_MiniList',
+        'displaySearch',
+        View::AJAX
+    );
+
+    $view->setModel($model);
+    $model->params = $params;
+    $view->displaySearch($params);
+
+  }//end public function service_miniSearch */
 
  /**
   * Form zum erstellen einer neuen Message
@@ -385,7 +484,7 @@ class WebfrapMessage_Controller extends Controller
     $view->displayContent($params);
 
   }//end public function service_showMailContent */
-  
+
 
   /**
    * Form zum anschauen einer Nachricht
@@ -395,25 +494,25 @@ class WebfrapMessage_Controller extends Controller
    */
   public function service_showPreview($request, $response)
   {
-  
+
     // prüfen ob irgendwelche steuerflags übergeben wurde
     $params  = $this->getFlags($request);
-  
+
     $msgId = $request->param('objid', Validator::EID);
-  
+
     /* @var $model WebfrapMessage_Model */
     $model = $this->loadModel('WebfrapMessage');
     $model->loadTableAccess($params);
-  
+
     if (!$model->access->access) {
       throw new InvalidRequest_Exception(
           Response::FORBIDDEN_MSG,
           Response::FORBIDDEN
       );
     }
-  
+
     $msgNode = $model->loadMessage($msgId);
-  
+
     // load the view object
     /* @var $view WebfrapMessage_Ajax_View */
     $view   = $response->loadView(
@@ -422,9 +521,9 @@ class WebfrapMessage_Controller extends Controller
         'displayMsgPreview'
     );
     $view->setModel($model);
-  
+
     $view->displayMsgPreview($msgNode);
-  
+
   }//end public function service_showPreview */
 
   /**
@@ -468,8 +567,8 @@ class WebfrapMessage_Controller extends Controller
 
 
   }//end public function service_loadUser */
-  
-  
+
+
   /**
    *
    * @param LibRequestHttp $request
@@ -498,11 +597,11 @@ class WebfrapMessage_Controller extends Controller
         Response::FORBIDDEN
       );
     }
-    
+
     $model->saveMessage($msgId, $rqtData);
 
   }//end public function service_saveMessage */
-  
+
   /**
    *
    * @param LibRequestHttp $request
@@ -531,7 +630,7 @@ class WebfrapMessage_Controller extends Controller
         Response::FORBIDDEN
       );
     }
-    
+
     if( 100 == $flagSpam) {
       //wenn spam dann löschen
       $this->getTpl()->addJsCode(<<<JS
@@ -541,11 +640,11 @@ class WebfrapMessage_Controller extends Controller
 JS
       );
     }
-    
+
     $model->setSpam($msgId, $flagSpam, $rqtData);
 
   }//end public function service_saveMessage */
-  
+
   /**
    *
    * @param LibRequestHttp $request
@@ -892,7 +991,7 @@ JS
     }
 
     $linkId = $model->addRef($msgId,$refId);
-    
+
     /* @var $view WebfrapMessage_Ajax_View */
     $view   = $response->loadView(
       'message-update-ref',
@@ -904,7 +1003,7 @@ JS
     $view->displayAddRef($linkId,$msgId);
 
   }//end public function service_addRef */
-  
+
   /**
    * @param LibRequestHttp $request
    * @param LibResponseHttp $response
@@ -930,7 +1029,7 @@ JS
     }
 
     $model->delRef($delId);
-    
+
     /* @var $view WebfrapMessage_Ajax_View */
     $view   = $response->loadView(
       'message-del-ref',
@@ -942,11 +1041,11 @@ JS
     $view->displayDelRef($delId);
 
   }//end public function service_addRef */
-  
+
 ////////////////////////////////////////////////////////////////////////////////
 // Archive
 ////////////////////////////////////////////////////////////////////////////////
-  
+
   /**
    *
    * @param LibRequestHttp $request
@@ -1004,7 +1103,7 @@ JS
     $user       = $this->getUser();
     $acl        = $this->getAcl();
     $tpl        = $this->getTpl();
-    
+
     $params = $this->getFlags($request);
 
     /* @var $model WebfrapMessage_Model */
@@ -1067,7 +1166,7 @@ JS
     $tpl->addJsCode($jsCode);
 
   }//end public function service_archiveSelection */
-  
+
   /**
    *
    * @param LibRequestHttp $request
@@ -1102,5 +1201,5 @@ JS
     $model->archiveMessage($messageId, false);
 
   }//end public function service_reopen */
-  
+
 } // end class WebfrapMessage_Controller

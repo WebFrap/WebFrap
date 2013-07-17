@@ -124,6 +124,23 @@ class DaidalosDeployDocu_Model extends Model
     $respsonse   = $this->getResponse();
 
     $this->protocol->paragraph('Doku Root');
+    
+    foreach ($modules as $module) {
+      $folder = new LibFilesystemFolder(PATH_ROOT.$module.'/data/docu/root/');
+    
+      $files = $folder->getFilesByEnding('.php');
+    
+      foreach ($files as $file)
+        include $file;
+    
+      $folder = new LibFilesystemFolder(PATH_ROOT.$module.'/sandbox/data/docu/root/');
+    
+      $files = $folder->getFilesByEnding('.php');
+    
+      foreach ($files as $file)
+        include $file;
+    
+    }
 
     foreach ($modules as $module) {
       $folder = new LibFilesystemFolder(PATH_ROOT.$module.'/data/docu/arch/');

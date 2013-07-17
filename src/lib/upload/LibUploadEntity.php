@@ -86,8 +86,8 @@ class LibUploadEntity extends LibUploadAdapter
   {
 
     Debug::console('SET upload entity');
-
     $this->entity = $entity;
+    
   }//end public function setEntity */
 
   /**

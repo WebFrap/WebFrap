@@ -36,7 +36,7 @@ class WebfrapAnnouncement_Crud_Create_Area_View extends LibTemplateAreaView
   public function displayForm($params)
   {
 
-    // laden der benötigten Resource Objekte
+    // laden der mvc/utils adapter Objekte
     $request = $this->getRequest();
 
     $this->position = '#wgt-box-webfrap_announcement-form';

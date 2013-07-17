@@ -143,7 +143,11 @@ class LibMessagePool
 
       return;
     } else {
-      Debug::console("GOT error: ".$error,null, true);
+
+      if(is_array($error) )
+        Debug::console("GOT error: ".implode($error),$error, true);
+      else
+        Debug::console("GOT error: ".$error,null, true);
     }
 
     if (is_array($error)) {

@@ -63,7 +63,7 @@ class LibTaskplanner extends BaseChild
   /**
 	 * Konstruktor.
 	 * @param LibFlowApachemod $env
-	 * @param int $currentTimestamp (Unix) Timestamp
+	 * @param int $currentTimestamp Timestamp
 	 */
   public function __construct ($env = null, $currentTimestamp = null)
   {
@@ -74,25 +74,23 @@ class LibTaskplanner extends BaseChild
       $this->env = Webfrap::$env;
     }
     
-    $this->load($currentTimestamp);
-  }
-
-  /**
-	 * Initialisiert den Taskplanner entweder mit einem übergebenen oder dem aktuellen Timestamp.
-	 * Je nach Timestamp werden dann die entsprechenden Tasks in das Array
-	 *  <code>$taskTypes</code> geladen.
-	 *
-	 * @param int $currentTimestamp (Unix) Timestamp
-	 */
-  public function load ($currentTimestamp = null)
-  {
-
     if ($currentTimestamp) {
       $this->currentTimestamp = $currentTimestamp;
     } else {
       $this->currentTimestamp = time();
     }
     
+    $this->load();
+  }
+
+  /**
+	 * Initialisiert den Taskplanner und ermittelt welche Typen von Tasks laufen sollen.
+	 *
+	 * @param int $currentTimestamp Timestamp
+	 */
+  public function load ()
+  {
+
     $this->currentDate = getdate($this->currentTimestamp);
     
     $this->taskTypes = $this->setupRequiredTasktypes($this->currentDate);
@@ -104,13 +102,12 @@ class LibTaskplanner extends BaseChild
 	 * Bestimmt in Abhängigkeit von <code>$currentDate</code> welche Typen von Tasks gestartet werden müssen.
 	 * Tasks die zu den selben Zeitpunkten starten können, werden zeitversetzt gestartet.
 	 *
-	 * @param int $currentDate (Unix) Timestamp
+	 * @param int $currentDate Timestamp
 	 * @return array $types
 	 */
   public function setupRequiredTasktypes ($currentDate)
   {
 
-    $seconds = $currentDate['seconds'];
     $minutes = $currentDate['minutes'];
     $hours = $currentDate['hours'];
     $weekDay = $currentDate['wday'];
@@ -121,71 +118,100 @@ class LibTaskplanner extends BaseChild
     
     $types = array();
     
-    // **:**:00, Jeden Tag
-    if ($seconds == 0) {
-      
-      // ETaskType: Every minute
-      $types[] = ETaskType::MINUTE;
-      
-      if ($minutes % 5 == 0) {
-        // ETaskType: Every 5 minutes
-        $types[] = ETaskType::MINUTE_5;
-      }
-      
-      if ($minutes % 15 == 0) {
-        // ETaskType: Every 15 minutes
-        $types[] = ETaskType::MINUTE_15;
-      }
-      
-      if ($minutes % 30 == 0) {
-        // ETaskType: Every 30 minutes
-        $types[] = ETaskType::MINUTE_30;
-      }
+    // Die Tasks im Bereich von Minuten können zu jeder Sekunde laufen. 
+    // Damit können verzögerungen besser ausgeglichen werden und $types ist niemals leer.
+    
+
+    // ETaskType: Every minute
+    $types[] = ETaskType::MINUTE;
+    
+    // ETaskType: Every 5 minutes
+    if ($minutes % 5 == 0) {
+      $types[] = ETaskType::MINUTE_5;
     }
     
-    // **:22, Jeden Tag
-    if ($minutes == 22) {
+    // ETaskType: Every 15 minutes
+    if ($minutes % 15 == 0) {
+      $types[] = ETaskType::MINUTE_15;
+    }
+    
+    // ETaskType: Every 30 minutes
+    if ($minutes % 30 == 0) {
+      $types[] = ETaskType::MINUTE_30;
+    }
+    
+    // **:11:**, Jeden Tag
+    if ($minutes == 11) {
       
       // ETaskType: Every hour
       $types[] = ETaskType::HOUR;
       
+      // ETaskType: Every 6 hours
       if ($hours % 6 == 0) {
-        // ETaskType: Every 6 hours
         $types[] = ETaskType::HOUR_6;
       }
       
+      // ETaskType: Every 12 hours
       if ($hours % 12 == 0) {
-        // ETaskType: Every 12 hours
         $types[] = ETaskType::HOUR_12;
       }
     }
     
-    // 02:22, Jeden Tag
+    // 02:22:**, Jeden Tag
     if ($hours == 2 && $minutes == 22) {
       
       // ETaskType: Every day
       $types[] = ETaskType::DAY;
       
+      // ETaskType: Every working day
       if ($weekDay > 0 && $weekDay < 6) {
-        // ETaskType: Every working day
         $types[] = ETaskType::WORK_DAY;
       }
       
+      // ETaskType: Every weekend
       if ($weekDay == 0 || $weekDay == 6) {
-        // ETaskType: Every weekend
         $types[] = ETaskType::WEEK_END;
       }
       
       // Mo alle 2 Wochen
+      // ETaskType: Every second week
       if ($weekDay == 1 && (($yearDay / 7) % 2) == 0) {
-        // ETaskType: Every second week
         $types[] = ETaskType::WEEK_2;
       }
     }
     
-    // 05:44
-    if ($hours == 5 && $minutes == 44) {
+    // 05:33:**
+    if ($hours == 5 && $minutes == 33) {
       $lastDayOfMonth = SDate::getMonthDays($year, $month);
+      
+      // Welches ist der letzte Wochentag des Monats?
+      $lastWeekdayOfMonth = date('N', strtotime(date($year . '-' . $month . '-' . $lastDayOfMonth)));
+      
+      // Wann ist Ostersonntag?
+      $easter = getdate(easter_date());
+      
+      // Wann ist Karfreitag?
+      $karfreitag = $easter['mday'] - 2;
+      
+      if ($lastWeekdayOfMonth == 6) {
+        // Wenn der letzte Tag des Monats ein Samstag ist, ist der letzte Arbeitstag der Freitag davor
+        $lastWorkingDay = $lastDayOfMonth - 1;
+      } elseif ($lastWeekdayOfMonth == 7) {
+        // Wenn der letzte Tag des Monats ein Sonntag ist, ist der letzte Arbeitstag der Freitag davor
+        $lastWorkingDay = $lastDayOfMonth - 2;
+        if ($lastWorkingDay == $karfreitag && $month == $easter['mon']) {
+          // Ist der lezte Arbeitstag der Karfreitag, ziehen wir noch einen Tag ab.
+          $lastWorkingDay --;
+        }
+      } else {
+        // In jedem anderen Fall ist der letzte Tag des Monats auch der letzte Arbeitstag
+        $lastWorkingDay = $lastDayOfMonth;
+      }
+      
+      // Letzter Tag im Monat
+      if ($monthDay == $lastWorkingDay) {
+        $types[] = ETaskType::MONTH_END_WORKDAY;
+      }
       
       // Jedes Quartal
       if ($monthDay == 1) {
@@ -205,7 +231,7 @@ class LibTaskplanner extends BaseChild
         $types[] = ETaskType::MONTH_3_END;
       }
       
-      // Jedes Halbjahr
+      // Jedes Halbjahr, erster Tag des Monats
       if ($monthDay == 1 && $month % 6 == 0) {
         // ETaskType: Every half year start
         $types[] = ETaskType::MONTH_6_START;
@@ -241,18 +267,14 @@ class LibTaskplanner extends BaseChild
   public function loadTypedTasks ($taskTypes, $currentDate)
   {
 
-    if ($taskTypes) {
-      $whereType = implode(', ', $taskTypes);
-    } else {
-      $whereType = ETaskType::MINUTE;
-    }
+    $whereType = implode(', ', $taskTypes);
+    $customType = ETaskType::CUSTOM;
     
-    $whereStatus = ETaskStatus::OPEN;
-    
+    $statusOpen = ETaskStatus::OPEN;
+    $statusDisabled = ETaskStatus::DISABLED;
+
     $db = $this->getDb();
-    
-    $tCustom = ETaskType::CUSTOM;
-    
+
     $sql = <<<SQL
 SELECT
   plan.rowid as plan_id,
@@ -270,14 +292,20 @@ JOIN
 WHERE
 	(
 		task.type IN({$whereType})
-		AND '{$currentDate}' BETWEEN plan.timestamp_start
-		AND plan.timestamp_end
+		AND task.task_time = '{$currentDate}'
+		AND task.status = {$statusOpen}
 	)
 	OR
 	(
-		task.type = {$tCustom}
+		task.type IN({$whereType})
+		AND '{$currentDate}' BETWEEN plan.timestamp_start AND plan.timestamp_end
+		AND task.status <> {$statusDisabled}
+	)
+	OR
+	(
+		task.type IN({$customType})
 		AND task.task_time = '{$currentDate}'
-		AND task.status = {$whereStatus}
+		AND task.status <> {$statusDisabled}
      )
 SQL;
     

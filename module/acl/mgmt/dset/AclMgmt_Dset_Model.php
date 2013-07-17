@@ -33,9 +33,8 @@ class AclMgmt_Dset_Model extends AclMgmt_Model
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   *
-   * Enter description here ...
-   * @var unknown_type
+   * Die Entity der Connection Tabelle
+   * @var Entity
    */
   public $conEntity = null;
 
@@ -345,7 +344,7 @@ class AclMgmt_Dset_Model extends AclMgmt_Model
   public function connect($params)
   {
 
-    // laden der benötigten resourcen
+    // laden der mvc/utils adapter Objekte
     $db        = $this->getDb();
     $orm       = $db->getOrm();
     $response  = $this->getResponse();

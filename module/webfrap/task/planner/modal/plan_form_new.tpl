@@ -358,8 +358,7 @@ $iconDel = $this->icon( 'control/delete.png', "Delete" );
     </div>
 
     <div class="wgt-box-dateplanner-advanced left bw62" wgt_hidden="true" >
-      <?php $planForm->selectboxByKey
-      ( 
+      <?php $planForm->selectboxByKey( 
       	'Type', 
       	'plan[series_rule-id_type]', 
       	'WebfrapTaskPlanner_Type_Selectbox', 

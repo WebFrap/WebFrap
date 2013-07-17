@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibSqlCriteria
-  implements ISqlParser
+class LibSqlCriteria implements ISqlParser
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // const
@@ -81,6 +80,12 @@ class LibSqlCriteria
    * @var string
    */
   public $table      = null;
+  
+  /**
+   * Alias für die From tabelle soweit vorhanden
+   * @var string
+   */
+  public $as      = null;
 
   /**
    * Joinbedingungen
@@ -415,12 +420,16 @@ class LibSqlCriteria
     if (is_object($table))
       $table = $table->getTable();
 
-    if (!$indexKey)
+    if (!$indexKey){
       $indexKey = $table;
+    } else {
+      $this->as = $table;
+    }
 
     $this->joinIndex[$indexKey] = true;
 
     $this->table = $table;
+
 
     return $this;
 

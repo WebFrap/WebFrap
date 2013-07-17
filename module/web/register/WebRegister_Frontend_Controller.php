@@ -52,28 +52,23 @@ class WebRegister_Frontend_Controller extends ControllerFrontend
    */
   protected $options = array
   (
-    'listing' => array
-    (
+    'listing' => array(
       'method'    => array('GET'),
       'views'      => array('html')
     ),
-    'addarticle' => array
-    (
+    'addarticle' => array(
       'method'    => array('POST'),
       'views'      => array('ajax')
     ),
-    'removearticle' => array
-    (
+    'removearticle' => array(
       'method'    => array('DELETE'),
       'views'      => array('ajax')
     ),
-    'clear' => array
-    (
+    'clear' => array(
       'method'    => array('DELETE'),
       'views'      => array('ajax')
     ),
-    'update' => array
-    (
+    'update' => array(
       'method'    => array('PUT'),
       'views'      => array('ajax')
     ),
@@ -113,176 +108,7 @@ class WebRegister_Frontend_Controller extends ControllerFrontend
 
   }//end public function service_listing */
 
-  /**
-   * @return void
-   */
-  public function service_addArticle($request,$response)
-  {
 
-    $view    = $this->getView();
-    $request = $this->getRequest();
 
-    /* @var $model ShopFront_Model */
-    $model = $this->loadModel('ShopFront');
-
-    $storeId = $request->param('store', Validator::EID);
-
-    if ($storeId)
-      $model->setStoreId($storeId);
-    else
-      $storeId = $model->getDefStoreId();
-
-    /* @var $view ShopBasket_Ajax_View */
-    $view   = $response->loadView
-    (
-      'shop-basket-ajax',
-      'ShopBasket',
-      'displayAdd',
-      View::AJAX
-    );
-
-    $articleId = $request->data('article', Validator::INT);
-    $numOrder  = $request->data('int', Validator::INT);
-
-    /* @var $shopBasket ShopBasket_Model */
-    $shopBasket = $this->loadModel('ShopBasket');
-
-    $shopBasket->addArticle($articleId, $numOrder);
-    $shopBasket->save();
-
-    $view->displayAddArticle($articleId, $numOrder);
-
-  }//end public function service_addArticle */
-
-  /**
-   * @return void
-   */
-  public function service_removeArticle($request,$response)
-  {
-
-    $view    = $this->getView();
-    $request = $this->getRequest();
-
-    /* @var $model ShopFront_Model */
-    $model = $this->loadModel('ShopFront');
-
-    $storeId = $request->param('store', Validator::EID);
-
-    if ($storeId)
-      $model->setStoreId($storeId);
-    else
-      $storeId = $model->getDefStoreId();
-
-    /* @var $view ShopBasket_Ajax_View */
-    $view   = $response->loadView
-    (
-      'shop-basket-ajax',
-      'ShopBasket',
-      'displayAdd',
-      View::AJAX
-    );
-
-    $articleId = $request->data('article', Validator::INT);
-
-    /* @var $shopBasket ShopBasket_Model */
-    $shopBasket = $this->loadModel('ShopBasket');
-
-    $shopBasket->removeArticle($articleId);
-    $shopBasket->save();
-
-    $view->displayAddArticle($articleId, $numOrder);
-
-  }//end public function service_removeArticle */
-
-  /**
-   * @return void
-   */
-  public function service_clear($request,$response)
-  {
-
-    $view    = $this->getView();
-    $request = $this->getRequest();
-
-    /* @var $model ShopFront_Model */
-    $model = $this->loadModel('ShopFront');
-
-    $storeId = $request->param('store', Validator::EID);
-
-    if ($storeId)
-      $model->setStoreId($storeId);
-    else
-      $storeId = $model->getDefStoreId();
-
-    /* @var $view ShopBasket_Ajax_View */
-    $view   = $response->loadView
-    (
-      'shop-basket-ajax',
-      'ShopBasket',
-      'displayClear',
-      View::AJAX
-    );
-
-    $articleId = $request->data('article', Validator::INT);
-    $numOrder  = $request->data('int', Validator::INT);
-
-    /* @var $shopBasket ShopBasket_Model */
-    $shopBasket = $this->loadModel('ShopBasket');
-
-    $shopBasket->clear();
-    $shopBasket->save();
-
-    $view->displayClear($articleId, $numOrder);
-
-  }//end public function service_category */
-
-  /**
-   * @return void
-   */
-  public function service_update($request,$response)
-  {
-
-    $view    = $this->getView();
-    $request = $this->getRequest();
-
-    /* @var $model ShopFront_Model */
-    $model = $this->loadModel('ShopFront');
-
-    $storeId = $request->param('store', Validator::EID);
-
-    if ($storeId)
-      $model->setStoreId($storeId);
-    else
-      $storeId = $model->getDefStoreId();
-
-    /* @var $view ShopBasket_Ajax_View */
-    $view   = $response->loadView
-    (
-      'shop-basket-ajax',
-      'ShopBasket',
-      'displayUpdate',
-      View::AJAX
-    );
-
-     /* @var $shopBasket ShopBasket_Model */
-    $shopBasket = $this->loadModel('ShopBasket');
-
-    $articles = $request->validateMultiData
-    (
-      array(
-        'article' => array(Validator::INT, true),
-        'amount'  => array(Validator::INT, true),
-      ),
-      'basket'
-    );
-
-    if ($articles)
-      $shopBasket->updateArticles($articles);
-
-    $shopBasket->save();
-
-    $view->displayUpdate();
-
-  }//end public function service_update */
-
-}//end class ShopFront_Controller
+}//end class WebRegister_Frontend_Controller
 

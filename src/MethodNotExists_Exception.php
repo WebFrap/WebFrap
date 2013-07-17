@@ -16,7 +16,9 @@
 *******************************************************************************/
 
 /**
- * Always Thrown If A Class Not Exists
+ * Wird geworfen wenn eine nicht existierende Methode auf einer Classe 
+ * mit __call / mapping aufgerufen wird
+ * 
  * @package WebFrap
  * @subpackage tech_core
  *

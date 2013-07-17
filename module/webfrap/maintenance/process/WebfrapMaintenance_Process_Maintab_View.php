@@ -90,7 +90,7 @@ class WebfrapMaintenance_Process_Maintab_View extends WgtMaintabList
   public function addMenu()
   {
 
-    // benötigte resourcen laden
+    // laden der mvc/utils adapter Objekte
     $acl    = $this->getAcl();
 
     $menu  = $this->newMenu($this->id.'_dropmenu');

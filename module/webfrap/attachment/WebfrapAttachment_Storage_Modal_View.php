@@ -42,7 +42,7 @@ class WebfrapAttachment_Storage_Modal_View extends WgtModal
 
  /**
   * the default edit form
-  * @param WebfrapAttachment_Context $context
+  * @param WebfrapAttachment_Request $context
   * @return void
   */
   public function displayForm($context)
@@ -68,7 +68,7 @@ class WebfrapAttachment_Storage_Modal_View extends WgtModal
  /**
   * the default edit form
   * @param WbfsysFileStorage_Entity $fileNode
-  * @param WebfrapAttachment_Context $context
+  * @param WebfrapAttachment_Request $context
   * @return void
   */
   public function displayEdit($storageNode, $context)

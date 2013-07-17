@@ -35,7 +35,7 @@ class WebfrapMessage_List_Ajax_View extends LibTemplateAjaxView
   public function displaySearch($params)
   {
 
-    // benötigte resourcen laden
+    // laden der mvc/utils adapter Objekte
     $user     = $this->getUser();
     $acl      = $this->getAcl();
     $request  = $this->getRequest();

@@ -54,10 +54,7 @@ class DaoSelectbox extends Dao
 
     foreach (Conf::$confPath as $path) {
 
-      if (!$this->source)
-        $menuPath = $path.'/selectbox/'.$this->name.'/';
-      else
-        $menuPath = $path.'/selectbox/'.$this->source.'/';
+      $menuPath = $path.'/selectbox/'.$mapName.'/';
 
       if (!file_exists($menuPath))
         continue;

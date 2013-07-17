@@ -128,7 +128,7 @@ class LibFlowTaskplanner extends LibFlow
       User::getActive()->login("system");
     }
     
-    $taskPlanner = new LibTaskplanner(Webfrap::$env, 1395846000);
+    $taskPlanner = new LibTaskplanner();
     
     $tasks = $taskPlanner->tasks;
     
@@ -314,11 +314,11 @@ class LibFlowTaskplanner extends LibFlow
         'response' => json_encode($response)
     );
     
+    $orm->insert('WbfsysTaskLog', $logMessage);
+    
     $orm->update('WbfsysPlannedTask', $taskId, array(
         'status' => $status
     ));
-    
-    $orm->insert('WbfsysTaskLog', $logMessage);
   }
 
   /**

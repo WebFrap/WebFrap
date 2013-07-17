@@ -48,7 +48,7 @@ class WbfsysAnnouncement_Crud_Create_Maintab_View extends WgtMaintabCustom
   public function displayForm($params)
   {
 
-    // laden der benötigten Resource Objekte
+    // laden der mvc/utils adapter Objekte
     $request = $this->getRequest();
 
     // I18n Label und Titel Laden

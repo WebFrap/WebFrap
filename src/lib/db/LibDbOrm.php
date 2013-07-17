@@ -107,14 +107,14 @@ class LibDbOrm
    * @var LibDbConnection
    */
   public $db   = null;
-  
+
   /**
    * the database connection object
    *
    * @var LibDbConnection
    */
   public $user   = null;
-  
+
   /**
    * Das Resultset der letzen Query
    * Vorsicht wird bei jeder neuen query überschieben
@@ -261,7 +261,7 @@ class LibDbOrm
   {
     return $this->sqlBuilder;
   }//end public function getQueryBuilder */
-  
+
   /**
    * @param User $user
    */
@@ -269,18 +269,18 @@ class LibDbOrm
   {
     $this->user = $user;
   }//end public function setUser */
-  
+
   /**
    * @return User
    */
   public function getUser()
   {
-    
+
     if (!$this->user)
       $this->user = Webfrap::$env->getUser();
-    
+
     return $this->user;
-    
+
   }//end public function getUser */
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -501,7 +501,7 @@ class LibDbOrm
           if (trim($value) == '' && $dropEmptyWhitespace) {
             $tmp[$key] = Db::NULL;
           } else {
-            $tmp[$key] = "'".$this->db->addSlashes($value)."'";
+            $tmp[$key] = "'".$this->db->escape($value)."'";
           }
         } else {
           if (trim($value) == '' && $dropEmptyWhitespace) {
@@ -529,7 +529,7 @@ class LibDbOrm
    */
   public function escape($value)
   {
-    return $this->db->addSlashes($value);
+    return $this->db->escape($value);
   }//end public function escape */
 
   /**
@@ -693,11 +693,11 @@ class LibDbOrm
    */
   public function getCols($entityKey, $categories = null)
   {
-    
+
     $entity = $this->getMetadata($entityKey);
 
     return $entity->getCols($categories);
-    
+
   }//end public function getCols */
 
   /**
@@ -863,8 +863,10 @@ class LibDbOrm
 
     // check if the entity is allready loaded and in the pool
     if (ctype_digit($id) && $obj = $this->getFromPool($entityKey, $id)) {
+
       return $obj;
     } elseif (is_object($id)) {
+
       $id = $id->getId();
     } elseif ($this->useConditionCache &&  $obj = $this->getSearchIndex($entityKey, $id)) {// check if the entity is already in the search index
 
@@ -1021,7 +1023,7 @@ class LibDbOrm
     $criteria  = $this->newCriteria();
     $paths     = array_reverse(explode('/', $path)) ;
 
-    // ok kleiner dirty hack
+    // ok kleiner phantastic hack
     $actual = explode(':', array_shift($paths));
 
     $table      = $actual[1];
@@ -1559,15 +1561,26 @@ SQL;
   public function save($entity)
   {
 
-    if (!is_object($entity) || !$entity instanceof Entity) {
+    if (is_object($entity)) {
+
+      if($entity instanceof Entity){
+        if ($entity->isNew()) {
+          return $this->insert($entity);
+        } else {
+          return $this->update($entity);
+        }
+      } else if ($entity instanceof LibUploadEntity) {
+
+        $entity->save();
+
+      }  else {
+        Debug::console('invalid data in save', $entity);
+        throw new LibDb_Exception('Got invalid data for save!');
+      }
+
+    } else {
       Debug::console('invalid data in save', $entity);
       throw new LibDb_Exception('Got invalid data for save!');
-    }
-
-    if ($entity->isNew()) {
-      return $this->insert($entity);
-    } else {
-      return $this->update($entity);
     }
 
   }//end public function save */
@@ -1591,7 +1604,7 @@ SQL;
       throw new LibDb_Exception('insertIfNotExists entity empty');
 
     $handleArray = false;
-    
+
     /*
     if (!is_object($entity)) {
       // $keyVal
@@ -1606,7 +1619,7 @@ SQL;
 
     } else
     */
-    
+
     if ($entity instanceof LibSqlCriteria) {
       $keyVal     = $entity->values;
       $tableName  = $entity->table;
@@ -1664,9 +1677,9 @@ SQL;
       }
 
       $sqlstring = $this->sqlBuilder->buildInsertIfNotExistsQuery(
-        $keyVal, 
-        $tableName, 
-        $duplicateKeys, 
+        $keyVal,
+        $tableName,
+        $duplicateKeys,
         $dropEmptyWhitespace
       );
 
@@ -1779,6 +1792,12 @@ SQL;
 
     try {
 
+    	$preSave = $entity->getPreSave();
+    	foreach ($preSave as /* @var Entity $postEntiy */ $preEntiy) {
+    		// we asume that the entity is allready appended
+    		$this->save($preEntiy);
+    	}
+
 
       $userId     = $this->getUser()->getId();
       $timestamp  = SDate::getTimestamp('Y-m-d H:i:s');
@@ -1836,6 +1855,14 @@ SQL;
         $value->save();
       }
     }
+
+    $postSave = $entity->getPostSave();
+    foreach ($postSave as /* @var Entity $postEntiy */ $postEntiy) {
+      // we asume that the entity is allready appended
+      $this->save($postEntiy);
+    }
+
+
 
     return $entity;
 
@@ -1919,21 +1946,6 @@ SQL;
     $indexData  = array();
 
     try {
-
-      // name
-      $nameFields = $entity->getIndexNameFields();
-      if ($nameFields) {
-        if (count($nameFields) > 1) {
-          $nameTmp = array();
-          foreach ($nameFields as $field) {
-            $nameTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
-          }
-
-          $indexData['name'] = implode(', ', $nameTmp);
-        } else {
-          $indexData['name'] = isset($keyVal[$nameFields[0]])?$keyVal[$nameFields[0]]:'';
-        }
-      }
 
       // title
       $titleFields = $entity->getIndexTitleFields();
@@ -2070,15 +2082,12 @@ SQL;
     $entity     = $this->newEntity($entityKey);
     $tableName  = $entity->getTable();
 
-    $nameFields   = $entity->getIndexNameFields();
     $titleFields  = $entity->getIndexTitleFields();
     $keyFields    = $entity->getIndexKeyFields();
     $descriptionFields = $entity->getIndexDescriptionFields();
 
-    $fields = array_merge
-    (
+    $fields = array_merge(
       array('rowid', Db::UUID, Db::TIME_CREATED),
-      $nameFields,
       $titleFields,
       $keyFields,
       $descriptionFields
@@ -2091,20 +2100,6 @@ SQL;
       foreach ($rows as $keyVal) {
 
         $indexData = array();
-
-        // name
-        if ($nameFields) {
-          if (count($nameFields) > 1) {
-            $nameTmp = array();
-            foreach ($nameFields as $field) {
-              $nameTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
-            }
-
-            $indexData['name'] = implode(', ', $nameTmp);
-          } else {
-            $indexData['name'] = isset($keyVal[$nameFields[0]])?$keyVal[$nameFields[0]]:'';
-          }
-        }
 
         // title
         if ($titleFields) {
@@ -2175,6 +2170,7 @@ SQL;
       }
 
     } catch (LibDb_Exception $exc) {
+
       return null;
     }
 
@@ -2294,9 +2290,9 @@ SQL;
       $entity->synchronized();
 
       $postSave = $entity->getPostSave();
-      foreach ($postSave as $postEntiy) {
+      foreach ($postSave as /* @var Entity $postEntiy */ $postEntiy) {
         // we asume that the entity is allready appended
-        $postEntiy->save();
+        $this->save($postEntiy);
       }
 
       if ($entity->hasIndex())

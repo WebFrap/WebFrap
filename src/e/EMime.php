@@ -529,5 +529,5 @@ class EMime
 
   );
 
-}//end class EEntity
+}//end class EMime
 

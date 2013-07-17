@@ -131,7 +131,7 @@ class AclMgmt_Ui extends MvcUi
     if ($params->targetId)
       $table->setId($params->targetId);
 
-    $table->addActions(array( 'tree', 'inheritance', 'sep',  'delete'));
+    $table->addActions(array( 'tree', 'sep',  'delete'));
 
     $table->setPagingId($params->searchFormId);
     $table->setSaveForm($params->formId);
@@ -204,7 +204,7 @@ WGTJS;
   public function listEntry($access, $params, $insert = false)
   {
 
-    // laden der benötigten resourcen
+    // laden der mvc/utils adapter Objekte
     $view = $this->getView();
 
     /* @var $table AclMgmt_Table_Element */

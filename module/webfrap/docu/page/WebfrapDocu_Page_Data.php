@@ -40,6 +40,11 @@ class WebfrapDocu_Page_Data
   /**
    * @var string
    */
+  public $lang = null;
+
+  /**
+   * @var string
+   */
   public $template = null;
 
   /**
@@ -60,7 +65,7 @@ class WebfrapDocu_Page_Data
    * @param WbfsysDocuTree_Entity $page
    * @param [WbfsysDocuTree_Entity] $slices
    */
-  public function __construct($page, $slices)
+  public function __construct($page, $slices, $lang)
   {
 
     if ($page->template)
@@ -73,6 +78,7 @@ class WebfrapDocu_Page_Data
 
     $this->page = $page;
     $this->slices = $slices;
+    $this->lang = $lang;
 
   }//end public function __construct */
 

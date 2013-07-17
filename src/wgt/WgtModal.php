@@ -209,6 +209,17 @@ class WgtModal extends LibTemplatePublisher
 
   }//end public function addJsItem */
 
+  /**
+   *
+   * @param string $name
+   * @param string $button
+   * @return void
+   */
+  public function setBookmark($title, $url, $role = null  )
+  {
+
+  }//end public function newButton */
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic
 //////////////////////////////////////////////////////////////////////////////*/

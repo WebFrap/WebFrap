@@ -44,10 +44,8 @@ class WebfrapMockup_Controller extends MvcController
    *
    * @var array
    */
-  protected $options           = array
-  (
-    'notyetimplemented' => array
-    (
+  protected $options           = array(
+    'notyetimplemented' => array(
       'method'    => array('GET'),
       'views'      => array('ajax')
     ),
@@ -72,7 +70,7 @@ If you found this link / button in a productive system please report it to the
 support.<br />
 
 RESP
-);
+    );
 
   }//end public function service_notYetImplemented */
 

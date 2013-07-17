@@ -17,7 +17,7 @@
 
 /**
  * @package WebFrap
- * @subpackage Groupware
+ * @subpackage webfrap/groupware
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
@@ -37,7 +37,7 @@ class WebfrapContact_New_Maintab_View extends WgtMaintab
     $this->setLabel('Create Contact');
     $this->setTitle('Create Contact');
 
-    $this->setTemplate('webfrap/contact/maintab/form_new', true);
+    $this->setTemplate('webfrap/contact/tpl/form_new', true);
 
     $this->addMenu($params);
 
@@ -80,8 +80,8 @@ class WebfrapContact_New_Maintab_View extends WgtMaintab
       <a class="deeplink" ><i class="icon-info-sign" ></i> {$this->i18n->l('Support', 'wbf.label')}</a>
       <span>
       <ul>
-        <li><a 
-        	class="wcm wcm_req_ajax" 
+        <li><a
+        	class="wcm wcm_req_ajax"
         	href="modal.php?c=Wbfsys.Faq.create&amp;context=menu" ><i class="icon-question-sign" ></i> {$this->i18n->l('Faq', 'wbf.label')}</a></li>
       </ul>
       </span>

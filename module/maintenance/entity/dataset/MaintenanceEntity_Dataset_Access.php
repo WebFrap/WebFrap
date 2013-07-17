@@ -32,7 +32,7 @@ class MaintenanceEntity_Dataset_Access extends LibAclPermission
   public function loadDefault($params, $entity = null)
   {
 
-    // laden der benötigten Resource Objekte
+    // laden der mvc/utils adapter Objekte
     /* @var $acl LibAclAdapter_Db */
     $acl = $this->getAcl();
 

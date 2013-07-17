@@ -1,3 +1,8 @@
+<?php
+/*
+ *  @var $I18N
+ */
+?>
 <div style="width:100%;height:320px;" >
 
   <div class="wgt_box_login" style="width:300px;padding-top:50px;margin: 0 auto;">
@@ -31,14 +36,14 @@
           <label class="wgt-label"  ></label>
           <div class="wgt-input"  ><input type="submit" class="wgt-button" value="<?php echo $I18N->l('change password','wbf.base.label.change_password'); ?>" /></div>
         </div>
-        
+
         <div class="wgt-clear small" ></div>
-        
+
         <div class="full text_center" >
           <a href="index.php?c=Webfrap.Auth.form" >Zurück zum Login</a>
         </div>
-        
-        
+
+
         <div class="wgt-clear small" ></div>
 
       </form>
@@ -49,4 +54,3 @@
   </div>
 
 </div>
-

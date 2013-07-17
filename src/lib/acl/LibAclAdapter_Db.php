@@ -307,8 +307,7 @@ class LibAclAdapter_Db extends LibAclAdapter
     $key,
     $entity     = null,
     $roles      = array()
-)
-  {
+  ) {
 
     if (DEBUG)
       Debug::console("getLevel {$key}");
@@ -1681,7 +1680,7 @@ SQL;
   public function getAreaIds($areaKeys)
   {
 
-    // laden der benötigten resourcen
+    // laden der mvc/utils adapter Objekte
     $model = $this->getModel();
 
     return $model->getAreaIds($areaKeys);
@@ -1696,7 +1695,7 @@ SQL;
   public function getAreaId($areaKey)
   {
 
-    // laden der benötigten resourcen
+    // laden der mvc/utils adapter Objekte
     $model = $this->getModel();
 
     return $model->getAreaId($areaKey);

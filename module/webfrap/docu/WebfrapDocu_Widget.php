@@ -33,7 +33,7 @@ class WebfrapDocu_Widget extends WgtWidget
   public function asTab($containerId, $tabId, $tabSize = 'medium')
   {
 
-    // benötigte resourcen laden
+    // laden der mvc/utils adapter Objekte
     $user     = $this->getUser();
     $view     = $this->getView();
     $acl      = $this->getAcl();
@@ -73,7 +73,7 @@ HTML;
    */
   public function embed($tabId, $tabSize = 'medium')
   {
-    // benötigte resourcen laden
+    // laden der mvc/utils adapter Objekte
     $user     = $this->getUser();
     $view     = $this->getView();
     $acl      = $this->getAcl();
@@ -88,7 +88,7 @@ HTML;
     $loader = new ExtensionLoader('index', 'data/docu/');
 
     $html = <<<HTML
-    <div id="{$tabId}" class="wgt_tab {$tabSize} {$containerId}" title="Docu"  >
+    <div id="{$tabId}" class="wgt_tab {$tabSize}" title="Docu"  >
       <div class="wgt-panel title" ><h2>Docu</h2></div>
 HTML;
 

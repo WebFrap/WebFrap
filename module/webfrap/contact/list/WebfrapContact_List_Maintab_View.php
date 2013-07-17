@@ -37,9 +37,42 @@ class WebfrapContact_List_Maintab_View extends WgtMaintab
     $this->setLabel('Contacts');
     $this->setTitle('Contacts');
 
-    $this->setTemplate('webfrap/contact/maintab/list', true);
-    
+    $this->setTemplate('webfrap/contact/tpl/list', true);
+
     $this->addVar( 'contacts', $this->model->fetchContacts($userRqt)  );
+
+    // Über Listenelemente können Eigene Panelcontainer gepackt werden
+    // hier verwenden wir ein einfaches Standardpanel mit Titel und
+    // simplem Suchfeld
+    $tabPanel = new WgtPanelTable();
+    /* @var $searchElement WgtPanelElementSearch_Overlay */
+    $searchElement = $this->setSearchElement(new WgtPanelElementSearch_Overlay());
+    $searchElement->searchKey = 'my_contact';
+    $searchElement->searchFieldSize = 'xlarge';
+    //$searchElement->advancedSearch = true;
+    $searchElement->focus = true;
+
+
+    $searchElement->setSearchFields($userRqt->searchFields);
+
+    // Ein Panel für die Filter hinzufügen
+    // Die Filteroptionen befinden sich im Panel
+    // Die UI Klasse wird als Environment übergeben
+    $filterSubPanel = new WebfrapContact_List_SubPanel_Filter($this);
+
+    // Search Form wird benötigt um die Filter an das passende Suchformular zu
+    // binden
+    $filterSubPanel->setSearchForm($userRqt->searchFormId);
+
+    // Setzen der Filterzustände, werden aus der URL ausgelesen
+    $filterSubPanel->setFilterStatus($userRqt->settings);
+
+    // Access wird im Panel als Rechte Container verwendet
+    //$filterSubPanel->setAccess($access);
+    $filterSubPanel->searchKey = $searchElement->searchKey;
+
+    // Jetzt wird das SubPanel in den Suchen Splittbutton integriert
+    $searchElement->setFilter($filterSubPanel);
 
     $this->addMenu($userRqt);
 
@@ -82,8 +115,8 @@ class WebfrapContact_List_Maintab_View extends WgtMaintab
       <a class="deeplink" ><i class="icon-info-sign" ></i> {$this->i18n->l('Support', 'wbf.label')}</a>
       <span>
       <ul>
-        <li><a 
-        	class="wcm wcm_req_ajax" 
+        <li><a
+        	class="wcm wcm_req_ajax"
         	href="modal.php?c=Wbfsys.Faq.create&amp;context=menu" ><i class="icon-question-sign" ></i> {$this->i18n->l('Faq', 'wbf.label')}</a></li>
       </ul>
       </span>
@@ -92,6 +125,41 @@ class WebfrapContact_List_Maintab_View extends WgtMaintab
       <a class="wgtac_close" ><i class="icon-remove-circle" ></i> {$this->i18n->l('Close','wbf.label')}</a>
     </li>
   </ul>
+</div>
+
+<div class="wgt-panel-control" >
+  <div
+    class="wcm wcm_control_buttonset wgt-button-set"
+    id="wgt-mentry-groupware-data" >
+    <input
+      type="radio"
+      id="wgt-mentry-groupware-data-mail"
+      value="maintab.php?c=Webfrap.Message.messageList"
+      class="{$this->id}-maskswitcher"
+      name="nav-boxtype" /><label
+        for="wgt-mentry-groupware-data-mail"
+        class="wcm wcm_ui_tip-top"
+        tooltip="Show the messages"  ><i class="icon-envelope-alt" ></i></label>
+    <input
+      type="radio"
+      id="wgt-mentry-groupware-data-contact"
+      value="maintab.php?c=Webfrap.Contact.list"
+      class="{$this->id}-maskswitcher"
+      checked="checked"
+      name="nav-boxtype"  /><label
+        for="wgt-mentry-groupware-data-contact"
+        class="wcm wcm_ui_tip-top"
+        tooltip="Show the contacts" ><i class="icon-user" ></i></label>
+    <input
+      type="radio"
+      id="wgt-mentry-groupware-data-calendar"
+      value="maintab.php?c=Webfrap.Calendar.element"
+      class="{$this->id}-maskswitcher"
+      name="nav-boxtype" /><label
+        for="wgt-mentry-groupware-data-calendar"
+        class="wcm wcm_ui_tip-top"
+        tooltip="Show Calendar" ><i class="icon-calendar" ></i></label>
+  </div>
 </div>
 
 <div
@@ -156,7 +224,7 @@ HTML;
     });
 
     self.getObject().find(".wgtac_create").click(function() {
-      \$R.get('modal.php?c=Webfrap.Contact.formNew');
+      \$R.get('ajax.php?c=Webfrap.Contact.formNew');
     });
 
     self.getObject().find(".wgtac_search_con").click(function() {
@@ -165,6 +233,11 @@ HTML;
 
     self.getObject().find(".wgtac_refresh").click(function() {
       \$R.form('wgt-form-webfrap-contact-search');
+    });
+
+
+    self.getObject().find('.{$this->id}-maskswitcher').change(function() {
+      \$R.get(\$S(this).val());
     });
 
 

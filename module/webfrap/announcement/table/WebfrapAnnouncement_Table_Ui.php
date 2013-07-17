@@ -331,7 +331,7 @@ JSCODE;
   public function searchForm( $model, $params = null)
   {
 
-    // laden der benötigten resourcen
+    // laden der mvc/utils adapter Objekte
     $view = $this->getView();
 
     $entityWbfsysAnnouncement  = $model->getEntityWbfsysAnnouncement();

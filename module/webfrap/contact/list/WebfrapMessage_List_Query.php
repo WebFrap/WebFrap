@@ -24,7 +24,7 @@
  */
 class WebfrapMessage_List_Query extends LibSqlQuery
 {
-  
+
   /**
    * Userid des Users für den die Kontaktdaten geladen werden sollen
    * @var int
@@ -91,7 +91,7 @@ class WebfrapMessage_List_Query extends LibSqlQuery
     $this->appendConditions($criteria, $condition, $params);
     $this->checkLimitAndOrder($criteria, $condition, $params);
     $this->appendFilter($criteria, $condition, $params);
-    
+
     $criteria->where( 'contact.id_user = '.$this->userId );
 
     // Run Query und save the result
@@ -152,7 +152,7 @@ class WebfrapMessage_List_Query extends LibSqlQuery
       'sender'
     );*/
 
-    
+
   }//end public function setTables */
 
   /**
@@ -221,7 +221,7 @@ class WebfrapMessage_List_Query extends LibSqlQuery
           $part = $condition['free'];
 
           $criteria->where('( wbfsys_contact.rowid = \''.$part.'\' )');
-          
+
        } else {
 
           // prüfen ob mehrere suchbegriffe kommagetrennt übergeben wurden
@@ -237,7 +237,7 @@ class WebfrapMessage_List_Query extends LibSqlQuery
               if ('' ==  $part)
                 continue;
 
-              $safePart = $db->addSlashes($part);
+              $safePart = $db->escape($part);
 
               if ('@' == $safePart[0]) {
                 $safePart = substr($safePart, 1);
@@ -259,7 +259,7 @@ class WebfrapMessage_List_Query extends LibSqlQuery
            }
 
          } else {
-           $safePart = $db->addSlashes($condition['free']) ;
+           $safePart = $db->escape($condition['free']) ;
 
            if ('@' == $safePart[0]) {
              $safePart = substr($safePart, 1);
@@ -282,7 +282,7 @@ class WebfrapMessage_List_Query extends LibSqlQuery
        }
 
     }//end if
-    
+
     // search conditions for  wbfsys_contact
     if (isset($condition['wbfsys_contact'])) {
       $whereCond = $condition['wbfsys_contact'];
@@ -356,11 +356,11 @@ class WebfrapMessage_List_Query extends LibSqlQuery
 
     // check if there is a given order
     if ($condition['order']) {
-      
+
       $criteria->orderBy($condition['order']);
 
     } else { // if not use the default
-      
+
       $criteria->orderBy('wbfsys_contact.m_time_created desc');
 
     }

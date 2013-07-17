@@ -83,7 +83,7 @@ class Protocol extends BaseChild
 
     $createDate = date("Y-m-d H:i:s");
 
-    $label = $db->addSlashes($label);
+    $label = $db->escape($label);
 
     $sql = <<<SQL
 

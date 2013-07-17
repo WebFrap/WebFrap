@@ -84,7 +84,7 @@ class WebfrapBase_Maintab_View extends WgtMaintab
   public function addMenu($params)
   {
 
-    // benötigte resourcen laden
+    // laden der mvc/utils adapter Objekte
     $acl    = $this->getAcl();
     $user   = $this->getUser();
     $access = $params->access;

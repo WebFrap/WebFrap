@@ -55,7 +55,7 @@ class MaintenanceDb_Index_Stats_Maintab_Menu extends WgtDropmenu
   public function buildMenu($params)
   {
 
-    // benötigte resourcen laden
+    // laden der mvc/utils adapter Objekte
     $acl   = $this->getAcl();
     $view   = $this->getView();
 

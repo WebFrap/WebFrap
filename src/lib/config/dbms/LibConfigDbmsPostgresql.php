@@ -27,9 +27,7 @@ class LibSetupDbmsPostgresql extends LibGenfGenerator
 // Constances
 //////////////////////////////////////////////////////////////////////////////*/
 
-  /**
-   *
-   * Enter description here ...
+  /** 
    * @param LibGenftreeNodeUniversePostgresql $universe
    */
   public function initBuild($universe)
@@ -42,8 +40,7 @@ class LibSetupDbmsPostgresql extends LibGenfGenerator
   }//end public function initBuild */
 
   /**
-   *
-   * Enter description here ...
+   * Bauen der Conf
    */
   public function createPgHbaConf()
   {

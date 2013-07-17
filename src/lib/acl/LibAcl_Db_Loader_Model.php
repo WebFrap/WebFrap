@@ -2648,7 +2648,7 @@ SQL;
   public function getAreaIds($areaKeys)
   {
 
-    // laden der benötigten resourcen
+    // laden der mvc/utils adapter Objekte
     $db        = $this->getDb();
     $orm       = $db->getOrm();
 

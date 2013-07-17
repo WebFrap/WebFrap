@@ -186,8 +186,7 @@ class User extends BaseChild
    *
    * @var array
    */
-  public $userLevels = array
-  (
+  public $userLevels = array(
     'public_edit'     => 0,
     'public_access'   => 10,
     'user'            => 20,
@@ -227,8 +226,7 @@ class User extends BaseChild
    * Standard ist eine minimale Menge für den annonymen benutzer
    * @var array
    */
-  protected $userData           = array
-  (
+  protected $userData           = array(
     'firstname' => 'Ano',
     'lastname'  => 'Nymous',
   );
@@ -272,8 +270,7 @@ class User extends BaseChild
    * Liste aller Profile doe dem Benutzer zur Verfügung stehen
    * @var array
    */
-  protected $profiles   = array
-  (
+  protected $profiles   = array(
     'default' => 'Default'
   );
 
@@ -363,8 +360,7 @@ class User extends BaseChild
    */
   public function __sleep()
   {
-    return array
-    (
+    return array(
       'groupRoles',
       'userLevel',
       'mainGroup',
@@ -654,7 +650,7 @@ class User extends BaseChild
 
     $profile = $this->getProfile();
 
-    return $profile->label;
+    return ucfirst($profile->label);
 
   }//end public function getProfileLabel */
 
@@ -785,7 +781,7 @@ class User extends BaseChild
   {
 
     if (!isset($_SESSION['SYS_USER'])) {
-      self::$instance       = new User(null,$env);
+      self::$instance = new User(null,$env);
 
       if (defined('WBF_NO_LOGIN') &&  WBF_NO_LOGIN)
         self::$instance->setNoLogin(true);

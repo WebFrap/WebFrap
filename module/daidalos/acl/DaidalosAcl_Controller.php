@@ -26,13 +26,25 @@ class DaidalosAcl_Controller extends Controller
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * @var string
+   * @var array
    */
-  protected $callAble = array
-  (
-    'form',
-    'updateacl',
-    'deactivateallusers',
+  protected $options           = array(
+
+    'form' => array(
+      'method'    => array('GET'),
+      'views'      => array('maintab')
+    ),
+
+    'updateacl' => array(
+      'method'    => array('POST','PUT'),
+      'views'      => array('ajax')
+    ),
+
+    'deactivateallusers' => array(
+      'method'    => array('POST','PUT'),
+      'views'      => array('ajax')
+    ),
+
   );
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -42,7 +54,7 @@ class DaidalosAcl_Controller extends Controller
   /**
    *
    */
-  public function form($params = null)
+  public function service_form($request, $response)
   {
 
     $params = $this->getFlags($this->getRequest());
@@ -54,12 +66,12 @@ class DaidalosAcl_Controller extends Controller
     $view->setModel($model);
     $view->displayForm($params);
 
-  }//end public function form */
+  }//end public function service_form */
 
   /**
    *
    */
-  public function updateAcl($params = null)
+  public function service_updateAcl($request, $response)
   {
 
     $params = $this->getFlags($this->getRequest());
@@ -67,15 +79,14 @@ class DaidalosAcl_Controller extends Controller
     $model  = $this->loadModel('DaidalosAcl');
     $model->updateArea($this->getRequest());
 
-  }//end public function updateAcl */
+  }//end public function service_updateAcl */
 
   /**
    *
    */
-  public function deactivateAllUsers($params = null)
+  public function service_deactivateAllUsers($request, $response)
   {
 
-    $response = $this->getResponse();
     $params   = $this->getFlags($this->getRequest());
     $model    = $this->loadModel('DaidalosAcl');
 
@@ -83,7 +94,7 @@ class DaidalosAcl_Controller extends Controller
 
     $response->addMessage('Dissabled all Users');
 
-  }//end public function deactivateAllUsers */
+  }//end public function service_deactivateAllUsers */
 
 }//end class DaidalosAcl_Controller
 

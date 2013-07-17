@@ -32,20 +32,44 @@ abstract class Base
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
 
+  /**
+   * @var string
+   */
   const DB = 'Db';
 
+  /**
+   * @var string
+   */
   const CACHE = 'Cache';
 
+  /**
+   * @var string
+   */
   const REQUEST = 'Request';
 
+  /**
+   * @var string
+   */
   const RESPONSE = 'Response';
 
+  /**
+   * @var string
+   */
   const USER = 'User';
 
+  /**
+   * @var string
+   */
   const ACL = 'Acl';
 
+  /**
+   * @var string
+   */
   const INFO = 'Info';
 
+  /**
+   * @var string
+   */
   const CONF = 'Conf';
 
   /*//////////////////////////////////////////////////////////////////////////////
@@ -161,6 +185,8 @@ abstract class Base
    * @var LibTemplate
    */
   protected $tplEngine = null;
+  
+  protected $providers = array();
 
   /*//////////////////////////////////////////////////////////////////////////////
 // getter & setter methodes
@@ -602,6 +628,41 @@ abstract class Base
     return $this->message;
 
   } //end public function getMessage
+  
+  /**
+   * @return Provider
+   */
+  public function getProvider($key, $class = null)
+  {
+  
+    if (!isset($this->providers[$key])){
+  
+      if(!$class)
+        $class = $key;
+  
+      $cn = $class.'_Provider';
+  
+      if(!Webfrap::classLoadable($cn)){
+        return null;
+      }
+  
+      $this->providers[$key] = new $cn($this);
+    }
+  
+    return $this->providers[$key];
+  
+  }//end public function getProvider */
+  
+  /**
+   * @param string $key
+   * @param Provider $obj
+   */
+  public function setProvider($key, $obj)
+  {
+  
+    $this->providers[$key] = $obj;
+  
+  }//end public function getProvider */
 
 } // end abstract class Base
 

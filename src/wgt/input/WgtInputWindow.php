@@ -191,6 +191,7 @@ class WgtInputWindow extends WgtInput
       $showAttr['readonly'] = 'readonly';
       $showAttr['class']  .= ' wgt-readonly';
     } else {
+    	
       $codeAutocomplete = '<var id="var-'.$showAttr['id'].'" >'.$this->autocomplete.'</var>';
       $showAttr['class']  .= ' wcm wcm_ui_autocomplete';
     }
@@ -258,13 +259,14 @@ HTML;
 
     unset($showAttr['type']);
 
-    $htmlShowAttr = $this->asmAttributes($showAttr);
+    $htmlShowAttr = $this->asmAttributes($showAttr, false);
     $required     = $this->required?'<span class="wgt-required">*</span>':'';
 
     $id = $this->attributes['id'];
     $helpIcon = $this->renderDocu($id);
 
     if (!$this->hide) {
+    	
       $html = '<div class="wgt-box input" id="wgt-box-'.$this->attributes['id'].'" >
         <div class="wgt-label" >
           <label  for="'.$this->attributes['id'].'" >'.$this->label.' '.$required.'</label>
@@ -288,7 +290,9 @@ HTML;
 
         <div class="wgt-clear tiny" >&nbsp;</div>
       </div>'.NL;
+      
     } else {
+    	
       $html = '<input
         type="hidden"
         class="'.$attrHidden['class'].'"

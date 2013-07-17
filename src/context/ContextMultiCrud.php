@@ -29,13 +29,25 @@ class ContextMultiCrud extends Context
    * @var array
    */
   public $dataBody = array();
-  
+
   /**
    * Soll die view upgedated werden
    * @var boolean
    */
   public $updtv = false;
+
+  /**
+   * Soll die view upgedated werden
+   * @var boolean
+   */
+  public $refId = null;
   
+  /**
+   * Sortierung
+   * @var array
+   */
+  public $order = array();
+
   /**
    * Interpret the Userinput Flags
    *
@@ -45,7 +57,7 @@ class ContextMultiCrud extends Context
   {
 
     $this->updtv = $request->param('updtv',Validator::BOOLEAN);
-    
+
     // startpunkt des pfades für die acls
     if ($aclRoot = $request->param('a_root', Validator::CKEY))
       $this->aclRoot    = $aclRoot;
@@ -132,7 +144,7 @@ class ContextMultiCrud extends Context
     if ($cntms = $request->param('cntms', Validator::CNAME))
       $this->contextMaskSwt    = $cntms;
 
-      
+
     // per default
     $this->categories = array();
 

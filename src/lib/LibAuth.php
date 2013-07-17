@@ -76,17 +76,14 @@ class LibAuth extends BaseChild
   }//end public function getPassword */
 
   /**
-   *
-   * Enter description here ...
-   * @param unknown_type $noPasswd
+   * @param boolean $noPasswd
    */
   public function setNoPasswd($noPasswd = true)
   {
     $this->noPasswd = $noPasswd;
-  }
+  }// end public function setNoPasswd */
 
   /**
-   *
    * @return string
    */
   public function getUsername()
@@ -95,7 +92,6 @@ class LibAuth extends BaseChild
   }//end public function getUsername */
 
   /**
-   *
    * @return string
    */
   public function getPassword()
@@ -108,7 +104,9 @@ class LibAuth extends BaseChild
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   *
+   * @param Base $env
+   * @param string $aType Adapter für die Authentifizierung
+   * @param string $vType Adapter für die Verifikation der Authentifizierungsdaten
    */
   public function __construct($env, $aType = null, $vType = null)
   {
@@ -140,8 +138,8 @@ class LibAuth extends BaseChild
 
       $authClass = 'LibAuth'.$this->authType;
       if (!WebFrap::classLoadable($authClass)) {
+        
         Error::report('Authmodule: '.$authClass.' not exists. Please check your Configuration, or your Modulepath.');
-
         return false;
       }
 
@@ -174,7 +172,11 @@ class LibAuth extends BaseChild
   }//end public function login */
 
   /**
+   * @param string $username
+   * @param string $password
+   * @param boolean $noPasswd
    *
+   * @return boolean
    */
   public function verificate($username, $password, $noPasswd = false)
   {
@@ -201,6 +203,7 @@ class LibAuth extends BaseChild
   }//end public function verificate */
 
   /**
+   * Ändern des Passworts für den aktuellen User
    * @param string $pwd
    */
   public function changePasswd($pwd)
@@ -208,12 +211,10 @@ class LibAuth extends BaseChild
 
     $orm = $this->getOrm();
 
-    return $orm->update
-    (
+    return $orm->update(
       'WbfsysRoleUser',
       self::id(),
-      array
-      (
+      array(
         'password'    =>  SEncrypt::passwordHash($pwd),
         'change_pwd'  =>  ''
       )

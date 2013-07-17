@@ -87,7 +87,7 @@ class WgtPanelElementSearch_Splitted extends WgtPanelElement
    */
   public function __construct($table = null)
   {
-
+  	$this->env = Webfrap::$env;
     if ($table) {
       $this->tableId    = $table->id;
       $this->searchForm = $table->searchForm;

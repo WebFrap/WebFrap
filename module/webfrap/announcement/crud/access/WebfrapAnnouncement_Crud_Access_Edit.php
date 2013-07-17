@@ -30,7 +30,7 @@ class WebfrapAnnouncement_Crud_Access_Edit extends LibAclPermission
   public function loadDefault($params, $entity = null)
   {
 
-    // laden der benötigten Resource Objekte
+    // laden der mvc/utils adapter Objekte
     $acl = $this->getAcl();
 
     // wenn keine root übergeben wird oder wir in level 1 sind

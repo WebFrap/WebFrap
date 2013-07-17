@@ -17,7 +17,7 @@
 
 /**
  * @package WebFrap
- * @subpackage Groupware
+ * @subpackage webfrap/groupware
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
@@ -50,35 +50,35 @@ class WebfrapContact_Model extends Model
     return $this->access;
 
   }//end public function loadTableAccess */
-  
-  
+
+
   /**
    * @param WebfrapContact_Save_Request $saveRqt
    * @throws InternalError_Exception
    */
   public function insertContact( $saveRqt )
   {
-    
+
     $db = $this->getDb();
     $orm = $this->getOrm();
-    
+
     $db->begin();
     try {
-      
+
       // speichert sowohl contact als auch person
       $orm->save($saveRqt->contact);
-      
+
     } catch( LibDb_Exception $exc ) {
-      
+
       $db->rollback();
       throw new InternalError_Exception( 'Save Failed', $exc->getMessage() );
-      
+
     }
-    
+
     $db->commit();
 
   }//end public function insertContact */
-  
+
 
   /**
    * @param TFlag $userRqt
@@ -91,7 +91,7 @@ class WebfrapContact_Model extends Model
     $user = $this->getUser();
 
 
-    /* @var $query WebfrapContact_List_Query */
+    /* @var $query WebfrapContact_List_Query
     $query = $db->newQuery('WebfrapContact_List');
     $query->userId = $user->getId();
 
@@ -100,7 +100,7 @@ class WebfrapContact_Model extends Model
       $params
     );
 
-    return $query;
+    return $query; */
 
   }//end public function fetchMessages */
 
@@ -149,15 +149,15 @@ FROM
 JOIN
 	wbfsys_message_receiver receiver
 		ON receiver.id_message = msg.rowid
-		
+
 LEFT JOIN
 	wbfsys_task task
 		ON task.id_message = msg.rowid
-		
+
 LEFT JOIN
 	wbfsys_appointment appoint
 		ON appoint.id_message = msg.rowid
-		
+
 
 JOIN
   view_person_role sender
@@ -177,23 +177,23 @@ SQL;
         $db->update("UPDATE wbfsys_message_receiver set status =".EMessageStatus::OPEN." WHERE rowid = ".$node['receiver_id'] );
         $node['receiver_status'] = EMessageStatus::OPEN;
       }
-  
+
       $this->messageNode = new TDataObject($node);
-          
+
     }
-    
+
     if (!$this->messageNode)
       throw new DataNotExists_Exception('The requested message not exists.');
-      
+
     $this->loadMessageAspects($msgId);
 
     return $this->messageNode;
 
   }//end public function loadMessage */
 
-  
- 
-  
-  
+
+
+
+
 } // end class WebfrapMessage_Model
 

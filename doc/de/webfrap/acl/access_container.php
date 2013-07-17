@@ -35,7 +35,7 @@ class ProjectMilestone_Crud_Access_Edit
   public function loadDefault($rqtContext, $entity = null)
   {
 
-    // laden der benötigten Resource Objekte
+    // laden der mvc/utils adapter Objekte
     $acl = $this->getAcl();
 
     $entityId = null;

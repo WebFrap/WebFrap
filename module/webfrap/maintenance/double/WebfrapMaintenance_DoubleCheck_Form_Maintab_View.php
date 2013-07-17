@@ -82,7 +82,7 @@ class WebfrapMaintenance_DoubleCheck_Maintab_View extends WgtMaintabCustom
   public function addMenu()
   {
 
-    // benötigte resourcen laden
+    // laden der mvc/utils adapter Objekte
     $acl    = $this->getAcl();
 
     $menu  = $this->newMenu($this->id.'_dropmenu');
@@ -90,10 +90,10 @@ class WebfrapMaintenance_DoubleCheck_Maintab_View extends WgtMaintabCustom
     $menu->setAcl($acl);
     $menu->setModel($this->model);
 
-    $iconMenu      = $view->icon( 'control/menu.png',  'Menu');
-    $iconRebuild   = $view->icon( 'maintenance/rebuild_index.png', 'Rebuild Index');
-    $iconBookmark  = $view->icon( 'control/bookmark.png', 'Bookmark');
-    $iconClose     = $view->icon( 'control/close.png', 'Close');
+    $iconMenu      = $this->icon( 'control/menu.png',  'Menu');
+    $iconRebuild   = $this->icon( 'maintenance/rebuild_index.png', 'Rebuild Index');
+    $iconBookmark  = $this->icon( 'control/bookmark.png', 'Bookmark');
+    $iconClose     = $this->icon( 'control/close.png', 'Close');
 
     $entries = new TArray();
     $entries->support  = $this->entriesSupport( $menu);
@@ -105,18 +105,18 @@ class WebfrapMaintenance_DoubleCheck_Maintab_View extends WgtMaintabCustom
       class="wcm wcm_control_dropmenu wgt-button"
       tabindex="-1"
       id="{$menu->id}-control"
-      wgt_drop_box="{$menu->id}"  >{$iconMenu} {$i18n->l('Menu','wbf.label')}</button>
+      wgt_drop_box="{$menu->id}"  >{$iconMenu} {$this->i18n->l('Menu','wbf.label')}</button>
       <var id="{$menu->id}-control-cfg-dropmenu"  >{"triggerEvent":"click"}</var>
   </div>
 
   <div class="wgt-dropdownbox" id="{$menu->id}" >
     <ul>
       <li>
-        <a class="wgtac_bookmark" >{$iconBookmark} {$i18n->l('Bookmark','wbf.label')}</a>
+        <a class="wgtac_bookmark" >{$iconBookmark} {$this->i18n->l('Bookmark','wbf.label')}</a>
       </li>
     {$entries->support}
       <li>
-        <a class="wgtac_close" >{$iconClose} {$i18n->l('Close', 'wbf.label')}</a>
+        <a class="wgtac_close" >{$iconClose} {$this->i18n->l('Close', 'wbf.label')}</a>
       </li>
     </ul>
   </div>

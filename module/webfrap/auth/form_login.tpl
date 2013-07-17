@@ -15,8 +15,8 @@
 			<div>
 				<label class="wgt-label"  ></label>
 				<div class="wgt-input"  ><input type="submit" class="wgt-button" value="<?php echo $this->i18n->l( 'Login', 'wbf.label' ); ?>" /></div>
-			</div>      
-			<div class="wgt-clear" > </div>        
+			</div>
+			<div class="wgt-clear" > </div>
 			<?php if( $CONF->getStatus('login.forgot_pwd') ){ ?>
 				<div class="full text_center" >
 					<a href="index.php?c=Webfrap.Auth.formForgotPasswd" ><?php echo $this->i18n->l( 'Forgot password?', 'wbf.label' ); ?></a>

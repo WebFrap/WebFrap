@@ -133,16 +133,6 @@ class AclMgmt_Qfdu_User_Treetable_Element extends WgtTreetable
         'wbf.label',
         Acl::ADMIN
       ),
-      'inheritance'  => array
-      (
-        Wgt::ACTION_BUTTON_GET,
-        'ACL Graph',
-        'maintab.php?c=Acl.Mgmt_Path.showGraph&dkey='.$this->domainNode->domainName.'&amp;objid=',
-        'control/acl_inheritance.png',
-        '',
-        'wbf.inheritance',
-        Acl::ADMIN
-      ),
       'tree'  => array
       (
         Wgt::ACTION_BUTTON_GET,
@@ -159,7 +149,7 @@ class AclMgmt_Qfdu_User_Treetable_Element extends WgtTreetable
       ),
 
     );
-    $this->actions['group'] = array('tree',  'inheritance', 'sep', 'delete');
+    $this->actions['group'] = array('tree', 'sep', 'delete');
 
     $this->url['user']  = array
     (

@@ -19,7 +19,7 @@
  * Acl Rechte Container über den alle Berechtigungen geladen werden
  *
  * @package WebFrap
- * @subpackage Groupware
+ * @subpackage webfrap/groupware
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
  * @copyright webfrap.net <contact@webfrap.net>
  */
@@ -33,7 +33,7 @@ class WebfrapContact_Table_Access extends LibAclPermission
   public function loadDefault($params, $entity = null)
   {
 
-    // laden der benötigten Resource Objekte
+    // laden der mvc/utils adapter Objekte
     $acl = $this->getAcl();
 
     $this->level = Acl::DELETE;

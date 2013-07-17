@@ -421,7 +421,7 @@ class Db
     {
         self::$instance ? : self::init();
 
-        return self::$instance->addSlashes($value);
+        return self::$instance->escape($value);
     }
 
     //end public static function addSlashes */

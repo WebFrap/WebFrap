@@ -65,9 +65,6 @@ class LibFilesystemFolder
   public function __construct($folder)
   {
 
-    if (Log::$levelVerbose)
-      Log::create(get_class($this) , array($folder));
-
     $this->folder = $folder;
 
   } // end of member function __construct */
