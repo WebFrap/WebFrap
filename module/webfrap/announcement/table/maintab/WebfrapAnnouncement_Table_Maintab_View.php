@@ -108,13 +108,6 @@ class WebfrapAnnouncement_Table_Maintab_View extends WgtMaintab
       $params
     );
 
-    // Das Suchformular wird erstellt
-    $ui->searchForm
-    (
-      $this->model,
-      $params
-    );
-
     // crudform
 
     // Form Target und ID definieren
