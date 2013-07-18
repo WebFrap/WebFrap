@@ -80,6 +80,12 @@ class LibSqlCriteria implements ISqlParser
    * @var string
    */
   public $table      = null;
+  
+  /**
+   * Alias für die From tabelle soweit vorhanden
+   * @var string
+   */
+  public $as      = null;
 
   /**
    * Joinbedingungen
@@ -414,12 +420,16 @@ class LibSqlCriteria implements ISqlParser
     if (is_object($table))
       $table = $table->getTable();
 
-    if (!$indexKey)
+    if (!$indexKey){
       $indexKey = $table;
+    } else {
+      $this->as = $table;
+    }
 
     $this->joinIndex[$indexKey] = true;
 
     $this->table = $table;
+
 
     return $this;
 

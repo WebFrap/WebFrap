@@ -171,6 +171,39 @@ $phpModules = array
       </tbody>
     </table>
   </div>
+
 </div>
 
+<div class="wgt-content_box  inline wgt-space bw48" > 
+  <div class="head" ><h2>Contexts</h2>
+    <div class="right" >
+      <a 
+        class="wcm wcm_req_del wgt-action" 
+        title="Please confirm to clean the Contexts" 
+        href="modal.php?c=Webfrap.Context.resetAll" >clean all</a>
+    </div>
+  </div>
+  <div class="content" style="height:auto;" >
+    <table class="wgt-table wgt-space bw45" >
+      <thead>
+        <tr>
+          <th style="width:40px;" class="col" >Pos</th>
+          <th style="width:120px;" >Name</th>
+          <th style="width:120px;" >Key</th>
+          <th style="width:75px;" >Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach( $this->contextData as $pos => $data ){ ?>
+          <tr>
+            <td class="pos" ><?php echo $pos ?></td>
+            <td><?php echo $data['value'] ?></td>
+            <td><?php echo $data['id'] ?></td>
+            <td><?php echo $this->contextMenu->renderActions( $this->contextMenu->listActions, $data ) ?></td>
+          </tr>
+        <?php } ?>
+      </tbody>
+    </table>
+  </div>
+</div>
 

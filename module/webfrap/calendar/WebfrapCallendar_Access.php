@@ -33,7 +33,7 @@ class WebfrapCalendar_Access extends LibAclPermission
   public function loadDefault($params, $entity = null)
   {
 
-    // laden der benötigten Resource Objekte
+    // laden der mvc/utils adapter Objekte
     $acl = $this->getAcl();
 
     $this->level = Acl::DELETE;
@@ -48,7 +48,7 @@ class WebfrapCalendar_Access extends LibAclPermission
   public function fetchListTableDefault($query, $condition, $params)
   {
 
-    // laden der benötigten Resource Objekte
+    // laden der mvc/utils adapter Objekte
     $acl  = $this->getAcl();
     $user = $this->getUser();
     $orm  = $this->getDb()->getOrm();

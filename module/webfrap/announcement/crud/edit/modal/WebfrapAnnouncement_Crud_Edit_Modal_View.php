@@ -55,7 +55,7 @@ class WebfrapAnnouncement_Crud_Edit_Modal_View extends WgtModal
   public function displayForm($objid, $params)
   {
 
-    // laden der benötigten Resource Objekte
+    // laden der mvc/utils adapter Objekte
     $request = $this->getRequest();
 
     $this->position = '#wgt-box-webfrap_announcement-form';

@@ -17,28 +17,27 @@
 
 /**
  * @package WebFrap
- * @subpackage Groupware
+ * @subpackage Taskplanner
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
- * @copyright webfrap.net <contact@webfrap.net>
+ * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapMy_Data_Access extends LibAclPermission
+class WebfrapMaintenance_Context_List_Menu extends WgtSimpleListmenu
 {
+/*//////////////////////////////////////////////////////////////////////////////
+// Attributes
+//////////////////////////////////////////////////////////////////////////////*/
 
-  /**
-   * @param TFlag $params
-   * @param WbfsysMessage_Entity $entity
-   */
-  public function loadDefault($params, $entity = null)
+  public $listActions = <<<JSON
+[
   {
+    "type" : "request",
+    "label": "",
+    "icon": "control/delete.png",
+    "method": "put",
+    "service": "ajax.php?c=Webfrap.Context.reset&key="
+  }
+]
+JSON;
 
-    // laden der mvc/utils adapter Objekte
-    $acl = $this->getAcl();
-
-    $this->level = Acl::DELETE;
-
-  }//end public function loadDefault */
-
-
-
-}//end class WebfrapMy_Data_Access
+}//end class WebfrapTaskPlanner_List_Ajax_View
 

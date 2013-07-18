@@ -39,7 +39,7 @@ class WebfrapMessage_List_Maintab_View extends WgtMaintab
 
     //$this->addVar('node', $this->model->node);
 
-    // benötigte resourcen laden
+    // laden der mvc/utils adapter Objekte
     $user     = $this->getUser();
     $acl      = $this->getAcl();
     $request  = $this->getRequest();

@@ -13,7 +13,7 @@
   public function fetchListTreetableDefault($query, $condition, $rqtContext)
   {
 
-    // laden der benötigten Resource Objekte
+    // laden der mvc/utils adapter Objekte
     $acl  = $this->getAcl();
     $user = $this->getUser();
     $orm  = $this->getDb()->getOrm();

@@ -16,29 +16,29 @@
 *******************************************************************************/
 
 /**
+ *
  * @package WebFrap
- * @subpackage Groupware
+ * @subpackage Core
  * @author Dominik Bonsch <dominik.bonsch@webfrap.net>
- * @copyright webfrap.net <contact@webfrap.net>
+ * @copyright Webfrap Developer Network <contact@webfrap.net>
  */
-class WebfrapMy_Data_Access extends LibAclPermission
+class WebfrapContext_Action extends Action
 {
+/*//////////////////////////////////////////////////////////////////////////////
+// Attributes
+//////////////////////////////////////////////////////////////////////////////*/
 
-  /**
-   * @param TFlag $params
-   * @param WbfsysMessage_Entity $entity
-   */
-  public function loadDefault($params, $entity = null)
+ /**
+  * @param string $key
+  * @param int $objid
+  */
+  public function setContext($key, $objid)
   {
 
-    // laden der mvc/utils adapter Objekte
-    $acl = $this->getAcl();
+    $session = $this->getSession();
+    $session->setContext($key, $objid);
 
-    $this->level = Acl::DELETE;
+  }//end public function setContext */
 
-  }//end public function loadDefault */
-
-
-
-}//end class WebfrapMy_Data_Access
+} // end class WebfrapContext_Action
 

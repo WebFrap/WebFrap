@@ -63,7 +63,7 @@ class MaintenanceDb_Index_Search_Modal_View extends WgtModal
   public function displayForm($params)
   {
 
-    // laden der benötigten Resource Objekte
+    // laden der mvc/utils adapter Objekte
     $request = $this->getRequest();
 
     $i18nLabel = $this->i18n->l(

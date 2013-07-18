@@ -88,7 +88,7 @@ class AclMgmt_Access_Container extends LibAclPermission
   public function loadDefault($params, $entity = null)
   {
 
-    // laden der benötigten Resource Objekte
+    // laden der mvc/utils adapter Objekte
     $acl = $this->getAcl();
 
     // wenn keine acl root übergeben wird, da befinden wir uns an dem

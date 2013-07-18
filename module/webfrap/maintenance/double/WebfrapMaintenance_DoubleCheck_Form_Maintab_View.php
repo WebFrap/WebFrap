@@ -82,7 +82,7 @@ class WebfrapMaintenance_DoubleCheck_Maintab_View extends WgtMaintabCustom
   public function addMenu()
   {
 
-    // benötigte resourcen laden
+    // laden der mvc/utils adapter Objekte
     $acl    = $this->getAcl();
 
     $menu  = $this->newMenu($this->id.'_dropmenu');

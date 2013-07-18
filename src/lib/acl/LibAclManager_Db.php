@@ -56,7 +56,7 @@ class LibAclManager_Db extends LibAclManager
   public function createAreaAssignment($entityAccess, $parents = array(), $syncMode = false)
   {
 
-    // laden der benötigten resourcen
+    // laden der mvc/utils adapter Objekte
     $db        = $this->getDb();
     $orm       = $db->getOrm();
 
@@ -126,7 +126,7 @@ class LibAclManager_Db extends LibAclManager
   )
   {
 
-    // laden der benötigten resourcen
+    // laden der mvc/utils adapter Objekte
     $db        = $this->getDb();
     $orm       = $db->getOrm();
 
@@ -265,7 +265,7 @@ class LibAclManager_Db extends LibAclManager
   )
   {
 
-    // laden der benötigten resourcen
+    // laden der mvc/utils adapter Objekte
     $db        = $this->getDb();
     $orm       = $db->getOrm();
 
@@ -401,7 +401,7 @@ class LibAclManager_Db extends LibAclManager
   public function deleteAssgignmentById($relId)
   {
 
-    // laden der benötigten resourcen
+    // laden der mvc/utils adapter Objekte
     $db        = $this->getDb();
     $orm       = $db->getOrm();
 
@@ -522,7 +522,7 @@ class LibAclManager_Db extends LibAclManager
   public function cleanDatasetRelations($entity)
   {
 
-    // laden der benötigten resourcen
+    // laden der mvc/utils adapter Objekte
     $db        = $this->getDb();
     $orm       = $db->getOrm();
 
@@ -553,7 +553,7 @@ class LibAclManager_Db extends LibAclManager
   public function cleanUserRelations($user)
   {
 
-    // laden der benötigten resourcen
+    // laden der mvc/utils adapter Objekte
     $db        = $this->getDb();
     $orm       = $db->getOrm();
 
@@ -594,7 +594,7 @@ class LibAclManager_Db extends LibAclManager
   )
   {
 
-    // laden der benötigten resourcen
+    // laden der mvc/utils adapter Objekte
     $db        = $this->getDb();
     $orm       = $db->getOrm();
 
@@ -662,7 +662,7 @@ class LibAclManager_Db extends LibAclManager
   )
   {
 
-    // laden der benötigten resourcen
+    // laden der mvc/utils adapter Objekte
     $db        = $this->getDb();
     $orm       = $db->getOrm();
 

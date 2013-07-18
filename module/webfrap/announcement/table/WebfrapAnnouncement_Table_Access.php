@@ -32,7 +32,7 @@ class WebfrapAnnouncement_Table_Access extends LibAclPermission
   public function loadDefault($params, $entity = null)
   {
 
-    // laden der benötigten Resource Objekte
+    // laden der mvc/utils adapter Objekte
     $acl = $this->getAcl();
 
     // wenn keine root übergeben wird oder wir in level 1 sind
@@ -87,7 +87,7 @@ class WebfrapAnnouncement_Table_Access extends LibAclPermission
   public function fetchListTableDefault($query, $condition, $params)
   {
 
-    // laden der benötigten Resource Objekte
+    // laden der mvc/utils adapter Objekte
     $acl  = $this->getAcl();
     $user = $this->getUser();
     $orm  = $this->getDb()->getOrm();

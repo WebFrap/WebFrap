@@ -84,7 +84,7 @@ class WebfrapNavigation_Controller extends ControllerCrud
   public function service_search($request, $response)
   {
 
-    // benötigte resourcen laden
+    // laden der mvc/utils adapter Objekte
     $user      = $this->getUser();
 
     // load request parameters an interpret as flags
@@ -153,7 +153,7 @@ class WebfrapNavigation_Controller extends ControllerCrud
   public function service_searchList($request, $response)
   {
 
-    // benötigte resourcen laden
+    // laden der mvc/utils adapter Objekte
     $user      = $this->getUser();
 
     // load request parameters an interpret as flags

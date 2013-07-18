@@ -33,7 +33,7 @@ class WebfrapDocu_Widget extends WgtWidget
   public function asTab($containerId, $tabId, $tabSize = 'medium')
   {
 
-    // benötigte resourcen laden
+    // laden der mvc/utils adapter Objekte
     $user     = $this->getUser();
     $view     = $this->getView();
     $acl      = $this->getAcl();
@@ -73,7 +73,7 @@ HTML;
    */
   public function embed($tabId, $tabSize = 'medium')
   {
-    // benötigte resourcen laden
+    // laden der mvc/utils adapter Objekte
     $user     = $this->getUser();
     $view     = $this->getView();
     $acl      = $this->getAcl();

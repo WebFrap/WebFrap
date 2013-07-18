@@ -33,7 +33,7 @@ class WebfrapContact_Table_Access extends LibAclPermission
   public function loadDefault($params, $entity = null)
   {
 
-    // laden der benötigten Resource Objekte
+    // laden der mvc/utils adapter Objekte
     $acl = $this->getAcl();
 
     $this->level = Acl::DELETE;

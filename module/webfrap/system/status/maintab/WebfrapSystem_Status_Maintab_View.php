@@ -46,8 +46,19 @@ class WebfrapSystem_Status_Maintab_View extends WgtMaintab
    * @var WebfrapMaintenance_Metadata_List_Menu
    */
   public $metadataMenu = null;
+  
+  /**
+   * @var array
+   */
+  public $contextData = array();
+  
+  /**
+   * @var WebfrapMaintenance_Context_List_Menu
+   */
+  public $contextMenu = null;
 
   /**
+   * @var string
    */
   public $overflowY = 'auto';
 
@@ -62,8 +73,7 @@ class WebfrapSystem_Status_Maintab_View extends WgtMaintab
   {
 
     // fetch the i18n text for title, status and bookmark
-    $i18nText = $this->i18n->l
-    (
+    $i18nText = $this->i18n->l(
       'System Status',
       'wbf.label'
     );
@@ -75,6 +85,22 @@ class WebfrapSystem_Status_Maintab_View extends WgtMaintab
     $this->metadataModel = $this->loadModel('WebfrapMaintenance_Metadata');
     $this->metadataModel->loadStats();
     $this->metadataMenu = new WebfrapMaintenance_Metadata_List_Menu();
+    
+    
+    $this->contextMenu = new WebfrapMaintenance_Context_List_Menu();
+    
+    $session = $this->getSession();
+    
+    $data = $session->getContext();
+    
+    if (!$data){
+      $this->contextData = array();
+    } else {
+      foreach ($data as $key => $value){
+        $this->contextData[] = array('id'=>$key, 'value' => $value);
+      }
+    }
+    
 
     // set the window title
     $this->setTitle($i18nText);

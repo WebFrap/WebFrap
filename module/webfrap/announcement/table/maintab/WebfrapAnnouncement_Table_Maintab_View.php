@@ -59,7 +59,7 @@ class WebfrapAnnouncement_Table_Maintab_View extends WgtMaintab
   public function displayListing($params)
   {
 
-    // laden der benötigten resourcen
+    // laden der mvc/utils adapter Objekte
     $request  = $this->getRequest();
     $access   = $params->access;
 
@@ -105,13 +105,6 @@ class WebfrapAnnouncement_Table_Maintab_View extends WgtMaintab
     (
       $this->model->search($access, $params, $condition),
       $access,
-      $params
-    );
-
-    // Das Suchformular wird erstellt
-    $ui->searchForm
-    (
-      $this->model,
       $params
     );
 
