@@ -1,1 +1,0 @@
-<h1>WebFrap Codekonvention</h1>
