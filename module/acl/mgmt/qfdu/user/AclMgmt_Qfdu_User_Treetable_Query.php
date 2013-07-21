@@ -271,10 +271,9 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
   public function setTables($criteria)
   {
 
-    $criteria->from('wbfsys_group_users group_users', 'group_users');
+    $criteria->from('wbfsys_group_users', 'group_users');
 
-    $criteria->join
-    (
+    $criteria->join(
       '
         JOIN wbfsys_role_user role_user
           ON group_users.id_user = role_user.rowid
@@ -312,14 +311,12 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
     $condition,
     $ids,
     $context
-  )
-  {
+  ) {
 
     if (isset($condition['free']) && trim($condition['free']) != ''  ) {
 
       if (ctype_digit($condition['free'])) {
-        $criteria->where
-        (
+        $criteria->where(
           '( group_users.rowid = \''.$condition['free'].'\')'
         );
       } else {
@@ -336,8 +333,7 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
             if ('' == trim($part))
               continue;
 
-            $criteria->where
-            (
+            $criteria->where(
               '(
                 ( upper(role_user.name) like upper(\''.$part.'%\'))
                 OR
@@ -354,8 +350,7 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
 
           $part = $condition['free'];
 
-          $criteria->where
-          (
+          $criteria->where(
             '(
               ( upper(role_user.name) like upper(\''.$part.'%\'))
               OR
@@ -373,8 +368,7 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
     }//end if
 
     if ('user' == $context->groupBy) {
-      $criteria->where
-      (
+      $criteria->where(
         "group_users.id_area = {$ids->areaId}
           AND
           (
@@ -382,8 +376,7 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
           )"
       );
     } elseif ('dset' == $context->groupBy) {
-      $criteria->where
-      (
+      $criteria->where(
         "group_users.id_area = {$ids->areaId}
           AND group_users.vid = {$ids->dsetId}
           AND
@@ -392,8 +385,7 @@ class AclMgmt_Qfdu_User_Treetable_Query extends LibSqlQuery
           )"
       );
     } else {
-      $criteria->where
-      (
+      $criteria->where(
         "group_users.id_area = {$ids->areaId}
           AND group_users.id_group = {$ids->groupId}
           AND

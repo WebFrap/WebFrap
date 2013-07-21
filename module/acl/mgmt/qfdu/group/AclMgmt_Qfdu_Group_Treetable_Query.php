@@ -226,7 +226,7 @@ class AclMgmt_Qfdu_Group_Treetable_Query extends LibSqlQuery
   public function setTables($criteria)
   {
 
-    $criteria->from('wbfsys_group_users group_users', 'group_users');
+    $criteria->from('wbfsys_group_users', 'group_users');
 
     $criteria->join
     (

@@ -100,10 +100,8 @@ class AclMgmt_Table_Element extends WgtTable
      * manually wich actions are used with: Wgt::addActions
      * @var array
      */
-    $this->url      = array
-    (
-      'delete'  => array
-      (
+    $this->url      = array(
+      'delete'  => array(
         Wgt::ACTION_DELETE,
         'Delete',
         'index.php?c=Acl.Mgmt.deleteGroup&dkey='.$this->domainNode->domainName.'&amp;objid=',
@@ -112,8 +110,7 @@ class AclMgmt_Table_Element extends WgtTable
         'wbf.label',
         Acl::ADMIN
       ),
-      'tree'  => array
-      (
+      'tree'  => array(
         Wgt::ACTION_BUTTON_GET,
         'Reference ACLs',
         'maintab.php?c=Acl.Mgmt_Tree.showGraph&amp;dkey='.$this->domainNode->domainName.'&amp;objid=',
@@ -122,8 +119,7 @@ class AclMgmt_Table_Element extends WgtTable
         'wbf.inheritance',
         Acl::ADMIN
       ),
-      'sep'  => array
-      (
+      'sep'  => array(
         Wgt::ACTION_SEP
       ),
 
@@ -284,32 +280,27 @@ class AclMgmt_Table_Element extends WgtTable
         .(!is_null($row['num_assignments'])?$row['num_assignments']:' ')
         .'</td>'.NL;
 
-      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectRights
-        (
+      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectRights(
           $row['security_access_access_level'],
           "ar[security_access][{$objid}][access_level]"
         ).'</td>'.NL;
 
-      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectRights
-        (
+      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectRights(
           $row['security_access_ref_access_level'],
           "ar[security_access][{$objid}][ref_access_level]"
         ).'</td>'.NL;
 
-      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectSimpleRights
-        (
+      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectSimpleRights(
           $row['security_access_message_level'],
           "ar[security_access][{$objid}][message_level]"
         ).'</td>'.NL;
 
-      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectSimpleRights
-        (
+      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectSimpleRights(
           $row['security_access_priv_message_level'],
           "ar[security_access][{$objid}][priv_message_level]"
         ).'</td>'.NL;
 
-      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectSimpleRights
-        (
+      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectSimpleRights(
           $row['security_access_meta_level'],
           "ar[security_access][{$objid}][meta_level]"
         ).'</td>'.NL;
@@ -452,29 +443,30 @@ class AclMgmt_Table_Element extends WgtTable
         .(!is_null($row['num_assignments'])?$row['num_assignments']:' ')
         .'</td>'.NL;
 
-      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectRights
-        (
+      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectRights(
           $row['security_access_access_level'],
           "ar[security_access][{$objid}][access_level]"
         ).'</td>'.NL;
 
-      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectRights
-        (
+      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectRights(
           $row['security_access_ref_access_level'],
           "ar[security_access][{$objid}][ref_access_level]"
         ).'</td>'.NL;
 
-      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectSimpleRights
-        (
+      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectSimpleRights(
           $row['security_access_message_level'],
           "ar[security_access][{$objid}][message_level]"
         ).'</td>'.NL;
 
-      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectSimpleRights
-        (
-          $row['security_access_meta_level'],
-          "ar[security_access][{$objid}][meta_level]"
-        ).'</td>'.NL;
+      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectSimpleRights(
+      	$row['security_access_priv_message_level'],
+      	"ar[security_access][{$objid}][priv_message_level]"
+      ).'</td>'.NL;
+
+      $body .= '<td valign="top" style="text-align:right;" >'.$this->selectSimpleRights(
+        $row['security_access_meta_level'],
+        "ar[security_access][{$objid}][meta_level]"
+      ).'</td>'.NL;
 
     /*
     $body .= '<td valign="top" >'
@@ -499,12 +491,11 @@ class AclMgmt_Table_Element extends WgtTable
       */
 
     if ($this->enableNav) {
-      $navigation  = $this->rowMenu
-        (
-          $objid.'&group_id='.$row['role_group_rowid'],
-          $row,
-          $row['role_group_name']
-        );
+      $navigation  = $this->rowMenu(
+      	$objid.'&group_id='.$row['role_group_rowid'],
+        $row,
+        $row['role_group_name']
+      );
       $body .= '<td valign="top"  class="nav_split"  >'.$navigation.'</td>'.NL;
     }
 

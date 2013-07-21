@@ -88,8 +88,7 @@ class AclMgmt_Table_Query_Postgresql extends LibSqlQuery
 
     ///TODO remove one of redundant id_group attributes
     // take care for the getEntryData method on the model
-    $cols = array
-    (
+    $cols = array(
       'security_access.rowid as "security_access_rowid"',
       'security_access.access_level as "security_access_access_level"',
       'security_access.ref_access_level as "security_access_ref_access_level"',
@@ -128,10 +127,9 @@ class AclMgmt_Table_Query_Postgresql extends LibSqlQuery
   public function setTables($criteria   )
   {
 
-    $criteria->from('wbfsys_security_access security_access', 'security_access');
+    $criteria->from('wbfsys_security_access', 'security_access');
 
-    $criteria->leftJoinOn
-    (
+    $criteria->leftJoinOn(
       'security_access',
       'id_group',
       'wbfsys_role_group',
@@ -140,8 +138,7 @@ class AclMgmt_Table_Query_Postgresql extends LibSqlQuery
       'role_group'
     );
 
-    $criteria->leftJoinOn
-    (
+    $criteria->leftJoinOn(
       'security_access',
       'id_group',
       'wbfsys_group_users',
