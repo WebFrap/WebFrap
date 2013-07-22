@@ -1443,12 +1443,6 @@ class LibAclAdapter_Db extends LibAclAdapter
 
     $model = $this->getModel();
 
-    if ($keys) {
-      $keyData  = $model->extractWeightedKeys($keys);
-    } else {
-      $keyData = null;
-    }
-
     if (is_array($entity) && !$asArray) {
       $data = new LibAclRoleContainer($model->loadNumUserExplicit($keys, $entity, $roleKey));
     } else {
@@ -1477,13 +1471,6 @@ class LibAclAdapter_Db extends LibAclAdapter
   {
 
     $model = $this->getModel();
-
-    if ($keys) {
-      $keyData  = $model->extractWeightedKeys($keys);
-    } else {
-      $keyData = null;
-    }
-
     return $model->loadExplicitUsers($keys, $entity, $roleKey, $groupFormat);
 
   }//end public function getExplicitUsers */

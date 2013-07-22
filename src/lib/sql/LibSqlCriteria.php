@@ -80,7 +80,7 @@ class LibSqlCriteria implements ISqlParser
    * @var string
    */
   public $table      = null;
-  
+
   /**
    * Alias für die From tabelle soweit vorhanden
    * @var string
@@ -423,7 +423,7 @@ class LibSqlCriteria implements ISqlParser
     if (!$indexKey){
       $indexKey = $table;
     } else {
-      $this->as = $table;
+      $this->as = $indexKey;
     }
 
     $this->joinIndex[$indexKey] = true;
