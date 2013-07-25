@@ -220,6 +220,11 @@ class LibTaskplanner extends BaseChild
         $types[] = ETaskType::MONTH_END_WORKDAY;
       }
       
+      // Monatlich am 20.
+      if($monthDay == 20) {
+      	$types[] = ETaskType::MONTHLY;
+      }
+      
       // Jedes Quartal
       if ($monthDay == 1) {
         // ETaskType: Every month start

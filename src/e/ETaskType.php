@@ -136,6 +136,11 @@ class ETaskType
    */
   const WEEKLY = 22;
   
+  /**
+   * @var int
+   */
+  const MONTHLY = 23;
+  
   /*//////////////////////////////////////////////////////////////////////////////
 // Labels
 //////////////////////////////////////////////////////////////////////////////*/
@@ -157,6 +162,7 @@ class ETaskType
   	  self::WEEKLY => 'Every week',
       self::WEEK_END => 'Every weekend', 
       self::WEEK_2 => 'Every second week', 
+      self::MONTHLY => 'Every month',
       self::MONTH_START => 'Every month start', 
       self::MONTH_END => 'Every month end', 
       self::MONTH_END_WORKDAY => 'Every month end (workday)', 
