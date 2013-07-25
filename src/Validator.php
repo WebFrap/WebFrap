@@ -549,7 +549,7 @@ class Validator
     }
 
     if ($maxSize) {
-      if (strlen($value) > $maxSize) {
+      if (mb_strlen($value) > $maxSize) {
         $this->invalid[$key]  = 'max';
 
         return 'max';
@@ -557,7 +557,7 @@ class Validator
     }
 
     if ($minSize) {
-      if (strlen($value) < $minSize) {
+      if (mb_strlen($value) < $minSize) {
         $this->invalid[$key]  = 'min';
 
         return 'min';
@@ -632,7 +632,7 @@ class Validator
     }
 
     if ($maxSize) {
-      if (strlen($value) > $maxSize) {
+      if (mb_strlen($value) > $maxSize) {
         $this->invalid[$key]  = 'max';
 
         return 'max';
@@ -640,7 +640,7 @@ class Validator
     }
 
     if ($minSize) {
-      if (strlen($value) < $minSize) {
+      if (mb_strlen($value) < $minSize) {
         $this->invalid[$key]  = 'min';
 
         return 'min';
@@ -940,8 +940,9 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addText($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addText($key, $value, $notNull = false, $maxSize = null, $minSize = null)
   {
+    
     if (!$notNull and trim($value) == '') {
       $this->data[$key]     = null;
       $this->invalid[$key]  = false;
@@ -949,22 +950,29 @@ class Validator
       return false;
     }
 
-    $this->data[$key] = $value;
-
+    if ($maxSize) {
+      if (mb_strlen($value) > $maxSize) {
+        $this->data[$key] = mb_substr(0, $value, $maxSize);
+        return 'max';
+      }
+    } else {
+      $this->data[$key] = $value;
+    }
+    
     if ($notNull) {
-      if (trim($value) == ''  ) {
+      if (trim($value) == '') {
         return 'empty';
       }
     }
 
     if ($maxSize) {
-      if (strlen($this->data[$key]) > $maxSize) {
+      if (mb_strlen($this->data[$key]) > $maxSize) {
         return 'max';
       }
     }
 
     if ($minSize) {
-      if (strlen($this->data[$key]) < $minSize) {
+      if (mb_strlen($this->data[$key]) < $minSize) {
         return 'min';
       }
     }
@@ -982,8 +990,9 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addSearch($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addSearch($key, $value, $notNull = false, $maxSize = null, $minSize = null)
   {
+
     if (!$notNull and trim($value) == '') {
       $this->data[$key]     = null;
       $this->invalid[$key]  = false;
@@ -1001,13 +1010,13 @@ class Validator
     }
 
     if ($maxSize) {
-      if (strlen($this->data[$key]) > $maxSize) {
+      if (mb_strlen($this->data[$key]) > $maxSize) {
         return 'max';
       }
     }
 
     if ($minSize) {
-      if (strlen($this->data[$key]) < $minSize) {
+      if (mb_strlen($this->data[$key]) < $minSize) {
         return 'min';
       }
     }
@@ -1051,12 +1060,12 @@ class Validator
     }
 
     if ($maxSize) {
-      if (strlen($this->data[$key]) > $maxSize)
+      if (mb_strlen($this->data[$key]) > $maxSize)
         return 'max';
     }
 
     if ($minSize) {
-      if (strlen($this->data[$key]) < $minSize)
+      if (mb_strlen($this->data[$key]) < $minSize)
         return 'min';
     }
 
@@ -1099,12 +1108,12 @@ class Validator
     }
 
     if ($maxSize) {
-      if (strlen($this->data[$key]) > $maxSize)
+      if (mb_strlen($this->data[$key]) > $maxSize)
         return 'max';
     }
 
     if ($minSize) {
-      if (strlen($this->data[$key]) < $minSize)
+      if (mb_strlen($this->data[$key]) < $minSize)
         return 'min';
     }
 
@@ -1147,12 +1156,12 @@ class Validator
     }
 
     if ($maxSize) {
-      if (strlen($this->data[$key]) > $maxSize)
+      if (mb_strlen($this->data[$key]) > $maxSize)
         return 'max';
     }
 
     if ($minSize) {
-      if (strlen($this->data[$key]) < $minSize)
+      if (mb_strlen($this->data[$key]) < $minSize)
         return 'min';
     }
 
@@ -1189,7 +1198,7 @@ class Validator
     }
 
     if ($maxSize) {
-      if (strlen($value) > $maxSize) {
+      if (mb_strlen($value) > $maxSize) {
         $this->invalid[$key]  = 'max';
 
         return 'max';
@@ -1197,7 +1206,7 @@ class Validator
     }
 
     if ($minSize) {
-      if (strlen($value) < $minSize) {
+      if (mb_strlen($value) < $minSize) {
         $this->invalid[$key]  = 'min';
 
         return 'min';
@@ -1250,7 +1259,7 @@ class Validator
 
     /*
     if ($maxSize) {
-      if (strlen($value) > $maxSize) {
+      if (mb_strlen($value) > $maxSize) {
         $this->invalid[$key]  = 'max';
 
         return 'max';
@@ -1258,7 +1267,7 @@ class Validator
     }
 
     if ($minSize) {
-      if (strlen($value) < $minSize) {
+      if (mb_strlen($value) < $minSize) {
         $this->invalid[$key]  = 'min';
 
         return 'min';
@@ -1300,7 +1309,7 @@ class Validator
 
     /*
     if ($maxSize) {
-      if (strlen($value) > $maxSize) {
+      if (mb_strlen($value) > $maxSize) {
         $this->invalid[$key]  = 'max';
 
         return 'max';
@@ -1308,7 +1317,7 @@ class Validator
     }
 
     if ($minSize) {
-      if (strlen($value) < $minSize) {
+      if (mb_strlen($value) < $minSize) {
         $this->invalid[$key]  = 'min';
 
         return 'min';
@@ -1350,7 +1359,7 @@ class Validator
 
     /*
     if ($maxSize) {
-      if (strlen($value) > $maxSize) {
+      if (mb_strlen($value) > $maxSize) {
         $this->invalid[$key]  = 'max';
 
         return 'max';
@@ -1358,7 +1367,7 @@ class Validator
     }
 
     if ($minSize) {
-      if (strlen($value) < $minSize) {
+      if (mb_strlen($value) < $minSize) {
         $this->invalid[$key]  = 'min';
 
         return 'min';
@@ -1404,7 +1413,7 @@ class Validator
     }
 
     if ($maxSize) {
-      if (strlen($value) > $maxSize) {
+      if (mb_strlen($value) > $maxSize) {
         $this->invalid[$key]  = 'max';
 
         return 'max';
@@ -1412,7 +1421,7 @@ class Validator
     }
 
     if ($minSize) {
-      if (strlen($value) < $minSize) {
+      if (mb_strlen($value) < $minSize) {
         $this->invalid[$key]  = 'min';
 
         return 'min';
@@ -1457,7 +1466,7 @@ class Validator
     }
 
     if ($maxSize) {
-      if (strlen($value) > $maxSize) {
+      if (mb_strlen($value) > $maxSize) {
         $this->invalid[$key]  = 'max';
 
         return 'max';
@@ -1465,7 +1474,7 @@ class Validator
     }
 
     if ($minSize) {
-      if (strlen($value) < $minSize) {
+      if (mb_strlen($value) < $minSize) {
         $this->invalid[$key]  = 'min';
 
         return 'min';
@@ -1513,7 +1522,7 @@ class Validator
     }
 
     if ($maxSize) {
-      if (strlen($value) > $maxSize) {
+      if (mb_strlen($value) > $maxSize) {
         $this->invalid[$key]  = 'max';
 
         return 'max';
@@ -1521,7 +1530,7 @@ class Validator
     }
 
     if ($minSize) {
-      if (strlen($value) < $minSize) {
+      if (mb_strlen($value) < $minSize) {
         $this->invalid[$key]  = 'min';
 
         return 'min';
@@ -1566,7 +1575,7 @@ class Validator
     }
 
     if ($maxSize) {
-      if (strlen($value) > $maxSize) {
+      if (mb_strlen($value) > $maxSize) {
         $this->invalid[$key]  = 'max';
 
         return 'max';
@@ -1574,7 +1583,7 @@ class Validator
     }
 
     if ($minSize) {
-      if (strlen($value) < $minSize) {
+      if (mb_strlen($value) < $minSize) {
         $this->invalid[$key]  = 'min';
 
         return 'min';
@@ -1620,7 +1629,7 @@ class Validator
     }
 
     if ($maxSize) {
-      if (strlen($value) > $maxSize) {
+      if (mb_strlen($value) > $maxSize) {
         $this->invalid[$key]  = 'max';
 
         return 'max';
@@ -1628,7 +1637,7 @@ class Validator
     }
 
     if ($minSize) {
-      if (strlen($value) < $minSize) {
+      if (mb_strlen($value) < $minSize) {
         $this->invalid[$key]  = 'min';
 
         return 'min';
@@ -1664,7 +1673,7 @@ class Validator
     }
 
     if ($maxSize) {
-      if (strlen($value) > $maxSize) {
+      if (mb_strlen($value) > $maxSize) {
         $this->invalid[$key]  = 'max';
 
         return 'max';
@@ -1672,7 +1681,7 @@ class Validator
     }
 
     if ($minSize) {
-      if (strlen($value) < $minSize) {
+      if (mb_strlen($value) < $minSize) {
         $this->invalid[$key]  = 'min';
 
         return 'min';
@@ -1722,7 +1731,7 @@ class Validator
     }
 
     if ($maxSize) {
-      if (strlen($value) > $maxSize) {
+      if (mb_strlen($value) > $maxSize) {
         $this->invalid[$key]  = 'max';
 
         return 'max';
@@ -1730,7 +1739,7 @@ class Validator
     }
 
     if ($minSize) {
-      if (strlen($value) < $minSize) {
+      if (mb_strlen($value) < $minSize) {
         $this->invalid[$key]  = 'min';
 
         return 'min';
@@ -1778,7 +1787,7 @@ class Validator
     }
 
     if ($maxSize) {
-      if (strlen($value) > $maxSize) {
+      if (mb_strlen($value) > $maxSize) {
         $this->invalid[$key]  = 'max';
 
         return 'max';
@@ -1786,7 +1795,7 @@ class Validator
     }
 
     if ($minSize) {
-      if (strlen($value) < $minSize) {
+      if (mb_strlen($value) < $minSize) {
         $this->invalid[$key]  = 'min';
 
         return 'min';
@@ -1882,7 +1891,7 @@ class Validator
     }
 
     if ($maxSize) {
-      if (strlen($value) > $maxSize) {
+      if (mb_strlen($value) > $maxSize) {
         $this->invalid[$key]  = 'max';
 
         return 'max';
@@ -1890,7 +1899,7 @@ class Validator
     }
 
     if ($minSize) {
-      if (strlen($value) < $minSize) {
+      if (mb_strlen($value) < $minSize) {
         $this->invalid[$key]  = 'min';
 
         return 'min';
@@ -1937,7 +1946,7 @@ class Validator
     }
 
     if ($maxSize) {
-      if (strlen($value) > $maxSize) {
+      if (mb_strlen($value) > $maxSize) {
         $this->invalid[$key]  = 'max';
 
         return 'max';
@@ -1945,7 +1954,7 @@ class Validator
     }
 
     if ($minSize) {
-      if (strlen($value) < $minSize) {
+      if (mb_strlen($value) < $minSize) {
         $this->invalid[$key]  = 'min';
 
         return 'min';
@@ -1992,7 +2001,7 @@ class Validator
     }
 
     if ($maxSize) {
-      if (strlen($value) > $maxSize) {
+      if (mb_strlen($value) > $maxSize) {
         $this->invalid[$key]  = 'max';
 
         return 'max';
@@ -2000,7 +2009,7 @@ class Validator
     }
 
     if ($minSize) {
-      if (strlen($value) < $minSize) {
+      if (mb_strlen($value) < $minSize) {
         $this->invalid[$key]  = 'min';
 
         return 'min';
@@ -2038,13 +2047,13 @@ class Validator
     }
 
     if ($maxSize) {
-      if (strlen($this->data[$key]) > $maxSize) {
+      if (mb_strlen($this->data[$key]) > $maxSize) {
         return 'max';
       }
     }
 
     if ($minSize) {
-      if (strlen($this->data[$key]) < $minSize) {
+      if (mb_strlen($this->data[$key]) < $minSize) {
         return 'min';
       }
     }

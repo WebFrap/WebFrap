@@ -1391,24 +1391,20 @@ class LibRequestPhp
    * if an error is found an message will be send to system, if you want to find
    * out if the test failed ask the system if there are any error messages
    *
-   *
    * @param array $values are the tablefields
    * @param array $messages
    * @param string $subkey  subkey is the tablename
    * @param string $required  subkey is the tablename
    * @param State $state
    * @return array
-   *
    */
-  public function checkMultiFormInput
-  (
+  public function checkMultiFormInput(
     $values,
     $messages,
     $subkey = null,
     $required = array(),
     $state = null
-)
-  {
+  ) {
 
     // check if data exists, if not return an empty array
     if (!isset($_POST[$subkey]) or !is_array($_POST[$subkey])) {
@@ -1420,13 +1416,14 @@ class LibRequestPhp
     $response = $this->getResponse();
 
     // get Validator from Factory
-    $filter   = Validator::getActive();
+    $filter = Validator::getActive();
     $filtered = array();
 
     foreach ($_POST[$subkey] as $rowPos => $row) {
       $filter->clean();
 
       foreach ($values as $key => $value) {
+        
         $method = 'add'.$value[0] ;
 
         if (!isset($row[$key]))
