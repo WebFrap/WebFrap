@@ -1011,7 +1011,7 @@ class LibRequestPhp
     if ($type) {
       $classname = 'LibUpload'.SParserString::subToCamelCase($type);
 
-      if (!Webfrap::classLoadable($classname))
+      if (!Webfrap::classExists($classname))
         throw new LibFlow_Exception('Requested nonexisting upload type: '.$classname);
 
       return new $classname($data, $key);

@@ -213,7 +213,7 @@ abstract class MvcController extends BaseChild
     $modelName    = $modelKey.'_Model';
 
     if (!isset($this->models[$key]  )) {
-      if (Webfrap::classLoadable($modelName)) {
+      if (Webfrap::classExists($modelName)) {
         $model = new $modelName($this);
         $this->models[$key] = $model;
       } else {
@@ -243,9 +243,9 @@ abstract class MvcController extends BaseChild
     $oldClassName = 'Ui'.$uiName;
 
     if (!isset($this->uis[$key]  )) {
-      if (Webfrap::classLoadable($className)) {
+      if (Webfrap::classExists($className)) {
         $this->uis[$key] = new $className();
-      } elseif (Webfrap::classLoadable($oldClassName)) {
+      } elseif (Webfrap::classExists($oldClassName)) {
         $this->uis[$key] = new $oldClassName();
       } else {
         throw new Controller_Exception('Internal Error','Failed to load ui: '.$uiName);
@@ -308,7 +308,7 @@ abstract class MvcController extends BaseChild
 
       $className = $conKey.'_Controller';
 
-      if (!Webfrap::classLoadable($className)) {
+      if (!Webfrap::classExists($className)) {
         throw new InvalidRoute_Exception($className);
       }
 

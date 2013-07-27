@@ -69,7 +69,7 @@ class Action extends BaseChild
 
     if (!isset(self::$pool[$key])) {
 
-      if (!Webfrap::classLoadable($classname)) {
+      if (!Webfrap::classExists($classname)) {
 
         throw new LibAction_Exception('Requested nonexisting Action: ' . $classname . ' key ' . $key);
 
@@ -150,7 +150,7 @@ class Action extends BaseChild
     $modelName = $modelKey . '_Model';
 
     if (!isset($this->models[$key])) {
-      if (Webfrap::classLoadable($modelName)) {
+      if (Webfrap::classExists($modelName)) {
         $model = new $modelName($this);
 
         $this->models[$key] = $model;

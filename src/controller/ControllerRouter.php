@@ -55,7 +55,7 @@ class ControllerRouter extends ControllerCrud
 
     $className = $controllerName . '_Controller';
 
-    if (WebFrap::loadable($className)) {
+    if (WebFrap::classExists($className)) {
       $controller = new $className();
     } else {
 

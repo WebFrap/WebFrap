@@ -280,7 +280,7 @@ class Context
    * method to set the form data
    * @param TFlag $param
    */
-  public function setSearchFormData($view, $subkey = null)
+  public function injectSearchFormData($view, $subkey = null)
   {
 
     $formAction = $this->searchFormAction;
@@ -383,7 +383,7 @@ class Context
     // formId
     $view->addVar('searchFormId'.$subkey, $this->searchFormId);
 
-  }//end public function setFormAction */
+  }//end public function injectSearchFormData */
 
   /**
    * method to set the form data

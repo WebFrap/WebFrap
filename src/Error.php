@@ -385,7 +385,7 @@ HTML;
 
     // if theres a exeption the exception handels the output of the errors
     if ($exception) {
-      if (WebFrap::loadable($exception)) {
+      if (WebFrap::classExists($exception)) {
         throw new $exception($message);
       } else {
         throw new WebfrapSys_Exception
@@ -443,7 +443,7 @@ HTML;
 
     // if theres a exeption the exception handels the output of the errors
     if ($exception) {
-      if (WebFrap::loadable($exception)) {
+      if (WebFrap::classExists($exception)) {
         throw new $exception($message);
       } else {
         throw new WebfrapSys_Exception
@@ -563,7 +563,7 @@ HTML;
     self::$lastError->toDump  = $toDump;
 
     if ($exception) {
-      if (WebFrap::loadable($exception)) {
+      if (WebFrap::classExists($exception)) {
         throw new $exception($message);
       } else {
         throw new WebfrapSys_Exception

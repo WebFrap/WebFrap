@@ -322,7 +322,7 @@ abstract class Controller extends BaseChild
     $modelNameOld = 'Model'.$modelKey;
 
     if (!isset($this->models[$key]  )) {
-      if (Webfrap::classLoadable($modelName)) {
+      if (Webfrap::classExists($modelName)) {
         $model = new $modelName($this);
 
         foreach ($injectKeys as $injectKey) {
@@ -330,7 +330,7 @@ abstract class Controller extends BaseChild
         }
 
         $this->models[$key] = $model;
-      } elseif (Webfrap::classLoadable($modelNameOld)) {
+      } elseif (Webfrap::classExists($modelNameOld)) {
         $model = new $modelNameOld($this);
 
         foreach ($injectKeys as $injectKey) {
@@ -445,7 +445,7 @@ abstract class Controller extends BaseChild
 
       $className = $conKey.'_Controller';
 
-      if (!Webfrap::classLoadable($className)) {
+      if (!Webfrap::classExists($className)) {
         throw new InvalidRoute_Exception($className);
       }
 
@@ -542,7 +542,7 @@ abstract class Controller extends BaseChild
       $modelClass = $this->modelName;
 
       // only load if not yet set and loadable
-      if (!$this->model && Webfrap::loadable($modelClass))
+      if (!$this->model && Webfrap::classExists($modelClass))
         $this->model = new $modelClass($this);
     }
 
@@ -1437,9 +1437,9 @@ abstract class Controller extends BaseChild
 
 
     if (!isset($this->uis[$key]  )) {
-      if (Webfrap::classLoadable($className)) {
+      if (Webfrap::classExists($className)) {
         $this->uis[$key] = new $className();
-      } elseif (Webfrap::classLoadable($oldClassName)) {
+      } elseif (Webfrap::classExists($oldClassName)) {
         $this->uis[$key] = new $oldClassName();
       } else {
         throw new Controller_Exception('Internal Error','Failed to load ui: '.$uiName);

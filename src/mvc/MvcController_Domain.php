@@ -97,7 +97,7 @@ abstract class MvcController_Domain  extends MvcController
     $modelName    = $modelKey.'_Model';
 
     if (!isset($this->models[$key]  )) {
-      if (Webfrap::classLoadable($modelName)) {
+      if (Webfrap::classExists($modelName)) {
         $model = new $modelName($domainNode, $this);
         $this->models[$key] = $model;
       } else {

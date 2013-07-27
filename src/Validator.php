@@ -418,7 +418,7 @@ class Validator
 
     $classname = 'LibValidator'.ucfirst($name);
 
-    if (!Webfrap::classLoadable($classname)  ) {
+    if (!Webfrap::classExists($classname)  ) {
       Error::addError('Requested nonexisting Validator: '.$name.'. Please check the existing Validator Classes');
 
       return null;

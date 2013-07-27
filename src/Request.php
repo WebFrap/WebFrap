@@ -271,7 +271,7 @@ class Request
       self::$instance->init();
     } else {
       $classname = 'LibRequest'.ucfirst(WBF_REQUEST_ADAPTER);
-      if (!WebFrap::loadable($classname)) {
+      if (!WebFrap::classExists($classname)) {
 
         throw new WebfrapConfig_Exception
         (

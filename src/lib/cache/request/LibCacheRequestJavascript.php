@@ -218,7 +218,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
     }
 
     /*
-    if (!DEBUG && Webfrap::classLoadable('LibVendorJsmin') && $minify) {
+    if (!DEBUG && Webfrap::classExists('LibVendorJsmin') && $minify) {
       $minifier = LibVendorJsmin::getInstance();
       $code     = $minifier->minify($code);
     }

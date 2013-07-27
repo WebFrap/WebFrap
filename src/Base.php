@@ -642,7 +642,7 @@ abstract class Base
   
       $cn = $class.'_Provider';
   
-      if(!Webfrap::classLoadable($cn)){
+      if(!Webfrap::classExists($cn)){
         return null;
       }
   

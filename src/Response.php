@@ -204,7 +204,7 @@ class Response
       self::$instance->init();
     } else {
       $classname = 'LibResponse'.ucfirst(WBF_RESPONSE_ADAPTER);
-      if (!WebFrap::loadable($classname)) {
+      if (!WebFrap::classExists($classname)) {
 
         throw new WebfrapConfig_Exception
         (

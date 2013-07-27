@@ -154,14 +154,14 @@ abstract class Module extends BaseChild
 
     ///TODO den default model kram muss ich hier mal kicken
     /// der ist nur noch wegen kompatibilitäts problemen drin
-    if (WebFrap::loadable($classname)) {
+    if (WebFrap::classExists($classname)) {
       $this->controller = new $classname($this);
 
       if (method_exists($this->controller, 'setDefaultModel'))
         $this->controller->setDefaultModel($this->modName.ucfirst($name));
 
       $this->controllerName = $classname;
-    } else  if (WebFrap::loadable($classnameOld)) {
+    } else  if (WebFrap::classExists($classnameOld)) {
       $classname = $classnameOld;
       $this->controller = new $classname($this);
       $this->controller->setDefaultModel($this->modName.ucfirst($name));

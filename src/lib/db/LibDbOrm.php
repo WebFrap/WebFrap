@@ -203,7 +203,7 @@ class LibDbOrm
 
     $className = ''.$type.'_Entity';
 
-    if (!Webfrap::classLoadable($className))
+    if (!Webfrap::classExists($className))
       throw new LibDb_Exception('Requested notexisting Entity '.$type);
 
     return new $className(null, array(), $this);
@@ -231,7 +231,7 @@ class LibDbOrm
 
     $className = $type.'_Entity';
 
-    if (!Webfrap::classLoadable($className))
+    if (!Webfrap::classExists($className))
       throw new LibDb_Exception('Requested notexisting Entity '.$type);
 
     $entity     = new $className(null, array(), $this  );
@@ -546,7 +546,7 @@ class LibDbOrm
 
     if (!isset($this->entityMeta[$entityKey])) {
 
-      if (WebFrap::classLoadable($className)) {
+      if (Webfrap::classExists($className)) {
         $this->entityMeta[$entityKey] = new $className(null, array(), $this);
 
         return true;
@@ -601,7 +601,7 @@ class LibDbOrm
       if (is_null($object)) {
         $className    = $entityKey.'_Entity';
 
-        if (Webfrap::classLoadable($className)) {
+        if (Webfrap::classExists($className)) {
           $object = new $className(null, array(), $this) ;
         } else {
           throw new LibDb_Exception('requested table for a nonexisting entity '.$entityKey);
@@ -610,7 +610,7 @@ class LibDbOrm
       }
 
       /*
-      if (!Webfrap::classLoadable($classname))
+      if (!Webfrap::classExists($classname))
         $classname = 'Entity'.$entityKey;
       */
       $this->tabNameCache[$entityKey] = $object->getTable();
@@ -638,11 +638,11 @@ class LibDbOrm
       $classname    = $entityKey.'_Entity';
 
       /*
-      if (!Webfrap::classLoadable($classname))
+      if (!Webfrap::classExists($classname))
         $classname = 'Entity'.$entityKey;
       */
 
-      if (!Webfrap::classLoadable($classname)) {
+      if (!Webfrap::classExists($classname)) {
         throw new LibDb_Exception('requested cols for a nonexisting entity '.$classname);
       } else {
         // cache both
@@ -1107,9 +1107,9 @@ SQL;
     $method = 'data'.ucfirst($tmp[1]);
 
     ///TODO add some error handling!!
-    if (!Webfrap::classLoadable($class)) {
+    if (!Webfrap::classExists($class)) {
       $class = $classOld;
-      if (!Webfrap::classLoadable($class)) {
+      if (!Webfrap::classExists($class)) {
         throw new LibDb_Exception('tried to call non exising query '.$tmp[0]);
       }
     }
@@ -2494,7 +2494,7 @@ SQL;
   protected function fillObjects($entityName, $datas)
   {
 
-    if (!Webfrap::classLoadable($entityName))
+    if (!Webfrap::classExists($entityName))
       throw new LibDb_Exception('Requested nonexisting Entity '.$entityName);
 
     $pool = array();
@@ -2521,7 +2521,7 @@ SQL;
 
     $classname    = $entityName.'_Entity';
 
-    if (!Webfrap::classLoadable($classname))
+    if (!Webfrap::classExists($classname))
       throw new LibDb_Exception('Requested nonexisting Entity '.$entityName);
 
     $id     = $data['rowid'];

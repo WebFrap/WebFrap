@@ -261,7 +261,7 @@ class LibFlowApachemod extends Base
 
     $classNameOld = 'Module'.$modName;
 
-    if (Webfrap::classLoadable($className)) {
+    if (Webfrap::classExists($className)) {
       Debug::console('$module',$className);
 
       $this->module = new $className($this);
@@ -270,7 +270,7 @@ class LibFlowApachemod extends Base
 
       // everythin fine
       return true;
-    } else  if (Webfrap::classLoadable($classNameOld)) {
+    } else  if (Webfrap::classExists($classNameOld)) {
       Debug::console('$module',$classNameOld);
 
       $this->module = new $classNameOld($this);
@@ -305,7 +305,7 @@ class LibFlowApachemod extends Base
       $classname    = $module.$controller.WBF_CONTROLLER_PREFIX.'_Controller';
       $classnameOld = 'Controller'.$module.$controller;
 
-      if (WebFrap::loadable($classname)) {
+      if (WebFrap::classExists($classname)) {
         $this->controller = new $classname($this);
         if (method_exists($this->controller, 'setDefaultModel'))
           $this->controller->setDefaultModel($module.$controller);
@@ -324,7 +324,7 @@ class LibFlowApachemod extends Base
         if ($this->controller)
           $this->controller->shutdownController();
 
-      } elseif (WebFrap::loadable($classnameOld)) {
+      } elseif (WebFrap::classExists($classnameOld)) {
 
         $classname = $classnameOld;
 
@@ -417,7 +417,7 @@ class LibFlowApachemod extends Base
 
     $errorClass = 'LibHttpError'.$errorKey;
 
-    if (!Webfrap::classLoadable($errorClass))
+    if (!Webfrap::classExists($errorClass))
       $errorClass = 'LibHttpError500';
 
     $error = new $errorClass($data);
