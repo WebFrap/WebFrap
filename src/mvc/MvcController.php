@@ -763,10 +763,8 @@ abstract class MvcController extends BaseChild
       $conf = Conf::get('view');
       if ($this->user->getLogedIn()) {
         $this->tplEngine->setIndex($conf['index.user']);
-        $this->tplEngine->setHtmlHead($conf['head.user']);
       } else {
         $this->tplEngine->setIndex($conf['index.annon']);
-        $this->tplEngine->setHtmlHead($conf['head.annon']);
       }
 
       $this->tplEngine->contentType = View::CONTENT_TYPE_TEXT;
