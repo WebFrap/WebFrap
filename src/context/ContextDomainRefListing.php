@@ -29,7 +29,7 @@
  * @subpackage tech_core
  *
  */
-class ContextDomainRefListing
+class ContextDomainRefListing  extends Context
 {
 
   /**
