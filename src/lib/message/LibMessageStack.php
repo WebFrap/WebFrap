@@ -53,14 +53,14 @@ class LibMessageStack extends PBase
   /**
    * Array mit Gruppen an welche die Nachricht gehen soll
    * @var array<WbfsysRoleGroup_Entity>
-   * /
+   */
   public $receiverGroups = array();
 
   /**
    * Array mit Plain Addressen. Wird benötigt wenn die Empfänger nicht im
    * System gepflegt sind
-   * @var array<string type: array<string address>>
-   * /
+   * @var array<string type: array<string address>
+   */
   public $addresses = array();
 
   /**
