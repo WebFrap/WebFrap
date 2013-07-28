@@ -209,7 +209,7 @@ class LibFlow extends Base
   {
 
     // Startseiten Eintrag ins Navmenu
-    $view     = View::engine();
+    $view     = View::getActive();
 
     if (!$session)
       $session      = $this->session;

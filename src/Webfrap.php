@@ -861,6 +861,11 @@ class Webfrap
 
     $conf = Conf::getActive();
 
+    if ($timezone = $conf->getStatus('activ.timezone'))
+      date_default_timezone_set($timezone);
+    else
+      date_default_timezone_set('Etc/UCT');
+
     if (defined('WBF_CONTROLLER')) {
       $flowController = 'LibFlow'.ucfirst(WBF_CONTROLLER);
       self::$instance = new $flowController();
@@ -886,14 +891,7 @@ class Webfrap
 
       if ('Cli' == WBF_CONTROLLER) {
         self::$instance->init();
-
-        if ($timezone = $conf->getStatus('activ.timezone'))
-          date_default_timezone_set($timezone);
-        else
-          date_default_timezone_set('Etc/UCT');
-
         return self::$instance;
-
       }
 
     }
