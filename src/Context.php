@@ -371,7 +371,7 @@ class Context
       $formAction .= '&amp;a_node='.$this->aclNode;
 
     // add the action to the form
-    $this->addVar('searchFormAction'.$subkey, $formAction);
+    $view->addVar('searchFormAction'.$subkey, $formAction);
 
     // check if there is a specific class for the crudform, if not use wcm wcm_req_ajax
     if (!$this->searchFormClass)
