@@ -286,14 +286,15 @@ class LibCacheRequestJavascript extends LibCacheRequest
     }
 
     $code = '';
-
+    
     if ($jsconf) {
       ob_start();
       include PATH_GW.'/js_conf/conf.js';
-      //include $jsconf;
       $code = ob_get_contents();
       ob_end_clean();
     }
+    
+    
   
   
   	if ($files) {
@@ -305,30 +306,43 @@ class LibCacheRequestJavascript extends LibCacheRequest
   			SFilesystem::createFolder(PATH_GW.'tmp/js_min/');
   
   			$fileLists = array();
-  
-  			$index = 0;
-  
-  			foreach ($files as $file) {
-  				$fileLists[$index][] = $file . " ";
-  				 
-  				if (count($fileLists[$index]) == 30) {
-  					$index++;
-  				}
-  
-  			}
   			
   			$codeArray = array();
   
+  			$index = 0;
+  			
+  			if ($jsconf) {
+  			   $codeArray[] = $code;
+  			}
+  
+  			foreach ($files as $file) {
+  				$fileLists[$index][] = $file;
+  				 
+  				
+  				if (count($fileLists[$index]) == 20) {
+  					$index++;
+  				}
+  				  
+  			}
+  			
   			foreach ($fileLists as $fileList) {
   				
-  				$file = implode("--js ", $fileList);
-  				 
+  				$file = implode(" --js ", $fileList);
+  				  				 
   				exec("java -jar " . PATH_WGT . "compressor/compiler.jar --js " . $file, $codeArray);
   				  				
   			}
+  			
+  			$code = implode(" ", $codeArray);
+  			
+  		} else {
+  		   
+  		   foreach ($files as $file) {
+  		      $code .= file_get_contents($file).NL;
+  		   }
+  		   
   		}
   		
-  		$code = implode("", $codeArray);
   	}
   	  
   	$etag       = md5($code);
