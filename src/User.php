@@ -690,7 +690,7 @@ class User extends BaseChild
 
       $classname = 'Profile'.SParserString::subToCamelCase($this->profileName);
 
-      if (Webfrap::classLoadable($classname)) {
+      if (Webfrap::classExists($classname)) {
         $this->profile = new $classname();
       } else {
         $this->profileName  = 'default';
@@ -743,7 +743,7 @@ class User extends BaseChild
     $classname = 'Profile'.SParserString::subToCamelCase($key);
 
     // change the profil if the new exists
-    if (Webfrap::classLoadable($classname)) {
+    if (Webfrap::classExists($classname)) {
       $this->profile      = new $classname();
       $this->profileName  = $key;
 
@@ -890,7 +890,7 @@ class User extends BaseChild
       $this->profiles[$authRole->profile] = SParserString::subToName($this->profileName);
     }
 
-    if (WebFrap::classLoadable('CorePerson_Entity')) {
+    if (Webfrap::classExists('CorePerson_Entity')) {
       if ($person = $orm->get('CorePerson', $authRole->id_person))
         $this->userData = array_merge($this->userData, $person->getData());
     }

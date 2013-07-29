@@ -152,7 +152,7 @@ abstract class Pbase
    * @var LibTemplate
    */
   public $view = null;
-  
+
   /**
    * Eine liste von Datenquellen / providern
    * @var []
@@ -446,7 +446,7 @@ abstract class Pbase
   {
 
     if (!$this->tpl) {
-      $this->tpl = View::engine();
+      $this->tpl = View::getActive();
       $this->tplEngine = $this->tpl;
     }
 
@@ -473,7 +473,7 @@ abstract class Pbase
   {
 
     if (!$this->tpl) {
-      $this->tpl = View::engine();
+      $this->tpl = View::getActive();
       $this->tplEngine = $this->tpl;
     }
 
@@ -525,31 +525,31 @@ abstract class Pbase
     return $this->message;
 
   }//end public function getMessage */
-  
+
   /**
    * @return Provider
    */
   public function getProvider($key, $class = null)
   {
-  
+
     if (!isset($this->providers[$key])){
-      
+
       if(!$class)
         $class = $key;
-      
+
       $cn = $class.'_Provider';
 
-      if(!Webfrap::classLoadable($cn)){
+      if(!Webfrap::classExists($cn)){
         return null;
       }
-      
+
       $this->providers[$key] = new $cn($this);
     }
 
     return $this->providers[$key];
-  
+
   }//end public function getProvider */
-  
+
   /**
    * @param string $key
    * @param Provider $obj
@@ -558,7 +558,7 @@ abstract class Pbase
   {
 
     $this->providers[$key] = $obj;
-  
+
   }//end public function getProvider */
 
 }//end abstract class Pbase

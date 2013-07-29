@@ -93,7 +93,7 @@ class Item extends BaseChild
     $modelClass    = $modelName.'_Model';
 
     if (!isset($this->models[$key]  )) {
-      if (Webfrap::classLoadable($modelClass)) {
+      if (Webfrap::classExists($modelClass)) {
         $model = new $modelClass($this);
         $this->models[$key] = $model;
       } else {
@@ -135,7 +135,7 @@ class Item extends BaseChild
     $uiName       = ucfirst($uiName);
     $className    = $uiName.'_Ui';
 
-    if (Webfrap::classLoadable($className)) {
+    if (Webfrap::classExists($className)) {
       $ui = new $className($this);
       $ui->setView($this->getView());
 
@@ -166,10 +166,10 @@ class Item extends BaseChild
     $className    = $type.'_Form';
     $classNameOld = 'WgtForm'.$type;
 
-    if (!WebFrap::classLoadable($className)) {
+    if (!Webfrap::classExists($className)) {
       // fall back to old name convention
       $className = $classNameOld;
-      if (!WebFrap::classLoadable($className))
+      if (!Webfrap::classExists($className))
         throw new LibTemplate_Exception('Requested noexisting form '.$type);
     }
 

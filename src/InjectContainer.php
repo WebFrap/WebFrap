@@ -438,7 +438,7 @@ abstract class InjectContainer
   {
 
     if (!$this->tpl) {
-      $this->tpl = View::engine();
+      $this->tpl = View::getActive();
       $this->tplEngine = $this->tpl;
     }
 

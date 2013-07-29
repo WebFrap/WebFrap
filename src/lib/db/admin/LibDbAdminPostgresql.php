@@ -38,8 +38,7 @@ class LibDbAdminPostgresql extends LibDbAdmin
   /**
    * @var array
    */
-  public $nameMapping = array
-  (
+  public $nameMapping = array(
     'boolean'     => 'boolean'    ,
     'boolean[]'   => '_boolean'   ,
     'bytea'       => 'bytea'      ,
@@ -85,8 +84,7 @@ class LibDbAdminPostgresql extends LibDbAdmin
   /**
    * @var array
    */
-  public $multiple = array
-  (
+  public $multiple = array(
     'smallint[]'  ,
     'integer[]'   ,
     'bigint[]'    ,
@@ -121,8 +119,7 @@ class LibDbAdminPostgresql extends LibDbAdmin
   /**
    * @var array
    */
-  public $quotesMap = array
-  (
+  public $quotesMap = array(
     'boolean'   =>  'false' ,
     'bytea'     =>  'true'  ,
     'bigint'    =>  'false' ,
@@ -636,11 +633,10 @@ SQL;
                 'bytea'
               )
             )
-        )
-        {
+        ) {
+
           $sql .= '('.str_replace('.',',',$row[LibDbAdmin::COL_LENGTH]).')';
-        } else if
-        (
+        } else if (
           isset($row[LibDbAdmin::COL_PRECISION])
             && '' != trim(LibDbAdmin::COL_PRECISION)
             && (int) $row[LibDbAdmin::COL_PRECISION]
@@ -652,15 +648,12 @@ SQL;
                 'numeric'
               )
             )
-        )
-        {
-          if
-          (
+        ) {
+          if(
             isset($row[LibDbAdmin::COL_SCALE])
               && '' != trim(LibDbAdmin::COL_SCALE)
               && (int) $row[LibDbAdmin::COL_SCALE]
-          )
-          {
+          ) {
             $sql .= '('.(int) $row[LibDbAdmin::COL_PRECISION].', '.(int) $row[LibDbAdmin::COL_SCALE].')';
           } else {
             $sql .= '('.(int) $row[LibDbAdmin::COL_PRECISION].')';
@@ -697,6 +690,8 @@ SQL;
 
     if ($this->createPatch)
       $this->sqlPatch .= $sql.NL.NL;
+
+    Debug::console($sql);
 
     if ($this->syncDb)
       return $this->db->exec($sql);
@@ -1758,6 +1753,9 @@ SQL;
       }
     }
 
+    foreach ($queryPool as $alterSql) {
+    	Debug::console($alterSql);
+    }
 
     if ($this->syncDb) {
       foreach ($queryPool as $alterSql) {

@@ -374,7 +374,7 @@ class LibAclAdapter_Db extends LibAclAdapter
 
     $containerName = SParserString::subToCamelCase(substr($key, 5)).'_Crud_Access_Root';
 
-    if (!Webfrap::classLoadable($containerName))
+    if (!Webfrap::classExists($containerName))
       throw new LibAcl_Exception("Requested nonexisting Root Container ".$containerName);
 
     $this->rootContainers[$key] = new $containerName($this);

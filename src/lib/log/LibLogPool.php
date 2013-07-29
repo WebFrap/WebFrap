@@ -189,7 +189,7 @@ class LibLogPool
         $this->level[$target] = $logMask ;
         $this->classLevel[$target] =  isset($modul['logareas']) ? $modul['logareas'] : array();
 
-        if (WebFrap::loadable($class)  )
+        if (WebFrap::classExists($class)  )
           $this->loadedAppender[$target] = new $class($modul);
         else
           throw new WebfrapService_Exception('invalid config');

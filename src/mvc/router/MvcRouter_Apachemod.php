@@ -261,7 +261,7 @@ class MvcRouter_Apachemod extends Base
 
     $classNameOld = 'Module'.$modName;
 
-    if (Webfrap::classLoadable($className)) {
+    if (Webfrap::classExists($className)) {
       Debug::console('$module',$className);
 
       $this->module = new $className($this);
@@ -270,7 +270,7 @@ class MvcRouter_Apachemod extends Base
 
       // everythin fine
       return true;
-    } else  if (Webfrap::classLoadable($classNameOld)) {
+    } else  if (Webfrap::classExists($classNameOld)) {
       Debug::console('$module',$classNameOld);
 
       $this->module = new $classNameOld($this);
@@ -305,7 +305,7 @@ class MvcRouter_Apachemod extends Base
 
       $classname    = $module.$controller.WBF_CONTROLLER_PREFIX.'_Controller';
 
-      if (WebFrap::loadable($classname)) {
+      if (WebFrap::classExists($classname)) {
         $this->controller = new $classname($this);
         $this->controller->setDefaultModel($module.$controller);
         $this->controllerName = $classname;
@@ -394,7 +394,7 @@ class MvcRouter_Apachemod extends Base
 
     $errorClass = 'LibHttpError'.$errorKey;
 
-    if (!Webfrap::classLoadable($errorClass))
+    if (!Webfrap::classExists($errorClass))
       $errorClass = 'LibHttpError500';
 
     $error = new $errorClass($data);

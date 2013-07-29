@@ -230,7 +230,7 @@ class LibCacheMemcache extends LibCache_L1Adapter
   public function connectMemached($conf)
   {
 
-    if (WebFrap::loadable('Memcache')) {
+    if (WebFrap::classExists('Memcache')) {
       $this->cache = new Memcache();
     } else {
       throw new LibCache_Exception('the Memcached modul not exists!');

@@ -159,8 +159,7 @@ class LibDbAdmin
    *
    * @var array<string:string>
   */
-  public $typeValidMap  = array
-  (
+  public $typeValidMap  = array(
     'boolean'   => 'boolean'  ,
     'bytea'     => 'bytea'  ,
     'integer'   => 'int'      ,
@@ -190,10 +189,12 @@ class LibDbAdmin
   {
 
     if (!$type) {
-      if (!isset(self::$metaPool['parent']))
+
+    	if (!isset(self::$metaPool['parent']))
         self::$metaPool['parent'] = new LibDbAdmin();
 
       return self::$metaPool['parent'];
+
     } else {
 
       $type = ucfirst($type);
@@ -316,7 +317,6 @@ class LibDbAdmin
   {
 
     $this->muliSeq = $flag;
-
   }//end public function setMultiSeq */
 
   /**
@@ -325,7 +325,6 @@ class LibDbAdmin
   public function getMultiple()
   {
     return $this->multiple;
-
   }//end public function getMultiple */
 
   /**
@@ -334,7 +333,6 @@ class LibDbAdmin
   public function getQuotesMap()
   {
     return $this->quotesMap;
-
   }//end public function getQuotesMap */
 
   /**

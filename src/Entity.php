@@ -1304,7 +1304,7 @@ abstract class Entity implements ArrayAccess
     $entityKey = SParserString::subToCamelCase(static::$links[$key]);
     $className = $entityKey.'_Entity';
 
-    if (! WebFrap::classLoadable($className))
+    if (! Webfrap::classExists($className))
       throw new LibDb_Exception("Target Entity {$className}  for attribute ".$key.' not exists!');
 
     // wenn der wert null ist, dann kann auch keine target Entity geladen werden

@@ -37,7 +37,7 @@ class LibReflectorClass extends ReflectionClass
   {
 
     if (is_string($className)) {
-      if (!Webfrap::loadable($className)) {
+      if (!Webfrap::classExists($className)) {
         throw new Lib_Exception('Class: '.$className.' is not loadable!');
       }
     }

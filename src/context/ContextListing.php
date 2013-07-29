@@ -29,7 +29,7 @@
  * @subpackage tech_core
  *
  */
-class ContextListing
+class ContextListing extends Context
 {
 
   /**
@@ -101,7 +101,7 @@ class ContextListing
    * @var TFlag
    */
   public $dynFilters = array();
-  
+
   public $refIds = null;
 
   /**
@@ -170,11 +170,11 @@ class ContextListing
         $this->filter->$key = $value;
       }
     }
-		
+
     // dynamische filter
     $this->dynFilters = $request->param('dynfilter', Validator::TEXT);
     $this->refIds = $request->paramList('refids', Validator::INT  );
-    
+
     if (!$this->refIds) {
     	$this->refIds = new TArray();
     }
@@ -238,7 +238,7 @@ class ContextListing
     // diese müssen jedoch vorhanden / implementiert sein
     if ($ltype   = $request->param('ltype', Validator::CNAME))
       $this->ltype    = $ltype;
-      
+
 		// wird bei selection und data verwendet
     if ($ltype   = $request->param('context', Validator::CNAME))
       $this->context    = $ltype;

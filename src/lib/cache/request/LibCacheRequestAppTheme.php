@@ -131,7 +131,7 @@ class LibCacheRequestAppTheme extends LibCacheRequestCss
     /*
     $layoutClass  = 'WgtLayout'.ucfirst($theme);
 
-    if (WebFrap::classLoadable($layoutClass)) {
+    if (Webfrap::classExists($layoutClass)) {
       $layout = new $layoutClass($layoutType);
     } else {
       echo '/* WARNING FAILED TO LOAD THE THEME: '.$layoutClass.' * /'.NL;

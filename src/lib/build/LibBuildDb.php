@@ -40,7 +40,7 @@ class LibBuild extends LibBuildAction
 
     $className = 'LibBuildDb'.ucfirst($type);
 
-    if (!WebFrap::classLoadable($className)) {
+    if (!Webfrap::classExists($className)) {
       Error::addError('Requested invalid Db Type: '.$type.'. Please Check you Buildconfiguration.');
 
       return false;

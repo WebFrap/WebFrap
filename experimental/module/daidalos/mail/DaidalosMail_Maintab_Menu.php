@@ -40,7 +40,7 @@ class DaidalosMail_Maintab_Menu extends WgtDropmenu
   {
 
     $iconMenu          = $this->view->icon('control/menu.png'     ,'Menu'   );
-    $iconClose         = $this->view->icon('control/close.png'    ,'Close'   );
+    $iconClose         = '<i class="icon-remove-circle " ></i>';
     $iconSearch        = $this->view->icon('control/search.png'   ,'Search'  );
     $iconBookmark      = $this->view->icon('control/bookmark.png' ,'Bookmark');
     $iconBackup        = $this->view->icon('daidalos/backup.png' ,'Backup');

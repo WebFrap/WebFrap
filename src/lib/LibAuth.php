@@ -137,7 +137,7 @@ class LibAuth extends BaseChild
           $this->authType = 'Httppost';
 
       $authClass = 'LibAuth'.$this->authType;
-      if (!WebFrap::classLoadable($authClass)) {
+      if (!Webfrap::classExists($authClass)) {
         
         Error::report('Authmodule: '.$authClass.' not exists. Please check your Configuration, or your Modulepath.');
         return false;
@@ -157,7 +157,7 @@ class LibAuth extends BaseChild
         $this->verificationType = 'Sql';
 
     $verificationClass = 'LibVerification'.$this->verificationType;
-    if (!WebFrap::classLoadable($verificationClass)) {
+    if (!Webfrap::classExists($verificationClass)) {
       Error::report('Verification: '.$verificationClass.' not exists. Please check your Configuration, or your Modulepath.');
 
       return false;
@@ -187,7 +187,7 @@ class LibAuth extends BaseChild
       $verificationType = 'Sql';
 
     $verificationClass = 'LibVerification'.$verificationType;
-    if (!WebFrap::classLoadable($verificationClass)) {
+    if (!Webfrap::classExists($verificationClass)) {
       Error::report('Verification: '.$verificationType.' not exists. Please check your Configuration, or your Modulepath.');
 
       return false;

@@ -246,122 +246,7 @@ class Webfrap
 
   } // end protected static function createInstance */
 
-  /**
-   * Dynamisches erstellen eines Objektes anhand eines übergebenen Klassennamens
-   *
-   * Wenn die Klasse nicht existiert wird einfach null zurückgegeben, ansonsten
-   * wird ein Objekt der Klasse zurückgegeben
-   *
-   * Um diese Klasse nutzen zu können
-   *
-   * @param string $className der Name einer Klasse
-   * @param array $params parameter für die klasse
-   * @return object
-   */
-  public static function newObject($className, $params = array())
-  {
 
-    if (Webfrap::classLoadable($className)) {
-      $numParams = count($params);
-
-      switch ($numParams) {
-        case 0:
-        {
-          return new $className();
-        }
-        case 1:
-        {
-          return new $className($params[0]);
-        }
-        case 2:
-        {
-          return new $className($params[0],$params[1]);
-        }
-        case 3:
-        {
-          return new $className($params[0],$params[1],$params[2]);
-        }
-        case 4:
-        {
-          return new $className($params[0],$params[1],$params[2],$params[3]);
-        }
-        case 5:
-        {
-          return new $className
-          (
-            $params[0],
-            $params[1],
-            $params[2],
-            $params[3],
-            $params[4]
-          );
-        }
-        case 6:
-        {
-          return new $className
-          (
-            $params[0],
-            $params[1],
-            $params[2],
-            $params[3],
-            $params[4],
-            $params[5]
-          );
-        }
-        case 7:
-        {
-          return new $className
-          (
-            $params[0],
-            $params[1],
-            $params[2],
-            $params[3],
-            $params[4],
-            $params[5],
-            $params[6]
-          );
-        }
-        case 8:
-        {
-          return new $className
-          (
-            $params[0],
-            $params[1],
-            $params[2],
-            $params[3],
-            $params[4],
-            $params[5],
-            $params[6],
-            $params[7]
-          );
-        }
-        case 9:
-        {
-          return new $className
-          (
-            $params[0],
-            $params[1],
-            $params[2],
-            $params[3],
-            $params[4],
-            $params[5],
-            $params[6],
-            $params[7],
-            $params[8]
-          );
-        }
-        // ok wer mehr als 9 parameter übergibt hat pech gehabt
-        // scheiß interface!
-        default:
-        {
-          return null;
-        }
-      }
-    } else {
-      return null;
-    }
-
-  } // end protected static function newObject */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Include Path
@@ -400,8 +285,6 @@ class Webfrap
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * Enter description here...
-   *
    * @param string $path
    */
   public static function addAutoloadPath($path)
@@ -487,25 +370,34 @@ class Webfrap
       return self::$loadAble[$classname];
     }
 
-  }//end function classLoadable */
+  }//end function classExists */
 
   /**
+   * wrapper for class exists
+   * cause class exists always throws an exception if the class not exists
    * @param string $classname
    * @return boolean
    */
-  public static function loadable($classname)
+  public static function interfaceExists($classname)
   {
 
-    try {
-      if (class_exists($classname,true) || interface_exists($classname,true))
-        return true;
-      else
+    if (!isset(self::$loadAble[$classname])) {
+      try {
+        $back = interface_exists($classname);
+        self::$loadAble[$classname] = $back;
+
+        return $back;
+      } catch (ClassNotFound_Exception $e) {
+        self::$loadAble[$classname] = false;
+
         return false;
-    } catch (ClassNotFound_Exception $e) {
-      return false;
+      }
+    } else {
+      return self::$loadAble[$classname];
     }
 
-  }//end function loadable */
+  }//end function interfaceExists */
+
 
   /**
    * Enter description here...
@@ -656,7 +548,7 @@ class Webfrap
       include Webfrap::$classIndex[$classname];
 
   } //function public static function indexAutoload */
-  
+
   /**
    * Die Autoload Methode versucht anhand des Namens der Klassen den Pfad
    * zu erraten in dem sich die Datei befindet
@@ -669,27 +561,27 @@ class Webfrap
    */
   public static function namespaceAutoload($classname)
   {
-  
+
     $length = strlen($classname);
     $requireMe = null;
-  
+
     $relPath = str_replace("\\", "/", $classname).".php";
-    
+
     foreach (Webfrap::$autoloadPath as $path) {
-  
+
       $file = $path.$relPath;
-      
+
       if (file_exists($file)) {
         Debug::logFile($file);
         self::$classIndex[$classname] = $file;
         self::$indexChanged           = true;
         include $file;
-      
+
         return;
       }
 
     }//end foreach (Webfrap::$autoloadPath as $path)
-  
+
   } //function public static function namespaceAutoload */
 
   /**
@@ -931,7 +823,7 @@ class Webfrap
 
         self::$instance->wakeup();
 
-        if (Webfrap::loadable('WbfsysRoleUser_Entity')) {
+        if (Webfrap::classExists('WbfsysRoleUser_Entity')) {
 
           // try to login user, if user has an annonymous session
           $user = User::getActive();
@@ -946,7 +838,7 @@ class Webfrap
 
         self::$instance->init();
 
-        if (Webfrap::loadable('WbfsysRoleUser_Entity')) {
+        if (Webfrap::classExists('WbfsysRoleUser_Entity')) {
           // try to sign on session start
           $user = User::getActive();
           $user->singleSignOn();
@@ -968,6 +860,11 @@ class Webfrap
     Conf::init();
 
     $conf = Conf::getActive();
+
+    if ($timezone = $conf->getStatus('activ.timezone'))
+      date_default_timezone_set($timezone);
+    else
+      date_default_timezone_set('Etc/UCT');
 
     if (defined('WBF_CONTROLLER')) {
       $flowController = 'LibFlow'.ucfirst(WBF_CONTROLLER);
@@ -994,14 +891,7 @@ class Webfrap
 
       if ('Cli' == WBF_CONTROLLER) {
         self::$instance->init();
-
-        if ($timezone = $conf->getStatus('activ.timezone'))
-          date_default_timezone_set($timezone);
-        else
-          date_default_timezone_set('Etc/UCT');
-
         return self::$instance;
-
       }
 
     }
@@ -1014,7 +904,7 @@ class Webfrap
 
       self::$instance->wakeup();
 
-      if (Webfrap::loadable('WbfsysRoleUser_Entity')) {
+      if (Webfrap::classExists('WbfsysRoleUser_Entity')) {
 
         // try to login user, if user has an annonymous session
         $user = User::getActive();
@@ -1029,7 +919,7 @@ class Webfrap
 
       self::$instance->init();
 
-      if (Webfrap::loadable('WbfsysRoleUser_Entity')) {
+      if (Webfrap::classExists('WbfsysRoleUser_Entity')) {
         // try to sign on session start
         $user = User::getActive();
         $user->singleSignOn();

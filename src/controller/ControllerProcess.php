@@ -44,7 +44,7 @@ class ControllerProcess extends Controller
     $modelName = $modelKey . '_Model';
 
     if (! isset($this->models[$key])) {
-      if (Webfrap::classLoadable($modelName)) {
+      if (Webfrap::classExists($modelName)) {
 
         $model = new $modelName($this);
 

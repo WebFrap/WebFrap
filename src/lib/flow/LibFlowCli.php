@@ -93,7 +93,7 @@ class LibFlowCli extends LibFlow
 
     $classNameOld = 'Module'.$modName;
 
-    if (Webfrap::classLoadable($className)) {
+    if (Webfrap::classExists($className)) {
       $this->module = new $className();
       $this->module->init();
       $this->module->main();
@@ -125,7 +125,7 @@ class LibFlowCli extends LibFlow
 
       $classname    = $module.$controller.'_Controller';
 
-      if (WebFrap::loadable($classname)) {
+      if (WebFrap::classExists($classname)) {
 
         $this->controller = new $classname();
         $this->controller->setDefaultModel($module.$controller);

@@ -36,7 +36,7 @@ class SFolders
 
     $cname = IncFolders.$os;
 
-    if (WebFrap::loadable($cname)) {
+    if (WebFrap::classExists($cname)) {
 
       call_user_func(array($cname , 'move') , $oldPos , $newPos  );
 

@@ -228,7 +228,7 @@ class LibSpreadsheetExcel  extends LibTemplateDocument
 
     if (!$this->styleObj) {
       $styleClass = 'LibSpreadsheetExcelStyle_'.SParserString::subToCamelCase($this->styleName);
-      if (!Webfrap::classLoadable($styleClass)) {
+      if (!Webfrap::classExists($styleClass)) {
         $styleClass = 'LibSpreadsheetExcelStyle_Default';
       }
 
