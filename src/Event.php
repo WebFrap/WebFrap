@@ -48,7 +48,7 @@ class Event extends BaseChild
   {
 
     if (!isset(self::$pool[$key])) {
-      if (!Webfrap::classLoadable($classname)) {
+      if (!Webfrap::classExists($classname)) {
         throw new Lib_Exception('Requested nonexisting Action: '.$classname.' key '.$key);
       } else {
         self::$pool[$key] = new $classname();

@@ -126,7 +126,7 @@ class Cache
     if (isset($conf['adapters']['level1'])) {
       $class = 'LibCache'.ucfirst($conf['adapters']['level1']['class']);
 
-      if (!Webfrap::loadable($class)) {
+      if (!Webfrap::classExists($class)) {
         throw new WebfrapConfig_Exception('Wrong Configuration');
       }
       $this->level1 = new $class($conf['adapters']['level1']);
@@ -135,7 +135,7 @@ class Cache
     if (isset($conf['adapters']['level2'])) {
       $class = 'LibCache'.ucfirst($conf['adapters']['level2']['class']);
 
-      if (!Webfrap::loadable($class)) {
+      if (!Webfrap::classExists($class)) {
         throw new WebfrapConfig_Exception('Wrong Configuration');
       }
 
@@ -147,7 +147,7 @@ class Cache
     if (isset($conf['adapters']['level3'])) {
       $class = 'LibCache'.ucfirst($conf['adapters']['level3']['class']);
 
-      if (!Webfrap::loadable($class)) {
+      if (!Webfrap::classExists($class)) {
         throw new WebfrapConfig_Exception('Wrong Configuration');
       }
 

@@ -308,13 +308,13 @@ abstract class LibDbConnection
     $defClassNameOld = 'Query'.$name;
     $dbClassNameOld  = $defClassName.$this->builderType;
 
-    if (Webfrap::classLoadable($dbClassName)) {
+    if (Webfrap::classExists($dbClassName)) {
       return new $dbClassName(null, $this);
-    } elseif (Webfrap::classLoadable($defClassName)) {
+    } elseif (Webfrap::classExists($defClassName)) {
       return new $defClassName(null, $this);
-    } elseif (Webfrap::classLoadable($dbClassNameOld)) {
+    } elseif (Webfrap::classExists($dbClassNameOld)) {
       return new $dbClassNameOld(null, $this);
-    } elseif (Webfrap::classLoadable($defClassNameOld)) {
+    } elseif (Webfrap::classExists($defClassNameOld)) {
       return new $defClassNameOld(null, $this);
     } else {
 
@@ -337,11 +337,11 @@ abstract class LibDbConnection
     $defClassName = $name.'_Filter';
     $dbClassName  = $defClassName.'_'.$this->builderType;
 
-    if (Webfrap::classLoadable($dbClassName)) {
+    if (Webfrap::classExists($dbClassName)) {
 
       return new $dbClassName(null, $this);
     
-    } elseif (Webfrap::classLoadable($defClassName)) {
+    } elseif (Webfrap::classExists($defClassName)) {
 
       return new $defClassName(null, $this);
     

@@ -559,7 +559,7 @@ class LibRequestPool extends LibRequestAbstract
       if (isset($this->files[$key])) {
         $classname = 'LibUpload'.SParserString::subToCamelCase($type);
 
-        if (!WebFrap::loadable($classname)) {
+        if (!WebFrap::classExists($classname)) {
           throw new LibUploadException('Uploadtype: '.ucfirst($type).' not exists');
         } else {
           $upload = new $classname($this->files[$key]);

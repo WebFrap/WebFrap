@@ -209,7 +209,7 @@ class MvcRouterAdapter extends Base
   {
 
     // Startseiten Eintrag ins Navmenu
-    $view     = View::engine();
+    $view     = View::getActive();
 
     if (!$session)
       $session      = $this->session;
@@ -254,7 +254,7 @@ class MvcRouterAdapter extends Base
 
     $classNameOld = 'Module'.$modName;
 
-    if (Webfrap::classLoadable($className)) {
+    if (Webfrap::classExists($className)) {
       Debug::console('$module', $className);
 
       $this->module = new $className();
@@ -263,7 +263,7 @@ class MvcRouterAdapter extends Base
 
       // everythin fine
       return true;
-    } else  if (Webfrap::classLoadable($classNameOld)) {
+    } else  if (Webfrap::classExists($classNameOld)) {
       Debug::console('$module', $classNameOld);
 
       $this->module = new $classNameOld();
@@ -296,7 +296,7 @@ class MvcRouterAdapter extends Base
       $classname    = $module.$controller.'_Controller';
       $classnameOld = 'Controller'.$module.$controller;
 
-      if (WebFrap::loadable($classname)) {
+      if (WebFrap::classExists($classname)) {
         $this->controller = new $classname();
         $this->controller->setDefaultModel($module.$controller);
         $this->controllerName = $classname;
@@ -313,7 +313,7 @@ class MvcRouterAdapter extends Base
         // shout down the extension
         $this->controller->shutdownController();
 
-      } elseif (WebFrap::loadable($classnameOld)) {
+      } elseif (WebFrap::classExists($classnameOld)) {
 
         $classname = $classnameOld;
 
@@ -398,7 +398,7 @@ class MvcRouterAdapter extends Base
 
     $errorClass = 'LibHttpError'.$errorKey;
 
-    if (!Webfrap::classLoadable($errorClass))
+    if (!Webfrap::classExists($errorClass))
       $errorClass = 'LibHttpError500';
 
     $error = new $errorClass($data);

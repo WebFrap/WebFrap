@@ -218,7 +218,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
     }
 
     /*
-    if (!DEBUG && Webfrap::classLoadable('LibVendorJsmin') && $minify) {
+    if (!DEBUG && Webfrap::classExists('LibVendorJsmin') && $minify) {
       $minifier = LibVendorJsmin::getInstance();
       $code     = $minifier->minify($code);
     }
@@ -264,6 +264,100 @@ class LibCacheRequestJavascript extends LibCacheRequest
 
   }//end public function publishList */
 
+  /**
+   * @param string $list
+   */
+  public function rebuildListBulk($list)
+  {
+     
+      if (!file_exists(PATH_GW.'/conf/include/javascript/'.$list.'.list.php'))
+      throw new ResourceNotExists_Exception("Js list {$list}");
+
+    $files  = array();
+    $jsconf = null; // wert wird im include gesetzt
+    $minify = true;
+
+    include PATH_GW.'/conf/include/javascript/'.$list.'.list.php';
+
+    if (function_exists('gzencode')) {
+      $encode = true;
+    } else {
+      $encode       = false;
+    }
+
+    $code = '';
+
+    if ($jsconf) {
+      ob_start();
+      include PATH_GW.'/js_conf/conf.js';
+      //include $jsconf;
+      $code = ob_get_contents();
+      ob_end_clean();
+    }
+  
+  
+  	if ($files) {
+  		if ($minify) {
+  
+  			if (file_exists(PATH_GW.'tmp/js_min/'))
+  				SFilesystem::delete(PATH_GW.'tmp/js_min/');
+  
+  			SFilesystem::createFolder(PATH_GW.'tmp/js_min/');
+  
+  			$fileLists = array();
+  
+  			$index = 0;
+  
+  			foreach ($files as $file) {
+  				$fileLists[$index][] = $file . " ";
+  				 
+  				if (count($fileLists[$index]) == 30) {
+  					$index++;
+  				}
+  
+  			}
+  			
+  			$codeArray = array();
+  
+  			foreach ($fileLists as $fileList) {
+  				
+  				$file = implode("--js ", $fileList);
+  				 
+  				exec("java -jar " . PATH_WGT . "compressor/compiler.jar --js " . $file, $codeArray);
+  				  				
+  			}
+  		}
+  		
+  		$code = implode("", $codeArray);
+  	}
+  	  
+  	$etag       = md5($code);
+  	$plainSize  = strlen($code);
+  
+  	if (!file_exists(PATH_GW.$this->folder.'/list/'))
+  		SFilesystem::createFolder(PATH_GW.$this->folder.'/list/'  );
+  
+  	file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.plain' ,  $code);
+  	file_put_contents(
+  	PATH_GW.$this->folder.'/list/'.$list.'.plain.meta' ,
+  	json_encode(array('etag'=> $etag, 'size'=> $plainSize))
+  	);
+  
+  	if ($encode) {
+  		$encoded      = gzencode($code);
+  		$encodedSize  = strlen($encoded);
+  
+  		file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.gz' ,  $encoded);
+  		file_put_contents(
+  		PATH_GW.$this->folder.'/list/'.$list.'.gz.meta' ,
+  		json_encode(array('etag'=> $etag, 'size'=> $encodedSize))
+  		);
+  	}
+  
+  	SFilesystem::delete(PATH_GW.'tmp/js_min/');
+ 	
+  }
+  
   /**
    * @param string $list
    */

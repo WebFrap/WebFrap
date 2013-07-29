@@ -157,7 +157,7 @@ class LibParserRegistry
 
     $className = $this->parserType.$key;
 
-    if (Webfrap::classLoadable($className)) {
+    if (Webfrap::classExists($className)) {
       $subParser            = new $className($this , $this->lexer);
       $this->registry[$key] = $subParser;
 
@@ -180,7 +180,7 @@ class LibParserRegistry
 
     $className = $this->parserType.$key;
 
-    if (Webfrap::classLoadable($className)) {
+    if (Webfrap::classExists($className)) {
       $subParser            = new $className($this, $this->lexer);
       $this->registry[$key] = $subParser;
 

@@ -495,9 +495,11 @@ class LibMessagePool
     $channelKeys = $message->getChannels();
 
     foreach ($channelKeys as $key) {
-      $chan = Webfrap::newObject("LibMessageChannel".ucfirst($key));
 
-      if ($chan) {
+      $className = "LibMessageChannel".ucfirst($key);
+
+      if (Webfrap::classExists($className)) {
+        $chan = new $className();
         $channelObjects[$key] = $chan;
       } else {
         throw new LibMessage_Exception("The requested Message Channel ".ucfirst($key).' not exists!');

@@ -542,7 +542,7 @@ abstract class Process extends PBase
 
       $className = 'LibProcessSlice_'.ucfirst($rawSlice['type']);
 
-      if (Webfrap::classLoadable($className)) {
+      if (Webfrap::classExists($className)) {
         
         $slices[] = new $className($this, $rawSlice);
         
@@ -876,7 +876,7 @@ abstract class Process extends PBase
 
     $className  = 'LibProcess_Model_'.$conType;
 
-    if (Webfrap::classLoadable($className)) {
+    if (Webfrap::classExists($className)) {
       $this->model = $className($db);
     } else {
       // wenn kein dbms spezifisches process modell vorhanden ist

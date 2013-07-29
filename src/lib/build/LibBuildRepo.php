@@ -54,7 +54,7 @@ class LibBuildRepo extends LibBuildAction
 
     $className = 'LibBuildRepo'.ucfirst($type);
 
-    if (!WebFrap::classLoadable($className)) {
+    if (!Webfrap::classExists($className)) {
       Error::addError('Requested invalid Repo Type: '.$type.'. Please Check you Buildconfiguration.');
 
       return false;

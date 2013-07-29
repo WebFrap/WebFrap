@@ -47,7 +47,7 @@ class LibBuildCreate extends LibBuildAction
 
     $className = 'LibBuildCreate'.ucfirst($type);
 
-    if (!WebFrap::classLoadable($className)) {
+    if (!Webfrap::classExists($className)) {
       Error::addError('Requested invalid Create Type: '.$type.'. Please Check you Buildconfiguration.');
 
       return false;

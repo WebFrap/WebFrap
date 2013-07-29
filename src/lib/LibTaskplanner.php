@@ -178,6 +178,13 @@ class LibTaskplanner extends BaseChild
       if ($weekDay == 1 && (($yearDay / 7) % 2) == 0) {
         $types[] = ETaskType::WEEK_2;
       }
+      
+      // Mi jede Woche
+      // ETaskType: Every week
+      if ($weekDay == 3) {
+      	$types[] = ETaskType::WEEKLY;
+      }
+      
     }
     
     // 05:33:**
@@ -211,6 +218,11 @@ class LibTaskplanner extends BaseChild
       // Letzter Tag im Monat
       if ($monthDay == $lastWorkingDay) {
         $types[] = ETaskType::MONTH_END_WORKDAY;
+      }
+      
+      // Monatlich am 20.
+      if($monthDay == 20) {
+      	$types[] = ETaskType::MONTHLY;
       }
       
       // Jedes Quartal

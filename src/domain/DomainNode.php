@@ -172,7 +172,7 @@ class DomainNode
 
       $className = SParserString::subToCamelCase($key).'_Domain';
 
-      if (!Webfrap::classLoadable($className)) {
+      if (!Webfrap::classExists($className)) {
         self::$pool[$key] = null;
 
         return null;
