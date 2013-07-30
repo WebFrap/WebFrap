@@ -52,7 +52,7 @@
           <button 
             class="wcm wcm_req_mtab wcm_ui_tip wgt-button" 
             title="Delete"
-            value="maintab.php?c=Daidalos.Db.listRestore&amp;key={$db['name']}" >{$iconDelete} 
+            value="maintab.php?c=Daidalos.Db.listRestore&amp;key={$db['name']}" ><i class="icon-remove" ></i> 
           </button>
           
         </td>

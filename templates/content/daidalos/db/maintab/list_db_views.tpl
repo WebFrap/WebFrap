@@ -57,7 +57,7 @@
           <button 
             class="wcm wcm_req_mtab wcm_ui_tip wgt-button" 
             title="Restore"
-            value="maintab.php?c=Daidalos.DbSchema.restoreSchema&db={$this->model->dbName}&schema={$this->model->schemaName}" >{$iconDelete} 
+            value="maintab.php?c=Daidalos.DbSchema.restoreSchema&db={$this->model->dbName}&schema={$this->model->schemaName}" ><i class="icon-remove" ></i> 
           </button>
           
         </td>

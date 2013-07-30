@@ -37,7 +37,7 @@
           <button 
             class="wcm wcm_req_mtab wcm_ui_tip wgt-button" 
             title="Edit"
-            value="maintab.php?c=Daidalos.Db.listSchemaTables{$urlPart}" >{$iconEdit} 
+            value="maintab.php?c=Daidalos.Db.listSchemaTables{$urlPart}" ><i class="icon-edit" ></i> 
           </button>
           
           <button 

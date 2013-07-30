@@ -55,7 +55,7 @@ if( $VAR->importMsg )
             class="wcm_ui_tip wgt-button" 
             title="Delete the dump"
             onclick="\$R.del('maintab.php?c=Daidalos.Db.deleteDump&amp;key={$VAR->dbKey}&dump={$file}&pos={$pos}',{confirm:'Please confirm to delete this entry.'});return false;"
-             >{$iconDelete} 
+             ><i class="icon-remove" ></i> 
           </button>
 
         </td>

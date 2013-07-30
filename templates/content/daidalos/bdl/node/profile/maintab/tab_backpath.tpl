@@ -28,10 +28,10 @@ $renderSubNode = function( $pathNode, $path, $subRednerer ) use ( $idPrefix, $ic
     <div class="right" style="width:90px;" ><button
      
         class="wgt-button wgtac_add_backpath_node"
-        wgt_path="{$path}.{$idx}" >{$iconAdd}</button><button
+        wgt_path="{$path}.{$idx}" ><i class="icon-plus-sign" ></i></button><button
          
         class="wgt-button wgtac_edit_backpath_node"
-        wgt_path="{$path}.{$idx}" >{$iconEdit}</button><button
+        wgt_path="{$path}.{$idx}" ><i class="icon-edit" ></i></button><button
          
         class="wgt-button wgtac_delete_backpath_node"
         wgt_path="{$path}.{$idx}" >{$iconDel}</button>
