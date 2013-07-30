@@ -1,8 +1,7 @@
-<?php 
+<?php
 
 $iconDelete = $this->icon( 'control/delete.png', 'xsmall', 'Delete' );
 $iconEdit = $this->icon( 'control/edit.png', 'xsmall', 'Edit' );
-$iconSearch = $this->icon( 'control/search.png', 'xsmall', 'Search' );
 
 $iconUploadImg = $this->icon( 'cms/upload_image.png', 'xsmall', 'Upload Image' );
 
@@ -26,7 +25,7 @@ $iconUploadImg = $this->icon( 'cms/upload_image.png', 'xsmall', 'Upload Image' )
 
 </style>
 
-<?php 
+<?php
 
 $key = 'thek1';
 $editorId = 'wgt-wysiwyg-cms';
@@ -89,71 +88,71 @@ $images = array
 ?>
 
   <!-- Tab Details -->
-  <div  class="window_tab" 
+  <div  class="window_tab"
     id="<?php echo $this->id?>_tab_images"
     title="Images (1)"  >
-  
+
     <div class="wgt-panel title" >
       <h3 class="head" >Images</h3>
       <div class="inline" >
-      
-        <button 
-          class="wcm wcm_ui_dropform wgt-button" 
+
+        <button
+          class="wcm wcm_ui_dropform wgt-button"
           id="wgt-dropform-upload-image-<?php echo $key; ?>" ><?php echo $iconUploadImg; ?> Upload Image</button>
-    
+
           <div class="wgt-dropform-upload-image-<?php echo $key; ?> hidden"  >
-          
+
             <div style="width:100%;height:400px;"  >
               <div class="wgt-panel title" >
                 <h2>Upload a new Image</h2>
               </div>
-              
-                <form 
+
+                <form
                   method="post"
                   id="wgt-form-image-cms_mediathek-<?php echo $key ?>"
                   action="ajax.php?c=Cms.Mediathek.uploadImage&amp;key=<?php echo $key ?>" ></form>
-                
-                <div 
-                  style="position:absolute;top:70px;left:70px;height:330px; width:330px;border: 1px solid black;" 
+
+                <div
+                  style="position:absolute;top:70px;left:70px;height:330px; width:330px;border: 1px solid black;"
                   onclick="$S('#wgt-upload-image-cms_mediathek-<?php echo $key ?>').click();" >
                   Klick to upload
                 </div>
-                
-                <input 
-                  type="file" 
-                  name="hans" 
+
+                <input
+                  type="file"
+                  name="hans"
                   class="asgd-wgt-form-image-cms_mediathek-<?php echo $key ?>"
-                  id="wgt-upload-image-cms_mediathek-<?php echo $key ?>" 
+                  id="wgt-upload-image-cms_mediathek-<?php echo $key ?>"
                   style="position:absolute;top:70px;left:70px;height:330px; width:330px;opacity: 0.1;"
                   onchange="$R.form('wgt-form-image-cms_mediathek-<?php echo $key ?>');"  />
-    
+
               <div class="wgt-clear" ></div>
             </div>
-        
+
           </div>
-          
+
         </div>
         <div class="bw3 right" >
           <div class="right">
-            <span>Search</span> 
-            <input 
-              type="text" 
-              name="free_search" 
-              id="wgt-inp-search-cms_mediathek-image-<?php echo $key ?>" 
+            <span>Search</span>
+            <input
+              type="text"
+              name="free_search"
+              id="wgt-inp-search-cms_mediathek-image-<?php echo $key ?>"
               class="wcm wcm_req_search medium wgt-no-save fparam-wgt-form-search-cms_mediathek-<?php echo $key ?>" />
             <button class="wgt-button append" id="wgt-image-search-button">
               <?php echo $iconSearch ?>
             </button>
-            
+
             <form
               id="wgt-form-search-cms_mediathek-<?php echo $key ?>"
               action="ajax.php?c=Cms.Mediathek.searchImage&amp;key=<?php echo $key ?>"
             ></form>
-            
+
           </div>
         </div>
       </div>
-    
+
       <div class="wgt-grid full" id="wgt-grid-mediathek-image-<?php echo $key ?>" >
         <table class="wcm wcm_widget_grid full" id="wgt-grid-mediathek-image-<?php echo $key ?>-table" >
           <thead>
@@ -166,13 +165,13 @@ $images = array
             </tr>
           </thead>
           <tbody>
-          
+
             <?php foreach( $images as $pos => $img ){ ?>
             <tr>
               <td valign="top" class="pos" ><?php echo $pos +1 ?></td>
               <td valign="top"  >
-                <img 
-                  onclick="$S('#<?php echo $editorId ?>').tinymce().execCommand('mceInsertContent',false,'<img src=\'<?php echo $img['src']; ?>\' />');" 
+                <img
+                  onclick="$S('#<?php echo $editorId ?>').tinymce().execCommand('mceInsertContent',false,'<img src=\'<?php echo $img['src']; ?>\' />');"
                   src="<?php echo $img['src']; ?>"
                   title="<?php echo $img['title']; ?>"
                   alt="<?php echo $img['label']; ?>"  /></td>
@@ -183,13 +182,13 @@ $images = array
                 </p>
                 <div class="wgt-menu bar" >
                   <ul>
-                    <?php 
-                      $tmp = array();  
+                    <?php
+                      $tmp = array();
                       foreach( $img['dimensions'] as $res => $data )
                       {
                         $tmp[] = '<li><a href="#" onclick="$S(\'#'.$editorId.'\').tinymce().execCommand(\'mceInsertContent\',false,\'<img src=\\\''.$data[1].'\\\' />\');"  >'.$data[0].' : '.$res.'</a></li>';
                       }
-                      
+
                       echo implode( '<li> | </li>',$tmp  );
                     ?>
                   </ul>
@@ -201,33 +200,33 @@ $images = array
                 <?php echo $img['licence']; ?>
               </td>
               <td valign="top" >
-                <button 
-                  class="wgt-button" ><?php echo $iconEdit; ?></button><button 
+                <button
+                  class="wgt-button" ><?php echo $iconEdit; ?></button><button
                   class="wgt-button" ><?php echo $iconDelete; ?></button>
               </td>
             </tr>
             <?php } ?>
-          
+
           </tbody>
         </table>
     </div>
-    
+
   </div>
 
-  <div  class="window_tab" 
+  <div  class="window_tab"
     id="<?php echo $this->id?>_tab_videos"
     title="Videos (6)"  >
-  
+
   Videos
-  
+
   </div>
 
-  <div  class="window_tab" 
+  <div  class="window_tab"
     id="<?php echo $this->id?>_tab_documents"
     title="Documents (6)"  >
-    
+
     Documents
-    
+
   </div>
 
 </div>
@@ -241,71 +240,71 @@ $images = array
   <fieldset>
     <div id="wgt-box-input-mediathek-<?php echo $key ?>-image_src-box" class="wgt_box input">
       <label for="wgt-box-wgt-input" class="wgt-label">Src</label>
-      <div class="wgt-input medium"><input 
-        type="text" 
-        value="" 
-        class="large" 
-        id="wgt-box-input-mediathek-<?php echo $key ?>-image_src" 
+      <div class="wgt-input medium"><input
+        type="text"
+        value=""
+        class="large"
+        id="wgt-box-input-mediathek-<?php echo $key ?>-image_src"
         name="image[src]" /></div>
       <div class="wgt-clear tiny">&nbsp;</div>
     </div>
     <div id="wgt-box-input-mediathek-<?php echo $key ?>-image_title-box" class="wgt_box input">
       <label for="wgt-box-wgt-input" class="wgt-label">Title</label>
-      <div class="wgt-input medium"><input 
-        type="text" 
-        value="" 
-        class="large" 
-        id="wgt-box-input-mediathek-<?php echo $key ?>-image_title" 
+      <div class="wgt-input medium"><input
+        type="text"
+        value=""
+        class="large"
+        id="wgt-box-input-mediathek-<?php echo $key ?>-image_title"
         name="input[title]" /></div>
       <div class="wgt-clear tiny">&nbsp;</div>
     </div>
     <div id="wgt-box-input-mediathek-<?php echo $key ?>-image_alt-box" class="wgt_box input">
       <label for="wgt-box-wgt-input" class="wgt-label">Alt</label>
-      <div class="wgt-input medium"><input 
-        type="text" 
-        value="" 
-        class="large" 
-        id="wgt-box-input-mediathek-<?php echo $key ?>-image_alt" 
+      <div class="wgt-input medium"><input
+        type="text"
+        value=""
+        class="large"
+        id="wgt-box-input-mediathek-<?php echo $key ?>-image_alt"
         name="input[alt]" /></div>
       <div class="wgt-clear tiny">&nbsp;</div>
     </div>
-    
+
   </fieldset>
-  
+
   <fieldset>
-  
+
     <div id="wgt-box-input-mediathek-<?php echo $key ?>-image_id-box" class="wgt_box input">
       <label for="wgt-box-wgt-input" class="wgt-label">Id</label>
-      <div class="wgt-input medium"><input 
-        type="text" 
-        value="" 
-        class="large" 
-        id="wgt-box-input-mediathek-<?php echo $key ?>-image_id" 
+      <div class="wgt-input medium"><input
+        type="text"
+        value=""
+        class="large"
+        id="wgt-box-input-mediathek-<?php echo $key ?>-image_id"
         name="input[id]" /></div>
       <div class="wgt-clear tiny">&nbsp;</div>
     </div>
-  
+
     <div id="wgt-box-input-mediathek-<?php echo $key ?>-image_class-box" class="wgt_box input">
       <label for="wgt-box-wgt-input" class="wgt-label">Class</label>
-      <div class="wgt-input medium"><input 
-        type="text" 
-        value="" 
-        class="large" 
-        id="wgt-box-input-mediathek-<?php echo $key ?>-image_class" 
+      <div class="wgt-input medium"><input
+        type="text"
+        value=""
+        class="large"
+        id="wgt-box-input-mediathek-<?php echo $key ?>-image_class"
         name="input[class]" /></div>
       <div class="wgt-clear tiny">&nbsp;</div>
     </div>
 
     <div id="wgt-box-input-mediathek-<?php echo $key ?>-image_style-box" class="wgt_box input" >
       <label for="wgt-box-wgt-input" class="wgt-label" >Style</label>
-      <div class="wgt-input medium" ><textarea 
-        class="large medium-height" 
-        id="wgt-box-input-mediathek-<?php echo $key ?>-image_style" 
+      <div class="wgt-input medium" ><textarea
+        class="large medium-height"
+        id="wgt-box-input-mediathek-<?php echo $key ?>-image_style"
         name="input[alt]" ></textarea></div>
       <div class="wgt-clear tiny">&nbsp;</div>
     </div>
-    
+
   </fieldset>
-  
+
 </div>
 
