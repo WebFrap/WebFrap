@@ -52,8 +52,7 @@ abstract class MvcController_Domain  extends MvcController
       $domainKey   = $request->param('dkey', Validator::CKEY);
 
     if (!$domainKey) {
-      throw new InvalidRequest_Exception
-      (
+      throw new InvalidRequest_Exception(
         'Missing Domain Parameter',
         Response::BAD_REQUEST
       );
@@ -62,8 +61,7 @@ abstract class MvcController_Domain  extends MvcController
     $domainNode  = DomainNode::getNode($domainKey);
 
     if (!$domainNode) {
-      throw new InvalidRequest_Exception
-      (
+      throw new InvalidRequest_Exception(
         'The requestes Metadate not exists',
         Response::NOT_FOUND
       );
