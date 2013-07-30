@@ -39,11 +39,6 @@ class DaidalosMail_Maintab_Menu extends WgtDropmenu
   public function buildMenu( $params)
   {
 
-    $iconMenu          = '<i class="icon-reorder" ></i>';
-    $iconSearch        = $this->view->icon('control/search.png'   ,'Search'  );
-    $iconBookmark      = '<i class="icon-bookmark" ></i>';
-    $iconBackup        = $this->view->icon('daidalos/backup.png' ,'Backup');
-    $iconSave = '<i class="icon-save" ></i>';
 
     $entries = new TArray();
     $entries->support  = $this->entriesSupport($params);
