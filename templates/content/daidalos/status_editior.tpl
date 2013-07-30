@@ -32,7 +32,7 @@
           id="wgt-button-project_project-acl-advanced_search"
           class="wgt-button append"
           onclick="$R.get('subwindow.php?c=Wbfsys.RoleUser.selection&input=wgt-input-statusedit-username');return false;"    >
-          <img src="<?php echo View::$iconsWeb ?>xsmall/control/search.png" alt="search" />
+          <i class="icon-search" ></i>
         </button>
 
       </div>
