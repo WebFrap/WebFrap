@@ -9,7 +9,7 @@
 <fieldset class="wgt-space bw61" >
   <legend>
     <span onclick="$S('#wgt-box-webfrap_announcement-default').iconToggle(this);">
-      <?php echo Wgt::icon('control/opened.png','xsmall',$I18N->l('Open','wbf.label'))?>
+      <i class="icon-folder-open-alt" ></i>
     </span>
     Announcement
   </legend>
@@ -29,9 +29,9 @@
     <div class="left bw6" >
       <?php echo $ITEM->inputWebfrapAnnouncementMessage?>
     </div>
-    
+
     <div class="wgt-clear small">&nbsp;</div>
-    
+
     <div class="left bw6" >
       <button class="wgt-button" onclick="$R.form('<?php echo $VAR->formId?>');" >Create</button>
     </div>
