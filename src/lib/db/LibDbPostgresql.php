@@ -344,8 +344,7 @@ class LibDbPostgresql extends LibDbConnection
     $sqlstring = "select lastval('".$seqName."');";
 
     if (!$this->result = pg_query($this->connectionRead, $sqlstring)) {
-      throw new LibDb_Exception
-      (
+      throw new LibDb_Exception(
         'Failed to receive a new id',
         'No Db Result: '.pg_last_error($this->connectionRead),
         Response::INTERNAL_ERROR,
@@ -384,8 +383,7 @@ class LibDbPostgresql extends LibDbConnection
     */
 
     if (!is_string($sql)) {
-      throw new LibDb_Exception
-      (
+      throw new LibDb_Exception(
         'incompatible parameters'
       );
     }
@@ -404,8 +402,7 @@ class LibDbPostgresql extends LibDbConnection
     }
 
     if (!$this->result = pg_query($this->connectionWrite , $sqlstring)) {
-      throw new LibDb_Exception
-      (
+      throw new LibDb_Exception(
         'Create Failed',
         'DB Response: '.pg_last_error($this->connectionWrite),
         Response::INTERNAL_ERROR,
@@ -453,8 +450,7 @@ class LibDbPostgresql extends LibDbConnection
 
     if (!$this->result = pg_query($this->connectionWrite, $sql)) {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
-      throw new LibDb_Exception
-      (
+      throw new LibDb_Exception(
         'Update Failed',
         'DB Response: '.pg_last_error($this->connectionWrite),
         Response::INTERNAL_ERROR,
@@ -490,8 +486,7 @@ class LibDbPostgresql extends LibDbConnection
     if (!is_string($sql)) {
       $args = func_get_args();
 
-      throw new LibDb_Exception
-      (
+      throw new LibDb_Exception(
         'Datenbank delete() hat inkompatible Parameter bekommen'
       );
     }
@@ -512,8 +507,7 @@ class LibDbPostgresql extends LibDbConnection
 
     if (!$this->result = pg_query($this->connectionWrite , $sql)) {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
-      throw new LibDb_Exception
-      (
+      throw new LibDb_Exception(
         'Delete failed',
         'DB Response: '.pg_last_error($this->connectionWrite),
         Response::INTERNAL_ERROR,
@@ -545,8 +539,7 @@ class LibDbPostgresql extends LibDbConnection
     if (trim($name) == '' || trim($sqlstring) == '') {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       $args = func_get_args();
-      Error::addError
-      (
+      Error::addError(
        'Wrong Parameters',
        'LibDb_Exception',
        $args
