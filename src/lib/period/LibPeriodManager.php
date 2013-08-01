@@ -75,6 +75,9 @@ SQL;
   }//end public function getActivePeriod */
 
 
+  /**
+   * 
+   */
   public function initNewPeriodType($key)
   {
 
