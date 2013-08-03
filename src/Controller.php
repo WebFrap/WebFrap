@@ -1413,9 +1413,21 @@ abstract class Controller extends BaseChild
    */
   protected function getFlags($request)
   {
+
     return new ContextDefault($request);
 
   }//end protected function getFlags */
+
+
+  /**
+   * @param LibRequest $request
+   * @return ContextTab
+   */
+  protected function getTabFlags ($request)
+  {
+    return new ContextTab($request);
+
+  } //end protected function getTabFlags */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // deprecated methodes
@@ -1507,8 +1519,7 @@ abstract class Controller extends BaseChild
     }
 
     Message::addError($message);
-    $this->errorPage
-    (
+    $this->errorPage(
       'Invalid Request' ,
       $message,
       $view
@@ -1548,6 +1559,7 @@ abstract class Controller extends BaseChild
     );
 
   }//end protected function internalError */
+
 
 } // end abstract class Controller
 
