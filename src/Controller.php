@@ -1081,15 +1081,13 @@ abstract class Controller extends BaseChild
    *  oder null wenn die Klasse, oder die angefragte Methode, nicht existieren
    *
    */
-  public function getSubView
-  (
+  public function getSubView(
     $key,
     $class,
     $displayMethod = null,
     $viewType = null,
     $throwError = true
-  )
-  {
+  ) {
 
     $tplEngine  = $this->getTplEngine();
     $request    = $this->getRequest();
