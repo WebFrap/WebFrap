@@ -852,18 +852,16 @@ class LibDbPostgresql extends LibDbConnection
       $this->connect();
     }
 
-    if (!$this->result = pg_query($this->connectionWrite , (string) $sql)) {
+    if (!$this->result = pg_query($this->connectionWrite , (string)$sql)) {
       // false alarm?!
       if (!$error = pg_last_error($this->connectionWrite)) {
-        throw new LibDb_Exception
-        (
-          'Query Failed, but Postgres returned no error!'
+        throw new LibDb_Exception(
+          'Query Failed, but Postgres returned no error! '.$sql
         );
       }
 
-      throw new LibDb_Exception
-      (
-        'Query Failed: '.$error
+      throw new LibDb_Exception(
+        'Query Failed: '.$error.' '.$sql
       );
     }
 
