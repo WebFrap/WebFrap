@@ -475,19 +475,19 @@ abstract class Entity implements ArrayAccess
   /**
    * @return string
    */
-  public function text($key = 'text')
+  public function text($key = 'text', $firstOnly = true)
   {
 
     if (!isset(static::$textKeys[$key])) {
       if (!$this->id)
-        return '';
+        return 'Empty '.static::$label;
       else
         return static::$label.': '.$this->id;
     }
 
     if (!static::$textKeys[$key]) {
       if (!$this->id)
-        return '';
+        return 'Empty '.static::$label;
       else
         return static::$label.': '.$this->id;
     } else {
@@ -496,8 +496,22 @@ abstract class Entity implements ArrayAccess
 
     $string = '';
 
-    foreach ($keys as $key)
-      $string .=  isset($this->data[$key])? $this->data[$key].', ':'';
+    if ($firstOnly) {
+
+      foreach ($keys as $key){
+
+        if( isset($this->data[$key]) && '' != trim($this->data[$key]) ){
+          $string = $this->data[$key];
+          break;
+        }
+
+      }
+
+    } else {
+      foreach ($keys as $key)
+        $string .=  isset($this->data[$key])&&''!=trim($this->data[$key])? $this->data[$key].', ':'';
+    }
+
 
     return substr($string,0,-2);
 
