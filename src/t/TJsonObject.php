@@ -101,6 +101,16 @@ class TJsonObject
       ?$this->pool[$key]
       :null;
   }// end of public function __get */
+  
+  /**
+   * @param string $key
+   * @return boolean
+   */
+  public function __isset($key){
+    return isset($this->pool[$key])
+      ? true
+      : false;
+  }
 
 }//end class TJsonObject
 

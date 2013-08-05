@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class TMatrix
-  implements ITObject, Iterator, Countable
+class TMatrix implements ITObject, Iterator, Countable
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

@@ -82,6 +82,16 @@ class TFlag
       : null;
 
   }// end public function __get */
+  
+  /**
+   * @param string $key
+   * @return boolean
+   */
+  public function __isset($key){
+    return isset($this->content[$key])
+      ? true
+      : false;
+  }
 
   /**
    * de:
