@@ -37,7 +37,7 @@ abstract class Model extends BaseChild
    * sub Modul Extention
    * @var array
    */
-  protected $subModels       = array();
+  protected $subModels = array();
 
   /**
    * Error Object zum sammeln von Fehlermeldungen
@@ -67,29 +67,6 @@ abstract class Model extends BaseChild
 
   }//end public function __construct */
 
-/*//////////////////////////////////////////////////////////////////////////////
-// Generic Logic Methodes
-//////////////////////////////////////////////////////////////////////////////*/
-
-  /**
-   *
-   * @param LibTemplateAjax $view
-   * @param string $key
-   * @param string $wgtId
-   *
-   * @return void
-   */
-  public function removeTableRow($view, $key, $wgtId  )
-  {
-
-    $code = <<<JSCODE
-    \$S('#{$wgtId}_row_{$key}').fadeOut(100,function() {\$S('#{$wgtId}_row_{$key}').remove();});
-
-JSCODE;
-
-    $view->addJsCode($code);
-
-  }//end public function removeTableRow */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // registry methodes
@@ -175,7 +152,7 @@ JSCODE;
     if (!$key)
       $key = $modelKey;
 
-    $modelName    = $modelKey.'_Model';
+    $modelName = $modelKey.'_Model';
     $modelNameOld = 'Model'.$modelKey;
 
     if (!isset($this->subModels[$key]  )) {

@@ -152,14 +152,10 @@ abstract class MvcModel extends BaseChild
       $key = $modelKey;
 
     $modelName    = $modelKey.'_Model';
-    $modelNameOld = 'Model'.$modelKey;
 
     if (!isset($this->subModels[$key]  )) {
       if (!Webfrap::classExists($modelName)) {
-        $modelName = $modelNameOld;
-        if (!Webfrap::classExists($modelName)) {
-          throw new Controller_Exception('Internal Error', 'Failed to load Submodul: '.$modelName);
-        }
+        throw new Controller_Exception('Internal Error', 'Failed to load Submodul: '.$modelName);
       }
 
       $this->subModels[$key] = new $modelName($this);
