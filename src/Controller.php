@@ -1081,15 +1081,13 @@ abstract class Controller extends BaseChild
    *  oder null wenn die Klasse, oder die angefragte Methode, nicht existieren
    *
    */
-  public function getSubView
-  (
+  public function getSubView(
     $key,
     $class,
     $displayMethod = null,
     $viewType = null,
     $throwError = true
-  )
-  {
+  ) {
 
     $tplEngine  = $this->getTplEngine();
     $request    = $this->getRequest();
@@ -1413,9 +1411,21 @@ abstract class Controller extends BaseChild
    */
   protected function getFlags($request)
   {
+
     return new ContextDefault($request);
 
   }//end protected function getFlags */
+
+
+  /**
+   * @param LibRequest $request
+   * @return ContextTab
+   */
+  protected function getTabFlags ($request)
+  {
+    return new ContextTab($request);
+
+  } //end protected function getTabFlags */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // deprecated methodes
@@ -1507,8 +1517,7 @@ abstract class Controller extends BaseChild
     }
 
     Message::addError($message);
-    $this->errorPage
-    (
+    $this->errorPage(
       'Invalid Request' ,
       $message,
       $view
@@ -1548,6 +1557,7 @@ abstract class Controller extends BaseChild
     );
 
   }//end protected function internalError */
+
 
 } // end abstract class Controller
 

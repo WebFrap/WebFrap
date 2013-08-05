@@ -40,10 +40,10 @@ $renderSubNode = function
     <div class="right" style="width:90px;" ><button
      
         class="wgt-button wgtac_add_permission_ref"
-        wgt_path="{$path}.{$idx}" wgt_key="{$ref->getName()}" >{$iconAdd}</button><button
+        wgt_path="{$path}.{$idx}" wgt_key="{$ref->getName()}" ><i class="icon-plus-sign" ></i></button><button
          
         class="wgt-button wgtac_edit_permission_ref"
-        wgt_path="{$path}.{$idx}" >{$iconEdit}</button><button
+        wgt_path="{$path}.{$idx}" ><i class="icon-edit" ></i></button><button
          
         class="wgt-button wgtac_delete_permission_ref"
         wgt_path="{$path}.{$idx}" >{$iconDel}</button>

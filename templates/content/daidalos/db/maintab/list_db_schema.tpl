@@ -97,7 +97,7 @@
             <ul>
               <li>
                 <a onclick="\$R.del( 'ajax.php?c=Daidalos.DbSchema.drop&db={$schema['db_name']}&schema={$schema['schema_name']}' );" >
-                  {$iconDelete} Restore
+                  <i class="icon-remove" ></i> Restore
                 </a>
               </li>
             </ul>

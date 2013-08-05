@@ -75,6 +75,16 @@ class TFlowFlag
   }// end public function __get */
 
   /**
+   * @param string $name
+   * @return boolean
+   */
+  public function __isset($key){
+    return isset($this->content[$key])
+      ? true
+      : false;
+  }
+  
+  /**
    * @param string $key
    */
   public function exists($key)
