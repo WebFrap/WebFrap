@@ -508,12 +508,18 @@ abstract class Entity implements ArrayAccess
       }
 
     } else {
+      
+      $stack = array();
+      
       foreach ($keys as $key)
-        $string .=  isset($this->data[$key])&&''!=trim($this->data[$key])? $this->data[$key].', ':'';
+        if(isset($this->data[$key])&&''!=trim($this->data[$key]))
+          $stack[] = $this->data[$key];
+        
+       $string = implode(', ', $stack);
     }
 
 
-    return substr($string,0,-2);
+    return $string;
 
   }//end public function text */
 
