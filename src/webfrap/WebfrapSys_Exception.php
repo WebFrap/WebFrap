@@ -55,8 +55,7 @@ class WebfrapSys_Exception extends Webfrap_Exception
    * @param int $errorKey ein Error Key analog zum HTTP Status
    * @param boolean $protocol soll der Fehler in der Datenbank protokolliert werden?
    */
-  public function __construct
-  (
+  public function __construct(
     $debugMessage,
     $userMessage = 'Error',
     $errorKey = Response::INTERNAL_ERROR,
@@ -65,7 +64,7 @@ class WebfrapSys_Exception extends Webfrap_Exception
     $mask = null
   ) {
 
-    $request  = Webfrap::$env->getRequest();
+    $request = Webfrap::$env->getRequest();
     $response = Webfrap::$env->getResponse();
 
     if (defined('DUMP_ERRORS')) {
@@ -84,7 +83,7 @@ class WebfrapSys_Exception extends Webfrap_Exception
     }
 
     $this->debugMessage = $debugMessage;
-    $this->errorKey     = $errorKey;
+    $this->errorKey = $errorKey;
 
     if ('cli' === $request->type)
       $response->writeLn($userMessage);
