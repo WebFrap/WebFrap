@@ -20,7 +20,7 @@
  * @subpackage tech_core
  *
  */
-class LibAction_Executor extends Pbase
+class LibAction_Runner extends Pbase
 {
 
   
