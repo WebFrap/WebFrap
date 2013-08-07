@@ -1,0 +1,29 @@
+{
+  "components":{
+    "wbf":{
+      "name":"Webfrap",
+      "key": "wbf",
+      "errors":{
+        "1": [
+          "missing_conf",
+          {
+            "en":"The system did not find a valid configuration file"
+          },
+          {
+            "en":"Go in the Gateway and check if conf/host/web/conf.php and conf/host/web/path.php exists and are readable."
+          }
+       ],
+      },
+      "sub_components":{
+        "period" :{
+          "name":"Lib Period",
+          "key": "period",
+          "errors":{
+            "1": ["period_type_not_exists","The requested period not exits"],
+            "2": ["period_type_not_exists"],
+          }
+        }
+      }
+    }
+  }
+}
