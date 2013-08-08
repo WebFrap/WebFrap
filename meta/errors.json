@@ -5,6 +5,20 @@
       "key": "wbf",
       "errors":{
         "1": [
+          "undefined_error",
+          {
+            "en":"The system did not find a valid configuration file"
+          },
+          {
+            "en":"The system detected a potential problem during the execution of your request. This is NOT your fault, it seems to be a bug that need to be fixed.<br /> The Problem was logged and the system maintainer was noticed.
+We will take care for this issue as soon as possible.<br />
+In urgent cases contact your the system support and describe exactly what you need
+to do. Sometimes there are easy workarounds especially for important use cases.
+<br />
+Sorry for the inconveniences."
+          }
+        ],
+        "2": [
           "missing_conf",
           {
             "en":"The system did not find a valid configuration file"
@@ -12,15 +26,20 @@
           {
             "en":"Go in the Gateway and check if conf/host/web/conf.php and conf/host/web/path.php exists and are readable."
           }
-       ],
+        ],
       },
       "sub_components":{
         "period" :{
           "name":"Lib Period",
           "key": "period",
           "errors":{
-            "1": ["period_type_not_exists","The requested period not exits"],
-            "2": ["period_type_not_exists"],
+            "1": ["period_type_not_exists",{
+              "de": "Dieser Periodentype ist nicht bekannt. Vermutlich ging etwas beim Setup schief."
+            }],
+            "2": ["multiple_periods_in_past",{
+              "de": "Mehrer Perioden dieses Types sind in der Vergangenheit.\nBitte korrigiere erst die geplanten Perioden, bevor du die aktuell Periode abschliesen kannst.",
+              "en": "The requested period not exits"
+            }],
           }
         }
       }
