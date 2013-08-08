@@ -36,14 +36,14 @@ class WebfrapSys_Exception extends Webfrap_Exception
    *
    * @var string
    */
-  protected $errorKey     = Response::INTERNAL_ERROR; // unspecified error
+  protected $errorKey = Response::INTERNAL_ERROR; // unspecified error
 
   /**
    * Container der eine oder mehrere Fehlermeldungen enthält
    *
    * @var ErrorContainer
    */
-  public $error     = null;
+  public $error = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Konstruktor
@@ -57,7 +57,7 @@ class WebfrapSys_Exception extends Webfrap_Exception
    */
   public function __construct(
     $debugMessage,
-    $userMessage = 'Error',
+    $userMessage = 'wbf.undefined_error',
     $errorKey = Response::INTERNAL_ERROR,
     $protocol = true,
     $dset = null,
@@ -72,7 +72,7 @@ class WebfrapSys_Exception extends Webfrap_Exception
         $protocol = false;
     }
 
-    if ('Error' === $userMessage)
+    if ('wbf.undefined_error' === $userMessage)
       $userMessage = Error::PROGRAM_BUG;
 
     if (DEBUG || WBF_RESPONSE_ADAPTER === 'cli') {
