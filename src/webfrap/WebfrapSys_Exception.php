@@ -36,14 +36,14 @@ class WebfrapSys_Exception extends Webfrap_Exception
    *
    * @var string
    */
-  protected $errorKey     = Response::INTERNAL_ERROR; // unspecified error
+  protected $errorKey = Response::INTERNAL_ERROR; // unspecified error
 
   /**
    * Container der eine oder mehrere Fehlermeldungen enthält
    *
    * @var ErrorContainer
    */
-  public $error     = null;
+  public $error = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Konstruktor
@@ -55,17 +55,16 @@ class WebfrapSys_Exception extends Webfrap_Exception
    * @param int $errorKey ein Error Key analog zum HTTP Status
    * @param boolean $protocol soll der Fehler in der Datenbank protokolliert werden?
    */
-  public function __construct
-  (
+  public function __construct(
     $debugMessage,
-    $userMessage = 'Error',
+    $userMessage = 'wbf.undefined_error',
     $errorKey = Response::INTERNAL_ERROR,
     $protocol = true,
     $dset = null,
     $mask = null
   ) {
 
-    $request  = Webfrap::$env->getRequest();
+    $request = Webfrap::$env->getRequest();
     $response = Webfrap::$env->getResponse();
 
     if (defined('DUMP_ERRORS')) {
@@ -73,7 +72,7 @@ class WebfrapSys_Exception extends Webfrap_Exception
         $protocol = false;
     }
 
-    if ('Error' === $userMessage)
+    if ('wbf.undefined_error' === $userMessage)
       $userMessage = Error::PROGRAM_BUG;
 
     if (DEBUG || WBF_RESPONSE_ADAPTER === 'cli') {
@@ -84,7 +83,7 @@ class WebfrapSys_Exception extends Webfrap_Exception
     }
 
     $this->debugMessage = $debugMessage;
-    $this->errorKey     = $errorKey;
+    $this->errorKey = $errorKey;
 
     if ('cli' === $request->type)
       $response->writeLn($userMessage);

@@ -29,7 +29,7 @@ class Webfrap_Exception extends Exception
    *
    * @var string
    */
-  protected $errorKey     = Response::INTERNAL_ERROR; // unspecified error
+  protected $errorKey = Response::INTERNAL_ERROR; // unspecified error
 
   /**
    * @return int
