@@ -321,12 +321,12 @@ class User extends BaseChild
     } else {
       $this->env = Webfrap::getActive();
     }
-    
+
     if ($userId) {
-      
+
       if (ctype_digit($userId))
         $this->loginById($userId);
-      else 
+      else
         $this->login($userId);
     }
 
@@ -368,11 +368,7 @@ class User extends BaseChild
       'groupId',
       'logedIn',
       'userData',
-      //'links',
-      //'linked',
-      //'reference',
       'fullName',
-      //'profile',
       'profileName',
       'profiles',
       'loginName',
@@ -844,7 +840,7 @@ class User extends BaseChild
     // mal was prüfen
     $orm       = $this->getOrm();
     $response  = $this->getResponse();
-  
+
     if ($userId) {
       try {
         if (!$authRole = $orm->get('WbfsysRoleUser', $userId)) {
@@ -856,11 +852,11 @@ class User extends BaseChild
         $response->addError('Error in the query to fetch the data for user: '.$userId);
 
         return false;
-      }  
-      
+      }
+
       $username = $authRole->name;
       $this->loginName = $authRole->name;
-      
+
     } else {
       if (is_object($username)) {
         $authRole        = $username;
@@ -868,12 +864,12 @@ class User extends BaseChild
         try {
           if (!$authRole = $orm->get('WbfsysRoleUser', "UPPER(name) = UPPER('{$username}')")) {
             $response->addError('User '.$username.' not exists');
-  
+
             return false;
           }
         } catch (LibDb_Exception $exc) {
           $response->addError('Error in the query to fetch the data for user: '.$username);
-  
+
           return false;
         }
       }
@@ -1106,7 +1102,7 @@ class User extends BaseChild
     return true;
 
   }//end public function login */
-  
+
   /**
    * en:
    * Login assumes that the user is allready authentificated and verificated
