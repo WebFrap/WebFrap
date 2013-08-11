@@ -378,6 +378,11 @@ class User extends BaseChild
 
   }//end public function __wakeup */
 
+  public function __toString()
+  {
+    return $this->getId();
+  }
+
   /**
    * @return WebfrapAuth_Model
    */
