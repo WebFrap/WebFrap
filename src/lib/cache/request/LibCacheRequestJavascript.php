@@ -329,7 +329,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
   				
   				$file = implode(" --js ", $fileList);
   				  				 
-  				exec("java -jar " . PATH_WGT . "compressor/compiler.jar --js " . $file, $codeArray);
+  				exec("java -jar " . PATH_WGT . "compressor/compiler.jar  --warning_level QUIET --js " . $file, $codeArray);
   				  				
   			}
   			
