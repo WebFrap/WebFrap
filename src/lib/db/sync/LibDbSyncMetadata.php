@@ -236,7 +236,7 @@ class LibDbSyncMetadata extends LibDbSync
 
     $colData  = array
     (
-      'name'      => $attribute->name(),
+      'name' => $attribute->name(),
       'type'      => $type,
       'size'      => $size,
       'required'  => $attribute->required()?'true':'false',
