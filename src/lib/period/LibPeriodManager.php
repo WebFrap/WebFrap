@@ -57,8 +57,8 @@ class LibPeriodManager extends BaseChild
   /**
    * Id der aktiven Period für eine bestimmten Type erfragen
    *
-   * @param string $key
-   * @return int
+   * @param string|int $key id des types oder der access_key
+   * @return int die id der periode
    *
    * @throws LibPeriod_Exception
    */
@@ -69,8 +69,21 @@ class LibPeriodManager extends BaseChild
       return $this->periods[$key];
 
     $active = EWbfsysPeriodStatus::ACTIVE;
-
-    $sql = <<<SQL
+    
+    if (ctype_digit($key)) {
+      
+      $sql = <<<SQL
+SELECT
+  period.rowid
+FROM wbfsys_period period
+WHERE
+  period.id_type = {$key}  
+    and period.status = {$active};
+SQL;
+      
+    } else {
+      
+      $sql = <<<SQL
 SELECT
   period.rowid
 FROM wbfsys_period period
@@ -80,7 +93,8 @@ WHERE
   upper(type.access_key) = upper('{$key}')
   and period.status = {$active};
 SQL;
-
+    }
+    
     $this->periods[$key] = $this->getDb()->select($sql)->getField('rowid');
 
     if (!$this->periods[$key]){
@@ -328,9 +342,26 @@ SQL;
 
     $status = EWbfsysPeriodStatus::PREPARATION;
     $startDate = date('Y-m-d');
-
-    // periode auf freeze setzen
-    $sql = <<<SQL
+    
+    if (ctype_digit($key)) {
+      
+      // periode auf freeze setzen
+      $sql = <<<SQL
+SELECT
+  COUNT(period.rowid) as num
+FROM
+   wbfsys_period period
+WHERE
+  period.id_type = {$key}
+    AND period.status <= {$status}
+    AND period.start_date < '{$startDate}';
+      
+SQL;
+      
+    } else {
+      
+      // periode auf freeze setzen
+      $sql = <<<SQL
 SELECT
   COUNT(period.rowid) as num
 FROM
@@ -341,8 +372,9 @@ WHERE
   UPPER(wbfsys_period_type.access_key) = UPPER('{$key}')
     AND status <= {$status}
     AND start_date < '{$startDate}';
-
+      
 SQL;
+    }
 
     $num = $db->select($sql)->getField('num');
 
