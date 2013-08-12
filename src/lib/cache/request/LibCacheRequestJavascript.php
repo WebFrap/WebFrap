@@ -431,7 +431,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
               system('java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'.$file.'" --type js --charset utf-8 -o "'.$cacheFile.'"');
             }*/
             if (!file_exists($cacheFile)) {
-              system('java -jar '.PATH_WGT.'compressor/compiler.jar  --js "'.$file.'" --js_output_file "'.$cacheFile.'"');
+              system('java -jar '.PATH_WGT.'compressor/compiler.jar --warning_level QUIET --js "'.$file.'" --js_output_file "'.$cacheFile.'"');
             }
 
             //$code .= '/* java java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'.$file.'" --type js --charset utf-8   -o "'.$file.'.min" */'.NL;

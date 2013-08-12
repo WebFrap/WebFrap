@@ -2198,7 +2198,7 @@ SQL;
 
       $colData  = array
       (
-        'name'      => $attribute->name(),
+        'name' => $attribute->name(),
         'type'      => $type,
         'size'      => $size,
         'required'  => $attribute->required()?'true':'false',
@@ -2214,7 +2214,7 @@ SQL;
 
       $colData  = array
       (
-        'name'      => $attribute['col_name'],
+        'name' => $attribute['col_name'],
         'type'      => $attribute['col_type'],
         'size'      => $size,
         'required'  => $attribute['col_null_able'] == 'YES'?'false':'true',
