@@ -80,7 +80,7 @@ abstract class LibDbConnection
    * Der aktive User
    * @var string
    */
-  public $dbUser      = null;
+  public $dbuser  = null;
 
   /**
    * Der aktive User
