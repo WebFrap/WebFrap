@@ -55,6 +55,53 @@ class LibPeriodManager extends BaseChild
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
+   * Initialisieren eines neuen Periodentypes
+   * @param string $key
+   */
+  public function initNewPeriodType($key)
+  {
+  
+    $orm = $this->getOrm();
+  
+    $period = $orm->getByKey('WbfsysPeriodType', $key);
+  
+    if (!$period)
+      throw new LibPeriod_Exception('wbf.period.period_type_not_exists', array('type',$key));
+  
+    // prüfen ob nicht schon initialisiert
+    if ($period->status > 1) {
+      throw new LibPeriod_Exception('wbf.period.period_type_allready_initialized', array('type',$key));
+    }
+  
+  }//end public function initNewPeriodType */
+  
+  /**
+   * Initialisieren eines neuen Periodentypes
+   * @param string $key
+   * 
+   * @return 
+   */
+  public function getPeriodType($key)
+  {
+  
+    $orm = $this->getOrm();
+
+    if (ctype_digit($key)) {
+    
+      $pType = $orm->get('WbfsysPeriodType', $key);
+    } else {
+    
+      $pType = $orm->getByKey('WbfsysPeriodType', $key);
+    }
+    
+    if (!$pType)
+      throw new LibPeriod_Exception('wbf.period.period_type_not_exists', array('type',$key));
+      
+    return $pType;
+  
+  }//end public function getPeriodType */
+  
+  /**
    * Id der aktiven Period für eine bestimmten Type erfragen
    *
    * @param string|int $key id des types oder der access_key
@@ -131,27 +178,6 @@ SQL;
 
   }//end public function getPeriodActions */
 
-
-  /**
-   * Initialisieren eines neuen Periodentypes
-   * @param string $key
-   */
-  public function initNewPeriodType($key)
-  {
-
-    $orm = $this->getOrm();
-
-    $period = $orm->getByKey('WbfsysPeriodType', $key);
-
-    if (!$period)
-      throw new LibPeriod_Exception('wbf.period.period_type_not_exists', array('type',$key));
-
-    // prüfen ob nicht schon initialisiert
-    if ($period->status > 1) {
-      throw new LibPeriod_Exception('wbf.period.period_type_allready_initialized', array('type',$key));
-    }
-
-  }//end public function initNewPeriodType */
 
   /**
    * Die nächste Periode eines Types erfragen
@@ -233,26 +259,20 @@ SQL;
    * @param string $key
    * @param int $status
    */
-  public function createNext($key, $status = null)
+  public function createNext($pType, $status = null)
   {
 
     $orm = $this->getOrm();
 
-    if (is_null($status))
-      $status = EWbfsysPeriodStatus::PLANNED;
-
-    $pType = $orm->getByKey('WbfsysPeriodType', $key);
-
-    if (!$period)
-      throw new LibPeriod_Exception('wbf.period.period_type_not_exists', array('type',$key));
-
     $period = new WbfsysPeriod_Entity();
+    $period->title = $pType->name.' '.date('Y-m-d');
+    $period->access_key = $pType->access_key.'_'.date('Y_m_d');
     $period->date_start = date('Y-m-d');
     $period->status = $status;
     $period->id_type = $pType;
 
     $orm->save($period);
-
+    
   }//end public function createNext */
   
   /**
@@ -261,8 +281,16 @@ SQL;
    */
   public function initialize($key)
   {
+    
+    $orm = $this->getOrm();
+    
+    $pType = $this->getPeriodType($key);
+    
+    if ($pType->status >= EWbfsysPeriodTypeStatus::ACTIVE){ 
+      throw new LibPeriod_Exception( 'wbf.period.period_type_allready_initialized' );
+    }
 
-    $this->createNext($key, EWbfsysPeriodStatus::ACTIVE);
+    $this->createNext($pType, EWbfsysPeriodStatus::ACTIVE);
   
   }//end public function initialize */
 

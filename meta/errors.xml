@@ -29,7 +29,7 @@ Sorry for the inconveniences.
     <sub_components>
       <component name="Lib Period" key="period" >
         <errors>
-          <error key="period_type_not_exists" >
+          <error key="period type not exists" >
             <msg>
               <de>
 Eine Periode des Types {@type@} existiert nicht. 
@@ -39,7 +39,7 @@ Bitte wende dich an den Support.
               <en></en>
             </msg>
           </error>
-          <error key="multiple_periods_in_past" >
+          <error key="multiple periods in past" >
             <msg>
               <de>
 Mehrer Perioden dieses Types sind in der Vergangenheit.
@@ -48,7 +48,7 @@ Bitte korrigiere erst die geplanten Perioden, bevor du die aktuell Periode absch
               <en></en>
             </msg>
           </error>
-          <error key="period_type_allready_initialized" >
+          <error key="type allready initialized" >
             <msg>
               <de>
 Der Periodentype {@type@} wurde bereits initialisiert.
@@ -57,7 +57,7 @@ Daher habe ich diesen Anfrage ignoriert und keine Aktion durchgeführt.
               <en></en>
             </msg>
           </error>
-          <error key="no_active_period" >
+          <error key="no active period" >
             <msg>
               <de>
 Der Periodentype {@type@} hat keine aktuelle laufene Periode.
