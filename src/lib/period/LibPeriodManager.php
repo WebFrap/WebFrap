@@ -254,6 +254,17 @@ SQL;
     $orm->save($period);
 
   }//end public function createNext */
+  
+  /**
+   * @param string $key
+   * @throws LibPeriod_Exception im Fehlerfall
+   */
+  public function initialize($key)
+  {
+
+    $this->createNext($key, EWbfsysPeriodStatus::ACTIVE);
+  
+  }//end public function initialize */
 
   /**
    * @param string $key
@@ -261,21 +272,16 @@ SQL;
    */
   public function freeze($key)
   {
+    
+    /// @throws LibPeriod_Exception wenn inkonsistent
+    $this->checkConsistency( $key );
+    
+    /// @throws LibPeriod_Exception  wenn keine aktive periode vorhanden ist
+    $activePeriod = $this->getActivePeriod($key);
 
-    $this->triggerAction($key, EWbfsysPeriodStatus::FROZEN, true);
+    $this->triggerAction($key, $activePeriod,  EWbfsysPeriodStatus::FROZEN, true);
 
   }//end public function freeze */
-
-  /**
-   * @param string $key
-   * @throws LibPeriod_Exception im Fehlerfall
-   */
-  public function init($key)
-  {
-
-    $this->triggerAction($key, EWbfsysPeriodStatus::ACTIVE, true);
-
-  }//end public function init */
 
   /**
    * @param string $key
@@ -291,20 +297,16 @@ SQL;
 
   /**
    * @param string $key
+   * @param int $activePeriod
    * @param int $status
    * @param boolean $createNext
    * @throws LibPeriod_Exception im Fehlerfall
    */
-  public function triggerAction($key, $status, $createNext = false)
+  public function triggerAction($key, $activePeriod, $status, $createNext = false)
   {
 
     $db = $this->getDb();
 
-    /// @throws LibPeriod_Exception wenn inkonsistent
-    $this->checkConsistency( $key );
-
-    /// @throws LibPeriod_Exception  wenn keine aktive periode vorhanden ist
-    $activePeriod = $this->getActivePeriod($key);
 
     // periode auf freeze setzen
     $sql = <<<SQL
