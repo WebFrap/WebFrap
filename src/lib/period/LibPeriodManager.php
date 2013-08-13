@@ -66,11 +66,11 @@ class LibPeriodManager extends BaseChild
     $period = $orm->getByKey('WbfsysPeriodType', $key);
   
     if (!$period)
-      throw new LibPeriod_Exception('wbf.period.period_type_not_exists', array('type',$key));
+      throw new LibPeriod_Exception('period type not exists','wbf.period',array('type',$key));
   
     // prüfen ob nicht schon initialisiert
     if ($period->status > 1) {
-      throw new LibPeriod_Exception('wbf.period.period_type_allready_initialized', array('type',$key));
+      throw new LibPeriod_Exception('period type allready initialized','wbf.period',array('type',$key));
     }
   
   }//end public function initNewPeriodType */
@@ -95,7 +95,7 @@ class LibPeriodManager extends BaseChild
     }
     
     if (!$pType)
-      throw new LibPeriod_Exception('wbf.period.period_type_not_exists', array('type',$key));
+      throw new LibPeriod_Exception('period_type_not_exists', 'wbf.period', array('type',$key));
       
     return $pType;
   
