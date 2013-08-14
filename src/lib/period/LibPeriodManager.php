@@ -302,7 +302,7 @@ SQL;
   {
     
     /// @throws LibPeriod_Exception wenn inkonsistent
-    $this->checkConsistency( $key );
+    $this->checkConsistency($key);
     
     /// @throws LibPeriod_Exception  wenn keine aktive periode vorhanden ist
     $activePeriod = $this->getActivePeriod($key);
