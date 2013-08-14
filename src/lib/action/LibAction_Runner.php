@@ -29,8 +29,8 @@ class LibAction_Runner extends Pbase
    */
   public function executeByString($string, array $params = array())
   {
+    
     $action = json_decode($string);
-
     return $this->execute($action, $params);
 
   }//end public function executeByString */

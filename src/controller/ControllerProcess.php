@@ -160,8 +160,8 @@ class ControllerProcess extends Controller
       $params->target = $target;
 
    // mask key
-    if ($mask = $request->param('mask', Validator::CNAME))
-      $params->mask = $mask;
+    if ($mask = $request->param('target_mask', Validator::CNAME))
+      $params->targetMask = $mask;
 
    // mask key
     if ($viewType = $request->param('view', Validator::CNAME))

@@ -105,9 +105,6 @@ class ContextMultiCrud extends Context
     if ($targetMask = $request->param('target_mask', Validator::CNAME))
       $this->targetMask = $targetMask;
 
-    // target mask
-    if ($mask = $request->param('mask', Validator::CNAME))
-      $this->mask = $mask;
 
     // mask key
     if ($viewId = $request->param('view_id', Validator::CKEY))
@@ -204,9 +201,6 @@ class ContextMultiCrud extends Context
     if ($this->viewId)
       $this->urlExt .= '&amp;view_id='.$this->viewId;
 
-    if ($this->mask)
-      $this->urlExt .= '&amp;mask='.$this->mask;
-
     if ($this->contextMaskSwt)
       $this->urlExt .= '&amp;cntms='.$this->contextMaskSwt;
 
@@ -264,9 +258,6 @@ class ContextMultiCrud extends Context
 
     if ($this->targetMask)
       $this->actionExt .= '&target_mask='.$this->targetMask;
-
-    if ($this->mask)
-      $this->actionExt .= '&mask='.$this->mask;
 
     if ($this->viewId)
       $this->actionExt .= '&view_id='.$this->viewId;
