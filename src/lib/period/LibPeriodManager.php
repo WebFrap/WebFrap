@@ -31,7 +31,7 @@ class LibPeriodManager extends BaseChild
   /**
    * @var array
    */
-  protected $periods = array();
+  protected $actPeriod = array();
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
@@ -105,17 +105,29 @@ class LibPeriodManager extends BaseChild
    * Id der aktiven Period für eine bestimmten Type erfragen
    *
    * @param string|int $key id des types oder der access_key
+   * @param int|array $status liste der status
+   * 
    * @return int die id der periode
    *
    * @throws LibPeriod_Exception
    */
-  public function getActivePeriod($key)
+  public function getActivePeriod($key, $status = null)
   {
+    
+    if (is_object($key))
+      $key = $key->getId();
 
-    if (isset($this->periods[$key]))
-      return $this->periods[$key];
-
-    $active = EWbfsysPeriodStatus::ACTIVE;
+    if (isset($this->actPeriod[$key]))
+      return $this->actPeriod[$key];
+    
+    if (!$status)
+      $status = EWbfsysPeriodStatus::ACTIVE;
+    
+    if ( is_array($status) ) {
+      $whereStatus = " IN(".implode(', ',$status).") ";
+    } else {
+      $whereStatus = " = ".EWbfsysPeriodStatus::ACTIVE;
+    }
     
     if (ctype_digit($key)) {
       
@@ -125,7 +137,7 @@ SELECT
 FROM wbfsys_period period
 WHERE
   period.id_type = {$key}  
-    and period.status = {$active};
+    and period.status {$whereStatus};
 SQL;
       
     } else {
@@ -138,17 +150,18 @@ FROM wbfsys_period period
     ON type.rowid = period.id_type
 WHERE
   upper(type.access_key) = upper('{$key}')
-  and period.status = {$active};
+  and period.status {$whereStatus};
 SQL;
+      
     }
     
-    $this->periods[$key] = $this->getDb()->select($sql)->getField('rowid');
+    $this->actPeriod[$key] = $this->getDb()->select($sql)->getField('rowid');
 
-    if (!$this->periods[$key]){
-      throw new LibPeriod_Exception('wbf.period.no_active_period', array('type',$key));
+    if (!$this->actPeriod[$key]){
+      throw new LibPeriod_Exception('no active period', 'wbf.period', array('type',$key));
     }
 
-    return $this->periods[$key];
+    return $this->actPeriod[$key];
 
   }//end public function getActivePeriod */
 
@@ -163,17 +176,32 @@ SQL;
   public function getPeriodActions($key, $type)
   {
 
-    $sql = <<<SQL
+    if ( is_object($key) || ctype_digit($key) ){
+      
+      $sql = <<<SQL
 SELECT
-  wbfsys_period_task.actions
+  task.actions
+FROM wbfsys_period_task task
+WHERE
+  task.id_type = {$key}
+  AND task.event_type = {$type};
+SQL;
+      
+    } else {
+      
+      $sql = <<<SQL
+SELECT
+  task.actions
 FROM wbfsys_period_task task
   JOIN wbfsys_period_type type
     ON type.rowid = task.id_type
 WHERE
-  upper(type.access_key) = upper('{$key}')
+  UPPER(type.access_key) = upper('{$key}')
   AND task.event_type = {$type};
 SQL;
-
+      
+    }
+    
     return $this->getDb()->select($sql)->getColumn('actions');
 
   }//end public function getPeriodActions */
@@ -185,21 +213,28 @@ SQL;
    *
    * @return int
    */
-  public function getNext($key)
+  public function getNext($pType)
   {
 
     // valide Perionden sind entweder in Planung oder in Preparation
-    $status = EWbfsysPeriodStatus::PREPARATION;
+    $prep = EWbfsysPeriodStatus::PREPARATION;
+    $planned = EWbfsysPeriodStatus::PLANNED;
 
     $sql = <<<SQL
 SELECT
-  period.rowid
+  rowid
 FROM
   wbfsys_period
 WHERE
-  status <= {$status}
-HAVING
-  start_date = min(start_date);
+  date_start IN(
+    SELECT min(date_start)
+    FROM wbfsys_period 
+    WHERE
+      status IN({$prep}, {$planned})
+        AND id_type = {$pType}
+  )
+  AND status IN({$prep}, {$planned})
+  AND id_type = {$pType}
 SQL;
 
     return $this->getDb()->select($sql)->getField('rowid');
@@ -226,7 +261,7 @@ FROM
 WHERE
   status = {$status}
 HAVING
-  end_date = max(end_date);
+  date_end = max(date_end);
 SQL;
 
     return $this->getDb()->select($sql)->getField('rowid');
@@ -273,6 +308,8 @@ SQL;
 
     $orm->save($period);
     
+    return $period;
+    
   }//end public function createNext */
   
   /**
@@ -287,10 +324,16 @@ SQL;
     $pType = $this->getPeriodType($key);
     
     if ($pType->status >= EWbfsysPeriodTypeStatus::ACTIVE){ 
-      throw new LibPeriod_Exception( 'wbf.period.period_type_allready_initialized' );
+      throw new LibPeriod_Exception('period type allready initialized', 'wbf.period');
     }
 
-    $this->createNext($pType, EWbfsysPeriodStatus::ACTIVE);
+    $activePeriod = $this->createNext(
+      $pType, 
+      EWbfsysPeriodStatus::ACTIVE
+    );
+    
+    
+    $this->triggerAction($pType, $activePeriod, EWbfsysPeriodEventType::INITIALIZE );
   
   }//end public function initialize */
 
@@ -306,8 +349,18 @@ SQL;
     
     /// @throws LibPeriod_Exception  wenn keine aktive periode vorhanden ist
     $activePeriod = $this->getActivePeriod($key);
+    $pType = $this->getPeriodType($key);
+    
+    $this->createNext($pType, EWbfsysPeriodStatus::PREPARATION);
+    
+    $this->updatePeriodStatus($activePeriod, EWbfsysPeriodStatus::FROZEN);
 
-    $this->triggerAction($key, $activePeriod,  EWbfsysPeriodStatus::FROZEN, true);
+    $this->triggerAction(
+      $pType, 
+      $activePeriod,  
+      EWbfsysPeriodEventType::FREEZE, 
+      true
+    );
 
   }//end public function freeze */
 
@@ -315,51 +368,112 @@ SQL;
    * @param string $key
    * @throws LibPeriod_Exception im Fehlerfall
    */
-  public function close($key)
+  public function next($key)
   {
 
-    $this->triggerAction($key, EWbfsysPeriodStatus::CLOSE);
+    /// @throws LibPeriod_Exception wenn inkonsistent
+    $this->checkConsistency($key);
 
-  }//end public function close */
+    $pType = $this->getPeriodType($key);
+    
+    // die aktive periode finden
+    $activePeriod = $this->getActivePeriod($pType, array(EWbfsysPeriodStatus::ACTIVE, EWbfsysPeriodStatus::FROZEN));
+    $this->closePeriod($activePeriod, EWbfsysPeriodStatus::CLOSED);
+    
+    
+    // die nächste Periode laden
+    $nextPeriod = $this->getNext($pType);
+    
+    // wenn keine vorhanden ist eine erstellen
+    if (!$nextPeriod) {
+      
+      $this->createNext($pType, EWbfsysPeriodStatus::ACTIVE);
+    } else {
+      
+      // die nächste periode aktiv setzen
+      $this->updatePeriodStatus($nextPeriod, EWbfsysPeriodStatus::ACTIVE);
+    }
+    
+    $this->triggerAction(
+      $pType, 
+      array($activePeriod,$nextPeriod),  
+      EWbfsysPeriodEventType::SWITCH_NEXT, 
+      true
+    );
+
+  }//end public function next */
 
 
   /**
-   * @param string $key
+   * @param string $pType
    * @param int $activePeriod
-   * @param int $status
-   * @param boolean $createNext
+   * @param int $actionType
    * @throws LibPeriod_Exception im Fehlerfall
    */
-  public function triggerAction($key, $activePeriod, $status, $createNext = false)
+  public function triggerAction($pType, $activePeriod, $actionType)
   {
 
-    $db = $this->getDb();
-
-
-    // periode auf freeze setzen
-    $sql = <<<SQL
-UPDATE wbfsys_period set status = {$status} where rowid = {$activePeriod};
-SQL;
-
-    $db->update($sql);
-
-    if ($createNext)
-      $this->createNext($key, EWbfsysPeriodStatus::IN_PREPARATION);
 
     // alle Actions die am Überfang hängen ausführen
-    $actions = $this->getPeriodActions($key, $status);
+    $actions = $this->getPeriodActions($pType, $actionType);
 
     if ($actions) {
       $executor = new LibAction_Runner($this->env);
-
       foreach ($actions as $action) {
         $executor->executeByString($action, array($activePeriod));
       }
     }
 
 
-  }//end public function freeze */
+  }//end public function triggerAction */
 
+  /**
+   * @param string $key
+   * @param int $activePeriod
+   * @param int $status
+   * @param int $actionType
+   * @param boolean $createNext
+   * @throws LibPeriod_Exception im Fehlerfall
+   */
+  public function updatePeriodStatus($activePeriod, $status)
+  {
+  
+    $db = $this->getDb();
+  
+    // periode auf freeze setzen
+    $sql = <<<SQL
+UPDATE wbfsys_period set status = {$status} where rowid = {$activePeriod};
+SQL;
+  
+    $db->update($sql);
+
+  
+  }//end public function updatePeriodStatus */
+  
+  /**
+   * @param string $key
+   * @param int $activePeriod
+   * @param int $status
+   * @param int $actionType
+   * @param boolean $createNext
+   * @throws LibPeriod_Exception im Fehlerfall
+   */
+  public function closePeriod($activePeriod, $status)
+  {
+  
+    $db = $this->getDb();
+  
+    $today = date('Y-m-d');
+    
+    // periode auf freeze setzen
+    $sql = <<<SQL
+UPDATE wbfsys_period set status = {$status}, date_end = '{$today}' where rowid = {$activePeriod};
+SQL;
+  
+    $db->update($sql);
+  
+  }//end public function closePeriod */
+  
 
   /**
    * @param string $key
@@ -384,7 +498,7 @@ FROM
 WHERE
   period.id_type = {$key}
     AND period.status <= {$status}
-    AND period.start_date < '{$startDate}';
+    AND period.date_start < '{$startDate}';
       
 SQL;
       
@@ -401,7 +515,7 @@ JOIN
 WHERE
   UPPER(wbfsys_period_type.access_key) = UPPER('{$key}')
     AND status <= {$status}
-    AND start_date < '{$startDate}';
+    AND date_start < '{$startDate}';
       
 SQL;
     }
