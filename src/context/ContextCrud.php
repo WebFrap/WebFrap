@@ -177,9 +177,6 @@ class ContextCrud extends Context
     if ($this->viewId)
       $this->urlExt .= '&amp;view_id='.$this->viewId;
 
-    if ($this->mask)
-      $this->urlExt .= '&amp;mask='.$this->mask;
-
     if ($this->contextMaskSwt)
       $this->urlExt .= '&amp;cntms='.$this->contextMaskSwt;
 
@@ -237,9 +234,6 @@ class ContextCrud extends Context
 
     if ($this->targetMask)
       $this->actionExt .= '&target_mask='.$this->targetMask;
-
-    if ($this->mask)
-      $this->actionExt .= '&mask='.$this->mask;
 
     if ($this->viewId)
       $this->actionExt .= '&view_id='.$this->viewId;

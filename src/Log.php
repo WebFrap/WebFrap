@@ -42,7 +42,7 @@ class Log
 
   const INFO      = 16;
 
-  const USER      = 32;
+  const user  = 32;
 
   const WARN      = 64;
 

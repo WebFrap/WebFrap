@@ -319,7 +319,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
   				$fileLists[$index][] = $file;
   				 
   				
-  				if (count($fileLists[$index]) == 20) {
+  				if (count($fileLists[$index]) == 40) {
   					$index++;
   				}
   				  

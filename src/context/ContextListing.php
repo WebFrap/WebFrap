@@ -331,8 +331,8 @@ class ContextListing extends Context
       = $request->param('objid', Validator::EID  );
 
     // order for the multi display element
-    $this->mask
-      = $request->param('mask', Validator::CNAME);
+    $this->targetMask
+      = $request->param('target_mask', Validator::CNAME);
 
   }//end public function interpretRequest */
 
@@ -423,8 +423,8 @@ class ContextListing extends Context
     if ($this->aclLevel)
       $this->urlExt .= '&amp;a_level='.$this->aclLevel;
 
-    if ($this->mask)
-      $this->urlExt .= '&amp;mask='.$this->mask;
+    if ($this->targetMask)
+      $this->urlExt .= '&amp;target_mask='.$this->targetMask;
 
     return $this->urlExt;
 
@@ -454,8 +454,8 @@ class ContextListing extends Context
     if ($this->aclLevel)
       $this->actionExt .= '&a_level='.$this->aclLevel;
 
-    if ($this->mask)
-      $this->actionExt .= '&mask='.$this->mask;
+    if ($this->targetMask)
+      $this->actionExt .= '&target_mask='.$this->targetMask;
 
     return $this->actionExt;
 
