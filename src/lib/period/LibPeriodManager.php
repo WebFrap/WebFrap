@@ -121,12 +121,12 @@ class LibPeriodManager extends BaseChild
       return $this->actPeriod[$key];
     
     if (!$status)
-      $status = EWbfsysPeriodStatus::ACTIVE;
+      $status = array(EWbfsysPeriodStatus::PREPARATION, EWbfsysPeriodStatus::ACTIVE) ;
     
     if ( is_array($status) ) {
       $whereStatus = " IN(".implode(', ',$status).") ";
     } else {
-      $whereStatus = " = ".EWbfsysPeriodStatus::ACTIVE;
+      $whereStatus = " = ".$status;
     }
     
     if (ctype_digit($key)) {
