@@ -42,15 +42,15 @@ class TFlagForm extends TFlag
    * Die Rootarea des Pfades über den wir gerade in den rechten wandeln
    * @var string $aclRoot
    */
-  public $aclRoot       = null;
+  public $aclRoot = null;
 
-  public $aclRootId     = null;
+  public $aclRootId = null;
 
-  public $aclKey        = null;
+  public $aclKey = null;
 
-  public $aclLevel      = null;
+  public $aclLevel = null;
 
-  public $aclNode       = null;
+  public $aclNode = null;
 
 } // end class TFlagForm
 
