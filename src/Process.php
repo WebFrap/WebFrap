@@ -236,7 +236,7 @@ abstract class Process extends PBase
    * Query objekt für den
    * @var LibProcess_Model
    */
-  protected $model  = null;
+  protected $model = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Constructor

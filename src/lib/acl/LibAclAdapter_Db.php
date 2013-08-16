@@ -804,7 +804,7 @@ class LibAclAdapter_Db extends LibAclAdapter
       $container = new LibAclPermission();
 
     $user   = $this->getUser();
-    $model  = $this->getModel();
+    $model = $this->getModel();
 
     // den key verarbeiten
     $tmp    = explode(':', $key);
@@ -955,7 +955,7 @@ class LibAclAdapter_Db extends LibAclAdapter
       $container = new LibAclPermission();
 
     $user   = $this->getUser();
-    $model  = $this->getModel();
+    $model = $this->getModel();
 
     // den key verarbeiten
     $tmp    = explode(':', $key);
@@ -1057,7 +1057,7 @@ class LibAclAdapter_Db extends LibAclAdapter
     }
 
     $user   = $this->getUser();
-    $model  = $this->getModel();
+    $model = $this->getModel();
 
     if (!$rootNode   = $model->getAreaNode($root)) {
       Debug::console("Keine Id für Area {$root} bekommen");
@@ -1187,7 +1187,7 @@ class LibAclAdapter_Db extends LibAclAdapter
     }
 
     $user   = $this->getUser();
-    $model  = $this->getModel();
+    $model = $this->getModel();
 
     if (!$rootNode   = $model->getAreaNode($areaKey)) {
       Debug::console("Keine Id für Area {$areaKey} bekommen");
