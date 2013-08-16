@@ -339,8 +339,7 @@ abstract class Controller extends BaseChild
 
         $this->models[$key] = $model;
       } else {
-        throw new Controller_Exception
-        (
+        throw new Controller_Exception(
           'Internal Error',
           'Failed to load Submodul: '.$modelName
         );
