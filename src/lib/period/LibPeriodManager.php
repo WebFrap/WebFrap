@@ -118,10 +118,10 @@ class LibPeriodManager extends BaseChild
       $key = $key->getId();
 
     if (isset($this->actPeriod[$key]))
-      return $this->actPeriod[$key];
+      return $this->actPeriod[$key]['rowid'];
     
     if (!$status)
-      $status = array(EWbfsysPeriodStatus::PREPARATION, EWbfsysPeriodStatus::ACTIVE) ;
+      $status = array(EWbfsysPeriodStatus::FROZEN, EWbfsysPeriodStatus::ACTIVE) ;
     
     if ( is_array($status) ) {
       $whereStatus = " IN(".implode(', ',$status).") ";
@@ -144,7 +144,9 @@ SQL;
       
       $sql = <<<SQL
 SELECT
-  period.rowid
+  period.rowid,
+  period.status,
+  period.planned_end
 FROM wbfsys_period period
   JOIN wbfsys_period_type type
     ON type.rowid = period.id_type
@@ -155,13 +157,13 @@ SQL;
       
     }
     
-    $this->actPeriod[$key] = $this->getDb()->select($sql)->getField('rowid');
+    $this->actPeriod[$key] = $this->getDb()->select($sql)->get();
 
     if (!$this->actPeriod[$key]){
       throw new LibPeriod_Exception('no active period', 'wbf.period', array('type',$key));
     }
 
-    return $this->actPeriod[$key];
+    return $this->actPeriod[$key]['rowid'];
 
   }//end public function getActivePeriod */
 
@@ -205,6 +207,44 @@ SQL;
     return $this->getDb()->select($sql)->getColumn('actions');
 
   }//end public function getPeriodActions */
+  
+  /**
+   * 
+   * 
+   * @constraint Kann erst nach getActivePeriod aufgerufen werden
+   *
+   * @param string $key
+   * @param int EWbfsysPeriodStatus $type
+   *
+   * @return array
+   */
+  public function getActivePeriodStatus($key)
+  {
+    
+    return isset($this->actPeriod[$key]['status'])
+      ? $this->actPeriod[$key]['status']
+      : null;
+    
+  }//end public function getActivePeriodStatus */
+  
+  /**
+   * 
+   * @constraint Kann erst nach getActivePeriod aufgerufen werden
+   *
+   * @param string $key
+   * @param int EWbfsysPeriodStatus $type
+   *
+   * @return array
+   *  
+   */
+  public function getActivePeriodDeadline($key)
+  {
+
+    return isset($this->actPeriod[$key]['planned_end'])
+      ? $this->actPeriod[$key]['planned_end']
+      : null;
+  
+  }//end public function getActivePeriodDeadline */
 
 
   /**

@@ -692,7 +692,7 @@ class LibDbPostgresql extends LibDbConnection
 
     if (is_object($name)) {
       $obj      = $name;
-      $name     = $obj->getName();
+      $name = $obj->getName();
       $values   = $obj->getPrepareValues();
       $single   = $obj->getSingelRow();
     }
@@ -742,7 +742,7 @@ class LibDbPostgresql extends LibDbConnection
 
     if (is_object($name)) {
       $obj      = $name;
-      $name     = $obj->getName();
+      $name = $obj->getName();
       $values   = $obj->getPrepareValues();
     }
 

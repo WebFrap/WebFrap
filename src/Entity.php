@@ -508,13 +508,13 @@ abstract class Entity implements ArrayAccess
       }
 
     } else {
-      
+
       $stack = array();
-      
+
       foreach ($keys as $key)
         if(isset($this->data[$key])&&''!=trim($this->data[$key]))
           $stack[] = $this->data[$key];
-        
+
        $string = implode(', ', $stack);
     }
 
@@ -1856,7 +1856,9 @@ abstract class Entity implements ArrayAccess
   public function getChecked($key)
   {
 
-    if (isset($this->data[$key]) && $this->data[$key]  )
+    Debug::console( ' getChecked('.$key.') '.$this->data[$key] );
+
+    if (isset($this->data[$key]) && $this->data[$key] && 'f' != $this->data[$key] )
       return ' checked="checked" ';
     else
       return '';
