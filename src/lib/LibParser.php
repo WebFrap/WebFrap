@@ -28,13 +28,13 @@ class LibParser
    *
    * @var LibBdlLexer
    */
-  protected $lexer     = null;
+  protected $lexer = null;
 
   /**
    *
    * @var LibBdlRegistry
    */
-  protected $registry     = null;
+  protected $registry = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
@@ -105,7 +105,7 @@ class LibParser
    */
   public function clean()
   {
-    $this->registry->name     = null;
+    $this->registry->name = null;
   }//end public function clean */
 
   /**

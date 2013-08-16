@@ -29,187 +29,187 @@ class Validator
    * Validatormapping
    * @var string
    */
-  const RAW         = 'Raw';
+  const RAW = 'Raw';
 
   /**
    * Validatormapping
    * @var string
    */
-  const NOTAGS      = 'Notags';
+  const NOTAGS = 'Notags';
 
   /**
    * Validatormapping
    * @var string
    */
-  const INT         = 'Int';
+  const INT = 'Int';
 
   /**
    * Validatormapping
    * @var string
    */
-  const SMALLINT         = 'Smallint';
+  const SMALLINT = 'Smallint';
 
   /**
    * Validatormapping
    * @var string
    */
-  const EID         = 'Eid';
+  const EID = 'Eid';
 
   /**
    * Validatormapping
    * @var string
    */
-  const NUMERIC     = 'Numeric';
+  const NUMERIC = 'Numeric';
 
   /**
    * Validatormapping
    * @var string
    */
-  const BOOLEAN     = 'Boolean';
+  const BOOLEAN = 'Boolean';
 
   /**
    * Validatormapping
    * @var string
    */
-  const TEXT        = 'Text';
+  const TEXT = 'Text';
 
   /**
    * Validatormapping
    * @var string
    */
-  const SEARCH       = 'Search';
+  const SEARCH = 'Search';
 
   /**
    * Validatormapping
    * @var string
    */
-  const HTML        = 'Html';
+  const HTML = 'Html';
 
   /**
    * Validatormapping
    * @var string
    */
-  const HTML_PUBLISH        = 'HtmlPublish';
+  const HTML_PUBLISH = 'HtmlPublish';
 
   /**
    * Validatormapping
    * @var string
    */
-  const HTML_FULL        = 'HtmlFull';
+  const HTML_FULL = 'HtmlFull';
 
   /**
    * Validatormapping
    * @var string
    */
-  const JSON        = 'Json';
+  const JSON = 'Json';
 
   /**
    * Validatormapping
    * @var string
    */
-  const DATE        = 'Date';
+  const DATE = 'Date';
 
   /**
    * Validatormapping
    * @var string
    */
-  const TIME        = 'Time';
+  const TIME = 'Time';
 
   /**
    * Validatormapping
    * @var string
    */
-  const TIMESTAMP   = 'Timestamp';
+  const TIMESTAMP = 'Timestamp';
 
   /**
    * Validatormapping
    * @var string
    */
-  const URL         = 'Url';
+  const URL = 'Url';
 
   /**
    * Validatormapping
    * @var string
    */
-  const LINK         = 'Link';
+  const LINK = 'Link';
 
   /**
    * Validatormapping
    * @var string
    */
-  const EMAIL       = 'Email';
+  const EMAIL = 'Email';
 
   /**
    * Validatormapping
    * @var string
    */
-  const USERNAME    = 'Username';
+  const USERNAME = 'Username';
 
   /**
    * Validatormapping
    * @var string
    */
-  const PASSWORD    = 'Password';
+  const PASSWORD = 'Password';
 
   /**
    * Validatormapping
    * @var string
    */
-  const CNAME       = 'Cname';
+  const CNAME = 'Cname';
 
   /**
    * Validatormapping
    * @var string
    */
-  const CKEY       = 'Ckey';
+  const CKEY = 'Ckey';
 
   /**
    * Validatormapping
    * @var string
    */
-  const FILENAME    = 'Filename';
+  const FILENAME = 'Filename';
 
   /**
    * Validatormapping
    * @var string
    */
-  const FILE        = 'File';
+  const FILE = 'File';
 
   /**
    * Validatormapping
    * @var string
    */
-  const IMAGE      = 'Image';
+  const IMAGE = 'Image';
 
   /**
    * Validatormapping
    * @var string
    */
-  const FULLNAME    = 'Fullname';
+  const FULLNAME = 'Fullname';
 
   /**
    * Validatormapping
    * @var string
    */
-  const FOLDERNAME  = 'Foldername';
+  const FOLDERNAME = 'Foldername';
 
   /**
    * Validatormapping
    * @var string
    */
-  const BITMASK     = 'Bitmask';
+  const BITMASK = 'Bitmask';
 
   /**
    * Validatormapping
    * @var string
    */
-  const UUID        = 'Uuid';
+  const UUID = 'Uuid';
 
   /**
    * Validatormapping
    * @var string
    */
-  const NETWORKSHARE        = 'Networkshare';
+  const NETWORKSHARE = 'Networkshare';
 
   /**
    *
@@ -231,32 +231,32 @@ class Validator
    *
    * @var array
    */
-  public $data        = array();
+  public $data = array();
 
   /**
    * array for saving if a value ist valid or invalid
    *
    * @var array
    */
-  public $invalid     = array();
+  public $invalid = array();
 
   /**
    *
    * @var string
    */
-  public $lastError   = null;
+  public $lastError = null;
 
   /**
    *
    * @var scalar
    */
-  public $lastValue   = null;
+  public $lastValue = null;
 
   /**
    *
    * @var scalar
    */
-  public $validatorPool   = array();
+  public $validatorPool = array();
 
   /**
    * list with secific error messages
@@ -357,8 +357,8 @@ class Validator
   public function appendCleanData($key, $value)
   {
 
-    $this->data[$key]     = $value;
-    $this->invalid[$key]  = false;
+    $this->data[$key] = $value;
+    $this->invalid[$key] = false;
 
   }//end public function appendCleanData */
 
@@ -401,9 +401,9 @@ class Validator
    */
   public function clean()
   {
-    $this->data           = array();
-    $this->invalid        = array();
-    $this->errorMessages  = array();
+    $this->data = array();
+    $this->invalid = array();
+    $this->errorMessages = array();
 
   }//end public function clean
 
@@ -446,11 +446,11 @@ class Validator
   {
 
     if ($notNull) {
-      $this->invalid[$key]  =  'emtpy';
+      $this->invalid[$key] =  'emtpy';
 
       return 'emtpy';
     } else {
-      $this->invalid[$key]  = false;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -498,22 +498,22 @@ class Validator
   public function add($validator, $key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]     = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
 
     if (!$valObj = $this->getValidator($validator)) {
-      $this->invalid[$key]  = 'wrong';
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
 
-    $conclusion       = $valObj->validate($key, $value, $notNull, $maxSize, $minSize);
+    $conclusion = $valObj->validate($key, $value, $notNull, $maxSize, $minSize);
     $this->data[$key] = $valObj->getSecure();
 
-    $this->invalid[$key]  = $conclusion;
+    $this->invalid[$key] = $conclusion;
 
     return $conclusion;
 
@@ -534,8 +534,8 @@ class Validator
   {
 
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]     = null;
-      $this->invalid[$key]  = true;
+      $this->data[$key] = null;
+      $this->invalid[$key] = true;
 
       return false;
     }
@@ -543,14 +543,14 @@ class Validator
     $this->data[$key] = stripslashes($value);
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
 
     if ($maxSize) {
       if (mb_strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -558,13 +558,13 @@ class Validator
 
     if ($minSize) {
       if (mb_strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -585,21 +585,21 @@ class Validator
   {
 
     if (!is_array($value) and !is_null($value)) {
-      $this->invalid[$key]  = 'wrong';
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
 
     if (!$notNull and count($value) == 0) {
 
-      $this->data[$key]   = null;
-      $this->invalid[$key]  = true;
+      $this->data[$key] = null;
+      $this->invalid[$key] = true;
 
       return false;
     }
 
-    $this->data[$key]     = new TBitmask($value);
-    $this->invalid[$key]  = false;
+    $this->data[$key] = new TBitmask($value);
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -617,8 +617,8 @@ class Validator
   public function addNotags($key, $value, $notNull = false, $maxSize = null, $minSize = null  )
   {
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]   = null;
-      $this->invalid[$key]  = true;
+      $this->data[$key] = null;
+      $this->invalid[$key] = true;
 
       return false;
     }
@@ -626,14 +626,14 @@ class Validator
     $this->data[$key] = strip_tags($value);
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
 
     if ($maxSize) {
       if (mb_strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -641,13 +641,13 @@ class Validator
 
     if ($minSize) {
       if (mb_strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -664,7 +664,7 @@ class Validator
   {
     if (!$notNull and trim($value) == '') {
       $this->data[$key] = null;
-      $this->invalid[$key]  = false;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -672,14 +672,14 @@ class Validator
     $this->data[$key] = (int) $value;
 
     if (!is_numeric($value)) {
-      $this->invalid[$key]  = 'wrong';
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
 
     if ($maxSize) {
       if ($this->data[$key] > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -687,13 +687,13 @@ class Validator
 
     if ($minSize) {
       if ($this->data[$key] < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -710,7 +710,7 @@ class Validator
   {
     if (!$notNull and trim($value) == '') {
       $this->data[$key] = null;
-      $this->invalid[$key]  = false;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -718,14 +718,14 @@ class Validator
     $this->data[$key] = (int) $value;
 
     if (!is_numeric($value)) {
-      $this->invalid[$key]  = 'wrong';
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
 
     if ($maxSize) {
       if ($this->data[$key] > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -733,13 +733,13 @@ class Validator
 
     if ($minSize) {
       if ($this->data[$key] < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -756,7 +756,7 @@ class Validator
   {
     if (!$notNull and trim($value) == '') {
       $this->data[$key] = null;
-      $this->invalid[$key]  = false;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -764,14 +764,14 @@ class Validator
     $this->data[$key] = (int) $value;
 
     if (!is_numeric($value)) {
-      $this->invalid[$key]  = 'wrong';
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
 
     if ($maxSize) {
       if ($this->data[$key] > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -779,13 +779,13 @@ class Validator
 
     if ($minSize) {
       if ($this->data[$key] < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -806,7 +806,7 @@ class Validator
   {
     if (!$notNull and trim($value) == '') {
       $this->data[$key] = null;
-      $this->invalid[$key]  = false;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -814,20 +814,20 @@ class Validator
     $this->data[$key] = (int) $value;
 
     if (!ctype_digit($value)) {
-      $this->invalid[$key]  = 'wrong';
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
 
     if (0 > $value) {
-      $this->invalid[$key]  = 'wrong';
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
 
     if ($maxSize) {
       if ($this->data[$key] > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -835,13 +835,13 @@ class Validator
 
     if ($minSize) {
       if ($this->data[$key] < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -859,7 +859,7 @@ class Validator
 
     if (!$notNull and trim($value) == '') {
       $this->data[$key] = null;
-      $this->invalid[$key]  = false;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -876,7 +876,7 @@ class Validator
 
     if ($maxSize) {
       if ($this->data[$key] > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -884,13 +884,13 @@ class Validator
 
     if ($minSize) {
       if ($this->data[$key] < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -927,7 +927,7 @@ class Validator
 
     $this->data[$key] = $value;
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -944,8 +944,8 @@ class Validator
   {
     
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]     = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -979,7 +979,7 @@ class Validator
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -996,8 +996,8 @@ class Validator
   {
 
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]     = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -1023,7 +1023,7 @@ class Validator
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -1039,8 +1039,8 @@ class Validator
   public function addHtml($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]     = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -1054,7 +1054,7 @@ class Validator
 
     $value = $sanitizer->purify($value);
 
-    $this->data[$key]     = $value;
+    $this->data[$key] = $value;
 
     if ($notNull) {
       if (trim($value) == ''  )
@@ -1071,7 +1071,7 @@ class Validator
         return 'min';
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -1087,8 +1087,8 @@ class Validator
   public function addHtmlPublish($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]     = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -1102,7 +1102,7 @@ class Validator
 
     $value = $sanitizer->purify($value);
 
-    $this->data[$key]     = $value;
+    $this->data[$key] = $value;
 
     if ($notNull) {
       if (trim($value) == ''  )
@@ -1119,7 +1119,7 @@ class Validator
         return 'min';
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -1135,8 +1135,8 @@ class Validator
   public function addHtmlFull($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]     = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -1150,7 +1150,7 @@ class Validator
 
     $value = $sanitizer->purify($value);
 
-    $this->data[$key]     = $value;
+    $this->data[$key] = $value;
 
     if ($notNull) {
       if (trim($value) == ''  )
@@ -1167,7 +1167,7 @@ class Validator
         return 'min';
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -1185,8 +1185,8 @@ class Validator
   {
 
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]     = null;
-      $this->invalid[$key]  = true;
+      $this->data[$key] = null;
+      $this->invalid[$key] = true;
 
       return false;
     }
@@ -1194,14 +1194,14 @@ class Validator
     $this->data[$key] = Db::addSlashes($value);
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
 
     if ($maxSize) {
       if (mb_strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -1209,13 +1209,13 @@ class Validator
 
     if ($minSize) {
       if (mb_strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -1232,8 +1232,8 @@ class Validator
   {
 
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]     = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -1246,7 +1246,7 @@ class Validator
     $formatter->setSeperator(I18n::$dateSeperator);
 
     if (!$formatter->setDateLanguage($value)) {
-      $this->invalid[$key]  = 'wrong';
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
@@ -1254,7 +1254,7 @@ class Validator
     $this->data[$key] = $formatter->formatToEnglish();
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
@@ -1262,7 +1262,7 @@ class Validator
     /*
     if ($maxSize) {
       if (mb_strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -1270,14 +1270,14 @@ class Validator
 
     if ($minSize) {
       if (mb_strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
     */
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -1294,8 +1294,8 @@ class Validator
   {
 
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]   = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -1304,7 +1304,7 @@ class Validator
     $this->data[$key] = $value;
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
@@ -1312,7 +1312,7 @@ class Validator
     /*
     if ($maxSize) {
       if (mb_strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -1320,14 +1320,14 @@ class Validator
 
     if ($minSize) {
       if (mb_strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
     */
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -1344,8 +1344,8 @@ class Validator
   {
 
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]   = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -1354,7 +1354,7 @@ class Validator
     $this->data[$key] = $value;
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
@@ -1362,7 +1362,7 @@ class Validator
     /*
     if ($maxSize) {
       if (mb_strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -1370,14 +1370,14 @@ class Validator
 
     if ($minSize) {
       if (mb_strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
     */
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -1394,8 +1394,8 @@ class Validator
   {
 
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]   = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -1403,20 +1403,20 @@ class Validator
     $this->data[$key] = str_replace('\\', '\\\\', $value);
 
     if (!preg_match(self::VALIDATE_URL ,$value)  ) {
-      $this->invalid[$key]  = 'wrong';
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
 
     if ($maxSize) {
       if (mb_strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -1424,13 +1424,13 @@ class Validator
 
     if ($minSize) {
       if (mb_strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -1447,8 +1447,8 @@ class Validator
   {
 
     if (!$notNull && trim($value) == '') {
-      $this->data[$key]   = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -1456,20 +1456,20 @@ class Validator
     $this->data[$key] = str_replace('\\', '\\\\', $value);
 
     if (!preg_match(self::VALIDATE_URL ,$value)  ) {
-      $this->invalid[$key]  = 'wrong';
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
 
     if ($notNull && trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
 
     if ($maxSize) {
       if (mb_strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -1477,13 +1477,13 @@ class Validator
 
     if ($minSize) {
       if (mb_strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -1500,8 +1500,8 @@ class Validator
   {
 
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]     = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -1511,21 +1511,21 @@ class Validator
 
     /*
     if (!preg_match(self::VALIDATE_URL ,$value)  ) {
-      $this->invalid[$key]  = 'wrong';
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
     */
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
 
     if ($maxSize) {
       if (mb_strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -1533,13 +1533,13 @@ class Validator
 
     if ($minSize) {
       if (mb_strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -1556,8 +1556,8 @@ class Validator
   {
 
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]   = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -1565,20 +1565,20 @@ class Validator
     $this->data[$key] = $value;
 
     if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-      $this->invalid[$key]  = 'wrong';
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
 
     if ($maxSize) {
       if (mb_strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -1586,13 +1586,13 @@ class Validator
 
     if ($minSize) {
       if (mb_strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -1609,8 +1609,8 @@ class Validator
   {
 
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]   = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -1619,20 +1619,20 @@ class Validator
 
     // musn't start with a number
     if (is_numeric($value[0])  ) {
-      $this->invalid[$key]  = 'wrong';
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
 
     if ($maxSize) {
       if (mb_strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -1640,13 +1640,13 @@ class Validator
 
     if ($minSize) {
       if (mb_strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -1662,21 +1662,21 @@ class Validator
   public function addPassword($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (!$notNull and trim($value) == '') {
-      //$this->data[$key]     = null;
-      $this->invalid[$key]  = false;
+      //$this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
 
     if ($maxSize) {
       if (mb_strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -1684,7 +1684,7 @@ class Validator
 
     if ($minSize) {
       if (mb_strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
@@ -1692,7 +1692,7 @@ class Validator
 
     $this->data[$key] = SEncrypt::passwordHash($value);
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -1708,8 +1708,8 @@ class Validator
   public function addCname($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]     = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -1721,20 +1721,20 @@ class Validator
 
     // musn't start with a number
     if (!ctype_alnum($testVal)) {
-      $this->invalid[$key]  = 'wrong';
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
 
     if ($maxSize) {
       if (mb_strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -1742,13 +1742,13 @@ class Validator
 
     if ($minSize) {
       if (mb_strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -1764,8 +1764,8 @@ class Validator
   public function addCkey($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]     = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -1777,20 +1777,20 @@ class Validator
 
     // musn't start with a number
     if (!ctype_alnum($testVal)) {
-      $this->invalid[$key]  = 'wrong';
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
 
     if ($maxSize) {
       if (mb_strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -1798,13 +1798,13 @@ class Validator
 
     if ($minSize) {
       if (mb_strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -1822,7 +1822,7 @@ class Validator
   {
 
     if (!$notNull && !$value) {
-      $this->invalid[$key]  = false;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -1833,7 +1833,7 @@ class Validator
     }
 
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -1850,7 +1850,7 @@ class Validator
   {
 
     if (!$notNull && !$value) {
-      $this->invalid[$key]  = false;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -1861,7 +1861,7 @@ class Validator
     }
 
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -1877,8 +1877,8 @@ class Validator
   public function addFilename($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]   = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -1887,14 +1887,14 @@ class Validator
     $this->data[$key] = SFiles::getFilename($value);
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
 
     if ($maxSize) {
       if (mb_strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -1902,13 +1902,13 @@ class Validator
 
     if ($minSize) {
       if (mb_strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -1925,15 +1925,15 @@ class Validator
   {
 
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]   = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
 
     if (strpos('../', $value)) {
-      $this->data[$key]   = null;
-      $this->invalid[$key]  = 'wrong';
+      $this->data[$key] = null;
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
@@ -1942,14 +1942,14 @@ class Validator
     $this->data[$key] = $value;
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
 
     if ($maxSize) {
       if (mb_strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -1957,13 +1957,13 @@ class Validator
 
     if ($minSize) {
       if (mb_strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -1980,15 +1980,15 @@ class Validator
   {
 
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]   = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
 
     if (strpos('../', $value)) {
-      $this->data[$key]   = null;
-      $this->invalid[$key]  = 'wrong';
+      $this->data[$key] = null;
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
@@ -1997,14 +1997,14 @@ class Validator
     $this->data[$key] = $value;
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
 
     if ($maxSize) {
       if (mb_strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -2012,13 +2012,13 @@ class Validator
 
     if ($minSize) {
       if (mb_strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -2034,8 +2034,8 @@ class Validator
   public function addUuid($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]     = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -2060,7 +2060,7 @@ class Validator
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 

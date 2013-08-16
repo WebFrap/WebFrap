@@ -5,10 +5,10 @@ $thisPath = dirname(__FILE__).'/';
 
 /*@var $backpath BdlEntityAttribute */
 $idPrefix = 'entity-attribute-create';
-$formId   = 'wgt-form-bdl_'.$idPrefix;
+$formId = 'wgt-form-bdl_'.$idPrefix;
 
 
-$iconAdd  = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
+$iconAdd = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
 
 // selectbox languages
 $langs = $this->model->getLanguages();

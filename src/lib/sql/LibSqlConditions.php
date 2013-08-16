@@ -117,7 +117,7 @@ class LibSqlConditions
 
       if (is_null($first)) {
 
-        $first  = $cond->con;
+        $first = $cond->con;
         $sql .= $this->{$method}($cond);
 
         if (isset($cond->sub)) {

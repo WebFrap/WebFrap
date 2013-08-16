@@ -24,25 +24,25 @@
 class ESearchText
 {
 
-  const EQUALS        = 1;
+  const EQUALS = 1;
   
-  const START_WITH    = 2;
+  const START_WITH = 2;
 
-  const CONTAINS      = 3;
+  const CONTAINS = 3;
   
-  const END_WITH      = 4;
+  const END_WITH = 4;
 
-  const IS_NULL       = 5;
+  const IS_NULL = 5;
 
   /**
    * @var array
    */
   public static $labels = array(
-    self::EQUALS      => 'equals',
-    self::START_WITH  => 'starts with',
-    self::CONTAINS    => 'contains',
-    self::END_WITH    => 'ends with',
-    self::IS_NULL     => 'is empty',
+    self::EQUALS => 'equals',
+    self::START_WITH => 'starts with',
+    self::CONTAINS => 'contains',
+    self::END_WITH => 'ends with',
+    self::IS_NULL => 'is empty',
   );
   
   /**

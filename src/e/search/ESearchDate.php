@@ -24,28 +24,28 @@
 class ESearchDate
 {
 
-  const EQUALS        = 1;
+  const EQUALS = 1;
   
-  const BEFORE        = 2;
+  const BEFORE = 2;
 
-  const BEFORE_EQUAL  = 3;
+  const BEFORE_EQUAL = 3;
   
-  const AFTER         = 4;
+  const AFTER = 4;
   
-  const AFTER_EQUAL   = 5;
+  const AFTER_EQUAL = 5;
   
-  const IS_NULL       = 6;
+  const IS_NULL = 6;
   
   /**
    * @var array
    */
   public static $labels = array(
-    self::EQUALS      => 'equals',
-    self::BEFORE      => 'before',
+    self::EQUALS => 'equals',
+    self::BEFORE => 'before',
     self::BEFORE_EQUAL => 'before or equal',
-    self::AFTER       => 'after',
+    self::AFTER => 'after',
     self::AFTER_EQUAL => 'after or equal',
-    self::IS_NULL     => 'is empty',
+    self::IS_NULL => 'is empty',
   );
   
   /**

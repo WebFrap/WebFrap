@@ -43,13 +43,13 @@ class Conf
    * list of pathes to possible conffile locations like acl / menu ...
    * @var array
    */
-  public static $confFiles  = array();
+  public static $confFiles = array();
 
   /**
    * list of pathes to possible conffile locations like acl / menu ...
    * @var array
    */
-  public static $confMaps   = array();
+  public static $confMaps = array();
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes

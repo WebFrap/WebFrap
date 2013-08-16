@@ -16,22 +16,22 @@
   <tbody>
   <?php 
 
-    $iconTables    = $this->icon( 'daidalos/table.png', 'Tables' );
-    $iconViews     = $this->icon( 'daidalos/db_view.png', 'Views' );
+    $iconTables = $this->icon( 'daidalos/table.png', 'Tables' );
+    $iconViews = $this->icon( 'daidalos/db_view.png', 'Views' );
     $iconSequences = $this->icon( 'daidalos/sequence.png', 'Sequences' );
-    $iconProperties  = $this->icon( 'daidalos/property.png', 'Properties' );
-    $iconRights    = $this->icon( 'control/rights.png', 'Rights' );
-     $iconBackup    = $this->icon( 'daidalos/backup.png', 'Backup' );
-    $iconRestore   = $this->icon( 'daidalos/restore.png', 'Restore' );
-    $iconDelete    = $this->icon( 'control/delete.png', 'Delete' );
-    $iconRename    = $this->icon( 'control/rename.png', 'Rename' );
+    $iconProperties = $this->icon( 'daidalos/property.png', 'Properties' );
+    $iconRights = $this->icon( 'control/rights.png', 'Rights' );
+     $iconBackup = $this->icon( 'daidalos/backup.png', 'Backup' );
+    $iconRestore = $this->icon( 'daidalos/restore.png', 'Restore' );
+    $iconDelete = $this->icon( 'control/delete.png', 'Delete' );
+    $iconRename = $this->icon( 'control/rename.png', 'Rename' );
 
   
     foreach( $VAR->schemas as $pos => $schema )
     {
       
-      $col     = ($pos % 2)+1;
-      $colPos  = $pos +1;
+      $col = ($pos % 2)+1;
+      $colPos = $pos +1;
       
       
       echo <<<TABLE

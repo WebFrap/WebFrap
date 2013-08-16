@@ -35,13 +35,13 @@ class LibRequestPool extends LibRequestAbstract
    *
    * @var array
    */
-  protected $get    = array();
+  protected $get = array();
 
   /**
    *
    * @var array
    */
-  protected $post   = array();
+  protected $post = array();
 
   /**
    *
@@ -53,7 +53,7 @@ class LibRequestPool extends LibRequestAbstract
    *
    * @var array
    */
-  protected $files  = array();
+  protected $files = array();
 
   /**
    *
@@ -65,7 +65,7 @@ class LibRequestPool extends LibRequestAbstract
    *
    * @var array
    */
-  protected $env    = array();
+  protected $env = array();
 
   /**
    *
@@ -83,12 +83,12 @@ class LibRequestPool extends LibRequestAbstract
   public function __construct($get, $post, $cookie = array(), $files= array(), $server= array(), $env= array())
   {
 
-    $this->get    = $get;
-    $this->post   = $post;
+    $this->get = $get;
+    $this->post = $post;
     $this->cookie = $cookie;
-    $this->files  = $files;
+    $this->files = $files;
     $this->server = $server;
-    $this->env    = $env;
+    $this->env = $env;
 
   }//end public function __construct
 

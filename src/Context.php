@@ -63,20 +63,20 @@ class Context
    *
    * @var int
    */
-  public $aclRootId  = null;
+  public $aclRootId = null;
 
-  public $aclKey     = null;
+  public $aclKey = null;
 
-  public $aclLevel   = null;
+  public $aclLevel = null;
 
-  public $aclNode    = null;
+  public $aclNode = null;
 
   /**
    * Flag ob der Request Invalid war
    *
    * @var boolean
    */
-  public $isInvalid  = false;
+  public $isInvalid = false;
 
   /**
    * @var string
@@ -162,23 +162,23 @@ class Context
 
     // startpunkt des pfades für die acls
     if ($aclRoot = $request->param('a_root', Validator::CKEY))
-      $this->aclRoot    = $aclRoot;
+      $this->aclRoot = $aclRoot;
 
     // die id des Datensatzes von dem aus der Pfad gestartet wurde
     if ($aclRootId = $request->param('a_root_id', Validator::INT))
-      $this->aclRootId    = $aclRootId;
+      $this->aclRootId = $aclRootId;
 
     // der key des knotens auf dem wir uns im pfad gerade befinden
     if ($aclKey = $request->param('a_key', Validator::CKEY))
-      $this->aclKey    = $aclKey;
+      $this->aclKey = $aclKey;
 
     // der name des knotens
     if ($aclNode = $request->param('a_node', Validator::CKEY))
-      $this->aclNode    = $aclNode;
+      $this->aclNode = $aclNode;
 
     // an welchem punkt des pfades befinden wir uns?
     if ($aclLevel = $request->param('a_level', Validator::INT))
-      $this->aclLevel  = $aclLevel;
+      $this->aclLevel = $aclLevel;
 
   }//end public function interpretRequestAcls */
 
@@ -189,11 +189,11 @@ class Context
   {
 
     // startpunkt des pfades für die acls
-    $this->aclRoot   = $context->aclRoot;
+    $this->aclRoot = $context->aclRoot;
     $this->aclRootId = $context->aclRootId;
-    $this->aclKey    = $context->aclKey;
-    $this->aclNode   = $context->aclNode;
-    $this->aclLevel   = $context->aclLevel;
+    $this->aclKey = $context->aclKey;
+    $this->aclNode = $context->aclNode;
+    $this->aclLevel = $context->aclLevel;
 
   }//end public function importAcl */
 

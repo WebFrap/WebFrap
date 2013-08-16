@@ -3,14 +3,14 @@
 $thisPath = dirname(__FILE__).'/';
 
 $backpath = $VAR->node;
-$profile  = $VAR->profile;
+$profile = $VAR->profile;
 
 /*@var $profile BdlEntity */
 $idPrefix = 'profile-'.$profile->getName().'-backpath-edit-'.$VAR->idx;
-$formId   = 'wgt-form-bdl_'.$idPrefix;
+$formId = 'wgt-form-bdl_'.$idPrefix;
 
 
-$iconAdd  = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
+$iconAdd = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
 
 
 $descriptions = $backpath->getDescriptions();

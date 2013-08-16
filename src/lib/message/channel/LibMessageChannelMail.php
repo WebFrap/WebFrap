@@ -45,7 +45,7 @@ class LibMessageChannelMail extends LibMessageChannel
 
     $renderer = $this->getRenderer();
 
-    $sender   = $message->getSender();
+    $sender = $message->getSender();
 
     if (!$sender)
       $sender = $this->getSender();
@@ -83,7 +83,7 @@ class LibMessageChannelMail extends LibMessageChannel
       $dmsAttachments = $message->getAttachments();
 
       foreach ($dmsAttachments as $attachment) {
-        $fileId   = $attachment->getId();
+        $fileId = $attachment->getId();
         $fullPath = PATH_GW.'data/uploads/wbfsys_file/name'.SParserString::idToPath($fileId).'/'.$fileId;
 
         $mailer->addAttachment($attachment->name , $fullPath);

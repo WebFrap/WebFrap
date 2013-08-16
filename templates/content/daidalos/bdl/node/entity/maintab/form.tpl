@@ -7,13 +7,13 @@ $basePath = realpath(dirname(__FILE__).'/../../base/maintab/').'/';
 $entity = $VAR->node;
 /*@var $entity BdlNodeEntity */
 
-$idPrefix   = 'entity-'.$entity->getName();
-$nodeKey    = 'entity';
-$formId     = 'wgt-form-bdl_'.$idPrefix;
+$idPrefix = 'entity-'.$entity->getName();
+$nodeKey = 'entity';
+$formId = 'wgt-form-bdl_'.$idPrefix;
 
 
-$iconDel  = Wgt::icon( 'control/delete.png', 'xsmall', 'Delete' );
-$iconAdd  = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
+$iconDel = Wgt::icon( 'control/delete.png', 'xsmall', 'Delete' );
+$iconAdd = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
 $iconEdit = Wgt::icon( 'control/edit.png', 'xsmall', 'Edit' );
 
 $iconAttrIndex = Wgt::icon( 'daidalos/table/index.png', 'xsmall', 'Index' );
@@ -22,9 +22,9 @@ $iconAttrRequired = Wgt::icon( 'daidalos/table/required.png', 'xsmall', 'Require
 $iconAttrUnique = Wgt::icon( 'daidalos/table/unique.png', 'xsmall', 'Unique' );
 
 
-$labels       = $entity->getLabels();
-$shortDescs   = $entity->getShortDesc();
-$docus        = $entity->getDocus();
+$labels = $entity->getLabels();
+$shortDescs = $entity->getShortDesc();
+$docus = $entity->getDocus();
 
 
 
@@ -200,7 +200,7 @@ HTML
         '',
         array
         ( 
-          'name'  => 'label[text]',
+          'name' => 'label[text]',
           'class' => 'medium wgte-text'
         )  
       ); 
@@ -238,7 +238,7 @@ HTML
           'entity-label-'.$lang, 
           $label, array
           (
-            'name'  => 'entity[label]['.$lang.']',
+            'name' => 'entity[label]['.$lang.']',
             'class' => 'medium lang-'.$lang
           ), 
           $formId,

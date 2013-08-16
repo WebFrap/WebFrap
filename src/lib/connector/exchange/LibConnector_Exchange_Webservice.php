@@ -29,7 +29,7 @@ class LibConnector_Exchange_Webservice extends LibConnector_Adapter
    * Type der Mailbox POP3 oder IMAP
    * @var string
    */
-  public $type   = null;
+  public $type = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes

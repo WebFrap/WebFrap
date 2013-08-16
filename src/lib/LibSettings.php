@@ -47,7 +47,7 @@ class LibSettings
    */
   public function __construct($db, $cache)
   {
-    $this->db   = $db;
+    $this->db = $db;
     $this->cache = $cache;
   }//end public function __construct */
 

@@ -40,10 +40,10 @@ class LibImageThumbGd extends LibImageThumbAdapter
     }
 
     try {
-      $imgdata      = getimagesize ($pic);
-      $org_width    = $imgdata[0];
-      $org_height   = $imgdata[1];
-      $type         = $imgdata[2];
+      $imgdata = getimagesize ($pic);
+      $org_width = $imgdata[0];
+      $org_height = $imgdata[1];
+      $type = $imgdata[2];
 
       switch ($type) {
         case 1 :

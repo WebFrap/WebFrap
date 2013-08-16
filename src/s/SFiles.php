@@ -165,8 +165,8 @@ class SFiles
   public static function getRawFilename($fileName)
   {
 
-    $tmp       = explode('/',$fileName); // remove folders
-    $fileName  = array_pop($tmp);
+    $tmp = explode('/',$fileName); // remove folders
+    $fileName = array_pop($tmp);
 
     // test if we found a dot an asume that if we find one it seperates the name
     // from the extension

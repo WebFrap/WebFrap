@@ -26,16 +26,16 @@ class LibSqlSimpleCriteria
 // const
 //////////////////////////////////////////////////////////////////////////////*/
 
-  const JOIN_TYPE     = 0;
+  const JOIN_TYPE = 0;
 
-  const SRC           = 1;
-  const SRC_FIELD     = 2;
+  const SRC = 1;
+  const SRC_FIELD = 2;
 
-  const TARGET        = 3;
-  const TARGET_FIELD  = 4;
+  const TARGET = 3;
+  const TARGET_FIELD = 4;
 
-  const WHERE         = 5;
-  const TARGET_ALIAS  = 6;
+  const WHERE = 5;
+  const TARGET_ALIAS = 6;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // attributes
@@ -45,84 +45,84 @@ class LibSqlSimpleCriteria
    * Felder die abgefragt werden sollen
    * @var array
    */
-  public $cols      = null;
+  public $cols = null;
 
   /**
    *
    * @var string
    */
-  public $table     = null;
+  public $table = null;
 
   /**
    * Joinbedingungen
    * @var array
    */
-  public $joinOn    = array();
+  public $joinOn = array();
 
   /**
    * Joinbedingungen
    * @var array
    */
-  public $joinIndex    = array();
+  public $joinIndex = array();
 
   /**
    * Limit der Abfrage
    * @var int
    */
-  public $limit     = null;
+  public $limit = null;
 
   /**
    * Offset der Abfrage
    * @var int
    */
-  public $offset    = null;
+  public $offset = null;
 
   /**
    * Group by Parameter
    * @var array
    */
-  public $group     = array();
+  public $group = array();
 
   /**
    * @var array
    */
-  public $having    = array();
+  public $having = array();
 
   /**
    * Die Wherebedingungen
    * @var string
    */
-  public $where     = null;
+  public $where = null;
 
   /**
    * Oder Reihenfolge
    * @var array
    */
-  public $order     = array();
+  public $order = array();
 
   /**
    * the values
    * @var array
    */
-  public $values     = array();
+  public $values = array();
 
   /**
    * Der generierte SQL String wird in dieser Variable gespeichert.
    * @var string
    */
-  public $sql       = null;
+  public $sql = null;
 
   /**
    * der name für prepare statements
    * @var string
    */
-  public $name      = null;
+  public $name = null;
 
   /**
    * parameter für prepare statements
    * @var array
    */
-  public $param     = array();
+  public $param = array();
 
   /**
    * Is es eine Singelrow oder eine Multirow Query
@@ -226,9 +226,9 @@ class LibSqlSimpleCriteria
     $this->cols = array($cols) ;
 
     // unnötige daten entfernen
-    $this->limit  = null; // limit und offset müssen weg um die gesamtsumme zu bekommen
+    $this->limit = null; // limit und offset müssen weg um die gesamtsumme zu bekommen
     $this->offset = null;
-    $this->order  = null;
+    $this->order = null;
 
     return $this;
   } // end public function count */

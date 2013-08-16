@@ -1,19 +1,19 @@
 <?php
 
-$thisPath  = dirname(__FILE__).'/';
+$thisPath = dirname(__FILE__).'/';
 
-$domainKey   = $VAR->domainKey;
+$domainKey = $VAR->domainKey;
 $domainClass = $VAR->domainClass;
 
-$ref          = $VAR->node;
-$parentNode   = $VAR->parentNode;
+$ref = $VAR->node;
+$parentNode = $VAR->parentNode;
 
 /*@var $parentNode BdlBaseNode */
 
 $idPrefix = $domainKey.'-'.$parentNode->getName().'-permission-ref-edit-'.$VAR->pathId;
-$formId   = 'wgt-form-bdl_'.$idPrefix;
+$formId = 'wgt-form-bdl_'.$idPrefix;
 
-$iconAdd  = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
+$iconAdd = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
 
 
 $descriptions = $ref->getDescriptions();

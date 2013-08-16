@@ -7,17 +7,17 @@ $basePath = realpath(dirname(__FILE__).'/../../base/maintab/').'/';
 $profile = $VAR->node;
 /*@var $profile BdlNodeProfile */
 
-$nodeKey    = 'profile';
+$nodeKey = 'profile';
 $idPrefix = 'profile-'.$profile->getName();
 $formId = 'wgt-form-bdl_'.$idPrefix;
 
-$iconDel  = Wgt::icon( 'control/delete.png', 'xsmall', 'Delete' );
-$iconAdd  = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
+$iconDel = Wgt::icon( 'control/delete.png', 'xsmall', 'Delete' );
+$iconAdd = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
 $iconEdit = Wgt::icon( 'control/edit.png', 'xsmall', 'Edit' );
 
-$labels       = $profile->getLabels();
-$shortDescs   = $profile->getShortDesc();
-$docus        = $profile->getDocus();
+$labels = $profile->getLabels();
+$shortDescs = $profile->getShortDesc();
+$docus = $profile->getDocus();
 
 $langs = $this->model->getLanguages();
 

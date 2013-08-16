@@ -30,14 +30,14 @@ abstract class LibDbPdo extends LibDbConnection
    *
    * @var int
    */
-  protected $affectedRows     = null;
+  protected $affectedRows = null;
 
   /**
    * save the affeted rows from update or delete queries
    *
    * @var int
    */
-  protected $numRows     = null;
+  protected $numRows = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Application Logic
@@ -349,10 +349,10 @@ abstract class LibDbPdo extends LibDbConnection
   {
 
     if (is_object($name)) {
-      $obj      = $name;
+      $obj = $name;
       $name = $obj->getName();
-      $values   = $obj->getPrepareValues();
-      $single   = $obj->getSingelRow();
+      $values = $obj->getPrepareValues();
+      $single = $obj->getSingelRow();
     }
 
     if (Log::$levelTrace)
@@ -402,9 +402,9 @@ abstract class LibDbPdo extends LibDbConnection
   {
 
     if (is_object($name)) {
-      $obj      = $name;
+      $obj = $name;
       $name = $obj->getName();
-      $values   = $obj->getPrepareValues();
+      $values = $obj->getPrepareValues();
     }
 
     if (!$this->result = pg_execute($this->connectionWrite, $name, $values)) {
@@ -525,8 +525,8 @@ abstract class LibDbPdo extends LibDbConnection
   {
 
     $this->lastData = array();
-    $this->numRows  = null;
-    $this->result   = null;
+    $this->numRows = null;
+    $this->result = null;
 
     if (!$this->result = $this->connection->exec($sql)) {
       Error::addError

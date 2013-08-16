@@ -34,14 +34,14 @@ class ErrorContainer
    * Liste der Fehlermeldungen
    * @var array
    */
-  public $messages   = array();
+  public $messages = array();
 
   /**
    * Der Fehler Type
    * @see Error Constanten
    * @var string
    */
-  public $code   = Response::INTERNAL_ERROR;
+  public $code = Response::INTERNAL_ERROR;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes

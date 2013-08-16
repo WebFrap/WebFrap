@@ -49,49 +49,49 @@ abstract class Entity implements ArrayAccess
    * Key für das required flag
    * @var int
    */
-  const COL_REQUIRED  = 1;
+  const COL_REQUIRED = 1;
 
   /**
    * the maxvalue / maxsize if exists
    * @var int
    */
-  const COL_MAX       = 2;
+  const COL_MAX = 2;
 
   /**
    * the minvalue / minsize if exists
    * @var int
    */
-  const COL_MIN       = 3;
+  const COL_MIN = 3;
 
   /**
    * needs this value a quote in the sql or not?
    * @var int
    */
-  const COL_QUOTE     = 4;
+  const COL_QUOTE = 4;
 
   /**
    * flag if the attribute is a search attribute
    * @var int
    */
-  const COL_SEARCH     = 5;
+  const COL_SEARCH = 5;
 
   /**
    * is this a pultiple value? an array in the database
    * @var int
    */
-  const COL_MULTI     = 6;
+  const COL_MULTI = 6;
 
   /**
    * the keyname of the main category
    * @var int
    */
-  const COL_CATEGORY  = 7;
+  const COL_CATEGORY = 7;
 
   /**
    * the default value
    * @var int
    */
-  const COL_DEFAULT  = 8;
+  const COL_DEFAULT = 8;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Protected Attributes
@@ -108,40 +108,40 @@ abstract class Entity implements ArrayAccess
    *
    * @var array<string:string>
    */
-  protected $savedData      = array();
+  protected $savedData = array();
 
   /**
    * Array with the data from the database
    * @var array<string:string>
    */
-  protected $data           = array();
+  protected $data = array();
 
   /**
    * Die eindeutige ID des Datensatzes in der Datenbank
    * Das ORM geht davon aus, dass die IDs einer globalen sequence entspringen
    * @var int
    */
-  protected $id             = null;
+  protected $id = null;
 
   /**
    * flag ob die entity mit der Datenbank synchronisiert wurde
    * @var boolean
    */
-  protected $synchronized   = true;
+  protected $synchronized = true;
 
   /**
    * pool for objects that have to be saved before this entity
    *
    * @var [Entity]
    */
-  protected $preSave       = array();
+  protected $preSave = array();
 
   /**
    * pool for objects that hase to be saved after save
    *
    * @var [Entity]
    */
-  protected $postSave       = array();
+  protected $postSave = array();
 
   /**
    * Pool with all to the entity connected Entities to build a net of entities
@@ -151,13 +151,13 @@ abstract class Entity implements ArrayAccess
    *
    * @var array<entity>
    */
-  protected $singleRef      = array();
+  protected $singleRef = array();
 
   /**
    * List to be able to connect multiple references
    * @var array<entity>
    */
-  protected $multiRef       = array();
+  protected $multiRef = array();
 
   /**
    * Flag to mark if an entity is new and has no id or the data are from
@@ -168,24 +168,24 @@ abstract class Entity implements ArrayAccess
    *
    * @var boolean
    */
-  protected $isNew      = false;
+  protected $isNew = false;
 
   /**
    * @var LibI18nPhp
    */
-  public $i18n          = null;
+  public $i18n = null;
 
   /**
    * Das Orm Objekt mit dem die Entity geladen wurde
    * @var LibDbOrm
    */
-  public $orm           = null;
+  public $orm = null;
 
   /**
    * Die Temporäre ID
    * @var string
    */
-  public $tmpId          = null;
+  public $tmpId = null;
 
   /**
    * Entities die mitgespeichert werden sollen wenn diese Entity gespeichert wurde
@@ -258,20 +258,20 @@ abstract class Entity implements ArrayAccess
    */
   public function __construct
   (
-    $id   = null,
+    $id = null,
     $data = array(),
-    $orm  = null
+    $orm = null
   ) {
 
     /// TODO check if its possible to use the id instead of the is new attribute
     if (is_null($id)) {
-      $this->isNew  = true;
+      $this->isNew = true;
       $this->fillupDefault();
     } else {
-      $this->id     = $id;
+      $this->id = $id;
     }
 
-    $this->data     = $data;
+    $this->data = $data;
 
     if ($orm) {
 
@@ -374,7 +374,7 @@ abstract class Entity implements ArrayAccess
         if (method_exists($this, $empty)) {
           if ($this->$empty($key, $value)) {
             $this->savedData[$key] = $this->data[$key];
-            $this->data[$key]   = $value;
+            $this->data[$key] = $value;
           }
         } else {
           throw new LibDb_Exception("Tried to retrofit with nonexisting check : ".$empty  );
@@ -383,7 +383,7 @@ abstract class Entity implements ArrayAccess
       } else {
         $this->synchronized = false;
         $this->savedData[$key] = null;
-        $this->data[$key]   = $value;
+        $this->data[$key] = $value;
       }
     } else {
       // works, cause if value is null, isset returns false
@@ -391,12 +391,12 @@ abstract class Entity implements ArrayAccess
         if ('' == trim($this->data[$key]) && $empty) {
           $this->synchronized = false;
           $this->savedData[$key] = null;
-          $this->data[$key]   = $value;
+          $this->data[$key] = $value;
         }
       } else {
         $this->synchronized = false;
         $this->savedData[$key] = null;
-        $this->data[$key]   = $value;
+        $this->data[$key] = $value;
       }
     }
 
@@ -416,14 +416,14 @@ abstract class Entity implements ArrayAccess
     // works, cause if value is null, isset returns false
     if (isset($this->data[$key])) {
       if ((string) $value !== (string) $this->data[$key]) {
-        $this->synchronized    = false;
+        $this->synchronized = false;
         $this->savedData[$key] = $this->data[$key];
-        $this->data[$key]      = $value;
+        $this->data[$key] = $value;
       }
     } else {
       $this->synchronized = false;
       $this->savedData[$key] = null;
-      $this->data[$key]   = $value;
+      $this->data[$key] = $value;
     }
 
   }//end public function upgrade */
@@ -970,7 +970,7 @@ abstract class Entity implements ArrayAccess
   public function getChangedData()
   {
 
-    $tmp  = array();
+    $tmp = array();
     $keys = array_keys($this->savedData);
 
     foreach ($keys as $key) {
@@ -1044,8 +1044,8 @@ abstract class Entity implements ArrayAccess
 
     $this->synchronized = false;
 
-    $this->id     = $id   ;
-    $this->isNew  = $new  ;
+    $this->id = $id   ;
+    $this->isNew = $new  ;
 
   } // public public function setId */
 
@@ -1563,14 +1563,14 @@ abstract class Entity implements ArrayAccess
 
       if (!isset($this->data[$key])) {
 
-        $this->synchronized    = false;
+        $this->synchronized = false;
         $this->savedData[$key] = null;
-        $this->data[$key]      = $value;
+        $this->data[$key] = $value;
       } elseif ($this->data[$key] !== (string) $value) {
 
-        $this->synchronized    = false;
+        $this->synchronized = false;
         $this->savedData[$key] = $this->data[$key];
-        $this->data[$key]      = $value;
+        $this->data[$key] = $value;
       }
 
     }
@@ -1977,12 +1977,12 @@ abstract class Entity implements ArrayAccess
   {
 
     $this->synchronized = true;
-    $this->id           = null;
-    $this->newId        = null;
-    $this->data         = array();
-    $this->savedData    = array();
-    $this->singleRef    = array();
-    $this->multiRef     = array();
+    $this->id = null;
+    $this->newId = null;
+    $this->data = array();
+    $this->savedData = array();
+    $this->singleRef = array();
+    $this->multiRef = array();
 
   }//end public function clear */
 
@@ -1994,15 +1994,15 @@ abstract class Entity implements ArrayAccess
   {
 
     $this->synchronized = true;
-    $this->id           = null;
-    $this->newId        = null;
-    $this->data         = array();
-    $this->savedData    = array();
-    $this->orm          = null;
+    $this->id = null;
+    $this->newId = null;
+    $this->data = array();
+    $this->savedData = array();
+    $this->orm = null;
 
-    $this->singleRef    = array();
-    $this->multiRef     = array();
-    $this->i18n         = null;
+    $this->singleRef = array();
+    $this->multiRef = array();
+    $this->i18n = null;
 
   }//end public function clear */
 

@@ -5,20 +5,20 @@ $thisPath = dirname(__FILE__).'/';
 $attribute = $VAR->node;
 /*@var $attribute BdlNodeEntityAttribute */
 
-$entityNode  = $VAR->entityNode;
+$entityNode = $VAR->entityNode;
 /*@var $entityNode BdlNodeEntity */
 
 $idPrefix = 'entity-'.$entityNode->getName().'-attribute-edit-'.$VAR->idx;
-$formId   = 'wgt-form-bdl_'.$idPrefix;
+$formId = 'wgt-form-bdl_'.$idPrefix;
 $fKeyName = 'attribute';
 
 
-$iconAdd  = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
-$iconDel  = Wgt::icon( 'control/delete.png', 'xsmall', 'Delete' );
+$iconAdd = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
+$iconDel = Wgt::icon( 'control/delete.png', 'xsmall', 'Delete' );
 
-$labels       = $attribute->getLabels(); 
+$labels = $attribute->getLabels(); 
 $descriptions = $attribute->getDescriptions();
-$docus        = $attribute->getDocus();
+$docus = $attribute->getDocus();
 
 
 $langs = $this->model->getLanguages();
@@ -224,7 +224,7 @@ HTML
               '',
               array
               ( 
-                'name'  => 'label[text]',
+                'name' => 'label[text]',
                 'class' => 'medium wgte-text'
               )  
             ); 
@@ -262,7 +262,7 @@ HTML
                   $idPrefix.'-label-'.$lang, 
                   $label, array
                   (
-                    'name'  => $fKeyName.'[label]['.$lang.']',
+                    'name' => $fKeyName.'[label]['.$lang.']',
                     'class' => 'medium lang-'.$lang
                   ), 
                   $formId,

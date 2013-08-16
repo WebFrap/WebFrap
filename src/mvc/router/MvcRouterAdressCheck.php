@@ -38,11 +38,11 @@ class MvcRouterAdressCheck
   {
 
     $gwDomain = $conf->getStatus('gateway.domain');
-    $gwSSL    = $conf->getStatus('gateway.ssl');
+    $gwSSL = $conf->getStatus('gateway.ssl');
 
-    $redirect    = false;
+    $redirect = false;
     $enforeceSSL = false;
-    $denySSL     = false;
+    $denySSL = false;
 
     if (2 === (int) $gwSSL) {
       $enforeceSSL = true;

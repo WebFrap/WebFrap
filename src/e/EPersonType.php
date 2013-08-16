@@ -64,11 +64,11 @@ class EPersonType
    * @var array
    */
   public static $labels = array(
-    self::HUMAN_PERSON     => 'Human Person',
-    self::LEGAL_PERSON      => 'Legal Person',
-    self::ARTIFICAL_PERSON  => 'Artifical Person',
-    self::VIRTUAL_PERSON  => 'Virtual Person',
-    self::MACHINE    => 'Machine',
+    self::HUMAN_PERSON => 'Human Person',
+    self::LEGAL_PERSON => 'Legal Person',
+    self::ARTIFICAL_PERSON => 'Artifical Person',
+    self::VIRTUAL_PERSON => 'Virtual Person',
+    self::MACHINE => 'Machine',
   );
 
   /**

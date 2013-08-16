@@ -106,7 +106,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
   public function publishList($list)
   {
 
-    $files  = array();
+    $files = array();
     $jsconf = null; // wird im include gesetzt
     $minify = true; // kann im include überschrieben werden
 
@@ -123,12 +123,12 @@ class LibCacheRequestJavascript extends LibCacheRequest
     if (function_exists('gzencode')) {
       $encode = true;
     } else {
-      $sendEncoded  = false;
-      $encode       = false;
+      $sendEncoded = false;
+      $encode = false;
     }
 
     if (isset($_GET['encode']) && 'false' == $_GET['encode']) {
-      $sendEncoded  = false;
+      $sendEncoded = false;
     }
 
     if ($sendEncoded) {
@@ -224,8 +224,8 @@ class LibCacheRequestJavascript extends LibCacheRequest
     }
     */
 
-    $etag       = md5($code);
-    $plainSize  = strlen($code);
+    $etag = md5($code);
+    $plainSize = strlen($code);
 
     if (!file_exists(PATH_GW.$this->folder.'/list/'))
       SFilesystem::createFolder(PATH_GW.$this->folder.'/list/'  );
@@ -238,8 +238,8 @@ class LibCacheRequestJavascript extends LibCacheRequest
     );
 
     if ($encode) {
-      $encoded      = gzencode($code);
-      $encodedSize  = strlen($encoded);
+      $encoded = gzencode($code);
+      $encodedSize = strlen($encoded);
 
       file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.gz' ,  $encoded);
       file_put_contents
@@ -250,11 +250,11 @@ class LibCacheRequestJavascript extends LibCacheRequest
     }
 
     if ($sendEncoded) {
-      $out  = $encoded;
+      $out = $encoded;
       $size = $encodedSize;
 
     } else {
-      $out  = $code;
+      $out = $code;
       $size = $plainSize;
     }
 
@@ -273,7 +273,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
       if (!file_exists(PATH_GW.'/conf/include/javascript/'.$list.'.list.php'))
       throw new ResourceNotExists_Exception("Js list {$list}");
 
-    $files  = array();
+    $files = array();
     $jsconf = null; // wert wird im include gesetzt
     $minify = true;
 
@@ -282,7 +282,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
     if (function_exists('gzencode')) {
       $encode = true;
     } else {
-      $encode       = false;
+      $encode = false;
     }
 
     $code = '';
@@ -345,8 +345,8 @@ class LibCacheRequestJavascript extends LibCacheRequest
   		
   	}
   	  
-  	$etag       = md5($code);
-  	$plainSize  = strlen($code);
+  	$etag = md5($code);
+  	$plainSize = strlen($code);
   
   	if (!file_exists(PATH_GW.$this->folder.'/list/'))
   		SFilesystem::createFolder(PATH_GW.$this->folder.'/list/'  );
@@ -358,8 +358,8 @@ class LibCacheRequestJavascript extends LibCacheRequest
   	);
   
   	if ($encode) {
-  		$encoded      = gzencode($code);
-  		$encodedSize  = strlen($encoded);
+  		$encoded = gzencode($code);
+  		$encodedSize = strlen($encoded);
   
   		file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.gz' ,  $encoded);
   		file_put_contents(
@@ -381,7 +381,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
     if (!file_exists(PATH_GW.'/conf/include/javascript/'.$list.'.list.php'))
       throw new ResourceNotExists_Exception("Js list {$list}");
 
-    $files  = array();
+    $files = array();
     $jsconf = null; // wert wird im include gesetzt
     $minify = true;
 
@@ -390,7 +390,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
     if (function_exists('gzencode')) {
       $encode = true;
     } else {
-      $encode       = false;
+      $encode = false;
     }
 
     $code = '';
@@ -448,8 +448,8 @@ class LibCacheRequestJavascript extends LibCacheRequest
       }
     }
 
-    $etag       = md5($code);
-    $plainSize  = strlen($code);
+    $etag = md5($code);
+    $plainSize = strlen($code);
 
     if (!file_exists(PATH_GW.$this->folder.'/list/'))
       SFilesystem::createFolder(PATH_GW.$this->folder.'/list/'  );
@@ -461,8 +461,8 @@ class LibCacheRequestJavascript extends LibCacheRequest
     );
 
     if ($encode) {
-      $encoded      = gzencode($code);
-      $encodedSize  = strlen($encoded);
+      $encoded = gzencode($code);
+      $encodedSize = strlen($encoded);
 
       file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.gz' ,  $encoded);
       file_put_contents(

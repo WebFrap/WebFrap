@@ -7,15 +7,15 @@ $docu = $VAR->node;
 /*@var $docu BdlNodeEnum */
 
 
-$idPrefix   = 'docu-'.$docu->getName();
-$nodeKey    = 'docu';
-$formId     = 'wgt-form-bdl_'.$idPrefix;
+$idPrefix = 'docu-'.$docu->getName();
+$nodeKey = 'docu';
+$formId = 'wgt-form-bdl_'.$idPrefix;
 
 $iconDel = Wgt::icon( 'control/delete.png', 'xsmall', 'Delete' );
 $iconAdd = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
 
-$titles     = $docu->getTitles();
-$contents   = $docu->getContents();
+$titles = $docu->getTitles();
+$contents = $docu->getContents();
 
 $langs = $this->model->getLanguages();
 

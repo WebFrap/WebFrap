@@ -203,14 +203,14 @@ HTML;
    *
    * @var string
    */
-  public $message   = null;
+  public $message = null;
 
   /**
    *  Die Fehlermeldung als String
    *
    * @var string
    */
-  public $debugMessage   = null;
+  public $debugMessage = null;
 
   /**
    * de:
@@ -218,31 +218,31 @@ HTML;
    * @see Error Constanten
    * @var string
    */
-  public $errorKey   = Response::INTERNAL_ERROR;
+  public $errorKey = Response::INTERNAL_ERROR;
 
   /**
    *
    * @var array
    */
-  protected $errorTrace     = null;
+  protected $errorTrace = null;
 
   /**
    *
    * @var string
    */
-  protected $file           = null;
+  protected $file = null;
 
   /**
    *
    * @var line
    */
-  protected $line           = null;
+  protected $line = null;
 
   /**
    *
    * @var mixed
    */
-  protected $coreDump       = null;
+  protected $coreDump = null;
 
   /**
    * data for the last error
@@ -268,13 +268,13 @@ HTML;
   {
 
     if (is_object($message) && $message instanceof Webfrap_Exception  ) {
-      $this->message      = $message->getMessage();
+      $this->message = $message->getMessage();
       $this->debugMessage = $message->getDebugMessage();
-      $this->errorKey     = $message->getErrorKey();
+      $this->errorKey = $message->getErrorKey();
     } else {
-      $this->message      = $message;
+      $this->message = $message;
       $this->debugMessage = $debugMessage;
-      $this->errorKey     = $errorKey;
+      $this->errorKey = $errorKey;
     }
 
   }//end public function construct */
@@ -336,11 +336,11 @@ HTML;
     $file = isset($metadata['file'])?$metadata['file']:'unkown file';
     $line = isset($metadata['line'])?$metadata['line']:'unkown line';
 
-    self::$lastError            = new TDataObject();
-    self::$lastError->file      = $file;
-    self::$lastError->line      = $line;
-    self::$lastError->message   = $message;
-    self::$lastError->toDump    = $toDump;
+    self::$lastError = new TDataObject();
+    self::$lastError->file = $file;
+    self::$lastError->line = $line;
+    self::$lastError->message = $message;
+    self::$lastError->toDump = $toDump;
 
     $trace = Debug::backtraceToTable();
 
@@ -376,12 +376,12 @@ HTML;
     $file = isset($metadata['file'])?$metadata['file']:'unkown file';
     $line = isset($metadata['line'])?$metadata['line']:'unkown line';
 
-    self::$lastError            = new TDataObject();
-    self::$lastError->file      = $file;
-    self::$lastError->line      = $line;
-    self::$lastError->message   = $message;
+    self::$lastError = new TDataObject();
+    self::$lastError->file = $file;
+    self::$lastError->line = $line;
+    self::$lastError->message = $message;
     self::$lastError->exception = $exception;
-    self::$lastError->toDump    = $toDump;
+    self::$lastError->toDump = $toDump;
 
     // if theres a exeption the exception handels the output of the errors
     if ($exception) {
@@ -433,11 +433,11 @@ HTML;
     $line = $metadata['line'];
 
     self::$lastError = new TDataObject();
-    self::$lastError->file    = $file;
-    self::$lastError->line    = $line;
+    self::$lastError->file = $file;
+    self::$lastError->line = $line;
     self::$lastError->message = $message;
     self::$lastError->exception = $exception;
-    self::$lastError->toDump  = $toDump;
+    self::$lastError->toDump = $toDump;
 
     Message::addError($message);
 
@@ -499,17 +499,17 @@ HTML;
 
     if (is_object($message)) {
       $exception = $message;
-      $message   = $exception->getMessage();
+      $message = $exception->getMessage();
     }
 
-    $backTrace  = $exception->getTraceAsString();
+    $backTrace = $exception->getTraceAsString();
 
     if (isset($backTrace[1])) {
-      $metadata   = $backTrace[1];
+      $metadata = $backTrace[1];
 
       if (isset($metadata['file'])) {
-        $file       = $metadata['file'];
-        $line       = $metadata['line'];
+        $file = $metadata['file'];
+        $line = $metadata['line'];
       } else {
         $file = -1;
         $line = -1;
@@ -556,11 +556,11 @@ HTML;
     }
 
     self::$lastError = new TDataObject();
-    self::$lastError->file    = $file;
-    self::$lastError->line    = $line;
+    self::$lastError->file = $file;
+    self::$lastError->line = $line;
     self::$lastError->message = $message;
     self::$lastError->exception = $exception;
-    self::$lastError->toDump  = $toDump;
+    self::$lastError->toDump = $toDump;
 
     if ($exception) {
       if (WebFrap::classExists($exception)) {
@@ -592,11 +592,11 @@ HTML;
     Log::logLine('fatal' , $file , $line , $message);
 
     self::$lastError = new TDataObject();
-    self::$lastError->file      = $file;
-    self::$lastError->line      = $line;
-    self::$lastError->message   = $message;
+    self::$lastError->file = $file;
+    self::$lastError->line = $line;
+    self::$lastError->message = $message;
     //self::$lastError->exception = $exception;
-    self::$lastError->toDump    = $toDump;
+    self::$lastError->toDump = $toDump;
 
     // eine Debugtrace ausgeben wenn auf Tracing geschaltet ist
     if (Log::$levelTrace)

@@ -29,31 +29,31 @@ class LibAuth extends BaseChild
    *
    * @var string
    */
-  protected $authType           = 'Httppost';
+  protected $authType = 'Httppost';
 
   /**
    *
    * @var string
    */
-  protected $verificationType   = 'Sql';
+  protected $verificationType = 'Sql';
 
   /**
    *
    * @var string
    */
-  public $username           = null;
+  public $username = null;
 
   /**
    *
    * @var string
    */
-  public $password           = null;
+  public $password = null;
 
   /**
    * flag if a password is required for login
    * @var boolean
    */
-  public $noPasswd           = false;
+  public $noPasswd = false;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // getter + setter
@@ -143,7 +143,7 @@ class LibAuth extends BaseChild
         return false;
       }
 
-      $auth         = new $authClass($this);
+      $auth = new $authClass($this);
 
       if (!$auth->fetchLoginData($this))
         return false;
@@ -215,8 +215,8 @@ class LibAuth extends BaseChild
       'WbfsysRoleUser',
       self::id(),
       array(
-        'password'    =>  SEncrypt::passwordHash($pwd),
-        'change_pwd'  =>  ''
+        'password' =>  SEncrypt::passwordHash($pwd),
+        'change_pwd' =>  ''
       )
     );
 

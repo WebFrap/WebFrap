@@ -7,15 +7,15 @@ $permission = $VAR->node;
 $parentNode = $VAR->parentNode;
 /*@var $parentNode BdlBaseNode */
 
-$domainKey   = $VAR->domainKey;
+$domainKey = $VAR->domainKey;
 $domainClass = $VAR->domainClass;
 
 $idPrefix = $domainKey.'-'.$parentNode->getName().'-permission-edit-'.$VAR->idx;
-$formId   = 'wgt-form-bdl_'.$idPrefix;
+$formId = 'wgt-form-bdl_'.$idPrefix;
 
 
 // icons
-$iconAdd  = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
+$iconAdd = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
 
 
 // data

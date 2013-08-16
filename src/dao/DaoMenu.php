@@ -32,13 +32,13 @@ class DaoMenu extends Dao
    *
    * @var array
    */
-  public $data  = array();
+  public $data = array();
 
   /**
    *
    * @var array
    */
-  public $view  = null;
+  public $view = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Static Attributes
@@ -112,7 +112,7 @@ class DaoMenu extends Dao
       if (!file_exists($menuPath))
         continue;
 
-      $folder   = new LibFilesystemFolder($menuPath);
+      $folder = new LibFilesystemFolder($menuPath);
 
       $menuData = new DaoMenu($folder->getFiles());
       $menuData = $menuData->getData();

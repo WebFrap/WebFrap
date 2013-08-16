@@ -29,12 +29,12 @@ abstract class LibTestGui
   /**
    * @var int
    */
-  public static $testId     = 0;
+  public static $testId = 0;
 
   /**
    * @var int
    */
-  public static $anzTests   = 0;
+  public static $anzTests = 0;
 
   /**
    * @var int
@@ -44,12 +44,12 @@ abstract class LibTestGui
   /**
    * @var int
    */
-  public static $anzClass   = 0;
+  public static $anzClass = 0;
 
   /**
    * @var array
    */
-  protected $failedMethod   = array();
+  protected $failedMethod = array();
 
   /**
    * the fake view object

@@ -105,7 +105,7 @@ class DaoDatasource extends Dao
       return;
     }
 
-    $folder   = new LibFilesystemFolder($menuPath);
+    $folder = new LibFilesystemFolder($menuPath);
 
     $menuData = new DaoDatasource($folder->getFiles());
 

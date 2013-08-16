@@ -25,31 +25,31 @@ abstract class Module extends BaseChild
   /**
    * @var Module
    */
-  public static $instance           = null;
+  public static $instance = null;
 
   /**
    * the activ mex extension
    * @var Controller
    */
-  protected $controller             = null;
+  protected $controller = null;
 
   /**
    * name of the activ extension
    * @var string
    */
-  protected $controllerName         = null;
+  protected $controllerName = null;
 
   /**
    * The default  extension to load if theres no other Parameter
    * @var string
    */
-  protected $defaultControllerName  = 'Base';
+  protected $defaultControllerName = 'Base';
 
   /**
    * the modul name as string
    * @var string
    */
-  protected $modName                = null;
+  protected $modName = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Magic Functions
@@ -137,8 +137,8 @@ abstract class Module extends BaseChild
   protected function setController($name = null)
   {
 
-    $request    = $this->getRequest();
-    $response   = $this->getResponse();
+    $request = $this->getRequest();
+    $response = $this->getResponse();
 
     if (!$name  )
       $name = $request->param('mex', Validator::CNAME);
@@ -149,7 +149,7 @@ abstract class Module extends BaseChild
     if (!$name)
       $name = $this->defaultControllerName;
 
-    $classname    = $this->modName.ucfirst($name).WBF_CONTROLLER_PREFIX.'_Controller';
+    $classname = $this->modName.ucfirst($name).WBF_CONTROLLER_PREFIX.'_Controller';
     $classnameOld = 'Controller'.$this->modName.ucfirst($name);
 
     ///TODO den default model kram muss ich hier mal kicken
@@ -192,8 +192,8 @@ abstract class Module extends BaseChild
   protected function runController()
   {
 
-    $request   = $this->getRequest();
-    $response  = $this->getResponse();
+    $request = $this->getRequest();
+    $response = $this->getResponse();
 
     try {
 
@@ -302,7 +302,7 @@ abstract class Module extends BaseChild
   {
 
     $response = $this->getResponse();
-    $view     = $this->getView();
+    $view = $this->getView();
 
     $response->addError($errorTitle);
 
@@ -312,7 +312,7 @@ abstract class Module extends BaseChild
       array
       (
         'errorMessage' => $errorMessage,
-        'errorTitle'   => $errorTitle,
+        'errorTitle' => $errorTitle,
       )
     );
 

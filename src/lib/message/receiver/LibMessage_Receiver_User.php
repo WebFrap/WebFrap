@@ -60,7 +60,7 @@ class LibMessage_Receiver_User
 
     if (is_object($user)) {
       $this->user = $user;
-      $this->id   = $user->getId();
+      $this->id = $user->getId();
     } elseif (is_numeric($user)) {
       $this->id = $user;
     } else {

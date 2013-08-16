@@ -14,12 +14,12 @@
   <tbody>
   <?php 
     
-    $iconSchema  = $this->icon( 'daidalos/schema.png', 'Schema' );
-    $iconProp    = $this->icon( 'daidalos/property.png', 'Property' );
-    $iconBackup  = $this->icon( 'daidalos/backup.png', 'Backup' );
+    $iconSchema = $this->icon( 'daidalos/schema.png', 'Schema' );
+    $iconProp = $this->icon( 'daidalos/property.png', 'Property' );
+    $iconBackup = $this->icon( 'daidalos/backup.png', 'Backup' );
     $iconRestore = $this->icon( 'daidalos/restore.png', 'Restore' );
-    $iconRights  = $this->icon( 'control/rights.png', 'Rights' );
-    $iconDelete  = $this->icon( 'control/delete.png', 'Delete' );
+    $iconRights = $this->icon( 'control/rights.png', 'Rights' );
+    $iconDelete = $this->icon( 'control/delete.png', 'Delete' );
   
     foreach( $VAR->databases as $pos => $db )
     {

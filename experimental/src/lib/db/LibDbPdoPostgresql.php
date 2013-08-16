@@ -28,35 +28,35 @@ class LibDbPdoPostgresql extends LibDbPdo
   /**
    * Der Standard Fetch Mode
    */
-  protected $fetchMode   = PDO::FETCH_ASSOC;
+  protected $fetchMode = PDO::FETCH_ASSOC;
 
   /**
    * Holen der Daten als Assoziativer Array
    */
-  const fetchAssoc  = PDO::FETCH_ASSOC;
+  const fetchAssoc = PDO::FETCH_ASSOC;
 
   /**
    * Holen der Daten als Numerischer Array
    */
-  const fetchNum    = PDO::FETCH_NUM;
+  const fetchNum = PDO::FETCH_NUM;
 
   /**
    * Holen der Daten als Doppelter Assoziativer und Numerischer Array
    */
-  const fetchBoth   = PDO::FETCH_BOTH;
+  const fetchBoth = PDO::FETCH_BOTH;
 
   /**
    * Database Connection Object
    * @var Pdo
    */
-  protected $connection   = null;
+  protected $connection = null;
 
   /**
    * Enter description here...
    *
    * @var string
    */
-  protected $schema       = 'public';
+  protected $schema = 'public';
 
   /**
    * the type of the sql sqlBuilder for this database class

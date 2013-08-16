@@ -29,19 +29,19 @@ class LibParserRegistry
    *
    * @var array
    */
-  protected $registry     = array();
+  protected $registry = array();
 
   /**
    *
    * @var string
    */
-  protected $parserType   = null;
+  protected $parserType = null;
 
   /**
    *
    * @var LibLexer
    */
-  protected $lexer        = null;
+  protected $lexer = null;
 
   /**
    * mapping list for all tokens / classes
@@ -53,25 +53,25 @@ class LibParserRegistry
    *
    * @var LibGenfName
    */
-  public $name            = null;
+  public $name = null;
 
   /**
    * the parsed code
    * @var string
    */
-  public $ws              = '';
+  public $ws = '';
 
   /**
    * the parsed code
    * @var string
    */
-  public $wsFactor        = 2;
+  public $wsFactor = 2;
 
   /**
    * the parsed code
    * @var string
    */
-  public $wsCount         = 0;
+  public $wsCount = 0;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
@@ -84,8 +84,8 @@ class LibParserRegistry
   public function __construct($parserType, $lexer)
   {
 
-    $this->parserType   = $parserType;
-    $this->lexer        = $lexer;
+    $this->parserType = $parserType;
+    $this->lexer = $lexer;
     $this->init();
 
     // reconnection
@@ -158,7 +158,7 @@ class LibParserRegistry
     $className = $this->parserType.$key;
 
     if (Webfrap::classExists($className)) {
-      $subParser            = new $className($this , $this->lexer);
+      $subParser = new $className($this , $this->lexer);
       $this->registry[$key] = $subParser;
 
       return $subParser;
@@ -181,7 +181,7 @@ class LibParserRegistry
     $className = $this->parserType.$key;
 
     if (Webfrap::classExists($className)) {
-      $subParser            = new $className($this, $this->lexer);
+      $subParser = new $className($this, $this->lexer);
       $this->registry[$key] = $subParser;
 
       return $subParser;

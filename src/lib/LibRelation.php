@@ -60,8 +60,8 @@ class LibRelation extends BaseChild
   public function getUsers($relations)
   {
 
-    //$receivers    = $message->getReceivers();
-    $users     = array();
+    //$receivers = $message->getReceivers();
+    $users = array();
 
     foreach ($relations as $relation) {
 
@@ -161,8 +161,8 @@ class LibRelation extends BaseChild
   {
 
     if (!$this->relationLoader) {
-      $db                 = $this->getDb();
-      $this->relationLoader  = $db->newQuery('LibRelationLoader');
+      $db  = $this->getDb();
+      $this->relationLoader = $db->newQuery('LibRelationLoader');
     }
 
     return $this->relationLoader;

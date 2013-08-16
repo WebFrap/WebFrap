@@ -28,7 +28,7 @@ class LibDbEmptyResult extends LibDbResult
   /**
    * Der Standard Fetch Mode
    */
-  protected $fetchMode  = PGSQL_ASSOC;
+  protected $fetchMode = PGSQL_ASSOC;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Constantes
@@ -37,17 +37,17 @@ class LibDbEmptyResult extends LibDbResult
   /**
    * Holen der Daten als Assoziativer Array
    */
-  const fetchAssoc      = PGSQL_ASSOC;
+  const fetchAssoc = PGSQL_ASSOC;
 
   /**
    * Holen der Daten als Numerischer Array
    */
-  const fetchNum        = PGSQL_NUM;
+  const fetchNum = PGSQL_NUM;
 
   /**
    * Holen der Daten als Doppelter Assoziativer und Numerischer Array
    */
-  const fetchBoth       = PGSQL_BOTH;
+  const fetchBoth = PGSQL_BOTH;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Special Queries

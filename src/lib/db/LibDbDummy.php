@@ -28,22 +28,22 @@ class LibDbDummy extends LibDbConnection
   /**
    * Der Standard Fetch Mode
    */
-  protected $fetchMode  = 0;
+  protected $fetchMode = 0;
 
   /**
    * Holen der Daten als Assoziativer Array
    */
-  const fetchAssoc  = 1;
+  const fetchAssoc = 1;
 
   /**
    * Holen der Daten als Numerischer Array
    */
-  const fetchNum    = 2;
+  const fetchNum = 2;
 
   /**
    * Holen der Daten als Doppelter Assoziativer und Numerischer Array
    */
-  const fetchBoth   = 3;
+  const fetchBoth = 3;
 
   /**
    * the type of the sql  for this database class

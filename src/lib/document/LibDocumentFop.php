@@ -32,7 +32,7 @@ abstract class LibDocumentFop
    * Temporärer Name für das erzeugte FOP Dokument
    * @var string
    */
-  protected $tmpDocFile  = null;
+  protected $tmpDocFile = null;
 
   /**
    * Name des Ordners in dem die ganzen FOP Dateien inlcusive log etc angelegt

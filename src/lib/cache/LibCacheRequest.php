@@ -94,10 +94,10 @@ class LibCacheRequest
         {
           // Tell the browser the content is compressed with gzip
           header ("Content-Encoding: gzip");
-          $out  = file_get_contents( PATH_GW.$this->folder.'/file/'.$file.'.gz');
+          $out = file_get_contents( PATH_GW.$this->folder.'/file/'.$file.'.gz');
           $etag = file_get_contents( PATH_GW.$this->folder.'/file/'.$file.'.gz.md5');
         } else {
-          $out  = file_get_contents( PATH_GW.$this->folder.'/file/'.$file.'.plain');
+          $out = file_get_contents( PATH_GW.$this->folder.'/file/'.$file.'.plain');
           $etag = file_get_contents( PATH_GW.$this->folder.'/file/'.$file.'.plain.md5');
         }
 

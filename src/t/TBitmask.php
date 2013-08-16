@@ -25,7 +25,7 @@ class TBitmask
 
   /** the bitmask array
    */
-  protected $mask  = array();
+  protected $mask = array();
 
   /**
    *

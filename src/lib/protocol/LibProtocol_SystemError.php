@@ -69,7 +69,7 @@ class LibProtocol_SystemError
   public function write($message, $trace, $request, $mask = null, $entity = null)
   {
 
-    $vid      = null;
+    $vid = null;
     $idEntity = null;
 
     $msgHash = md5($message.$trace);
@@ -81,14 +81,14 @@ class LibProtocol_SystemError
       $this->orm->insert(
         'WbfsysProtocolError',
         array(
-          'message'       => $message,
-          'trace'         => $trace,
-          'message_hash'  => $msgHash,
-          'counter'       => 1,
-          'request'       => $request->dumpAsJson(),
-          'vid'           => $vid,
+          'message' => $message,
+          'trace' => $trace,
+          'message_hash' => $msgHash,
+          'counter' => 1,
+          'request' => $request->dumpAsJson(),
+          'vid' => $vid,
           'id_vid_entity' => $idEntity,
-          'id_mask'        => $mask
+          'id_mask' => $mask
         )
       );
     }

@@ -83,10 +83,10 @@ class LibRelationContainer_Group
       $this->name = $group;
     }
 
-    $this->area     = $area;
-    $this->entity   = $entiy;
+    $this->area = $area;
+    $this->entity = $entiy;
 
-    $this->else     = $else;
+    $this->else = $else;
 
   }//end public function __construct */
 

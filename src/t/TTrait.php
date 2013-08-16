@@ -46,7 +46,7 @@ class TTrait
     }
 
     $func = $this->funcs[$funcName];
-    $anz  = count($params);
+    $anz = count($params);
 
     switch ($anz) {
       case 0: return $func();

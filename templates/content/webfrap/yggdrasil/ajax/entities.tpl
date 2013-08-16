@@ -1,7 +1,7 @@
 <?php 
 $iconEntity = $this->icon( 'control/entity.png', 'Entity' );
-$iconEdit   = $this->icon( 'control/edit.png', 'Edit' );
-$iconMask   = $this->icon( 'control/mask_table.png', 'Table' );
+$iconEdit = $this->icon( 'control/edit.png', 'Edit' );
+$iconMask = $this->icon( 'control/mask_table.png', 'Table' );
 ?>
 
 <?php foreach( $VAR->entities as $entity ){ ?>

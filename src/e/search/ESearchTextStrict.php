@@ -24,16 +24,16 @@
 class ESearchTextStrict
 {
 
-  const EQUALS        = 1;
+  const EQUALS = 1;
 
-  const IS_NULL       = 5;
+  const IS_NULL = 5;
 
   /**
    * @var array
    */
   public static $labels = array(
-    self::EQUALS      => 'equals',
-    self::IS_NULL     => 'is empty'
+    self::EQUALS => 'equals',
+    self::IS_NULL => 'is empty'
   );
   
   /**

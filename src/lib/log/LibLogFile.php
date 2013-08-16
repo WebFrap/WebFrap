@@ -68,23 +68,23 @@ class LibLogFile
 
   /** Folder in dem die Datei gespeichert wird
    */
-  private $folder       = null;
+  private $folder = null;
 
   /** Die Name der Datei
    */
-  private $fileName     = null;
+  private $fileName = null;
 
   /** Der Filehandle
    */
-  private $handle       = null;
+  private $handle = null;
 
   /** accessmode of the file
    */
-  private $accessMode   = null;
+  private $accessMode = null;
 
   /** Actual Size of the Logfile
    */
-  private $size         = null;
+  private $size = null;
 
   /** Default constructor
    * parse the conf and open a file
@@ -378,23 +378,23 @@ class LibLogFile
   {
 
     /*
-      'singel'    => 'true',
+      'singel' => 'true',
       'logfolder' => 'log/',
-      'logfile'   => 'webfrap.log',
-      'logroll'   =>  false ,
+      'logfile' => 'webfrap.log',
+      'logroll' =>  false ,
       'logrotate' => '10',
-      'maxsize'   => '10000',
-      'compress'  => 'bz2',
+      'maxsize' => '10000',
+      'compress' => 'bz2',
      */
 
-    $this->fileName     =   $conf['logfile'];
-    $this->folder       =   PATH_GW.$conf['logfolder'];
-    $this->maxSize      =   $conf['maxsize'];
-    $this->logRotate    =   $conf['logrotate'] - 1;
-    $this->logRoll      =   $conf['logroll'];
-    $this->compress     =   isset($conf['compress'])?true:false;;
+    $this->fileName =   $conf['logfile'];
+    $this->folder =   PATH_GW.$conf['logfolder'];
+    $this->maxSize =   $conf['maxsize'];
+    $this->logRotate =   $conf['logrotate'] - 1;
+    $this->logRoll =   $conf['logroll'];
+    $this->compress =   isset($conf['compress'])?true:false;;
     $this->compressType =   isset($conf['compress'])?$conf['compress']:null;
-    $this->singleRun    =   $conf['singel'] ;
+    $this->singleRun =   $conf['singel'] ;
 
   } // end protected function parseConf */
 

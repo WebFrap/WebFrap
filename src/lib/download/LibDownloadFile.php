@@ -31,7 +31,7 @@ class LibDownloadFile extends LibDownloadAdapter
   {
 
     $httpRequest = Request::getActive();
-    $orm         = Db::getOrm();
+    $orm = Db::getOrm();
 
     if (!$fid = $httpRequest->param('file' , Validator::INT)) {
       throw new Io_Exception('Invalid File Requested :'. urlencode($fid));

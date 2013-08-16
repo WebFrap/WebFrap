@@ -53,7 +53,7 @@ class LibProcess_Phase
   /**
    * @var string
    */
-  public $icon  = null;
+  public $icon = null;
 
   /**
    * @var string
@@ -91,15 +91,15 @@ class LibProcess_Phase
 
     $this->order = $nodeData['order'];
 
-    $this->icon   = isset($nodeData['icon'])
+    $this->icon = isset($nodeData['icon'])
       ? $nodeData['icon']
       : 'process/go_on.png';
 
-    $this->color  = isset($nodeData['color'])
+    $this->color = isset($nodeData['color'])
       ? $nodeData['color']
       : 'default';
 
-    $this->description  = isset($nodeData['description'])
+    $this->description = isset($nodeData['description'])
       ? $nodeData['description']
       : '';
 

@@ -35,8 +35,8 @@ class LibBuild extends LibBuildAction
   public function execute()
   {
 
-    $type         = $this->args[0];
-    $action       = $this->args[1];
+    $type = $this->args[0];
+    $action = $this->args[1];
 
     $className = 'LibBuildDb'.ucfirst($type);
 

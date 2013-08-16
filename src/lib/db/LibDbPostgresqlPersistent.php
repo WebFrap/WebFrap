@@ -28,17 +28,17 @@ class LibDbPostgresqlPersistent extends LibDbPostgresql
   /**
    * Holen der Daten als Assoziativer Array
    */
-  const fetchAssoc      = PGSQL_ASSOC;
+  const fetchAssoc = PGSQL_ASSOC;
 
   /**
    * Holen der Daten als Numerischer Array
    */
-  const fetchNum        = PGSQL_NUM;
+  const fetchNum = PGSQL_NUM;
 
   /**
    * Holen der Daten als Doppelter Assoziativer und Numerischer Array
    */
-  const fetchBoth       = PGSQL_BOTH;
+  const fetchBoth = PGSQL_BOTH;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
@@ -59,11 +59,11 @@ class LibDbPostgresqlPersistent extends LibDbPostgresql
       .' user='.$this->conf['dbuser']
       .' password='.$this->conf['dbpwd'];
 
-    $this->dbUrl  = $this->conf['dbhost'];
+    $this->dbUrl = $this->conf['dbhost'];
     $this->dbPort = $this->conf['dbport'];
     $this->databaseName = $this->conf['dbname'];
     $this->dbUser = $this->conf['dbuser'];
-    $this->dbPwd  = $this->conf['dbpwd'];
+    $this->dbPwd = $this->conf['dbpwd'];
 
     if (DEBUG) {
       $pgsql_con_debug = 'host='.$this->conf['dbhost']

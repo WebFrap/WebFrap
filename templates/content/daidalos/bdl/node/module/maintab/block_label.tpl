@@ -12,7 +12,7 @@
         '',
         array
         ( 
-          'name'  => 'label[text]',
+          'name' => 'label[text]',
           'class' => 'medium wgte-text'
         )  
       ); 
@@ -50,7 +50,7 @@ HTML
           $idPrefix.'-label-'.$lang, 
           $label, array
           (
-            'name'  => $nodeKey.'[label]['.$lang.']',
+            'name' => $nodeKey.'[label]['.$lang.']',
             'class' => 'medium lang-'.$lang
           ), 
           $formId,

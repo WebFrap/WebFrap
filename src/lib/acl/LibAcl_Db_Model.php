@@ -88,8 +88,8 @@ class LibAcl_Db_Model extends Model
         return $cached;
     }
 
-    $joins      = '';
-    $wheres     = '';
+    $joins = '';
+    $wheres = '';
 
     // wenn keine Area übergeben wurde dann brauchen wir nur die
     // globalen assignments
@@ -100,7 +100,7 @@ class LibAcl_Db_Model extends Model
   JOIN
     wbfsys_group_users
     ON
-      wbfsys_group_users.id_group       = wbfsys_role_group.rowid
+      wbfsys_group_users.id_group = wbfsys_role_group.rowid
         AND wbfsys_group_users.id_area  is null
         AND wbfsys_group_users.vid      is null
         AND (wbfsys_group_users.partial = 0 )
@@ -208,13 +208,13 @@ SQL;
 SQL;
 
     /// FIXME so umschreiben das nur noch partielle permissions gefunden werden
-    // and wbfsys_group_users.partial  = 0
+    // and wbfsys_group_users.partial = 0
 
 
     $groups = array();
 
-    $db   = $this->getDb();
-    $tmp  = $db->select($query)->getAll();
+    $db = $this->getDb();
+    $tmp = $db->select($query)->getAll();
 
     foreach ($tmp as $group) {
       $groups[$group['rowid']] = $group['access_key'];
@@ -248,16 +248,16 @@ SQL;
   public function loadRole($role, $area = null, $id = null, $loadAllRoles = false)
   {
 
-    $user  = $this->getUser();
+    $user = $this->getUser();
     $cache = $this->getCache()->getLevel1();
 
 
     if (!$userId = $user->getId())
       throw new LibAcl_Exception('Got no User');
 
-    $joins      = '';
-    $condition  = '';
-    $loadKey    = array();
+    $joins = '';
+    $condition = '';
+    $loadKey = array();
 
     if (is_array($role)) {
       foreach ($role as $roleKey) {
@@ -267,7 +267,7 @@ SQL;
       $loadKey = $this->createCacheKey('role', $role, $area, $id);
     }
 
-    $allKey  = $allKey = $this->createCacheKey('all_roles', null, $area, $id);
+    $allKey = $allKey = $this->createCacheKey('all_roles', null, $area, $id);
 
     // laden aus dem cache
     if ($this->aclCache) {
@@ -513,8 +513,8 @@ SQL;
   public function countAreaRoles($area, $id = null, $role = null, $global = false)
   {
 
-    $joins      = '';
-    $condition  = '';
+    $joins = '';
+    $condition = '';
 
     // in dem fall gibt es so oder so nur global
     if (is_null($id)) {
@@ -740,8 +740,8 @@ SQL;
   public function countGroupAssignment($role, $area = null, $id = null, $global = false)
   {
 
-    $joins      = '';
-    $condition  = '';
+    $joins = '';
+    $condition = '';
 
     // in dem fall gibt es so oder so nur global
     if (is_null($area)) {
@@ -999,8 +999,8 @@ SQL;
     if (!$userId = $user->getId())
       throw new LibAcl_Exception('Got no User');
 
-    $joins      = '';
-    $condition  = '';
+    $joins = '';
+    $condition = '';
 
     $areaKeys = " upper('".implode("'), upper('",$area)."') " ;
 
@@ -1106,8 +1106,8 @@ SQL;
     if (!$userId = $user->getId())
       throw new LibAcl_Exception('Got no User');
 
-    $joins      = '';
-    $condition  = '';
+    $joins = '';
+    $condition = '';
 
     $areaKeys = " upper('".implode("'), upper('",$area)."') " ;
 
@@ -1211,7 +1211,7 @@ SQL;
     if (!$userId = $user->getId())
       throw new LibAcl_Exception('Got no User');
 
-    $joins      = '';
+    $joins = '';
 
     if (is_string($areas)) {
       $areaKeys = " upper(wbfsys_security_area.access_key) = upper('{$areas}') " ;
@@ -1275,12 +1275,12 @@ SQL;
 SQL;
 
     /// FIXME so umschreiben das nur noch partielle permissions gefunden werden
-    // and wbfsys_group_users.partial  = 0
+    // and wbfsys_group_users.partial = 0
 
     $groups = array();
 
-    $db   = $this->getDb();
-    $tmp  = $db->select($query)->getAll();
+    $db = $this->getDb();
+    $tmp = $db->select($query)->getAll();
 
     foreach ($tmp as $group) {
 
@@ -1325,7 +1325,7 @@ SQL;
     if (!$datasets)
       return array();
 
-    $joins      = '';
+    $joins = '';
 
     if (is_string($areas)) {
       $areaKeys = " UPPER(wbfsys_security_area.access_key) = UPPER('{$areas}') " ;
@@ -1374,12 +1374,12 @@ SQL;
 SQL;
 
     /// FIXME so umschreiben das nur noch partielle permissions gefunden werden
-    // and wbfsys_group_users.partial  = 0
+    // and wbfsys_group_users.partial = 0
 
     $groups = array();
 
-    $db   = $this->getDb();
-    $tmp  = $db->select($query)->getAll();
+    $db = $this->getDb();
+    $tmp = $db->select($query)->getAll();
 
     foreach ($tmp as $group) {
 
@@ -1415,7 +1415,7 @@ SQL;
     if (!$datasets)
       return array();
 
-    $joins      = '';
+    $joins = '';
 
     if (is_string($areas)) {
       $areaKeys = " UPPER(wbfsys_security_area.access_key) = UPPER('{$areas}') " ;
@@ -1464,12 +1464,12 @@ SQL;
 SQL;
 
     /// FIXME so umschreiben das nur noch partielle permissions gefunden werden
-    // and wbfsys_group_users.partial  = 0
+    // and wbfsys_group_users.partial = 0
 
     $groups = array();
 
-    $db   = $this->getDb();
-    $tmp  = $db->select($query)->getAll();
+    $db = $this->getDb();
+    $tmp = $db->select($query)->getAll();
 
     foreach ($tmp as $group) {
       $groups[$group['dataset']][$group['group']] = $group['num_user'];
@@ -1495,7 +1495,7 @@ SQL;
     if (!$datasets)
       return array();
 
-    $joins      = '';
+    $joins = '';
 
     if (is_string($areas)) {
 
@@ -1548,8 +1548,8 @@ SQL;
 
       $users = array();
 
-      $db   = $this->getDb();
-      $tmp  = $db->select($query)->getAll();
+      $db = $this->getDb();
+      $tmp = $db->select($query)->getAll();
 
       foreach ($tmp as $userNode) {
         $users[$userNode['dataset']][$userNode['group']][$userNode['user_id']] = $userNode['user_id'];
@@ -1570,8 +1570,8 @@ SQL;
 
       $users = array();
 
-      $db   = $this->getDb();
-      $tmp  = $db->select($query)->getAll();
+      $db = $this->getDb();
+      $tmp = $db->select($query)->getAll();
 
       foreach ($tmp as $userNode) {
         $users[$userNode['dataset']][$userNode['user_id']] = $userNode['user_id'];
@@ -1591,8 +1591,8 @@ SQL;
 
       $users = array();
 
-      $db   = $this->getDb();
-      $tmp  = $db->select($query)->getAll();
+      $db = $this->getDb();
+      $tmp = $db->select($query)->getAll();
 
       foreach ($tmp as $userNode) {
         $users[] = $userNode['user_id'];
@@ -1663,7 +1663,7 @@ SQL;
       return array();
     }
 
-    if (!$rootId   = $this->getAreaNode($rootArea)) {
+    if (!$rootId = $this->getAreaNode($rootArea)) {
       if (DEBUG)
         Debug::console("Keine Id für Area {$rootArea} bekommen");
 
@@ -1677,7 +1677,7 @@ SQL;
       return array();
     }
 
-    $db       = $this->getDb();
+    $db = $this->getDb();
 
     $groupIds = implode(',', array_keys($roles));
 
@@ -1859,7 +1859,7 @@ SQL;
         return $levels;
     }
 
-    $areaPerm     = $this->loadAreaAccesslevel($areas);
+    $areaPerm = $this->loadAreaAccesslevel($areas);
 
 
     if (DEBUG)
@@ -1868,9 +1868,9 @@ SQL;
     if (!$areaPerm)
       return null;
 
-    $userLevel    = $this->getUser()->getLevel();
+    $userLevel = $this->getUser()->getLevel();
 
-    $accessLevel  = null;
+    $accessLevel = null;
 
     if (DEBUG)
       Debug::console("GOT USER LEVEL ".$userLevel, $areaPerm  );
@@ -1913,8 +1913,8 @@ SQL;
   public function extractAreaRefAccessLevel($areas)
   {
 
-    $areaPerm   = $this->loadAreaAccesslevel($areas);
-    $userLevel  = $this->getUser()->getLevel();
+    $areaPerm = $this->loadAreaAccesslevel($areas);
+    $userLevel = $this->getUser()->getLevel();
 
     $accessLevel = null;
 
@@ -2127,10 +2127,10 @@ SQL;
 
     // wenn partial erlaub ist, dann
     if ($partial) {
-      $checkPartial     = '';
+      $checkPartial = '';
       $checkUserPartial = '';
     } else {
-      $checkPartial     = ' AND (acl_access.partial = 0 )';
+      $checkPartial = ' AND (acl_access.partial = 0 )';
       $checkUserPartial = ' AND (acl_gu.partial = 0 )';
     }
 
@@ -2210,7 +2210,7 @@ SQL;
   public function loadAreaPermission($areas, $entity = null)
   {
 
-    $user       = $this->getUser();
+    $user = $this->getUser();
 
     $cacheKey = null;
     if ($this->aclCache) {
@@ -2226,13 +2226,13 @@ SQL;
         return $assign;
     }
 
-    $areaKeys   = "upper('".implode($areas,"'),upper('")."')" ;
+    $areaKeys = "upper('".implode($areas,"'),upper('")."')" ;
 
     if (!$userId = $user->getId())
       throw new LibAcl_Exception('Got no User');
 
     $sourceAssigned = ACL_ASSIGNED_SOURCE;
-    $sourceMaxPerm  = ACL_MAX_PERMISSION;
+    $sourceMaxPerm = ACL_MAX_PERMISSION;
 
     if (is_null($entity)) {
 
@@ -2306,7 +2306,7 @@ SQL;
 
     $db = $this->getDb();
 
-    $level  = $db->select($query1)->getField('acl-level');
+    $level = $db->select($query1)->getField('acl-level');
     $assign = $db->select($query2)->get();
 
     if (DEBUG) {
@@ -2342,9 +2342,9 @@ SQL;
   public function loadGloalPermission($areas  )
   {
 
-    $user       = $this->getUser();
+    $user = $this->getUser();
 
-    $areaKeys   = "upper('".implode($areas,"'),upper('")."')" ;
+    $areaKeys = "upper('".implode($areas,"'),upper('")."')" ;
 
     if (!$userId = $user->getId())
       throw new LibAcl_Exception('Got no User');
@@ -2375,18 +2375,18 @@ SQL;
   public function loadAreaLevel($areas, $entity = null, $roles = array())
   {
 
-    $user       = $this->getUser();
+    $user = $this->getUser();
 
-    $areaKeys   = "upper('".implode($areas,"'),upper('")."')" ;
+    $areaKeys = "upper('".implode($areas,"'),upper('")."')" ;
 
     if (!$userId = $user->getId())
       throw new LibAcl_Exception('Got no User');
 
-    $sourceMaxPerm  = ACL_MAX_PERMISSION;
+    $sourceMaxPerm = ACL_MAX_PERMISSION;
 
 
-    $joinGroup   = '';
-    $whereGroup  = '';
+    $joinGroup = '';
+    $whereGroup = '';
 
     if ($roles) {
 
@@ -2442,7 +2442,7 @@ SQL;
 
     $db = $this->getDb();
 
-    $level  = $db->select($query)->getField('acl-level');
+    $level = $db->select($query)->getField('acl-level');
 
     return $level;
 
@@ -2528,21 +2528,21 @@ SQL;
       return array();
     }
 
-    if (!$rootId   = $this->getAreaNode($root)) {
+    if (!$rootId = $this->getAreaNode($root)) {
       if (DEBUG)
         Debug::console("Keine Id für Area {$root} bekommen");
 
       return array();
     }
 
-    if (!$parentId   = $this->getAreaNode($parentKey)) {
+    if (!$parentId = $this->getAreaNode($parentKey)) {
       if (DEBUG)
         Debug::console("Keine Id für Parent Area {$parentKey} bekommen");
 
       return array();
     }
 
-    if (!$nodeId   = $this->getAreaNode($nodeKey)) {
+    if (!$nodeId = $this->getAreaNode($nodeKey)) {
       if (DEBUG)
         Debug::console("Keine Id für Area {$nodeKey} bekommen");
 
@@ -2638,7 +2638,7 @@ SQL;
       else if ('mgmt' == substr($nodeId->source_key,0,4) && $nodeId->id_source)
         $whereNodeId = "rowid  IN({$nodeId}, {$nodeId->id_source}) AND";
       else
-        $whereNodeId = "rowid  = {$nodeId} AND";
+        $whereNodeId = "rowid = {$nodeId} AND";
     }
 
      // diese Query trägt den schönen namen Ilse, weil keiner willse...
@@ -2744,9 +2744,9 @@ SQL;
   public function loadUserAreaPermissions($areas  )
   {
 
-    $areaKeys   = " upper('".implode("'), upper('", $areas)."') " ;
+    $areaKeys = " upper('".implode("'), upper('", $areas)."') " ;
 
-    $user       = $this->getUser();
+    $user = $this->getUser();
 
     if (!$userId = $user->getId())
       throw new LibAcl_Exception('Got no User');
@@ -2818,7 +2818,7 @@ SQL;
         return $id;
     }
 
-    $orm  = $this->getDb()->getOrm();
+    $orm = $this->getDb()->getOrm();
 
     $area = $orm->get('WbfsysSecurityArea', "upper(access_key)=upper('{$key}')");
 
@@ -2846,7 +2846,7 @@ SQL;
   public function getAreaNode($key)
   {
 
-    $orm  = $this->getDb()->getOrm();
+    $orm = $this->getDb()->getOrm();
 
     if (is_array($key))
       $area = $orm->getByKeys('WbfsysSecurityArea', $key);
@@ -2873,7 +2873,7 @@ SQL;
   public function getAreaNodes($key)
   {
 
-    $orm  = $this->getDb()->getOrm();
+    $orm = $this->getDb()->getOrm();
 
     if (is_array($key)) {
       $area = $orm->getByKeys('WbfsysSecurityArea', $key);
@@ -2914,8 +2914,8 @@ SQL;
     }
 
     // laden der mvc/utils adapter Objekte
-    $db        = $this->getDb();
-    $orm       = $db->getOrm();
+    $db = $this->getDb();
+    $orm = $db->getOrm();
 
     $where = "UPPER('".implode("'), UPPER('", $keys)."')";
 
@@ -2948,17 +2948,17 @@ SQL;
 
     if (is_array($keys)) {
       foreach ($keys as $subKey) {
-        $tmp    = explode(':', $subKey);
+        $tmp = explode(':', $subKey);
 
-        $areas  = explode('/', $tmp[0]);
+        $areas = explode('/', $tmp[0]);
         $access = $tmp[1];
 
         $keysData[] = array($areas, $access);
       }
     } else {
-      $tmp    = explode(':', $keys);
+      $tmp = explode(':', $keys);
 
-      $areas  = explode('/', $tmp[0]);
+      $areas = explode('/', $tmp[0]);
       $access = $tmp[1];
 
       $keysData[] = array($areas, $access);
@@ -3037,8 +3037,8 @@ SQL;
 
     $keysData = array();
 
-    $tmp    = explode('>', $keys);
-    $areas  = explode('/', $tmp[0]);
+    $tmp = explode('>', $keys);
+    $areas = explode('/', $tmp[0]);
 
     $wAreas = array();
     if (isset($tmp[1]))

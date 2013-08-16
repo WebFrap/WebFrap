@@ -49,7 +49,7 @@ abstract class LibImageThumbAdapter
    *
    * @var int
    */
-  public $maxWidth   = 100;
+  public $maxWidth = 100;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Magic
@@ -59,7 +59,7 @@ abstract class LibImageThumbAdapter
    * Enter description here...
    *
    */
-  public function __construct($origName = null, $thumbName  = null, $maxWidth = null, $maxHeight = null)
+  public function __construct($origName = null, $thumbName = null, $maxWidth = null, $maxHeight = null)
   {
 
     if ($origName) {

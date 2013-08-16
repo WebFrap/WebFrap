@@ -30,18 +30,18 @@ abstract class MvcController extends BaseChild
   /**
    * @var string the default Action
    */
-  protected $activAction    = null;
+  protected $activAction = null;
 
   /**
    * sub Modul Extention
    * @var array
    */
-  protected $models         = array();
+  protected $models = array();
 
   /**
    * @var array
    */
-  protected $uis            = array();
+  protected $uis = array();
 
   /**
    * Flag ob der Controller schon initialisiert wurde, und damit einsatzbereit
@@ -49,7 +49,7 @@ abstract class MvcController extends BaseChild
    *
    * @var boolean
    */
-  protected $initialized  = false;
+  protected $initialized = false;
 
   /**
    * Liste der Services welche über diesen Controller angeboten werden.
@@ -73,7 +73,7 @@ abstract class MvcController extends BaseChild
    * (
    *   'helloworld' => array
    *   (
-   *     'method'    => array('GET', 'POST'),
+   *     'method' => array('GET', 'POST'),
    *     'interface' => array
    *     (
    *        'GET' => array
@@ -95,21 +95,21 @@ abstract class MvcController extends BaseChild
    *         )
    *       )
    *     ),
-   *     'views'       => array
+   *     'views' => array
    *     (
    *       'maintab',
    *       'window'
    *     ),
-   *     'access'       => 'auth_required',
+   *     'access' => 'auth_required',
    *     'description' => 'Hello World Method'
-   *     'docref'       => 'some_link',
-   *     'author'       => 'author <author@mail.addr>'
+   *     'docref' => 'some_link',
+   *     'author' => 'author <author@mail.addr>'
    *   )
    *);
    *
    * @var array
    */
-  protected $options           = array();
+  protected $options = array();
 
   /**
    * makte the public Access whitelist to a blacklist
@@ -122,7 +122,7 @@ abstract class MvcController extends BaseChild
    * }
    * @var boolean
    */
-  protected $flipPublicAccess   = false;
+  protected $flipPublicAccess = false;
 
   /**
    * ignore accesslist everything is free accessable
@@ -134,7 +134,7 @@ abstract class MvcController extends BaseChild
    * }
    * @var boolean
    */
-  protected $fullAccess         = false;
+  protected $fullAccess = false;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // deprecated attributes
@@ -146,7 +146,7 @@ abstract class MvcController extends BaseChild
    * @deprecated
    * @todo prüfen ob das ding problemlos gelöscht werden kann
    */
-  public $listMethod    = null;
+  public $listMethod = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Constructor and other Magics
@@ -210,7 +210,7 @@ abstract class MvcController extends BaseChild
     if (!$key || is_array($key))
       $key = $modelKey;
 
-    $modelName    = $modelKey.'_Model';
+    $modelName = $modelKey.'_Model';
 
     if (!isset($this->models[$key]  )) {
       if (Webfrap::classExists($modelName)) {
@@ -301,8 +301,8 @@ abstract class MvcController extends BaseChild
   public function routeToSubcontroller($conKey, $do, $request, $response)
   {
 
-    $request   = $this->getRequest();
-    $response  = $this->getResponse();
+    $request = $this->getRequest();
+    $response = $this->getResponse();
 
     try {
 
@@ -412,8 +412,8 @@ abstract class MvcController extends BaseChild
   public function runIfCallable($methodeKey  )
   {
 
-    $request   = $this->getRequest();
-    $response  = $this->getResponse();
+    $request = $this->getRequest();
+    $response = $this->getResponse();
 
     $methodeKey = strtolower($methodeKey);
     $methodeName = 'service_'.$methodeKey;
@@ -441,7 +441,7 @@ abstract class MvcController extends BaseChild
                 array
                 (
                   'method' => $request->method(),
-                  'use'    => implode(' or ', $this->options[$methodeKey]['method'])
+                  'use' => implode(' or ', $this->options[$methodeKey]['method'])
                 )
               ),
               Request::METHOD_NOT_ALLOWED
@@ -465,7 +465,7 @@ abstract class MvcController extends BaseChild
                  array
                  (
                    'type' => $response->tpl->getType(),
-                   'use'  => implode(' or ', $this->options[$methodeKey]['views'])
+                   'use' => implode(' or ', $this->options[$methodeKey]['views'])
                  )
                ),
                Request::NOT_ACCEPTABLE
@@ -725,10 +725,10 @@ abstract class MvcController extends BaseChild
   {
 
     if (is_object($message)) {
-      $messageText  = $message->getMessage();
-      $errorCode    = $message->getErrorKey();
+      $messageText = $message->getMessage();
+      $errorCode = $message->getErrorKey();
     } else {
-      $messageText  = $message;
+      $messageText = $message;
     }
 
     $response = $this->getResponse();
@@ -798,13 +798,13 @@ abstract class MvcController extends BaseChild
   {
 
     $request = $this->getRequest();
-    $orm     = $this->getOrm();
+    $orm = $this->getOrm();
 
     ///TODO was sollte der check auf post?
     if (!$request->method(Request::POST))
       return false;
 
-    $auth     = new LibAuth($this, 'Httppost');
+    $auth = new LibAuth($this, 'Httppost');
     $response = $this->getResponse();
 
     if ($auth->login()) {

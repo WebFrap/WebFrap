@@ -34,9 +34,9 @@ $images = array
 (
   array
   (
-    'src'   => '../files/images/thumb_small.jpg',
-    'name'  => 'fubar.jpg',
-    'type'  => 'Portrait',
+    'src' => '../files/images/thumb_small.jpg',
+    'name' => 'fubar.jpg',
+    'type' => 'Portrait',
     'title' => 'Hans',
     'label' => 'Wurst',
     'author' => 'Ollum',
@@ -45,15 +45,15 @@ $images = array
     'description' => 'jaja soso jaja, mhm...',
     'dimensions' => array
     (
-      '100x200'   => array( 'small', '../files/images/thumb_small.jpg' ),
+      '100x200' => array( 'small', '../files/images/thumb_small.jpg' ),
       '1000x2000' => array( 'original', '../files/images/thumb_small.jpg' ),
     )
   ),
   array
   (
-    'src'   => '../files/images/thumb_small.jpg',
-    'name'  => 'fubar.jpg',
-    'type'  => 'Portrait',
+    'src' => '../files/images/thumb_small.jpg',
+    'name' => 'fubar.jpg',
+    'type' => 'Portrait',
     'title' => 'Hans',
     'label' => 'Wurst',
     'author' => 'Ollum',
@@ -62,15 +62,15 @@ $images = array
     'description' => 'jaja soso jaja, mhm...',
     'dimensions' => array
     (
-      '100x200'   => array( 'small', '../files/images/thumb_small.jpg' ),
+      '100x200' => array( 'small', '../files/images/thumb_small.jpg' ),
       '1000x2000' => array( 'original', '../files/images/thumb_small.jpg' ),
     )
   ),
   array
   (
-    'src'   => '../files/images/thumb_small.jpg',
-    'name'  => 'fubar.jpg',
-    'type'  => 'Portrait',
+    'src' => '../files/images/thumb_small.jpg',
+    'name' => 'fubar.jpg',
+    'type' => 'Portrait',
     'title' => 'Hans',
     'label' => 'Wurst',
     'author' => 'Ollum',
@@ -79,7 +79,7 @@ $images = array
     'description' => 'jaja soso jaja, mhm...',
     'dimensions' => array
     (
-      '100x200'   => array( 'small', '../files/images/thumb_small.jpg' ),
+      '100x200' => array( 'small', '../files/images/thumb_small.jpg' ),
       '1000x2000' => array( 'original', '../files/images/thumb_small.jpg' ),
     )
   ),

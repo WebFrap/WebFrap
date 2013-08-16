@@ -102,11 +102,11 @@ abstract class LibUploadAdapter
   {
 
     if (is_array($data)) {
-      $this->oldname  = $data['name'];
-      $this->tmpname  = $data['tmp_name'];
-      $this->type     = $data['type'];
-      $this->size     = $data['size'];
-      $this->error    = $data['error'];
+      $this->oldname = $data['name'];
+      $this->tmpname = $data['tmp_name'];
+      $this->type = $data['type'];
+      $this->size = $data['size'];
+      $this->error = $data['error'];
     } else {
       throw new LibUploadException('Requested a non existing Upload');
     }

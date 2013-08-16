@@ -34,9 +34,9 @@ class Registry extends TArray
    */
   private static $instance = null;
 
-  protected $flow         = null;
-  protected $module       = null;
-  protected $controller   = null;
+  protected $flow = null;
+  protected $module = null;
+  protected $controller = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

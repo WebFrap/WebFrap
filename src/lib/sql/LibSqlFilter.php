@@ -50,7 +50,7 @@ class LibSqlFilter extends Base
   public function __construct($roles = null, $fieldName = null)
   {
 
-    $this->roles     = $roles;
+    $this->roles = $roles;
     $this->fieldName = $fieldName;
 
   }//end public function __construct */

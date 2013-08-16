@@ -24,19 +24,19 @@
 class ESearchBoolean
 {
 
-  const IS_TRUE       = 1;
+  const IS_TRUE = 1;
 
-  const IS_FALSE      = 2;
+  const IS_FALSE = 2;
   
-  const IS_NULL       = 3;
+  const IS_NULL = 3;
 
   /**
    * @var array
    */
   public static $labels = array(
-    self::IS_TRUE      => 'True',
-    self::IS_FALSE     => 'False',
-    self::IS_NULL      => 'Is not Set',
+    self::IS_TRUE => 'True',
+    self::IS_FALSE => 'False',
+    self::IS_NULL => 'Is not Set',
   );
 
   /**

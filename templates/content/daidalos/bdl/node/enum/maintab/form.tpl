@@ -7,16 +7,16 @@ $enum = $VAR->node;
 /*@var $enum BdlNodeEnum */
 
 
-$idPrefix   = 'enum-'.$enum->getName();
-$nodeKey    = 'enum';
-$formId     = 'wgt-form-bdl_'.$idPrefix;
+$idPrefix = 'enum-'.$enum->getName();
+$nodeKey = 'enum';
+$formId = 'wgt-form-bdl_'.$idPrefix;
 
 $iconDel = Wgt::icon( 'control/delete.png', 'xsmall', 'Delete' );
 $iconAdd = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
 
-$labels       = $enum->getLabels();
-$shortDescs   = $enum->getShortDesc();
-$docus        = $enum->getDocus();
+$labels = $enum->getLabels();
+$shortDescs = $enum->getShortDesc();
+$docus = $enum->getDocus();
 
 $langs = $this->model->getLanguages();
 

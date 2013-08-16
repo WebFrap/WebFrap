@@ -39,35 +39,35 @@ class TUrl
    *
    * @var unknown_type
    */
-  protected $urlDesign    = URL_DESIGN;
+  protected $urlDesign = URL_DESIGN;
 
   /**
    * Enter description here...
    *
    * @var unknown_type
    */
-  protected $urlEndSep    = URL_END_SEP;
+  protected $urlEndSep = URL_END_SEP;
 
   /**
    * Enter description here...
    *
    * @var unknown_type
    */
-  protected $urlParamSep  = URL_PARAM_SEP;
+  protected $urlParamSep = URL_PARAM_SEP;
 
   /**
    * Enter description here...
    *
    * @var unknown_type
    */
-  protected $urlValueSep  = URL_VALUE_SEP;
+  protected $urlValueSep = URL_VALUE_SEP;
 
   /**
    * Enter description here...
    *
    * @var unknown_type
    */
-  protected $urlTitleSep  = URL_TITLE_SEP;
+  protected $urlTitleSep = URL_TITLE_SEP;
 
   /**
    * Enter description here...
@@ -105,8 +105,8 @@ class TUrl
   protected static $fileMap = array
   (
   'index.php' => array('sys','.html'),
-  'ajax.php'  => array('ajax','.xml'),
-  'get.php'   => array('file',''),
+  'ajax.php' => array('ajax','.xml'),
+  'get.php' => array('file',''),
   );
 
   /**
@@ -146,7 +146,7 @@ class TUrl
    */
   public function cleanParams()
   {
-    $this->urlFile   = 'index.php';
+    $this->urlFile = 'index.php';
     $this->urlParams = array();
 
   }//end public function cleanParams()

@@ -29,42 +29,42 @@ class LibFormatterTimestamp
    *
    * @var LibFormatterTimestamp
    */
-  protected static $instance  = null;
+  protected static $instance = null;
 
   /**
    *
    */
-  protected $timeOrigin   = null;
+  protected $timeOrigin = null;
 
   /**
    *
    */
-  protected $timeRaw      = array();
+  protected $timeRaw = array();
 
   /**
    *
    */
-  protected $timeEnglish  = null;
+  protected $timeEnglish = null;
 
   /**
    *
    */
-  protected $format       = 'd.m.Y<\b\r />H:i:s';
+  protected $format = 'd.m.Y<\b\r />H:i:s';
 
   /**
    *
    */
-  protected $formatRaw    = array();
+  protected $formatRaw = array();
 
   /**
    *
    */
-  protected $separatorDate    = '.';
+  protected $separatorDate = '.';
 
   /**
    *
    */
-  protected $separatorTime    = ':';
+  protected $separatorTime = ':';
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Magic
@@ -163,7 +163,7 @@ class LibFormatterTimestamp
   {
 
     if (trim($time) == '') {
-      $this->timeOrigin  = null;
+      $this->timeOrigin = null;
       $this->timeEnglish = null;
 
       return;

@@ -47,7 +47,7 @@ class LibSpreadsheetExcelStyle_Default extends LibSpreadsheetExcelStyle
   /**
    * @var string
    */
-  public $borderColor      =  '00000000';
+  public $borderColor =  '00000000';
 
   /**
    * @param int $key

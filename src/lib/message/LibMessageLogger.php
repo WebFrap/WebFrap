@@ -30,13 +30,13 @@ class LibMessageLogger
    *
    * @var LibDbConnection
    */
-  protected $db   = null;
+  protected $db = null;
 
   /**
    *
    * @var User
    */
-  protected $user   = null;
+  protected $user = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // getter + setter für die Resourcen
@@ -70,7 +70,7 @@ class LibMessageLogger
   public function __construct($db, $user)
   {
 
-    $this->db   = $db;
+    $this->db = $db;
     $this->user = $user;
 
   }//end public function __construct */
@@ -91,8 +91,8 @@ class LibMessageLogger
       'WbfsysMessageLog',
       array
       (
-        'title'         => $title,
-        'email'         => $address
+        'title' => $title,
+        'email' => $address
       )
     );
 

@@ -26,8 +26,8 @@ class TStyle
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
 
-  public $font        = null;
-  public $background  = null;
-  public $color       = null;
+  public $font = null;
+  public $background = null;
+  public $color = null;
 
 }//end class TStyle

@@ -228,7 +228,7 @@ class LibXmlDocument
   {
 
     if (!$parent)
-      $parent  = $this->rootNode;
+      $parent = $this->rootNode;
 
     $newNode = $this->document->createElement($tagName, $value);
 

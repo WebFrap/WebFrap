@@ -6,10 +6,10 @@ $permission = $VAR->node;
 
 /*@var $permission BdlProfilePermission */
 $idPrefix = 'profile-permission-ref-create';
-$formId   = 'wgt-form-bdl_'.$idPrefix;
+$formId = 'wgt-form-bdl_'.$idPrefix;
 
 
-$iconAdd  = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
+$iconAdd = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
 
 $langs = $this->model->getLanguages();
 

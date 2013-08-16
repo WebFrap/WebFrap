@@ -50,7 +50,7 @@ class LibSearchQueryLexer extends LibLexer
    */
   protected $element = array
   (
-    'OWNER'   => array(1000), // der besitzer eines datensatzes
+    'OWNER' => array(1000), // der besitzer eines datensatzes
   );
 
   /**
@@ -58,22 +58,22 @@ class LibSearchQueryLexer extends LibLexer
    */
   protected $keyWord = array
   (
-    'IN'     => array(100),
-    'AND'    => array(101),
-    'OR'     => array(102),
-    'IS'     => array(103),
-    'NOT'    => array(104),
-    'NULL'   => array(105),
-    'CHECK'  => array(106),
-    'IF'     => array(107),
-    'ELSE'   => array(108),
-    'GRANT'  => array(109),
+    'IN' => array(100),
+    'AND' => array(101),
+    'OR' => array(102),
+    'IS' => array(103),
+    'NOT' => array(104),
+    'NULL' => array(105),
+    'CHECK' => array(106),
+    'IF' => array(107),
+    'ELSE' => array(108),
+    'GRANT' => array(109),
     'ACCESS' => array(110),
-    'FOR'    => array(111),
-    'HAS'    => array(112),
-    'ROLE'   => array(113),
-    'EMAIL'  => array(114),
-    'OLDER'  => array(115),
+    'FOR' => array(111),
+    'HAS' => array(112),
+    'ROLE' => array(113),
+    'EMAIL' => array(114),
+    'OLDER' => array(115),
   );
 
   /**
@@ -81,32 +81,32 @@ class LibSearchQueryLexer extends LibLexer
    */
   protected $operator = array
   (
-    '::'      => array(500 , false), // ATTRIBUTE
-    '@'       => array(501 , true),  // ATTRIBUTE
-    '<'       => array(502 , false), // SMALLER
-    '>'       => array(503 , false), // BIGGER
-    '='       => array(504 , false), // ASIGN OPERATOR
-    '=='      => array(505 , false), // EQUALS
-    '<='      => array(506 , false), // SMALER OR EQUAL
-    '=>'      => array(507 , false), // BIGGER OR EQUAL
-    '!'       => array(508 , true),  // NOT
-    '&&'      => array(509 , false), // AND
-    '||'      => array(510 , false), // OR
-    '+'       => array(511 , true),  // plus
-    '-'       => array(512 , true),  // minus
-    '*'       => array(513 , true),  // start
-    '/'       => array(514 , true),
-    '%'       => array(515 , true),
-    '->'      => array(516 , false),
-    '.'       => array(517 , true),
-    ','       => array(518 , true),
-    ';'       => array(519 , true),
-    '('       => array(520 , true),
-    ')'       => array(521 , true),
-    '{'       => array(522 , true),
-    '}'       => array(523 , true),
-    '['       => array(524 , true),
-    ']'       => array(525 , true),
+    '::' => array(500 , false), // ATTRIBUTE
+    '@' => array(501 , true),  // ATTRIBUTE
+    '<' => array(502 , false), // SMALLER
+    '>' => array(503 , false), // BIGGER
+    '=' => array(504 , false), // ASIGN OPERATOR
+    '==' => array(505 , false), // EQUALS
+    '<=' => array(506 , false), // SMALER OR EQUAL
+    '=>' => array(507 , false), // BIGGER OR EQUAL
+    '!' => array(508 , true),  // NOT
+    '&&' => array(509 , false), // AND
+    '||' => array(510 , false), // OR
+    '+' => array(511 , true),  // plus
+    '-' => array(512 , true),  // minus
+    '*' => array(513 , true),  // start
+    '/' => array(514 , true),
+    '%' => array(515 , true),
+    '->' => array(516 , false),
+    '.' => array(517 , true),
+    ',' => array(518 , true),
+    ';' => array(519 , true),
+    '(' => array(520 , true),
+    ')' => array(521 , true),
+    '{' => array(522 , true),
+    '}' => array(523 , true),
+    '[' => array(524 , true),
+    ']' => array(525 , true),
   );
 
   /**
@@ -145,61 +145,61 @@ class LibSearchQueryLexer extends LibLexer
    */
   public $tokenType = array
   (
-    't_none'        => 1,
-    't_identifier'  => 2,
-    't_integer'     => 3,
-    't_string'      => 4,
-    't_float'       => 5,
-    't_boolean'     => 6,
-    't_comment'     => 7,
-    't_keyword'     => 8,
+    't_none' => 1,
+    't_identifier' => 2,
+    't_integer' => 3,
+    't_string' => 4,
+    't_float' => 5,
+    't_boolean' => 6,
+    't_comment' => 7,
+    't_keyword' => 8,
 
-    'k_in'          => 100,
-    'k_and'         => 101,
-    'k_or'          => 102,
-    'k_is'          => 103,
-    'k_not'         => 104,
-    'k_null'        => 105,
-    'k_check'       => 106,
-    'k_if'          => 107,
-    'k_else'        => 108,
-    'k_grant'       => 109,
-    'k_access'      => 110,
-    'k_for'         => 111,
-    'k_has'         => 112,
-    'k_role'        => 113,
+    'k_in' => 100,
+    'k_and' => 101,
+    'k_or' => 102,
+    'k_is' => 103,
+    'k_not' => 104,
+    'k_null' => 105,
+    'k_check' => 106,
+    'k_if' => 107,
+    'k_else' => 108,
+    'k_grant' => 109,
+    'k_access' => 110,
+    'k_for' => 111,
+    'k_has' => 112,
+    'k_role' => 113,
 
-    'c_double_colon'  => 500,
-    'c_at'            => 501,
-    'c_smaller'       => 502 ,
-    'c_bigger'        => 503 ,
-    'c_assign'        => 504 ,
-    'c_equals'        => 505 ,
-    'c_smaller_or_equal'  => 506 ,
-    'c_bigger_or_equal'   => 507 ,
-    'c_not'         => 508 ,
-    'c_and'         => 509 ,
-    'c_or'          => 510 ,
-    'c_plus'        => 511 ,
-    'c_minus'       => 512 ,
-    'c_asterisk'    => 513 ,
-    'c_slash'       => 514 ,
-    'c_percent'     => 515 ,
-    'c_path'        => 516 ,
-    'c_dot'         => 517 ,
-    'c_comma'       => 518 ,
-    'c_semicolon'   => 519 ,
-    'c_open_parenthesis'      => 520 ,
-    'c_close_parenthesis'     => 521 ,
-    'c_open_curly_braces'     => 522 ,
-    'c_close_curly_braces'    => 523 ,
-    'c_open_square_brackets'  => 524 ,
+    'c_double_colon' => 500,
+    'c_at' => 501,
+    'c_smaller' => 502 ,
+    'c_bigger' => 503 ,
+    'c_assign' => 504 ,
+    'c_equals' => 505 ,
+    'c_smaller_or_equal' => 506 ,
+    'c_bigger_or_equal' => 507 ,
+    'c_not' => 508 ,
+    'c_and' => 509 ,
+    'c_or' => 510 ,
+    'c_plus' => 511 ,
+    'c_minus' => 512 ,
+    'c_asterisk' => 513 ,
+    'c_slash' => 514 ,
+    'c_percent' => 515 ,
+    'c_path' => 516 ,
+    'c_dot' => 517 ,
+    'c_comma' => 518 ,
+    'c_semicolon' => 519 ,
+    'c_open_parenthesis' => 520 ,
+    'c_close_parenthesis' => 521 ,
+    'c_open_curly_braces' => 522 ,
+    'c_close_curly_braces' => 523 ,
+    'c_open_square_brackets' => 524 ,
     'c_close_square_brackets' => 525 ,
 
-    'e_owner'      => 1000,
-    'e_this'       => 1001,
-    'e_user'       => 1002,
-    'e_my'         => 1003,
+    'e_owner' => 1000,
+    'e_this' => 1001,
+    'e_user' => 1002,
+    'e_my' => 1003,
   );
 
   /**
@@ -413,7 +413,7 @@ class LibSearchQueryLexer extends LibLexer
 
     while (true) {
 
-      $token  = next($this->rawMatches);
+      $token = next($this->rawMatches);
 
       if (false === $token) {
         // hier müssen wir etwas nachsichtiger sein
@@ -422,7 +422,7 @@ class LibSearchQueryLexer extends LibLexer
       }
 
       if (!$escape && '\\' == $token[0]) {
-        $escape   = true;
+        $escape = true;
         $string   .= '\\';
         continue;
       }
@@ -448,7 +448,7 @@ class LibSearchQueryLexer extends LibLexer
 
     while (true) {
 
-      $token  = next($this->rawMatches);
+      $token = next($this->rawMatches);
 
       if (false === $token) {
         // comment @ line end, is ok

@@ -1,16 +1,16 @@
 <?php
 
-$thisPath  = dirname(__FILE__).'/';
+$thisPath = dirname(__FILE__).'/';
 
-$node      = $VAR->node;
-$profile   = $VAR->profile;
+$node = $VAR->node;
+$profile = $VAR->profile;
 
 /*@var $profile BdlProfile */
 
 $idPrefix = 'profile-'.$profile->getName().'-backpath-node-edit-'.$VAR->pathId;
-$formId   = 'wgt-form-bdl_'.$idPrefix;
+$formId = 'wgt-form-bdl_'.$idPrefix;
 
-$iconAdd  = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
+$iconAdd = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
 
 
 $descriptions = $node->getDescriptions();

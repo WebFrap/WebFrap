@@ -231,60 +231,60 @@ class ContextListing extends Context
     }
 
     // the publish type, like selectbox, tree, table..
-    if ($publish  = $request->param('publish', Validator::CNAME))
-      $this->publish   = $publish;
+    if ($publish = $request->param('publish', Validator::CNAME))
+      $this->publish = $publish;
 
     // über den ltype können verschiedene listenvarianten gewählt werden
     // diese müssen jedoch vorhanden / implementiert sein
-    if ($ltype   = $request->param('ltype', Validator::CNAME))
-      $this->ltype    = $ltype;
+    if ($ltype = $request->param('ltype', Validator::CNAME))
+      $this->ltype = $ltype;
 
 		// wird bei selection und data verwendet
-    if ($ltype   = $request->param('context', Validator::CNAME))
-      $this->context    = $ltype;
+    if ($ltype = $request->param('context', Validator::CNAME))
+      $this->context = $ltype;
 
     // input type
     if ($input = $request->param('input', Validator::CKEY))
-      $this->input    = $input;
+      $this->input = $input;
 
     // input type
     if ($suffix = $request->param('suffix', Validator::CKEY))
-      $this->suffix    = $suffix;
+      $this->suffix = $suffix;
 
     // append entries
     if ($append = $request->param('append', Validator::BOOLEAN))
-      $this->append    = $append;
+      $this->append = $append;
 
     // startpunkt des pfades für die acls
     if ($aclRoot = $request->param('a_root', Validator::CKEY))
-      $this->aclRoot    = $aclRoot;
+      $this->aclRoot = $aclRoot;
 
     // die id des Datensatzes von dem aus der Pfad gestartet wurde
     if ($aclRootId = $request->param('a_root_id', Validator::INT))
-      $this->aclRootId    = $aclRootId;
+      $this->aclRootId = $aclRootId;
 
     // der key des knotens auf dem wir uns im pfad gerade befinden
     if ($aclKey = $request->param('a_key', Validator::CKEY))
-      $this->aclKey    = $aclKey;
+      $this->aclKey = $aclKey;
 
     // der name des knotens
     if ($aclNode = $request->param('a_node', Validator::CKEY))
-      $this->aclNode    = $aclNode;
+      $this->aclNode = $aclNode;
 
     // an welchem punkt des pfades befinden wir uns?
     if ($aclLevel = $request->param('a_level', Validator::INT))
-      $this->aclLevel  = $aclLevel;
+      $this->aclLevel = $aclLevel;
 
     // per default
     $this->categories = array();
 
       // start position of the query and size of the table
     $this->offset
-      = $request->param('offset', Validator::INT);
+ = $request->param('offset', Validator::INT);
 
     // start position of the query and size of the table
     $this->start
-      = $request->param('start', Validator::INT);
+ = $request->param('start', Validator::INT);
 
     if ($this->offset) {
       if (!$this->start)
@@ -297,15 +297,15 @@ class ContextListing extends Context
 
     // order for the multi display element
     $this->order
-      = $request->param('order', Validator::CNAME);
+ = $request->param('order', Validator::CNAME);
 
     // target for a callback function
     $this->target
-      = $request->param('target', Validator::CKEY  );
+ = $request->param('target', Validator::CKEY  );
 
     // target for some ui element
     $this->targetId
-      = $request->param('target_id', Validator::CKEY  );
+ = $request->param('target_id', Validator::CKEY  );
 
     // flag for beginning seach filter
     if ($text = $request->param('begin', Validator::TEXT  )) {
@@ -316,23 +316,23 @@ class ContextListing extends Context
     // the model should add all inputs in the ajax request, not just the text
     // converts per default to false, thats ok here
     $this->fullLoad
-      = $request->param('full_load', Validator::BOOLEAN);
+ = $request->param('full_load', Validator::BOOLEAN);
 
     // exclude whatever
     $this->exclude
-      = $request->param('exclude', Validator::CKEY  );
+ = $request->param('exclude', Validator::CKEY  );
 
     // keyname to tageting ui elements
     $this->keyName
-      = $request->param('key_name', Validator::CKEY  );
+ = $request->param('key_name', Validator::CKEY  );
 
     // the activ id, mostly needed in exlude calls
     $this->objid
-      = $request->param('objid', Validator::EID  );
+ = $request->param('objid', Validator::EID  );
 
     // order for the multi display element
     $this->targetMask
-      = $request->param('target_mask', Validator::CNAME);
+ = $request->param('target_mask', Validator::CNAME);
 
   }//end public function interpretRequest */
 
@@ -468,11 +468,11 @@ class ContextListing extends Context
   {
 
     // startpunkt des pfades für die acls
-    $this->aclRoot   = $context->aclRoot;
+    $this->aclRoot = $context->aclRoot;
     $this->aclRootId = $context->aclRootId;
-    $this->aclKey    = $context->aclKey;
-    $this->aclNode   = $context->aclNode;
-    $this->aclLevel   = $context->aclLevel;
+    $this->aclKey = $context->aclKey;
+    $this->aclNode = $context->aclNode;
+    $this->aclLevel = $context->aclLevel;
 
   }//end public function importAcl */
 

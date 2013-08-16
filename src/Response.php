@@ -47,13 +47,13 @@ class Response
    * Idempotente Anfrage war ok
    * @var int
    */
-  const OK      = 200;
+  const OK = 200;
 
   /**
    * Anlegen eines Neuen Datensatzes wurde akzeptiert
    * @var int
    */
-  const CREATED      = 201;
+  const CREATED = 201;
 
   /**
    * Änderung wurde akzeptiert
@@ -75,7 +75,7 @@ class Response
 
   const PARTIAL_CONTENT = 206;
 
-  const MULTI_STATUS  = 207;
+  const MULTI_STATUS = 207;
 
   const NULTIPLE_CHOICES = 300;
 
@@ -111,7 +111,7 @@ class Response
 
   const HTTP_413 = 'Request Entity Too Large';
 
-  const HTTP_414  = 'Request-URI Too Long';
+  const HTTP_414 = 'Request-URI Too Long';
 
   const UNSUPPORTED_MEDIA_TYPE = 415;
 
@@ -132,23 +132,23 @@ class Response
   /**
    * @var int
    */
-  const INTERNAL_ERROR   = 500;
+  const INTERNAL_ERROR = 500;
 
-  const NOT_IMPLEMENTED  = 501;
+  const NOT_IMPLEMENTED = 501;
 
-  const BAD_GATEWAY      = 502;
+  const BAD_GATEWAY = 502;
 
-  const SERVICE_UNAVAILABLE  = 503;
+  const SERVICE_UNAVAILABLE = 503;
 
-  const GATEWAY_TIMEOUT      = 504;
+  const GATEWAY_TIMEOUT = 504;
 
-  const HTTP_505      = 'HTTP Version Not Supported';
+  const HTTP_505 = 'HTTP Version Not Supported';
 
-  const HTTP_506      = 'Variant Also Negotiates';
+  const HTTP_506 = 'Variant Also Negotiates';
 
-  const HTTP_507      = 'Insufficient Storage';
+  const HTTP_507 = 'Insufficient Storage';
 
-  const HTTP_509      = 'Bandwidth Limit Exceeded';
+  const HTTP_509 = 'Bandwidth Limit Exceeded';
 
   const NOT_EXTENDED = 510;
 

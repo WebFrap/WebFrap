@@ -69,12 +69,12 @@ class EMessageAspect
    * @var array
    */
   public static $labels = array(
-    self::NO_ASPECT   => 'No Aspect',
-    self::MESSAGE   => 'Message',
-    self::NOTICE   => 'Notice / Memo',
-    self::APPOINTMENT   => 'Appointment',
-    self::SHARED   => 'Shared',
-    self::TASK   => 'Task',
+    self::NO_ASPECT => 'No Aspect',
+    self::MESSAGE => 'Message',
+    self::NOTICE => 'Notice / Memo',
+    self::APPOINTMENT => 'Appointment',
+    self::SHARED => 'Shared',
+    self::TASK => 'Task',
     self::DISCUSSION => 'Discussion',
     self::CHECKLIST => 'Checklist',
   );

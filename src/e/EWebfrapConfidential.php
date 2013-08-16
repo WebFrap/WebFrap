@@ -62,12 +62,12 @@ class EWebfrapConfidential
    * @var array
    */
   public static $labels = array(
-    self::PUBLICLY   => 'Public',
-    self::CUSTOMER   => 'Customer Only',
-    self::RESTRICTED   => 'Restricted',
-    self::CONFIDENTIAL   => 'Confidential',
-    self::SECRET   => 'Secret',
-    self::TOP_SECRET   => 'Top Secret',
+    self::PUBLICLY => 'Public',
+    self::CUSTOMER => 'Customer Only',
+    self::RESTRICTED => 'Restricted',
+    self::CONFIDENTIAL => 'Confidential',
+    self::SECRET => 'Secret',
+    self::TOP_SECRET => 'Top Secret',
   );
 
   /**

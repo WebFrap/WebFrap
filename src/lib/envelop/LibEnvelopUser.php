@@ -30,57 +30,57 @@ class LibEnvelopUser
   /**
    * @var string
    */
-  public $fullName   = null;
+  public $fullName = null;
 
   /**
    * @var int
    */
-  public $userId   = null;
+  public $userId = null;
 
   /**
    * @var string
    */
-  public $firstName  = null;
+  public $firstName = null;
 
   /**
    * @var string
    */
-  public $lastName   = null;
+  public $lastName = null;
 
   /**
    * @var string
    */
-  public $userName   = null;
+  public $userName = null;
 
   /**
    * @var string
    */
-  public $passwd     = null;
+  public $passwd = null;
 
   /**
    * @var string
    */
-  public $employee   = null;
+  public $employee = null;
 
   /**
    * @var string
    */
-  public $description   = null;
+  public $description = null;
 
   /**
    * @var string
    */
-  public $profile   = null;
+  public $profile = null;
 
   /**
    * @var int
    */
-  public $level   = null;
+  public $level = null;
 
   /**
    * @var boolean
    */
-  public $inactive   = null;
+  public $inactive = null;
 
   /**
    * @var boolean

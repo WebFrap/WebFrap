@@ -54,7 +54,7 @@ abstract class LibProcessSlice
   public function __construct($process, $slice)
   {
 
-    $this->process   = $process;
+    $this->process = $process;
     $this->sliceData = $slice;
 
   }//end public function __construct */

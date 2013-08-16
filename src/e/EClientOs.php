@@ -24,15 +24,15 @@
 class EClientOs
 {
 
-  const WINDOWS       = 1;
+  const WINDOWS = 1;
 
-  const LINUX         = 2;
+  const LINUX = 2;
 
-  const SOLARIS       = 3;
+  const SOLARIS = 3;
 
-  const BSD           = 4;
+  const BSD = 4;
 
-  const MAC           = 5;
+  const MAC = 5;
 
   /**
    * Minimale liste potentiell vorhandener serverbetriebsysteme
@@ -41,11 +41,11 @@ class EClientOs
    */
   public static $text = array
   (
-    self::WINDOWS   => 'Windows',
-    self::LINUX     => 'Linux',
-    self::SOLARIS   => 'Solaris',
-    self::BSD       => 'BSD',
-    self::MAC       => 'MacOsX'
+    self::WINDOWS => 'Windows',
+    self::LINUX => 'Linux',
+    self::SOLARIS => 'Solaris',
+    self::BSD => 'BSD',
+    self::MAC => 'MacOsX'
   );
 
 }//end class ECoreClientOs

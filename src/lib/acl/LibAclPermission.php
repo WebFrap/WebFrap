@@ -126,7 +126,7 @@ class LibAclPermission
    *
    * @var boolea
    */
-  public $isPartAssign   = false;
+  public $isPartAssign = false;
 
   /**
    * @lang de:
@@ -144,7 +144,7 @@ class LibAclPermission
    * Liste der Rollen die der User in relation zu der Area Inne hat
    * @var array
    */
-  public $roles     = array();
+  public $roles = array();
 
   /**
    * Relevanten Rollen die bei hasRoleSomewhere gefunden werden würden
@@ -154,7 +154,7 @@ class LibAclPermission
    *
    * @var array
    */
-  public $partRoles     = array();
+  public $partRoles = array();
 
   /**
    * @lang de:
@@ -164,7 +164,7 @@ class LibAclPermission
    * @var array
    *  @format <string key : int access_level>
    */
-  public $paths     = array();
+  public $paths = array();
 
   /**
    * @lang de:
@@ -173,7 +173,7 @@ class LibAclPermission
    * @see Acl::$accessLevels
    * @var array
    */
-  protected $levels     = array();
+  protected $levels = array();
 
   /**
    * @lang de:
@@ -182,7 +182,7 @@ class LibAclPermission
    *
    * @var array<string:boolean>
    */
-  protected $accessFlags  = array();
+  protected $accessFlags = array();
 
   /**
    * Der Haupt Area Pfad zu welchem dieser Permission Container relativ ist
@@ -190,7 +190,7 @@ class LibAclPermission
    *
    * @var string
    */
-  protected $areaPath  = null;
+  protected $areaPath = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Listen Daten
@@ -207,7 +207,7 @@ class LibAclPermission
    * Query Objekt zum ermitteln der Tatsächlichen Anzahl auffindbarer Elemente
    * @var LibSqlQuery
    */
-  public $calcQuery  = null;
+  public $calcQuery = null;
 
   /**
    * Laden der Rollen relativ zu den Entries
@@ -436,30 +436,30 @@ class LibAclPermission
       if (array_key_exists('acl-level', $level)) {
 
         // zuweisung der rechte für die gruppe
-        $this->isPartAccess   = isset($level['access-is-partial'])
-          ? (int) $level['access-is-partial']  == 1
+        $this->isPartAccess = isset($level['access-is-partial'])
+          ? (int) $level['access-is-partial'] == 1
           : false;
 
-        $this->hasPartAccess  = isset($level['access-has-partial'])
-          ? (int) $level['access-has-partial']  == 1
+        $this->hasPartAccess = isset($level['access-has-partial'])
+          ? (int) $level['access-has-partial'] == 1
           : false;
 
         // zugehörigkeit zur gruppe
-        $this->isPartAssign   = isset($level['assign-is-partial'])
-          ? (int) $level['assign-is-partial']  == 1
+        $this->isPartAssign = isset($level['assign-is-partial'])
+          ? (int) $level['assign-is-partial'] == 1
           : false;
 
-        $this->hasPartAssign  = isset($level['assign-has-partial'])
-          ? (int) $level['assign-has-partial']  == 1
+        $this->hasPartAssign = isset($level['assign-has-partial'])
+          ? (int) $level['assign-has-partial'] == 1
           : false;
 
-        $this->level    = (int) $level['acl-level'];
+        $this->level = (int) $level['acl-level'];
 
         //if (!$this->isPartAssign)
         $this->defLevel = (int) $level['acl-level'];
 
       } else {
-        $this->level    = Acl::DENIED;
+        $this->level = Acl::DENIED;
         $this->defLevel = Acl::DENIED;
 
         Debug::console('Wrong Input Format for LibAclPermission::setPermission, acl-level is missing! Fallback to denied!',$level,true);
@@ -468,11 +468,11 @@ class LibAclPermission
 
     } else {
 
-      $this->level     = (int) $level;
+      $this->level = (int) $level;
 
       //TODO CHECK THAT!
       //if (!$this->isPartAssign)
-        $this->defLevel  = (int) $level;
+        $this->defLevel = (int) $level;
 
       if (!is_null($refBaseLevel))
         $this->refBaseLevel = (int) $refBaseLevel;
@@ -521,41 +521,41 @@ class LibAclPermission
       if (isset($level['acl-level'])) {
 
         if ($this->level < (int) $level['acl-level'])
-           $this->level  = (int) $level['acl-level'];
+           $this->level = (int) $level['acl-level'];
 
-        if (isset($level['access-is-partial']) && (int) $level['access-is-partial']  == 1)
+        if (isset($level['access-is-partial']) && (int) $level['access-is-partial'] == 1)
           $this->isPartAccess = true;
 
-        if (isset($level['access-has-partial']) && (int) $level['access-has-partial']  == 1)
+        if (isset($level['access-has-partial']) && (int) $level['access-has-partial'] == 1)
           $this->hasPartAccess = true;
 
-        if (isset($level['assign-is-partial']) && (int) $level['assign-is-partial']  == 1)
+        if (isset($level['assign-is-partial']) && (int) $level['assign-is-partial'] == 1)
           $this->isPartAssign = true;
 
-        if (isset($level['assign-has-partial']) && (int) $level['assign-has-partial']  == 1)
+        if (isset($level['assign-has-partial']) && (int) $level['assign-has-partial'] == 1)
           $this->hasPartAssign = true;
 
         if (!$this->isPartAssign) {
           if ($this->defLevel < (int) $level['acl-level'])
-             $this->defLevel  = (int) $level['acl-level'];
+             $this->defLevel = (int) $level['acl-level'];
         }
 
         if ($this->defLevel < (int) $level['acl-level'])
-           $this->defLevel  = (int) $level['acl-level'];
+           $this->defLevel = (int) $level['acl-level'];
 
       }
     } else {
 
       if ($this->level < (int) $level)
-       $this->level  = (int) $level;
+       $this->level = (int) $level;
 
       if (!$this->isPartAssign) {
         if ($this->defLevel < (int) $level)
-         $this->defLevel  = (int) $level;
+         $this->defLevel = (int) $level;
       }
 
       if ($this->defLevel < (int) $level)
-        $this->defLevel  = (int) $level;
+        $this->defLevel = (int) $level;
 
       if (!is_null($refBaseLevel) &&  $this->refBaseLevel < (int) $refBaseLevel)
         $this->refBaseLevel = (int) $refBaseLevel;
@@ -963,8 +963,8 @@ class LibAclPermission
     ///TODO Den Pfad auch noch als möglichkeit für die Diversifizierung einbauen
 
     // sicherheitshalber den String umbauen
-    $profil   = SParserString::subToCamelCase($profil);
-    $context  = ucfirst(strtolower($context));
+    $profil = SParserString::subToCamelCase($profil);
+    $context = ucfirst(strtolower($context));
 
     if (method_exists($this, 'fetchList_'.$context.'_Profile_'.$profil)) {
       return $this->{'fetchList_'.$context.'_Profile_'.$profil}($query, $params, $entity);

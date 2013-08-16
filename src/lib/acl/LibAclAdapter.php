@@ -28,31 +28,31 @@ class LibAclAdapter extends BaseChild
    * the user level
    * @var array
    */
-  protected $level              = array();
+  protected $level = array();
 
   /**
    *
    * @var array
    */
-  protected $group              = array();
+  protected $group = array();
 
   /**
    *
    * @var array
    */
-  protected $extend             = array();
+  protected $extend = array();
 
   /**
    *
    * @var array
    */
-  protected $groupCache         = array();
+  protected $groupCache = array();
 
   /**
    *
    * @var array
    */
-  protected $lists              = array();
+  protected $lists = array();
 
   /**
    * flag to enable or disable the check for acls
@@ -62,25 +62,25 @@ class LibAclAdapter extends BaseChild
    *
    * @var boolean
    */
-  protected $disabled           = false;
+  protected $disabled = false;
 
   /**
    * available Access Levels
    * @var array
    */
-  protected $levels             = array();
+  protected $levels = array();
 
   /**
    * Der Datenbank manager
    * @var LibAclManager
    */
-  protected $manager             = null;
+  protected $manager = null;
 
   /**
    * Der ACL Reader
    * @var LibAclReader
    */
-  protected $reader             = null;
+  protected $reader = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Messaging System
@@ -98,7 +98,7 @@ class LibAclAdapter extends BaseChild
     if (!$env)
       $env = Webfrap::getActive();
 
-    $this->env    = $env;
+    $this->env = $env;
 
   }//end public function __construct */
 

@@ -28,25 +28,25 @@ class LibSystemProcess
    * Die Prozess Resource
    * @var Resource
    */
-  protected $proc   = null;
+  protected $proc = null;
 
   /**
    *
    * @var string
    */
-  protected $stdin  = null;
+  protected $stdin = null;
 
   /**
    *
    * @var string
    */
-  protected $stdout  = null;
+  protected $stdout = null;
 
   /**
    *
    * @var string
    */
-  protected $stderr  = null;
+  protected $stderr = null;
 
   /**
    * first simple call method
@@ -139,7 +139,7 @@ class LibSystemProcess
     if (!is_resource($this->proc)) {
       return false;
     } else {
-      $this->stdin  = $pipes[0];
+      $this->stdin = $pipes[0];
       $this->stdout = $pipes[1];
       $this->stderr = $pipes[2];
 

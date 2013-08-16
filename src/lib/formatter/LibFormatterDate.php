@@ -32,37 +32,37 @@ class LibFormatterDate
    *
    * @var LibFormatterDate
    */
-  protected static $instance  = null;
+  protected static $instance = null;
 
   /**
    *
    */
-  protected $dateOrigin   = null;
+  protected $dateOrigin = null;
 
   /**
    *
    */
-  protected $dateRaw      = array();
+  protected $dateRaw = array();
 
   /**
    *
    */
-  protected $dateEnglish  = null;
+  protected $dateEnglish = null;
 
   /**
    *
    */
-  protected $format       = null;
+  protected $format = null;
 
   /**
    *
    */
-  protected $formatRaw    = array();
+  protected $formatRaw = array();
 
   /**
    *
    */
-  protected $separator    = null;
+  protected $separator = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Magic
@@ -195,7 +195,7 @@ class LibFormatterDate
   public function setDateLanguage($date)
   {
     if (trim($date) == '') {
-      $this->dateOrigin  = null;
+      $this->dateOrigin = null;
       $this->dateEnglish = null;
 
       return false;
@@ -203,7 +203,7 @@ class LibFormatterDate
 
     if (I18n::$short == 'en') {
       $this->dateEnglish = $date;
-      $this->dateOrigin  = $date;
+      $this->dateOrigin = $date;
 
       return true;
     }
@@ -232,7 +232,7 @@ class LibFormatterDate
     }
 
     if (!is_numeric($this->dateRaw['Y']) || !is_numeric($this->dateRaw['m'])) {
-      $this->dateOrigin  = null;
+      $this->dateOrigin = null;
       $this->dateEnglish = null;
 
       return false;

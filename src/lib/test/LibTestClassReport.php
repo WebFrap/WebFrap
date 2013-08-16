@@ -71,8 +71,8 @@ class LibTestClassReport
    */
   public function addMethod($className, $methodName)
   {
-    $this->errors[$className][$methodName]  = array();
-    $this->tests[$className][$methodName]   = 0;
+    $this->errors[$className][$methodName] = array();
+    $this->tests[$className][$methodName] = 0;
 
   }//end public function addMethod */
 

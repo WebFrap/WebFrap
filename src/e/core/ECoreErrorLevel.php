@@ -24,15 +24,15 @@
 class ECoreErrorLevel
 {
 
-  const DISPLAY       = 1;
+  const DISPLAY = 1;
 
-  const LIGHT         = 2;
+  const LIGHT = 2;
 
-  const MODERATE      = 3;
+  const MODERATE = 3;
 
-  const HEAVY         = 4;
+  const HEAVY = 4;
 
-  const BLOCKER       = 5;
+  const BLOCKER = 5;
 
   /**
    * Key Map
@@ -40,11 +40,11 @@ class ECoreErrorLevel
    */
   public static $text = array
   (
-    self::DISPLAY   => 'wbf.enum.errorlevel.Display',
-    self::LIGHT     => 'wbf.enum.errorlevel.Light',
-    self::MODERATE  => 'wbf.enum.errorlevel.Moderate',
-    self::HEAVY     => 'wbf.enum.errorlevel.Heavy',
-    self::BLOCKER   => 'wbf.enum.errorlevel.Blocker',
+    self::DISPLAY => 'wbf.enum.errorlevel.Display',
+    self::LIGHT => 'wbf.enum.errorlevel.Light',
+    self::MODERATE => 'wbf.enum.errorlevel.Moderate',
+    self::HEAVY => 'wbf.enum.errorlevel.Heavy',
+    self::BLOCKER => 'wbf.enum.errorlevel.Blocker',
   );
 
 }//end class ECoreErrorLevel

@@ -51,9 +51,9 @@ class PermissionDenied_Exception extends InvalidRequest_Exception
       else
         parent::__construct($message->getMessage());
 
-      $this->error        = $message;
+      $this->error = $message;
       $this->debugMessage = $debugMessage;
-      $this->errorKey     = $message->getId();
+      $this->errorKey = $message->getId();
 
       Error::addException($debugMessage, $this);
     } else {
@@ -63,7 +63,7 @@ class PermissionDenied_Exception extends InvalidRequest_Exception
         parent::__construct($message);
 
       $this->debugMessage = $debugMessage;
-      $this->errorKey     = $errorKey;
+      $this->errorKey = $errorKey;
 
       Error::addException($message , $this);
     }

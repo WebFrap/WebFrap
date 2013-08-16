@@ -33,7 +33,7 @@ class Error_Node
    * Der HTTP Fehlercode
    * @var int
    */
-  public $errorCode    = null;
+  public $errorCode = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 //

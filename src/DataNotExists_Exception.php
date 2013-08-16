@@ -48,7 +48,7 @@ class DataNotExists_Exception extends Io_Exception
       $this->error = $message;
 
       $this->debugMessage = $debugMessage;
-      $this->errorKey     = $message->getId();
+      $this->errorKey = $message->getId();
 
       if ('cli' == $request->type)
         $response->writeLn($debugMessage);
@@ -61,7 +61,7 @@ class DataNotExists_Exception extends Io_Exception
         parent::__construct($message);
 
       $this->debugMessage = $debugMessage;
-      $this->errorKey     = $errorKey;
+      $this->errorKey = $errorKey;
 
       if ('cli' == $request->type)
         $response->writeLn($message);

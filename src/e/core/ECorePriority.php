@@ -24,15 +24,15 @@
 class ECorePriority
 {
 
-  const MIN       = 1;
+  const MIN = 1;
 
-  const LOW       = 2;
+  const LOW = 2;
 
-  const MEDIUM    = 3;
+  const MEDIUM = 3;
 
-  const HIGH      = 4;
+  const HIGH = 4;
 
-  const MAX       = 5;
+  const MAX = 5;
 
   /**
    * Key Map
@@ -40,11 +40,11 @@ class ECorePriority
    */
   public static $text = array
   (
-    self::MIN     => 'core.enum.priority.min',
-    self::LOW     => 'core.enum.priority.low',
-    self::MEDIUM  => 'core.enum.priority.medium',
-    self::HIGH    => 'core.enum.priority.high',
-    self::MAX     => 'core.enum.priority.max',
+    self::MIN => 'core.enum.priority.min',
+    self::LOW => 'core.enum.priority.low',
+    self::MEDIUM => 'core.enum.priority.medium',
+    self::HIGH => 'core.enum.priority.high',
+    self::MAX => 'core.enum.priority.max',
   );
 
 }//end class ECorePriority

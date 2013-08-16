@@ -26,16 +26,16 @@ class LibLogSyslog
 
   protected static $mapping = array
   (
-  'TRACE'     => LOG_DEBUG,
-  'DEBUG'     => LOG_DEBUG,
-  'VERBOSE'   => LOG_DEBUG,
-  'CONFIG'    => LOG_INFO,
-  'INFO'      => LOG_INFO,
-  'USER'      => LOG_NOTICE,
-  'WARN'      => LOG_WARNING,
-  'SECURITY'  => LOG_WARNING,
-  'ERROR'     => LOG_ERR,
-  'FATAL'     => LOG_ALERT
+  'TRACE' => LOG_DEBUG,
+  'DEBUG' => LOG_DEBUG,
+  'VERBOSE' => LOG_DEBUG,
+  'CONFIG' => LOG_INFO,
+  'INFO' => LOG_INFO,
+  'USER' => LOG_NOTICE,
+  'WARN' => LOG_WARNING,
+  'SECURITY' => LOG_WARNING,
+  'ERROR' => LOG_ERR,
+  'FATAL' => LOG_ALERT
   );
 
   /**

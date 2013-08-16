@@ -30,7 +30,7 @@ class LibMessageCli
    *
    * @var array
    */
-  protected $errors   = array();
+  protected $errors = array();
 
   /**
    *
@@ -200,22 +200,22 @@ class LibMessageCli
     if ($entity) {
       if (is_array($entity)) {
         $resourceId = $orm->getResourceId($entity[0]);
-        $entityId   = $entity[1];
+        $entityId = $entity[1];
       } else {
         $resourceId = $orm->getResourceId($entity);
-        $entityId   = $entity->getId();
+        $entityId = $entity->getId();
       }
 
     } else {
       $resourceId = null;
-      $entityId   = null;
+      $entityId = null;
     }
 
     $protocol = new WbfsysProtocolMessage_Entity();
     $protocol->message = $message;
     $protocol->context = $context;
-    $protocol->vid     = $entityId;
-    $protocol->id_vid_entity  = $resourceId;
+    $protocol->vid = $entityId;
+    $protocol->id_vid_entity = $resourceId;
 
     $orm->send($protocol);
 

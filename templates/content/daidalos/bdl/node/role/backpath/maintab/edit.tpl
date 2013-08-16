@@ -4,16 +4,16 @@ $thisPath = dirname(__FILE__).'/';
 
 $backpath = $VAR->node;
 
-$domainKey   = $VAR->domainKey;
+$domainKey = $VAR->domainKey;
 $domainClass = $VAR->domainClass;
-$parentNode  = $VAR->parentNode;
+$parentNode = $VAR->parentNode;
 
 /*@var $parentNode BdlEntity */
 $idPrefix = $domainKey.'-'.$parentNode->getName().'-backpath-edit-'.$VAR->idx;
-$formId   = 'wgt-form-bdl_'.$idPrefix;
+$formId = 'wgt-form-bdl_'.$idPrefix;
 
 
-$iconAdd  = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
+$iconAdd = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
 
 
 $descriptions = $backpath->getDescriptions();

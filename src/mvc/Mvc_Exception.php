@@ -38,14 +38,14 @@ class Mvc_Exception extends Webfrap_Exception
    *
    * @var string
    */
-  protected $errorKey     = Response::INTERNAL_ERROR; // unspecified error
+  protected $errorKey = Response::INTERNAL_ERROR; // unspecified error
 
   /**
    * Container der eine oder mehrere Fehlermeldungen enthält
    *
    * @var ErrorContainer
    */
-  public $error     = null;
+  public $error = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Konstruktor
@@ -59,7 +59,7 @@ class Mvc_Exception extends Webfrap_Exception
   public function __construct($message, $debugMessage = 'Internal Error', $errorKey = Response::INTERNAL_ERROR  )
   {
 
-    $request  = Webfrap::$env->getRequest();
+    $request = Webfrap::$env->getRequest();
     $response = Webfrap::$env->getResponse();
 
     if (is_object($message)) {
@@ -72,7 +72,7 @@ class Mvc_Exception extends Webfrap_Exception
       $this->error = $message;
 
       $this->debugMessage = $debugMessage;
-      $this->errorKey     = $message->getId();
+      $this->errorKey = $message->getId();
 
       if ('cli' == $request->type)
         $response->writeLn($debugMessage);
@@ -85,7 +85,7 @@ class Mvc_Exception extends Webfrap_Exception
         parent::__construct($message);
 
       $this->debugMessage = $debugMessage;
-      $this->errorKey     = $errorKey;
+      $this->errorKey = $errorKey;
 
       if ('cli' == $request->type)
         $response->writeLn($message);
