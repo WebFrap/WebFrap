@@ -56,8 +56,8 @@ class WebfrapSys_Exception extends Webfrap_Exception
    * @param boolean $protocol soll der Fehler in der Datenbank protokolliert werden?
    */
   public function __construct(
-    $userMessage,
-    $debugMessage = 'wbf.undefined_error',
+    $debugMessage,
+    $userMessage = 'undefined error',
     $errorKey = Response::INTERNAL_ERROR,
     $protocol = true,
     $dset = null,
@@ -72,11 +72,11 @@ class WebfrapSys_Exception extends Webfrap_Exception
         $protocol = false;
     }
 
-    if ('wbf.undefined_error' === $debugMessage)
+    if ('undefined error' === $debugMessage)
       $debugMessage = Error::PROGRAM_BUG;
 
     if (DEBUG || WBF_RESPONSE_ADAPTER === 'cli') {
-      $userMessage = $debugMessage;
+      //$userMessage = $debugMessage;
       parent::__construct($debugMessage);
     } else {
       parent::__construct($userMessage);
@@ -113,7 +113,7 @@ class WebfrapSys_Exception extends Webfrap_Exception
    */
   public function getDebugMessage()
   {
-    
+
     return $this->debugMessage;
 
   }//end public function getDebugMessage */
