@@ -1,8 +1,8 @@
 <?php 
 
 /* @var $model WebfrapMediathek_Model */
-$model  = $this->loadModel( 'WebfrapMediathek' );
-$user   = Webfrap::$env->getUser();
+$model = $this->loadModel( 'WebfrapMediathek' );
+$user = Webfrap::$env->getUser();
 
 $userDomain = DomainNode::getNode( 'wbfsys_role_user' );
 

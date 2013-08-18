@@ -28,43 +28,43 @@ class LibAclAdapter_File
    * singleton instance
    * @var Acl
    */
-  protected static $instance    = null;
+  protected static $instance = null;
 
   /**
    * the user level
    * @var array
    */
-  protected $level              = array();
+  protected $level = array();
 
   /**
    *
    * @var array
    */
-  protected $group              = array();
+  protected $group = array();
 
   /**
    *
    * @var array
    */
-  protected $extend             = array();
+  protected $extend = array();
 
   /**
    *
    * @var array
    */
-  protected $groupCache         = array();
+  protected $groupCache = array();
 
   /**
    *
    * @var array
    */
-  protected $lists              = array();
+  protected $lists = array();
 
   /**
    *
    * @var User
    */
-  protected $user               = null;
+  protected $user = null;
 
   /**
    * flag to enable or disable the check for acls
@@ -74,7 +74,7 @@ class LibAclAdapter_File
    *
    * @var boolean
    */
-  protected $disabled           = false;
+  protected $disabled = false;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Messaging System

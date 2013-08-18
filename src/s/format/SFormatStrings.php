@@ -144,22 +144,22 @@ class SFormatStrings
     /*
     $clean = array
     (
-      '&'  => '_',
-      '-'  => '_',
-      ' '  => '_',
-      '/'  => '_',
-      '@'  => '_',
-      "'"  => '_',
-      '"'  => '_',
-      ':'  => '_',
-      '^'  => '_',
-      '+'  => '_',
+      '&' => '_',
+      '-' => '_',
+      ' ' => '_',
+      '/' => '_',
+      '@' => '_',
+      "'" => '_',
+      '"' => '_',
+      ':' => '_',
+      '^' => '_',
+      '+' => '_',
       '__' => '_',
-      '.'  => '_',
-      ','  => '_',
+      '.' => '_',
+      ',' => '_',
     );
 
-    $tmp  = explode('(',$name);
+    $tmp = explode('(',$name);
     $tmp2 = explode(',',$tmp[0]);
 
     $key = mb_strtolower
@@ -225,7 +225,7 @@ class SFormatStrings
       $camelCase .= ucfirst($case);
     }
 
-    $tmp2       = explode('-' , trim($camelCase));
+    $tmp2 = explode('-' , trim($camelCase));
     $camelCase2 = array();
 
     foreach ($tmp2 as $case2) {
@@ -249,9 +249,9 @@ class SFormatStrings
 
     $tmp1 = explode(':', $str);
 
-    $tmp   = explode('_' , trim($tmp1[0]));
+    $tmp = explode('_' , trim($tmp1[0]));
 
-    $mod   = ucfirst(array_shift($tmp)) ;
+    $mod = ucfirst(array_shift($tmp)) ;
     $contr = '';
 
     foreach ($tmp as $node) {

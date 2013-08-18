@@ -32,25 +32,25 @@ class Log
 // Constantes
 //////////////////////////////////////////////////////////////////////////////*/
 
-  const TRACE     = 1;
+  const TRACE = 1;
 
-  const DEBUG     = 2;
+  const DEBUG = 2;
 
-  const VERBOSE   = 4;
+  const VERBOSE = 4;
 
-  const CONFIG    = 8;
+  const CONFIG = 8;
 
-  const INFO      = 16;
+  const INFO = 16;
 
-  const user  = 32;
+  const user = 32;
 
-  const WARN      = 64;
+  const WARN = 64;
 
-  const SECURITY  = 128;
+  const SECURITY = 128;
 
-  const ERROR     = 256;
+  const ERROR = 256;
 
-  const FATAL     = 512;
+  const FATAL = 512;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

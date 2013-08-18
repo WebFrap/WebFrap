@@ -59,10 +59,10 @@ class EProcessStatus
    */
   public static $labels = array
   (
-    self::RUNNING   => 'Running',
-    self::WARNING   => 'Warning',
-    self::FROZEN    => 'Frozen',
-    self::ABORTED   => 'Aborted',
+    self::RUNNING => 'Running',
+    self::WARNING => 'Warning',
+    self::FROZEN => 'Frozen',
+    self::ABORTED => 'Aborted',
     self::COMPLETED => 'Completed'
   );
 
@@ -71,10 +71,10 @@ class EProcessStatus
    */
   public static $classes = array
   (
-    self::RUNNING   => 'ok',
-    self::WARNING   => 'warn',
-    self::FROZEN    => 'frozen',
-    self::ABORTED   => 'bad',
+    self::RUNNING => 'ok',
+    self::WARNING => 'warn',
+    self::FROZEN => 'frozen',
+    self::ABORTED => 'bad',
     self::COMPLETED => 'completed'
   );
 

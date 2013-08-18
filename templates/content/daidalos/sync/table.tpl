@@ -22,7 +22,7 @@
           $this->model->getSelectGalaxies(),
           array
           (
-            'name'  => 'galaxy',
+            'name' => 'galaxy',
             'class' => 'medium wgt-no-save'
           )
         ); ?></div>

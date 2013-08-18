@@ -28,28 +28,28 @@ class LibDbMysqli extends LibDbConnection
   /**
    * Der Standard Fetch Mode
    */
-  protected $fetchMode   = MYSQLI_ASSOC;
+  protected $fetchMode = MYSQLI_ASSOC;
 
   /**
    * Holen der Daten als Assoziativer Array
    */
-  const fetchAssoc  = MYSQLI_ASSOC;
+  const fetchAssoc = MYSQLI_ASSOC;
 
   /**
    * Holen der Daten als Numerischer Array
    */
-  const fetchNum    = MYSQLI_NUM;
+  const fetchNum = MYSQLI_NUM;
 
   /**
    * Holen der Daten als Doppelter Assoziativer und Numerischer Array
    */
-  const fetchBoth   = MYSQLI_BOTH;
+  const fetchBoth = MYSQLI_BOTH;
 
   /**
    * Database Connection Object
    * @var Mysqli
    */
-  protected $connection        = null;
+  protected $connection = null;
 
   /**
    * the type of the sql  for this database class

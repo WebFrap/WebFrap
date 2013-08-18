@@ -41,7 +41,7 @@ class LibFilewriterCsv extends LibFilewriter
    *
    * @var string
    */
-  public $escape    = '\\';
+  public $escape = '\\';
 
 /*//////////////////////////////////////////////////////////////////////////////
 // methodes

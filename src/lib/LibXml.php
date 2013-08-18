@@ -55,8 +55,8 @@ class LibXml extends SimpleXMLElement
 
     ///TODO add some error handling
     $tmpDoc = new DOMDocument('1.0', 'utf-8');
-    $tmpDoc->preserveWhitespace  = false;
-    $tmpDoc->formatOutput        = true;
+    $tmpDoc->preserveWhitespace = false;
+    $tmpDoc->formatOutput = true;
 
     if (!$tmpDoc->loadXML($xml)) {
       Error::addError('Failed to load an XML String',null,htmlentities($xml));

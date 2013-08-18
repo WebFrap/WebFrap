@@ -30,13 +30,13 @@ class LibMessagePool
    *
    * @var array
    */
-  protected $errors   = array();
+  protected $errors = array();
 
   /**
    *
    * @var array
    */
-  protected $errorDblCheck   = array();
+  protected $errorDblCheck = array();
 
   /**
    *
@@ -57,12 +57,12 @@ class LibMessagePool
   /**
    * @var LibDbConnection
    */
-  protected $db   = null;
+  protected $db = null;
 
   /**
    * @var Base
    */
-  protected $env   = null;
+  protected $env = null;
 
   /**
    * Klasse über welche die relevanten Adressdaten zu versenden der Nachricht
@@ -70,7 +70,7 @@ class LibMessagePool
    *
    * @var LibMessageAddressloader
    */
-  protected $addressModel   = null;
+  protected $addressModel = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // constructor
@@ -348,25 +348,25 @@ class LibMessagePool
     if ($entity) {
       if (is_array($entity)) {
         $resourceId = $orm->getResourceId($entity[0]);
-        $entityId   = $entity[1];
+        $entityId = $entity[1];
       } elseif (is_string($entity)) {
         $resourceId = $orm->getResourceId($entity);
-        $entityId   = null;
+        $entityId = null;
       } else {
         $resourceId = $orm->getResourceId($entity);
-        $entityId   = $entity->getId();
+        $entityId = $entity->getId();
       }
 
     } else {
       $resourceId = null;
-      $entityId   = null;
+      $entityId = null;
     }
 
     $protocol = new WbfsysProtocolMessage_Entity();
     $protocol->message = $message;
     $protocol->context = $context;
-    $protocol->vid     = $entityId;
-    $protocol->id_vid_entity  = $resourceId;
+    $protocol->vid = $entityId;
+    $protocol->id_vid_entity = $resourceId;
     $protocol->mask = $mask;
 
     $orm->send($protocol);
@@ -387,14 +387,14 @@ class LibMessagePool
   {
 
     // alle relevanten empfänger laden
-    $addressModel  = $this->getAddressModel();
+    $addressModel = $this->getAddressModel();
 
     // die addresierten Channel laden
-    $channels      = $this->getMessageChannels($message);
+    $channels = $this->getMessageChannels($message);
 
     foreach ($channels as $channel) {
       // adressen laden
-      $receivers     = $addressModel->getReceivers($message->getReceivers(), $channel->type);
+      $receivers = $addressModel->getReceivers($message->getReceivers(), $channel->type);
       $channel->send($message, $receivers);
     }
 

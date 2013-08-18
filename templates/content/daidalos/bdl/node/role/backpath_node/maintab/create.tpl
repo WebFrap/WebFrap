@@ -3,18 +3,18 @@
 $thisPath = dirname(__FILE__).'/';
 
 
-$domainKey   = $VAR->domainKey;
+$domainKey = $VAR->domainKey;
 $domainClass = $VAR->domainClass;
-$parentNode  = $VAR->parentNode;
+$parentNode = $VAR->parentNode;
 
 $pathNode = $VAR->node;
 
 /*@var $pathNode BdlNodeBaseAreaBackpathNode */
 $idPrefix = $domainKey.'-backpath_node-create';
-$formId   = 'wgt-form-bdl_'.$idPrefix;
+$formId = 'wgt-form-bdl_'.$idPrefix;
 
 
-$iconAdd  = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
+$iconAdd = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
 
 $langs = $this->model->getLanguages();
 

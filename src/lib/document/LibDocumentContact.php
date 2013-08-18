@@ -31,31 +31,31 @@ class LibDocumentContact
    * Die Andrede
    * @var string
    */
-  public $sexTitle  = null;
+  public $sexTitle = null;
 
   /**
    * Adelstitel
    * @var string
    */
-  public $nobilityTitle  = null;
+  public $nobilityTitle = null;
 
   /**
    * Akademischer Titel
    * @var string
    */
-  public $academicTitle  = null;
+  public $academicTitle = null;
 
   /**
    * Der Vorname
    * @var string
    */
-  public $firstName  = null;
+  public $firstName = null;
 
   /**
    * Der Vorname
    * @var string
    */
-  public $nachName  = null;
+  public $nachName = null;
 
 }//end class LibDocumentContact
 

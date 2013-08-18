@@ -57,7 +57,7 @@ class WebfrapSys_Exception extends Webfrap_Exception
    */
   public function __construct(
     $debugMessage,
-    $userMessage = 'wbf.undefined_error',
+    $userMessage = 'undefined error',
     $errorKey = Response::INTERNAL_ERROR,
     $protocol = true,
     $dset = null,
@@ -72,11 +72,11 @@ class WebfrapSys_Exception extends Webfrap_Exception
         $protocol = false;
     }
 
-    if ('wbf.undefined_error' === $userMessage)
-      $userMessage = Error::PROGRAM_BUG;
+    if ('undefined error' === $debugMessage)
+      $debugMessage = Error::PROGRAM_BUG;
 
     if (DEBUG || WBF_RESPONSE_ADAPTER === 'cli') {
-      $userMessage = $debugMessage;
+      //$userMessage = $debugMessage;
       parent::__construct($debugMessage);
     } else {
       parent::__construct($userMessage);
@@ -113,6 +113,7 @@ class WebfrapSys_Exception extends Webfrap_Exception
    */
   public function getDebugMessage()
   {
+
     return $this->debugMessage;
 
   }//end public function getDebugMessage */

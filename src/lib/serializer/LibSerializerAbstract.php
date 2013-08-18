@@ -37,7 +37,7 @@ abstract class LibSerializerAbstract
    *
    * @var array
    */
-  protected $serialized   = null;
+  protected $serialized = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Magic

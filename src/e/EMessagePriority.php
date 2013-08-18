@@ -44,9 +44,9 @@ class EMessagePriority
    * @var array
    */
   public static $labels = array(
-    self::LOW   => 'Low',
+    self::LOW => 'Low',
     self::NORMAL=> 'Normal',
-    self::HIGH  => 'High',
+    self::HIGH => 'High',
   );
 
   /**

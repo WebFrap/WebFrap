@@ -22,7 +22,7 @@ if( $VAR->importMsg )
   <tbody>
   <?php 
     
-    $iconDelete  = $this->icon( 'control/delete.png', 'Delete' );
+    $iconDelete = $this->icon( 'control/delete.png', 'Delete' );
     $iconRestore = $this->icon( 'daidalos/restore.png', 'Restore' );
     
     $pos = 0;
@@ -33,7 +33,7 @@ if( $VAR->importMsg )
       $col = ($pos % 2)+1;
       
       $fileSize = $path->getSize( 'mb' );
-      $changed  = date('Y-m-d H:i:s',$path->getLastchanged( ));
+      $changed = date('Y-m-d H:i:s',$path->getLastchanged( ));
       
       echo <<<TABLE
       <tr class="row{$col}" id="wgt-table-daidalos-restore-{$VAR->dbKey}-{$pos}" >

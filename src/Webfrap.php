@@ -50,13 +50,13 @@ class Webfrap
    * singleton instance
    * @var LibFlowApachemod
    */
-  private static $instance     = null;
+  private static $instance = null;
 
   /**
    * singleton instance
    * @var LibFlowApachemod
    */
-  public static $env     = null;
+  public static $env = null;
 
   /**
    * @var string
@@ -67,19 +67,19 @@ class Webfrap
    *
    * @var array
    */
-  public static $loadAble     = array();
+  public static $loadAble = array();
 
   /**
    * Include Path
    * @var array
    */
-  protected static $includePath  = array();
+  protected static $includePath = array();
 
   /**
    * Autoload methods
    * @var array
    */
-  protected static $autoload     = array(
+  protected static $autoload = array(
     'Webfrap::autoload' => true
   );
 
@@ -87,74 +87,74 @@ class Webfrap
    * alle projektpfade durch die die standard Autoload Itterieren muss
    * @var array
    */
-  public static $autoloadPath   = array();
+  public static $autoloadPath = array();
 
   /**
    * Klassenindex für die Schnelle Autoload Methode
    * @var array
    */
-  public static $classIndex     = array();
+  public static $classIndex = array();
 
   /**
    * Template Index to save all requested templates per request
    * @var array
    */
-  public static $tplIndex       = array();
+  public static $tplIndex = array();
 
   /**
    * Template Cache index
    * @var array
    */
-  public static $tplCacheIndex  = array();
+  public static $tplCacheIndex = array();
 
   /**
    * where there any changes in the classindex in the autoload?
    * if true the system writes the new index in the cache
    * @var boolean
    */
-  public static $indexChanged   = false;
+  public static $indexChanged = false;
 
   /**
    * the key for fetching the autoload class index
    * @var string
    */
-  public static $indexKey       = null;
+  public static $indexKey = null;
 
   /**
    * path to the index cache for the autoload method
    * @var string
    */
-  public static $indexCache     = 'cache/autoload/';
+  public static $indexCache = 'cache/autoload/';
 
   /**
    * nicht persistente sequence für die script laufzeit
    * @var int
    */
-  public static $sequence       = 0;
+  public static $sequence = 0;
 
   /**
    * Classes that should be initialized
    * @var array
    */
-  public static $initClasses    = array();
+  public static $initClasses = array();
 
   /**
    * Number of PHP Errors from the own error handler
    * @var int
    */
-  public static $numPhpErrors      = 0;
+  public static $numPhpErrors = 0;
 
   /**
    * the first php error as string
    * @var string
    */
-  public static $firstError      = null;
+  public static $firstError = null;
 
   /**
    * the first php error as string
    * @var int
    */
-  public static $scriptStart      = null;
+  public static $scriptStart = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // constantes
@@ -423,10 +423,10 @@ class Webfrap
     $key = strtolower($key);
 
     self::$indexChanged = false;
-    self::$indexKey     = $key;
+    self::$indexKey = $key;
 
-    $keyPath  = str_replace('.' , '/' , $key  );
-    $path     = PATH_GW.self::$indexCache.$keyPath.'/'.$key.'.php';
+    $keyPath = str_replace('.' , '/' , $key  );
+    $path = PATH_GW.self::$indexCache.$keyPath.'/'.$key.'.php';
 
     if (file_exists($path))
       include $path;
@@ -511,14 +511,14 @@ class Webfrap
             if (ctype_upper($classname[$pos])) {
               $package  .= strtolower(str_replace('_','', substr($classname, $start, $end  ))).'/' ;
               $start    += $end;
-              $end      = 0;
+              $end = 0;
               ++$level;
 
               $file = realpath($path.$package.$classname.'.php');
               if (file_exists($file)) {
                 Debug::logFile($file);
                 self::$classIndex[$classname] = $file;
-                self::$indexChanged           = true;
+                self::$indexChanged = true;
                 include $file;
 
                 return;
@@ -574,7 +574,7 @@ class Webfrap
       if (file_exists($file)) {
         Debug::logFile($file);
         self::$classIndex[$classname] = $file;
-        self::$indexChanged           = true;
+        self::$indexChanged = true;
         include $file;
 
         return;
@@ -640,19 +640,19 @@ class Webfrap
   {
 
     $errorType = array(
-      E_ERROR            => 'ERROR',
-      E_WARNING          => 'WARNING',
-      E_PARSE            => 'PARSING_ERROR',
-      E_NOTICE           => 'NOTICE',
-      E_CORE_ERROR       => 'CORE_ERROR',
-      E_CORE_WARNING     => 'CORE_WARNING',
-      E_COMPILE_ERROR    => 'COMPILE_ERROR',
-      E_COMPILE_WARNING  => 'COMPILE_WARNING',
-      E_USER_ERROR       => 'USER_ERROR',
-      E_USER_WARNING     => 'USER_WARNING',
-      E_USER_NOTICE      => 'USER_NOTICE',
-      E_STRICT           => 'STRICT',
-      4096               => 'UNKNOWN ERROR'
+      E_ERROR => 'ERROR',
+      E_WARNING => 'WARNING',
+      E_PARSE => 'PARSING_ERROR',
+      E_NOTICE => 'NOTICE',
+      E_CORE_ERROR => 'CORE_ERROR',
+      E_CORE_WARNING => 'CORE_WARNING',
+      E_COMPILE_ERROR => 'COMPILE_ERROR',
+      E_COMPILE_WARNING => 'COMPILE_WARNING',
+      E_USER_ERROR => 'USER_ERROR',
+      E_USER_WARNING => 'USER_WARNING',
+      E_USER_NOTICE => 'USER_NOTICE',
+      E_STRICT => 'STRICT',
+      4096 => 'UNKNOWN ERROR'
     );
 
     $L[] = microtime(true);
@@ -685,69 +685,69 @@ class Webfrap
       // Fatale Laufzeit-Fehler. Dies zeigt Fehler an, die nicht behoben werden können.
       // Beispielsweise Probleme bei der Speicherzuweisung.
       // Die Ausführung des Skripts wird abgebrochen.
-      E_ERROR            => 'ERROR',
+      E_ERROR => 'ERROR',
 
       // Warnungen (keine fatalen Fehler) zur Laufzeit des Skripts.
       // Das Skript wird nicht abgebrochen.
-      E_WARNING          => 'WARNING',
+      E_WARNING => 'WARNING',
 
       // Parser-Fehler während der Übersetzung.
       // Parser-Fehler können nur vom Parser erzeugt werden.
-      E_PARSE            => 'PARSING ERROR',
+      E_PARSE => 'PARSING ERROR',
 
       // Benachrichtigungen während der Laufzeit. Sie zeigen an, dass im Skript
       // irgend etwas gefunden wurde, was einen Fehler verursachen könnte.
       // Es ist aber genauso möglich, dass Benachrichtigungen im ordnungsgemäßen
       // Ablauf eines Skripts ausgegeben werden.
-      E_NOTICE           => 'NOTICE',
+      E_NOTICE => 'NOTICE',
 
       // Fatale Fehler, die beim Starten von PHP auftreten.
       // Diese sind ähnlich wie E_ERROR, nur dass diese Fehlermeldungen vom PHP-Kern erzeugt werden
-      E_CORE_ERROR       => 'CORE ERROR',
+      E_CORE_ERROR => 'CORE ERROR',
 
       // Warnungen (keine fatalen Fehler), die beim Starten von PHP auftreten.
       // Diese sind ähnlich wie E_WARNING, nur dass diese Warnungen vom PHP-Kern erzeugt werden.
-      E_CORE_WARNING     => 'CORE WARNING',
+      E_CORE_WARNING => 'CORE WARNING',
 
       // Fatale Fehler zur Übersetzungszeit. Diese sind ähnlich wie E_ERROR,
       // nur dass diese Fehlermeldungen von der Zend Scripting Engine erzeugt werden.
-      E_COMPILE_ERROR    => 'COMPILE ERROR',
+      E_COMPILE_ERROR => 'COMPILE ERROR',
 
       // Warnungen zur Übersetzungszeit. Diese sind ähnlich wie E_WARNING,
       // nur dass diese Warnungen von der Zend Scripting Engine erzeugt werden.
-      E_COMPILE_WARNING  => 'COMPILE WARNING',
+      E_COMPILE_WARNING => 'COMPILE WARNING',
 
       // Benutzerdefinierte Fehlermeldungen. Diese sind ähnlich wie E_ERROR, nur
       // dass diese Fehlermeldungen im PHP-Code mit trigger_error() erzeugt werden.
-      E_USER_ERROR       => 'USER ERROR',
+      E_USER_ERROR => 'USER ERROR',
 
       // Benutzerdefinierte Warnungen. Diese sind ähnlich wie E_WARNING, nur dass
       // diese Warnungen im PHP-Code mit trigger_error() erzeugt werden.
-      E_USER_WARNING     => 'USER WARNING',
+      E_USER_WARNING => 'USER WARNING',
 
       // Benutzerdefinierte Benachrichtigung. Diese sind ähnlich wie E_NOTICE,
       // nur dass diese Benachrichtigungen im PHP-Code mit trigger_error() erzeugt werden.
-      E_USER_NOTICE      => 'USER NOTICE',
+      E_USER_NOTICE => 'USER NOTICE',
 
       // Benachrichtigungen des Laufzeitsystems. Damit erhalten Sie von PHP Vorschläge
       // für Änderungen des Programmcodes, die eine bestmögliche Interoperabilität und
       // zukünftige Kompatibilität Ihres Codes gewährleisten.
-      E_STRICT           => 'STRICT',
+      E_STRICT => 'STRICT',
 
       // Abfangbarer fataler Fehler. Dies bedeutet das ein potentiell gefährlicher
       // Fehler aufgetreten ist, die Engine aber nicht in einem instabilen Zustand hinterlassen hat.
       // Wird der Fehler nicht durch eine benutzerdefinierte Fehlerbehandlungsroutine abgefangen
       // (siehe auch set_error_handler()) so wird die Anwendung wie bei einem E_ERROR Fehler abgebrochen.
-      E_RECOVERABLE_ERROR   => 'RECOVERABLE ERROR',
+      E_RECOVERABLE_ERROR => 'RECOVERABLE ERROR',
 
       // Notices zur Laufzeit des Programms. Aktivieren Sie diese Einstellung,
       // um Warnungen über Codebestandteile zu erhalten, die in zukünftigen
       // PHP-Versionen nicht mehr funktionieren werden.
-      E_DEPRECATED          => 'DEPRECATED',
+      E_DEPRECATED => 'DEPRECATED',
 
       // Benutzererzeugte Warnmeldung. Diese entspricht E_DEPRECATED mit der Ausnahme,
       // dass sie im PHP-Code durch die Verwendung der Funktion trigger_error() generiert wurde.
-      E_USER_DEPRECATED     => 'USER DEPRECATED',
+      E_USER_DEPRECATED => 'USER DEPRECATED',
     );
 
     $time = microtime(true);
@@ -869,14 +869,14 @@ class Webfrap
     if (defined('WBF_CONTROLLER')) {
       $flowController = 'LibFlow'.ucfirst(WBF_CONTROLLER);
       self::$instance = new $flowController();
-      self::$env      = self::$instance;
+      self::$env = self::$instance;
 
       if (DEBUG)
         Log::debug('Found WBF_CONTROLLER: '.WBF_CONTROLLER);
     } else {
       // fallback auf apache mod
       self::$instance = new LibFlowApachemod();
-      self::$env      = self::$instance;
+      self::$env = self::$instance;
 
       if (DEBUG)
         Log::debug('Found WBF_CONTROLLER: LibFlowApachemod');
@@ -1329,7 +1329,7 @@ class Webfrap
       $tPath = realpath($tPath);
 
       self::$tplIndex[$key] = $tPath;
-      self::$indexChanged   = true;
+      self::$indexChanged = true;
 
       if (DEBUG)
         Debug::console('TEMPLATE: '.$tPath);
@@ -1354,7 +1354,7 @@ class Webfrap
           $tmpPath = realpath($tmpPath);
 
           self::$tplIndex[$key] = $tmpPath;
-          self::$indexChanged   = true;
+          self::$indexChanged = true;
 
           return $tmpPath;
         } else {
@@ -1379,7 +1379,7 @@ class Webfrap
           $tmpPath = realpath($tmpPath);
 
           self::$tplIndex[$key] = $tmpPath;
-          self::$indexChanged   = true;
+          self::$indexChanged = true;
 
           return $tmpPath;
         } else {

@@ -35,7 +35,7 @@ class LibFilereaderCsv extends LibFilereader
    *
    * @var array
    */
-  public $pos    = 0;
+  public $pos = 0;
 
   /**
    *
@@ -53,7 +53,7 @@ class LibFilereaderCsv extends LibFilereader
    *
    * @var string
    */
-  public $escape    = '\\';
+  public $escape = '\\';
 
 /*//////////////////////////////////////////////////////////////////////////////
 // methodes

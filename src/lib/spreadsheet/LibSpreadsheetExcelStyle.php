@@ -50,54 +50,54 @@ class LibSpreadsheetExcelStyle
   /**
    * @var string
    */
-  public $borderColor      =  '00000000';
+  public $borderColor =  '00000000';
 
   /**
    * Hintergrundfarbe Heads
    * @var array
    */
-  public $tableHeadColor   =  array('00000000', 'FF4F81BD');
+  public $tableHeadColor =  array('00000000', 'FF4F81BD');
 
 /*//////////////////////////////////////////////////////////////////////////////
 // to check
 //////////////////////////////////////////////////////////////////////////////*/
 
-  public $white            =  'FFFFFFFF';
+  public $white =  'FFFFFFFF';
 
-  public $black            =  '00000000';
+  public $black =  '00000000';
 
-  public $headColumnColor      =  'FFF79646';
+  public $headColumnColor =  'FFF79646';
 
-  public $headDataColor        =  'FFFCD5B4';
+  public $headDataColor =  'FFFCD5B4';
 
-  public $tableRowColor1        =  'FFDBE5F1';
+  public $tableRowColor1 =  'FFDBE5F1';
 
-  public $tableRowColor2        =  'FFB8CCE4';
+  public $tableRowColor2 =  'FFB8CCE4';
 
-  public $project_basic_head_color    =   'FF1F497D';
-  public $project_year_head_color    =   'FF75923C';
-  public $project_rate_head_color    =   'FF60497B';
-  public $project_cost_head_color    =   'FF31849B';
-  public $project_variance_head_color  =   'FF7F7F7F';
-  public $project_error_head_color    =   'FFC0504D';
+  public $project_basic_head_color =   'FF1F497D';
+  public $project_year_head_color =   'FF75923C';
+  public $project_rate_head_color =   'FF60497B';
+  public $project_cost_head_color =   'FF31849B';
+  public $project_variance_head_color =   'FF7F7F7F';
+  public $project_error_head_color =   'FFC0504D';
 
-  public $projectBasicDataColor1  =  'FFDBE5F1';
-  public $projectBasicDataColor2  =  'FF8DB4E3';
+  public $projectBasicDataColor1 =  'FFDBE5F1';
+  public $projectBasicDataColor2 =  'FF8DB4E3';
 
-  public $project_year_data_color1    =  'FFC2D69A';
-  public $project_year_data_color2    =  'FF9BBB59';
+  public $project_year_data_color1 =  'FFC2D69A';
+  public $project_year_data_color2 =  'FF9BBB59';
 
-  public $project_rate_data_color1    =  'FFCCC0DA';
-  public $project_rate_data_color2    =  'FFB2A1C7';
+  public $project_rate_data_color1 =  'FFCCC0DA';
+  public $project_rate_data_color2 =  'FFB2A1C7';
 
-  public $project_cost_data_color1    =  'FFB6DDE8';
-  public $project_cost_data_color2    =  'FF93CDDD';
+  public $project_cost_data_color1 =  'FFB6DDE8';
+  public $project_cost_data_color2 =  'FF93CDDD';
 
-  public $project_variance_data_color1    =  'FFD8D8D8';
-  public $project_variance_data_color2    =  'FFBFBFBF';
+  public $project_variance_data_color1 =  'FFD8D8D8';
+  public $project_variance_data_color2 =  'FFBFBFBF';
 
-  public $project_error_data_color1    =  'FFE6B9B8';
-  public $project_error_data_color2    =  'FFD99795';
+  public $project_error_data_color1 =  'FFE6B9B8';
+  public $project_error_data_color2 =  'FFD99795';
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
@@ -163,15 +163,15 @@ class LibSpreadsheetExcelStyle
 
     $style = array
     (
-      'fill'   =>   array
+      'fill' =>   array
       (
-        'type'    => PHPExcel_Style_Fill::FILL_SOLID,
-        'color'    => array('argb' => $bgColor)
+        'type' => PHPExcel_Style_Fill::FILL_SOLID,
+        'color' => array('argb' => $bgColor)
       ),
       'font' =>   array
       (
-        'color'    => array('argb' => $fontColor),
-        'bold'    => $bold
+        'color' => array('argb' => $fontColor),
+        'bold' => $bold
       ),
       'borders' => array
       (

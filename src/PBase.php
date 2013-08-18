@@ -141,7 +141,7 @@ abstract class Pbase
    * @deprecated use $tpl
    * @var LibTemplate
    */
-  public $tplEngine  = null;
+  public $tplEngine = null;
 
   /**
    * de:

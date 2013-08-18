@@ -60,30 +60,30 @@ class ContextMultiCrud extends Context
 
     // startpunkt des pfades für die acls
     if ($aclRoot = $request->param('a_root', Validator::CKEY))
-      $this->aclRoot    = $aclRoot;
+      $this->aclRoot = $aclRoot;
 
     // die id des Datensatzes von dem aus der Pfad gestartet wurde
     if ($aclRootId = $request->param('a_root_id', Validator::INT))
-      $this->aclRootId    = $aclRootId;
+      $this->aclRootId = $aclRootId;
 
     // der key des knotens auf dem wir uns im pfad gerade befinden
     if ($aclKey = $request->param('a_key', Validator::CKEY))
-      $this->aclKey    = $aclKey;
+      $this->aclKey = $aclKey;
 
     // der neue knoten
     if ($aclNode = $request->param('a_node', Validator::CKEY))
-      $this->aclNode    = $aclNode;
+      $this->aclNode = $aclNode;
 
     // an welchem punkt des pfades befinden wir uns?
     if ($aclLevel = $request->param('a_level', Validator::INT))
-      $this->aclLevel  = $aclLevel;
+      $this->aclLevel = $aclLevel;
 
     // request elemet type, bei back to top ist es relevant zu wissen woher der
     // aufruf kam (in diesem fall von einem input)
     // könnte bei referenzen auch interessant werden
     // values: inp | ref
     //if ($requestedBy = $request->param('rqtby', Validator::TEXT))
-    //  $this->requestedBy    = $requestedBy;
+    //  $this->requestedBy = $requestedBy;
 
     // sprungpunkt für back to top
     if ($maskRoot = $request->param('m_root', Validator::TEXT))
@@ -112,15 +112,15 @@ class ContextMultiCrud extends Context
 
     // mask key
     if ($viewType = $request->param('view', Validator::CNAME))
-      $this->viewType  = $viewType;
+      $this->viewType = $viewType;
 
     // soll die maske neu geladen werden?
     //if ($reload = $request->param('reload', Validator::BOOLEAN))
-    //  $this->reload  = $reload;
+    //  $this->reload = $reload;
 
     // target mask key
     if ($refId = $request->param('refid', Validator::INT))
-      $this->refId  = $refId;
+      $this->refId = $refId;
 
     // listing type
     if ($ltype = $request->param('ltype', Validator::CNAME))
@@ -134,12 +134,12 @@ class ContextMultiCrud extends Context
     // wird verwendet um zwischen "unterschiedliche" Masken mit dem gleichen
     // viewnamen zu switchen
     if ($cntk = $request->param('cntk', Validator::CKEY))
-      $this->contextKey    = $cntk;
+      $this->contextKey = $cntk;
 
     // mask switcher key
     // wird nur in der view gesetzt wenn der mask switcher vorhanden ist
     if ($cntms = $request->param('cntms', Validator::CNAME))
-      $this->contextMaskSwt    = $cntms;
+      $this->contextMaskSwt = $cntms;
 
 
     // per default

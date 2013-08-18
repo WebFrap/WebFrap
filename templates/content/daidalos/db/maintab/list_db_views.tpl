@@ -20,9 +20,9 @@
   <tbody>
   <?php 
 
-    $iconProperties  = $this->icon( 'daidalos/property.png', 'Properties' );
-    $iconRights      = $this->icon( 'control/rights.png', 'Rights' );
-    $iconDelete      = $this->icon( 'control/delete.png', 'Delete' );
+    $iconProperties = $this->icon( 'daidalos/property.png', 'Properties' );
+    $iconRights = $this->icon( 'control/rights.png', 'Rights' );
+    $iconDelete = $this->icon( 'control/delete.png', 'Delete' );
 
   
     foreach( $VAR->views as $pos => $schema )

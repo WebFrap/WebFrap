@@ -24,7 +24,7 @@ class TDataObject
 
   /** Der Inhalt des Knotens
    */
-  public $content  = array();
+  public $content = array();
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Magic Functions

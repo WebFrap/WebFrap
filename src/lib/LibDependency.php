@@ -31,35 +31,35 @@ class LibDependency
    *
    * @var array
    */
-  protected $tempTree     = array();
+  protected $tempTree = array();
 
   /**
    * the dependencies
    *
    * @var array
    */
-  protected $sorted       = array();
+  protected $sorted = array();
 
   /**
    * the depth
    *
    * @var int
    */
-  protected $runs         = 0;
+  protected $runs = 0;
 
   /**
    * should the depedency table revertet?
    *
    * @var boolean
    */
-  protected $reorganize   = true;
+  protected $reorganize = true;
 
   /**
    * some keyname only needed for better error messages but not really nessesary
    *
    * @var string
    */
-  protected $keyName      = null;
+  protected $keyName = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Magic Methodes
@@ -86,7 +86,7 @@ class LibDependency
   public function __construct($data , $reorganize = true, $keyName = null)
   {
 
-    $this->keyName     = $keyName;
+    $this->keyName = $keyName;
     $this->setDependencys($data , $reorganize);
 
   }//end public function __construct */
@@ -205,8 +205,8 @@ class LibDependency
   {
 
     foreach ($data as $pos => $tmp) {
-      $child   = trim($tmp[0]);
-      $father  = trim($tmp[1]);
+      $child = trim($tmp[0]);
+      $father = trim($tmp[1]);
 
       if (!isset($this->tempTree[$father])) {
         $this->tempTree[$father]= array();

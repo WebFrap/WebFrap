@@ -26,14 +26,14 @@ class Request
 // constant
 //////////////////////////////////////////////////////////////////////////////*/
 
-  const GET     = 'GET';
-  const PUT     = 'PUT';
-  const POST    = 'POST';
-  const DELETE  = 'DELETE';
+  const GET = 'GET';
+  const PUT = 'PUT';
+  const POST = 'POST';
+  const DELETE = 'DELETE';
 
-  const HEAD    = 'HEAD';
+  const HEAD = 'HEAD';
   const OPTIONNS = 'OPTIONS';
-  const TRACE   = 'TRACE';
+  const TRACE = 'TRACE';
   const CONNECT = 'CONNECT';
 
   const MOD = 'mod';

@@ -26,13 +26,13 @@ class TStack
    *
    * @var int
    */
-  protected $size   = array();
+  protected $size = array();
 
   /**
    *
    * @var array
    */
-  protected $stacks  = array();
+  protected $stacks = array();
 
   /**
    * pointer to the actual stack for iterators
@@ -50,13 +50,13 @@ class TStack
    *
    * @var int
    */
-  protected $next     = null;
+  protected $next = null;
 
   /**
    *
    * @var int
    */
-  protected $biggest  = null;
+  protected $biggest = null;
 
   /**
    * pointer to the smallest stack
@@ -159,10 +159,10 @@ class TStack
   {
 
     // set vars back to initial value
-    $this->smallest         = 100000;
-    $this->next             = null;
-    $this->biggest          = 0;
-    $this->pointerSmallest  = null;
+    $this->smallest = 100000;
+    $this->next = null;
+    $this->biggest = 0;
+    $this->pointerSmallest = null;
 
     foreach ($this->stacks as $stackName => $stack) {
       $size = count($stack);

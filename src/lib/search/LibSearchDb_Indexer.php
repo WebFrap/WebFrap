@@ -44,13 +44,13 @@ class LibSearchDb_Indexer
   public function saveDsIndex($entity, $create = false)
   {
 
-    $keyVal     = $entity->getData();
-    $entityKey  = $entity->getEntityName();
+    $keyVal = $entity->getData();
+    $entityKey = $entity->getEntityName();
 
     $resourceId = $this->orm->getResourceId($entityKey);
-    $id         = $entity->getId();
+    $id = $entity->getId();
 
-    $indexData  = array();
+    $indexData = array();
 
     try {
 
@@ -113,12 +113,12 @@ class LibSearchDb_Indexer
         }
       }
 
-      $indexData['vid']           = $id;
+      $indexData['vid'] = $id;
       $indexData['id_vid_entity'] = $resourceId;
 
       if ($create) {
 
-        $indexData[Db::UUID]         = $keyVal[Db::UUID];
+        $indexData[Db::UUID] = $keyVal[Db::UUID];
         $indexData[Db::TIME_CREATED] = $keyVal[Db::TIME_CREATED];
 
         $sqlstring = $this->orm->sqlBuilder->buildInsert($indexData, 'wbfsys_data_index');
@@ -145,10 +145,10 @@ class LibSearchDb_Indexer
   public function removeIndex($entity)
   {
 
-    $keyVal     = $entity->getData();
-    $entityKey  = $entity->getEntityName();
+    $keyVal = $entity->getData();
+    $entityKey = $entity->getEntityName();
     $resourceId = $this->orm->getResourceId($entityKey);
-    $id         = $entity->getId();
+    $id = $entity->getId();
 
     $this->orm->db->delete('DELETE FROM wbfsys_data_index where vid = '.$id.' and id_vid_entity = '.$resourceId);
 
@@ -187,13 +187,13 @@ class LibSearchDb_Indexer
 
     $resourceId = $this->orm->getResourceId($entityKey);
 
-    $indexData  = array();
+    $indexData = array();
 
-    $entity     = $this->orm->newEntity($entityKey);
-    $tableName  = $entity->getTable();
+    $entity = $this->orm->newEntity($entityKey);
+    $tableName = $entity->getTable();
 
-    $titleFields  = $entity->getIndexTitleFields();
-    $keyFields    = $entity->getIndexKeyFields();
+    $titleFields = $entity->getIndexTitleFields();
+    $keyFields = $entity->getIndexKeyFields();
     $descriptionFields = $entity->getIndexDescriptionFields();
 
     $fields = array_merge
@@ -270,10 +270,10 @@ class LibSearchDb_Indexer
           $indexData['description'] = mb_substr($indexData['description'], 0,500);
         }
 
-        $indexData['vid']            = $keyVal['rowid'];
-        $indexData['id_vid_entity']  = $resourceId;
+        $indexData['vid'] = $keyVal['rowid'];
+        $indexData['id_vid_entity'] = $resourceId;
 
-        $indexData[Db::UUID]         = $keyVal[Db::UUID];
+        $indexData[Db::UUID] = $keyVal[Db::UUID];
         $indexData[Db::TIME_CREATED] = $keyVal[Db::TIME_CREATED];
 
         $sqlstring = $this->orm->sqlBuilder->buildInsert($indexData, 'wbfsys_data_index');

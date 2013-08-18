@@ -44,9 +44,9 @@ class ERelevance
    * @var array
    */
   public static $labels = array(
-    self::LOW   => 'Low',
+    self::LOW => 'Low',
     self::AVERAGE=> 'Average',
-    self::HIGH  => 'High',
+    self::HIGH => 'High',
   );
 
   /**

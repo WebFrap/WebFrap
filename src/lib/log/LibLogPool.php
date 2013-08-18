@@ -28,28 +28,28 @@ class LibLogPool
    *
    * @var boolean
    */
-  public $logTrace    = false;
+  public $logTrace = false;
 
   /**
    * flag level Debug
    *
    * @var boolean
    */
-  public $logDebug    = false;
+  public $logDebug = false;
 
   /**
    * flag level Verbose
    *
    * @var boolean
    */
-  public $logVerbose  = false;
+  public $logVerbose = false;
 
   /**
    * flag level Config
    *
    * @var boolean
    */
-  public $logConfig   = false;
+  public $logConfig = false;
 
   /**
    * Alle Logappender welche zum Logging benutzt werden sollen
@@ -80,31 +80,31 @@ class LibLogPool
   /*
   private $logLevel = array
   (
-  'TRACE'     => 1,
-  'DEBUG'     => 2,
-  'VERBOSE'   => 4,
-  'CONFIG'    => 8,
-  'INFO'      => 16,
-  'USER'      => 32,
-  'WARN'      => 64,
-  'SECURITY'  => 128,
-  'ERROR'     => 256,
-  'FATAL'     => 512
+  'TRACE' => 1,
+  'DEBUG' => 2,
+  'VERBOSE' => 4,
+  'CONFIG' => 8,
+  'INFO' => 16,
+  'USER' => 32,
+  'WARN' => 64,
+  'SECURITY' => 128,
+  'ERROR' => 256,
+  'FATAL' => 512
   );
   */
 
   private $logLevel = array
   (
-    'TRACE'     => 1,
-    'DEBUG'     => 2,
-    'VERBOSE'   => 4,
-    'CONFIG'    => 8,
-    'INFO'      => 16,
-    'USER'      => 32,
-    'WARN'      => 64,
-    'SECURITY'  => 128,
-    'ERROR'     => 256,
-    'FATAL'     => 512
+    'TRACE' => 1,
+    'DEBUG' => 2,
+    'VERBOSE' => 4,
+    'CONFIG' => 8,
+    'INFO' => 16,
+    'USER' => 32,
+    'WARN' => 64,
+    'SECURITY' => 128,
+    'ERROR' => 256,
+    'FATAL' => 512
   );
 
   /**
@@ -198,29 +198,29 @@ class LibLogPool
     } // ENDE FOREACH
 
     if ($this->getTrace()) {
-      Log::$levelTrace  = true;
-      $this->logTrace   = true;
+      Log::$levelTrace = true;
+      $this->logTrace = true;
     } else {
       Log::$levelTrace = false;
     }
 
     if ($this->getDebug()) {
-      Log::$levelDebug  = true;
-      $this->logDebug   = true;
+      Log::$levelDebug = true;
+      $this->logDebug = true;
     } else {
       Log::$levelDebug = false ;
     }
 
     if ($this->getVerbose()) {
-      Log::$levelVerbose  = true ;
-      $this->logVerbose   = true;
+      Log::$levelVerbose = true ;
+      $this->logVerbose = true;
     } else {
       Log::$levelVerbose = false;
     }
 
     if ($this->getConfig()) {
-      Log::$levelConfig   = true;
-      $this->logConfig    = true;
+      Log::$levelConfig = true;
+      $this->logConfig = true;
     } else {
       Log::$levelConfig = false;
     }
@@ -341,12 +341,12 @@ class LibLogPool
       } else {
 
         if (strrpos($pos , '-'  )) {
-          $tmp    = explode('-', $pos);
+          $tmp = explode('-', $pos);
 
-          $start  = strtoupper($tmp[0]);
-          $end    = strtoupper($tmp[1]);
+          $start = strtoupper($tmp[0]);
+          $end = strtoupper($tmp[1]);
 
-          $seen   = false;
+          $seen = false;
 
           foreach ($this->logLevel as $key => $value) {
 
@@ -387,7 +387,7 @@ class LibLogPool
 
     $target = 'SESSION';
 
-    Log::$levelDebug    = true;
+    Log::$levelDebug = true;
     $this->logDebug = true;
 
     $logMask = $this->parseLoglevel('DEBUG-USER,-CONFIG,+SECURITY');

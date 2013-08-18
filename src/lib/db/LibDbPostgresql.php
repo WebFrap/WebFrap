@@ -29,22 +29,22 @@ class LibDbPostgresql extends LibDbConnection
   /**
    * Der Standard Fetch Mode
    */
-  protected $fetchMode  = PGSQL_ASSOC;
+  protected $fetchMode = PGSQL_ASSOC;
 
   /**
    * Holen der Daten als Assoziativer Array
    */
-  const fetchAssoc      = PGSQL_ASSOC;
+  const fetchAssoc = PGSQL_ASSOC;
 
   /**
    * Holen der Daten als Numerischer Array
    */
-  const fetchNum        = PGSQL_NUM;
+  const fetchNum = PGSQL_NUM;
 
   /**
    * Holen der Daten als Doppelter Assoziativer und Numerischer Array
    */
-  const fetchBoth       = PGSQL_BOTH;
+  const fetchBoth = PGSQL_BOTH;
 
   /**
    * the type of the sql sqlBuilder for this database class
@@ -691,10 +691,10 @@ class LibDbPostgresql extends LibDbConnection
   {
 
     if (is_object($name)) {
-      $obj      = $name;
+      $obj = $name;
       $name = $obj->getName();
-      $values   = $obj->getPrepareValues();
-      $single   = $obj->getSingelRow();
+      $values = $obj->getPrepareValues();
+      $single = $obj->getSingelRow();
     }
 
     if (!$this->result = pg_execute($this->connectionRead, $name, $values)) {
@@ -741,9 +741,9 @@ class LibDbPostgresql extends LibDbConnection
   {
 
     if (is_object($name)) {
-      $obj      = $name;
+      $obj = $name;
       $name = $obj->getName();
-      $values   = $obj->getPrepareValues();
+      $values = $obj->getPrepareValues();
     }
 
     if (!$this->result = pg_execute($this->connectionWrite, $name, $values)) {
@@ -1214,11 +1214,11 @@ class LibDbPostgresql extends LibDbConnection
       .' user='.$this->conf['dbuser']
       .' password='.$this->conf['dbpwd'];
 
-    $this->dbUrl  = $this->conf['dbhost'];
+    $this->dbUrl = $this->conf['dbhost'];
     $this->dbPort = $this->conf['dbport'];
     $this->databaseName = $this->conf['dbname'];
     $this->dbUser = $this->conf['dbuser'];
-    $this->dbPwd  = $this->conf['dbpwd'];
+    $this->dbPwd = $this->conf['dbpwd'];
 
     if (Log::$levelConfig)
       Log::config('DbVerbindungsparameter: '. $pgsql_con_string);

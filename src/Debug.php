@@ -337,8 +337,8 @@ class Debug
       } elseif ($toDump instanceof Exception) {
         $content = 'Exception: '.get_class($toDump).' '.$toDump->getMessage();
       } elseif (method_exists($toDump , 'getDebugDump')) {
-        $className  = get_class($toDump);
-        $content    = self::dumpToString($toDump->getDebugDump());
+        $className = get_class($toDump);
+        $content = self::dumpToString($toDump->getDebugDump());
       } else {
 
         $content = 'Object: '.get_class($toDump);
@@ -438,8 +438,8 @@ class Debug
       } elseif ($toDump instanceof Exception) {
         $content = 'Exception: '.get_class($toDump).' '.$toDump->getMessage();
       } elseif (method_exists($toDump , 'getDebugDump')) {
-        $className  = get_class($toDump);
-        $content    = self::dumpToString($toDump->getDebugDump());
+        $className = get_class($toDump);
+        $content = self::dumpToString($toDump->getDebugDump());
       } else {
         ob_start();
         var_dump($toDump);
@@ -922,8 +922,8 @@ CODE;
   public static function  publishDebugdata()
   {
     $_SESSION['TRACES'] = self::$traces;
-    $_SESSION['DUMPS']  = self::$dumps;
-    $_SESSION['FILES']  = self::getIncludedFiles();
+    $_SESSION['DUMPS'] = self::$dumps;
+    $_SESSION['FILES'] = self::getIncludedFiles();
   }//end public static function  publishDebugdata */
 
   /**
@@ -933,12 +933,12 @@ CODE;
   public static function clean()
   {
 
-    $_SESSION['TRACES']     = array();
-    $_SESSION['DUMPS']      = array();
-    $_SESSION['FILES']      = array();
-    $_SESSION['SCREENLOG']  = array();
-    $_SESSION['PHPLOG']     = array();
-    $_SESSION['BUFFERD_OUT']  = null;
+    $_SESSION['TRACES'] = array();
+    $_SESSION['DUMPS'] = array();
+    $_SESSION['FILES'] = array();
+    $_SESSION['SCREENLOG'] = array();
+    $_SESSION['PHPLOG'] = array();
+    $_SESSION['BUFFERD_OUT'] = null;
 
   }//end public static function clean */
 

@@ -29,52 +29,52 @@ class Profile extends Base
   /**
    * @param string
    */
-  public $key      = 'default';
+  public $key = 'default';
 
   /**
    * @param WgtMainmenu
    */
-  public $mainMenu      = null;
+  public $mainMenu = null;
 
   /**
    * @param string
    */
-  public $mainMenuName  = 'Default';
+  public $mainMenuName = 'Default';
 
   /**
    * @param WgtDesktop
    */
-  public $desktop       = null;
+  public $desktop = null;
 
   /**
    * @param string
    */
-  public $desktopName   = 'Default';
+  public $desktopName = 'Default';
 
   /**
    * @param WgtNavigation
    */
-  public $navigation      =  null;
+  public $navigation =  null;
 
   /**
    * @param string
    */
-  public $navigationName  =  'Default';
+  public $navigationName =  'Default';
 
   /**
    * @param WgtPanel
    */
-  public $panel      =  null;
+  public $panel =  null;
 
   /**
    * @param string
    */
-  public $panelName  =  'Default';
+  public $panelName =  'Default';
 
   /**
    * @param string
    */
-  public $label  =  'Default';
+  public $label =  'Default';
 
   /**
    * Stateless archivieren

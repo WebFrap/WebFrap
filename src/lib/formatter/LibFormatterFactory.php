@@ -33,7 +33,7 @@ class LibFormatterFactory
   /**
    * @var ObjFormatterFactory
    */
-  protected $instance     = null;
+  protected $instance = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Singleton Factory

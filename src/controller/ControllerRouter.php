@@ -86,19 +86,18 @@ class ControllerRouter extends ControllerCrud
 
       } else {
         switch ($type) {
-          case 'Security_Exception' :
-            {
-              $this->errorPage($response->i18n->l('Access Denied', 'wbf.message'), Error::NOT_AUTHORIZED);
+          case 'Security_Exception' :{
+            $this->errorPage($response->i18n->l('Access Denied', 'wbf.message'), Error::NOT_AUTHORIZED);
 
-              break;
-            }
-          default :
-            {
+            break;
+          }
+          default :{
 
-              $this->errorPage($response->i18n->l('Sorry Internal Error', 'wbf.message'), Response::INTERNAL_ERROR);
+            Debug::console($exc->getMessage());
+            $this->errorPage($response->i18n->l('Sorry Internal Error', 'wbf.message'), Response::INTERNAL_ERROR);
 
-              break;
-            } //end default
+            break;
+          } //end default
 
         } //end switch
 

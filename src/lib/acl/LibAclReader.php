@@ -97,7 +97,7 @@ class LibAclReader extends BaseChild
     if (!$env)
       $env = Webfrap::getActive();
 
-    $this->env    = $env;
+    $this->env = $env;
 
   }//end public function __construct */
 

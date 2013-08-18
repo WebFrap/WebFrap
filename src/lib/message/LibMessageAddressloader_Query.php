@@ -34,8 +34,8 @@ class LibMessageAddressloader_Query extends LibSqlQuery
   public function fetchGroups($group, $type, $direct = false)
   {
 
-    $areas  = array();
-    $id     = null;
+    $areas = array();
+    $id = null;
 
     if ($group->area) {
       $areas = $this->extractWeightedKeys($group->area);
@@ -49,8 +49,8 @@ class LibMessageAddressloader_Query extends LibSqlQuery
       }
     }
 
-    $joins    = '';
-    $wheres   = '';
+    $joins = '';
+    $wheres = '';
 
     // wenn keine Area übergeben wurde dann brauchen wir nur die
     // globalen assignments
@@ -164,7 +164,7 @@ SQL;
   JOIN
     wbfsys_group_users
     ON
-      wbfsys_group_users.id_user       = wbfsys_role_user.rowid
+      wbfsys_group_users.id_user = wbfsys_role_user.rowid
         and wbfsys_group_users.id_area  is null
         and wbfsys_group_users.vid      is null
 SQL;
@@ -176,15 +176,15 @@ SQL;
       if (is_array($group->name)) {
         $groupRoles = " UPPER(wbfsys_role_group.access_key)  IN(upper('".implode($group->name,"'),upper('")."')) AND " ;
       } else {
-        $groupRoles = " UPPER(wbfsys_role_group.access_key)  =  upper('{$group->name}') AND " ;
+        $groupRoles = " UPPER(wbfsys_role_group.access_key) =  upper('{$group->name}') AND " ;
       }
     }
 
     // wenn kein type defniert wurde ist die id des users seine adresse
     if (!$type) {
 
-      $valueAddress  = "wbfsys_role_user.rowid as address";
-      $joinAddress   = '';
+      $valueAddress = "wbfsys_role_user.rowid as address";
+      $joinAddress = '';
 
     } else {
 
@@ -258,7 +258,7 @@ WHERE
 SQL;
 
 
-    $db   = $this->getDb();
+    $db = $this->getDb();
 
     return $db->select($query)->getAll();
 
@@ -434,7 +434,7 @@ SQL;
       throw new LibMessage_Exception('Receiver for User: '.$user->name.' '.$user->id.' was empty');
     }
 
-    $db       = $this->getDb();
+    $db = $this->getDb();
     $userData = $db->select($sql)->get();
 
     Debug::console($sql, $userData);
@@ -454,9 +454,9 @@ SQL;
 
     $keysData = array();
 
-    $tmp    = explode('>', $keys);
+    $tmp = explode('>', $keys);
 
-    $areas  = explode('/', $tmp[0]);
+    $areas = explode('/', $tmp[0]);
 
     $wAreas = array();
     if (isset($tmp[1]))

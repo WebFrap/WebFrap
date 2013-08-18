@@ -34,8 +34,8 @@ class LibRelationLoader_Query extends LibSqlQuery
   public function fetchGroups($group  )
   {
 
-    $areas  = array();
-    $id     = null;
+    $areas = array();
+    $id = null;
 
     if ($group->area) {
       $areas = $this->extractWeightedKeys($group->area);
@@ -49,7 +49,7 @@ class LibRelationLoader_Query extends LibSqlQuery
       }
     }
 
-    $joins    = '';
+    $joins = '';
 
     // wenn keine Area übergeben wurde dann brauchen wir nur die
     // globalen assignments
@@ -135,7 +135,7 @@ SQL;
   JOIN
     wbfsys_group_users
     ON
-      wbfsys_group_users.id_user       = wbfsys_role_user.rowid
+      wbfsys_group_users.id_user = wbfsys_role_user.rowid
         and wbfsys_group_users.id_area  is null
         and wbfsys_group_users.vid      is null
 SQL;
@@ -181,7 +181,7 @@ WHERE
 SQL;
 
 
-    $db   = $this->getDb();
+    $db = $this->getDb();
 
     return $db->select($query)->getAll();
 
@@ -279,7 +279,7 @@ SQL;
       throw new LibRelation_Exception('Receiver for User: '.$user->name.' '.$user->id.' was empty');
     }
 
-    $db   = $this->getDb();
+    $db = $this->getDb();
 
     $userData = $db->select($sql)->get();
 
@@ -300,9 +300,9 @@ SQL;
 
     $keysData = array();
 
-    $tmp    = explode('>', $keys);
+    $tmp = explode('>', $keys);
 
-    $areas  = explode('/', $tmp[0]);
+    $areas = explode('/', $tmp[0]);
 
     $wAreas = array();
     if (isset($tmp[1]))

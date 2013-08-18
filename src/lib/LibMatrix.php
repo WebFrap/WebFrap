@@ -29,7 +29,7 @@ abstract class LibMatrix
    * backref to the owning view element
    * @var LibTemplate
    */
-  public $view       = null;
+  public $view = null;
 
   /**
    *

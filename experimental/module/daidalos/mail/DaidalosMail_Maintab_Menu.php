@@ -41,7 +41,7 @@ class DaidalosMail_Maintab_Menu extends WgtDropmenu
 
 
     $entries = new TArray();
-    $entries->support  = $this->entriesSupport($params);
+    $entries->support = $this->entriesSupport($params);
 
     $this->content = <<<HTML
 <ul class="wcm wcm_ui_dropmenu wgt-dropmenu" id="{$this->id}"  >
@@ -70,9 +70,9 @@ HTML;
   protected function entriesSupport($params)
   {
 
-    $iconBug     = $this->view->icon('control/bug.png'      ,'Bug');
-    $iconFaq     = $this->view->icon('control/faq.png'      ,'Faq');
-    $iconHelp    = $this->view->icon('control/help.png'     ,'Help');
+    $iconBug = $this->view->icon('control/bug.png'      ,'Bug');
+    $iconFaq = $this->view->icon('control/faq.png'      ,'Faq');
+    $iconHelp = $this->view->icon('control/help.png'     ,'Help');
 
     $html = <<<HTML
 

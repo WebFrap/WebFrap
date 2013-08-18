@@ -31,7 +31,7 @@ class LibDocumentBill extends LibDocumentLetter
    * Währung der Rechnung
    * @var string
    */
-  public $currency  = null;
+  public $currency = null;
 
 }//end class LibDocumentBillSimple
 

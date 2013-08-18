@@ -1,7 +1,7 @@
 <?php 
 
-$iconDel     = $this->icon( 'control/delete.png', 'Delete' );
-$iconUpload  = $this->icon( 'control/upload.png', 'Upload' );
+$iconDel = $this->icon( 'control/delete.png', 'Delete' );
+$iconUpload = $this->icon( 'control/upload.png', 'Upload' );
 
 $packageForm = new WgtRenderForm
 (

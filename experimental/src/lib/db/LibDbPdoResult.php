@@ -28,7 +28,7 @@ class LibDbPdoResult extends LibDbResult
   /**
    * Der Standard Fetch Mode
    */
-  protected $fetchMode  = PDO::FETCH_ASSOC;
+  protected $fetchMode = PDO::FETCH_ASSOC;
 
   /**
    * @var PDOStatement

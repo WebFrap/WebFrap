@@ -9,13 +9,13 @@ $role = $VAR->node;
 $idPrefix = 'role-'.$role->getName();
 $formId = 'wgt-form-bdl_'.$idPrefix;
 
-$iconAdd  = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
+$iconAdd = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
 $iconEdit = Wgt::icon( 'control/edit.png', 'xsmall', 'Edit' );
-$iconDel  = Wgt::icon( 'control/delete.png', 'xsmall', 'Delete' );
+$iconDel = Wgt::icon( 'control/delete.png', 'xsmall', 'Delete' );
 
-$labels       = $role->getLabels();
+$labels = $role->getLabels();
 $descriptions = $role->getDescriptions();
-$docus        = $role->getDocus();
+$docus = $role->getDocus();
 
 $langs = $this->model->getLanguages();
 
@@ -108,7 +108,7 @@ $langCode = implode( ','.NL, $langCode  );
         '',
         array
         (
-          'name'  => 'label[text]',
+          'name' => 'label[text]',
           'class' => 'medium wgte-text'
         )
       );
@@ -146,7 +146,7 @@ HTML
           'role-label-'.$lang,
           $label, array
           (
-            'name'  => 'role[label]['.$lang.']',
+            'name' => 'role[label]['.$lang.']',
             'class' => 'medium lang-'.$lang
           ),
           $formId,

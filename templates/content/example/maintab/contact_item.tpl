@@ -1,8 +1,8 @@
 <?php 
 
 /* @var $model WebfrapContactItem_Model */
-$model  = $this->loadModel( 'WebfrapContactItem' );
-$user   = Webfrap::$env->getUser();
+$model = $this->loadModel( 'WebfrapContactItem' );
+$user = Webfrap::$env->getUser();
 
 
 try

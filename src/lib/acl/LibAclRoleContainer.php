@@ -52,14 +52,14 @@ class LibAclRoleContainer
    * Liste der Angefragen Datensätze mit den dazugehörigen rollen
    * @var array
    */
-  public $roles     = array();
+  public $roles = array();
 
   /**
    * @lang de:
    * der area key
    * @var array
    */
-  public $key       = null;
+  public $key = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Constructor

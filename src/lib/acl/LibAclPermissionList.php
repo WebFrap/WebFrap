@@ -63,7 +63,7 @@ class LibAclPermissionList extends LibAclPermission
    * Query Objekt zum ermitteln der Tatsächlichen Anzahl auffindbarer Elemente
    * @var LibSqlQuery
    */
-  public $calcQuery  = null;
+  public $calcQuery = null;
 
   /**
    * Liste der Ids aller gefundener Datensätze
@@ -149,8 +149,8 @@ class LibAclPermissionList extends LibAclPermission
     ///TODO Den Pfad auch noch als möglichkeit für die Diversifizierung einbauen
 
     // sicherheitshalber den String umbauen
-    $profil   = SFormatStrings::subToCamelCase($profil);
-    $context  = SFormatStrings::subToCamelCase($context);
+    $profil = SFormatStrings::subToCamelCase($profil);
+    $context = SFormatStrings::subToCamelCase($context);
 
     if (method_exists($this, 'fetchList_Profile_'.$profil  )) {
       return $this->{'fetchList_Profile_'.$profil}($query, $conditions, $params);

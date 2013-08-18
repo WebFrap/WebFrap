@@ -88,12 +88,12 @@ class LibDbSyncMetadata extends LibDbSync
   {
 
     //TODO maybe this should be a "little" more genereric
-    $orgType  = trim($attribute->dbType());
+    $orgType = trim($attribute->dbType());
 
-    $mapping  = $this->nameMapping;
+    $mapping = $this->nameMapping;
 
     if (isset($mapping[$orgType])) {
-      $type     = $mapping[$orgType];
+      $type = $mapping[$orgType];
     } else {
       Error::addError('missing $orgType'.$orgType);
       $type = 'text';
@@ -113,10 +113,10 @@ class LibDbSyncMetadata extends LibDbSync
       $default = '';
     }
 
-    $precision  = null;
-    $scale      = null;
-    $length     = null;
-    $size       = $attribute->size();
+    $precision = null;
+    $scale = null;
+    $length = null;
+    $size = $attribute->size();
 
     if ($orgType == 'numeric') {
       $tmp = explode('.'  , $size);
@@ -129,8 +129,8 @@ class LibDbSyncMetadata extends LibDbSync
         $scale = 0;
 
     } elseif ($orgType == 'integer' || $orgType == 'int') {
-      $precision  = '32';
-      $scale      = '0';
+      $precision = '32';
+      $scale = '0';
     } elseif ($orgType == 'char') {
       if (trim($size) == '') {
         $length = '1';
@@ -151,13 +151,13 @@ class LibDbSyncMetadata extends LibDbSync
 
     $data = array
     (
-      LibDbAdmin::COL_NAME        => $colName,
-      LibDbAdmin::COL_DEFAULT     => $default,
-      LibDbAdmin::COL_NULL_ABLE   => $nullAble,
-      LibDbAdmin::COL_TYPE        => $type,
-      LibDbAdmin::COL_LENGTH      => $length,
-      LibDbAdmin::COL_PRECISION   => $precision,
-      LibDbAdmin::COL_SCALE       => $scale,
+      LibDbAdmin::COL_NAME => $colName,
+      LibDbAdmin::COL_DEFAULT => $default,
+      LibDbAdmin::COL_NULL_ABLE => $nullAble,
+      LibDbAdmin::COL_TYPE => $type,
+      LibDbAdmin::COL_LENGTH => $length,
+      LibDbAdmin::COL_PRECISION => $precision,
+      LibDbAdmin::COL_SCALE => $scale,
     );
 
     if ($diff = $this->diffColumn($colName , $data, $tableName  )) {
@@ -231,16 +231,16 @@ class LibDbSyncMetadata extends LibDbSync
       $default = '';
     }
 
-    $type     = $attribute->dbType();
-    $size     = str_replace('.' , ',', $attribute->size());
+    $type = $attribute->dbType();
+    $size = str_replace('.' , ',', $attribute->size());
 
-    $colData  = array
+    $colData = array
     (
       'name' => $attribute->name(),
-      'type'      => $type,
-      'size'      => $size,
-      'required'  => $attribute->required()?'true':'false',
-      'default'   => $default,
+      'type' => $type,
+      'size' => $size,
+      'required' => $attribute->required()?'true':'false',
+      'default' => $default,
     );
 
     return $colData;

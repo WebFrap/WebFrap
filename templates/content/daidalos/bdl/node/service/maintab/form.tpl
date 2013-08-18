@@ -7,9 +7,9 @@ $idPrefix = 'service-'.$service->getName();
 $iconDel = Wgt::icon( 'control/delete.png', 'xsmall', 'Delete' );
 $iconAdd = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
 
-$labels       = $service->getLabels();
+$labels = $service->getLabels();
 $descriptions = $service->getDescriptions();
-$docus        = $service->getDocus();
+$docus = $service->getDocus();
 
 $langs = $this->model->getLanguages();
 
@@ -107,7 +107,7 @@ $langCode = implode( ','.NL, $langCode  );
         '',
         array
         (
-          'name'  => 'label[text]',
+          'name' => 'label[text]',
           'class' => 'medium wgte-text'
         )
       );
@@ -145,7 +145,7 @@ HTML
           'service-label-'.$lang,
           $label, array
           (
-            'name'  => 'service[label]['.$lang.']',
+            'name' => 'service[label]['.$lang.']',
             'class' => 'medium lang-'.$lang
           ),
           $formId,

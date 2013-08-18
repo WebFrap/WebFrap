@@ -24,13 +24,13 @@
 class ESearchId
 {
 
-  const EQUALS       = 1;
+  const EQUALS = 1;
   
   /**
    * @var array
    */
   public static $labels = array(
-    self::EQUALS      => 'Equals',
+    self::EQUALS => 'Equals',
   );
   
   /**

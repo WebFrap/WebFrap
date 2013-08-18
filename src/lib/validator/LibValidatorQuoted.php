@@ -37,14 +37,14 @@ class LibValidator
    *
    * @var array
    */
-  public $data      = array();
+  public $data = array();
 
   /**
    * array for saving if a value ist valid or invalid
    *
    * @var array
    */
-  public $invalid     = array();
+  public $invalid = array();
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Static Attributes
@@ -153,8 +153,8 @@ class LibValidator
         array($filter , $key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
-      $filter->data[$key]     = null;
-      $filter->invalid[$key]  = true;
+      $filter->data[$key] = null;
+      $filter->invalid[$key] = true;
 
       return false;
     }
@@ -167,7 +167,7 @@ class LibValidator
         Log::logLine('trace', __file__, __line__,
         'Invalid cause to big');
 
-        $filter->invalid[$key]  = 'max';
+        $filter->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -175,13 +175,13 @@ class LibValidator
 
     if ($minSize) {
       if (strlen($value) < $minSize) {
-        $filter->invalid[$key]  = 'min';
+        $filter->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $filter->invalid[$key]  = false;
+    $filter->invalid[$key] = false;
 
     return false;
 
@@ -209,8 +209,8 @@ class LibValidator
         Log::logLine('trace', __file__, __line__,
         'Valid cause empty');
 
-      $this->data[$key]   = null;
-      $this->invalid[$key]  = true;
+      $this->data[$key] = null;
+      $this->invalid[$key] = true;
 
       return false;
     }
@@ -222,7 +222,7 @@ class LibValidator
       Log::logLine('trace', __file__, __line__,
       'Invalid cause empty');
 
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
@@ -233,7 +233,7 @@ class LibValidator
         Log::logLine('trace', __file__, __line__,
         'Invalid cause to big');
 
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -241,13 +241,13 @@ class LibValidator
 
     if ($minSize) {
       if (strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -271,7 +271,7 @@ class LibValidator
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!is_array($value) and !is_null($value)) {
-      $this->invalid[$key]  = 'wrong';
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
@@ -280,14 +280,14 @@ class LibValidator
       if (Log::$levelTrace)
         Log::logLine('trace', __file__, __line__,'Valid cause empty');
 
-      $this->data[$key]   = null;
-      $this->invalid[$key]  = true;
+      $this->data[$key] = null;
+      $this->invalid[$key] = true;
 
       return false;
     }
 
     $this->data[$key] = new TBitmask($value);
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -313,8 +313,8 @@ class LibValidator
       Log::logLine('trace', __file__, __line__,
       'Valid cause empty');
 
-      $this->data[$key]   = null;
-      $this->invalid[$key]  = true;
+      $this->data[$key] = null;
+      $this->invalid[$key] = true;
 
       return false;
     }
@@ -323,7 +323,7 @@ class LibValidator
 
     if ($maxSize) {
       if (strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -331,13 +331,13 @@ class LibValidator
 
     if ($minSize) {
       if (strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -363,8 +363,8 @@ class LibValidator
       Log::logLine('trace', __file__, __line__,
       'Valid cause empty');
 
-      $this->data[$key]   = null;
-      $this->invalid[$key]  = true;
+      $this->data[$key] = null;
+      $this->invalid[$key] = true;
 
       return false;
     }
@@ -376,7 +376,7 @@ class LibValidator
       Log::logLine('trace', __file__, __line__,
       'Invalid cause empty');
 
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
@@ -387,7 +387,7 @@ class LibValidator
         Log::logLine('trace', __file__, __line__,
         'Invalid cause to big');
 
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -395,13 +395,13 @@ class LibValidator
 
     if ($minSize) {
       if (strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -422,7 +422,7 @@ class LibValidator
 
     if (!$notNull and trim($value) == '') {
       $this->data[$key] = null;
-      $this->invalid[$key]  = false;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -430,14 +430,14 @@ class LibValidator
     $this->data[$key] = (int) $value;
 
     if (!is_numeric($value)) {
-      $this->invalid[$key]  = 'wrong';
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
 
     if ($maxSize) {
       if ($this->data[$key] > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -445,13 +445,13 @@ class LibValidator
 
     if ($minSize) {
       if ($this->data[$key] < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -472,7 +472,7 @@ class LibValidator
 
     if (!$notNull and trim($value) == '') {
       $this->data[$key] = null;
-      $this->invalid[$key]  = false;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -480,14 +480,14 @@ class LibValidator
     $this->data[$key] = (int) $value;
 
     if (!is_numeric($value)) {
-      $this->invalid[$key]  = 'wrong';
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
 
     if ($maxSize) {
       if ($this->data[$key] > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -495,13 +495,13 @@ class LibValidator
 
     if ($minSize) {
       if ($this->data[$key] < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -522,7 +522,7 @@ class LibValidator
 
     if (!$notNull and trim($value) == '') {
       $this->data[$key] = null;
-      $this->invalid[$key]  = false;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -539,14 +539,14 @@ class LibValidator
     }
 
     if (!is_numeric($this->data[$key])  ) {
-      $this->invalid[$key]  = 'wrong';
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
 
     if ($maxSize) {
       if ($this->data[$key] > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -554,13 +554,13 @@ class LibValidator
 
     if ($minSize) {
       if ($this->data[$key] < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -594,7 +594,7 @@ class LibValidator
 
     $this->data[$key] = $value ? '1':'0';
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -617,8 +617,8 @@ class LibValidator
       if (Log::$levelTrace)
       Log::logLine('trace', __file__, __line__, 'Valid cause empty');
 
-      $this->data[$key]     = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -643,7 +643,7 @@ class LibValidator
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -667,15 +667,15 @@ class LibValidator
       Log::logLine('trace', __file__, __line__,
       'Valid cause empty');
 
-      $this->data[$key]     = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
 
     // musn't start with a number
     if (is_numeric($value[0])  ) {
-      $this->invalid[$key]  = 'wrong';
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
@@ -700,7 +700,7 @@ class LibValidator
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -725,8 +725,8 @@ class LibValidator
       Log::logLine('trace', __file__, __line__,
       'Valid cause empty');
 
-      $this->data[$key]     = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -749,7 +749,7 @@ class LibValidator
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -769,8 +769,8 @@ class LibValidator
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]     = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -778,7 +778,7 @@ class LibValidator
     $formatter = LibFormatterDate::getActive();
 
     if (!$formatter->setDateLanguage($value)) {
-      $this->invalid[$key]  = 'wrong';
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
@@ -787,7 +787,7 @@ class LibValidator
 
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
@@ -797,7 +797,7 @@ class LibValidator
     /*
     if ($maxSize) {
       if (strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -805,14 +805,14 @@ class LibValidator
 
     if ($minSize) {
       if (strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
     */
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -832,8 +832,8 @@ class LibValidator
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]   = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -842,7 +842,7 @@ class LibValidator
     $this->data[$key] = $value;
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
@@ -850,7 +850,7 @@ class LibValidator
     /*
     if ($maxSize) {
       if (strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -858,14 +858,14 @@ class LibValidator
 
     if ($minSize) {
       if (strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
     */
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -885,8 +885,8 @@ class LibValidator
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]   = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -895,7 +895,7 @@ class LibValidator
     $this->data[$key] = $value;
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
@@ -903,7 +903,7 @@ class LibValidator
     /*
     if ($maxSize) {
       if (strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -911,14 +911,14 @@ class LibValidator
 
     if ($minSize) {
       if (strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
     */
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -938,8 +938,8 @@ class LibValidator
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]   = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -947,20 +947,20 @@ class LibValidator
     $this->data[$key] = $value;
 
     if (!preg_match(self::VALIDATE_URL ,$value)  ) {
-      $this->invalid[$key]  = 'wrong';
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
 
     if ($maxSize) {
       if (strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -968,13 +968,13 @@ class LibValidator
 
     if ($minSize) {
       if (strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -994,8 +994,8 @@ class LibValidator
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]   = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -1003,20 +1003,20 @@ class LibValidator
     $this->data[$key] = $value;
 
     if (!preg_match(self::VALIDATE_MAIL, $value)) {
-      $this->invalid[$key]  = 'wrong';
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
 
     if ($maxSize) {
       if (strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -1024,13 +1024,13 @@ class LibValidator
 
     if ($minSize) {
       if (strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -1050,8 +1050,8 @@ class LibValidator
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]   = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -1060,20 +1060,20 @@ class LibValidator
 
     // musn't start with a number
     if (is_numeric($value[0])  ) {
-      $this->invalid[$key]  = 'wrong';
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
 
     if ($maxSize) {
       if (strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -1081,13 +1081,13 @@ class LibValidator
 
     if ($minSize) {
       if (strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -1107,21 +1107,21 @@ class LibValidator
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
-      //$this->data[$key]     = null;
-      $this->invalid[$key]  = false;
+      //$this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
 
     if ($maxSize) {
       if (strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -1129,7 +1129,7 @@ class LibValidator
 
     if ($minSize) {
       if (strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
@@ -1137,7 +1137,7 @@ class LibValidator
 
     $this->data[$key] = SEncrypt::passwordHash($value);
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -1157,8 +1157,8 @@ class LibValidator
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]     = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -1170,20 +1170,20 @@ class LibValidator
 
     // musn't start with a number
     if (!ctype_alnum($testVal)) {
-      $this->invalid[$key]  = 'wrong';
+      $this->invalid[$key] = 'wrong';
 
       return 'wrong';
     }
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
 
     if ($maxSize) {
       if (strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -1191,13 +1191,13 @@ class LibValidator
 
     if ($minSize) {
       if (strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -1217,8 +1217,8 @@ class LibValidator
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]   = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -1227,14 +1227,14 @@ class LibValidator
     $this->data[$key] = SFiles::getFilename($value);
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
 
     if ($maxSize) {
       if (strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -1242,13 +1242,13 @@ class LibValidator
 
     if ($minSize) {
       if (strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -1268,8 +1268,8 @@ class LibValidator
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]   = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -1278,14 +1278,14 @@ class LibValidator
     $this->data[$key] = $value;
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
 
     if ($maxSize) {
       if (strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -1293,13 +1293,13 @@ class LibValidator
 
     if ($minSize) {
       if (strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 
@@ -1319,8 +1319,8 @@ class LibValidator
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
-      $this->data[$key]   = null;
-      $this->invalid[$key]  = false;
+      $this->data[$key] = null;
+      $this->invalid[$key] = false;
 
       return false;
     }
@@ -1328,14 +1328,14 @@ class LibValidator
     $this->data[$key] = SFiles::getPath($value);
 
     if ($notNull and trim($value) == '') {
-      $this->invalid[$key]  = 'emtpy';
+      $this->invalid[$key] = 'emtpy';
 
       return 'emtpy';
     }
 
     if ($maxSize) {
       if (strlen($value) > $maxSize) {
-        $this->invalid[$key]  = 'max';
+        $this->invalid[$key] = 'max';
 
         return 'max';
       }
@@ -1343,13 +1343,13 @@ class LibValidator
 
     if ($minSize) {
       if (strlen($value) < $minSize) {
-        $this->invalid[$key]  = 'min';
+        $this->invalid[$key] = 'min';
 
         return 'min';
       }
     }
 
-    $this->invalid[$key]  = false;
+    $this->invalid[$key] = false;
 
     return false;
 

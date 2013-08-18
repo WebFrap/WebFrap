@@ -7,9 +7,9 @@ $idPrefix = 'process-'.$process->getName();
 $iconDel = Wgt::icon( 'control/delete.png', 'xsmall', 'Delete' );
 $iconAdd = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
 
-$labels       = $process->getLabels();
+$labels = $process->getLabels();
 $descriptions = $process->getDescriptions();
-$docus        = $process->getDocus();
+$docus = $process->getDocus();
 
 $langs = $this->model->getLanguages();
 
@@ -102,7 +102,7 @@ $langCode = implode( ','.NL, $langCode  );
         '',
         array
         (
-          'name'  => 'label[text]',
+          'name' => 'label[text]',
           'class' => 'medium wgte-text'
         )
       );
@@ -140,7 +140,7 @@ HTML
           'process-label-'.$lang,
           $label, array
           (
-            'name'  => 'process[label]['.$lang.']',
+            'name' => 'process[label]['.$lang.']',
             'class' => 'medium lang-'.$lang
           ),
           $formId,

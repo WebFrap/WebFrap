@@ -210,8 +210,8 @@ class LibResponseCli extends LibResponse
   {
 
     /* @var $tplEngine LibTemplate   */
-    $tplEngine  = $this->getTplEngine();
-    $request    = $this->getRequest();
+    $tplEngine = $this->getTplEngine();
+    $request = $this->getRequest();
 
     if (!$viewType)
       $viewType =  $tplEngine->type;

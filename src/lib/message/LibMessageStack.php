@@ -582,11 +582,11 @@ class LibMessageStack extends PBase
   public function clean()
   {
 
-    $this->htmlDynContent   = null;
-    $this->htmlContent      = null;
+    $this->htmlDynContent = null;
+    $this->htmlContent = null;
 
-    $this->plainDynContent  = null;
-    $this->plainContent  = null;
+    $this->plainDynContent = null;
+    $this->plainContent = null;
 
   }//end public function clean */
 

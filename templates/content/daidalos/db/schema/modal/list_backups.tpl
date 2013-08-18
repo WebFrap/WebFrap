@@ -1,7 +1,7 @@
 <?php 
 $iconRestore = $this->icon( 'control/restore.png', 'Restore' );
-$iconDel     = $this->icon( 'control/delete.png', 'Delete' );
-$iconUpload  = $this->icon( 'control/upload.png', 'Upload' );
+$iconDel = $this->icon( 'control/delete.png', 'Delete' );
+$iconUpload = $this->icon( 'control/upload.png', 'Upload' );
 ?>
 
 <div class="wgt-space" style="width:550px;"  >

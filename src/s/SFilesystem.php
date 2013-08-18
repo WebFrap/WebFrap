@@ -192,7 +192,7 @@ class SFilesystem
     if (file_exists($file))
       return touch($file);
 
-    $path     = dirname($file);
+    $path = dirname($file);
     //$filename = filename($file);
 
     //Log::error("Touch dir: $path file: $file");

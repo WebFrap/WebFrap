@@ -94,7 +94,7 @@ class LibRichtextParser
   {
 
     $this->rawText = null;
-    $this->nodes   = array();
+    $this->nodes = array();
 
   }//end public function clean */
 

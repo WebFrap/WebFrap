@@ -30,7 +30,7 @@ class LibDbImportForget_Exception extends LibDbImport_Exception
   public function __construct($message = null)
   {
 
-    $this->delete   = true;
+    $this->delete = true;
 
     if (!$message)
       $message = 'just forget the dataset';

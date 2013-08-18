@@ -28,41 +28,41 @@ class LibFormatterNumeric
   /**
    * @var LibFormatterNumeric
    */
-  protected static $instance  = null;
+  protected static $instance = null;
 
   /**
    * @var float
    */
-  protected $numericEnglish    = null;
+  protected $numericEnglish = null;
 
   /**
    * @var string
    */
-  protected $numericLanguage   = null;
+  protected $numericLanguage = null;
 
   /**
    * seperator from full to broken numbers 20,44
    * @var string
    */
-  protected $separatorDec      = ',';
+  protected $separatorDec = ',';
 
   /**
    * visual seperator to make numbers better readbale 200.000.394
    *
    * @var string
    */
-  protected $separatorTh       = '.';
+  protected $separatorTh = '.';
 
   /**
    * precission
    * @var unknown_type
    */
-  protected $size              =  2;
+  protected $size =  2;
 
   /**
    * @var unknown_type
    */
-  protected $negativ           = false;
+  protected $negativ = false;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Magic
@@ -77,9 +77,9 @@ class LibFormatterNumeric
     if (!$i18n)
       $i18n = I18n::getActive();
 
-    $this->size         = $precision;
+    $this->size = $precision;
     $this->separatorDec = $i18n->numberDec;
-    $this->separatorTh  = $i18n->numberMil;
+    $this->separatorTh = $i18n->numberMil;
 
   }//end public function __construct */
 
@@ -157,8 +157,8 @@ class LibFormatterNumeric
   {
 
     $this->separatorDec = $separatorDec;
-    $this->separatorTh  = $separatorTh;
-    $this->size         = $size;
+    $this->separatorTh = $separatorTh;
+    $this->size = $size;
 
   }//end public function setFormat */
 

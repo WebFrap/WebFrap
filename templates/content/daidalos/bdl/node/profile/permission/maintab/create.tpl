@@ -9,7 +9,7 @@ $idPrefix = 'profile-permission-create';
 $formId = 'wgt-form-bdl_'.$idPrefix;
 
 
-$iconAdd  = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
+$iconAdd = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
 
 $langs = $this->model->getLanguages();
 

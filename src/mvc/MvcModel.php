@@ -31,13 +31,13 @@ abstract class MvcModel extends BaseChild
    * Die vorhadenen Registry keys
    * @var array
    */
-  protected $regKeys  = array();
+  protected $regKeys = array();
 
   /**
    * sub Modul Extention
    * @var array
    */
-  protected $subModels       = array();
+  protected $subModels = array();
 
   /**
    * Error Object zum sammeln von Fehlermeldungen
@@ -92,7 +92,7 @@ abstract class MvcModel extends BaseChild
    */
   public function register($key, $value)
   {
-    $this->regKeys[$key]  = true;
+    $this->regKeys[$key] = true;
     $this->registry[$key] = $value;
   }//end public function register */
 
@@ -151,7 +151,7 @@ abstract class MvcModel extends BaseChild
     if (!$key)
       $key = $modelKey;
 
-    $modelName    = $modelKey.'_Model';
+    $modelName = $modelKey.'_Model';
 
     if (!isset($this->subModels[$key]  )) {
       if (!Webfrap::classExists($modelName)) {

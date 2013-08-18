@@ -1,7 +1,7 @@
 <?php 
 
 $thisPath = dirname(__FILE__).'/';
-$nodeKey  = 'module';
+$nodeKey = 'module';
 
 $module = $VAR->node;
 /*@var $module BdlNodeModule */
@@ -12,10 +12,10 @@ $idPrefix = 'module-'.$module->getName();
 $iconDel = Wgt::icon( 'control/delete.png', 'xsmall', 'Delete' );
 $iconAdd = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
 
-$labels       = $module->getLabels();
+$labels = $module->getLabels();
 $descriptions = $module->getDescriptions();
-$docus        = $module->getDocus();
-$shortDescs   = $module->getShortDesc();
+$docus = $module->getDocus();
+$shortDescs = $module->getShortDesc();
 
 $langs = $this->model->getLanguages();
 

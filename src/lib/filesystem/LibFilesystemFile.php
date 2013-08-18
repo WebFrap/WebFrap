@@ -42,7 +42,7 @@ class LibFilesystemFile
   /**
    * @var string
    */
-  protected $extension  = null;
+  protected $extension = null;
 
   /**
    * @var string
@@ -325,11 +325,11 @@ class LibFilesystemFile
     // well hope php has an optimizer in the opcodecache!
     $calcs = array
     (
-      'kb'  => 1024,
-      'mb'  => 1049600,
-      'gb'  => 1074790400,
-      'tb'  => (1074790400*1024),
-      'pb'  => (1074790400*1024*1024), // should be enough i think
+      'kb' => 1024,
+      'mb' => 1049600,
+      'gb' => 1074790400,
+      'tb' => (1074790400*1024),
+      'pb' => (1074790400*1024*1024), // should be enough i think
     );
 
     $format = strtolower($format);
@@ -454,8 +454,8 @@ class LibFilesystemFile
   protected function splitFilename($fullFilename)
   {
 
-    $folderEnd      = strrpos($fullFilename, '/');
-    $this->folder   = substr($fullFilename , 0, $folderEnd).'/';
+    $folderEnd = strrpos($fullFilename, '/');
+    $this->folder = substr($fullFilename , 0, $folderEnd).'/';
     $this->fileName = substr($fullFilename , ($folderEnd+1));
 
   }//end protected function splitFilename */
@@ -468,9 +468,9 @@ class LibFilesystemFile
   {
 
     ///TODO check if wie don't have any extension
-    $fEnd                 = strrpos($this->fileName, '.');
-    $this->extension      = substr($this->fileName , ($fEnd + 1));
-    $this->plainFilename  = substr($this->fileName , 0 , $fEnd);
+    $fEnd  = strrpos($this->fileName, '.');
+    $this->extension = substr($this->fileName , ($fEnd + 1));
+    $this->plainFilename = substr($this->fileName , 0 , $fEnd);
 
   }//end protected function splitExtension */
 

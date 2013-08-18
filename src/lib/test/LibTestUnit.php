@@ -90,16 +90,16 @@ abstract class LibTestUnit extends Base
   public function run()
   {
 
-    //$this->className  = get_class ($this);
+    //$this->className = get_class ($this);
     //$methodes = get_class_methods ($this->className);
 
     $reflector = new LibReflectorClass($this);
 
-    $this->className  = $reflector->getName();
+    $this->className = $reflector->getName();
 
     $this->report->addClass($this->className);
 
-    $methodes         = $reflector->getAllMethodNames();
+    $methodes = $reflector->getAllMethodNames();
 
     try {
       $this->setUp();

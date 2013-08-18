@@ -25,12 +25,12 @@ class TRcsContainer
   /**
    * @var string
    */
-  public $userName  = null;
+  public $userName = null;
 
   /**
    * @var string
    */
-  public $passwd    = null;
+  public $passwd = null;
 
   /**
    * @var string

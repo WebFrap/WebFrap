@@ -24,28 +24,28 @@
 class ESearchNumeric
 {
 
-  const EQUALS        = 1;
+  const EQUALS = 1;
   
-  const SMALLER       = 2;
+  const SMALLER = 2;
 
-  const SMALLER_EQUAL  = 3;
+  const SMALLER_EQUAL = 3;
   
-  const BIGGER         = 4;
+  const BIGGER = 4;
   
-  const BIGGER_EQUAL   = 5;
+  const BIGGER_EQUAL = 5;
   
-  const IS_NULL       = 6;
+  const IS_NULL = 6;
 
   /**
    * @var array
    */
   public static $labels = array(
-    self::EQUALS      => 'equals',
-    self::SMALLER      => 'smaller',
+    self::EQUALS => 'equals',
+    self::SMALLER => 'smaller',
     self::SMALLER_EQUAL => 'smaller or equal',
-    self::BIGGER       => 'bigger',
+    self::BIGGER => 'bigger',
     self::BIGGER_EQUAL => 'bigger or equal',
-    self::IS_NULL     => 'is empty',
+    self::IS_NULL => 'is empty',
   );
   
   /**

@@ -43,8 +43,8 @@ class LibMessageAddressloader extends PBase
   {
 
     if (!$this->addressLoader) {
-      $db                 = $this->getDb();
-      $this->addressLoader  = $db->newQuery('LibMessageAddressloader');
+      $db  = $this->getDb();
+      $this->addressLoader = $db->newQuery('LibMessageAddressloader');
     }
 
     return $this->addressLoader;
@@ -65,8 +65,8 @@ class LibMessageAddressloader extends PBase
   public function getReceivers($receivers, $type)
   {
 
-    //$receivers    = $message->getReceivers();
-    $contacts     = array();
+    //$receivers = $message->getReceivers();
+    $contacts = array();
 
     foreach ($receivers as $receiver) {
 

@@ -33,36 +33,36 @@ abstract class Controller extends BaseChild
    * action in the request
    * @var string
    */
-  protected $defaultAction  = null;
+  protected $defaultAction = null;
 
   /**
    * @var string the default Action
    */
-  protected $activAction    = null;
+  protected $activAction = null;
 
   /**
    * sub Modul Extention
    * @var array
    */
-  protected $models         = array();
+  protected $models = array();
 
   /**
    * sub Modul Extention
    * @var Model
    */
-  protected $model          = null;
+  protected $model = null;
 
   /**
    * sub Modul Extention
    * @var array
    */
-  protected $modelName      = null;
+  protected $modelName = null;
 
   /**
    * sub Modul Extention
    * @var array
    */
-  protected $viewName      = null;
+  protected $viewName = null;
 
   /**
    * Flag ob der Controller schon initialisiert wurde, und damit einsatzbereit
@@ -70,7 +70,7 @@ abstract class Controller extends BaseChild
    *
    * @var boolean
    */
-  protected $initialized  = false;
+  protected $initialized = false;
 
   /**
    * Alle Methoden welche direkt über ein CallTripple (c=Simple.Example.helloWorld)
@@ -87,7 +87,7 @@ abstract class Controller extends BaseChild
    *  - ? anstelle von & als url trenner
    *
    * @example
-   * protected $publicAccess       = array
+   * protected $publicAccess = array
    * (
    *   'helloworld',
    *   'callable'
@@ -96,7 +96,7 @@ abstract class Controller extends BaseChild
    * @var array
    * @deprecated use service_ prefix and options instead
    */
-  protected $callAble           = array();
+  protected $callAble = array();
 
   /**
    * Liste der Services welche über diesen Controller angeboten werden.
@@ -121,7 +121,7 @@ abstract class Controller extends BaseChild
    * (
    *   'helloworld' => array
    *   (
-   *     'method'    => array('GET', 'POST'),
+   *     'method' => array('GET', 'POST'),
    *     'interface' => array
    *     (
    *        'GET' => array
@@ -143,21 +143,21 @@ abstract class Controller extends BaseChild
    *         )
    *       )
    *     ),
-   *     'views'       => array
+   *     'views' => array
    *     (
    *       'maintab',
    *       'window'
    *     ),
-   *     'access'       => 'auth_required',
+   *     'access' => 'auth_required',
    *     'description' => 'Hello World Method'
-   *     'docref'       => 'some_link',
-   *     'author'       => 'author <author@mail.addr>'
+   *     'docref' => 'some_link',
+   *     'author' => 'author <author@mail.addr>'
    *   )
    *);
    *
    * @var array
    */
-  protected $options           = array();
+  protected $options = array();
 
   /**
    * array with the actions that can be access without be loggedin
@@ -168,7 +168,7 @@ abstract class Controller extends BaseChild
    *   aufgerufen werden.
    *   Die Methodennamen müssen lowercase angegeben werden
    *   @example
-   *   protected $publicAccess       = array
+   *   protected $publicAccess = array
    *   (
    *     'helloworld',
    *     'callable'
@@ -176,7 +176,7 @@ abstract class Controller extends BaseChild
    * }
    * @var array
    */
-  protected $publicAccess       = array();
+  protected $publicAccess = array();
 
   /**
    * makte the public Access whitelist to a blacklist
@@ -189,7 +189,7 @@ abstract class Controller extends BaseChild
    * }
    * @var boolean
    */
-  protected $flipPublicAccess   = false;
+  protected $flipPublicAccess = false;
 
   /**
    * ignore accesslist everything is free accessable
@@ -201,14 +201,14 @@ abstract class Controller extends BaseChild
    * }
    * @var boolean
    */
-  protected $fullAccess         = false;
+  protected $fullAccess = false;
 
   /**
    * @lang de:
    * Der Container mit den Zugriffsrecheten auf Module Ebene
    * @var LibAclConatiner
    */
-  protected $modAccess       = null;
+  protected $modAccess = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // deprecated attributes
@@ -218,7 +218,7 @@ abstract class Controller extends BaseChild
    * @deprecated ui objekte sollen in die view
    * @var array
    */
-  protected $uis            = array();
+  protected $uis = array();
 
   /**
    *
@@ -226,7 +226,7 @@ abstract class Controller extends BaseChild
    * @deprecated
    * @todo prüfen ob das ding problemlos gelöscht werden kann
    */
-  public $listMethod    = null;
+  public $listMethod = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Constructor and other Magics
@@ -318,7 +318,7 @@ abstract class Controller extends BaseChild
     if (!$key || is_array($key))
       $key = $modelKey;
 
-    $modelName    = $modelKey.'_Model';
+    $modelName = $modelKey.'_Model';
     $modelNameOld = 'Model'.$modelKey;
 
     if (!isset($this->models[$key]  )) {
@@ -339,8 +339,7 @@ abstract class Controller extends BaseChild
 
         $this->models[$key] = $model;
       } else {
-        throw new Controller_Exception
-        (
+        throw new Controller_Exception(
           'Internal Error',
           'Failed to load Submodul: '.$modelName
         );
@@ -438,8 +437,8 @@ abstract class Controller extends BaseChild
   public function routeToSubcontroller($conKey, $do, $request, $response)
   {
 
-    $request   = $this->getRequest();
-    $response  = $this->getResponse();
+    $request = $this->getRequest();
+    $response = $this->getResponse();
 
     try {
 
@@ -560,8 +559,8 @@ abstract class Controller extends BaseChild
   public function runIfCallable($methodeKey, $view = null)
   {
 
-    $request   = $this->getRequest();
-    $response  = $this->getResponse();
+    $request = $this->getRequest();
+    $response = $this->getResponse();
 
     $methodeKey = strtolower($methodeKey);
 
@@ -592,7 +591,7 @@ abstract class Controller extends BaseChild
                   array
                   (
                     'method' => $request->method(),
-                    'use'    => implode(' or ', $this->options[$methodeKey]['method'])
+                    'use' => implode(' or ', $this->options[$methodeKey]['method'])
                   )
                 ),
                 Request::METHOD_NOT_ALLOWED
@@ -616,7 +615,7 @@ abstract class Controller extends BaseChild
                    array
                    (
                      'type' => $response->tpl->getType(),
-                     'use'  => implode(' or ', $this->options[$methodeKey]['views'])
+                     'use' => implode(' or ', $this->options[$methodeKey]['views'])
                    )
                  ),
                  Request::NOT_ACCEPTABLE
@@ -925,15 +924,15 @@ abstract class Controller extends BaseChild
   {
 
     if (is_object($message)) {
-      $messageText  = $message->getMessage();
+      $messageText = $message->getMessage();
 
       // Fallback für nicht wbf exceptions
       if (method_exists($message, 'getErrorKey'))
-        $errorCode    = $message->getErrorKey();
+        $errorCode = $message->getErrorKey();
       else
         $errorCode = Response::INTERNAL_ERROR;
     } else {
-      $messageText  = $message;
+      $messageText = $message;
     }
 
     $response = $this->getResponse();
@@ -1089,9 +1088,9 @@ abstract class Controller extends BaseChild
     $throwError = true
   ) {
 
-    $tplEngine  = $this->getTplEngine();
-    $request    = $this->getRequest();
-    $response   = $this->getResponse();
+    $tplEngine = $this->getTplEngine();
+    $request = $this->getRequest();
+    $response = $this->getResponse();
 
     if (!$viewType)
       $viewType =  $tplEngine->type;
@@ -1344,13 +1343,13 @@ abstract class Controller extends BaseChild
   {
 
     $request = $this->getRequest();
-    $orm     = $this->getOrm();
+    $orm = $this->getOrm();
 
     ///TODO was sollte der check auf post?
     if (!$request->method(Request::POST))
       return false;
 
-    $auth     = new LibAuth($this, 'Httppost');
+    $auth = new LibAuth($this, 'Httppost');
     $response = $this->getResponse();
 
     if ($auth->login()) {

@@ -24,15 +24,15 @@
 class EPriority
 {
 
-  const VERY_LOW    = 10;
+  const VERY_LOW = 10;
 
-  const LOW         = 20;
+  const LOW = 20;
 
-  const MEDIUM      = 30;
+  const MEDIUM = 30;
 
-  const HIGH        = 40;
+  const HIGH = 40;
 
-  const VERY_HEIGH  = 50;
+  const VERY_HEIGH = 50;
 
 }//end class EPriority
 

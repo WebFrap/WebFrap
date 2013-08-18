@@ -2,9 +2,9 @@
 
 $thisPath = dirname(__FILE__).'/';
 
-$domainKey   = $VAR->domainKey;
+$domainKey = $VAR->domainKey;
 $domainClass = $VAR->domainClass;
-$parentNode  = $VAR->parentNode;
+$parentNode = $VAR->parentNode;
 
 $backpath = $VAR->node;
 
@@ -13,7 +13,7 @@ $idPrefix = $domainKey.'-backpath-create';
 $formId = 'wgt-form-bdl_'.$idPrefix;
 
 
-$iconAdd  = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
+$iconAdd = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
 
 $langs = $this->model->getLanguages();
 

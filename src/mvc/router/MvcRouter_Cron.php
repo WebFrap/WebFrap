@@ -40,32 +40,32 @@ class MvcRouter_Cron extends Base
    * the active module object
    * @var Module
    */
-  protected $module               = null;
+  protected $module = null;
 
   /**
    * name of the active module
    * @var string
    */
-  protected $moduleName           = null;
+  protected $moduleName = null;
 
   /**
    * the activ controller object
    * @var Controller
    */
-  protected $controller           = null;
+  protected $controller = null;
 
   /**
    * name of the activ controller
    * @var string
    */
-  protected $controllerName       = null;
+  protected $controllerName = null;
 
   /**
    * mappertabelle für shortlinks
    *
    * @var array
    */
-  protected $redirectMap          = array();
+  protected $redirectMap = array();
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic
@@ -82,7 +82,7 @@ class MvcRouter_Cron extends Base
 
     foreach ($conf->redirect as $name => $data) {
       if (isset($_GET[$name])) {
-        $_GET['c']      = $data[0];
+        $_GET['c'] = $data[0];
         $_GET[$data[1]] = $_GET[$name];
         break;
       }
@@ -112,9 +112,9 @@ class MvcRouter_Cron extends Base
     if (defined('MODE_MAINTENANCE')) {
       $map = array
       (
-        Request::MOD  => 'Maintenance',
-        Request::CON  => 'Base',
-        Request::RUN  => 'message'
+        Request::MOD => 'Maintenance',
+        Request::CON => 'Base',
+        Request::RUN => 'message'
       );
       $request->addParam($map);
 
@@ -127,18 +127,18 @@ class MvcRouter_Cron extends Base
       $tmp = explode('.',$command);
       $map = array
       (
-        Request::MOD  => $tmp[0],
-        Request::CON  => $tmp[1],
-        Request::RUN  => $tmp[2]
+        Request::MOD => $tmp[0],
+        Request::CON => $tmp[1],
+        Request::RUN => $tmp[2]
       );
       $request->addParam($map);
     } elseif ($command = $request->data('c', Validator::TEXT)) {
       $tmp = explode('.',$command);
       $map = array
       (
-        Request::MOD  => $tmp[0],
-        Request::CON  => $tmp[1],
-        Request::RUN  => $tmp[2]
+        Request::MOD => $tmp[0],
+        Request::CON => $tmp[1],
+        Request::RUN => $tmp[2]
       );
       $request->addParam($map);
     }
@@ -166,9 +166,9 @@ class MvcRouter_Cron extends Base
     if (defined('MODE_MAINTENANCE')) {
       $map = array
       (
-        Request::MOD  => 'Maintenance',
-        Request::CON  => 'Base',
-        Request::RUN  => 'message'
+        Request::MOD => 'Maintenance',
+        Request::CON => 'Base',
+        Request::RUN => 'message'
       );
       $request->addParam($map);
 
@@ -181,18 +181,18 @@ class MvcRouter_Cron extends Base
       $tmp = explode('.',$command);
       $map = array
       (
-        Request::MOD  => $tmp[0],
-        Request::CON  => $tmp[1],
-        Request::RUN  => $tmp[2]
+        Request::MOD => $tmp[0],
+        Request::CON => $tmp[1],
+        Request::RUN => $tmp[2]
       );
       $request->addParam($map);
     } elseif ($command = $request->data('c', Validator::TEXT)) {
       $tmp = explode('.',$command);
       $map = array
       (
-        Request::MOD  => $tmp[0],
-        Request::CON  => $tmp[1],
-        Request::RUN  => $tmp[2]
+        Request::MOD => $tmp[0],
+        Request::CON => $tmp[1],
+        Request::RUN => $tmp[2]
       );
       $request->addParam($map);
     }
@@ -212,11 +212,11 @@ class MvcRouter_Cron extends Base
   {
 
     // Startseiten Eintrag ins Navmenu
-    $view     = $this->getView();
+    $view = $this->getView();
 
-    $session      = $this->session;
-    $httpRequest  = $this->request;
-    $transaction  = $this->transaction;
+    $session = $this->session;
+    $httpRequest = $this->request;
+    $transaction = $this->transaction;
 
     $user = $this->getUser();
     Debug::console('USER' , $user);
@@ -227,9 +227,9 @@ class MvcRouter_Cron extends Base
         $tmp = explode('.',$session->getStatus('tripple.annon'));
         $map = array
         (
-          Request::MOD  => $tmp[0],
-          Request::CON  => $tmp[1],
-          Request::RUN  => $tmp[2]
+          Request::MOD => $tmp[0],
+          Request::CON => $tmp[1],
+          Request::RUN => $tmp[2]
         );
         $httpRequest->addParam($map);
 
@@ -238,9 +238,9 @@ class MvcRouter_Cron extends Base
         $tmp = explode('.',$session->getStatus('tripple.user'));
         $map = array
         (
-          Request::MOD  => $tmp[0],
-          Request::CON  => $tmp[1],
-          Request::RUN  => $tmp[2]
+          Request::MOD => $tmp[0],
+          Request::CON => $tmp[1],
+          Request::RUN => $tmp[2]
         );
         $httpRequest->addParam($map);
 
@@ -248,8 +248,8 @@ class MvcRouter_Cron extends Base
       }
     }//end if (!$sysClass = $httpRequest->param(Request::MOD,'Cname'))
 
-    $modName      = ucfirst($sysClass);
-    $className    = $modName.'_Module';
+    $modName = ucfirst($sysClass);
+    $className = $modName.'_Module';
 
     $classNameOld = 'Module'.$modName;
 
@@ -295,7 +295,7 @@ class MvcRouter_Cron extends Base
 
     try {
 
-      $classname    = $module.$controller.WBF_CONTROLLER_PREFIX.'_Controller';
+      $classname = $module.$controller.WBF_CONTROLLER_PREFIX.'_Controller';
       $classnameOld = 'Controller'.$module.$controller;
 
       if (WebFrap::classExists($classname)) {
@@ -353,7 +353,7 @@ class MvcRouter_Cron extends Base
       );
 
       // if the controller ist not loadable set an error controller
-      $this->controller     = new Error_Controller($this);
+      $this->controller = new Error_Controller($this);
       $this->controllerName = 'ControllerError';
       //\Reset The Extention
 
@@ -550,9 +550,9 @@ class MvcRouter_Cron extends Base
 
     $map = array
     (
-      Request::MOD  => $tmp[0],
-      Request::CON  => $tmp[1],
-      Request::RUN  => $tmp[2]
+      Request::MOD => $tmp[0],
+      Request::CON => $tmp[1],
+      Request::RUN => $tmp[2]
     );
     $this->redirect($map);
 
@@ -573,9 +573,9 @@ class MvcRouter_Cron extends Base
 
     $map = array
     (
-      Request::MOD  => $tmp[0],
-      Request::CON  => $tmp[1],
-      Request::RUN  => $tmp[2]
+      Request::MOD => $tmp[0],
+      Request::CON => $tmp[1],
+      Request::RUN => $tmp[2]
     );
     $this->redirect($map);
 
@@ -596,9 +596,9 @@ class MvcRouter_Cron extends Base
 
     $map = array
     (
-      Request::MOD  => $tmp[0],
-      Request::CON  => $tmp[1],
-      Request::RUN  => $tmp[2]
+      Request::MOD => $tmp[0],
+      Request::CON => $tmp[1],
+      Request::RUN => $tmp[2]
     );
     $this->redirect($map);
 

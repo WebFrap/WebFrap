@@ -59,12 +59,12 @@ class EMessageTaskStatus
    * @var array
    */
   public static $labels = array(
-    self::OPEN   => 'Open',
-    self::REJECTED   => 'Rejected',
-    self::RUNNING   => 'Running',
-    self::WAITING   => 'Waiting',
-    self::ABORTED   => 'Aborted',
-    self::COMPLETED   => 'Completed',
+    self::OPEN => 'Open',
+    self::REJECTED => 'Rejected',
+    self::RUNNING => 'Running',
+    self::WAITING => 'Waiting',
+    self::ABORTED => 'Aborted',
+    self::COMPLETED => 'Completed',
   );
 
   /**

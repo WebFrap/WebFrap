@@ -25,11 +25,11 @@ class EUserAnnouncementStatus
 // attributes
 //////////////////////////////////////////////////////////////////////////////*/
 
-  const IS_NEW     = 1;
+  const IS_NEW = 1;
 
-  const OPEN       = 2;
+  const OPEN = 2;
 
-  const ARCHIVED   = 3;
+  const ARCHIVED = 3;
 
 } // end class EAnnouncementStatus
 

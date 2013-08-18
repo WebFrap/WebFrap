@@ -36,7 +36,7 @@ class LibUserSettings extends LibSettings
    */
   public function __construct($db, $user, $cache)
   {
-    $this->db   = $db;
+    $this->db = $db;
     $this->user = $user;
     $this->cache = $cache;
   }//end public function __construct */
@@ -115,7 +115,7 @@ SQL;
   {
   
     $orm = $this->db->getOrm();
-    $id  = $data->getId();
+    $id = $data->getId();
     
     $this->settings[$key.'-'.$mask.'-'.$name.'-'.$id] = $data;
     $jsonString = $data->toJson();

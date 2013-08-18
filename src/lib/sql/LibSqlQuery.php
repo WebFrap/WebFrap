@@ -30,42 +30,42 @@ abstract class LibSqlQuery implements Iterator, Countable
   /**
    * @var int
    */
-  const SOURCE_KEY  = 0;
+  const SOURCE_KEY = 0;
 
   /**
    * @var int
    */
-  const FIELD       = 1;
+  const FIELD = 1;
 
   /**
    * @var int
    */
-  const OPERATOR    = 2;
+  const OPERATOR = 2;
 
   /**
    * @var int
    */
-  const VALUE       = 3;
+  const VALUE = 3;
 
   /**
    * @var int
    */
-  const CONDITION   = 4;
+  const CONDITION = 4;
 
   /**
    * @var int
    */
-  const NOT         = 5;
+  const NOT = 5;
 
   /**
    * @var int
    */
-  const CASE_SENSITIVE  = 6;
+  const CASE_SENSITIVE = 6;
 
   /**
    * @var int
    */
-  const HEAD        = 7;
+  const HEAD = 7;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -340,7 +340,7 @@ abstract class LibSqlQuery implements Iterator, Countable
    */
   public function setCondition($condition)
   {
-    $this->condition  = $condition;
+    $this->condition = $condition;
   }//end public function setCondition */
 
   /**

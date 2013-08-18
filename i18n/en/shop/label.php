@@ -9,5 +9,5 @@
 // Some Words and Descriptions
 //////////////////////////////////////////////////////////////////////////////*/
 
-$this->l['wbf.label']['Author']      = 'Autor';
+$this->l['wbf.label']['Author'] = 'Autor';
 

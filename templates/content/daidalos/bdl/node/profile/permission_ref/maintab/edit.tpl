@@ -1,17 +1,17 @@
 <?php
 
-$thisPath  = dirname(__FILE__).'/';
+$thisPath = dirname(__FILE__).'/';
 
-$ref       = $VAR->node;
+$ref = $VAR->node;
 /* @var $ref BdlNodeBaseAreaPermissionRef */
 
-$profile   = $VAR->profile;
+$profile = $VAR->profile;
 /* @var $profile BdlNodeProfile */
 
-$formId   = 'wgt-form-bdl_profile-'.$profile->getName().'-ref-edit-'.$VAR->pathId;
+$formId = 'wgt-form-bdl_profile-'.$profile->getName().'-ref-edit-'.$VAR->pathId;
 $idPrefix = 'profile-ref-edit-'.$VAR->pathId;
 
-$iconAdd  = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
+$iconAdd = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
 
 
 $descriptions = $ref->getDescriptions();

@@ -45,7 +45,7 @@ class LibProtocol_UserAction
   public function write($message, $area = null, $entity = null)
   {
     
-    $vid      = null;
+    $vid = null;
     $idEntity = null;
 
     $this->orm->insert(

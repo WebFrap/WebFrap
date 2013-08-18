@@ -32,7 +32,7 @@ abstract class LibDocumentLatex
    * Temporärer Name für das erzeugte Latex Dokument
    * @var string
    */
-  protected $texFile  = null;
+  protected $texFile = null;
 
   /**
    * Name des Ordners in dem die ganzen Latex Dateien inlcusive log etc angelegt

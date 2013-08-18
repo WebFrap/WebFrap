@@ -34,7 +34,7 @@ final class SParserSql
   public static function arrayToInsert($data , $tabName, $quotes , $schema = null)
   {
 
-    $keys   = '';
+    $keys = '';
     $values = '';
 
     foreach ($data as $key => $value) {

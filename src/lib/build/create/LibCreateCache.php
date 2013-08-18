@@ -37,8 +37,8 @@ class LibBuildCreateCache extends LibBuildAction
     ///TODO implement me
     $cacheFolder = $this->args[1];
 
-    $type        = $this->args[2];
-    $depth       = $this->args[3];
+    $type = $this->args[2];
+    $depth = $this->args[3];
 
     return true;
 

@@ -145,7 +145,7 @@ class LibSerializerDbtoxml extends LibSerializerAbstract
 
     $replace = array
     (
-    '�?'  => '',
+    '�?' => '',
     '&uuml;' => 'ü',
     'Ã¼' => 'ü',
     'Ã¤' => 'ä',

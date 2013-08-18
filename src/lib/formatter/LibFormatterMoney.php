@@ -31,42 +31,42 @@ class LibFormatterMoney
    *
    * @var unknown_type
    */
-  protected static $instance  = null;
+  protected static $instance = null;
 
   /**
    * Enter description here...
    *
    * @var unknown_type
    */
-  protected $moneyEnglish    = null;
+  protected $moneyEnglish = null;
 
   /**
    * Enter description here...
    *
    * @var unknown_type
    */
-  protected $moneyLanguage  = null;
+  protected $moneyLanguage = null;
 
   /**
    * Enter description here...
    *
    * @var unknown_type
    */
-  protected $separatorDec   = ',';
+  protected $separatorDec = ',';
 
   /**
    * Enter description here...
    *
    * @var unknown_type
    */
-  protected $separatorTh    = '.';
+  protected $separatorTh = '.';
 
   /**
    * Enter description here...
    *
    * @var unknown_type
    */
-  protected $size           =  2;
+  protected $size =  2;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Magic
@@ -91,8 +91,8 @@ class LibFormatterMoney
     }
 
     $this->separatorDec = $separatorDec;
-    $this->separatorTh  = $separatorTh;
-    $this->size         = $size;
+    $this->separatorTh = $separatorTh;
+    $this->size = $size;
 
   }//end public function __construct
 
@@ -149,8 +149,8 @@ class LibFormatterMoney
   public function setFormat($separatorDec = ',', $separatorTh = '.' , $size = 2)
   {
     $this->separatorDec = $separatorDec;
-    $this->separatorTh  = $separatorTh;
-    $this->size         = $size;
+    $this->separatorTh = $separatorTh;
+    $this->size = $size;
 
   }//end public function setFormat
 

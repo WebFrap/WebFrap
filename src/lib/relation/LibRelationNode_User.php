@@ -29,7 +29,7 @@ class LibRelationNode_User
    * Die Id des User Objekts
    * @var int
    */
-  public $id  = null;
+  public $id = null;
 
   /**
    * @var string
@@ -85,11 +85,11 @@ class LibRelationNode_User
       }
 
     } else {
-      $this->id        = $userData->userId;
-      $this->nickname  = $userData->nickname;
+      $this->id = $userData->userId;
+      $this->nickname = $userData->nickname;
       $this->firstname = $userData->firstname;
-      $this->lastname  = $userData->lastname;
-      $this->title     = $userData->title;
+      $this->lastname = $userData->lastname;
+      $this->title = $userData->title;
     }
 
   }//end public function __construct */

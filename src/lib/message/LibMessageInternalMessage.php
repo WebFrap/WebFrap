@@ -103,8 +103,8 @@ class LibMessageInternalMessage extends LibMessageAdapter
   public function send($envelop)
   {
 
-    $db   = $this->getDb();
-    $orm  = $db->getOrm();
+    $db = $this->getDb();
+    $orm = $db->getOrm();
 
     // Variables
     if (!$envelop) {
@@ -128,8 +128,8 @@ class LibMessageInternalMessage extends LibMessageAdapter
 
     // Header
     $messageObj->id_sender = $envelop->stack->sender->userId;
-    $messageObj->flag_sender_deleted   = 0;
-    $messageObj->id_sender_status   = EMessageStatus::IS_NEW;
+    $messageObj->flag_sender_deleted = 0;
+    $messageObj->id_sender_status = EMessageStatus::IS_NEW;
     $messageObj->confidential = $envelop->stack->confidential;
 
     $messageObj->priority = $envelop->stack->priority
@@ -181,8 +181,8 @@ class LibMessageInternalMessage extends LibMessageAdapter
       
       $attachmentObj = $orm->newEntity('WbfsysEntityAttachment');
 
-      $attachmentObj->vid       = $messageObj;
-      $attachmentObj->id_file   = $attachment;
+      $attachmentObj->vid = $messageObj;
+      $attachmentObj->id_file = $attachment;
       $attachmentObj->id_entity = $entityObj;
       $orm->save($attachmentObj);
       

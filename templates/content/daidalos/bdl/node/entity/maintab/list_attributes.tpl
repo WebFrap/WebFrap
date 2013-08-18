@@ -1,6 +1,6 @@
 <?php 
 
-$attributes   = $entity->getAttributes();
+$attributes = $entity->getAttributes();
 
 ?>
 

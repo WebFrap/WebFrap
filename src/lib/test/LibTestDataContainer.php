@@ -77,8 +77,8 @@ class LibTestDataContainer
   public function __construct($db)
   {
 
-    $this->db   = $db;
-    $this->orm  = $db->getOrm();
+    $this->db = $db;
+    $this->orm = $db->getOrm();
 
   }//end public function __construct */
 

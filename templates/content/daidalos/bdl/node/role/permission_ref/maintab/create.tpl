@@ -2,19 +2,19 @@
 
 $thisPath = dirname(__FILE__).'/';
 
-$domainKey   = $VAR->domainKey;
+$domainKey = $VAR->domainKey;
 $domainClass = $VAR->domainClass;
-$parentNode  = $VAR->parentNode;
+$parentNode = $VAR->parentNode;
 
 $permission = $VAR->node;
 /*@var $permission BdlBasePermission */
 
 
 $idPrefix = $domainKey.'-permission-ref-create';
-$formId   = 'wgt-form-bdl_'.$idPrefix;
+$formId = 'wgt-form-bdl_'.$idPrefix;
 
 
-$iconAdd  = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
+$iconAdd = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
 
 $langs = $this->model->getLanguages();
 

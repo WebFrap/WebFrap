@@ -115,8 +115,8 @@ class LibDbDeveloperCreatePgTestdata
       $name = $table['name'];
 
       for ($i=1; $i<=100; $i++) {
-        $rowNames   = array();
-        $rowValues  = array();
+        $rowNames = array();
+        $rowValues = array();
 
         foreach ($table->row as $row) {
           $rowName = $row['name'];

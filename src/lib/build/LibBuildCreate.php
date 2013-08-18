@@ -35,14 +35,14 @@ class LibBuildCreate extends LibBuildAction
   public function execute()
   {
 
-    $type         = $this->args[0];
-    $action       = $this->args[1];
+    $type = $this->args[0];
+    $action = $this->args[1];
 
     /*
-      $repoUrl      = $node[2];
+      $repoUrl = $node[2];
       $checkoutPath = $node[3];
-      $repoUser     = $node[4];
-      $repoPwd      = $node[5];
+      $repoUser = $node[4];
+      $repoPwd = $node[5];
     */
 
     $className = 'LibBuildCreate'.ucfirst($type);

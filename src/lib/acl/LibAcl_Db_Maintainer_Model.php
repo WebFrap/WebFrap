@@ -44,7 +44,7 @@ class LibAcl_Db_Maintainer_Model extends LibAcl_Db_Model
   public function hasUserRoleAssignmentsSingleArea($userId, $groupId, $areaId = null)
   {
 
-    $condition  = '';
+    $condition = '';
 
     if ($areaId) {
 

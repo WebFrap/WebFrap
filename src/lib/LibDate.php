@@ -49,16 +49,16 @@ class LibDate
   {
 
     $formDate = '';
-    $now      = time();
+    $now = time();
 
     if ($now > $timeStamp) {
-      $diff       = round($now  - $timeStamp          );
-      $minutes    = round($diff     / self::SEC_MIN   );
-      $hours      = round($minutes  / self::MIN_HOUR  );
-      $days       = round($hours    / self::HOUR_DAY  );
-      $weeks      = round($days     / self::DAY_WEEK  );
-      $months     = round($weeks    / self::WEEK_MONTH);
-      $years      = round($months   / self::MONTH_YEAR);
+      $diff = round($now  - $timeStamp          );
+      $minutes = round($diff     / self::SEC_MIN   );
+      $hours = round($minutes  / self::MIN_HOUR  );
+      $days = round($hours    / self::HOUR_DAY  );
+      $weeks = round($days     / self::DAY_WEEK  );
+      $months = round($weeks    / self::WEEK_MONTH);
+      $years = round($months   / self::MONTH_YEAR);
 
       if (($diff < self::SEC_MIN) || ($minutes <= 1))
         return 'less than 1 minute ago';
@@ -101,13 +101,13 @@ class LibDate
       }
     } else {
 
-      $diff       = ($timeStamp     - $now            );
-      $minutes    = round($diff     / self::SEC_MIN   );
-      $hours      = round($minutes  / self::MIN_HOUR  );
-      $days       = round($hours    / self::HOUR_DAY  );
-      $weeks      = round($days     / self::DAY_WEEK  );
-      $months     = round($weeks    / self::WEEK_MONTH);
-      $years      = round($months   / self::MONTH_YEAR);
+      $diff = ($timeStamp     - $now            );
+      $minutes = round($diff     / self::SEC_MIN   );
+      $hours = round($minutes  / self::MIN_HOUR  );
+      $days = round($hours    / self::HOUR_DAY  );
+      $weeks = round($days     / self::DAY_WEEK  );
+      $months = round($weeks    / self::WEEK_MONTH);
+      $years = round($months   / self::MONTH_YEAR);
 
       if ($days == 0) {
         $formDate = 'Today';

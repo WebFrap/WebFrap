@@ -83,7 +83,7 @@ class Message
    * singleton instance
    * @var LibMessagePool
    */
-  protected static $instance   = null;
+  protected static $instance = null;
 
   /**
    * Init Methode für das Messaging System

@@ -990,11 +990,11 @@ class LibRequestPhp
         $data = null;
       } else {
         $data = array();
-        $data['name']     = $_FILES[$subkey]['name'][$key];
-        $data['type']     = $_FILES[$subkey]['type'][$key];
+        $data['name'] = $_FILES[$subkey]['name'][$key];
+        $data['type'] = $_FILES[$subkey]['type'][$key];
         $data['tmp_name'] = $_FILES[$subkey]['tmp_name'][$key];
-        $data['error']    = $_FILES[$subkey]['error'][$key];
-        $data['size']     = $_FILES[$subkey]['size'][$key];
+        $data['error'] = $_FILES[$subkey]['error'][$key];
+        $data['size'] = $_FILES[$subkey]['size'][$key];
       }
     } else {
       // asume this was just an empty file
@@ -1173,11 +1173,11 @@ class LibRequestPhp
               //$data = null;
             } else {
               $data = array();
-              $data['name']     = $_FILES[$subkey]['name'][$key];
-              $data['type']     = $_FILES[$subkey]['type'][$key];
+              $data['name'] = $_FILES[$subkey]['name'][$key];
+              $data['type'] = $_FILES[$subkey]['type'][$key];
               $data['tmp_name'] = $_FILES[$subkey]['tmp_name'][$key];
-              $data['error']    = $_FILES[$subkey]['error'][$key];
-              $data['size']     = $_FILES[$subkey]['size'][$key];
+              $data['error'] = $_FILES[$subkey]['error'][$key];
+              $data['size'] = $_FILES[$subkey]['size'][$key];
             }
           } else {
             continue;
@@ -1507,7 +1507,7 @@ class LibRequestPhp
     $response = $this->getResponse();
 
     // get Validator from Factory
-    $filter   = Validator::getActive();
+    $filter = Validator::getActive();
     $filtered = array();
 
     foreach ($post as $rowPos => $row) {
@@ -1571,7 +1571,7 @@ class LibRequestPhp
   {
 
     // get Validator from Factory
-    $filter   = Validator::getActive();
+    $filter = Validator::getActive();
     $response = $this->getResponse();
 
     $filtered = array();
@@ -1635,7 +1635,7 @@ class LibRequestPhp
   public function checkMultiIds($key , $subkey = null)
   {
 
-    $ids    = array();
+    $ids = array();
 
     if ($subkey) {
       foreach ($_POST[$key][$subkey] as $val) {
@@ -1851,7 +1851,7 @@ class LibRequestPhp
 )
   {
 
-    $orm      = $this->getOrm();
+    $orm = $this->getOrm();
 
     $filtered = $this->checkMultiFormInput
     (
@@ -1892,7 +1892,7 @@ class LibRequestPhp
   public function validateMultiUpdate($entityName, $keyName, $fields = array(), $required = array())
   {
 
-    $orm      = $this->getOrm();
+    $orm = $this->getOrm();
     $response = $this->getResponse();
 
     $filtered = $this->checkMultiFormInput
@@ -1953,7 +1953,7 @@ class LibRequestPhp
     $defaults = array()
   ) {
 
-    $orm      = $this->getOrm();
+    $orm = $this->getOrm();
 
     $filtered = $this->checkMultiFormInput(
       $orm->getValidationData($entityName, $fields),

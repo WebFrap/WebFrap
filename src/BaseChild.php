@@ -34,13 +34,13 @@ abstract class BaseChild
    * Der aktive ACL Adapter
    * @var LibAclAdapter_Db
    */
-  public $acl          = null;
+  public $acl = null;
 
   /**
    * Der dem Objekt zugewiesene Access Container
    * @var LibAclContainer
    */
-  public $access       = null;
+  public $access = null;
 
   /**
    * Die Haupt Datenbank Verbindung, wir gehen davon aus, das in der Regel nur
@@ -49,92 +49,92 @@ abstract class BaseChild
    * Davon ein Key vorliegen um diese identifizieren und ansprechen zu können.
    * @var LibDbConnection
    */
-  public $db           = null;
+  public $db = null;
 
   /**
    * Der Haupt Cache Adapter
    * Regel alle Caching Level
    * @var LibCacheAdapter
    */
-  public $cache        = null;
+  public $cache = null;
 
   /**
    * L1 Cache
    * @var LibCacheAdapter
    */
-  public $cacheL1        = null;
+  public $cacheL1 = null;
 
   /**
    * L2 Cache
    * @var LibCacheAdapter
    */
-  public $cacheL2        = null;
+  public $cacheL2 = null;
 
   /**
    * L3 Cache
    * @var LibCacheAdapter
    */
-  public $cacheL3        = null;
+  public $cacheL3 = null;
 
   /**
    * Das Standard Konfigurations Objekt
    * @var LibConf
    */
-  public $conf         = null;
+  public $conf = null;
 
   /**
    * Das Haupt Internationalisierungs Element
    * @var LibI18nPhp
    */
-  public $i18n         = null;
+  public $i18n = null;
 
   /**
    * Das aktive Request Objekt mit dem der Aufruf des Scriptes / Services getriggert
    * wurde
    * @var LibRequestPhp
    */
-  public $request      = null;
+  public $request = null;
 
   /**
    * Das Response Objekt, welches automatisch in den Kanal Schreib über welchen
    * auch der Aufruf kam
    * @var LibResponseHttp
    */
-  public $response      = null;
+  public $response = null;
 
   /**
    * @deprecated die Registry soll nichtmehr verwendet werden
    * @var Registry
    */
-  public $registry     = null;
+  public $registry = null;
 
   /**
    * Das Session Objekt
    * @var LibSessionPhp
    */
-  public $session      = null;
+  public $session = null;
 
   /**
    * @notYetImplemented Kommt noch
    * @var Transaction
    */
-  public $transaction  = null;
+  public $transaction = null;
 
   /**
    * Das Userobjekt mit den Informationen über den aktuell angemeldeten Benutzer
    * @var User
    */
-  public $user         = null;
+  public $user = null;
 
   /**
    * @var LibTemplate
    */
-  public $view         = null;
+  public $view = null;
 
   /**
    * @var Message
    */
-  public $message      = null;
+  public $message = null;
   
   /**
    * @var Data Providers
@@ -152,23 +152,23 @@ abstract class BaseChild
    * }
    * @var LibTemplate
    */
-  public $tpl    = null;
+  public $tpl = null;
 
   /**
    * @deprecated use $tpl
    * @var LibTemplate
    */
-  public $tplEngine    = null;
+  public $tplEngine = null;
 
   /**
    * @var Base
    */
-  public $env       = null;
+  public $env = null;
 
   /**
    * @var TFlag
    */
-  public $params       = null;
+  public $params = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // getter & setter methodes

@@ -30,7 +30,7 @@ class LibDbExportMysqlToPg
    *
    * @var unknown_type
    */
-  protected $dataBaseMysql      = null;
+  protected $dataBaseMysql = null;
 
   /**
    * Enter description here...

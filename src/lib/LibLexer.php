@@ -40,17 +40,17 @@ class LibLexer
    *
    * @var array
    */
-  protected $tokens       = array();
+  protected $tokens = array();
 
   /**
    * @var array
    */
-  protected $rawMatches   = array();
+  protected $rawMatches = array();
 
   /**
    * @var LibParserRegistry
    */
-  protected $registry    = null;
+  protected $registry = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // constructor
@@ -62,7 +62,7 @@ class LibLexer
   public function __construct($registry = null)
   {
     if ($registry)
-      $this->registry  =  $registry;
+      $this->registry =  $registry;
 
     $this->loadLexerData();
 
@@ -81,7 +81,7 @@ class LibLexer
    */
   public function setRegistry($registry)
   {
-    $this->registry  =  $registry;
+    $this->registry =  $registry;
   }//end public function setRegistry */
 
   /**
@@ -236,7 +236,7 @@ class LibLexer
   public function until($till)
   {
 
-    $token  = $this->next();
+    $token = $this->next();
 
     if (false === $token)
       throw new LibParser_Exception('Unexpected end of tokens');
@@ -362,12 +362,12 @@ class LibLexer
   public function getTokensTill($till)
   {
 
-    $tokens   = array();
-    $proceed  = true;
+    $tokens = array();
+    $proceed = true;
 
     while ($proceed) {
 
-      $token  = $this->next();
+      $token = $this->next();
 
       if (false === $token)
         throw new LibParser_Exception('PARSER ERROR');
@@ -389,9 +389,9 @@ class LibLexer
   public function getSurrounded($left, $right)
   {
 
-    $level    = 0;
-    $tokens   = array();
-    $proceed  = true;
+    $level = 0;
+    $tokens = array();
+    $proceed = true;
 
     $first = $this->next();
 
@@ -404,7 +404,7 @@ class LibLexer
 
     while ($proceed) {
 
-      $token    = $this->next();
+      $token = $this->next();
 
       if (false === $token)
         throw new LibParser_Exception('PARSER ERROR');
@@ -430,8 +430,8 @@ class LibLexer
   public function clean()
   {
 
-    $this->tokens       = array();
-    $this->rawMatches   = array();
+    $this->tokens = array();
+    $this->rawMatches = array();
 
   }
 

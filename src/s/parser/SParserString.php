@@ -134,7 +134,7 @@ final class SParserString
       $camelCase .= ucfirst($case);
     }
 
-    $tmp2       = explode('-' , trim($camelCase));
+    $tmp2 = explode('-' , trim($camelCase));
     $camelCase2 = array();
 
     foreach ($tmp2 as $case2) {
@@ -213,9 +213,9 @@ final class SParserString
       return ucfirst($str);
     }
 
-    $tmp   = explode('_' , trim($str));
+    $tmp = explode('_' , trim($str));
 
-    $mod   = ucfirst(array_shift($tmp)) ;
+    $mod = ucfirst(array_shift($tmp)) ;
     $contr = '';
 
     foreach ($tmp as $node) {
@@ -294,12 +294,12 @@ final class SParserString
   public static function setIndentinon($code, $idention)
   {
 
-    $lines     = explode(NL, $code);
-    $indLines  = array();
+    $lines = explode(NL, $code);
+    $indLines = array();
 
-    $ident     = str_repeat('  ', $idention);
+    $ident = str_repeat('  ', $idention);
 
-    $newCode   = '';
+    $newCode = '';
 
     foreach ($lines as $line) {
       $indLines[] = $ident.$line;
@@ -348,20 +348,20 @@ final class SParserString
   public static function nameToAccessKey($name)
   {
     $clean = array(
-      '&'  => '_',
-      '-'  => '_',
-      ' '  => '_',
-      '/'  => '_',
-      '@'  => '_',
-      "'"  => '_',
-      '"'  => '_',
-      ':'  => '_',
-      '^'  => '_',
-      '+'  => '_',
-      '__'  => '_',
+      '&' => '_',
+      '-' => '_',
+      ' ' => '_',
+      '/' => '_',
+      '@' => '_',
+      "'" => '_',
+      '"' => '_',
+      ':' => '_',
+      '^' => '_',
+      '+' => '_',
+      '__' => '_',
     );
 
-    $tmp  = explode('(',$name);
+    $tmp = explode('(',$name);
     $tmp2 = explode(',',$tmp[0]);
 
     $key = mb_strtolower(
@@ -383,7 +383,7 @@ final class SParserString
   {
 
       $start = 0;
-      $end   = 1;
+      $end = 1;
       $package = '';
 
       $length = mb_strlen($className);
@@ -414,7 +414,7 @@ final class SParserString
   public static function camelCaseToDot($className  )
   {
     $start = 0;
-    $end   = 1;
+    $end = 1;
     $package = '';
 
     $length = mb_strlen($className);
@@ -444,7 +444,7 @@ final class SParserString
   public static function camelCaseToName($className  )
   {
     $start = 0;
-    $end   = 1;
+    $end = 1;
     $package = '';
 
     $length = mb_strlen($className);
@@ -478,7 +478,7 @@ final class SParserString
 
     $level = 0;
     $start = 0;
-    $end   = 1;
+    $end = 1;
     $package = '';
 
     $length = mb_strlen($className);
@@ -541,7 +541,7 @@ final class SParserString
    */
   public static function getFirstHump($className)
   {
-    $end   = 1;
+    $end = 1;
 
     $hump = $className;
 
@@ -566,7 +566,7 @@ final class SParserString
   public static function getBodyHumps($className)
   {
 
-    $end   = 1;
+    $end = 1;
 
     $hump = $className;
 
@@ -593,7 +593,7 @@ final class SParserString
   {
     $level = 0;
     $start = 0;
-    $end   = 1;
+    $end = 1;
     $package = '';
 
     $length = mb_strlen($className);
@@ -628,8 +628,8 @@ final class SParserString
   public static function geti18nPath($name  )
   {
 
-    $conf  = Conf::getActive();
-    $lang     = $conf->getStatus('lang');
+    $conf = Conf::getActive();
+    $lang = $conf->getStatus('lang');
     $lPackage = $conf->getStatus('lang_path');
 
     $folder = PATH_GW.'i18n/'.$lPackage.'/'.$lang.'/' ;
@@ -659,7 +659,7 @@ final class SParserString
 
     $level = 0;
     $start = 0;
-    $end   = 1;
+    $end = 1;
     $package = '';
 
     $length = mb_strlen($eventName);
@@ -989,8 +989,8 @@ final class SParserString
       return $back;
     }
 
-    $back['folder']  = substr($filename , 0 ,  $pos);
-    $back['file']  = substr($filename , ($pos+1));
+    $back['folder'] = substr($filename , 0 ,  $pos);
+    $back['file'] = substr($filename , ($pos+1));
 
     return $back;
 

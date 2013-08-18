@@ -65,8 +65,8 @@ class DaoModuleLoader extends Dao
   public static function load($mapName, $modName)
   {
 
-    $subModules  = array();
-    $modules     = array();
+    $subModules = array();
+    $modules = array();
 
     ///TODO find a solution how to add a hirachie
     if (is_dir(PATH_GW.'conf/include/'.$mapName)  ) {

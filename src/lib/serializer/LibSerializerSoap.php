@@ -38,7 +38,7 @@ class LibSerializerSoap extends LibSerializerAbstract
    *
    * @var array
    */
-  protected $data      = array();
+  protected $data = array();
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Singleton

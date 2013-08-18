@@ -29,7 +29,7 @@ class LibMessageSender
    * Die Id des User Objekts
    * @var int
    */
-  public $userId  = null;
+  public $userId = null;
 
   /**
    * @var string
@@ -65,22 +65,22 @@ class LibMessageSender
 
       $data = $user->getData();
 
-      $this->userId    = $user->getId();
-      $this->userName  = $data['name'];
+      $this->userId = $user->getId();
+      $this->userName = $data['name'];
       $this->firstName = $data['firstname'];
-      $this->lastName  = $data['lastname'];
-      $this->fullName  = $user->getFullName();
+      $this->lastName = $data['lastname'];
+      $this->fullName = $user->getFullName();
     } else {
 
       //$orm = Webfrap::$env->getOrm();
 
       $person = $user->followLink('id_person');
 
-      $this->userId    = $user->getId();
-      $this->userName  = $user->name;
+      $this->userId = $user->getId();
+      $this->userName = $user->name;
       $this->firstName = $person->firstname;
-      $this->lastName  = $person->lastname;
-      $this->fullName  = $person->lastname.", ".$person->firstname;
+      $this->lastName = $person->lastname;
+      $this->fullName = $person->lastname.", ".$person->firstname;
 
     }
 

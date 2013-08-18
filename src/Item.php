@@ -30,7 +30,7 @@ class Item extends BaseChild
    * sub Modul Extention
    * @var array
    */
-  protected $models         = array();
+  protected $models = array();
 
   /**
    * @var Model
@@ -90,7 +90,7 @@ class Item extends BaseChild
     if (!$key)
       $key = $modelName;
 
-    $modelClass    = $modelName.'_Model';
+    $modelClass = $modelName.'_Model';
 
     if (!isset($this->models[$key]  )) {
       if (Webfrap::classExists($modelClass)) {
@@ -132,8 +132,8 @@ class Item extends BaseChild
   public function loadUi($uiName)
   {
 
-    $uiName       = ucfirst($uiName);
-    $className    = $uiName.'_Ui';
+    $uiName = ucfirst($uiName);
+    $className = $uiName.'_Ui';
 
     if (Webfrap::classExists($className)) {
       $ui = new $className($this);
@@ -163,7 +163,7 @@ class Item extends BaseChild
       ? ucfirst($type)
       : ($key);
 
-    $className    = $type.'_Form';
+    $className = $type.'_Form';
     $classNameOld = 'WgtForm'.$type;
 
     if (!Webfrap::classExists($className)) {

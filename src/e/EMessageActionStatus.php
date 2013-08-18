@@ -39,8 +39,8 @@ class EMessageActionStatus
    * @var array
    */
   public static $labels = array(
-    self::ANNOUNCEMENT   => 'Announcement',
-    self::WALLMESSAGE   => 'Wallmessage',
+    self::ANNOUNCEMENT => 'Announcement',
+    self::WALLMESSAGE => 'Wallmessage',
   );
 
   /**

@@ -61,7 +61,7 @@ class TMatrix implements ITObject, Iterator, Countable
     $tmp = explode('_',$key);
 
     if (count($tmp) == 0) {
-      $this->pool[$key]  = $value;
+      $this->pool[$key] = $value;
     } else {
       $this->pool[$tmp[0]][$tmp[1]] = $value;
     }

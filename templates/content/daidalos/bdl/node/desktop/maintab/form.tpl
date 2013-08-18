@@ -7,16 +7,16 @@ $desktop = $VAR->node;
 /*@var $enum BdlNodeDesktop */
 
 
-$idPrefix   = 'desktop-'.$desktop->getName();
-$nodeKey    = 'desktop';
-$formId     = 'wgt-form-bdl_'.$idPrefix;
+$idPrefix = 'desktop-'.$desktop->getName();
+$nodeKey = 'desktop';
+$formId = 'wgt-form-bdl_'.$idPrefix;
 
 $iconDel = Wgt::icon( 'control/delete.png', 'xsmall', 'Delete' );
 $iconAdd = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
 
-$labels       = $desktop->getLabels();
-$shortDescs   = $desktop->getShortDesc();
-$docus        = $desktop->getDocus();
+$labels = $desktop->getLabels();
+$shortDescs = $desktop->getShortDesc();
+$docus = $desktop->getDocus();
 
 $langs = $this->model->getLanguages();
 

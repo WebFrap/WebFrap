@@ -31,15 +31,15 @@ class LibDbImportXmltoDbPostgresql
    */
   protected $quotesMap = array
   (
-  'int'       =>  false,
-  'float'     =>  false,
-  'text'      =>  true,
-  'varchar'   =>  true,
-  'numeric'   =>  false,
-  'decimal'   =>  false,
-  'char'      =>  true,
-  'date'      =>  true,
-  'time'      =>  true,
+  'int' =>  false,
+  'float' =>  false,
+  'text' =>  true,
+  'varchar' =>  true,
+  'numeric' =>  false,
+  'decimal' =>  false,
+  'char' =>  true,
+  'date' =>  true,
+  'time' =>  true,
   'timestamp' =>  true
   );
 

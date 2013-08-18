@@ -31,7 +31,7 @@ abstract class Model extends BaseChild
    * Die vorhadenen Registry keys
    * @var array
    */
-  protected $regKeys  = array();
+  protected $regKeys = array();
 
   /**
    * sub Modul Extention
@@ -93,7 +93,7 @@ abstract class Model extends BaseChild
    */
   public function register($key, $value)
   {
-    $this->regKeys[$key]  = true;
+    $this->regKeys[$key] = true;
     $this->registry[$key] = $value;
   }//end public function register */
 

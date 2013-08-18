@@ -1,10 +1,10 @@
 <?php 
 
-$dateStart  = new DateTime( '1970-01-01' );
-$dateEnd    = new DateTime( '2038-01-01'   );
-$interval   = new DateInterval('P1D');
+$dateStart = new DateTime( '1970-01-01' );
+$dateEnd = new DateTime( '2038-01-01'   );
+$interval = new DateInterval('P1D');
 
-$period     = new DatePeriod( $dateStart, $interval , $dateEnd );
+$period = new DatePeriod( $dateStart, $interval , $dateEnd );
 
 
 // fillup

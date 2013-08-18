@@ -27,14 +27,14 @@ class LibUploadEntity extends LibUploadAdapter
    * Enter description here ...
    * @var Entity
    */
-  public $entity    = null;
+  public $entity = null;
 
   /**
    *
    * Enter description here ...
    * @var string
    */
-  public $attrName  = null;
+  public $attrName = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 //
@@ -52,17 +52,17 @@ class LibUploadEntity extends LibUploadAdapter
   {
 
     if (is_object($fileData)) {
-      $this->oldname  = $fileData->oldname;
-      $this->tmpname  = $fileData->tmpname;
-      $this->type     = $fileData->type;
-      $this->size     = $fileData->size;
-      $this->error    = $fileData->error;
+      $this->oldname = $fileData->oldname;
+      $this->tmpname = $fileData->tmpname;
+      $this->type = $fileData->type;
+      $this->size = $fileData->size;
+      $this->error = $fileData->error;
     } else {
-      $this->oldname  = $fileData['name'];
-      $this->tmpname  = $fileData['tmp_name'];
-      $this->type     = $fileData['type'];
-      $this->size     = $fileData['size'];
-      $this->error    = $fileData['error'];
+      $this->oldname = $fileData['name'];
+      $this->tmpname = $fileData['tmp_name'];
+      $this->type = $fileData['type'];
+      $this->size = $fileData['size'];
+      $this->error = $fileData['error'];
     }
 
     Debug::console('in upload '.$this->oldname);
@@ -98,7 +98,7 @@ class LibUploadEntity extends LibUploadAdapter
 
     Debug::console('In save of file upload');
 
-    $id       = $this->entity->getId();
+    $id = $this->entity->getId();
 
     $filePath = PATH_GW.'data/uploads/';
     $filePath .= $this->entity->getTable().'/'.$this->attrName.'/';

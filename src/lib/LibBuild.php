@@ -46,12 +46,12 @@ class LibBuild
   /**
    * @param string
    */
-  protected $buildConf  = null;
+  protected $buildConf = null;
 
   /**
    * @param string
    */
-  protected $build      = array();
+  protected $build = array();
 
 /*//////////////////////////////////////////////////////////////////////////////
 // nethodes

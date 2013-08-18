@@ -55,7 +55,7 @@ class LibRichtextNode
   public function __construct($value, $compiler)
   {
 
-    $this->value    = $value;
+    $this->value = $value;
     $this->compiler = $compiler;
 
   }//end public function __construct */
@@ -77,7 +77,7 @@ class LibRichtextNode
   {
 
     $newVal = $this->renderValue();
-    $key    = "[[{$this->key}:{$this->value}]]";
+    $key = "[[{$this->key}:{$this->value}]]";
 
     Debug::console("replace key $key");
 

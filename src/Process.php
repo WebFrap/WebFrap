@@ -70,13 +70,13 @@ abstract class Process extends PBase
    * Der key
    * @var string
    */
-  public $activKey    = null;
+  public $activKey = null;
 
   /**
    * Der key
    * @var string
    */
-  public $oldKey    = null;
+  public $oldKey = null;
 
   /**
    * Der Name des Prozesses
@@ -84,7 +84,7 @@ abstract class Process extends PBase
    *
    * @var string
    */
-  public $name        = null;
+  public $name = null;
 
   /**
    * Die Beschreibung für den Prozess
@@ -97,43 +97,43 @@ abstract class Process extends PBase
    * Alle Rollen die irgendwie mit dem Prozess in verbindung sind
    * @var array
    */
-  public $roles       = array();
+  public $roles = array();
 
   /**
    * Prozess nodes
    * @var array
    */
-  public $nodes       = array();
+  public $nodes = array();
 
   /**
    * Phasen des Prozesses
    * @var array
    */
-  public $phases       = array();
+  public $phases = array();
 
   /**
    * Mögliche Katen des Prozesses
    * @var array
    */
-  public $edges       = array();
+  public $edges = array();
 
   /**
    * States Metadata
    * @var array
    */
-  public $states       = null;
+  public $states = null;
 
   /**
    * States Metadata
    * @var stdClass json data
    */
-  public $statesData       = null;
+  public $statesData = null;
 
   /**
    * Die Datenbank Id des Prozesses
    * @var int
    */
-  public $processId   = null;
+  public $processId = null;
 
   /**
    * Der Default Node kommt dann zur Anwendung, wenn ein Datensatz zwar existiert
@@ -216,20 +216,20 @@ abstract class Process extends PBase
    * Die relative ID für die
    * @var int
    */
-  protected $relativeId  = null;
+  protected $relativeId = null;
 
   /**
    * Alle möglichen security areas
    * @var array
    */
-  protected $areas  = array(
+  protected $areas = array(
   );
 
   /**
    * liste mit den relativen ids
    * @var array
    */
-  protected $ids  = array(
+  protected $ids = array(
   );
 
   /**
@@ -397,8 +397,8 @@ abstract class Process extends PBase
     Debug::console('get active edges');
 
     /* @var $acl LibAclAdapter_Db */
-    $acl   = $this->getAcl();
-    $user  = $this->getUser();
+    $acl = $this->getAcl();
+    $user = $this->getUser();
 
     $profileName = $user->getProfileName();
 
@@ -453,11 +453,11 @@ abstract class Process extends PBase
 
             $roles = $access['roles'];
 
-            $area  = (isset($access['area']) && isset($this->areas[$access['area']]))
+            $area = (isset($access['area']) && isset($this->areas[$access['area']]))
               ? $this->areas[$access['area']]
               : null;
 
-            $id  = (isset($access['id']) && isset($this->ids[$access['id']]))
+            $id = (isset($access['id']) && isset($this->ids[$access['id']]))
               ? $this->ids[$access['id']]
               : null;
 
@@ -475,7 +475,7 @@ abstract class Process extends PBase
 
             $roles = $access['roles'];
 
-            $area  = isset($access['area']) && isset($this->areas[$access['area']])
+            $area = isset($access['area']) && isset($this->areas[$access['area']])
               ? $this->areas[$access['area']]
               : null;
 
@@ -598,8 +598,8 @@ abstract class Process extends PBase
       return array();
     }
 
-    $message       = $this->getMessage();
-    $responsibles  = array();
+    $message = $this->getMessage();
+    $responsibles = array();
 
     $dataResp = $this->nodes[$this->activKey]['responsible'];
 
@@ -618,11 +618,11 @@ abstract class Process extends PBase
 
           $roles = $resp['roles'];
 
-          $area  = isset($resp['area']) && isset($this->areas[$resp['area']])
+          $area = isset($resp['area']) && isset($this->areas[$resp['area']])
             ? $this->areas[$resp['area']]
             : null;
 
-          $id  = isset($resp['id']) && isset($this->ids[$resp['id']])
+          $id = isset($resp['id']) && isset($this->ids[$resp['id']])
             ? $this->ids[$resp['id']]
             : null;
 
@@ -649,7 +649,7 @@ abstract class Process extends PBase
 
           $roles = $access['roles'];
 
-          $area  = isset($access['area']) && isset($this->areas[$access['area']])
+          $area = isset($access['area']) && isset($this->areas[$access['area']])
             ? $this->areas[$access['area']]
             : null;
 
@@ -718,8 +718,8 @@ abstract class Process extends PBase
   public function checkUserAccess($edge  )
   {
 
-    $access     = false;
-    $edgeRoles  = array();
+    $access = false;
+    $edgeRoles = array();
 
     if (isset($edge['roles']))
       $edgeRoles = $edge['roles'];
@@ -754,13 +754,13 @@ abstract class Process extends PBase
       (
         'node2' => array
         (
-          'label'     => 'bar fu',
-          'order'     => 1,
-          'type'      => 'forward',
-          'icon'      => '',
-          'color'     => '',
-          'roles'     => array('project_manager'),
-          'actions'   => array
+          'label' => 'bar fu',
+          'order' => 1,
+          'type' => 'forward',
+          'icon' => '',
+          'color' => '',
+          'roles' => array('project_manager'),
+          'actions' => array
           (
             'default' => 'action_node1_node2_default'
           )
@@ -784,17 +784,17 @@ abstract class Process extends PBase
     (
       'init' => array
       (
-        'label'   => 'New',
-        'order'   => 1,
-        'icon'    => 'process/new.png',
-        'color'   => 'default',
-        'phase'   => 'default',
-        'responsible'    => array
+        'label' => 'New',
+        'order' => 1,
+        'icon' => 'process/new.png',
+        'color' => 'default',
+        'phase' => 'default',
+        'responsible' => array
         (
           'test',
           'test_2',
         ),
-        'description'  => 'New'
+        'description' => 'New'
       ),
     );
     */
@@ -814,15 +814,15 @@ abstract class Process extends PBase
     (
       'init' => array
       (
-        'label'   => 'New',
-        'order'   => 1,
-        'icon'    => 'process/new.png',
-        'responsible'    => array
+        'label' => 'New',
+        'order' => 1,
+        'icon' => 'process/new.png',
+        'responsible' => array
         (
           'test',
           'test_2',
         ),
-        'description'  => 'New',
+        'description' => 'New',
         'display' = array()
       ),
     );
@@ -843,14 +843,14 @@ abstract class Process extends PBase
     (
       'some_state' => array
       (
-        'label'   => 'New',
-        'type'    => 'checkbox',
-        'responsible'    => array
+        'label' => 'New',
+        'type' => 'checkbox',
+        'responsible' => array
         (
           'test',
           'test_2',
         ),
-        'description'  => 'New'
+        'description' => 'New'
       ),
     );
     */
@@ -872,9 +872,9 @@ abstract class Process extends PBase
   public function loadProcessModel($db  )
   {
 
-    $conType    = $db->getConnectionDbms();
+    $conType = $db->getConnectionDbms();
 
-    $className  = 'LibProcess_Model_'.$conType;
+    $className = 'LibProcess_Model_'.$conType;
 
     if (Webfrap::classExists($className)) {
       $this->model = $className($db);
@@ -966,9 +966,9 @@ abstract class Process extends PBase
   {
 
     if ($this->model->requestedEdge) {
-      $this->newNode    = $this->model->requestedEdge;
+      $this->newNode = $this->model->requestedEdge;
     } else {
-      $this->newNode    = $this->oldKey;
+      $this->newNode = $this->oldKey;
     }
 
     if (!isset($this->nodes[$this->newNode])) {
@@ -1441,11 +1441,11 @@ abstract class Process extends PBase
 
     $roles = $resp['roles'];
 
-    $area  = isset($resp['area']) && isset($this->areas[$resp['area']])
+    $area = isset($resp['area']) && isset($this->areas[$resp['area']])
       ? $this->areas[$resp['area']]
       : null;
 
-    $id  = isset($resp['id']) && isset($this->ids[$resp['id']])
+    $id = isset($resp['id']) && isset($this->ids[$resp['id']])
       ? $this->ids[$resp['id']]
       : null;
 

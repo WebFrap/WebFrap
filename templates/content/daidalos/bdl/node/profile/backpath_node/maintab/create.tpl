@@ -5,10 +5,10 @@ $thisPath = dirname(__FILE__).'/';
 $permission = $VAR->node;
 /*@var $permission BdlEntity */
 $idPrefix = 'profile-backpath_node-create';
-$formId   = 'wgt-form-bdl_'.$idPrefix;
+$formId = 'wgt-form-bdl_'.$idPrefix;
 
 
-$iconAdd  = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
+$iconAdd = Wgt::icon( 'control/add.png', 'xsmall', 'Add' );
 
 $langs = $this->model->getLanguages();
 

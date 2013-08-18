@@ -39,30 +39,30 @@ class LibRequestSubrequest
    * post data array
    * @var array
    */
-  protected $data   = array();
+  protected $data = array();
 
   /**
    * files data array
    * @var array
    */
-  protected $files  = array();
+  protected $files = array();
 
   /**
    *
    * @var LibDbConnection
    */
-  protected $db    = null;
+  protected $db = null;
 
   /**
    *
    * @var LibDbOrm
    */
-  protected $orm    = null;
+  protected $orm = null;
 
   /**
    * @var Validator
    */
-  protected $validator  = null;
+  protected $validator = null;
 
   /**
    * @var string
@@ -89,7 +89,7 @@ class LibRequestSubrequest
     // set default orm
     if (!$this->orm) {
       if (!$this->db)
-        $this->db  = Webfrap::$env->getDb();
+        $this->db = Webfrap::$env->getDb();
 
       $this->orm = $this->db->getOrm();
     }
@@ -105,7 +105,7 @@ class LibRequestSubrequest
   {
     // set default orm
     if (!$this->db)
-      $this->db  = Webfrap::$env->getDb();
+      $this->db = Webfrap::$env->getDb();
 
     return $this->db;
 
@@ -156,10 +156,10 @@ class LibRequestSubrequest
   {
 
     $this->request = $request;
-    $this->data    = $data;
-    $this->files   = $files;
+    $this->data = $data;
+    $this->files = $files;
 
-    $this->db  = $request->getDb();
+    $this->db = $request->getDb();
 
   }//end public function __construct */
 
@@ -583,11 +583,11 @@ class LibRequestSubrequest
         $data = null;
       } else {
         $data = array();
-        $data['name']     = $this->files[$subkey]['name'][$key];
-        $data['type']     = $this->files[$subkey]['type'][$key];
+        $data['name'] = $this->files[$subkey]['name'][$key];
+        $data['type'] = $this->files[$subkey]['type'][$key];
         $data['tmp_name'] = $this->files[$subkey]['tmp_name'][$key];
-        $data['error']    = $this->files[$subkey]['error'][$key];
-        $data['size']     = $this->files[$subkey]['size'][$key];
+        $data['error'] = $this->files[$subkey]['error'][$key];
+        $data['size'] = $this->files[$subkey]['size'][$key];
       }
 
     } else {
@@ -699,11 +699,11 @@ class LibRequestSubrequest
               $data = null;
             } else {
               $data = array();
-              $data['name']     = $this->files[$subkey]['name'][$key];
-              $data['type']     = $this->files[$subkey]['type'][$key];
+              $data['name'] = $this->files[$subkey]['name'][$key];
+              $data['type'] = $this->files[$subkey]['type'][$key];
               $data['tmp_name'] = $this->files[$subkey]['tmp_name'][$key];
-              $data['error']    = $this->files[$subkey]['error'][$key];
-              $data['size']     = $this->files[$subkey]['size'][$key];
+              $data['error'] = $this->files[$subkey]['error'][$key];
+              $data['size'] = $this->files[$subkey]['size'][$key];
             }
           } else {
             $data = null;
@@ -810,7 +810,7 @@ class LibRequestSubrequest
     $response = $this->getResponse();
 
     // get Validator from Factory
-    $filter   = $this->getValidator();
+    $filter = $this->getValidator();
     $filtered = array();
 
     foreach ($this->data[$subkey] as $rowPos => $row) {
@@ -859,7 +859,7 @@ class LibRequestSubrequest
   {
 
     // get Validator from Factory
-    $filter   = $this->getValidator();
+    $filter = $this->getValidator();
     $response = $this->getResponse();
 
     $filtered = array();
@@ -921,7 +921,7 @@ class LibRequestSubrequest
   public function checkMultiIds($key , $subkey = null)
   {
 
-    $ids    = array();
+    $ids = array();
 
     if ($subkey) {
       foreach ($this->data[$key][$subkey] as $val) {
@@ -1052,7 +1052,7 @@ class LibRequestSubrequest
   public function validateMultiInsert($entityName, $keyName, $fields = array())
   {
 
-    $orm      = $this->getOrm();
+    $orm = $this->getOrm();
 
     $filtered = $this->checkMultiFormInput
     (
@@ -1087,7 +1087,7 @@ class LibRequestSubrequest
   public function validateMultiUpdate($entityKey, $keyName, $fields = array())
   {
 
-    $orm      = $this->getOrm();
+    $orm = $this->getOrm();
 
     $filtered = $this->checkMultiFormInput
     (
@@ -1137,7 +1137,7 @@ class LibRequestSubrequest
   public function validateMultiSave($entityName, $keyName, $fields = array())
   {
 
-    $orm      = $this->getOrm();
+    $orm = $this->getOrm();
 
     $filtered = $this->checkMultiFormInput
     (

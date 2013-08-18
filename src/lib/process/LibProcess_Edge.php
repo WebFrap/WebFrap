@@ -31,27 +31,27 @@ class LibProcess_Edge
   /**
    * @var string
    */
-  public $label     = null;
+  public $label = null;
 
   /**
    * @var string
    */
-  public $order     = null;
+  public $order = null;
 
   /**
    * @var string
    */
-  public $confirm   = false;
+  public $confirm = false;
 
   /**
    * @var string
    */
-  public $icon      = null;
+  public $icon = null;
 
   /**
    * @var string
    */
-  public $color     = null;
+  public $color = null;
 
   /**
    * @var string
@@ -95,40 +95,40 @@ class LibProcess_Edge
   public function __construct($key, array $nodeData)
   {
 
-    $this->key   = $key;
+    $this->key = $key;
 
     $this->label = $nodeData['label'];
     $this->order = $nodeData['order'];
 
-    $this->icon   = isset($nodeData['icon'])
+    $this->icon = isset($nodeData['icon'])
       ? $nodeData['icon']
       : 'process/go_on.png';
 
-    $this->color  = isset($nodeData['color'])
+    $this->color = isset($nodeData['color'])
       ? $nodeData['color']
       : 'default';
 
-    $this->description  = isset($nodeData['description'])
+    $this->description = isset($nodeData['description'])
       ? $nodeData['description']
       : '';
 
-    $this->profiles  = isset($nodeData['profiles'])
+    $this->profiles = isset($nodeData['profiles'])
       ? $nodeData['profiles']
       : array();
 
-    $this->roles  = isset($nodeData['roles'])
+    $this->roles = isset($nodeData['roles'])
       ? $nodeData['roles']
       : array();
 
-    $this->hasRoles  = isset($nodeData['has_roles'])
+    $this->hasRoles = isset($nodeData['has_roles'])
       ? $nodeData['has_roles']
       : array();
 
-    $this->access  = isset($nodeData['access'])
+    $this->access = isset($nodeData['access'])
       ? $nodeData['access']
       : array();
 
-    $this->confirm  = isset($nodeData['confirm'])
+    $this->confirm = isset($nodeData['confirm'])
       ? $nodeData['confirm']
       : false;
 

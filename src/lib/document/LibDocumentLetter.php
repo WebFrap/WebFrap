@@ -33,25 +33,25 @@ class LibDocumentLetter
    * Absender des Briefes
    * @var LibDocumentContact
    */
-  public $sender      = null;
+  public $sender = null;
 
   /**
    * Empfänger des Briefes
    * @var LibDocumentContact
    */
-  public $reciever    = null;
+  public $reciever = null;
 
   /**
    * Betreff des Briefes
    * @var string
    */
-  public $subject    = null;
+  public $subject = null;
 
   /**
    * Das Datum des Briefes
    * @var string
    */
-  public $date    = null;
+  public $date = null;
 
 }//end class LibDocumentLetter
 

@@ -35,7 +35,7 @@ class LibConnector_Adapter
    * Der Serverport
    * @var string
    */
-  public $port   = null;
+  public $port = null;
 
   /**
    * Benutzername

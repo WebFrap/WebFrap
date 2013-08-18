@@ -25,17 +25,17 @@
 class TFlagForm extends TFlag
 {
 
-  public $publish       = null;
+  public $publish = null;
 
-  public $targetId      = null;
+  public $targetId = null;
 
-  public $target        = null;
+  public $target = null;
 
-  public $targetMask    = null;
+  public $targetMask = null;
 
-  public $refId         = null;
+  public $refId = null;
 
-  public $ltype         = null;
+  public $ltype = null;
 
   /**
    *

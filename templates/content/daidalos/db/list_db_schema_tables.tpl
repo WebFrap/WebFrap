@@ -11,8 +11,8 @@
   <tbody>
   <?php 
     
-    $iconEdit    = $this->icon( 'control/edit.png', 'Edit' );
-    $iconBackup  = $this->icon( 'daidalos/backup.png', 'Backup' );
+    $iconEdit = $this->icon( 'control/edit.png', 'Edit' );
+    $iconBackup = $this->icon( 'daidalos/backup.png', 'Backup' );
     $iconRestore = $this->icon( 'daidalos/restore.png', 'Restore' );
   
     foreach( $VAR->tables as $pos => $table )
