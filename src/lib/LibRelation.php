@@ -161,7 +161,7 @@ class LibRelation extends BaseChild
   {
 
     if (!$this->relationLoader) {
-      $db  = $this->getDb();
+      $db = $this->getDb();
       $this->relationLoader = $db->newQuery('LibRelationLoader');
     }
 
