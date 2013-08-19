@@ -293,9 +293,6 @@ class LibCacheRequestJavascript extends LibCacheRequest
       $code = ob_get_contents();
       ob_end_clean();
     }
-    
-    
-  
   
   	if ($files) {
   		if ($minify) {
@@ -316,8 +313,12 @@ class LibCacheRequestJavascript extends LibCacheRequest
   			}
   
   			foreach ($files as $file) {
-  				$fileLists[$index][] = $file;
-  				 
+  				
+  				if(file_exists($file)) {
+  					$fileLists[$index][] = $file;  					
+  				} else {
+  					echo "File does not exist: " . $file . "\n";
+  				}
   				
   				if (count($fileLists[$index]) == 40) {
   					$index++;
