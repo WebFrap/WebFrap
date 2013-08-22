@@ -67,7 +67,7 @@ class LibTaskplanner extends BaseChild {
     * @param int $currentTimestamp
     *           Timestamp
     */
-   public function __construct($env = null, $currentTimestamp = null) {
+   public function __construct($currentTimestamp = null, $env = null) {
 
       if ($env) {
          $this->env = $env;
