@@ -50,7 +50,7 @@ abstract class LibDbConnection
    * The ORM Layer in the WebFrap Database Layer
    * @var LibDbOrm
    */
-  public $orm   = null;
+  public $orm = null;
 
   /**
    * name of the connected Database

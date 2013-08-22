@@ -1769,6 +1769,20 @@ abstract class Entity implements ArrayAccess
   } // end public function getNumeric */
 
   /**
+   * @param string key
+   * @return int
+   */
+  public function asInt($key)
+  {
+
+    if (isset($this->data[$key]))
+      return (int)$this->data[$key];
+    else
+      return 0;
+
+  } // end public function asInt */
+
+  /**
    * @param string $key
    * @return array
    */

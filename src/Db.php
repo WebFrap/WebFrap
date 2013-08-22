@@ -263,7 +263,7 @@ class Db
         // Erstellen des Aktiven Objects
         if (class_exists($classname)) {
 
-            $connection  = new $classname($connectionConf);
+            $connection = new $classname($connectionConf);
             self::$connectionPool[$key] = $connection;
 
             if ($activ) {
@@ -314,7 +314,7 @@ class Db
         // Erstellen des Aktiven Objects
         if (class_exists($classname)) {
 
-            $connection  = new $classname($connectionConf);
+            $connection = new $classname($connectionConf);
             self::$connectionPool[$key] = $connection;
         } else {
             throw new LibDb_Exception('tried to load nonexisting database connection');

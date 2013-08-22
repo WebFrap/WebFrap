@@ -43,7 +43,7 @@ class LibMessageAddressloader extends PBase
   {
 
     if (!$this->addressLoader) {
-      $db  = $this->getDb();
+      $db = $this->getDb();
       $this->addressLoader = $db->newQuery('LibMessageAddressloader');
     }
 

@@ -10,30 +10,35 @@ class LibTask extends BaseChild {
    
    /**
     * Das Environment Objekt.
+    *
     * @var LibFlowApachemod
     */
    public $env = null;
    
    /**
     * Task der die einzelnen Aktionen enthält.
+    *
     * @var array
     */
    public $task = null;
    
    /**
     * Zeit zu der der Task gestartet wurde.
+    *
     * @var int
     */
    public $taskStart = null;
    
    /**
     * Alle Aktionen als JSON Objekt.
+    *
     * @var object
     */
    public $actions = null;
    
    /**
     * Nimmt die Meldungen der einzelnen Actions entgegen.
+    *
     * @var LibResponseCollector
     */
    public $response = null;
@@ -41,22 +46,26 @@ class LibTask extends BaseChild {
    /**
     * Enthält die Rückgabewerte der Einzelnen Aktionen nach folgendem Schema:
     * "Name der Action" => (true|false|null)
-    * Falls eine Aktion gelaufen ist, ist ihr Rückgabewert <code>true</code> oder <code>false</code>, 
+    * Falls eine Aktion gelaufen ist, ist ihr Rückgabewert <code>true</code> oder <code>false</code>,
     * in jedem anderen Fall <code>null</code>.
+    *
     * @var array
     */
    public $results = array ();
-
+   
    /**
-    * Wird gesetzt wenn ein Rückgabewert erzwungen wird (z.B. mit setFailed)
+    * Wird gesetzt wenn ein Rückgabewert erzwungen wird (z.B.
+    * mit setFailed)
+    *
     * @var boolean
     */
    public $hardStatus = null;
 
    /**
     * Konstruktor.
-    * @param object $task
-    * @param LibFlowApachemod $env
+    *
+    * @param object $task           
+    * @param LibFlowApachemod $env           
     */
    public function __construct($task, $env = null) {
 
@@ -67,12 +76,13 @@ class LibTask extends BaseChild {
       }
       
       $this->task = $task;
-
-      $this->taskStart = time();
-            
-      $this->actions = json_decode ( $task ['plan_actions'] );
       
-      $this->response = new LibResponseCollector ();
+      $this->taskStart = time();
+      
+      $this->actions = json_decode( $task ['plan_actions'] );
+      
+      $this->response = new LibResponseCollector();
+   
    }
 
    /**
@@ -84,30 +94,32 @@ class LibTask extends BaseChild {
          
          $this->results ["$action->key"] = null;
          
-         if (isset ( $action->constraint )) {
-            $this->runActionConstraint ( $action );
+         if (isset( $action->constraint )) {
+            $this->runActionConstraint( $action );
          } else {
-            $this->runAction ( $action );
+            $this->runAction( $action );
          }
          
-         if (isset ( $action->after )) {
-            $this->runActionAfter ( $action );
+         if (isset( $action->after )) {
+            $this->runActionAfter( $action );
          }
       }
       
-      $this->updateStatus ();
+      $this->updateStatus();
+   
    }
 
    /**
     * Stellt sicher, dass eine Aktionen nur dann ausgeführt wird, wenn die Vorraussetungen gegeben
     * sind.
-    * @param object $action
+    *
+    * @param object $action           
     */
    public function runActionConstraint($action) {
-      
+
       $parent = $action->constraint->parent->key;
       
-      if (array_key_exists ( $parent, $this->results )) {
+      if (array_key_exists( $parent, $this->results )) {
          
          $parentResult = $action->constraint->parent->on;
          
@@ -118,18 +130,20 @@ class LibTask extends BaseChild {
          }
          
          if ($this->results [$parent] == $parentResult) {
-            $this->runAction ( $action );
+            $this->runAction( $action );
          }
       }
+   
    }
 
    /**
     * Führt alle Teile einer Aktion aus, die im "After" Teil angegeben sind.
-    * @param object $action
+    *
+    * @param object $action           
     */
    public function runActionAfter($action) {
-      
-      if (isset ( $action->after->do )) {
+
+      if (isset( $action->after->do )) {
          switch ($action->after->do) {
             case "break" :
                $this->hardStatus = ETaskStatus::FAILED;
@@ -147,7 +161,7 @@ class LibTask extends BaseChild {
          }
       }
       
-      if (isset ( $action->after->success )) {
+      if (isset( $action->after->success )) {
          if ($this->results ["$action->key"] == true) {
             switch ($action->after->success) {
                case "break" :
@@ -167,7 +181,7 @@ class LibTask extends BaseChild {
             }
          }
          
-         if (isset ( $action->after->fail )) {
+         if (isset( $action->after->fail )) {
             if ($this->results ["$action->key"] == false) {
                switch ($action->after->fail) {
                   case "break" :
@@ -187,6 +201,7 @@ class LibTask extends BaseChild {
             }
          }
       }
+   
    }
 
    /**
@@ -194,13 +209,15 @@ class LibTask extends BaseChild {
     */
    public function updateStatus() {
 
-      if (isset ( $this->hardStatus )) {
+      if (isset( $this->hardStatus )) {
          $status = $this->hardStatus;
       } else {
          
-         while ( ! is_null ( array_pop ( $this->results ) ) );
+         while ( is_null( end( $this->results ) ) ) {
+            array_pop( $this->results );
+         };
          
-         $last = end ( $this->results );
+         $last = end( $this->results );
          
          if ($last) {
             $status = ETaskStatus::COMPLETED;
@@ -209,32 +226,34 @@ class LibTask extends BaseChild {
          }
       }
       
-      $orm = $this->getOrm ();
+      $orm = $this->getOrm();
       
       $taskId = $this->task ['task_id'];
       $taskVid = $this->task ['plan_id'];
       
-      $taskPlan = $orm->get ( 'WbfsysTaskPlan', $taskVid );
-            
+      $taskPlan = $orm->get( 'WbfsysTaskPlan', $taskVid );
+      
       $logMessage = array (
             'title' => $taskPlan->title,
-            'task_start' => date ( 'Y-m-d H:i:s', $this->taskStart ),
-            'task_end' => date ( 'Y-m-d H:i:s', time() ),
+            'task_start' => date( 'Y-m-d H:i:s', $this->taskStart ),
+            'task_end' => date( 'Y-m-d H:i:s', time() ),
             'id_plan' => $taskId,
             'status' => $status,
-            'response' => json_encode ( $this->response ) 
+            'response' => json_encode( $this->response ) 
       );
       
-      $orm->insert ( 'WbfsysTaskLog', $logMessage );
+      $orm->insert( 'WbfsysTaskLog', $logMessage );
       
-      $orm->update ( 'WbfsysPlannedTask', $taskId, array (
+      $orm->update( 'WbfsysPlannedTask', $taskId, array (
             'status' => $status 
       ) );
+   
    }
 
    /**
     * Führt die eigentliche Aktion aus.
-    * @param object $action
+    *
+    * @param object $action           
     * @throws LibTaskplanner_Exception
     */
    public function runAction($action) {
@@ -245,40 +264,42 @@ class LibTask extends BaseChild {
       
       $result = false;
       
-      if (! Webfrap::classExists ( $className )) {
-         throw new LibTaskplanner_Exception ( "Missing Action " . $className );
+      if (! Webfrap::classExists( $className )) {
+         throw new LibTaskplanner_Exception( "Missing Action " . $className );
       }
       
-      $actionClass = new $className ( Webfrap::$env );
+      $actionClass = new $className( Webfrap::$env );
       
-      if (! method_exists ( $actionClass, $actionMethod )) {
-         throw new LibTaskplanner_Exception ( "Missing requested method " . $actionMethod );
+      if (! method_exists( $actionClass, $actionMethod )) {
+         throw new LibTaskplanner_Exception( "Missing requested method " . $actionMethod );
       }
       
-      if (! isset ( $action->inf )) {
+      if (! isset( $action->inf )) {
          $action->inf = 'plain';
       }
       
-      $actionClass->setResponse ( $this->response );
+      $actionClass->setResponse( $this->response );
       
       switch ($action->inf) {
          case 'plain' :
-            $result = $actionClass->{$actionMethod} ();
+            $result = $actionClass->{$actionMethod}();
             break;
          case 'entity' :
-            $result = $actionClass->{$actionMethod} ( $action->params->id );
+            $result = $actionClass->{$actionMethod}( $action->params->id );
             break;
          case 'table' :
-            $result = $actionClass->{$actionMethod} ( $action->params->name );
+            $result = $actionClass->{$actionMethod}( $action->params->name );
             break;
          case 'mask' :
-            $result = $actionClass->{$actionMethod} ( $action->params->mask, $action->params->id );
+            $result = $actionClass->{$actionMethod}( $action->params->mask, $action->params->id );
             break;
          default :
-            throw new LibTaskplanner_Exception ( "Unknown Interface " . $action->inf );
+            throw new LibTaskplanner_Exception( "Unknown Interface " . $action->inf );
             break;
       }
       
       $this->results ["$action->key"] = $result;
+   
    }
+
 }

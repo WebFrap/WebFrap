@@ -899,6 +899,7 @@ class Webfrap
     $session = Session::getActive();
 
     if ($session->wakeup) {
+
       if (DEBUG)
         Debug::console('wakeup');
 

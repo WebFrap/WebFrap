@@ -489,7 +489,7 @@ class IoFile
   {
 
     ///TODO check if wie don't have any extension
-    $fEnd  = strrpos($this->fileName, '.');
+    $fEnd = strrpos($this->fileName, '.');
     $this->extension = substr($this->fileName , ($fEnd + 1));
     $this->plainFilename = substr($this->fileName , 0 , $fEnd);
 
