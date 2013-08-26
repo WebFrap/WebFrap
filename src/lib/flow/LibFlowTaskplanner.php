@@ -113,7 +113,7 @@ class LibFlowTaskplanner extends LibFlow {
    
    /**
     * Führt die anstehenden Tasks aus
-    * 
+    *
     * @param LibRequestPhp $httpRequest           
     * @param LibSessionPhp $session           
     * @param Transaction $transaction           
@@ -128,19 +128,12 @@ class LibFlowTaskplanner extends LibFlow {
       
       $taskPlanner = new LibTaskplanner();
       
-      $tasks = $taskPlanner->tasks;
-      
-      $taskList = array ();
-      
-      foreach ( $tasks as $task ) {
-         
-         $taskList [] = new LibTask( $task );
-      }
+      $taskList = $taskPlanner->getTasklist();
       
       foreach ( $taskList as $task ) {
          $task->run();
       }
-
+   
    } // end public function main */
    
    /**
