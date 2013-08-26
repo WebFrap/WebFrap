@@ -113,7 +113,7 @@ class LibFlowTaskplanner extends LibFlow {
    
    /**
     * Führt die anstehenden Tasks aus
-    * 
+    *
     * @param LibRequestPhp $httpRequest           
     * @param LibSessionPhp $session           
     * @param Transaction $transaction           
@@ -128,50 +128,12 @@ class LibFlowTaskplanner extends LibFlow {
       
       $taskPlanner = new LibTaskplanner();
       
-      $tasks = $taskPlanner->tasks;
-      
-      $taskList = array ();
-      
-      foreach ( $tasks as $task ) {
-         
-         $taskList [] = new LibTask( $task );
-      }
+      $taskList = $taskPlanner->getTasklist();
       
       foreach ( $taskList as $task ) {
          $task->run();
       }
-      
-      /*
-    if (isset($tasks)) {
-      foreach ($tasks as $task) {
-        $actionResponse = new LibResponseCollector();
-
-        // JSON Object
-        $actions = json_decode($task['plan_actions']);
-
-        // JSON für jeweils eine einzelne Aktion
-        foreach ($actions as $action) {
-          if (isset($action->constraint)) {
-            $this->runActionConstraint($action, $actionResponse);
-          } else {
-            $this->runAction($action, $actionResponse);
-          }
-
-          // Falls 'after' Aktionen vorhanden sind, werden diese jetzt ausgeführt
-          if (isset($action->after)) {
-            if (! $this->runActionAfter($action, $actionResponse)) {
-              break;
-            }
-          }
-
-          // Neues Spiel, neues Glück
-          $this->isActionRun = false;
-        }
-
-        $this->updateStatus($task, $taskPlanner, $actionResponse);
-      }
-    }
-    */
+   
    } // end public function main */
    
    /**

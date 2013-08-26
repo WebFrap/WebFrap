@@ -86,7 +86,9 @@ class LibTask extends BaseChild {
    }
 
    /**
-    * Führt alle Abschnitte der Aktionen der Reihe nach durch.
+    * Führt alle Aktionen nacheinander aus.
+    *
+    * @throws LibTaskplanner_Exception
     */
    public function run() {
 
@@ -110,8 +112,8 @@ class LibTask extends BaseChild {
    }
 
    /**
-    * Stellt sicher, dass eine Aktionen nur dann ausgeführt wird, wenn die Vorraussetungen gegeben
-    * sind.
+    * Einhaltung der im 'Constraint' angegebenen Bedingungen.
+    * Sind die Bedingungen nicht erfüllt, wird der Task übersprungen.
     *
     * @param object $action           
     */
@@ -137,12 +139,20 @@ class LibTask extends BaseChild {
    }
 
    /**
-    * Führt alle Teile einer Aktion aus, die im "After" Teil angegeben sind.
+    * Führt die im 'After' Teil angebenen Aktionen der übergebenen Action durch.
+    * Folgende Aktionen
+    * sind definiert:
+    * setFailed: Der aktuelle Task läuft weiter, das Ergebnis ist fail (<code>false</code>)
+    * break: Der aktuelle Task wird abgebrochen, das Ergebnis ist fail (<code>false</code>)
+    * complete: Der aktuelle Task wird abgebrochen, das Ergebnis ist success (<code>true</code>)
+    * In allen anderen Fällen läuft der Task normal weiter.
     *
     * @param object $action           
     */
    public function runActionAfter($action) {
 
+      $result = false;
+      
       if (isset( $action->after->do )) {
          switch ($action->after->do) {
             case "break" :
@@ -201,11 +211,13 @@ class LibTask extends BaseChild {
             }
          }
       }
+      
+      return $result;
    
    }
 
    /**
-    * Schreibt die Ergebnisse des Tasks und der einzelnen Aktionen in die Datenbank.
+    * Setzt den Status eines gelaufenen Tasks und logt das Ergebnis.
     */
    public function updateStatus() {
 
@@ -215,7 +227,8 @@ class LibTask extends BaseChild {
          
          while ( is_null( end( $this->results ) ) ) {
             array_pop( $this->results );
-         };
+         }
+         ;
          
          $last = end( $this->results );
          
@@ -251,7 +264,9 @@ class LibTask extends BaseChild {
    }
 
    /**
-    * Führt die eigentliche Aktion aus.
+    * Ausführen einer einzelnen Action und persistieren des Ergebnis.
+    * Der Rückgabewert der Action überschreibt dabei jedes mal <code>$softStatus</code>
+    * mit dem entsprechenden Wert.
     *
     * @param object $action           
     * @throws LibTaskplanner_Exception
