@@ -62,7 +62,7 @@ class LibTaskplanner extends BaseChild {
 
    /**
     * Konstruktor.
-    * 
+    *
     * @param LibFlowApachemod $env           
     * @param int $currentTimestamp
     *           Timestamp
@@ -273,7 +273,7 @@ class LibTaskplanner extends BaseChild {
 
    /**
     * Ermittelt die zum Zeitpunkt <code>$currentDate</code> zu startenden Tasks.
-    * 
+    *
     * @param array $taskTypes
     *           ETaskType
     * @param array $currentDate           
@@ -326,6 +326,21 @@ WHERE
 SQL;
       
       return $db->select( $sql )->getAll();
+   
+   }
+
+   public function getTasklist() {
+
+      $taskList = array ();
+      
+      if (! is_null( $this->tasks )) {
+         foreach ( $this->tasks as $task ) {
+            
+            $taskList [] = new LibTask( $task );
+         }
+      }
+      
+      return $taskList;
    
    }
 
