@@ -47,6 +47,12 @@ class LibAcl_Db_Model extends Model
   protected $aclCache = null;
 
   /**
+   * Cache für die acl keys
+   * @var array
+   */
+  protected $keyCache = array();
+
+  /**
    * @param $cache
    */
   public function setAclCache($cache)
@@ -488,13 +494,13 @@ SQL;
           return true;
       }
     } else {
-      
+
       if (isset($this->rolesCache[$loadKey]) && $this->rolesCache[$loadKey]) {
         return true;
       }
 
     }
-    
+
     return false;
 
   }//end public function loadRole */
@@ -3035,6 +3041,9 @@ SQL;
   public function extractWeightedKeys($keys)
   {
 
+    if (isset($this->keyCache[$keys]))
+      return $this->keyCache[$keys];
+
     $keysData = array();
 
     $tmp = explode('>', $keys);
@@ -3045,6 +3054,8 @@ SQL;
       $wAreas = explode('/', $tmp[1]);;
 
     $keysData = array_merge($areas, $wAreas);
+
+    $this->keyCache[$keys] = $keysData;
 
     return $keysData;
 
