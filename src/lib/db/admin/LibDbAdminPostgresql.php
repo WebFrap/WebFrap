@@ -1071,7 +1071,10 @@ where action is one of:
 
     $type = $this->invertMapping[$typeKey];
 
-    if (in_array(LibDbAdmin::COL_TYPE,  $diff)) {
+    if (in_array(LibDbAdmin::COL_TYPE,  $diff)
+      || in_array(LibDbAdmin::COL_SCALE,  $diff)
+      || in_array(LibDbAdmin::COL_PRECISION,  $diff)
+      || in_array(LibDbAdmin::COL_LENGTH,  $diff)) {
 
 
       if (in_array($type, array('char','varchar','char[]','varchar[]'))) {
@@ -1528,8 +1531,7 @@ SQL;
 
 
     if (!$dbData = $this->getColumnData($colName, $tableName, $dbName, $schemaName)) {
-      throw new LibDb_Exception
-      (
+      throw new LibDb_Exception(
         'Requested Column '.$colName.' for Table: '.$tableName.' in Schema: '.$schemaName.' Database: '.$dbName.' not exists'
       );
     }
@@ -1838,7 +1840,7 @@ SQL;
       }
     }
 
-    return implode(', ', $diff);
+    return 'type: '.$dbData[LibDbAdmin::COL_TYPE].' '.implode(', ', $diff);
 
   }//end public function reportDiffCol */
 
@@ -2046,6 +2048,8 @@ SQL;
     if ($orgType == 'numeric') {
       $tmp = explode('.', $size);
 
+      Debug::console('numeric size '.$size);
+
       $precision = $tmp[0];
 
       if (isset($tmp[1]))
@@ -2165,15 +2169,29 @@ SQL;
         if ($multiSeq) {
           if (is_string($sequence)) {
             $default =  "nextval('".$sequence."'::regclass)";
+
+            if(!$this->sequenceExists($sequence)){
+              $this->createSequence($sequence);
+            }
+
           } else {
             $default =  "nextval('".$tableName."_".$attribute->name()."_seq'::regclass)";
           }
+
+
 
           //$dbAdmin->createSequence($tableName."_".$attribute->name()."_seq");
         } else {
 
           if (!is_string($sequence)) {
             $sequence =  Db::SEQUENCE;
+          } else {
+
+            // sicher stellen, dass die referenzierte sequence auch existiert
+            if(!$this->sequenceExists($sequence)){
+              $this->createSequence($sequence);
+            }
+
           }
 
           $default = "nextval('{$sequence}'::regclass)";
