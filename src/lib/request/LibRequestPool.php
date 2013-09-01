@@ -770,7 +770,7 @@ class LibRequestPool extends LibRequestAbstract
     if ($subkey) {// check if we have a subkey
       foreach ($values as $key => $value) {
         if (Log::$levelTrace)
-          Log::logTrace(__file__,__line__, "with Subjey: $subkey Key $key");
+          Log::logTrace(__FILE__,__LINE__, "with Subjey: $subkey Key $key");
 
         $method = 'add'.$value[0] ;
 
@@ -793,7 +793,7 @@ class LibRequestPool extends LibRequestAbstract
     } else {// we have no subkey geht direct
       foreach ($values as $key => $value) {
         if (Log::$levelTrace)
-          Log::logTrace(__file__,__line__, "Key $key");
+          Log::logTrace(__FILE__,__LINE__, "Key $key");
 
         $method = 'add'.$value[0] ;
 
@@ -817,7 +817,7 @@ class LibRequestPool extends LibRequestAbstract
     }
 
     if (Log::$levelTrace) {
-      Debug::logDump('$filter: '.__file__.':'.__line__, $filter);
+      Debug::logDump('$filter: '.__FILE__.':'.__LINE__, $filter);
       Debug::console('$filter search input',$filter);
     }
 

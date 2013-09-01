@@ -102,7 +102,7 @@ class LibDbPdoPostgresql extends LibDbPdo
     }
 
     if (Log::$levelDebug)
-      Log::debug(__file__ , __line__ , 'Select Query: '. $sqlstring);
+      Log::debug(__FILE__ , __LINE__ , 'Select Query: '. $sqlstring);
 
     if (!$result = $this->connection->query($sqlstring)  ) {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
@@ -129,7 +129,7 @@ class LibDbPdoPostgresql extends LibDbPdo
   public function insert($sql , $tableName = null, $tablePk = null)
   {
     if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__,array($sql , $tableName , $tablePk));
+      Log::start(__FILE__,__LINE__,__METHOD__,array($sql , $tableName , $tablePk));
 
     ++$this->counter ;
 
@@ -164,7 +164,7 @@ class LibDbPdoPostgresql extends LibDbPdo
     $this->lastQuery = $sqlstring;
 
     if (Log::$levelDebug)
-      Log::debug(__file__ , __line__ ,'SQL: '.$sqlstring);
+      Log::debug(__FILE__ , __LINE__ ,'SQL: '.$sqlstring);
 
     $this->affectedRows = $this->connection->exec($sqlstring);
 
@@ -182,7 +182,7 @@ class LibDbPdoPostgresql extends LibDbPdo
     $id = $this->connection->lastInsertId($tableName.'_'.$tablePk.'_seq'  );
 
     if (Log::$levelDebug)
-      Log::debug(__file__,__line__,'GOT ID : '.$id);
+      Log::debug(__FILE__,__LINE__,'GOT ID : '.$id);
 
     return $id ;
 
@@ -229,7 +229,7 @@ class LibDbPdoPostgresql extends LibDbPdo
   public function exec($sql , $insertId = null , $table = null  )
   {
     if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__,array($sql , $insertId, $table));
+      Log::start(__FILE__,__LINE__,__METHOD__,array($sql , $insertId, $table));
 
     $this->result = null;
 
@@ -262,7 +262,7 @@ class LibDbPdoPostgresql extends LibDbPdo
   public function executeAction($name,  $values = null, $getNewId = null)
   {
     if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__,array($name, $values, $getNewId));
+      Log::start(__FILE__,__LINE__,__METHOD__,array($name, $values, $getNewId));
 
     if (!isset($this->prepares[$name])) {
       Error::addError

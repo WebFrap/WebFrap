@@ -260,7 +260,7 @@ class LibCodePackerPhp
 
     $row = str_replace(' ' , '', trim($row));
 
-    if ($row == 'Debug::addLoc(__line__+1);' || $row == 'Debug::addLoc(__line__+1);') {
+    if ($row == 'Debug::addLoc(__LINE__+1);' || $row == 'Debug::addLoc(__LINE__+1);') {
       return true;
     }
 

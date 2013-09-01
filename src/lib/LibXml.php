@@ -81,10 +81,10 @@ class LibXml extends SimpleXMLElement
       if ($xml = simplexml_load_file($filename , 'LibXml')) {
         return $xml;
       } else {
-        Log::warn(__file__,__line__,'Failed to open the the xml file: '.$xml);
+        Log::warn(__FILE__,__LINE__,'Failed to open the the xml file: '.$xml);
       }
     } else {
-      Log::warn(__file__,__line__,'The xml file: '.$xml.' is not readable');
+      Log::warn(__FILE__,__LINE__,'The xml file: '.$xml.' is not readable');
     }
 
     return null;

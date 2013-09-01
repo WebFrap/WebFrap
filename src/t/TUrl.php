@@ -207,7 +207,7 @@ class TUrl
   public function toUrl($file = null , $params = array() , $title = null , $anchor = null)
   {
     if (Log::$levelDebug)
-     Log::start(__file__,__line__,__method__,array($file, $params, $title, $anchor));
+     Log::start(__FILE__,__LINE__,__METHOD__,array($file, $params, $title, $anchor));
 
     $file = $file?$file:$this->urlFile;
 
@@ -236,7 +236,7 @@ class TUrl
   public static function asUrl($filename , $attributes , $title = null , $anchor = null)
   {
     if (Log::$levelDebug)
-     Log::start(__file__,__line__,__method__,array($filename , $attributes , $title, $anchor));
+     Log::start(__FILE__,__LINE__,__METHOD__,array($filename , $attributes , $title, $anchor));
 
     $attributes = array_merge(self::$persistentParam,$attributes);
 
@@ -282,7 +282,7 @@ class TUrl
   protected static function asmAttributes($attributes)
   {
     if (Log::$levelDebug)
-     Log::start(__file__,__line__,__method__,array($attributes));
+     Log::start(__FILE__,__LINE__,__METHOD__,array($attributes));
 
     if (URL_DESIGN) {
       if ($attributes) {
@@ -341,7 +341,7 @@ class TUrl
   protected static function buildAnchor($anchor)
   {
     if (Log::$levelDebug)
-     Log::start(__file__,__line__,__method__,array($anchor));
+     Log::start(__FILE__,__LINE__,__METHOD__,array($anchor));
 
     return trim($anchor) != '' ? '#'.$anchor : '';
 

@@ -206,7 +206,7 @@ class LibDbDummy extends LibDbConnection
   public function executeAction($name,  $values = null, $getNewId = false)
   {
     if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__,array($name, $values, $getNewId));
+      Log::start(__FILE__,__LINE__,__METHOD__,array($name, $values, $getNewId));
 
   } // end public function executeAction($name,  $values = null, $getNewId = false)
 
@@ -222,7 +222,7 @@ class LibDbDummy extends LibDbConnection
   public function query($sql, $returnit = true, $single = false)
   {
     if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__,array($sql, $returnit, $single));
+      Log::start(__FILE__,__LINE__,__METHOD__,array($sql, $returnit, $single));
 
   } // end public function query($sql, $returnit = true, $single = false)
 
@@ -236,7 +236,7 @@ class LibDbDummy extends LibDbConnection
   public function exec($sql , $insertId = null , $table = null  )
   {
     if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__,array($sql , $insertId, $table));
+      Log::start(__FILE__,__LINE__,__METHOD__,array($sql , $insertId, $table));
 
   } // end public function exec($sql  )
 
@@ -249,7 +249,7 @@ class LibDbDummy extends LibDbConnection
   public function ddlQuery($sql)
   {
     if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__);
+      Log::start(__FILE__,__LINE__,__METHOD__);
   }//end public function ddlQuery($sql)
 
   /**
@@ -261,7 +261,7 @@ class LibDbDummy extends LibDbConnection
   public function getResult()
   {
     if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__);
+      Log::start(__FILE__,__LINE__,__METHOD__);
 
   } // end public function getResult()
 
@@ -274,7 +274,7 @@ class LibDbDummy extends LibDbConnection
   public function getAll($mode = null)
   {
     if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__,array($mode));
+      Log::start(__FILE__,__LINE__,__METHOD__,array($mode));
 
   } // end public function getAll($mode = null)
 
@@ -287,7 +287,7 @@ class LibDbDummy extends LibDbConnection
   public function getRow($mode = null)
   {
     if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__,array($mode));
+      Log::start(__FILE__,__LINE__,__METHOD__,array($mode));
 
   } // end public function getRow($mode = null)
 
@@ -299,7 +299,7 @@ class LibDbDummy extends LibDbConnection
   public function clearResult()
   {
     if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__);
+      Log::start(__FILE__,__LINE__,__METHOD__);
 
   } // end public function clearResult()
 
@@ -311,7 +311,7 @@ class LibDbDummy extends LibDbConnection
   public function getNumRows()
   {
     if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__);
+      Log::start(__FILE__,__LINE__,__METHOD__);
 
   } // end public function getNumRows()
 
@@ -323,7 +323,7 @@ class LibDbDummy extends LibDbConnection
   public function getAffectedRows()
   {
     if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__);
+      Log::start(__FILE__,__LINE__,__METHOD__);
 
   } // end of member function getAffectedRows
 
@@ -335,7 +335,7 @@ class LibDbDummy extends LibDbConnection
   public function getNotice()
   {
     if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__);
+      Log::start(__FILE__,__LINE__,__METHOD__);
 
   } // end public function getNotice()
 
@@ -347,7 +347,7 @@ class LibDbDummy extends LibDbConnection
   public function getError()
   {
     if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__);
+      Log::start(__FILE__,__LINE__,__METHOD__);
 
   } // end public function getError()
 
@@ -359,7 +359,7 @@ class LibDbDummy extends LibDbConnection
   public function begin($write = true)
   {
     if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__);
+      Log::start(__FILE__,__LINE__,__METHOD__);
 
   } // end public function begin()
 
@@ -371,7 +371,7 @@ class LibDbDummy extends LibDbConnection
   public function rollback($write = true   )
   {
     if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__);
+      Log::start(__FILE__,__LINE__,__METHOD__);
 
   } // end public function rollback()
 
@@ -383,7 +383,7 @@ class LibDbDummy extends LibDbConnection
   public function commit($write = true  )
   {
     if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__);
+      Log::start(__FILE__,__LINE__,__METHOD__);
 
   } // end public function commit()
 
@@ -405,7 +405,7 @@ class LibDbDummy extends LibDbConnection
   public function checkStatus()
   {
     if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__);
+      Log::start(__FILE__,__LINE__,__METHOD__);
 
   } // end public function checkStatus()
 
@@ -418,7 +418,7 @@ class LibDbDummy extends LibDbConnection
   public function connect()
   {
     if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__);
+      Log::start(__FILE__,__LINE__,__METHOD__);
 
   } // end protected function connect()
 
@@ -431,7 +431,7 @@ class LibDbDummy extends LibDbConnection
   public function dissconnect()
   {
     if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__);
+      Log::start(__FILE__,__LINE__,__METHOD__);
 
   } // end of member function dissconnect
 
@@ -445,7 +445,7 @@ class LibDbDummy extends LibDbConnection
   public function convertData($table , $daten , $prepare = false)
   {
     if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__,array($table , $daten , $prepare));
+      Log::start(__FILE__,__LINE__,__METHOD__,array($table , $daten , $prepare));
 
     return $daten;
 
@@ -460,7 +460,7 @@ class LibDbDummy extends LibDbConnection
   public function addSlashes($value)
   {
     if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__,array($value));
+      Log::start(__FILE__,__LINE__,__METHOD__,array($value));
 
     if (get_magic_quotes_gpc()) {
       return $value;

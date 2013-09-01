@@ -99,7 +99,7 @@ class LibUploadImage extends LibUploadAdapter
   public function convert($newname = null , $newpath = null , $x = 640, $y = 480)
   {
     if (Log::$levelDebug)
-      Log::start(__file__ , __line__ , __method__ , array($newname, $newpath, $x, $y)  );
+      Log::start(__FILE__ , __LINE__ , __METHOD__ , array($newname, $newpath, $x, $y)  );
 
     if ($newpath) {
       $this->newpath = $newpath;

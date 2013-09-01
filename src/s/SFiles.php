@@ -36,7 +36,7 @@ class SFiles
   public static function move($oldPos , $newPos)
   {
     if (Log::$levelDebug)
-      Log::start( __file__ , __line__ , __method__ , array($oldPos , $newPos));
+      Log::start( __FILE__ , __LINE__ , __METHOD__ , array($oldPos , $newPos));
 
     ///FIXME this will not work! change to SFilesystem
 
@@ -309,7 +309,7 @@ class SFiles
   {
 
     if (!$handle = fopen($fileName, 'w')  ) {
-      Log::warn(__file__,__line__,'Failed to write: '.$fileName.' to cache');
+      Log::warn(__FILE__,__LINE__,'Failed to write: '.$fileName.' to cache');
 
       return false;
     }
@@ -324,7 +324,7 @@ class SFiles
     fclose($handle);
 
     if (!$wrote)
-      Log::warn(__file__,__line__,'Failed to write: '.$fileName);
+      Log::warn(__FILE__,__LINE__,'Failed to write: '.$fileName);
 
     return $wrote;
 

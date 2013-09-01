@@ -29,42 +29,32 @@ class LibFormatterMoney
     /**
    * Enter description here...
    *
-   * @var unknown_type
+   * @var LibFormatterMoney
    */
   protected static $instance = null;
 
   /**
-   * Enter description here...
-   *
-   * @var unknown_type
+   * @var string
    */
   protected $moneyEnglish = null;
 
   /**
-   * Enter description here...
-   *
-   * @var unknown_type
+   * @var string
    */
   protected $moneyLanguage = null;
 
   /**
-   * Enter description here...
-   *
-   * @var unknown_type
+   * @var string
    */
   protected $separatorDec = ',';
 
   /**
-   * Enter description here...
-   *
-   * @var unknown_type
+   * @var string
    */
   protected $separatorTh = '.';
 
   /**
-   * Enter description here...
-   *
-   * @var unknown_type
+   * @var int
    */
   protected $size =  2;
 
@@ -72,15 +62,19 @@ class LibFormatterMoney
 // Magic
 //////////////////////////////////////////////////////////////////////////////*/
 
-  /**
-   *
-   */
-  public function __construct
+
+    /**
+     * @param null $money
+     * @param string $separatorDec
+     * @param string $separatorTh
+     * @param int $size
+     */
+    public function __construct
   (
-  $money = null,
-  $separatorDec = ',',
-  $separatorTh = '.' ,
-  $size = 2
+      $money = null,
+      $separatorDec = ',',
+      $separatorTh = '.' ,
+      $size = 2
   )
   {
     if (Log::$levelVerbose)
@@ -97,7 +91,7 @@ class LibFormatterMoney
   }//end public function __construct
 
   /**
-   *
+   * @return string
    */
   public function __toString()
   {

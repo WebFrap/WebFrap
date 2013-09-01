@@ -255,7 +255,7 @@ class SFolders
 
             $data = explode(':',$exclude,2);
             if (!count($data) == 2) {
-              Log::warn(__file__,__line__,'Got invalid exclude: '.$exclude);
+              Log::warn(__FILE__,__LINE__,'Got invalid exclude: '.$exclude);
               continue;
             }
 
@@ -325,7 +325,7 @@ class SFolders
   public static function getFolderContentNohiddenExclude($folder, $fullPath, $type, $excludes)
   {
     if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__,array($folder, $fullPath, $type, $excludes));
+      Log::start(__FILE__,__LINE__,__METHOD__,array($folder, $fullPath, $type, $excludes));
 
     $files = array();
 
@@ -341,7 +341,7 @@ class SFolders
             $data = explode(':',$exclude,2);
 
             if (!count($data) == 2) {
-              Log::warn(__file__,__line__,'Got invalid exclude: '.$exclude);
+              Log::warn(__FILE__,__LINE__,'Got invalid exclude: '.$exclude);
               continue;
             }
 

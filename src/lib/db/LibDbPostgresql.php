@@ -547,7 +547,7 @@ class LibDbPostgresql extends LibDbConnection
     }
 
     if (Log::$levelDebug)
-      Log::debug(__file__ , __line__ ,'PREPARE SELECT: '.$name.' SQL: '.$sqlstring);
+      Log::debug(__FILE__ , __LINE__ ,'PREPARE SELECT: '.$name.' SQL: '.$sqlstring);
 
     if (!$this->result = pg_prepare($this->connectionRead, $name,  $sqlstring)) {
       throw new LibDb_Exception
@@ -580,7 +580,7 @@ class LibDbPostgresql extends LibDbConnection
     }
 
     if (Log::$levelDebug)
-      Log::debug(__file__ , __line__ ,'PREPARE INSERT: '.$name.' SQL: '.$sqlstring);
+      Log::debug(__FILE__ , __LINE__ ,'PREPARE INSERT: '.$name.' SQL: '.$sqlstring);
 
     if (!$this->result = pg_prepare($this->connectionWrite, $name,  $sqlstring)) {
       throw new LibDb_Exception
@@ -614,7 +614,7 @@ class LibDbPostgresql extends LibDbConnection
     }
 
     if (Log::$levelDebug)
-      Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring);
+      Log::debug(__FILE__ , __LINE__ ,'Name: '.$name.' SQL: '.$sqlstring);
 
     if (!$this->result = pg_prepare($this->connectionWrite, $name,  $sqlstring)) {
       throw new LibDb_Exception
@@ -646,7 +646,7 @@ class LibDbPostgresql extends LibDbConnection
     }
 
     if (Log::$levelDebug)
-      Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring);
+      Log::debug(__FILE__ , __LINE__ ,'Name: '.$name.' SQL: '.$sqlstring);
 
     if (!$this->result = pg_prepare($this->connectionWrite, $name,  $sqlstring)) {
       throw new LibDb_Exception

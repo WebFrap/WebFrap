@@ -66,7 +66,7 @@ class LibValidator
   public function __construct()
   {
     if (Log::$levelVerbose)
-      Log::logLine('verbose', __file__, __line__,
+      Log::logLine('verbose', __FILE__, __LINE__,
       'Create new '.get_class($this).' object ');
 
   }//end protected function __construct
@@ -81,18 +81,18 @@ class LibValidator
   public function getData($key = null)
   {
     if (Log::$levelDebug)
-      Log::start(__file__, __line__, __method__ ,array($key));
+      Log::start(__FILE__, __LINE__, __METHOD__ ,array($key));
 
     if (!is_null($key)) {
       $data = isset($this->data[$key])?$this->data[$key]:null;
 
       if (Log::$levelDebug)
-        Log::end(__file__, __line__, __method__ ,array($key,$data));
+        Log::end(__FILE__, __LINE__, __METHOD__ ,array($key,$data));
 
       return $data;
     } else {
       if (Log::$levelDebug)
-        Log::end(__file__, __line__, __method__ ,array($this->data));
+        Log::end(__FILE__, __LINE__, __METHOD__ ,array($this->data));
 
       return $this->data;
     }
@@ -105,7 +105,7 @@ class LibValidator
   public function isInvalid($key = null)
   {
     if (Log::$levelDebug)
-    Log::start(__file__, __line__, __method__, array($key)) ;
+    Log::start(__FILE__, __LINE__, __METHOD__, array($key)) ;
 
     if ($key) {
       if (!isset($this->invalid[$key])) {
@@ -126,7 +126,7 @@ class LibValidator
   public function clean()
   {
     if (Log::$levelDebug)
-      Log::start(__file__, __line__, __method__) ;
+      Log::start(__FILE__, __LINE__, __METHOD__) ;
 
     $this->data = array();
     $this->invalid = array();
@@ -149,7 +149,7 @@ class LibValidator
   public static function validate($filter , $key, $value, $notNull = false, $maxSize = null, $minSize = null  )
   {
     if (Log::$levelDebug)
-      Log::warn( __file__, __line__, 'Empty Validator! Fallback to quoted',
+      Log::warn( __FILE__, __LINE__, 'Empty Validator! Fallback to quoted',
         array($filter , $key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
@@ -164,7 +164,7 @@ class LibValidator
     if ($maxSize) {
       if (strlen($value) > $maxSize) {
         if (Log::$levelTrace)
-        Log::logLine('trace', __file__, __line__,
+        Log::logLine('trace', __FILE__, __LINE__,
         'Invalid cause to big');
 
         $filter->invalid[$key] = 'max';
@@ -201,12 +201,12 @@ class LibValidator
   public function addRaw($key, $value, $notNull = false, $maxSize = null, $minSize = null  )
   {
     if (Log::$levelDebug)
-      Log::start( __file__, __line__, __method__,
+      Log::start( __FILE__, __LINE__, __METHOD__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
       if (Log::$levelTrace)
-        Log::logLine('trace', __file__, __line__,
+        Log::logLine('trace', __FILE__, __LINE__,
         'Valid cause empty');
 
       $this->data[$key] = null;
@@ -219,7 +219,7 @@ class LibValidator
 
     if ($notNull and trim($value) == '') {
       if (Log::$levelTrace)
-      Log::logLine('trace', __file__, __line__,
+      Log::logLine('trace', __FILE__, __LINE__,
       'Invalid cause empty');
 
       $this->invalid[$key] = 'emtpy';
@@ -230,7 +230,7 @@ class LibValidator
     if ($maxSize) {
       if (strlen($value) > $maxSize) {
         if (Log::$levelTrace)
-        Log::logLine('trace', __file__, __line__,
+        Log::logLine('trace', __FILE__, __LINE__,
         'Invalid cause to big');
 
         $this->invalid[$key] = 'max';
@@ -267,7 +267,7 @@ class LibValidator
   public function addBitmask($key, $value, $notNull = false, $maxSize = null, $minSize = null  )
   {
     if (Log::$levelDebug)
-      Log::start( __file__, __line__, __method__,
+      Log::start( __FILE__, __LINE__, __METHOD__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!is_array($value) and !is_null($value)) {
@@ -278,7 +278,7 @@ class LibValidator
 
     if (!$notNull && count($value) == 0) {
       if (Log::$levelTrace)
-        Log::logLine('trace', __file__, __line__,'Valid cause empty');
+        Log::logLine('trace', __FILE__, __LINE__,'Valid cause empty');
 
       $this->data[$key] = null;
       $this->invalid[$key] = true;
@@ -305,12 +305,12 @@ class LibValidator
   public function addQuery($key, $value, $notNull = false, $maxSize = null, $minSize = null  )
   {
     if (Log::$levelDebug)
-      Log::start( __file__, __line__, __method__,
+      Log::start( __FILE__, __LINE__, __METHOD__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
       if (Log::$levelTrace)
-      Log::logLine('trace', __file__, __line__,
+      Log::logLine('trace', __FILE__, __LINE__,
       'Valid cause empty');
 
       $this->data[$key] = null;
@@ -324,7 +324,7 @@ class LibValidator
     if ($maxSize) {
       if (strlen($value) > $maxSize) {
         if (Log::$levelTrace)
-        Log::logLine('trace', __file__, __line__,
+        Log::logLine('trace', __FILE__, __LINE__,
         'Invalid cause to big');
 
         $this->invalid[$key] = 'max';
@@ -359,12 +359,12 @@ class LibValidator
   public function addQuoted($key, $value, $notNull = false, $maxSize = null, $minSize = null  )
   {
     if (Log::$levelDebug)
-      Log::start( __file__, __line__, __method__,
+      Log::start( __FILE__, __LINE__, __METHOD__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
       if (Log::$levelTrace)
-      Log::logLine('trace', __file__, __line__,
+      Log::logLine('trace', __FILE__, __LINE__,
       'Valid cause empty');
 
       $this->data[$key] = null;
@@ -378,7 +378,7 @@ class LibValidator
     if ($maxSize) {
       if (strlen($value) > $maxSize) {
         if (Log::$levelTrace)
-        Log::logLine('trace',__file__,__line__,'Invalid cause to big');
+        Log::logLine('trace',__FILE__,__LINE__,'Invalid cause to big');
 
         $this->invalid[$key] = 'max';
 
@@ -412,12 +412,12 @@ class LibValidator
   public function addNotags($key, $value, $notNull = false, $maxSize = null, $minSize = null  )
   {
     if (Log::$levelDebug)
-      Log::start( __file__, __line__, __method__,
+      Log::start( __FILE__, __LINE__, __METHOD__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
       if (Log::$levelTrace)
-      Log::logLine('trace', __file__, __line__,
+      Log::logLine('trace', __FILE__, __LINE__,
       'Valid cause empty');
 
       $this->data[$key] = null;
@@ -430,7 +430,7 @@ class LibValidator
 
     if ($notNull and trim($value) == '') {
       if (Log::$levelTrace)
-      Log::logLine('trace', __file__, __line__,
+      Log::logLine('trace', __FILE__, __LINE__,
       'Invalid cause empty');
 
       $this->invalid[$key] = 'emtpy';
@@ -441,7 +441,7 @@ class LibValidator
     if ($maxSize) {
       if (strlen($value) > $maxSize) {
         if (Log::$levelTrace)
-        Log::logLine('trace', __file__, __line__,
+        Log::logLine('trace', __FILE__, __LINE__,
         'Invalid cause to big');
 
         $this->invalid[$key] = 'max';
@@ -474,7 +474,7 @@ class LibValidator
   public function addInt($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (Log::$levelDebug)
-      Log::start( __file__, __line__, __method__,
+      Log::start( __FILE__, __LINE__, __METHOD__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
@@ -524,7 +524,7 @@ class LibValidator
   public function addRowid($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (Log::$levelDebug)
-      Log::start( __file__, __line__, __method__,
+      Log::start( __FILE__, __LINE__, __METHOD__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
@@ -574,7 +574,7 @@ class LibValidator
   public function addFloat($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (Log::$levelDebug)
-      Log::start( __file__, __line__, __method__,
+      Log::start( __FILE__, __LINE__, __METHOD__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
@@ -633,7 +633,7 @@ class LibValidator
   public function addBoolean($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (Log::$levelDebug)
-      Log::start( __file__, __line__, __method__,
+      Log::start( __FILE__, __LINE__, __METHOD__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (is_null($value)) {
@@ -667,12 +667,12 @@ class LibValidator
   public function addText($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (Log::$levelDebug)
-      Log::start( __file__, __line__, __method__,
+      Log::start( __FILE__, __LINE__, __METHOD__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
       if (Log::$levelTrace)
-      Log::logLine('trace', __file__, __line__, 'Valid cause empty');
+      Log::logLine('trace', __FILE__, __LINE__, 'Valid cause empty');
 
       $this->data[$key] = null;
       $this->invalid[$key] = false;
@@ -716,12 +716,12 @@ class LibValidator
   public function addFulltext($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (Log::$levelDebug)
-      Log::start( __file__, __line__, __method__,
+      Log::start( __FILE__, __LINE__, __METHOD__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
       if (Log::$levelTrace)
-      Log::logLine('trace', __file__, __line__,
+      Log::logLine('trace', __FILE__, __LINE__,
       'Valid cause empty');
 
       $this->data[$key] = null;
@@ -773,13 +773,13 @@ class LibValidator
   public function addHtml($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (Log::$levelDebug)
-      Log::start( __file__, __line__, __method__,
+      Log::start( __FILE__, __LINE__, __METHOD__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
 
     if (!$notNull and trim($value) == '') {
       if (Log::$levelTrace)
-      Log::logLine('trace', __file__, __line__,
+      Log::logLine('trace', __FILE__, __LINE__,
       'Valid cause empty');
 
       $this->data[$key] = null;
@@ -822,7 +822,7 @@ class LibValidator
   public function addDate($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (Log::$levelDebug)
-      Log::start( __file__, __line__, __method__,
+      Log::start( __FILE__, __LINE__, __METHOD__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
@@ -885,7 +885,7 @@ class LibValidator
   public function addTime($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (Log::$levelDebug)
-      Log::start( __file__, __line__, __method__,
+      Log::start( __FILE__, __LINE__, __METHOD__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
@@ -938,7 +938,7 @@ class LibValidator
   public function addTimestamp($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (Log::$levelDebug)
-      Log::start( __file__, __line__, __method__,
+      Log::start( __FILE__, __LINE__, __METHOD__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
@@ -991,7 +991,7 @@ class LibValidator
   public function addUrl($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (Log::$levelDebug)
-      Log::start( __file__, __line__, __method__,
+      Log::start( __FILE__, __LINE__, __METHOD__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
@@ -1047,7 +1047,7 @@ class LibValidator
   public function addEmail($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (Log::$levelDebug)
-      Log::start( __file__, __line__, __method__,
+      Log::start( __FILE__, __LINE__, __METHOD__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
@@ -1103,7 +1103,7 @@ class LibValidator
   public function addUsername($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (Log::$levelDebug)
-      Log::start( __file__, __line__, __method__,
+      Log::start( __FILE__, __LINE__, __METHOD__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
@@ -1160,7 +1160,7 @@ class LibValidator
   public function addPassword($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (Log::$levelDebug)
-      Log::start( __file__, __line__, __method__,
+      Log::start( __FILE__, __LINE__, __METHOD__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
@@ -1210,7 +1210,7 @@ class LibValidator
   public function addCname($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (Log::$levelDebug)
-      Log::start( __file__, __line__, __method__,
+      Log::start( __FILE__, __LINE__, __METHOD__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
@@ -1270,7 +1270,7 @@ class LibValidator
   public function addFilename($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (Log::$levelDebug)
-      Log::start( __file__, __line__, __method__,
+      Log::start( __FILE__, __LINE__, __METHOD__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
@@ -1321,7 +1321,7 @@ class LibValidator
   public function addFullname($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (Log::$levelDebug)
-      Log::start( __file__, __line__, __method__,
+      Log::start( __FILE__, __LINE__, __METHOD__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
@@ -1372,7 +1372,7 @@ class LibValidator
   public function addFoldername($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
   {
     if (Log::$levelDebug)
-      Log::start( __file__, __line__, __method__,
+      Log::start( __FILE__, __LINE__, __METHOD__,
         array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
