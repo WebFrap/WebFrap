@@ -208,7 +208,7 @@ class LibFlowApachemod extends Base
   * @param Transaction $transaction
   * @return void
   */
-  public function main($httpRequest = null, $session = null, $transaction = null  )
+  public function main($httpRequest = null, $session = null, $transaction = null)
   {
 
     // get the info from where main was called

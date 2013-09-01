@@ -365,8 +365,6 @@ class LibXmlNode
 
     $list = $this->document->xpath('./'.$type.'/text[@lang="'.$lang.'"]', $this->dom);
 
-    $nodes = array();
-
     if ($list->length) {
       $node = $list->item(0);
 

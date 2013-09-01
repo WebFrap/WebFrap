@@ -88,7 +88,7 @@ class Transaction
   /**
    * Enter description here...
    *
-   * @param unknown_type $transactionId
+   * @param string $transactionId
    * @return SysTransactionAbstract
    */
   public static function getTransaction($transactionId)
@@ -98,6 +98,7 @@ class Transaction
         return $this->transactions[$transactionId]->isValid();
       }
     }
+    return null;
   }//end public static function getTransaction($transactionId)
 
   /**

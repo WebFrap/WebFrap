@@ -1,5 +1,5 @@
 
--- Activ Views
+-- Active Views
 
 CREATE  OR REPLACE VIEW webfrap_acl_max_permission_view
 AS

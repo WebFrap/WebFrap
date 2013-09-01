@@ -1479,14 +1479,12 @@ class LibRequestPhp
    * @return array
    *
    */
-  public function validateMultiData
-  (
+  public function validateMultiData(
     $values,
     $subkey = null,
     $messages = array(),
     $state = null
-)
-  {
+  ) {
 
     $post = array();
 
@@ -1501,6 +1499,7 @@ class LibRequestPhp
       $post = $_POST[$subkey];
 
     } else {
+
       $post = $_POST;
     }
 

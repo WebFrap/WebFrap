@@ -70,7 +70,7 @@ class LibFlowCli extends LibFlow
 
   /**
   * the main method
-  * @return void
+  * @return boolean
   */
   public function main($httpRequest = null, $session = null, $transaction = null)
   {

@@ -101,6 +101,9 @@ class LibSerializerXml extends LibSerializerAbstract
         I18n::s('wbf.error.unserializeable')
       );
     }
+
+    return null;
+
   }//end protected function serializeNode()
 
   /**

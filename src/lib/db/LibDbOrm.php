@@ -627,7 +627,7 @@ class LibDbOrm
    * Get the table name of an entity
    *
    * @param string $entityKey
-   * @return string
+   * @return array
    */
   public function getTableCols($entityKey)
   {
@@ -1142,7 +1142,7 @@ SQL;
    *
    * @polymorph
    * @param string/Entity $entity
-   * @param int $uniqeFields
+   * @param array $uniqeFields
    * @return
    * {
    *   CASE: $returnObjects = false
@@ -2436,7 +2436,6 @@ SQL;
   public function deleteWhere($entityKey, $where)
   {
 
-    $tableName = $this->getTableName($entityKey);
     $entities = $this->getListWhere($entityKey, $where);
 
     foreach ($entities as $entity)

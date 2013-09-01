@@ -178,6 +178,170 @@ class LibAclAdapter_Db extends LibAclAdapter
 // Methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
+
+  /**
+   * @lang de:
+   *
+   * das zugriffslevel des aktiven benutzers für die übergebenen security
+   * areas abfragen
+   *
+   * die entity ist optional.
+   * Wenn ein entity objekt mitübergeben wird prüft die abfrage ob der
+   * benutzer auch rechte in relation zu dem per entity übergebenen datensatz
+   * hat
+   *
+   * wenn die constante WFB_NO_LOGIN auf true definiert wurde gibt diese
+   * methode immer true zurück
+   * @tutorial <a href="http://webfrap.net/doc/{{version}}/index.php?page=debug.constants" >Debug Flags</a>
+   *
+   * @param string $key
+   * {
+   *   die gewünschten security areas,
+   *   wenn mehr als eine area übergeben wird gewinnt jeweils das höchste access level
+   *   egal auf welcher area es sich befindet
+   *
+   *   @example 'mod-area'  single area
+   *   @example 'mod-area/mgmt-area/mgmt-area' path like area
+   *   @example 'mgmt-area1/mgmt-area2>mgmt-area3' gruppe von masken
+   *   @tutorial <a href="http://webfrap.net/doc/{{version}}/index.php?page=acls.security_areas" >Security areas</a>
+   * }
+   *
+   * @param Entity $entity Das Entity Objekt
+   * @param boolean $loadRoles sollen die Rollen auch geladen werden?
+   * @param LibAclPermission $container Der Container in welchen die Daten sollen kann mit übergeben werden
+   * @param boolean $extend
+   *
+   * @return LibAclPermission Permission Container mit allen nötigen Informationen
+   *
+   */
+  public function injectDsetRoles(
+    $container,
+    $key,
+    $entity = null
+  ) {
+
+    if (DEBUG)
+      Debug::console("injectDsetRoles {$key}");
+
+    // resources
+    $model = $this->getModel();
+
+    // sicher stellen, dass vorhanden
+    $checkAreas = $model->extractWeightedKeys($key);
+
+    $container->addRoles($model->loadUserRoles($checkAreas, $entity));
+
+    return $container;
+
+  }//end public function injectDsetRoles */
+
+  /**
+   * @lang de:
+   *
+   * das zugriffslevel des aktiven benutzers für die übergebenen security
+   * areas abfragen
+   *
+   * die entity ist optional.
+   * Wenn ein entity objekt mitübergeben wird prüft die abfrage ob der
+   * benutzer auch rechte in relation zu dem per entity übergebenen datensatz
+   * hat
+   *
+   * wenn die constante WFB_NO_LOGIN auf true definiert wurde gibt diese
+   * methode immer true zurück
+   * @tutorial <a href="http://webfrap.net/doc/{{version}}/index.php?page=debug.constants" >Debug Flags</a>
+   *
+   * @param LibAclPermission $container Der Container in welchen die Daten sollen kann mit übergeben werden
+   * @param string $key
+   * {
+   *   die gewünschten security areas,
+   *   wenn mehr als eine area übergeben wird gewinnt jeweils das höchste access level
+   *   egal auf welcher area es sich befindet
+   *
+   *   @example 'mod-area'  single area
+   *   @example 'mod-area/mgmt-area/mgmt-area' path like area
+   *   @example 'mgmt-area1/mgmt-area2>mgmt-area3' gruppe von masken
+   *   @tutorial <a href="http://webfrap.net/doc/{{version}}/index.php?page=acls.security_areas" >Security areas</a>
+   * }
+   *
+   * @param Entity $entity Das Entity Objekt
+   *
+   * @return LibAclPermission Permission Container mit allen nötigen Informationen
+   *
+   */
+  public function injectDsetLevel(
+    $container,
+    $key,
+    $entity = null
+  ) {
+
+    if (DEBUG)
+      Debug::console("injectDsetLevel {$key}");
+
+    // resources
+    $user = $this->getUser();
+    $userLevel = $user->getLevel();
+    $model = $this->getModel();
+
+    $checkAreas = $model->extractWeightedKeys($key);
+
+
+    // wenn die acls deaktiviert sind, rückgabe mit global admin
+    // wenn der user vollen accees hat, rückgabe gloabl admin
+    if ( $this->disabled || $user->getLevel() >= User::LEVEL_FULL_ACCESS) {
+      $container->setPermission(Acl::ADMIN, Acl::ADMIN);
+      return $container;
+    }
+
+    $areaLevel = $model->extractAreaAccessLevel($checkAreas, $entity);
+    $permission = $model->loadAreaPermission($checkAreas, $entity);
+
+    // prüfen ob das area level größer ist als als die permission
+    if ($areaLevel) {
+      if (!isset($permission['acl-level'])) {
+        $permission['acl-level'] = $areaLevel;
+      } elseif ($areaLevel > $permission['acl-level']) {
+        $permission['acl-level'] = $areaLevel;
+      }
+    }
+
+    $globalLevel = $model->loadGloalPermission($checkAreas);
+
+    if ($globalLevel) {
+      if ($globalLevel > $permission['acl-level'])
+        $permission['acl-level'] = $globalLevel;
+
+      $permission['assign-is-partial'] = false;
+
+    }
+
+    if ($areaLevel) {
+      if ($container->defLevel >= $areaLevel)
+        $container->defLevel = $areaLevel;
+    }
+
+    $container->updatePermission($permission);
+
+    return $container;
+
+  }//end public function injectDsetLevel */
+
+
+
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   /**
    * @lang de:
    * Methode zum prüfen ob ein Benutzer rechte auf eine bestimmte Area hat.
@@ -459,15 +623,159 @@ class LibAclAdapter_Db extends LibAclAdapter
    * @return LibAclPermission Permission Container mit allen nötigen Informationen
    *
    */
-  public function getPermission
-  (
+  public function injectDsetPermissions(
+    $key,
+    $entity = null,
+    $container = null
+  ) {
+
+    if (!$container)
+      $container = new LibAclPermission;
+
+    if (DEBUG)
+      Debug::console("getPermission {$key}");
+
+    // resources
+    $user = $this->getUser();
+    $userLevel = $user->getLevel();
+    $model = $this->getModel();
+
+    // sicher stellen, dass vorhanden
+    $roles = array();
+    $checkAreas = array();
+
+    // den key verarbeiten
+    $tmp = explode(':', $key);
+
+    // es kann sein, dass ein benutzer nur partiellen zugriff auf eine area hat
+    // das bedeuted, er darf zwar in den bereich, aber für alle kinder darin
+    // müssen die kinder nochmal gesondert geprüft werden
+    $paths = explode('>', $tmp[0]);
+
+    // wenn die acls deaktiviert sind, rückgabe mit global admin
+    // wenn der user vollen accees hat, rückgabe gloabl admin
+    if ( $this->disabled || $user->getLevel() >= User::LEVEL_FULL_ACCESS) {
+      $container->setPermission(Acl::ADMIN, Acl::ADMIN);
+
+      if (count($paths) > 1) {
+        $parentAreas = explode('/', $paths[0]);
+        $mainAreas = explode('/', $paths[1]);
+
+        // rollen müssen immer geladen werden
+        $roles = $model->loadUserRoles(array_merge($parentAreas,$mainAreas), $entity);
+
+      } else {
+        $parentAreas = null;
+        $mainAreas = explode('/', $paths[0]);
+
+        // rollen müssen immer geladen werden
+        $roles = $model->loadUserRoles($mainAreas, $entity);
+      }
+
+      $container->roles = $roles;
+
+      return $container;
+    }
+
+    // standard check
+    if (count($paths) > 1) {
+      $parentAreas = explode('/', $paths[0]);
+      $mainAreas = explode('/', $paths[1]);
+
+      $checkAreas = array_merge($parentAreas, $mainAreas);
+
+      $roles = $model->loadUserRoles($checkAreas, $entity);
+
+      $areaLevel = $model->extractAreaAccessLevel($checkAreas, $entity);
+
+    } else {
+      $parentAreas = null;
+      $mainAreas = explode('/', $paths[0]);
+
+      $checkAreas = $mainAreas;
+
+      $roles = $model->loadUserRoles($checkAreas, $entity);
+
+      $areaLevel = $model->extractAreaAccessLevel($checkAreas, $entity);
+
+    }
+
+    $permission = $model->loadAreaPermission($checkAreas, $entity);
+
+    // prüfen ob das area level größer ist als als die permission
+    if ($areaLevel) {
+      if (!isset($permission['acl-level'])) {
+        $permission['acl-level'] = $areaLevel;
+      } elseif ($areaLevel > $permission['acl-level']) {
+        $permission['acl-level'] = $areaLevel;
+      }
+    }
+
+    $globalLevel = $model->loadGloalPermission($checkAreas);
+
+    if ($globalLevel) {
+      if ($globalLevel > $permission['acl-level'])
+        $permission['acl-level'] = $globalLevel;
+
+      $permission['assign-is-partial'] = false;
+
+    }
+
+    $container->addRoles($roles);
+
+    if ($areaLevel) {
+      if ($container->defLevel >= $areaLevel)
+        $container->defLevel = $areaLevel;
+    }
+
+    $container->updatePermission($permission);
+
+    return $container;
+
+  }//end public function injectDsetPermissions */
+
+  /**
+   * @lang de:
+   *
+   * das zugriffslevel des aktiven benutzers für die übergebenen security
+   * areas abfragen
+   *
+   * die entity ist optional.
+   * Wenn ein entity objekt mitübergeben wird prüft die abfrage ob der
+   * benutzer auch rechte in relation zu dem per entity übergebenen datensatz
+   * hat
+   *
+   * wenn die constante WFB_NO_LOGIN auf true definiert wurde gibt diese
+   * methode immer true zurück
+   * @tutorial <a href="http://webfrap.net/doc/{{version}}/index.php?page=debug.constants" >Debug Flags</a>
+   *
+   * @param string $key
+   * {
+   *   die gewünschten security areas,
+   *   wenn mehr als eine area übergeben wird gewinnt jeweils das höchste access level
+   *   egal auf welcher area es sich befindet
+   *
+   *   @example 'mod-area'  single area
+   *   @example 'mod-area/mgmt-area/mgmt-area' path like area
+   *   @example 'mgmt-area1/mgmt-area2>mgmt-area3' gruppe von masken
+   *   @tutorial <a href="http://webfrap.net/doc/{{version}}/index.php?page=acls.security_areas" >Security areas</a>
+   * }
+   *
+   * @param Entity $entity Das Entity Objekt
+   * @param boolean $loadRoles sollen die Rollen auch geladen werden?
+   * @param LibAclPermission $container Der Container in welchen die Daten sollen kann mit übergeben werden
+   * @param boolean $extend
+   *
+   * @return LibAclPermission Permission Container mit allen nötigen Informationen
+   *
+   */
+  public function getPermission(
     $key,
     $entity = null,
     $loadRoles = false,
     $container = null,
     $extend = false
-)
-  {
+  ) {
 
     if (!$container)
       $container = new LibAclPermission;
@@ -1244,7 +1552,7 @@ class LibAclAdapter_Db extends LibAclAdapter
    *  Ein oder mehrere mit "/" getrennte Areas
    *
    * @param int/Entity $entity def: null,
-   *  Ein Eintity Objekt oder eine Rowid wenn die Rolle Relativ zu einer Area
+   *  Ein Entity Objekt oder eine Rowid wenn die Rolle relativ zu einer Area
    *  ausgelesen werden soll
    *
    * @param boolean $loadAllRoles alle rollen laden, da es später mehr checks gibt
@@ -1593,11 +1901,11 @@ class LibAclAdapter_Db extends LibAclAdapter
     $paths = explode('>', $tmp[0]);
 
     if (count($paths) > 1) {
-      
+
       $areas = explode('/', $paths[0]);
       $partialAreas = explode('/', $paths[1]);
     } else {
-      
+
       $areas = null;
       $partialAreas = explode('/', $paths[0]);
     }
@@ -1610,22 +1918,22 @@ class LibAclAdapter_Db extends LibAclAdapter
 
     /// TODO prüfen ob das so überhaupt sinn macht
     if ($mainSource) {
-      
+
       if (is_array($mainSource)) {
-        
+
         $tmp = array();
         foreach ($mainSource as $src) {
           $tmp[] = "{$mainSource}";
         }
 
         $mainSource = "AND acls.\"acl-vid\" IN(".implode(', ', $tmp).")";
-      
+
       } else {
-        
+
         $mainSource = "AND acls.\"acl-vid\" = {$mainSource}";
       }
     } else {
-      
+
       $mainSource = "AND acls.\"acl-vid\" = {$criteria->table}.rowid";
     }
 

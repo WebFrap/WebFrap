@@ -79,7 +79,6 @@ abstract class InjectContainer
   public $response = null;
 
   /**
-   * @deprecated die Registry soll nichtmehr verwendet werden
    * @var Registry
    */
   protected $registry = null;
@@ -324,7 +323,7 @@ abstract class InjectContainer
   /**
    *
    * Enter description here ...
-   * @param unknown_type $registry
+   * @param Registry $registry
    */
   public function setRegistry($registry)
   {

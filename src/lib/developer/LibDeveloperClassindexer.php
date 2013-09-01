@@ -64,7 +64,7 @@ class LibDeveloperClassindexer
   *
   * Diese Funktion generiert die Rootordner und Rootbookmarks der kompletten
   * Bookmarkstruktur.
-  * @return void
+  * @return string
   */
   public function build()
   {

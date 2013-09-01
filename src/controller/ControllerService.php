@@ -68,7 +68,6 @@ class ControllerService extends Controller
       return;
     }
 
-    return;
 
   } //end public function runIfCallable */
 

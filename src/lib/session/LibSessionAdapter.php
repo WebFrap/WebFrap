@@ -40,8 +40,8 @@ abstract class LibSessionAdapter implements ArrayAccess
   /**
    * Enter description here...
    *
-   * @param unknown_type $key
-   * @return unknown
+   * @param string $key
+   * @return string
    */
   public function __get($key)
   {

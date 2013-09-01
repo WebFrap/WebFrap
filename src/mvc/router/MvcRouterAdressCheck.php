@@ -32,7 +32,7 @@ class MvcRouterAdressCheck
   /**
    * @param LibRequestHttp $request
    * @param LibConfPhp $conf
-   * @return void
+   * @return boolean
    */
   public static function checkRedirect($request, $conf)
   {

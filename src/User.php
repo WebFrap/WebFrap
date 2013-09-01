@@ -752,11 +752,9 @@ class User extends BaseChild
     } else {
       Debug::console('profile class: '.$classname.' not exists');
 
+      // else just keep the old profile
       return false;
     }
-
-    // else just keep the old profile
-    return false;
 
   }//end public function hasProfile */
 

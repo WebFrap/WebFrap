@@ -133,7 +133,7 @@ class ContextDomainListing  extends Context
 
     $filters = $request->param('filter', Validator::BOOLEAN);
 
-    if ($filters) {
+    if (is_array($filters)) {
       foreach ($filters as $key => $value) {
         $this->filter->$key = $value;
       }

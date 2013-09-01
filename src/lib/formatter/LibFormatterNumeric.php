@@ -84,7 +84,7 @@ class LibFormatterNumeric
   }//end public function __construct */
 
   /**
-   *
+   * @return string
    */
   public function __toString()
   {
@@ -232,6 +232,7 @@ class LibFormatterNumeric
 
   /**
    * @param $numeric
+   * @return string
    */
   public function formatToEnglish($numeric = null)
   {

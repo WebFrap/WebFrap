@@ -83,7 +83,7 @@ class LibEnvelopEntity
    */
   public function __set($key , $value)
   {
-    return $this->entity->$key = $value;
+     $this->entity->$key = $value;
   }//end public function __set */
 
   /**

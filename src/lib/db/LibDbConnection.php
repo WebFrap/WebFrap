@@ -119,7 +119,7 @@ abstract class LibDbConnection
 
   /**
    * database connection result
-   * @var resource id
+   * @var Resource
    */
   protected $result = null;
 
@@ -516,8 +516,6 @@ abstract class LibDbConnection
       return explode(',' , $string);
 
     $length = strlen($string);
-
-    $open = false;
 
     $array = array();
     $ignoreNext = false;

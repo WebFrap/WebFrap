@@ -177,7 +177,7 @@ class LibSessionPhp
    *
    * @param string $key
    * @param string[optional] $value
-   * @return void
+   * @return string
    */
   public function getStatus($key = null)
   {

@@ -98,7 +98,7 @@ class LibResponseHttp extends LibResponse
   /**
    * Einen neuen Cookie hinzufügen
    *
-   * @param array $name
+   * @param string $name
    * @return boolean
    */
   public function getCookie($name)

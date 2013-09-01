@@ -41,6 +41,7 @@ class ControllerRouter extends ControllerCrud
    * die vom request angeforderte methode auf rufen
    *
    * @param string $action
+   * @return boolean
    */
   public function run ($action = null)
   {
@@ -104,6 +105,8 @@ class ControllerRouter extends ControllerCrud
       } //end else
 
     } //end catch
+
+    return true;
 
   } //end public function run */
 

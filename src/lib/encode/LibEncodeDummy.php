@@ -48,7 +48,7 @@ class LibEncodeDummy
 
   /**
    * check for hidden redirects in the url
-   * @return void
+   * @return string
    */
   public function i18n($key, $repo, $data = array())
   {

@@ -425,12 +425,10 @@ class LibAclPermission
    *   @see LibAclPermission::$refBaseLevel
    * }
    */
-  public function setPermission
-  (
+  public function setPermission(
     $level,
     $refBaseLevel = null
-  )
-  {
+  ) {
 
     if (is_array($level)) {
       if (array_key_exists('acl-level', $level)) {
@@ -480,8 +478,7 @@ class LibAclPermission
     }
 
     if (DEBUG) {
-      Debug::console
-      (
+      Debug::console(
         "Init Acl Container: ".get_class($this)
         ." isPartAccess: ".($this->isPartAccess ?'true':'false')
         ." hasPartAccess: ".($this->hasPartAccess ?'true':'false')
@@ -514,8 +511,7 @@ class LibAclPermission
   (
     $level,
     $refBaseLevel = null
-  )
-  {
+  ) {
 
     if (is_array($level)) {
       if (isset($level['acl-level'])) {
@@ -616,6 +612,18 @@ class LibAclPermission
     return ($this->level >= $this->levels[$key])?true:false;
 
   }//end public function __get */
+
+  /**
+   * @lang:de
+   *
+   * Einfache Abfrage des Access Levels
+   *
+   * @return boolean
+   */
+  public function __isset($key)
+  {
+    return $this->__get($key);
+  }//end public function __isset */
 
   /**
    * access ist analog zu __get
@@ -994,7 +1002,7 @@ class LibAclPermission
         return null;
 
       if (is_string($this->calcQuery)) {
-        
+
         if ($res = $this->getDb()->select($this->calcQuery)) {
           $tmp = $res->get();
 
@@ -1010,7 +1018,7 @@ class LibAclPermission
 
         }
       } else {
-        
+
         if ($res = $this->getDb()->getOrm()->select($this->calcQuery)) {
           $tmp =  $res->get();
           if (!isset($tmp[Db::Q_SIZE])) {
@@ -1040,17 +1048,17 @@ class LibAclPermission
    * @param array $id
    * @param array $roles die relevanten Rollen
    */
-  public function loadEntryRoles($area, $id, $roles = array())
+  public function loadEntryRoles($area, $ids, $roles = array())
   {
 
     /* @var $acl LibAclAdapter_Db */
     $acl = $this->getAcl();
 
-    $entryRoles = $acl->getRoles($area, $id, $roles);
+    $entryRoles = $acl->getRoles($area, $ids, $roles);
 
     // dafür sorgen, das für alle ids zumindest ein leerer array vorhanden ist
     // bzw, dass potentiell vorhandenen rollen sauber gemerged werden
-    foreach ($id as $id) {
+    foreach ($ids as $id) {
 
       if (isset($entryRoles[$id])) {
         if (!isset($this->entryRoles[$id]))

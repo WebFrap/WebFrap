@@ -16,8 +16,8 @@ $this->l['wbf.message']['Sucessfully copied folder {@src@} to {@target@}.']
 $this->l['wbf.message']['Failed to copy {@src@} to {@target@}.']
  = 'Failed to copy {@src@} to {@target@}.';
 
-$this->l['wbf.message']['Sucessfully created {@path@}.']
- = 'Sucessfully created {@path@}.';
+$this->l['wbf.message']['Successfully created {@path@}.']
+ = 'Successfully created {@path@}.';
 
 $this->l['wbf.message']['Failed to create {@path@}.']
  = 'Failed to create {@path@}.';

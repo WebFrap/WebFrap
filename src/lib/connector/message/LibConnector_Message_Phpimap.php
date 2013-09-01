@@ -156,9 +156,9 @@ class LibConnector_Message_Phpimap extends LibConnector_Adapter
    * @param int $msgNo
    * @return object
    */
-  public function getMessageHead($msgNo  )
+  public function getMessageHead($msgNo)
   {
-    return imap_headerinfo($this->resource, $msgNo);;
+    return imap_headerinfo($this->resource, $msgNo);
 
   }//end public function getMessageHeads */
 

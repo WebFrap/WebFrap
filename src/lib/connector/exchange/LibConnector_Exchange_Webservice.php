@@ -158,7 +158,7 @@ class LibConnector_Exchange_Webservice extends LibConnector_Adapter
    */
   public function getMessageHead($msgNo  )
   {
-    return imap_headerinfo($this->resource, $msgNo);;
+    return imap_headerinfo($this->resource, $msgNo);
 
   }//end public function getMessageHeads */
 

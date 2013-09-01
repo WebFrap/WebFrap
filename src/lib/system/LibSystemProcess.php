@@ -43,7 +43,6 @@ class LibSystemProcess
   protected $stdout = null;
 
   /**
-   *
    * @var string
    */
   protected $stderr = null;
@@ -121,8 +120,7 @@ class LibSystemProcess
   public function open($command , $params = null, $env = null  )
   {
 
-    $spec = array
-    (
+    $spec = array(
        0 => array("pipe", "r"),  // stdin pipe for reading input
        1 => array("pipe", "w"),  // stdout pipe for standard output
        2 => array("pipe", "w")   // stderr pipe for errors

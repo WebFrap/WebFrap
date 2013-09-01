@@ -261,8 +261,8 @@ class TUrl
   /**
    * Enter description here...
    *
-   * @param unknown_type $filename
-   * @return unknown
+   * @param string $filename
+   * @return string
    */
   protected static function getDesignedData($filename)
   {

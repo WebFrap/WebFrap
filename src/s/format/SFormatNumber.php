@@ -41,7 +41,7 @@ class SFormatNumber
       return '-';
 
     $labels = array('bytes', 'kb', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB');
-    $key = floor(log($value)/log(1024));
+    $key = (int)floor(log($value)/log(1024));
 
     return sprintf('%.2f '.$labels[$key], ($value/pow(1024, floor($key))));
 

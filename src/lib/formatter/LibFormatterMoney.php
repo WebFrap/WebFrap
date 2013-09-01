@@ -182,7 +182,7 @@ class LibFormatterMoney
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   *
+   * @return string
    */
   public function formatToEnglish()
   {

@@ -71,8 +71,8 @@ class LibXml extends SimpleXMLElement
   /**
    * Enter description here...
    *
-   * @param unknown_type $filename
-   * @return unknown
+   * @param string $filename
+   * @return string
    */
   public static function load($filename)
   {
@@ -86,6 +86,8 @@ class LibXml extends SimpleXMLElement
     } else {
       Log::warn(__file__,__line__,'The xml file: '.$xml.' is not readable');
     }
+
+    return null;
 
   }//end public static function load */
 
