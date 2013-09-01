@@ -1867,7 +1867,6 @@ SQL;
 
     $areaPerm = $this->loadAreaAccesslevel($areas);
 
-
     if (DEBUG)
       Debug::console("extractAreaAccessLevel ".implode(', ', $areas  ));
 
@@ -1876,7 +1875,7 @@ SQL;
 
     $userLevel = $this->getUser()->getLevel();
 
-    $accessLevel = null;
+    $accessLevel = Acl::DENIED;
 
     if (DEBUG)
       Debug::console("GOT USER LEVEL ".$userLevel, $areaPerm  );
@@ -1893,18 +1892,36 @@ SQL;
       $accessLevel = Acl::ACCESS;
     } elseif ($userLevel >= $areaPerm['level_listing']) {
       $accessLevel = Acl::LISTING;
-    } else {
-      $accessLevel = 0;
     }
+
+    $refLevel = Acl::DENIED;
+
+    if ($userLevel >= $areaPerm['ref_admin']) {
+      $refLevel = Acl::ADMIN;
+    } elseif ($userLevel >= $areaPerm['ref_delete']) {
+      $refLevel = Acl::DELETE;
+    } elseif ($userLevel >= $areaPerm['ref_update']) {
+      $refLevel = Acl::UPDATE;
+    } elseif ($userLevel >= $areaPerm['ref_insert']) {
+      $refLevel = Acl::INSERT;
+    } elseif ($userLevel >= $areaPerm['ref_access']) {
+      $refLevel = Acl::ACCESS;
+    } elseif ($userLevel >= $areaPerm['ref_listing']) {
+      $refLevel = Acl::LISTING;
+    }
+
+    $levels = array();
+    $levels['access'] = $accessLevel;
+    $levels['ref'] = $refLevel;
 
     if (DEBUG)
-      Debug::console("area access Level  $accessLevel");
+      Debug::console("area access Level ".implode(' : ',$levels) );
 
     if ($this->aclCache) {
-      $this->aclCache->add($cacheKey, $accessLevel);
+      $this->aclCache->add($cacheKey, $levels);
     }
 
-    return $accessLevel;
+    return $levels;
 
   }//end public function extractAreaAccessLevel */
 
@@ -2237,8 +2254,6 @@ SQL;
     if (!$userId = $user->getId())
       throw new LibAcl_Exception('Got no User');
 
-    $sourceAssigned = ACL_ASSIGNED_SOURCE;
-    $sourceMaxPerm = ACL_MAX_PERMISSION;
 
     if (is_null($entity)) {
 
@@ -2246,7 +2261,7 @@ SQL;
   SELECT
     max("acl-level") as "acl-level"
   FROM
-    {$sourceMaxPerm}
+    webfrap_acl_max_permission_view
 
   WHERE
     upper("acl-area") in({$areaKeys})
@@ -2261,7 +2276,7 @@ SQL;
     "assign-is-partial",
     "assign-has-partial"
   FROM
-    {$sourceAssigned}
+    webfrap_acl_assigned_view
 
   WHERE
     upper("acl-area") in({$areaKeys})
@@ -2276,7 +2291,7 @@ SQL;
   SELECT
     max("acl-level") as "acl-level"
   FROM
-    {$sourceMaxPerm}
+    webfrap_acl_max_permission_view
 
   WHERE
     upper("acl-area") in({$areaKeys})
@@ -2296,17 +2311,12 @@ SQL;
     "assign-has-partial"
 
   FROM
-    {$sourceAssigned}
+    webfrap_acl_assigned_view
 
   WHERE
     upper("acl-area") in({$areaKeys})
       and "acl-user" = {$userId}
-      and
-      (
-        "acl-vid" = {$entity}
-          OR
-        "acl-vid" is NULL
-      )
+      and "acl-vid" = {$entity}
 SQL;
     }
 
@@ -2322,13 +2332,11 @@ SQL;
 
     $assign['acl-level'] = $level;
 
-    if
-    (
+    if(
       isset($assign['assign-is-partial'])
         && 1 == $assign['assign-is-partial']
         && !$level
-    )
-    {
+    ) {
       $assign['acl-level'] = Acl::LISTING;
 
     }

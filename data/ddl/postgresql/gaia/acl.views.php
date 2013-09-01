@@ -109,7 +109,7 @@ CREATE OR REPLACE VIEW {$schemaName}.webfrap_inject_acls_view
   left JOIN
     {$schemaName}.wbfsys_group_users acl_gu
     ON
-      (acl_gu.partial = 0 or acl_gu.partial is null)
+      acl_gu.partial = 0
 
   WHERE
   (
@@ -166,7 +166,7 @@ CREATE  OR REPLACE VIEW {$schemaName}.webfrap_has_arearole_view
   JOIN
     {$schemaName}.wbfsys_group_users acl_gu
     ON
-      (acl_gu.partial = 0 or acl_gu.partial is null)
+      acl_gu.partial = 0
 
   JOIN
     {$schemaName}.wbfsys_role_group group_role

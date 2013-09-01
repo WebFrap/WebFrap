@@ -4,12 +4,13 @@
 CREATE OR REPLACE VIEW webfrap_acl_max_permission_view
 AS
   SELECT
-    max(acl_access.access_level)  as "acl-level",
-    acl_area.access_key           as "acl-area",
-    acl_area.rowid                as "acl-id_area",
-    acl_gu.id_user                as "acl-user",
-    acl_gu.vid                    as "acl-vid",
-    min(acl_gu.partial)           as "assign-partial"
+    max(acl_access.access_level) as "acl-level",
+    max(acl_access.ref_access_level) as "ref-level",
+    min(acl_gu.partial) as "assign-partial",
+    acl_area.access_key as "acl-area",
+    acl_area.rowid as "acl-id_area",
+    acl_gu.id_user as "acl-user",
+    acl_gu.vid as "acl-vid"
   FROM
     wbfsys_group_users acl_gu
   JOIN
@@ -87,7 +88,7 @@ CREATE OR REPLACE VIEW webfrap_inject_acls_view
   left JOIN
     wbfsys_group_users acl_gu
     ON
-      ( acl_gu.partial = 0 or acl_gu.partial is null )
+      acl_gu.partial = 0
 
   WHERE
    (
@@ -134,7 +135,7 @@ CREATE  OR REPLACE VIEW webfrap_has_arearole_view
   JOIN
     wbfsys_group_users acl_gu
     ON
-      ( acl_gu.partial = 0 or acl_gu.partial is null )
+      acl_gu.partial = 0
 
   JOIN
     wbfsys_role_group group_role
@@ -174,7 +175,7 @@ AS
     wbfsys_security_access acl_access
     ON
       acl_gu.id_group = acl_access.id_group
-      AND ( acl_access.partial = 0 OR acl_access.partial IS NULL )
+      AND acl_access.partial = 0
   JOIN
     wbfsys_security_area acl_area
     ON
@@ -182,7 +183,7 @@ AS
   WHERE
     acl_gu.id_area is null
       AND acl_gu.vid is null
-      AND ( acl_gu.partial = 0 OR acl_gu.partial IS NULL )
+      AND acl_gu.partial = 0
   GROUP BY
     acl_gu.id_user,
     acl_area.access_key,

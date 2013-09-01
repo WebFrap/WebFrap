@@ -146,7 +146,7 @@ class DomainNode
   public $domainAclMask = null;
 
   /**
-   * @var string UPPER('mod-project'), UPPER('mgmt-project_activity')
+   * @var string'mod-project', 'mgmt-project_activity'
    */
   public $domainAclQuery = null;
 

@@ -1697,7 +1697,7 @@ SQL;
    *
    * @param array/string $areas
    * @return int
-   */
+   * /
   public function extractAreaAccessLevel($areas)
   {
 
@@ -1747,7 +1747,7 @@ SQL;
    *
    * @param array/string $areas
    * @return int
-   */
+   * /
   public function extractAreaRefAccessLevel($areas)
   {
 

@@ -53,7 +53,13 @@ class LibAclPermission
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * @lang de:
+   * Definiert ob der Kontainer für einen Datensatz oder für eine Liste
+   * von Datensätzen ist
+   * @var boolean
+   */
+  public $isReference = false;
+
+  /**
    * das einfach zugriffslevel für eine besimmte area, bzw das höchste level
    * für eine gruppe von areas
    *
@@ -65,7 +71,6 @@ class LibAclPermission
   public $level = null;
 
   /**
-   * @lang de:
    * Das Standard Level, dass von den Arearechten kommt
    *
    * @var int
@@ -464,6 +469,10 @@ class LibAclPermission
         throw new LibAcl_Exception('Wrong Input Format for LibAclPermission::__construct, acl-level is missing!');
       }
 
+      if (isset($level['ref-level'])) {
+        $this->refBaseLevel = (int)$level['ref-level'];
+      }
+
     } else {
 
       $this->level = (int) $level;
@@ -496,7 +505,7 @@ class LibAclPermission
    * @lang:de
    * Updaten der Permissions
    *
-   * @param int   $level das zugriffslevel
+   * @param int $level das zugriffslevel
    * @param array $level array as named parameter access_level,partial
    * {
    *   @see LibAclPermission::$level
@@ -507,17 +516,17 @@ class LibAclPermission
    *   @see LibAclPermission::$refBaseLevel
    * }
    */
-  public function updatePermission
-  (
+  public function updatePermission(
     $level,
     $refBaseLevel = null
   ) {
 
     if (is_array($level)) {
+
       if (isset($level['acl-level'])) {
 
-        if ($this->level < (int) $level['acl-level'])
-           $this->level = (int) $level['acl-level'];
+        if ($this->level < (int)$level['acl-level'])
+           $this->level = (int)$level['acl-level'];
 
         if (isset($level['access-is-partial']) && (int) $level['access-is-partial'] == 1)
           $this->isPartAccess = true;
@@ -532,35 +541,37 @@ class LibAclPermission
           $this->hasPartAssign = true;
 
         if (!$this->isPartAssign) {
-          if ($this->defLevel < (int) $level['acl-level'])
-             $this->defLevel = (int) $level['acl-level'];
+          if ($this->defLevel < (int)$level['acl-level'])
+             $this->defLevel = (int)$level['acl-level'];
         }
 
-        if ($this->defLevel < (int) $level['acl-level'])
-           $this->defLevel = (int) $level['acl-level'];
-
       }
+
+      if (isset($level['ref-level'])) {
+        if ($this->refBaseLevel < (int)$level['ref-level'])
+          $this->refBaseLevel = (int)$level['ref-level'];
+      }
+
     } else {
 
       if ($this->level < (int) $level)
        $this->level = (int) $level;
 
       if (!$this->isPartAssign) {
-        if ($this->defLevel < (int) $level)
-         $this->defLevel = (int) $level;
+        if ($this->defLevel < (int)$level)
+         $this->defLevel = (int)$level;
       }
 
-      if ($this->defLevel < (int) $level)
-        $this->defLevel = (int) $level;
+      if ($this->defLevel < (int)$level)
+        $this->defLevel = (int)$level;
 
-      if (!is_null($refBaseLevel) &&  $this->refBaseLevel < (int) $refBaseLevel)
-        $this->refBaseLevel = (int) $refBaseLevel;
+      if (!is_null($refBaseLevel) &&  $this->refBaseLevel < (int)$refBaseLevel)
+        $this->refBaseLevel = (int)$refBaseLevel;
 
     }
 
     if (DEBUG) {
-      Debug::console
-      (
+      Debug::console(
         "Update Acl Container: ".get_class($this)
         ." isPartAccess: ".($this->isPartAccess ?'true':'false')
         ." hasPartAccess: ".($this->hasPartAccess ?'true':'false')

@@ -292,16 +292,20 @@ class LibAclAdapter_Db extends LibAclAdapter
       return $container;
     }
 
-    $areaLevel = $model->extractAreaAccessLevel($checkAreas, $entity);
     $permission = $model->loadAreaPermission($checkAreas, $entity);
+    $areaLevels = $model->extractAreaAccessLevel($checkAreas, $entity);
 
     // prüfen ob das area level größer ist als als die permission
-    if ($areaLevel) {
-      if (!isset($permission['acl-level'])) {
-        $permission['acl-level'] = $areaLevel;
-      } elseif ($areaLevel > $permission['acl-level']) {
-        $permission['acl-level'] = $areaLevel;
-      }
+    if (!isset($permission['acl-level'])) {
+      $permission['acl-level'] = $areaLevels['access'];
+    } elseif ($areaLevels['access'] > $permission['acl-level']) {
+      $permission['acl-level'] = $areaLevels['access'];
+    }
+
+    if (!isset($permission['ref-level'])) {
+      $permission['ref-level'] = $areaLevels['ref'];
+    } elseif ($areaLevels['ref'] > $permission['ref-level']) {
+      $permission['ref-level'] = $areaLevels['ref'];
     }
 
     $globalLevel = $model->loadGloalPermission($checkAreas);
@@ -311,12 +315,6 @@ class LibAclAdapter_Db extends LibAclAdapter
         $permission['acl-level'] = $globalLevel;
 
       $permission['assign-is-partial'] = false;
-
-    }
-
-    if ($areaLevel) {
-      if ($container->defLevel >= $areaLevel)
-        $container->defLevel = $areaLevel;
     }
 
     $container->updatePermission($permission);
@@ -325,21 +323,179 @@ class LibAclAdapter_Db extends LibAclAdapter
 
   }//end public function injectDsetLevel */
 
+  /**
+   * @lang de:
+   * Das Zugriffslevel auf die übergebene Area, sowie alle zugriffslevel
+   * auf die Referenzen welche auf den übergeben Datensatz verweisen
+   * auslesen.
+   *
+   * @todo besser kommentieren
+   * @param string $root access_key der root security_area
+   * @param int    $rootId rowid des datensatze von dem der pfad ausgeht
+   * @param int    $level position in der area hirachie
+   * @param string $parentKey access_key der parent security_area
+   * @param int    $parentId rowid der
+   *
+   * @param LibAclPermission $container
+   * @return LibAclPermission Permission Container mit allen nötigen Informationen
+   *
+   */
+  public function injectDsetPathPermission(
+    $container,
+    $root,
+    $rootId,
+    $level,
+    $parentKey,
+    $parentId,
+    $nodeKey,
+    $refEntity = null,
+    $loadChildren = false
+  ) {
 
+    Debug::console(
+      "injectDsetPathPermission(root: $root, rootId: $rootId, level: $level, "
+      ."parentKey: $parentKey, parentId: $parentId, modeKey: $nodeKey, refEntity: $refEntity)"
+    );
+
+    $user = $this->getUser();
+    $model = $this->getModel();
+
+
+    if (!$rootNode = $model->getAreaNode($root)) {
+      Debug::console("Keine Id für Area {$root} bekommen");
+      return $container;
+    }
+
+    if ('mgmt' == substr($rootNode->parent_key,0,4))
+      $whereRootArea = array($root, $rootNode->parent_key);
+    else
+      $whereRootArea = $root;
+
+    $roles = $model->loadUserRoles($whereRootArea, $rootId);
+
+      // wenn die acls deaktiviert sind, rückgabe mit global admin
+    // wenn der user vollen accees hat, rückgabe gloabl admin
+    if ( $this->disabled || $user->getLevel() >= User::LEVEL_FULL_ACCESS) {
+
+      $container->setPermission(Acl::ADMIN, Acl::ADMIN);
+      $container->addRoles($roles);
+
+      return $container;
+    }
+
+    ///FIXME sh
+    // das aktuelle sh ist dass der pfad zum rootnode
+    // nicht direkt geprüft wird
+    // das muss noch eingebaut werden
+    $permission = $model->loadAccessPathNode(
+      $root, // wird benötigt um den passenden startpunkt zu finden
+      $rootId, // die rowid der root area
+      $level, // das level in dem wir uns aktuell befinden
+      $parentKey, // parent wird benötigt da es theoretisch auf dem gleichen level mehrere nodes des gleichen types geben kann
+      $parentId, // die id des parent nodes
+      $nodeKey, // der key des aktuellen reference node
+      $container->roles // gruppen rollen in denen der user sich relativ zum rootnode befinden
+    );
+
+    $areaLevels = $model->extractAreaAccessLevel(array($parentKey));
+
+    // prüfen ob das area level größer ist als als die permission
+    if (!isset($permission['acl-level'])) {
+      $permission['acl-level'] = $areaLevels['access'];
+    } elseif ($areaLevels['access'] > $permission['acl-level']) {
+      $permission['acl-level'] = $areaLevels['access'];
+    }
+
+    if (!isset($permission['ref-level'])) {
+      $permission['ref-level'] = $areaLevels['ref'];
+    } elseif ($areaLevels['ref'] > $permission['ref-level']) {
+      $permission['ref-level'] = $areaLevels['ref'];
+    }
+
+    if (DEBUG)
+      Debug::console(
+        "acl-level ".(isset($permission['acl-level'])?$permission['acl-level']:'not set').' areaLevel '
+        .implode(', ',$areaLevels). ' pkey: '.$parentKey
+      );
+
+    if (!isset($permission['acl-level'])) {
+      $permission['acl-level'] = Acl::DENIED;
+    }
+
+    $container->addRoles($roles);
+    $container->updatePermission($permission);
+
+    if ($loadChildren) {
+      // der aktuelle node ist zugleich auch der rootnode
+      $path = $model->loadAccessPathChildren($root, $nodeKey, $container->roles, $level+1);
+      $container->paths = $path;
+
+      if (DEBUG)
+        Debug::console("Container PATH ", $container->paths);
+    }
+
+    if (DEBUG)
+      Debug::console(
+          "getPathPermission level: {$container->level}  defLevel: {$container->defLevel}  "
+          ."refBaseLevel: {$container->refBaseLevel} roles: ".implode(', ',$container->roles). ' pkey: '.$parentKey
+    );
+
+    return $container;
+
+  }//end public function injectDsetPathPermission */
+
+
+
+  /**
+   * @param LibAclPermission $container
+   * @param string $aclRoot
+   * @param string $aclRootId
+   * @param string $aclLevel
+   * @param string $aclNode
+   * @return LibAclPermission Permission Container mit allen nötigen Informationen
+   *
+   */
+  public function injectDsetRootPermission(
+    $container,
+    $aclRoot,
+    $aclRootId,
+    $aclLevel,
+    $aclNode,
+    $entity = null
+  ) {
+
+    if (DEBUG)
+      Debug::console("injectDsetRootPermission {$aclRoot} {$aclRootId}");
+
+    // checken ob rechte über den rootcontainer bis hier her vereerbt
+    // werden sollen
+    try {
+      $rootContainer = $this->getRootContainer($aclRoot);
+
+      $rootPerm = $rootContainer->getRefAccess($aclRootId, $aclLevel, $aclNode);
+
+      if ($rootPerm) {
+        if (!$container->defLevel || $rootPerm['level'] > $container->defLevel) {
+          $container->defLevel = $rootPerm['level'];
+        }
+        if (!$container->level || $rootPerm['level'] > $container->level) {
+          $container->level = $rootPerm['level'];
+        }
+      }
+
+      if ($rootPerm['roles']) {
+        $container->roles = array_merge($container->roles, $rootPerm['roles']);
+      }
+
+    } catch (LibAcl_Exception $e) {
+
+    }
+
+    return $container;
+
+  }//end public function injectDsetLevel */
 
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   /**
@@ -382,43 +538,17 @@ class LibAclAdapter_Db extends LibAclAdapter
     // es kann sein, dass ein benutzer nur partiellen zugriff auf eine area hat
     // das bedeuted, er darf zwar in den bereich, aber für alle kinder darin
     // müssen die kinder nochmal gesondert geprüft werden
-    $paths = explode('>', $tmp[0]);
-
-    if (count($paths) > 1) {
-      $parentAreas = explode('/', $paths[0]);
-      $mainAreas = explode('/', $paths[1]);
-    } else {
-      $parentAreas = null;
-      $mainAreas = explode('/', $paths[0]);
-    }
+    $paths = $model->extractWeightedKeys($tmp[0]);
 
     // access is das level das übergeben wurde
     $access = $tmp[1];
 
-    if (!is_null($parentAreas)) {
-      $areaLevel = $model->extractAreaAccessLevel(array_merge($parentAreas, $mainAreas));
-    } else {
-      $areaLevel = $model->extractAreaAccessLevel($mainAreas);
-    }
-
-    // prüfen ob es überhaupt areas gibt
-    if (!is_null($parentAreas)) {
-      $level = $model->loadParentAccess(array_merge($parentAreas, $mainAreas), $entity, $partial);
-
-      if (!is_null($areaLevel) && $areaLevel > $level) {
-        $level = $areaLevel;
-      }
-
-      // erst mal prüfen ob direkter zugriff möglich ist
-      if (!is_null($level) && $level >= $this->levels[$access])
-        return true;
-    }
-
-    $level = $model->loadAreaAccess($mainAreas, $entity, $partial);
+    $areaLevel = $model->extractAreaAccessLevel($paths);
+    $level = $model->loadAreaAccess($paths, $entity, $partial);
 
     // prüfen ob das area level größer ist als als die permission
-    if ($areaLevel && $areaLevel > $level) {
-      $level = $areaLevel;
+    if ($areaLevel['access'] && $areaLevel['access'] > $level) {
+      $level = $areaLevel['access'];
     }
 
     if (is_null($level))
@@ -466,8 +596,7 @@ class LibAclAdapter_Db extends LibAclAdapter
    * @return LibAclPermission Permission Container mit allen nötigen Informationen
    *
    */
-  public function getLevel
-  (
+  public function getLevel(
     $key,
     $entity = null,
     $roles = array()
@@ -492,32 +621,16 @@ class LibAclAdapter_Db extends LibAclAdapter
     // es kann sein, dass ein benutzer nur partiellen zugriff auf eine area hat
     // das bedeuted, er darf zwar in den bereich, aber für alle kinder darin
     // müssen die kinder nochmal gesondert geprüft werden
-    $paths = explode('>', $tmp[0]);
+    $paths = $model->extractWeightedKeys($key);
 
-    $checkAreas = array();
-
-    // standard check
-    if (count($paths) > 1) {
-      $parentAreas = explode('/', $paths[0]);
-      $mainAreas = explode('/', $paths[1]);
-
-      $checkAreas = array_merge($parentAreas, $mainAreas);
-    } else {
-      $parentAreas = null;
-      $mainAreas = explode('/', $paths[0]);
-      $checkAreas = $mainAreas;
-    }
-
-    $areaLevel = $model->extractAreaAccessLevel($checkAreas, $entity);
-    $permission = $model->loadAreaLevel($checkAreas, $entity, $roles);
+    $areaLevels = $model->extractAreaAccessLevel($paths, $entity);
+    $permission = $model->loadAreaLevel($paths, $entity, $roles);
 
     // prüfen ob das area level größer ist als als die permission
-    if ($areaLevel) {
-      if (!$permission) {
-        return $areaLevel;
-      } elseif ($areaLevel > $permission) {
-        return $areaLevel;
-      }
+    if (!$permission) {
+      return $areaLevels['access'];
+    } elseif ($areaLevels['access'] > $permission) {
+      return $areaLevels['access'];
     }
 
     return $permission;
@@ -525,6 +638,8 @@ class LibAclAdapter_Db extends LibAclAdapter
   }//end public function getLevel */
 
   /**
+   * Wir bei Referenzen verwendet um die Rechte von einem Root Container laden zu können
+   *
    * @param $key string den Rootcontainer erfragen
    * @return LibAclRoot
    */
@@ -588,151 +703,7 @@ class LibAclAdapter_Db extends LibAclAdapter
 
   }//end public function getPermissions */
 
-  /**
-   * @lang de:
-   *
-   * das zugriffslevel des aktiven benutzers für die übergebenen security
-   * areas abfragen
-   *
-   * die entity ist optional.
-   * Wenn ein entity objekt mitübergeben wird prüft die abfrage ob der
-   * benutzer auch rechte in relation zu dem per entity übergebenen datensatz
-   * hat
-   *
-   * wenn die constante WFB_NO_LOGIN auf true definiert wurde gibt diese
-   * methode immer true zurück
-   * @tutorial <a href="http://webfrap.net/doc/{{version}}/index.php?page=debug.constants" >Debug Flags</a>
-   *
-   * @param string $key
-   * {
-   *   die gewünschten security areas,
-   *   wenn mehr als eine area übergeben wird gewinnt jeweils das höchste access level
-   *   egal auf welcher area es sich befindet
-   *
-   *   @example 'mod-area'  single area
-   *   @example 'mod-area/mgmt-area/mgmt-area' path like area
-   *   @example 'mgmt-area1/mgmt-area2>mgmt-area3' gruppe von masken
-   *   @tutorial <a href="http://webfrap.net/doc/{{version}}/index.php?page=acls.security_areas" >Security areas</a>
-   * }
-   *
-   * @param Entity $entity Das Entity Objekt
-   * @param boolean $loadRoles sollen die Rollen auch geladen werden?
-   * @param LibAclPermission $container Der Container in welchen die Daten sollen kann mit übergeben werden
-   * @param boolean $extend
-   *
-   * @return LibAclPermission Permission Container mit allen nötigen Informationen
-   *
-   */
-  public function injectDsetPermissions(
-    $key,
-    $entity = null,
-    $container = null
-  ) {
 
-    if (!$container)
-      $container = new LibAclPermission;
-
-    if (DEBUG)
-      Debug::console("getPermission {$key}");
-
-    // resources
-    $user = $this->getUser();
-    $userLevel = $user->getLevel();
-    $model = $this->getModel();
-
-    // sicher stellen, dass vorhanden
-    $roles = array();
-    $checkAreas = array();
-
-    // den key verarbeiten
-    $tmp = explode(':', $key);
-
-    // es kann sein, dass ein benutzer nur partiellen zugriff auf eine area hat
-    // das bedeuted, er darf zwar in den bereich, aber für alle kinder darin
-    // müssen die kinder nochmal gesondert geprüft werden
-    $paths = explode('>', $tmp[0]);
-
-    // wenn die acls deaktiviert sind, rückgabe mit global admin
-    // wenn der user vollen accees hat, rückgabe gloabl admin
-    if ( $this->disabled || $user->getLevel() >= User::LEVEL_FULL_ACCESS) {
-      $container->setPermission(Acl::ADMIN, Acl::ADMIN);
-
-      if (count($paths) > 1) {
-        $parentAreas = explode('/', $paths[0]);
-        $mainAreas = explode('/', $paths[1]);
-
-        // rollen müssen immer geladen werden
-        $roles = $model->loadUserRoles(array_merge($parentAreas,$mainAreas), $entity);
-
-      } else {
-        $parentAreas = null;
-        $mainAreas = explode('/', $paths[0]);
-
-        // rollen müssen immer geladen werden
-        $roles = $model->loadUserRoles($mainAreas, $entity);
-      }
-
-      $container->roles = $roles;
-
-      return $container;
-    }
-
-    // standard check
-    if (count($paths) > 1) {
-      $parentAreas = explode('/', $paths[0]);
-      $mainAreas = explode('/', $paths[1]);
-
-      $checkAreas = array_merge($parentAreas, $mainAreas);
-
-      $roles = $model->loadUserRoles($checkAreas, $entity);
-
-      $areaLevel = $model->extractAreaAccessLevel($checkAreas, $entity);
-
-    } else {
-      $parentAreas = null;
-      $mainAreas = explode('/', $paths[0]);
-
-      $checkAreas = $mainAreas;
-
-      $roles = $model->loadUserRoles($checkAreas, $entity);
-
-      $areaLevel = $model->extractAreaAccessLevel($checkAreas, $entity);
-
-    }
-
-    $permission = $model->loadAreaPermission($checkAreas, $entity);
-
-    // prüfen ob das area level größer ist als als die permission
-    if ($areaLevel) {
-      if (!isset($permission['acl-level'])) {
-        $permission['acl-level'] = $areaLevel;
-      } elseif ($areaLevel > $permission['acl-level']) {
-        $permission['acl-level'] = $areaLevel;
-      }
-    }
-
-    $globalLevel = $model->loadGloalPermission($checkAreas);
-
-    if ($globalLevel) {
-      if ($globalLevel > $permission['acl-level'])
-        $permission['acl-level'] = $globalLevel;
-
-      $permission['assign-is-partial'] = false;
-
-    }
-
-    $container->addRoles($roles);
-
-    if ($areaLevel) {
-      if ($container->defLevel >= $areaLevel)
-        $container->defLevel = $areaLevel;
-    }
-
-    $container->updatePermission($permission);
-
-    return $container;
-
-  }//end public function injectDsetPermissions */
 
   /**
    * @lang de:
@@ -792,107 +763,59 @@ class LibAclAdapter_Db extends LibAclAdapter
     $roles = array();
     $checkAreas = array();
 
-    // den key verarbeiten
-    $tmp = explode(':', $key);
 
     // es kann sein, dass ein benutzer nur partiellen zugriff auf eine area hat
     // das bedeuted, er darf zwar in den bereich, aber für alle kinder darin
     // müssen die kinder nochmal gesondert geprüft werden
-    $paths = explode('>', $tmp[0]);
+    $paths = $model->extractWeightedKeys($key);
+
+
+    // rollen müssen immer geladen werden
+    if ($loadRoles){
+      $roles = $model->loadUserRoles($paths, $entity);
+      $container->addRoles($roles);
+    }
 
     // wenn die acls deaktiviert sind, rückgabe mit global admin
     // wenn der user vollen accees hat, rückgabe gloabl admin
     if ( $this->disabled || $user->getLevel() >= User::LEVEL_FULL_ACCESS) {
+
       $container->setPermission(Acl::ADMIN, Acl::ADMIN);
-
-      if (count($paths) > 1) {
-        $parentAreas = explode('/', $paths[0]);
-        $mainAreas = explode('/', $paths[1]);
-
-        // rollen müssen immer geladen werden
-        if ($loadRoles)
-          $roles = $model->loadUserRoles(array_merge($parentAreas,$mainAreas), $entity);
-
-      } else {
-        $parentAreas = null;
-        $mainAreas = explode('/', $paths[0]);
-
-        // rollen müssen immer geladen werden
-        if ($loadRoles)
-          $roles = $model->loadUserRoles($mainAreas, $entity);
-      }
-
-      if ($loadRoles)
-        $container->roles = $roles;
-
       return $container;
     }
 
     // standard check
-    if (count($paths) > 1) {
-      $parentAreas = explode('/', $paths[0]);
-      $mainAreas = explode('/', $paths[1]);
-
-      $checkAreas = array_merge($parentAreas, $mainAreas);
-
-      if ($loadRoles)
-        $roles = $model->loadUserRoles($checkAreas, $entity);
-
-      $areaLevel = $model->extractAreaAccessLevel($checkAreas, $entity);
-
-    } else {
-      $parentAreas = null;
-      $mainAreas = explode('/', $paths[0]);
-
-      $checkAreas = $mainAreas;
-
-      if ($loadRoles)
-        $roles = $model->loadUserRoles($checkAreas, $entity);
-
-      $areaLevel = $model->extractAreaAccessLevel($checkAreas, $entity);
-
-    }
-
-    $permission = $model->loadAreaPermission($checkAreas, $entity);
+    $areaLevels = $model->extractAreaAccessLevel($paths, $entity);
+    $permission = $model->loadAreaPermission($paths, $entity);
 
     // prüfen ob das area level größer ist als als die permission
-    if ($areaLevel) {
-      if (!isset($permission['acl-level'])) {
-        $permission['acl-level'] = $areaLevel;
-      } elseif ($areaLevel > $permission['acl-level']) {
-        $permission['acl-level'] = $areaLevel;
-      }
+    if (!isset($permission['acl-level'])) {
+      $permission['acl-level'] = $areaLevels['access'];
+    } elseif ($areaLevels['access'] > $permission['acl-level']) {
+      $permission['acl-level'] = $areaLevels['access'];
     }
 
-    $globalLevel = $model->loadGloalPermission($checkAreas);
+    if (!isset($permission['ref-level'])) {
+      $permission['ref-level'] = $areaLevels['ref'];
+    } elseif ($areaLevels['ref'] > $permission['ref-level']) {
+      $permission['ref-level'] = $areaLevels['ref'];
+    }
+
+    $globalLevel = $model->loadGloalPermission($paths);
 
     if ($globalLevel) {
       if ($globalLevel > $permission['acl-level'])
         $permission['acl-level'] = $globalLevel;
 
       $permission['assign-is-partial'] = false;
-
     }
 
     // sollen die permissions im container erweitert werden?
     if ($extend) {
-      if ($loadRoles)
-        $container->addRoles($roles);
-
-      if ($areaLevel) {
-        if ($container->defLevel >= $areaLevel)
-          $container->defLevel = $areaLevel;
-      }
 
       $container->updatePermission($permission);
 
     } else {// wenn nicht werden vorhandene permissions überschrieben
-
-      if ($loadRoles)
-        $container->setRoles($roles);
-
-      if ($areaLevel)
-        $container->defLevel = $areaLevel;
 
       $container->setPermission($permission);
 
@@ -937,15 +860,13 @@ class LibAclAdapter_Db extends LibAclAdapter
    * @return LibAclPermission Permission Container mit allen nötigen Informationen
    *
    */
-  public function getListPermission
-  (
+  public function getListPermission(
     $key,
     $entity = null,
     $loadRoles = false,
     $container = null,
     $extend = false
-)
-  {
+  ) {
 
     if (!$container)
       $container = new LibAclPermission;
@@ -1023,11 +944,11 @@ class LibAclAdapter_Db extends LibAclAdapter
     $permission = $model->loadAreaPermission($checkAreas, $entity);
 
     // prüfen ob das area level größer ist als als die permission
-    if ($areaLevel) {
+    if ($areaLevel['access']) {
       if (!isset($permission['acl-level'])) {
-        $permission['acl-level'] = $areaLevel;
-      } elseif ($areaLevel > $permission['acl-level']) {
-        $permission['acl-level'] = $areaLevel;
+        $permission['acl-level'] = $areaLevel['access'];
+      } elseif ($areaLevel['access'] > $permission['acl-level']) {
+        $permission['acl-level'] = $areaLevel['access'];
       }
     }
 
@@ -1044,11 +965,6 @@ class LibAclAdapter_Db extends LibAclAdapter
       if ($loadRoles)
         $container->addRoles($roles);
 
-      if ($areaLevel) {
-        if ($container->defLevel >= $areaLevel)
-          $container->defLevel = $areaLevel;
-      }
-
       $container->updatePermission($permission);
 
     } else {
@@ -1056,11 +972,7 @@ class LibAclAdapter_Db extends LibAclAdapter
       if ($loadRoles)
         $container->setRoles($roles);
 
-      if ($areaLevel)
-        $container->defLevel = $areaLevel;
-
       $container->setPermission($permission);
-
     }
 
     return $container;
@@ -1099,14 +1011,12 @@ class LibAclAdapter_Db extends LibAclAdapter
    * @return LibAclPermission Permission Container mit allen nötigen Informationen
    *
    */
-  public function getFormPermission
-  (
+  public function getFormPermission(
     $key,
     $entity,
     $loadChildren = true,
     $container = null
-)
-  {
+  ) {
 
     if (!$container)
       $container = new LibAclPermission();
