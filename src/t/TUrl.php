@@ -276,8 +276,8 @@ class TUrl
   /**
    * Enter description here...
    *
-   * @param unknown_type $attributes
-   * @return unknown
+   * @param array $attributes
+   * @return string
    */
   protected static function asmAttributes($attributes)
   {
