@@ -59,7 +59,7 @@ $sql = <<<SQL
 CREATE INDEX search_wbfsys_security_area_access_key_idx
   ON {$schemaName}.wbfsys_security_area
   (
-    upper(access_key)
+    access_key
   );
 
 SQL;

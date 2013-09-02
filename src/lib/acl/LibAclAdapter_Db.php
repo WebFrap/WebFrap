@@ -271,7 +271,9 @@ class LibAclAdapter_Db extends LibAclAdapter
   public function injectDsetLevel(
     $container,
     $key,
-    $entity = null
+    $roles,
+    $entity = null,
+    $loadRefs = false
   ) {
 
     if (DEBUG)
@@ -282,8 +284,7 @@ class LibAclAdapter_Db extends LibAclAdapter
     $userLevel = $user->getLevel();
     $model = $this->getModel();
 
-    $checkAreas = $model->extractWeightedKeys($key);
-
+    $areaKeys = $model->extractWeightedKeys($key);
 
     // wenn die acls deaktiviert sind, rückgabe mit global admin
     // wenn der user vollen accees hat, rückgabe gloabl admin
@@ -292,8 +293,8 @@ class LibAclAdapter_Db extends LibAclAdapter
       return $container;
     }
 
-    $permission = $model->loadAreaPermission($checkAreas, $entity);
-    $areaLevels = $model->extractAreaAccessLevel($checkAreas, $entity);
+    $permission = $model->loadAreaGroupPermission($areaKeys, $roles);
+    $areaLevels = $model->extractAreaAccessLevel($areaKeys);
 
     // prüfen ob das area level größer ist als als die permission
     if (!isset($permission['acl-level'])) {
@@ -308,7 +309,7 @@ class LibAclAdapter_Db extends LibAclAdapter
       $permission['ref-level'] = $areaLevels['ref'];
     }
 
-    $globalLevel = $model->loadGloalPermission($checkAreas);
+    $globalLevel = $model->loadGloalPermission($areaKeys);
 
     if ($globalLevel) {
       if ($globalLevel > $permission['acl-level'])
@@ -316,6 +317,8 @@ class LibAclAdapter_Db extends LibAclAdapter
 
       $permission['assign-is-partial'] = false;
     }
+
+    Debug::console('updatePermission $permission',$permission, false,true);
 
     $container->updatePermission($permission);
 

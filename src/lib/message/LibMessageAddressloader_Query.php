@@ -58,7 +58,7 @@ class LibMessageAddressloader_Query extends LibSqlQuery
       $areaKeys = '';
 
       if ($areas)
-        $areaKeys = "and UPPER(wbfsys_security_area.access_key)  IN(UPPER('".implode($areas,"'), UPPER('")."')) " ;
+        $areaKeys = "and wbfsys_security_area.access_key  IN('".implode($areas,"', '")."') " ;
 
       $joins = <<<SQL
 

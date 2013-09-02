@@ -190,3 +190,22 @@ AS
     acl_area.rowid
 ;
 
+CREATE  OR REPLACE VIEW webfrap_area_group_level_view
+AS
+  SELECT
+	  max(acl_access.access_level) AS "acl-level", 
+	  max(acl_access.ref_access_level) AS "ref-level",
+	  acl_area.access_key AS area_key, 
+	  acl_area.rowid AS id_area, 
+	  acl_access.id_group AS id_group, 
+	  acl_group.access_key AS group_key
+  FROM wbfsys_security_access acl_access 
+  JOIN wbfsys_security_area acl_area ON acl_access.id_area = acl_area.rowid
+  JOIN wbfsys_role_group acl_group ON acl_access.id_group = acl_group.rowid
+  WHERE
+	  acl_access.partial = 0
+  GROUP BY 
+	  acl_access.id_group, 
+	  acl_group.access_key,
+	  acl_area.access_key, 
+	  acl_area.rowid;

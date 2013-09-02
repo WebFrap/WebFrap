@@ -1360,14 +1360,14 @@ abstract class Controller extends BaseChild
       $userName = $auth->getUsername();
 
       try {
+
         if (!$authRole = $orm->get('WbfsysRoleUser', "UPPER(name) = UPPER('{$userName}')")) {
           $response->addError('User '.$userName.' not exists');
-
           return false;
         }
       } catch (LibDb_Exception $exc) {
-        $response->addError('Error in the query to fetch the data for user: '.$userName);
 
+        $response->addError('Error in the query to fetch the data for user: '.$userName);
         return false;
       }
 

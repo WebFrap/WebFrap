@@ -115,9 +115,9 @@ SQL;
     } elseif (is_null($id) || (is_object($id) && !$id->getId())  ) {
 
       if (is_string($areas)) {
-        $areaKeys = " upper(wbfsys_security_area.access_key) = upper('{$areas}') " ;
+        $areaKeys = " wbfsys_security_area.access_key = upper('{$areas}' " ;
       } else {
-        $areaKeys = " upper(wbfsys_security_area.access_key)  IN(upper('".implode($areas,"'),upper('")."'))" ;
+        $areaKeys = " wbfsys_security_area.access_key  IN('".implode($areas,"','")."')" ;
       }
 
       $joins = <<<SQL
@@ -2348,6 +2348,88 @@ SQL;
     return $assign;
 
   }//end public function loadAreaPermission */
+
+  /**
+   * @param array $areas
+   * @param array $groups
+   */
+  public function loadAreaGroupPermission($areas, $groups)
+  {
+
+    $user = $this->getUser();
+    $userId = $user->getId();
+
+    $cacheKey = null;
+    if ($this->aclCache) {
+      $cacheKey = 'lagp:gs:'.implode(',',$groups).';a:'
+          .(is_array($areas)?implode(',', $areas):$areas)
+          .($entity?';e:'.$entity:'');
+
+      Debug::console('loadAreaGroupPermission cacheKey: '.$cacheKey);
+
+      $assign = $this->aclCache->get($cacheKey);
+
+      if ($assign)
+        return $assign;
+    }
+
+    $areaKeys = "'".implode("','",$areas)."'";
+    $groupKeys = "'".implode("','",$groups)."'" ;
+
+
+    $query1 = <<<SQL
+  SELECT
+    max("acl-level") as "acl-level",
+    max("ref-level") as "ref-level"
+  FROM
+    webfrap_area_group_level_view
+
+  WHERE
+    area_key in({$areaKeys})
+      AND group_key in({$groupKeys})
+
+SQL;
+
+      $query2 = <<<SQL
+  SELECT
+    "assign-is-partial",
+    "assign-has-partial"
+  FROM
+    webfrap_acl_assigned_view
+
+  WHERE
+    upper("acl-area") in({$areaKeys})
+      and "acl-user" = {$userId}
+
+SQL;
+
+    $db = $this->getDb();
+
+    $levels = $db->select($query1)->get();
+    $assign = $db->select($query2)->get();
+
+    if (DEBUG) {
+      Debug::console('$level', $levels);
+      Debug::console('$assign', $assign);
+    }
+
+    $assign = array_merge($levels, $assign);
+
+    if(
+      isset($assign['assign-is-partial'])
+      && 1 == $assign['assign-is-partial']
+      && !$assign['acl-level']
+    ) {
+      $assign['acl-level'] = Acl::LISTING;
+    }
+
+    if ($this->aclCache) {
+      $this->aclCache->add($cacheKey, $assign);
+    }
+
+    return $assign;
+
+  }//end public function loadAreaGroupPermission */
 
   /**
    * @param string $areas

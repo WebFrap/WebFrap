@@ -294,8 +294,7 @@ class LibAclPermission
     $level = null,
     $refBaseLevel = null,
     $env = null
-  )
-  {
+  ) {
 
     Debug::console("new ".get_class($this).' access container');
 
