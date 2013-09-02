@@ -109,7 +109,7 @@ SQL;
       }
 
     } elseif ($areas) {
-      $areaKeys = " UPPER(wbfsys_security_area.access_key)  IN(upper('".implode($areas,"'),upper('")."'))" ;
+      $areaKeys = " wbfsys_security_area.access_key  IN('".implode($areas,"','")."')" ;
 
       $joins = <<<SQL
 
@@ -174,9 +174,9 @@ SQL;
     $groupRoles = '';
     if ($group->name) {
       if (is_array($group->name)) {
-        $groupRoles = " UPPER(wbfsys_role_group.access_key)  IN(upper('".implode($group->name,"'),upper('")."')) AND " ;
+        $groupRoles = " wbfsys_role_group.access_key  IN('".implode($group->name,"','")."') AND " ;
       } else {
-        $groupRoles = " UPPER(wbfsys_role_group.access_key) =  upper('{$group->name}') AND " ;
+        $groupRoles = " wbfsys_role_group.access_key =  '{$group->name}' AND " ;
       }
     }
 
@@ -195,9 +195,9 @@ SQL;
 HTML;
 
       if (is_array($type)) {
-        $codeType = " IN(UPPER('".implode("'), UPPER('", $type  )."')) ";
+        $codeType = " IN('".implode("', '", $type  )."') ";
       } else {
-        $codeType = "= UPPER('{$type}')";
+        $codeType = "= '{$type}'";
       }
 
       $joinAddress = <<<HTML
@@ -212,7 +212,7 @@ JOIN
   ON
     wbfsys_address_item_type.rowid = wbfsys_address_item.id_type
     AND
-      UPPER(wbfsys_address_item_type.access_key) {$codeType}
+      wbfsys_address_item_type.access_key) {$codeType}
 
 HTML;
 
@@ -345,7 +345,7 @@ JOIN
   ON
     wbfsys_address_item_type.rowid = wbfsys_address_item.id_type
     AND
-      UPPER(wbfsys_address_item_type.access_key) = UPPER('{$type}')
+      wbfsys_address_item_type.access_key) = '{$type}'
 WHERE
   (wbfsys_role_user.inactive = FALSE or wbfsys_role_user.inactive is null)
     AND wbfsys_role_user.rowid = {$userId}
@@ -382,7 +382,7 @@ JOIN
   ON
     wbfsys_address_item_type.rowid = wbfsys_address_item.id_type
     AND
-      UPPER(wbfsys_address_item_type.access_key) = UPPER('{$type}')
+      wbfsys_address_item_type.access_key) = '{$type}'
 
 WHERE
   (wbfsys_role_user.inactive = FALSE or wbfsys_role_user.inactive is null)
@@ -422,7 +422,7 @@ JOIN
   ON
     wbfsys_address_item_type.rowid = wbfsys_address_item.id_type
     AND
-      UPPER(wbfsys_address_item_type.access_key) = UPPER('{$type}')
+      wbfsys_address_item_type.access_key) = '{$type}'
 
 WHERE
   (wbfsys_role_user.inactive = FALSE or wbfsys_role_user.inactive is null)

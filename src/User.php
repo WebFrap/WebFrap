@@ -865,7 +865,7 @@ class User extends BaseChild
         $authRole = $username;
       } else {
         try {
-          if (!$authRole = $orm->get('WbfsysRoleUser', "UPPER(name) = UPPER('{$username}')")) {
+          if (!$authRole = $orm->get('WbfsysRoleUser', "lower(name) = 'lower({$userName})'")) {
             $response->addError('User '.$username.' not exists');
 
             return false;

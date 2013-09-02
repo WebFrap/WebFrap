@@ -1827,7 +1827,7 @@ class LibAclAdapter_Db extends LibAclAdapter
     if (!$userId = $user->getId())
       throw new LibAcl_Exception('Got no User');
 
-    $areaKeys = "UPPER('".implode("'), UPPER('",$partialAreas)."')" ;
+    $areaKeys = "'".implode("', '",$partialAreas)."'" ;
 
     /// TODO prüfen ob das so überhaupt sinn macht
     if ($mainSource) {
@@ -1866,7 +1866,7 @@ class LibAclAdapter_Db extends LibAclAdapter
   JOIN
     {$sourceRelation} as acls
     ON
-      UPPER(acls."acl-area") IN({$areaKeys})
+      acls."acl-area" IN({$areaKeys})
         AND acls."acl-user" = {$userId}
         {$mainSource}
 

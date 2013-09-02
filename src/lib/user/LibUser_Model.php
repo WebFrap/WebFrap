@@ -78,9 +78,9 @@ SQL;
     } elseif (is_null($id) || (is_object($id) && !$id->getId())  ) {
 
       if (is_string($areas)) {
-        $areaKeys = " upper(wbfsys_security_area.access_key) = upper('{$areas}') " ;
+        $areaKeys = " wbfsys_security_area.access_key =  '{$areas}' " ;
       } else {
-        $areaKeys = " upper(wbfsys_security_area.access_key)  IN(upper('".implode($areas,"'),upper('")."'))" ;
+        $areaKeys = " wbfsys_security_area.access_key  IN('".implode($areas,"','")."')" ;
       }
 
       $joins = <<<SQL
@@ -120,9 +120,9 @@ SQL;
     } else {
 
       if (is_string($areas)) {
-        $areaKeys = " upper(wbfsys_security_area.access_key) = upper('{$areas}') " ;
+        $areaKeys = " wbfsys_security_area.access_key =  '{$areas}' " ;
       } else {
-        $areaKeys = " upper(wbfsys_security_area.access_key)  IN(upper('".implode($areas,"'),upper('")."')) " ;
+        $areaKeys = " wbfsys_security_area.access_key  IN('".implode($areas,"','")."') " ;
       }
 
       $joins = <<<SQL
@@ -242,7 +242,7 @@ SQL;
 
     } elseif (is_null($id)) {
 
-      $areaKeys = " upper('".implode("'), upper('",$area)."') " ;
+      $areaKeys = "'".implode("', '",$area)."'" ;
 
       $joins = <<<SQL
 
@@ -264,7 +264,7 @@ SQL;
     AND
     (
       (
-        upper(wbfsys_security_area.access_key) IN({$areaKeys})
+        wbfsys_security_area.access_key IN({$areaKeys})
           and wbfsys_group_users.vid is null
       )
       OR
@@ -279,7 +279,7 @@ SQL;
 
     } else {
 
-      $areaKeys = " upper('".implode("'), upper('",$area)."') " ;
+      $areaKeys = "'".implode("', '",$area)."'" ;
 
       if (is_array($id)) {
         $whereVid = " IN(".implode(', ', $id).") ";
@@ -306,12 +306,12 @@ SQL;
     AND
     (
       (
-        upper(wbfsys_security_area.access_key) IN({$areaKeys})
+        wbfsys_security_area.access_key IN({$areaKeys})
           AND wbfsys_group_users.vid {$whereVid}
       )
       OR
       (
-        upper(wbfsys_security_area.access_key) IN({$areaKeys})
+        wbfsys_security_area.access_key IN({$areaKeys})
           and wbfsys_group_users.vid is null
       )
       OR
@@ -344,9 +344,9 @@ SQL;
      */
 
     if (is_array($role)) {
-      $roleCheck = "IN(upper('".implode("'), upper('", $role). "'))";
+      $roleCheck = "IN('".implode("', '", $role). "')";
     } else {
-      $roleCheck = "= upper('{$role}')";
+      $roleCheck = "= '{$role}'";
     }
 
     $query = <<<SQL
@@ -357,7 +357,7 @@ SQL;
 {$joins}
   WHERE
     wbfsys_group_users.id_user = {$userId}
-      AND upper(wbfsys_role_group.access_key) {$roleCheck}
+      AND wbfsys_role_group.access_key {$roleCheck}
 {$condition}
 
 SQL;
@@ -396,7 +396,7 @@ SQL;
     if (is_null($id)) {
       // wir haben eine area aber kein
 
-      $areaKeys = " upper('".implode("'), upper('", $area)."') " ;
+      $areaKeys = " '".implode("', '", $area)."' " ;
 
       if ($global) {
         $joins = <<<SQL
@@ -418,7 +418,7 @@ SQL;
     AND
     (
       (
-        upper(wbfsys_security_area.access_key) IN({$areaKeys})
+        wbfsys_security_area.access_key IN({$areaKeys})
           and wbfsys_group_users.vid is null
       )
       OR
@@ -446,7 +446,7 @@ SQL;
     wbfsys_security_area
     ON
      wbfsys_group_users.id_area = wbfsys_security_area.rowid
-      AND upper(wbfsys_security_area.access_key) IN({$areaKeys})
+      AND wbfsys_security_area.access_key IN({$areaKeys})
       AND wbfsys_group_users.vid is null
 
 SQL;
@@ -456,7 +456,7 @@ SQL;
     } else {
 
       // area und vid
-      $areaKeys = " upper('".implode("'), upper('", $area)."') " ;
+      $areaKeys = " '".implode("', '", $area)."' " ;
 
       if (is_array($id)) {
         $whereVid = " IN(".implode(', ', $id).") ";
@@ -486,12 +486,12 @@ SQL;
     AND
     (
       (
-        upper(wbfsys_security_area.access_key) IN({$areaKeys})
+        wbfsys_security_area.access_key IN({$areaKeys})
           and wbfsys_group_users.vid {$whereVid}
       )
       OR
       (
-        upper(wbfsys_security_area.access_key) IN({$areaKeys})
+        wbfsys_security_area.access_key IN({$areaKeys})
           and wbfsys_group_users.vid is null
       )
       OR
@@ -516,7 +516,7 @@ SQL;
     wbfsys_security_area
     ON
       wbfsys_group_users.id_area = wbfsys_security_area.rowid
-        AND UPPER(wbfsys_security_area.access_key) IN({$areaKeys})
+        AND wbfsys_security_area.access_key IN({$areaKeys})
         AND wbfsys_group_users.vid {$whereVid}
 
 SQL;
@@ -526,9 +526,9 @@ SQL;
 
     // prüfen ob wir auf eine oder mehrere rollen checken müssen
     if (is_array($role)) {
-      $roleCheck = "IN(UPPER('".implode("'), UPPER('", $role). "'))";
+      $roleCheck = "IN('".implode("', '", $role). "')";
     } else {
-      $roleCheck = "= UPPER('{$role}')";
+      $roleCheck = "= '{$role}'";
     }
 
     ///TODO prüfen was bei global qureries rauskommt
@@ -546,7 +546,7 @@ SQL;
 {$joins}
   WHERE
     wbfsys_group_users.partial = 0
-      AND UPPER(wbfsys_role_group.access_key) {$roleCheck}
+      AND wbfsys_role_group.access_key {$roleCheck}
 {$condition}
   GROUP BY
     wbfsys_role_group.access_key,
@@ -577,7 +577,7 @@ SQL;
 {$joins}
   WHERE
     wbfsys_group_users.partial = 0
-      AND UPPER(wbfsys_role_group.access_key) {$roleCheck}
+      AND wbfsys_role_group.access_key {$roleCheck}
 {$condition}
   GROUP BY
     wbfsys_role_group.access_key;
@@ -635,7 +635,7 @@ SQL;
     } elseif (is_null($id)) {
       // wir haben eine area aber kein
 
-      $areaKeys = " upper('".implode("'), upper('",$area)."') " ;
+      $areaKeys = "'".implode("', '",$area)."'" ;
 
       if ($global) {
         $joins = <<<SQL
@@ -657,7 +657,7 @@ SQL;
     AND
     (
       (
-        upper(wbfsys_security_area.access_key) IN({$areaKeys})
+        wbfsys_security_area.access_key IN({$areaKeys})
           and wbfsys_group_users.vid is null
       )
       OR
@@ -685,7 +685,7 @@ SQL;
     wbfsys_security_area
     ON
      wbfsys_group_users.id_area = wbfsys_security_area.rowid
-      AND upper(wbfsys_security_area.access_key) IN({$areaKeys})
+      AND wbfsys_security_area.access_key IN({$areaKeys})
       AND wbfsys_group_users.vid is null
 
 SQL;
@@ -696,7 +696,7 @@ SQL;
 
       // area und vid
 
-      $areaKeys = " upper('".implode("'), upper('",$area)."') " ;
+      $areaKeys = "'".implode("', '",$area)."'" ;
 
       if (is_array($id)) {
         $whereVid = " IN(".implode(', ', $id).") ";
@@ -726,12 +726,12 @@ SQL;
     AND
     (
       (
-        upper(wbfsys_security_area.access_key) IN({$areaKeys})
+        wbfsys_security_area.access_key IN({$areaKeys})
           and wbfsys_group_users.vid {$whereVid}
       )
       OR
       (
-        upper(wbfsys_security_area.access_key) IN({$areaKeys})
+        wbfsys_security_area.access_key IN({$areaKeys})
           and wbfsys_group_users.vid is null
       )
       OR
@@ -756,7 +756,7 @@ SQL;
     wbfsys_security_area
     ON
       wbfsys_group_users.id_area = wbfsys_security_area.rowid
-        AND UPPER(wbfsys_security_area.access_key) IN({$areaKeys})
+        AND wbfsys_security_area.access_key IN({$areaKeys})
         AND wbfsys_group_users.vid {$whereVid}
 
 SQL;
@@ -766,9 +766,9 @@ SQL;
 
     // prüfen ob wir auf eine oder mehrere rollen checken müssen
     if (is_array($role)) {
-      $roleCheck = "IN(UPPER('".implode("'), UPPER('", $role). "'))";
+      $roleCheck = "IN('".implode("', '", $role). "')";
     } else {
-      $roleCheck = "= UPPER('{$role}')";
+      $roleCheck = "= '{$role}'";
     }
 
 
@@ -780,7 +780,7 @@ SQL;
 {$joins}
   WHERE
     wbfsys_group_users.partial = 0
-      AND upper(wbfsys_role_group.access_key) {$roleCheck}
+      AND wbfsys_role_group.access_key {$roleCheck}
 {$condition}
 
 SQL;
@@ -807,14 +807,14 @@ SQL;
       throw new LibAcl_Exception('Got no User');
 
     if (is_array($role)) {
-      $roleCheck = "IN(upper('".implode("'), upper('", $role). "'))";
+      $roleCheck = "IN('".implode("', '", $role). "')";
     } else {
-      $roleCheck = "= upper('{$role}')";
+      $roleCheck = "= '{$role}'";
     }
 
     if ($keyData) {
 
-      $areaKeys = "IN(upper('".implode("'), upper('", $keyData). "'))";
+      $areaKeys = "IN('".implode("', '", $keyData). "')";
 
       $areaCheck = <<<SQL
 
@@ -822,7 +822,7 @@ SQL;
     wbfsys_security_area
       ON
         wbfsys_group_users.id_area = wbfsys_security_area.rowid
-          AND UPPER(wbfsys_security_area.access_key) {$areaKeys}
+          AND wbfsys_security_area.access_key {$areaKeys}
 
 SQL;
 
@@ -843,7 +843,7 @@ SQL;
 {$areaCheck}
   WHERE
     wbfsys_group_users.id_user = {$userId}
-      AND upper(wbfsys_role_group.access_key) {$roleCheck}
+      AND wbfsys_role_group.access_key {$roleCheck}
 
 SQL;
 
@@ -878,7 +878,7 @@ SQL;
     $joins = '';
     $condition = '';
 
-    $areaKeys = " upper('".implode("'), upper('",$area)."') " ;
+    $areaKeys = "'".implode("', '",$area)."'" ;
 
     if (is_null($id)) {
 
@@ -895,7 +895,7 @@ SQL;
     ON
       wbfsys_group_users.id_group = wbfsys_role_group.rowid
         and wbfsys_group_users.id_area = wbfsys_security_area.rowid
-        and upper(wbfsys_security_area.access_key) IN({$areaKeys})
+        and wbfsys_security_area.access_key IN({$areaKeys})
         and wbfsys_group_users.vid is null
 
 SQL;
@@ -922,7 +922,7 @@ SQL;
     ON
       wbfsys_group_users.id_group = wbfsys_role_group.rowid
         and wbfsys_group_users.id_area = wbfsys_security_area.rowid
-        and upper(wbfsys_security_area.access_key) IN({$areaKeys})
+        and wbfsys_security_area.access_key IN({$areaKeys})
         and wbfsys_group_users.vid {$whereVid}
 
 SQL;
@@ -931,9 +931,9 @@ SQL;
 
 
     if (is_array($role)) {
-      $roleCheck = "IN(upper('".implode("'), upper('", $role). "'))";
+      $roleCheck = "IN('".implode("', '", $role). "')";
     } else {
-      $roleCheck = "= upper('{$role}')";
+      $roleCheck = "= '{$role}'";
     }
 
     $query = <<<SQL
@@ -944,7 +944,7 @@ SQL;
 {$joins}
   WHERE
     wbfsys_group_users.id_user = {$userId}
-      and upper(wbfsys_role_group.access_key) {$roleCheck}
+      and wbfsys_role_group.access_key {$roleCheck}
 {$condition}
 
 SQL;
@@ -985,7 +985,7 @@ SQL;
     $joins = '';
     $condition = '';
 
-    $areaKeys = " upper('".implode("'), upper('",$area)."') " ;
+    $areaKeys = "'".implode("', '",$area)."'" ;
 
     if (is_null($id)) {
 
@@ -1002,7 +1002,7 @@ SQL;
     ON
       wbfsys_group_users.id_group = wbfsys_role_group.rowid
         and wbfsys_group_users.id_area = wbfsys_security_area.rowid
-        and upper(wbfsys_security_area.access_key) IN({$areaKeys})
+        and wbfsys_security_area.access_key IN({$areaKeys})
         and wbfsys_group_users.vid is null
 
 SQL;
@@ -1029,7 +1029,7 @@ SQL;
     ON
       wbfsys_group_users.id_group = wbfsys_role_group.rowid
         and wbfsys_group_users.id_area = wbfsys_security_area.rowid
-        and upper(wbfsys_security_area.access_key) IN({$areaKeys})
+        and wbfsys_security_area.access_key IN({$areaKeys})
         and wbfsys_group_users.vid {$whereVid}
 
 SQL;
@@ -1038,9 +1038,9 @@ SQL;
 
 
     if (is_array($role)) {
-      $roleCheck = "IN(upper('".implode("'), upper('", $role). "'))";
+      $roleCheck = "IN('".implode("', '", $role). "')";
     } else {
-      $roleCheck = "= upper('{$role}')";
+      $roleCheck = "= '{$role}'";
     }
 
     $query = <<<SQL
@@ -1055,7 +1055,7 @@ SQL;
 {$joins}
   WHERE
     wbfsys_group_users.id_user = {$userId}
-      and upper(wbfsys_role_group.access_key) {$roleCheck}
+      and wbfsys_role_group.access_key {$roleCheck}
 {$condition}
 
 SQL;
@@ -1090,9 +1090,9 @@ SQL;
     $joins = '';
 
     if (is_string($areas)) {
-      $areaKeys = " upper(wbfsys_security_area.access_key) = upper('{$areas}') " ;
+      $areaKeys = " wbfsys_security_area.access_key =  '{$areas}' " ;
     } else {
-      $areaKeys = " upper(wbfsys_security_area.access_key)  IN(upper('".implode($areas,"'),upper('")."'))" ;
+      $areaKeys = " wbfsys_security_area.access_key  IN('".implode($areas,"','")."')" ;
     }
 
     $checkKeys = implode(',',  $datasets);
@@ -1204,14 +1204,14 @@ SQL;
     $joins = '';
 
     if (is_string($areas)) {
-      $areaKeys = " UPPER(wbfsys_security_area.access_key) = UPPER('{$areas}') " ;
+      $areaKeys = " wbfsys_security_area.access_key =  '{$areas}' " ;
     } else {
-      $areaKeys = " UPPER(wbfsys_security_area.access_key)  IN(UPPER('".implode($areas,"'),UPPER('")."'))" ;
+      $areaKeys = " wbfsys_security_area.access_key  IN('".implode($areas,"','")."')" ;
     }
 
     $checkRoles = '';
     if ($roles) {
-      $checkRoles = " AND UPPER(wbfsys_role_group.access_key)  IN(UPPER('".implode($roles,"'),UPPER('")."'))" ;
+      $checkRoles = " AND wbfsys_role_group.access_key  IN('".implode("','",$roles)."')" ;
     }
 
     $checkKeys = implode(',',  $datasets);
@@ -1292,14 +1292,14 @@ SQL;
     $joins = '';
 
     if (is_string($areas)) {
-      $areaKeys = " UPPER(wbfsys_security_area.access_key) = UPPER('{$areas}') " ;
+      $areaKeys = " wbfsys_security_area.access_key =  '{$areas}' " ;
     } else {
-      $areaKeys = " UPPER(wbfsys_security_area.access_key)  IN(UPPER('".implode($areas,"'),UPPER('")."'))" ;
+      $areaKeys = " wbfsys_security_area.access_key  IN('".implode($areas,"','")."')" ;
     }
 
     $checkRoles = '';
     if ($roles) {
-      $checkRoles = " WHERE UPPER(wbfsys_role_group.access_key)  IN(UPPER('".implode($roles,"'),UPPER('")."'))" ;
+      $checkRoles = " WHERE wbfsys_role_group.access_key  IN('".implode("','",$roles)."')" ;
     }
 
     $checkKeys = implode(',',  $datasets);
@@ -1372,14 +1372,14 @@ SQL;
     $joins = '';
 
     if (is_string($areas)) {
-      $areaKeys = " UPPER(wbfsys_security_area.access_key) = UPPER('{$areas}') " ;
+      $areaKeys = " wbfsys_security_area.access_key =  '{$areas}' " ;
     } else {
-      $areaKeys = " UPPER(wbfsys_security_area.access_key) IN(UPPER('".implode($areas,"'),UPPER('")."'))" ;
+      $areaKeys = " wbfsys_security_area.access_key IN('".implode($areas,"','")."')" ;
     }
 
     $checkRoles = '';
     if ($roles) {
-      $checkRoles = " WHERE UPPER(wbfsys_role_group.access_key) IN(UPPER('".implode($roles,"'),UPPER('")."'))" ;
+      $checkRoles = " WHERE wbfsys_role_group.access_key IN('".implode("','",$roles)."')" ;
     }
 
     $checkKeys = implode(',',  $datasets);
@@ -1790,9 +1790,9 @@ SQL;
       throw new LibAcl_Exception("Tried to load rights without area");
 
     if (is_array($areas)) {
-      $areaKeys = "IN(upper('".implode($areas,"'),upper('")."'))" ;
+      $areaKeys = "IN('".implode($areas,"','")."')" ;
     } else {
-      $areaKeys = "= upper('{$areas}')" ;
+      $areaKeys = "= ('{$areas}'" ;
     }
 
 
@@ -1816,7 +1816,7 @@ SQL;
     wbfsys_security_area
 
   WHERE
-    UPPER(access_key) {$areaKeys}
+    access_key {$areaKeys}
 
 SQL;
 
@@ -1848,7 +1848,7 @@ SQL;
     if (!$userId = $user->getId())
       throw new LibAcl_Exception('Got no User');
 
-    $areaKeys = "'".implode($areas,"','")."'" ;
+    $areaKeys = "'".implode("','",$areas)."'" ;
 
     // wenn partial erlaub ist, dann
     if ($partial) {
@@ -1930,7 +1930,7 @@ SQL;
 
     $user = $this->getUser();
 
-    $areaKeys = "'".implode($areas,"','")."'" ;
+    $areaKeys = "'".implode("','",$areas)."'" ;
 
     if (!$userId = $user->getId())
       throw new LibAcl_Exception('Got no User');
@@ -2016,7 +2016,7 @@ SQL;
 
     $user = $this->getUser();
 
-    $areaKeys = "upper('".implode($areas,"'),upper('")."')" ;
+    $areaKeys = "'".implode("','",$areas)."'" ;
 
     if (!$userId = $user->getId())
       throw new LibAcl_Exception('Got no User');
@@ -2033,7 +2033,7 @@ SQL;
     {$sourceMaxPerm}
 
   WHERE
-    upper("acl-area") in({$areaKeys})
+    "acl-area" in({$areaKeys})
       and "acl-user" = {$userId}
       and "acl-vid" is null
       and ("assign-partial" = 0)
@@ -2048,7 +2048,7 @@ SQL;
     {$sourceAssigned}
 
   WHERE
-    upper("acl-area") in({$areaKeys})
+    "acl-area" in({$areaKeys})
       and "acl-vid" is null
       and "acl-user" = {$userId}
 
@@ -2063,7 +2063,7 @@ SQL;
     {$sourceMaxPerm}
 
   WHERE
-    upper("acl-area") in({$areaKeys})
+    "acl-area" in({$areaKeys})
       and "acl-user" = {$userId}
       and ("assign-partial" = 0)
       and
@@ -2083,7 +2083,7 @@ SQL;
     {$sourceAssigned}
 
   WHERE
-    upper("acl-area") in({$areaKeys})
+    "acl-area" in({$areaKeys})
       and "acl-user" = {$userId}
       and
       (
@@ -2130,7 +2130,7 @@ SQL;
 
     $user = $this->getUser();
 
-    $areaKeys = "upper('".implode($areas,"'),upper('")."')" ;
+    $areaKeys = "'".implode("','",$areas)."'" ;
 
     if (!$userId = $user->getId())
       throw new LibAcl_Exception('Got no User');
@@ -2142,7 +2142,7 @@ SQL;
     webfrap_acl_level_global_asgd_view
 
   WHERE
-    upper("acl-area") in({$areaKeys})
+    "acl-area" in({$areaKeys})
       and "acl-user" = {$userId}
 SQL;
 
@@ -2163,7 +2163,7 @@ SQL;
 
     $user = $this->getUser();
 
-    $areaKeys = "upper('".implode($areas,"'),upper('")."')" ;
+    $areaKeys = "'".implode("','",$areas)."'" ;
 
     if (!$userId = $user->getId())
       throw new LibAcl_Exception('Got no User');
@@ -2181,7 +2181,7 @@ JOIN
   wbfsys_role_group ro_group acl_gu ON acl_gu.id_group = ro_group.rowid
 SQL;
 
-      $whereGroup = " AND UPPER(ro_group.access_key) IN (upper('".implode($roles,"'),upper('")."')) ";
+      $whereGroup = " AND ro_group.access_key IN ('".implode("','",$roles)."') ";
 
     }
 
@@ -2216,7 +2216,7 @@ JOIN
 {$joinGroup}
 
 WHERE
-    UPPER(wbfsys_security_area.access_key) in({$areaKeys})
+    wbfsys_security_area.access_key IN({$areaKeys})
       AND acl_gu.id_user = {$userId}
       AND (acl_gu.partial = 0)
       AND (acl_access.partial = 0)
@@ -2502,7 +2502,7 @@ SQL;
   public function loadUserAreaPermissions($areas  )
   {
 
-    $areaKeys = " upper('".implode("'), upper('", $areas)."') " ;
+    $areaKeys = " '".implode("', '", $areas)."' " ;
 
     $user = $this->getUser();
 
@@ -2547,7 +2547,7 @@ SQL;
 {$condition}
 
   WHERE
-    upper(wbfsys_security_area.access_key) in({$areaKeys})
+    wbfsys_security_area.access_key IN({$areaKeys})
       and wbfsys_group_users.id_user = {$userId}
 
 SQL;
@@ -2572,7 +2572,7 @@ SQL;
 
     $orm = $this->getDb()->getOrm();
 
-    $area = $orm->get('WbfsysSecurityArea', "upper(access_key)=upper('{$key}')");
+    $area = $orm->get('WbfsysSecurityArea', "access_key='{$key}'");
 
     // wenn keine area gefunden wurde wird null zurückgegeben
     if (!$area)

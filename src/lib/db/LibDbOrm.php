@@ -779,7 +779,7 @@ class LibDbOrm
 
     $tabKey = $this->getTableName($entityKey);
 
-    $sql = "select rowid from wbfsys_entity where upper(access_key) = upper('".$tabKey."')";
+    $sql = "select rowid from wbfsys_entity where access_key = '".$tabKey."'";
 
     if (!$result = $this->db->select($sql)->get())
       return null;
@@ -918,7 +918,7 @@ class LibDbOrm
    */
   public function getByKey($entityKey, $id  )
   {
-    return $this->get($entityKey, "upper(access_key) = upper('{$id}')");
+    return $this->get($entityKey, "access_key = '{$id}'");
 
   }//end public function getByKey */
 
@@ -955,7 +955,7 @@ class LibDbOrm
       return null;
     }
 
-    return $this->get($entityKey, "upper(access_key) = upper('{$id}') and id_lang=".$lang);
+    return $this->get($entityKey, "access_key = '{$id}' and id_lang=".$lang);
 
   }//end public function getI18nByKey */
 
@@ -972,9 +972,9 @@ class LibDbOrm
   public function getByKeys($entityKey, $ids)
   {
 
-    $where = "UPPER('".implode("'), UPPER('", $ids)."')";
+    $where = "'".implode("', '", $ids)."'";
 
-    return $this->getListWhere($entityKey, "upper(access_key) IN({$where})");
+    return $this->getListWhere($entityKey, "access_key IN({$where})");
 
   }//end public function getByKeys */
 
@@ -1431,12 +1431,12 @@ SQL;
     return $this->getIds
     (
       $entityKey,
-      "upper(access_key) IN(upper('"
+      "access_key IN('"
         .implode
         (
-          "'), upper('",
+          "', '",
           $keys
-        )."'))"
+        )."')"
     );
 
   }//end public function getIdsByKeys */
@@ -1452,7 +1452,7 @@ SQL;
     return $this->getId
     (
       $entityKey,
-      "upper(access_key) = upper('{$key}')"
+      "access_key = '{$key}'"
     );
 
   }//end public function getIdsByKeys */
@@ -1549,7 +1549,7 @@ SQL;
       return null;
     }
 
-    return $this->getId($entityKey, "upper(access_key) = upper('{$key}') and id_lang=".$lang);
+    return $this->getId($entityKey, "access_key = '{$key}' and id_lang=".$lang);
 
   }//end public function getI18nIdByKey */
 

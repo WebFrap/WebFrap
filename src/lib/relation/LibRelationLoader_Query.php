@@ -54,7 +54,7 @@ class LibRelationLoader_Query extends LibSqlQuery
     // wenn keine Area übergeben wurde dann brauchen wir nur die
     // globalen assignments
     if ($id) {
-      $areaKeys = " UPPER(wbfsys_security_area.access_key)  IN(UPPER('".implode($areas,"'), UPPER('")."')) " ;
+      $areaKeys = " wbfsys_security_area.access_key  IN('".implode("', '",$areas)."') " ;
 
       $joins = <<<SQL
 
@@ -96,7 +96,7 @@ SQL;
 
 
     } elseif ($areas) {
-      $areaKeys = " UPPER(wbfsys_security_area.access_key)  IN(upper('".implode($areas,"'),upper('")."'))" ;
+      $areaKeys = " wbfsys_security_area.access_key  IN('".implode($areas,"','")."')" ;
 
       $joins = <<<SQL
 
@@ -143,9 +143,9 @@ SQL;
     }
 
     if (is_array($group->name)) {
-      $groupRoles = " IN(upper('".implode($group->name,"'),upper('")."'))" ;
+      $groupRoles = " IN('".implode($group->name,"','")."')" ;
     } else {
-      $groupRoles = " =  upper('{$group->name}') " ;
+      $groupRoles = " =  '{$group->name}' " ;
     }
 
 
@@ -173,7 +173,7 @@ FROM
       wbfsys_role_user.id_person = core_person.rowid
 
 WHERE
-  UPPER(wbfsys_role_group.access_key) {$groupRoles}
+  wbfsys_role_group.access_key {$groupRoles}
     AND ( wbfsys_group_users.partial = 0 )
     AND
       NOT wbfsys_role_user.inactive = TRUE

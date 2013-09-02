@@ -1361,7 +1361,7 @@ abstract class Controller extends BaseChild
 
       try {
 
-        if (!$authRole = $orm->get('WbfsysRoleUser', "UPPER(name) = UPPER('{$userName}')")) {
+        if (!$authRole = $orm->get('WbfsysRoleUser', "lower(name) = 'lower({$userName})'")) {
           $response->addError('User '.$userName.' not exists');
           return false;
         }
