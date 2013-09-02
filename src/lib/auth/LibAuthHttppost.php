@@ -61,8 +61,8 @@ class LibAuthHttppost extends LibAuthApdapter
     else
       $httpRequest = Request::getActive();
 
-    $username = $httpRequest->data('name'    , Validator::TEXT      );
-    $password = $httpRequest->data('passwd'  , Validator::PASSWORD  );
+    $username = $httpRequest->data('name' , Validator::TEXT);
+    $password = $httpRequest->data('passwd' , Validator::PASSWORD);
 
     // if one of both is empty
     if (!$username || !$password)

@@ -24,7 +24,7 @@ if (!defined('ACL_MAX_PERMISSION')) {
 }
 
 if (!defined('ACL_RELATION')) {
-    define('ACL_RELATION', 'webfrap_inject_acls_view');
+    define('ACL_RELATION', 'webfrap_area_user_level_view');
 }
 
 if (!defined('ACL_ROLE_RELATION')) {

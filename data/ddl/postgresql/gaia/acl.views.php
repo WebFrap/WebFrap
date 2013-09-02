@@ -81,13 +81,13 @@ $this->ddl($sql);
 $this->chownView( $dbName, $schemaName, 'webfrap_acl_assigned_view', $owner);
 
 // view: assign_user_area_vid_idx
-if ($this->viewExists($dbName, $schemaName, 'webfrap_inject_acls_view'  )) {
-  $this->dropView($dbName, $schemaName, 'webfrap_inject_acls_view'  );
+if ($this->viewExists($dbName, $schemaName, 'webfrap_area_user_level_view'  )) {
+  $this->dropView($dbName, $schemaName, 'webfrap_area_user_level_view'  );
 }
 
 $sql = <<<SQL
 
-CREATE OR REPLACE VIEW {$schemaName}.webfrap_inject_acls_view
+CREATE OR REPLACE VIEW {$schemaName}.webfrap_area_user_level_view
   AS
   SELECT distinct
     max(acl_access.access_level)  as "acl-level",
@@ -138,7 +138,7 @@ CREATE OR REPLACE VIEW {$schemaName}.webfrap_inject_acls_view
 
 SQL;
 $this->ddl($sql);
-$this->chownView( $dbName, $schemaName, 'webfrap_inject_acls_view', $owner);
+$this->chownView( $dbName, $schemaName, 'webfrap_area_user_level_view', $owner);
 
 // view: assign_user_area_vid_idx
 if ($this->viewExists($dbName, $schemaName, 'webfrap_has_arearole_view'  )) {
