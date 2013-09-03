@@ -61,11 +61,20 @@ class LibFlowApachemod extends Base
   protected $controllerName = null;
 
   /**
-   * mappertabelle für shortlinks
+   * mappertabelle for url short links
    *
    * @var array
    */
   protected $redirectMap = array();
+
+  /**
+   * List of callbacks to be executed on shutdown
+   *
+   * @example $flow->registerShutdownFunction( $key, $closure );
+   *
+   * @var array
+   */
+  protected $shutDownFunctions = array();
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic
@@ -449,12 +458,18 @@ class LibFlowApachemod extends Base
       Debug::publishDebugdata();
 
     if (Session::$session->getStatus('logout')) {
-      Log::info
-      (
+      Log::info(
         'User logged of from system'
       );
 
       Session::destroy();
+    }
+
+    if ($this->shutDownFunctions) {
+      foreach ($this->shutDownFunctions as $shutFunc) {
+        // execute the shutdown function
+        $shutFunc($this);
+      }
     }
 
     Session::close();
@@ -476,8 +491,7 @@ class LibFlowApachemod extends Base
   public function panikShutdown($file, $line,  $lastMessage)
   {
 
-    Log::fatal
-    (
+    Log::fatal(
       'System got killed: '.$file.' Linie: '.$line .' reason: '.$lastMessage
     );
 
@@ -534,8 +548,7 @@ class LibFlowApachemod extends Base
       } else {
         $tmp = explode('.', $this->session->getStatus('tripple.login'));
 
-        $map = array
-        (
+        $map = array(
           Request::MOD => $tmp[0],
           Request::CON => $tmp[1],
           Request::RUN => $tmp[2]
