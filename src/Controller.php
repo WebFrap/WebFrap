@@ -52,7 +52,7 @@ abstract class Controller extends BaseChild
    */
   protected $model = null;
 
-  /**
+  /**b
    * sub Modul Extention
    * @var array
    */

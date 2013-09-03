@@ -254,3 +254,57 @@ CREATE OR REPLACE VIEW webfrap_area_user_level_view
     acl_gu.vid,
     acl_gu.id_group
 ;
+
+
+CREATE OR REPLACE VIEW webfrap_area_gruser_level_view
+  AS 
+  SELECT distinct
+    max(acl_access.access_level)  as "acl-level",
+    acl_area.access_key           as "acl-area",
+    acl_area.rowid                as "acl-id_area",
+    acl_gu.vid                    as "acl-vid",
+    acl_gu.id_user                as "acl-user",
+    acl_gu.id_group               as "acl-group",
+    acl_group.access_key          as "acl-group_key"
+    
+  FROM
+    wbfsys_security_area acl_area
+    
+  JOIN
+    wbfsys_security_access acl_access
+    ON
+      acl_area.rowid = acl_access.id_area
+      AND acl_access.partial = 0
+    
+  left JOIN
+    wbfsys_group_users acl_gu
+    ON
+      acl_gu.partial = 0
+    
+  JOIN
+    wbfsys_role_group acl_group
+    ON
+      acl_group.rowid = acl_gu.id_group
+
+  WHERE
+   (
+    (
+      acl_access.id_group = acl_gu.id_group
+        and acl_gu.id_area = acl_area.rowid
+    )
+    OR
+    (
+      acl_access.id_group = acl_gu.id_group
+        and acl_gu.id_area is null
+        and acl_gu.vid is null
+    )
+   )
+
+  GROUP BY
+    acl_gu.id_user,
+    acl_area.access_key,
+    acl_area.rowid,              
+    acl_gu.vid,
+    acl_gu.id_group,
+    acl_group.access_key
+;
