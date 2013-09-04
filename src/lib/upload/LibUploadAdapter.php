@@ -337,7 +337,7 @@ abstract class LibUploadAdapter
 
     if (!$newPath) {
       if (!$this->newpath) {
-        $this->newpath = PATH_FILES.'data/dms/';
+        $this->newpath = PATH_UPLOADS.'dms/';
       }
     } else {
       $this->newpath = $newPath;
@@ -360,11 +360,11 @@ abstract class LibUploadAdapter
       }
     }
 
-    if (!is_writeable($this->newpath)  ) {
+    if (!is_writeable($this->newpath)) {
       throw new LibUploadException('Target Folder: '.$this->newpath.' ist not writeable');
     }
 
-    if (!copy($this->tmpname , $newName  )) {
+    if (!copy($this->tmpname, $newName)) {
       throw new LibUploadException('Was not able to copy the file '.$this->tmpname.' to the new target: '.$newName);
     }
 
@@ -381,9 +381,8 @@ abstract class LibUploadAdapter
   {
 
     foreach ($this->copies as $copy) {
-      if (!unlink($copy  )) {
-        Error::addError
-        (
+      if (!unlink($copy)) {
+        Error::addError(
           'Failed to clean: '. $copy
         );
       }

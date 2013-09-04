@@ -76,7 +76,7 @@ class LibUploadImage extends LibUploadAdapter
       $this->thumbPath = $thumbPath;
     }
     if (!$this->thumbPath) {
-      $this->thumbPath = PATH_FILES.'files/images/thumb/';
+      $this->thumbPath = PATH_UPLOADS.'images/thumb/';
     }
 
     if ($newName) {
@@ -110,7 +110,7 @@ class LibUploadImage extends LibUploadAdapter
     }
 
     if (!$this->newpath) {
-      $this->newpath = PATH_FILES.'files/images/';
+      $this->newpath = PATH_UPLOADS.'images/';
     }
 
     if (is_null($this->newname)) {
@@ -131,9 +131,8 @@ class LibUploadImage extends LibUploadAdapter
     }
 
     // Falls der Ordner nicht beschreibbar ist Fehler werfen
-    if (!is_writeable($this->newpath)  ) {
-      Error::addError
-      (
+    if (!is_writeable($this->newpath)) {
+      Error::addError(
       'Target Folder :  '.$this->newpath.' is not writeable',
       'LibUploadException'
       );
