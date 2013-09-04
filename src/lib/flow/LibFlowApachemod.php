@@ -99,6 +99,15 @@ class LibFlowApachemod extends Base
 
   }//end protected function checkRedirect */
 
+  /**
+   * @param string $key
+   * @param Closure $func
+   */
+  public function registerShutdownFunction($key, $func)
+  {
+    $this->shutDownFunctions[$key] = $func;
+  }//end public function registerShutdownFunction */
+
  /**
   *
   * @return void

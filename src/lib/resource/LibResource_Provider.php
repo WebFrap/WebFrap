@@ -70,7 +70,7 @@ class LibResource_Provider extends Provider
 
       $db = $this->getDb();
       $sql = <<<SQL
-select rowid from wbsys_security_area where access_key = '{$db->escape($key)}';
+select rowid from wbfsys_security_area where access_key = '{$db->escape($key)}';
 SQL;
       $areaId = $db->select($sql)->getField('rowid');
 
@@ -117,7 +117,7 @@ SQL;
 
       $db = $this->getDb();
       $sql = <<<SQL
-select rowid from wbsys_group_role where access_key = '{$db->escape($key)}';
+select rowid from wbfsys_role_group where access_key = '{$db->escape($key)}';
 SQL;
       $groupId = $db->select($sql)->getField('rowid');
 

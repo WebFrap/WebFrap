@@ -308,3 +308,50 @@ CREATE OR REPLACE VIEW webfrap_area_gruser_level_view
     acl_gu.id_group,
     acl_group.access_key
 ;
+
+-- view welche das maximale level eines users in relation
+-- von ihm direkt zugewiesenen gruppen / area relations zurückgibt
+
+CREATE OR REPLACE VIEW webfrap_area_level_by_user_view
+  AS 
+  SELECT distinct
+    max(acl_access.access_level) as max_level,
+    acl_area.rowid as id_area,
+    acl_gu.vid as vid,
+    acl_gu.id_user as id_user,
+    acl_gu.id_group as id_group
+    
+  FROM
+    wbfsys_security_area acl_area
+    
+  JOIN
+    wbfsys_security_access acl_access
+    ON
+      acl_area.rowid = acl_access.id_area
+      AND acl_access.partial = 0
+    
+  left JOIN
+    wbfsys_group_users acl_gu
+    ON
+      acl_gu.partial = 0
+
+  WHERE
+   (
+    (
+      acl_access.id_group = acl_gu.id_group
+        and acl_gu.id_area = acl_area.rowid
+    )
+    OR
+    (
+      acl_access.id_group = acl_gu.id_group
+        and acl_gu.id_area is null
+        and acl_gu.vid is null
+    )
+   )
+
+  GROUP BY
+    acl_gu.id_user,
+    acl_area.rowid,              
+    acl_gu.vid,
+    acl_gu.id_group
+;

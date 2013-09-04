@@ -30,6 +30,11 @@ class LibAcl_Db_Model extends Model
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
+   * @var LibResource_Provider
+   */
+  public $resources = null;
+
+  /**
    * @var array
    */
   protected $rolesCache = array();
@@ -51,6 +56,20 @@ class LibAcl_Db_Model extends Model
    * @var array
    */
   protected $keyCache = array();
+
+/*//////////////////////////////////////////////////////////////////////////////
+// Zugriff auf Gruppen Rollen Daten
+//////////////////////////////////////////////////////////////////////////////*/
+
+  /**
+   * @param Base $env
+   * @param LibResource_Provider $reosurces
+   */
+  public function __construct($env, $reosurces)
+  {
+    parent::__construct($env);
+    $this->resources = $reosurces;
+  }//end public function __construct */
 
   /**
    * @param $cache

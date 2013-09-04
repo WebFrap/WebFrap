@@ -19,7 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibResource_Cache_File implements LibAcl_CacheAdapter
+class LibResource_Cache_File implements LibResource_CacheAdapter
 {
 
   /**
@@ -78,8 +78,8 @@ class LibResource_Cache_File implements LibAcl_CacheAdapter
    */
   protected function extractKey($areaKey)
   {
-    $modKey = explode('-',$areaKey,1);
-    $modKey = explode('_',$modKey[1],1);
+    $modKey = explode('-',$areaKey,2);
+    $modKey = explode('_',$modKey[1],2);
     return $modKey[0];
   }//end protected function extractKey */
 
@@ -132,7 +132,7 @@ class LibResource_Cache_File implements LibAcl_CacheAdapter
 ));
 CACHE;
 
-      SFiles::write(PATH_CACHE.'', $cData);
+      SFiles::write(PATH_CACHE.'resource/area-'.$modKey.'-ids.php', $cData);
 
     }
 
