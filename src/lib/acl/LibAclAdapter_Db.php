@@ -53,6 +53,11 @@ class LibAclAdapter_Db extends LibAclAdapter
   public $roleRelation = ACL_ROLE_RELATION;
 
   /**
+   * @var LibAcl_Cache_File
+   */
+  public $rCache = null;
+
+  /**
    * Das Modell zum laden der benötigten Daten
    * @var LibAcl_Db_Model
    */
@@ -137,6 +142,8 @@ class LibAclAdapter_Db extends LibAclAdapter
 
     $this->env = $env;
     $this->db = $db;
+
+    $this->rCache = new LibAcl_Cache_File();
 
   }//end public function __construct */
 

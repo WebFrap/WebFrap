@@ -25,12 +25,17 @@ class LibAcl_Cache_File implements LibAcl_CacheAdapter
   /**
    * @var array
    */
+  protected $loadedModules = array();
+
+  /**
+   * @var array
+   */
   protected $areaIds = array();
 
   /**
    * @var array
    */
-  protected $groupIds = array();
+  protected $groupIds = null;
 
   /**
    * @param string $areaKey
@@ -38,39 +43,167 @@ class LibAcl_Cache_File implements LibAcl_CacheAdapter
   public function getAreaId($areaKey)
   {
 
+    if(!isset($this->areaIds[$areaKey])){
+      $modKey = $this->extractKey($areaKey);
+      $this->loadAreaCache($modKey);
+    }
+
+    return isset($this->areaIds[$areaKey])?$this->areaIds[$areaKey]:null;
+
   }//end public function getAreaId */
 
-  /**
-   * @param array $areaKeys
-   */
-  public function getAreaIds($areaKeys)
-  {
-
-  }//end public function getAreaIds */
 
   /**
    * @param array $areaKeys
    */
   public function addAreaId($key, $id)
   {
+    $this->areaIds[$key] = $id;
 
-
+    $self = $this;
+    Webfrap::$env->registerShutdownFunction(
+      'cache_acl_areaids',
+      function() use ($self){
+        /*@var LibAcl_Cache_File $self */
+        $self->writeAreaCache();
+      }
+    );
 
   }//end public function addAreaId */
 
+  /**
+   * Extract the module name from the the key
+   * @param string $areaKey
+   * @return string
+   */
+  protected function extractKey($areaKey)
+  {
+    $modKey = explode('-',$areaKey,1);
+    $modKey = explode('_',$modKey[1],1);
+    return $modKey[0];
+  }//end protected function extractKey */
 
-  protected function extractKey()
+  /**
+   * Laden eines gecachten modules
+   */
+  protected function loadAreaCache($modKey)
   {
 
-  }
+    if (isset($this->loadedModules[$modKey])) {
+      return;
+    }
+
+    if (file_exists(PATH_CACHE.'resource/area-'.$modKey.'-ids.php')){
+      include PATH_CACHE.'resource/area-'.$modKey.'-ids.php';
+    }
+
+    $this->loadedModules[$modKey] = true;
+
+  }//end protected function loadAreaCache */
 
   /**
    * Schreiben des Caches
    */
-  public function writeCache()
+  public function writeAreaCache()
   {
 
-  }//end public function writeCache */
+    $mods = array();
+
+    foreach ($this->areaIds as $key => $id) {
+      $mods[$this->getAreaId($key)][$key] = $id;
+    }
+
+    foreach( $mods as $modKey => $modData ){
+
+      $cacheData = '';
+      foreach ($modData as $modKey => $modId) {
+        $cacheData .= "'{$modKey}' => '{$modId}',";
+      }
+
+      $cData = <<<CACHE
+<?php
+\$this->areaIds = array_merge(\$this->areaIds, array(
+{$cacheData}
+));
+CACHE;
+
+      SFiles::write(PATH_CACHE.'', $cData);
+
+    }
+
+  }//end public function writeAreaCache */
+
+  /**
+   * @param string $groupKey
+   * @return int
+   */
+  public function getGroupId($groupKey)
+  {
+
+    if (!$this->groupIds)
+      $this->loadGroupCache();
+
+    return isset($this->groupIds[$groupKey])
+      ? $this->groupIds[$groupKey]
+      : null;
+
+  }//end public function getGroupId */
+
+
+  /**
+   * @param array $key
+   */
+  public function addGroupId($key, $id)
+  {
+    $this->groupIds[$key] = $id;
+
+    $self = $this;
+    Webfrap::$env->registerShutdownFunction(
+      'cache_acl_groupids',
+      function() use ($self){
+        /*@var LibAcl_Cache_File $self */
+        $self->writeGroupCache();
+      }
+    );
+
+  }//end public function addAreaId */
+
+  /**
+   * Laden des Group Caches
+   */
+  public function loadGroupCache()
+  {
+
+    if (file_exists(PATH_CACHE.'resource/group_ids.php')){
+      include PATH_CACHE.'resource/group_ids.php';
+    } else {
+      $this->groupIds = array();
+    }
+
+  }//end public function loadGroupCache */
+
+  /**
+   * Schreiben des Group Caches
+   */
+  public function writeGroupCache()
+  {
+
+    $cacheData = '';
+
+    foreach ($this->groupIds as $key => $id) {
+      $cacheData .= "'{$key}' => '{$id}',";
+    }
+
+    $cData = <<<CACHE
+<?php
+\$this->groupIds = array(
+{$cacheData}
+);
+CACHE;
+
+    SFiles::write(PATH_CACHE.'resource/group_ids.php', $cData);
+
+  }//end public function writeGroupCache */
 
 } // end class LibAcl_Cache_File
 
