@@ -64,7 +64,7 @@ class LibResource_Cache_File implements LibResource_CacheAdapter
     Webfrap::$env->registerShutdownFunction(
       'cache_resource_areaids',
       function() use ($self){
-        /*@var LibAcl_Cache_File $self */
+        /*@var LibResource_Cache_File $self */
         $self->writeAreaCache();
       }
     );
@@ -166,7 +166,7 @@ CACHE;
     Webfrap::$env->registerShutdownFunction(
       'cache_resource_groupids',
       function() use ($self){
-        /*@var LibAcl_Cache_File $self */
+        /*@var LibResource_Cache_File $self */
         $self->writeGroupCache();
       }
     );
