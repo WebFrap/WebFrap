@@ -48,11 +48,29 @@ class LibAcl_Cache_File implements LibAcl_CacheAdapter
 
   }//end public function getAreaIds */
 
+  /**
+   * @param array $areaKeys
+   */
+  public function addAreaId($key, $id)
+  {
+
+
+
+  }//end public function addAreaId */
+
 
   protected function extractKey()
   {
 
   }
+
+  /**
+   * Schreiben des Caches
+   */
+  public function writeCache()
+  {
+
+  }//end public function writeCache */
 
 } // end class LibAcl_Cache_File
 

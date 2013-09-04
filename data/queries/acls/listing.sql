@@ -1,12 +1,14 @@
 ﻿set search_path = production;
 
-  SELECT 
-  inner_acl.rowid, max(inner_acl."acl-level") as "acl-level"
+SELECT 
+  inner_acl.rowid, 
+  inner_acl."acl-level", 
+  inner_acl."acl-area"
   FROM (
    SELECT 
     project_activity.rowid as rowid, 
-    greatest ( 0, acls."acl-level", back_acls."acl-level" ) as "acl-level" , 
-    wbfsys_process_node.m_order as "wbfsys_process_node-m_order-order" 
+    greatest ( 0, acls."acl-level", back_path.access_level ) as "acl-level" , 
+    acls."acl-area"
 FROM project_activity 
   LEFT JOIN project_activity_category project_activity_category 
     ON project_activity.id_category = project_activity_category.rowid 
@@ -21,19 +23,28 @@ FROM project_activity
 
   LEFT JOIN webfrap_area_user_level_view  acls ON  
     acls."acl-user" = 189423 
-    AND acls."acl-area" IN('mod-project', 'mgmt-project_activity') 
+    AND acls."acl-area" IN('mgmt-project_activity') 
     AND ( acls."acl-vid" = project_activity.rowid OR acls."acl-vid" is null ) 
 
   LEFT JOIN wbfsys_security_backpath back_path
-    ON back_path.id_area = acls."acl-area_id"
+    ON back_path.id_area = (select rowid from wbfsys_security_area where access_key = 'mgmt-project_activity')
 
   LEFT JOIN webfrap_area_user_level_view as back_acls ON  
-    back_path.id_target_area =  back_acls."acl-area_id"
-    AND acls."acl-user" = 189423
+    back_path.id_target_area = back_acls."acl-id_area"
+    AND back_acls."acl-user" = 189423
     AND(
       ( 
-		
+        back_acls."acl-area" IN('mod-enterprise', 'mgmt-enterprise_org_unit') 
+        AND ( back_acls."acl-vid" = project_activity.id_org_unit OR back_acls."acl-vid" is null ) 
       )
     )
 
-  )
+
+  ) inner_acl
+
+
+LIMIT 20
+  
+WHERE "acl-level" > 0 ;
+
+
