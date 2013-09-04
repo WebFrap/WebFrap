@@ -97,7 +97,11 @@ SQL;
     $areaIds = array();
 
     foreach ($keys as $key) {
-      $areaIds[$key] = $this->getAreaId($key);
+
+      $areaId = $this->getAreaId($key);
+
+      if ($areaId)
+       $areaIds[$key] = $areaId;
     }
 
     return $areaIds;
@@ -144,7 +148,10 @@ SQL;
     $groupIds = array();
 
     foreach ($keys as $key) {
-      $groupIds[$key] = $this->getGroupId($key);
+
+      $groupId = $this->getGroupId($key);
+      if ($groupId)
+        $groupIds[$key] = $this->getGroupId($key);
     }
 
     return $groupIds;

@@ -187,6 +187,26 @@ class LibAclAdapter_Db extends LibAclAdapter
 
 
   /**
+   * @param int $areaId
+   * @return [id_target_area:int, ref_field:int, groups:text]
+   */
+  public function getPathJoins($areaId)
+  {
+
+    $sql = <<<SQL
+SELECT
+  id_target_area,
+  ref_field,
+  groups
+FROM wbfsys_security_backpath
+WHERE id_area = {$areaId};
+SQL;
+
+    return $this->getDb()->select($sql)->getAll();
+
+  }//end public function getPathJoins */
+
+  /**
    * @lang de:
    *
    * das zugriffslevel des aktiven benutzers für die übergebenen security

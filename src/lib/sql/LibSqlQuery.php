@@ -387,6 +387,12 @@ abstract class LibSqlQuery implements Iterator, Countable
       if (!$this->calcQuery)
         return null;
 
+      // remove orders from the subquery
+      if($this->calcQuery->subQuery){
+        $this->calcQuery->subQuery->order = array();
+        $this->calcQuery->group = array();
+      }
+
       if (is_string($this->calcQuery)) {
         if ($res = $this->getDb()->select($this->calcQuery)) {
           $tmp = $res->get();
