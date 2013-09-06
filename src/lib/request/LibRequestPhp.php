@@ -1787,18 +1787,15 @@ class LibRequestPhp
    * @param TState $state
    * @return void
    */
-  public function validateUpdate
-  (
+  public function validateUpdate(
     $entity,
     $keyName,
     $fields = array(),
     $required = array(),
     $state = null
-)
-  {
+  ) {
 
-    $filter = $this->checkFormInput
-    (
+    $filter = $this->checkFormInput(
       $entity->getValidationData($fields),
       $entity->getErrorMessages(),
       $keyName,
@@ -1807,8 +1804,6 @@ class LibRequestPhp
    );
 
     $data = $filter->getData();
-
-
     $entity->addData($data);
 
     // wenn ein State object übergeben wurde ist dieses mit höchster priorität
@@ -1820,9 +1815,7 @@ class LibRequestPhp
     if ($filter->hasErrors()) {
 
       $response = $this->getResponse();
-
       $response->addError($filter->getErrorMessages());
-
       return false;
     }
 

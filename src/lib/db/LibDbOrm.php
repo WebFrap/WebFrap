@@ -2328,7 +2328,6 @@ SQL;
 
     try {
 
-
       $userId = $this->getUser()->getId();
       $timestamp = SDate::getTimestamp(I18n::$timeStampFormat);
 
