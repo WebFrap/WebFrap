@@ -151,6 +151,11 @@ class DomainNode
   public $domainAclQuery = null;
 
   /**
+   * @var array ['mod-project', 'mgmt-project_activity']
+   */
+  public $domainAclAreas = null;
+
+  /**
    * @example project.activity_mask_product.
    * @var string
    */
