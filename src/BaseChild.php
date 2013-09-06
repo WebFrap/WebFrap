@@ -377,8 +377,7 @@ abstract class BaseChild
   }//end public function setResponse */
 
   /**
-   *
-   * @return LibResponse
+   * @return LibResponseHttp
    */
   public function getResponse()
   {
@@ -391,16 +390,12 @@ abstract class BaseChild
   }//end public function getResponse */
 
   /**
-   *
-   * Enter description here ...
    * @param Registry $registry
    */
   public function setRegistry($registry)
   {
-
     $this->registry = $registry;
-
-  }
+  }//end public function setRegistry */
 
   /**
    * @return Registry
