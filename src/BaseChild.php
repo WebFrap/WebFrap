@@ -103,7 +103,6 @@ abstract class BaseChild
   public $response = null;
 
   /**
-   * @deprecated die Registry soll nichtmehr verwendet werden
    * @var Registry
    */
   public $registry = null;
