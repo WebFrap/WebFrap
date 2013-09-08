@@ -216,8 +216,8 @@ class LibCacheRequestCss extends LibCacheRequest
     $theme = 'default';
     $layoutType = 'full';
 
-    $icons = WEB_ICONS.'icons/default/';
-    $images = WEB_THEME.'themes/default/images/';
+    $icons = WEB_ICONS.'icons/classic/';
+    $images = WEB_THEME.'themes/classic/images/';
 
     $files = array();
     $minify = true;
