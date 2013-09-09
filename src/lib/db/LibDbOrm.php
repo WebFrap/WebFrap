@@ -2362,7 +2362,8 @@ SQL;
   public function delete($entity, $id = null  )
   {
 
-    if (is_object($entity)   ) {
+    if (is_object($entity)) {
+      
       if ($entity instanceof Entity) {
         $id = $entity->getId();
         $entityKey = $entity->getEntityName();
@@ -2371,8 +2372,9 @@ SQL;
       } elseif ($entity instanceof LibSqlCriteria) {
         $this->db->delete($this->sqlBuilder->buildDelete($entity));
 
-        return;
+        return false;
       }
+      
     } else {
       //$id
       $entityKey = $entity;
@@ -2393,6 +2395,7 @@ SQL;
     foreach ($references as $attribute => $ref) {
 
       if ($attribute == 'rowid') {
+        
         //array('type' => 'oneToOne', 'entity' => 'CorePeople' , 'refId' => 'rowid' , 'delete' => true),
         foreach ($ref as $conRef) {
           if (!$conRef['delete'])
@@ -2401,7 +2404,9 @@ SQL;
           $this->deleteWhere(SParserString::subToCamelCase($conRef['entity']), $conRef['refId'].' = '.$id);
 
         }
+        
       } else {
+        
         if (!$ref['delete'])
           continue;
 
@@ -2423,7 +2428,8 @@ SQL;
     $this->db->delete($sqlstring);
 
     $this->removeFromPool($entityKey, $id);
-
+    
+    return true;
 
   }//end public function delete */
 
