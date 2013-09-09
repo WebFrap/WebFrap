@@ -349,6 +349,9 @@ class LibMessagePool
       if (is_array($entity)) {
         $resourceId = $orm->getResourceId($entity[0]);
         $entityId = $entity[1];
+      } elseif (is_numeric($entity)) {
+        $resourceId = null;
+        $entityId = $entity;
       } elseif (is_string($entity)) {
         $resourceId = $orm->getResourceId($entity);
         $entityId = null;
@@ -356,7 +359,6 @@ class LibMessagePool
         $resourceId = $orm->getResourceId($entity);
         $entityId = $entity->getId();
       }
-
     } else {
       $resourceId = null;
       $entityId = null;
