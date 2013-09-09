@@ -1772,7 +1772,7 @@ class Validator
 
     $this->data[$key] = $value;
 
-    // remove all __
+    // remove all _ and -
     $testVal = str_replace(array('_','-') ,array('',''),$value);
 
     // musn't start with a number
