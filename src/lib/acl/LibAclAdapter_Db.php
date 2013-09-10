@@ -192,6 +192,9 @@ class LibAclAdapter_Db extends LibAclAdapter
    */
   public function getPathJoins($areaId)
   {
+    
+    if (!ctype_digit($areaId))
+      $areaId = $this->resources->getAreaId($areaId);
 
     $sql = <<<SQL
 SELECT
@@ -206,6 +209,38 @@ SQL;
 
   }//end public function getPathJoins */
 
+  
+  /**
+   * @param int $areaId
+   * @return [id_target_area:int, ref_field:int, groups:text]
+   */
+  public function getPathJoinLevels($areaId)
+  {
+    
+    if (!ctype_digit($areaId))
+      $areaId = $this->resources->getAreaId($areaId);
+  
+    $sql = <<<SQL
+SELECT
+  id_target_area,
+  ref_field,
+  groups,
+  access_level,
+  ref_access_level,
+  message_level,
+  priv_message_level,
+  meta_level
+FROM 
+  wbfsys_security_backpath
+WHERE 
+  id_area = {$areaId};
+SQL;
+  
+    return $this->getDb()->select($sql)->getAll();
+  
+  }//end public function getPathJoinLevels */
+
+  
   /**
    * @lang de:
    *
@@ -1508,7 +1543,11 @@ SQL;
     $model = $this->getModel();
 
     if ($keys) {
-      $keyData = $model->extractWeightedKeys($keys);
+      if (!ctype_digit($keys)) {
+        $keyData = $model->extractWeightedKeys($keys);
+      } else {
+        $keyData = $this->getAreaKey($keys);
+      }
     } else {
       $keyData = null;
     }
@@ -1936,6 +1975,7 @@ SQL;
     return $model->getAreaId($areaKey);
 
   }//end public function getAreaId */
+
 
   /**
    * de:
