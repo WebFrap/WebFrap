@@ -58,6 +58,16 @@ class LibAclPermission
    * @var boolean
    */
   public $isReference = false;
+  
+  /**
+   * Benutzer hat insertrechte kann datensätze aber nur in relation
+   * zu einer übergeordneten entity anlegen.
+   * 
+   * zb nur projekte für seine org unit, org_unit ist pflichtfeld
+   *
+   * @var int
+   */
+  public $implicitInsert = null;
 
   /**
    * das einfach zugriffslevel für eine besimmte area, bzw das höchste level
@@ -289,8 +299,7 @@ class LibAclPermission
    *   @see LibAclPermission::$refBaseLevel
    * }
    */
-  public function __construct
-  (
+  public function __construct(
     $level = null,
     $refBaseLevel = null,
     $env = null
@@ -461,6 +470,7 @@ class LibAclPermission
         $this->defLevel = (int) $level['acl-level'];
 
       } else {
+        
         $this->level = Acl::DENIED;
         $this->defLevel = Acl::DENIED;
 
@@ -612,6 +622,13 @@ class LibAclPermission
   {
 
     $key = strtolower($key);
+    
+    // insert hat keinen direkten datenbezug, daher gibt es hier
+    // noch eine sonderlösung um insert rechte separat zu geben
+    if ('insert'===$key) { 
+      if ($this->implicitInsert)
+        return true;
+    }
 
     if (!isset($this->levels[$key]))
       return false;

@@ -199,8 +199,10 @@ class LibAclAdapter_Db extends LibAclAdapter
     $sql = <<<SQL
 SELECT
   id_target_area,
+  target_area_key,
   ref_field,
-  groups
+  groups,
+  set_groups
 FROM wbfsys_security_backpath
 WHERE id_area = {$areaId};
 SQL;
@@ -223,8 +225,10 @@ SQL;
     $sql = <<<SQL
 SELECT
   id_target_area,
+  target_area_key,
   ref_field,
   groups,
+  set_groups,
   access_level,
   ref_access_level,
   message_level,
