@@ -705,6 +705,60 @@ SQL;
     return $permission;
 
   }//end public function getLevel */
+  
+  /**
+   * @lang de:
+   *
+   * das zugriffslevel des aktiven benutzers für die übergebenen security
+   * areas abfragen
+   *
+   * die entity ist optional.
+   * Wenn ein entity objekt mitübergeben wird prüft die abfrage ob der
+   * benutzer auch rechte in relation zu dem per entity übergebenen datensatz
+   * hat
+   *
+   * wenn die constante WFB_NO_LOGIN auf true definiert wurde gibt diese
+   * methode immer true zurück
+   * @tutorial <a href="http://webfrap.net/doc/{{version}}/index.php?page=debug.constants" >Debug Flags</a>
+   *
+   * @param string $key
+   * {
+   *   die gewünschten security areas,
+   *   wenn mehr als eine area übergeben wird gewinnt jeweils das höchste access level
+   *   egal auf welcher area es sich befindet
+   *
+   *   @example 'mod-area'  single area
+   *   @example 'mod-area/mgmt-area/mgmt-area' path like area
+   *   @example 'mgmt-area1/mgmt-area2>mgmt-area3' gruppe von masken
+   *   @tutorial <a href="http://webfrap.net/doc/{{version}}/index.php?page=acls.security_areas" >Security areas</a>
+   * }
+   *
+   * @param Entity $entity Das Entity Objekt
+   * @param array $roles sollen die Rollen auch geladen werden?
+   *
+   * @return LibAclPermission Permission Container mit allen nötigen Informationen
+   *
+   */
+  public function getRoleAreaLevels(
+    $key,
+    $roles = array()
+  ) {
+  
+    if (DEBUG)
+      Debug::console("getRoleAreaLevels {$key}");
+  
+    $user = $this->getUser();
+    $model = $this->getModel();
+  
+  
+    // es kann sein, dass ein benutzer nur partiellen zugriff auf eine area hat
+    // das bedeuted, er darf zwar in den bereich, aber für alle kinder darin
+    // müssen die kinder nochmal gesondert geprüft werden
+    $paths = $model->extractWeightedKeys($key);
+
+    return $model->loadRoleAreaLevels($paths, $roles);
+  
+  }//end public function getRoleAreaLevels */
 
   /**
    * Wir bei Referenzen verwendet um die Rechte von einem Root Container laden zu können
@@ -1324,11 +1378,9 @@ SQL;
     $refEntity = null,
     $loadChildren = true,
     $container = null
-)
-  {
+  ) {
 
-    Debug::console
-    (
+    Debug::console(
       "getPathPermission(root: $root, rootId: $rootId, level: $level, "
       ."parentKey: $parentKey, parentId: $parentId, modeKey: $nodeKey, refEntity: $refEntity)"
    );
@@ -1373,8 +1425,7 @@ SQL;
     // der aktuelle schwachpunkt ist dass der pfad zum rootnode
     // nicht direkt geprüft wird
     // das muss noch eingebaut werden
-    $permission = $model->loadAccessPathNode
-    (
+    $permission = $model->loadAccessPathNode(
       $root,      // wird benötigt um den passenden startpunkt zu finden
       $rootId,    // die rowid der root area
       $level,     // das level in dem wir uns aktuell befinden
@@ -1382,7 +1433,7 @@ SQL;
       $parentId,  // die id des parent nodes
       $nodeKey,   // der key des aktuellen reference node
       $roles      // gruppen rollen in denen der user sich relativ zum rootnode befinden
-   );
+    );
 
     $areaLevel = $model->extractAreaAccessLevel(array($parentKey));
     $areaRefLevel = $model->extractAreaRefAccessLevel(array($parentKey));

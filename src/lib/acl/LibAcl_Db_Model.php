@@ -2507,7 +2507,7 @@ SQL;
 
       $joinGroup = <<<SQL
 JOIN
-  wbfsys_role_group ro_group acl_gu ON acl_gu.id_group = ro_group.rowid
+  wbfsys_role_group ro_group ON acl_gu.id_group = ro_group.rowid
 SQL;
 
       $whereGroup = " AND ro_group.access_key IN ('".implode("','",$roles)."') ";
@@ -2562,6 +2562,49 @@ SQL;
     return $level;
 
   }//end public function loadAreaLevel */
+  
+  /**
+   * Die Maximalen Zugriffslevel für eine Gruppe auslesen
+   * Wird zum updaten der Pfade verwendet
+   * 
+   * @param string $areas
+   * @param array $roles
+   */
+  public function loadRoleAreaLevels($areas, $roles)
+  {
+
+    $areaKeys = "'".implode("','",$areas)."'" ;
+    $whereGroup = " AND ro_group.access_key IN ('".implode("','",$roles)."') ";
+  
+    $query = <<<SQL
+  
+SELECT
+  max(acl_access.access_level) AS access_level,
+  max(acl_access.ref_access_level) AS ref_access_level,
+  max(acl_access.message_level) AS message_level,
+  max(acl_access.priv_message_level) priv_message_level,
+  max(acl_access.meta_level) AS meta_level
+  
+FROM
+  wbfsys_security_access acl_access
+    
+JOIN
+  wbfsys_role_group ro_group ON acl_access.id_group = ro_group.rowid
+  
+JOIN
+  wbfsys_security_area acl_area ON acl_access.id_area = acl_area.rowid
+  
+WHERE
+    acl_area.access_key IN({$areaKeys})
+      AND (acl_access.partial = 0)
+      {$whereGroup}
+  
+SQL;
+  
+      $db = $this->getDb();
+      return $db->select($query)->get();
+  
+  }//end public function loadRoleAreaLevels */
 
 
  /**
@@ -2619,8 +2662,7 @@ SQL;
   * @param $roles
   *   gruppen rollen in denen der user sich relativ zum rootnode befinden
   */
-  public function loadAccessPathNode
-  (
+  public function loadAccessPathNode (
     $root,      // wird benötigt um den passenden startpunkt zu finden
     $rootId,    // der access_key der root area
     $level,     // das level in dem wir uns aktuell befinden
@@ -2628,8 +2670,7 @@ SQL;
     $parentId,  // die id des parent nodes
     $nodeKey,   // der key des aktuellen reference node
     $roles      // gruppen rollen in denen der user sich relativ zum rootnode befinden
-  )
-  {
+  ) {
 
     if (DEBUG)
       Debug::console("loadAccessPathNode root: {$root}, rootId: $rootId, level: $level, parentKey: $parentKey, parentId: $parentId, nodeKey: $nodeKey ");

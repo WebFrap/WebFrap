@@ -233,7 +233,7 @@ CREATE OR REPLACE VIEW webfrap_area_user_level_view
     ON
       acl_gu.partial = 0
 
-  WHERE
+  AND
    (
     (
       acl_access.id_group = acl_gu.id_group
