@@ -963,6 +963,21 @@ class LibAclPermission
    * @param TFlag $params
    * @param Entity $entity
    */
+  public function init($params, $entity = null)
+  {
+  
+    $this->loadDefault($params, $entity);
+  
+  }//end public function init */
+
+  /**
+   * Standard lade Funktion für den Access Container
+   * Mappt die Aufrufe auf passene Profil loader soweit vorhanden.
+   *
+   * @param string $profil der namen des Aktiven Profil als CamelCase
+   * @param TFlag $params
+   * @param Entity $entity
+   */
   public function load($profil, $params, $entity = null)
   {
 
