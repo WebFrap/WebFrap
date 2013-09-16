@@ -25,9 +25,24 @@ class LibAclContainer_Reflist extends LibAclPermission
 {
   
   /**
-   * @var DomainRefNode
+   * @var string
    */
-  protected $domainRefNode = false;
+  protected $refAclKey = null;
+  
+  /**
+   * @var string
+   */
+  protected $srcName = null;
+  
+  /**
+   * @var string
+   */
+  protected $aclKey = null;
+  
+  /**
+   * @var string
+   */
+  protected $aclQuery = null;
   
   /**
    * @lang:de
@@ -49,17 +64,11 @@ class LibAclContainer_Reflist extends LibAclPermission
    */
   public function __construct(
     $env,
-    $refDomainKey,
     $level = null,
     $refBaseLevel = null
   ) {
-  
-    $this->domainRefNode = DomainRefNode::getNode($refDomainKey);
-    $this->domainNode = $this->domainRefNode->getQBaseNode();
-    
 
-    Debug::console('IN LibAclContainer_List '.$refDomainKey);
-    
+
     $this->env = $env;
   
     $this->levels = Acl::$accessLevels;
@@ -87,7 +96,7 @@ class LibAclContainer_Reflist extends LibAclPermission
       $params->aclRoot,
       $params->aclRootId,
       $params->aclLevel,
-      $this->domainRefNode->aclKey
+      $this->refAclKey
     );
 
     // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
@@ -99,7 +108,7 @@ class LibAclContainer_Reflist extends LibAclPermission
       $params->aclLevel,
       $params->aclKey,
       $params->refId,
-      $this->domainRefNode->aclKey,
+      $this->refAclKey,
       $entity,
       false // keine rechte für die referenzen mitladen
     );
@@ -120,7 +129,7 @@ class LibAclContainer_Reflist extends LibAclPermission
     $orm = $this->getDb()->getOrm();
 
     $userId = $user->getId();
-    $mainAreaId = $acl->resources->getAreaId($this->domainNode->aclBaseKey);
+    $mainAreaId = $acl->resources->getAreaId($this->aclKey);
     $pathJoins = $acl->getPathJoins($mainAreaId);
 
     // erstellen der Acl criteria und befüllen mit den relevanten cols
@@ -136,7 +145,7 @@ class LibAclContainer_Reflist extends LibAclPermission
     $envelop->groupBy('inner_acl.rowid');
     $envelop->where('"acl-level" > 0'); // alle ausblenden für die es keine berechtigung gibt
 
-    $criteria->select(array($this->domainNode->srcName.'.rowid as rowid'));
+    $criteria->select(array($this->srcName.'.rowid as rowid'));
 
     if (is_null($this->defLevel)) {
       $this->defLevel = 0;
@@ -170,7 +179,7 @@ class LibAclContainer_Reflist extends LibAclPermission
         $pathConditions[] = <<<SUB_COND
       (
         back_acls."acl-id_area" = {$pathJoin['id_target_area']}
-        AND ( back_acls."acl-vid" = {$this->domainNode->srcName}.{$pathJoin['ref_field']} OR back_acls."acl-vid" is null )
+        AND ( back_acls."acl-vid" = {$this->srcName}.{$pathJoin['ref_field']} OR back_acls."acl-vid" is null )
         AND back_acls."acl-group" IN( {$groupCond} )
       )
 SUB_COND;
@@ -189,7 +198,7 @@ SUB_COND;
 {$joinType} JOIN webfrap_area_user_level_view  acls ON
     acls."acl-user" = {$userId}
     AND acls."acl-area" IN({$this->domainNode->domainAclQuery})
-    AND ( acls."acl-vid" = {$this->domainNode->srcName}.rowid OR acls."acl-vid" is null )
+    AND ( acls."acl-vid" = {$this->srcName}.rowid OR acls."acl-vid" is null )
 
   LEFT JOIN wbfsys_security_backpath back_path
     ON back_path.id_area = {$mainAreaId}
@@ -212,7 +221,7 @@ SQL
 LEFT JOIN webfrap_area_user_level_view  acls ON
     acls."acl-user" = {$userId}
     AND acls."acl-area" IN({$this->domainNode->domainAclQuery})
-    AND ( acls."acl-vid" = {$this->domainNode->srcName}.rowid OR acls."acl-vid" is null )
+    AND ( acls."acl-vid" = {$this->srcName}.rowid OR acls."acl-vid" is null )
 SQL
         ,'acls'
       );
