@@ -16,38 +16,17 @@
 *******************************************************************************/
 
 /**
- * @lang:de
- *
- * Container zum transportieren von acl informationen.
- *
- * Wird benötigt, da ACLs in der Regel aus mehr als nur einem Zugriffslevel bestehen
- * Weiter ermöglicht der Permission Container einfach zusätzliche Checks
- * mit einzubauen.
- *
- * @example
- * <code>
- *
- *  $access = new LibAclPermission(16);
- *
- *  if ($access->access)
- *  {
- *    echo 'Zugriff erlaubt';
- *  }
- *
- *  if ($access->admin)
- *  {
- *    echo 'Wenn du das lesen kannst... Liest du hoffentlich nur das Beispiel hier';
- *  }
- *
- * </code>
- *
  *
  * @package WebFrap
  * @subpackage tech_core
  * @author dominik alexander bonsch <dominik.bonsch@webfrap.net>
  */
-class LibAclContainer_Show extends LibAclContainer_Edit
+class LibAclContainer_Reflist_Table extends LibAclContainer_Reflist
 {
 
-}//end class LibAclContainer_Show
+  public function fetchListTableDefault($query, $condition, $params){
+    return $this->injectListAcls($query, $condition, $params);
+  }
+  
+}//end class LibAclContainer_Reflist_Table
 

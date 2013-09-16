@@ -16,37 +16,12 @@
 *******************************************************************************/
 
 /**
- * @lang:de
- *
- * Container zum transportieren von acl informationen.
- *
- * Wird benötigt, da ACLs in der Regel aus mehr als nur einem Zugriffslevel bestehen
- * Weiter ermöglicht der Permission Container einfach zusätzliche Checks
- * mit einzubauen.
- *
- * @example
- * <code>
- *
- *  $access = new LibAclPermission(16);
- *
- *  if ($access->access)
- *  {
- *    echo 'Zugriff erlaubt';
- *  }
- *
- *  if ($access->admin)
- *  {
- *    echo 'Wenn du das lesen kannst... Liest du hoffentlich nur das Beispiel hier';
- *  }
- *
- * </code>
- *
  *
  * @package WebFrap
  * @subpackage tech_core
  * @author dominik alexander bonsch <dominik.bonsch@webfrap.net>
  */
-class LibAclContainer_Edit extends LibAclPermission
+class LibAclContainer_Dataset extends LibAclPermission
 {
 
   /**
@@ -58,7 +33,6 @@ class LibAclContainer_Edit extends LibAclPermission
    * @var string
    */
   public $aclPath = null;
-  
   
   /**
    * @lang:de
@@ -80,14 +54,14 @@ class LibAclContainer_Edit extends LibAclPermission
    */
   public function __construct(
     $env,
-    $aclKey,
-    $aclPath,
+    //$aclKey = null,
+    //$aclPath = null,
     $level = null,
     $refBaseLevel = null
   ) {
   
-    $this->aclKey = $aclKey;
-    $this->aclPath = $aclPath;
+    //$this->aclKey = $aclKey;
+    //$this->aclPath = $aclPath;
     $this->env = $env;
   
     $this->levels = Acl::$accessLevels;
@@ -177,7 +151,7 @@ class LibAclContainer_Edit extends LibAclPermission
         $this->aclPath,
         $this->roles,
         $entity,
-        true // rechte für die referenzen mitladen
+        $this->loadReferences // rechte für die referenzen mitladen
       );
 
     } else {
@@ -202,7 +176,7 @@ class LibAclContainer_Edit extends LibAclPermission
         $params->refId,
         $params->aclNode,
         $entity,
-        true // rechte für die referenzen mitladen
+        $this->loadReferences // rechte für die referenzen mitladen
       );
 
     }

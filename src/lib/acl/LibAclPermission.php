@@ -206,7 +206,18 @@ class LibAclPermission
    * @var string
    */
   protected $areaPath = null;
+  
+  /**
+   * Referenzen mitladen
+   * @var boolean
+   */
+  protected $loadReferences = false;
 
+  /**
+   * @var DomainNode
+   */
+  protected $domainNode = false;
+  
 /*//////////////////////////////////////////////////////////////////////////////
 // Listen Daten
 //////////////////////////////////////////////////////////////////////////////*/

@@ -105,6 +105,12 @@ class DomainRefNode
   public $domainName = null;
 
   /**
+   * @example {$name->aclKey}-ref-{$refName->name}
+   * @var string
+   */
+  public $aclKey = null;
+
+  /**
    * @var [DomainNode]
    */
   private static $pool = array();
@@ -124,7 +130,6 @@ class DomainRefNode
 
       if (!Webfrap::classExists($className)) {
         self::$pool[$key] = null;
-
         return null;
       }
 
@@ -134,5 +139,18 @@ class DomainRefNode
     return self::$pool[$key];
 
   }//end public static function getNode */
+  
+
+
+  /**
+   * @param string $key
+   * @return DomainNode
+   */
+  public function getQBaseNode()
+  {
+  
+    return DomainNode::getNode(($this->connectionName?$this->connectionName:$this->targetName));
+  
+  }//end public static function getQBaseNode */
 
 }//end class DomainRefNode
