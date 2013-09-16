@@ -23,27 +23,27 @@
  */
 class LibAclContainer_Reflist extends LibAclPermission
 {
-  
+
   /**
    * @var string
    */
   protected $refAclKey = null;
-  
+
   /**
    * @var string
    */
   protected $srcName = null;
-  
+
   /**
    * @var string
    */
   protected $aclKey = null;
-  
+
   /**
    * @var string
    */
   protected $aclQuery = null;
-  
+
   /**
    * @lang:de
    * Einfacher Konstruktor,
@@ -70,15 +70,14 @@ class LibAclContainer_Reflist extends LibAclPermission
 
 
     $this->env = $env;
-  
     $this->levels = Acl::$accessLevels;
-  
+
     if (!is_null($level))
       $this->setPermission($level, $refBaseLevel);
-  
+
   }//end public function __construct */
-  
-  
+
+
   /**
    * @param TFlag $params
    * @param Entity: ProjectPartner_Entity $entity
@@ -89,7 +88,7 @@ class LibAclContainer_Reflist extends LibAclPermission
     // laden der mvc/utils adapter Objekte
     /* @var $acl LibAclAdapter_Db */
     $acl = $this->getAcl();
-    
+
     // erst mal root laden
     $acl->injectDsetRootPermission(
 	    $this,
@@ -114,7 +113,7 @@ class LibAclContainer_Reflist extends LibAclPermission
     );
 
   }//end public function loadDefault */
-    
+
   /**
    * @param ProjectProjectMaskCapa_Ref_Partners_Table_Query $query
    * @param string $condition
@@ -124,7 +123,7 @@ class LibAclContainer_Reflist extends LibAclPermission
   {
 
     // laden der mvc/utils adapter Objekte
-    $acl = $this->getAcl();
+    $acl = $this->env->getAcl();
     $user = $this->getUser();
     $orm = $this->getDb()->getOrm();
 
@@ -197,7 +196,7 @@ SUB_COND;
         <<<SQL
 {$joinType} JOIN webfrap_area_user_level_view  acls ON
     acls."acl-user" = {$userId}
-    AND acls."acl-area" IN({$this->domainNode->domainAclQuery})
+    AND acls."acl-area" IN({$this->aclQuery})
     AND ( acls."acl-vid" = {$this->srcName}.rowid OR acls."acl-vid" is null )
 
   LEFT JOIN wbfsys_security_backpath back_path
@@ -220,7 +219,7 @@ SQL
         <<<SQL
 LEFT JOIN webfrap_area_user_level_view  acls ON
     acls."acl-user" = {$userId}
-    AND acls."acl-area" IN({$this->domainNode->domainAclQuery})
+    AND acls."acl-area" IN({$this->aclQuery})
     AND ( acls."acl-vid" = {$this->srcName}.rowid OR acls."acl-vid" is null )
 SQL
         ,'acls'
@@ -235,12 +234,12 @@ SQL
 
   greatest(
     {$this->defLevel},
-    acls."acl-level",  
-    case when back_acls."acl-id_area" is null 
+    acls."acl-level",
+    case when back_acls."acl-id_area" is null
  then 0
-else 
+else
  back_path.access_level
-end 
+end
   ) as "acl-level"
 
 SQL;
@@ -274,7 +273,7 @@ SQL;
     return $ids;
 
   }//end public function injectListAcls */
-  
+
 
 
 }//end class LibAclPermissionList

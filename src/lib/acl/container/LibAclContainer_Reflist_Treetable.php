@@ -23,9 +23,9 @@
  */
 class LibAclContainer_Reflist_Treetable extends LibAclContainer_Reflist
 {
-  
-  public $refFieldName = null;
-  
+
+  protected $refFieldName = null;
+
   /**
    * @param ProjectProjectMaskCapa_Ref_Partners_Table_Query $query
    * @param string $condition
@@ -33,7 +33,7 @@ class LibAclContainer_Reflist_Treetable extends LibAclContainer_Reflist
    */
   public function injectFetchChildAcls($query, $parentIds, $condition, $params)
   {
-    
+
     // direkt einen leere aray zurückgeben wenn keine ids datensätze geladen
     // werden sollen
     if (!$parentIds)
@@ -45,7 +45,7 @@ class LibAclContainer_Reflist_Treetable extends LibAclContainer_Reflist
     $orm = $this->getDb()->getOrm();
 
     $userId = $user->getId();
-    $mainAreaId = $acl->resources->getAreaId($this->domainNode->aclBaseKey);
+    $mainAreaId = $acl->resources->getAreaId($this->aclKey);
     $pathJoins = $acl->getPathJoins($mainAreaId);
 
     // erstellen der Acl criteria und befüllen mit den relevanten cols
@@ -61,7 +61,7 @@ class LibAclContainer_Reflist_Treetable extends LibAclContainer_Reflist
     $envelop->groupBy('inner_acl.rowid');
     $envelop->where('"acl-level" > 0'); // alle ausblenden für die es keine berechtigung gibt
 
-    $criteria->select(array($this->domainNode->srcName.'.rowid as rowid'));
+    $criteria->select(array($this->srcName.'.rowid as rowid'));
 
     if (is_null($this->defLevel)) {
       $this->defLevel = 0;
@@ -92,7 +92,7 @@ class LibAclContainer_Reflist_Treetable extends LibAclContainer_Reflist
         $pathConditions[] = <<<SUB_COND
       (
         back_acls."acl-id_area" = {$pathJoin['id_target_area']}
-        AND ( back_acls."acl-vid" = {$this->domainNode->srcName}.{$pathJoin['ref_field']} OR back_acls."acl-vid" is null )
+        AND ( back_acls."acl-vid" = {$this->srcName}.{$pathJoin['ref_field']} OR back_acls."acl-vid" is null )
         AND back_acls."acl-group" IN( {$groupCond} )
       )
 SUB_COND;
@@ -110,8 +110,8 @@ SUB_COND;
         <<<SQL
 {$joinType} JOIN webfrap_area_user_level_view  acls ON
     acls."acl-user" = {$userId}
-    AND acls."acl-area" IN({$this->domainNode->domainAclQuery})
-    AND ( acls."acl-vid" = {$this->domainNode->srcName}.rowid OR acls."acl-vid" is null )
+    AND acls."acl-area" IN({$this->aclQuery})
+    AND ( acls."acl-vid" = {$this->srcName}.rowid OR acls."acl-vid" is null )
 
   LEFT JOIN wbfsys_security_backpath back_path
     ON back_path.id_area = {$mainAreaId}
@@ -133,8 +133,8 @@ SQL
         <<<SQL
 LEFT JOIN webfrap_area_user_level_view  acls ON
     acls."acl-user" = {$userId}
-    AND acls."acl-area" IN({$this->domainNode->domainAclQuery})
-    AND ( acls."acl-vid" = {$this->domainNode->srcName}.rowid OR acls."acl-vid" is null )
+    AND acls."acl-area" IN({$this->aclQuery})
+    AND ( acls."acl-vid" = {$this->srcName}.rowid OR acls."acl-vid" is null )
 SQL
         ,'acls'
       );
@@ -148,12 +148,12 @@ SQL
 
   greatest(
     {$this->defLevel},
-    acls."acl-level",  
-    case when back_acls."acl-id_area" is null 
+    acls."acl-level",
+    case when back_acls."acl-id_area" is null
  then 0
-else 
+else
  back_path.access_level
-end 
+end
   ) as "acl-level"
 
 SQL;
@@ -170,8 +170,8 @@ SQL;
 SQL;
 
     }
-    
-    $criteria->where( $this->domainNode->srcName.'.'.$this->dom.' in('.implode(',',$parentIds).')');
+
+    $criteria->where( $this->srcName.'.'.$this->refFieldName.' in('.implode(',',$parentIds).')');
 
     $criteria->selectAlso($greatest);
 
@@ -195,15 +195,29 @@ SQL;
   {
     return $this->injectListAcls($query, $condition, $params);
   }
-  
-  
+
+
   public function fetchChildrenTreetableDefault($query, $parentIds, $condition, $params)
   {
     return $this->injectFetchChildAcls($query, $parentIds, $condition, $params);
   }
-  
-  
-  
-  
+
+  /**
+   * Standard lade Funktion für den Access Container
+   * Mappt die Aufrufe auf passene Profil loader soweit vorhanden.
+   *
+   * @param string $profil der namen des Aktiven Profil als CamelCase
+   * @param LibSqlQuery $query
+   * @param string $context
+   * @param TFlag $params
+   * @param Entity $entity
+   */
+  public function fetchChildrenIds($profil, $context, $query, $ids, $conditions, $params = null  )
+  {
+
+    return $this->injectFetchChildAcls($query, $ids, $conditions, $params);
+
+  }//end public function fetchChildrenIds */
+
 }//end class LibAclContainer_Reflist_Treetable
 
