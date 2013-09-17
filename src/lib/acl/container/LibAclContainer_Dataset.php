@@ -33,7 +33,7 @@ class LibAclContainer_Dataset extends LibAclPermission
    * @var string
    */
   public $aclPath = null;
-  
+
   /**
    * @lang:de
    * Einfacher Konstruktor,
@@ -59,19 +59,19 @@ class LibAclContainer_Dataset extends LibAclPermission
     $level = null,
     $refBaseLevel = null
   ) {
-  
+
     //$this->aclKey = $aclKey;
     //$this->aclPath = $aclPath;
     $this->env = $env;
-  
+
     $this->levels = Acl::$accessLevels;
-  
+
     if (!is_null($level))
       $this->setPermission($level, $refBaseLevel);
-  
+
   }//end public function __construct */
-  
-  
+
+
   /**
    * @param TFlag $params
    * @param ProjectProject_Entity $entity
@@ -102,7 +102,7 @@ class LibAclContainer_Dataset extends LibAclPermission
       $params->aclNode = $this->aclKey;
       $params->aclLevel = 1;
     }
-    
+
     $areaId = $acl->resources->getAreaId($this->aclKey);
 
     // eventuellen check Code vorab laden, erweitert die rollen
@@ -111,24 +111,27 @@ class LibAclContainer_Dataset extends LibAclPermission
 
     // impliziete Rechtevergabe
     foreach ($backPaths as $backPath) {
-      
+
       if (is_object($entity) && $entity->{$backPath['ref_field']}) {
 
         $pathRoles = explode(',', $backPath['groups']);
-        
+
         // prüfen ob der user die Rolle hat
         $hasRole = $acl->hasRole(
           $pathRoles,
           $backPath['target_area_key'],
           $entity->{$backPath['ref_field']}
         );
-      
+
         // wenn der user gruppenmitglied ist die neuen level setzen
         if ($hasRole) {
+
+          Debug::console('ININININININ $backPaths as $backPath '.$backPath['target_area_key'].' '.$entity->{$backPath['ref_field']} );
+
           $this->updatePermission($backPath['access_level'], $backPath['ref_access_level']);
           $this->addRoles($pathRoles);
         }
-      
+
       }//end check
     }
 

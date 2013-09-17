@@ -30,19 +30,19 @@ class LibAclContainer_List extends LibAclPermission
    * @var int
    */
   public $sourceSize = null;
-  
+
   /**
    * Query Objekt zum ermitteln der Tatsächlichen Anzahl auffindbarer Elemente
    * @var LibSqlQuery
    */
   public $calcQuery = null;
-  
+
   /**
    * Liste der Ids aller gefundener Datensätze
    * @var array()
    */
   public $ids = array();
-  
+
   /**
    * @var string
    */
@@ -62,7 +62,7 @@ class LibAclContainer_List extends LibAclPermission
    * @var string
    */
   protected $srcName = null;
-  
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Getter
 //////////////////////////////////////////////////////////////////////////////*/
@@ -91,16 +91,16 @@ class LibAclContainer_List extends LibAclPermission
       $level = null,
       $refBaseLevel = null
   ) {
-  
-  
+
+
     $this->env = $env;
     $this->levels = Acl::$accessLevels;
-  
+
     if (!is_null($level))
       $this->setPermission($level, $refBaseLevel);
-  
+
   }//end public function __construct */
-  
+
   /**
    * getter für die ids
    * @return array
@@ -109,7 +109,7 @@ class LibAclContainer_List extends LibAclPermission
   {
     return $this->ids;
   }//end public function getIds */
-  
+
   /**
    * @param int $dataset
    * @param array|string $role
@@ -117,14 +117,14 @@ class LibAclContainer_List extends LibAclPermission
    */
   public function hasEntryRole($dataset, $role = null)
   {
-  
+
     if (!$this->entryRoles)
       return false;
-  
+
     return $this->entryRoles->hasRole($dataset, $role);
-  
+
   }//end public function hasEntryRole */
-  
+
   /**
    * @param int $dataset
    * @param array|string $role
@@ -132,14 +132,14 @@ class LibAclContainer_List extends LibAclPermission
    */
   public function hasExplicitRole($dataset, $role)
   {
-  
+
     if (!$this->entryExplicitRoles)
       return false;
-  
+
     return $this->entryExplicitRoles->hasRole($dataset, $role);
-  
+
   }//end public function hasExplicitRole */
-  
+
   /**
    * @param int $dataset
    * @param array|string $role
@@ -147,18 +147,18 @@ class LibAclContainer_List extends LibAclPermission
    */
   public function numExplicitUsers($dataset, $role)
   {
-  
+
     if (!$this->numExplicitUsers)
       return false;
-  
+
     return $this->numExplicitUsers->getNum($dataset, $role);
-  
+
   }//end public function numExplicitUsers */
-  
+
   /*//////////////////////////////////////////////////////////////////////////////
    // Methodes
    //////////////////////////////////////////////////////////////////////////////*/
-  
+
   /**
    * Standard lade Funktion für den Access Container
    * Mappt die Aufrufe auf passene Profil loader soweit vorhanden.
@@ -170,20 +170,20 @@ class LibAclContainer_List extends LibAclPermission
    */
   public function fetchListIds($query, $context, $conditions, $params = null  )
   {
-  
+
     ///TODO Den Pfad auch noch als möglichkeit für die Diversifizierung einbauen
-  
+
     // sicherheitshalber den String umbauen
     $context = SFormatStrings::subToCamelCase($context);
-  
+
     if (method_exists($this, 'fetchListDefault')) {
       return $this->fetchListDefault($query, $conditions, $params);
     } else {
       return $this->{'fetchList'.$context.'Default'}($query, $conditions, $params);
     }
-  
+
   }//end public function fetchListIds */
-  
+
   /**
    * Erfragen der tatsächlichen Anzahl gefundener Elemente, wenn kein Limit
    * gesetzt worden wäre
@@ -195,51 +195,51 @@ class LibAclContainer_List extends LibAclPermission
    */
   public function getSourceSize()
   {
-  
+
     if (is_null($this->sourceSize)) {
-  
+
       if (!$this->calcQuery)
         return null;
-  
+
       if (is_string($this->calcQuery)) {
-        
+
         if ($res = $this->getDb()->select($this->calcQuery)) {
           $tmp = $res->get();
-  
+
           if (!isset($tmp[Db::Q_SIZE])) {
-  
+
             if (Log::$levelDebug)
               Debug::console('got no Db::Q_SIZE');
-  
+
             $this->sourceSize = 0;
           } else {
             $this->sourceSize = $tmp[Db::Q_SIZE];
           }
-  
+
         }
-        
+
       } else {
-        
+
         if ($res = $this->getDb()->getOrm()->select($this->calcQuery)) {
           $tmp =  $res->get();
           if (!isset($tmp[Db::Q_SIZE])) {
-  
+
             if (Log::$levelDebug)
               Debug::console('got no Db::Q_SIZE');
-  
+
             $this->sourceSize = 0;
           } else {
             $this->sourceSize = $tmp[Db::Q_SIZE];
           }
         }
       }
-  
+
     }
-  
+
     return $this->sourceSize;
-  
+
   }//end public function getSourceSize */
-  
+
   /**
    * @param string $area
    * @param array $ids
@@ -247,16 +247,16 @@ class LibAclContainer_List extends LibAclPermission
    */
   public function loadEntryRoles($area, $ids, $roles = array())
   {
-  
+
     /* @var $acl LibAclAdapter_Db */
     $acl = $this->getAcl();
-  
+
     $entryRoles = $acl->getRoles($area, $ids, $roles);
-  
+
     // dafür sorgen, das für alle ids zumindest ein leerer array vorhanden ist
     // bzw, dass potentiell vorhandenen rollen sauber gemerged werden
     foreach ($ids as $id) {
-  
+
       if (isset($entryRoles[$id])) {
         if (!isset($this->entryRoles[$id]))
           $this->entryRoles[$id] = $entryRoles[$id];
@@ -266,11 +266,11 @@ class LibAclContainer_List extends LibAclPermission
         if (!isset($this->entryRoles[$id]))
           $this->entryRoles[$id] = array();
       }
-  
+
     }
-  
+
   }//end public function loadEntryRoles */
-  
+
   /**
    * @param string $area
    * @param array $ids
@@ -278,20 +278,20 @@ class LibAclContainer_List extends LibAclPermission
    */
   public function loadEntryExplicitRoles($area, $ids, $roles = array())
   {
-  
+
     /* @var $acl LibAclAdapter_Db */
     $acl = $this->getAcl();
-  
+
     $entryExplicitRoles = $acl->getRolesExplicit($area, $ids, $roles);
-  
+
     if (!$this->entryExplicitRoles) {
       $this->entryExplicitRoles = $entryExplicitRoles;
     } else {
       $this->entryExplicitRoles->merge($entryExplicitRoles);
     }
-  
+
   }//end public function loadEntryExplicitRoles */
-  
+
   /**
    * @param string $area
    * @param array $ids
@@ -299,22 +299,22 @@ class LibAclContainer_List extends LibAclPermission
    */
   public function loadNumExplicitUsers($area, $ids, $roles = array())
   {
-  
+
     /* @var $acl LibAclAdapter_Db */
     $acl = $this->getAcl();
-  
+
     $entryExplicitRoles = $acl->getNumUserExplicit($area, $ids, $roles);
-  
+
     if (!$this->numExplicitUsers) {
       $this->numExplicitUsers = $entryExplicitRoles;
     } else {
       $this->numExplicitUsers->merge($entryExplicitRoles);
     }
-  
+
   }//end public function loadNumExplicitUsers */
 
-  
-  
+
+
   /**
    * @param TFlag $params
    * @param ProjectProject_Entity $entity
@@ -345,33 +345,37 @@ class LibAclContainer_List extends LibAclPermission
       $params->aclNode = $this->aclKey;
       $params->aclLevel = 1;
     }
-    
+
     $areaId = $acl->resources->getAreaId($this->aclKey);
 
     // eventuellen check Code vorab laden, erweitert die rollen
       // eventuellen check Code vorab laden, erweitert die rollen
     $backPaths = $acl->getPathJoinLevels($areaId);
 
+    if($backPaths){
+      $this->hasPartAssign = true;
+    }
+
     // impliziete Rechtevergabe
     foreach ($backPaths as $backPath) {
-      
+
       if (is_object($entity) && $entity->{$backPath['ref_field']}) {
 
         $pathRoles = explode(',', $backPath['groups']);
-        
+
         // prüfen ob der user die Rolle hat
         $hasRole = $acl->hasRole(
           $pathRoles,
           $backPath['target_area_key'],
           $entity->{$backPath['ref_field']}
         );
-      
+
         // wenn der user gruppenmitglied ist die neuen level setzen
         if ($hasRole) {
           $this->updatePermission($backPath['access_level'], $backPath['ref_access_level']);
           $this->addRoles($pathRoles);
         }
-      
+
       }//end check
     }
 
@@ -545,12 +549,12 @@ SQL
 
   greatest(
     {$this->defLevel},
-    acls."acl-level",  
-    case when back_acls."acl-id_area" is null 
- then 0
-else 
- back_path.access_level
-end 
+    acls."acl-level",
+    case when back_acls."acl-id_area" is null
+     then 0
+    else
+     back_path.access_level
+    end
   ) as "acl-level"
 
 SQL;

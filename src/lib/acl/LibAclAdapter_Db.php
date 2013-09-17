@@ -192,7 +192,7 @@ class LibAclAdapter_Db extends LibAclAdapter
    */
   public function getPathJoins($areaId)
   {
-    
+
     if (!ctype_digit($areaId))
       $areaId = $this->resources->getAreaId($areaId);
 
@@ -211,17 +211,17 @@ SQL;
 
   }//end public function getPathJoins */
 
-  
+
   /**
    * @param int $areaId
    * @return [id_target_area:int, ref_field:int, groups:text]
    */
   public function getPathJoinLevels($areaId)
   {
-    
+
     if (!ctype_digit($areaId))
       $areaId = $this->resources->getAreaId($areaId);
-  
+
     $sql = <<<SQL
 SELECT
   id_target_area,
@@ -234,17 +234,17 @@ SELECT
   message_level,
   priv_message_level,
   meta_level
-FROM 
+FROM
   wbfsys_security_backpath
-WHERE 
+WHERE
   id_area = {$areaId};
 SQL;
-  
+
     return $this->getDb()->select($sql)->getAll();
-  
+
   }//end public function getPathJoinLevels */
 
-  
+
   /**
    * @lang de:
    *
@@ -353,8 +353,8 @@ SQL;
     $user = $this->getUser();
     $userLevel = $user->getLevel();
     $model = $this->getModel();
-    
-    if(is_array($key)){
+
+    if (is_array($key)) {
       $areaKeys = $key;
     } else {
       $areaKeys = $model->extractWeightedKeys($key);
@@ -362,7 +362,7 @@ SQL;
 
     // wenn die acls deaktiviert sind, rückgabe mit global admin
     // wenn der user vollen accees hat, rückgabe gloabl admin
-    if ( $this->disabled || $user->getLevel() >= User::LEVEL_FULL_ACCESS) {
+    if ($this->disabled || $user->getLevel() >= User::LEVEL_FULL_ACCESS) {
       $container->setPermission(Acl::ADMIN, Acl::ADMIN);
       return $container;
     }
@@ -545,7 +545,7 @@ SQL;
     // checken ob rechte über den rootcontainer bis hier her vereerbt
     // werden sollen
     try {
-      
+
       $rootContainer = $this->getRootContainer($aclRoot);
       $rootPerm = $rootContainer->getRefAccess($aclRootId, $aclLevel, $aclNode);
 
@@ -711,7 +711,7 @@ SQL;
     return $permission;
 
   }//end public function getLevel */
-  
+
   /**
    * @lang de:
    *
@@ -749,21 +749,21 @@ SQL;
     $key,
     $roles = array()
   ) {
-  
+
     if (DEBUG)
       Debug::console("getRoleAreaLevels {$key}");
-  
+
     $user = $this->getUser();
     $model = $this->getModel();
-  
-  
+
+
     // es kann sein, dass ein benutzer nur partiellen zugriff auf eine area hat
     // das bedeuted, er darf zwar in den bereich, aber für alle kinder darin
     // müssen die kinder nochmal gesondert geprüft werden
     $paths = $model->extractWeightedKeys($key);
 
     return $model->loadRoleAreaLevels($paths, $roles);
-  
+
   }//end public function getRoleAreaLevels */
 
   /**
@@ -945,8 +945,8 @@ SQL;
    * @param boolean $extend
    *
    * @return LibAclPermission Permission Container mit allen nötigen Informationen
-   * 
-   * @deprecated 
+   *
+   * @deprecated
    * @unused
    */
   public function getListPermission(
@@ -1284,7 +1284,7 @@ SQL;
     $roles = $model->loadUserRoles($allAreas, $entity);
     $areaRefLevel = $model->extractAreaRefAccessLevel($allAreas);
 
-    
+
     // sicher stellen, dass nur mgmt areas verwendet werden
     $maskAreas = array();
     foreach($allAreas as $checkArea){
@@ -1292,8 +1292,8 @@ SQL;
         $maskAreas[] = $checkArea;
       }
     }
-    
-    
+
+
 
     // der aktuelle node ist zugleich auch der rootnode
     $path = $model->loadAccessPathChildren($maskAreas, $maskAreas, $roles, 2);

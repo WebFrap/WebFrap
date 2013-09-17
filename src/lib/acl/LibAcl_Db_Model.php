@@ -251,8 +251,7 @@ SQL;
     }
 
     if (DEBUG)
-      Debug::console
-      (
+      Debug::console(
         'Load Roles'.__METHOD__.' areas'
           .(is_array($areas)?implode(',', $areas):$areas)
         , $groups
@@ -2562,11 +2561,11 @@ SQL;
     return $level;
 
   }//end public function loadAreaLevel */
-  
+
   /**
    * Die Maximalen Zugriffslevel für eine Gruppe auslesen
    * Wird zum updaten der Pfade verwendet
-   * 
+   *
    * @param string $areas
    * @param array $roles
    */
@@ -2575,35 +2574,35 @@ SQL;
 
     $areaKeys = "'".implode("','",$areas)."'" ;
     $whereGroup = " AND ro_group.access_key IN ('".implode("','",$roles)."') ";
-  
+
     $query = <<<SQL
-  
+
 SELECT
   max(acl_access.access_level) AS access_level,
   max(acl_access.ref_access_level) AS ref_access_level,
   max(acl_access.message_level) AS message_level,
   max(acl_access.priv_message_level) priv_message_level,
   max(acl_access.meta_level) AS meta_level
-  
+
 FROM
   wbfsys_security_access acl_access
-    
+
 JOIN
   wbfsys_role_group ro_group ON acl_access.id_group = ro_group.rowid
-  
+
 JOIN
   wbfsys_security_area acl_area ON acl_access.id_area = acl_area.rowid
-  
+
 WHERE
     acl_area.access_key IN({$areaKeys})
       AND (acl_access.partial = 0)
       {$whereGroup}
-  
+
 SQL;
-  
+
       $db = $this->getDb();
       return $db->select($query)->get();
-  
+
   }//end public function loadRoleAreaLevels */
 
 
@@ -3189,7 +3188,7 @@ SQL;
    */
   public function extractWeightedKeys($keys)
   {
-    
+
     if(is_array($keys)){
       return $keys;
     }

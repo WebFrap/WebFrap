@@ -236,9 +236,9 @@ SQL
     {$this->defLevel},
     acls."acl-level",
     case when back_acls."acl-id_area" is null
- then 0
-else
- back_path.access_level
+     then 0
+    else
+     back_path.access_level
 end
   ) as "acl-level"
 
