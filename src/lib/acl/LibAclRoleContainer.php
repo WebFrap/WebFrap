@@ -40,8 +40,7 @@
  * @subpackage tech_core
  * @author dominik alexander bonsch <dominik.bonsch@webfrap.net>
  */
-class LibAclRoleContainer
-  implements ArrayAccess, Countable
+class LibAclRoleContainer implements ArrayAccess, Countable
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

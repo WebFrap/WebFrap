@@ -384,8 +384,6 @@ SQL;
       $permission['assign-is-partial'] = false;
     }
 
-    Debug::console('updatePermission $permission',$permission, false,true);
-
     $container->updatePermission($permission);
 
     return $container;
@@ -539,8 +537,8 @@ SQL;
     // checken ob rechte über den rootcontainer bis hier her vereerbt
     // werden sollen
     try {
+      
       $rootContainer = $this->getRootContainer($aclRoot);
-
       $rootPerm = $rootContainer->getRefAccess($aclRootId, $aclLevel, $aclNode);
 
       if ($rootPerm) {
@@ -939,7 +937,9 @@ SQL;
    * @param boolean $extend
    *
    * @return LibAclPermission Permission Container mit allen nötigen Informationen
-   *
+   * 
+   * @deprecated 
+   * @unused
    */
   public function getListPermission(
     $key,
@@ -1090,6 +1090,7 @@ SQL;
    * @param LibAclPermission $container
    *
    * @return LibAclPermission Permission Container mit allen nötigen Informationen
+   * @deprecated
    *
    */
   public function getFormPermission(
@@ -1261,6 +1262,7 @@ SQL;
     // das bedeuted, er darf zwar in den bereich, aber für alle kinder darin
     // müssen die kinder nochmal gesondert geprüft werden
     $paths = explode('>', $tmp[0]);
+    $allAreas = $this->model->extractWeightedKeys($tmp[0]);
 
     // wenn die acls deaktiviert sind, rückgabe mit global admin
     // wenn der user vollen accees hat, rückgabe gloabl admin
@@ -1271,30 +1273,22 @@ SQL;
     }
 
     // ansonsten normales laden
-    if (count($paths) > 1) {
+    $roles = $model->loadUserRoles($allAreas, $entity);
+    $areaRefLevel = $model->extractAreaRefAccessLevel($allAreas);
 
-      $parentAreas = explode('/', $paths[0]);
-      $mainAreas = explode('/', $paths[1]);
-
-      $allAreas = array_merge($parentAreas, $mainAreas);
-
-      $roles = $model->loadUserRoles($allAreas, $entity);
-      $areaRefLevel = $model->extractAreaRefAccessLevel($allAreas);
-
-    } else {
-
-      $parentAreas = null;
-      $mainAreas = explode('/', $paths[0]);
-      $allAreas = $mainAreas;
-
-      $roles = $model->loadUserRoles($mainAreas, $entity);
-      $areaRefLevel = $model->extractAreaRefAccessLevel($mainAreas);
+    
+    // sicher stellen, dass nur mgmt areas verwendet werden
+    $maskAreas = array();
+    foreach($allAreas as $checkArea){
+      if ('mod-' !== substr($checkArea, 0, 4)) {
+        $maskAreas[] = $checkArea;
+      }
     }
-
-    array_shift($allAreas);
+    
+    
 
     // der aktuelle node ist zugleich auch der rootnode
-    $path = $model->loadAccessPathChildren($allAreas, $allAreas, $roles, 2);
+    $path = $model->loadAccessPathChildren($maskAreas, $maskAreas, $roles, 2);
     $container->paths = $path;
 
     if (DEBUG)
@@ -1323,8 +1317,7 @@ SQL;
    * @return LibAclPermission Permission Container mit allen nötigen Informationen
    *
    */
-  public function getPathPermission
-  (
+  public function getPathPermission(
     $root,
     $rootId,
     $level,
@@ -1382,13 +1375,13 @@ SQL;
     // nicht direkt geprüft wird
     // das muss noch eingebaut werden
     $permission = $model->loadAccessPathNode(
-      $root,      // wird benötigt um den passenden startpunkt zu finden
-      $rootId,    // die rowid der root area
-      $level,     // das level in dem wir uns aktuell befinden
+      $root, // wird benötigt um den passenden startpunkt zu finden
+      $rootId, // die rowid der root area
+      $level, // das level in dem wir uns aktuell befinden
       $parentKey, // parent wird benötigt da es theoretisch auf dem gleichen level mehrere nodes des gleichen types geben kann
-      $parentId,  // die id des parent nodes
-      $nodeKey,   // der key des aktuellen reference node
-      $roles      // gruppen rollen in denen der user sich relativ zum rootnode befinden
+      $parentId, // die id des parent nodes
+      $nodeKey, // der key des aktuellen reference node
+      $roles // gruppen rollen in denen der user sich relativ zum rootnode befinden
     );
 
     $areaLevel = $model->extractAreaAccessLevel(array($parentKey));
@@ -1967,7 +1960,6 @@ SQL;
 
     // laden der mvc/utils adapter Objekte
     $model = $this->getModel();
-
     return $model->getAreaIds($areaKeys);
 
   }//end public function getAreaIds */
@@ -1982,7 +1974,6 @@ SQL;
 
     // laden der mvc/utils adapter Objekte
     $model = $this->getModel();
-
     return $model->getAreaId($areaKey);
 
   }//end public function getAreaId */
