@@ -24,7 +24,7 @@
 class LibAclContainer_Reflist_Table extends LibAclContainer_Reflist
 {
 
-  public function fetchListTableDefault($query, $condition, $params){
+  public function fetchListDefault($query, $condition, $params){
     return $this->injectListAcls($query, $condition, $params);
   }
   

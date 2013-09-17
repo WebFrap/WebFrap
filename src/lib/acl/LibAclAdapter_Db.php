@@ -287,15 +287,19 @@ SQL;
   ) {
 
     if (DEBUG)
-      Debug::console("injectDsetRoles {$key}");
+      Debug::console("injectDsetRoles");
 
     // resources
     $model = $this->getModel();
 
     // sicher stellen, dass vorhanden
-    $checkAreas = $model->extractWeightedKeys($key);
+    if(is_array($key)){
+      $areaKeys = $key;
+    } else {
+      $areaKeys = $model->extractWeightedKeys($key);
+    }
 
-    $container->addRoles($model->loadUserRoles($checkAreas, $entity));
+    $container->addRoles($model->loadUserRoles($areaKeys, $entity));
 
     return $container;
 
@@ -343,14 +347,18 @@ SQL;
   ) {
 
     if (DEBUG)
-      Debug::console("injectDsetLevel {$key}");
+      Debug::console("injectDsetLevel");
 
     // resources
     $user = $this->getUser();
     $userLevel = $user->getLevel();
     $model = $this->getModel();
-
-    $areaKeys = $model->extractWeightedKeys($key);
+    
+    if(is_array($key)){
+      $areaKeys = $key;
+    } else {
+      $areaKeys = $model->extractWeightedKeys($key);
+    }
 
     // wenn die acls deaktiviert sind, rückgabe mit global admin
     // wenn der user vollen accees hat, rückgabe gloabl admin

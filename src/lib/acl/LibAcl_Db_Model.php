@@ -3189,6 +3189,10 @@ SQL;
    */
   public function extractWeightedKeys($keys)
   {
+    
+    if(is_array($keys)){
+      return $keys;
+    }
 
     if (isset($this->keyCache[$keys]))
       return $this->keyCache[$keys];

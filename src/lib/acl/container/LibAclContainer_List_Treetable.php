@@ -200,20 +200,20 @@ SQL;
    * @param TFlag $params
    * @param Entity $entity
    */
-  public function fetchChildrenIds($profil, $context, $query, $ids, $conditions, $params = null  )
+  public function fetchChildrenIds($context, $query, $ids, $conditions, $params = null  )
   {
   
     return $this->injectFetchChildAcls($query, $ids, $conditions, $params);
   
   }//end public function fetchChildrenIds */
   
-  public function fetchListTreetableDefault($query, $condition, $params)
+  public function fetchListDefault($query, $condition, $params)
   {
     return $this->injectListAcls($query, $condition, $params);
   }
   
   
-  public function fetchChildrenTreetableDefault($query, $parentIds, $condition, $params)
+  public function fetchChildrenDefault($query, $parentIds, $condition, $params)
   {
     return $this->injectFetchChildAcls($query, $parentIds, $condition, $params);
   }

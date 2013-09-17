@@ -137,29 +137,19 @@ class LibAclPermissionList extends LibAclPermission
    * Standard lade Funktion für den Access Container
    * Mappt die Aufrufe auf passene Profil loader soweit vorhanden.
    *
-   * @param string $profil der namen des Aktiven Profil als CamelCase
    * @param LibSqlQuery $query
    * @param string $context
    * @param array $conditions
    * @param TFlag $params
    */
-  public function fetchListIds($profil, $query, $context, $conditions, $params = null  )
+  public function fetchListIds($query, $context, $conditions, $params = null  )
   {
 
     ///TODO Den Pfad auch noch als möglichkeit für die Diversifizierung einbauen
-
-    // sicherheitshalber den String umbauen
-    $profil = SFormatStrings::subToCamelCase($profil);
     $context = SFormatStrings::subToCamelCase($context);
-
-    if (method_exists($this, 'fetchList_Profile_'.$profil  )) {
-      return $this->{'fetchList_Profile_'.$profil}($query, $conditions, $params);
-    } elseif (method_exists($this, 'fetchListDefault'  )) {
+    
+    if (method_exists($this, 'fetchListDefault')) {
       return $this->fetchListDefault($query, $conditions, $params);
-    }
-    // fallback to the context stuff
-    else if (method_exists($this, 'fetchList_'.$context.'_Profile_'.$profil  )) {
-      return $this->{'fetchList_'.$context.'_Profile_'.$profil}($query, $conditions, $params);
     } else {
       return $this->{'fetchList'.$context.'Default'}($query, $conditions, $params);
     }

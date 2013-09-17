@@ -206,13 +206,12 @@ SQL;
    * Standard lade Funktion für den Access Container
    * Mappt die Aufrufe auf passene Profil loader soweit vorhanden.
    *
-   * @param string $profil der namen des Aktiven Profil als CamelCase
    * @param LibSqlQuery $query
    * @param string $context
    * @param TFlag $params
    * @param Entity $entity
    */
-  public function fetchChildrenIds($profil, $context, $query, $ids, $conditions, $params = null  )
+  public function fetchChildrenIds( $context, $query, $ids, $conditions, $params = null  )
   {
 
     return $this->injectFetchChildAcls($query, $ids, $conditions, $params);
