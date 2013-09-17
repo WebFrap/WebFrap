@@ -54,17 +54,12 @@ class LibAclContainer_List extends LibAclPermission
    */
   public function __construct(
     $env,
-    $aclKey,
-    $aclPath,
     $level = null,
     $refBaseLevel = null
   ) {
     
   
-    $this->aclKey = $aclKey;
-    $this->aclPath = $aclPath;
     $this->env = $env;
-  
     $this->levels = Acl::$accessLevels;
   
     if (!is_null($level))
