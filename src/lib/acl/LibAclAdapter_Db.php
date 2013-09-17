@@ -785,48 +785,6 @@ SQL;
 
   }//end public function getRootContainer */
 
-  /**
-   * checks if a use has the permission for a given area
-   *
-   * @param string $key
-   * @param array/entity $ids
-   * @return boolean
-   */
-  public function getPermissions($key, $ids)
-  {
-
-    if ($this->disabled)
-      return true;
-
-    $user = $this->getUser();
-
-    $userLevel = $user->getLevel();
-
-    if ($userLevel >= User::LEVEL_FULL_ACCESS)
-      return true;
-
-    $model = $this->getModel();
-
-    $keyData = $model->extractKeys($key);
-    $key = $keyData[0];
-
-    if ($data = $model->loadUserAreaPermissions($key)) {
-
-      $tmp = array();
-
-      foreach ($ids as $id) {
-        $tmp[] = array_merge($data, array('rowid' => $id));
-      }
-
-      return $tmp;
-
-    } elseif (!$ids) {
-      return array();
-    }
-
-  }//end public function getPermissions */
-
-
 
   /**
    * @lang de:
@@ -1284,13 +1242,11 @@ SQL;
    * @return LibAclPermission Permission Container mit allen nötigen Informationen
    *
    */
-  public function getDsetRefPermissions
-  (
+  public function getDsetRefPermissions(
     $key,
     $entity,
     $container = null
-)
-  {
+  ) {
 
     if (!$container)
       $container = new LibAclPermission();
