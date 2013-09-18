@@ -689,7 +689,7 @@ class LibAclPermission
     $this->roles = array ();
 
     foreach ($roles as $role) {
-      $this->roles [$role] = $role;
+      $this->roles[$role] = $role;
     }
 
   } // end public function setRoles */
@@ -715,7 +715,6 @@ class LibAclPermission
   {
 
     foreach ($roles as $role) {
-      Debug::console('ADD ROLE '.$role);
       $this->roles[$role] = $role;
     }
 

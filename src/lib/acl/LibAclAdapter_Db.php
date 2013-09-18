@@ -447,16 +447,17 @@ SQL;
       $whereRootArea = $root;
 
     $roles = $model->loadUserRoles($whereRootArea, $rootId);
+    $container->addRoles(array_values($roles));
 
       // wenn die acls deaktiviert sind, rückgabe mit global admin
     // wenn der user vollen accees hat, rückgabe gloabl admin
     if ( $this->disabled || $user->getLevel() >= User::LEVEL_FULL_ACCESS) {
 
       $container->setPermission(Acl::ADMIN, Acl::ADMIN);
-      $container->addRoles($roles);
-
       return $container;
     }
+    
+    $roleIds = $this->resources->getGroupIds($container->roles);
 
     ///FIXME sh
     // das aktuelle sh ist dass der pfad zum rootnode
@@ -469,7 +470,7 @@ SQL;
       $parentKey, // parent wird benötigt da es theoretisch auf dem gleichen level mehrere nodes des gleichen types geben kann
       $parentId, // die id des parent nodes
       $nodeKey, // der key des aktuellen reference node
-      $container->roles // gruppen rollen in denen der user sich relativ zum rootnode befinden
+      $roleIds // gruppen rollen in denen der user sich relativ zum rootnode befinden
     );
 
     $areaLevels = $model->extractAreaAccessLevel(array($parentKey));
@@ -497,12 +498,11 @@ SQL;
       $permission['acl-level'] = Acl::DENIED;
     }
 
-    $container->addRoles($roles);
     $container->updatePermission($permission);
 
     if ($loadChildren) {
       // der aktuelle node ist zugleich auch der rootnode
-      $path = $model->loadAccessPathChildren($root, $nodeKey, $container->roles, $level+1);
+      $path = $model->loadAccessPathChildren($root, $nodeKey, $roleIds, $level+1);
       $container->paths = $path;
 
       if (DEBUG)
@@ -1389,7 +1389,7 @@ SQL;
       $parentKey, // parent wird benötigt da es theoretisch auf dem gleichen level mehrere nodes des gleichen types geben kann
       $parentId, // die id des parent nodes
       $nodeKey, // der key des aktuellen reference node
-      $roles // gruppen rollen in denen der user sich relativ zum rootnode befinden
+      array_keys($roles) // gruppen rollen in denen der user sich relativ zum rootnode befinden
     );
 
     $areaLevel = $model->extractAreaAccessLevel(array($parentKey));
@@ -1424,7 +1424,7 @@ SQL;
 
     if ($loadChildren) {
       // der aktuelle node ist zugleich auch der rootnode
-      $path = $model->loadAccessPathChildren($root, $nodeKey, $roles, $level+1);
+      $path = $model->loadAccessPathChildren($root, $nodeKey, array_keys($roles), $level+1);
       $container->paths = $path;
 
       if (DEBUG)

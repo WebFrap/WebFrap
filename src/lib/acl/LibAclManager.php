@@ -66,7 +66,7 @@ class LibAclManager extends BaseChild
   {
 
     if (!$this->maintainerModel) {
-      $this->maintainerModel = new LibAcl_Db_Maintainer_Model($this);
+      $this->maintainerModel = new LibAcl_Db_Maintainer_Model($this, $this->env->resources );
     }
 
     return $this->maintainerModel;

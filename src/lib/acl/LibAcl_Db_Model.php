@@ -1703,7 +1703,7 @@ SQL;
 
     $db = $this->getDb();
 
-    $groupIds = implode(',', array_keys($roles));
+    $groupIds = implode(',', $roles);
 
     $whereRootId = '';
     $whereAreaId = '';
@@ -2704,7 +2704,7 @@ SQL;
       return array();
     }
 
-    $groupIds = implode(',', array_keys($roles));
+    $groupIds = implode(',', $roles);
 
     $whereRootId = '';
     $whereAreaId = '';
