@@ -1396,23 +1396,18 @@ SQL;
     $areaRefLevel = $model->extractAreaRefAccessLevel(array($parentKey));
 
     // prüfen ob das area level größer ist als als die permission
-    if ($areaLevel) {
+    if ($areaLevel['access']) {
       if (!isset($permission['acl-level'])) {
-        $permission['acl-level'] = $areaLevel;
-      } elseif ($areaLevel  >  $permission['acl-level']) {
-        $permission['acl-level'] = $areaLevel;
+        $permission['acl-level'] = $areaLevel['access'];
+      } elseif ($areaLevel['access']  >  $permission['acl-level']) {
+        $permission['acl-level'] = $areaLevel['access'];
       }
     }
 
-    if (DEBUG)
-      Debug::console(
-        "acl-level ".(isset($permission['acl-level'])?$permission['acl-level']:'not set').' areaLevel '
-        .$areaLevel. ' pkey: '.$parentKey
-     );
 
     // einfach zurückschreiben, ist per definition bei existenz der gültige wert
     if (isset($permission['acl-level'])) {
-      $areaLevel = $permission['acl-level'];
+      $areaLevel['access'] = $permission['acl-level'];
     }
 
     if (!isset($permission['acl-level'])) {
@@ -1434,13 +1429,13 @@ SQL;
 
     $container->refBaseLevel = $areaRefLevel;
 
-    if ($areaLevel)
-      $container->defLevel = $areaLevel;
+    if ($areaLevel['access'])
+      $container->defLevel = $areaLevel['access'];
 
     if (DEBUG)
       Debug::console(
         "getPathPermission level: {$container->level}  defLevel: {$container->defLevel}  "
-        ."refBaseLevel: {$container->refBaseLevel} roles: ".implode(', ',$container->roles). ' pkey: '.$parentKey
+        ."refBaseLevel: {$container->refBaseLevel} roles: ".implode(', ',$container->roles)//. ' pkey: '.$parentKey
      );
 
     return $container;
