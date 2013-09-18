@@ -349,36 +349,26 @@ class LibAclContainer_List extends LibAclPermission
     $areaId = $acl->resources->getAreaId($this->aclKey);
 
     // eventuellen check Code vorab laden, erweitert die rollen
-      // eventuellen check Code vorab laden, erweitert die rollen
     $backPaths = $acl->getPathJoinLevels($areaId);
-
-    if($backPaths){
-      $this->hasPartAssign = true;
-    }
 
     // impliziete Rechtevergabe
     foreach ($backPaths as $backPath) {
-
-      if (is_object($entity) && $entity->{$backPath['ref_field']}) {
-
-        $pathRoles = explode(',', $backPath['groups']);
-
-        // prüfen ob der user die Rolle hat
-        $hasRole = $acl->hasRole(
-          $pathRoles,
-          $backPath['target_area_key'],
-          $entity->{$backPath['ref_field']}
-        );
-
-        // wenn der user gruppenmitglied ist die neuen level setzen
-        if ($hasRole) {
-          $this->updatePermission($backPath['access_level'], $backPath['ref_access_level']);
-          $this->addRoles($pathRoles);
-        }
-
-      }//end check
+    
+      $pathRoles = explode(',', $backPath['groups']);
+    
+      // prüfen ob der user die Rolle hat
+      $hasRole = $acl->hasRoleSomewhere(
+        $pathRoles,
+        $backPath['target_area_key']
+      );
+    
+      // wenn der user gruppenmitglied ist die neuen level setzen
+      if ($hasRole && (int)$backPath['access_level'] >= Acl::INSERT) {
+        $this->implicitInsert = true;
+        $this->hasPartAssign = true;
+      }
+    
     }
-
 
     // wenn wir in keinem pfad sind nehmen wir einfach die normalen berechtigungen
     if ($params->isAclRoot) {
