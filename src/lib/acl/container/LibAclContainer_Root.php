@@ -21,7 +21,7 @@
  * @subpackage tech_core
  * @author dominik alexander bonsch <dominik.bonsch@webfrap.net>
  */
-class LibAclContainer_Root extends LibAclPermission
+class LibAclContainer_Root extends LibAclRoot
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -31,6 +31,11 @@ class LibAclContainer_Root extends LibAclPermission
    * @var string
    */
   protected $srcKey = null;
+  
+  /**
+   * @var string
+   */
+  protected $aclKey = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
@@ -68,13 +73,7 @@ class LibAclContainer_Root extends LibAclPermission
       $entity = $orm->get($this->srcKey, $rootId);
     }
 
-    $method = 'path_'.$level.'_'.SParserString::subToCamelCase($refKey);
-
-    if (method_exists($this, $method)) {
-      $this->$method($entity);
-    } else {
-      $this->pathRoot($entity, $level, $refKey);
-    }
+    $this->pathRoot($entity, $level, $refKey);
 
     return $this->paths[$rootId][$level][$refKey]['level'];
 
@@ -110,13 +109,7 @@ class LibAclContainer_Root extends LibAclPermission
       $entity = $orm->get($this->srcKey, $rootId);
     }
 
-    $method = 'path_'.$level.'_'.SParserString::subToCamelCase($refKey);
-
-    if (method_exists($this, $method)) {
-      $this->$method($entity);
-    } else {
-      $this->pathRoot($entity, $level, $refKey);
-    }
+    $this->pathRoot($entity, $level, $refKey);
 
     return $this->paths[$rootId][$level][$refKey]['roles'];
 
@@ -152,13 +145,7 @@ class LibAclContainer_Root extends LibAclPermission
       $entity = $orm->get($this->srcKey, $rootId);
     }
 
-    $method = 'path_'.$level.'_'.SParserString::subToCamelCase($refKey);
-
-    if (method_exists($this, $method)) {
-      $this->$method($entity);
-    } else {
-      $this->pathRoot($entity, $level, $refKey);
-    }
+    $this->pathRoot($entity, $level, $refKey);
 
     return $this->paths[$rootId][$level][$refKey];
 
@@ -199,15 +186,46 @@ class LibAclContainer_Root extends LibAclPermission
     $acl = $this->getAcl();
 
     $roles = array();
-    $levels = array(
-      'acl-level' => 0,
-      'ref-level' => 0
-    );
+    $level = 0;
+    
+    $areaId = $acl->resources->getAreaId($this->aclKey);
+    
+    // eventuellen check Code vorab laden, erweitert die rollen
+    // eventuellen check Code vorab laden, erweitert die rollen
+    $backPaths = $acl->getPathJoinLevels($areaId);
+    
+    $roles = array();
+    
+    // impliziete Rechtevergabe
+    foreach ($backPaths as $backPath) {
+    
+      if (is_object($entity) && $entity->{$backPath['ref_field']}) {
+    
+        $pathRoles = explode(',', $backPath['groups']);
+    
+        // prüfen ob der user die Rolle hat
+        $hasRole = $acl->hasRole(
+          $pathRoles,
+          $backPath['target_area_key'],
+          $entity->{$backPath['ref_field']}
+        );
+    
+        // wenn der user gruppenmitglied ist die neuen level setzen
+        if ($hasRole) {
 
+          if ((int)$backPath['ref_access_level'] > $level ) {
+            $level = (int)$backPath['ref_access_level'];
+          }
+          
+          //$roles = array_merge($roles, explode(',', $backPath['set_ref_groups']));
+        }
+    
+      }//end check
+    }
 
     return array(
-        'roles' => $roles,
-        'levels' => $levels
+      'roles' => $roles,
+      'level' => $level
     );
 
   }//end protected function loadRootPath */

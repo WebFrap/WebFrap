@@ -539,7 +539,7 @@ class LibAclPermission
 
     if (is_array($level)) {
 
-      if (isset($level ['acl-level'])) {
+      if (isset($level['acl-level'])) {
 
         if ($this->level < (int)$level['acl-level'])
           $this->level = (int)$level['acl-level'];
@@ -577,10 +577,10 @@ class LibAclPermission
           $this->defLevel = (int)$level;
       }
 
-      if ($this->defLevel < (int)$level)
+      if ( $this->defLevel < (int)$level )
         $this->defLevel = (int)$level;
 
-      if (! is_null($refBaseLevel) && $this->refBaseLevel < (int)$refBaseLevel)
+      if ( !is_null($refBaseLevel) && $this->refBaseLevel < (int)$refBaseLevel)
         $this->refBaseLevel = (int)$refBaseLevel;
     }
 

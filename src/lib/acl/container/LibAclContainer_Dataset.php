@@ -126,7 +126,7 @@ class LibAclContainer_Dataset extends LibAclPermission
         // wenn der user gruppenmitglied ist die neuen level setzen
         if ($hasRole) {
           $this->updatePermission($backPath['access_level'], $backPath['ref_access_level']);
-          $this->addRoles($pathRoles);
+          $this->addRoles(explode(',', $backPath['set_groups']));
         }
 
       }//end check
