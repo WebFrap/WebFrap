@@ -212,7 +212,7 @@ JOIN
   ON
     wbfsys_address_item_type.rowid = wbfsys_address_item.id_type
     AND
-      wbfsys_address_item_type.access_key) {$codeType}
+      wbfsys_address_item_type.access_key {$codeType}
 
 HTML;
 
@@ -345,7 +345,7 @@ JOIN
   ON
     wbfsys_address_item_type.rowid = wbfsys_address_item.id_type
     AND
-      wbfsys_address_item_type.access_key) = '{$type}'
+      wbfsys_address_item_type.access_key = '{$type}'
 WHERE
   (wbfsys_role_user.inactive = FALSE or wbfsys_role_user.inactive is null)
     AND wbfsys_role_user.rowid = {$userId}
@@ -382,7 +382,7 @@ JOIN
   ON
     wbfsys_address_item_type.rowid = wbfsys_address_item.id_type
     AND
-      wbfsys_address_item_type.access_key) = '{$type}'
+      wbfsys_address_item_type.access_key = '{$type}'
 
 WHERE
   (wbfsys_role_user.inactive = FALSE or wbfsys_role_user.inactive is null)
@@ -422,7 +422,7 @@ JOIN
   ON
     wbfsys_address_item_type.rowid = wbfsys_address_item.id_type
     AND
-      wbfsys_address_item_type.access_key) = '{$type}'
+      wbfsys_address_item_type.access_key = '{$type}'
 
 WHERE
   (wbfsys_role_user.inactive = FALSE or wbfsys_role_user.inactive is null)
