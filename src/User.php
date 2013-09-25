@@ -845,6 +845,7 @@ class User extends BaseChild
     $response = $this->getResponse();
 
     if ($userId) {
+
       try {
         if (!$authRole = $orm->get('WbfsysRoleUser', $userId)) {
           $response->addError('UserID '.$userId.' not exists');
@@ -861,6 +862,7 @@ class User extends BaseChild
       $this->loginName = $authRole->name;
 
     } else {
+
       if (is_object($username)) {
         $authRole = $username;
       } else {
@@ -882,7 +884,7 @@ class User extends BaseChild
 
     $this->userData = $authRole->getData();
     $this->userId = $authRole->getId();
-    $this->userLevel = (int) $authRole->getData('level');
+    $this->userLevel = (int)$authRole->getData('level');
 
     if ($authRole->profile) {
       $this->profileName = $authRole->profile;
