@@ -1282,6 +1282,16 @@ abstract class Entity implements ArrayAccess
   } // end public function getAllReferences */
   
   /**
+   * @param string $key          
+   * @param boolean $empty
+   * @return Entity
+   */
+  public function getRefNode($key, $empty = false)
+  {
+    return $this->followLink($key, $empty);
+  }//end public function getRefNode */
+  
+  /**
    * @getter
    * 
    * @param string $key          
@@ -1294,7 +1304,7 @@ abstract class Entity implements ArrayAccess
 
     Debug::console('FOLLOW link ' . $key . ' in ' . static::$table);
     
-    if (! isset(static::$links [$key])) {
+    if (!isset(static::$links [$key])) {
       throw new LibDb_Exception('Tried fo follow nonexisting link ' . $key);
     }
     
@@ -1302,11 +1312,11 @@ abstract class Entity implements ArrayAccess
      * if (!$this->id) { throw new LibDb_Exception('Tried to follow a link on a nonloaded entity '.$key); }
      */
     
-    if (! isset($this->data [$key]) || ! $this->data [$key]) {
+    if (!isset($this->data[$key]) || !$this->data[$key]) {
       Debug::console('no data to follow for key ' . $key);
       
       if ($empty) {
-        $newObj = $this->orm->newEntity(SParserString::subToCamelCase(static::$links [$key]));
+        $newObj = $this->orm->newEntity(SParserString::subToCamelCase(static::$links[$key]));
         $this->{$key} = $newObj;
         
         return $newObj;
@@ -1320,7 +1330,7 @@ abstract class Entity implements ArrayAccess
     if (is_object($entityId))
       return $entityId;
     
-    $entity = $this->orm->get(SParserString::subToCamelCase(static::$links [$key]), $entityId);
+    $entity = $this->orm->get(SParserString::subToCamelCase(static::$links[$key]), $entityId);
     
     if ($entity) {
       $this->{$key} = $entity;
@@ -1445,7 +1455,7 @@ abstract class Entity implements ArrayAccess
    * 
    * @param string $key          
    * @param boolean $enforceEntity          
-   */
+   * /
   public function getRefNode($key, $enforceEntity = false)
   {
 
@@ -1499,6 +1509,7 @@ abstract class Entity implements ArrayAccess
           $data [$key] = $this->data [$key];
         }
       }
+      
     } else {
       
       foreach ($category as $catKey) {
