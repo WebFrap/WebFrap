@@ -109,6 +109,9 @@ class ContextForm extends Context
     // values: inp | ref
     if ($requestedBy = $request->param('rqtby', Validator::TEXT))
       $this->requestedBy = $requestedBy;
+    
+    if ($parentMask = $request->param('psmk', Validator::TEXT))
+      $this->parentMask = $parentMask;
 
     // sprungpunkt für back to top
     if ($maskRoot = $request->param('m_root', Validator::TEXT))

@@ -279,12 +279,10 @@ class ContextListing extends Context
     $this->categories = array();
 
       // start position of the query and size of the table
-    $this->offset
- = $request->param('offset', Validator::INT);
+    $this->offset = $request->param('offset', Validator::INT);
 
     // start position of the query and size of the table
-    $this->start
- = $request->param('start', Validator::INT);
+    $this->start = $request->param('start', Validator::INT);
 
     if ($this->offset) {
       if (!$this->start)
@@ -296,16 +294,13 @@ class ContextListing extends Context
       $this->qsize = Wgt::$defListSize;
 
     // order for the multi display element
-    $this->order
- = $request->param('order', Validator::CNAME);
+    $this->order = $request->param('order', Validator::CNAME);
 
     // target for a callback function
-    $this->target
- = $request->param('target', Validator::CKEY  );
+    $this->target = $request->param('target', Validator::CKEY  );
 
     // target for some ui element
-    $this->targetId
- = $request->param('target_id', Validator::CKEY  );
+    $this->targetId = $request->param('target_id', Validator::CKEY  );
 
     // flag for beginning seach filter
     if ($text = $request->param('begin', Validator::TEXT  )) {
@@ -315,24 +310,19 @@ class ContextListing extends Context
 
     // the model should add all inputs in the ajax request, not just the text
     // converts per default to false, thats ok here
-    $this->fullLoad
- = $request->param('full_load', Validator::BOOLEAN);
+    $this->fullLoad = $request->param('full_load', Validator::BOOLEAN);
 
     // exclude whatever
-    $this->exclude
- = $request->param('exclude', Validator::CKEY  );
+    $this->exclude = $request->param('exclude', Validator::CKEY  );
 
     // keyname to tageting ui elements
-    $this->keyName
- = $request->param('key_name', Validator::CKEY  );
+    $this->keyName = $request->param('key_name', Validator::CKEY  );
 
     // the activ id, mostly needed in exlude calls
-    $this->objid
- = $request->param('objid', Validator::EID  );
+    $this->objid = $request->param('objid', Validator::EID  );
 
     // order for the multi display element
-    $this->targetMask
- = $request->param('target_mask', Validator::CNAME);
+    $this->targetMask = $request->param('target_mask', Validator::CNAME);
 
   }//end public function interpretRequest */
 

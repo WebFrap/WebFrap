@@ -88,6 +88,9 @@ class ContextMultiCrud extends Context
     // sprungpunkt für back to top
     if ($maskRoot = $request->param('m_root', Validator::TEXT))
       $this->maskRoot = $maskRoot;
+    
+    if ($parentMask = $request->param('psmk', Validator::TEXT))
+      $this->parentMask = $parentMask;
 
     // the publish type, like selectbox, tree, table..
     if ($publish = $request->param('publish', Validator::CNAME))
@@ -177,6 +180,9 @@ class ContextMultiCrud extends Context
     if ($this->requestedBy)
       $this->urlExt .= '&amp;rqtby='.$this->requestedBy;
 
+    if ($this->parentMask)
+      $this->urlExt .= '&amp;pmsk='.$this->parentMask;
+
     if ($this->ltype)
       $this->urlExt .= '&amp;ltype='.$this->ltype;
 
@@ -237,6 +243,9 @@ class ContextMultiCrud extends Context
 
     if ($this->requestedBy)
       $this->actionExt .= '&rqtby='.$this->requestedBy;
+
+    if ($this->parentMask)
+      $this->actionExt .= '&pmsk='.$this->parentMask;
 
     if ($this->ltype)
       $this->actionExt .= '&ltype='.$this->ltype;
