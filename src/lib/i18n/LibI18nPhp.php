@@ -20,8 +20,7 @@
   * @package WebFrap
   * @subpackage tech_core
   */
-class LibI18nPhp
-  implements ArrayAccess
+class LibI18nPhp implements ArrayAccess
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -98,13 +97,11 @@ class LibI18nPhp
   public $timeStampFormat = 'Y-m-d H:i:s';
 
   /**
-   *
    * @var string
    */
   public $numberMil = ',';
 
   /**
-   *
    * @var string
    */
   public $numberDec = '.';
@@ -114,8 +111,8 @@ class LibI18nPhp
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   *
-   * @param $conf
+   * @param $conf array
+   * @param $def boolean
    */
   public function __construct($conf = array() , $def = false)
   {
@@ -124,6 +121,10 @@ class LibI18nPhp
 
   }//end public function __construct
 
+  /**
+   * @param string $key
+   * @param boolean $def
+   */
   public function setLangByKey($key , $def = false)
   {
 
