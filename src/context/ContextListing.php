@@ -302,6 +302,10 @@ class ContextListing extends Context
     // target for some ui element
     $this->targetId = $request->param('target_id', Validator::CKEY  );
 
+    if ($parentMask = $request->param('pmsk', Validator::TEXT))
+      $this->parentMask = $parentMask;
+
+
     // flag for beginning seach filter
     if ($text = $request->param('begin', Validator::TEXT  )) {
       // whatever is comming... take the first char

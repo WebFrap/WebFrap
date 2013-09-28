@@ -76,6 +76,10 @@ class ContextDomainCrud extends Context
     if ($mask = $request->param('mask', Validator::CNAME))
       $this->mask = $mask;
 
+    if ($parentMask = $request->param('pmsk', Validator::TEXT))
+      $this->parentMask = $parentMask;
+
+
     // mask key
     if ($viewId = $request->param('view_id', Validator::CKEY))
       $this->viewId = $viewId;

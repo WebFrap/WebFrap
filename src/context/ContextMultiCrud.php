@@ -41,7 +41,7 @@ class ContextMultiCrud extends Context
    * @var boolean
    */
   public $refId = null;
-  
+
   /**
    * Sortierung
    * @var array
@@ -88,9 +88,6 @@ class ContextMultiCrud extends Context
     // sprungpunkt für back to top
     if ($maskRoot = $request->param('m_root', Validator::TEXT))
       $this->maskRoot = $maskRoot;
-    
-    if ($parentMask = $request->param('psmk', Validator::TEXT))
-      $this->parentMask = $parentMask;
 
     // the publish type, like selectbox, tree, table..
     if ($publish = $request->param('publish', Validator::CNAME))
@@ -107,6 +104,10 @@ class ContextMultiCrud extends Context
     // target mask key
     if ($targetMask = $request->param('target_mask', Validator::CNAME))
       $this->targetMask = $targetMask;
+
+    if ($parentMask = $request->param('pmsk', Validator::TEXT))
+      $this->parentMask = $parentMask;
+
 
 
     // mask key

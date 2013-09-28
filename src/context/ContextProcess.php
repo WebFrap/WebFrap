@@ -42,6 +42,9 @@ class ContextProcess extends Context
     if ($target = $request->param('target', Validator::CNAME))
       $this->target = $target;
 
+    if ($parentMask = $request->param('pmsk', Validator::TEXT))
+      $this->parentMask = $parentMask;
+
     // id of the target window
     if ($viewId = $request->param('view_id', Validator::CKEY))
       $this->viewId = $viewId;

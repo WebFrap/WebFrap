@@ -145,6 +145,10 @@ class ContextDomainListing  extends Context
     if ($append = $request->param('append', Validator::BOOLEAN))
       $this->append = $append;
 
+    if ($parentMask = $request->param('pmsk', Validator::TEXT))
+      $this->parentMask = $parentMask;
+
+
   } // end public function __construct */
 
   /**

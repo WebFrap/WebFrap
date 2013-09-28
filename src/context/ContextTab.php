@@ -96,7 +96,7 @@ class ContextTab extends Context
      // mask key
     if ($viewId = $request->param('view_id', Validator::CKEY))
       $this->viewId = $viewId;
-    
+
     // parent mask
     if ($parentMask = $request->param('pmsk', Validator::TEXT))
       $this->parentMask = $parentMask;

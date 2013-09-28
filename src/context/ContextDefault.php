@@ -74,6 +74,10 @@ class ContextDefault extends Context
     if ($dkey = $request->param('dkey', Validator::CKEY))
       $this->dkey = $dkey;
 
+    if ($parentMask = $request->param('pmsk', Validator::TEXT))
+      $this->parentMask = $parentMask;
+
+
     // per default
     $this->categories = array();
 
