@@ -72,6 +72,11 @@ class Context
   public $aclNode = null;
 
   /**
+   * @var string
+   */
+  public $parentMask = null;
+
+  /**
    * Flag ob der Request Invalid war
    *
    * @var boolean
