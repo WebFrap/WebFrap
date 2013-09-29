@@ -70,8 +70,6 @@ HTML;
   protected function entriesSupport($params)
   {
 
-    $iconBug = $this->view->icon('control/bug.png'      ,'Bug');
-    $iconFaq = $this->view->icon('control/faq.png'      ,'Faq');
     $iconHelp = $this->view->icon('control/help.png'     ,'Help');
 
     $html = <<<HTML
@@ -79,8 +77,7 @@ HTML;
       <li>
         <p><i class="icon-question-sign" ></i> Support</p>
         <ul>
-          <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Issue.create&amp;context=menu" >{$iconBug} Bug</a></li>
-          <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Faq.create&amp;context=menu" >{$iconFaq} Faq</a></li>
+          <li><a class="wcm wcm_req_ajax" href="modal.php?c=Wbfsys.Faq.create&amp;context=menu" ><i class="icon-question" ></i> Faq</a></li>
         </ul>
       </li>
 
