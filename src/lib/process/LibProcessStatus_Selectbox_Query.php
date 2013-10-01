@@ -37,7 +37,7 @@ class LibProcessStatus_Selectbox_Query extends LibSqlQuery
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * Fetch method for the ProjectProject Selectbox
+   * Fetch method for the Process Selectbox
    * @return void
    */
   public function fetchSelectbox()

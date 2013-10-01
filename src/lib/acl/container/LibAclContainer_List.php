@@ -317,7 +317,7 @@ class LibAclContainer_List extends LibAclPermission
 
   /**
    * @param TFlag $params
-   * @param ProjectProject_Entity $entity
+   * @param Entity $entity
    */
   public function loadDefault($params, $entity = null)
   {
@@ -418,10 +418,21 @@ class LibAclContainer_List extends LibAclPermission
 
     }
 
+    $this->loadCustom($params, $entity);
+    
   }//end public function loadDefault */
 
   /**
-   * @param ProjectProjectMaskCapa_Table_Query $query
+   * @param TFlag $params
+   * @param Entity $entity
+   */
+  public function loadCustom($params, $entity = null)
+  {
+  
+  }//end public function loadCustom */
+  
+  /**
+   * @param LibSqlQuery $query
    * @param string $condition
    * @param TFlag $params
    */

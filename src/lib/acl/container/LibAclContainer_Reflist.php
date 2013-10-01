@@ -117,7 +117,7 @@ class LibAclContainer_Reflist extends LibAclPermission
   }//end public function loadDefault */
 
   /**
-   * @param ProjectProjectMaskCapa_Ref_Partners_Table_Query $query
+   * @param LibSqlQuery $query
    * @param string $condition
    * @param TFlag $params
    */

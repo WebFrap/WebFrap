@@ -74,7 +74,7 @@ class LibAclContainer_Dataset extends LibAclPermission
 
   /**
    * @param TFlag $params
-   * @param ProjectProject_Entity $entity
+   * @param Entity $entity
    */
   public function loadDefault($params, $entity = null)
   {
@@ -180,12 +180,19 @@ class LibAclContainer_Dataset extends LibAclPermission
       );
 
     }
+    
+    $this->loadCustom($params, $entity);
 
   }//end public function loadDefault */
+  
+  public function loadCustom($params, $entity = null)
+  {
+    
+  }  
 
   /**
    * @param Context $params
-   * @param ProjectProject_Entity $entity
+   * @param Entity $entity
    */
   public function loadDefReferences($params, $entity = null)
   {

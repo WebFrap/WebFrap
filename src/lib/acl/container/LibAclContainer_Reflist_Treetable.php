@@ -27,7 +27,7 @@ class LibAclContainer_Reflist_Treetable extends LibAclContainer_Reflist
   protected $refFieldName = null;
 
   /**
-   * @param ProjectProjectMaskCapa_Ref_Partners_Table_Query $query
+   * @param LibSqlQuery $query
    * @param string $condition
    * @param TFlag $params
    */

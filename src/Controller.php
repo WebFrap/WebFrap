@@ -1425,6 +1425,18 @@ abstract class Controller extends BaseChild
     return new ContextTab($request);
 
   } //end protected function getTabFlags */
+  
+  /**
+   * @param LibRequest $request
+   * @return ContextCrud
+   */
+  protected function getCrudFlags($request)
+  {
+  
+    return new ContextCrud($request);
+  
+  } //end protected function getCrudFlags */
+  
 
 /*//////////////////////////////////////////////////////////////////////////////
 // deprecated methodes
