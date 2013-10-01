@@ -1023,6 +1023,60 @@ class LibRequestPhp
   } // end public function file */
 
   /**
+   * Request if a File Upload Exists
+   *
+   * @param string $key
+   * @param string $type
+   * @param string $subkey
+   * @param string $message
+   *
+   * @return LibUploadFile
+   */
+  public function files($key, $type = null, $subkey = null, $message = null)
+  {
+
+    $filter = Validator::getActive();
+    $filter->clean(); // first clean the filter
+
+    if ($subkey) {
+      // asume this was just an empty file
+      if (!isset($_FILES[$subkey]) || '' == trim($_FILES[$subkey]['name'][$key])) {
+        $data = null;
+      } else {
+        $data = array();
+        $data['name'] = $_FILES[$subkey]['name'][$key];
+        $data['type'] = $_FILES[$subkey]['type'][$key];
+        $data['tmp_name'] = $_FILES[$subkey]['tmp_name'][$key];
+        $data['error'] = $_FILES[$subkey]['error'][$key];
+        $data['size'] = $_FILES[$subkey]['size'][$key];
+      }
+    } else {
+      // asume this was just an empty file
+      if (!isset($_FILES[$key]) || '' == trim($_FILES[$key]['name'])) {
+        $data = null;
+      } else {
+        $data = $_FILES[$key];
+      }
+    }
+
+    if (!$data)
+      return null;
+
+    if ($type) {
+      $classname = 'LibUpload'.SParserString::subToCamelCase($type);
+
+      if (!Webfrap::classExists($classname))
+        throw new LibFlow_Exception('Requested nonexisting upload type: '.$classname);
+
+      return new $classname($data, $key);
+
+    } else {
+      return new LibUploadFile($data);
+    }
+
+  } // end public function files */
+
+  /**
   * request if we have a cookie with this name
   *
   * @param string Key Name des zu testenden Cookies
@@ -1423,7 +1477,7 @@ class LibRequestPhp
       $filter->clean();
 
       foreach ($values as $key => $value) {
-        
+
         $method = 'add'.$value[0] ;
 
         if (!isset($row[$key]))
@@ -1667,23 +1721,20 @@ class LibRequestPhp
   *
   * @return array
   */
-  public function validate
-  (
+  public function validate(
     $entity,
     $keyName,
     $fields = array(),
     $required = array(),
     $state = null
-)
-  {
+  ) {
 
-    $filter = $this->checkSearchInput
-    (
+    $filter = $this->checkSearchInput(
       $entity->getValidationData($fields),
       $entity->getErrorMessages(),
       $keyName,
       $required
-   );
+    );
 
     $entity->addData($filter->getData());
 
@@ -1695,7 +1746,6 @@ class LibRequestPhp
     if ($filter->hasErrors()) {
 
       $response = $this->getResponse();
-
       $response->addError($filter->getErrorMessages());
 
       return false;
@@ -1713,20 +1763,18 @@ class LibRequestPhp
   public function validateSearch($entity, $keyName, $fields = array(), $required = array()  )
   {
 
-    $filter = $this->checkSearchInput
-    (
+    $filter = $this->checkSearchInput(
       $entity->getValidationData($fields),
       $entity->getErrorMessages(),
       $keyName,
       $required
-   );
+    );
 
     $entity->addData($filter->getData());
 
     if ($filter->hasErrors()) {
 
       $response = $this->getResponse();
-
       $response->addError($filter->getErrorMessages());
 
       return false;
@@ -1747,14 +1795,13 @@ class LibRequestPhp
   public function validateInsert($entity, $keyName, $fields = array(), $required = array(), $state = null)
   {
 
-    $filter = $this->checkFormInput
-    (
+    $filter = $this->checkFormInput(
       $entity->getValidationData($fields, true),
       $entity->getErrorMessages(),// return all so it's just an internal reference for reading
       $keyName,
       $required,
       $state
-   );
+    );
 
     $entity->addData($filter->getData());
 
@@ -1766,7 +1813,6 @@ class LibRequestPhp
     if ($filter->hasErrors()) {
 
       $response = $this->getResponse();
-
       $response->addError($filter->getErrorMessages());
 
       return false;
@@ -1801,7 +1847,7 @@ class LibRequestPhp
       $keyName,
       $required,
       $state
-   );
+    );
 
     $data = $filter->getData();
     $entity->addData($data);
@@ -1833,28 +1879,23 @@ class LibRequestPhp
    * @param State $state
    * @return array all filtered data
    */
-  public function validateMultiInsert
-  (
+  public function validateMultiInsert(
     $entityName,
     $keyName,
     $fields = array(),
     $required = array(),
     $state = null
-)
-  {
+  ) {
 
     $orm = $this->getOrm();
 
-    $filtered = $this->checkMultiFormInput
-    (
+    $filtered = $this->checkMultiFormInput(
       $orm->getValidationData($entityName,$fields),
       $orm->getErrorMessages($entityName),
       $keyName,
       $required,
       $state
-   );
-
-
+    );
 
     $entityName = $entityName.'_Entity';
 
@@ -1887,13 +1928,12 @@ class LibRequestPhp
     $orm = $this->getOrm();
     $response = $this->getResponse();
 
-    $filtered = $this->checkMultiFormInput
-    (
+    $filtered = $this->checkMultiFormInput(
       $orm->getValidationData($entityName, $fields),
       $orm->getErrorMessages($entityName),
       $keyName,
       $required
-   );
+    );
 
     $entityName = $entityName.'_Entity';
 
@@ -2123,7 +2163,6 @@ class LibRequestPhp
 
     if (strpos($tmp[0], '-')) {
       $tmp = explode('-', $tmp[0]);
-
       return $tmp[0];
     } else {
       return $tmp[0];
@@ -2173,11 +2212,12 @@ class LibRequestPhp
     if (!$requested)
       return $method;
     else {
+
       if (is_array($requested)) {
+
         foreach ($requested as $reqKey) {
           if ($method == $reqKey)
             return true;
-
         }
 
         return false;
