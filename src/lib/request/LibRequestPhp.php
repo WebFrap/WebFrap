@@ -1994,29 +1994,32 @@ class LibRequestPhp
       $required
     );
 
-    $entityName = $entityName.'_Entity';
+    $entityClass = $entityName.'_Entity';
 
     $entityList = array();
     foreach ($filtered as $rowid => $data) {
-
-      $tpObj = new $entityName(null, array(), $this->getDb());
+    
+      if(is_numeric($rowid)){
+        $tpObj = $orm->get($entityName, $rowid);
+      } else{
+        $tpObj = new $entityClass(null, array(), $this->getDb());
+      }
 
       // ignore rowid
       if (array_key_exists(Db::PK, $data)) {
         unset($data[Db::PK]);
       }//end if
 
-      if (is_numeric($rowid)) {
-        $tpObj->setId((int) $rowid);
-      } else { //end if
+      if (!is_numeric($rowid)) {
         $tpObj->tmpId = $rowid;
-      }
-
-      if ($defaults) {
-        foreach ($defaults as $defKey => $defValue) {
-          $tpObj->$defKey = $defValue;
+        
+        if ($defaults) {
+          foreach ($defaults as $defKey => $defValue) {
+            $tpObj->$defKey = $defValue;
+          }
         }
       }
+
 
       $tpObj->addData($data);
       $entityList[$rowid] = $tpObj;
