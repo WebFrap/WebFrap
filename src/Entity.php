@@ -912,7 +912,7 @@ abstract class Entity implements ArrayAccess
 
     foreach ($keys as $key) {
 
-      if (! isset(static::$cols [$key])) {
+      if (!isset(static::$cols[$key])) {
 
         Debug::console(get_class($this).'::'.$key, static::$cols);
 
@@ -2160,6 +2160,6 @@ abstract class Entity implements ArrayAccess
     $this->i18n = null;
 
   } // end public function unload */
-  
+
 }//end abstract class Entity */
 
