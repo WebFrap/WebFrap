@@ -64,6 +64,8 @@ abstract class MvcModel extends BaseChild
 
     $this->getRegistry();
 
+    $this->init();
+
     if (DEBUG)
       Debug::console('Load model '.get_class($this));
 
@@ -72,6 +74,15 @@ abstract class MvcModel extends BaseChild
 /*//////////////////////////////////////////////////////////////////////////////
 // registry methodes
 //////////////////////////////////////////////////////////////////////////////*/
+
+  /**
+   * Empty init
+   * jut overwrite me
+   */
+  protected function init()
+  {
+
+  }//end public function init */
 
   /**
    * get data from the registry of the model
@@ -169,7 +180,6 @@ abstract class MvcModel extends BaseChild
   }//end public function loadModel */
 
   /**
-   *
    * @param string $key
    * @return Model
    */
@@ -183,5 +193,5 @@ abstract class MvcModel extends BaseChild
 
   }//public function getModel */
 
-} // end abstract class Model
+} // end abstract class MvcModel
 
