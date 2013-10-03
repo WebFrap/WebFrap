@@ -20,6 +20,7 @@
  * Static Interface to get the activ configuration object
  * @package WebFrap
  * @subpackage tech_core
+ * @stateless bis auf Resource Objekte müssen Manager immer komplett Stateless sein
  *
  */
 class Manager extends BaseChild

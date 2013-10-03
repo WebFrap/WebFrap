@@ -18,6 +18,8 @@
 /**
  * @package WebFrap
  * @subpackage Mvc
+ *
+ * @statefull
  */
 abstract class MvcController_Domain  extends MvcController
 {

@@ -20,6 +20,8 @@
  * Extention zum verwalten und erstellen von neuen Menus in der Applikation
  * @package WebFrap
  * @subpackage Mvc
+ *
+ * @statefull
  */
 abstract class MvcController extends BaseChild
 {
@@ -426,20 +428,15 @@ abstract class MvcController extends BaseChild
          if (isset($this->options[$methodeKey])) {
 
            // prüfen ob die HTTP Methode überhaupt zulässig ist
-           if
-           (
+           if (
              isset($this->options[$methodeKey]['method'])
                && !$request->method($this->options[$methodeKey]['method'])
-           )
-           {
-            throw new InvalidRequest_Exception
-            (
-              $response->i18n->l
-              (
+           ) {
+            throw new InvalidRequest_Exception(
+              $response->i18n->l(
                 'The request method {@method@} is not allowed for this action! Use {@use@}.',
                 'wbf.message',
-                array
-                (
+                array(
                   'method' => $request->method(),
                   'use' => implode(' or ', $this->options[$methodeKey]['method'])
                 )
@@ -449,21 +446,16 @@ abstract class MvcController extends BaseChild
 
            }
 
-           if
-           (
+           if(
              isset($this->options[$methodeKey]['views'])
                && !$response->tpl->isType($this->options[$methodeKey]['views'])
-           )
-           {
+           ) {
 
-             throw new InvalidRequest_Exception
-             (
-               $response->i18n->l
-               (
+             throw new InvalidRequest_Exception(
+               $response->i18n->l(
                  'Invalid format type {@type@}, valid types are: {@use@}',
                  'wbf.message',
-                 array
-                 (
+                 array(
                    'type' => $response->tpl->getType(),
                    'use' => implode(' or ', $this->options[$methodeKey]['views'])
                  )
@@ -854,6 +846,94 @@ abstract class MvcController extends BaseChild
     }
 
   }//end public function login */
+
+
+  /**
+   * get the form flags for this management
+   * @param LibRequest $request
+   * @return ContextForm
+   */
+  protected function getFormFlags($request)
+  {
+
+    return new ContextForm($request);
+
+  } //end protected function getFormFlags */
+
+  /**
+   * @param LibRequest $request
+   * @return ContextCrud
+   */
+  protected function getCrudFlags($request)
+  {
+
+    return new ContextCrud($request);
+
+  } //end protected function getCrudFlags */
+
+  /**
+   * @lang de:
+   * Auslesen der Listingflags
+   *
+   * @get_param: cname ltype,
+   * Der Type der des Listenelements. Sollte sinnigerweise
+   * der gleich type wie das Listenelement sein, für das die Suche angestoßen wurde
+   *
+   * @get_param: cname view_type,
+   * Der genaue View Type, zb. Maintab, Subwindow etc.,
+   * welcher verwendet wurde den eintrag zu erstellen.
+   * Wird benötigt um im client die maske ansprechen zu können
+   *
+   * @get_param: cname mask,
+   * Mask ist ein key mit dem angegeben wird welche
+   * View genau verwendet werden soll. Dieser Parameter ist nötig, da es pro
+   * tabelle mehrere management sichten geben kann die jeweils eigenen
+   * listenformate haben
+   *
+   * @get_param: cname refid,
+   * Wird benötigt wenn dieser Datensatz in Relation
+   * zu einem Hauptdatensatz als referenz in einem Tab, bzw ManyToX Element
+   * erstellt wurde.
+   *
+   * @get_param: cname view_id,
+   * Die genaue ID der Maske. Wird benötigt um
+   * die Maske bei der Rückgabe adressieren zu können
+   *
+   * @get_param: boolean append,
+   * Flag das bei der Suche und dem Paging
+   * in listenelementen zu einsatz kommt, wenn übergeben und true
+   * werden die daten die zum client gepusht werden im listenelement
+   * im body angehängt, standard aktion wäre das überschreiben
+   * des body inhaltes
+   *
+   * @get_param: ckey a_root,
+   * Die Rootarea des Pfades über den wir gerade in den rechten wandeln
+   *
+   * @get_param: ckey a_key,
+   * Der key des knotens auf dem wir uns im pfad gerade befinden
+   *
+   * @get_param: int a_level,
+   * Die aktuelle position im ACL Pfad
+   *
+   * @param LibRequest $request
+   *
+   * @return ContextListing
+   */
+  protected function getListingFlags ($request)
+  {
+    return new ContextListing($request);
+
+  } //end protected function getListingFlags */
+
+  /**
+   * @param LibRequest $request
+   * @return ContextTab
+   */
+  protected function getTabFlags ($request)
+  {
+    return new ContextTab($request);
+
+  } //end protected function getTabFlags */
 
 } // end abstract class Controller
 

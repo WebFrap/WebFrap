@@ -20,6 +20,8 @@
  * Extention zum verwalten und erstellen von neuen Menus in der Applikation
  * @package WebFrap
  * @subpackage Mvc
+ *
+ * @statefull
  */
 abstract class MvcModel extends BaseChild
 {

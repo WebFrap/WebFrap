@@ -19,6 +19,8 @@
  *
  * @package WebFrap
  * @subpackage Mvc
+ *
+ * @statefull
  */
 abstract class MvcModel_Domain extends MvcModel
 {
