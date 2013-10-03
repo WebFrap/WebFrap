@@ -200,23 +200,21 @@ class User extends BaseChild
     'full_access' => 90,
   );
 
-  /**
-   * name of the main group
-   * @var string
-   */
-  protected $mainGroup = null;
 
   /**
+   * The id of the user
    * @var int
    */
   protected $userId = null;
 
   /**
+   * The ID of the Mandant
    * @var int
    */
-  protected $groupId = null;
+  public $mandantId = null;
 
   /**
+   * Flag if the actual user is logged in
    * @var boolean
    */
   protected $logedIn = false;
@@ -363,9 +361,7 @@ class User extends BaseChild
     return array(
       'groupRoles',
       'userLevel',
-      'mainGroup',
       'userId',
-      'groupId',
       'logedIn',
       'userData',
       'fullName',
@@ -459,29 +455,6 @@ class User extends BaseChild
 /*//////////////////////////////////////////////////////////////////////////////
 // Group data
 //////////////////////////////////////////////////////////////////////////////*/
-
-  /**
-   * return the main group for the user
-   * this group hase to be used for the gui components the user will see
-   * if there is no clustered view by the group roles
-   *
-   * @return string
-   * @deprecated
-   */
-  public function getGroup()
-  {
-    return $this->mainGroup;
-  }//end public function getGroup */
-
-  /**
-   *
-   * @return string
-   * @deprecated
-   */
-  public function getGroupId()
-  {
-    return $this->groupId;
-  }//end public function getMainGroup */
 
   /**
    * @deprecated
@@ -886,6 +859,9 @@ class User extends BaseChild
     $this->userId = $authRole->getId();
     $this->userLevel = (int)$authRole->getData('level');
 
+    // setzen der Mandant ID
+    $this->mandantId = $this->userData['id_mandant']?:$orm->getIdByKey('WbfsysRoleMandant','master');
+
     if ($authRole->profile) {
       $this->profileName = $authRole->profile;
       $this->profiles[$authRole->profile] = SParserString::subToName($this->profileName);
@@ -1154,7 +1130,6 @@ class User extends BaseChild
     $this->userLevel = null;
 
     $this->groupRoles = array();
-    $this->groupId = null;
     $this->profiles = array();
 
     if (!$this->loadUserData($this->loginName)) {
@@ -1228,7 +1203,6 @@ class User extends BaseChild
 
     $this->roupRoles = array();
     $this->userId = null;
-    $this->groupId = null;
     $this->userLevel = null;
     $this->logedIn = false;
 
