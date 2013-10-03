@@ -91,10 +91,6 @@ SQL;
 DELETE FROM wbfsys_faq where vid = {$id};
 SQL;
 
-    // faq
-    $sql[] = <<<SQL
-DELETE FROM wbfsys_faq where vid = {$id};
-SQL;
 
     // Prozess status leeren
     $sql[] = <<<SQL
