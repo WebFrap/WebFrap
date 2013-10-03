@@ -367,6 +367,7 @@ class User extends BaseChild
       'fullName',
       'profileName',
       'profiles',
+      'mandantId',
       'loginName',
       'flagChangeUser',
       'flagNoLogin'
@@ -861,7 +862,7 @@ class User extends BaseChild
 
     // setzen der Mandant ID
     // master muss vorhanden sein
-    $this->mandantId = $this->userData['id_mandant']?:$orm->getIdByKey('WbfsysRoleMandant','master');
+    $this->mandantId = $this->userData['id_mandant']?$this->userData['id_mandant']:$orm->getIdByKey('WbfsysRoleMandant','master');
 
     if ($authRole->profile) {
       $this->profileName = $authRole->profile;
