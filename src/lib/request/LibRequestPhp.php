@@ -1038,41 +1038,42 @@ class LibRequestPhp
     $filter = Validator::getActive();
     $filter->clean(); // first clean the filter
 
-    if ($subkey) {
-      // asume this was just an empty file
-      if (!isset($_FILES[$subkey]) || '' == trim($_FILES[$subkey]['name'][$key])) {
-        $data = null;
-      } else {
-        $data = array();
-        $data['name'] = $_FILES[$subkey]['name'][$key];
-        $data['type'] = $_FILES[$subkey]['type'][$key];
-        $data['tmp_name'] = $_FILES[$subkey]['tmp_name'][$key];
-        $data['error'] = $_FILES[$subkey]['error'][$key];
-        $data['size'] = $_FILES[$subkey]['size'][$key];
-      }
-    } else {
-      // asume this was just an empty file
-      if (!isset($_FILES[$key]) || '' == trim($_FILES[$key]['name'])) {
-        $data = null;
-      } else {
-        $data = $_FILES[$key];
-      }
-    }
-
-    if (!$data)
-      return null;
-
     if ($type) {
       $classname = 'LibUpload'.SParserString::subToCamelCase($type);
-
       if (!Webfrap::classExists($classname))
         throw new LibFlow_Exception('Requested nonexisting upload type: '.$classname);
 
-      return new $classname($data, $key);
+    } else {
+
+      $classname = 'LibUploadFile';
+    }
+
+    // asume this was just an empty file
+    if (!isset($_FILES[$key]) || !count($_FILES[$subkey])) {
+
+      $files = array();
 
     } else {
-      return new LibUploadFile($data);
+
+      $files = array();
+      $numFiles = count($_FILES[$key]['name']);
+
+      for ($pos = 0; $pos < $numFiles; ++$pos) {
+        $file = array(
+          'name' => $_FILES[$key]['name'][$pos],
+          'type' => $_FILES[$key]['type'][$pos],
+          'tmp_name' => $_FILES[$key]['tmp_name'][$pos],
+          'error' => $_FILES[$key]['error'][$pos],
+          'size' => $_FILES[$key]['size'][$pos]
+        );
+
+        $files[] = new $classname($file);
+      }
+
     }
+
+    return $files;
+
 
   } // end public function files */
 
@@ -1998,7 +1999,7 @@ class LibRequestPhp
 
     $entityList = array();
     foreach ($filtered as $rowid => $data) {
-    
+
       if(is_numeric($rowid)){
         $tpObj = $orm->get($entityName, $rowid);
       } else{
@@ -2012,7 +2013,7 @@ class LibRequestPhp
 
       if (!is_numeric($rowid)) {
         $tpObj->tmpId = $rowid;
-        
+
         if ($defaults) {
           foreach ($defaults as $defKey => $defValue) {
             $tpObj->$defKey = $defValue;
