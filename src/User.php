@@ -860,6 +860,7 @@ class User extends BaseChild
     $this->userLevel = (int)$authRole->getData('level');
 
     // setzen der Mandant ID
+    // master muss vorhanden sein
     $this->mandantId = $this->userData['id_mandant']?:$orm->getIdByKey('WbfsysRoleMandant','master');
 
     if ($authRole->profile) {
