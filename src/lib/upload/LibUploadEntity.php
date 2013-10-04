@@ -87,7 +87,7 @@ class LibUploadEntity extends LibUploadAdapter
 
     Debug::console('SET upload entity');
     $this->entity = $entity;
-    
+
   }//end public function setEntity */
 
   /**
@@ -100,7 +100,7 @@ class LibUploadEntity extends LibUploadAdapter
 
     $id = $this->entity->getId();
 
-    $filePath = PATH_GW.'data/uploads/';
+    $filePath = PATH_UPLOADS;
     $filePath .= $this->entity->getTable().'/'.$this->attrName.'/';
     $filePath .= SParserString::idToPath($id);
 

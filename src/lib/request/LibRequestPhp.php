@@ -1039,6 +1039,7 @@ class LibRequestPhp
     $filter->clean(); // first clean the filter
 
     if ($type) {
+
       $classname = 'LibUpload'.SParserString::subToCamelCase($type);
       if (!Webfrap::classExists($classname))
         throw new LibFlow_Exception('Requested nonexisting upload type: '.$classname);

@@ -424,7 +424,7 @@ class SFiles
    */
   public static function getUploadPath($entityName, $attrName, $id)
   {
-    return PATH_GW.'data/uploads/'.$entityName.'/'.$attrName.SParserString::idToPath($id).'/'.$id;
+    return PATH_UPLOADS.'.$entityName.'/'.$attrName.SParserString::idToPath($id).'/'.$id;
 
   }//end public static function getUploadPath */
 
