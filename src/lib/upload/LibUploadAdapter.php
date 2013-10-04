@@ -337,7 +337,7 @@ abstract class LibUploadAdapter
 
     if (!$newPath) {
       if (!$this->newpath) {
-        $this->newpath = PATH_UPLOADS.'dms/';
+        $this->newpath = PATH_UPLOADS.'attachments/';
       }
     } else {
       $this->newpath = $newPath;

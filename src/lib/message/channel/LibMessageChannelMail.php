@@ -84,7 +84,7 @@ class LibMessageChannelMail extends LibMessageChannel
 
       foreach ($dmsAttachments as $attachment) {
         $fileId = $attachment->getId();
-        $fullPath = PATH_UPLOADS.'wbfsys_file/name'.SParserString::idToPath($fileId).'/'.$fileId;
+        $fullPath = PATH_UPLOADS.'attachments/wbfsys_file/name'.SParserString::idToPath($fileId).'/'.$fileId;
 
         $mailer->addAttachment($attachment->name , $fullPath);
       }

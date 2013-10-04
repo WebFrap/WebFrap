@@ -32,7 +32,7 @@ class LibUploadImageEntity extends LibUploadEntity
 
     $id = $this->entity->getId();
 
-    $filePath = PATH_UPLOADS;
+    $filePath = PATH_UPLOADS.'attachments/';
     $filePath .= $this->entity->getTable().'/'.$this->attrName.'/';
     $filePath .= SParserString::idToPath($id);
 
@@ -54,7 +54,7 @@ class LibUploadImageEntity extends LibUploadEntity
 
     $id = $this->entity->getId();
 
-    $filePath = PATH_GW.'data/thumbs/';
+    $filePath = PATH_UPLOADS.'thumbs/';
     $filePath .= $this->entity->getTable().'/'.$this->attrName.'/';
     $filePath .= SParserString::idToPath($id);
 
