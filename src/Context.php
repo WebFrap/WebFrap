@@ -107,6 +107,11 @@ class Context
    */
   protected $actionExt = null;
 
+  /**
+   * @var string
+   */
+  protected $request = null;
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Magic Functions
 //////////////////////////////////////////////////////////////////////////////*/
@@ -118,8 +123,10 @@ class Context
   public function __construct($request = null)
   {
 
-    if ($request)
+    if ($request){
       $this->interpretRequest($request);
+      $this->request = $request;
+    }
 
   }// end public function __construct */
 
@@ -148,6 +155,16 @@ class Context
       ? $this->content[$key]
       : null;
   }// end public function __get */
+  
+  /**
+   * @param LibRequestHttp $request
+   */
+  public function setRequest($request)
+  {
+  
+    $this->request = $request;
+  
+  }//end public function setRequest */
 
   /**
    * @param LibRequestHttp $request
@@ -482,6 +499,53 @@ class Context
 
   }//end public function setFormAction */
 
+  /**
+   *
+   * get the main oid, can be overwritten if needed
+   * @param string $key
+   * @param string $accessKey
+   * @param string $validator
+   * @return int/string
+   */
+  public function getOID($key = null, $accessKey = null, $validator = Validator::CKEY)
+  {
+  
+    $request = $this->request;
+  
+    if ($key) {
+      $id = $request->data($key, Validator::INT, 'rowid');
+  
+      if ($id) {
+        Debug::console('got post rowid: '.$id);
+  
+        return $id;
+      }
+    }
+  
+    $id = $request->param('objid', Validator::INT);
+  
+    if (!$id && $accessKey) {
+      if ($key) {
+        $id = $request->data($key, $validator, $accessKey);
+  
+        if ($id) {
+          Debug::console('got post rowid: '.$id);
+  
+          return $id;
+        }
+      }
+  
+      $id = $request->param($accessKey, $validator);
+  
+      Debug::console('got param '.$accessKey.': '.$id);
+  
+    } else {
+      Debug::console('got param objid: '.$id);
+    }
+  
+    return $id;
+  
+  }//end public function getOID
 
 } // end class Context
 

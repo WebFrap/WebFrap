@@ -1505,7 +1505,6 @@ abstract class Controller extends BaseChild
   }//end protected function accessDenied */
 
   /**
-   * Enter description here...
    *
    * @param string $message the error message
    * @param string $view
@@ -1515,8 +1514,7 @@ abstract class Controller extends BaseChild
   {
 
     if (!$message) {
-      $message =  $this->tplEngine->i18n->l
-      (
+      $message =  $this->tplEngine->i18n->l(
         'This Request was invalid. If you think this is a bug call your Administrator',
         'wbf.message'
       );
@@ -1537,8 +1535,6 @@ abstract class Controller extends BaseChild
   }//end protected function invalidRequest */
 
   /**
-   * Enter description here...
-   *
    * @param string $message the error message
    * @param string $view
    * @deprecated use Controller::errorPage instead
