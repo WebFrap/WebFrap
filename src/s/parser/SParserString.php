@@ -536,6 +536,27 @@ final class SParserString
   }//end public public static function idToPath */
 
   /**
+   * @param int $id
+   * @return String
+   */
+  public static function idToDeepPath($id)
+  {
+
+    $pos1 =  $id % 10000;
+    $pos2 =  $pos1 % 1000;
+    $pos3 =  $pos2 % 100;
+    $pos4 =  $pos3 % 10;
+
+    $first = function($num){
+      $num = (string)$num;
+      return (int)$num[0];
+    };
+
+    return '/'.$first($pos1).'/'.$first($$pos2).'/'.$first($pos3).'/'.$first($pos4).'/';
+
+  }//end public public static function idToPath */
+
+  /**
    * @return String
    *
    */

@@ -43,8 +43,6 @@ class LibSerializerXml extends LibSerializerAbstract
    */
   public static function getInstance()
   {
-    if (Log::$levelDebug)
-      Log::start(__FILE__,__LINE__,__METHOD__);
 
     if (is_null(self::$instance)) {
       self::$instance = new LibSerializerXml();
@@ -65,8 +63,6 @@ class LibSerializerXml extends LibSerializerAbstract
    */
   public function serialize($data = null)
   {
-    if (Log::$levelDebug)
-     Log::start(__FILE__,__LINE__,__METHOD__,array($data));
 
     $this->serialized = '<data>'.NL;
     $this->serialized .= $this->serializeNode($data);

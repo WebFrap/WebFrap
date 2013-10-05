@@ -128,8 +128,6 @@ class LibDbPdoPostgresql extends LibDbPdo
    */
   public function insert($sql , $tableName = null, $tablePk = null)
   {
-    if (Log::$levelDebug)
-      Log::start(__FILE__,__LINE__,__METHOD__,array($sql , $tableName , $tablePk));
 
     ++$this->counter ;
 
@@ -228,8 +226,6 @@ class LibDbPdoPostgresql extends LibDbPdo
    */
   public function exec($sql , $insertId = null , $table = null  )
   {
-    if (Log::$levelDebug)
-      Log::start(__FILE__,__LINE__,__METHOD__,array($sql , $insertId, $table));
 
     $this->result = null;
 
@@ -261,8 +257,6 @@ class LibDbPdoPostgresql extends LibDbPdo
    */
   public function executeAction($name,  $values = null, $getNewId = null)
   {
-    if (Log::$levelDebug)
-      Log::start(__FILE__,__LINE__,__METHOD__,array($name, $values, $getNewId));
 
     if (!isset($this->prepares[$name])) {
       Error::addError

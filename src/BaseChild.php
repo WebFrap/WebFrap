@@ -89,6 +89,12 @@ abstract class BaseChild
   public $i18n = null;
 
   /**
+   * Das Log Element
+   * @var LibLog_Manager
+   */
+  public $logger = null;
+
+  /**
    * Das aktive Request Objekt mit dem der Aufruf des Scriptes / Services getriggert
    * wurde
    * @var LibRequestPhp
@@ -134,12 +140,12 @@ abstract class BaseChild
    * @var Message
    */
   public $message = null;
-  
+
   /**
    * @var Data Providers
    */
   public $providers = array();
-  
+
 
   /**
    * de:
@@ -668,30 +674,30 @@ abstract class BaseChild
     return $this->message;
 
   }//end public function getMessage
-  
+
   /**
    * @return Provider
    */
   public function getProvider($key, $class = null)
   {
-  
+
     if (!isset($this->providers[$key])) {
       $this->providers[$key] = $this->env->getProvider($key, $class);
     }
-  
+
     return $this->providers[$key];
-  
+
   }//end public function getProvider */
-  
+
   /**
    * @param string $key
    * @param Provider $obj
    */
   public function setProvider($key, $obj)
   {
-  
+
     $this->providers[$key] = $obj;
-  
+
   }//end public function getProvider */
 
 } // end abstract class BaseChild

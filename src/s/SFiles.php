@@ -35,8 +35,6 @@ class SFiles
    */
   public static function move($oldPos , $newPos)
   {
-    if (Log::$levelDebug)
-      Log::start( __FILE__ , __LINE__ , __METHOD__ , array($oldPos , $newPos));
 
     ///FIXME this will not work! change to SFilesystem
 

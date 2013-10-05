@@ -126,8 +126,6 @@ class LibParserDocHtml
     */
    public function setIndex($index = 'default')
    {
-     if (Log::$levelDebug)
-      Log::start(__FILE__ , __LINE__ , __METHOD__,array($index));
 
      $this->indexTemplate = $index;
 
@@ -138,8 +136,6 @@ class LibParserDocHtml
     */
    public function setTemplate($template , $folder = null)
    {
-     if (Log::$levelDebug)
-      Log::start(__FILE__ , __LINE__ , __METHOD__,array($template , $folder));
 
      $sub = is_null($folder) ? '' : $folder.'/';
 
@@ -156,8 +152,6 @@ class LibParserDocHtml
    */
   public function addVar($key, $data = null)
   {
-     if (Log::$levelDebug)
-      Log::start(__FILE__ , __LINE__ , __METHOD__,array($key, $data));
 
     if (is_scalar($key)) {
       $this->var->content[$key] = $data;
@@ -176,8 +170,6 @@ class LibParserDocHtml
    */
   public function addItem($key, $type , $subtype = 'Item')
   {
-    if (Log::$levelDebug)
-      Log::start(__FILE__ , __LINE__ , __METHOD__,array($key, $type , $subtype));
 
     if (isset($this->object->content[$key])) {
       return $this->object->content[$key];

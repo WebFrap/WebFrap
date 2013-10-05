@@ -324,8 +324,6 @@ class SFolders
    */
   public static function getFolderContentNohiddenExclude($folder, $fullPath, $type, $excludes)
   {
-    if (Log::$levelDebug)
-      Log::start(__FILE__,__LINE__,__METHOD__,array($folder, $fullPath, $type, $excludes));
 
     $files = array();
 

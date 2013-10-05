@@ -369,46 +369,8 @@ class Log
     }
   } //end public static function end */
 
-  /**
-   * Enter description here...
-   *
-   * @param unknown_type $file
-   * @param unknown_type $Line
-   * @param unknown_type $method
-   * @param unknown_type $logContent
-   */
-  public static function endVerbose($file, $Line , $method , $logContent = null)
-  {
 
-    if (!is_null(self::$instance)) {
 
-    $logMessage = 'end of method '.$method;
-
-      if (is_scalar($logContent) or is_object($logContent)) {
-        $logMessage .= ' '.$logContent;
-      } else {
-        $logMessage .= Debug::dumpToString($logContent);
-      }
-
-      self::$instance->verbose($file, $Line, $logMessage,null);
-    }
-  } //end public static function end */
-
-  /**
-   * Enter description here...
-   *
-   * @param unknown_type $file
-   * @param unknown_type $Line
-   * @param unknown_type $method
-   * @param unknown_type $logContent
-   */
-  public static function endWarn($file, $Line , $method , $logContent = null)
-  {
-
-    if (!is_null(self::$instance)) {
-      self::$instance->warn($file, $Line, 'dissatisfactory end of method '.$method.' cause '.$logContent,null);
-    }
-  } //end public static function endWarn */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Static logging

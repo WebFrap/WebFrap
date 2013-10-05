@@ -73,8 +73,6 @@ class LibDbMysqli extends LibDbConnection
    */
   public function select($sql , $returnit = true , $singleRow = false)
   {
-    if (Log::$levelDebug)
-      Log::start(__FILE__,__LINE__,__METHOD__,array($sql, $returnit, $singleRow));
 
     ++$this->counter ;
 
@@ -169,8 +167,6 @@ class LibDbMysqli extends LibDbConnection
    */
   public function insert($sql , $tableName = null, $tablePk = null)
   {
-    if (Log::$levelDebug)
-      Log::start(__FILE__,__LINE__,__METHOD__,array($sql , $tableName , $tablePk));
 
     ++$this->counter ;
 
@@ -239,8 +235,6 @@ class LibDbMysqli extends LibDbConnection
    */
   public function update($sql  )
   {
-    if (Log::$levelDebug)
-      Log::start(__FILE__,__LINE__,__METHOD__,array($sql));
 
     ++$this->counter ;
 
@@ -348,8 +342,6 @@ class LibDbMysqli extends LibDbConnection
    */
   public function setSearchPath($schema)
   {
-    if (Log::$levelDebug)
-      Log::start(__FILE__,__LINE__,__METHOD__,array($schema));
 
     $this->schema = $schema;
 
@@ -366,8 +358,6 @@ class LibDbMysqli extends LibDbConnection
    */
   public function prepareSelect($name,  $sqlstring = null)
   {
-    if (Log::$levelDebug)
-      Log::start(__FILE__,__LINE__,__METHOD__,array($name,  $sqlstring));
 
     ++$this->counter ;
 
@@ -509,8 +499,6 @@ class LibDbMysqli extends LibDbConnection
    */
   public function prepareDelete($name,  $sqlstring = null  )
   {
-    if (Log::$levelDebug)
-      Log::start(__FILE__,__LINE__,__METHOD__,array($name,  $sqlstring));
 
     ++$this->counter ;
 
@@ -655,8 +643,6 @@ class LibDbMysqli extends LibDbConnection
    */
   public function exec($sql , $insertId = null , $table = null)
   {
-    if (Log::$levelDebug)
-      Log::start(__FILE__,__LINE__,__METHOD__,array($sql));
 
     if (!$this->result = $this->connection->query($sql)) {
       throw new LibDb_Exception

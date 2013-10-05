@@ -80,8 +80,6 @@ class LibValidator
    */
   public function getData($key = null)
   {
-    if (Log::$levelDebug)
-      Log::start(__FILE__, __LINE__, __METHOD__ ,array($key));
 
     if (!is_null($key)) {
       $data = isset($this->data[$key])?$this->data[$key]:null;
@@ -104,8 +102,6 @@ class LibValidator
    */
   public function isInvalid($key = null)
   {
-    if (Log::$levelDebug)
-    Log::start(__FILE__, __LINE__, __METHOD__, array($key)) ;
 
     if ($key) {
       if (!isset($this->invalid[$key])) {
@@ -200,9 +196,6 @@ class LibValidator
    */
   public function addRaw($key, $value, $notNull = false, $maxSize = null, $minSize = null  )
   {
-    if (Log::$levelDebug)
-      Log::start( __FILE__, __LINE__, __METHOD__,
-        array($key, $value, $notNull, $maxSize, $minSize));
 
     if (!$notNull and trim($value) == '') {
       if (Log::$levelTrace)

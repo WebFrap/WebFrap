@@ -1049,14 +1049,13 @@ class LibRequestPhp
       $classname = 'LibUploadFile';
     }
 
-    // asume this was just an empty file
-    if (!isset($_FILES[$key]) || !count($_FILES[$subkey])) {
+    $files = array();
 
-      $files = array();
+    // asume this was just an empty file
+    if (!isset($_FILES[$key]) || !count($_FILES[$key])) {
 
     } else {
 
-      $files = array();
       $numFiles = count($_FILES[$key]['name']);
 
       for ($pos = 0; $pos < $numFiles; ++$pos) {
@@ -1067,6 +1066,8 @@ class LibRequestPhp
           'error' => $_FILES[$key]['error'][$pos],
           'size' => $_FILES[$key]['size'][$pos]
         );
+
+        Debug::console('got file '.$_FILES[$key]['name'][$pos]);
 
         $files[] = new $classname($file);
       }

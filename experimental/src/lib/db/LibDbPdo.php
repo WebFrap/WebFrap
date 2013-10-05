@@ -472,8 +472,6 @@ abstract class LibDbPdo extends LibDbConnection
    */
   public function query($sql, $returnit = true, $single = false)
   {
-    if (Log::$levelDebug)
-      Log::start(__FILE__,__LINE__,__METHOD__,array($sql, $returnit, $single));
 
     $this->lastData = array();
     $this->numRows = null;
@@ -829,8 +827,6 @@ abstract class LibDbPdo extends LibDbConnection
    */
   protected function extractPdoError($error = array())
   {
-    if (Log::$levelDebug)
-      Log::start(__FILE__,__LINE__,__METHOD__,array($error));
 
     if (!$error) {
       $error = $this->connection->errorInfo();

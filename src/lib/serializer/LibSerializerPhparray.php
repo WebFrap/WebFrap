@@ -69,8 +69,6 @@ class LibSerializerPhparray extends LibSerializerAbstract
    */
   protected function subParser($data , $pre)
   {
-   if (Log::$levelDebug)
-      Log::start(__FILE__ , __LINE__ , __METHOD__ , array($data));
 
     $assembled = NL.$pre.'array('.NL;
 
@@ -97,8 +95,6 @@ class LibSerializerPhparray extends LibSerializerAbstract
    */
   protected function serializeArray($data)
   {
-   if (Log::$levelDebug)
-      Log::start(__FILE__ , __LINE__ , __METHOD__ , array($data));
 
     $assembled = $this->varName.' = array('.NL;
 
@@ -125,8 +121,6 @@ class LibSerializerPhparray extends LibSerializerAbstract
    */
   public function serialize($data = null)
   {
-   if (Log::$levelDebug)
-      Log::start(__FILE__ , __LINE__ , __METHOD__);
 
     if (!is_null($data)) {
       $this->toSerialize = $data;
