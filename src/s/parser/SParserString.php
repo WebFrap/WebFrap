@@ -552,7 +552,7 @@ final class SParserString
       return (int)$num[0];
     };
 
-    return '/'.$first($pos1).'/'.$first($$pos2).'/'.$first($pos3).'/'.$first($pos4).'/';
+    return '/'.$first($pos1).'/'.$first($pos2).'/'.$first($pos3).'/'.$first($pos4).'/';
 
   }//end public public static function idToPath */
 
