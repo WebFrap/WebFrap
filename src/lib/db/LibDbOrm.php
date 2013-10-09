@@ -2490,8 +2490,8 @@ SQL;
   }//end protected function buildEmptyResult */
 
   /**
-   * @param string  $entityName
-   * @param array   $datas
+   * @param string $entityName
+   * @param array $datas
    *
    * @return array
    */
