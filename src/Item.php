@@ -151,12 +151,11 @@ class Item extends BaseChild
   }//end public function loadUi */
 
   /**
-   * Enter description here...
-   *
    * @param string $key
+   * @param string $type
    * @return WgtForm
    */
-  public function newForm($key , $type = null  )
+  public function newForm($key, $type = null  )
   {
 
     $type = $type
@@ -164,13 +163,9 @@ class Item extends BaseChild
       : ($key);
 
     $className = $type.'_Form';
-    $classNameOld = 'WgtForm'.$type;
 
     if (!Webfrap::classExists($className)) {
-      // fall back to old name convention
-      $className = $classNameOld;
-      if (!Webfrap::classExists($className))
-        throw new LibTemplate_Exception('Requested noexisting form '.$type);
+      throw new LibTemplate_Exception('Requested noexisting Form Class '.$type);
     }
 
     $form = new $className($this->getView());
