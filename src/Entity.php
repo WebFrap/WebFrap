@@ -250,7 +250,7 @@ abstract class Entity implements ArrayAccess
 
     if (isset($this->data[$offset])) {
       $this->synchronized = false;
-      $this->savedData [$offset] = $this->data[$offset];
+      $this->savedData[$offset] = $this->data[$offset];
       unset($this->data[$offset]);
     }
 
@@ -391,11 +391,11 @@ abstract class Entity implements ArrayAccess
   public function toText(array $fields)
   {
 
-    $stack = array ();
+    $stack = array();
 
     foreach ($fields as $key)
       if (isset($this->data[$key]) && '' != trim($this->data[$key]))
-        $stack [] = $this->data[$key];
+        $stack[] = $this->data[$key];
 
     $string = implode(', ', $stack);
 
@@ -421,7 +421,7 @@ abstract class Entity implements ArrayAccess
 
         if (method_exists($this, $empty)) {
           if ($this->$empty($key, $value)) {
-            $this->savedData [$key] = $this->data[$key];
+            $this->savedData[$key] = $this->data[$key];
             $this->data[$key] = $value;
           }
         } else {
@@ -429,7 +429,7 @@ abstract class Entity implements ArrayAccess
         }
       } else {
         $this->synchronized = false;
-        $this->savedData [$key] = null;
+        $this->savedData[$key] = null;
         $this->data[$key] = $value;
       }
     } else {
@@ -437,12 +437,12 @@ abstract class Entity implements ArrayAccess
       if (isset($this->data[$key])) {
         if ('' == trim($this->data[$key]) && $empty) {
           $this->synchronized = false;
-          $this->savedData [$key] = null;
+          $this->savedData[$key] = null;
           $this->data[$key] = $value;
         }
       } else {
         $this->synchronized = false;
-        $this->savedData [$key] = null;
+        $this->savedData[$key] = null;
         $this->data[$key] = $value;
       }
     }
@@ -465,12 +465,12 @@ abstract class Entity implements ArrayAccess
     if (isset($this->data[$key])) {
       if ((string)$value !== (string)$this->data[$key]) {
         $this->synchronized = false;
-        $this->savedData [$key] = $this->data[$key];
+        $this->savedData[$key] = $this->data[$key];
         $this->data[$key] = $value;
       }
     } else {
       $this->synchronized = false;
-      $this->savedData [$key] = null;
+      $this->savedData[$key] = null;
       $this->data[$key] = $value;
     }
 
@@ -490,7 +490,7 @@ abstract class Entity implements ArrayAccess
 
       if ('' === trim($this->data[$key]) && $empty) {
 
-        $this->savedData [$key] = $this->data[$key];
+        $this->savedData[$key] = $this->data[$key];
         $this->data[$key] = trim($value);
         $this->synchronized = false;
 
@@ -501,7 +501,7 @@ abstract class Entity implements ArrayAccess
     } else {
 
       $this->data[$key] = $value;
-      $this->savedData [$key] = null;
+      $this->savedData[$key] = null;
       $this->synchronized = false;
 
       return true;
@@ -528,20 +528,20 @@ abstract class Entity implements ArrayAccess
   public function text($key = 'text', $firstOnly = true)
   {
 
-    if (! isset(static::$textKeys [$key])) {
+    if (! isset(static::$textKeys[$key])) {
       if (!$this->id)
         return 'Empty '.static::$label;
       else
         return static::$label.': '.$this->id;
     }
 
-    if (! static::$textKeys [$key]) {
+    if (! static::$textKeys[$key]) {
       if (!$this->id)
         return 'Empty '.static::$label;
       else
         return static::$label.': '.$this->id;
     } else {
-      $keys = static::$textKeys [$key];
+      $keys = static::$textKeys[$key];
     }
 
     $string = '';
@@ -561,7 +561,7 @@ abstract class Entity implements ArrayAccess
 
       foreach ($keys as $key)
         if (isset($this->data[$key]) && '' != trim($this->data[$key]))
-          $stack [] = $this->data[$key];
+          $stack[] = $this->data[$key];
 
       $string = implode(', ', $stack);
     }
@@ -577,8 +577,8 @@ abstract class Entity implements ArrayAccess
   public function textKeys($key = 'text')
   {
 
-    if (isset(static::$textKeys [$key])) {
-      return static::$textKeys [$key];
+    if (isset(static::$textKeys[$key])) {
+      return static::$textKeys[$key];
     } else {
       return null;
     }
@@ -659,21 +659,21 @@ abstract class Entity implements ArrayAccess
       return array_keys(static::$cols);
     } elseif (is_scalar($catKeys)) {
 
-      if (! isset(static::$categories [$catKeys])) {
+      if (! isset(static::$categories[$catKeys])) {
         Error::report('Requested invalid '.$catKeys);
 
         return array ();
       }
 
-      return static::$categories [$catKeys];
+      return static::$categories[$catKeys];
     } elseif (is_array($catKeys)) {
 
       $cols = array ();
 
       // /TODO error reporting
       foreach ($catKeys as $cat) {
-        if (isset(static::$categories [$cat]))
-          $cols = array_merge($cols, static::$categories [$cat]);
+        if (isset(static::$categories[$cat]))
+          $cols = array_merge($cols, static::$categories[$cat]);
       }
 
       return $cols;
@@ -709,7 +709,7 @@ abstract class Entity implements ArrayAccess
   public function hasCol($colKey)
   {
 
-    return isset(static::$cols [$colKey]);
+    return isset(static::$cols[$colKey]);
 
   } // end public function hasCol */
 
@@ -742,16 +742,16 @@ abstract class Entity implements ArrayAccess
 
       $cols = array ();
       foreach ($categories as $cat) {
-        if (isset(static::$categories [$cat]))
-          $cols = array_merge($cols, static::$categories [$cat]);
+        if (isset(static::$categories[$cat]))
+          $cols = array_merge($cols, static::$categories[$cat]);
       }
     }
 
     $searchCols = array ();
 
     foreach ($cols as $col) {
-      if (static::$cols [$col] [self::COL_SEARCH])
-        $searchCols [] = $col;
+      if (static::$cols[$col][self::COL_SEARCH])
+        $searchCols[] = $col;
     }
 
     return $searchCols;
@@ -826,13 +826,13 @@ abstract class Entity implements ArrayAccess
   public function minSize($key)
   {
 
-    if (! isset(static::$cols [$key])) {
+    if (! isset(static::$cols[$key])) {
       Error::report('asked for wrong Validation data: '.$key.' in '.get_class($this));
 
       return null;
     }
 
-    return static::$cols [$key] [self::COL_MIN];
+    return static::$cols[$key][self::COL_MIN];
 
   } // end public function getMinSize */
 
@@ -844,13 +844,13 @@ abstract class Entity implements ArrayAccess
   public function maxSize($key)
   {
 
-    if (! isset(static::$cols [$key])) {
+    if (! isset(static::$cols[$key])) {
       Error::report('asked for wrong Validation data: '.$key.' in '.get_class($this));
 
       return null;
     }
 
-    return static::$cols [$key] [self::COL_MAX];
+    return static::$cols[$key][self::COL_MAX];
 
   } // end public function getMaxSize */
 
@@ -862,13 +862,13 @@ abstract class Entity implements ArrayAccess
   public function required($key)
   {
 
-    if (! isset(static::$cols [$key])) {
+    if (! isset(static::$cols[$key])) {
       Error::report('asked for wrong Validation data: '.$key.' in '.get_class($this));
 
       return null;
     }
 
-    return static::$cols [$key] [self::COL_REQUIRED];
+    return static::$cols[$key][self::COL_REQUIRED];
 
   } // end public function getMaxSize */
 
@@ -880,13 +880,13 @@ abstract class Entity implements ArrayAccess
   public function defaultValue($key)
   {
 
-    if (! isset(static::$cols [$key])) {
+    if (! isset(static::$cols[$key])) {
       Error::report('asked for wrong default value data: '.$key.' in '.get_class($this));
 
       return null;
     }
 
-    return static::$cols [$key] [self::COL_DEFAULT];
+    return static::$cols[$key][self::COL_DEFAULT];
 
   } // end public function getMaxSize */
 
@@ -900,7 +900,7 @@ abstract class Entity implements ArrayAccess
     if (!$keys) {
       if ($insert) {
         $cols = static::$cols;
-        unset($cols [Db::PK]);
+        unset($cols[Db::PK]);
 
         return $cols;
       } else {
@@ -918,7 +918,7 @@ abstract class Entity implements ArrayAccess
 
         throw new LibDb_Exception('asked for wrong Validation data: '.$key.' in '.get_class($this));
       } else {
-        $data[$key] = static::$cols [$key];
+        $data[$key] = static::$cols[$key];
       }
     }
 
@@ -940,8 +940,8 @@ abstract class Entity implements ArrayAccess
     $data = array ();
 
     foreach ($keys as $key) {
-      if (isset(static::$messages [$key])) {
-        $data[$key] = I18n::s(static::$messages [$key]);
+      if (isset(static::$messages[$key])) {
+        $data[$key] = I18n::s(static::$messages[$key]);
       } else {
         Log::warn('No Error Message for key: '.$key);
       }
@@ -1064,7 +1064,7 @@ abstract class Entity implements ArrayAccess
     $keys = array_keys($this->savedData);
 
     foreach ($keys as $key) {
-      $tmp [$key] = $this->data[$key];
+      $tmp[$key] = $this->data[$key];
     }
 
     return $tmp;
@@ -1240,7 +1240,7 @@ abstract class Entity implements ArrayAccess
   public function connect($key, $entity)
   {
 
-    $this->singleRef [$key] = $entity;
+    $this->singleRef[$key] = $entity;
 
   } // end public function connect */
 
@@ -1253,7 +1253,7 @@ abstract class Entity implements ArrayAccess
   public function append($key, $entity)
   {
 
-    $this->multiRef [$key] [$entity->getId()] = $entity;
+    $this->multiRef[$key][$entity->getId()] = $entity;
 
   } // end public function append */
 
@@ -1265,7 +1265,7 @@ abstract class Entity implements ArrayAccess
   public function getReference($key)
   {
 
-    return isset(static::$references [$key]) ? static::$references [$key] : null;
+    return isset(static::$references[$key]) ? static::$references[$key] : null;
 
   } // end public function getReference */
 
@@ -1304,7 +1304,7 @@ abstract class Entity implements ArrayAccess
 
     Debug::console('FOLLOW link '.$key.' in '.static::$table);
 
-    if (!isset(static::$links [$key])) {
+    if (!isset(static::$links[$key])) {
       throw new LibDb_Exception('Tried fo follow nonexisting link '.$key);
     }
 
@@ -1337,7 +1337,7 @@ abstract class Entity implements ArrayAccess
 
       return $entity;
     } elseif ($empty) {
-      $newObj = $this->orm->newEntity(SParserString::subToCamelCase(static::$links [$key]));
+      $newObj = $this->orm->newEntity(SParserString::subToCamelCase(static::$links[$key]));
       $this->{$key} = $newObj;
 
       return $newObj;
@@ -1443,7 +1443,7 @@ abstract class Entity implements ArrayAccess
   {
 
     foreach (static::$cols as $key => $col) {
-      if ('' != $col [self::COL_DEFAULT]) {
+      if ('' != $col[self::COL_DEFAULT]) {
         $this->data[$key] = $col;
       }
     }
@@ -1459,10 +1459,10 @@ abstract class Entity implements ArrayAccess
   public function getRefNode($key, $enforceEntity = false)
   {
 
-    if (! isset(static::$links [$key]))
+    if (! isset(static::$links[$key]))
       throw new LibDb_Exception("Requested a target object for a non linked attribute " . $key);
 
-    $entityKey = SParserString::subToCamelCase(static::$links [$key]);
+    $entityKey = SParserString::subToCamelCase(static::$links[$key]);
     $className = $entityKey.'_Entity';
 
     if (! Webfrap::classExists($className))
@@ -1498,11 +1498,11 @@ abstract class Entity implements ArrayAccess
 
     if (is_string($category)) {
 
-      if (! isset(static::$categories [$category])) {
+      if (! isset(static::$categories[$category])) {
         throw new LibDb_Exception('Tried to fetch data from a nonexisting category '.$category);
       }
 
-      $cats = static::$categories [$category];
+      $cats = static::$categories[$category];
 
       foreach ($cats as $key) {
         if (array_key_exists($key, $this->data)) {
@@ -1513,11 +1513,11 @@ abstract class Entity implements ArrayAccess
     } else {
 
       foreach ($category as $catKey) {
-        if (! isset(static::$categories [$catKey])) {
+        if (! isset(static::$categories[$catKey])) {
           throw new LibDb_Exception('Tried to fetch data from a nonexisting category '.$catKey);
         }
 
-        $cats = static::$categories [$catKey];
+        $cats = static::$categories[$catKey];
 
         foreach ($cats as $key) {
           if (array_key_exists($key, $this->data)) {
@@ -1662,17 +1662,17 @@ abstract class Entity implements ArrayAccess
           $this->postSave[] = $value;
         } else {
 
-          $this->singleRef [$key] = $value;
+          $this->singleRef[$key] = $value;
 
           if (! isset($this->data[$key])) {
 
-            $this->savedData [$key] = null;
+            $this->savedData[$key] = null;
             $this->data[$key] = $value;
           } else {
             // wenn neu können wir auf jeden fall von einer Änderung ausgehen
             if ($value->isNew() || $this->data[$key] !== (string)$value) {
 
-              $this->savedData [$key] = $this->data[$key];
+              $this->savedData[$key] = $this->data[$key];
               $this->data[$key] = $value;
             }
           }
@@ -1681,11 +1681,11 @@ abstract class Entity implements ArrayAccess
 
         if (! isset($this->data[$key])) {
 
-          $this->savedData [$key] = null;
+          $this->savedData[$key] = null;
           $this->data[$key] = $value;
         } else {
 
-          $this->savedData [$key] = $this->data[$key];
+          $this->savedData[$key] = $this->data[$key];
           $this->data[$key] = $value;
         }
 
@@ -1698,12 +1698,12 @@ abstract class Entity implements ArrayAccess
       if (! isset($this->data[$key])) {
 
         $this->synchronized = false;
-        $this->savedData [$key] = null;
+        $this->savedData[$key] = null;
         $this->data[$key] = $value;
       } elseif ($this->data[$key] !== (string)$value) {
 
         $this->synchronized = false;
-        $this->savedData [$key] = $this->data[$key];
+        $this->savedData[$key] = $this->data[$key];
         $this->data[$key] = $value;
       }
     }
@@ -2018,8 +2018,6 @@ abstract class Entity implements ArrayAccess
    */
   public function getChecked($key)
   {
-
-    Debug::console(' getChecked('.$key.') '.$this->data[$key]);
 
     if (isset($this->data[$key]) && $this->data[$key] && 'f' != $this->data[$key])
       return ' checked="checked" ';

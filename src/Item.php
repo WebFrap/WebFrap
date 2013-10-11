@@ -153,7 +153,7 @@ class Item extends BaseChild
   /**
    * @param string $key
    * @param string $type
-   * @return WgtForm
+   * @return WgtCrudForm
    */
   public function newForm($key, $type = null  )
   {
