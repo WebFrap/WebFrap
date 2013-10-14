@@ -903,17 +903,17 @@ class Validator
    * @param int $maxSize
    * @param int $minSize
    */
-  public function addBoolean($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  public function addBoolean($key, $value, $notNull = false, $maxSize = null, $minSize = null)
   {
 
     $value = strtolower(trim($value));
 
     if ('f' == $value  || 'false' == $value || '0' == $value) {
-      $value = 0;
+      $value = 'f';
     } elseif ('' == $value) {
-      $value = null;
+      $value = 'f'; // false per default
     } else {
-      $value = 1;
+      $value = 't';
     }
 
     // litle hack for search fields
@@ -926,7 +926,6 @@ class Validator
     */
 
     $this->data[$key] = $value;
-
     $this->invalid[$key] = false;
 
     return false;
