@@ -1049,6 +1049,18 @@ abstract class Entity implements ArrayAccess
 
   } // end public function getChangedFields */
 
+  /**
+   * @param string $key
+   * @return string
+   */
+  public function getSavedValue($key)
+  {
+  
+    return isset($this->savedData[$key])
+      ? $this->savedData[$key]
+      : null;
+  
+  } // end public function getSavedValue */
   
   /**
    * @return array
