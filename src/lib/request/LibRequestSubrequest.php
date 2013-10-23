@@ -1277,11 +1277,20 @@ class LibRequestSubrequest
   /**
    * @return string
    */
-  public function getServerAddress()
+  public function getServerAddress($forceHttp=false)
   {
-    return $this->request->getServerAddress();
+    return $this->request->getServerAddress($forceHttp);
 
   }//end public function getServerAddress */
+
+  /**
+   * @return string
+   */
+  public function getFullRequest($forceHttp=false)
+  {
+    return $this->request->getFullRequest($forceHttp);
+
+  }//end public function getFullRequest */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Static Methodes

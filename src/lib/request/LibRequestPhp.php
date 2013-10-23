@@ -52,6 +52,11 @@ class LibRequestPhp
    */
   protected $serverAddress = null;
 
+  /**
+   * @var string
+   */
+  protected $fullRequest = null;
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Init
 //////////////////////////////////////////////////////////////////////////////*/
@@ -2331,6 +2336,8 @@ class LibRequestPhp
   }//end public function getServerName */
 
   /**
+   * Die Addresse zum Server bekommen,
+   * checken was bei URL Design passiert
    * @param boolean $forceHttps
    * @return string
    */
@@ -2367,6 +2374,40 @@ class LibRequestPhp
     return $this->serverAddress;
 
   }//end public function getServerAddress */
+  
+  /**
+   * Die volle Angefragte URL bekommen mit Servername und allen Parametern
+   * @param boolean $forceHttps einen https link erzwingen
+   * @return string
+   */
+  public function getFullRequest($forceHttps = false)
+  {
+  
+    if (!$this->fullRequest) {
+  
+      $this->fullRequest = ((isset($_SERVER['HTTPS']) && 'on' == $_SERVER['HTTPS']) || $forceHttps)
+      ? 'https://'
+      : 'http://';
+  
+      $this->fullRequest .= $_SERVER['SERVER_NAME'];
+  
+      if (isset($_SERVER['HTTPS']) && 'on' == $_SERVER['HTTPS']) {
+        if ($_SERVER['SERVER_PORT'] != '443') {
+          $this->fullRequest .= ':'.$_SERVER['SERVER_PORT'];
+        }
+      } else {
+        if ($_SERVER['SERVER_PORT'] != '80') {
+          $this->fullRequest .= ':'.$_SERVER['SERVER_PORT'];
+        }
+      }
+  
+      $this->fullRequest .= $_SERVER['REQUEST_URI'];
+    
+    }
+  
+    return $this->fullRequest;
+  
+  }//end public function getFullRequest */
 
   /**
    * @param string $domainName

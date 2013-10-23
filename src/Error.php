@@ -267,7 +267,7 @@ HTML;
   public function construct($message, $debugMessage = null, $errorKey = Response::INTERNAL_ERROR, $toDump = null)
   {
 
-    if (is_object($message) && $message instanceof Webfrap_Exception  ) {
+    if (is_object($message) && $message instanceof Webfrap_Exception) {
       $this->message = $message->getMessage();
       $this->debugMessage = $message->getDebugMessage();
       $this->errorKey = $message->getErrorKey();

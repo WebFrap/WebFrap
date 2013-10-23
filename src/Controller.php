@@ -903,7 +903,6 @@ abstract class Controller extends BaseChild
    */
   public function shutDown() {}
 
-
 /*//////////////////////////////////////////////////////////////////////////////
 // error page and messages
 //////////////////////////////////////////////////////////////////////////////*/
@@ -923,80 +922,14 @@ abstract class Controller extends BaseChild
   public function errorPage($message, $errorCode = Response::INTERNAL_ERROR, $dump = null)
   {
 
-    if (is_object($message)) {
-      $messageText = $message->getMessage();
-
-      // Fallback für nicht wbf exceptions
-      if (method_exists($message, 'getErrorKey'))
-        $errorCode = $message->getErrorKey();
-      else
-        $errorCode = Response::INTERNAL_ERROR;
+    if (is_string($message)) {
+      $error = new Error($message, $message, $errorCode, $dump );
     } else {
-      $messageText = $message;
+      $error = $message;
     }
-
-    $response = $this->getResponse();
-    $response->httpState = $errorCode;
-
-    // bei ajax request wird einfach eine fehlermeldung geworfen
-    if
-    (
-      $response->tpl->isType(View::MAINTAB)
-        || $response->tpl->isType(View::MODAL)
-        || $response->tpl->isType(View::AJAX)
-        || $response->tpl->isType(View::SERVICE)
-    )
-    {
-
-      $response->sendHeader("X-error-message: ".urlencode($messageText.' '.$errorCode));
-
-      $response->addError($messageText);
-    } elseif ($response->tpl->isType(View::DOCUMENT)) {
-
-      // Wenn ein dokument angefragt wurde das nicht bearbeitet werden kann
-      // wird eine html fehlermeldung zurückgegeben
-      // meist sinnvoller als irgendetwas in ein dokument zu pinseln
-      View::setType('Html');
-      View::rebase('Html');
-
-
-      // nach rebase wird die neue aktive templateengine geholt
-      $this->tplEngine = View::getActive();
-
-      Debug::dumpFile('doc.error', $this->tplEngine);
-
-
-      //TODO prüfen ob set index und html head in der form bleiben sollen
-      $conf = Conf::get('view');
-      if ($this->user->getLogedIn()) {
-        $this->tplEngine->setIndex($conf['index.user']);
-      } else {
-        $this->tplEngine->setIndex($conf['index.annon']);
-      }
-
-      $this->tplEngine->contentType = View::CONTENT_TYPE_TEXT;
-
-      $this->tplEngine->setIndex('error');
-
-      $this->tplEngine->setTitle($response->i18n->l('An Error occured', 'wbf.label'));
-      $this->tplEngine->setTemplate('error/message'  );
-      $this->tplEngine->addVar('errorTitle' , $messageText);
-      $this->tplEngine->addVar('errorMessage' , $message);
-
-    } elseif ($response->tpl->isType(View::JSON)) {
-
-      $this->tplEngine->setDataBody('error: '.$message);
-
-    } else {
-
-      $view = $this->getView();
-
-      $view->setTitle($response->i18n->l('Error', 'wbf.label'));
-      $view->setTemplate('error/message'  );
-      $view->addVar('errorMessage', $message);
-
-
-    }
+    
+    $errorHandler = new Error_Controller($this);
+    $errorHandler->handleError($this->getRequest(), $this->getResponse(), $error);
 
   }//end public function errorPage */
 
@@ -1014,10 +947,8 @@ abstract class Controller extends BaseChild
 
     // check if the request type is AJAX, if not return an error page
     if (!$response->tpl->isType($type)) {
-      $this->errorPage
-      (
-        $response->i18n->l
-        (
+      $this->errorPage (
+        $response->i18n->l(
           'Invalid access type {@type@}',
           'wbf.message',
           array('type', $type)

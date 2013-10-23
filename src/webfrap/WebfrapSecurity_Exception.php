@@ -22,19 +22,16 @@
  */
 class WebfrapSecurity_Exception extends Webfrap_Exception
 {
-
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   *
    * @var string
    */
   protected $debugMessage = 'Internal Error'; // unspecified error
 
   /**
-   *
    * @var string
    */
   protected $errorKey = Response::INTERNAL_ERROR; // unspecified error

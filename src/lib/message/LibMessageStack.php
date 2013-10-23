@@ -571,6 +571,16 @@ class LibMessageStack extends PBase
     return Webfrap::$env->getRequest()->getServerAddress($forceHttps);
 
   }//end public function getServerAddress */
+  
+  /**
+   * @param boolean $forceHttps
+   * @return string
+   */
+  public function getFullRequest($forceHttps = false)
+  {
+    return Webfrap::$env->getRequest()->getFullRequest($forceHttps);
+
+  }//end public function getFullRequest */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Clean
