@@ -65,9 +65,9 @@ class Response
    * Änderung wurde akzeptiert
    * @var int
    */
-  const CHANGED = 202;
+  const CHANGED = 202; // changed
 
-  const HTTP_203 = 'Non-Authoritative Information';
+  const NON_AUTHORITATIVE = 203;// 'Non-Authoritative Information';
 
   const NO_CONTENT = 204;
 
@@ -109,7 +109,7 @@ class Response
 
   const PRECONDITION_FAILED = 412;
 
-  const HTTP_413 = 'Request Entity Too Large';
+  const REQUEST_ENTITY_TO_LARGE =  413;//'Request Entity Too Large';
 
   const HTTP_414 = 'Request-URI Too Long';
 
