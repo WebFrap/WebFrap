@@ -23,29 +23,6 @@
 class WebfrapConfig_Exception extends Webfrap_Exception
 {
 /*//////////////////////////////////////////////////////////////////////////////
-// Attributes
-//////////////////////////////////////////////////////////////////////////////*/
-
-  /**
-   *
-   * @var string
-   */
-  protected $debugMessage = 'Internal Error'; // unspecified error
-
-  /**
-   *
-   * @var string
-   */
-  protected $errorKey = Response::INTERNAL_ERROR; // unspecified error
-
-  /**
-   * Container der eine oder mehrere Fehlermeldungen enthält
-   *
-   * @var ErrorContainer
-   */
-  public $error = null;
-
-/*//////////////////////////////////////////////////////////////////////////////
 // Konstruktor
 //////////////////////////////////////////////////////////////////////////////*/
 
@@ -93,43 +70,7 @@ class WebfrapConfig_Exception extends Webfrap_Exception
 
   }//end public function __construct */
 
-/*//////////////////////////////////////////////////////////////////////////////
-// Getter & Setter
-//////////////////////////////////////////////////////////////////////////////*/
 
-  /**
-   *
-   * @return string
-   */
-  public function getDebugMessage()
-  {
-    return $this->debugMessage;
-
-  }//end public function getDebugMessage */
-
-  /**
-   *
-   * @return string
-   */
-  public function getErrorKey()
-  {
-    return $this->errorKey;
-
-  }//end public function getErrorKey */
-
-  /**
-   * @param LibResponseHttp $response
-   */
-  public function publish($response)
-  {
-
-    if ($this->error) {
-      $this->error->publish($response);
-    } else {
-      $response->addError($this->message);
-    }
-
-  }//end public function publish */
 
 }//end class WebfrapConfig_Exception
 
