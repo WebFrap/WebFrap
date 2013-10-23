@@ -26,7 +26,7 @@ class Webfrap_Exception extends Exception
 {
 
   /**
-   *
+   * Message für den Entwickler. Soll im Debug Modus ausgegeben werden
    * @var string
    */
   protected $debugMessage = 'Internal Error'; // unspecified error
@@ -37,6 +37,27 @@ class Webfrap_Exception extends Exception
    * @var ErrorContainer
    */
   public $error = null;
+    
+  /**
+   * Wert der als Dump ausgegeben werden soll
+   *
+   * @var mixed
+   */
+  public $toDump = null;
+  
+  /**
+   * Wie schwerwiegend ist der Fehler?
+   *
+   * @var int
+   */
+  public $severity = null;
+  
+  /**
+   * Soll ein Dialog geöffnet werden?
+   *
+   * @var int
+   */
+  public $dialog = null;
   
   /**
    *
@@ -49,20 +70,59 @@ class Webfrap_Exception extends Exception
 //////////////////////////////////////////////////////////////////////////////*/
   
   /**
-   * @param string $message
-   * @param string $debugMessage
+   * Das Error handling interface
+   * 
+   * @param [error message, (opt)debug message, (opt)dump] || multi error: [[error message, (opt)debug message], (opt)dump]
    * @param int $errorKey
+   * @param Base $env
+   * @param string $dialog
+   * @param int $severity am ende
+   * Passt nicht zum alten interface, soll das neue darstellen
+   * 
    */
   public function __construct(
     $message, 
     $debugMessage = 'Internal Error', 
-    $errorKey = Response::INTERNAL_ERROR  
+    $errorKey = Response::INTERNAL_ERROR,
+    $dialog = null,
+    $severity = null
   ) {
   
-    $request = Webfrap::$env->getRequest();
-    $response = Webfrap::$env->getResponse();
+    // wenn object alles eins nach oben, dann haben wir das neue interface
+    if(is_object($errorKey)){
+      $env = $errorKey;
+    } else {
+      $env = Webfrap::$env;
+    }
+    
+    $request = $env->getRequest();
+    $response = $env->getResponse();
+    
+    $this->serverity = $severity;
+    $this->dialog = $dialog;
   
-    if (is_object($message)) {
+    if (is_array($message)) {
+      
+      if(ctype_digit($debugMessage)){
+        $this->errorKey = $debugMessage;
+      } else {
+        $this->errorKey = Response::INTERNAL_ERROR;
+      }
+      
+      // multi message exception
+      if (is_array($message[0])) {
+        
+      } else { // nur eine fehlermeldung
+        
+        parent::__construct($message[0]);
+
+        $this->debugMessage = isset($message[1])?$message[1]:$message[0];
+        $this->toDump = isset($message[2])?$message[2]:null;
+        Error::addException($message[0], $this);
+        
+      }
+      
+    } else if (is_object($message)) { 
   
       if (DEBUG && 'Internal Error' != $debugMessage)
         parent::__construct($debugMessage);
@@ -117,6 +177,25 @@ class Webfrap_Exception extends Exception
   
   }//end public function getErrorKey */
   
+
+  /**
+   * @return string
+   */
+  public function getDialog()
+  {
+    return $this->dialog;
+  
+  }//end public function getDialog */
+  
+  /**
+   * @return string
+   */
+  public function getServerity()
+  {
+    return $this->dialog;
+  
+  }//end public function getServerity */
+  
   /**
    * @param LibResponseHttp $response
    */
@@ -140,7 +219,7 @@ class Webfrap_Exception extends Exception
 
     $traces = $this->getTrace();
 
-    $table = '<table>';
+    $table = '<table><label>'.$this->message.'</label>';
     $table .= <<<CODE
 <thead>
   <tr>
