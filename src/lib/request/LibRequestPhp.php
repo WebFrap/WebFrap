@@ -1188,6 +1188,54 @@ class LibRequestPhp
 // Form input
 //////////////////////////////////////////////////////////////////////////////*/
 
+  
+  /**
+   *
+   * get the main oid, can be overwritten if needed
+   * @param string $key
+   * @param string $accessKey
+   * @param string $validator
+   * @return int/string
+   */
+  public function getOID($key = null, $accessKey = null, $validator = Validator::CKEY)
+  {
+  
+  
+    if ($key) {
+      $id = $this->data($key, Validator::INT, 'rowid');
+  
+      if ($id) {
+        Debug::console('got post rowid: '.$id);
+  
+        return $id;
+      }
+    }
+  
+    $id = $this->param('objid', Validator::INT);
+  
+    if (!$id && $accessKey) {
+      if ($key) {
+        $id = $this->data($key, $validator, $accessKey);
+  
+        if ($id) {
+          Debug::console('got post rowid: '.$id);
+  
+          return $id;
+        }
+      }
+  
+      $id = $this->param($accessKey, $validator);
+  
+      Debug::console('got param '.$accessKey.': '.$id);
+  
+    } else {
+      Debug::console('got param objid: '.$id);
+    }
+  
+    return $id;
+  
+  }//end public function getOID
+
   /** method for validating Formdata
    * if an error is found an message will be send to system, if you want to find
    * out if the test failed ask the system if there are any error messages
