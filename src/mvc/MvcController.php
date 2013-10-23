@@ -607,6 +607,7 @@ abstract class MvcController extends BaseChild
    * @param string $accessKey
    * @param string $validator
    * @return int/string
+   * @deprecated use the request object
    */
   protected function getOID($key = null, $accessKey = null, $validator = Validator::CKEY)
   {
