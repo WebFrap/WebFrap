@@ -1198,13 +1198,13 @@ SQL;
    *
    * @return int Die Anzahl der gefunden Einträge
    */
-  public function countRows($entityKey, $where = null  )
+  public function countRows($entityKey, $where = null)
   {
 
     $tableName = $this->getTableName($entityKey);
 
     $criteria = $this->newCriteria();
-    $criteria->select('count('.'rowid'.') as anz')->from($tableName)->where($where);
+    $criteria->select('count(rowid) as anz')->from($tableName)->where($where);
 
     $data = $this->select($criteria)->get();
 
@@ -1219,7 +1219,7 @@ SQL;
    *
    * @return Entity
    */
-  public function getWhere($entityKey, $where  )
+  public function getWhere($entityKey, $where)
   {
 
     $tableName = $this->getTableName($entityKey);
@@ -1253,7 +1253,7 @@ SQL;
    *
    * @return array
    */
-  public function getListWhere($entityKey, $where, $params = array(), $groupByKey = true  )
+  public function getListWhere($entityKey, $where, $params = array(), $groupByKey = true)
   {
 
     $tableName = $this->getTableName($entityKey);
@@ -1317,7 +1317,7 @@ SQL;
    *
    * @return array<Entity>
    */
-  public function getRows($entityKey, $where, $cols = array(), $limit = null, $offset = null  )
+  public function getRows($entityKey, $where, $cols = array(), $limit = null, $offset = null)
   {
 
     $tableName = $this->getTableName($entityKey);
@@ -1368,7 +1368,7 @@ SQL;
    *
    * @return array
    */
-  public function getField($entityKey, $id , $fieldName  )
+  public function getField($entityKey, $id , $fieldName)
   {
     if (is_numeric($id) && $obj = $this->getFromPool($entityKey, $id))
       return $obj->getData($fieldName);
@@ -1428,12 +1428,10 @@ SQL;
     if (!$keys)
       return array();
 
-    return $this->getIds
-    (
+    return $this->getIds(
       $entityKey,
       "access_key IN('"
-        .implode
-        (
+        .implode(
           "', '",
           $keys
         )."')"
@@ -1449,8 +1447,7 @@ SQL;
    */
   public function getIdByKey($entityKey, $key)
   {
-    return $this->getId
-    (
+    return $this->getId(
       $entityKey,
       "access_key = '{$key}'"
     );
@@ -1487,7 +1484,8 @@ SQL;
   public function getI18nId($entityKey, $where, $lang)
   {
 
-      $langKey = $lang;
+    $langKey = $lang;
+    
     if (!ctype_digit($lang)) {
 
       if (isset($this->langIds[$langKey])) {
