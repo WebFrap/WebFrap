@@ -385,7 +385,7 @@ abstract class Controller extends BaseChild
   public function setDefaultModel($name)
   {
 
-    if ($this->modelName || (is_bool($this->modelName) && false == $this->modelName  ))
+    if ($this->modelName || (is_bool($this->modelName) && false == $this->modelName))
       return;
 
     $this->modelName = $name.'_Model';
@@ -462,14 +462,11 @@ abstract class Controller extends BaseChild
 
     } catch (Exception $exc) {
 
-      Error::report
-      (
-        $response->i18n->l
-        (
+      Error::report(
+        $response->i18n->l(
           'Module Error: {@message@}',
           'wbf.message' ,
-          array
-          (
+          array(
             'message' => $exc->getMessage()
           )
         ),
@@ -480,8 +477,7 @@ abstract class Controller extends BaseChild
 
       if (Log::$levelDebug) {
         // Create a Error Page
-        $this->errorPage
-        (
+        $this->errorPage(
           $exc->getMessage(),
           Response::INTERNAL_ERROR,
           '<pre>'.Debug::dumpToString($exc).'</pre>'
@@ -491,8 +487,7 @@ abstract class Controller extends BaseChild
         switch ($type) {
           case 'Security_Exception':
           {
-            $this->errorPage
-            (
+            $this->errorPage(
               $response->i18n->l('Access Denied', 'wbf.message'  ),
               Response::FORBIDDEN
             );
@@ -502,15 +497,13 @@ abstract class Controller extends BaseChild
           {
 
             if (Log::$levelDebug) {
-              $this->errorPage
-              (
+              $this->errorPage(
                 'Exception '.$type.' not catched ',
                 Response::INTERNAL_ERROR,
                 Debug::dumpToString($exc)
               );
             } else {
-              $this->errorPage
-              (
+              $this->errorPage(
                 $response->i18n->l( 'Sorry Internal Error', 'wbf.message'  ),
                 Response::INTERNAL_ERROR
               );
@@ -576,14 +569,11 @@ abstract class Controller extends BaseChild
            if (isset($this->options[$methodeKey])) {
 
              // prüfen ob die HTTP Methode überhaupt zulässig ist
-             if
-             (
+             if(
                isset($this->options[$methodeKey]['method'])
                  && !$request->method($this->options[$methodeKey]['method'])
-             )
-             {
-              throw new InvalidRequest_Exception
-              (
+             ) {
+              throw new InvalidRequest_Exception(
                 $response->i18n->l
                 (
                   'The request method {@method@} is not allowed for this action! Use {@use@}.',
@@ -928,7 +918,7 @@ abstract class Controller extends BaseChild
       $error = $message;
     }
     
-    $errorHandler = new Error_Controller($this);
+    $errorHandler = new LibFlowErrorHandler($this);
     $errorHandler->handleError($this->getRequest(), $this->getResponse(), $error);
 
   }//end public function errorPage */

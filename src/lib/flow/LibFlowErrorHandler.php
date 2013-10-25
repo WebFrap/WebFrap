@@ -24,7 +24,7 @@
  *
  * @author domnik alexander bonsch <dominik.bonsch@webfrap.net>
  */
-class Error_Controller extends Pbase // wird nicht von Controller abgeleitet um Endless Loops zu vermeiden
+class LibFlowErrorHandler extends Pbase // wird nicht von Controller abgeleitet um Endless Loops zu vermeiden
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -107,10 +107,9 @@ class Error_Controller extends Pbase // wird nicht von Controller abgeleitet um 
       $view->setTemplate('error/message'  );
       $view->addVar('errorMessage', $message);
     
-    
     }
     
   }//end public function handleError */
   
   
-}//end class Error_Controller
+}//end class LibFlowErrorHandler
