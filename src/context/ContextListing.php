@@ -102,6 +102,10 @@ class ContextListing extends Context
    */
   public $dynFilters = array();
 
+  /**
+   * Liste von Referenzen (wo wird das verwendet?)
+   * @var array
+   */
   public $refIds = null;
 
   /**
@@ -173,7 +177,8 @@ class ContextListing extends Context
 
     // dynamische filter
     $this->dynFilters = $request->param('dynfilter', Validator::TEXT);
-    $this->refIds = $request->paramList('refids', Validator::INT  );
+    $this->refIds = $request->paramList('refids', Validator::INT);
+    $this->pRefId = $request->param('prefid', Validator::INT);
 
     if (!$this->refIds) {
     	$this->refIds = new TArray();

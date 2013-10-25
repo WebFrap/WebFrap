@@ -111,8 +111,7 @@ class LibDbPostgresql extends LibDbConnection
 
     if (!is_string($sql)) {
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
-      throw new LibDb_Exception
-      (
+      throw new LibDb_Exception(
         'incompatible parameters'
       );
     }
