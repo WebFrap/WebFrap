@@ -815,6 +815,23 @@ abstract class MvcController extends BaseChild
     }
 
   }//end public function login */
+  
+  
+  /**
+   * get the form flags for this management
+   * de:
+   * {
+   *   prüfen ob die standard steuer flags vorhanden sind
+   * }
+   * @param LibRequestHttp $request
+   * @return TFlag
+   */
+  protected function interpretDefRqt($request)
+  {
+  
+    return new ContextDefault($request);
+  
+  }//end protected function interpretDefRqt */
 
   /**
    * get the form flags for this management
