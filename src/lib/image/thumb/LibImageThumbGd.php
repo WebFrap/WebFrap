@@ -99,12 +99,11 @@ class LibImageThumbGd extends LibImageThumbAdapter
       // neugenerieren des THUMBS
       $thumb = imagecreatetruecolor($new_width, $new_height);
 
-      imagecopyresampled
-      (
-      $thumb,
-      $im,
-      0,0,0,0,
-      $new_width,$new_height,$org_width,$org_height
+      imagecopyresampled(
+        $thumb,
+        $im,
+        0,0,0,0,
+        $new_width,$new_height,$org_width,$org_height
       );
 
       if (!imagejpeg($thumb, $this->thumbName , 95)) {
