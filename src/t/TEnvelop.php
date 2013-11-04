@@ -88,7 +88,7 @@ class TEnvelop
   {
 
     if (!method_exists($this->object, $method)) {
-      Error::addError('Tried to call nonexisting method '.$method);
+      Error::addError('Tried to call nonexisting method '.$method.' on '.get_class($this->object));
 
       return null;
     }
