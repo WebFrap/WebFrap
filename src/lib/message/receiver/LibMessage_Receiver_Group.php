@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibMessage_Receiver_Group
-  implements IReceiver
+class LibMessage_Receiver_Group implements IReceiver
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

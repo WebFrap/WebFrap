@@ -20,7 +20,7 @@
  * @subpackage tech_core
  *
  */
-class LibMessageSync_Pop3
+class LibMessageSync_Imap
 {
 
 }

@@ -36,6 +36,7 @@ class LibMessageAddressloader_Query extends LibSqlQuery
 
     $areas = array();
     $id = null;
+    $ids = array();
 
     if ($group->area) {
       $areas = $this->extractWeightedKeys($group->area);
@@ -44,6 +45,8 @@ class LibMessageAddressloader_Query extends LibSqlQuery
     if ($group->entity) {
       if (is_object($group->entity)) {
         $id = $group->entity->getId();
+      } else if(is_array($group->entity)) {
+        $ids = $group->entity;
       } else {
         $id = $group->entity;
       }
@@ -54,7 +57,8 @@ class LibMessageAddressloader_Query extends LibSqlQuery
 
     // wenn keine Area übergeben wurde dann brauchen wir nur die
     // globalen assignments
-    if ($id) {
+    if ($id || $ids) {
+      
       $areaKeys = '';
 
       if ($areas)
@@ -74,19 +78,65 @@ class LibMessageAddressloader_Query extends LibSqlQuery
 
 SQL;
 
-
+      
+      // muss direkt zugeordnet sein
       if ($direct) {
-        $wheres = <<<SQL
+        
+        // mehrere IDs
+        if ($ids) {
+          
+          $whereIn = implode(', ',$ids);
+          $wheres = <<<SQL
+          
+  (
+    wbfsys_group_users.id_area = wbfsys_security_area.rowid
+        {$areaKeys}
+        and wbfsys_group_users.vid IN({$whereIn})
+  ) AND
+SQL;
 
+        } else {
+          $wheres = <<<SQL
+          
   (
     wbfsys_group_users.id_area = wbfsys_security_area.rowid
         {$areaKeys}
         and wbfsys_group_users.vid = {$id}
   ) AND
 SQL;
+        }
+        
       } else {
-        $wheres = <<<SQL
+        
+        
+        // mehrere IDs
+        if ($ids) {
+        
+          $whereIn = implode(', ',$ids);
+          $wheres = <<<SQL
+  (
+    (
+      wbfsys_group_users.id_area = wbfsys_security_area.rowid
+        {$areaKeys}
+        and wbfsys_group_users.vid IN({$whereIn})
+    )
+    OR
+    (
+      wbfsys_group_users.id_area = wbfsys_security_area.rowid
+        {$areaKeys}
+        and wbfsys_group_users.vid is null
+    )
+    OR
+    (
+      wbfsys_group_users.id_area is null
+        and wbfsys_group_users.vid is null
+    )
+  ) AND
 
+SQL;
+        
+        } else {
+          $wheres = <<<SQL
   (
     (
       wbfsys_group_users.id_area = wbfsys_security_area.rowid
@@ -106,9 +156,12 @@ SQL;
     )
   ) AND
 SQL;
+        }
+        
       }
 
     } elseif ($areas) {
+      
       $areaKeys = " wbfsys_security_area.access_key  IN('".implode($areas,"','")."')" ;
 
       $joins = <<<SQL

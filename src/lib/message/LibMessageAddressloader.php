@@ -73,23 +73,19 @@ class LibMessageAddressloader extends PBase
       try {
         switch ($receiver->type) {
 
-          case 'address':
-          {
+          case 'address': {
             $contacts = $this->loadAddress($receiver, $type, $contacts);
             break;
           }
-          case 'contact':
-          {
+          case 'contact': {
             $contacts = $this->loadContact($receiver, $type, $contacts);
             break;
           }
-          case 'group':
-          {
+          case 'group': {
             $contacts = $this->loadGroup($receiver, $type, $contacts);
             break;
           }
-          case 'user':
-          {
+          case 'user': {
             $contacts = $this->loadUser($receiver, $type, $contacts);
             break;
           }
