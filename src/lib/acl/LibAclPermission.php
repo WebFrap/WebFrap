@@ -325,7 +325,7 @@ class LibAclPermission
 
     Debug::console("new " . get_class($this) . ' access container');
 
-    if (! $env) {
+    if (!$env) {
       $env = Webfrap::$env;
     }
 
@@ -388,7 +388,7 @@ class LibAclPermission
   public function getAcl()
   {
 
-    if (! $this->acl)
+    if (!$this->acl)
       $this->acl = $this->env->getAcl();
 
     return $this->acl;
