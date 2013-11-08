@@ -220,6 +220,7 @@ class LibMessageMail
     } elseif ($defSender = Conf::status('app.sender')) {
       $this->sender = $defSender;
     } else {
+      //todo no server name in cli... has to be maintained in the conf
       $this->sender = 'WebFrap Mail API <do_not_reply@'.$_SERVER['SERVER_NAME'].'>';
     }
 
@@ -318,8 +319,7 @@ class LibMessageMail
   public function setPriority($priority)
   {
 
-    $possible = array
-    (
+    $possible = array(
       '1' => '1 (Highest)',
       '2' => '2 (High)',
       '3' => '3 (Normal)',
@@ -347,8 +347,7 @@ class LibMessageMail
   public function setImportance($importance)
   {
 
-    $possible = array
-    (
+    $possible = array(
       'high',
       'normal',
       'low'
@@ -491,8 +490,7 @@ class LibMessageMail
   {
 
     if (!is_readable($attach)) {
-      Error::report
-      (
+      Error::report(
         'Tried to send nonreadable file: '.$attach.' by mail'
       );
 
@@ -522,8 +520,7 @@ class LibMessageMail
   {
 
     if (!is_readable($attach)) {
-      Error::report
-      (
+      Error::report(
       'Tried to send nonreadable file: '.$attach.' by mail'
       );
 
@@ -624,19 +621,16 @@ class LibMessageMail
     );
     */
 
-    if
-    (
-      !mail
-      (
+    if(
+      !mail(
         $address,
         $this->subject,
         $body,
         $header
       )
-    )
-    {
-      Error::report
-      (
+    ) {
+      
+      Error::report(
         'Failed to send Mail to'.$address
       );
 
