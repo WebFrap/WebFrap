@@ -66,7 +66,7 @@ class LibMessageSender
       $data = $user->getData();
 
       $this->userId = $user->getId();
-      $this->userName = $data['name'];
+      $this->userName = $user->getLoginName();
       $this->firstName = $data['firstname'];
       $this->lastName = $data['lastname'];
       $this->fullName = $user->getFullName();
