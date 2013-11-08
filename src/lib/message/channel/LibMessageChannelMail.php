@@ -101,7 +101,7 @@ class LibMessageChannelMail extends LibMessageChannel
 
       $embededLayouts = $message->getEmbededLayout();
       foreach ($embededLayouts as $fullPath => $fileName) {
-        $mailer->addEmbedded($fileName , PATH_THEME.'themes/default/images/'.$fullPath);
+        $mailer->addEmbedded($fileName , PATH_THEME.'themes/classic/images/'.$fullPath);
       }
 
       Debug::console(
