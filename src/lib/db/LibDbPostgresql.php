@@ -1014,6 +1014,8 @@ class LibDbPostgresql extends LibDbConnection
   public function begin($write = true)
   {
 
+    Debug::console('DB Begin');
+    
     if ($write) {
       if (! $this->result = pg_query($this->connectionWrite , 'BEGIN')) {
         Error::addError (
@@ -1040,6 +1042,8 @@ class LibDbPostgresql extends LibDbConnection
   public function rollback($write = true)
   {
 
+    Debug::console('DB Rollback');
+
     if ($write) {
       if (! $this->result = pg_query($this->connectionWrite , 'ROLLBACK')) {
         Error::addError(
@@ -1065,6 +1069,7 @@ class LibDbPostgresql extends LibDbConnection
    */
   public function commit($write = true)
   {
+    Debug::console('DB Commit');
 
     if ($write) {
       if (! $this->result = pg_query($this->connectionWrite , 'COMMIT')) {
