@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibRelationContainer_Group
-  implements LibRelationContainer
+class LibRelationContainer_Group implements LibRelationContainer
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -84,6 +83,7 @@ class LibRelationContainer_Group
     }
 
     $this->area = $area;
+    
     $this->entity = $entiy;
 
     $this->else = $else;
