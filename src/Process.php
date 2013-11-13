@@ -1254,7 +1254,7 @@ abstract class Process extends PBase
         return $error;
 
     } else {
-      Debug::console("No action $this->edges[$this->oldKey][$this->newNode]['actions'][$position] ");
+      Debug::console("No action \$this->edges[$this->oldKey][$this->newNode]['actions'][$position] ");
     }
 
     $this->model->changeStatus($nodeKey, $params);

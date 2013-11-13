@@ -909,11 +909,11 @@ class Validator
     $value = strtolower(trim($value));
 
     if ('f' == $value  || 'false' == $value || '0' == $value) {
-      $value = 'f';
+      $value = false; //f
     } elseif ('' == $value) {
-      $value = 'f'; // false per default
+      $value = false; // f | false per default
     } else {
-      $value = 't';
+      $value = true; // t
     }
 
     // litle hack for search fields
