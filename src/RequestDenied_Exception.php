@@ -32,13 +32,11 @@ class RequestDenied_Exception extends InvalidRequest_Exception
    * @param string $debugMessage
    * @param int $errorKey
    */
-  public function __construct
-  (
+  public function __construct(
     $message,
     $debugMessage = 'Access Denied',
     $errorKey = Request::NOT_AUTHORIZED
-  )
-  {
+  ) {
 
     if (is_object($message)) {
 
