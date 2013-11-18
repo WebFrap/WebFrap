@@ -169,6 +169,18 @@ abstract class LibDbResult implements Iterator, Countable
   {
     return array();
   }//end public function getName
+  
+  /**
+   * Das Nächste Result Abfragen
+   * @param string $key
+   * @return array
+   */
+  public function getField($key)
+  {
+  
+    return null;
+  
+  } // end public function getField */
 
   /**
    * @return array
