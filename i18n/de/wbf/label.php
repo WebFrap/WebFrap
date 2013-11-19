@@ -19,6 +19,7 @@ $this->l['wbf.label']['Search'] = 'Suchen';
 $this->l['wbf.label']['New'] = 'Neu';
 $this->l['wbf.label']['Save'] = 'Speichern';
 $this->l['wbf.label']['Save & Close'] = 'Save & Close';
+$this->l['wbf.label']['Save &amp; Close'] = 'Save &amp; Close';
 $this->l['wbf.label']['Meta Data'] = 'Meta Data';
 $this->l['wbf.label']['Open'] = 'Öffnen';
 $this->l['wbf.label']['Connect'] = 'Verknüpfen';
@@ -44,6 +45,9 @@ $this->l['wbf.label']['Date End'] = 'Date End';
 $this->l['wbf.label']['Entries'] = 'Entries';
 $this->l['wbf.label']['Description'] = 'Description';
 $this->l['wbf.label']['Group'] = 'Group';
+$this->l['wbf.label']['Search by keyword'] = 'Search by keyword';
+
+
 
 $this->l['wbf.label']['List Type'] = 'List Type';
 $this->l['wbf.label']['Table'] = 'Table';
