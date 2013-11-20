@@ -71,6 +71,12 @@ class Validator
    * Validatormapping
    * @var string
    */
+  const BOOLEAN3 = 'Boolean3';
+
+  /**
+   * Validatormapping
+   * @var string
+   */
   const TEXT = 'Text';
 
   /**
@@ -933,6 +939,47 @@ class Validator
   }//end function addBoolean
 
   /**
+   * Boolean mit 3 Werten, true,false, null
+   * @param string $key
+   * @param scalar $value
+   * @param boolean $notNull
+   * @param int $maxSize
+   * @param int $minSize
+   */
+  public function addBoolean3($key, $value, $notNull = false, $maxSize = null, $minSize = null)
+  {
+
+    if(is_null($value)){
+      $value = null;
+    } else {
+      $value = strtolower(trim($value));
+
+      if ('f' == $value  || 'false' == $value || '0' == $value) {
+        $value = false; //f
+      } elseif ('' == $value) {
+        $value = false; // f | false per default
+      } else {
+        $value = true; // t
+      }
+    }
+
+    // litle hack for search fields
+    /*
+    if ($value == '0') {
+    $this->data[$key] = '-1';
+    } else {
+    $this->data[$key] = $value ? '1':'0';
+    }
+    */
+
+    $this->data[$key] = $value;
+    $this->invalid[$key] = false;
+
+    return false;
+
+  }//end function addBoolean
+
+  /**
    * @param string $key
    * @param scalar $value
    * @param boolean $notNull
@@ -941,7 +988,7 @@ class Validator
    */
   public function addText($key, $value, $notNull = false, $maxSize = null, $minSize = null)
   {
-    
+
     if (!$notNull and trim($value) == '') {
       $this->data[$key] = null;
       $this->invalid[$key] = false;
@@ -959,7 +1006,7 @@ class Validator
     } else {
       $this->data[$key] = $value;
     }
-    
+
     if ($notNull) {
       if (trim($value) == '') {
         return 'empty';
