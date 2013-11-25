@@ -69,10 +69,10 @@ class TEnvelop
    */
   public function __get($key)
   {
-    if (property_exists  ($this->object  , $key  )) {
+    if (property_exists($this->object, $key)) {
       return $this->object->$key;
     } else {
-      Error::addError('Tried to read from nonexisting property '.$key);
+      Error::addError('Tried to read from nonexisting property '.$key.' on '.get_class($this->object));
       return null;
     }
   }// end of public function __get */
