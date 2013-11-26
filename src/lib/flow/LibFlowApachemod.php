@@ -364,15 +364,14 @@ class LibFlowApachemod extends Base
         $this->controller->shutdownController();
 
       } else {
+
         throw new WebfrapUser_Exception('Resource '.$classname.' not exists!');
       }
 
     } catch (Exception $exc) {
 
-      Error::report
-      (
-        I18n::s
-        (
+      Error::report(
+        I18n::s(
           'Module Error: {@message@}',
           'wbf.message' ,
           array('message' => $exc->getMessage())
@@ -382,7 +381,7 @@ class LibFlowApachemod extends Base
 
       // if the controller ist not loadable set an error controller
       $this->controller = new Error_Controller($this);
-      $this->controllerName = 'ControllerError';
+      $this->controllerName = 'Error_Controller';
       //\Reset The Extention
 
       if (Log::$levelDebug) {
