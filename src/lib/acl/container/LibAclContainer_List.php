@@ -87,9 +87,9 @@ class LibAclContainer_List extends LibAclPermission
    * }
    */
   public function __construct(
-      $env,
-      $level = null,
-      $refBaseLevel = null
+    $env,
+    $level = null,
+    $refBaseLevel = null
   ) {
 
 
@@ -466,10 +466,13 @@ class LibAclContainer_List extends LibAclPermission
       $this->defLevel = 0;
     }
   
+    /*
     $joinType = '';
     if (!$this->isPartAssign) {
       $joinType = ' LEFT ';
     }
+    */
+    $joinType = ' LEFT ';
 
 
     $query->setTables($criteria);

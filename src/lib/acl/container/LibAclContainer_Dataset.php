@@ -188,7 +188,7 @@ class LibAclContainer_Dataset extends LibAclPermission
   public function loadCustom($params, $entity = null)
   {
     
-  }  
+  }//end public function loadCustom */
 
   /**
    * @param Context $params
