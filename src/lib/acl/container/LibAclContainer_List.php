@@ -465,7 +465,8 @@ class LibAclContainer_List extends LibAclPermission
     if (is_null($this->defLevel)) {
       $this->defLevel = 0;
     }
-
+  
+    $joinType = '';
     if (!$this->isPartAssign) {
       $joinType = ' LEFT ';
     }
