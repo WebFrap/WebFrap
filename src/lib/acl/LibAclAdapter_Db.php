@@ -1296,7 +1296,7 @@ SQL;
 
 
     // der aktuelle node ist zugleich auch der rootnode
-    $path = $model->loadAccessPathChildren($maskAreas, $maskAreas, $roles, 2);
+    $path = $model->loadAccessPathChildren($maskAreas, $maskAreas, array_keys($roles), 2);
     $container->paths = $path;
 
     if (DEBUG)

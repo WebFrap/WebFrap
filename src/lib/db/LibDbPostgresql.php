@@ -133,11 +133,13 @@ class LibDbPostgresql extends LibDbConnection
     }
 
     if (!$this->result = pg_query($this->connectionRead , $sql)) {
-
+      
+      $trace = Debug::backtrace();
+      
       // Fehlermeldung raus und gleich mal nen Trace laufen lassen
       throw new LibDb_Exception(
-        'Read failed',
-        'DB Response: '.pg_last_error($this->connectionRead),
+        'Failed to read from the database. Seems we have a broken query here.',
+        'DB Response: '.pg_last_error($this->connectionRead).' '.$trace,
         Response::INTERNAL_ERROR,
         $sql,
         $this->counter
