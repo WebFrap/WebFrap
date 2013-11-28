@@ -1485,7 +1485,7 @@ SQL;
   {
 
     $langKey = $lang;
-    
+
     if (!ctype_digit($lang)) {
 
       if (isset($this->langIds[$langKey])) {
@@ -1655,6 +1655,13 @@ SQL;
 
     try {
 
+      $preSave = $entity->getPreSave();
+      foreach ($preSave as /* @var Entity $postEntiy */ $preEntiy) {
+        // we asume that the entity is allready appended
+        Debug::console('Presave insertIfNotExists '.get_class($preEntiy));
+        $this->save($preEntiy);
+      }
+
 
       $userId = $this->getUser()->getId();
       $timestamp = SDate::getTimestamp('Y-m-d H:i:s');
@@ -1793,6 +1800,7 @@ SQL;
     	$preSave = $entity->getPreSave();
     	foreach ($preSave as /* @var Entity $postEntiy */ $preEntiy) {
     		// we asume that the entity is allready appended
+    		Debug::console('Presave '.get_class($preEntiy));
     		$this->save($preEntiy);
     	}
 
@@ -1859,8 +1867,6 @@ SQL;
       // we asume that the entity is allready appended
       $this->save($postEntiy);
     }
-
-
 
     return $entity;
 
@@ -2212,6 +2218,13 @@ SQL;
         if ($entity->getSynchronized())
           return $entity;
 
+        $preSave = $entity->getPreSave();
+        foreach ($preSave as /* @var Entity $postEntiy */ $preEntiy) {
+          // we asume that the entity is allready appended
+          Debug::console('Presave update '.get_class($preEntiy));
+          $this->save($preEntiy);
+        }
+
         $connected = $entity->getConnected();
 
         foreach ($connected as $key => $conEnt) {
@@ -2361,7 +2374,7 @@ SQL;
   {
 
     if (is_object($entity)) {
-      
+
       if ($entity instanceof Entity) {
         $id = $entity->getId();
         $entityKey = $entity->getEntityName();
@@ -2372,7 +2385,7 @@ SQL;
 
         return false;
       }
-      
+
     } else {
       //$id
       $entityKey = $entity;
@@ -2393,7 +2406,7 @@ SQL;
     foreach ($references as $attribute => $ref) {
 
       if ($attribute == 'rowid') {
-        
+
         //array('type' => 'oneToOne', 'entity' => 'CorePeople' , 'refId' => 'rowid' , 'delete' => true),
         foreach ($ref as $conRef) {
           if (!$conRef['delete'])
@@ -2402,9 +2415,9 @@ SQL;
           $this->deleteWhere(SParserString::subToCamelCase($conRef['entity']), $conRef['refId'].' = '.$id);
 
         }
-        
+
       } else {
-        
+
         if (!$ref['delete'])
           continue;
 
@@ -2426,7 +2439,7 @@ SQL;
     $this->db->delete($sqlstring);
 
     $this->removeFromPool($entityKey, $id);
-    
+
     return true;
 
   }//end public function delete */
