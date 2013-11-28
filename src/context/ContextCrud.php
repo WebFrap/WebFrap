@@ -20,6 +20,14 @@
  * @package WebFrap
  * @subpackage tech_core
  *
+ * @property $aclRoot
+ * @property $aclRootId
+ * @property $aclKey
+ * @property $aclNode
+ * @property $aclLevel
+ *
+ * @property string $subTab Key zum öffnen eines Subtabs
+ *
  */
 class ContextCrud extends Context
 {
@@ -62,7 +70,7 @@ class ContextCrud extends Context
     // sprungpunkt für back to top
     if ($maskRoot = $request->param('m_root', Validator::TEXT))
       $this->maskRoot = $maskRoot;
-    
+
     if ($parentMask = $request->param('pmsk', Validator::TEXT))
       $this->parentMask = $parentMask;
 
@@ -120,6 +128,11 @@ class ContextCrud extends Context
     // wird nur in der view gesetzt wenn der mask switcher vorhanden ist
     if ($cntms = $request->param('cntms', Validator::CNAME))
       $this->contextMaskSwt = $cntms;
+
+    // mask switcher key
+    // wird nur in der view gesetzt wenn der mask switcher vorhanden ist
+    if ($sbt = $request->param('sbt', Validator::CNAME))
+      $this->subTab = $sbt;
 
     // per default
     $this->categories = array();
