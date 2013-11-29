@@ -193,7 +193,11 @@ class LibAclContainer_Root extends LibAclRoot
     $roles = array();
     $level = 0;
     
-    $areaId = $acl->resources->getAreaId($this->aclKey);
+    $pathKey = $this->pathKey;
+    if (!$pathKey)
+      $pathKey = $this->aclKey;
+
+    $areaId = $acl->resources->getAreaId($pathKey);
     
     // eventuellen check Code vorab laden, erweitert die rollen
     // eventuellen check Code vorab laden, erweitert die rollen

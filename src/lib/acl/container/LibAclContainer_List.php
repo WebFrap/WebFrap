@@ -351,7 +351,11 @@ class LibAclContainer_List extends LibAclPermission
       $params->aclLevel = 1;
     }
 
-    $areaId = $acl->resources->getAreaId($this->pathKey);
+    $pathKey = $this->pathKey;
+    if (!$pathKey)
+      $pathKey = $this->aclKey;
+
+    $areaId = $acl->resources->getAreaId($pathKey);
 
     // eventuellen check Code vorab laden, erweitert die rollen
     $backPaths = $acl->getPathJoinLevels($areaId);

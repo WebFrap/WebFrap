@@ -911,7 +911,7 @@ class LibAclPermission
   public function extendPathLevel($key, $level)
   {
 
-    if (! isset($this->paths [$key])) {
+    if (! isset($this->paths[$key])) {
       $this->paths [$key] = $level;
     } else {
       if ($this->paths [$key] < $level) {

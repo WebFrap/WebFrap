@@ -107,8 +107,12 @@ class LibAclContainer_Dataset extends LibAclPermission
       $params->aclNode = $this->aclKey;
       $params->aclLevel = 1;
     }
+    
+    $pathKey = $this->pathKey;
+    if (!$pathKey)
+      $pathKey = $this->aclKey;
 
-    $areaId = $acl->resources->getAreaId($this->pathKey);
+    $areaId = $acl->resources->getAreaId($pathKey);
 
     // eventuellen check Code vorab laden, erweitert die rollen
       // eventuellen check Code vorab laden, erweitert die rollen
