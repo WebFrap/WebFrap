@@ -59,6 +59,7 @@ class LibAclContainer_DomainDataset extends LibAclContainer_Dataset
     $this->domainNode = $domainNode;
     $this->aclKey = $domainNode->aclBaseKey;
     $this->aclPath = $domainNode->domainAcl;
+    $this->pathKey = $domainNode->aclBaseKey;
 
     $this->levels = Acl::$accessLevels;
 

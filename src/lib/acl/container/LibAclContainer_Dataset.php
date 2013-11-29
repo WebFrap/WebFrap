@@ -32,6 +32,11 @@ class LibAclContainer_Dataset extends LibAclPermission
   /**
    * @var string
    */
+  public $pathKey = null;
+
+  /**
+   * @var string
+   */
   public $aclPath = null;
 
   /**
@@ -103,7 +108,7 @@ class LibAclContainer_Dataset extends LibAclPermission
       $params->aclLevel = 1;
     }
 
-    $areaId = $acl->resources->getAreaId($this->aclKey);
+    $areaId = $acl->resources->getAreaId($this->pathKey);
 
     // eventuellen check Code vorab laden, erweitert die rollen
       // eventuellen check Code vorab laden, erweitert die rollen

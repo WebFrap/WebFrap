@@ -42,6 +42,11 @@ class LibAclContainer_Reflist extends LibAclPermission
   /**
    * @var string
    */
+  protected $pathKey = null;
+
+  /**
+   * @var string
+   */
   protected $aclQuery = null;
 
   /**

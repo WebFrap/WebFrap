@@ -36,6 +36,11 @@ class LibAclContainer_Root extends LibAclRoot
    * @var string
    */
   protected $aclKey = null;
+  
+  /**
+   * @var string
+   */
+  protected $pathKey = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
