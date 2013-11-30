@@ -1635,13 +1635,11 @@ SQL;
       return $entity;
     }
 
-    $connected = $entity->getConnected();
-
-    foreach ($connected as $key => $conEnt) {
-      if (!$this->save($conEnt))
-        return null;
-
-      $entity->$key = $conEnt->getId();
+    $preSave = $entity->getPreSave();
+    foreach ($preSave as /* @var Entity $postEntiy */ $preEntiy) {
+      // we asume that the entity is allready appended
+      Debug::console('Presave update '.get_class($preEntiy));
+      $this->save($preEntiy);
     }
 
     $keyVal = $entity->getData();
@@ -1654,14 +1652,6 @@ SQL;
     }
 
     try {
-
-      $preSave = $entity->getPreSave();
-      foreach ($preSave as /* @var Entity $postEntiy */ $preEntiy) {
-        // we asume that the entity is allready appended
-        Debug::console('Presave insertIfNotExists '.get_class($preEntiy));
-        $this->save($preEntiy);
-      }
-
 
       $userId = $this->getUser()->getId();
       $timestamp = SDate::getTimestamp('Y-m-d H:i:s');
@@ -1773,17 +1763,11 @@ SQL;
       return $entity;
     }
 
-    $connected = $entity->getConnected();
-
-    foreach ($connected as $key => $conEnt) {
-
-      if (!$this->save($conEnt)) {
-        Debug::console('Failed to save connected element');
-
-        return null;
-      }
-
-      $entity->$key = $conEnt->getId();
+    $preSave = $entity->getPreSave();
+    foreach ($preSave as /* @var Entity $postEntiy */ $preEntiy) {
+      // we asume that the entity is allready appended
+      Debug::console('Presave update '.get_class($preEntiy));
+      $this->save($preEntiy);
     }
 
     $keyVal = $entity->getData();
@@ -1796,14 +1780,6 @@ SQL;
     }
 
     try {
-
-    	$preSave = $entity->getPreSave();
-    	foreach ($preSave as /* @var Entity $postEntiy */ $preEntiy) {
-    		// we asume that the entity is allready appended
-    		Debug::console('Presave '.get_class($preEntiy));
-    		$this->save($preEntiy);
-    	}
-
 
       $userId = $this->getUser()->getId();
       $timestamp = SDate::getTimestamp('Y-m-d H:i:s');
@@ -2224,19 +2200,6 @@ SQL;
           Debug::console('Presave update '.get_class($preEntiy));
           $this->save($preEntiy);
         }
-
-        $connected = $entity->getConnected();
-
-        foreach ($connected as $key => $conEnt) {
-
-          Debug::console('connected '.$entity->getTable().' '.$key);
-
-          $this->save($conEnt);
-
-          if (!$entity->$key)
-            $entity->$key = $conEnt->getId();
-        }
-
 
         $id = $entity->getId();
         $this->addToPool($entity->getEntityName(), $id, $entity);

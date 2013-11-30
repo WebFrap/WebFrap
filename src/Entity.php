@@ -156,16 +156,6 @@ abstract class Entity implements ArrayAccess
   protected $postSave = array ();
 
   /**
-   * Pool with all to the entity connected Entities to build a net of entities
-   * to save alle connected entities in one way
-   * That makes it easier for developers to same the entities in the correct
-   * order to solve all dependencies
-   *
-   * @var array<entity>
-   */
-  protected $singleRef = array ();
-
-  /**
    * List to be able to connect multiple references
    *
    * @var array<entity>
@@ -243,13 +233,13 @@ abstract class Entity implements ArrayAccess
    */
   public function offsetUnset($offset)
   {
-    
+
     // unset gibt es nicht, nur set null
     if (isset($this->data[$offset])) {
       $this->synchronized = false;
       $this->data[$offset] = null;
     }
-    
+
   } // end public function offsetUnset */
 
   /**
@@ -282,9 +272,9 @@ abstract class Entity implements ArrayAccess
     } else {
       $this->id = $id;
     }
-  
+
     $this->data = $data;
-    
+
     if (static::$track) {
       $this->savedData = $this->data; // den alten wert behalten
     }
@@ -295,7 +285,7 @@ abstract class Entity implements ArrayAccess
         $orm = $orm->getOrm();
 
       $this->orm = $orm;
-      
+
     } else {
 
       $this->orm = Db::getOrm();
@@ -459,12 +449,12 @@ abstract class Entity implements ArrayAccess
     // works, cause if value is null, isset returns false
     if (isset($this->data[$key])) {
       if ((string)$value !== (string)$this->data[$key]) {
-        
+
         $this->synchronized = false;
         $this->data[$key] = $value;
       }
     } else {
-      
+
       $this->synchronized = false;
       $this->data[$key] = $value;
     }
@@ -492,7 +482,7 @@ abstract class Entity implements ArrayAccess
       }
 
       return false;
-      
+
     } else {
 
       $this->data[$key] = $value;
@@ -1031,15 +1021,15 @@ abstract class Entity implements ArrayAccess
    */
   public function getChangedFields()
   {
-    
+
     $fields = array();
-    
+
     if ($this->synchronized || !static::$track) {
       return $fields;
     }
-    
+
     foreach ($this->savedData as $key => $value) {
-      
+
       if ($value != $this->data[$key]) {
         $fields[] = $key;
       }
@@ -1055,21 +1045,21 @@ abstract class Entity implements ArrayAccess
    */
   public function getSavedValue($key)
   {
-  
+
     return isset($this->savedData[$key])
       ? $this->savedData[$key]
       : null;
-  
+
   } // end public function getSavedValue */
-  
+
   /**
    * @return array
    */
   public function getSavedData()
   {
-  
+
     return $this->savedData;
-  
+
   } // end public function getSavedData */
 
   /**
@@ -1082,12 +1072,12 @@ abstract class Entity implements ArrayAccess
     if ($this->synchronized) {
       return array();
     }
-    
+
     $tmp = array();
-    
+
     if (!$fields)
       $fields = array_keys($this->savedData);
-    
+
     foreach ($fields as $field) {
       if ($this->savedData[$field] != $this->data[$field]) {
         $tmp[] = $this->data[$field];
@@ -1260,19 +1250,6 @@ abstract class Entity implements ArrayAccess
    * @param Entity $entity
    * @return void
    */
-  public function connect($key, $entity)
-  {
-
-    $this->singleRef[$key] = $entity;
-
-  } // end public function connect */
-
-  /**
-   *
-   * @param string $key
-   * @param Entity $entity
-   * @return void
-   */
   public function append($key, $entity)
   {
 
@@ -1356,17 +1333,17 @@ abstract class Entity implements ArrayAccess
     $entity = $this->orm->get(SParserString::subToCamelCase(static::$links[$key]), $entityId);
 
     if ($entity) {
-      
+
       $this->{$key} = $entity;
       return $entity;
     } elseif ($empty) {
-      
+
       $newObj = $this->orm->newEntity(SParserString::subToCamelCase(static::$links[$key]));
       $this->{$key} = $newObj;
       return $newObj;
-      
+
     } else {
-      
+
       return null;
     }
 
@@ -1389,17 +1366,6 @@ abstract class Entity implements ArrayAccess
 
   } // end public function owner */
 
-  /**
-   * @getter
-   *
-   * @return array<string:Entity>
-   */
-  public function getConnected()
-  {
-
-    return $this->singleRef;
-
-  } // end public function getConnected */
 
   /**
    * @getter
@@ -1654,7 +1620,7 @@ abstract class Entity implements ArrayAccess
       }
 
       $data[$preTab.'_rowid'] = $this->id;
-      
+
     } else {
 
       foreach ($colKeys as $key) {
@@ -1686,9 +1652,10 @@ abstract class Entity implements ArrayAccess
 
           // speichern der entity nachdem diese entity gespeichert wurde
           $this->postSave[] = $value;
+
         } else {
 
-          $this->singleRef[$key] = $value;
+          $this->preSave[] = $value;
 
           if (! isset($this->data[$key])) {
 
@@ -1715,7 +1682,7 @@ abstract class Entity implements ArrayAccess
         $value->setEntity($this);
         $this->postSave[] = $value;
       }
-      
+
     } else {
 
       if (!isset($this->data[$key])) {
@@ -1755,12 +1722,12 @@ abstract class Entity implements ArrayAccess
   {
 
     if (is_string($key)) {
-      
+
       if (array_key_exists($key, $this->data))
         return Validator::sanitizeHtml($this->data[$key]);
       else
         return null;
-      
+
     } elseif ($key and is_array($key)) {
 
       $data = array ();
@@ -1784,7 +1751,7 @@ abstract class Entity implements ArrayAccess
       }
 
       return $data;
-      
+
     } else {
 
       if (array_key_exists(Db::PK, $this->data))
@@ -2086,7 +2053,7 @@ abstract class Entity implements ArrayAccess
       }
 
       return true;
-      
+
     } elseif (is_string($key) and $key != Db::PK) {
 
       if (is_object($value)) {
@@ -2157,7 +2124,6 @@ abstract class Entity implements ArrayAccess
     $this->newId = null;
     $this->data = array();
     $this->savedData = array();
-    $this->singleRef = array();
     $this->multiRef = array();
 
   } // end public function clear */
@@ -2177,7 +2143,6 @@ abstract class Entity implements ArrayAccess
     $this->savedData = array();
     $this->orm = null;
 
-    $this->singleRef = array();
     $this->multiRef = array();
     $this->i18n = null;
 

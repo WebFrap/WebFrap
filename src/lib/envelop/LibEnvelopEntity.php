@@ -168,14 +168,6 @@ class LibEnvelopEntity
     $this->multiRef[$key][$entity->getId()] = $entity;
   }//end public function append */
 
-  /**
-   * @getter
-   * @return array<string:Entity>
-   */
-  public function getConnected()
-  {
-    return $this->singleRef;
-  }//end public function getConnected */
 
   /**
    * @getter
