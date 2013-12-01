@@ -1723,10 +1723,17 @@ abstract class Entity implements ArrayAccess
 
     if (is_string($key)) {
 
-      if (array_key_exists($key, $this->data))
-        return Validator::sanitizeHtml($this->data[$key]);
-      else
+      if (array_key_exists($key, $this->data)){
+
+        if (is_object($this->data[$key])) {
+          return $this->data[$key]->getId();
+        } else {
+          return Validator::sanitizeHtml($this->data[$key]);
+        }
+
+      } else {
         return null;
+      }
 
     } elseif ($key and is_array($key)) {
 
