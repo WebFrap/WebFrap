@@ -1,1 +1,0 @@
-<h1>Simple Desktop</h1>
