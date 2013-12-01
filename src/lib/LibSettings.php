@@ -24,21 +24,58 @@
 class LibSettings
 {
 
+  const T_VID = 1;
+
+  const T_VAL = 2;
+
+  const T_JSON = 3;
+
+  /**
+   * @var LibSettings
+   */
+  private static $instance = null;
+
   /**
    * @var LibDbConnection
    */
-  public $db = null;
+  protected $db = null;
 
   /**
    * @var LibCache_L1Adapter
    */
-  public $cache = null;
+  protected $cache = null;
 
   /**
    * Alle bereits geladenen settings
    * @var array
    */
-  public $settings = array();
+  protected $userSettings = array();
+
+  /**
+   * Alle bereits geladenen settings
+   * @var array
+   */
+  protected $moduleSettings = array();
+
+  /**
+   * Alle bereits geladenen settings
+   * @var array
+   */
+  protected $newModuleSettings = array();
+
+  /**
+   * @return LibSettings
+   */
+  public static function getActive()
+  {
+    if(!self::$instance){
+      $env = Webfrap::$env;
+      self::$instance = new LibSettings($env->getDb(), $env->getL1Cache());
+    }
+
+    return self::$instance;
+
+  }//end public static function getActive */
 
   /**
    * @param LibDbConnection $db
@@ -51,20 +88,20 @@ class LibSettings
     $this->cache = $cache;
   }//end public function __construct */
 
+
+
   /**
    * @param string $key
    * @param User $user Wenn das Setting User Spezifisch ist
    *
    * @return LibSettingsNode
    */
-  public function getSetting($key)
+  public function getUserSetting($key)
   {
 
-
-    if (!isset($this->settings[$key])) {
+    if (!isset($this->userSettings[$key])) {
 
       $className = EUserSettingType::getClass($key);
-
 
       $sql = <<<SQL
 SELECT rowid, jdata from wbfsys_user_setting where type = {$key} AND id_user is null;
@@ -77,13 +114,13 @@ SQL;
       else
         $setting = new $className();
 
-      $this->settings[$key] = $setting;
+      $this->userSettings[$key] = $setting;
 
     }
 
-    return $this->settings[$key];
+    return $this->userSettings[$key];
 
-  }//end public function getSetting */
+  }//end public function getUserSetting */
 
   /**
    * Speichern der Settings
@@ -91,10 +128,10 @@ SQL;
    * @param int $key
    * @param TArray $data
    */
-  public function saveSetting($key, $data)
+  public function saveUserSetting($key, $data)
   {
 
-    $this->settings[$key] = $data;
+    $this->userSettings[$key] = $data;
 
     $jsonString = $this->db->escape($data->toJson());
 
@@ -104,7 +141,86 @@ SQL;
       $this->db->orm()->insert('WbfsysUserSetting', array('jdata',$jsonString));
     }
 
-  }//end public function saveSetting */
+  }//end public function saveUserSetting */
+
+
+  /**
+   * @param string $key
+   * @param User $user Wenn das Setting User Spezifisch ist
+   *
+   * @return LibSettingsNode
+   */
+  public function getModuleSetting($key)
+  {
+
+    if (!isset($this->moduleSettings[$key])) {
+
+      $className = EUserSettingType::getClass($key);
+
+      $sql = <<<SQL
+SELECT rowid, vid, value, jdata from wbfsys_module_setting where upper(access_key) = upper('{$key}');
+SQL;
+
+      $data = $this->db->select($sql)->get();
+
+      if (!$data) {
+        $this->moduleSettings[$key] = null;
+      } else if (!is_null($data['vid'])) {
+        $this->moduleSettings[$key] = $data['vid'];
+      } elseif (!is_null($data['value'])) {
+        $this->moduleSettings[$key] = $data['value'];
+      } else if(!is_null($data['jdata'])){
+        $this->moduleSettings[$key] = json_decode($data['jdata']);
+      }
+    }
+
+    return $this->moduleSettings[$key];
+
+  }//end public function getModuleSetting */
+
+  /**
+   * Speichern der Settings
+   *
+   * @param int $key
+   * @param TArray $data
+   */
+  public function setModuleSetting($key, $data)
+  {
+
+    $this->settings[$key] = $data;
+
+    $jsonString = $this->db->escape($data->toJson());
+
+    if ($data->id) {
+      $this->db->orm()->update('WbfsysModuleSetting', $data->id, array('jdata',$jsonString));
+    } else {
+      $this->db->orm()->insert('WbfsysModuleSetting', array('jdata',$jsonString));
+    }
+
+  }//end public function setModuleSetting */
+
+  /**
+   * Speichern der Settings
+   *
+   * @param int $key
+   * @param TArray $data
+   */
+  public function saveModuleSetting()
+  {
+
+    $jsonString = $this->db->escape($data->toJson());
+
+    foreach ($this->newModuleSettings as $key => $setting) {
+      if ($data->id) {
+        $this->db->orm()->update('WbfsysModuleSetting', $data->id, array('jdata',$jsonString));
+      } else {
+        $this->db->orm()->insert('WbfsysModuleSetting', array('jdata',$jsonString));
+      }
+    }
+
+
+
+  }//end public function saveModuleSetting */
 
 }// end class LibSettings
 
