@@ -1359,6 +1359,7 @@ class Webfrap
 
           return $tmpPath;
         } else {
+          
           if (Log::$levelDebug)
             Debug::console('Not found: '. $tmpPath);
         }
@@ -1384,6 +1385,7 @@ class Webfrap
 
           return $tmpPath;
         } else {
+          
           if (Log::$levelDebug)
             Debug::console('Not found: '. $tmpPath);
         }
