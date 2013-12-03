@@ -135,8 +135,10 @@ SQL;
 
     $jsonString = $this->db->escape($data->toJson());
 
-    if ($data->id) {
-      $this->db->orm()->update('WbfsysUserSetting', $data->id, array('jdata',$jsonString));
+    $id = $data->getId();
+
+    if ($id) {
+      $this->db->orm()->update('WbfsysUserSetting', $id, array('jdata',$jsonString));
     } else {
       $this->db->orm()->insert('WbfsysUserSetting', array('jdata',$jsonString));
     }
@@ -155,28 +157,31 @@ SQL;
 
     if (!isset($this->moduleSettings[$key])) {
 
-      $className = EUserSettingType::getClass($key);
-
       $sql = <<<SQL
-SELECT rowid, vid, value, jdata from wbfsys_module_setting where upper(access_key) = upper('{$key}');
+SELECT rowid, vid, value, type, jdata from wbfsys_module_setting where upper(access_key) = upper('{$key}');
 SQL;
 
       $data = $this->db->select($sql)->get();
 
-      if (!$data) {
-        $this->moduleSettings[$key] = null;
-      } else if (!is_null($data['vid'])) {
-        $this->moduleSettings[$key] = $data['vid'];
-      } elseif (!is_null($data['value'])) {
-        $this->moduleSettings[$key] = $data['value'];
-      } else if(!is_null($data['jdata'])){
-        $this->moduleSettings[$key] = json_decode($data['jdata']);
-      }
+      $node = new LibSettingsModNode($data);
+      $this->moduleSettings[$key] = $node;
     }
 
     return $this->moduleSettings[$key];
 
   }//end public function getModuleSetting */
+
+  /**
+   * @param string $key
+   * @param User $user Wenn das Setting User Spezifisch ist
+   *
+   * @return LibSettingsNode
+   */
+  public function getModuleSettings($keys)
+  {
+
+  }//end public function getModuleSettings */
+
 
   /**
    * Speichern der Settings
@@ -187,17 +192,25 @@ SQL;
   public function setModuleSetting($key, $data)
   {
 
-    $this->settings[$key] = $data;
-
-    $jsonString = $this->db->escape($data->toJson());
-
-    if ($data->id) {
-      $this->db->orm()->update('WbfsysModuleSetting', $data->id, array('jdata',$jsonString));
-    } else {
-      $this->db->orm()->insert('WbfsysModuleSetting', array('jdata',$jsonString));
-    }
+    $this->moduleSettings[$key] = $data;
+    $this->newModuleSettings[$key] = $data;
 
   }//end public function setModuleSetting */
+
+  /**
+   * Übergeben der Settings node an die Lib
+   *
+   * @param [LibSettingsModNode]
+   */
+  public function setModuleSettings($settings)
+  {
+
+    foreach ($settings as $key => $data) {
+      $this->moduleSettings[$key] = $data;
+      $this->newModuleSettings[$key] = $data;
+    }
+
+  }//end public function setModuleSettings */
 
   /**
    * Speichern der Settings
@@ -205,22 +218,20 @@ SQL;
    * @param int $key
    * @param TArray $data
    */
-  public function saveModuleSetting()
+  public function saveModuleSettings()
   {
 
-    $jsonString = $this->db->escape($data->toJson());
+    $orm = $this->getOrm();
 
     foreach ($this->newModuleSettings as $key => $setting) {
       if ($data->id) {
-        $this->db->orm()->update('WbfsysModuleSetting', $data->id, array('jdata',$jsonString));
+        $orm->update('WbfsysModuleSetting', $data->id, $data->saveValue() );
       } else {
-        $this->db->orm()->insert('WbfsysModuleSetting', array('jdata',$jsonString));
+        $orm->insert('WbfsysModuleSetting', $data->saveValue());
       }
     }
 
-
-
-  }//end public function saveModuleSetting */
+  }//end public function saveModuleSettings */
 
 }// end class LibSettings
 
