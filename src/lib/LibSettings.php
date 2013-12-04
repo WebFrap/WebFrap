@@ -136,11 +136,13 @@ SQL;
     $jsonString = $this->db->escape($data->toJson());
 
     $id = $data->getId();
+    
+    $orm = $this->db->orm;
 
     if ($id) {
-      $this->db->orm()->update('WbfsysUserSetting', $id, array('jdata',$jsonString));
+      $orm->update('WbfsysUserSetting', $id, array('jdata',$jsonString));
     } else {
-      $this->db->orm()->insert('WbfsysUserSetting', array('jdata',$jsonString));
+      $orm->insert('WbfsysUserSetting', array('jdata',$jsonString));
     }
 
   }//end public function saveUserSetting */
