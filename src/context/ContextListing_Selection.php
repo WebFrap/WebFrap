@@ -92,6 +92,15 @@ class ContextListing_Selection extends ContextListing
   
     if ($this->targetMask)
       $this->actionExt .= '&target_mask='.$this->targetMask;
+    
+    if ($this->refId)
+      $this->actionExt .= '&refid='.$this->refId;
+    
+    if ($this->pRefId)
+      $this->actionExt .= '&prefid='.$this->pRefId;
+    
+    if ($this->adfs)
+      $this->actionExt .= '&adfs[]='.implode('&adfs[]=',$this->adfs);
   
     return $this->actionExt;
   
