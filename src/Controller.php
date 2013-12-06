@@ -1482,8 +1482,7 @@ abstract class Controller extends BaseChild
     }
 
     Message::addError($message);
-    $this->errorPage
-    (
+    $this->errorPage(
       'Access Denied' ,
       $message,
       $view
@@ -1543,8 +1542,7 @@ abstract class Controller extends BaseChild
     }
 
     Message::addError($message);
-    $this->errorPage
-    (
+    $this->errorPage(
       'Invalid Request' ,
       $message,
       $view
