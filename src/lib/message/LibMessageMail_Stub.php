@@ -109,8 +109,7 @@ class LibMessageMail_Stub extends LibMessageMail
 
 MAIL;
 
-    SFiles::write
-    (
+    SFiles::write(
       PATH_GW.'tmp/messages/'.Webfrap::getRunId().'/'.$address.'.txt' ,
       $mail
     );
