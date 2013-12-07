@@ -93,14 +93,12 @@ class LibSpreadsheetExcel  extends LibTemplateDocument
    * @param string $style
    * @param string $tabType
    */
-  public function __construct
-  (
+  public function __construct(
     $env,
     $defTitle = null,
     $style = null,
     $tabType = 'LibSpreadsheetExcelTab_Sql'
-  )
-  {
+  ) {
 
     $this->env = $env;
     $this->parent = $env->getTpl();
