@@ -579,6 +579,7 @@ SQL;
               )
             )
         ) {
+
           $sql .= '('.str_replace('.',',',$row[LibDbAdmin::COL_LENGTH]).')';
         } else if (
           isset($row[LibDbAdmin::COL_PRECISION])
@@ -597,8 +598,10 @@ SQL;
                 )
               )
           ) {
+
             $sql .= '('.(int)$row[LibDbAdmin::COL_PRECISION].', '.(int)$row[LibDbAdmin::COL_SCALE].')';
           } else {
+
             $sql .= '('.(int)$row[LibDbAdmin::COL_PRECISION].')';
           }
 
@@ -619,14 +622,11 @@ SQL;
 
         $sql .= $row[LibDbAdmin::COL_NAME].' '.$type;
 
-        if
-        (
+        if(
           trim($row[LibDbAdmin::COL_LENGTH]) != ''
-            && !in_array
-            (
+            && !in_array(
               $row[LibDbAdmin::COL_TYPE],
-              array
-              (
+              array(
                 'integer', 'int4',
                 'int2', 'int8',
                 'boolean',
@@ -637,18 +637,18 @@ SQL;
 
           $sql .= '('.str_replace('.',',',$row[LibDbAdmin::COL_LENGTH]).')';
         } else if (
+
           isset($row[LibDbAdmin::COL_PRECISION])
             && '' != trim(LibDbAdmin::COL_PRECISION)
             && (int)$row[LibDbAdmin::COL_PRECISION]
-            && in_array
-            (
+            && in_array(
               $row[LibDbAdmin::COL_TYPE],
-              array
-              (
+              array(
                 'numeric'
               )
             )
         ) {
+
           if(
             isset($row[LibDbAdmin::COL_SCALE])
               && '' != trim(LibDbAdmin::COL_SCALE)
@@ -673,10 +673,12 @@ SQL;
 
     // check if the table has a rowid
     if ($hasRowid) {
-    $sql .= <<<SQL
+
+      $sql .= <<<SQL
       PRIMARY KEY (rowid)
 SQL;
     } else {
+
       $sql = substr($sql, 0, -3);
     }
 

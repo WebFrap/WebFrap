@@ -149,8 +149,7 @@ class LibDbSyncMetadata extends LibDbSync
 
     $colName = $attribute->name();
 
-    $data = array
-    (
+    $data = array(
       LibDbAdmin::COL_NAME => $colName,
       LibDbAdmin::COL_DEFAULT => $default,
       LibDbAdmin::COL_NULL_ABLE => $nullAble,
