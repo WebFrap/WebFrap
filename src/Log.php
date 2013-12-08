@@ -377,11 +377,11 @@ class Log
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   *
-   * @param $file
-   * @param $line
-   * @param $message
-   * @return unknown_type
+   * @param string $file (filename oder message)
+   * @param int $line
+   * @param string $message
+   * @param Exception $exception
+   * @return void
    */
   public static function trace($file, $line = null, $message = null, $exception = null)
   {
@@ -401,11 +401,11 @@ class Log
   }//end public static function trace */
 
   /**
-   *
-   * @param $file
-   * @param $line
-   * @param $message
-   * @return unknown_type
+   * @param string $file (filename oder message)
+   * @param int $line
+   * @param string $message
+   * @param Exception $exception
+   * @return void
    */
   public static function debug($file, $line = null, $message = null, $exception = null  )
   {
@@ -425,11 +425,11 @@ class Log
   }//end public static function debug */
 
   /**
-   *
-   * @param $file
-   * @param $line
-   * @param $message
-   * @return unknown_type
+   * @param string $file (filename oder message)
+   * @param int $line
+   * @param string $message
+   * @param Exception $exception
+   * @return void
    */
   public static function verbose($file, $line = null, $message = null, $exception = null  )
   {
@@ -467,11 +467,11 @@ class Log
   }//end public static function dumpVerbose */
 
   /**
-   *
-   * @param $file
-   * @param $line
-   * @param $message
-   * @return unknown_type
+   * @param string $file (filename oder message)
+   * @param int $line
+   * @param string $message
+   * @param Exception $exception
+   * @return void
    */
   public static function config($file, $line = null, $message = null, $exception = null  )
   {
@@ -491,11 +491,11 @@ class Log
   }//end public static function config */
 
   /**
-   *
-   * @param $file
-   * @param $line
-   * @param $message
-   * @return unknown_type
+   * @param string $file (filename oder message)
+   * @param int $line
+   * @param string $message
+   * @param Exception $exception
+   * @return void
    */
   public static function user($file, $line = null, $message = null, $exception = null  )
   {
@@ -515,11 +515,11 @@ class Log
   }//end public static function user */
 
   /**
-   *
-   * @param $file
-   * @param $line
-   * @param $message
-   * @return unknown_type
+   * @param string $file (filename oder message)
+   * @param int $line
+   * @param string $message
+   * @param Exception $exception
+   * @return void
    */
   public static function info($file, $line = null, $message = null, $exception = null  )
   {
@@ -540,7 +540,10 @@ class Log
 
   /**
    * Statisches Loggen, möglich dank getInstance
-   *
+   * @param string $file (filename oder message)
+   * @param int $line
+   * @param string $message
+   * @param Exception $exception
    * @return void
    */
   public static function warn($file, $line = null, $message = null, $exception = null  )
@@ -562,7 +565,10 @@ class Log
 
   /**
    * Statisches Loggen, möglich dank getInstance
-   *
+   * @param string $file (filename oder message)
+   * @param int $line
+   * @param string $message
+   * @param Exception $exception
    * @return void
    */
   public static function error($file, $line = null, $message = null, $exception = null  )
