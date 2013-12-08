@@ -22,6 +22,10 @@ $this->l['wbf.message']['Successfully created {@path@}.']
 $this->l['wbf.message']['Failed to create {@path@}.']
  = 'Failed to create {@path@}.';
 
+$this->l['wbf.message']['Failed to updated {@key@}']
+= 'Failed to updated {@key@}';
+
+
 // invalid access errors in services
 
 $this->l['wbf.message']['The requested Outputformat is not implemented for this action!']

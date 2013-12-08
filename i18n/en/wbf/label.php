@@ -40,6 +40,22 @@ $this->l['wbf.label']['Help'] = 'Help';
 $this->l['wbf.label']['Bug'] = 'Bug';
 $this->l['wbf.label']['Status'] = 'Status';
 $this->l['wbf.label']['Help for: {@label@}'] = 'Help for: {@label@}';
+$this->l['wbf.label']['Contact all'] = 'Contact all';
+
+$this->l['wbf.label']['Contact all'] = 'Contact all';
+$this->l['wbf.label']['Rolebased Access'] = 'Rolebased Access';
+$this->l['wbf.label']['Qualified Users'] = 'Qualified Users';
+$this->l['wbf.label']['Backpath'] = 'Backpath';
+$this->l['wbf.label']['Rolebased Access'] = 'Rolebased Access';
+$this->l['wbf.label']['Area'] = 'Area';
+$this->l['wbf.label']['Area Acecss'] = 'Area Acecss';
+$this->l['wbf.label']['References Access'] = 'References Access';
+$this->l['wbf.label']['Search by keyword'] = 'Search by keyword';
+
+
+$this->l['wbf.label']['Connect'] = 'Connect';
+$this->l['wbf.label']['Connect &amp; Close'] = 'Connect &amp; Close';
+
 
 $this->l['wbf.label']['Export'] = 'Export';
 $this->l['wbf.label']['Custom Exports'] = 'Custom Exports';

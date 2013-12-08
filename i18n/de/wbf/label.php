@@ -47,6 +47,15 @@ $this->l['wbf.label']['Description'] = 'Description';
 $this->l['wbf.label']['Group'] = 'Group';
 $this->l['wbf.label']['Search by keyword'] = 'Search by keyword';
 
+$this->l['wbf.label']['Contact all'] = 'Contact all';
+$this->l['wbf.label']['Rolebased Access'] = 'Rolebased Access';
+$this->l['wbf.label']['Qualified Users'] = 'Qualified Users';
+$this->l['wbf.label']['Backpath'] = 'Backpath';
+$this->l['wbf.label']['Rolebased Access'] = 'Rolebased Access';
+$this->l['wbf.label']['Area'] = 'Area';
+$this->l['wbf.label']['Area Acecss'] = 'Area Acecss';
+$this->l['wbf.label']['References Access'] = 'References Access';
+
 
 
 $this->l['wbf.label']['List Type'] = 'List Type';
