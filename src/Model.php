@@ -62,9 +62,6 @@ abstract class Model extends BaseChild
 
     $this->getRegistry();
 
-    if (DEBUG)
-      Debug::console('Load model '.get_class($this));
-
   }//end public function __construct */
 
 

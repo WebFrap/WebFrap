@@ -344,8 +344,6 @@ HTML;
 
     $trace = Debug::backtraceToTable();
 
-    Debug::console('ERROR: '.$file.' '.$line.': '.$message , $toDump, $trace  );
-
     if ($toDump) {
       $message .= Debug::getDump($toDump);
     }
@@ -397,8 +395,6 @@ HTML;
 
       if (!$toDump)
         $toDump = $metadata;
-
-      Debug::console('ERROR: '.$file.' '.$line.': '.$message , $toDump);
 
       Log::error( $file , $line , $message);
 
@@ -452,7 +448,6 @@ HTML;
         );
       }
     } else { // else we have to handle the error output
-      Debug::console('ERROR: '.$file.' '.$line.' '.$message , $toDump);
       Log::error( $file , $line , $message);
 
       // eine Debugtrace ausgeben wenn auf Tracing geschaltet ist
@@ -566,9 +561,8 @@ HTML;
       if (WebFrap::classExists($exception)) {
         throw new $exception($message);
       } else {
-        throw new WebfrapSys_Exception
-        (
-        'Thrown nonexisting exception: '.$exception.' with message: '.$message
+        throw new WebfrapSys_Exception(
+          'Thrown nonexisting exception: '.$exception.' with message: '.$message
         );
       }
     }

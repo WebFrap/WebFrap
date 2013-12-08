@@ -1286,8 +1286,6 @@ class Validator
 
     $formatter = LibFormatterDate::getActive();
 
-    Debug::console(I18n::$short.' '.I18n::$dateFormat .' '.  I18n::$dateSeperator  );
-
     $formatter->setFormat(I18n::$dateFormat);
     $formatter->setSeperator(I18n::$dateSeperator);
 

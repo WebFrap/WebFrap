@@ -308,7 +308,7 @@ class Session
     $className = 'LibSession'.self::$sessionType;
     self::$session = new $className();
 
-    Debug::console('start session '.$className);
+    Log::debug('start session '.$className);
 
     self::$session->start(
       self::$name ,

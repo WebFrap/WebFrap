@@ -356,8 +356,6 @@ class ContextListing extends Context
       }
     }
 
-    //Debug::console('got search fields',$extSearchFields);
-
     foreach ($extSearchFields as $fKey => $extField) {
 
       if (!isset($this->searchFieldsStack[$extField['field']])) {

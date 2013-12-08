@@ -143,9 +143,6 @@ abstract class Module extends BaseChild
     if (!$name  )
       $name = $request->param('mex', Validator::CNAME);
 
-    if (DEBUG)
-      Debug::console('Controller name '.$name.' Modname ' .$this->modName);
-
     if (!$name)
       $name = $this->defaultControllerName;
 

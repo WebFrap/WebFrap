@@ -65,9 +65,8 @@ class Protocol extends BaseChild
     }
 
     if (!$resourceId) {
-      Debug::console("Got no Resource ID, this means the datamodell is not yet synced.");
-      Log::warn("Got no Resource ID, this means the datamodell is not yet synced.");
 
+      Log::warn("Got no Resource ID, this means the datamodell is not yet synced.");
       return;
     }
 
