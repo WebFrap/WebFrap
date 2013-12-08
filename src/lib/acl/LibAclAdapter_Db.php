@@ -193,6 +193,11 @@ class LibAclAdapter_Db extends LibAclAdapter
   public function getPathJoins($areaId)
   {
 
+    if(!$areaId){
+      Log::error('Tried to load path joins with an empty area id');
+      return array();
+    }
+
     if (!ctype_digit($areaId))
       $areaId = $this->resources->getAreaId($areaId);
 
@@ -456,7 +461,7 @@ SQL;
       $container->setPermission(Acl::ADMIN, Acl::ADMIN);
       return $container;
     }
-    
+
     $roleIds = $this->resources->getGroupIds($container->roles);
 
     ///FIXME sh

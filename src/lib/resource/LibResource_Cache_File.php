@@ -78,12 +78,19 @@ class LibResource_Cache_File implements LibResource_CacheAdapter
    */
   protected function extractKey($areaKey)
   {
-    
+
     Debug::console('extract area resource key '.$areaKey);
-    
+
+    if (!$areaKey) {
+      ///TODO better error message
+      Log::error('Got empty area key');
+      return null;
+    }
+
     $modKey = explode('-',$areaKey,2);
     $modKey = explode('_',$modKey[1],2);
     return $modKey[0];
+
   }//end protected function extractKey */
 
   /**
