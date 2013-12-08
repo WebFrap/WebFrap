@@ -46,7 +46,6 @@ $this->l['wbf.label']['Contact all'] = 'Contact all';
 $this->l['wbf.label']['Rolebased Access'] = 'Rolebased Access';
 $this->l['wbf.label']['Qualified Users'] = 'Qualified Users';
 $this->l['wbf.label']['Backpath'] = 'Backpath';
-$this->l['wbf.label']['Rolebased Access'] = 'Rolebased Access';
 $this->l['wbf.label']['Area'] = 'Area';
 $this->l['wbf.label']['Area Acecss'] = 'Area Acecss';
 $this->l['wbf.label']['References Access'] = 'References Access';
@@ -136,4 +135,31 @@ $this->l['wbf.label']['Full Export XML'] = 'Full Export XML';
 $this->l['wbf.label']['Insert value for {@attr@} ({@src@})'] = 'Insert value for {@attr@} ({@src@})';
 $this->l['wbf.label']['Search for {@attr@} ({@src@})'] = 'Insert value for {@attr@} ({@src@})';
 $this->l['wbf.label']['Append new {@label@}'] = 'Append new {@label@}';
+
+$this->l['wbf.label']['Search by keyword'] = 'Search by keyword';
+$this->l['wbf.label']['Asgd'] = 'Asgd';
+$this->l['wbf.label']['Access'] = 'Access';
+$this->l['wbf.label']['References'] = 'References';
+$this->l['wbf.label']['Msg'] = 'Msg';
+$this->l['wbf.label']['Priv Msg'] = 'Priv Msg';
+$this->l['wbf.label']['Maint'] = 'Maint';
+$this->l['wbf.label']['Filter'] = 'Filter';
+
+$this->l['wbf.label']['Listing'] = 'Listing';
+$this->l['wbf.label']['Insert'] = 'Insert';
+$this->l['wbf.label']['Update'] = 'Update';
+$this->l['wbf.label']['Admin'] = 'Admin';
+$this->l['wbf.label']['Rowid'] = 'Rowid';
+
+$this->l['wbf.label']['Target Area'] = 'Target Area';
+$this->l['wbf.label']['Ref Field'] = 'Ref Field';
+$this->l['wbf.label']['Groups'] = 'Groups';
+$this->l['wbf.label']['Set Groups'] = 'Set Groups';
+$this->l['wbf.label']['Backpath Access {@label@}'] = 'Backpath Access {@label@}';
+
+
+
+
+
+
 
