@@ -109,7 +109,7 @@ class IoFileIterator
       $this->fRes = opendir($folder);
       $this->next();
     } else {
-      Debug::console('Tried to open nonexisting Folder: '.$folder);
+      Log::warn('Tried to open nonexisting Folder: '.$folder);
     }
 
   }// public function __construct

@@ -214,7 +214,7 @@ class LibAclContainer_List extends LibAclPermission
           if (!isset($tmp[Db::Q_SIZE])) {
 
             if (Log::$levelDebug)
-              Debug::console('got no Db::Q_SIZE');
+              Log::debug('got no Db::Q_SIZE');
 
             $this->sourceSize = 0;
           } else {
@@ -230,7 +230,7 @@ class LibAclContainer_List extends LibAclPermission
           if (!isset($tmp[Db::Q_SIZE])) {
 
             if (Log::$levelDebug)
-              Debug::console('got no Db::Q_SIZE');
+              Log::debug('got no Db::Q_SIZE');
 
             $this->sourceSize = 0;
           } else {
@@ -362,21 +362,21 @@ class LibAclContainer_List extends LibAclPermission
 
     // impliziete Rechtevergabe
     foreach ($backPaths as $backPath) {
-    
+
       $pathRoles = explode(',', $backPath['groups']);
-    
+
       // prüfen ob der user die Rolle hat
       $hasRole = $acl->hasRoleSomewhere(
         $pathRoles,
         $backPath['target_area_key']
       );
-    
+
       // wenn der user gruppenmitglied ist die neuen level setzen
       if ($hasRole && (int)$backPath['access_level'] >= Acl::INSERT) {
         $this->implicitInsert = true;
         $this->hasPartAssign = true;
       }
-    
+
     }
 
     // wenn wir in keinem pfad sind nehmen wir einfach die normalen berechtigungen
@@ -428,7 +428,7 @@ class LibAclContainer_List extends LibAclPermission
     }
 
     $this->loadCustom($params, $entity);
-    
+
   }//end public function loadDefault */
 
   /**
@@ -437,9 +437,9 @@ class LibAclContainer_List extends LibAclPermission
    */
   public function loadCustom($params, $entity = null)
   {
-  
+
   }//end public function loadCustom */
-  
+
   /**
    * @param LibSqlQuery $query
    * @param string $condition
@@ -474,7 +474,7 @@ class LibAclContainer_List extends LibAclPermission
     if (is_null($this->defLevel)) {
       $this->defLevel = 0;
     }
-  
+
     /*
     $joinType = '';
     if (!$this->isPartAssign) {

@@ -31,12 +31,12 @@ class LibAclContainer_Root extends LibAclRoot
    * @var string
    */
   protected $srcKey = null;
-  
+
   /**
    * @var string
    */
   protected $aclKey = null;
-  
+
   /**
    * @var string
    */
@@ -63,7 +63,7 @@ class LibAclContainer_Root extends LibAclRoot
     $rootId = (int)$rootId;
 
     if (DEBUG)
-      Debug::console("getRefLevel $rootId, $level, $refKey ".__METHOD__);
+      Log::debug("getRefLevel $rootId, $level, $refKey ");
 
     if (isset($this->paths[$rootId][$level][$refKey]['level']))
       return $this->paths[$rootId][$level][$refKey]['level'];
@@ -99,7 +99,7 @@ class LibAclContainer_Root extends LibAclRoot
     }
 
     if (DEBUG)
-      Debug::console("getRefRoles $rootId, $level, $refKey ".__METHOD__);
+      Log::debug("getRefRoles $rootId, $level, $refKey ");
 
     if (isset($this->paths[$rootId][$level][$refKey]['roles']))
       return $this->paths[$rootId][$level][$refKey]['roles'];
@@ -135,7 +135,7 @@ class LibAclContainer_Root extends LibAclRoot
     }
 
     if (DEBUG)
-      Debug::console("getRefAccess $rootId, $level, $refKey ".__METHOD__);
+      Log::debug("getRefAccess $rootId, $level, $refKey ");
 
     if (isset($this->paths[$rootId][$level][$refKey]))
       return $this->paths[$rootId][$level][$refKey];
@@ -192,43 +192,43 @@ class LibAclContainer_Root extends LibAclRoot
 
     $roles = array();
     $level = 0;
-    
+
     $pathKey = $this->pathKey;
     if (!$pathKey)
       $pathKey = $this->aclKey;
 
     $areaId = $acl->resources->getAreaId($pathKey);
-    
+
     // eventuellen check Code vorab laden, erweitert die rollen
     // eventuellen check Code vorab laden, erweitert die rollen
     $backPaths = $acl->getPathJoinLevels($areaId);
-    
+
     $roles = array();
-    
+
     // impliziete Rechtevergabe
     foreach ($backPaths as $backPath) {
-    
+
       if (is_object($entity) && $entity->{$backPath['ref_field']}) {
-    
+
         $pathRoles = explode(',', $backPath['groups']);
-    
+
         // prüfen ob der user die Rolle hat
         $hasRole = $acl->hasRole(
           $pathRoles,
           $backPath['target_area_key'],
           $entity->{$backPath['ref_field']}
         );
-    
+
         // wenn der user gruppenmitglied ist die neuen level setzen
         if ($hasRole) {
 
           if ((int)$backPath['ref_access_level'] > $level ) {
             $level = (int)$backPath['ref_access_level'];
           }
-          
+
           //$roles = array_merge($roles, explode(',', $backPath['set_ref_groups']));
         }
-    
+
       }//end check
     }
 

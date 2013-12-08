@@ -95,7 +95,6 @@ class LibAclContainer_Reflist extends LibAclPermission
     $acl = $this->getAcl();
 
     // erst mal root laden
-    Debug::console('injectDsetRootPermission');
     $acl->injectDsetRootPermission(
 	    $this,
       $params->aclRoot,
@@ -106,7 +105,6 @@ class LibAclContainer_Reflist extends LibAclPermission
 
     // da wir die zugriffsrechte mehr als nur einmal brauchen holen wir uns
     // direkt das zugriffslevel
-    Debug::console('injectDsetPathPermission');
     $acl->injectDsetPathPermission(
       $this, // sich selbst als container mit übergeben
       $params->aclRoot,
@@ -243,8 +241,8 @@ SQL
     {$this->defLevel},
     acls."acl-level",
     case when back_acls."acl-id_area" is null
-    then 0 
-    else back_path.access_level 
+    then 0
+    else back_path.access_level
     end
   ) as "acl-level"
 
