@@ -83,7 +83,8 @@ class LibResource_Cache_File implements LibResource_CacheAdapter
 
     if (!$areaKey) {
       ///TODO better error message
-      Log::error('Got empty area key');
+      $trace = Debug::backtrace();
+      Log::error('Got empty area key '.$trace);
       return null;
     }
 
