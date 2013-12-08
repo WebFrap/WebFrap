@@ -22,8 +22,7 @@
  * @subpackage tech_core
  *
  */
-class LibLogFile
-  implements LibLogAdapter
+class LibLogFile implements LibLogAdapter
 {
 
   /** Die Maximale Größe der Logdatei in kb

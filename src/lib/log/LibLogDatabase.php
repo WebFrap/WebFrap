@@ -23,8 +23,7 @@
  * @todo implement me
  *
  */
-class LibLogDatabase
-  implements LibLogAdapter
+class LibLogDatabase implements LibLogAdapter
 {
 
   /**

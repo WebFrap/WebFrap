@@ -20,8 +20,7 @@
  * @subpackage tech_core
  * @todo implement me
  */
-class LibLogMail
-  implements LibLogAdapter
+class LibLogMail implements LibLogAdapter
 {
 
   /**

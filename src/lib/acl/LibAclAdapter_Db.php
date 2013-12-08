@@ -224,6 +224,11 @@ SQL;
   public function getPathJoinLevels($areaId)
   {
 
+    if (!$areaId) {
+      Log::error('Called getPathJoinLevels with an empty area ID');
+      return array();
+    }
+
     if (!ctype_digit($areaId))
       $areaId = $this->resources->getAreaId($areaId);
 

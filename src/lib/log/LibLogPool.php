@@ -147,8 +147,7 @@ class LibLogPool
 
       if (isset($this->logLevel[$method]) && $aktLevel[$this->logLevel[$method]]  ) {
         $mod = $this->loadedAppender[$name];
-        $mod->logline
-        (
+        $mod->logline(
           self::logtime(), // Time
           $method,
           $arguments[0], // File

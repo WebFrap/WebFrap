@@ -15,21 +15,16 @@
 *
 *******************************************************************************/
 
-if (!ENABLE_FIREPHP) {
-  include PATH_VENDOR.'FirePHPLibrary/lib/FirePHPCore/FirePHP.class.php';
-}
+include PATH_ROOT.'WebFrap_Vendor/vendor/FirePHPCore/FirePHP.class.php';
 
 /**
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibLogFirephp
-  implements LibLogAdapter
+class LibLogFirephp implements LibLogAdapter
 {
 
   /**
-   * Enter description here...
-   *
    * @var FirePHP
    */
   private $firephp = null;
@@ -39,6 +34,7 @@ class LibLogFirephp
   public function  __construct($conf)
   {
     $this->firephp = FirePHP::getInstance(true);
+
   }//end public function  __construct */
 
   /**
@@ -48,7 +44,8 @@ class LibLogFirephp
   public function logline($time,  $level,  $file,  $line,  $message, $exception)
   {
 
-    if (View::$blockHeader) return;
+    if (View::$blockHeader)
+      return;
 
     if ($level <=  5) {
       $this->firephp->fb("$time $level $file $line $message", FirePHP::INFO);

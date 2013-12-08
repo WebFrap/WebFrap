@@ -74,8 +74,11 @@ select rowid from wbfsys_security_area where access_key = '{$db->escape($key)}';
 SQL;
       $areaId = $db->select($sql)->getField('rowid');
 
-      if ($areaId)
+      if ($areaId) {
         $this->rCache->addAreaId($key, $areaId);
+      } else {
+        Log::error('Missing the AreaId for key: '.$key);
+      }
 
       // has a value or is null
       return $areaId;

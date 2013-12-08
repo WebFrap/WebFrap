@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LobLogCli
-  implements LibLogAdapter
+class LobLogCli implements LibLogAdapter
 {
 
   /**

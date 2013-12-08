@@ -398,7 +398,7 @@ class LibI18nPhp implements ArrayAccess
       $this->includeLang($key);
 
     if (!isset($this->l[$key][$text])) {
-      Debug::console('MISSING I18N: repo: '.$key.' key: '.$text);
+      Log::warn('MISSING I18N: repo: '.$key.' key: '.$text);
       if ($data) {
 
         $keys = array();
