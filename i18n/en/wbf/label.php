@@ -158,6 +158,10 @@ $this->l['wbf.label']['Set Groups'] = 'Set Groups';
 $this->l['wbf.label']['Backpath Access {@label@}'] = 'Backpath Access {@label@}';
 
 
+$this->l['wbf.label']['Clean assignments'] = 'Clean assignments';
+$this->l['wbf.label']['Delete assignment'] = 'Delete assignment';
+
+
 
 
 
