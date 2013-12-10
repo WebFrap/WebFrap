@@ -43,14 +43,6 @@ class LibSettingsModNode
   public $vid = null;
 
   /**
-   * Flag zum feststellen ob die Settings geändert wurden, also ob
-   * sie zurückgeschrieben werden müssen
-   *
-   * @var boolean
-   */
-  public $changed = false;
-
-  /**
    * @param string $value
    * @param int $vid
    * @param int $id
@@ -58,46 +50,21 @@ class LibSettingsModNode
   public function __construct($value = null, $vid = null, $id = null)
   {
 
-    $this->value = $value;
-    $this->vid = $vid;
-    $this->id = $id;
-
-    Debug::console("GOT ID ".$id);
-
-    $this->prepareSettings();
+    if(is_array($value)){
+      $this->value = $value['value'];
+      $this->vid = $value['vid'];
+      $this->id = $value['rowid'];
+    } else if(is_object($value)){
+      $this->value = $value->value;
+      $this->vid = $value->vid;
+      $this->id = $value->rowid;
+    } else {
+      $this->value = $value;
+      $this->vid = $vid;
+      $this->id = $id;
+    }
 
   }//end public function __construct */
-
-
-  /**
-   * @return int
-   */
-  public function getId()
-  {
-
-    return $this->id;
-
-  }//end public function getId */
-
-  /**
-   * @return int
-   */
-  public function setId($id)
-  {
-
-    $this->id = $id;
-
-  }//end public function setId */
-
-
-  /**
-   * Prepare the settings
-   */
-  protected function prepareSettings()
-  {
-    // kann, muss aber nicht implementiert werden daher einfach leer
-  }//end protected function prepareSettings */
-
 
 }// end class LibSettingsModNode
 

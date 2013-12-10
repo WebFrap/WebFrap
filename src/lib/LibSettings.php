@@ -136,7 +136,7 @@ SQL;
     $jsonString = $this->db->escape($data->toJson());
 
     $id = $data->getId();
-    
+
     $orm = $this->db->orm;
 
     if ($id) {
@@ -160,7 +160,7 @@ SQL;
     if (!isset($this->moduleSettings[$key])) {
 
       $sql = <<<SQL
-SELECT rowid, vid, value, type, jdata from wbfsys_module_setting where upper(access_key) = upper('{$key}');
+SELECT rowid, vid, value, type from wbfsys_module_setting where upper(access_key) = upper('{$key}');
 SQL;
 
       $data = $this->db->select($sql)->get();
