@@ -21,6 +21,7 @@
  * @subpackage tech_core
  *
  * @stateless bis auf Resource Objekte müssen Manager immer komplett Stateless sein
+ * @staticFactory
  *
  */
 class Manager extends BaseChild
