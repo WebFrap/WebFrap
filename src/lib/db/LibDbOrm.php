@@ -2422,6 +2422,21 @@ SQL;
 
   }//end public function deleteWhere */
 
+  /**
+   * Löschen einer gegebenen Liste von Datensätzen
+   * @param Dbo/array
+   * @return boolean
+   */
+  public function deleteByList($entityKey, $ids)
+  {
+
+    $entities = $this->getListWhere($entityKey, $where);
+
+    foreach ($ids as $id)
+      $this->delete($entityKey, $id);
+
+  }//end public function deleteByList */
+
 
   /**
    * method to delete all entities from a table
