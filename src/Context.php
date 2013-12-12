@@ -124,8 +124,8 @@ class Context
   {
 
     if ($request){
-      $this->interpretRequest($request);
       $this->request = $request;
+      $this->interpretRequest($request);
     }
 
   }// end public function __construct */
@@ -155,15 +155,15 @@ class Context
       ? $this->content[$key]
       : null;
   }// end public function __get */
-  
+
   /**
    * @param LibRequestHttp $request
    */
   public function setRequest($request)
   {
-  
+
     $this->request = $request;
-  
+
   }//end public function setRequest */
 
   /**
@@ -509,42 +509,42 @@ class Context
    */
   public function getOID($key = null, $accessKey = null, $validator = Validator::CKEY)
   {
-  
+
     $request = $this->request;
-  
+
     if ($key) {
       $id = $request->data($key, Validator::INT, 'rowid');
-  
+
       if ($id) {
         Debug::console('got post rowid: '.$id);
-  
+
         return $id;
       }
     }
-  
+
     $id = $request->param('objid', Validator::INT);
-  
+
     if (!$id && $accessKey) {
       if ($key) {
         $id = $request->data($key, $validator, $accessKey);
-  
+
         if ($id) {
           Debug::console('got post rowid: '.$id);
-  
+
           return $id;
         }
       }
-  
+
       $id = $request->param($accessKey, $validator);
-  
+
       Debug::console('got param '.$accessKey.': '.$id);
-  
+
     } else {
       Debug::console('got param objid: '.$id);
     }
-  
+
     return $id;
-  
+
   }//end public function getOID
 
 } // end class Context

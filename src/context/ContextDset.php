@@ -37,6 +37,8 @@ class ContextDset extends Context
   public function interpretRequest($request)
   {
 
+    $this->request = $request;
+
     $this->objid = $this->getOID();
 
     // startpunkt des pfades für die acls
