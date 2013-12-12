@@ -25,6 +25,9 @@ $this->l['wbf.message']['Failed to create {@path@}.']
 $this->l['wbf.message']['Failed to updated {@key@}']
 = 'Failed to updated {@key@}';
 
+$this->l['wbf.message']['The Update Request for {@resource@} was invalid.']
+= 'The Update Request for {@resource@} was invalid.';
+
 
 // invalid access errors in services
 
