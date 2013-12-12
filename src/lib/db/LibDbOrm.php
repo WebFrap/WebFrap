@@ -2353,7 +2353,7 @@ SQL;
       //$id
       $entityKey = $entity;
 
-      if (!$entity = $this->get($entity, $id)) {
+      if (!$entity = $this->get($entityKey, $id)) {
         Message::addWarning('Tried to delete a non existing Dataset');
 
         return false;
@@ -2429,8 +2429,6 @@ SQL;
    */
   public function deleteByList($entityKey, $ids)
   {
-
-    $entities = $this->getListWhere($entityKey, $where);
 
     foreach ($ids as $id)
       $this->delete($entityKey, $id);
