@@ -191,6 +191,11 @@ SQL;
   }//end public function injectListAcls */
 
 
+  public function fetchListTableDefault($query, $condition, $params)
+  {
+    return $this->injectListAcls($query, $condition, $params);
+  }
+
   public function fetchListTreetableDefault($query, $condition, $params)
   {
     return $this->injectListAcls($query, $condition, $params);
