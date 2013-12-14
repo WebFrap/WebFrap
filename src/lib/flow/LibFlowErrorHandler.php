@@ -39,6 +39,7 @@ class LibFlowErrorHandler extends Pbase // wird nicht von Controller abgeleitet 
   {
 
     $conf = $this->getConf();
+    $user = $this->getUser();
 
     $messageText = $error->getMessage();
 
