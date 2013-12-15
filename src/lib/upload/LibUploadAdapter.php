@@ -355,7 +355,7 @@ abstract class LibUploadAdapter
 
     // Wenn der Ordner nicht existiert, einfach versuchen zu erstellen
     if (!is_dir($this->newpath)) {
-      if (!SFilesystem::createFolder($this->newpath)) {
+      if (!SFilesystem::mkdir($this->newpath)) {
         throw new LibUploadException('Failed to create target folder: '.$this->newpath);
       }
     }

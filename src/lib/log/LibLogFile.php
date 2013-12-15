@@ -101,7 +101,7 @@ class LibLogFile implements LibLogAdapter
       $this->accessMode = 'a' ;
 
     if (!file_exists($this->folder))
-      SFilesystem::createFolder($this->folder);
+      SFilesystem::mkdir($this->folder);
 
     $this->handle = fopen($this->folder."/".$this->fileName, $this->accessMode);
 

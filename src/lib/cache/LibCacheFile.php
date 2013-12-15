@@ -112,7 +112,7 @@ class LibCacheFile extends LibCacheAdapter
     $path = SParserString::getFileFolder($this->folder.'/'.$key);
 
     if (!is_dir($path)) {
-      if (!SFilesystem::createFolder($path)) {
+      if (!SFilesystem::mkdir($path)) {
         throw new LibCache_Exception
         (
           I18n::s('Failed to create the cache Folder {@folder@}', 'wbf.message' , array('folder' => $key))

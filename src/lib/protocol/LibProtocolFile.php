@@ -44,7 +44,7 @@ class LibProtocolFile
     $folder = dirname($fileName);
 
     if (!file_exists($folder))
-      SFilesystem::createFolder($folder);
+      SFilesystem::mkdir($folder);
 
     $this->handle = fopen($fileName, $accessMode);
 

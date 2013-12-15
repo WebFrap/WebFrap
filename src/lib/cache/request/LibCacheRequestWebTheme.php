@@ -76,7 +76,7 @@ class LibCacheRequestWebTheme extends LibCacheRequestCss
     $codeEtag = md5($code);
 
     if (!file_exists(PATH_GW.$this->folder.'/file/'))
-      SFilesystem::createFolder(PATH_GW.$this->folder.'/file/');
+      SFilesystem::mkdir(PATH_GW.$this->folder.'/file/');
 
     file_put_contents(PATH_GW.$this->folder.'/file/'.$file.'.plain' ,  $code);
     file_put_contents(PATH_GW.$this->folder.'/file/'.$file.'.plain.md5' ,  $codeEtag);
@@ -168,7 +168,7 @@ class LibCacheRequestWebTheme extends LibCacheRequestCss
     $codeEtag = md5($code);
 
     if (!file_exists(PATH_GW.$this->folder.'/list/'))
-      SFilesystem::createFolder(PATH_GW.$this->folder.'/list/'  );
+      SFilesystem::mkdir(PATH_GW.$this->folder.'/list/'  );
 
     file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.plain' ,  $code);
     file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.plain.md5' ,  $codeEtag);

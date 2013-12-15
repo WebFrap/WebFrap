@@ -119,21 +119,14 @@ class LibUploadImage extends LibUploadAdapter
 
     // Wenn der Ordner nicht existiert, einfach versuchen zu erstellen
     if (!is_dir($this->newpath)) {
-      if (!SFilesystem::createFolder($this->newpath)) {
-        Error::addError
-        (
-        'Failed to create Folder: '.$this->newpath,
-        'LibUploadException'
-        );
+      if (!SFilesystem::mkdir($this->newpath)) {
+        throw new LibUploadException( 'Failed to create Folder: '.$this->newpath );
       }
     }
 
     // Falls der Ordner nicht beschreibbar ist Fehler werfen
     if (!is_writeable($this->newpath)) {
-      Error::addError(
-      'Target Folder :  '.$this->newpath.' is not writeable',
-      'LibUploadException'
-      );
+      throw new LibUploadException('Target Folder :  '.$this->newpath.' is not writeable');
     }
 
     $thumb = LibImageThumbFactory::getThumb($this->tmpname , $newname , $x , $y);

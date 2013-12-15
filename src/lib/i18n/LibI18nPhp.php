@@ -303,7 +303,7 @@ class LibI18nPhp implements ArrayAccess
     $file = $path.Webfrap::$indexKey.'.php';
 
     if (!is_dir($path)  )
-      if (!SFilesystem::createFolder($path))
+      if (!SFilesystem::mkdir($path))
         return;
 
     file_put_contents($file , $index);

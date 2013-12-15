@@ -32,8 +32,12 @@ class SFilesystem
    *
    * @return boolean
    */
-  public static function createFolder($folder , $rekursiv = true , $absolut = false  )
+  public static function createFolder($folder, $rekursiv = true, $absolut = false)
   {
+
+    if('/'==$folder[0]){
+      $absolut = true;
+    }
 
     if ($absolut) {
       $activFolder = '/';
@@ -113,11 +117,15 @@ class SFilesystem
    *
    * @return boolean
    */
-  public static function mkdir($folder , $rekursiv = true , $absolut = false  )
+  public static function mkdir($folder, $rekursiv = true, $absolut = false)
   {
 
     if ('' == trim($folder))
       throw new Io_Exception('Called mkdir with empty folderstring');
+
+    if('/'==$folder[0]){
+      $absolut = true;
+    }
 
     if ($absolut) {
       $activFolder = '/';
@@ -135,18 +143,11 @@ class SFilesystem
         if (!file_exists($activFolder.$tpFolder)) {
 
           if (!is_writeable($activFolder)) {
-            if (Webfrap::classExists('Io_Exception'))
-              throw new Io_Exception('Folder: '.$activFolder.' is not writeable');
-            else
-              return false;
+            throw new Io_Exception('Folder: '.$activFolder.' is not writeable');
           }
 
           if (!mkdir($activFolder.$tpFolder)) {
-            if (Webfrap::classExists('Io_Exception'))
-              throw new Io_Exception('Failed to create folder: '.$activFolder.$tpFolder);
-            else
-              return false;
-
+            throw new Io_Exception('Failed to create folder: '.$activFolder.$tpFolder);
           }
 
         }
@@ -159,18 +160,12 @@ class SFilesystem
        return true;
 
       if (!is_writeable($folder)) {
-        if (Webfrap::classExists('Io_Exception'))
-          throw new Io_Exception('Folder: '.$folder.' is not writeable');
-        else
-          return false;
+        throw new Io_Exception('Folder: '.$folder.' is not writeable');
 
       }
 
       if (!mkdir($folder)) {
-        if (Webfrap::classExists('Io_Exception'))
-          throw new Io_Exception('Failed to create folder: '.$folder);
-        else
-          return false;
+        throw new Io_Exception('Failed to create folder: '.$folder);
 
       }
 

@@ -466,8 +466,8 @@ class Webfrap
 
     $file = $path.self::$indexKey.'.php';
 
-    if (!is_dir($path)  )
-      if (!SFilesystem::createFolder($path))
+    if (!is_dir($path))
+      if (!SFilesystem::mkdir($path))
         return;
 
     file_put_contents($file , $index);
@@ -1359,7 +1359,7 @@ class Webfrap
 
           return $tmpPath;
         } else {
-          
+
           if (Log::$levelDebug)
             Debug::console('Not found: '. $tmpPath);
         }
@@ -1385,7 +1385,7 @@ class Webfrap
 
           return $tmpPath;
         } else {
-          
+
           if (Log::$levelDebug)
             Debug::console('Not found: '. $tmpPath);
         }

@@ -388,14 +388,13 @@ class LibFilesystemFile
     $data = SParserString::splitFilename($target);
 
     if (trim($data['folder'])!= '' and !file_exists($data['folder'])) {
-      SFilesystem::createFolder($data['folder']);
+      SFilesystem::mkdir($data['folder']);
     }
 
     if (is_writeable($data['folder'])) {
       return copy($this->folder.'/'.$this->fileName , $target);
     } else {
-      Error::report
-      (
+      Error::report(
       'target folder for copy is not writeable: '.$data['folder']
       );
 
