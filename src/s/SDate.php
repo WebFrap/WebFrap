@@ -161,6 +161,26 @@ class SDate
     return date('t', mktime( 0, 0, 0, $month, 1,  $year));
 
   }//end public static function getMonthDays */
+  
+  /**
+   * Erstellt ein Dateinterval String nach  http://en.wikipedia.org/wiki/Iso8601#Durations
+   * @param int $duration
+   * @param string $type
+   * @return string
+   */
+  public static function durationToInterval($duration, $type = 'm')
+  {
+    
+    $months = floor($duration);
+    $days = ($duration - $months) * 30;
+    
+    if ($days) {
+      return 'P'.$months.'M'.$days.'D';
+    } else {
+      return 'P'.$months.'M';
+    }
+    
+  }//end public static function durationToInterval */
 
 }// end class SDate
 
