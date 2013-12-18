@@ -257,10 +257,8 @@ class SFilesystem
 
     if (is_file($path)) {
       if (!is_writeable($path)) {
-        throw new Io_Exception
-        (
-          I18n::s
-          (
+        throw new Io_Exception(
+          I18n::s(
            'file '.$path.' ist not deleteable ',
            'wbf.message.fileNotDeletable',
            array($path)
@@ -273,10 +271,8 @@ class SFilesystem
 
     if (is_dir($path)) {
       if (!is_writeable($path)) {
-        throw new Io_Exception
-        (
-          I18n::s
-          (
+        throw new Io_Exception(
+          I18n::s(
             'Folder '.$path.' ist not deleteable',
             'wbf.message',
             array($path)
@@ -300,18 +296,14 @@ class SFilesystem
                 if (!unlink($tmpPath.'/'.$file))
                   $clean = false;
               } else {
-                Error::addError
-                (
-                  I18n::s
-                  (
+                throw new Io_Exception(
+                  I18n::s(
                     'File {@file@} is not deleteable.',
                     'wbf.message',
-                    array
-                    (
+                    array(
                       'file' => $tmpPath.'/'.$file
                     )
-                  ),
-                  'Io_Exception'
+                  )
                 );
               }
             }
@@ -338,10 +330,8 @@ class SFilesystem
 
     if (is_file($path)) {
       if (!is_writeable($path)) {
-        Error::cachtableError
-        (
-        I18n::s('wbf.message.fileNotDeleteable',array($path)),
-        'Io_Exception'
+        throw new Io_Exception(
+          I18n::s('wbf.message.fileNotDeleteable',array($path))
         );
       }
 
@@ -350,10 +340,8 @@ class SFilesystem
 
     if (is_dir($path)) {
       if (!is_readable($path) or !is_writeable($path)) {
-        Error::cachtableError
-        (
-        I18n::s('wbf.message.folderInvalidRights',array($path)),
-        'Io_Exception'
+        throw new Io_Exception(
+          I18n::s('wbf.message.folderInvalidRights',array($path))
         );
       }
 
@@ -373,14 +361,11 @@ class SFilesystem
                 if (!unlink($tmpPath.'/'.$file))
                   $clean = false;
               } else {
-                Error::cachtableError
-                (
-                I18n::s
-                (
-                  'the file '.$tmpPath.'/'.$file.' is not deleteable ',
-                  'wbf.message.fileNotDeleteable',array($tmpPath.'/'.$file)
-                ),
-                'Io_Exception'
+                throw new Io_Exception(
+                  I18n::s(
+                    'the file '.$tmpPath.'/'.$file.' is not deleteable ',
+                    'wbf.message.fileNotDeleteable',array($tmpPath.'/'.$file)
+                  )
                 );
               }
             }
@@ -409,10 +394,8 @@ class SFilesystem
 
     if (!file_exists($path)) {
 
-      Error::addError
-      (
-      I18n::s('The file: '.$path.' not exists' , 'wbf.message.fileNotExists',array($path)),
-      'Io_Exception'
+      throw new Io_Exception(
+        I18n::s('The file: '.$path.' not exists' , 'wbf.message.fileNotExists',array($path))
       );
     }
 
@@ -439,10 +422,8 @@ class SFilesystem
   {
 
     if (!is_readable($path)) {
-      Error::addError
-      (
-        I18n::s('The file: '.$path.' not exists' , 'wbf.message.fileNotExists',array($path)),
-        'Io_Exception'
+      throw new Io_Exception(
+        I18n::s('The file: '.$path.' not exists' , 'wbf.message.fileNotExists',array($path))
       );
     }
 
@@ -473,10 +454,8 @@ class SFilesystem
   {
 
     if (!file_exists($path)) {
-      Error::addError
-      (
-      I18n::s('Die Datei '.$path.' existiert nicht', 'wbf.message.fileNotExists',array($path)),
-      'Io_Exception'
+      throw new Io_Exception(
+        I18n::s('Die Datei '.$path.' existiert nicht', 'wbf.message.fileNotExists',array($path))
       );
     }
 
@@ -501,11 +480,9 @@ class SFilesystem
   {
 
     if (!file_exists($path)) {
-        Error::addError
-        (
-        I18n::s('Die Datei '.$path.' existiert nicht', 'wbf.message.fileNotExists',array($path)),
-        'Io_Exception'
-        );
+      throw new Io_Exception(
+        I18n::s('Die Datei '.$path.' existiert nicht', 'wbf.message.fileNotExists',array($path))
+      );
     }
 
     if (is_file($path))
@@ -530,10 +507,8 @@ class SFilesystem
     $status = true;
 
     if (!is_readable($path)) {
-      Error::addError
-      (
-        I18n::s('wbf.message.folderInvalidRights',array($path)),
-        'Io_Exception'
+      throw new Io_Exception(
+        I18n::s('wbf.message.folderInvalidRights',array($path))
       );
     }
 
@@ -542,20 +517,14 @@ class SFilesystem
         $status = false;
 
     if (!is_dir($target)) {
-      Error::addError
-      (
-        "Invalide Pfadangabe: ".$path,
-        //I18n::s('wbf.message.targetIsNoFolder',array($path)),
-        'Io_Exception'
+      throw new Io_Exception(
+        "Invalide Pfadangabe: ".$path
       );
     }
 
     if (!is_writeable($target)  ) {
-      Error::addError
-      (
-        "Ungenügende Rechte für Pfadangabe: ".$path,
-        //I18n::s('wbf.message.targetInvalidRights',array($path)),
-        'Io_Exception'
+      throw new Io_Exception(
+        "Ungenügende Rechte für Pfadangabe: ".$path
       );
     }
 
@@ -660,7 +629,8 @@ class SFilesystem
   }//end protected function copyFile */
 
   /**
-   * Enter description here...
+   * @path $path string
+   * @path $target string
    *
    */
   protected static function copyFolder($path , $target)
@@ -669,10 +639,8 @@ class SFilesystem
     $status = true;
 
     if (!is_readable($path)) {
-      Error::addError
-      (
-        I18n::s('wbf.message.folderInvalidRights',array($path)),
-        'Io_Exception'
+      throw new Io_Exception(
+        I18n::s('wbf.message.folderInvalidRights',array($path))
       );
     }
 
@@ -681,20 +649,14 @@ class SFilesystem
         $status = false;
 
     if (!is_dir($target)) {
-      Error::addError
-      (
-        "Pfad ist kein Verzeichnis: ".$path,
-        //I18n::s('wbf.message.targetIsNoFolder',array($path)),
-        'Io_Exception'
+      throw new Io_Exception(
+        "Pfad ist kein Verzeichnis: ".$path
       );
     }
 
     if (!is_writeable($target)  ) {
-      Error::addError
-      (
-        "Invalide Rechte für Pfad: ".$path,
-        //I18n::s('wbf.message.targetInvalidRights',array($path)),
-        'Io_Exception'
+      throw new Io_Exception(
+        "Invalide Rechte für Pfad: ".$path
       );
     }
 
@@ -731,29 +693,31 @@ class SFilesystem
    *
    * @param string $path
    * @param string $target
+   * 
+   * @throws Io_Exception
+   * 
    * @return boolean
    */
   protected static function mergeFile($path , $target)
   {
 
     if (!is_readable($path)) {
-      Error::addError
-      (
-        I18n::s('wbf.message.fileNotReadable',array($path)),
-        'Io_Exception'
+      
+      throw new Io_Exception(
+        I18n::s('wbf.message.fileNotReadable',array($path))
       );
     }
 
     if (!is_writeable(SParserString::getFileFolder($target))) {
-      Error::addError
-      (
-        I18n::s('wbf.message.folderNotWriteable',array($target)),
-        'Io_Exception'
+
+      throw new Io_Exception(
+        I18n::s('wbf.message.folderNotWriteable',array($target))
       );
+    
     } else {
+      
       if (!file_exists($target))
         return copy($path , $target);
-
       else
         return true;
     }
@@ -763,6 +727,8 @@ class SFilesystem
   /**
    * @param string $path
    * @param string $target
+   * 
+   * @throws Io_Exception
    *
    */
   protected static function mergeFolder($path, $target)
@@ -772,10 +738,8 @@ class SFilesystem
 
     if (!is_readable($path)) {
 
-      throw new Io_Exception
-      (
-        I18n::s
-        (
+      throw new Io_Exception(
+        I18n::s(
           'Folder Invalid Rights {@folder@}',
           'wbf.message',
           array('folder' => $path)
@@ -788,20 +752,14 @@ class SFilesystem
         $status = false;
 
     if (!is_dir($target)) {
-      Error::addError
-      (
-        "Invalide Pfadangabe: ".$path,
-        //I18n::s('wbf.message.targetIsNoFolder',array($path)),
-        'Io_Exception'
+      throw new Io_Exception(
+        "Invalide Pfadangabe: ".$path
       );
     }
 
     if (!is_writeable($target)  ) {
-      Error::addError
-      (
-        "Invalide Rechte für Pfad: ".$path,
-        //I18n::s('wbf.message.targetInvalidRights',array($path)),
-        'Io_Exception'
+      throw new Io_Exception(
+        "Invalide Rechte für Pfad: ".$path
       );
     }
 
