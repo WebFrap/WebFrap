@@ -129,8 +129,7 @@ class ContextCrud extends Context
     if ($cntms = $request->param('cntms', Validator::CNAME))
       $this->contextMaskSwt = $cntms;
 
-    // mask switcher key
-    // wird nur in der view gesetzt wenn der mask switcher vorhanden ist
+    // setzen des tabs welchen man aktiv setzen möchte
     if ($sbt = $request->param('sbt', Validator::CNAME))
       $this->subTab = $sbt;
 
