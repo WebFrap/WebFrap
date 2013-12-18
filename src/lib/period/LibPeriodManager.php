@@ -351,6 +351,46 @@ SQL;
     return $period;
 
   }//end public function createNext */
+  
+  /**
+   * Checken ob die Periode aktuell in frozen Status ist
+   *
+   * @param int $pTypeId ID der Periode
+   */
+  public function isInitialized($pTypeId)
+  {
+  
+    $orm = $this->getOrm();
+    return (boolean)$orm->countRows('WbfsysPeriod', 'id_type = '.$pTypeId);
+  
+  }//end public function isFrozen */
+  
+  /**
+   * Checken ob die Periode aktuell in frozen Status ist
+   * 
+   * @param int $pTypeId ID der Periode
+   */
+  public function isFrozen($pTypeId)
+  {
+    
+    $orm = $this->getOrm();
+    return (boolean)$orm->countRows('WbfsysPeriod', 'id_type = '.$pTypeId.' and status = '.EWbfsysPeriodStatus::FROZEN);
+    
+  }//end public function isFrozen */
+  
+  /**
+   * Checken ob die Periode aktuell in frozen Status ist
+   *
+   * @param int $pTypeId ID der Periode
+   */
+  public function isActive($pTypeId)
+  {
+  
+    $orm = $this->getOrm();
+    return !(boolean)$orm->countRows('WbfsysPeriod', 'id_type = '.$pTypeId.' and status = '.EWbfsysPeriodStatus::FROZEN);
+  
+  }//end public function isFrozen */
+  
 
   /**
    * @param string $key
