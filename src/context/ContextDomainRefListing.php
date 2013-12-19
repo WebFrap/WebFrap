@@ -190,7 +190,7 @@ class ContextDomainRefListing  extends Context
       $this->ltype = $ltype;
 
     // Der Domainkey
-    if ($dkey = $request->param('dkey', Validator::CNAME))
+    if ($dkey = $request->param('dkey', Validator::CKEY))
       $this->dKey = $dkey;
 
     // Reference key

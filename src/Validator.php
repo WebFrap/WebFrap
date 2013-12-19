@@ -593,6 +593,8 @@ class Validator
     if (!is_array($value) and !is_null($value)) {
       $this->invalid[$key] = 'wrong';
 
+      if(Log::$levelDebug)
+        Log::debug('Invalid Value for bitmask key '.$key);
       return 'wrong';
     }
 
@@ -680,6 +682,9 @@ class Validator
     if (!is_numeric($value)) {
       $this->invalid[$key] = 'wrong';
 
+      if(Log::$levelDebug)
+        Log::debug('Invalid Value for int key '.$key);
+
       return 'wrong';
     }
 
@@ -726,6 +731,9 @@ class Validator
     if (!is_numeric($value)) {
       $this->invalid[$key] = 'wrong';
 
+      if(Log::$levelDebug)
+        Log::debug('Invalid Value for smallint key '.$key);
+
       return 'wrong';
     }
 
@@ -771,6 +779,9 @@ class Validator
 
     if (!is_numeric($value)) {
       $this->invalid[$key] = 'wrong';
+
+      if(Log::$levelDebug)
+        Log::debug('Invalid Value for bigint key '.$key);
 
       return 'wrong';
     }
@@ -821,6 +832,9 @@ class Validator
 
     if (!ctype_digit($value)) {
       $this->invalid[$key] = 'wrong';
+
+      if(Log::$levelDebug)
+        Log::debug('Invalid Value for eid key '.$key);
 
       return 'wrong';
     }
@@ -1292,6 +1306,9 @@ class Validator
     if (!$formatter->setDateLanguage($value)) {
       $this->invalid[$key] = 'wrong';
 
+      if(Log::$levelDebug)
+        Log::debug('Invalid Value for date key '.$key);
+
       return 'wrong';
     }
 
@@ -1449,6 +1466,9 @@ class Validator
     if (!preg_match(self::VALIDATE_URL ,$value)  ) {
       $this->invalid[$key] = 'wrong';
 
+      if(Log::$levelDebug)
+        Log::debug('Invalid Value for url key '.$key);
+
       return 'wrong';
     }
 
@@ -1501,6 +1521,9 @@ class Validator
 
     if (!preg_match(self::VALIDATE_URL ,$value)  ) {
       $this->invalid[$key] = 'wrong';
+
+      if(Log::$levelDebug)
+        Log::debug('Invalid Value for networkshare key '.$key);
 
       return 'wrong';
     }
@@ -1611,6 +1634,9 @@ class Validator
     if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
       $this->invalid[$key] = 'wrong';
 
+      if(Log::$levelDebug)
+        Log::debug('Invalid Value for email key '.$key);
+
       return 'wrong';
     }
 
@@ -1664,6 +1690,9 @@ class Validator
     // musn't start with a number
     if (is_numeric($value[0])  ) {
       $this->invalid[$key] = 'wrong';
+
+      if(Log::$levelDebug)
+        Log::debug('Invalid Value for username key '.$key);
 
       return 'wrong';
     }
@@ -1767,6 +1796,9 @@ class Validator
     if (!ctype_alnum($testVal)) {
       $this->invalid[$key] = 'wrong';
 
+      if(Log::$levelDebug)
+        Log::debug('Invalid Value for cname key '.$key);
+
       return 'wrong';
     }
 
@@ -1822,6 +1854,9 @@ class Validator
     // musn't start with a number
     if (!ctype_alnum($testVal)) {
       $this->invalid[$key] = 'wrong';
+
+      if(Log::$levelDebug)
+        Log::debug('Invalid Value for ckey key '.$key);
 
       return 'wrong';
     }
@@ -1979,6 +2014,9 @@ class Validator
       $this->data[$key] = null;
       $this->invalid[$key] = 'wrong';
 
+      if(Log::$levelDebug)
+        Log::debug('Invalid Value for fullname key '.$key);
+
       return 'wrong';
     }
 
@@ -2033,6 +2071,9 @@ class Validator
     if (strpos('../', $value)) {
       $this->data[$key] = null;
       $this->invalid[$key] = 'wrong';
+
+      if(Log::$levelDebug)
+        Log::debug('Invalid Value for foldername key '.$key);
 
       return 'wrong';
     }
