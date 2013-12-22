@@ -313,8 +313,7 @@ class LibDbPostgresql extends LibDbConnection
     $sqlstring = "select last_value from {$seqName};";
 
     if (!$this->result = pg_query($this->connectionRead, $sqlstring)) {
-      throw new LibDb_Exception
-      (
+      throw new LibDb_Exception(
         'Failed to receive a new id',
         'No Db Result: '.pg_last_error($this->connectionRead),
         Response::INTERNAL_ERROR,
@@ -410,8 +409,8 @@ class LibDbPostgresql extends LibDbConnection
       );
     }
 
-    if (DEBUG)
-      Debug::console('CREATE: '.$sqlstring);
+    if (Log::$levelDebug)
+      Log::debug('CREATE: '.$sqlstring);
 
     return new LibDbPostgresqlResult($this->result , $this);
 
@@ -435,9 +434,6 @@ class LibDbPostgresql extends LibDbConnection
 
     if (Log::$levelDebug)
       Log::debug('UPDATE SQL '.$this->counter.':  '.$sql  );
-
-    if (DEBUG)
-      Debug::console('UPDATE SQL '.$this->counter.':  '.$sql);
 
     if ($this->protocol)
       $this->protocol->write($sql);

@@ -817,7 +817,6 @@ class LibDbOrm
       return $result;
 
     } catch (LibDb_Exception $e) {
-      Debug::console('Failed Criteria : '.$criteria->sql, $criteria);
 
       return null;
     }

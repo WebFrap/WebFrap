@@ -418,7 +418,7 @@ class Log
       $line = $pos['line'];
     }
 
-    if (!is_null(self::$instance)  ) {
+    if (!is_null(self::$instance)) {
       self::$instance->debug($file, $line, $message, $exception);
     }
 
