@@ -451,6 +451,51 @@ class LibRequestPhp
 
   } // end public function param */
 
+  /**
+   * Daten einer bestimmten Urlvariable erfragen
+   *
+   * @param string $key Name der zu erfragende $_GET Variable
+   * @param string $validator Der Validator key
+   * @param string $subkey Wenn wir einen Wert aus einer Matrix möchten
+   * @param LibDbConnection $db wenn mit übergeben wird das objekt zum escapen verwendet
+   *  ist nicht zwangweise nötig da einige validatoren gar keine gefährlichen zeichen durch lassen
+   *
+   * @return string
+   */
+  public function paramQList($key, $validator, $subkey = null, $db = null)
+  {
+
+    $response = $this->getResponse();
+
+    if ($subkey) {
+
+      if (isset($_GET[$key][$subkey])) {
+        $data = $_GET[$key][$subkey];
+      } else {
+        return "''";
+      }
+
+    } else {
+
+      if (isset($_GET[$key])) {
+        $data = $_GET[$key];
+      } else {
+        return "''";
+      }
+
+    }
+
+
+    $filter = Validator::getActive();
+    $filter->clean(); // first clean the filter
+
+    $fMethod = 'add'.ucfirst($validator);
+    $values = $this->validateArray($fMethod, $data, $db);
+
+    return "'".implode("','",$values)."'";
+
+  } // end public function paramQList */
+
 
 
  /**
@@ -487,32 +532,6 @@ class LibRequestPhp
 //
 //////////////////////////////////////////////////////////////////////////////*/
 
-  /**
-   * Abfragen des Status einer POST Variable
-   *
-   * @param string Key Name der zu prüfenden Variable
-   * @return bool
-   *
-   * @deprecated
-   */
-  public function postExists($key , $subkey = null)
-  {
-    return $this->dataExists($key , $subkey);
-
-  } // end public function postExists */
-
-  /**
-   * Abfragen des Status einer POST Variable
-   *
-   * @param string Key Name der zu prüfenden Variable
-   * @return bool
-   * @deprecated
-   */
-  public function postSearchIds($key)
-  {
-    return $this->dataSearchIds($key);
-
-  } // end public function postSearchIds */
 
   /**
   * Auslesen einer Postvariable
@@ -524,36 +543,13 @@ class LibRequestPhp
   */
   public function post($key = null , $validator = null , $subkey = null , $message = null , $required = false)
   {
+
+    Log::warn('Called Request POST with key: '.$key);
+
     return $this->data($key, $validator, $subkey, $message, $required);
 
   }//end public function post */
 
-  /**
-   * remove some variables from the url
-   * @param string $key
-   * @param string $subkey
-   *
-   * @deprecated
-   */
-  public function removePost($key , $subkey = null)
-  {
-    return $this->removeData($key, $subkey);
-
-  }//end public function removePost */
-
-  /**
-   * request if one or more values are empty
-   *
-   * @param string Key Name der zu prüfenden Variable
-   * @return bool
-   *
-   * @deprecated
-   */
-  public function postEmpty($keys , $subkey = null)
-  {
-    return $this->dataEmpty($keys, $subkey);
-
-  } // end public function postEmpty */
 
 /*//////////////////////////////////////////////////////////////////////////////
 //
@@ -870,9 +866,11 @@ class LibRequestPhp
    *
    * @param string $fMethod
    * @param array $data
+   * @param LibDbConnection $db wenn mit übergeben wird das objekt zum escapen verwendet
+   *  ist nicht zwangweise nötig da einige validatoren gar keine gefährlichen zeichen durch lassen
    * @return array
    */
-  protected function validateArray($fMethod , $data)
+  protected function validateArray($fMethod , $data, $db = null)
   {
 
     $filter = Validator::getActive();
@@ -894,7 +892,15 @@ class LibRequestPhp
         $filter->$fMethod($key,$value);
 
         $tmp = $filter->getData();
-        $back[$key] = $tmp[$key];
+
+        if ($db) {
+
+          $back[$key] = $db->escape($tmp[$key]);
+        } else {
+
+          $back[$key] = $tmp[$key];
+        }
+
       }
     }
 
@@ -1193,7 +1199,7 @@ class LibRequestPhp
 // Form input
 //////////////////////////////////////////////////////////////////////////////*/
 
-  
+
   /**
    *
    * get the main oid, can be overwritten if needed
@@ -1204,41 +1210,41 @@ class LibRequestPhp
    */
   public function getOID($key = null, $accessKey = null, $validator = Validator::CKEY)
   {
-  
-  
+
+
     if ($key) {
       $id = $this->data($key, Validator::INT, 'rowid');
-  
+
       if ($id) {
         Debug::console('got post rowid: '.$id);
-  
+
         return $id;
       }
     }
-  
+
     $id = $this->param('objid', Validator::INT);
-  
+
     if (!$id && $accessKey) {
       if ($key) {
         $id = $this->data($key, $validator, $accessKey);
-  
+
         if ($id) {
           Debug::console('got post rowid: '.$id);
-  
+
           return $id;
         }
       }
-  
+
       $id = $this->param($accessKey, $validator);
-  
+
       Debug::console('got param '.$accessKey.': '.$id);
-  
+
     } else {
       Debug::console('got param objid: '.$id);
     }
-  
+
     return $id;
-  
+
   }//end public function getOID
 
   /** method for validating Formdata
@@ -2374,7 +2380,7 @@ class LibRequestPhp
     return $this->serverAddress;
 
   }//end public function getServerAddress */
-  
+
   /**
    * Die volle Angefragte URL bekommen mit Servername und allen Parametern
    * @param boolean $forceHttps einen https link erzwingen
@@ -2382,15 +2388,15 @@ class LibRequestPhp
    */
   public function getFullRequest($forceHttps = false)
   {
-  
+
     if (!$this->fullRequest) {
-  
+
       $this->fullRequest = ((isset($_SERVER['HTTPS']) && 'on' == $_SERVER['HTTPS']) || $forceHttps)
       ? 'https://'
       : 'http://';
-  
+
       $this->fullRequest .= $_SERVER['SERVER_NAME'];
-  
+
       if (isset($_SERVER['HTTPS']) && 'on' == $_SERVER['HTTPS']) {
         if ($_SERVER['SERVER_PORT'] != '443') {
           $this->fullRequest .= ':'.$_SERVER['SERVER_PORT'];
@@ -2400,13 +2406,13 @@ class LibRequestPhp
           $this->fullRequest .= ':'.$_SERVER['SERVER_PORT'];
         }
       }
-  
+
       $this->fullRequest .= $_SERVER['REQUEST_URI'];
-    
+
     }
-  
+
     return $this->fullRequest;
-  
+
   }//end public function getFullRequest */
 
   /**

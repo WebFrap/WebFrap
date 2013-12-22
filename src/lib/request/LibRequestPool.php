@@ -223,30 +223,6 @@ class LibRequestPool extends LibRequestAbstract
 
   } // end public function addUrlVar
 
-  /**
-   * Abfragen des Status einer POST Variable
-   *
-   * @param string Key Name der zu prüfenden Variable
-   * @return bool
-   */
-  public function postExists($key , $subkey = null)
-  {
-
-    if (!is_null($subkey)) {
-      if (isset($this->post[$key][$subkey])) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      if (isset($this->post[$key])) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-
-  } // end public function postExists */
 
   /**
   * Auslesen einer Postvariable
@@ -407,78 +383,6 @@ class LibRequestPool extends LibRequestAbstract
 
   }//end protected function validateArray($fMethod , $data)
 
-  /**
-   * request if one or more values are empty
-   *
-   * @param string Key Name der zu prüfenden Variable
-   * @return bool
-   */
-  public function postEmpty($keys , $subkey = null)
-  {
-
-    if ($subkey) {
-      if (is_array($keys)) {
-
-        foreach ($keys as $key) {
-
-          if (!isset($this->post[$subkey][$key])) {
-            return true;
-          }
-
-          if (trim($this->post[$subkey][$key]) == '') {
-            return true;
-          }
-
-          return false;
-
-        }
-
-      } else {
-
-        if (!isset($this->post[$subkey][$keys])) {
-          return true;
-        }
-
-        if (trim($this->post[$subkey][$keys]) == '') {
-          return true;
-        }
-
-        return false;
-
-      }
-    } else {
-      if (is_array($keys)) {
-
-        foreach ($keys as $key) {
-
-          if (!isset($this->post[$key])) {
-            return true;
-          }
-
-          if (trim($this->post[$key]) == '') {
-            return true;
-          }
-
-          return false;
-
-        }
-
-      } else {
-
-        if (!isset($this->post[$keys])) {
-          return true;
-        }
-
-        if (trim($this->post[$keys]) == '') {
-          return true;
-        }
-
-        return false;
-
-      }
-    }
-
-  } // end public function postEmpty
 
   /**
   * request if we have a cookie with this name
