@@ -684,7 +684,7 @@ CODE;
   }//end public static function getCallerPosition */
 
   /**
-   * 
+   *
    */
   public static function getCaller($level = 2)
   {
@@ -777,6 +777,65 @@ CODE;
       $entry[1] = $data.(string) $trace;
     } else {
       $entry[1] = Debug::dumpToString($data, $force).(string) $trace;
+    }
+
+    //SFiles::write(PATH_GW.'log/'.$logFile, 'MESSAGE: '.$message, 'a');
+    //SFiles::write(PATH_GW.'log/'.$logFile, $entry[1], 'a');
+
+    if (DEBUG_CONSOLE) {
+      self::$console[] = $entry;
+    }
+
+    if ('cli' === View::$type)
+      echo $message.NL;
+
+    // need to check
+    if (DEBUG) {
+      self::logDump($message , $data);
+    }
+
+  }//end public static function console */
+
+  /**
+   * Enter description here...
+   *
+   * @param string $message
+   * @param mixed $data
+   * @param string $trace
+   */
+  public static function dumpConsole($message, $data, $trace = null, $force = false)
+  {
+
+    if (!$force) {
+      if (!DEBUG && !DEBUG_CONSOLE)
+        return;
+    }
+
+    if (defined('STDOUT'))
+      fputs(STDOUT, 'DEBUG: '.$message.NL);
+
+    if (!file_exists(PATH_GW.'log')) {
+      if (!class_exists('SFilesystem'))
+        include PATH_FW.'src/s/SFilesystem.php';
+
+      SFilesystem::mkdir(PATH_GW.'log');
+    }
+
+    if (defined('WBF_CONSOLE_LOG'))
+      $logFile = WBF_CONSOLE_LOG;
+    else
+      $logFile = 'console.html';
+
+    $entry = array();
+    $entry[0] = $message;
+
+    if ($trace === true)
+      $trace = Debug::backtrace();
+
+    if (is_scalar($data)) {
+      $entry[0] .= $data.(string) $trace;
+    } else {
+      $entry[0] .= Debug::dumpToString($data, $force).(string) $trace;
     }
 
     //SFiles::write(PATH_GW.'log/'.$logFile, 'MESSAGE: '.$message, 'a');
