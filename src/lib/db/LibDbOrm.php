@@ -2,6 +2,7 @@
 /*******************************************************************************
 *
 * @author      : Dominik Bonsch <dominik.bonsch@webfrap.net>
+* @author      : Malte Schirmacher <malte.schirmacher@webfrap.net>
 * @date        :
 * @copyright   : Webfrap Developer Network <contact@webfrap.net>
 * @project     : Webfrap Web Frame Application
@@ -24,6 +25,11 @@ class LibDbOrm
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
+
+  /**
+   * @var LibSearchDb_EntityIndex
+   */
+  private $searchIndexer;
 
   /**
    * Der Type der Datenbankverbindung des ORMs
@@ -143,7 +149,6 @@ class LibDbOrm
    */
   public function __construct($db, $dbType, $dbName = null, $dbSchema = null)
   {
-
     $this->db = $db;
     $this->dbType = $dbType;
 
@@ -152,6 +157,8 @@ class LibDbOrm
 
     $className = 'LibParserSql'.ucfirst($dbType);
     $this->sqlBuilder = new $className('orm_'.$dbType, $db);
+
+      $this->searchIndexer = new LibSearchDb_EntityIndex($this);
 
   }//end public function __construct */
 
@@ -1698,7 +1705,7 @@ SQL;
     $entity->synchronized();
 
     if ($entity->hasIndex())
-      $this->saveDsIndex($entity, true);
+      $this->searchIndexer->updateSearchIndexForEntity($entity, true);
 
 
     if ($handleArray) {
@@ -1825,7 +1832,7 @@ SQL;
     $entity->synchronized();
 
     if ($entity->hasIndex())
-      $this->saveDsIndex($entity, true);
+      $this->searchIndexer->updateSearchIndexForEntity($entity, true);
 
 
     $this->addToPool($entityKey, $entity->getId(), $entity);
@@ -1898,262 +1905,7 @@ SQL;
 
   }//end public function copy */
 
-  /**
-   * de:
-   * methode zum erstellen neuer einträge in der datenbank
-   *
-   * @param Entity $entity
-   * @return Entity
-   */
-  public function saveDsIndex($entity, $create = false)
-  {
 
-    $keyVal = $entity->getData();
-    $entityKey = $entity->getEntityName();
-
-    $resourceId = $this->getResourceId($entityKey);
-
-    if (!$resourceId) {
-      Debug::console("Control Structure out of sync");
-      Log::warn("Control Structure out of sync");
-
-      return;
-    }
-
-    $id = $entity->getId();
-
-    $indexData = array();
-
-    try {
-
-      // title
-      $titleFields = $entity->getIndexTitleFields();
-      if ($titleFields) {
-        if (count($titleFields) > 1) {
-          $titleTmp = array();
-          foreach ($titleFields as $field) {
-            $titleTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
-          }
-
-          $indexData['title'] = implode(', ', $titleTmp);
-        } else {
-          $indexData['title'] = isset($keyVal[$titleFields[0]])?$keyVal[$titleFields[0]]:'';
-        }
-      }
-
-      // key
-      $keyFields = $entity->getIndexKeyFields();
-      if ($keyFields) {
-        if (count($keyFields) > 1) {
-          $keyTmp = array();
-          foreach ($keyFields as $field) {
-            $keyTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
-          }
-
-          $indexData['access_key'] = implode(', ', $keyTmp);
-        } else {
-          $indexData['access_key'] = isset($keyVal[$keyFields[0]])?$keyVal[$keyFields[0]]:'';
-        }
-      }
-
-      // description
-      $descriptionFields = $entity->getIndexDescriptionFields();
-      if ($descriptionFields) {
-        if (count($descriptionFields) > 1) {
-          $keyTmp = array();
-          foreach ($descriptionFields as $field) {
-            $keyTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
-          }
-
-          $description = implode(', ', $keyTmp);
-          $indexData['description'] = mb_substr
-          (
-            strip_tags($description),
-            0,
-            250,
-            'utf-8'
-          );
-        } else {
-          $indexData['description'] = mb_substr
-          (
-            strip_tags((isset($keyVal[$descriptionFields[0]])?$keyVal[$descriptionFields[0]]:'')),
-            0,
-            250,
-            'utf-8'
-          );
-        }
-      }
-
-
-      $indexData['vid'] = $id;
-      $indexData['id_vid_entity'] = $resourceId;
-
-      if ($create) {
-
-        if (isset($keyVal[Db::UUID]))
-          $indexData[Db::UUID] = $keyVal[Db::UUID];
-
-        if (isset($keyVal[Db::TIME_CREATED]))
-          $indexData[Db::TIME_CREATED] = $keyVal[Db::TIME_CREATED];
-
-        $sqlstring = $this->sqlBuilder->buildInsert($indexData, 'wbfsys_data_index');
-
-        $this->db->insert($sqlstring, 'wbfsys_data_index', 'rowid');
-
-      } else {
-
-        $where = "vid={$id} and id_vid_entity={$resourceId}";
-
-        $sqlstring = $this->sqlBuilder->buildUpdateSql($indexData, 'wbfsys_data_index', $where);
-        $res = $this->db->update($sqlstring);
-
-        /* @var $res LibDbPostgresqlResult  */
-        if (!$res->getAffectedRows()) {
-          if (isset($keyVal[Db::UUID]))
-            $indexData[Db::UUID] = $keyVal[Db::UUID];
-
-          if (isset($keyVal[Db::TIME_CREATED]))
-            $indexData[Db::TIME_CREATED] = $keyVal[Db::TIME_CREATED];
-
-          $sqlstring = $this->sqlBuilder->buildInsert($indexData, 'wbfsys_data_index');
-
-          $this->db->insert($sqlstring, 'wbfsys_data_index', 'rowid');
-        }
-
-
-      }
-
-    } catch (LibDb_Exception $exc) {
-      return null;
-    }
-
-  }//end public function saveDsIndex */
-
-  /**
-   * Löschen des Index nachdem ein Datensatz gelöscht wurde
-   * @param Entity $entity
-   */
-  public function removeIndex($entity)
-  {
-
-    $keyVal = $entity->getData();
-    $entityKey = $entity->getEntityName();
-    $resourceId = $this->getResourceId($entityKey);
-    $id = $entity->getId();
-
-    $this->db->delete('DELETE FROM wbfsys_data_index where vid = '.$id.' and id_vid_entity = '.$resourceId);
-
-  }//end public function removeIndex */
-
-  /**
-   * Löschen des Indexes für eine Tabelle
-   * @param string $entityKey
-   */
-  public function rebuildEntityIndex($entityKey)
-  {
-
-    $this->removeIndex($entityKey);
-
-    $resourceId = $this->getResourceId($entityKey);
-
-    $indexData = array();
-
-    $entity = $this->newEntity($entityKey);
-    $tableName = $entity->getTable();
-
-    $titleFields = $entity->getIndexTitleFields();
-    $keyFields = $entity->getIndexKeyFields();
-    $descriptionFields = $entity->getIndexDescriptionFields();
-
-    $fields = array_merge(
-      array('rowid', Db::UUID, Db::TIME_CREATED),
-      $titleFields,
-      $keyFields,
-      $descriptionFields
-    );
-
-    try {
-
-      $rows = $this->db->select('SELECT '.implode(',', $fields).' FROM '.$tableName);
-
-      foreach ($rows as $keyVal) {
-
-        $indexData = array();
-
-        // title
-        if ($titleFields) {
-          if (count($titleFields) > 1) {
-            $titleTmp = array();
-            foreach ($titleFields as $field) {
-              $titleTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
-            }
-
-            $indexData['title'] = implode(', ', $titleTmp);
-          } else {
-            $indexData['title'] = isset($keyVal[$titleFields[0]])?$keyVal[$titleFields[0]]:'';
-          }
-        }
-
-        // key
-        if ($keyFields) {
-          if (count($keyFields) > 1) {
-            $keyTmp = array();
-            foreach ($keyFields as $field) {
-              $keyTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
-            }
-
-            $indexData['access_key'] = implode(', ', $keyTmp);
-          } else {
-            $indexData['access_key'] = isset($keyVal[$keyFields[0]])?$keyVal[$keyFields[0]]:'';
-          }
-        }
-
-        // description
-        if ($descriptionFields) {
-          if (count($descriptionFields) > 1) {
-            $keyTmp = array();
-            foreach ($descriptionFields as $field) {
-              $keyTmp[] = isset($keyVal[$field])?$keyVal[$field]:'';
-            }
-
-            $description = implode(', ', $keyTmp);
-            $indexData['description'] = mb_substr
-            (
-              strip_tags($description),
-              0,
-              250,
-              'utf-8'
-            );
-          } else {
-            $indexData['description'] = mb_substr
-            (
-              strip_tags((isset($keyVal[$descriptionFields[0]])?$keyVal[$descriptionFields[0]]:'')),
-              0,
-              250,
-              'utf-8'
-            );
-          }
-        }
-
-
-        $indexData['vid'] = $keyVal['rowid'];
-        $indexData['id_vid_entity'] = $resourceId;
-
-        $indexData[Db::UUID] = $keyVal[Db::UUID];
-        $indexData[Db::TIME_CREATED] = $keyVal[Db::TIME_CREATED];
-
-        $sqlstring = $this->sqlBuilder->buildInsert($indexData, 'wbfsys_data_index');
-
-        $this->db->create($sqlstring);
-
-      }
-
-    } catch (LibDb_Exception $exc) {
-
-      return null;
-    }
-
-  }//end public function removeEntityIndex */
 
   /**
    * @param string $key
@@ -2264,12 +2016,12 @@ SQL;
 
       $postSave = $entity->getPostSave();
       foreach ($postSave as /* @var Entity $postEntiy */ $postEntiy) {
-        // we asume that the entity is allready appended
+        // we assume that the entity is allready appended
         $this->save($postEntiy);
       }
 
       if ($entity->hasIndex())
-        $this->saveDsIndex($entity);
+        $this->searchIndexer->updateSearchIndexForEntity($entity);
 
       return $entity;
 
@@ -2279,7 +2031,7 @@ SQL;
       $entity = $this->fillObject($entityKey, $data);
 
       if ($entity->hasIndex())
-        $this->saveDsIndex($entity);
+        $this->searchIndexer->updateSearchIndexForEntity($entity);
 
       return $entity;
     }
