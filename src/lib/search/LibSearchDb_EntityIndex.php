@@ -193,10 +193,7 @@ class LibSearchDb_EntityIndex
      */
     private function retrieveDescriptionData($descriptionFields, $keyVal)
     {
-        $indexData = implode(
-            ', ',
-            $this->concatenateArrayValues($descriptionFields, $keyVal)
-        );
+        $indexData = $this->concatenateArrayValues($descriptionFields, $keyVal);
 
         return mb_substr
         (
@@ -209,18 +206,18 @@ class LibSearchDb_EntityIndex
 
     private function concatenateArrayValues(array $keys, array $data)
     {
-        return array_filter(
-            array_map(
-                function ($field) use ($data) {
-                    if (isset($keyVal[$field])) {
-                        return $keyVal[$field];
-                    } else {
-                        return false;
-                    }
-                },
-                $keys
-            )
-        );
+        return
+            implode(
+                ', ',
+                array_filter(
+                    array_map(
+                        function ($field) use ($data) {
+                            return isset($data[$field]) ? $data[$field] : false;
+                        },
+                        $keys
+                    )
+                )
+            );
     }
 }
 
