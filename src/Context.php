@@ -173,8 +173,19 @@ class Context
   {
 
     $this->interpretRequestAcls($request);
+    $this->interpretCustom($request);
 
   }//end public function interpretRequest */
+
+
+
+  /**
+   * @param LibRequestHttp $request
+   */
+  public function interpretCustom($request)
+  {
+
+  }//end public function interpretCustom */
 
   /**
    * @param LibRequestHttp $request

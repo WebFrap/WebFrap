@@ -165,6 +165,19 @@ class LibConf
   }//end public function getStatus */
 
   /**
+   * Rückgabe eines Status Keys
+   * @param string $key
+   * @return string
+   */
+  public function getVal($key)
+  {
+
+    $tmp = $this->status[$key];
+    return $tmp;
+
+  }//end public function getVal */
+
+  /**
    * @param $name
    **/
   public function getMap($name)

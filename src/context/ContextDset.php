@@ -65,6 +65,8 @@ class ContextDset extends Context
     if ($aclNode = $request->param('a_node', Validator::CKEY))
       $this->aclNode = $aclNode;
 
+    $this->interpretCustom($request);
+
   }//end public function interpretRequest */
 
 } // end class ContextDset

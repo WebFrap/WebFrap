@@ -147,6 +147,19 @@ SQL;
 
   }//end public function saveUserSetting */
 
+  /**
+   * @param string $key
+   * @param User $user Wenn das Setting User Spezifisch ist
+   *
+   * @return LibSettingsNode
+   */
+  public function get($key)
+  {
+
+    return $this->getModuleSetting($key);
+
+  }//end public function getModuleSetting */
+
 
   /**
    * @param string $key
