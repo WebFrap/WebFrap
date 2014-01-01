@@ -1,5 +1,5 @@
 
--- Activ Views
+-- Active Views
 
 CREATE  OR REPLACE VIEW webfrap_acl_max_permission_view
 AS
@@ -476,5 +476,5 @@ CREATE INDEX search_wbfsys_security_access_access_level_idx
 CREATE INDEX search_wbfsys_security_area_access_key_idx 
   ON wbfsys_security_area 
   (
-    upper(access_key)
+    access_key
   );

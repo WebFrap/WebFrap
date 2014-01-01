@@ -28,42 +28,42 @@ class LibDbAdmin
   /**
   * @var string
   */
-  const COL_NAME       = 'col_name';
+  const COL_NAME = 'col_name';
 
   /**
   * @var string
   */
-  const COL_DEFAULT    = 'col_default';
+  const COL_DEFAULT = 'col_default';
 
   /**
   * @var string
   */
-  const COL_NULL_ABLE  = 'col_null_able';
+  const COL_NULL_ABLE = 'col_null_able';
 
   /**
   * @var string
   */
-  const COL_TYPE       = 'col_type';
+  const COL_TYPE = 'col_type';
 
   /**
   * @var string
   */
-  const COL_LENGTH     = 'col_length';
+  const COL_LENGTH = 'col_length';
 
   /**
   * @var string
   */
-  const COL_PRECISION  = 'col_precision';
+  const COL_PRECISION = 'col_precision';
 
   /**
   * @var string
   */
-  const COL_SCALE      = 'col_scale';
+  const COL_SCALE = 'col_scale';
 
   /**
   * @var string
   */
-  const INDEX_TYPE      = 'index';
+  const INDEX_TYPE = 'index';
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -72,13 +72,13 @@ class LibDbAdmin
   /**
    * @var LibDbConnection
    */
-  protected $db         = null;
+  protected $db = null;
 
   /**
    *
    * @var string
    */
-  protected $dbName     = null;
+  protected $dbName = null;
 
   /**
    *
@@ -90,13 +90,13 @@ class LibDbAdmin
    *
    * @var string
    */
-  protected $tableName  = null;
+  protected $tableName = null;
 
   /**
    *
    * @var string
    */
-  protected $owner      = null;
+  protected $owner = null;
 
   /**
    * @var boolean flag
@@ -108,19 +108,19 @@ class LibDbAdmin
    * the sql patch string with all changes for the database
    * @var string
    */
-  protected $sqlPatch   = '';
+  protected $sqlPatch = '';
 
   /**
    * @var boolean flag
    * if this this flag is true, the database will be synced
    */
-  protected $syncDb     = true;
+  protected $syncDb = true;
 
   /**
    * if false all tables just use one single sequence
    * @var boolean
    */
-  protected $muliSeq    = false;
+  protected $muliSeq = false;
 
   /**
    *
@@ -142,7 +142,7 @@ class LibDbAdmin
    *
    * @var array
    */
-  public $invertMapping   = array();
+  public $invertMapping = array();
 
   /**
    *
@@ -159,23 +159,22 @@ class LibDbAdmin
    *
    * @var array<string:string>
   */
-  public $typeValidMap  = array
-  (
-    'boolean'   => 'boolean'  ,
-    'bytea'     => 'bytea'  ,
-    'integer'   => 'int'      ,
-    'int2'      => 'smallint' ,
-    'smallint'  => 'smallint' ,
-    'bigint'    => 'bigint' ,
-    'int8'      => 'bigint' ,
-    'numeric'   => 'numeric'  ,
-    'text'      => 'text'     ,
-    'varchar'   => 'text'     ,
-    'char'      => 'text'     ,
-    'date'      => 'date'     ,
-    'time'      => 'time'     ,
+  public $typeValidMap = array(
+    'boolean' => 'boolean'  ,
+    'bytea' => 'bytea'  ,
+    'integer' => 'int'      ,
+    'int2' => 'smallint' ,
+    'smallint' => 'smallint' ,
+    'bigint' => 'bigint' ,
+    'int8' => 'bigint' ,
+    'numeric' => 'numeric'  ,
+    'text' => 'text'     ,
+    'varchar' => 'text'     ,
+    'char' => 'text'     ,
+    'date' => 'date'     ,
+    'time' => 'time'     ,
     'timestamp' => 'timestamp',
-    'uuid'      => 'uuid'     ,
+    'uuid' => 'uuid'     ,
   );
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -190,10 +189,12 @@ class LibDbAdmin
   {
 
     if (!$type) {
-      if (!isset(self::$metaPool['parent']))
+
+    	if (!isset(self::$metaPool['parent']))
         self::$metaPool['parent'] = new LibDbAdmin();
 
       return self::$metaPool['parent'];
+
     } else {
 
       $type = ucfirst($type);
@@ -215,10 +216,10 @@ class LibDbAdmin
   {
 
     if ($db) {
-      $this->db           = $db;
+      $this->db = $db;
 
-      $this->dbName       = $db->getDatabaseName();
-      $this->schemaName   = $db->getSchemaName();
+      $this->dbName = $db->getDatabaseName();
+      $this->schemaName = $db->getSchemaName();
     }
 
   }//end public function __construct */
@@ -316,7 +317,6 @@ class LibDbAdmin
   {
 
     $this->muliSeq = $flag;
-
   }//end public function setMultiSeq */
 
   /**
@@ -325,7 +325,6 @@ class LibDbAdmin
   public function getMultiple()
   {
     return $this->multiple;
-
   }//end public function getMultiple */
 
   /**
@@ -334,7 +333,6 @@ class LibDbAdmin
   public function getQuotesMap()
   {
     return $this->quotesMap;
-
   }//end public function getQuotesMap */
 
   /**

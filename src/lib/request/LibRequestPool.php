@@ -35,13 +35,13 @@ class LibRequestPool extends LibRequestAbstract
    *
    * @var array
    */
-  protected $get    = array();
+  protected $get = array();
 
   /**
    *
    * @var array
    */
-  protected $post   = array();
+  protected $post = array();
 
   /**
    *
@@ -53,7 +53,7 @@ class LibRequestPool extends LibRequestAbstract
    *
    * @var array
    */
-  protected $files  = array();
+  protected $files = array();
 
   /**
    *
@@ -65,7 +65,7 @@ class LibRequestPool extends LibRequestAbstract
    *
    * @var array
    */
-  protected $env    = array();
+  protected $env = array();
 
   /**
    *
@@ -83,12 +83,12 @@ class LibRequestPool extends LibRequestAbstract
   public function __construct($get, $post, $cookie = array(), $files= array(), $server= array(), $env= array())
   {
 
-    $this->get    = $get;
-    $this->post   = $post;
+    $this->get = $get;
+    $this->post = $post;
     $this->cookie = $cookie;
-    $this->files  = $files;
+    $this->files = $files;
     $this->server = $server;
-    $this->env    = $env;
+    $this->env = $env;
 
   }//end public function __construct
 
@@ -223,30 +223,6 @@ class LibRequestPool extends LibRequestAbstract
 
   } // end public function addUrlVar
 
-  /**
-   * Abfragen des Status einer POST Variable
-   *
-   * @param string Key Name der zu prüfenden Variable
-   * @return bool
-   */
-  public function postExists($key , $subkey = null)
-  {
-
-    if (!is_null($subkey)) {
-      if (isset($this->post[$key][$subkey])) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      if (isset($this->post[$key])) {
-        return true;
-      } else {
-        return false;
-      }
-    }
-
-  } // end public function postExists */
 
   /**
   * Auslesen einer Postvariable
@@ -407,78 +383,6 @@ class LibRequestPool extends LibRequestAbstract
 
   }//end protected function validateArray($fMethod , $data)
 
-  /**
-   * request if one or more values are empty
-   *
-   * @param string Key Name der zu prüfenden Variable
-   * @return bool
-   */
-  public function postEmpty($keys , $subkey = null)
-  {
-
-    if ($subkey) {
-      if (is_array($keys)) {
-
-        foreach ($keys as $key) {
-
-          if (!isset($this->post[$subkey][$key])) {
-            return true;
-          }
-
-          if (trim($this->post[$subkey][$key]) == '') {
-            return true;
-          }
-
-          return false;
-
-        }
-
-      } else {
-
-        if (!isset($this->post[$subkey][$keys])) {
-          return true;
-        }
-
-        if (trim($this->post[$subkey][$keys]) == '') {
-          return true;
-        }
-
-        return false;
-
-      }
-    } else {
-      if (is_array($keys)) {
-
-        foreach ($keys as $key) {
-
-          if (!isset($this->post[$key])) {
-            return true;
-          }
-
-          if (trim($this->post[$key]) == '') {
-            return true;
-          }
-
-          return false;
-
-        }
-
-      } else {
-
-        if (!isset($this->post[$keys])) {
-          return true;
-        }
-
-        if (trim($this->post[$keys]) == '') {
-          return true;
-        }
-
-        return false;
-
-      }
-    }
-
-  } // end public function postEmpty
 
   /**
   * request if we have a cookie with this name
@@ -559,7 +463,7 @@ class LibRequestPool extends LibRequestAbstract
       if (isset($this->files[$key])) {
         $classname = 'LibUpload'.SParserString::subToCamelCase($type);
 
-        if (!WebFrap::loadable($classname)) {
+        if (!WebFrap::classExists($classname)) {
           throw new LibUploadException('Uploadtype: '.ucfirst($type).' not exists');
         } else {
           $upload = new $classname($this->files[$key]);
@@ -770,7 +674,7 @@ class LibRequestPool extends LibRequestAbstract
     if ($subkey) {// check if we have a subkey
       foreach ($values as $key => $value) {
         if (Log::$levelTrace)
-          Log::logTrace(__file__,__line__, "with Subjey: $subkey Key $key");
+          Log::logTrace(__FILE__,__LINE__, "with Subjey: $subkey Key $key");
 
         $method = 'add'.$value[0] ;
 
@@ -793,7 +697,7 @@ class LibRequestPool extends LibRequestAbstract
     } else {// we have no subkey geht direct
       foreach ($values as $key => $value) {
         if (Log::$levelTrace)
-          Log::logTrace(__file__,__line__, "Key $key");
+          Log::logTrace(__FILE__,__LINE__, "Key $key");
 
         $method = 'add'.$value[0] ;
 
@@ -817,7 +721,7 @@ class LibRequestPool extends LibRequestAbstract
     }
 
     if (Log::$levelTrace) {
-      Debug::logDump('$filter: '.__file__.':'.__line__, $filter);
+      Debug::logDump('$filter: '.__FILE__.':'.__LINE__, $filter);
       Debug::console('$filter search input',$filter);
     }
 

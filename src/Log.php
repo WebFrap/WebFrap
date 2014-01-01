@@ -32,25 +32,25 @@ class Log
 // Constantes
 //////////////////////////////////////////////////////////////////////////////*/
 
-  const TRACE     = 1;
+  const TRACE = 1;
 
-  const DEBUG     = 2;
+  const DEBUG = 2;
 
-  const VERBOSE   = 4;
+  const VERBOSE = 4;
 
-  const CONFIG    = 8;
+  const CONFIG = 8;
 
-  const INFO      = 16;
+  const INFO = 16;
 
-  const USER      = 32;
+  const user = 32;
 
-  const WARN      = 64;
+  const WARN = 64;
 
-  const SECURITY  = 128;
+  const SECURITY = 128;
 
-  const ERROR     = 256;
+  const ERROR = 256;
 
-  const FATAL     = 512;
+  const FATAL = 512;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -369,57 +369,19 @@ class Log
     }
   } //end public static function end */
 
-  /**
-   * Enter description here...
-   *
-   * @param unknown_type $file
-   * @param unknown_type $Line
-   * @param unknown_type $method
-   * @param unknown_type $logContent
-   */
-  public static function endVerbose($file, $Line , $method , $logContent = null)
-  {
 
-    if (!is_null(self::$instance)) {
 
-    $logMessage = 'end of method '.$method;
-
-      if (is_scalar($logContent) or is_object($logContent)) {
-        $logMessage .= ' '.$logContent;
-      } else {
-        $logMessage .= Debug::dumpToString($logContent);
-      }
-
-      self::$instance->verbose($file, $Line, $logMessage,null);
-    }
-  } //end public static function end */
-
-  /**
-   * Enter description here...
-   *
-   * @param unknown_type $file
-   * @param unknown_type $Line
-   * @param unknown_type $method
-   * @param unknown_type $logContent
-   */
-  public static function endWarn($file, $Line , $method , $logContent = null)
-  {
-
-    if (!is_null(self::$instance)) {
-      self::$instance->warn($file, $Line, 'dissatisfactory end of method '.$method.' cause '.$logContent,null);
-    }
-  } //end public static function endWarn */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Static logging
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   *
-   * @param $file
-   * @param $line
-   * @param $message
-   * @return unknown_type
+   * @param string $file (filename oder message)
+   * @param int $line
+   * @param string $message
+   * @param Exception $exception
+   * @return void
    */
   public static function trace($file, $line = null, $message = null, $exception = null)
   {
@@ -439,11 +401,11 @@ class Log
   }//end public static function trace */
 
   /**
-   *
-   * @param $file
-   * @param $line
-   * @param $message
-   * @return unknown_type
+   * @param string $file (filename oder message)
+   * @param int $line
+   * @param string $message
+   * @param Exception $exception
+   * @return void
    */
   public static function debug($file, $line = null, $message = null, $exception = null  )
   {
@@ -456,18 +418,18 @@ class Log
       $line = $pos['line'];
     }
 
-    if (!is_null(self::$instance)  ) {
+    if (!is_null(self::$instance)) {
       self::$instance->debug($file, $line, $message, $exception);
     }
 
   }//end public static function debug */
 
   /**
-   *
-   * @param $file
-   * @param $line
-   * @param $message
-   * @return unknown_type
+   * @param string $file (filename oder message)
+   * @param int $line
+   * @param string $message
+   * @param Exception $exception
+   * @return void
    */
   public static function verbose($file, $line = null, $message = null, $exception = null  )
   {
@@ -505,11 +467,11 @@ class Log
   }//end public static function dumpVerbose */
 
   /**
-   *
-   * @param $file
-   * @param $line
-   * @param $message
-   * @return unknown_type
+   * @param string $file (filename oder message)
+   * @param int $line
+   * @param string $message
+   * @param Exception $exception
+   * @return void
    */
   public static function config($file, $line = null, $message = null, $exception = null  )
   {
@@ -529,11 +491,11 @@ class Log
   }//end public static function config */
 
   /**
-   *
-   * @param $file
-   * @param $line
-   * @param $message
-   * @return unknown_type
+   * @param string $file (filename oder message)
+   * @param int $line
+   * @param string $message
+   * @param Exception $exception
+   * @return void
    */
   public static function user($file, $line = null, $message = null, $exception = null  )
   {
@@ -553,11 +515,11 @@ class Log
   }//end public static function user */
 
   /**
-   *
-   * @param $file
-   * @param $line
-   * @param $message
-   * @return unknown_type
+   * @param string $file (filename oder message)
+   * @param int $line
+   * @param string $message
+   * @param Exception $exception
+   * @return void
    */
   public static function info($file, $line = null, $message = null, $exception = null  )
   {
@@ -578,7 +540,10 @@ class Log
 
   /**
    * Statisches Loggen, möglich dank getInstance
-   *
+   * @param string $file (filename oder message)
+   * @param int $line
+   * @param string $message
+   * @param Exception $exception
    * @return void
    */
   public static function warn($file, $line = null, $message = null, $exception = null  )
@@ -600,7 +565,10 @@ class Log
 
   /**
    * Statisches Loggen, möglich dank getInstance
-   *
+   * @param string $file (filename oder message)
+   * @param int $line
+   * @param string $message
+   * @param Exception $exception
    * @return void
    */
   public static function error($file, $line = null, $message = null, $exception = null  )

@@ -42,22 +42,22 @@ class EUserSettingType
    * @var array
    */
   public static $labels = array(
-    self::MESSAGES     => 'Messages',
-    self::LISTING      => 'Listing',
-    self::LISTING_SEARCH  => 'Listing Search',
-    self::LISTING_REF  => 'Listing Ref',
-    self::SELECTION    => 'Selection',
+    self::MESSAGES => 'Messages',
+    self::LISTING => 'Listing',
+    self::LISTING_SEARCH => 'Listing Search',
+    self::LISTING_REF => 'Listing Ref',
+    self::SELECTION => 'Selection',
   );
 
   /**
    * @var array
    */
   public static $classes = array(
-    self::MESSAGES     => 'WebfrapMessage_Table_Search_Settings',
-    self::LISTING      => 'WgtSettings_Search_Listing',
+    self::MESSAGES => 'WebfrapMessage_Table_Search_Settings',
+    self::LISTING => 'WgtSettings_Search_Listing',
     self::LISTING_SEARCH => 'WgtSettings_Search_Listing',
-    self::LISTING_REF  => 'WgtSettings_Search_Listing',
-    self::SELECTION    => 'WgtSettings_Search_Listing',
+    self::LISTING_REF => 'WgtSettings_Search_Listing',
+    self::SELECTION => 'WgtSettings_Search_Listing',
   );
 
   /**

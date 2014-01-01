@@ -39,11 +39,11 @@ class LibImage_Gd extends LibImageAdapter
     $this->imageName = SFilesystem::dirname($imagePath);
 
     try {
-      $imgdata      = getimagesize ($imagePath);
+      $imgdata = getimagesize ($imagePath);
 
-      $this->width   = $imgdata[0];
-      $this->height  = $imgdata[1];
-      $type         = $imgdata[2];
+      $this->width = $imgdata[0];
+      $this->height = $imgdata[1];
+      $type = $imgdata[2];
 
       switch ($type) {
         case IMG_GIF :
@@ -134,10 +134,10 @@ class LibImage_Gd extends LibImageAdapter
     }
 
     try {
-      $imgdata      = getimagesize ($pic);
-      $org_width    = $imgdata[0];
-      $org_height   = $imgdata[1];
-      $type         = $imgdata[2];
+      $imgdata = getimagesize ($pic);
+      $org_width = $imgdata[0];
+      $org_height = $imgdata[1];
+      $type = $imgdata[2];
 
       // Errechnen der neuen Größe
       if ($org_width > $org_height) {

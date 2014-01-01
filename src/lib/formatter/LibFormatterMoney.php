@@ -29,58 +29,52 @@ class LibFormatterMoney
     /**
    * Enter description here...
    *
-   * @var unknown_type
+   * @var LibFormatterMoney
    */
-  protected static $instance  = null;
+  protected static $instance = null;
 
   /**
-   * Enter description here...
-   *
-   * @var unknown_type
+   * @var string
    */
-  protected $moneyEnglish    = null;
+  protected $moneyEnglish = null;
 
   /**
-   * Enter description here...
-   *
-   * @var unknown_type
+   * @var string
    */
-  protected $moneyLanguage  = null;
+  protected $moneyLanguage = null;
 
   /**
-   * Enter description here...
-   *
-   * @var unknown_type
+   * @var string
    */
-  protected $separatorDec   = ',';
+  protected $separatorDec = ',';
 
   /**
-   * Enter description here...
-   *
-   * @var unknown_type
+   * @var string
    */
-  protected $separatorTh    = '.';
+  protected $separatorTh = '.';
 
   /**
-   * Enter description here...
-   *
-   * @var unknown_type
+   * @var int
    */
-  protected $size           =  2;
+  protected $size =  2;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Magic
 //////////////////////////////////////////////////////////////////////////////*/
 
-  /**
-   *
-   */
-  public function __construct
+
+    /**
+     * @param null $money
+     * @param string $separatorDec
+     * @param string $separatorTh
+     * @param int $size
+     */
+    public function __construct
   (
-  $money = null,
-  $separatorDec = ',',
-  $separatorTh = '.' ,
-  $size = 2
+      $money = null,
+      $separatorDec = ',',
+      $separatorTh = '.' ,
+      $size = 2
   )
   {
     if (Log::$levelVerbose)
@@ -91,13 +85,13 @@ class LibFormatterMoney
     }
 
     $this->separatorDec = $separatorDec;
-    $this->separatorTh  = $separatorTh;
-    $this->size         = $size;
+    $this->separatorTh = $separatorTh;
+    $this->size = $size;
 
   }//end public function __construct
 
   /**
-   *
+   * @return string
    */
   public function __toString()
   {
@@ -149,8 +143,8 @@ class LibFormatterMoney
   public function setFormat($separatorDec = ',', $separatorTh = '.' , $size = 2)
   {
     $this->separatorDec = $separatorDec;
-    $this->separatorTh  = $separatorTh;
-    $this->size         = $size;
+    $this->separatorTh = $separatorTh;
+    $this->size = $size;
 
   }//end public function setFormat
 
@@ -182,7 +176,7 @@ class LibFormatterMoney
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   *
+   * @return string
    */
   public function formatToEnglish()
   {

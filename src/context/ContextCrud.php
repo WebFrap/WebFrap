@@ -20,6 +20,14 @@
  * @package WebFrap
  * @subpackage tech_core
  *
+ * @property $aclRoot
+ * @property $aclRootId
+ * @property $aclKey
+ * @property $aclNode
+ * @property $aclLevel
+ *
+ * @property string $subTab Key zum öffnen eines Subtabs
+ *
  */
 class ContextCrud extends Context
 {
@@ -34,89 +42,96 @@ class ContextCrud extends Context
 
     // startpunkt des pfades für die acls
     if ($aclRoot = $request->param('a_root', Validator::CKEY))
-      $this->aclRoot    = $aclRoot;
+      $this->aclRoot = $aclRoot;
 
     // die id des Datensatzes von dem aus der Pfad gestartet wurde
     if ($aclRootId = $request->param('a_root_id', Validator::INT))
-      $this->aclRootId    = $aclRootId;
+      $this->aclRootId = $aclRootId;
 
     // der key des knotens auf dem wir uns im pfad gerade befinden
     if ($aclKey = $request->param('a_key', Validator::CKEY))
-      $this->aclKey    = $aclKey;
+      $this->aclKey = $aclKey;
 
     // der neue knoten
     if ($aclNode = $request->param('a_node', Validator::CKEY))
-      $this->aclNode    = $aclNode;
+      $this->aclNode = $aclNode;
 
     // an welchem punkt des pfades befinden wir uns?
     if ($aclLevel = $request->param('a_level', Validator::INT))
-      $this->aclLevel  = $aclLevel;
+      $this->aclLevel = $aclLevel;
 
     // request elemet type, bei back to top ist es relevant zu wissen woher der
     // aufruf kam (in diesem fall von einem input)
     // könnte bei referenzen auch interessant werden
     // values: inp | ref
     if ($requestedBy = $request->param('rqtby', Validator::TEXT))
-      $this->requestedBy    = $requestedBy;
+      $this->requestedBy = $requestedBy;
 
     // sprungpunkt für back to top
     if ($maskRoot = $request->param('m_root', Validator::TEXT))
-      $this->maskRoot    = $maskRoot;
+      $this->maskRoot = $maskRoot;
+
+    if ($parentMask = $request->param('pmsk', Validator::TEXT))
+      $this->parentMask = $parentMask;
 
     // the publish type, like selectbox, tree, table..
-    if ($publish  = $request->param('publish', Validator::CNAME))
-      $this->publish   = $publish;
+    if ($publish = $request->param('publish', Validator::CNAME))
+      $this->publish = $publish;
 
     // if of the target element, can be a table, a tree or whatever
     if ($targetId = $request->param('target_id', Validator::CKEY))
-      $this->targetId  = $targetId;
+      $this->targetId = $targetId;
 
     // callback for a target function in thr browser
-    if ($target   = $request->param('target', Validator::CKEY))
-      $this->target    = $target;
+    if ($target = $request->param('target', Validator::CKEY))
+      $this->target = $target;
 
     // target mask key
     if ($targetMask = $request->param('target_mask', Validator::CNAME))
-      $this->targetMask  = $targetMask;
+      $this->targetMask = $targetMask;
 
     // target mask
     if ($mask = $request->param('mask', Validator::CNAME))
-      $this->mask  = $mask;
+      $this->mask = $mask;
 
     // mask key
     if ($viewId = $request->param('view_id', Validator::CKEY))
-      $this->viewId  = $viewId;
+      $this->viewId = $viewId;
 
     // mask key
     if ($viewType = $request->param('view', Validator::CNAME))
-      $this->viewType  = $viewType;
+      $this->viewType = $viewType;
 
     // soll die maske neu geladen werden?
     if ($reload = $request->param('reload', Validator::BOOLEAN))
-      $this->reload  = $reload;
+      $this->reload = $reload;
 
     // target mask key
     if ($refId = $request->param('refid', Validator::INT))
-      $this->refId  = $refId;
+      $this->refId = $refId;
 
     // listing type
-    if ($ltype   = $request->param('ltype', Validator::CNAME))
-      $this->ltype    = $ltype;
+    if ($ltype = $request->param('ltype', Validator::CNAME))
+      $this->ltype = $ltype;
 
     // context
-    if ($context   = $request->param('context', Validator::CNAME))
-      $this->context    = $context;
+    if ($context = $request->param('context', Validator::CNAME))
+      $this->context = $context;
 
     // parameter zum fixieren des Contexts
     // wird verwendet um zwischen "unterschiedliche" Masken mit dem gleichen
     // viewnamen zu switchen
-    if ($cntk   = $request->param('cntk', Validator::CKEY))
-      $this->contextKey    = $cntk;
+    if ($cntk = $request->param('cntk', Validator::CKEY))
+      $this->contextKey = $cntk;
 
     // mask switcher key
     // wird nur in der view gesetzt wenn der mask switcher vorhanden ist
-    if ($cntms   = $request->param('cntms', Validator::CNAME))
-      $this->contextMaskSwt    = $cntms;
+    if ($cntms = $request->param('cntms', Validator::CNAME))
+      $this->contextMaskSwt = $cntms;
+
+    // setzen des tabs welchen man aktiv setzen möchte
+    if ($sbt = $request->param('sbt', Validator::CNAME))
+      $this->subTab = $sbt;
 
     // per default
     $this->categories = array();
@@ -153,6 +168,9 @@ class ContextCrud extends Context
     if ($this->requestedBy)
       $this->urlExt .= '&amp;rqtby='.$this->requestedBy;
 
+    if ($this->parentMask)
+      $this->urlExt .= '&amp;pmsk='.$this->parentMask;
+
     if ($this->ltype)
       $this->urlExt .= '&amp;ltype='.$this->ltype;
 
@@ -176,9 +194,6 @@ class ContextCrud extends Context
 
     if ($this->viewId)
       $this->urlExt .= '&amp;view_id='.$this->viewId;
-
-    if ($this->mask)
-      $this->urlExt .= '&amp;mask='.$this->mask;
 
     if ($this->contextMaskSwt)
       $this->urlExt .= '&amp;cntms='.$this->contextMaskSwt;
@@ -217,6 +232,9 @@ class ContextCrud extends Context
     if ($this->requestedBy)
       $this->actionExt .= '&rqtby='.$this->requestedBy;
 
+    if ($this->parentMask)
+      $this->actionExt .= '&pmsk='.$this->parentMask;
+
     if ($this->ltype)
       $this->actionExt .= '&ltype='.$this->ltype;
 
@@ -237,9 +255,6 @@ class ContextCrud extends Context
 
     if ($this->targetMask)
       $this->actionExt .= '&target_mask='.$this->targetMask;
-
-    if ($this->mask)
-      $this->actionExt .= '&mask='.$this->mask;
 
     if ($this->viewId)
       $this->actionExt .= '&view_id='.$this->viewId;

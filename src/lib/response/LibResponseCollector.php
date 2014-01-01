@@ -50,6 +50,8 @@ class LibResponseCollector extends LibResponse
    * @var array
    */
   public $protocol = array();
+  
+  public $counter = 0;
 
   /**
    * Fügt eine neue Nachricht zu den Nachrichten hinzu
@@ -57,8 +59,8 @@ class LibResponseCollector extends LibResponse
    */
   public function addMessage ($message)
   {
-
-    $this->message[] = $message;
+    $this->counter ++;
+    $this->message[] = "Action " . $this->counter . " " . $message;
   }
 
   /**
@@ -67,8 +69,8 @@ class LibResponseCollector extends LibResponse
    */
   public function addWarning ($warning)
   {
-
-    $this->warning[] = $warning;
+    $this->counter ++;
+    $this->warning[] = "Action " . $this->counter . " " . $warning;
   }
 
   /**
@@ -77,8 +79,8 @@ class LibResponseCollector extends LibResponse
    */
   public function addError ($error)
   {
-
-    $this->error[] = $error;
+    $this->counter ++;
+    $this->error[] = "Action " . $this->counter . " " . $error;
   }
 
   /**

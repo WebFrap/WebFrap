@@ -27,49 +27,49 @@ class Cache
    * an hour is average long
    * @var int
    */
-  const SHORT   = 600;
+  const SHORT = 600;
 
   /**
    * an hour is average long
    * @var int
    */
-  const MEDIUM  = 3600;
+  const MEDIUM = 3600;
 
   /**
    * a week is long
    * @var int
    */
-  const LONG    = 604800;
+  const LONG = 604800;
 
   /**
    * @var int
    */
-  const MINUTE  = 60;
+  const MINUTE = 60;
 
   /**
    * @var int
    */
-  const HOUR    = 3600;
+  const HOUR = 3600;
 
   /**
    * @var int
    */
-  const DAY     = 86400;
+  const DAY = 86400;
 
   /**
    * @var int
    */
-  const WEEK    = 604800;
+  const WEEK = 604800;
 
   /**
    * @var int
    */
-  const MONTH   = 2592000;
+  const MONTH = 2592000;
 
   /**
    * @var int
    */
-  const YEAR    = 31536000;
+  const YEAR = 31536000;
 
   /**
    * @var int
@@ -126,7 +126,7 @@ class Cache
     if (isset($conf['adapters']['level1'])) {
       $class = 'LibCache'.ucfirst($conf['adapters']['level1']['class']);
 
-      if (!Webfrap::loadable($class)) {
+      if (!Webfrap::classExists($class)) {
         throw new WebfrapConfig_Exception('Wrong Configuration');
       }
       $this->level1 = new $class($conf['adapters']['level1']);
@@ -135,7 +135,7 @@ class Cache
     if (isset($conf['adapters']['level2'])) {
       $class = 'LibCache'.ucfirst($conf['adapters']['level2']['class']);
 
-      if (!Webfrap::loadable($class)) {
+      if (!Webfrap::classExists($class)) {
         throw new WebfrapConfig_Exception('Wrong Configuration');
       }
 
@@ -147,7 +147,7 @@ class Cache
     if (isset($conf['adapters']['level3'])) {
       $class = 'LibCache'.ucfirst($conf['adapters']['level3']['class']);
 
-      if (!Webfrap::loadable($class)) {
+      if (!Webfrap::classExists($class)) {
         throw new WebfrapConfig_Exception('Wrong Configuration');
       }
 
@@ -155,7 +155,7 @@ class Cache
     } else {
 
       $this->level3 = new LibCacheFile(array(
-        'class'  => 'File',
+        'class' => 'File',
         'folder' => PATH_GW.'cache/',
         'expire' => Cache::MONTH,
       ));

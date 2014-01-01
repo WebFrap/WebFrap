@@ -134,7 +134,7 @@ class LibCacheSqlite extends LibCacheAdapter
    * @param string Area Die zu verwendente Subarea
    * @return string
    */
-  public function get($key  )
+  public function get($key, $time = Cache::MEDIUM)
   {
 
     if (isset($this->cache[$key]))return $this->cache[$key];

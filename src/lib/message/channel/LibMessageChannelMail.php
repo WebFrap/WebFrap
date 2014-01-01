@@ -45,7 +45,7 @@ class LibMessageChannelMail extends LibMessageChannel
 
     $renderer = $this->getRenderer();
 
-    $sender   = $message->getSender();
+    $sender = $message->getSender();
 
     if (!$sender)
       $sender = $this->getSender();
@@ -83,8 +83,8 @@ class LibMessageChannelMail extends LibMessageChannel
       $dmsAttachments = $message->getAttachments();
 
       foreach ($dmsAttachments as $attachment) {
-        $fileId   = $attachment->getId();
-        $fullPath = PATH_GW.'data/uploads/wbfsys_file/name'.SParserString::idToPath($fileId).'/'.$fileId;
+        $fileId = $attachment->getId();
+        $fullPath = PATH_UPLOADS.'attachments/wbfsys_file/name'.SParserString::idToPath($fileId).'/'.$fileId;
 
         $mailer->addAttachment($attachment->name , $fullPath);
       }
@@ -101,7 +101,7 @@ class LibMessageChannelMail extends LibMessageChannel
 
       $embededLayouts = $message->getEmbededLayout();
       foreach ($embededLayouts as $fullPath => $fileName) {
-        $mailer->addEmbedded($fileName , PATH_THEME.'themes/default/images/'.$fullPath);
+        $mailer->addEmbedded($fileName , PATH_THEME.'themes/classic/images/'.$fullPath);
       }
 
       Debug::console(

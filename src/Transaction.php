@@ -31,7 +31,7 @@ class Transaction
    * pool for the transactions
    * @var array
    */
-  protected static $transactions   = array();
+  protected static $transactions = array();
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Fake Destructor
@@ -75,20 +75,20 @@ class Transaction
   public static function createTransaction()
   {
 
-    $sessionId       = Session::getSessionId();
-    $transactionId    = sha1(uniqid(rand(), true));
+    $sessionId = Session::getSessionId();
+    $transactionId = sha1(uniqid(rand(), true));
 
     $className = 'SysTransaction'.$this->transactionType;
 
     $tansaction = new $className($transactionId, $sessionId);
-    $this->transactions[$transactionId]  = $tansaction;
+    $this->transactions[$transactionId] = $tansaction;
 
   }//end public static function createTransaction()
 
   /**
    * Enter description here...
    *
-   * @param unknown_type $transactionId
+   * @param string $transactionId
    * @return SysTransactionAbstract
    */
   public static function getTransaction($transactionId)
@@ -98,6 +98,7 @@ class Transaction
         return $this->transactions[$transactionId]->isValid();
       }
     }
+    return null;
   }//end public static function getTransaction($transactionId)
 
   /**

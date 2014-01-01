@@ -70,13 +70,13 @@ class EUserType
    * @var array
    */
   public static $labels = array(
-    self::SYSTEM     => 'System',
-    self::USER      => 'User',
-    self::MACHINE  => 'Machine',
-    self::ORGANISATION  => 'Organisation',
-    self::BUIZ_NODE    => 'BuizNode',
-    self::BOT    => 'Bot',
-    self::SPIDER    => 'Spider',
+    self::SYSTEM => 'System',
+    self::USER => 'User',
+    self::MACHINE => 'Machine',
+    self::ORGANISATION => 'Organisation',
+    self::BUIZ_NODE => 'BuizNode',
+    self::BOT => 'Bot',
+    self::SPIDER => 'Spider',
   );
 
   /**

@@ -28,13 +28,13 @@ class LibSpreadsheetExcel  extends LibTemplateDocument
   /**
    * @var [LibSpreadsheetExcelTab]
    */
-  protected $sheets   = array();
+  protected $sheets = array();
 
   /**
    * Die Instanz des Dokuments
    * @var PHPExcel
    */
-  protected $document   = null;
+  protected $document = null;
 
   /**
    * @var string
@@ -93,16 +93,14 @@ class LibSpreadsheetExcel  extends LibTemplateDocument
    * @param string $style
    * @param string $tabType
    */
-  public function __construct
-  (
+  public function __construct(
     $env,
     $defTitle = null,
     $style = null,
     $tabType = 'LibSpreadsheetExcelTab_Sql'
-  )
-  {
+  ) {
 
-    $this->env    = $env;
+    $this->env = $env;
     $this->parent = $env->getTpl();
 
     if ($style)
@@ -182,7 +180,7 @@ class LibSpreadsheetExcel  extends LibTemplateDocument
   public function addSheet(LibSpreadsheetExcelTab $sheet)
   {
 
-    $this->sheets[]   = $sheet;
+    $this->sheets[] = $sheet;
     $this->document->addSheet($sheet);
 
   }//end public function addSheet */
@@ -193,7 +191,7 @@ class LibSpreadsheetExcel  extends LibTemplateDocument
    */
   public function removeSheet($position = 0)
   {
-    $this->sheets[$position]   = null;
+    $this->sheets[$position] = null;
   }//end public function removeSheet */
 
   /**
@@ -228,7 +226,7 @@ class LibSpreadsheetExcel  extends LibTemplateDocument
 
     if (!$this->styleObj) {
       $styleClass = 'LibSpreadsheetExcelStyle_'.SParserString::subToCamelCase($this->styleName);
-      if (!Webfrap::classLoadable($styleClass)) {
+      if (!Webfrap::classExists($styleClass)) {
         $styleClass = 'LibSpreadsheetExcelStyle_Default';
       }
 
@@ -290,8 +288,8 @@ class LibSpreadsheetExcel  extends LibTemplateDocument
       return;
     }
 
-    $db    = $this->getDb();
-    $user  = $this->getUser()->getFullName();
+    $db = $this->getDb();
+    $user = $this->getUser()->getFullName();
 
     foreach ($this->sheets as $key => /* @var $sheetNode LibSpreadsheetExcelTab  */ $sheetNode) {
 
@@ -355,18 +353,18 @@ class LibSpreadsheetExcel  extends LibTemplateDocument
     $fileKey = Webfrap::uniqid();
 
     // tell the view that it has to send a file, and no parsed content
-    $file    = $this->env->getTpl()->sendFile();
+    $file = $this->env->getTpl()->sendFile();
 
     // file is temporay so the view deletes after sending
-    $file->tmp     = true;
+    $file->tmp = true;
     // set the filename
-    $file->name    = $this->fileName;
+    $file->name = $this->fileName;
     // where is the file to find
-    $file->path    = PATH_GW.'tmp/documents/'.$fileKey;
+    $file->path = PATH_GW.'tmp/documents/'.$fileKey;
     // the mimetype for the file
 
-    $file->type    = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
-    //$file->type    = 'text/plain';
+    $file->type = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+    //$file->type = 'text/plain';
 
     $factory = LibVendorPhpexcelFactory::getDefault();
 
@@ -393,7 +391,7 @@ class LibSpreadsheetExcel  extends LibTemplateDocument
       $this->document->disconnectWorksheets();
 
     $this->document = null;
-    $this->sheets   = array();
+    $this->sheets = array();
 
   }//end public function close */
 

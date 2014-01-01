@@ -63,17 +63,17 @@ class LibResponseHttp extends LibResponse
    * Liste der neu zu erstellenden Cookies
    * @var array
    */
-  protected $cookies  = array();
+  protected $cookies = array();
 
   /**
    * default headers prevent caching in the browser
    * @var array
    */
-  protected $header   = array
+  protected $header = array
   (
     'cache-control' => "Cache-Control: must-revalidate, post-check=0, pre-check=0",
     //'cache-control' => 'Cache-Control: no-cache, must-revalidate',
-    'expires'       => 'Expires: Mon, 26 Jul 1997 05:00:00 GMT'
+    'expires' => 'Expires: Mon, 26 Jul 1997 05:00:00 GMT'
   );
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -98,7 +98,7 @@ class LibResponseHttp extends LibResponse
   /**
    * Einen neuen Cookie hinzufügen
    *
-   * @param array $name
+   * @param string $name
    * @return boolean
    */
   public function getCookie($name)
@@ -374,8 +374,8 @@ class LibResponseHttp extends LibResponse
   {
 
     /* @var $tplEngine LibTemplate   */
-    $tplEngine  = $this->getTplEngine();
-    $request    = $this->getRequest();
+    $tplEngine = $this->getTplEngine();
+    $request = $this->getRequest();
 
     if (!$viewType)
       $viewType =  $tplEngine->type;
@@ -623,8 +623,8 @@ class LibResponseHttp extends LibResponse
     // nur wenn kein Content Type header explizit gesetzt wurde
     if (!isset($this->header['content-type'])) {
 
-      if (!$charset  = $this->tpl->tplConf['charset']) {
-        if (!$charset  = $conf->status('encoding'))
+      if (!$charset = $this->tpl->tplConf['charset']) {
+        if (!$charset = $conf->status('encoding'))
           $charset = 'utf-8';
       }
 
@@ -722,7 +722,7 @@ class LibResponseHttp extends LibResponse
       $this->sendHeader('Pragma: public');
 
     } else {
-      if (!$charset  = $this->tpl->tplConf['charset'])
+      if (!$charset = $this->tpl->tplConf['charset'])
         $charset = 'utf-8';
 
       $this->sendHeader('Content-Type:'.$this->tpl->contentType.'; charset='.$charset);

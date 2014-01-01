@@ -16,35 +16,14 @@
 *******************************************************************************/
 
 /**
+ * 
+ * 
  * @package WebFrap
  * @subpackage tech_core
  *
  */
 class WebfrapSys_Exception extends Webfrap_Exception
 {
-/*//////////////////////////////////////////////////////////////////////////////
-// Attributes
-//////////////////////////////////////////////////////////////////////////////*/
-
-  /**
-   *
-   * @var string
-   */
-  protected $debugMessage = null; // unspecified error
-
-  /**
-   *
-   * @var string
-   */
-  protected $errorKey     = Response::INTERNAL_ERROR; // unspecified error
-
-  /**
-   * Container der eine oder mehrere Fehlermeldungen enthält
-   *
-   * @var ErrorContainer
-   */
-  public $error     = null;
-
 /*//////////////////////////////////////////////////////////////////////////////
 // Konstruktor
 //////////////////////////////////////////////////////////////////////////////*/
@@ -55,17 +34,16 @@ class WebfrapSys_Exception extends Webfrap_Exception
    * @param int $errorKey ein Error Key analog zum HTTP Status
    * @param boolean $protocol soll der Fehler in der Datenbank protokolliert werden?
    */
-  public function __construct
-  (
+  public function __construct(
     $debugMessage,
-    $userMessage = 'Error',
+    $userMessage = 'undefined error',
     $errorKey = Response::INTERNAL_ERROR,
     $protocol = true,
     $dset = null,
     $mask = null
   ) {
 
-    $request  = Webfrap::$env->getRequest();
+    $request = Webfrap::$env->getRequest();
     $response = Webfrap::$env->getResponse();
 
     if (defined('DUMP_ERRORS')) {
@@ -73,18 +51,18 @@ class WebfrapSys_Exception extends Webfrap_Exception
         $protocol = false;
     }
 
-    if ('Error' === $userMessage)
-      $userMessage = Error::PROGRAM_BUG;
+    if ('undefined error' === $debugMessage)
+      $debugMessage = Error::PROGRAM_BUG;
 
     if (DEBUG || WBF_RESPONSE_ADAPTER === 'cli') {
-      $userMessage = $debugMessage;
+      //$userMessage = $debugMessage;
       parent::__construct($debugMessage);
     } else {
       parent::__construct($userMessage);
     }
 
     $this->debugMessage = $debugMessage;
-    $this->errorKey     = $errorKey;
+    $this->errorKey = $errorKey;
 
     if ('cli' === $request->type)
       $response->writeLn($userMessage);
@@ -104,43 +82,7 @@ class WebfrapSys_Exception extends Webfrap_Exception
 
   }//end public function __construct */
 
-/*//////////////////////////////////////////////////////////////////////////////
-// Getter & Setter
-//////////////////////////////////////////////////////////////////////////////*/
 
-  /**
-   *
-   * @return string
-   */
-  public function getDebugMessage()
-  {
-    return $this->debugMessage;
-
-  }//end public function getDebugMessage */
-
-  /**
-   *
-   * @return string
-   */
-  public function getErrorKey()
-  {
-    return $this->errorKey;
-
-  }//end public function getErrorKey */
-
-  /**
-   * @param LibResponseHttp $response
-   */
-  public function publish($response)
-  {
-
-    if ($this->error) {
-      $this->error->publish($response);
-    } else {
-      $response->addError($this->message);
-    }
-
-  }//end public function publish */
 
 }//end class WebfrapSys_Exception
 

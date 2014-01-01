@@ -28,25 +28,24 @@ class LibSystemProcess
    * Die Prozess Resource
    * @var Resource
    */
-  protected $proc   = null;
+  protected $proc = null;
 
   /**
    *
    * @var string
    */
-  protected $stdin  = null;
+  protected $stdin = null;
 
   /**
    *
    * @var string
    */
-  protected $stdout  = null;
+  protected $stdout = null;
 
   /**
-   *
    * @var string
    */
-  protected $stderr  = null;
+  protected $stderr = null;
 
   /**
    * first simple call method
@@ -121,8 +120,7 @@ class LibSystemProcess
   public function open($command , $params = null, $env = null  )
   {
 
-    $spec = array
-    (
+    $spec = array(
        0 => array("pipe", "r"),  // stdin pipe for reading input
        1 => array("pipe", "w"),  // stdout pipe for standard output
        2 => array("pipe", "w")   // stderr pipe for errors
@@ -139,7 +137,7 @@ class LibSystemProcess
     if (!is_resource($this->proc)) {
       return false;
     } else {
-      $this->stdin  = $pipes[0];
+      $this->stdin = $pipes[0];
       $this->stdout = $pipes[1];
       $this->stderr = $pipes[2];
 

@@ -49,7 +49,7 @@ class LibMessageLoader
     if (!$list)
       return array();
 
-    $whereIn = implode( "'), UPPER('", $list );
+    $whereIn = implode( "', '", $list );
 
     $sql = <<<SQL
 SELECT
@@ -58,7 +58,7 @@ SELECT
 FROM
   wbfsys_message_sync
 WHERE
-  UPPER(message_id) IN(UPPER('{$whereIn}'));
+  message_id IN('{$whereIn}');
 
 SQL;
 

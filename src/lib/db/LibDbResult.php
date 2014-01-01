@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-abstract class LibDbResult
-  implements Iterator, Countable
+abstract class LibDbResult implements Iterator, Countable
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -31,58 +30,58 @@ abstract class LibDbResult
    * database connection result
    * @var resource id
    */
-  protected $result         = null;
+  protected $result = null;
 
   /**
    * @var LibDbConnection
    */
-  protected $dbObject       = null;
+  protected $dbObject = null;
 
   /**
    *
    * @var int
    */
-  protected $fetchMode      = null;
+  protected $fetchMode = null;
 
   /**
    *
    * @var string
    */
-  protected $name           = null;
+  protected $name = null;
 
   /**
    *
    * @var boolean
    */
-  protected $single         = false;
+  protected $single = false;
 
   /**
    *
    * @var array
    */
-  protected $row            = array();
+  protected $row = array();
 
   /**
    *
    * @var array
    */
-  protected $pos            = 0;
+  protected $pos = 0;
 
   /**
    *
    * @var array
    */
-  protected $numRows        = null;
+  protected $numRows = null;
 
   /**
    * @var int
    */
-  protected $numFields     = null;
+  protected $numFields = null;
 
   /**
    * @var array
    */
-  protected $data     = array();
+  protected $data = array();
 
   /**
    * Die Nummer der Query
@@ -118,14 +117,14 @@ abstract class LibDbResult
   )
   {
 
-    $this->result   = $result;
+    $this->result = $result;
     $this->dbObject = $dbObject;
-    $this->name     = $name;
+    $this->name = $name;
 
     $this->numQuery = $numQuery;
     $this->duration = $duration;
 
-    $this->pos      = 0;
+    $this->pos = 0;
 
   } // end public function __construct */
 
@@ -170,6 +169,18 @@ abstract class LibDbResult
   {
     return array();
   }//end public function getName
+  
+  /**
+   * Das Nächste Result Abfragen
+   * @param string $key
+   * @return array
+   */
+  public function getField($key)
+  {
+  
+    return null;
+  
+  } // end public function getField */
 
   /**
    * @return array

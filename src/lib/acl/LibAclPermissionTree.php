@@ -62,21 +62,15 @@ class LibAclPermissionTree extends LibAclPermissionList
    * @param TFlag $params
    * @param Entity $entity
    */
-  public function fetchChildrenIds($profil, $context, $query, $ids, $conditions, $params = null  )
+  public function fetchChildrenIds( $context, $query, $ids, $conditions, $params = null  )
   {
 
     ///TODO Den Pfad auch noch als möglichkeit für die Diversifizierung einbauen
 
     // sicherheitshalber den String umbauen
-    $profil   = SParserString::subToCamelCase($profil);
-    $context  = ucfirst(strtolower($context));
+    $context = ucfirst(strtolower($context));
 
-    if (method_exists($this, 'fetchChildren_'.$context.'_Profile_'.$profil  )) {
-      return $this->{'fetchChildren_'.$context.'_Profile_'.$profil}($query, $ids, $conditions, $params);
-    } else {
-      return $this->fetchChildrenTreetableDefault($query, $ids, $conditions, $params);
-      //return $this->{'fetchChildren'.$context.'Default'}($query, $ids, $conditions, $params);
-    }
+    return $this->fetchChildrenTreetableDefault($query, $ids, $conditions, $params);
 
   }//end public function fetchChildrenIds */
 

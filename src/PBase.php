@@ -33,12 +33,12 @@ abstract class Pbase
    *
    * @var LibAclAdapter
    */
-  public $acl          = null;
+  public $acl = null;
 
   /**
    * @var LibAclContainer
    */
-  public $access         = null;
+  public $access = null;
 
   /**
    * Die Haupt Datenbank Verbindung, wir gehen davon aus, das in der Regel nur
@@ -47,55 +47,55 @@ abstract class Pbase
    * Davon ein Key vorliegen um diese identifizieren und ansprechen zu können.
    * @var LibDbConnection
    */
-  public $db           = null;
+  public $db = null;
 
   /**
    * de:
    * Das Cache Objekt
    * @var LibCacheAdapter
    */
-  public $cache        = null;
+  public $cache = null;
 
   /**
    *
    * Enter description here ...
    * @var LibConf
    */
-  public $conf         = null;
+  public $conf = null;
 
   /**
    *
    * Enter description here ...
    * @var unknown_type
    */
-  public $i18n         = null;
+  public $i18n = null;
 
   /**
    *
    * Enter description here ...
    * @var LibPhpRequest
    */
-  public $request      = null;
+  public $request = null;
 
   /**
    *
    * Enter description here ...
    * @var Registry
    */
-  public $registry     = null;
+  public $registry = null;
 
   /**
    *
    * Enter description here ...
    * @var LibSessionPhp
    */
-  public $session      = null;
+  public $session = null;
 
   /**
    * @notYetImplemented
    * @var Transaction
    */
-  public $transaction  = null;
+  public $transaction = null;
 
   /**
    * de:
@@ -106,13 +106,13 @@ abstract class Pbase
    * }
    * @var User
    */
-  public $user         = null;
+  public $user = null;
 
   /**
    * Das Nachrichtensystem
    * @var LibMessagePool
    */
-  public $message      = null;
+  public $message = null;
 
   /**
    * de:
@@ -123,7 +123,7 @@ abstract class Pbase
    * }
    * @var Response
    */
-  public $response      = null;
+  public $response = null;
 
   /**
    * de:
@@ -135,13 +135,13 @@ abstract class Pbase
    * }
    * @var LibTemplate
    */
-  public $tpl    = null;
+  public $tpl = null;
 
   /**
    * @deprecated use $tpl
    * @var LibTemplate
    */
-  public $tplEngine    = null;
+  public $tplEngine = null;
 
   /**
    * de:
@@ -151,7 +151,13 @@ abstract class Pbase
    * }
    * @var LibTemplate
    */
-  public $view         = null;
+  public $view = null;
+
+  /**
+   * Eine liste von Datenquellen / providern
+   * @var []
+   */
+  public $providers = array();
 
 /*//////////////////////////////////////////////////////////////////////////////
 // getter & setter methodes
@@ -440,7 +446,7 @@ abstract class Pbase
   {
 
     if (!$this->tpl) {
-      $this->tpl = View::engine();
+      $this->tpl = View::getActive();
       $this->tplEngine = $this->tpl;
     }
 
@@ -467,7 +473,7 @@ abstract class Pbase
   {
 
     if (!$this->tpl) {
-      $this->tpl = View::engine();
+      $this->tpl = View::getActive();
       $this->tplEngine = $this->tpl;
     }
 
@@ -519,6 +525,41 @@ abstract class Pbase
     return $this->message;
 
   }//end public function getMessage */
+
+  /**
+   * @return Provider
+   */
+  public function getProvider($key, $class = null)
+  {
+
+    if (!isset($this->providers[$key])){
+
+      if(!$class)
+        $class = $key;
+
+      $cn = $class.'_Provider';
+
+      if(!Webfrap::classExists($cn)){
+        return null;
+      }
+
+      $this->providers[$key] = new $cn($this);
+    }
+
+    return $this->providers[$key];
+
+  }//end public function getProvider */
+
+  /**
+   * @param string $key
+   * @param Provider $obj
+   */
+  public function setProvider($key, $obj)
+  {
+
+    $this->providers[$key] = $obj;
+
+  }//end public function getProvider */
 
 }//end abstract class Pbase
 

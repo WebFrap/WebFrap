@@ -37,7 +37,7 @@ class LibProcessStatus_Selectbox_Query extends LibSqlQuery
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * Fetch method for the ProjectProject Selectbox
+   * Fetch method for the Process Selectbox
    * @return void
    */
   public function fetchSelectbox()
@@ -79,7 +79,7 @@ class LibProcessStatus_Selectbox_Query extends LibSqlQuery
         'wbfsys_process'
       );
 
-      $criteria->where('upper(wbfsys_process.access_key) = upper(\''.$this->processName."')");
+      $criteria->where('wbfsys_process.access_key = \''.$this->processName."'");
     }
 
     $criteria->orderBy('wbfsys_process_node.m_order');

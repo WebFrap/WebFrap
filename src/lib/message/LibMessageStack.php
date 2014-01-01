@@ -53,14 +53,14 @@ class LibMessageStack extends PBase
   /**
    * Array mit Gruppen an welche die Nachricht gehen soll
    * @var array<WbfsysRoleGroup_Entity>
-   * /
+   */
   public $receiverGroups = array();
 
   /**
    * Array mit Plain Addressen. Wird benötigt wenn die Empfänger nicht im
    * System gepflegt sind
-   * @var array<string type: array<string address>>
-   * /
+   * @var array<string type: array<string address>
+   */
   public $addresses = array();
 
   /**
@@ -571,6 +571,16 @@ class LibMessageStack extends PBase
     return Webfrap::$env->getRequest()->getServerAddress($forceHttps);
 
   }//end public function getServerAddress */
+  
+  /**
+   * @param boolean $forceHttps
+   * @return string
+   */
+  public function getFullRequest($forceHttps = false)
+  {
+    return Webfrap::$env->getRequest()->getFullRequest($forceHttps);
+
+  }//end public function getFullRequest */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Clean
@@ -582,11 +592,11 @@ class LibMessageStack extends PBase
   public function clean()
   {
 
-    $this->htmlDynContent   = null;
-    $this->htmlContent      = null;
+    $this->htmlDynContent = null;
+    $this->htmlContent = null;
 
-    $this->plainDynContent  = null;
-    $this->plainContent  = null;
+    $this->plainDynContent = null;
+    $this->plainContent = null;
 
   }//end public function clean */
 

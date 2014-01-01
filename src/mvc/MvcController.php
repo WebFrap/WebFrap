@@ -20,6 +20,8 @@
  * Extention zum verwalten und erstellen von neuen Menus in der Applikation
  * @package WebFrap
  * @subpackage Mvc
+ *
+ * @statefull
  */
 abstract class MvcController extends BaseChild
 {
@@ -30,18 +32,13 @@ abstract class MvcController extends BaseChild
   /**
    * @var string the default Action
    */
-  protected $activAction    = null;
+  protected $activAction = null;
 
   /**
    * sub Modul Extention
    * @var array
    */
-  protected $models         = array();
-
-  /**
-   * @var array
-   */
-  protected $uis            = array();
+  protected $models = array();
 
   /**
    * Flag ob der Controller schon initialisiert wurde, und damit einsatzbereit
@@ -49,7 +46,7 @@ abstract class MvcController extends BaseChild
    *
    * @var boolean
    */
-  protected $initialized  = false;
+  protected $initialized = false;
 
   /**
    * Liste der Services welche über diesen Controller angeboten werden.
@@ -73,7 +70,7 @@ abstract class MvcController extends BaseChild
    * (
    *   'helloworld' => array
    *   (
-   *     'method'    => array('GET', 'POST'),
+   *     'method' => array('GET', 'POST'),
    *     'interface' => array
    *     (
    *        'GET' => array
@@ -95,21 +92,21 @@ abstract class MvcController extends BaseChild
    *         )
    *       )
    *     ),
-   *     'views'       => array
+   *     'views' => array
    *     (
    *       'maintab',
    *       'window'
    *     ),
-   *     'access'       => 'auth_required',
+   *     'access' => 'auth_required',
    *     'description' => 'Hello World Method'
-   *     'docref'       => 'some_link',
-   *     'author'       => 'author <author@mail.addr>'
+   *     'docref' => 'some_link',
+   *     'author' => 'author <author@mail.addr>'
    *   )
    *);
    *
    * @var array
    */
-  protected $options           = array();
+  protected $options = array();
 
   /**
    * makte the public Access whitelist to a blacklist
@@ -122,7 +119,7 @@ abstract class MvcController extends BaseChild
    * }
    * @var boolean
    */
-  protected $flipPublicAccess   = false;
+  protected $flipPublicAccess = false;
 
   /**
    * ignore accesslist everything is free accessable
@@ -134,7 +131,7 @@ abstract class MvcController extends BaseChild
    * }
    * @var boolean
    */
-  protected $fullAccess         = false;
+  protected $fullAccess = false;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // deprecated attributes
@@ -146,7 +143,7 @@ abstract class MvcController extends BaseChild
    * @deprecated
    * @todo prüfen ob das ding problemlos gelöscht werden kann
    */
-  public $listMethod    = null;
+  public $listMethod = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Constructor and other Magics
@@ -210,10 +207,10 @@ abstract class MvcController extends BaseChild
     if (!$key || is_array($key))
       $key = $modelKey;
 
-    $modelName    = $modelKey.'_Model';
+    $modelName = $modelKey.'_Model';
 
     if (!isset($this->models[$key]  )) {
-      if (Webfrap::classLoadable($modelName)) {
+      if (Webfrap::classExists($modelName)) {
         $model = new $modelName($this);
         $this->models[$key] = $model;
       } else {
@@ -228,33 +225,6 @@ abstract class MvcController extends BaseChild
     return $this->models[$key];
 
   }//end public function loadModel */
-
-  /**
-   * request the default action of the ControllerClass
-   * @return Ui
-   */
-  public function loadUi($uiName , $key = null)
-  {
-
-    if (!$key)
-      $key = $uiName;
-
-    $className = $uiName.'_Ui';
-    $oldClassName = 'Ui'.$uiName;
-
-    if (!isset($this->uis[$key]  )) {
-      if (Webfrap::classLoadable($className)) {
-        $this->uis[$key] = new $className();
-      } elseif (Webfrap::classLoadable($oldClassName)) {
-        $this->uis[$key] = new $oldClassName();
-      } else {
-        throw new Controller_Exception('Internal Error','Failed to load ui: '.$uiName);
-      }
-    }
-
-    return $this->uis[$key];
-
-  }//end public function loadUi */
 
   /**
    * de:
@@ -301,14 +271,14 @@ abstract class MvcController extends BaseChild
   public function routeToSubcontroller($conKey, $do, $request, $response)
   {
 
-    $request   = $this->getRequest();
-    $response  = $this->getResponse();
+    $request = $this->getRequest();
+    $response = $this->getResponse();
 
     try {
 
       $className = $conKey.'_Controller';
 
-      if (!Webfrap::classLoadable($className)) {
+      if (!Webfrap::classExists($className)) {
         throw new InvalidRoute_Exception($className);
       }
 
@@ -412,8 +382,8 @@ abstract class MvcController extends BaseChild
   public function runIfCallable($methodeKey  )
   {
 
-    $request   = $this->getRequest();
-    $response  = $this->getResponse();
+    $request = $this->getRequest();
+    $response = $this->getResponse();
 
     $methodeKey = strtolower($methodeKey);
     $methodeName = 'service_'.$methodeKey;
@@ -426,22 +396,17 @@ abstract class MvcController extends BaseChild
          if (isset($this->options[$methodeKey])) {
 
            // prüfen ob die HTTP Methode überhaupt zulässig ist
-           if
-           (
+           if (
              isset($this->options[$methodeKey]['method'])
                && !$request->method($this->options[$methodeKey]['method'])
-           )
-           {
-            throw new InvalidRequest_Exception
-            (
-              $response->i18n->l
-              (
+           ) {
+            throw new InvalidRequest_Exception(
+              $response->i18n->l(
                 'The request method {@method@} is not allowed for this action! Use {@use@}.',
                 'wbf.message',
-                array
-                (
+                array(
                   'method' => $request->method(),
-                  'use'    => implode(' or ', $this->options[$methodeKey]['method'])
+                  'use' => implode(' or ', $this->options[$methodeKey]['method'])
                 )
               ),
               Request::METHOD_NOT_ALLOWED
@@ -449,23 +414,18 @@ abstract class MvcController extends BaseChild
 
            }
 
-           if
-           (
+           if(
              isset($this->options[$methodeKey]['views'])
                && !$response->tpl->isType($this->options[$methodeKey]['views'])
-           )
-           {
+           ) {
 
-             throw new InvalidRequest_Exception
-             (
-               $response->i18n->l
-               (
+             throw new InvalidRequest_Exception(
+               $response->i18n->l(
                  'Invalid format type {@type@}, valid types are: {@use@}',
                  'wbf.message',
-                 array
-                 (
+                 array(
                    'type' => $response->tpl->getType(),
-                   'use'  => implode(' or ', $this->options[$methodeKey]['views'])
+                   'use' => implode(' or ', $this->options[$methodeKey]['views'])
                  )
                ),
                Request::NOT_ACCEPTABLE
@@ -647,6 +607,7 @@ abstract class MvcController extends BaseChild
    * @param string $accessKey
    * @param string $validator
    * @return int/string
+   * @deprecated use the request object
    */
   protected function getOID($key = null, $accessKey = null, $validator = Validator::CKEY)
   {
@@ -725,10 +686,10 @@ abstract class MvcController extends BaseChild
   {
 
     if (is_object($message)) {
-      $messageText  = $message->getMessage();
-      $errorCode    = $message->getErrorKey();
+      $messageText = $message->getMessage();
+      $errorCode = $message->getErrorKey();
     } else {
-      $messageText  = $message;
+      $messageText = $message;
     }
 
     $response = $this->getResponse();
@@ -763,10 +724,8 @@ abstract class MvcController extends BaseChild
       $conf = Conf::get('view');
       if ($this->user->getLogedIn()) {
         $this->tplEngine->setIndex($conf['index.user']);
-        $this->tplEngine->setHtmlHead($conf['head.user']);
       } else {
         $this->tplEngine->setIndex($conf['index.annon']);
-        $this->tplEngine->setHtmlHead($conf['head.annon']);
       }
 
       $this->tplEngine->contentType = View::CONTENT_TYPE_TEXT;
@@ -800,13 +759,13 @@ abstract class MvcController extends BaseChild
   {
 
     $request = $this->getRequest();
-    $orm     = $this->getOrm();
+    $orm = $this->getOrm();
 
     ///TODO was sollte der check auf post?
     if (!$request->method(Request::POST))
       return false;
 
-    $auth     = new LibAuth($this, 'Httppost');
+    $auth = new LibAuth($this, 'Httppost');
     $response = $this->getResponse();
 
     if ($auth->login()) {
@@ -817,7 +776,7 @@ abstract class MvcController extends BaseChild
       $userName = $auth->getUsername();
 
       try {
-        if (!$authRole = $orm->get('WbfsysRoleUser', "UPPER(name) = UPPER('{$userName}')")) {
+        if (!$authRole = $orm->get('WbfsysRoleUser', "lower(name) = 'lower({$userName})'")) {
           $response->addError('User '.$userName.' not exists');
 
           return false;
@@ -856,6 +815,84 @@ abstract class MvcController extends BaseChild
     }
 
   }//end public function login */
+  
+  
+  /**
+   * get the form flags for this management
+   * de:
+   * {
+   *   prüfen ob die standard steuer flags vorhanden sind
+   * }
+   * @param LibRequestHttp $request
+   * @return TFlag
+   */
+  protected function interpretDefRqt($request)
+  {
+  
+    return new ContextDefault($request);
+  
+  }//end protected function interpretDefRqt */
 
-} // end abstract class Controller
+  /**
+   * get the form flags for this management
+   * de:
+   * {
+   *   prüfen ob die standard steuer flags vorhanden sind
+   * }
+   * @param LibRequestHttp $request
+   * @return TFlag
+   */
+  protected function getFlags($request)
+  {
+
+    return new ContextDefault($request);
+
+  }//end protected function getFlags */
+
+
+  /**
+   * get the form flags for this management
+   * @param LibRequest $request
+   * @return ContextForm
+   */
+  protected function getFormFlags($request)
+  {
+
+    return new ContextForm($request);
+
+  } //end protected function getFormFlags */
+
+  /**
+   * @param LibRequest $request
+   * @return ContextCrud
+   */
+  protected function getCrudFlags($request)
+  {
+
+    return new ContextCrud($request);
+
+  } //end protected function getCrudFlags */
+
+  /**
+   * @param LibRequest $request
+   *
+   * @return ContextListing
+   */
+  protected function getListingFlags ($request)
+  {
+    return new ContextListing($request);
+
+  } //end protected function getListingFlags */
+
+  /**
+   * @param LibRequest $request
+   * @return ContextTab
+   */
+  protected function getTabFlags ($request)
+  {
+    return new ContextTab($request);
+
+  } //end protected function getTabFlags */
+
+} // end abstract class MvcController
 

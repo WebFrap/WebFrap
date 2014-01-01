@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<components>
+  
+  <component name="WebFrap" key="wbf" >
+    <errors>
+      <error key="undefined_error" >
+        <title>
+          <en>error</en>
+        </title>
+        <msg>
+          <de></de>
+          <en>
+The system detected a potential problem during the execution of your request. 
+This is NOT your fault, it seems to be a bug that need to be fixed.
+The Problem was logged and the system maintainer was noticed. 
+We will take care for this issue as soon as possible.
+In urgent cases contact your the system support 
+and describe exactly what you need to do. 
+Sometimes there are easy workarounds especially for important use cases.
+
+Sorry for the inconveniences.
+          </en>
+        </msg>
+        <help>
+        </help>
+      </error>
+    </errors>
+    
+    <sub_components>
+      <component name="Lib Period" key="period" >
+        <errors>
+          <error key="period type not exists" >
+            <msg>
+              <de>
+Eine Periode des Types {@type@} existiert nicht. 
+Wahrscheinlich ist bei der Installation ein Fehler aufgetreten.
+Bitte wende dich an den Support.
+              </de>
+              <en></en>
+            </msg>
+          </error>
+          <error key="multiple periods in past" >
+            <msg>
+              <de>
+Mehrer Perioden dieses Types sind in der Vergangenheit.
+Bitte korrigiere erst die geplanten Perioden, bevor du die aktuell Periode abschliesen kannst.
+              </de>
+              <en></en>
+            </msg>
+          </error>
+          <error key="type allready initialized" >
+            <msg>
+              <de>
+Der Periodentype {@type@} wurde bereits initialisiert.
+Daher habe ich diesen Anfrage ignoriert und keine Aktion durchgeführt.
+              </de>
+              <en></en>
+            </msg>
+          </error>
+          <error key="no active period" >
+            <msg>
+              <de>
+Der Periodentype {@type@} hat keine aktuelle laufene Periode.
+Entweder die aktuelle Periode ist eingefrohren, oder die Periodentype
+wurde nicht initialisiert.
+              </de>
+              <en></en>
+            </msg>
+          </error>
+          
+          
+        </errors>
+      </component>
+    </sub_components>
+    
+  </component>
+
+</components>

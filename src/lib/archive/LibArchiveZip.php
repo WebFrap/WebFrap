@@ -102,7 +102,7 @@ class LibArchiveZip extends LibArchive
   {
 
     $this->fileName = $fileName;
-    $this->mode     = $mode;
+    $this->mode = $mode;
 
     SFilesystem::touchFileFolder($fileName);
 
@@ -113,7 +113,7 @@ class LibArchiveZip extends LibArchive
       $this->hugeTempFoder = Webfrap::tmpFolder(true);
       SFilesystem::mkdir($this->hugeTempFoder);
 
-      $this->mainResource  = new ZipArchive();
+      $this->mainResource = new ZipArchive();
       $this->mainResource->open($this->fileName, ZipArchive::CREATE);
 
       $this->resource = new ZipArchive();
@@ -151,7 +151,7 @@ class LibArchiveZip extends LibArchive
   {
 
     $this->writeCounter = 0;
-    $this->hugeCounter  = 0;
+    $this->hugeCounter = 0;
 
     $this->resource->close();
 

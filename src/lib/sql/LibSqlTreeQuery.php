@@ -87,7 +87,7 @@ abstract class LibSqlTreeQuery extends LibSqlQuery
    */
   public function clean()
   {
-    $this->data   = array();
+    $this->data = array();
     $this->childs = array();
     $this->result = null;
     $this->sourceSize = null;

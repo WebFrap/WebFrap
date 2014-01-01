@@ -56,7 +56,7 @@ class LibDb_Exception extends Io_Exception
       $this->error = $message;
 
       $this->debugMessage = $debugMessage;
-      $this->errorKey     = $message->getId();
+      $this->errorKey = $message->getId();
 
       Error::addException($debugMessage, $this);
 
@@ -68,7 +68,7 @@ class LibDb_Exception extends Io_Exception
         parent::__construct($message);
 
       $this->debugMessage = $debugMessage;
-      $this->errorKey     = $errorKey;
+      $this->errorKey = $errorKey;
 
       Error::addException($message , $this);
     }

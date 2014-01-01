@@ -50,7 +50,7 @@ class User extends BaseChild
    * .oO(dream on, hrhr)
    * @deprecated
    */
-  const LEVEL_DEVELOPER  = 110;
+  const LEVEL_DEVELOPER = 110;
 
   /**
    * @param int
@@ -62,31 +62,31 @@ class User extends BaseChild
    * @param int
    *  @deprecated
    */
-  const LEVEL_ADMIN      = 90;
+  const LEVEL_ADMIN = 90;
 
   /**
    * @param int
    * @deprecated
    */
-  const LEVEL_DIRECTOR   = 50;
+  const LEVEL_DIRECTOR = 50;
 
   /**
    * @param int
    * @deprecated
    */
-  const LEVEL_AGENT      = 25;
+  const LEVEL_AGENT = 25;
 
   /**
    * @param int
    * @deprecated
    */
-  const LEVEL_CUSTOMER   = 15;
+  const LEVEL_CUSTOMER = 15;
 
   /**
    * @param int
    * @deprecated
    */
-  const LEVEL_GUEST      = 10;
+  const LEVEL_GUEST = 10;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Die neuen Benutzerlevel
@@ -95,62 +95,62 @@ class User extends BaseChild
   /**
    * @var int
    */
-  const LEVEL_PUBLIC_EDIT      = 0;
+  const LEVEL_PUBLIC_EDIT = 0;
 
   /**
    * @var int
    */
-  const LEVEL_PUBLIC_ACCESS    = 10;
+  const LEVEL_PUBLIC_ACCESS = 10;
 
   /**
    * @var int
    */
-  const LEVEL_USER             = 20;
+  const LEVEL_USER = 20;
 
   /**
    * @var int
    */
-  const LEVEL_IDENT            = 30;
+  const LEVEL_IDENT = 30;
 
   /**
    * @var int
    */
-  const LEVEL_EMPLOYEE         = 40;
+  const LEVEL_EMPLOYEE = 40;
 
   /**
    * @var int
    */
-  const LEVEL_SUPERIOR         = 50;
+  const LEVEL_SUPERIOR = 50;
 
   /**
    * @var int
    */
-  const LEVEL_L4_MANAGER       = 60;
+  const LEVEL_L4_MANAGER = 60;
 
   /**
    * @var int
    */
-  const LEVEL_L3_MANAGER       = 70;
+  const LEVEL_L3_MANAGER = 70;
 
   /**
    * @var int
    */
-  const LEVEL_L2_MANAGER       = 80;
+  const LEVEL_L2_MANAGER = 80;
 
   /**
    * @var int
    */
-  const LEVEL_L1_MANAGER       = 90;
+  const LEVEL_L1_MANAGER = 90;
 
   /**
    * @var int
    */
-  const LEVEL_FULL_ACCESS      = 90;
+  const LEVEL_FULL_ACCESS = 90;
 
   /**
    * @var int
    */
-  const LEVEL_SYSTEM           = 100;
+  const LEVEL_SYSTEM = 100;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -159,87 +159,85 @@ class User extends BaseChild
   /**
    * @var User
    */
-  protected static $instance    = null;
+  protected static $instance = null;
 
   /**
    * array with all embeded Roles for the user
    *
    * @var array
    */
-  protected $groupRoles         = array();
+  protected $groupRoles = array();
 
   /**
    * user access level, per default 0
    * for simple access controll based on levels
    * @var int
    */
-  protected $userLevel          = 0;
+  protected $userLevel = 0;
 
   /**
    * Flag ob der Benutzer zwischen verschiedenen Benutzerprofilen
    * zur Laufzeit wechseln darf
    * @var int
    */
-  protected $flagChangeUser          = false;
+  protected $flagChangeUser = false;
 
   /**
    *
    * @var array
    */
   public $userLevels = array(
-    'public_edit'     => 0,
-    'public_access'   => 10,
-    'user'            => 20,
-    'ident'           => 30,
-    'employee'        => 40,
-    'superior'        => 50,
-    'l4_manager'      => 60,
-    'l3_manager'      => 70,
-    'l2_manager'      => 80,
-    'l1_manager'      => 90,
-    'full_access'     => 90,
+    'public_edit' => 0,
+    'public_access' => 10,
+    'user' => 20,
+    'ident' => 30,
+    'employee' => 40,
+    'superior' => 50,
+    'l4_manager' => 60,
+    'l3_manager' => 70,
+    'l2_manager' => 80,
+    'l1_manager' => 90,
+    'full_access' => 90,
   );
 
-  /**
-   * name of the main group
-   * @var string
-   */
-  protected $mainGroup          = null;
 
   /**
+   * The id of the user
    * @var int
    */
-  protected $userId             = null;
+  protected $userId = null;
 
   /**
+   * The ID of the Mandant
    * @var int
    */
-  protected $groupId            = null;
+  public $mandantId = null;
 
   /**
+   * Flag if the actual user is logged in
    * @var boolean
    */
-  protected $logedIn            = false;
+  protected $logedIn = false;
 
   /**
    * Eine Reihe benutzerbezogerne Daten
    * Standard ist eine minimale Menge für den annonymen benutzer
    * @var array
    */
-  protected $userData           = array(
+  protected $userData = array(
     'firstname' => 'Ano',
-    'lastname'  => 'Nymous',
+    'lastname' => 'Nymous',
   );
 
   /**
    * @var array
    */
-  protected $links      = array();
+  protected $links = array();
 
   /**
    * @var array
    */
-  protected $linked     = array();
+  protected $linked = array();
 
   /**
    * @var array
@@ -250,27 +248,27 @@ class User extends BaseChild
    * the full name of the user
    * @var string
    */
-  protected $fullName   = null;
+  protected $fullName = null;
 
   /**
    *
    * @var string
    */
-  protected $profile    = null;
+  protected $profile = null;
 
   /**
    * de:
    * Der Name des aktiven profiles des Benutzers
    * @var string
    */
-  protected $profileName  = 'default';
+  protected $profileName = 'default';
 
   /**
    * de:
    * Liste aller Profile doe dem Benutzer zur Verfügung stehen
    * @var array
    */
-  protected $profiles   = array(
+  protected $profiles = array(
     'default' => 'Default'
   );
 
@@ -278,13 +276,13 @@ class User extends BaseChild
    * the name that was used for login
    * @var string
    */
-  protected $loginName    = null;
+  protected $loginName = null;
 
   /**
    * the name that was used for login
    * @var string
    */
-  protected $flagNoLogin  = false;
+  protected $flagNoLogin = false;
 
   /**
    *
@@ -321,12 +319,12 @@ class User extends BaseChild
     } else {
       $this->env = Webfrap::getActive();
     }
-    
+
     if ($userId) {
-      
+
       if (ctype_digit($userId))
         $this->loginById($userId);
-      else 
+      else
         $this->login($userId);
     }
 
@@ -363,24 +361,24 @@ class User extends BaseChild
     return array(
       'groupRoles',
       'userLevel',
-      'mainGroup',
       'userId',
-      'groupId',
       'logedIn',
       'userData',
-      //'links',
-      //'linked',
-      //'reference',
       'fullName',
-      //'profile',
       'profileName',
       'profiles',
+      'mandantId',
       'loginName',
       'flagChangeUser',
       'flagNoLogin'
     );
 
   }//end public function __wakeup */
+
+  public function __toString()
+  {
+    return $this->getId();
+  }
 
   /**
    * @return WebfrapAuth_Model
@@ -460,29 +458,6 @@ class User extends BaseChild
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * return the main group for the user
-   * this group hase to be used for the gui components the user will see
-   * if there is no clustered view by the group roles
-   *
-   * @return string
-   * @deprecated
-   */
-  public function getGroup()
-  {
-    return $this->mainGroup;
-  }//end public function getGroup */
-
-  /**
-   *
-   * @return string
-   * @deprecated
-   */
-  public function getGroupId()
-  {
-    return $this->groupId;
-  }//end public function getMainGroup */
-
-  /**
    * @deprecated
    * @param string
    * @param Entity
@@ -509,9 +484,9 @@ class User extends BaseChild
     if (!$entity)
       return false;
 
-    $db     = $this->getDb();
+    $db = $this->getDb();
     /* @var $query WebfrapEntityRoles_Query */
-    $query  = $db->newQuery('WebfrapEntityRoles');
+    $query = $db->newQuery('WebfrapEntityRoles');
 
     if (is_object($entity))
       $entityKey = $entity->getEntityName();
@@ -682,19 +657,19 @@ class User extends BaseChild
     if (!$this->profile) {
 
       if (!isset($this->profiles[$this->profileName])) {
-        $this->profileName  = 'default';
-        $this->profile      = new ProfileDefault();
+        $this->profileName = 'default';
+        $this->profile = new ProfileDefault();
 
         return $this->profile;
       }
 
       $classname = 'Profile'.SParserString::subToCamelCase($this->profileName);
 
-      if (Webfrap::classLoadable($classname)) {
+      if (Webfrap::classExists($classname)) {
         $this->profile = new $classname();
       } else {
-        $this->profileName  = 'default';
-        $this->profile      = new ProfileDefault();
+        $this->profileName = 'default';
+        $this->profile = new ProfileDefault();
       }
 
     }
@@ -743,19 +718,17 @@ class User extends BaseChild
     $classname = 'Profile'.SParserString::subToCamelCase($key);
 
     // change the profil if the new exists
-    if (Webfrap::classLoadable($classname)) {
-      $this->profile      = new $classname();
-      $this->profileName  = $key;
+    if (Webfrap::classExists($classname)) {
+      $this->profile = new $classname();
+      $this->profileName = $key;
 
       return true;
     } else {
       Debug::console('profile class: '.$classname.' not exists');
 
+      // else just keep the old profile
       return false;
     }
-
-    // else just keep the old profile
-    return false;
 
   }//end public function hasProfile */
 
@@ -842,13 +815,14 @@ class User extends BaseChild
   {
 
     // mal was prüfen
-    $orm       = $this->getOrm();
-    $response  = $this->getResponse();
-  
+    $orm = $this->getOrm();
+    $response = $this->getResponse();
+
     if ($userId) {
+
       try {
         if (!$authRole = $orm->get('WbfsysRoleUser', $userId)) {
-          $response->addError('User '.$userId.' not exists');
+          $response->addError('UserID '.$userId.' not exists');
 
           return false;
         }
@@ -856,41 +830,46 @@ class User extends BaseChild
         $response->addError('Error in the query to fetch the data for user: '.$userId);
 
         return false;
-      }  
-      
+      }
+
       $username = $authRole->name;
       $this->loginName = $authRole->name;
-      
+
     } else {
+
       if (is_object($username)) {
-        $authRole        = $username;
+        $authRole = $username;
       } else {
         try {
-          if (!$authRole = $orm->get('WbfsysRoleUser', "UPPER(name) = UPPER('{$username}')")) {
-            $response->addError('User '.$username.' not exists');
-  
+          if (!$authRole = $orm->getWhere('WbfsysRoleUser', "upper(name) = upper('{$username}')")) {
+            $response->addError('User name '.$username.' not exists');
+
             return false;
           }
         } catch (LibDb_Exception $exc) {
           $response->addError('Error in the query to fetch the data for user: '.$username);
-  
+
           return false;
         }
       }
     }
 
-    $this->entity    = $authRole;
+    $this->entity = $authRole;
 
-    $this->userData  = $authRole->getData();
-    $this->userId    = $authRole->getId();
-    $this->userLevel = (int) $authRole->getData('level');
+    $this->userData = $authRole->getData();
+    $this->userId = $authRole->getId();
+    $this->userLevel = (int)$authRole->getData('level');
+
+    // setzen der Mandant ID
+    // master muss vorhanden sein
+    $this->mandantId = $this->userData['id_mandant']?$this->userData['id_mandant']:$orm->getIdByKey('WbfsysRoleMandant','master');
 
     if ($authRole->profile) {
       $this->profileName = $authRole->profile;
       $this->profiles[$authRole->profile] = SParserString::subToName($this->profileName);
     }
 
-    if (WebFrap::classLoadable('CorePerson_Entity')) {
+    if (Webfrap::classExists('CorePerson_Entity')) {
       if ($person = $orm->get('CorePerson', $authRole->id_person))
         $this->userData = array_merge($this->userData, $person->getData());
     }
@@ -1088,8 +1067,8 @@ class User extends BaseChild
     else
       $this->loginName = $username;
 
-    $this->profiles    = array('default' => 'Default');
-    $this->groupRoles  = array();
+    $this->profiles = array('default' => 'Default');
+    $this->groupRoles = array();
 
     if (!$this->loadUserData($username)) {
       $response = $this->getResponse();
@@ -1101,12 +1080,12 @@ class User extends BaseChild
     $this->loadGroupRoles();
     $this->loadUserProfiles();
 
-    $this->logedIn   = true;
+    $this->logedIn = true;
 
     return true;
 
   }//end public function login */
-  
+
   /**
    * en:
    * Login assumes that the user is allready authentificated and verificated
@@ -1121,8 +1100,8 @@ class User extends BaseChild
   public function loginById($id)
   {
 
-    $this->profiles    = array('default' => 'Default');
-    $this->groupRoles  = array();
+    $this->profiles = array('default' => 'Default');
+    $this->groupRoles = array();
 
     if (!$this->loadUserData(null,$id)) {
       $response = $this->getResponse();
@@ -1134,7 +1113,7 @@ class User extends BaseChild
     $this->loadGroupRoles();
     $this->loadUserProfiles();
 
-    $this->logedIn   = true;
+    $this->logedIn = true;
 
     return true;
 
@@ -1148,13 +1127,12 @@ class User extends BaseChild
   public function reload()
   {
 
-    $this->userData  = array();
-    $this->userId    = null;
+    $this->userData = array();
+    $this->userId = null;
     $this->userLevel = null;
 
     $this->groupRoles = array();
-    $this->groupId    = null;
-    $this->profiles   = array();
+    $this->profiles = array();
 
     if (!$this->loadUserData($this->loginName)) {
       $response = $this->getResponse();
@@ -1220,16 +1198,15 @@ class User extends BaseChild
   public function clean()
   {
 
-    $this->userData     = array(
+    $this->userData = array(
       'firstname' => 'Ano',
-      'lastname'  => 'Nymous',
+      'lastname' => 'Nymous',
     );
 
-    $this->roupRoles    = array();
-    $this->userId       = null;
-    $this->groupId      = null;
-    $this->userLevel    = null;
-    $this->logedIn      = false;
+    $this->roupRoles = array();
+    $this->userId = null;
+    $this->userLevel = null;
+    $this->logedIn = false;
 
   }//end protected function clean */
 
@@ -1274,8 +1251,8 @@ class User extends BaseChild
       'WbfsysRoleUser',
       $id,
       array(
-        'password'    =>  SEncrypt::passwordHash($pwd),
-        'change_pwd'  =>  ''
+        'password' =>  SEncrypt::passwordHash($pwd),
+        'change_pwd' =>  ''
       )
     );
 

@@ -43,9 +43,9 @@ class Db
 
     const VERSION = 'm_version';
     /*
-      const CREATOR       = 'm_role_create';
+      const CREATOR = 'm_role_create';
 
-      const CREATED       = 'm_time_created';
+      const CREATED = 'm_time_created';
     */
 
     const TIME_CREATED = 'm_time_created';
@@ -263,7 +263,7 @@ class Db
         // Erstellen des Aktiven Objects
         if (class_exists($classname)) {
 
-            $connection                 = new $classname($connectionConf);
+            $connection = new $classname($connectionConf);
             self::$connectionPool[$key] = $connection;
 
             if ($activ) {
@@ -314,7 +314,7 @@ class Db
         // Erstellen des Aktiven Objects
         if (class_exists($classname)) {
 
-            $connection                 = new $classname($connectionConf);
+            $connection = new $classname($connectionConf);
             self::$connectionPool[$key] = $connection;
         } else {
             throw new LibDb_Exception('tried to load nonexisting database connection');

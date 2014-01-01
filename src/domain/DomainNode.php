@@ -146,9 +146,14 @@ class DomainNode
   public $domainAclMask = null;
 
   /**
-   * @var string UPPER('mod-project'), UPPER('mgmt-project_activity')
+   * @var string'mod-project', 'mgmt-project_activity'
    */
   public $domainAclQuery = null;
+
+  /**
+   * @var array ['mod-project', 'mgmt-project_activity']
+   */
+  public $domainAclAreas = null;
 
   /**
    * @example project.activity_mask_product.
@@ -172,7 +177,7 @@ class DomainNode
 
       $className = SParserString::subToCamelCase($key).'_Domain';
 
-      if (!Webfrap::classLoadable($className)) {
+      if (!Webfrap::classExists($className)) {
         self::$pool[$key] = null;
 
         return null;

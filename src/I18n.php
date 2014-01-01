@@ -53,13 +53,13 @@ class I18n
    * Format für das Datum
    * @var string
    */
-  public static $dateFormat  = 'Y-m-d';
+  public static $dateFormat = 'Y-m-d';
 
   /**
    * Format für Zeiten
    * @var string
    */
-  public static $timeFormat  = 'H:i:s';
+  public static $timeFormat = 'H:i:s';
 
   /**
    * Trenner für Zeiten
@@ -71,19 +71,19 @@ class I18n
    * Format für Timestamps
    * @var string
    */
-  public static $timeStampFormat  = 'Y-m-d H:i:s';
+  public static $timeStampFormat = 'Y-m-d H:i:s';
 
   /**
    *
    * @var string
    */
-  public static $numberMil  = ',';
+  public static $numberMil = ',';
 
   /**
    *
    * @var string
    */
-  public static $numberDec  = '.';
+  public static $numberDec = '.';
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Singleton Pattern

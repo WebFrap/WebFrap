@@ -20,8 +20,7 @@
   * @package WebFrap
   * @subpackage tech_core
   */
-class LibI18nPhp
-  implements ArrayAccess
+class LibI18nPhp implements ArrayAccess
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -77,13 +76,13 @@ class LibI18nPhp
    * Format für das Datum
    * @var string
    */
-  public $dateFormat  = 'Y-m-d';
+  public $dateFormat = 'Y-m-d';
 
   /**
    * Format für Zeiten
    * @var string
    */
-  public $timeFormat  = 'H:i:s';
+  public $timeFormat = 'H:i:s';
 
   /**
    * Trenner für Zeiten
@@ -95,27 +94,25 @@ class LibI18nPhp
    * Format für Timestamps
    * @var string
    */
-  public $timeStampFormat  = 'Y-m-d H:i:s';
+  public $timeStampFormat = 'Y-m-d H:i:s';
 
   /**
-   *
    * @var string
    */
-  public $numberMil  = ',';
+  public $numberMil = ',';
 
   /**
-   *
    * @var string
    */
-  public $numberDec  = '.';
+  public $numberDec = '.';
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Magic Methodes
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   *
-   * @param $conf
+   * @param $conf array
+   * @param $def boolean
    */
   public function __construct($conf = array() , $def = false)
   {
@@ -124,38 +121,42 @@ class LibI18nPhp
 
   }//end public function __construct
 
+  /**
+   * @param string $key
+   * @param boolean $def
+   */
   public function setLangByKey($key , $def = false)
   {
 
     $conf = Conf::get('i18n');
 
-    $this->lang     = $key;
+    $this->lang = $key;
     //$this->lPackage = $conf['lang_path'];
 
     ///TODO add better error handling
     $langConf = $conf[$key];
 
-    $this->short            = $langConf['short'];
-    $this->dateSeperator    = $langConf['dateSeperator'];
-    $this->dateFormat       = $langConf['dateFormat'];
-    $this->timeFormat       = $langConf['timeFormat'];
-    $this->timeSteperator   = $langConf['timeSteperator'];
-    $this->timeStampFormat  = $langConf['timeStampFormat'];
-    $this->numberMil        = $langConf['numberMil'];
-    $this->numberDec        = $langConf['numberDec'];
+    $this->short = $langConf['short'];
+    $this->dateSeperator = $langConf['dateSeperator'];
+    $this->dateFormat = $langConf['dateFormat'];
+    $this->timeFormat = $langConf['timeFormat'];
+    $this->timeSteperator = $langConf['timeSteperator'];
+    $this->timeStampFormat = $langConf['timeStampFormat'];
+    $this->numberMil = $langConf['numberMil'];
+    $this->numberDec = $langConf['numberDec'];
 
     if ($def) {
-      I18n::$short            = $langConf['short'];
-      I18n::$dateSeperator    = $langConf['dateSeperator'];
-      I18n::$dateFormat       = $langConf['dateFormat'];
-      I18n::$timeFormat       = $langConf['timeFormat'];
-      I18n::$timeSteperator   = $langConf['timeSteperator'];
-      I18n::$timeStampFormat  = $langConf['timeStampFormat'];
-      I18n::$numberMil        = $langConf['numberMil'];
-      I18n::$numberDec        = $langConf['numberDec'];
+      I18n::$short = $langConf['short'];
+      I18n::$dateSeperator = $langConf['dateSeperator'];
+      I18n::$dateFormat = $langConf['dateFormat'];
+      I18n::$timeFormat = $langConf['timeFormat'];
+      I18n::$timeSteperator = $langConf['timeSteperator'];
+      I18n::$timeStampFormat = $langConf['timeStampFormat'];
+      I18n::$numberMil = $langConf['numberMil'];
+      I18n::$numberDec = $langConf['numberDec'];
     }
 
-    $this->folder   = $this->lang.'/' ;
+    $this->folder = $this->lang.'/' ;
 
     $this->loadCache();
 
@@ -171,33 +172,33 @@ class LibI18nPhp
       $conf = Conf::get('i18n');
     }
 
-    $this->lang     = Conf::status('activ.language');
+    $this->lang = Conf::status('activ.language');
     //$this->lPackage = $conf['lang_path'];
 
     ///TODO add better error handling
     $langConf = $conf[$this->lang];
 
-    $this->short            = $langConf['short'];
-    $this->dateSeperator    = $langConf['dateSeperator'];
-    $this->dateFormat       = $langConf['dateFormat'];
-    $this->timeFormat       = $langConf['timeFormat'];
-    $this->timeSteperator   = $langConf['timeSteperator'];
-    $this->timeStampFormat  = $langConf['timeStampFormat'];
-    $this->numberMil        = $langConf['numberMil'];
-    $this->numberDec        = $langConf['numberDec'];
+    $this->short = $langConf['short'];
+    $this->dateSeperator = $langConf['dateSeperator'];
+    $this->dateFormat = $langConf['dateFormat'];
+    $this->timeFormat = $langConf['timeFormat'];
+    $this->timeSteperator = $langConf['timeSteperator'];
+    $this->timeStampFormat = $langConf['timeStampFormat'];
+    $this->numberMil = $langConf['numberMil'];
+    $this->numberDec = $langConf['numberDec'];
 
     if ($def) {
-      I18n::$short            = $langConf['short'];
-      I18n::$dateSeperator    = $langConf['dateSeperator'];
-      I18n::$dateFormat       = $langConf['dateFormat'];
-      I18n::$timeFormat       = $langConf['timeFormat'];
-      I18n::$timeSteperator   = $langConf['timeSteperator'];
-      I18n::$timeStampFormat  = $langConf['timeStampFormat'];
-      I18n::$numberMil        = $langConf['numberMil'];
-      I18n::$numberDec        = $langConf['numberDec'];
+      I18n::$short = $langConf['short'];
+      I18n::$dateSeperator = $langConf['dateSeperator'];
+      I18n::$dateFormat = $langConf['dateFormat'];
+      I18n::$timeFormat = $langConf['timeFormat'];
+      I18n::$timeSteperator = $langConf['timeSteperator'];
+      I18n::$timeStampFormat = $langConf['timeStampFormat'];
+      I18n::$numberMil = $langConf['numberMil'];
+      I18n::$numberDec = $langConf['numberDec'];
     }
 
-    $this->folder   = $this->lang.'/' ;
+    $this->folder = $this->lang.'/' ;
 
     $this->loadCache();
 
@@ -302,7 +303,7 @@ class LibI18nPhp
     $file = $path.Webfrap::$indexKey.'.php';
 
     if (!is_dir($path)  )
-      if (!SFilesystem::createFolder($path))
+      if (!SFilesystem::mkdir($path))
         return;
 
     file_put_contents($file , $index);
@@ -329,7 +330,7 @@ class LibI18nPhp
   public function setLPackage($lPackage)
   {
 
-    $this->lPackage   = $lPackage;
+    $this->lPackage = $lPackage;
     $this->folder = $this->lang.'/' ;
 
   }//end public function setLPackage */
@@ -361,7 +362,7 @@ class LibI18nPhp
     //array_pop($folders); // last element away
 
     $fileName = array_pop($folders); // get the filename
-    $folder   = implode('/',$folders).'/'.$fileName.".php";
+    $folder = implode('/',$folders).'/'.$fileName.".php";
 
     foreach (I18n::$i18nPath as $path) {
       if (file_exists($path.$this->folder.$folder)) {
@@ -390,14 +391,14 @@ class LibI18nPhp
     //2 Parameter Syntax ummappen
     if (is_array($key)) {
       $data = $key;
-      $key  = $text;
+      $key = $text;
     }
 
     if (!isset($this->l[$key]))
       $this->includeLang($key);
 
     if (!isset($this->l[$key][$text])) {
-      Debug::console('MISSING I18N: repo: '.$key.' key: '.$text);
+      Log::warn('MISSING I18N: repo: '.$key.' key: '.$text);
       if ($data) {
 
         $keys = array();

@@ -52,6 +52,11 @@ class LibRequestPhp
    */
   protected $serverAddress = null;
 
+  /**
+   * @var string
+   */
+  protected $fullRequest = null;
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Init
 //////////////////////////////////////////////////////////////////////////////*/
@@ -74,6 +79,7 @@ class LibRequestPhp
       Debug::console('Data POST' , $_POST);
       Debug::console('Data FILES' , $_FILES);
       Debug::console('Data COOKIE' , $_COOKIE);
+      Debug::console('Data SERVER' , $_SERVER);
     }
 
   }//end public function init */
@@ -445,6 +451,51 @@ class LibRequestPhp
 
   } // end public function param */
 
+  /**
+   * Daten einer bestimmten Urlvariable erfragen
+   *
+   * @param string $key Name der zu erfragende $_GET Variable
+   * @param string $validator Der Validator key
+   * @param string $subkey Wenn wir einen Wert aus einer Matrix möchten
+   * @param LibDbConnection $db wenn mit übergeben wird das objekt zum escapen verwendet
+   *  ist nicht zwangweise nötig da einige validatoren gar keine gefährlichen zeichen durch lassen
+   *
+   * @return string
+   */
+  public function paramQList($key, $validator, $subkey = null, $db = null)
+  {
+
+    $response = $this->getResponse();
+
+    if ($subkey) {
+
+      if (isset($_GET[$key][$subkey])) {
+        $data = $_GET[$key][$subkey];
+      } else {
+        return "''";
+      }
+
+    } else {
+
+      if (isset($_GET[$key])) {
+        $data = $_GET[$key];
+      } else {
+        return "''";
+      }
+
+    }
+
+
+    $filter = Validator::getActive();
+    $filter->clean(); // first clean the filter
+
+    $fMethod = 'add'.ucfirst($validator);
+    $values = $this->validateArray($fMethod, $data, $db);
+
+    return "'".implode("','",$values)."'";
+
+  } // end public function paramQList */
+
 
 
  /**
@@ -481,32 +532,6 @@ class LibRequestPhp
 //
 //////////////////////////////////////////////////////////////////////////////*/
 
-  /**
-   * Abfragen des Status einer POST Variable
-   *
-   * @param string Key Name der zu prüfenden Variable
-   * @return bool
-   *
-   * @deprecated
-   */
-  public function postExists($key , $subkey = null)
-  {
-    return $this->dataExists($key , $subkey);
-
-  } // end public function postExists */
-
-  /**
-   * Abfragen des Status einer POST Variable
-   *
-   * @param string Key Name der zu prüfenden Variable
-   * @return bool
-   * @deprecated
-   */
-  public function postSearchIds($key)
-  {
-    return $this->dataSearchIds($key);
-
-  } // end public function postSearchIds */
 
   /**
   * Auslesen einer Postvariable
@@ -518,36 +543,13 @@ class LibRequestPhp
   */
   public function post($key = null , $validator = null , $subkey = null , $message = null , $required = false)
   {
+
+    Log::warn('Called Request POST with key: '.$key);
+
     return $this->data($key, $validator, $subkey, $message, $required);
 
   }//end public function post */
 
-  /**
-   * remove some variables from the url
-   * @param string $key
-   * @param string $subkey
-   *
-   * @deprecated
-   */
-  public function removePost($key , $subkey = null)
-  {
-    return $this->removeData($key, $subkey);
-
-  }//end public function removePost */
-
-  /**
-   * request if one or more values are empty
-   *
-   * @param string Key Name der zu prüfenden Variable
-   * @return bool
-   *
-   * @deprecated
-   */
-  public function postEmpty($keys , $subkey = null)
-  {
-    return $this->dataEmpty($keys, $subkey);
-
-  } // end public function postEmpty */
 
 /*//////////////////////////////////////////////////////////////////////////////
 //
@@ -864,9 +866,11 @@ class LibRequestPhp
    *
    * @param string $fMethod
    * @param array $data
+   * @param LibDbConnection $db wenn mit übergeben wird das objekt zum escapen verwendet
+   *  ist nicht zwangweise nötig da einige validatoren gar keine gefährlichen zeichen durch lassen
    * @return array
    */
-  protected function validateArray($fMethod , $data)
+  protected function validateArray($fMethod , $data, $db = null)
   {
 
     $filter = Validator::getActive();
@@ -888,7 +892,15 @@ class LibRequestPhp
         $filter->$fMethod($key,$value);
 
         $tmp = $filter->getData();
-        $back[$key] = $tmp[$key];
+
+        if ($db) {
+
+          $back[$key] = $db->escape($tmp[$key]);
+        } else {
+
+          $back[$key] = $tmp[$key];
+        }
+
       }
     }
 
@@ -989,11 +1001,11 @@ class LibRequestPhp
         $data = null;
       } else {
         $data = array();
-        $data['name']     = $_FILES[$subkey]['name'][$key];
-        $data['type']     = $_FILES[$subkey]['type'][$key];
+        $data['name'] = $_FILES[$subkey]['name'][$key];
+        $data['type'] = $_FILES[$subkey]['type'][$key];
         $data['tmp_name'] = $_FILES[$subkey]['tmp_name'][$key];
-        $data['error']    = $_FILES[$subkey]['error'][$key];
-        $data['size']     = $_FILES[$subkey]['size'][$key];
+        $data['error'] = $_FILES[$subkey]['error'][$key];
+        $data['size'] = $_FILES[$subkey]['size'][$key];
       }
     } else {
       // asume this was just an empty file
@@ -1010,7 +1022,7 @@ class LibRequestPhp
     if ($type) {
       $classname = 'LibUpload'.SParserString::subToCamelCase($type);
 
-      if (!Webfrap::classLoadable($classname))
+      if (!Webfrap::classExists($classname))
         throw new LibFlow_Exception('Requested nonexisting upload type: '.$classname);
 
       return new $classname($data, $key);
@@ -1020,6 +1032,63 @@ class LibRequestPhp
     }
 
   } // end public function file */
+
+  /**
+   * Request if a File Upload Exists
+   *
+   * @param string $key
+   * @param string $type
+   * @param string $subkey
+   * @param string $message
+   *
+   * @return LibUploadFile
+   */
+  public function files($key, $type = null, $subkey = null, $message = null)
+  {
+
+    $filter = Validator::getActive();
+    $filter->clean(); // first clean the filter
+
+    if ($type) {
+
+      $classname = 'LibUpload'.SParserString::subToCamelCase($type);
+      if (!Webfrap::classExists($classname))
+        throw new LibFlow_Exception('Requested nonexisting upload type: '.$classname);
+
+    } else {
+
+      $classname = 'LibUploadFile';
+    }
+
+    $files = array();
+
+    // asume this was just an empty file
+    if (!isset($_FILES[$key]) || !count($_FILES[$key])) {
+
+    } else {
+
+      $numFiles = count($_FILES[$key]['name']);
+
+      for ($pos = 0; $pos < $numFiles; ++$pos) {
+        $file = array(
+          'name' => $_FILES[$key]['name'][$pos],
+          'type' => $_FILES[$key]['type'][$pos],
+          'tmp_name' => $_FILES[$key]['tmp_name'][$pos],
+          'error' => $_FILES[$key]['error'][$pos],
+          'size' => $_FILES[$key]['size'][$pos]
+        );
+
+        Debug::console('got file '.$_FILES[$key]['name'][$pos]);
+
+        $files[] = new $classname($file);
+      }
+
+    }
+
+    return $files;
+
+
+  } // end public function files */
 
   /**
   * request if we have a cookie with this name
@@ -1130,6 +1199,54 @@ class LibRequestPhp
 // Form input
 //////////////////////////////////////////////////////////////////////////////*/
 
+
+  /**
+   *
+   * get the main oid, can be overwritten if needed
+   * @param string $key
+   * @param string $accessKey
+   * @param string $validator
+   * @return int/string
+   */
+  public function getOID($key = null, $accessKey = null, $validator = Validator::CKEY)
+  {
+
+
+    if ($key) {
+      $id = $this->data($key, Validator::INT, 'rowid');
+
+      if ($id) {
+        Debug::console('got post rowid: '.$id);
+
+        return $id;
+      }
+    }
+
+    $id = $this->param('objid', Validator::INT);
+
+    if (!$id && $accessKey) {
+      if ($key) {
+        $id = $this->data($key, $validator, $accessKey);
+
+        if ($id) {
+          Debug::console('got post rowid: '.$id);
+
+          return $id;
+        }
+      }
+
+      $id = $this->param($accessKey, $validator);
+
+      Debug::console('got param '.$accessKey.': '.$id);
+
+    } else {
+      Debug::console('got param objid: '.$id);
+    }
+
+    return $id;
+
+  }//end public function getOID
+
   /** method for validating Formdata
    * if an error is found an message will be send to system, if you want to find
    * out if the test failed ask the system if there are any error messages
@@ -1172,11 +1289,11 @@ class LibRequestPhp
               //$data = null;
             } else {
               $data = array();
-              $data['name']     = $_FILES[$subkey]['name'][$key];
-              $data['type']     = $_FILES[$subkey]['type'][$key];
+              $data['name'] = $_FILES[$subkey]['name'][$key];
+              $data['type'] = $_FILES[$subkey]['type'][$key];
               $data['tmp_name'] = $_FILES[$subkey]['tmp_name'][$key];
-              $data['error']    = $_FILES[$subkey]['error'][$key];
-              $data['size']     = $_FILES[$subkey]['size'][$key];
+              $data['error'] = $_FILES[$subkey]['error'][$key];
+              $data['size'] = $_FILES[$subkey]['size'][$key];
             }
           } else {
             continue;
@@ -1390,24 +1507,20 @@ class LibRequestPhp
    * if an error is found an message will be send to system, if you want to find
    * out if the test failed ask the system if there are any error messages
    *
-   *
    * @param array $values are the tablefields
    * @param array $messages
    * @param string $subkey  subkey is the tablename
    * @param string $required  subkey is the tablename
    * @param State $state
    * @return array
-   *
    */
-  public function checkMultiFormInput
-  (
+  public function checkMultiFormInput(
     $values,
     $messages,
     $subkey = null,
     $required = array(),
     $state = null
-)
-  {
+  ) {
 
     // check if data exists, if not return an empty array
     if (!isset($_POST[$subkey]) or !is_array($_POST[$subkey])) {
@@ -1419,13 +1532,14 @@ class LibRequestPhp
     $response = $this->getResponse();
 
     // get Validator from Factory
-    $filter   = Validator::getActive();
+    $filter = Validator::getActive();
     $filtered = array();
 
     foreach ($_POST[$subkey] as $rowPos => $row) {
       $filter->clean();
 
       foreach ($values as $key => $value) {
+
         $method = 'add'.$value[0] ;
 
         if (!isset($row[$key]))
@@ -1481,14 +1595,12 @@ class LibRequestPhp
    * @return array
    *
    */
-  public function validateMultiData
-  (
+  public function validateMultiData(
     $values,
     $subkey = null,
     $messages = array(),
     $state = null
-)
-  {
+  ) {
 
     $post = array();
 
@@ -1503,13 +1615,14 @@ class LibRequestPhp
       $post = $_POST[$subkey];
 
     } else {
+
       $post = $_POST;
     }
 
     $response = $this->getResponse();
 
     // get Validator from Factory
-    $filter   = Validator::getActive();
+    $filter = Validator::getActive();
     $filtered = array();
 
     foreach ($post as $rowPos => $row) {
@@ -1573,7 +1686,7 @@ class LibRequestPhp
   {
 
     // get Validator from Factory
-    $filter   = Validator::getActive();
+    $filter = Validator::getActive();
     $response = $this->getResponse();
 
     $filtered = array();
@@ -1637,7 +1750,7 @@ class LibRequestPhp
   public function checkMultiIds($key , $subkey = null)
   {
 
-    $ids    = array();
+    $ids = array();
 
     if ($subkey) {
       foreach ($_POST[$key][$subkey] as $val) {
@@ -1670,23 +1783,20 @@ class LibRequestPhp
   *
   * @return array
   */
-  public function validate
-  (
+  public function validate(
     $entity,
     $keyName,
     $fields = array(),
     $required = array(),
     $state = null
-)
-  {
+  ) {
 
-    $filter = $this->checkSearchInput
-    (
+    $filter = $this->checkSearchInput(
       $entity->getValidationData($fields),
       $entity->getErrorMessages(),
       $keyName,
       $required
-   );
+    );
 
     $entity->addData($filter->getData());
 
@@ -1698,7 +1808,6 @@ class LibRequestPhp
     if ($filter->hasErrors()) {
 
       $response = $this->getResponse();
-
       $response->addError($filter->getErrorMessages());
 
       return false;
@@ -1716,20 +1825,18 @@ class LibRequestPhp
   public function validateSearch($entity, $keyName, $fields = array(), $required = array()  )
   {
 
-    $filter = $this->checkSearchInput
-    (
+    $filter = $this->checkSearchInput(
       $entity->getValidationData($fields),
       $entity->getErrorMessages(),
       $keyName,
       $required
-   );
+    );
 
     $entity->addData($filter->getData());
 
     if ($filter->hasErrors()) {
 
       $response = $this->getResponse();
-
       $response->addError($filter->getErrorMessages());
 
       return false;
@@ -1750,14 +1857,13 @@ class LibRequestPhp
   public function validateInsert($entity, $keyName, $fields = array(), $required = array(), $state = null)
   {
 
-    $filter = $this->checkFormInput
-    (
+    $filter = $this->checkFormInput(
       $entity->getValidationData($fields, true),
       $entity->getErrorMessages(),// return all so it's just an internal reference for reading
       $keyName,
       $required,
       $state
-   );
+    );
 
     $entity->addData($filter->getData());
 
@@ -1769,7 +1875,6 @@ class LibRequestPhp
     if ($filter->hasErrors()) {
 
       $response = $this->getResponse();
-
       $response->addError($filter->getErrorMessages());
 
       return false;
@@ -1790,28 +1895,23 @@ class LibRequestPhp
    * @param TState $state
    * @return void
    */
-  public function validateUpdate
-  (
+  public function validateUpdate(
     $entity,
     $keyName,
     $fields = array(),
     $required = array(),
     $state = null
-)
-  {
+  ) {
 
-    $filter = $this->checkFormInput
-    (
+    $filter = $this->checkFormInput(
       $entity->getValidationData($fields),
       $entity->getErrorMessages(),
       $keyName,
       $required,
       $state
-   );
+    );
 
     $data = $filter->getData();
-
-
     $entity->addData($data);
 
     // wenn ein State object übergeben wurde ist dieses mit höchster priorität
@@ -1823,9 +1923,7 @@ class LibRequestPhp
     if ($filter->hasErrors()) {
 
       $response = $this->getResponse();
-
       $response->addError($filter->getErrorMessages());
-
       return false;
     }
 
@@ -1843,28 +1941,23 @@ class LibRequestPhp
    * @param State $state
    * @return array all filtered data
    */
-  public function validateMultiInsert
-  (
+  public function validateMultiInsert(
     $entityName,
     $keyName,
     $fields = array(),
     $required = array(),
     $state = null
-)
-  {
+  ) {
 
-    $orm      = $this->getOrm();
+    $orm = $this->getOrm();
 
-    $filtered = $this->checkMultiFormInput
-    (
+    $filtered = $this->checkMultiFormInput(
       $orm->getValidationData($entityName,$fields),
       $orm->getErrorMessages($entityName),
       $keyName,
       $required,
       $state
-   );
-
-
+    );
 
     $entityName = $entityName.'_Entity';
 
@@ -1894,16 +1987,15 @@ class LibRequestPhp
   public function validateMultiUpdate($entityName, $keyName, $fields = array(), $required = array())
   {
 
-    $orm      = $this->getOrm();
+    $orm = $this->getOrm();
     $response = $this->getResponse();
 
-    $filtered = $this->checkMultiFormInput
-    (
+    $filtered = $this->checkMultiFormInput(
       $orm->getValidationData($entityName, $fields),
       $orm->getErrorMessages($entityName),
       $keyName,
       $required
-   );
+    );
 
     $entityName = $entityName.'_Entity';
 
@@ -1955,7 +2047,7 @@ class LibRequestPhp
     $defaults = array()
   ) {
 
-    $orm      = $this->getOrm();
+    $orm = $this->getOrm();
 
     $filtered = $this->checkMultiFormInput(
       $orm->getValidationData($entityName, $fields),
@@ -1964,29 +2056,32 @@ class LibRequestPhp
       $required
     );
 
-    $entityName = $entityName.'_Entity';
+    $entityClass = $entityName.'_Entity';
 
     $entityList = array();
     foreach ($filtered as $rowid => $data) {
 
-      $tpObj = new $entityName(null, array(), $this->getDb());
+      if(is_numeric($rowid)){
+        $tpObj = $orm->get($entityName, $rowid);
+      } else{
+        $tpObj = new $entityClass(null, array(), $this->getDb());
+      }
 
       // ignore rowid
       if (array_key_exists(Db::PK, $data)) {
         unset($data[Db::PK]);
       }//end if
 
-      if (is_numeric($rowid)) {
-        $tpObj->setId((int) $rowid);
-      } else { //end if
+      if (!is_numeric($rowid)) {
         $tpObj->tmpId = $rowid;
-      }
 
-      if ($defaults) {
-        foreach ($defaults as $defKey => $defValue) {
-          $tpObj->$defKey = $defValue;
+        if ($defaults) {
+          foreach ($defaults as $defKey => $defValue) {
+            $tpObj->$defKey = $defValue;
+          }
         }
       }
+
 
       $tpObj->addData($data);
       $entityList[$rowid] = $tpObj;
@@ -2133,7 +2228,6 @@ class LibRequestPhp
 
     if (strpos($tmp[0], '-')) {
       $tmp = explode('-', $tmp[0]);
-
       return $tmp[0];
     } else {
       return $tmp[0];
@@ -2183,11 +2277,12 @@ class LibRequestPhp
     if (!$requested)
       return $method;
     else {
+
       if (is_array($requested)) {
+
         foreach ($requested as $reqKey) {
           if ($method == $reqKey)
             return true;
-
         }
 
         return false;
@@ -2247,6 +2342,8 @@ class LibRequestPhp
   }//end public function getServerName */
 
   /**
+   * Die Addresse zum Server bekommen,
+   * checken was bei URL Design passiert
    * @param boolean $forceHttps
    * @return string
    */
@@ -2283,6 +2380,40 @@ class LibRequestPhp
     return $this->serverAddress;
 
   }//end public function getServerAddress */
+
+  /**
+   * Die volle Angefragte URL bekommen mit Servername und allen Parametern
+   * @param boolean $forceHttps einen https link erzwingen
+   * @return string
+   */
+  public function getFullRequest($forceHttps = false)
+  {
+
+    if (!$this->fullRequest) {
+
+      $this->fullRequest = ((isset($_SERVER['HTTPS']) && 'on' == $_SERVER['HTTPS']) || $forceHttps)
+      ? 'https://'
+      : 'http://';
+
+      $this->fullRequest .= $_SERVER['SERVER_NAME'];
+
+      if (isset($_SERVER['HTTPS']) && 'on' == $_SERVER['HTTPS']) {
+        if ($_SERVER['SERVER_PORT'] != '443') {
+          $this->fullRequest .= ':'.$_SERVER['SERVER_PORT'];
+        }
+      } else {
+        if ($_SERVER['SERVER_PORT'] != '80') {
+          $this->fullRequest .= ':'.$_SERVER['SERVER_PORT'];
+        }
+      }
+
+      $this->fullRequest .= $_SERVER['REQUEST_URI'];
+
+    }
+
+    return $this->fullRequest;
+
+  }//end public function getFullRequest */
 
   /**
    * @param string $domainName

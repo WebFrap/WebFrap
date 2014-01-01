@@ -30,9 +30,9 @@ class LibUploadImageEntity extends LibUploadEntity
 
     Debug::console('In save of file upload');
 
-    $id       = $this->entity->getId();
+    $id = $this->entity->getId();
 
-    $filePath = PATH_GW.'data/uploads/';
+    $filePath = PATH_UPLOADS.'attachments/';
     $filePath .= $this->entity->getTable().'/'.$this->attrName.'/';
     $filePath .= SParserString::idToPath($id);
 
@@ -52,9 +52,9 @@ class LibUploadImageEntity extends LibUploadEntity
   public function cleanThumbs()
   {
 
-    $id       = $this->entity->getId();
+    $id = $this->entity->getId();
 
-    $filePath = PATH_GW.'data/thumbs/';
+    $filePath = PATH_UPLOADS.'thumbs/';
     $filePath .= $this->entity->getTable().'/'.$this->attrName.'/';
     $filePath .= SParserString::idToPath($id);
 

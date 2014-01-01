@@ -35,12 +35,12 @@ class LibBuild extends LibBuildAction
   public function execute()
   {
 
-    $type         = $this->args[0];
-    $action       = $this->args[1];
+    $type = $this->args[0];
+    $action = $this->args[1];
 
     $className = 'LibBuildDb'.ucfirst($type);
 
-    if (!WebFrap::classLoadable($className)) {
+    if (!Webfrap::classExists($className)) {
       Error::addError('Requested invalid Db Type: '.$type.'. Please Check you Buildconfiguration.');
 
       return false;

@@ -34,7 +34,7 @@ abstract class InjectContainer
    * Der aktive ACL Adapter
    * @var LibAclAdapter
    */
-  protected $acl          = null;
+  protected $acl = null;
 
   /**
    * Die Haupt Datenbank Verbindung, wir gehen davon aus, das in der Regel nur
@@ -43,78 +43,77 @@ abstract class InjectContainer
    * Davon ein Key vorliegen um diese identifizieren und ansprechen zu können.
    * @var LibDbConnection
    */
-  protected $db           = null;
+  protected $db = null;
 
   /**
    * Der Haupt Cache Adapter
    * Regel alle Caching Level
    * @var LibCacheAdapter
    */
-  protected $cache        = null;
+  protected $cache = null;
 
   /**
    * Das Standard Konfigurations Objekt
    * @var LibConf
    */
-  protected $conf         = null;
+  protected $conf = null;
 
   /**
    * Das Haupt Internationalisierungs Element
    * @var LibI18nPhp
    */
-  protected $i18n         = null;
+  protected $i18n = null;
 
   /**
    * Das aktive Request Objekt mit dem der Aufruf des Scriptes / Services getriggert
    * wurde
    * @var LibRequestPhp
    */
-  protected $request      = null;
+  protected $request = null;
 
   /**
    * Das Response Objekt, welches automatisch in den Kanal Schreib über welchen
    * auch der Aufruf kam
    * @var Response
    */
-  public $response      = null;
+  public $response = null;
 
   /**
-   * @deprecated die Registry soll nichtmehr verwendet werden
    * @var Registry
    */
-  protected $registry     = null;
+  protected $registry = null;
 
   /**
    * Das Session Objekt
    * @var LibSessionPhp
    */
-  protected $session      = null;
+  protected $session = null;
 
   /**
    * @notYetImplemented Kommt noch
    * @var Transaction
    */
-  protected $transaction  = null;
+  protected $transaction = null;
 
   /**
    * Das Userobjekt mit den Informationen über den aktuell angemeldeten Benutzer
    * @var User
    */
-  protected $user         = null;
+  protected $user = null;
 
   /**
    *
    * Enter description here ...
    * @var LibTemplate
    */
-  protected $view         = null;
+  protected $view = null;
 
   /**
    *
    * Enter description here ...
    * @var Message
    */
-  protected $message      = null;
+  protected $message = null;
 
   /**
    * de:
@@ -126,13 +125,13 @@ abstract class InjectContainer
    * }
    * @var LibTemplate
    */
-  protected $tpl    = null;
+  protected $tpl = null;
 
   /**
    * @deprecated use $tpl
    * @var LibTemplate
    */
-  protected $tplEngine    = null;
+  protected $tplEngine = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // getter & setter methodes
@@ -324,7 +323,7 @@ abstract class InjectContainer
   /**
    *
    * Enter description here ...
-   * @param unknown_type $registry
+   * @param Registry $registry
    */
   public function setRegistry($registry)
   {
@@ -438,7 +437,7 @@ abstract class InjectContainer
   {
 
     if (!$this->tpl) {
-      $this->tpl = View::engine();
+      $this->tpl = View::getActive();
       $this->tplEngine = $this->tpl;
     }
 

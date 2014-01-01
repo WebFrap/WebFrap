@@ -37,15 +37,15 @@ class LibDownload
     $request = Request::getActive();
 
     if (!$type = $request->param('type')) {
-      throw new Io_Exception('Invalid Donwload Type');
+      throw new Io_Exception('Invalid Download Type');
     }
 
     $classname = 'LibDownload'.ucfirst($type);
 
-    if (WebFrap::loadable($classname) &&  $classname != 'LibDownloadAdapter') {
+    if (WebFrap::classExists($classname) &&  $classname != 'LibDownloadAdapter') {
       $download = new $classname();
     } else {
-      throw new Io_Exception('Invalid Donwload Type');
+      throw new Io_Exception('Invalid Download Type');
     }
 
     return $download;

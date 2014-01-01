@@ -33,7 +33,7 @@ class QueryEmpty extends LibSqlQuery
   /**
    * @var array
    */
-  protected $result     = array();
+  protected $result = array();
 
   /**
    * @var int

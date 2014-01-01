@@ -35,13 +35,13 @@ abstract class LibVerificationAdapter
    *
    * @var User
    */
-  protected $user       = null;
+  protected $user = null;
 
   /**
    *
    * @var LibMessagePool
    */
-  protected $message    = null;
+  protected $message = null;
 
   /**
    * flag to mark if it is necessary to check the password, or if it is ok
@@ -49,7 +49,7 @@ abstract class LibVerificationAdapter
    * Makes sense with ssl / cert logins
    * @var boolean
    */
-  protected $nopwd      = false;
+  protected $nopwd = false;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // setter

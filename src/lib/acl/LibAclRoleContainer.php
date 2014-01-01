@@ -40,8 +40,7 @@
  * @subpackage tech_core
  * @author dominik alexander bonsch <dominik.bonsch@webfrap.net>
  */
-class LibAclRoleContainer
-  implements ArrayAccess, Countable
+class LibAclRoleContainer implements ArrayAccess, Countable
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -52,14 +51,14 @@ class LibAclRoleContainer
    * Liste der Angefragen Datensätze mit den dazugehörigen rollen
    * @var array
    */
-  public $roles     = array();
+  public $roles = array();
 
   /**
    * @lang de:
    * der area key
    * @var array
    */
-  public $key       = null;
+  public $key = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Constructor

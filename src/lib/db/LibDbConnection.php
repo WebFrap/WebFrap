@@ -30,17 +30,17 @@ abstract class LibDbConnection
   /**
    * fetch as assoc array
    */
-  const fetchAssoc        = null;
+  const fetchAssoc = null;
 
   /**
    * fetch as numeric array
    */
-  const fetchNum          = null;
+  const fetchNum = null;
 
   /**
    * fetch assoc and numeric
    */
-  const fetchBoth         = null;
+  const fetchBoth = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Public Attributes
@@ -50,49 +50,49 @@ abstract class LibDbConnection
    * The ORM Layer in the WebFrap Database Layer
    * @var LibDbOrm
    */
-  public $orm                  = null;
+  public $orm = null;
 
   /**
    * name of the connected Database
    *
    * @var string
    */
-  public $databaseName      = null;
+  public $databaseName = null;
 
   /**
    * Databaseconf
    */
-  public $schema            = null;
+  public $schema = null;
 
   /**
    * Die Connection URL
    * @var string
    */
-  public $dbUrl      = null;
+  public $dbUrl = null;
 
   /**
    * Der Port der Datenbank
    * @var string
    */
-  public $dbPort      = null;
+  public $dbPort = null;
 
   /**
    * Der aktive User
    * @var string
    */
-  public $dbUser      = null;
+  public $dbuser = null;
 
   /**
    * Der aktive User
    * @var string
    */
-  public $dbPwd      = null;
+  public $dbPwd = null;
 
   /**
    * Zeit die für Datenbankabfragen aufgewendet wurde
    * @var string
    */
-  public $queryTime      = 0;
+  public $queryTime = 0;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Protected Attributes
@@ -102,71 +102,71 @@ abstract class LibDbConnection
    * the datbase resource id for the read connection
    * @var resource id
    */
-  protected $connectionRead    = null;
+  protected $connectionRead = null;
 
   /**
    * the datbase resource id for the write connection
    * @var resource id
    */
-  protected $connectionWrite   = null;
+  protected $connectionWrite = null;
 
   /**
    * works the database in cluster mode
    *
    * @var boolean
    */
-  protected $clusterMode      = false;
+  protected $clusterMode = false;
 
   /**
    * database connection result
-   * @var resource id
+   * @var Resource
    */
-  protected $result            = null;
+  protected $result = null;
 
   /**
    * object pool for prepared statements
    * @var array
    */
-  protected $prepares          = array();
+  protected $prepares = array();
 
   /**
    * counter for database requests
    */
-  protected $counter           = 0;
+  protected $counter = 0;
 
   /**
    * Speichert das SQL Objekt zwischen
    * @var ISqlParser
    */
-  protected $activObject       = null;
+  protected $activObject = null;
 
   /**
    * Speichern der letzten Abfrage
    */
-  protected $lastQuery         = null;
+  protected $lastQuery = null;
 
   /**
    * array with the database connection parameters
    * @var array
    */
-  protected $conf              = null;
+  protected $conf = null;
 
   /**
    * the fetchmode for the database
    */
-  protected $fetchMode         = null;
+  protected $fetchMode = null;
 
   /**
    * the type of the sql
    * @var string
    */
-  protected $builderType        = null;
+  protected $builderType = null;
 
   /**
    * if this logger is set, all queries are logged in this object
    * @var LibProtocolFile
    */
-  protected $protocol            = null;
+  protected $protocol = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Constructor
@@ -303,18 +303,18 @@ abstract class LibDbConnection
   {
 
     $defClassName = $name.'_Query';
-    $dbClassName  = $defClassName.'_'.$this->builderType;
+    $dbClassName = $defClassName.'_'.$this->builderType;
 
     $defClassNameOld = 'Query'.$name;
-    $dbClassNameOld  = $defClassName.$this->builderType;
+    $dbClassNameOld = $defClassName.$this->builderType;
 
-    if (Webfrap::classLoadable($dbClassName)) {
+    if (Webfrap::classExists($dbClassName)) {
       return new $dbClassName(null, $this);
-    } elseif (Webfrap::classLoadable($defClassName)) {
+    } elseif (Webfrap::classExists($defClassName)) {
       return new $defClassName(null, $this);
-    } elseif (Webfrap::classLoadable($dbClassNameOld)) {
+    } elseif (Webfrap::classExists($dbClassNameOld)) {
       return new $dbClassNameOld(null, $this);
-    } elseif (Webfrap::classLoadable($defClassNameOld)) {
+    } elseif (Webfrap::classExists($defClassNameOld)) {
       return new $defClassNameOld(null, $this);
     } else {
 
@@ -335,13 +335,13 @@ abstract class LibDbConnection
   {
 
     $defClassName = $name.'_Filter';
-    $dbClassName  = $defClassName.'_'.$this->builderType;
+    $dbClassName = $defClassName.'_'.$this->builderType;
 
-    if (Webfrap::classLoadable($dbClassName)) {
+    if (Webfrap::classExists($dbClassName)) {
 
       return new $dbClassName(null, $this);
     
-    } elseif (Webfrap::classLoadable($defClassName)) {
+    } elseif (Webfrap::classExists($defClassName)) {
 
       return new $defClassName(null, $this);
     
@@ -516,8 +516,6 @@ abstract class LibDbConnection
       return explode(',' , $string);
 
     $length = strlen($string);
-
-    $open = false;
 
     $array = array();
     $ignoreNext = false;

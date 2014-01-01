@@ -77,13 +77,13 @@ class EUserRelation
    * @var array
    */
   public static $labels = array(
-    self::INTERNAL     => 'Internal',
-    self::PARTNER      => 'Partner',
-    self::TRUSTED  => 'Trusted',
-    self::KNOWN  => 'Known',
-    self::EXTERN    => 'Extern',
-    self::ANNON    => 'Annonym',
-    self::UNTRUSTED    => 'Un trusted',
+    self::INTERNAL => 'Internal',
+    self::PARTNER => 'Partner',
+    self::TRUSTED => 'Trusted',
+    self::KNOWN => 'Known',
+    self::EXTERN => 'Extern',
+    self::ANNON => 'Annonym',
+    self::UNTRUSTED => 'Un trusted',
   );
 
   /**

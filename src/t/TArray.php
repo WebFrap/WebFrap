@@ -86,6 +86,17 @@ class TArray implements ITObject, Iterator, Countable
   {
     return isset($this->pool[$key])?$this->pool[$key]:null;
   }// end of public function __get */
+  
+  /**
+   * Zugriff Auf die Elemente per magic get
+   *
+   * @param string $key
+   * @return mixed
+   */
+  public function __isset($key)
+  {
+    return isset($this->pool[$key])?true:false;
+  }// end of public function __isset */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes

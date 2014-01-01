@@ -76,7 +76,7 @@ class LibUploadImage extends LibUploadAdapter
       $this->thumbPath = $thumbPath;
     }
     if (!$this->thumbPath) {
-      $this->thumbPath = PATH_FILES.'files/images/thumb/';
+      $this->thumbPath = PATH_UPLOADS.'images/thumb/';
     }
 
     if ($newName) {
@@ -98,8 +98,6 @@ class LibUploadImage extends LibUploadAdapter
    */
   public function convert($newname = null , $newpath = null , $x = 640, $y = 480)
   {
-    if (Log::$levelDebug)
-      Log::start(__file__ , __line__ , __method__ , array($newname, $newpath, $x, $y)  );
 
     if ($newpath) {
       $this->newpath = $newpath;
@@ -110,7 +108,7 @@ class LibUploadImage extends LibUploadAdapter
     }
 
     if (!$this->newpath) {
-      $this->newpath = PATH_FILES.'files/images/';
+      $this->newpath = PATH_UPLOADS.'images/';
     }
 
     if (is_null($this->newname)) {
@@ -121,22 +119,14 @@ class LibUploadImage extends LibUploadAdapter
 
     // Wenn der Ordner nicht existiert, einfach versuchen zu erstellen
     if (!is_dir($this->newpath)) {
-      if (!SFilesystem::createFolder($this->newpath)) {
-        Error::addError
-        (
-        'Failed to create Folder: '.$this->newpath,
-        'LibUploadException'
-        );
+      if (!SFilesystem::mkdir($this->newpath)) {
+        throw new LibUploadException( 'Failed to create Folder: '.$this->newpath );
       }
     }
 
     // Falls der Ordner nicht beschreibbar ist Fehler werfen
-    if (!is_writeable($this->newpath)  ) {
-      Error::addError
-      (
-      'Target Folder :  '.$this->newpath.' is not writeable',
-      'LibUploadException'
-      );
+    if (!is_writeable($this->newpath)) {
+      throw new LibUploadException('Target Folder :  '.$this->newpath.' is not writeable');
     }
 
     $thumb = LibImageThumbFactory::getThumb($this->tmpname , $newname , $x , $y);

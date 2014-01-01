@@ -29,7 +29,7 @@ class LibMessageRendererMail extends LibTemplateHtml
    * Type des Template objectes
    * @var string
    */
-  public $type         = 'mail';
+  public $type = 'mail';
 
 /*//////////////////////////////////////////////////////////////////////////////
 // getter + setter Methodes
@@ -50,24 +50,24 @@ class LibMessageRendererMail extends LibTemplateHtml
 
     if ($message->htmlDynContent) {
       if ($message->htmlMaster) {
-        $masterTpl  = $message->htmlMaster;
-        $CONTENT    = $message->htmlDynContent;
+        $masterTpl = $message->htmlMaster;
+        $CONTENT = $message->htmlDynContent;
       } else {
         return $message->htmlDynContent;
       }
     } elseif ($message->htmlContent) {
       if ($message->htmlMaster) {
-        $masterTpl  = $message->htmlMaster;
-        $CONTENT    = $message->htmlContent;
+        $masterTpl = $message->htmlMaster;
+        $CONTENT = $message->htmlContent;
       } else {
         return $message->htmlContent;
       }
     } elseif ($message->htmlMaster) {
-      $masterTpl  = $message->htmlMaster;
-      $TEMPLATE   = $message->htmlTemplate;
+      $masterTpl = $message->htmlMaster;
+      $TEMPLATE = $message->htmlTemplate;
     } elseif ($message->htmlTemplate) {
       $masterTpl = $message->htmlTemplate;
-      $TEMPLATE  = null;
+      $TEMPLATE = null;
     } else {
       throw new LibMessage_Exception('Message has no html content');
     }
@@ -76,12 +76,12 @@ class LibMessageRendererMail extends LibTemplateHtml
       throw new LibMessage_Exception('Template '.$masterTpl.' not exists ');
     }
 
-    $VAR       = $this->var;
-    $ELEMENT   = $this->object;
-    $FUNC      = $this->funcs;
+    $VAR = $this->var;
+    $ELEMENT = $this->object;
+    $FUNC = $this->funcs;
 
-    $I18N      = $this->i18n;
-    $USER      = $this->user;
+    $I18N = $this->i18n;
+    $user = $this->user;
 
     ob_start();
     include $filename;
@@ -103,29 +103,29 @@ class LibMessageRendererMail extends LibTemplateHtml
   public function renderPlain($message, $receiver, $sender)
   {
 
-    $CONTENT   = null;
-    $TEMPLATE  = null;
+    $CONTENT = null;
+    $TEMPLATE = null;
 
     if ($message->plainDynContent) {
       if ($message->plainMaster) {
-        $masterTpl  = $message->plainMaster;
-        $CONTENT    = $message->plainDynContent;
+        $masterTpl = $message->plainMaster;
+        $CONTENT = $message->plainDynContent;
       } else {
         return $message->plainDynContent;
       }
     } elseif ($message->plainContent) {
       if ($message->plainMaster) {
-        $masterTpl  = $message->plainMaster;
-        $CONTENT    = $message->plainContent;
+        $masterTpl = $message->plainMaster;
+        $CONTENT = $message->plainContent;
       } else {
         return $message->plainContent;
       }
     } elseif ($message->plainMaster) {
-      $masterTpl  = $message->plainMaster;
-      $TEMPLATE   = $message->plainTemplate;
+      $masterTpl = $message->plainMaster;
+      $TEMPLATE = $message->plainTemplate;
     } elseif ($message->plainTemplate) {
       $masterTpl = $message->plainTemplate;
-      $TEMPLATE  = null;
+      $TEMPLATE = null;
     } else {
       throw new LibMessage_Exception('Message has no plain content');
     }
@@ -134,12 +134,12 @@ class LibMessageRendererMail extends LibTemplateHtml
       throw new LibMessage_Exception('Template '.$masterTpl.' not exists ');
     }
 
-    $VAR       = $this->var;
-    $ELEMENT   = $this->object;
-    $FUNC      = $this->funcs;
+    $VAR = $this->var;
+    $ELEMENT = $this->object;
+    $FUNC = $this->funcs;
 
-    $I18N      = $this->i18n;
-    $USER      = $this->user;
+    $I18N = $this->i18n;
+    $user = $this->user;
 
     ob_start();
     include $filename;

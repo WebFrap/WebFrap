@@ -24,7 +24,7 @@ class TDataObject
 
   /** Der Inhalt des Knotens
    */
-  public $content  = array();
+  public $content = array();
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Magic Functions
@@ -67,6 +67,17 @@ class TDataObject
   {
     return isset($this->content[$key])?$this->content[$key]:null;
   }// end of public function __get($key)
+  
+  /**
+   * Enter description here...
+   *
+   * @param string $key
+   * @return string
+   */
+  public function __isset($key)
+  {
+    return isset($this->content[$key])?true:false;
+  }// end of public function __isset */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter

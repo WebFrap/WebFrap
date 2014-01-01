@@ -39,35 +39,35 @@ class TUrl
    *
    * @var unknown_type
    */
-  protected $urlDesign    = URL_DESIGN;
+  protected $urlDesign = URL_DESIGN;
 
   /**
    * Enter description here...
    *
    * @var unknown_type
    */
-  protected $urlEndSep    = URL_END_SEP;
+  protected $urlEndSep = URL_END_SEP;
 
   /**
    * Enter description here...
    *
    * @var unknown_type
    */
-  protected $urlParamSep  = URL_PARAM_SEP;
+  protected $urlParamSep = URL_PARAM_SEP;
 
   /**
    * Enter description here...
    *
    * @var unknown_type
    */
-  protected $urlValueSep  = URL_VALUE_SEP;
+  protected $urlValueSep = URL_VALUE_SEP;
 
   /**
    * Enter description here...
    *
    * @var unknown_type
    */
-  protected $urlTitleSep  = URL_TITLE_SEP;
+  protected $urlTitleSep = URL_TITLE_SEP;
 
   /**
    * Enter description here...
@@ -105,8 +105,8 @@ class TUrl
   protected static $fileMap = array
   (
   'index.php' => array('sys','.html'),
-  'ajax.php'  => array('ajax','.xml'),
-  'get.php'   => array('file',''),
+  'ajax.php' => array('ajax','.xml'),
+  'get.php' => array('file',''),
   );
 
   /**
@@ -146,7 +146,7 @@ class TUrl
    */
   public function cleanParams()
   {
-    $this->urlFile   = 'index.php';
+    $this->urlFile = 'index.php';
     $this->urlParams = array();
 
   }//end public function cleanParams()
@@ -206,8 +206,6 @@ class TUrl
    */
   public function toUrl($file = null , $params = array() , $title = null , $anchor = null)
   {
-    if (Log::$levelDebug)
-     Log::start(__file__,__line__,__method__,array($file, $params, $title, $anchor));
 
     $file = $file?$file:$this->urlFile;
 
@@ -235,8 +233,6 @@ class TUrl
    */
   public static function asUrl($filename , $attributes , $title = null , $anchor = null)
   {
-    if (Log::$levelDebug)
-     Log::start(__file__,__line__,__method__,array($filename , $attributes , $title, $anchor));
 
     $attributes = array_merge(self::$persistentParam,$attributes);
 
@@ -261,8 +257,8 @@ class TUrl
   /**
    * Enter description here...
    *
-   * @param unknown_type $filename
-   * @return unknown
+   * @param string $filename
+   * @return string
    */
   protected static function getDesignedData($filename)
   {
@@ -276,13 +272,11 @@ class TUrl
   /**
    * Enter description here...
    *
-   * @param unknown_type $attributes
-   * @return unknown
+   * @param array $attributes
+   * @return string
    */
   protected static function asmAttributes($attributes)
   {
-    if (Log::$levelDebug)
-     Log::start(__file__,__line__,__method__,array($attributes));
 
     if (URL_DESIGN) {
       if ($attributes) {
@@ -340,8 +334,6 @@ class TUrl
    */
   protected static function buildAnchor($anchor)
   {
-    if (Log::$levelDebug)
-     Log::start(__file__,__line__,__method__,array($anchor));
 
     return trim($anchor) != '' ? '#'.$anchor : '';
 

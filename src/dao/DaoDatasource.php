@@ -102,10 +102,10 @@ class DaoDatasource extends Dao
     if (!file_exists($menuPath)) {
       Debug::console('found no source: '.$menuPath);
 
-      return;
+      return null;
     }
 
-    $folder   = new LibFilesystemFolder($menuPath);
+    $folder = new LibFilesystemFolder($menuPath);
 
     $menuData = new DaoDatasource($folder->getFiles());
 

@@ -61,42 +61,42 @@ class ContextSearch extends Context
     /* Acl Stuff */
     // startpunkt des pfades für die acls
     if ($aclRoot = $request->param('a_root', Validator::CKEY))
-      $this->aclRoot    = $aclRoot;
+      $this->aclRoot = $aclRoot;
 
     // die id des Datensatzes von dem aus der Pfad gestartet wurde
     if ($aclRootId = $request->param('a_root_id', Validator::INT))
-      $this->aclRootId    = $aclRootId;
+      $this->aclRootId = $aclRootId;
 
     // der key des knotens auf dem wir uns im pfad gerade befinden
     if ($aclKey = $request->param('a_key', Validator::CKEY))
-      $this->aclKey    = $aclKey;
+      $this->aclKey = $aclKey;
 
     // der name des knotens
     if ($aclNode = $request->param('a_node', Validator::CKEY))
-      $this->aclNode    = $aclNode;
+      $this->aclNode = $aclNode;
 
     // an welchem punkt des pfades befinden wir uns?
     if ($aclLevel = $request->param('a_level', Validator::INT))
-      $this->aclLevel  = $aclLevel;
+      $this->aclLevel = $aclLevel;
     
     /* List Stuff */
       
     // über den ltype können verschiedene listenvarianten gewählt werden
     // diese müssen jedoch vorhanden / implementiert sein
-    if ($ltype   = $request->param('ltp', Validator::CNAME))
-      $this->ltype    = $ltype;
+    if ($ltype = $request->param('ltp', Validator::CNAME))
+      $this->ltype = $ltype;
 
     // append entries
     if ($append = $request->param('apd', Validator::BOOLEAN))
-      $this->append    = $append;
+      $this->append = $append;
 
       // start position of the query and size of the table
     $this->offset
-      = $request->param('ofs', Validator::INT);
+ = $request->param('ofs', Validator::INT);
 
     // start position of the query and size of the table
     $this->start
-      = $request->param('st', Validator::INT);
+ = $request->param('st', Validator::INT);
 
     if ($this->offset) {
       if (!$this->start)
@@ -109,15 +109,15 @@ class ContextSearch extends Context
 
     // order for the multi display element
     $this->order
-      = $request->param('ord', Validator::CNAME);
+ = $request->param('ord', Validator::CNAME);
 
     // Call Back element ID
     $this->cbElement
-      = $request->param('cbe', Validator::CKEY  );
+ = $request->param('cbe', Validator::CKEY  );
 
     // HTML Id for the target HTML List Element
     $this->elid
-      = $request->param('elid', Validator::CKEY  );
+ = $request->param('elid', Validator::CKEY  );
 
     // flag for beginning seach filter
     if ($text = $request->param('bgn', Validator::TEXT  )) {
@@ -128,29 +128,29 @@ class ContextSearch extends Context
     // the model should add all inputs in the ajax request, not just the text
     // converts per default to false, thats ok here
     $this->fullLoad
-      = $request->param('ful', Validator::BOOLEAN);
+ = $request->param('ful', Validator::BOOLEAN);
 
     // exclude whatever
     $this->exclude
-      = $request->param('xcld', Validator::CKEY  );
+ = $request->param('xcld', Validator::CKEY  );
 
     // keyname to tageting ui elements
     $this->keyName
-      = $request->param('kn', Validator::CKEY  );
+ = $request->param('kn', Validator::CKEY  );
 
     // the activ id, mostly needed in exlude calls
     $this->objid
-      = $request->param('objid', Validator::EID  );
+ = $request->param('objid', Validator::EID  );
 
     // order for the multi display element
-    $this->mask
-      = $request->param('msk', Validator::CNAME);
+    $this->targetMask
+ = $request->param('target_mask', Validator::CNAME);
       
     /* Basic Search */
       
     // search free
     $this->free
-      = $request->param('free', Validator::TEXT);
+ = $request->param('free', Validator::TEXT);
 
   }//end public function interpretRequest */
 
@@ -178,8 +178,8 @@ class ContextSearch extends Context
     if ($this->aclLevel)
       $this->urlExt .= '&amp;a_level='.$this->aclLevel;
 
-    if ($this->mask)
-      $this->urlExt .= '&amp;mask='.$this->mask;
+    if ($this->targetMask)
+      $this->urlExt .= '&amp;target_mask='.$this->targetMask;
 
     return $this->urlExt;
 
@@ -209,8 +209,8 @@ class ContextSearch extends Context
     if ($this->aclLevel)
       $this->actionExt .= '&a_level='.$this->aclLevel;
 
-    if ($this->mask)
-      $this->actionExt .= '&mask='.$this->mask;
+    if ($this->targetMask)
+      $this->actionExt .= '&target_mask='.$this->targetMask;
 
     return $this->actionExt;
 
@@ -240,4 +240,4 @@ class ContextSearch extends Context
     return array_key_exists($key , $this->content);
   }//end public function exists */
 
-} // end class TFlagListing
+} // end class ContextSearch

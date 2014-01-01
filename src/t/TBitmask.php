@@ -25,7 +25,7 @@ class TBitmask
 
   /** the bitmask array
    */
-  protected $mask  = array();
+  protected $mask = array();
 
   /**
    *
@@ -38,7 +38,6 @@ class TBitmask
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   *
    * @param array/int $data
    */
   public function __construct($data = null)

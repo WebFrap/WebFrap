@@ -68,28 +68,28 @@ class LibMessageMail
   /**
    * @var string
    */
-  protected $address  = null;
+  protected $address = null;
 
   /**
    * the mail Subject
    *
    * @var string
    */
-  protected $subject  = null;
+  protected $subject = null;
 
   /**
    * Plain Text
    *
    * @var string
    */
-  protected $plainText  = null;
+  protected $plainText = null;
 
   /**
    * html text
    *
    * @var string
    */
-  protected $htmlText   = null;
+  protected $htmlText = null;
 
   /**
    * list of files to attach
@@ -113,39 +113,39 @@ class LibMessageMail
    * Der mime Type der Message   *
    * @var string
    */
-  protected $mimeType   = '1.0';
+  protected $mimeType = '1.0';
 
   /**
    * Die Absender Addresse
    * @var string
    */
-  protected $sender   = null;
+  protected $sender = null;
 
   /**
    * @var string
    */
-  protected $replyTo  = null;
+  protected $replyTo = null;
 
     /**
    * Enter description here...
    *
    * @var array
    */
-  protected $bbc   = array();
+  protected $bbc = array();
 
   /**
    * Enter description here...
    *
    * @var array
    */
-  protected $cc   = array();
+  protected $cc = array();
 
   /**
    * Enter description here...
    *
    * @var string
    */
-  protected $contentType  = 'text/html';
+  protected $contentType = 'text/html';
 
   /**
    * Mail Charset
@@ -220,6 +220,7 @@ class LibMessageMail
     } elseif ($defSender = Conf::status('app.sender')) {
       $this->sender = $defSender;
     } else {
+      //todo no server name in cli... has to be maintained in the conf
       $this->sender = 'WebFrap Mail API <do_not_reply@'.$_SERVER['SERVER_NAME'].'>';
     }
 
@@ -318,8 +319,7 @@ class LibMessageMail
   public function setPriority($priority)
   {
 
-    $possible = array
-    (
+    $possible = array(
       '1' => '1 (Highest)',
       '2' => '2 (High)',
       '3' => '3 (Normal)',
@@ -347,8 +347,7 @@ class LibMessageMail
   public function setImportance($importance)
   {
 
-    $possible = array
-    (
+    $possible = array(
       'high',
       'normal',
       'low'
@@ -491,8 +490,7 @@ class LibMessageMail
   {
 
     if (!is_readable($attach)) {
-      Error::report
-      (
+      Error::report(
         'Tried to send nonreadable file: '.$attach.' by mail'
       );
 
@@ -522,8 +520,7 @@ class LibMessageMail
   {
 
     if (!is_readable($attach)) {
-      Error::report
-      (
+      Error::report(
       'Tried to send nonreadable file: '.$attach.' by mail'
       );
 
@@ -624,19 +621,16 @@ class LibMessageMail
     );
     */
 
-    if
-    (
-      !mail
-      (
+    if(
+      !mail(
         $address,
         $this->subject,
         $body,
         $header
       )
-    )
-    {
-      Error::report
-      (
+    ) {
+      
+      Error::report(
         'Failed to send Mail to'.$address
       );
 
@@ -668,9 +662,9 @@ class LibMessageMail
   public function cleanData()
   {
 
-    $this->subject     = null;
-    $this->plainText   = null;
-    $this->htmlText    = null;
+    $this->subject = null;
+    $this->plainText = null;
+    $this->htmlText = null;
 
   }//end public function cleanData */
 

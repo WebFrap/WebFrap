@@ -69,26 +69,28 @@ class TEnvelop
    */
   public function __get($key)
   {
-    if (property_exists  ($this->object  , $key  )) {
+    if (property_exists($this->object, $key)) {
       return $this->object->$key;
     } else {
-      Error::addError('Tried to read from nonexisting property '.$key);
+      Error::addError('Tried to read from nonexisting property '.$key.' on '.get_class($this->object));
+      return null;
     }
   }// end of public function __get */
 
   /**
    * map method calls
    *
-   * @param string $key
+   * @param string $method
+   * @param string $params
    * @return mixed
    */
   public function __call($method, $params)
   {
 
-    if (!method_exists  ($this->object  , $method  )) {
-      Error::addError('Tried to call nonexisting method '.$method);
+    if (!method_exists($this->object, $method)) {
+      Error::addError('Tried to call nonexisting method '.$method.' on '.get_class($this->object));
 
-      return;
+      return null;
     }
 
     return call_user_func_array(array($this->object, $method), $params);

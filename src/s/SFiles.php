@@ -35,8 +35,6 @@ class SFiles
    */
   public static function move($oldPos , $newPos)
   {
-    if (Log::$levelDebug)
-      Log::start( __file__ , __line__ , __method__ , array($oldPos , $newPos));
 
     ///FIXME this will not work! change to SFilesystem
 
@@ -165,8 +163,8 @@ class SFiles
   public static function getRawFilename($fileName)
   {
 
-    $tmp       = explode('/',$fileName); // remove folders
-    $fileName  = array_pop($tmp);
+    $tmp = explode('/',$fileName); // remove folders
+    $fileName = array_pop($tmp);
 
     // test if we found a dot an asume that if we find one it seperates the name
     // from the extension
@@ -309,7 +307,7 @@ class SFiles
   {
 
     if (!$handle = fopen($fileName, 'w')  ) {
-      Log::warn(__file__,__line__,'Failed to write: '.$fileName.' to cache');
+      Log::warn(__FILE__,__LINE__,'Failed to write: '.$fileName.' to cache');
 
       return false;
     }
@@ -324,7 +322,7 @@ class SFiles
     fclose($handle);
 
     if (!$wrote)
-      Log::warn(__file__,__line__,'Failed to write: '.$fileName);
+      Log::warn(__FILE__,__LINE__,'Failed to write: '.$fileName);
 
     return $wrote;
 
@@ -424,7 +422,7 @@ class SFiles
    */
   public static function getUploadPath($entityName, $attrName, $id)
   {
-    return PATH_GW.'data/uploads/'.$entityName.'/'.$attrName.SParserString::idToPath($id).'/'.$id;
+    return PATH_UPLOADS.'attachments/'.$entityName.'/'.$attrName.SParserString::idToPath($id).'/'.$id;
 
   }//end public static function getUploadPath */
 

@@ -40,32 +40,32 @@ class MvcRouter_Apachemod extends Base
    * the active module object
    * @var Module
    */
-  protected $module               = null;
+  protected $module = null;
 
   /**
    * name of the active module
    * @var string
    */
-  protected $moduleName           = null;
+  protected $moduleName = null;
 
   /**
    * the activ controller object
    * @var Controller
    */
-  protected $controller           = null;
+  protected $controller = null;
 
   /**
    * name of the activ controller
    * @var string
    */
-  protected $controllerName       = null;
+  protected $controllerName = null;
 
   /**
    * mappertabelle für shortlinks
    *
    * @var array
    */
-  protected $redirectMap          = array();
+  protected $redirectMap = array();
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic
@@ -82,7 +82,7 @@ class MvcRouter_Apachemod extends Base
 
     foreach ($conf->redirect as $name => $data) {
       if (isset($_GET[$name])) {
-        $_GET['c']      = $data[0];
+        $_GET['c'] = $data[0];
         $_GET[$data[1]] = $_GET[$name];
         break;
       }
@@ -113,9 +113,9 @@ class MvcRouter_Apachemod extends Base
     if (defined('MODE_MAINTENANCE')) {
       $map = array
       (
-        Request::MOD  => 'Maintenance',
-        Request::CON  => 'Base',
-        Request::RUN  => 'message'
+        Request::MOD => 'Maintenance',
+        Request::CON => 'Base',
+        Request::RUN => 'message'
       );
       $request->addParam($map);
 
@@ -128,18 +128,18 @@ class MvcRouter_Apachemod extends Base
       $tmp = explode('.',$command);
       $map = array
       (
-        Request::MOD  => $tmp[0],
-        Request::CON  => $tmp[1],
-        Request::RUN  => $tmp[2]
+        Request::MOD => $tmp[0],
+        Request::CON => $tmp[1],
+        Request::RUN => $tmp[2]
       );
       $request->addParam($map);
     } elseif ($command = $request->data('c', Validator::TEXT)) {
       $tmp = explode('.',$command);
       $map = array
       (
-        Request::MOD  => $tmp[0],
-        Request::CON  => $tmp[1],
-        Request::RUN  => $tmp[2]
+        Request::MOD => $tmp[0],
+        Request::CON => $tmp[1],
+        Request::RUN => $tmp[2]
       );
       $request->addParam($map);
     }
@@ -153,7 +153,7 @@ class MvcRouter_Apachemod extends Base
   public function wakeup()
   {
 
-    $request  = $this->getRequest();
+    $request = $this->getRequest();
     $response = $this->getResponse();
     $session = $this->getSession();
     $this->getUser();
@@ -169,9 +169,9 @@ class MvcRouter_Apachemod extends Base
     if (defined('MODE_MAINTENANCE')) {
       $map = array
       (
-        Request::MOD  => 'Maintenance',
-        Request::CON  => 'Base',
-        Request::RUN  => 'message'
+        Request::MOD => 'Maintenance',
+        Request::CON => 'Base',
+        Request::RUN => 'message'
       );
       $request->addParam($map);
 
@@ -184,18 +184,18 @@ class MvcRouter_Apachemod extends Base
       $tmp = explode('.',$command);
       $map = array
       (
-        Request::MOD  => $tmp[0],
-        Request::CON  => $tmp[1],
-        Request::RUN  => $tmp[2]
+        Request::MOD => $tmp[0],
+        Request::CON => $tmp[1],
+        Request::RUN => $tmp[2]
       );
       $request->addParam($map);
     } elseif ($command = $request->data('c', Validator::TEXT)) {
       $tmp = explode('.',$command);
       $map = array
       (
-        Request::MOD  => $tmp[0],
-        Request::CON  => $tmp[1],
-        Request::RUN  => $tmp[2]
+        Request::MOD => $tmp[0],
+        Request::CON => $tmp[1],
+        Request::RUN => $tmp[2]
       );
       $request->addParam($map);
     }
@@ -215,16 +215,16 @@ class MvcRouter_Apachemod extends Base
   {
 
     // Startseiten Eintrag ins Navmenu
-    $view     = $this->getView();
+    $view = $this->getView();
 
     if (!$session)
-      $session      = $this->session;
+      $session = $this->session;
 
     if (!$httpRequest)
-      $httpRequest  = $this->request;
+      $httpRequest = $this->request;
 
     if (!$transaction)
-      $transaction  = $this->transaction;
+      $transaction = $this->transaction;
 
     $user = $this->getUser();
     Debug::console('USER' , $user);
@@ -235,9 +235,9 @@ class MvcRouter_Apachemod extends Base
         $tmp = explode('.',$session->getStatus('tripple.annon'));
         $map = array
         (
-          Request::MOD  => $tmp[0],
-          Request::CON  => $tmp[1],
-          Request::RUN  => $tmp[2]
+          Request::MOD => $tmp[0],
+          Request::CON => $tmp[1],
+          Request::RUN => $tmp[2]
         );
         $httpRequest->addParam($map);
 
@@ -246,9 +246,9 @@ class MvcRouter_Apachemod extends Base
         $tmp = explode('.',$session->getStatus('tripple.user'));
         $map = array
         (
-          Request::MOD  => $tmp[0],
-          Request::CON  => $tmp[1],
-          Request::RUN  => $tmp[2]
+          Request::MOD => $tmp[0],
+          Request::CON => $tmp[1],
+          Request::RUN => $tmp[2]
         );
         $httpRequest->addParam($map);
 
@@ -256,12 +256,12 @@ class MvcRouter_Apachemod extends Base
       }
     }//end if (!$sysClass = $httpRequest->param(Request::MOD,'Cname'))
 
-    $modName      = ucfirst($sysClass);
-    $className    = $modName.'_Module';
+    $modName = ucfirst($sysClass);
+    $className = $modName.'_Module';
 
     $classNameOld = 'Module'.$modName;
 
-    if (Webfrap::classLoadable($className)) {
+    if (Webfrap::classExists($className)) {
       Debug::console('$module',$className);
 
       $this->module = new $className($this);
@@ -270,7 +270,7 @@ class MvcRouter_Apachemod extends Base
 
       // everythin fine
       return true;
-    } else  if (Webfrap::classLoadable($classNameOld)) {
+    } else  if (Webfrap::classExists($classNameOld)) {
       Debug::console('$module',$classNameOld);
 
       $this->module = new $classNameOld($this);
@@ -303,9 +303,9 @@ class MvcRouter_Apachemod extends Base
 
     try {
 
-      $classname    = $module.$controller.WBF_CONTROLLER_PREFIX.'_Controller';
+      $classname = $module.$controller.WBF_CONTROLLER_PREFIX.'_Controller';
 
-      if (WebFrap::loadable($classname)) {
+      if (WebFrap::classExists($classname)) {
         $this->controller = new $classname($this);
         $this->controller->setDefaultModel($module.$controller);
         $this->controllerName = $classname;
@@ -340,7 +340,7 @@ class MvcRouter_Apachemod extends Base
       );
 
       // if the controller ist not loadable set an error controller
-      $this->controller     = new Error_Controller($this);
+      $this->controller = new Error_Controller($this);
       $this->controllerName = 'ControllerError';
       //\Reset The Extention
 
@@ -394,7 +394,7 @@ class MvcRouter_Apachemod extends Base
 
     $errorClass = 'LibHttpError'.$errorKey;
 
-    if (!Webfrap::classLoadable($errorClass))
+    if (!Webfrap::classExists($errorClass))
       $errorClass = 'LibHttpError500';
 
     $error = new $errorClass($data);
@@ -536,9 +536,9 @@ class MvcRouter_Apachemod extends Base
 
     $map = array
     (
-      Request::MOD  => $tmp[0],
-      Request::CON  => $tmp[1],
-      Request::RUN  => $tmp[2]
+      Request::MOD => $tmp[0],
+      Request::CON => $tmp[1],
+      Request::RUN => $tmp[2]
     );
     $this->redirect($map);
 
@@ -559,9 +559,9 @@ class MvcRouter_Apachemod extends Base
 
     $map = array
     (
-      Request::MOD  => $tmp[0],
-      Request::CON  => $tmp[1],
-      Request::RUN  => $tmp[2]
+      Request::MOD => $tmp[0],
+      Request::CON => $tmp[1],
+      Request::RUN => $tmp[2]
     );
     $this->redirect($map);
 
@@ -582,9 +582,9 @@ class MvcRouter_Apachemod extends Base
 
     $map = array
     (
-      Request::MOD  => $tmp[0],
-      Request::CON  => $tmp[1],
-      Request::RUN  => $tmp[2]
+      Request::MOD => $tmp[0],
+      Request::CON => $tmp[1],
+      Request::RUN => $tmp[2]
     );
     $this->redirect($map);
 

@@ -137,31 +137,31 @@ class ContextExport extends Context
 
     // startpunkt des pfades für die acls
     if ($aclRoot = $request->param('a_root', Validator::CKEY))
-      $this->aclRoot    = $aclRoot;
+      $this->aclRoot = $aclRoot;
 
     // die id des Datensatzes von dem aus der Pfad gestartet wurde
     if ($aclRootId = $request->param('a_root_id', Validator::INT))
-      $this->aclRootId    = $aclRootId;
+      $this->aclRootId = $aclRootId;
 
     // der key des knotens auf dem wir uns im pfad gerade befinden
     if ($aclKey = $request->param('a_key', Validator::CKEY))
-      $this->aclKey    = $aclKey;
+      $this->aclKey = $aclKey;
 
     // der name des knotens
     if ($aclNode = $request->param('a_node', Validator::CKEY))
-      $this->aclNode    = $aclNode;
+      $this->aclNode = $aclNode;
 
     // an welchem punkt des pfades befinden wir uns?
     if ($aclLevel = $request->param('a_level', Validator::INT))
-      $this->aclLevel  = $aclLevel;
+      $this->aclLevel = $aclLevel;
 
       // start position of the query and size of the table
     $this->offset
-      = $request->param('offset', Validator::INT);
+ = $request->param('offset', Validator::INT);
 
     // start position of the query and size of the table
     $this->start
-      = $request->param('start', Validator::INT);
+ = $request->param('start', Validator::INT);
 
     if ($this->offset) {
       if (!$this->start)
@@ -174,7 +174,7 @@ class ContextExport extends Context
 
     // order for the multi display element
     $this->order
-      = $request->param('order', Validator::CNAME);
+ = $request->param('order', Validator::CNAME);
 
     // flag for beginning seach filter
     if ($text = $request->param('begin', Validator::TEXT  )) {
@@ -270,4 +270,4 @@ class ContextExport extends Context
     return array_key_exists($key , $this->content);
   }//end public function exists */
 
-} // end class TFlagListing
+} // end class ContextExport

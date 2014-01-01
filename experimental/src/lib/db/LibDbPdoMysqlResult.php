@@ -28,17 +28,17 @@ class LibDbPdoMysqlResult extends LibDbPdoResult
   /**
    * Holen der Daten als Assoziativer Array
    */
-  const fetchAssoc  = PDO::FETCH_ASSOC;
+  const fetchAssoc = PDO::FETCH_ASSOC;
 
   /**
    * Holen der Daten als Numerischer Array
    */
-  const fetchNum    = PDO::FETCH_NUM;
+  const fetchNum = PDO::FETCH_NUM;
 
   /**
    * Holen der Daten als Doppelter Assoziativer und Numerischer Array
    */
-  const fetchBoth   = PDO::FETCH_BOTH;
+  const fetchBoth = PDO::FETCH_BOTH;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Special Queries

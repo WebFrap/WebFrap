@@ -67,7 +67,7 @@ class InvalidRequest_Exception extends WebfrapUser_Exception
       $this->error = $message;
 
       $this->debugMessage = $debugMessage;
-      $this->errorKey     = $message->getId();
+      $this->errorKey = $message->getId();
 
       if ('cli' == $request->type)
         $response->writeLn($debugMessage);
@@ -80,7 +80,7 @@ class InvalidRequest_Exception extends WebfrapUser_Exception
         parent::__construct($message);
 
       $this->debugMessage = $debugMessage;
-      $this->errorKey     = $errorKey;
+      $this->errorKey = $errorKey;
 
       if ('cli' == $request->type)
         $response->writeLn($message);

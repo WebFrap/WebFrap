@@ -30,42 +30,42 @@ abstract class LibSqlQuery implements Iterator, Countable
   /**
    * @var int
    */
-  const SOURCE_KEY  = 0;
+  const SOURCE_KEY = 0;
 
   /**
    * @var int
    */
-  const FIELD       = 1;
+  const FIELD = 1;
 
   /**
    * @var int
    */
-  const OPERATOR    = 2;
+  const OPERATOR = 2;
 
   /**
    * @var int
    */
-  const VALUE       = 3;
+  const VALUE = 3;
 
   /**
    * @var int
    */
-  const CONDITION   = 4;
+  const CONDITION = 4;
 
   /**
    * @var int
    */
-  const NOT         = 5;
+  const NOT = 5;
 
   /**
    * @var int
    */
-  const CASE_SENSITIVE  = 6;
+  const CASE_SENSITIVE = 6;
 
   /**
    * @var int
    */
-  const HEAD        = 7;
+  const HEAD = 7;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -340,7 +340,7 @@ abstract class LibSqlQuery implements Iterator, Countable
    */
   public function setCondition($condition)
   {
-    $this->condition  = $condition;
+    $this->condition = $condition;
   }//end public function setCondition */
 
   /**
@@ -386,6 +386,12 @@ abstract class LibSqlQuery implements Iterator, Countable
     if (is_null($this->sourceSize)) {
       if (!$this->calcQuery)
         return null;
+
+      // remove orders from the subquery
+      if($this->calcQuery->subQuery){
+        $this->calcQuery->subQuery->order = array();
+        $this->calcQuery->group = array();
+      }
 
       if (is_string($this->calcQuery)) {
         if ($res = $this->getDb()->select($this->calcQuery)) {
@@ -472,8 +478,10 @@ abstract class LibSqlQuery implements Iterator, Countable
       return $this->data;
     else if (is_array($this->result))
       return $this->result; // quickfix for a generator issue
-    else if ($this->result)
-      return $this->result->getAll();
+    else if ($this->result){
+    	$this->data = $this->result->getAll();
+      return $this->data;
+    }
     else
       return array();
 

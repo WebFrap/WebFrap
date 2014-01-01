@@ -28,28 +28,28 @@ class LibDbMysqli extends LibDbConnection
   /**
    * Der Standard Fetch Mode
    */
-  protected $fetchMode   = MYSQLI_ASSOC;
+  protected $fetchMode = MYSQLI_ASSOC;
 
   /**
    * Holen der Daten als Assoziativer Array
    */
-  const fetchAssoc  = MYSQLI_ASSOC;
+  const fetchAssoc = MYSQLI_ASSOC;
 
   /**
    * Holen der Daten als Numerischer Array
    */
-  const fetchNum    = MYSQLI_NUM;
+  const fetchNum = MYSQLI_NUM;
 
   /**
    * Holen der Daten als Doppelter Assoziativer und Numerischer Array
    */
-  const fetchBoth   = MYSQLI_BOTH;
+  const fetchBoth = MYSQLI_BOTH;
 
   /**
    * Database Connection Object
    * @var Mysqli
    */
-  protected $connection        = null;
+  protected $connection = null;
 
   /**
    * the type of the sql  for this database class
@@ -73,8 +73,6 @@ class LibDbMysqli extends LibDbConnection
    */
   public function select($sql , $returnit = true , $singleRow = false)
   {
-    if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__,array($sql, $returnit, $singleRow));
 
     ++$this->counter ;
 
@@ -99,7 +97,7 @@ class LibDbMysqli extends LibDbConnection
     }
 
     if (Log::$levelDebug)
-      Log::debug(__file__ , __line__ , 'Select Query: '. $sqlstring);
+      Log::debug(__FILE__ , __LINE__ , 'Select Query: '. $sqlstring);
 
     // close result
     if (!is_null($this->result)) {
@@ -128,7 +126,7 @@ class LibDbMysqli extends LibDbConnection
 
       if ($singleRow) {
         if (Log::$levelDebug)
-          Log::debug(__file__ , __line__ , 'Returned SingelRow'  );
+          Log::debug(__FILE__ , __LINE__ , 'Returned SingelRow'  );
 
         if (isset($data[0])) {
           if (Log::$levelTrace)
@@ -140,7 +138,7 @@ class LibDbMysqli extends LibDbConnection
         }
       } else {
         if (Log::$levelDebug)
-          Log::debug(__file__ , __line__ , 'Returned MultiRow'  );
+          Log::debug(__FILE__ , __LINE__ , 'Returned MultiRow'  );
 
         if (Log::$levelTrace)
           Debug::logDump('Multi Row Query: '.$sqlstring , $data);
@@ -151,7 +149,7 @@ class LibDbMysqli extends LibDbConnection
       $anz = $this->result->num_rows;
 
       if (Log::$levelDebug)
-        Log::debug(__file__ , __line__ , 'Returned NumRows: '.$anz  );
+        Log::debug(__FILE__ , __LINE__ , 'Returned NumRows: '.$anz  );
 
       return $anz;
     }
@@ -169,8 +167,6 @@ class LibDbMysqli extends LibDbConnection
    */
   public function insert($sql , $tableName = null, $tablePk = null)
   {
-    if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__,array($sql , $tableName , $tablePk));
 
     ++$this->counter ;
 
@@ -203,7 +199,7 @@ class LibDbMysqli extends LibDbConnection
     $this->lastQuery = $sqlstring;
 
     if (Log::$levelDebug)
-      Log::debug(__file__ , __line__ ,'SQL: '.$sqlstring);
+      Log::debug(__FILE__ , __LINE__ ,'SQL: '.$sqlstring);
 
     if (! $this->connection->query($sqlstring)) {
       throw new LibDb_Exception
@@ -224,7 +220,7 @@ class LibDbMysqli extends LibDbConnection
     $id = $this->connection->insert_id;
 
     if (Log::$levelDebug)
-      Log::debug(__file__,__line__,'GOT ID : '.$id);
+      Log::debug(__FILE__,__LINE__,'GOT ID : '.$id);
 
     return $id ;
 
@@ -239,8 +235,6 @@ class LibDbMysqli extends LibDbConnection
    */
   public function update($sql  )
   {
-    if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__,array($sql));
 
     ++$this->counter ;
 
@@ -253,7 +247,7 @@ class LibDbMysqli extends LibDbConnection
           $args = func_get_args();
           throw new LibDb_Exception
           (
-          __file__ , __file__,
+          __FILE__ , __FILE__,
           I18n::s('wbf.log.dbFailedToParseSql'),
           'LibDb_Exception',
           $args
@@ -267,7 +261,7 @@ class LibDbMysqli extends LibDbConnection
     }
 
     if (Log::$levelDebug)
-      Log::debug(__file__ , __line__ , 'SQL:  '.$sqlstring  );
+      Log::debug(__FILE__ , __LINE__ , 'SQL:  '.$sqlstring  );
 
     $this->lastQuery = $sqlstring;
 
@@ -348,8 +342,6 @@ class LibDbMysqli extends LibDbConnection
    */
   public function setSearchPath($schema)
   {
-    if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__,array($schema));
 
     $this->schema = $schema;
 
@@ -366,8 +358,6 @@ class LibDbMysqli extends LibDbConnection
    */
   public function prepareSelect($name,  $sqlstring = null)
   {
-    if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__,array($name,  $sqlstring));
 
     ++$this->counter ;
 
@@ -390,7 +380,7 @@ class LibDbMysqli extends LibDbConnection
     }
 
     if (Log::$levelDebug)
-      Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring);
+      Log::debug(__FILE__ , __LINE__ ,'Name: '.$name.' SQL: '.$sqlstring);
 
     if (!$this->result = $this->connection->prepare($sqlstring)) {
       throw new LibDb_Exception
@@ -439,7 +429,7 @@ class LibDbMysqli extends LibDbConnection
     }
 
     if (Log::$levelDebug)
-      Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring);
+      Log::debug(__FILE__ , __LINE__ ,'Name: '.$name.' SQL: '.$sqlstring);
 
     if (!$this->result = $this->connection->prepare($sqlstring)) {
       throw new LibDb_Exception
@@ -488,7 +478,7 @@ class LibDbMysqli extends LibDbConnection
     }
 
     if (Log::$levelDebug)
-      Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring);
+      Log::debug(__FILE__ , __LINE__ ,'Name: '.$name.' SQL: '.$sqlstring);
 
     if (!$this->result = $this->connection->prepare($sqlstring)) {
       throw new LibDb_Exception
@@ -509,8 +499,6 @@ class LibDbMysqli extends LibDbConnection
    */
   public function prepareDelete($name,  $sqlstring = null  )
   {
-    if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__,array($name,  $sqlstring));
 
     ++$this->counter ;
 
@@ -538,7 +526,7 @@ class LibDbMysqli extends LibDbConnection
     }
 
     if (Log::$levelDebug)
-      Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring);
+      Log::debug(__FILE__ , __LINE__ ,'Name: '.$name.' SQL: '.$sqlstring);
 
     if (!$this->result = $this->connection->prepare($sqlstring)) {
       throw new LibDb_Exception
@@ -620,7 +608,7 @@ class LibDbMysqli extends LibDbConnection
 
       if ($single) {
         if (Log::$levelDebug)
-          Log::debug(__file__ , __line__ , 'Returned SingelRow'  );
+          Log::debug(__FILE__ , __LINE__ , 'Returned SingelRow'  );
 
         if (Log::$levelTrace)
           Debug::logDump('Single Row Query: '.$sql , $data[0]);
@@ -628,7 +616,7 @@ class LibDbMysqli extends LibDbConnection
         return $data[0];
       } else {
         if (Log::$levelDebug)
-          Log::debug(__file__ , __line__ , 'Returned MultiRow'  );
+          Log::debug(__FILE__ , __LINE__ , 'Returned MultiRow'  );
 
         if (Log::$levelTrace)
           Debug::logDump('Multi Row Query: '.$sql , $data);
@@ -639,7 +627,7 @@ class LibDbMysqli extends LibDbConnection
       $anz = $this->result->num_rows;
 
       if (Log::$levelDebug)
-        Log::debug(__file__ , __line__ , 'Returned NumRows: '.$anz  );
+        Log::debug(__FILE__ , __LINE__ , 'Returned NumRows: '.$anz  );
 
       return $anz;
     }
@@ -655,8 +643,6 @@ class LibDbMysqli extends LibDbConnection
    */
   public function exec($sql , $insertId = null , $table = null)
   {
-    if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__,array($sql));
 
     if (!$this->result = $this->connection->query($sql)) {
       throw new LibDb_Exception

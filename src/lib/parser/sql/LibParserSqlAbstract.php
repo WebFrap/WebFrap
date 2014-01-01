@@ -35,105 +35,105 @@ abstract class LibParserSqlAbstract
    * Felder die abgefragt werden sollen
    * @var array()
    */
-  protected $cols     = array();
+  protected $cols = array();
 
   /**
    * Felder die abgefragt werden sollen
    * @var array()
    */
-  protected $values   = array();
+  protected $values = array();
 
   /**
    * Name der Tables mit denen gearbeitet wird
    * @var array()
    */
-  protected $table   = null;
+  protected $table = null;
 
   /**
    * Joinbedingungen
    * @var array()
    */
-  protected $joinOn   = array();
+  protected $joinOn = array();
 
   /**
    * Limit der Abfrage
    * @var int
    */
-  protected $limit    = null;
+  protected $limit = null;
 
   /**
    * Offset der Abfrage
    *  @var int
    */
-  protected $offset   = null;
+  protected $offset = null;
 
   /**
    * Group by Parameter
    * @var array()
    */
-  protected $group    = array();
+  protected $group = array();
 
   /**
    * @var array()
    */
-  protected $having   = array();
+  protected $having = array();
 
   /**
    * Die Wherebedingungen
    * @var array()
    */
-  protected $where    = array();
+  protected $where = array();
 
   /**
    * the orders
    * @var array
    */
-  protected $order    = array();
+  protected $order = array();
 
   /**
    * Is es eine Singelrow oder eine Multirow Query
    */
-  public $singleRow   = false;
+  public $singleRow = false;
 
   /**
    * Enter description here...
    *
    * @var string
    */
-  protected $newId    = null;
+  protected $newId = null;
 
   /**
    * Database Data Object
    *
    * @var LibParserSqlAbstract
    */
-  protected $dataObj  = null;
+  protected $dataObj = null;
 
   /**
    * Enter description here...
    *
    * @var string
    */
-  protected $name       = null;
+  protected $name = null;
 
   /**
    * Enter description here...
    *
    * @var boolean
    */
-  protected $prepare    = null;
+  protected $prepare = null;
 
   /**
    * the table schema
    * @var string
    */
-  protected $schema     = null;
+  protected $schema = null;
 
   /**
    * Der generierte SQL String wird in dieser Variable gespeichert.
    * @return string
    */
-  protected $sql        = null;
+  protected $sql = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter Methodes
@@ -150,8 +150,8 @@ abstract class LibParserSqlAbstract
   public function __construct( $name = null, $db = null)
   {
 
-    $this->name  = $name;
-    $this->db    = $db;
+    $this->name = $name;
+    $this->db = $db;
 
   }//end public function __construct */
 
@@ -210,9 +210,9 @@ abstract class LibParserSqlAbstract
   {
 
     if ($db) {
-      $this->db   = $db;
+      $this->db = $db;
     } else {
-      $this->db   = Webfrap::$env->getDb();
+      $this->db = Webfrap::$env->getDb();
     }
 
   } //end public function setDb */
@@ -719,7 +719,7 @@ abstract class LibParserSqlAbstract
   public function setLimits($limit = null,  $offset = null)
   {
 
-    $this->limit  = (int) $limit;
+    $this->limit = (int) $limit;
     $this->offset = (int) $offset;
 
     return true;
@@ -734,7 +734,7 @@ abstract class LibParserSqlAbstract
    */
   public function setLimit($limit = null)
   {
-    $this->limit  = (int) $limit;
+    $this->limit = (int) $limit;
   } // end public function setLimit */
 
   /**
@@ -745,7 +745,7 @@ abstract class LibParserSqlAbstract
    */
   public function setOffset($offset = null)
   {
-    $this->offset  = (int) $offset;
+    $this->offset = (int) $offset;
   } // end public function setOffset */
 
   /**
@@ -775,7 +775,7 @@ abstract class LibParserSqlAbstract
    */
   public function resetLimits()
   {
-    $this->limit  = null;
+    $this->limit = null;
     $this->offset = null;
   } // end public function resetLimits */
 
@@ -903,18 +903,18 @@ abstract class LibParserSqlAbstract
   public function clean()
   {
 
-    $this->cols     = array();
-    $this->values   = array();
-    $this->table    = null;
-    $this->schema   = null;
-    $this->joinOn   = array();
-    $this->limit    = null;
-    $this->offset   = null;
-    $this->group    = array();
-    $this->having   = array();
-    $this->where    = array();
-    $this->order    = array();
-    $this->newId    = null;
+    $this->cols = array();
+    $this->values = array();
+    $this->table = null;
+    $this->schema = null;
+    $this->joinOn = array();
+    $this->limit = null;
+    $this->offset = null;
+    $this->group = array();
+    $this->having = array();
+    $this->where = array();
+    $this->order = array();
+    $this->newId = null;
 
   }//end public function clean */
 
@@ -1012,7 +1012,7 @@ abstract class LibParserSqlAbstract
         throw new LibDb_Exception(I18n::s('got no table','wbf.message'));
       }
     } else {
-      $sql .= ' FROM '. $obj->table .' ';
+      $sql .= ' FROM '. $obj->table .' '.$obj->as.' ';
     }
 
     // Die Joins falls vorhanden generieren
@@ -1021,13 +1021,13 @@ abstract class LibParserSqlAbstract
       foreach ($obj->joinOn as $join) {
 
         /*
-         *  JOIN_TYPE     = 0;
-         *  SRC           = 1;
-         *  SRC_FIELD     = 2;
-         *  TARGET        = 3;
-         *  TARGET_FIELD  = 4;
-         *  WHERE         = 5;
-         *  TARGET_ALIAS  = 6;
+         *  JOIN_TYPE = 0;
+         *  SRC = 1;
+         *  SRC_FIELD = 2;
+         *  TARGET = 3;
+         *  TARGET_FIELD = 4;
+         *  WHERE = 5;
+         *  TARGET_ALIAS = 6;
          */
 
         if (is_string($join)) {
@@ -1159,8 +1159,8 @@ abstract class LibParserSqlAbstract
 
     $cols = implode(',', array_keys($values));
 
-    $keyVal         = array();
-    $keyDupl        = array();
+    $keyVal = array();
+    $keyDupl = array();
 
     foreach ($values as $key => $value) {
       $keyVal[] = " $value as $key ";
@@ -1179,7 +1179,7 @@ abstract class LibParserSqlAbstract
 
     }
 
-    $sqlValues   = implode(', ', $keyVal);
+    $sqlValues = implode(', ', $keyVal);
     $sqlDuplKeys = implode(' AND ', $keyDupl);
 
     $sql = <<<SQL

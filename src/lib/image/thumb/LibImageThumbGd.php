@@ -40,10 +40,10 @@ class LibImageThumbGd extends LibImageThumbAdapter
     }
 
     try {
-      $imgdata      = getimagesize ($pic);
-      $org_width    = $imgdata[0];
-      $org_height   = $imgdata[1];
-      $type         = $imgdata[2];
+      $imgdata = getimagesize ($pic);
+      $org_width = $imgdata[0];
+      $org_height = $imgdata[1];
+      $type = $imgdata[2];
 
       switch ($type) {
         case 1 :
@@ -99,12 +99,11 @@ class LibImageThumbGd extends LibImageThumbAdapter
       // neugenerieren des THUMBS
       $thumb = imagecreatetruecolor($new_width, $new_height);
 
-      imagecopyresampled
-      (
-      $thumb,
-      $im,
-      0,0,0,0,
-      $new_width,$new_height,$org_width,$org_height
+      imagecopyresampled(
+        $thumb,
+        $im,
+        0,0,0,0,
+        $new_width,$new_height,$org_width,$org_height
       );
 
       if (!imagejpeg($thumb, $this->thumbName , 95)) {

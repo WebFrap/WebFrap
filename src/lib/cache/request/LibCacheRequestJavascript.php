@@ -61,7 +61,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
     $codeEtag = md5($code);
 
     if (!file_exists(PATH_GW.$this->folder.'/file/'))
-      SFilesystem::createFolder(PATH_GW.$this->folder.'/file/');
+      SFilesystem::mkdir(PATH_GW.$this->folder.'/file/');
 
     file_put_contents(PATH_GW.$this->folder.'/file/'.$file.'.plain' ,  $code);
     file_put_contents(PATH_GW.$this->folder.'/file/'.$file.'.plain.md5' ,  $codeEtag);
@@ -106,7 +106,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
   public function publishList($list)
   {
 
-    $files  = array();
+    $files = array();
     $jsconf = null; // wird im include gesetzt
     $minify = true; // kann im include überschrieben werden
 
@@ -123,12 +123,12 @@ class LibCacheRequestJavascript extends LibCacheRequest
     if (function_exists('gzencode')) {
       $encode = true;
     } else {
-      $sendEncoded  = false;
-      $encode       = false;
+      $sendEncoded = false;
+      $encode = false;
     }
 
     if (isset($_GET['encode']) && 'false' == $_GET['encode']) {
-      $sendEncoded  = false;
+      $sendEncoded = false;
     }
 
     if ($sendEncoded) {
@@ -179,7 +179,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
       //if (true) {
 
         if (!file_exists(PATH_GW.'cache/jsmin/'))
-          SFilesystem::createFolder(PATH_GW.'cache/jsmin/');
+          SFilesystem::mkdir(PATH_GW.'cache/jsmin/');
 
         foreach ($files as $file) {
 
@@ -194,7 +194,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
           try {
 
             if (!file_exists(dirname($cacheFile)))
-              SFilesystem::createFolder(dirname($cacheFile));
+              SFilesystem::mkdir(dirname($cacheFile));
 
             /*
             if (!file_exists($cacheFile)) {
@@ -218,17 +218,17 @@ class LibCacheRequestJavascript extends LibCacheRequest
     }
 
     /*
-    if (!DEBUG && Webfrap::classLoadable('LibVendorJsmin') && $minify) {
+    if (!DEBUG && Webfrap::classExists('LibVendorJsmin') && $minify) {
       $minifier = LibVendorJsmin::getInstance();
-      $code     = $minifier->minify($code);
+      $code = $minifier->minify($code);
     }
     */
 
-    $etag       = md5($code);
-    $plainSize  = strlen($code);
+    $etag = md5($code);
+    $plainSize = strlen($code);
 
     if (!file_exists(PATH_GW.$this->folder.'/list/'))
-      SFilesystem::createFolder(PATH_GW.$this->folder.'/list/'  );
+      SFilesystem::mkdir(PATH_GW.$this->folder.'/list/'  );
 
     file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.plain' ,  $code);
     file_put_contents
@@ -238,8 +238,8 @@ class LibCacheRequestJavascript extends LibCacheRequest
     );
 
     if ($encode) {
-      $encoded      = gzencode($code);
-      $encodedSize  = strlen($encoded);
+      $encoded = gzencode($code);
+      $encodedSize = strlen($encoded);
 
       file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.gz' ,  $encoded);
       file_put_contents
@@ -250,11 +250,11 @@ class LibCacheRequestJavascript extends LibCacheRequest
     }
 
     if ($sendEncoded) {
-      $out  = $encoded;
+      $out = $encoded;
       $size = $encodedSize;
 
     } else {
-      $out  = $code;
+      $out = $code;
       $size = $plainSize;
     }
 
@@ -267,13 +267,13 @@ class LibCacheRequestJavascript extends LibCacheRequest
   /**
    * @param string $list
    */
-  public function rebuildList($list)
+  public function rebuildListBulk($list)
   {
 
-    if (!file_exists(PATH_GW.'/conf/include/javascript/'.$list.'.list.php'))
+      if (!file_exists(PATH_GW.'/conf/include/javascript/'.$list.'.list.php'))
       throw new ResourceNotExists_Exception("Js list {$list}");
 
-    $files  = array();
+    $files = array();
     $jsconf = null; // wert wird im include gesetzt
     $minify = true;
 
@@ -282,7 +282,116 @@ class LibCacheRequestJavascript extends LibCacheRequest
     if (function_exists('gzencode')) {
       $encode = true;
     } else {
-      $encode       = false;
+      $encode = false;
+    }
+
+    $code = '';
+
+    if ($jsconf) {
+      ob_start();
+      include PATH_GW.'/js_conf/conf.js';
+      $code = ob_get_contents();
+      ob_end_clean();
+    }
+
+  	if ($files) {
+  		if ($minify) {
+
+  			if (file_exists(PATH_GW.'tmp/js_min/'))
+  				SFilesystem::delete(PATH_GW.'tmp/js_min/');
+
+  			SFilesystem::mkdir(PATH_GW.'tmp/js_min/');
+
+  			$fileLists = array();
+
+  			$codeArray = array();
+
+  			$index = 0;
+
+  			if ($jsconf) {
+  			   $codeArray[] = $code;
+  			}
+
+  			foreach ($files as $file) {
+
+  				if(file_exists($file)) {
+  					$fileLists[$index][] = $file;
+  				} else {
+  					echo "File does not exist: " . $file . "\n";
+  				}
+
+  				if (count($fileLists[$index]) == 40) {
+  					$index++;
+  				}
+
+  			}
+
+  			foreach ($fileLists as $fileList) {
+
+  				$file = implode(" --js ", $fileList);
+
+  				exec("java -jar " . PATH_WGT . "compressor/compiler.jar  --warning_level QUIET --js " . $file, $codeArray);
+
+  			}
+
+  			$code = implode(" ", $codeArray);
+
+  		} else {
+
+  		   foreach ($files as $file) {
+  		      $code .= file_get_contents($file).NL;
+  		   }
+
+  		}
+
+  	}
+
+  	$etag = md5($code);
+  	$plainSize = strlen($code);
+
+  	if (!file_exists(PATH_GW.$this->folder.'/list/'))
+  		SFilesystem::mkdir(PATH_GW.$this->folder.'/list/'  );
+
+  	file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.plain' ,  $code);
+  	file_put_contents(
+  	PATH_GW.$this->folder.'/list/'.$list.'.plain.meta' ,
+  	json_encode(array('etag'=> $etag, 'size'=> $plainSize))
+  	);
+
+  	if ($encode) {
+  		$encoded = gzencode($code);
+  		$encodedSize = strlen($encoded);
+
+  		file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.gz' ,  $encoded);
+  		file_put_contents(
+  		PATH_GW.$this->folder.'/list/'.$list.'.gz.meta' ,
+  		json_encode(array('etag'=> $etag, 'size'=> $encodedSize))
+  		);
+  	}
+
+  	SFilesystem::delete(PATH_GW.'tmp/js_min/');
+
+  }
+
+  /**
+   * @param string $list
+   */
+  public function rebuildList($list)
+  {
+
+    if (!file_exists(PATH_GW.'/conf/include/javascript/'.$list.'.list.php'))
+      throw new ResourceNotExists_Exception("Js list {$list}");
+
+    $files = array();
+    $jsconf = null; // wert wird im include gesetzt
+    $minify = true;
+
+    include PATH_GW.'/conf/include/javascript/'.$list.'.list.php';
+
+    if (function_exists('gzencode')) {
+      $encode = true;
+    } else {
+      $encode = false;
     }
 
     $code = '';
@@ -301,7 +410,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
         if (file_exists(PATH_GW.'tmp/js_min/'))
           SFilesystem::delete(PATH_GW.'tmp/js_min/');
 
-        SFilesystem::createFolder(PATH_GW.'tmp/js_min/');
+        SFilesystem::mkdir(PATH_GW.'tmp/js_min/');
 
         foreach ($files as $file) {
 
@@ -316,14 +425,14 @@ class LibCacheRequestJavascript extends LibCacheRequest
           try {
 
             if (!file_exists(dirname($cacheFile)))
-              SFilesystem::createFolder(dirname($cacheFile));
+              SFilesystem::mkdir(dirname($cacheFile));
 
             /*
             if (!file_exists($cacheFile)) {
               system('java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'.$file.'" --type js --charset utf-8 -o "'.$cacheFile.'"');
             }*/
             if (!file_exists($cacheFile)) {
-              system('java -jar '.PATH_WGT.'compressor/compiler.jar  --js "'.$file.'" --js_output_file "'.$cacheFile.'"');
+              system('java -jar '.PATH_WGT.'compressor/compiler.jar --warning_level QUIET --js "'.$file.'" --js_output_file "'.$cacheFile.'"');
             }
 
             //$code .= '/* java java -jar '.PATH_WGT.'compressor/yuicompressor.jar "'.$file.'" --type js --charset utf-8   -o "'.$file.'.min" */'.NL;
@@ -340,11 +449,11 @@ class LibCacheRequestJavascript extends LibCacheRequest
       }
     }
 
-    $etag       = md5($code);
-    $plainSize  = strlen($code);
+    $etag = md5($code);
+    $plainSize = strlen($code);
 
     if (!file_exists(PATH_GW.$this->folder.'/list/'))
-      SFilesystem::createFolder(PATH_GW.$this->folder.'/list/'  );
+      SFilesystem::mkdir(PATH_GW.$this->folder.'/list/'  );
 
     file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.plain' ,  $code);
     file_put_contents(
@@ -353,8 +462,8 @@ class LibCacheRequestJavascript extends LibCacheRequest
     );
 
     if ($encode) {
-      $encoded      = gzencode($code);
-      $encodedSize  = strlen($encoded);
+      $encoded = gzencode($code);
+      $encodedSize = strlen($encoded);
 
       file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.gz' ,  $encoded);
       file_put_contents(

@@ -34,8 +34,8 @@ class LibRelationLoader_Query extends LibSqlQuery
   public function fetchGroups($group  )
   {
 
-    $areas  = array();
-    $id     = null;
+    $areas = array();
+    $id = null;
 
     if ($group->area) {
       $areas = $this->extractWeightedKeys($group->area);
@@ -49,12 +49,12 @@ class LibRelationLoader_Query extends LibSqlQuery
       }
     }
 
-    $joins    = '';
+    $joins = '';
 
     // wenn keine Area übergeben wurde dann brauchen wir nur die
     // globalen assignments
     if ($id) {
-      $areaKeys = " UPPER(wbfsys_security_area.access_key)  IN(UPPER('".implode($areas,"'), UPPER('")."')) " ;
+      $areaKeys = " wbfsys_security_area.access_key  IN('".implode("', '",$areas)."') " ;
 
       $joins = <<<SQL
 
@@ -96,7 +96,7 @@ SQL;
 
 
     } elseif ($areas) {
-      $areaKeys = " UPPER(wbfsys_security_area.access_key)  IN(upper('".implode($areas,"'),upper('")."'))" ;
+      $areaKeys = " wbfsys_security_area.access_key  IN('".implode($areas,"','")."')" ;
 
       $joins = <<<SQL
 
@@ -135,7 +135,7 @@ SQL;
   JOIN
     wbfsys_group_users
     ON
-      wbfsys_group_users.id_user       = wbfsys_role_user.rowid
+      wbfsys_group_users.id_user = wbfsys_role_user.rowid
         and wbfsys_group_users.id_area  is null
         and wbfsys_group_users.vid      is null
 SQL;
@@ -143,9 +143,9 @@ SQL;
     }
 
     if (is_array($group->name)) {
-      $groupRoles = " IN(upper('".implode($group->name,"'),upper('")."'))" ;
+      $groupRoles = " IN('".implode($group->name,"','")."')" ;
     } else {
-      $groupRoles = " =  upper('{$group->name}') " ;
+      $groupRoles = " =  '{$group->name}' " ;
     }
 
 
@@ -173,7 +173,7 @@ FROM
       wbfsys_role_user.id_person = core_person.rowid
 
 WHERE
-  UPPER(wbfsys_role_group.access_key) {$groupRoles}
+  wbfsys_role_group.access_key {$groupRoles}
     AND ( wbfsys_group_users.partial = 0 )
     AND
       NOT wbfsys_role_user.inactive = TRUE
@@ -181,7 +181,7 @@ WHERE
 SQL;
 
 
-    $db   = $this->getDb();
+    $db = $this->getDb();
 
     return $db->select($query)->getAll();
 
@@ -279,7 +279,7 @@ SQL;
       throw new LibRelation_Exception('Receiver for User: '.$user->name.' '.$user->id.' was empty');
     }
 
-    $db   = $this->getDb();
+    $db = $this->getDb();
 
     $userData = $db->select($sql)->get();
 
@@ -300,9 +300,9 @@ SQL;
 
     $keysData = array();
 
-    $tmp    = explode('>', $keys);
+    $tmp = explode('>', $keys);
 
-    $areas  = explode('/', $tmp[0]);
+    $areas = explode('/', $tmp[0]);
 
     $wAreas = array();
     if (isset($tmp[1]))

@@ -31,19 +31,19 @@ class LibEnvelopEntity
    * the entity in the envelop
    * @var Entity
    */
-  protected $entity      = null;
+  protected $entity = null;
 
   /**
    * Entity object of the data repository
    * @var EntityWbfsysDataRepository
    */
-  protected $repository  = null;
+  protected $repository = null;
 
   /**
    * the id from the referencing system
    * @var string
    */
-  protected $refId       = null;
+  protected $refId = null;
 
   /**
    * Pool with all to the entity connected Entities to build a net of entities
@@ -53,13 +53,13 @@ class LibEnvelopEntity
    *
    * @var array<entity>
    */
-  protected $singleRef      = array();
+  protected $singleRef = array();
 
   /**
    * List to be able to connect multiple references
    * @var array<entity>
    */
-  protected $multiRef       = array();
+  protected $multiRef = array();
 
 /*//////////////////////////////////////////////////////////////////////////////
 // methodes
@@ -83,7 +83,7 @@ class LibEnvelopEntity
    */
   public function __set($key , $value)
   {
-    return $this->entity->$key = $value;
+     $this->entity->$key = $value;
   }//end public function __set */
 
   /**
@@ -96,8 +96,8 @@ class LibEnvelopEntity
   public function __construct($repo = null, $entity = null, $refId = null)
   {
     $this->repository = $repo;
-    $this->entity     = $entity;
-    $this->refId      = $refId;
+    $this->entity = $entity;
+    $this->refId = $refId;
   }//end public function __construct */
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -168,14 +168,6 @@ class LibEnvelopEntity
     $this->multiRef[$key][$entity->getId()] = $entity;
   }//end public function append */
 
-  /**
-   * @getter
-   * @return array<string:Entity>
-   */
-  public function getConnected()
-  {
-    return $this->singleRef;
-  }//end public function getConnected */
 
   /**
    * @getter

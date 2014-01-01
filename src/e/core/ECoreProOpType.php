@@ -28,13 +28,13 @@ class ECoreProOpType
    * it's an url
    * @var int
    */
-  const URL           = 1;
+  const URL = 1;
 
   /**
    * it's an action
    * @var int
    */
-  const ACTION        = 2;
+  const ACTION = 2;
 
   /**
    * Key map
@@ -42,8 +42,8 @@ class ECoreProOpType
    */
   public static $text = array
   (
-    self::URL       => 'core.enum.type.url',
-    self::ACTION    => 'core.enum.type.action',
+    self::URL => 'core.enum.type.url',
+    self::ACTION => 'core.enum.type.action',
   );
 
 }//end class ECoreProOpType

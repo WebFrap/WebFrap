@@ -54,27 +54,26 @@ class LibRelation extends BaseChild
    * Welche genau das sind kann den Nachrichten Umschlag entnommen werden
    *
    * @param array<IReceiver> $receivers
-   * @param string $type
+   * @param boolean $single flag ob nur ein User erwartet wird
    *
+   * @return [LibRelationNode_User]
    */
-  public function getUsers($relations)
+  public function getUsers($relations, $single=false)
   {
 
-    //$receivers    = $message->getReceivers();
-    $users     = array();
+    //$receivers = $message->getReceivers();
+    $users = array();
 
     foreach ($relations as $relation) {
 
       try {
 
         switch ($relation->type) {
-          case 'group':
-          {
+          case 'group':{
             $users = $this->loadGroup($relation, $users);
             break;
           }
-          case 'user':
-          {
+          case 'user':{
             $users = $this->loadUser($relation, $users);
             break;
           }
@@ -86,16 +85,22 @@ class LibRelation extends BaseChild
 
     }
 
+    // wenn single, dann nur rückgabe des erste eintrags
+    if($single){
+      // sicher stellen, den ersten eintrag zu bekommen
+      reset($users);
+      return current($users);
+    }
+    
     return $users;
 
   }//end public function getUsers */
 
   /**
    * @param LibMessage_Receiver_Group $receiver
-   * @param string $type
-   * @param array $userList
+   * @param [LibRelationNode_User] $userList
    *
-   * @return array
+   * @return [LibRelationNode_User]
    */
   public function loadGroup($receiver, $userList)
   {
@@ -161,8 +166,8 @@ class LibRelation extends BaseChild
   {
 
     if (!$this->relationLoader) {
-      $db                 = $this->getDb();
-      $this->relationLoader  = $db->newQuery('LibRelationLoader');
+      $db = $this->getDb();
+      $this->relationLoader = $db->newQuery('LibRelationLoader');
     }
 
     return $this->relationLoader;

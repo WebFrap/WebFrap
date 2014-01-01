@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibMessage_Receiver_Address
-  implements IReceiver
+class LibMessage_Receiver_Address implements IReceiver
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -66,12 +65,12 @@ class LibMessage_Receiver_Address
   {
 
     if (is_string($name)) {
-      $this->name     = array('nickname' => $name);
+      $this->name = array('nickname' => $name);
     } elseif (is_array($name)) {
       $this->name = $name;
     }
 
-    $this->address  = $address;
+    $this->address = $address;
 
   }//end public function __construct */
 

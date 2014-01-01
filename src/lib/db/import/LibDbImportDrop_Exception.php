@@ -29,21 +29,21 @@ class LibDbImportDrop_Exception extends Exception
    * Enter description here ...
    * @var unknown_type
    */
-  public $resource    = null;
+  public $resource = null;
 
   /**
    *
    * Enter description here ...
    * @var unknown_type
    */
-  public $key         = null;
+  public $key = null;
 
   /**
    *
    * Enter description here ...
    * @var unknown_type
    */
-  public $delete        = false;
+  public $delete = false;
 
   /**
    * @param unknown_type $message
@@ -56,9 +56,9 @@ class LibDbImportDrop_Exception extends Exception
 
     $this->resource = $resource;
 
-    $this->key      = $key;
+    $this->key = $key;
 
-    $this->delete   = $delete;
+    $this->delete = $delete;
 
     parent::__construct($message);
   }

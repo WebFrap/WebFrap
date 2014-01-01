@@ -20,6 +20,8 @@
  * Extention zum verwalten und erstellen von neuen Menus in der Applikation
  * @package WebFrap
  * @subpackage Mvc
+ *
+ * @statefull
  */
 abstract class MvcModel extends BaseChild
 {
@@ -31,13 +33,13 @@ abstract class MvcModel extends BaseChild
    * Die vorhadenen Registry keys
    * @var array
    */
-  protected $regKeys  = array();
+  protected $regKeys = array();
 
   /**
    * sub Modul Extention
    * @var array
    */
-  protected $subModels       = array();
+  protected $subModels = array();
 
   /**
    * Error Object zum sammeln von Fehlermeldungen
@@ -62,6 +64,8 @@ abstract class MvcModel extends BaseChild
 
     $this->getRegistry();
 
+    $this->init();
+
     if (DEBUG)
       Debug::console('Load model '.get_class($this));
 
@@ -70,6 +74,15 @@ abstract class MvcModel extends BaseChild
 /*//////////////////////////////////////////////////////////////////////////////
 // registry methodes
 //////////////////////////////////////////////////////////////////////////////*/
+
+  /**
+   * Empty init
+   * jut overwrite me
+   */
+  protected function init()
+  {
+
+  }//end public function init */
 
   /**
    * get data from the registry of the model
@@ -92,7 +105,7 @@ abstract class MvcModel extends BaseChild
    */
   public function register($key, $value)
   {
-    $this->regKeys[$key]  = true;
+    $this->regKeys[$key] = true;
     $this->registry[$key] = $value;
   }//end public function register */
 
@@ -151,15 +164,11 @@ abstract class MvcModel extends BaseChild
     if (!$key)
       $key = $modelKey;
 
-    $modelName    = $modelKey.'_Model';
-    $modelNameOld = 'Model'.$modelKey;
+    $modelName = $modelKey.'_Model';
 
     if (!isset($this->subModels[$key]  )) {
-      if (!Webfrap::classLoadable($modelName)) {
-        $modelName = $modelNameOld;
-        if (!Webfrap::classLoadable($modelName)) {
-          throw new Controller_Exception('Internal Error', 'Failed to load Submodul: '.$modelName);
-        }
+      if (!Webfrap::classExists($modelName)) {
+        throw new Controller_Exception('Internal Error', 'Failed to load Submodul: '.$modelName);
       }
 
       $this->subModels[$key] = new $modelName($this);
@@ -171,7 +180,6 @@ abstract class MvcModel extends BaseChild
   }//end public function loadModel */
 
   /**
-   *
    * @param string $key
    * @return Model
    */
@@ -185,5 +193,5 @@ abstract class MvcModel extends BaseChild
 
   }//public function getModel */
 
-} // end abstract class Model
+} // end abstract class MvcModel
 

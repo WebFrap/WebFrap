@@ -66,7 +66,7 @@ class LibAclManager extends BaseChild
   {
 
     if (!$this->maintainerModel) {
-      $this->maintainerModel = new LibAcl_Db_Maintainer_Model($this);
+      $this->maintainerModel = new LibAcl_Db_Maintainer_Model($this, $this->env->resources );
     }
 
     return $this->maintainerModel;
@@ -113,7 +113,7 @@ class LibAclManager extends BaseChild
     if (!$env)
       $env = Webfrap::getActive();
 
-    $this->env    = $env;
+    $this->env = $env;
 
   }//end public function __construct */
 

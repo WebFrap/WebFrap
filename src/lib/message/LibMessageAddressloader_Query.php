@@ -34,8 +34,9 @@ class LibMessageAddressloader_Query extends LibSqlQuery
   public function fetchGroups($group, $type, $direct = false)
   {
 
-    $areas  = array();
-    $id     = null;
+    $areas = array();
+    $id = null;
+    $ids = array();
 
     if ($group->area) {
       $areas = $this->extractWeightedKeys($group->area);
@@ -44,21 +45,24 @@ class LibMessageAddressloader_Query extends LibSqlQuery
     if ($group->entity) {
       if (is_object($group->entity)) {
         $id = $group->entity->getId();
+      } else if(is_array($group->entity)) {
+        $ids = $group->entity;
       } else {
         $id = $group->entity;
       }
     }
 
-    $joins    = '';
-    $wheres   = '';
+    $joins = '';
+    $wheres = '';
 
     // wenn keine Area übergeben wurde dann brauchen wir nur die
     // globalen assignments
-    if ($id) {
+    if ($id || $ids) {
+      
       $areaKeys = '';
 
       if ($areas)
-        $areaKeys = "and UPPER(wbfsys_security_area.access_key)  IN(UPPER('".implode($areas,"'), UPPER('")."')) " ;
+        $areaKeys = "and wbfsys_security_area.access_key  IN('".implode($areas,"', '")."') " ;
 
       $joins = <<<SQL
 
@@ -74,19 +78,65 @@ class LibMessageAddressloader_Query extends LibSqlQuery
 
 SQL;
 
-
+      
+      // muss direkt zugeordnet sein
       if ($direct) {
-        $wheres = <<<SQL
+        
+        // mehrere IDs
+        if ($ids) {
+          
+          $whereIn = implode(', ',$ids);
+          $wheres = <<<SQL
+          
+  (
+    wbfsys_group_users.id_area = wbfsys_security_area.rowid
+        {$areaKeys}
+        and wbfsys_group_users.vid IN({$whereIn})
+  ) AND
+SQL;
 
+        } else {
+          $wheres = <<<SQL
+          
   (
     wbfsys_group_users.id_area = wbfsys_security_area.rowid
         {$areaKeys}
         and wbfsys_group_users.vid = {$id}
   ) AND
 SQL;
+        }
+        
       } else {
-        $wheres = <<<SQL
+        
+        
+        // mehrere IDs
+        if ($ids) {
+        
+          $whereIn = implode(', ',$ids);
+          $wheres = <<<SQL
+  (
+    (
+      wbfsys_group_users.id_area = wbfsys_security_area.rowid
+        {$areaKeys}
+        and wbfsys_group_users.vid IN({$whereIn})
+    )
+    OR
+    (
+      wbfsys_group_users.id_area = wbfsys_security_area.rowid
+        {$areaKeys}
+        and wbfsys_group_users.vid is null
+    )
+    OR
+    (
+      wbfsys_group_users.id_area is null
+        and wbfsys_group_users.vid is null
+    )
+  ) AND
 
+SQL;
+        
+        } else {
+          $wheres = <<<SQL
   (
     (
       wbfsys_group_users.id_area = wbfsys_security_area.rowid
@@ -106,10 +156,13 @@ SQL;
     )
   ) AND
 SQL;
+        }
+        
       }
 
     } elseif ($areas) {
-      $areaKeys = " UPPER(wbfsys_security_area.access_key)  IN(upper('".implode($areas,"'),upper('")."'))" ;
+      
+      $areaKeys = " wbfsys_security_area.access_key  IN('".implode($areas,"','")."')" ;
 
       $joins = <<<SQL
 
@@ -164,7 +217,7 @@ SQL;
   JOIN
     wbfsys_group_users
     ON
-      wbfsys_group_users.id_user       = wbfsys_role_user.rowid
+      wbfsys_group_users.id_user = wbfsys_role_user.rowid
         and wbfsys_group_users.id_area  is null
         and wbfsys_group_users.vid      is null
 SQL;
@@ -174,17 +227,17 @@ SQL;
     $groupRoles = '';
     if ($group->name) {
       if (is_array($group->name)) {
-        $groupRoles = " UPPER(wbfsys_role_group.access_key)  IN(upper('".implode($group->name,"'),upper('")."')) AND " ;
+        $groupRoles = " wbfsys_role_group.access_key  IN('".implode($group->name,"','")."') AND " ;
       } else {
-        $groupRoles = " UPPER(wbfsys_role_group.access_key)  =  upper('{$group->name}') AND " ;
+        $groupRoles = " wbfsys_role_group.access_key =  '{$group->name}' AND " ;
       }
     }
 
     // wenn kein type defniert wurde ist die id des users seine adresse
     if (!$type) {
 
-      $valueAddress  = "wbfsys_role_user.rowid as address";
-      $joinAddress   = '';
+      $valueAddress = "wbfsys_role_user.rowid as address";
+      $joinAddress = '';
 
     } else {
 
@@ -195,9 +248,9 @@ SQL;
 HTML;
 
       if (is_array($type)) {
-        $codeType = " IN(UPPER('".implode("'), UPPER('", $type  )."')) ";
+        $codeType = " IN('".implode("', '", $type  )."') ";
       } else {
-        $codeType = "= UPPER('{$type}')";
+        $codeType = "= '{$type}'";
       }
 
       $joinAddress = <<<HTML
@@ -212,7 +265,7 @@ JOIN
   ON
     wbfsys_address_item_type.rowid = wbfsys_address_item.id_type
     AND
-      UPPER(wbfsys_address_item_type.access_key) {$codeType}
+      wbfsys_address_item_type.access_key {$codeType}
 
 HTML;
 
@@ -258,7 +311,7 @@ WHERE
 SQL;
 
 
-    $db   = $this->getDb();
+    $db = $this->getDb();
 
     return $db->select($query)->getAll();
 
@@ -345,7 +398,7 @@ JOIN
   ON
     wbfsys_address_item_type.rowid = wbfsys_address_item.id_type
     AND
-      UPPER(wbfsys_address_item_type.access_key) = UPPER('{$type}')
+      wbfsys_address_item_type.access_key = '{$type}'
 WHERE
   (wbfsys_role_user.inactive = FALSE or wbfsys_role_user.inactive is null)
     AND wbfsys_role_user.rowid = {$userId}
@@ -382,7 +435,7 @@ JOIN
   ON
     wbfsys_address_item_type.rowid = wbfsys_address_item.id_type
     AND
-      UPPER(wbfsys_address_item_type.access_key) = UPPER('{$type}')
+      wbfsys_address_item_type.access_key = '{$type}'
 
 WHERE
   (wbfsys_role_user.inactive = FALSE or wbfsys_role_user.inactive is null)
@@ -422,7 +475,7 @@ JOIN
   ON
     wbfsys_address_item_type.rowid = wbfsys_address_item.id_type
     AND
-      UPPER(wbfsys_address_item_type.access_key) = UPPER('{$type}')
+      wbfsys_address_item_type.access_key = '{$type}'
 
 WHERE
   (wbfsys_role_user.inactive = FALSE or wbfsys_role_user.inactive is null)
@@ -434,7 +487,7 @@ SQL;
       throw new LibMessage_Exception('Receiver for User: '.$user->name.' '.$user->id.' was empty');
     }
 
-    $db       = $this->getDb();
+    $db = $this->getDb();
     $userData = $db->select($sql)->get();
 
     Debug::console($sql, $userData);
@@ -454,9 +507,9 @@ SQL;
 
     $keysData = array();
 
-    $tmp    = explode('>', $keys);
+    $tmp = explode('>', $keys);
 
-    $areas  = explode('/', $tmp[0]);
+    $areas = explode('/', $tmp[0]);
 
     $wAreas = array();
     if (isset($tmp[1]))

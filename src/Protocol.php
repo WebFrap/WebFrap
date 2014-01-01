@@ -49,34 +49,33 @@ class Protocol extends BaseChild
   public function updateLastVisited($mask, $entity, $label  )
   {
 
-    $db   = $this->getDb();
-    $orm  = $db->orm;
+    $db = $this->getDb();
+    $orm = $db->orm;
     $user = $this->getUser();
 
     if (is_array($entity)) {
       $resourceId = $orm->getResourceId($entity[0]);
-      $entityId   = $entity[1];
+      $entityId = $entity[1];
     } elseif (is_string($entity)) {
       $resourceId = $orm->getResourceId($entity);
-      $entityId   = null;
+      $entityId = null;
     } else {
       $resourceId = $orm->getResourceId($entity);
-      $entityId   = $entity->getId();
+      $entityId = $entity->getId();
     }
 
     if (!$resourceId) {
-      Debug::console("Got no Resource ID, this means the datamodell is not yet synced.");
-      Log::warn("Got no Resource ID, this means the datamodell is not yet synced.");
 
+      Log::warn("Got no Resource ID, this means the datamodell is not yet synced.");
       return;
     }
 
     if ($entityId) {
       $codeVid = " = {$entityId}";
-      $valVid  = "{$entityId}";
+      $valVid = "{$entityId}";
     } else {
       $codeVid = " IS NULL";
-      $valVid  = "NULL";
+      $valVid = "NULL";
     }
 
     $maskId = $this->getMaskId($mask);
@@ -140,7 +139,7 @@ SQL;
   public function getMaskId($maskKey)
   {
 
-    $orm   = $this->getOrm();
+    $orm = $this->getOrm();
 
     // checken ob wir einen level 1 cache haben
     $cache = $this->getL1Cache();

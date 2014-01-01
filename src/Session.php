@@ -41,14 +41,14 @@ class Session
   /**
    * @var LibSessionPhp
    */
-  public static $session   = null;
+  public static $session = null;
 
   /**
    * Id of the actual session
    *
    * @var string
    */
-  protected static $sessionId   = null;
+  protected static $sessionId = null;
 
   /**
    * Path where the session files are stored on the server
@@ -140,8 +140,8 @@ class Session
       $sessionConf = Conf::get('session');
     }
 
-    self::$sessionType     = isset($sessionConf['type'])?$sessionConf['type']:'Php';
-    self::$name           = isset($sessionConf['name'])?$sessionConf['name']:'WEBFRAP_SID';
+    self::$sessionType = isset($sessionConf['type'])?$sessionConf['type']:'Php';
+    self::$name = isset($sessionConf['name'])?$sessionConf['name']:'WEBFRAP_SID';
     self::$sessionSavePath = isset($sessionConf['path'])?$sessionConf['path']:null;
 
     self::start();
@@ -152,9 +152,9 @@ class Session
       if (!$confObj)
         $confObj = Conf::getActive();
 
-      $confObj->status['serveros']   = php_uname('s');
+      $confObj->status['serveros'] = php_uname('s');
       $confObj->status['serverarch'] = php_uname('m');
-      $confObj->status['lang']       = Conf::get('i18n','lang');
+      $confObj->status['lang'] = Conf::get('i18n','lang');
 
       if (!isset($confObj->status['def_lang']))
         $confObj->status['def_lang'] = Conf::get('i18n','lang');
@@ -308,7 +308,7 @@ class Session
     $className = 'LibSession'.self::$sessionType;
     self::$session = new $className();
 
-    Debug::console('start session '.$className);
+    Log::debug('start session '.$className);
 
     self::$session->start(
       self::$name ,
@@ -356,11 +356,11 @@ class Session
   {
 
     // Leeren der PHP Logfiles in der Session
-    $_SESSION['SCREENLOG']     = array();
-    $_SESSION['PHPLOG']        = array();
-    $_SESSION['TRACES']        = array();
-    $_SESSION['DUMPS']         = array();
-    $_SESSION['BUFFERD_OUT']   = '';
+    $_SESSION['SCREENLOG'] = array();
+    $_SESSION['PHPLOG'] = array();
+    $_SESSION['TRACES'] = array();
+    $_SESSION['DUMPS'] = array();
+    $_SESSION['BUFFERD_OUT'] = '';
 
   }//end public static function cleanLogs */
 

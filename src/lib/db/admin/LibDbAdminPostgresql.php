@@ -38,43 +38,42 @@ class LibDbAdminPostgresql extends LibDbAdmin
   /**
    * @var array
    */
-  public $nameMapping = array
-  (
-    'boolean'     => 'boolean'    ,
-    'boolean[]'   => '_boolean'   ,
-    'bytea'       => 'bytea'      ,
-    'char'        => 'bpchar'     ,
-    'char[]'      => '_char'      ,
-    'smallint'    => 'int2'       ,
-    'smallint[]'  => '_int2'      ,
-    'integer'     => 'int4'       ,
-    'integer[]'   => '_int4'      ,
-    'int'         => 'int4'       ,
-    'int[]'       => '_int4'      ,
-    'int'         => 'integer'    ,
-    'bigint'      => 'int8'       ,
-    'bigint[]'    => '_int8'      ,
-    'numeric'     => 'numeric'    ,
-    'numeric[]'   => '_numeric'   ,
-    'money'       => 'money'    ,
-    'money[]'      => '_money'   ,
-    'text'        => 'text'       ,
-    'text[]'      => '_text'      ,
-    'date'        => 'date'       ,
-    'date[]'      => '_date'      ,
-    'time'        => 'time'       ,
-    'time[]'      => '_time'      ,
-    'timestamp'   => 'timestamp'  ,
-    'timestamp[]' => '_timestamp' ,
-    'varchar'     => 'varchar'    ,
-    'varchar[]'   => '_varchar'   ,
-    'uuid'        => 'uuid'       ,
-    'uuid[]'      => '_uuid'      ,
-    'inet'        => 'inet'       ,
-    'macaddr'     => 'macaddr'    ,
-    'cidr'        => 'cidr'       ,
-    'interval'    => 'interval'   ,
-    'tsvector'    => 'tsvector'   ,
+  public $nameMapping = array(
+    'boolean' => 'boolean',
+    'boolean[]' => '_boolean',
+    'bytea' => 'bytea',
+    'char' => 'bpchar',
+    'char[]' => '_char',
+    'smallint' => 'int2',
+    'smallint[]' => '_int2',
+    'integer' => 'int4',
+    'integer[]' => '_int4',
+    'int' => 'int4',
+    'int[]' => '_int4',
+    'int' => 'integer',
+    'bigint' => 'int8',
+    'bigint[]' => '_int8',
+    'numeric' => 'numeric',
+    'numeric[]' => '_numeric',
+    'money' => 'money',
+    'money[]' => '_money',
+    'text' => 'text',
+    'text[]' => '_text',
+    'date' => 'date',
+    'date[]' => '_date',
+    'time' => 'time',
+    'time[]' => '_time',
+    'timestamp' => 'timestamp',
+    'timestamp[]' => '_timestamp',
+    'varchar' => 'varchar',
+    'varchar[]' => '_varchar',
+    'uuid' => 'uuid',
+    'uuid[]' => '_uuid',
+    'inet' => 'inet',
+    'macaddr' => 'macaddr',
+    'cidr' => 'cidr',
+    'interval' => 'interval',
+    'tsvector' => 'tsvector',
   );
 
   /**
@@ -85,82 +84,80 @@ class LibDbAdminPostgresql extends LibDbAdmin
   /**
    * @var array
    */
-  public $multiple = array
-  (
-    'smallint[]'  ,
-    'integer[]'   ,
-    'bigint[]'    ,
-    'varchar[]'   ,
-    'text[]'      ,
-    'char[]'      ,
-    'numeric[]'   ,
-    'date[]'      ,
-    'time[]'      ,
-    'timestamp[]' ,
-    'uuid[]'      ,
-    'money[]'     ,
-    'boolean[]'   ,
-    'bytea[]'   ,
-    '_smallint'  ,
-    '_integer'   ,
-    '_bigint'    ,
-    '_varchar'   ,
-    '_text'      ,
-    '_char'      ,
-    '_numeric'   ,
-    '_date'      ,
-    '_time'      ,
-    '_timestamp' ,
-    '_uuid'      ,
-    '_money'     ,
-    '_boolean'   ,
-    '_bytea'   ,
-    '_tsvector'   ,
+  public $multiple = array(
+    'smallint[]',
+    'integer[]',
+    'bigint[]',
+    'varchar[]',
+    'text[]',
+    'char[]',
+    'numeric[]',
+    'date[]',
+    'time[]',
+    'timestamp[]',
+    'uuid[]',
+    'money[]',
+    'boolean[]',
+    'bytea[]',
+    '_smallint',
+    '_integer',
+    '_bigint',
+    '_varchar',
+    '_text',
+    '_char',
+    '_numeric',
+    '_date',
+    '_time',
+    '_timestamp',
+    '_uuid',
+    '_money',
+    '_boolean',
+    '_bytea',
+    '_tsvector',
   );
 
   /**
    * @var array
    */
-  public $quotesMap = array
-  (
-    'boolean'   =>  'false' ,
-    'bytea'     =>  'true'  ,
-    'bigint'    =>  'false' ,
-    'cidr'      =>  'true'  ,
-    'char'      =>  'true'  ,
-    'date'      =>  'true'  ,
-    'inet'      =>  'true'  ,
-    'int'       =>  'false' ,
-    'integer'   =>  'false' ,
-    'interval'  =>  'true'  ,
-    'macaddr'   =>  'true'  ,
-    'money'     =>  'true'  ,
-    'numeric'   =>  'false' ,
-    'smallint'  =>  'false' ,
-    'text'      =>  'true'  ,
-    'time'      =>  'true'  ,
-    'timestamp' =>  'true'  ,
-    'varchar'   =>  'true'  ,
-    'uuid'      =>  'true'  ,
-    'tsvector'  =>  'true'  ,
+  public $quotesMap = array(
+    'boolean' =>  'false',
+    'bytea' =>  'true',
+    'bigint' =>  'false',
+    'cidr' =>  'true',
+    'char' =>  'true',
+    'date' =>  'true',
+    'inet' =>  'true',
+    'int' =>  'false',
+    'integer' =>  'false',
+    'interval' =>  'true',
+    'macaddr' =>  'true',
+    'money' =>  'true',
+    'numeric' =>  'false',
+    'smallint' =>  'false',
+    'text' =>  'true',
+    'time' =>  'true',
+    'timestamp' =>  'true',
+    'varchar' =>  'true',
+    'uuid' =>  'true',
+    'tsvector' =>  'true',
 
-    'boolean[]'   =>  'true',
-    'bigint[]'    =>  'true',
-    'char[]'      =>  'true',
-    'date[]'      =>  'true',
-    'int[]'       =>  'true',
-    'integer[]'   =>  'true',
-    'smallint[]'  =>  'true',
-    'text[]'      =>  'true',
-    'varchar[]'   =>  'true',
-    'money[]'     =>  'true',
-    'numeric[]'   =>  'true',
-    'time[]'      =>  'true',
+    'boolean[]' =>  'true',
+    'bigint[]' =>  'true',
+    'char[]' =>  'true',
+    'date[]' =>  'true',
+    'int[]' =>  'true',
+    'integer[]' =>  'true',
+    'smallint[]' =>  'true',
+    'text[]' =>  'true',
+    'varchar[]' =>  'true',
+    'money[]' =>  'true',
+    'numeric[]' =>  'true',
+    'time[]' =>  'true',
     'timestamp[]' =>  'true',
-    'uuid[]'      =>  'true',
-    'inet[]'      =>  'true',
-    'cidr[]'      =>  'true',
-    'macaddr[]'   =>  'true',
+    'uuid[]' =>  'true',
+    'inet[]' =>  'true',
+    'cidr[]' =>  'true',
+    'macaddr[]' =>  'true',
   );
 
 /*//////////////////////////////////////////////////////////////////////////////
@@ -365,7 +362,7 @@ SQL;
     WHERE
     table_catalog = '$dbName'
     AND table_schema = '$schemaName'
-    AND table_type  = 'BASE TABLE'
+    AND table_type = 'BASE TABLE'
     ORDER BY table_name ;
 SQL;
 
@@ -378,7 +375,7 @@ SQL;
    * @param string $dbName
    * @param string $schemaName
    */
-  public function getTableQuotes( $table, $dbName  = null, $schemaName = null)
+  public function getTableQuotes( $table, $dbName = null, $schemaName = null)
   {
 
 
@@ -429,7 +426,7 @@ SQL;
     table_catalog = '$dbName'
     AND table_schema = '$schemaName'
     AND table_name = '$tableName'
-    AND table_type  = 'BASE TABLE'  ;
+    AND table_type = 'BASE TABLE'  ;
 SQL;
 
     return $this->db->select($sql)->get() ? true:false;
@@ -582,17 +579,18 @@ SQL;
               )
             )
         ) {
+
           $sql .= '('.str_replace('.',',',$row[LibDbAdmin::COL_LENGTH]).')';
         } else if (
           isset($row[LibDbAdmin::COL_PRECISION])
             && '' != trim(LibDbAdmin::COL_PRECISION)
-            && (int) $row[LibDbAdmin::COL_PRECISION]
+            && (int)$row[LibDbAdmin::COL_PRECISION]
         ) {
 
           if(
             isset($row[LibDbAdmin::COL_SCALE])
               && '' != trim(LibDbAdmin::COL_SCALE)
-              && (int) $row[LibDbAdmin::COL_SCALE]
+              && (int)$row[LibDbAdmin::COL_SCALE]
               && in_array(
                 $row[LibDbAdmin::COL_TYPE],
                 array(
@@ -600,9 +598,11 @@ SQL;
                 )
               )
           ) {
-            $sql .= '('.(int) $row[LibDbAdmin::COL_PRECISION].', '.(int) $row[LibDbAdmin::COL_SCALE].')';
+
+            $sql .= '('.(int)$row[LibDbAdmin::COL_PRECISION].', '.(int)$row[LibDbAdmin::COL_SCALE].')';
           } else {
-            $sql .= '('.(int) $row[LibDbAdmin::COL_PRECISION].')';
+
+            $sql .= '('.(int)$row[LibDbAdmin::COL_PRECISION].')';
           }
 
         }
@@ -622,48 +622,41 @@ SQL;
 
         $sql .= $row[LibDbAdmin::COL_NAME].' '.$type;
 
-        if
-        (
+        if(
           trim($row[LibDbAdmin::COL_LENGTH]) != ''
-            && !in_array
-            (
+            && !in_array(
               $row[LibDbAdmin::COL_TYPE],
-              array
-              (
+              array(
                 'integer', 'int4',
                 'int2', 'int8',
                 'boolean',
                 'bytea'
               )
             )
-        )
-        {
+        ) {
+
           $sql .= '('.str_replace('.',',',$row[LibDbAdmin::COL_LENGTH]).')';
-        } else if
-        (
+        } else if (
+
           isset($row[LibDbAdmin::COL_PRECISION])
             && '' != trim(LibDbAdmin::COL_PRECISION)
-            && (int) $row[LibDbAdmin::COL_PRECISION]
-            && in_array
-            (
+            && (int)$row[LibDbAdmin::COL_PRECISION]
+            && in_array(
               $row[LibDbAdmin::COL_TYPE],
-              array
-              (
+              array(
                 'numeric'
               )
             )
-        )
-        {
-          if
-          (
+        ) {
+
+          if(
             isset($row[LibDbAdmin::COL_SCALE])
               && '' != trim(LibDbAdmin::COL_SCALE)
-              && (int) $row[LibDbAdmin::COL_SCALE]
-          )
-          {
-            $sql .= '('.(int) $row[LibDbAdmin::COL_PRECISION].', '.(int) $row[LibDbAdmin::COL_SCALE].')';
+              && (int)$row[LibDbAdmin::COL_SCALE]
+          ) {
+            $sql .= '('.(int)$row[LibDbAdmin::COL_PRECISION].', '.(int)$row[LibDbAdmin::COL_SCALE].')';
           } else {
-            $sql .= '('.(int) $row[LibDbAdmin::COL_PRECISION].')';
+            $sql .= '('.(int)$row[LibDbAdmin::COL_PRECISION].')';
           }
         }
 
@@ -680,11 +673,13 @@ SQL;
 
     // check if the table has a rowid
     if ($hasRowid) {
-    $sql .= <<<SQL
+
+      $sql .= <<<SQL
       PRIMARY KEY (rowid)
 SQL;
     } else {
-      $sql = substr($sql , 0 , -3);
+
+      $sql = substr($sql, 0, -3);
     }
 
     $sql .= <<<SQL
@@ -697,6 +692,8 @@ SQL;
 
     if ($this->createPatch)
       $this->sqlPatch .= $sql.NL.NL;
+
+    Debug::console($sql);
 
     if ($this->syncDb)
       return $this->db->exec($sql);
@@ -880,7 +877,7 @@ SQL;
     table_catalog = '{$dbName}'
     AND table_schema = '{$schemaName}'
     AND table_name = '{$viewName}'
-    AND table_type  = 'VIEW'  ;
+    AND table_type = 'VIEW'  ;
 SQL;
 
     return $this->db->select($sql)->get() ? true:false;
@@ -980,7 +977,7 @@ SQL;
    *
    * @throws LibDb_Exception
    */
-  public function alterColumn($colName, $newData , $diff = null, $tableName= null)
+  public function alterColumn($colName, $newData, $diff = null, $tableName= null)
   {
 
     // rowid is inmutable!
@@ -1000,6 +997,7 @@ SQL;
 
     if (!$diff) {
       Log::warn('Tried to alter colum: '.$colName.' in table: '.$tableName.' but there was no diff');
+      Debug::console('Tried to alter colum: '.$colName.' in table: '.$tableName.' but there was no diff');
 
       return true;
     }
@@ -1017,7 +1015,7 @@ SQL;
     LibDbAdmin::COL_SCALE
      */
 
-    // mixed $needle  , array $haystack
+    // mixed $needle, array $haystack
 
 
     /*
@@ -1075,18 +1073,21 @@ where action is one of:
 
     $type = $this->invertMapping[$typeKey];
 
-    if (in_array(LibDbAdmin::COL_TYPE,  $diff)) {
+    if (in_array(LibDbAdmin::COL_TYPE,  $diff)
+      || in_array(LibDbAdmin::COL_SCALE,  $diff)
+      || in_array(LibDbAdmin::COL_PRECISION,  $diff)
+      || in_array(LibDbAdmin::COL_LENGTH,  $diff)) {
 
 
-      if ($type == 'char' || $type == 'varchar'  || $type == 'char[]' || $type == 'varchar[]') {
+      if (in_array($type, array('char','varchar','char[]','varchar[]'))) {
 
         $size = trim($newData[LibDbAdmin::COL_LENGTH]);
 
         if ($size != '')
           $size = "($size)";
 
-        if (in_array($type , $this->multiple)) {
-          $type = str_replace(array('[',']') , array('','') , $type);
+        if (in_array($type, $this->multiple)) {
+          $type = str_replace(array('[',']'), array('',''), $type);
 
           $sql[] = <<<SQL
 ALTER TABLE {$tableName} ALTER column {$colName} TYPE {$type}{$size}[];
@@ -1094,6 +1095,7 @@ ALTER TABLE {$tableName} ALTER column {$colName} TYPE {$type}{$size}[];
 SQL;
 
         } else {
+
           $sql[] = <<<SQL
 ALTER TABLE {$tableName} ALTER column {$colName} TYPE {$type}{$size};
 
@@ -1101,7 +1103,7 @@ SQL;
 
         }
 
-      } elseif (in_array($type, array('bytea','inet','macaddr','cidr','interval'))  ) {
+      } elseif (in_array($type, array('bytea','inet','macaddr','cidr','interval'))) {
 
           $sql[] = <<<SQL
 ALTER TABLE {$tableName} DROP COLUMN {$colName};
@@ -1113,11 +1115,11 @@ ALTER TABLE {$tableName} ADD COLUMN {$colName} {$type};
 
 SQL;
 
-      } elseif ($type == 'numeric' || $type == 'numeric[]') {
+      } elseif ($type == 'numeric' || $type == 'numeric[]' || $type == 'float' || $type == 'float[]') {
 
 
-        $prec   = $newData[LibDbAdmin::COL_PRECISION];
-        $scale  = $newData[LibDbAdmin::COL_SCALE];
+        $prec = $newData[LibDbAdmin::COL_PRECISION];
+        $scale = $newData[LibDbAdmin::COL_SCALE];
 
         $size = '';
 
@@ -1130,8 +1132,8 @@ SQL;
           $size .= ")";
         }
 
-        if (in_array($type , $this->multiple)) {
-          $type = str_replace(array('[',']') , array('','') , $type);
+        if (in_array($type, $this->multiple)) {
+          $type = str_replace(array('[',']'), array('',''), $type);
 
           $sql[] = <<<SQL
 ALTER TABLE {$tableName} ALTER column {$colName} TYPE {$type}{$size}[];
@@ -1163,7 +1165,7 @@ SQL;
             || $type == 'char[]'
             || $type == 'varchar[]'
         )
-        && in_array(LibDbAdmin::COL_LENGTH , $diff)
+        && in_array(LibDbAdmin::COL_LENGTH, $diff)
       ) {
 
         $size = trim($newData[LibDbAdmin::COL_LENGTH]);
@@ -1171,8 +1173,8 @@ SQL;
         if ($size != '')
           $size = "($size)";
 
-        if (in_array($type , $this->multiple)) {
-          $type = str_replace(array('[',']') , array('','') , $type);
+        if (in_array($type, $this->multiple)) {
+          $type = str_replace(array('[',']'), array('',''), $type);
 
           $sql[] = <<<SQL
 ALTER TABLE {$tableName} ALTER column {$colName} TYPE {$type}{$size}[];
@@ -1190,13 +1192,13 @@ SQL;
       } else if
       (
         ($type == 'numeric' || $type == 'numeric[]')
-          && in_array(array(LibDbAdmin::COL_SCALE,LibDbAdmin::COL_PRECISION) , $diff)
+          && in_array(array(LibDbAdmin::COL_SCALE,LibDbAdmin::COL_PRECISION), $diff)
       )
       {
 
 
-        $prec   = $newData[LibDbAdmin::COL_PRECISION];
-        $scale  = $newData[LibDbAdmin::COL_SCALE];
+        $prec = $newData[LibDbAdmin::COL_PRECISION];
+        $scale = $newData[LibDbAdmin::COL_SCALE];
 
         $size = '';
 
@@ -1210,7 +1212,7 @@ SQL;
         }
 
         if (in_array($type, $this->multiple)) {
-          $type = str_replace(array('[',']') , array('','') , $type);
+          $type = str_replace(array('[',']'), array('',''), $type);
 
           $sql[] = <<<SQL
 ALTER TABLE {$tableName} ALTER column {$colName} TYPE {$type}{$size}[];
@@ -1230,7 +1232,7 @@ SQL;
     }// alter the type
 
 
-    if (in_array(LibDbAdmin::COL_DEFAULT , $diff)) {
+    if (in_array(LibDbAdmin::COL_DEFAULT, $diff)) {
 
       $default =  $newData[LibDbAdmin::COL_DEFAULT];
 
@@ -1266,7 +1268,7 @@ SQL;
 
     }
 
-    if (in_array(LibDbAdmin::COL_NULL_ABLE , $diff)) {
+    if (in_array(LibDbAdmin::COL_NULL_ABLE, $diff)) {
 
       $nullAble =  $newData[LibDbAdmin::COL_NULL_ABLE];
       $default =  $newData[LibDbAdmin::COL_DEFAULT];
@@ -1294,7 +1296,7 @@ SQL;
 UPDATE {$tableName} SET {$colName} = '{$default}' where {$colName} is null;
 
 SQL;
-        } elseif (in_array($type , array('smallint', 'integer', 'int', 'bigint', 'numeric')  )  ) {
+        } elseif (in_array($type, array('smallint', 'integer', 'int', 'bigint', 'numeric')  )  ) {
 
           $default = $default?:'0';
 
@@ -1302,7 +1304,7 @@ SQL;
 UPDATE {$tableName} SET {$colName} = {$default} where {$colName} is null;
 
 SQL;
-        } elseif (in_array($type , array('smallint[]', 'integer[]', 'int[]', 'bigint[]', 'numeric[]')  )   ) {
+        } elseif (in_array($type, array('smallint[]', 'integer[]', 'int[]', 'bigint[]', 'numeric[]')  )   ) {
 
           $default = $default?:'{0}';
 
@@ -1413,6 +1415,7 @@ SQL;
 
 
     foreach ($sql as $alterSql) {
+      Message::addMessage($alterSql);
       Debug::console($alterSql);
       Log::warn($alterSql);
     }
@@ -1484,7 +1487,7 @@ SQL;
    *
    * @test TestDbAdmin::test_diffColumn
    */
-  public function diffColumn($colName, $data , $tableName = null, $dbName = null, $schemaName = null  )
+  public function diffColumn($colName, $data, $tableName = null, $dbName = null, $schemaName = null  )
   {
 
     if (!$dbName)
@@ -1503,7 +1506,7 @@ SQL;
       );
     }
 
-    return $this->diffCol($data , $dbData , $tableName);
+    return $this->diffCol($data, $dbData, $tableName);
 
   }//end public function diffColumn */
 
@@ -1516,7 +1519,7 @@ SQL;
    *
    * @test TestDbAdmin::test_diffColumn
    */
-  public function reportDiffColumn($colName, $data , $tableName = null, $dbName = null, $schemaName = null  )
+  public function reportDiffColumn($colName, $data, $tableName = null, $dbName = null, $schemaName = null  )
   {
 
     if (!$dbName)
@@ -1530,13 +1533,12 @@ SQL;
 
 
     if (!$dbData = $this->getColumnData($colName, $tableName, $dbName, $schemaName)) {
-      throw new LibDb_Exception
-      (
+      throw new LibDb_Exception(
         'Requested Column '.$colName.' for Table: '.$tableName.' in Schema: '.$schemaName.' Database: '.$dbName.' not exists'
       );
     }
 
-    return $this->reportDiffCol($data , $dbData , $tableName);
+    return $this->reportDiffCol($data, $dbData, $tableName);
 
   }//end public function diffColumn */
 
@@ -1570,11 +1572,11 @@ SQL;
     if (!isset($data[LibDbAdmin::COL_TYPE])) {
       if (!isset($data['type'])) {
         Message::addError('Missing the Type in the given Data for add new column: '.$colName);
-        Debug::console('Missing the Type in the given Data for add new column: '.$colName ,$data);
+        Debug::console('Missing the Type in the given Data for add new column: '.$colName,$data);
 
         return;
       } else {
-        $type     = $data['type'];
+        $type = $data['type'];
       }
     } else {
       $rawType = $data[LibDbAdmin::COL_TYPE];
@@ -1599,7 +1601,7 @@ SQL;
       return false;
     }
 
-    $sql  = 'ALTER TABLE '.$tableName.' ADD COLUMN '.$colName.' '.$type ;
+    $sql = 'ALTER TABLE '.$tableName.' ADD COLUMN '.$colName.' '.$type ;
 
     if (!in_array($type, array
       (
@@ -1758,6 +1760,9 @@ SQL;
       }
     }
 
+    foreach ($queryPool as $alterSql) {
+    	Debug::console($alterSql);
+    }
 
     if ($this->syncDb) {
       foreach ($queryPool as $alterSql) {
@@ -1806,7 +1811,7 @@ SQL;
    * @param array $dbData
    * @param string $tableName
    */
-  public function diffCol($newData , $dbData , $tableName)
+  public function diffCol($newData, $dbData, $tableName)
   {
 
     $diff = array();
@@ -1826,7 +1831,7 @@ SQL;
    * @param array $dbData
    * @param string $tableName
    */
-  public function reportDiffCol($newData , $dbData , $tableName)
+  public function reportDiffCol($newData, $dbData, $tableName)
   {
 
     $diff = array();
@@ -1837,7 +1842,7 @@ SQL;
       }
     }
 
-    return implode(', ', $diff);
+    return 'type: '.$dbData[LibDbAdmin::COL_TYPE].' '.implode(', ', $diff);
 
   }//end public function reportDiffCol */
 
@@ -1860,13 +1865,13 @@ SQL;
     if (!$tableName)
       $tableName = $this->tableName;
 
-    $colName      = LibDbAdmin::COL_NAME;
-    $colDefault   = LibDbAdmin::COL_DEFAULT;
-    $colNullAble  = LibDbAdmin::COL_NULL_ABLE;
-    $colType      = LibDbAdmin::COL_TYPE;
-    $colLength    = LibDbAdmin::COL_LENGTH;
+    $colName = LibDbAdmin::COL_NAME;
+    $colDefault = LibDbAdmin::COL_DEFAULT;
+    $colNullAble = LibDbAdmin::COL_NULL_ABLE;
+    $colType = LibDbAdmin::COL_TYPE;
+    $colLength = LibDbAdmin::COL_LENGTH;
     $colPrecision = LibDbAdmin::COL_PRECISION;
-    $colScale     = LibDbAdmin::COL_SCALE;
+    $colScale = LibDbAdmin::COL_SCALE;
 
     $sql = <<<SQL
   SELECT
@@ -1890,9 +1895,9 @@ SQL;
       throw  new LibDb_Exception('col '.$theCol.' not exists');
     }
 
-    $data[$colLength] = (int) $data[$colLength];
-    $data[$colPrecision] = (int) $data[$colPrecision];
-    $data[$colScale] = (int) $data[$colScale];
+    $data[$colLength] = (int)$data[$colLength];
+    $data[$colPrecision] = (int)$data[$colPrecision];
+    $data[$colScale] = (int)$data[$colScale];
 
     return $data;
 
@@ -1912,13 +1917,13 @@ SQL;
     if (!$schemaName)
       $schemaName = $this->schemaName;
 
-    $colName      = LibDbAdmin::COL_NAME;
-    $colDefault   = LibDbAdmin::COL_DEFAULT;
-    $colNullAble  = LibDbAdmin::COL_NULL_ABLE;
-    $colType      = LibDbAdmin::COL_TYPE;
-    $colLength    = LibDbAdmin::COL_LENGTH;
+    $colName = LibDbAdmin::COL_NAME;
+    $colDefault = LibDbAdmin::COL_DEFAULT;
+    $colNullAble = LibDbAdmin::COL_NULL_ABLE;
+    $colType = LibDbAdmin::COL_TYPE;
+    $colLength = LibDbAdmin::COL_LENGTH;
     $colPrecision = LibDbAdmin::COL_PRECISION;
-    $colScale     = LibDbAdmin::COL_SCALE;
+    $colScale = LibDbAdmin::COL_SCALE;
 
     $sql = <<<SQL
   SELECT
@@ -1963,7 +1968,7 @@ SQL;
       //if ($attribute->inCategory('meta'))
       //  continue;
 
-      if ($this->columnExists($colName , $tableName)) {
+      if ($this->columnExists($colName, $tableName)) {
 
         if (!$this->syncAttributeColumn($tableName, $attribute, $multiSeq)) {
           $this->dropColumn($colName,$tableName);
@@ -2010,12 +2015,12 @@ SQL;
   {
 
     //TODO maybe this should be a "little" more genereric
-    $orgType  = trim($attribute->dbType());
+    $orgType = trim($attribute->dbType());
 
-    $mapping  = $this->nameMapping;
+    $mapping = $this->nameMapping;
 
     if (isset($mapping[$orgType])) {
-      $type     = $mapping[$orgType];
+      $type = $mapping[$orgType];
     } else {
       Error::addError('missing $orgType'.$orgType);
       $type = 'text';
@@ -2037,13 +2042,15 @@ SQL;
       $default = '';
     }
 
-    $precision  = null;
-    $scale      = null;
-    $length     = null;
-    $size       = $attribute->size();
+    $precision = null;
+    $scale = null;
+    $length = null;
+    $size = $attribute->size();
 
     if ($orgType == 'numeric') {
-      $tmp = explode('.'  , $size);
+      $tmp = explode('.', $size);
+
+      Debug::console('numeric size '.$size);
 
       $precision = $tmp[0];
 
@@ -2053,14 +2060,14 @@ SQL;
         $scale = 0;
 
     } elseif ($orgType == 'smallint') {
-      $precision  = '16';
-      $scale      = '0';
+      $precision = '16';
+      $scale = '0';
     } elseif ($orgType == 'integer' || $orgType == 'int') {
-      $precision  = '32';
-      $scale      = '0';
+      $precision = '32';
+      $scale = '0';
     } elseif ($orgType == 'bigint') {
-      $precision  = '64';
-      $scale      = '0';
+      $precision = '64';
+      $scale = '0';
     } elseif ($orgType == 'char') {
       if (trim($size) == '') {
         $length = '1';
@@ -2081,11 +2088,11 @@ SQL;
 
     $checkNegativ = array(
       'integer',
-      'int2' ,
-      'smallint'  ,
-      'bigint'  ,
-      'int8'  ,
-      'numeric' ,
+      'int2',
+      'smallint',
+      'bigint',
+      'int8',
+      'numeric',
     );
 
 
@@ -2096,19 +2103,19 @@ SQL;
     }
 
     $data = array(
-      LibDbAdmin::COL_NAME        => $colName,
-      LibDbAdmin::COL_DEFAULT     => $default,
-      LibDbAdmin::COL_NULL_ABLE   => $nullAble,
-      LibDbAdmin::COL_TYPE        => $type,
-      LibDbAdmin::COL_LENGTH      => $length,
-      LibDbAdmin::COL_PRECISION   => $precision,
-      LibDbAdmin::COL_SCALE       => $scale,
+      LibDbAdmin::COL_NAME => $colName,
+      LibDbAdmin::COL_DEFAULT => $default,
+      LibDbAdmin::COL_NULL_ABLE => $nullAble,
+      LibDbAdmin::COL_TYPE => $type,
+      LibDbAdmin::COL_LENGTH => $length,
+      LibDbAdmin::COL_PRECISION => $precision,
+      LibDbAdmin::COL_SCALE => $scale,
     );
 
-    if ($diff = $this->diffColumn($colName , $data, $tableName  )) {
+    if ($diff = $this->diffColumn($colName, $data, $tableName  )) {
       try {
-        $this->alterColumn($colName , $data, $diff, $tableName);
-        Message::addMessage('Column: '.$colName.' in Tabelle '.$tableName.' wurde angepasst');
+        $this->alterColumn($colName, $data, $diff, $tableName);
+        Debug::console('Column: '.$colName.' in Tabelle '.$tableName.' wurde angepasst');
 
         return true;
       } catch (LibDb_Exception $e) {
@@ -2136,7 +2143,7 @@ SQL;
       $colName = $attribute['col_name'];
     }
 
-    $this->addColumn($colName , $this->columnAttributeData($attribute, $tableName),  $tableName);
+    $this->addColumn($colName, $this->columnAttributeData($attribute, $tableName),  $tableName);
     Message::addMessage('Column: '.$colName.' in Tabelle '.$tableName.' wurde erstellt');
 
   }//end protected function createColumn */
@@ -2164,15 +2171,29 @@ SQL;
         if ($multiSeq) {
           if (is_string($sequence)) {
             $default =  "nextval('".$sequence."'::regclass)";
+
+            if(!$this->sequenceExists($sequence)){
+              $this->createSequence($sequence);
+            }
+
           } else {
             $default =  "nextval('".$tableName."_".$attribute->name()."_seq'::regclass)";
           }
+
+
 
           //$dbAdmin->createSequence($tableName."_".$attribute->name()."_seq");
         } else {
 
           if (!is_string($sequence)) {
             $sequence =  Db::SEQUENCE;
+          } else {
+
+            // sicher stellen, dass die referenzierte sequence auch existiert
+            if(!$this->sequenceExists($sequence)){
+              $this->createSequence($sequence);
+            }
+
           }
 
           $default = "nextval('{$sequence}'::regclass)";
@@ -2190,22 +2211,22 @@ SQL;
         $default = '';
       }
 
-      $type     = $attribute->dbType();
+      $type = $attribute->dbType();
 
       if ($type == 'bytea') {
-        $size     = '';
+        $size = '';
       } else {
-        $size     = str_replace('.' , ',', $attribute->size());
+        $size = str_replace('.', ',', $attribute->size());
       }
 
-      $colData  = array
-      (
-        'name'      => $attribute->name(),
-        'type'      => $type,
-        'size'      => $size,
-        'required'  => $attribute->required()?'true':'false',
-        'default'   => $default,
+      $colData = array(
+        'name' => $attribute->name(),
+        'type' => $type,
+        'size' => $size,
+        'required' => $attribute->required()?'true':'false',
+        'default' => $default,
       );
+
     } else {
 
       if (trim($attribute['col_length']) == '') {
@@ -2214,13 +2235,12 @@ SQL;
         $size = $attribute['col_scale'].(trim($attribute['col_precision'])==''?'.'.$attribute['col_precision']:'');
       }
 
-      $colData  = array
-      (
-        'name'      => $attribute['col_name'],
-        'type'      => $attribute['col_type'],
-        'size'      => $size,
-        'required'  => $attribute['col_null_able'] == 'YES'?'false':'true',
-        'default'   => $attribute['col_default'],
+      $colData = array(
+        'name' => $attribute['col_name'],
+        'type' => $attribute['col_type'],
+        'size' => $size,
+        'required' => $attribute['col_null_able'] == 'YES'?'false':'true',
+        'default' => $attribute['col_default'],
       );
     }
 
@@ -2331,7 +2351,7 @@ SQL;
     AND upper(sequence_name) = upper('{$tableName}') ;
 SQL;
 
-    return (boolean) (int) $this->db->select($sql)->getField('num_seq');
+    return (boolean)(int)$this->db->select($sql)->getField('num_seq');
 
   }//end public function sequenceExists */
 
@@ -2411,7 +2431,7 @@ JOIN
 
  WHERE
    relkind = 'S'
-     AND ns.nspname  = '{$schema}'
+     AND ns.nspname = '{$schema}'
  ORDER BY relname
 
 SQL;

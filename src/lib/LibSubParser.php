@@ -29,18 +29,18 @@ class LibSubParser
    *
    * @var LibParserRegistry
    */
-  protected $registry   = null;
+  protected $registry = null;
 
   /**
    *
    * @var LibBdlLexer
    */
-  protected $lexer      = null;
+  protected $lexer = null;
 
   /**
    * @var Tarray
    */
-  protected $flag      = null;
+  protected $flag = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Methodes
@@ -53,10 +53,10 @@ class LibSubParser
   public function __construct($registry ,  $lexer)
   {
 
-    $this->registry     = $registry;
-    $this->lexer        = $lexer;
+    $this->registry = $registry;
+    $this->lexer = $lexer;
 
-    $this->flag         = new TArray();
+    $this->flag = new TArray();
 
   }//end public function __construct */
 

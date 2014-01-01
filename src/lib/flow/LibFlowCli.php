@@ -59,9 +59,9 @@ class LibFlowCli extends LibFlow
 
       $map = array
       (
-        Request::MOD  => $tmp[0],
-        Request::CON  => $tmp[1],
-        Request::RUN  => $tmp[2]
+        Request::MOD => $tmp[0],
+        Request::CON => $tmp[1],
+        Request::RUN => $tmp[2]
       );
       $request->addParam($map);
     }
@@ -70,16 +70,16 @@ class LibFlowCli extends LibFlow
 
   /**
   * the main method
-  * @return void
+  * @return boolean
   */
   public function main($httpRequest = null, $session = null, $transaction = null)
   {
 
     // Startseiten Eintrag ins Navmenu
-    $view         = $this->getTplEngine();
-    $httpRequest  = $this->getRequest();
-    $user         = $this->getUser();
-    $conf         = $this->getConf();
+    $view = $this->getTplEngine();
+    $httpRequest = $this->getRequest();
+    $user = $this->getUser();
+    $conf = $this->getConf();
 
     if (!$classModule = $httpRequest->param(Request::MOD, Validator::CNAME)) {
       $view->writeLn('No Command was given');
@@ -88,12 +88,12 @@ class LibFlowCli extends LibFlow
       return;
     }
 
-    $modName      = ucfirst($classModule);
-    $className    = $modName.'_Module';
+    $modName = ucfirst($classModule);
+    $className = $modName.'_Module';
 
     $classNameOld = 'Module'.$modName;
 
-    if (Webfrap::classLoadable($className)) {
+    if (Webfrap::classExists($className)) {
       $this->module = new $className();
       $this->module->init();
       $this->module->main();
@@ -123,9 +123,9 @@ class LibFlowCli extends LibFlow
 
     try {
 
-      $classname    = $module.$controller.'_Controller';
+      $classname = $module.$controller.'_Controller';
 
-      if (WebFrap::loadable($classname)) {
+      if (WebFrap::classExists($classname)) {
 
         $this->controller = new $classname();
         $this->controller->setDefaultModel($module.$controller);
@@ -161,7 +161,7 @@ class LibFlowCli extends LibFlow
       );
 
       // if the controller ist not loadable set an error controller
-      $this->controller     = new Error_Controller();
+      $this->controller = new Error_Controller();
       $this->controllerName = 'Error_Controller';
       //\Reset The Extention
 

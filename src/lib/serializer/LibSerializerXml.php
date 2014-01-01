@@ -43,8 +43,6 @@ class LibSerializerXml extends LibSerializerAbstract
    */
   public static function getInstance()
   {
-    if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__);
 
     if (is_null(self::$instance)) {
       self::$instance = new LibSerializerXml();
@@ -65,8 +63,6 @@ class LibSerializerXml extends LibSerializerAbstract
    */
   public function serialize($data = null)
   {
-    if (Log::$levelDebug)
-     Log::start(__file__,__line__,__method__,array($data));
 
     $this->serialized = '<data>'.NL;
     $this->serialized .= $this->serializeNode($data);
@@ -101,6 +97,9 @@ class LibSerializerXml extends LibSerializerAbstract
         I18n::s('wbf.error.unserializeable')
       );
     }
+
+    return null;
+
   }//end protected function serializeNode()
 
   /**

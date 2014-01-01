@@ -32,17 +32,17 @@ class MvcRouterAdressCheck
   /**
    * @param LibRequestHttp $request
    * @param LibConfPhp $conf
-   * @return void
+   * @return boolean
    */
   public static function checkRedirect($request, $conf)
   {
 
     $gwDomain = $conf->getStatus('gateway.domain');
-    $gwSSL    = $conf->getStatus('gateway.ssl');
+    $gwSSL = $conf->getStatus('gateway.ssl');
 
-    $redirect    = false;
+    $redirect = false;
     $enforeceSSL = false;
-    $denySSL     = false;
+    $denySSL = false;
 
     if (2 === (int) $gwSSL) {
       $enforeceSSL = true;

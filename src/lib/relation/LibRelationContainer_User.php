@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibRelationContainer_User
-  implements LibRelationContainer
+class LibRelationContainer_User implements LibRelationContainer
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes

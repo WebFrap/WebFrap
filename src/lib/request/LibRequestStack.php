@@ -27,19 +27,19 @@ class LibRequestStack extends LibRequestSubrequest
    * post data array
    * @var array
    */
-  protected $params   = array();
+  protected $params = array();
 
   /**
    * post data array
    * @var array
    */
-  protected $data   = array();
+  protected $data = array();
 
   /**
    * files data array
    * @var array
    */
-  protected $files  = array();
+  protected $files = array();
 
   /**
    * @var string
@@ -62,26 +62,24 @@ class LibRequestStack extends LibRequestSubrequest
     $params = array(),
     $data = array(),
     $files = array()
-  )
-  {
+  ) {
 
     $this->httpMethod = $method;
-    $this->db  = $request->getDb();
+    $this->db = $request->getDb();
 
     $this->request = $request;
-    $this->params  = $params;
-    $this->data    = $data;
-    $this->files   = $files;
+    $this->params = $params;
+    $this->data = $data;
+    $this->files = $files;
 
     $this->params['c'] = $target;
 
     $tmp = explode('.', $target);
 
-    $map = array
-    (
-      Request::MOD  => $tmp[0],
-      Request::CON  => $tmp[1],
-      Request::RUN  => $tmp[2]
+    $map = array(
+      Request::MOD => $tmp[0],
+      Request::CON => $tmp[1],
+      Request::RUN => $tmp[2]
     );
 
     $this->addParam($map);

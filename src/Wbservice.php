@@ -31,14 +31,14 @@ abstract class Wbservice
    *
    * @var array
    */
-  protected $data       = array();
+  protected $data = array();
 
   /**
    * name of the Webservice type
    *
    * @var string
    */
-  protected $name       = null;
+  protected $name = null;
 
   /**
    *
@@ -50,31 +50,31 @@ abstract class Wbservice
    *
    * @var LibRequestHttp
    */
-  protected $request    = null;
+  protected $request = null;
 
   /**
    *
    * @var LibI81nPhp
    */
-  protected $i18n       = null;
+  protected $i18n = null;
 
   /**
    *
    * @var LibAclPhp
    */
-  protected $acl        = null;
+  protected $acl = null;
 
   /**
    *
    * @var LibDbConnection
    */
-  protected $db         = null;
+  protected $db = null;
 
   /**
    *
    * @var User
    */
-  protected $user       = null;
+  protected $user = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic

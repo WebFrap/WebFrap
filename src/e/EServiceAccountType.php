@@ -44,9 +44,9 @@ class EServiceAccountType
    * @var array
    */
   public static $labels = array(
-    self::POP3   => 'Pop3',
-    self::IMAP   => 'Imap',
-    self::EXCHANGE   => 'MS Exchange',
+    self::POP3 => 'Pop3',
+    self::IMAP => 'Imap',
+    self::EXCHANGE => 'MS Exchange',
   );
 
   /**

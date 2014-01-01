@@ -36,8 +36,8 @@ class LibAclManager_Db extends LibAclManager
   public function __construct($adapter)
   {
 
-    $this->env    = $adapter;
-    $this->model  = $adapter->getModel();
+    $this->env = $adapter;
+    $this->model = $adapter->getModel();
 
   }//end public function __construct */
 
@@ -56,9 +56,9 @@ class LibAclManager_Db extends LibAclManager
   public function createAreaAssignment($entityAccess, $parents = array(), $syncMode = false)
   {
 
-    // laden der benötigten resourcen
-    $db        = $this->getDb();
-    $orm       = $db->getOrm();
+    // laden der mvc/utils adapter Objekte
+    $db = $this->getDb();
+    $orm = $db->getOrm();
 
     // sicher stellen, dass auch alle Daten vorhanden sind
     if (!$entityAccess->id_area) {
@@ -70,7 +70,7 @@ class LibAclManager_Db extends LibAclManager
     }
 
     // per definition nicht partiell
-    $entityAccess->partial       = 0;
+    $entityAccess->partial = 0;
     $entityAccess->ref_access_level = $entityAccess->ref_access_level ? $entityAccess->ref_access_level : Acl::LISTING;
     $entityAccess->message_level = $entityAccess->message_level ? $entityAccess->message_level: Acl::DENIED;
     $entityAccess->priv_message_level = $entityAccess->priv_message_level ? $entityAccess->priv_message_level : Acl::DENIED;
@@ -92,10 +92,10 @@ class LibAclManager_Db extends LibAclManager
 
       // partielle zuweisung zu den parents
       $partial = new WbfsysSecurityAccess_Entity(null, array(), $this->getDb());
-      $partial->id_area       = $orm->getByKey('WbfsysSecurityArea', $parent);
-      $partial->id_group      = $entityAccess->id_group;
-      $partial->partial       = 1;
-      $partial->access_level  = Acl::LISTING;
+      $partial->id_area = $orm->getByKey('WbfsysSecurityArea', $parent);
+      $partial->id_group = $entityAccess->id_group;
+      $partial->partial = 1;
+      $partial->access_level = Acl::LISTING;
       $partial->ref_access_level = Acl::DENIED;
       $partial->message_level = Acl::DENIED;
       $partial->priv_message_level = Acl::DENIED;
@@ -126,9 +126,9 @@ class LibAclManager_Db extends LibAclManager
   )
   {
 
-    // laden der benötigten resourcen
-    $db        = $this->getDb();
-    $orm       = $db->getOrm();
+    // laden der mvc/utils adapter Objekte
+    $db = $this->getDb();
+    $orm = $db->getOrm();
 
     if (is_object($entityGUser) &&  $entityGUser instanceof User) {
       $entityGUser = $entityGUser->getId();
@@ -140,7 +140,7 @@ class LibAclManager_Db extends LibAclManager
       $entityUser = $entityGUser;
 
       $entityGUser = new WbfsysGroupUsers_Entity(null,array(),$this->getDb());
-      $entityGUser->id_user  = $entityUser;
+      $entityGUser->id_user = $entityUser;
 
       if ($groupName) {
         if (is_string($groupName)) {
@@ -176,7 +176,7 @@ class LibAclManager_Db extends LibAclManager
     }
 
     // per definition nicht partiell
-    $entityGUser->partial       = 0;
+    $entityGUser->partial = 0;
 
     $orm->insertIfNotExists(
       $entityGUser,
@@ -198,18 +198,18 @@ class LibAclManager_Db extends LibAclManager
     if ($entityGUser->id_area) {
 
       $partUser = new WbfsysGroupUsers_Entity(null, array(), $db);
-      $partUser->id_user    = $entityGUser->id_user;
-      $partUser->id_group   = $entityGUser->id_group;
-      $partUser->partial  = 1;
+      $partUser->id_user = $entityGUser->id_user;
+      $partUser->id_group = $entityGUser->id_group;
+      $partUser->partial = 1;
       $orm->insertIfNotExists($partUser, array('id_area','id_group','id_user','vid','partial'));
 
       // ohne area kein vid
       if ($entityGUser->vid) {
         $partUser = new WbfsysGroupUsers_Entity(null, array(), $db);
-        $partUser->id_user    = $entityGUser->id_user;
-        $partUser->id_group   = $entityGUser->id_group;
-        $partUser->id_area    = $entityGUser->id_area;
-        $partUser->partial    = 1;
+        $partUser->id_user = $entityGUser->id_user;
+        $partUser->id_group = $entityGUser->id_group;
+        $partUser->id_area = $entityGUser->id_area;
+        $partUser->partial = 1;
         $orm->insertIfNotExists($partUser, array('id_area','id_group','id_user','vid','partial'));
       }
 
@@ -237,7 +237,7 @@ class LibAclManager_Db extends LibAclManager
   {
 
     if ($area) {
-      $keyData  = $this->model->extractWeightedKeys($area);
+      $keyData = $this->model->extractWeightedKeys($area);
     } else {
       $keyData = null;
     }
@@ -265,30 +265,30 @@ class LibAclManager_Db extends LibAclManager
   )
   {
 
-    // laden der benötigten resourcen
-    $db        = $this->getDb();
-    $orm       = $db->getOrm();
+    // laden der mvc/utils adapter Objekte
+    $db = $this->getDb();
+    $orm = $db->getOrm();
 
-    $userId   = null;
-    $groupId  = null;
-    $areaId   = null;
-    $dsetId   = null;
+    $userId = null;
+    $groupId = null;
+    $areaId = null;
+    $dsetId = null;
 
     if ($entityGUser instanceof WbfsysGroupUsers_Entity) {
 
-      $userId   = $entityGUser->id_user;
-      $groupId  = $entityGUser->id_group;
-      $areaId   = $entityGUser->id_area;
-      $dsetId   = $entityGUser->vid;
+      $userId = $entityGUser->id_user;
+      $groupId = $entityGUser->id_group;
+      $areaId = $entityGUser->id_area;
+      $dsetId = $entityGUser->vid;
 
       $orm->delete($entityGUser);
 
     } elseif ($entityGUser instanceof  WbfsysRoleUser_Entity || is_numeric($entityGUser)) {
 
-      $userId   = (string) $entityGUser;
-      $groupId  = null;
-      $areaId   = null;
-      $dsetId   = null;
+      $userId = (string) $entityGUser;
+      $groupId = null;
+      $areaId = null;
+      $dsetId = null;
 
       if ($groupName) {
         if (is_string($groupName)) {
@@ -401,13 +401,13 @@ class LibAclManager_Db extends LibAclManager
   public function deleteAssgignmentById($relId)
   {
 
-    // laden der benötigten resourcen
-    $db        = $this->getDb();
-    $orm       = $db->getOrm();
+    // laden der mvc/utils adapter Objekte
+    $db = $this->getDb();
+    $orm = $db->getOrm();
 
     if (is_object($relId)) {
       $entity = $relId;
-      $relId  = $entity->getId();
+      $relId = $entity->getId();
     } else {
       $entity = $orm->get('WbfsysGroupUsers', $relId  );
     }
@@ -418,11 +418,11 @@ class LibAclManager_Db extends LibAclManager
 
     $asgdData = new TDataObject();
 
-    $asgdData->id      = $relId;
-    $asgdData->userId  = $entity->id_user;
+    $asgdData->id = $relId;
+    $asgdData->userId = $entity->id_user;
     $asgdData->groupId = $entity->id_group;
-    $asgdData->areaId  = $entity->id_area;
-    $asgdData->dsetId  = $entity->vid;
+    $asgdData->areaId = $entity->id_area;
+    $asgdData->dsetId = $entity->vid;
 
     /* @var $cModel LibAcl_Db_Maintiner_Model */
     $cModel = $this->getMaintainerModel();
@@ -522,9 +522,9 @@ class LibAclManager_Db extends LibAclManager
   public function cleanDatasetRelations($entity)
   {
 
-    // laden der benötigten resourcen
-    $db        = $this->getDb();
-    $orm       = $db->getOrm();
+    // laden der mvc/utils adapter Objekte
+    $db = $this->getDb();
+    $orm = $db->getOrm();
 
     $dsetId = null;
 
@@ -553,9 +553,9 @@ class LibAclManager_Db extends LibAclManager
   public function cleanUserRelations($user)
   {
 
-    // laden der benötigten resourcen
-    $db        = $this->getDb();
-    $orm       = $db->getOrm();
+    // laden der mvc/utils adapter Objekte
+    $db = $this->getDb();
+    $orm = $db->getOrm();
 
     $dsetId = null;
 
@@ -594,9 +594,9 @@ class LibAclManager_Db extends LibAclManager
   )
   {
 
-    // laden der benötigten resourcen
-    $db        = $this->getDb();
-    $orm       = $db->getOrm();
+    // laden der mvc/utils adapter Objekte
+    $db = $this->getDb();
+    $orm = $db->getOrm();
 
     if ($entityUserProfile instanceof User) {
       $entityUser = $entityUserProfile->getId();
@@ -608,7 +608,7 @@ class LibAclManager_Db extends LibAclManager
       $entityUser = $entityUserProfile;
 
       $entityUserProfile = new WbfsysRoleProfile_Entity(null,array(),$this->getDb());
-      $entityUserProfile->id_user  = $entityUser;
+      $entityUserProfile->id_user = $entityUser;
 
       if ($entityProfile) {
         if (is_string($entityProfile)) {
@@ -662,24 +662,24 @@ class LibAclManager_Db extends LibAclManager
   )
   {
 
-    // laden der benötigten resourcen
-    $db        = $this->getDb();
-    $orm       = $db->getOrm();
+    // laden der mvc/utils adapter Objekte
+    $db = $this->getDb();
+    $orm = $db->getOrm();
 
-    $userId     = null;
-    $profileId  = null;
+    $userId = null;
+    $profileId = null;
 
     if ($entityUserProfile instanceof WbfsysUserProfile_Entity) {
 
-      $userId     = $entityUserProfile->id_user;
-      $profileId  = $entityUserProfile->id_group;
+      $userId = $entityUserProfile->id_user;
+      $profileId = $entityUserProfile->id_group;
 
       $orm->delete($entityUserProfile);
 
     } elseif ($entityUserProfile instanceof  WbfsysRoleUser_Entity || is_numeric($entityUserProfile)) {
 
-      $userId     = $entityUserProfile->getId();
-      $profileId  = null;
+      $userId = $entityUserProfile->getId();
+      $profileId = null;
 
       if ($entityProfile) {
         if (is_string($entityProfile)) {

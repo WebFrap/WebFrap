@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibMessage_Receiver_Group
-  implements IReceiver
+class LibMessage_Receiver_Group implements IReceiver
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -83,10 +82,10 @@ class LibMessage_Receiver_Group
       $this->name = $group;
     }
 
-    $this->area     = $area;
-    $this->entity   = $entiy;
+    $this->area = $area;
+    $this->entity = $entiy;
 
-    $this->else     = $else;
+    $this->else = $else;
 
   }//end public function __construct */
 

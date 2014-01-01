@@ -20,8 +20,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibMessage_Receiver_User
-  implements IReceiver
+class LibMessage_Receiver_User implements IReceiver
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -60,7 +59,7 @@ class LibMessage_Receiver_User
 
     if (is_object($user)) {
       $this->user = $user;
-      $this->id   = $user->getId();
+      $this->id = $user->getId();
     } elseif (is_numeric($user)) {
       $this->id = $user;
     } else {

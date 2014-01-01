@@ -25,32 +25,32 @@
 class TFlagForm extends TFlag
 {
 
-  public $publish       = null;
+  public $publish = null;
 
-  public $targetId      = null;
+  public $targetId = null;
 
-  public $target        = null;
+  public $target = null;
 
-  public $targetMask    = null;
+  public $targetMask = null;
 
-  public $refId         = null;
+  public $refId = null;
 
-  public $ltype         = null;
+  public $ltype = null;
 
   /**
    *
    * Die Rootarea des Pfades über den wir gerade in den rechten wandeln
    * @var string $aclRoot
    */
-  public $aclRoot       = null;
+  public $aclRoot = null;
 
-  public $aclRootId     = null;
+  public $aclRootId = null;
 
-  public $aclKey        = null;
+  public $aclKey = null;
 
-  public $aclLevel      = null;
+  public $aclLevel = null;
 
-  public $aclNode       = null;
+  public $aclNode = null;
 
 } // end class TFlagForm
 

@@ -30,7 +30,7 @@ class LibMessageReceiver
    * Die Id des User Objekts
    * @var int
    */
-  public $id  = null;
+  public $id = null;
 
   /**
    * @var string
@@ -95,11 +95,11 @@ class LibMessageReceiver
       }
 
     } else {
-      $this->id        = $userData->id;
-      $this->nickname  = $userData->nickname;
+      $this->id = $userData->id;
+      $this->nickname = $userData->nickname;
       $this->firstname = $userData->firstname;
-      $this->lastname  = $userData->lastname;
-      $this->title     = $userData->title;
+      $this->lastname = $userData->lastname;
+      $this->title = $userData->title;
     }
 
     if ($address) {

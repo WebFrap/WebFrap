@@ -18,6 +18,8 @@
 /**
  * @package WebFrap
  * @subpackage Mvc
+ *
+ * @statefull
  */
 abstract class MvcController_Domain  extends MvcController
 {
@@ -47,23 +49,21 @@ abstract class MvcController_Domain  extends MvcController
   {
 
     if ($isData)
-      $domainKey   = $request->data('dkey', Validator::CKEY);
+      $domainKey = $request->data('dkey', Validator::CKEY);
     else
-      $domainKey   = $request->param('dkey', Validator::CKEY);
+      $domainKey = $request->param('dkey', Validator::CKEY);
 
     if (!$domainKey) {
-      throw new InvalidRequest_Exception
-      (
+      throw new InvalidRequest_Exception(
         'Missing Domain Parameter',
         Response::BAD_REQUEST
       );
     }
 
-    $domainNode  = DomainNode::getNode($domainKey);
+    $domainNode = DomainNode::getNode($domainKey);
 
     if (!$domainNode) {
-      throw new InvalidRequest_Exception
-      (
+      throw new InvalidRequest_Exception(
         'The requestes Metadate not exists',
         Response::NOT_FOUND
       );
@@ -94,10 +94,10 @@ abstract class MvcController_Domain  extends MvcController
     if (!$key || is_array($key))
       $key = $modelKey;
 
-    $modelName    = $modelKey.'_Model';
+    $modelName = $modelKey.'_Model';
 
     if (!isset($this->models[$key]  )) {
-      if (Webfrap::classLoadable($modelName)) {
+      if (Webfrap::classExists($modelName)) {
         $model = new $modelName($domainNode, $this);
         $this->models[$key] = $model;
       } else {

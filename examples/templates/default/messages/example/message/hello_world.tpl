@@ -1,1 +1,0 @@
-Hallo das ist eine einfache Hello World Message im Template

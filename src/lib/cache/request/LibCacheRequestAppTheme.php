@@ -76,7 +76,7 @@ class LibCacheRequestAppTheme extends LibCacheRequestCss
     $codeEtag = md5($code);
 
     if (!file_exists(PATH_GW.$this->folder.'/file/'))
-      SFilesystem::createFolder(PATH_GW.$this->folder.'/file/');
+      SFilesystem::mkdir(PATH_GW.$this->folder.'/file/');
 
     file_put_contents(PATH_GW.$this->folder.'/file/'.$file.'.plain' ,  $code);
     file_put_contents(PATH_GW.$this->folder.'/file/'.$file.'.plain.md5' ,  $codeEtag);
@@ -85,8 +85,8 @@ class LibCacheRequestAppTheme extends LibCacheRequestCss
 
     if ($encode) {
 
-      $encoded      = gzencode($code);
-      $encodedEtag  = md5($encoded);
+      $encoded = gzencode($code);
+      $encodedEtag = md5($encoded);
 
       file_put_contents(PATH_GW.$this->folder.'/file/'.$file.'.gz' ,  $encoded);
       file_put_contents(PATH_GW.$this->folder.'/file/'.$file.'.gz.md5' ,  $encodedEtag);
@@ -102,7 +102,7 @@ class LibCacheRequestAppTheme extends LibCacheRequestCss
     {
       // Tell the browser the content is compressed with gzip
       header ("Content-Encoding: gzip");
-      $out  = $encoded;
+      $out = $encoded;
       $etag = $encodedEtag;
     } else {
       $out = $code;
@@ -125,13 +125,13 @@ class LibCacheRequestAppTheme extends LibCacheRequestCss
   public function publishList($list)
   {
 
-    $theme        = Session::status('activ.theme');
-    $layoutType   = Session::status('default.layout');
+    $theme = Session::status('activ.theme');
+    $layoutType = Session::status('default.layout');
 
     /*
-    $layoutClass  = 'WgtLayout'.ucfirst($theme);
+    $layoutClass = 'WgtLayout'.ucfirst($theme);
 
-    if (WebFrap::classLoadable($layoutClass)) {
+    if (Webfrap::classExists($layoutClass)) {
       $layout = new $layoutClass($layoutType);
     } else {
       echo '/* WARNING FAILED TO LOAD THE THEME: '.$layoutClass.' * /'.NL;
@@ -158,7 +158,7 @@ class LibCacheRequestAppTheme extends LibCacheRequestCss
     }
 
 
-    $icons  = View::$webIcons;
+    $icons = View::$webIcons;
     $images = View::$webImages;
 
     ob_start();
@@ -174,7 +174,7 @@ class LibCacheRequestAppTheme extends LibCacheRequestCss
     $codeEtag = md5($code);
 
     if (!file_exists(PATH_GW.$this->folder.'/list/'))
-      SFilesystem::createFolder(PATH_GW.$this->folder.'/list/'  );
+      SFilesystem::mkdir(PATH_GW.$this->folder.'/list/'  );
 
     file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.plain' ,  $code);
     file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.plain.md5' ,  $codeEtag);
@@ -223,15 +223,15 @@ class LibCacheRequestAppTheme extends LibCacheRequestCss
     if (!file_exists(PATH_GW.'/conf/include/css/'.$list.'.list.php'))
       throw new ResourceNotExists_Exception("Css list {$list}");
 
-    //$theme        = Session::status('key.theme');
-    //$layoutType   = Session::status('default.layout');
-    $theme        = 'default';
-    $layoutType   = 'full';
+    //$theme = Session::status('key.theme');
+    //$layoutType = Session::status('default.layout');
+    $theme = 'default';
+    $layoutType = 'full';
 
-    $icons        = WEB_ICONS.'icons/default/';
-    $images       = WEB_THEME.'themes/default/images/';
+    $icons = WEB_ICONS.'icons/classic/';
+    $images = WEB_THEME.'themes/classic/images/';
 
-    $files  = array();
+    $files = array();
     $minify = true;
 
     if (function_exists('gzencode')) {
@@ -265,8 +265,8 @@ class LibCacheRequestAppTheme extends LibCacheRequestCss
     SFiles::write(PATH_GW.$this->folder.'/list/'.$list.'.plain.md5', $codeEtag);
 
     if ($encode) {
-      $encoded      = gzencode($code);
-      $encodedSize  = strlen($encoded);
+      $encoded = gzencode($code);
+      $encodedSize = strlen($encoded);
 
       SFiles::write(PATH_GW.$this->folder.'/list/'.$list.'.gz' ,  $encoded);
       SFiles::write

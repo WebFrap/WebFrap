@@ -30,7 +30,7 @@ class Item extends BaseChild
    * sub Modul Extention
    * @var array
    */
-  protected $models         = array();
+  protected $models = array();
 
   /**
    * @var Model
@@ -90,10 +90,10 @@ class Item extends BaseChild
     if (!$key)
       $key = $modelName;
 
-    $modelClass    = $modelName.'_Model';
+    $modelClass = $modelName.'_Model';
 
     if (!isset($this->models[$key]  )) {
-      if (Webfrap::classLoadable($modelClass)) {
+      if (Webfrap::classExists($modelClass)) {
         $model = new $modelClass($this);
         $this->models[$key] = $model;
       } else {
@@ -132,10 +132,10 @@ class Item extends BaseChild
   public function loadUi($uiName)
   {
 
-    $uiName       = ucfirst($uiName);
-    $className    = $uiName.'_Ui';
+    $uiName = ucfirst($uiName);
+    $className = $uiName.'_Ui';
 
-    if (Webfrap::classLoadable($className)) {
+    if (Webfrap::classExists($className)) {
       $ui = new $className($this);
       $ui->setView($this->getView());
 
@@ -151,26 +151,21 @@ class Item extends BaseChild
   }//end public function loadUi */
 
   /**
-   * Enter description here...
-   *
    * @param string $key
-   * @return WgtForm
+   * @param string $type
+   * @return WgtCrudForm
    */
-  public function newForm($key , $type = null  )
+  public function newForm($key, $type = null  )
   {
 
     $type = $type
       ? ucfirst($type)
       : ($key);
 
-    $className    = $type.'_Form';
-    $classNameOld = 'WgtForm'.$type;
+    $className = $type.'_Form';
 
-    if (!WebFrap::classLoadable($className)) {
-      // fall back to old name convention
-      $className = $classNameOld;
-      if (!WebFrap::classLoadable($className))
-        throw new LibTemplate_Exception('Requested noexisting form '.$type);
+    if (!Webfrap::classExists($className)) {
+      throw new LibTemplate_Exception('Requested noexisting Form Class '.$type);
     }
 
     $form = new $className($this->getView());

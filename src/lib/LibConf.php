@@ -25,17 +25,17 @@ class LibConf
   /**
    * @var array
    */
-  public $status      = null;
+  public $status = null;
 
   /**
    * @var array
    */
-  public $modules     = null;
+  public $modules = null;
 
   /**
    * @var array
    */
-  public $objids      = array();
+  public $objids = array();
 
   /**
    * @var array
@@ -45,23 +45,23 @@ class LibConf
   /**
    * @var array
    */
-  public $redirect    = array();
+  public $redirect = array();
 
   /**
    * speicher für maps aus conf/map
    * @var array
    */
-  protected $maps     = array();
+  protected $maps = array();
 
   /**
    * @var array
    */
-  protected $appConf  = array();
+  protected $appConf = array();
 
   /**
    * @var array
    */
-  protected $userSettings  = array();
+  protected $userSettings = array();
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Constructor
@@ -73,8 +73,8 @@ class LibConf
   public function __construct()
   {
 
-    $this->status   = new TArray();
-    $this->modules  = new TArray();
+    $this->status = new TArray();
+    $this->modules = new TArray();
 
     $this->load();
 
@@ -163,6 +163,19 @@ class LibConf
      return $tmp;
 
   }//end public function getStatus */
+
+  /**
+   * Rückgabe eines Status Keys
+   * @param string $key
+   * @return string
+   */
+  public function getVal($key)
+  {
+
+    $tmp = $this->status[$key];
+    return $tmp;
+
+  }//end public function getVal */
 
   /**
    * @param $name

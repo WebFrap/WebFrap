@@ -29,52 +29,52 @@ class LibParserDocHtml
   /** The master template
    * @var string
    */
-  protected $theme  = 'default';
+  protected $theme = 'default';
 
   /** The Index
    * @var string
    */
-  protected $indexTemplate   = 'plain';
+  protected $indexTemplate = 'plain';
 
   /** The main Template
    * @var string
    */
-  protected $template        = null;
+  protected $template = null;
 
   /**
    * @var string
    */
-  protected $title           = null;
+  protected $title = null;
 
   /**
    * @var array
    */
-  protected $var             = array();
+  protected $var = array();
 
   /**
    * @var array
    */
-  protected $object          = array();
+  protected $object = array();
 
   /**
    * @var array
    */
-  protected $objectHtml      = array();
+  protected $objectHtml = array();
 
   /**
    * @var string
    */
-  protected $assembledBody      = '';
+  protected $assembledBody = '';
 
   /**
    * @var string
    */
-  protected $assembledMessages  = null;
+  protected $assembledMessages = null;
 
   /**
    * @var boolean
    */
-  protected $compiled        = false;
+  protected $compiled = false;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // magic methodes
@@ -87,16 +87,16 @@ class LibParserDocHtml
   public function __construct()
   {
 
-     $this->var         = new TDataObject();
-     $this->object      = new TDataObject();
-     $this->objectHtml  = new TDataObject();
+     $this->var = new TDataObject();
+     $this->object = new TDataObject();
+     $this->objectHtml = new TDataObject();
 
      $wbf = Webfrap::getActive();
 
      if ($theme = $wbf->getSysStatus('systemplate')) {
        $this->theme = $theme;
      } else {
-       $this->theme  = 'default';
+       $this->theme = 'default';
      }
 
    }// end public function __construct
@@ -126,8 +126,6 @@ class LibParserDocHtml
     */
    public function setIndex($index = 'default')
    {
-     if (Log::$levelDebug)
-      Log::start(__file__ , __line__ , __method__,array($index));
 
      $this->indexTemplate = $index;
 
@@ -138,8 +136,6 @@ class LibParserDocHtml
     */
    public function setTemplate($template , $folder = null)
    {
-     if (Log::$levelDebug)
-      Log::start(__file__ , __line__ , __method__,array($template , $folder));
 
      $sub = is_null($folder) ? '' : $folder.'/';
 
@@ -156,8 +152,6 @@ class LibParserDocHtml
    */
   public function addVar($key, $data = null)
   {
-     if (Log::$levelDebug)
-      Log::start(__file__ , __line__ , __method__,array($key, $data));
 
     if (is_scalar($key)) {
       $this->var->content[$key] = $data;
@@ -176,15 +170,13 @@ class LibParserDocHtml
    */
   public function addItem($key, $type , $subtype = 'Item')
   {
-    if (Log::$levelDebug)
-      Log::start(__file__ , __line__ , __method__,array($key, $type , $subtype));
 
     if (isset($this->object->content[$key])) {
       return $this->object->content[$key];
     } else {
       $className = 'Wgt'.ucfirst($subtype).ucfirst($type);
 
-      if (!WebFrap::loadable($className)) {
+      if (!WebFrap::classExists($className)) {
         throw new WgtItemNotFound_Exception
         (
         'Class '.$className.' was not found'
@@ -236,12 +228,12 @@ class LibParserDocHtml
     $filename = TEMPLATE_PATH.'modules/'.$template.'.tpl';
 
     if (file_exists($filename) and is_readable($filename)) {
-      $TITLE     = $this->title;
-      $VAR       = $this->var;
-      $ITEM      = $this->objectHtml;
-      $ELEMENT   = $this->objectHtml;
-      $WGI       = $this->object;
-      $LANG      = I18n::getDefault();
+      $TITLE = $this->title;
+      $VAR = $this->var;
+      $ITEM = $this->objectHtml;
+      $ELEMENT = $this->objectHtml;
+      $WGI = $this->object;
+      $LANG = I18n::getDefault();
 
       ob_start();
       include $filename;
@@ -269,10 +261,10 @@ class LibParserDocHtml
 
     if (file_exists($filename) and is_readable($filename)) {
 
-      $VAR       = $this->var;
-      $ITEM      = $this->objectHtml;
-      $WGI       = $this->object;
-      $LANG      = I18n::getDefault();
+      $VAR = $this->var;
+      $ITEM = $this->objectHtml;
+      $WGI = $this->object;
+      $LANG = I18n::getDefault();
 
       ob_start();
       include $filename;
@@ -306,12 +298,12 @@ class LibParserDocHtml
   public function cleanView()
   {
 
-    $this->template    = null;
+    $this->template = null;
     $this->mainCaption = null;
-    $this->var         = array();
-    $this->object      = array();
-    $this->objectHtml  = null;
-    $this->assembledBody  = '';
+    $this->var = array();
+    $this->object = array();
+    $this->objectHtml = null;
+    $this->assembledBody = '';
 
   }// end cleanView
 
@@ -327,11 +319,11 @@ class LibParserDocHtml
 
     if (file_exists($filename)) {
 
-      $VAR       = $this->var;
-      $ITEM      = $this->objectHtml;
-      $WGI       = $this->object;
-      $TEMPLATE  = $this->template;
-      $LANG      = I18n::getDefault();
+      $VAR = $this->var;
+      $ITEM = $this->objectHtml;
+      $WGI = $this->object;
+      $TEMPLATE = $this->template;
+      $LANG = I18n::getDefault();
 
       ob_start();
       include $filename;

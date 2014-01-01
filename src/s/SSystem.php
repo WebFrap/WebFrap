@@ -43,6 +43,8 @@ final class SSystem
       return $result;
     }
 
+    return null;
+
   }//end public static function call */
 
 }// end final class SSystem

@@ -26,17 +26,17 @@ class LibProtocolFile
 
   /** Die Name der Datei
    */
-  private $fileName     = null;
+  private $fileName = null;
 
   /** Der Filehandle
    */
-  private $handle       = null;
+  private $handle = null;
 
   /** Default constructor
    *  the conf and open a file
    *
    */
-  public function __construct($fileName , $accessMode  = 'w')
+  public function __construct($fileName , $accessMode = 'w')
   {
 
     $this->fileName = $fileName;
@@ -44,7 +44,7 @@ class LibProtocolFile
     $folder = dirname($fileName);
 
     if (!file_exists($folder))
-      SFilesystem::createFolder($folder);
+      SFilesystem::mkdir($folder);
 
     $this->handle = fopen($fileName, $accessMode);
 

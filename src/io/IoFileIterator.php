@@ -91,25 +91,25 @@ class IoFileIterator
   public function __construct
   (
     $folder,
-    $mode       = IoFileIterator::RELATIVE,
-    $recursive  = true,
-    $filter     = null
+    $mode = IoFileIterator::RELATIVE,
+    $recursive = true,
+    $filter = null
   )
   {
 
-    $this->folder     = str_replace('//', '/', $folder);
+    $this->folder = str_replace('//', '/', $folder);
 
-    $this->mode       = IoFileIterator::RELATIVE;
-    $this->recursive  = $recursive;
+    $this->mode = IoFileIterator::RELATIVE;
+    $this->recursive = $recursive;
 
     if ($filter)
-      $this->filter     = explode(',', $filter);
+      $this->filter = explode(',', $filter);
 
     if (is_dir($folder)) {
       $this->fRes = opendir($folder);
       $this->next();
     } else {
-      Debug::console('Tried to open nonexisting Folder: '.$folder);
+      Log::warn('Tried to open nonexisting Folder: '.$folder);
     }
 
   }// public function __construct
@@ -184,8 +184,8 @@ class IoFileIterator
     if (!is_resource($this->fRes))
       return null;
 
-    $repeat   = true;
-    $current  = null;
+    $repeat = true;
+    $current = null;
 
     while ($repeat) {
 
@@ -194,12 +194,12 @@ class IoFileIterator
 
         if ($nextSub) {
           $this->current = $nextSub;
-          $this->key     = $nextSub;
+          $this->key = $nextSub;
 
           return $this->current;
         } else {
           $this->subFolder = null;
-          $this->current   = null;
+          $this->current = null;
           continue;
         }
       }
@@ -226,7 +226,7 @@ class IoFileIterator
 
           if (!$current) {
             $this->subFolder = null;
-            $this->current   = null;
+            $this->current = null;
             continue;
           }
 
@@ -277,8 +277,8 @@ class IoFileIterator
 
     Debug::console('next folder '.$this->folder);
 
-    $repeat   = false;
-    $current  = null;
+    $repeat = false;
+    $current = null;
 
     do {
 
@@ -291,7 +291,7 @@ class IoFileIterator
           return $this->current;
         } else {
           $this->subFolder = null;
-          $this->current   = null;
+          $this->current = null;
           continue;
         }
       }
@@ -313,7 +313,7 @@ class IoFileIterator
 
           if (!$current) {
             $this->subFolder = null;
-            $this->current   = null;
+            $this->current = null;
             continue;
           }
 

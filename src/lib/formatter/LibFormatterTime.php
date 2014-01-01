@@ -31,19 +31,19 @@ class LibFormatterTime
    *
    * @var unknown_type
    */
-  protected static $instance  = null;
+  protected static $instance = null;
 
-  protected $timeOrigin   = null;
+  protected $timeOrigin = null;
 
-  protected $timeRaw      = array();
+  protected $timeRaw = array();
 
-  protected $timeEnglish  = null;
+  protected $timeEnglish = null;
 
-  protected $format       = 'H:i:s';
+  protected $format = 'H:i:s';
 
-  protected $formatRaw    = array();
+  protected $formatRaw = array();
 
-  protected $separator    = ':';
+  protected $separator = ':';
 
   /**
    *
@@ -121,7 +121,7 @@ class LibFormatterTime
   public function setTimeLanguage($time)
   {
     if (trim($time) == '') {
-      $this->timeOrigin  = null;
+      $this->timeOrigin = null;
       $this->timeEnglish = null;
 
       return;

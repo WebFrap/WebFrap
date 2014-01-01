@@ -28,13 +28,13 @@ class LibParserHumanName
 
   public $firstName = null;
 
-  public $lastName  = null;
+  public $lastName = null;
 
-  public $academic  = null;
+  public $academic = null;
 
-  public $nobility  = null;
+  public $nobility = null;
 
-  public $origin    = null;
+  public $origin = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // parser attributes
@@ -78,10 +78,10 @@ class LibParserHumanName
   public function clean()
   {
     $this->firstName = null;
-    $this->lastName  = null;
-    $this->academic  = null;
-    $this->nobility  = null;
-    $this->origin    = null;
+    $this->lastName = null;
+    $this->academic = null;
+    $this->nobility = null;
+    $this->origin = null;
   }
 
 }//end class LibAnnotationParser

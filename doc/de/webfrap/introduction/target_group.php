@@ -1,1 +1,0 @@
-<h1>Zielgruppe</h1>

@@ -24,7 +24,7 @@ if (!defined('ACL_MAX_PERMISSION')) {
 }
 
 if (!defined('ACL_RELATION')) {
-    define('ACL_RELATION', 'webfrap_inject_acls_view');
+    define('ACL_RELATION', 'webfrap_area_user_level_view');
 }
 
 if (!defined('ACL_ROLE_RELATION')) {
@@ -51,9 +51,9 @@ if (!defined('ACL_ROLE_RELATION')) {
 class Acl
 {
 
-    /*//////////////////////////////////////////////////////////////////////////////
-  // Constantes
-  //////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////
+// Constantes
+//////////////////////////////////////////////////////////////////////////////*/
 
     /**
      * @lang de:
@@ -172,9 +172,9 @@ class Acl
      */
     const ACL_OVERWRITE = true;
 
-    /*//////////////////////////////////////////////////////////////////////////////
-  //
-  //////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////////*/
 
     /**
      * @var string
@@ -206,9 +206,9 @@ class Acl
      */
     const PROFILE = 'profile';
 
-    /*//////////////////////////////////////////////////////////////////////////////
-  //
-  //////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////
+//
+//////////////////////////////////////////////////////////////////////////////*/
 
     /**
      * @lang de:
@@ -220,17 +220,17 @@ class Acl
      * @var array
      */
     public static $accessLevels = array(
-        'denied'      => 0,
-        'listing'     => 1,
-        'access'      => 2,
-        'assign'      => 4,
-        'insert'      => 8,
-        'update'      => 16,
-        'delete'      => 32,
-        'publish'     => 64,
-        'maintenance' => 128,
-        'rights'      => 256,
-        'admin'       => 256
+      'denied' => 0,
+      'listing' => 1,
+      'access' => 2,
+      'assign' => 4,
+      'insert' => 8,
+      'update' => 16,
+      'delete' => 32,
+      'publish' => 64,
+      'maintenance' => 128,
+      'rights' => 256,
+      'admin' => 256
     );
 
     /**
@@ -243,19 +243,19 @@ class Acl
      * @var array
      */
     public static $simpleAccessLevels = array(
-        'none'       => 0,
-        'access'     => 2,
-        'insert'     => 8,
-        'update_own' => 16,
-        'delete_own' => 32,
-        'update'     => 64,
-        'delete'     => 128,
-        'admin'      => 256
+      'none' => 0,
+      'access' => 2,
+      'insert' => 8,
+      'update_own' => 16,
+      'delete_own' => 32,
+      'update' => 64,
+      'delete' => 128,
+      'admin' => 256
     );
 
-    /*//////////////////////////////////////////////////////////////////////////////
-  // Methodes
-  //////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////
+// Methodes
+//////////////////////////////////////////////////////////////////////////////*/
 
     /**
      * @lang de:
@@ -305,9 +305,9 @@ class Acl
      */
     protected $user = null;
 
-    /*//////////////////////////////////////////////////////////////////////////////
-  // Messaging System
-  //////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////
+// Messaging System
+//////////////////////////////////////////////////////////////////////////////*/
 
     /**
      * Standard Konstruktor
@@ -320,9 +320,9 @@ class Acl
         $this->user = User::getActive();
     } //end public function __construct
 
-    /*//////////////////////////////////////////////////////////////////////////////
-  // getter & setter
-  //////////////////////////////////////////////////////////////////////////////*/
+/*//////////////////////////////////////////////////////////////////////////////
+// getter & setter
+//////////////////////////////////////////////////////////////////////////////*/
 
     /**
      * Init Methode
@@ -408,7 +408,7 @@ class Acl
             if (!defined('WBF_ACL_ADAPTER')) {
                 self::$manager = new LibAclManager_Db($env);
             } else {
-                $className     = 'LibAclManager_' . ucfirst(WBF_ACL_ADAPTER);
+                $className = 'LibAclManager_' . ucfirst(WBF_ACL_ADAPTER);
                 self::$manager = new $className($env);
             }
         }
@@ -467,10 +467,10 @@ class Acl
      */
     public function level($key, $access = null)
     {
-        $tmp    = explode(':', $key);
+        $tmp = explode(':', $key);
         $orgKey = $tmp[0];
-        $files  = explode('/', $tmp[0]);
-        $key    = $tmp[1];
+        $files = explode('/', $tmp[0]);
+        $key = $tmp[1];
 
         if (is_null($access)) {
             $access = $this->user->getLevel();
@@ -481,7 +481,7 @@ class Acl
         foreach ($files as $subPath) {
 
             $fullKey[] = $subPath;
-            $file      = implode('/', $fullKey);
+            $file = implode('/', $fullKey);
 
             if (!isset($this->level[$file][$key])) {
                 if (!$this->loadLists($file)) {
@@ -511,10 +511,10 @@ class Acl
      */
     public function group($key, $access = null)
     {
-        $tmp    = explode(':', $key);
+        $tmp = explode(':', $key);
         $orgKey = $tmp[0];
-        $files  = explode('/', $tmp[0]);
-        $key    = $tmp[1];
+        $files = explode('/', $tmp[0]);
+        $key = $tmp[1];
 
         if (is_null($access)) {
             $access = $this->user->getGroups();
@@ -524,7 +524,7 @@ class Acl
         foreach ($files as $subPath) {
 
             $fullKey[] = $subPath;
-            $file      = implode('/', $fullKey);
+            $file = implode('/', $fullKey);
 
             if (!isset($this->group[$file][$key])) {
                 // if this is the original Path an there are no ALCs access ist denied

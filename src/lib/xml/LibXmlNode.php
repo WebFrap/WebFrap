@@ -55,7 +55,7 @@ class LibXmlNode
   {
 
     $this->document = $document;
-    $this->dom      = $node;
+    $this->dom = $node;
 
   }//end public function __construct */
 
@@ -364,8 +364,6 @@ class LibXmlNode
   {
 
     $list = $this->document->xpath('./'.$type.'/text[@lang="'.$lang.'"]', $this->dom);
-
-    $nodes = array();
 
     if ($list->length) {
       $node = $list->item(0);

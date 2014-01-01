@@ -40,32 +40,41 @@ class LibFlowApachemod extends Base
    * the active module object
    * @var Module
    */
-  protected $module               = null;
+  protected $module = null;
 
   /**
    * name of the active module
    * @var string
    */
-  protected $moduleName           = null;
+  protected $moduleName = null;
 
   /**
    * the activ controller object
    * @var Controller
    */
-  protected $controller           = null;
+  protected $controller = null;
 
   /**
    * name of the activ controller
    * @var string
    */
-  protected $controllerName       = null;
+  protected $controllerName = null;
 
   /**
-   * mappertabelle für shortlinks
+   * mappertabelle for url short links
    *
    * @var array
    */
-  protected $redirectMap          = array();
+  protected $redirectMap = array();
+
+  /**
+   * List of callbacks to be executed on shutdown
+   *
+   * @example $flow->registerShutdownFunction( $key, $closure );
+   *
+   * @var array
+   */
+  protected $shutDownFunctions = array();
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic
@@ -82,13 +91,22 @@ class LibFlowApachemod extends Base
 
     foreach ($conf->redirect as $name => $data) {
       if (isset($_GET[$name])) {
-        $_GET['c']      = $data[0];
+        $_GET['c'] = $data[0];
         $_GET[$data[1]] = $_GET[$name];
         break;
       }
     }
 
   }//end protected function checkRedirect */
+
+  /**
+   * @param string $key
+   * @param Closure $func
+   */
+  public function registerShutdownFunction($key, $func)
+  {
+    $this->shutDownFunctions[$key] = $func;
+  }//end public function registerShutdownFunction */
 
  /**
   *
@@ -112,9 +130,9 @@ class LibFlowApachemod extends Base
 
     if (defined('MODE_MAINTENANCE')) {
       $map = array(
-        Request::MOD  => 'Maintenance',
-        Request::CON  => 'Base',
-        Request::RUN  => 'message'
+        Request::MOD => 'Maintenance',
+        Request::CON => 'Base',
+        Request::RUN => 'message'
       );
       $request->addParam($map);
 
@@ -127,9 +145,9 @@ class LibFlowApachemod extends Base
 
       $tmp = explode('.',$command);
       $map = array(
-        Request::MOD  => $tmp[0],
-        Request::CON  => $tmp[1],
-        Request::RUN  => $tmp[2]
+        Request::MOD => $tmp[0],
+        Request::CON => $tmp[1],
+        Request::RUN => $tmp[2]
       );
       $request->addParam($map);
 
@@ -137,9 +155,9 @@ class LibFlowApachemod extends Base
 
       $tmp = explode('.',$command);
       $map = array(
-        Request::MOD  => $tmp[0],
-        Request::CON  => $tmp[1],
-        Request::RUN  => $tmp[2]
+        Request::MOD => $tmp[0],
+        Request::CON => $tmp[1],
+        Request::RUN => $tmp[2]
       );
       $request->addParam($map);
     }
@@ -153,7 +171,7 @@ class LibFlowApachemod extends Base
   public function wakeup()
   {
 
-    $request  = $this->getRequest();
+    $request = $this->getRequest();
     $response = $this->getResponse();
     $session = $this->getSession();
     $this->getUser();
@@ -168,9 +186,9 @@ class LibFlowApachemod extends Base
 
     if (defined('MODE_MAINTENANCE')) {
       $map = array(
-        Request::MOD  => 'Maintenance',
-        Request::CON  => 'Base',
-        Request::RUN  => 'message'
+        Request::MOD => 'Maintenance',
+        Request::CON => 'Base',
+        Request::RUN => 'message'
       );
       $request->addParam($map);
 
@@ -182,17 +200,17 @@ class LibFlowApachemod extends Base
     if ($command = $request->param('c', Validator::TEXT  )) {
       $tmp = explode('.',$command);
       $map = array(
-        Request::MOD  => $tmp[0],
-        Request::CON  => $tmp[1],
-        Request::RUN  => $tmp[2]
+        Request::MOD => $tmp[0],
+        Request::CON => $tmp[1],
+        Request::RUN => $tmp[2]
       );
       $request->addParam($map);
     } elseif ($command = $request->data('c', Validator::TEXT)) {
       $tmp = explode('.',$command);
       $map = array(
-        Request::MOD  => $tmp[0],
-        Request::CON  => $tmp[1],
-        Request::RUN  => $tmp[2]
+        Request::MOD => $tmp[0],
+        Request::CON => $tmp[1],
+        Request::RUN => $tmp[2]
       );
       $request->addParam($map);
     }
@@ -208,7 +226,7 @@ class LibFlowApachemod extends Base
   * @param Transaction $transaction
   * @return void
   */
-  public function main($httpRequest = null, $session = null, $transaction = null  )
+  public function main($httpRequest = null, $session = null, $transaction = null)
   {
 
     // get the info from where main was called
@@ -216,16 +234,16 @@ class LibFlowApachemod extends Base
       Debug::console('Called MAIN flow', null, true);
 
     // Startseiten Eintrag ins Navmenu
-    $view     = $this->getView();
+    $view = $this->getView();
 
     if (!$session)
-      $session      = $this->session;
+      $session = $this->session;
 
     if (!$httpRequest)
-      $httpRequest  = $this->request;
+      $httpRequest = $this->request;
 
     if (!$transaction)
-      $transaction  = $this->transaction;
+      $transaction = $this->transaction;
 
     $user = $this->getUser();
 
@@ -234,9 +252,9 @@ class LibFlowApachemod extends Base
       if (!$user->getLogedIn()) {
         $tmp = explode('.',$session->getStatus('tripple.annon'));
         $map = array(
-          Request::MOD  => $tmp[0],
-          Request::CON  => $tmp[1],
-          Request::RUN  => $tmp[2]
+          Request::MOD => $tmp[0],
+          Request::CON => $tmp[1],
+          Request::RUN => $tmp[2]
         );
         $httpRequest->addParam($map);
 
@@ -246,9 +264,9 @@ class LibFlowApachemod extends Base
         $tmp = explode('.',$session->getStatus('tripple.user'));
         $map = array
         (
-          Request::MOD  => $tmp[0],
-          Request::CON  => $tmp[1],
-          Request::RUN  => $tmp[2]
+          Request::MOD => $tmp[0],
+          Request::CON => $tmp[1],
+          Request::RUN => $tmp[2]
         );
         $httpRequest->addParam($map);
 
@@ -256,12 +274,12 @@ class LibFlowApachemod extends Base
       }
     }//end if (!$sysClass = $httpRequest->param(Request::MOD,'Cname'))
 
-    $modName      = ucfirst($sysClass);
-    $className    = $modName.'_Module';
+    $modName = ucfirst($sysClass);
+    $className = $modName.'_Module';
 
     $classNameOld = 'Module'.$modName;
 
-    if (Webfrap::classLoadable($className)) {
+    if (Webfrap::classExists($className)) {
       Debug::console('$module',$className);
 
       $this->module = new $className($this);
@@ -270,7 +288,7 @@ class LibFlowApachemod extends Base
 
       // everythin fine
       return true;
-    } else  if (Webfrap::classLoadable($classNameOld)) {
+    } else  if (Webfrap::classExists($classNameOld)) {
       Debug::console('$module',$classNameOld);
 
       $this->module = new $classNameOld($this);
@@ -302,10 +320,10 @@ class LibFlowApachemod extends Base
 
     try {
 
-      $classname    = $module.$controller.WBF_CONTROLLER_PREFIX.'_Controller';
+      $classname = $module.$controller.WBF_CONTROLLER_PREFIX.'_Controller';
       $classnameOld = 'Controller'.$module.$controller;
 
-      if (WebFrap::loadable($classname)) {
+      if (WebFrap::classExists($classname)) {
         $this->controller = new $classname($this);
         if (method_exists($this->controller, 'setDefaultModel'))
           $this->controller->setDefaultModel($module.$controller);
@@ -324,7 +342,7 @@ class LibFlowApachemod extends Base
         if ($this->controller)
           $this->controller->shutdownController();
 
-      } elseif (WebFrap::loadable($classnameOld)) {
+      } elseif (WebFrap::classExists($classnameOld)) {
 
         $classname = $classnameOld;
 
@@ -346,15 +364,14 @@ class LibFlowApachemod extends Base
         $this->controller->shutdownController();
 
       } else {
+
         throw new WebfrapUser_Exception('Resource '.$classname.' not exists!');
       }
 
     } catch (Exception $exc) {
 
-      Error::report
-      (
-        I18n::s
-        (
+      Error::report(
+        I18n::s(
           'Module Error: {@message@}',
           'wbf.message' ,
           array('message' => $exc->getMessage())
@@ -363,8 +380,8 @@ class LibFlowApachemod extends Base
       );
 
       // if the controller ist not loadable set an error controller
-      $this->controller     = new Error_Controller($this);
-      $this->controllerName = 'ControllerError';
+      $this->controller = new Error_Controller($this);
+      $this->controllerName = 'Error_Controller';
       //\Reset The Extention
 
       if (Log::$levelDebug) {
@@ -417,7 +434,7 @@ class LibFlowApachemod extends Base
 
     $errorClass = 'LibHttpError'.$errorKey;
 
-    if (!Webfrap::classLoadable($errorClass))
+    if (!Webfrap::classExists($errorClass))
       $errorClass = 'LibHttpError500';
 
     $error = new $errorClass($data);
@@ -449,12 +466,18 @@ class LibFlowApachemod extends Base
       Debug::publishDebugdata();
 
     if (Session::$session->getStatus('logout')) {
-      Log::info
-      (
+      Log::info(
         'User logged of from system'
       );
 
       Session::destroy();
+    }
+
+    if ($this->shutDownFunctions) {
+      foreach ($this->shutDownFunctions as $shutFunc) {
+        // execute the shutdown function
+        $shutFunc($this);
+      }
     }
 
     Session::close();
@@ -476,8 +499,7 @@ class LibFlowApachemod extends Base
   public function panikShutdown($file, $line,  $lastMessage)
   {
 
-    Log::fatal
-    (
+    Log::fatal(
       'System got killed: '.$file.' Linie: '.$line .' reason: '.$lastMessage
     );
 
@@ -521,9 +543,9 @@ class LibFlowApachemod extends Base
     if ($this->controller)
       $this->controller->shutdownController();
 
-    $this->module       = null;
-    $this->moduleName     = null;
-    $this->controller     = null;
+    $this->module = null;
+    $this->moduleName = null;
+    $this->controller = null;
     $this->controllerName = null;
 
     if (is_array($target)) {
@@ -534,11 +556,10 @@ class LibFlowApachemod extends Base
       } else {
         $tmp = explode('.', $this->session->getStatus('tripple.login'));
 
-        $map = array
-        (
-          Request::MOD  => $tmp[0],
-          Request::CON  => $tmp[1],
-          Request::RUN  => $tmp[2]
+        $map = array(
+          Request::MOD => $tmp[0],
+          Request::CON => $tmp[1],
+          Request::RUN => $tmp[2]
         );
       }
 
@@ -551,9 +572,9 @@ class LibFlowApachemod extends Base
 
       $map = array
       (
-        Request::MOD  => $tmp[0],
-        Request::CON  => $tmp[1],
-        Request::RUN  => $tmp[2]
+        Request::MOD => $tmp[0],
+        Request::CON => $tmp[1],
+        Request::RUN => $tmp[2]
       );
 
     }
@@ -582,9 +603,9 @@ class LibFlowApachemod extends Base
     // shutdown actual controller
     $this->controller->shutdownController();
 
-    $this->module       = null;
-    $this->moduleName     = null;
-    $this->controller     = null;
+    $this->module = null;
+    $this->moduleName = null;
+    $this->controller = null;
     $this->controllerName = null;
 
     View::rebase(SFormatStrings::subToCamelCase($viewType));
@@ -595,9 +616,9 @@ class LibFlowApachemod extends Base
       $map = array
       (
         'c' => $loginTripple,
-        Request::MOD  => $tmp[0],
-        Request::CON  => $tmp[1],
-        Request::RUN  => $tmp[2]
+        Request::MOD => $tmp[0],
+        Request::CON => $tmp[1],
+        Request::RUN => $tmp[2]
       );
       $request->addParam($map);
     }
@@ -650,9 +671,9 @@ class LibFlowApachemod extends Base
 
     $map = array
     (
-      Request::MOD  => $tmp[0],
-      Request::CON  => $tmp[1],
-      Request::RUN  => $tmp[2]
+      Request::MOD => $tmp[0],
+      Request::CON => $tmp[1],
+      Request::RUN => $tmp[2]
     );
     $this->redirect($map);
 
@@ -673,9 +694,9 @@ class LibFlowApachemod extends Base
 
     $map = array
     (
-      Request::MOD  => $tmp[0],
-      Request::CON  => $tmp[1],
-      Request::RUN  => $tmp[2]
+      Request::MOD => $tmp[0],
+      Request::CON => $tmp[1],
+      Request::RUN => $tmp[2]
     );
     $this->redirect($map);
 
@@ -696,9 +717,9 @@ class LibFlowApachemod extends Base
 
     $map = array
     (
-      Request::MOD  => $tmp[0],
-      Request::CON  => $tmp[1],
-      Request::RUN  => $tmp[2]
+      Request::MOD => $tmp[0],
+      Request::CON => $tmp[1],
+      Request::RUN => $tmp[2]
     );
     $this->redirect($map);
 

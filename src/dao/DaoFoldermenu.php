@@ -31,53 +31,53 @@ class DaoFoldermenu extends Dao
    * Der erste anzugeigenden Eintrag des Menüs
    * @var array
    */
-  public $firstEntry  = null;
+  public $firstEntry = null;
 
   /**
    * Einträge die als Ordner angezeigt werden, öffnen in der Regel ein neues
    * Menü
    * @var array
    */
-  public $folders     = array();
+  public $folders = array();
 
   /**
    * Einträge die als Datei / Entity angezeigt werden, verweisen in der Regel
    * auf eine Maske
    * @var array
    */
-  public $files       = array();
+  public $files = array();
 
   /**
    * Crumbs für die Adresszeile im Menü
    * @var array
    */
-  public $crumbs      = array();
+  public $crumbs = array();
 
   /**
    * @var array
    */
-  public $sort        = true;
+  public $sort = true;
 
   /**
    * Das Viewobjekt in dem das Menü verwendet wird
    * @var array
    */
-  public $view        = null;
+  public $view = null;
 
   /**
    * @var string
    */
-  public $interface   = 'maintab.php';
+  public $interface = 'maintab.php';
 
   /**
    * @var string
    */
-  public $title   = null;
+  public $title = null;
 
   /**
    * @var string
    */
-  public $label   = null;
+  public $label = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Static Attributes
@@ -104,9 +104,9 @@ class DaoFoldermenu extends Dao
 
     $this->view = View::getActive();
 
-    $acl        = Acl::getActive();
-    $view       = $this->view;
-    $user       = User::getActive();
+    $acl = Acl::getActive();
+    $view = $this->view;
+    $user = User::getActive();
 
     $title = null;
     $label = null;
@@ -192,7 +192,7 @@ class DaoFoldermenu extends Dao
       if (!file_exists($menuPath))
         continue;
 
-      $folder   = new LibFilesystemFolder($menuPath);
+      $folder = new LibFilesystemFolder($menuPath);
       $menuData = new DaoFoldermenu($folder->getFiles());
 
       if (DEBUG)

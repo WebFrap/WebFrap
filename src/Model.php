@@ -31,13 +31,13 @@ abstract class Model extends BaseChild
    * Die vorhadenen Registry keys
    * @var array
    */
-  protected $regKeys  = array();
+  protected $regKeys = array();
 
   /**
    * sub Modul Extention
    * @var array
    */
-  protected $subModels       = array();
+  protected $subModels = array();
 
   /**
    * Error Object zum sammeln von Fehlermeldungen
@@ -62,34 +62,8 @@ abstract class Model extends BaseChild
 
     $this->getRegistry();
 
-    if (DEBUG)
-      Debug::console('Load model '.get_class($this));
-
   }//end public function __construct */
 
-/*//////////////////////////////////////////////////////////////////////////////
-// Generic Logic Methodes
-//////////////////////////////////////////////////////////////////////////////*/
-
-  /**
-   *
-   * @param LibTemplateAjax $view
-   * @param string $key
-   * @param string $wgtId
-   *
-   * @return void
-   */
-  public function removeTableRow($view, $key, $wgtId  )
-  {
-
-    $code = <<<JSCODE
-    \$S('#{$wgtId}_row_{$key}').fadeOut(100,function() {\$S('#{$wgtId}_row_{$key}').remove();});
-
-JSCODE;
-
-    $view->addJsCode($code);
-
-  }//end public function removeTableRow */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // registry methodes
@@ -116,7 +90,7 @@ JSCODE;
    */
   public function register($key, $value)
   {
-    $this->regKeys[$key]  = true;
+    $this->regKeys[$key] = true;
     $this->registry[$key] = $value;
   }//end public function register */
 
@@ -175,13 +149,13 @@ JSCODE;
     if (!$key)
       $key = $modelKey;
 
-    $modelName    = $modelKey.'_Model';
+    $modelName = $modelKey.'_Model';
     $modelNameOld = 'Model'.$modelKey;
 
     if (!isset($this->subModels[$key]  )) {
-      if (!Webfrap::classLoadable($modelName)) {
+      if (!Webfrap::classExists($modelName)) {
         $modelName = $modelNameOld;
-        if (!Webfrap::classLoadable($modelName)) {
+        if (!Webfrap::classExists($modelName)) {
           throw new Controller_Exception('Internal Error', 'Failed to load Submodul: '.$modelName);
         }
       }

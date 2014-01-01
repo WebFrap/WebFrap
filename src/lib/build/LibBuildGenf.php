@@ -35,7 +35,7 @@ class LibBuildGenf extends LibBuildAction
   public function execute()
   {
 
-    $action         = $this->args[0];
+    $action = $this->args[0];
 
     if (!method_exists($this , $action)) {
       Error::addError('Requested invalid Genf Action: '.$action.'sn . Please Check you Buildconfiguration.');

@@ -52,7 +52,7 @@ class LibVerificationSql extends LibVerificationAdapter
       $orm = $this->dataSource;
 
     try {
-      if (!$role = $orm->get('WbfsysRoleUser', " upper(name) = '".strtoupper($login)."' ")) {
+      if (!$role = $orm->get('WbfsysRoleUser', " upper(name) = upper('".$login."') ")) {
         Message::addError(I18n::s('No User with that name', 'wbf.message'));
 
         return false;

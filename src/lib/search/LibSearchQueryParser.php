@@ -29,19 +29,19 @@ class LibSearchQueryParser extends LibParser
    *
    * @var LibSearchLexer
    */
-  protected $lexer      = null;
+  protected $lexer = null;
 
   /**
    *
    * @var LibBdlSst
    */
-  protected $sst      = null;
+  protected $sst = null;
 
   /**
    * the parsed code
    * @var string
    */
-  protected $parsed     = null;
+  protected $parsed = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // init methodes
@@ -89,9 +89,9 @@ class LibSearchQueryParser extends LibParser
   public function cleanWorkspace()
   {
 
-    $this->registry->name     = null;
-    $this->registry->context  = null;
-    $this->registry->node     = null;
+    $this->registry->name = null;
+    $this->registry->context = null;
+    $this->registry->node = null;
 
   }//end public function clean */
 
@@ -101,9 +101,9 @@ class LibSearchQueryParser extends LibParser
   public function clean()
   {
 
-    $this->registry->name     = null;
-    $this->registry->context  = null;
-    $this->registry->node     = null;
+    $this->registry->name = null;
+    $this->registry->context = null;
+    $this->registry->node = null;
 
   }//end public function clean */
 

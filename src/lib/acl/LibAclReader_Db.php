@@ -36,8 +36,8 @@ class LibAclReader_Db extends LibAclReader
   public function __construct($adapter)
   {
 
-    $this->env    = $adapter;
-    $this->model  = $adapter->getModel();
+    $this->env = $adapter;
+    $this->model = $adapter->getModel();
 
   }//end public function __construct */
 

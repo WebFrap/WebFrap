@@ -36,13 +36,11 @@ class PermissionDenied_Exception extends InvalidRequest_Exception
    * @param string $debugMessage
    * @param int $errorKey
    */
-  public function __construct
-  (
+  public function __construct(
     $message = "You have no permission to execute this request!",
     $debugMessage = 'The user tried to process an operation without the required permissions!',
     $errorKey = Response::FORBIDDEN
-  )
-  {
+  ) {
 
     if (is_object($message)) {
 
@@ -51,19 +49,21 @@ class PermissionDenied_Exception extends InvalidRequest_Exception
       else
         parent::__construct($message->getMessage());
 
-      $this->error        = $message;
+      $this->error = $message;
       $this->debugMessage = $debugMessage;
-      $this->errorKey     = $message->getId();
+      $this->errorKey = $message->getId();
 
       Error::addException($debugMessage, $this);
+      
     } else {
+      
       if (DEBUG && 'Permission Denied' != $debugMessage && !is_numeric($debugMessage))
         parent::__construct($debugMessage);
       else
         parent::__construct($message);
 
       $this->debugMessage = $debugMessage;
-      $this->errorKey     = $errorKey;
+      $this->errorKey = $errorKey;
 
       Error::addException($message , $this);
     }

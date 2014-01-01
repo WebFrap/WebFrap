@@ -140,7 +140,7 @@ class LibSpreadsheetExcelTab  extends PHPExcel_Worksheet
     $this->title = $title;
 
     if ($data)
-      $this->data  = $data;
+      $this->data = $data;
 
     if ($vSumFields)
       $this->vSumFields = $vSumFields;
@@ -177,7 +177,7 @@ class LibSpreadsheetExcelTab  extends PHPExcel_Worksheet
     else
       $structure = $this->structure;
 
-    $styleTableHead    =  $this->styleObj->getHeaderStyle();
+    $styleTableHead =  $this->styleObj->getHeaderStyle();
 
     $margins = $this->getPageMargins();
     $margins->setTop(1);
@@ -225,9 +225,9 @@ class LibSpreadsheetExcelTab  extends PHPExcel_Worksheet
   public function writeDataBody()
   {
 
-    $rowStyle1    =  $this->styleObj->getRowStyle(1);
-    $rowStyle2    =  $this->styleObj->getRowStyle(2);
-    $styleListBorders  =  $this->styleObj->getAllBorders();
+    $rowStyle1 =  $this->styleObj->getRowStyle(1);
+    $rowStyle2 =  $this->styleObj->getRowStyle(2);
+    $styleListBorders =  $this->styleObj->getAllBorders();
 
     $listStructure = array();
 

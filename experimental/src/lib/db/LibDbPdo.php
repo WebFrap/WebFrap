@@ -30,14 +30,14 @@ abstract class LibDbPdo extends LibDbConnection
    *
    * @var int
    */
-  protected $affectedRows     = null;
+  protected $affectedRows = null;
 
   /**
    * save the affeted rows from update or delete queries
    *
    * @var int
    */
-  protected $numRows     = null;
+  protected $numRows = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Application Logic
@@ -76,7 +76,7 @@ abstract class LibDbPdo extends LibDbConnection
     }
 
     if (Log::$levelDebug)
-      Log::debug(__file__ , __line__ , 'SQL:  '.$sqlstring  );
+      Log::debug(__FILE__ , __LINE__ , 'SQL:  '.$sqlstring  );
 
     $this->lastQuery = $sqlstring;
 
@@ -177,7 +177,7 @@ abstract class LibDbPdo extends LibDbConnection
     }
 
     if (Log::$levelDebug)
-      Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring);
+      Log::debug(__FILE__ , __LINE__ ,'Name: '.$name.' SQL: '.$sqlstring);
 
     if (!$this->result = $this->connection->prepare($sqlstring)) {
       throw new LibDb_Exception
@@ -226,7 +226,7 @@ abstract class LibDbPdo extends LibDbConnection
     }
 
     if (Log::$levelDebug)
-      Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring);
+      Log::debug(__FILE__ , __LINE__ ,'Name: '.$name.' SQL: '.$sqlstring);
 
     if (!$this->result = $this->connection->prepare($sqlstring)) {
       throw new LibDb_Exception
@@ -275,7 +275,7 @@ abstract class LibDbPdo extends LibDbConnection
     }
 
     if (Log::$levelDebug)
-      Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring);
+      Log::debug(__FILE__ , __LINE__ ,'Name: '.$name.' SQL: '.$sqlstring);
 
     if (!$this->result = $this->connection->prepare($sqlstring)) {
       throw new LibDb_Exception
@@ -324,7 +324,7 @@ abstract class LibDbPdo extends LibDbConnection
     }
 
     if (Log::$levelDebug)
-      Log::debug(__file__ , __line__ ,'Name: '.$name.' SQL: '.$sqlstring);
+      Log::debug(__FILE__ , __LINE__ ,'Name: '.$name.' SQL: '.$sqlstring);
 
     if (!$this->result = $this->connection->prepare($sqlstring)) {
       throw new LibDb_Exception
@@ -349,10 +349,10 @@ abstract class LibDbPdo extends LibDbConnection
   {
 
     if (is_object($name)) {
-      $obj      = $name;
-      $name     = $obj->getName();
-      $values   = $obj->getPrepareValues();
-      $single   = $obj->getSingelRow();
+      $obj = $name;
+      $name = $obj->getName();
+      $values = $obj->getPrepareValues();
+      $single = $obj->getSingelRow();
     }
 
     if (Log::$levelTrace)
@@ -369,19 +369,19 @@ abstract class LibDbPdo extends LibDbConnection
 
       if (!$ergebnis = pg_fetch_all($this->result)) {
         if (Log::$levelDebug)
-          Log::debug(__file__ , __line__ , 'Got no Result'  );
+          Log::debug(__FILE__ , __LINE__ , 'Got no Result'  );
 
         return array();
       }
 
       if ($single) {
         if (Log::$levelDebug)
-          Log::debug(__file__ , __line__ , 'Returned SingelRow'  );
+          Log::debug(__FILE__ , __LINE__ , 'Returned SingelRow'  );
 
         return $ergebnis[0];
       } else {
         if (Log::$levelDebug)
-          Log::debug(__file__ , __line__ , 'Returned MultiRow'  );
+          Log::debug(__FILE__ , __LINE__ , 'Returned MultiRow'  );
 
         return $ergebnis;
       }
@@ -402,9 +402,9 @@ abstract class LibDbPdo extends LibDbConnection
   {
 
     if (is_object($name)) {
-      $obj      = $name;
-      $name     = $obj->getName();
-      $values   = $obj->getPrepareValues();
+      $obj = $name;
+      $name = $obj->getName();
+      $values = $obj->getPrepareValues();
     }
 
     if (!$this->result = pg_execute($this->connectionWrite, $name, $values)) {
@@ -472,8 +472,6 @@ abstract class LibDbPdo extends LibDbConnection
    */
   public function query($sql, $returnit = true, $single = false)
   {
-    if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__,array($sql, $returnit, $single));
 
     $this->lastData = array();
     $this->numRows = null;
@@ -502,7 +500,7 @@ abstract class LibDbPdo extends LibDbConnection
         }
       } else {
         if (Log::$levelDebug)
-          Log::debug(__file__ , __line__ , 'Returned MultiRow'  );
+          Log::debug(__FILE__ , __LINE__ , 'Returned MultiRow'  );
 
         if (Log::$levelTrace)
           Debug::logDump('Multi Row Query: '.$sql , $this->lastData[0]);
@@ -511,7 +509,7 @@ abstract class LibDbPdo extends LibDbConnection
       }
     } else {
       if (Log::$levelDebug)
-        Log::debug(__file__ , __line__ , 'Returned NumRows: '.$this->numRows);
+        Log::debug(__FILE__ , __LINE__ , 'Returned NumRows: '.$this->numRows);
 
       return $this->numRows;
     }
@@ -525,8 +523,8 @@ abstract class LibDbPdo extends LibDbConnection
   {
 
     $this->lastData = array();
-    $this->numRows  = null;
-    $this->result   = null;
+    $this->numRows = null;
+    $this->result = null;
 
     if (!$this->result = $this->connection->exec($sql)) {
       Error::addError
@@ -829,8 +827,6 @@ abstract class LibDbPdo extends LibDbConnection
    */
   protected function extractPdoError($error = array())
   {
-    if (Log::$levelDebug)
-      Log::start(__file__,__line__,__method__,array($error));
 
     if (!$error) {
       $error = $this->connection->errorInfo();

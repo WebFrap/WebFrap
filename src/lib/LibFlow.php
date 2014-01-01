@@ -35,32 +35,32 @@ class LibFlow extends Base
    * the active module object
    * @var Module
    */
-  protected $module               = null;
+  protected $module = null;
 
   /**
    * name of the active module
    * @var string
    */
-  protected $moduleName           = null;
+  protected $moduleName = null;
 
   /**
    * the activ controller object
    * @var Controller
    */
-  protected $controller           = null;
+  protected $controller = null;
 
   /**
    * name of the activ controller
    * @var string
    */
-  protected $controllerName       = null;
+  protected $controllerName = null;
 
   /**
    * mappertabelle für shortlinks
    *
    * @var array
    */
-  protected $redirectMap          = array();
+  protected $redirectMap = array();
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Logic
@@ -73,8 +73,8 @@ class LibFlow extends Base
   protected function checkRedirect()
   {
 
-    $conf     = $this->getConf();
-    $request  = $this->getRequest();
+    $conf = $this->getConf();
+    $request = $this->getRequest();
 
     foreach ($conf->redirect as $name => $data) {
       if ($request->hasParam($name)) {
@@ -107,9 +107,9 @@ class LibFlow extends Base
     if (defined('MODE_MAINTENANCE')) {
       $map = array
       (
-        Request::MOD  => 'Maintenance',
-        Request::CON  => 'Base',
-        Request::RUN  => 'message'
+        Request::MOD => 'Maintenance',
+        Request::CON => 'Base',
+        Request::RUN => 'message'
       );
       $this->request->addParam($map);
 
@@ -122,18 +122,18 @@ class LibFlow extends Base
       $tmp = explode('.',$command);
       $map = array
       (
-        Request::MOD  => $tmp[0],
-        Request::CON  => $tmp[1],
-        Request::RUN  => $tmp[2]
+        Request::MOD => $tmp[0],
+        Request::CON => $tmp[1],
+        Request::RUN => $tmp[2]
       );
       $this->request->addParam($map);
     } elseif ($command = $this->request->data('c', Validator::TEXT)) {
       $tmp = explode('.',$command);
       $map = array
       (
-        Request::MOD  => $tmp[0],
-        Request::CON  => $tmp[1],
-        Request::RUN  => $tmp[2]
+        Request::MOD => $tmp[0],
+        Request::CON => $tmp[1],
+        Request::RUN => $tmp[2]
       );
       $this->request->addParam($map);
     }
@@ -161,9 +161,9 @@ class LibFlow extends Base
     if (defined('MODE_MAINTENANCE')) {
       $map = array
       (
-        Request::MOD  => 'Maintenance',
-        Request::CON  => 'Base',
-        Request::RUN  => 'message'
+        Request::MOD => 'Maintenance',
+        Request::CON => 'Base',
+        Request::RUN => 'message'
       );
       $this->request->addParam($map);
 
@@ -176,18 +176,18 @@ class LibFlow extends Base
       $tmp = explode('.',$command);
       $map = array
       (
-        Request::MOD  => $tmp[0],
-        Request::CON  => $tmp[1],
-        Request::RUN  => $tmp[2]
+        Request::MOD => $tmp[0],
+        Request::CON => $tmp[1],
+        Request::RUN => $tmp[2]
       );
       $this->request->addParam($map);
     } elseif ($command = $this->request->data('c', Validator::TEXT)) {
       $tmp = explode('.',$command);
       $map = array
       (
-        Request::MOD  => $tmp[0],
-        Request::CON  => $tmp[1],
-        Request::RUN  => $tmp[2]
+        Request::MOD => $tmp[0],
+        Request::CON => $tmp[1],
+        Request::RUN => $tmp[2]
       );
       $this->request->addParam($map);
     }
@@ -209,16 +209,16 @@ class LibFlow extends Base
   {
 
     // Startseiten Eintrag ins Navmenu
-    $view     = View::engine();
+    $view = View::getActive();
 
     if (!$session)
-      $session      = $this->session;
+      $session = $this->session;
 
     if (!$httpRequest)
-      $httpRequest  = $this->request;
+      $httpRequest = $this->request;
 
     if (!$transaction)
-      $transaction  = $this->transaction;
+      $transaction = $this->transaction;
 
     $user = $this->getUser();
 
@@ -228,9 +228,9 @@ class LibFlow extends Base
         $tmp = explode('.',$session->getStatus('tripple.annon'));
         $map = array
         (
-          Request::MOD  => $tmp[0],
-          Request::CON  => $tmp[1],
-          Request::RUN  => $tmp[2]
+          Request::MOD => $tmp[0],
+          Request::CON => $tmp[1],
+          Request::RUN => $tmp[2]
         );
         $httpRequest->addParam($map);
 
@@ -239,9 +239,9 @@ class LibFlow extends Base
         $tmp = explode('.',$session->getStatus('tripple.user'));
         $map = array
         (
-          Request::MOD  => $tmp[0],
-          Request::CON  => $tmp[1],
-          Request::RUN  => $tmp[2]
+          Request::MOD => $tmp[0],
+          Request::CON => $tmp[1],
+          Request::RUN => $tmp[2]
         );
         $httpRequest->addParam($map);
 
@@ -249,12 +249,12 @@ class LibFlow extends Base
       }
     }//end if (!$sysClass = $httpRequest->param(Request::MOD,'Cname'))
 
-    $modName      = ucfirst($sysClass);
-    $className    = $modName.'_Module';
+    $modName = ucfirst($sysClass);
+    $className = $modName.'_Module';
 
     $classNameOld = 'Module'.$modName;
 
-    if (Webfrap::classLoadable($className)) {
+    if (Webfrap::classExists($className)) {
       Debug::console('$module', $className);
 
       $this->module = new $className();
@@ -263,7 +263,7 @@ class LibFlow extends Base
 
       // everythin fine
       return true;
-    } else  if (Webfrap::classLoadable($classNameOld)) {
+    } else  if (Webfrap::classExists($classNameOld)) {
       Debug::console('$module', $classNameOld);
 
       $this->module = new $classNameOld();
@@ -293,10 +293,10 @@ class LibFlow extends Base
   {
     try {
 
-      $classname    = $module.$controller.'_Controller';
+      $classname = $module.$controller.'_Controller';
       $classnameOld = 'Controller'.$module.$controller;
 
-      if (WebFrap::loadable($classname)) {
+      if (WebFrap::classExists($classname)) {
         $this->controller = new $classname();
         $this->controller->setDefaultModel($module.$controller);
         $this->controllerName = $classname;
@@ -313,7 +313,7 @@ class LibFlow extends Base
         // shout down the extension
         $this->controller->shutdownController();
 
-      } elseif (WebFrap::loadable($classnameOld)) {
+      } elseif (WebFrap::classExists($classnameOld)) {
 
         $classname = $classnameOld;
 
@@ -351,7 +351,7 @@ class LibFlow extends Base
       );
 
       // if the controller ist not loadable set an error controller
-      $this->controller     = new Error_Controller();
+      $this->controller = new Error_Controller();
       $this->controllerName = 'ControllerError';
       //\Reset The Extention
 
@@ -398,7 +398,7 @@ class LibFlow extends Base
 
     $errorClass = 'LibHttpError'.$errorKey;
 
-    if (!Webfrap::classLoadable($errorClass))
+    if (!Webfrap::classExists($errorClass))
       $errorClass = 'LibHttpError500';
 
     $error = new $errorClass($data);
@@ -499,9 +499,9 @@ class LibFlow extends Base
   public function redirectToDefault($client = false)
   {
 
-    $conf     = $this->getConf();
-    $user     = $this->getUser();
-    $request  = $this->getRequest();
+    $conf = $this->getConf();
+    $user = $this->getUser();
+    $request = $this->getRequest();
 
     if ($user->getLogedin()  ) {
 
@@ -535,9 +535,9 @@ class LibFlow extends Base
 
     $map = array
     (
-      Request::MOD  => $tmp[0],
-      Request::CON  => $tmp[1],
-      Request::RUN  => $tmp[2]
+      Request::MOD => $tmp[0],
+      Request::CON => $tmp[1],
+      Request::RUN => $tmp[2]
     );
 
     if ($client && 'ajax' == $request->param('rqt',Validator::CNAME)) {
