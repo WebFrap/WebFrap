@@ -154,8 +154,6 @@ class LibSearchDb_EntityIndex
 
         $resourceId = $this->orm->getResourceId($entityKey);
 
-        $indexData = array();
-
         $entity    = $this->orm->newEntity($entityKey);
         $tableName = $entity->getTable();
 
