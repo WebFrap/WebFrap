@@ -1328,7 +1328,7 @@ class LibDbPostgresql extends LibDbConnection
         $tmp = array();
 
         foreach ($value as $key => $data)
-          $tmp[$key] = $this->addSlashes($data);
+          $tmp[$key] = $this->escape($data);
 
         $value = $tmp;
       } else {
@@ -1356,7 +1356,7 @@ class LibDbPostgresql extends LibDbConnection
         $tmp = array();
 
         foreach ($value as $key => $data)
-          $tmp[$key] = $this->addSlashes($data);
+          $tmp[$key] = $this->escape($data);
 
         $value = $tmp;
       } else {
