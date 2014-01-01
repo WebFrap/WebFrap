@@ -18,6 +18,7 @@
     "require": {
         "php": ">=5.3.0",
         "ext-gd": "*",
+        "ruflin/Elastica": "dev-master"
     },
     "suggest": {
         "webfrap/doc" : "The Documentation for the complete WebFrap development platform",
