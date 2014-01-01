@@ -169,7 +169,6 @@ class LibSearchDb_EntityIndex
         );
 
         try {
-
             $rows = $this->orm->db->select('SELECT ' . implode(',', $fields) . ' FROM ' . $tableName);
 
             foreach ($rows as $keyVal) {
@@ -186,7 +185,7 @@ class LibSearchDb_EntityIndex
 
                 $sqlstring = $this->orm->sqlBuilder->buildInsert($indexData, 'wbfsys_data_index');
 
-                $this->db->create($sqlstring);
+                $this->orm->db->create($sqlstring);
             }
         } catch (LibDb_Exception $exc) {
             return null;
