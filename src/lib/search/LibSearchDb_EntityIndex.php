@@ -35,12 +35,11 @@ class LibSearchDb_EntityIndex
     }
 
     /**
-     * de:
-     * methode zum erstellen neuer einträge in der datenbank
+     * Updates the search index for the given entity
      *
      * @param Entity $entity
      * @param bool $create
-     * @return Entity
+     * @return null
      */
     public function updateSearchIndexForEntity(Entity $entity, $create = false)
     {
@@ -112,7 +111,8 @@ class LibSearchDb_EntityIndex
     }
 
     /**
-     * Löschen des Index nachdem ein Datensatz gelöscht wurde
+     * Removes the given Entity from the search index
+     *
      * @param Entity $entity
      */
     public function removeSingleEntityFromSearchIndex(Entity $entity)
@@ -127,9 +127,10 @@ class LibSearchDb_EntityIndex
     }
 
     /**
-     * Löschen des Index nachdem ein Datensatz gelöscht wurde
+     * Removes all Entities of the given type from the search index
+     * @param $entityKey
      */
-    public function removeEntityTypeFromSearchIndex($entityKey)
+    private function removeEntityTypeFromSearchIndex($entityKey)
     {
         $resourceId = $this->orm->getResourceId($entityKey);
 
@@ -137,20 +138,13 @@ class LibSearchDb_EntityIndex
     }
 
     /**
-     * Löschen des Index nachdem ein Datensatz gelöscht wurde
-     */
-    public function removeFullSearchIndex()
-    {
-        $this->orm->db->delete('DELETE FROM wbfsys_data_index');
-    }
-
-    /**
-     * Löschen des Indexes für eine Tabelle
+     * Regenerates the whole search index for the given entity type
+     *
      * @param string $entityKey
      */
     public function rebuildSearchIndex($entityKey)
     {
-        $this->removeSingleEntityFromSearchIndex($entityKey);
+        $this->removeEntityTypeFromSearchIndex($entityKey);
 
         $resourceId = $this->orm->getResourceId($entityKey);
 
