@@ -64,8 +64,8 @@ class LibSearchDb_EntityIndex
             $keyFields         = $entity->getIndexKeyFields();
             $descriptionFields = $entity->getIndexDescriptionFields();
 
-            $indexData['title']         = $this->retrieveTitleData($titleFields, $keyVal);
-            $indexData['access_key']    = $this->retrieveAccessKeyData($keyFields, $keyVal);
+            $indexData['title']         = $this->concatenateArrayValues($titleFields, $keyVal);
+            $indexData['access_key']    = $this->concatenateArrayValues($keyFields, $keyVal);
             $indexData['description']   = $this->retrieveDescriptionData($descriptionFields, $keyVal);
             $indexData['vid']           = $id;
             $indexData['id_vid_entity'] = $resourceId;
@@ -169,8 +169,8 @@ class LibSearchDb_EntityIndex
 
                 $indexData = array();
 
-                $indexData['title']          = $this->retrieveTitleData($titleFields, $keyVal);
-                $indexData['access_key']     = $this->retrieveAccessKeyData($keyFields, $keyVal);
+                $indexData['title']          = $this->concatenateArrayValues($titleFields, $keyVal);
+                $indexData['access_key']     = $this->concatenateArrayValues($keyFields, $keyVal);
                 $indexData['description']    = $this->retrieveDescriptionData($descriptionFields, $keyVal);
                 $indexData['vid']            = $keyVal['rowid'];
                 $indexData['id_vid_entity']  = $resourceId;
@@ -187,75 +187,13 @@ class LibSearchDb_EntityIndex
     }
 
     /**
-     * @param $titleFields
-     * @param $keyVal
-     * @return string
-     */
-    private function retrieveTitleData(array $titleFields, $keyVal)
-    {
-        return implode(
-            ', ',
-            array_filter(
-                array_map(
-                    function ($field) use ($keyVal) {
-                        if (isset($keyVal[$field])) {
-                            return $keyVal[$field];
-                        } else {
-                            return false;
-                        }
-                    },
-                    $titleFields
-                )
-            )
-        );
-    }
-
-    /**
-     * @param $keyFields
-     * @param $keyVal
-     * @return string
-     */
-    private function retrieveAccessKeyData($keyFields, $keyVal)
-    {
-        return implode(
-            ', ',
-            array_filter(
-                array_map(
-                    function ($field) use ($keyVal) {
-                        if (isset($keyVal[$field])) {
-                            return $keyVal[$field];
-                        } else {
-                            return false;
-                        }
-                    },
-                    $keyFields
-                )
-            )
-        );
-    }
-
-    /**
      * @param $descriptionFields
      * @param $keyVal
      * @return string
      */
     private function retrieveDescriptionData($descriptionFields, $keyVal)
     {
-        $indexData = implode(
-            ', ',
-            array_filter(
-                array_map(
-                    function ($field) use ($keyVal) {
-                        if (isset($keyVal[$field])) {
-                            return $keyVal[$field];
-                        } else {
-                            return false;
-                        }
-                    },
-                    $descriptionFields
-                )
-            )
-        );
+        $indexData = $this->concatenateArrayValues($descriptionFields, $keyVal);
 
         return mb_substr
         (
@@ -264,6 +202,22 @@ class LibSearchDb_EntityIndex
             250,
             'utf-8'
         );
+    }
+
+    private function concatenateArrayValues(array $keys, array $data)
+    {
+        return
+            implode(
+                ', ',
+                array_filter(
+                    array_map(
+                        function ($field) use ($data) {
+                            return isset($data[$field]) ? $data[$field] : false;
+                        },
+                        $keys
+                    )
+                )
+            );
     }
 }
 
