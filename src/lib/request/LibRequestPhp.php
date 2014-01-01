@@ -650,6 +650,7 @@ class LibRequestPhp
     $response = $this->getResponse();
 
     if ($validator) {
+
       $filter = Validator::getActive();
       $filter->clean(); // first clean the filter
 

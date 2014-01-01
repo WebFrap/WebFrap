@@ -1,4 +1,5 @@
 <?php
+
 /*******************************************************************************
 *
 * @author      : Dominik Bonsch <dominik.bonsch@webfrap.net>
@@ -23,48 +24,64 @@
 class LibSettingsModNode
 {
 
-  /**
+    /**
    * Die ID des Nodes
    * kann auch der access key sein
    * @var int|string
    */
-  public $id = null;
+    public $id = null;
 
-  /**
+    /**
    * Value
    * @var string
    */
-  public $value = null;
+    public $value = null;
 
-  /**
+    /**
    * Eventuell vorhandene ID einens Datensatzes auf den referenziert wird
    * @var int
    */
-  public $vid = null;
+    public $vid = null;
 
-  /**
+    /**
    * @param string $value
    * @param int $vid
    * @param int $id
    */
-  public function __construct($value = null, $vid = null, $id = null)
-  {
+    public function __construct($value = null, $vid = null, $id = null)
+    {
 
-    if(is_array($value)){
-      $this->value = $value['value'];
-      $this->vid = $value['vid'];
-      $this->id = $value['rowid'];
-    } else if(is_object($value)){
-      $this->value = $value->value;
-      $this->vid = $value->vid;
-      $this->id = $value->rowid;
-    } else {
-      $this->value = $value;
-      $this->vid = $vid;
-      $this->id = $id;
+        // ein array und nicht leer
+        if ($value && is_array($value)) {
+            $this->value = $value['value'];
+            $this->vid = $value['vid'];
+            $this->id = $value['rowid'];
+        } else if (is_object($value)) {
+            $this->value = $value->value;
+            $this->vid = $value->vid;
+            $this->id = $value->rowid;
+        } else {
+            $this->value = $value;
+            $this->vid = $vid;
+            $this->id = $id;
+        }
+    } //end public function __construct */
+
+    /**
+     * to string
+     * @return string
+     */
+    public function __toString()
+    {
+
+        if ($this->value) {
+            return (string)$this->value;
+        } else if ($this->vid) {
+            return (string)$this->vid;
+        } else {
+            return '';
+        }
     }
-
-  }//end public function __construct */
 
 }// end class LibSettingsModNode
 

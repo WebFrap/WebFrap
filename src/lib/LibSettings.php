@@ -173,7 +173,7 @@ SQL;
     if (!isset($this->moduleSettings[$key])) {
 
       $sql = <<<SQL
-SELECT rowid, vid, value, type from wbfsys_module_setting where upper(access_key) = upper('{$key}');
+SELECT rowid, vid, value from wbfsys_module_setting where upper(access_key) = upper('{$key}');
 SQL;
 
       $data = $this->db->select($sql)->get();

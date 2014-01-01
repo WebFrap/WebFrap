@@ -103,7 +103,7 @@ class LibConf
    * @param string $sub
    * @return array
    */
-  public function getConf($ext , $sub = null)
+  public function getConf($ext, $sub = null)
   {
 
     if ($sub)
