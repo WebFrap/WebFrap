@@ -64,18 +64,7 @@ ERRMSG;
 DELETE FROM wbfsys_bookmark where vid = {$id};
 SQL;
 
-    //// Calendar
-    // calendar refs
-    $sql[] = <<<SQL
-DELETE FROM wbfsys_calendar_vref where vid = {$id};
-SQL;
 
-    // Appointment mit dem Bezug auf diesen Datensatz
-    /*
-    $sql[] = <<<SQL
-DELETE FROM wbfsys_appointment_vref where vid = {$id};
-SQL;
-    */
 
     //// TAGGING löschen
 
