@@ -1063,7 +1063,7 @@ class Validator
     }
 
     $db = Db::getActive();
-    $this->data[$key] = $db->addSlashes($value);
+    $this->data[$key] = $db->escape($value);
 
     if ($notNull) {
       if (trim($value) == ''  ) {

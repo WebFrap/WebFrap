@@ -434,7 +434,7 @@ class LibDbDummy extends LibDbConnection
    * @param res Sql Ein Select Object
    * @return
    */
-  public function addSlashes($value)
+  public function escape($value)
   {
 
 
@@ -444,7 +444,7 @@ class LibDbDummy extends LibDbConnection
       if (is_array($value)) {
         $tmp = array();
         foreach ($value as $key => $data) {
-          $tmp[$key] = $this->addSlashes($data);
+          $tmp[$key] = $this->escape($data);
         }
         $value = $tmp;
       } else {
@@ -455,6 +455,7 @@ class LibDbDummy extends LibDbConnection
     return $value;
 
   }
+
 /* (non-PHPdoc)
    * @see LibDbConnection::crud()
    */
