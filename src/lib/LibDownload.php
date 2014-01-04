@@ -28,7 +28,6 @@ class LibDownload
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * Enter description here...
    * @return LibDownloadAdapter
    */
   public static function getDownload()
@@ -50,7 +49,7 @@ class LibDownload
 
     return $download;
 
-  }//end public function getInstance()
+  }//end public function getDownload
 
 } // end class LibDownload
 
