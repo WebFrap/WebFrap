@@ -1,4 +1,5 @@
 <?php
+
 /*******************************************************************************
 *
 * @author      : Dominik Bonsch <dominik.bonsch@webfrap.net>
@@ -16,40 +17,50 @@
 *******************************************************************************/
 
 /**
-  * Download Klasse für WebFrap
-  * @package WebFrap
-  * @subpackage tech_core
-  */
+ * Download Klasse für WebFrap
+ * 
+ * @package WebFrap
+ * @subpackage tech_core
+ */
 class LibDownload
 {
-
-/*//////////////////////////////////////////////////////////////////////////////
-// Singleton Pattern
-//////////////////////////////////////////////////////////////////////////////*/
-
-  /**
-   * @return LibDownloadAdapter
-   */
-  public static function getDownload()
-  {
-
-    $request = Request::getActive();
-
-    if (!$type = $request->param('type')) {
-      throw new Io_Exception('Invalid Download Type');
-    }
-
-    $classname = 'LibDownload'.ucfirst($type);
-
-    if (WebFrap::classExists($classname) &&  $classname != 'LibDownloadAdapter') {
-      $download = new $classname();
-    } else {
-      throw new Io_Exception('Invalid Download Type');
-    }
-
-    return $download;
-
-  }//end public function getDownload
-
+    
+    /**
+     * Name der Tabelle auf welchen sich der Datensatz bezieht
+     * @var string
+     */
+    public $table = 'wbfsys_file';
+    
+    /**
+     * Name des Attributes wo sich die Datei befindet
+     * @var string
+     */
+    public $attr = 'name';
+    
+    /**
+     * 
+     * @var Pbase
+     */
+    protected $env = null;
+    
+    /**
+     * @param Pbase $env
+     */
+    public function __construct($env)
+    {
+        $this->env = $env;
+    }//end public function __construct */
+    
+    /**
+     * @param string $fileId
+     * @param array $params
+     */
+    public function getFileNode($fileId, $params)
+    {
+        
+        return null;
+        
+    }//end public function getFileNode */
+    
 } // end class LibDownload
 
