@@ -319,6 +319,26 @@ class LibRequestPhp
     return $paramList;
 
   } // end public function paramList */
+  
+  /**
+   * Die keys des User Inputs abfragen
+   * @param string $key
+   * @return array
+   */
+  public function paramKeys($key = null)
+  {
+      
+      if($key){
+          if(isset($_GET[$key]) && is_array($_GET[$key]) ){
+              return array_keys($_GET[$key]);
+          }
+          
+      } else {
+          return array_keys($_GET);
+      }
+      
+      return array();
+  }//end public function paramKeys */
 
   /**
   * Daten einer bestimmten Urlvariable erfragen
