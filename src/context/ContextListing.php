@@ -203,6 +203,8 @@ class ContextListing extends Context
             }
         }
         
+        Log::debug('$this->customFilterFlags '.Debug::dumpToString($this->customFilterFlags));
+        
         if (! $this->refIds) {
             $this->refIds = new TArray();
         }
@@ -488,7 +490,7 @@ class ContextListing extends Context
         if ($this->customFilterFlags) {
             foreach ($this->customFilterFlags as $fKey => $values) {
                 foreach ($values as $value) {
-                    $this->urlExt .= '&cff['.$fKey.'][]='.$value;
+                    $this->actionExt .= '&cff['.$fKey.'][]='.$value;
                 }
             }
         }
