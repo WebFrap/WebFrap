@@ -40,7 +40,7 @@ class EUserType
   /**
    * @var int
    */
-  const MACHINE = 3;
+  const PLUGIN = 3;
 
   /**
    * @var int
