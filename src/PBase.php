@@ -21,7 +21,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-abstract class Pbase
+abstract class PBase
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
