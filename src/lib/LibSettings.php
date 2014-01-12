@@ -149,34 +149,43 @@ SQL;
 
   /**
    * @param string $key
-   * @param User $user Wenn das Setting User Spezifisch ist
+   * @param int $idUser Wenn das Setting User Spezifisch ist
    *
    * @return LibSettingsNode
    */
-  public function get($key)
+  public function get($key, $idUser = null)
   {
 
-    return $this->getModuleSetting($key);
+    return $this->getModuleSetting($key, $idUser);
 
   }//end public function getModuleSetting */
 
 
   /**
    * @param string $key
-   * @param User $user Wenn das Setting User Spezifisch ist
+   * @param int $idUser Wenn das Setting User Spezifisch ist
    *
    * @return LibSettingsNode
    */
-  public function getModuleSetting($key)
+  public function getModuleSetting($key, $idUser = null)
   {
 
     if (!isset($this->moduleSettings[$key])) {
 
       $sql = <<<SQL
-SELECT rowid, vid, value from wbfsys_module_setting where upper(access_key) = upper('{$key}');
+SELECT rowid, vid, value from wbfsys_module_setting where upper(access_key) = upper('{$key}')
 SQL;
+      
+      if($idUser){
+          $sql .= " id_user = {$idUser} " ;
+      }
 
       $data = $this->db->select($sql)->get();
+      
+      if(!$data){
+          $this->moduleSettings[$key] = false;
+          return false;
+      }
 
       $node = new LibSettingsModNode($data);
       $this->moduleSettings[$key] = $node;
