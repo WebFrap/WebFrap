@@ -2145,8 +2145,8 @@ SQL;
     }
 
     // daten aus dem Data Index entfernen
-    if ($entity->hasIndex())
-      $this->removeIndex($entity);
+    //if ($entity->hasIndex())
+    //  $this->removeIndex($entity);
 
     $sqlstring = $this->sqlBuilder->buildDelete($entityTable, 'rowid',  $id);
 
