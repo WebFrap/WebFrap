@@ -215,8 +215,8 @@ class LibCacheRequestJavascript extends LibCacheRequest
         
         file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.plain', $code);
         file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.plain.meta', json_encode(array (
-                'etag' => $etag,
-                'size' => $plainSize 
+            'etag' => $etag,
+            'size' => $plainSize 
         )));
         
         if ($encode) {
@@ -225,8 +225,8 @@ class LibCacheRequestJavascript extends LibCacheRequest
             
             file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.gz', $encoded);
             file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.gz.meta', json_encode(array (
-                    'etag' => $etag,
-                    'size' => $encodedSize 
+                'etag' => $etag,
+                'size' => $encodedSize 
             )));
         }
         
@@ -336,8 +336,8 @@ class LibCacheRequestJavascript extends LibCacheRequest
         
         file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.plain', $code);
         file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.plain.meta', json_encode(array (
-                'etag' => $etag,
-                'size' => $plainSize 
+            'etag' => $etag,
+            'size' => $plainSize 
         )));
         
         if ($encode) {
@@ -346,11 +346,9 @@ class LibCacheRequestJavascript extends LibCacheRequest
             
             file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.gz', $encoded);
             file_put_contents(PATH_GW.$this->folder.'/list/'.$list.'.gz.meta', json_encode(array (
-                    'etag' => $etag,
-                    'size' => $encodedSize 
+                'etag' => $etag,
+                'size' => $encodedSize 
             )));
-            
-            
         }
         
         SFilesystem::delete(PATH_GW.'tmp/js_min/');
@@ -358,6 +356,7 @@ class LibCacheRequestJavascript extends LibCacheRequest
     }
 
     /**
+     * einfaches versenden der Daten, der cache wurde bereits gebaut
      * @param string $list
      */
     public function sendData($list)
@@ -393,6 +392,10 @@ class LibCacheRequestJavascript extends LibCacheRequest
                 $this->sendHeader($metadata->etag, $metadata->size, true);
                 echo file_get_contents(PATH_GW.$this->folder.'/list/'.$list.'.gz');
                 exit();
+            } else {
+                header("HTTP/1.1 404 Not Found", true, 404); // ok nichts zu sehen
+                header("Connection: Close"); // Keep-Alives unterbinden
+                exit();
             }
         } else {
     
@@ -408,11 +411,15 @@ class LibCacheRequestJavascript extends LibCacheRequest
                 $this->sendHeader($metadata->etag, $metadata->size, false);
                 echo file_get_contents(PATH_GW.$this->folder.'/list/'.$list.'.plain');
                 exit();
+            } else {
+                header("HTTP/1.1 404 Not Found", true, 404); // ok nichts zu sehen
+                header("Connection: Close"); // Keep-Alives unterbinden
+                exit();
             }
         }
     
     
-    } // end public function publishList */
+    } // end public function sendData */
     
     /**
      *
