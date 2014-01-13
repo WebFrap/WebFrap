@@ -72,7 +72,7 @@ class EUserType
   public static $labels = array(
     self::SYSTEM => 'System',
     self::USER => 'User',
-    self::MACHINE => 'Machine',
+    self::PLUGIN => 'Pugin',
     self::ORGANISATION => 'Organisation',
     self::BUIZ_NODE => 'BuizNode',
     self::BOT => 'Bot',
