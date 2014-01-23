@@ -504,19 +504,25 @@ class LibDbOrm
           }
         }
 
+      	
+
         if ($map[$key][Entity::COL_QUOTE]) {
-          if (trim($value) == '' && $dropEmptyWhitespace) {
-            $tmp[$key] = Db::NULL;
-          } else {
-            $tmp[$key] = "'".$this->db->escape($value)."'";
-          }
-        } else {
-          if (trim($value) == '' && $dropEmptyWhitespace) {
-            $tmp[$key] = Db::NULL;
-          } else {
-            $tmp[$key] = $value; // here we need no slashes
-          }
+
+           if( is_bool($value) ){ // check auf booleans, passiert nur bei tatsÃ¤chlichen booleans
+               $tmp[$key] = $value ? "'t'":"'f'";
+           } else if (trim($value) == '' && $dropEmptyWhitespace) {
+             $tmp[$key] = Db::NULL;
+           } else {
+             $tmp[$key] = "'".$this->db->escape($value)."'";
+           }
+         } else {if (trim($value) == '' && $dropEmptyWhitespace) {
+             $tmp[$key] = Db::NULL;
+           } else {
+             $tmp[$key] = $value; // here we need no slashes
+           }
         }
+
+        
 
       } else {
         throw new LibDb_Exception
