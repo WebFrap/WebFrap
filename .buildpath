@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="src" path=""/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/WebFrap_Lib_Htmlpurifier"/>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/WebFrap_Vendor"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/WebFrap_Genf"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/WebFrap_Genf_Wbf"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/WebFrap_Vendor_GPL"/>
+	<buildpathentry combineaccessrules="false" kind="prj" path="/WebFrap_Lib_PHPExcel"/>
+</buildpath>
