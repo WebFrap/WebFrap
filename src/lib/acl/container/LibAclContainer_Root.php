@@ -151,8 +151,13 @@ class LibAclContainer_Root extends LibAclRoot
     }
 
     $this->pathRoot($entity, $level, $refKey);
+    
+    if (isset($this->paths[$rootId][$level][$refKey]))
+        return $this->paths[$rootId][$level][$refKey];
+    else 
+        return 0;
 
-    return $this->paths[$rootId][$level][$refKey];
+    //return $this->paths[$rootId][$level][$refKey];
 
   }//end public function getRefAccess */
 
