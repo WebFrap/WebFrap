@@ -317,8 +317,6 @@ class VPrimitive extends V_Adaper
             return true;
         }
     
-        $val
-        
         if ($constr['max']) {
             if (mb_strlen($value) > $constr['max']) {
                 $this->safeVal = mb_substr(0, $value, $constr['max']);

@@ -348,10 +348,12 @@ class Validator
   {
 
     if (!is_null($key)) {
+        
       $data = isset($this->data[$key])?$this->data[$key]:null;
-
       return $data;
+
     } else {
+        
       return $this->data;
     }
 
@@ -415,23 +417,22 @@ class Validator
 
   /**
    * @param string name
+   * @return V_Adaper
    */
-  public function getValidator($name)
+  public function getValidator($classname)
   {
 
-    if (isset($this->validatorPool[$name]))
-      return $this->validatorPool[$name];
+    if (isset($this->validatorPool[$classname]))
+      return $this->validatorPool[$classname];
 
-    $classname = 'LibValidator'.ucfirst($name);
-
-    if (!Webfrap::classExists($classname)  ) {
-      Error::addError('Requested nonexisting Validator: '.$name.'. Please check the existing Validator Classes');
-
+    if (!Webfrap::classExists($classname)) {
+        
+      Error::addError('Requested nonexisting Validator: '.$classname.'. Please check the existing Validator Classes');
       return null;
     }
 
     $validator = new $classname();
-    $this->validatorPool[$name] = $validator;
+    $this->validatorPool[$classname] = $validator;
 
     return $validator;
 
@@ -452,12 +453,13 @@ class Validator
   {
 
     if ($notNull) {
+        
       $this->invalid[$key] =  'emtpy';
-
       return 'emtpy';
+      
     } else {
+        
       $this->invalid[$key] = false;
-
       return false;
     }
 
@@ -493,6 +495,22 @@ class Validator
 /*//////////////////////////////////////////////////////////////////////////////
 // Add Validator
 //////////////////////////////////////////////////////////////////////////////*/
+
+  /**
+   * @param string $validator
+   * @param scalar $value
+   * @param array $constr
+   */
+  public function check($validator, $value, $constr = array() )
+  {
+
+      $tmp = explode('::', $validator);
+      $validator = $this->getValidator($tmp[0]);
+      
+      return $validator->$tmp[0]($value, $constr);
+  
+  }//end public function check */
+  
 
   /**
    * @param string $key
