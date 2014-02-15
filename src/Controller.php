@@ -672,20 +672,17 @@ abstract class Controller extends BaseChild
            Debug::console($methodeName.' is not callable!' ,  $this->callAble);
 
            $methodes = implode(', ', get_class_methods($this));
-           $response->addError
-           (
+           $response->addError(
              'The action :'.$methodeName .' is not callable on service: '.get_class($this).' methode: '.$methodes.'!'
-            );
+           );
 
-           $this->errorPage
-           (
+           $this->errorPage(
               'The action :'.$methodeName .' is not callable on service: '.get_class($this).' methode: '.$methodes.'!',
               Response::NOT_FOUND
            );
          } else {
            $response->addError('The action :'.$methodeName .' is not callable on service: '.get_class($this).' !');
-           $this->errorPage
-           (
+           $this->errorPage(
               'The action :'.$methodeName .' is not callable on service: '.get_class($this).' !',
               Response::NOT_FOUND
            );
@@ -699,8 +696,7 @@ abstract class Controller extends BaseChild
 
        $do = $request->param('do', Validator::CNAME);
 
-       $this->errorPage
-       (
+       $this->errorPage(
           'Sorry, our Codemonkey failed. The requested Resource '.$do.' not exists',
           Response::INTERNAL_ERROR
        );
@@ -1020,8 +1016,7 @@ abstract class Controller extends BaseChild
 
       // alle views bekommen zumindest den request und die response injiziter
       switch ($viewType) {
-        case View::FRONTEND:
-        {
+        case View::FRONTEND: {
           $view = $tplEngine->loadView($class.'_Frontend');
 
           if ($displayMethod && !method_exists ($view, $displayMethod))
@@ -1033,8 +1028,7 @@ abstract class Controller extends BaseChild
           return $view;
           break;
         }
-        case View::AJAX:
-        {
+        case View::AJAX: {
           $view = $tplEngine->loadView($class.'_Ajax'  );
 
           if ($displayMethod && !method_exists ($view, $displayMethod))
@@ -1046,8 +1040,7 @@ abstract class Controller extends BaseChild
           return $view;
           break;
         }
-        case View::MAINTAB:
-        {
+        case View::MAINTAB: {
           // use maintab view
           $view = $tplEngine->newMaintab($key, $class);
 
@@ -1060,8 +1053,7 @@ abstract class Controller extends BaseChild
           return $view;
           break;
         }
-        case View::HTML:
-        {
+        case View::HTML: {
           $view = $tplEngine->loadView($class.'_Html');
 
           if ($displayMethod && !method_exists ($view, $displayMethod))
@@ -1073,8 +1065,7 @@ abstract class Controller extends BaseChild
           return $view;
           break;
         }
-        case View::JSON:
-        {
+        case View::JSON: {
           $view = $tplEngine->loadView($class.'_Json'  );
 
           if ($displayMethod && !method_exists ($view, $displayMethod))
@@ -1086,8 +1077,7 @@ abstract class Controller extends BaseChild
           return $view;
           break;
         }
-        case View::MODAL:
-        {
+        case View::MODAL: {
           $view = $tplEngine->loadView($class.'_Modal'  );
 
           if ($displayMethod && !method_exists ($view, $displayMethod))
@@ -1099,8 +1089,7 @@ abstract class Controller extends BaseChild
           return $view;
           break;
         }
-        case View::SERVICE:
-        {
+        case View::SERVICE: {
           $view = $tplEngine->loadView($class.'_Service'  );
 
           if ($displayMethod && !method_exists ($view, $displayMethod))
@@ -1112,8 +1101,7 @@ abstract class Controller extends BaseChild
           return $view;
           break;
         }
-        case View::AREA:
-        {
+        case View::AREA: {
           $view = $tplEngine->getMainArea($key, $class.'_Area'  );
 
           if ($displayMethod && !method_exists ($view, $displayMethod))
@@ -1125,8 +1113,7 @@ abstract class Controller extends BaseChild
           return $view;
           break;
         }
-        case View::CLI:
-        {
+        case View::CLI: {
           $view = $tplEngine->loadView($class.'_Cli');
 
           if ($displayMethod && !method_exists ($view, $displayMethod))
@@ -1138,8 +1125,7 @@ abstract class Controller extends BaseChild
           return $view;
           break;
         }
-        default:
-        {
+        default: {
           return $this->handleNonexistingView($throwError);
         }
       }
