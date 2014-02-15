@@ -98,7 +98,7 @@ class LibFlowErrorHandler extends Pbase // wird nicht von Controller abgeleitet 
 
     } elseif ($response->tpl->isType(View::JSON)) {
 
-      $this->tplEngine->setDataBody('error: '.$messageText);
+      $response->tpl->setDataBody('error: '.$messageText);
 
     } else {
 
