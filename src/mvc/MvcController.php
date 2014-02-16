@@ -457,21 +457,28 @@ abstract class MvcController extends BaseChild
        if (DEBUG) {
          Debug::console($methodeName.' is not callable!' ,  array_keys($this->options));
 
-         $methodes = implode(', ', get_class_methods($this));
-         $response->addError
-         (
+         $tmpMethodes = get_class_methods($this);
+         $methodes = array();
+         
+         foreach ($tmpMethodes as $method) {
+             if('service_'== substr($method, 0, 8)){
+                 $methodes[] = $method;
+             }
+         }
+         
+         
+         $methodes = implode(', ', $methodes);
+         $response->addError(
            'The action :'.$methodeName .' is not callable on service: '.get_class($this).' methode: '.$methodes.'!'
-          );
+         );
 
-         $this->errorPage
-         (
+         $this->errorPage(
             'The action :'.$methodeName .' is not callable on service: '.get_class($this).' methode: '.$methodes.'!',
             Response::NOT_FOUND
          );
        } else {
          $response->addError('The action :'.$methodeName .' is not callable on service: '.get_class($this).' !');
-         $this->errorPage
-         (
+         $this->errorPage(
             'The action :'.$methodeName .' is not callable on service: '.get_class($this).' !',
             Response::NOT_FOUND
          );

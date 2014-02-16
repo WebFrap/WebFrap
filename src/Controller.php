@@ -668,10 +668,21 @@ abstract class Controller extends BaseChild
          return;
 
        } else {
+           
          if (DEBUG) {
            Debug::console($methodeName.' is not callable!' ,  $this->callAble);
 
-           $methodes = implode(', ', get_class_methods($this));
+            $tmpMethodes = get_class_methods($this);
+            $methodes = array();
+            
+            foreach ($tmpMethodes as $method) {
+                if('service_'== substr($method, 0, 8)){
+                    $methodes[] = $method;
+                }
+            }
+            
+            
+           $methodes = implode(', ', $methodes);
            $response->addError(
              'The action :'.$methodeName .' is not callable on service: '.get_class($this).' methode: '.$methodes.'!'
            );
