@@ -928,6 +928,10 @@ class Webfrap
 
     }
 
+    // some security settings:
+    // prevent xee
+    libxml_disable_entity_loader(true);
+    
     ///TODO fetch timezone from os (check if that works in win / mac)
     // set a timezone
     if ($timezone = Session::status('activ.timezone'))
