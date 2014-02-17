@@ -574,12 +574,10 @@ abstract class Controller extends BaseChild
                  && !$request->method($this->options[$methodeKey]['method'])
              ) {
               throw new InvalidRequest_Exception(
-                $response->i18n->l
-                (
+                $response->i18n->l(
                   'The request method {@method@} is not allowed for this action! Use {@use@}.',
                   'wbf.message',
-                  array
-                  (
+                  array(
                     'method' => $request->method(),
                     'use' => implode(' or ', $this->options[$methodeKey]['method'])
                   )
@@ -589,21 +587,16 @@ abstract class Controller extends BaseChild
 
              }
 
-             if
-             (
+             if(
                isset($this->options[$methodeKey]['views'])
                  && !$response->tpl->isType($this->options[$methodeKey]['views'])
-             )
-             {
+             ) {
 
-               throw new InvalidRequest_Exception
-               (
-                 $response->i18n->l
-                 (
+               throw new InvalidRequest_Exception(
+                 $response->i18n->l(
                    'Invalid format {@type@}, valid formats are: {@use@}',
                    'wbf.message',
-                   array
-                   (
+                   array(
                      'type' => $response->tpl->getType(),
                      'use' => implode(' or ', $this->options[$methodeKey]['views'])
                    )
@@ -632,10 +625,8 @@ abstract class Controller extends BaseChild
 
                $user = $this->getUser();
                if ($this->options[$methodeKey]['auth'] && !$user->getLogedIn()) {
-                 throw new InvalidRequest_Exception
-                 (
-                   $response->i18n->l
-                   (
+                 throw new InvalidRequest_Exception(
+                   $response->i18n->l(
                      'You have to be authentificated to access this resource.',
                      'wbf.message'
                    ),
@@ -653,13 +644,11 @@ abstract class Controller extends BaseChild
            }
 
          } catch (Webfrap_Exception $error) {
-           $this->errorPage
-           (
+           $this->errorPage(
              $error
            );
          } catch (Exception $error) {
-           $this->errorPage
-           (
+           $this->errorPage(
              $error,
              Response::INTERNAL_ERROR
            );
@@ -691,7 +680,9 @@ abstract class Controller extends BaseChild
               'The action :'.$methodeName .' is not callable on service: '.get_class($this).' methode: '.$methodes.'!',
               Response::NOT_FOUND
            );
+           
          } else {
+             
            $response->addError('The action :'.$methodeName .' is not callable on service: '.get_class($this).' !');
            $this->errorPage(
               'The action :'.$methodeName .' is not callable on service: '.get_class($this).' !',
@@ -703,7 +694,7 @@ abstract class Controller extends BaseChild
        }
     }
 
-    if (!$this->runIfExists($methodeKey, $view)  ) {
+    if (!$this->runIfExists($methodeKey, $view)) {
 
        $do = $request->param('do', Validator::CNAME);
 
