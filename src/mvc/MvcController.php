@@ -296,14 +296,11 @@ abstract class MvcController extends BaseChild
 
     } catch (Exception $exc) {
 
-      Error::report
-      (
-        $response->i18n->l
-        (
+      Error::report(
+        $response->i18n->l(
           'Module Error: {@message@}',
           'wbf.message' ,
-          array
-          (
+          array(
             'message' => $exc->getMessage()
           )
         ),
@@ -314,8 +311,7 @@ abstract class MvcController extends BaseChild
 
       if (Log::$levelDebug) {
         // Create a Error Page
-        $this->errorPage
-        (
+        $this->errorPage(
           $exc->getMessage(),
           Response::INTERNAL_ERROR,
           '<pre>'.Debug::dumpToString($exc).'</pre>'
@@ -323,28 +319,23 @@ abstract class MvcController extends BaseChild
 
       } else {
         switch ($type) {
-          case 'Security_Exception':
-          {
-            $this->errorPage
-            (
+          case 'Security_Exception': {
+            $this->errorPage(
               $response->i18n->l('Access Denied', 'wbf.message'  ),
               Response::FORBIDDEN
             );
             break;
           }
-          default:
-          {
+          default: {
 
             if (Log::$levelDebug) {
-              $this->errorPage
-              (
+              $this->errorPage(
                 'Exception '.$type.' not catched ',
                 Response::INTERNAL_ERROR,
                 Debug::dumpToString($exc)
               );
             } else {
-              $this->errorPage
-              (
+              $this->errorPage(
                 $response->i18n->l( 'Sorry Internal Error', 'wbf.message'  ),
                 Response::INTERNAL_ERROR
               );
@@ -442,10 +433,11 @@ abstract class MvcController extends BaseChild
          }
 
        } catch (Webfrap_Exception $error) {
+           
          $this->errorPage($error);
        } catch (Exception $error) {
-         $this->errorPage
-         (
+         
+         $this->errorPage(
            $error->getMessage(),
            Response::INTERNAL_ERROR
          );
@@ -454,17 +446,18 @@ abstract class MvcController extends BaseChild
        return;
 
      } else {
+         
        if (DEBUG) {
          Debug::console($methodeName.' is not callable!' ,  array_keys($this->options));
 
-         $tmpMethodes = get_class_methods($this);
-         $methodes = array();
-         
-         foreach ($tmpMethodes as $method) {
-             if('service_'== substr($method, 0, 8)){
-                 $methodes[] = $method;
-             }
-         }
+        $tmpMethodes = get_class_methods($this);
+        $methodes = array();
+        
+        foreach ($tmpMethodes as $method) {
+            if('service_'== substr($method, 0, 8)){
+                $methodes[] = $method;
+            }
+        }
          
          
          $methodes = implode(', ', $methodes);
@@ -476,7 +469,9 @@ abstract class MvcController extends BaseChild
             'The action :'.$methodeName .' is not callable on service: '.get_class($this).' methode: '.$methodes.'!',
             Response::NOT_FOUND
          );
+         
        } else {
+         
          $response->addError('The action :'.$methodeName .' is not callable on service: '.get_class($this).' !');
          $this->errorPage(
             'The action :'.$methodeName .' is not callable on service: '.get_class($this).' !',
@@ -794,15 +789,12 @@ abstract class MvcController extends BaseChild
         return false;
       }
 
-      if
-      (
+      if(
         defined('WBF_AUTH_TYPE')
           && 2 == WBF_AUTH_TYPE && ($userName != 'admin')
           && !$authRole->non_cert_login
-      )
-      {
-        $response->addError
-        (
+      ) {
+        $response->addError(
           'Login Via Password is not permitted, you need a valid X509 SSO Certificate'
         );
 

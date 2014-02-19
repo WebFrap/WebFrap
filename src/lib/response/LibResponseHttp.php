@@ -363,15 +363,13 @@ class LibResponseHttp extends LibResponse
    *  oder null wenn die Klasse, oder die angefragte Methode, nicht existieren
    *
    */
-  public function loadView
-  (
+  public function loadView(
     $key,
     $class,
     $displayMethod = null,
     $viewType = null,
     $throwError = true
-  )
-  {
+  ) {
 
     /* @var $tplEngine LibTemplate   */
     $tplEngine = $this->getTplEngine();
@@ -426,7 +424,7 @@ class LibResponseHttp extends LibResponse
         }
         case View::JSON: {
 
-          $view = $tplEngine->loadView($class.'_Json'  );
+          $view = $tplEngine->loadView($class.'_Json');
 
           if ($displayMethod && !method_exists ($view, $displayMethod))
             return $this->handleNonexistingView($throwError, $displayMethod, $viewType.':: '.$class.'_Json');
@@ -549,14 +547,12 @@ class LibResponseHttp extends LibResponse
       // action methode implementiert ist
 
       if ($displayMethod) {
-        throw new InvalidRequest_Exception
-        (
+        throw new InvalidRequest_Exception(
           'The requested Outputformat '.$viewName.' is not implemented for action: '.$displayMethod.'!',
           Response::NOT_IMPLEMENTED
         );
       } else {
-        throw new InvalidRequest_Exception
-        (
+        throw new InvalidRequest_Exception(
           'The requested Outputformat '.$viewName.' is not implemented for this action! '.Debug::backtrace(),
           Response::NOT_IMPLEMENTED
         );
@@ -653,14 +649,12 @@ class LibResponseHttp extends LibResponse
 
     $this->tpl->compile();
 
-    if
-    (
+    if(
       isset($_SERVER['HTTP_ACCEPT_ENCODING'])
         && strstr ($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')
         && function_exists('gzencode')
         && Session::status('WBF_GZIP_OUTPUT')
-    )
-    {
+    ) {
       // Tell the browser the content is compressed with gzip
       $this->sendHeader("Content-Encoding: gzip");
       $this->tpl->compress();
@@ -727,13 +721,11 @@ class LibResponseHttp extends LibResponse
 
       $this->sendHeader('Content-Type:'.$this->tpl->contentType.'; charset='.$charset);
 
-      if
-      (isset($_SERVER['HTTP_ACCEPT_ENCODING'])
+      if (isset($_SERVER['HTTP_ACCEPT_ENCODING'])
           && strstr($_SERVER['HTTP_ACCEPT_ENCODING'], 'gzip')
           && function_exists('gzencode')
           && Session::status('WBF_GZIP_OUTPUT')
-      )
-      {
+      ) {
         // Tell the browser the content is compressed with gzip
         $this->sendHeader("Content-Encoding: gzip");
         $this->tpl->compress();
