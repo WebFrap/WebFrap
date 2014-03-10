@@ -270,8 +270,7 @@ class Db
                 self::$instance = $connection;
             }
         } else {
-            throw new LibDb_Exception
-            (
+            throw new LibDb_Exception(
                 'tried to load nonexisting database connection'
             );
         }

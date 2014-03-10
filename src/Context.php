@@ -157,6 +157,18 @@ class Context
   }// end public function __get */
 
   /**
+   * virtual __isset
+   * @see http://www.php.net/manual/de/language.oop5.overloading.php
+   *
+   * @param string $key
+   * @return string
+   */
+  public function __isset($key)
+  {
+    return isset($this->content[$key]);
+  }// end public function __isset */
+
+  /**
    * @param LibRequestHttp $request
    */
   public function setRequest($request)
