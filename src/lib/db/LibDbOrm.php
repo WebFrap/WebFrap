@@ -1010,7 +1010,7 @@ class LibDbOrm
    * @param string $id
    * @return Entity
    */
-  public function getByIds($entityKey, $ids  )
+  public function getByIds($entityKey, $ids, $byKey = false)
   {
 
     // keine ids, keine datensätze
@@ -1020,7 +1020,7 @@ class LibDbOrm
       return array();
     }
 
-    return $this->getListWhere($entityKey, "rowid IN(".implode(',',$ids).")");
+    return $this->getListWhere($entityKey, "rowid IN(".implode(',',$ids).")",array(), $byKey);
 
   }//end public function getByIds */
 
