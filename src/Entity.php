@@ -947,7 +947,7 @@ abstract class Entity implements ArrayAccess
   public function hasIndex()
   {
 
-    return isset(static::$index) ? static::$index : false;
+    return false;// isset(static::$index) ? static::$index : false;
 
   } // end public function hasIndex */
 
