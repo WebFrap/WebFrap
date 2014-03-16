@@ -637,17 +637,16 @@ abstract class Controller extends BaseChild
 
            }
 
-           $error = $this->$methodeName($request, $response  );
-
-           if ($error && is_object($error)) {
-             $this->errorPage($error);
-           }
+           $this->$methodeName($request, $response);
 
          } catch (Webfrap_Exception $error) {
+             
            $this->errorPage(
              $error
            );
+           
          } catch (Exception $error) {
+           
            $this->errorPage(
              $error,
              Response::INTERNAL_ERROR

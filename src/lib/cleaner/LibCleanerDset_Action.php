@@ -64,8 +64,6 @@ ERRMSG;
 DELETE FROM wbfsys_bookmark where vid = {$id};
 SQL;
 
-
-
     //// TAGGING löschen
 
     // Tags auf einen Datensatz
@@ -107,6 +105,7 @@ DELETE FROM wbfsys_group_users where vid = {$id};
 SQL;
 
     //// INDEX
+    /*
     // links auf Datensätze löschen
     $sql[] = <<<SQL
 DELETE FROM wbfsys_data_link where id_link = {$id};
@@ -115,6 +114,7 @@ SQL;
     $sql[] = <<<SQL
 DELETE FROM wbfsys_data_index where vid = {$id};
 SQL;
+    */
 
     $db->multiDelete($sql);
 

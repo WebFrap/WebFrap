@@ -73,7 +73,8 @@ class LibRequestPhp
       mb_parse_str(file_get_contents("php://input"),$_POST);
     }
 
-    if (DEBUG) {
+    /*
+    if (false) {
       Debug::console('Data URL' , $_SERVER['REQUEST_URI']);
       Debug::console('Data GET' , $_GET);
       Debug::console('Data POST' , $_POST);
@@ -81,6 +82,7 @@ class LibRequestPhp
       Debug::console('Data COOKIE' , $_COOKIE);
       Debug::console('Data SERVER' , $_SERVER);
     }
+    */
 
   }//end public function init */
 
