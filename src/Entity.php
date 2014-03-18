@@ -1398,8 +1398,12 @@ abstract class Entity implements ArrayAccess
    */
   public function saveAfter($entity, $refIdKey = null)
   {
-
-    $this->postSave[] = $entity;
+      
+    if($refIdKey){
+        $this->postSave[] = array($entity, $refIdKey);
+    } else {
+        $this->postSave[] = $entity;
+    }
 
   } // end public function saveAfter */
 
@@ -1419,11 +1423,16 @@ abstract class Entity implements ArrayAccess
    *
    * @param Entity $entity
    * @param string $refIdKey
+   * @param string $srcIdKey
    */
-  public function saveBefore($entity, $refIdKey = null)
+  public function saveBefore($entity, $refIdKey = null, $srcIdKey = null)
   {
 
-    $this->preSave[] = $entity;
+    if ($refIdKey||$srcIdKey) {
+        $this->preSave[] = array($entity,$refIdKey,$srcIdKey);
+    } else {
+        $this->preSave[] = $entity;
+    }
 
   } // end public function saveBefore */
 
@@ -1647,32 +1656,38 @@ abstract class Entity implements ArrayAccess
       // sich ändern könnte und auf dieser beim save auch ein save getriggert
       // werden muss
       $this->synchronized = false;
+      
       if ($value instanceof Entity) {
+        
         if ('rowid' === $key) {
 
           // speichern der entity nachdem diese entity gespeichert wurde
+          Log::warn('Veraltete zuweisung auf rowid');
           $this->postSave[] = $value;
 
         } else {
 
           $this->preSave[] = $value;
 
-          if (! isset($this->data[$key])) {
+          /// TODO was soll das?
+          if (!isset($this->data[$key])) {
 
             $this->data[$key] = $value;
           } else {
             // wenn neu können wir auf jeden fall von einer Änderung ausgehen
             if ($value->isNew() || $this->data[$key] !== (string)$value) {
-
               $this->data[$key] = $value;
             }
           }
         }
+        
       } else {
 
-        if (! isset($this->data[$key])) {
+        /// TODO was soll das?
+        if (!isset($this->data[$key])) {
 
           $this->data[$key] = $value;
+          
         } else {
 
           $this->data[$key] = $value;
@@ -1689,6 +1704,7 @@ abstract class Entity implements ArrayAccess
 
         $this->synchronized = false;
         $this->data[$key] = $value;
+        
       } elseif ($this->data[$key] !== (string)$value) {
 
         $this->synchronized = false;

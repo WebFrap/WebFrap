@@ -867,7 +867,7 @@ class LibDbOrm
    * @param int $id
    * @return Entity
    */
-  public function get($entityKey, $id  )
+  public function get($entityKey, $id)
   {
 
     if (!$id)
@@ -879,7 +879,15 @@ class LibDbOrm
       return $obj;
     } elseif (is_object($id)) {
 
+        
+      $trace = Debug::backtrace();
+      throw new LibDb_Exception('Invalid ID parameter '.$entityKey.' :: '.get_class($id).' <pre>'.$trace.'</pre>' );
+        
       $id = $id->getId();
+          
+      if (!$id)
+        return null;
+      
     } elseif ($this->useConditionCache &&  $obj = $this->getSearchIndex($entityKey, $id)) {// check if the entity is already in the search index
 
       return $obj[0];
@@ -1650,8 +1658,20 @@ SQL;
     $preSave = $entity->getPreSave();
     foreach ($preSave as /* @var Entity $postEntiy */ $preEntiy) {
       // we asume that the entity is allready appended
-      Debug::console('Presave update '.get_class($preEntiy));
-      $this->save($preEntiy);
+      
+      if (is_array($preEntiy)) {
+          
+        $this->save($preEntiy[0]);
+        if($preEntiy[2]){
+            $entity->setData($preEntiy[1],(int)(string)$preEntiy[0]->getData($preEntiy[2]));
+        } else {
+            $entity->setData($preEntiy[1],$preEntiy[0]->getId());
+        }
+          
+      } else {
+          Debug::console('Presave update '.get_class($preEntiy));
+          $this->save($preEntiy);
+      }
     }
 
     $keyVal = $entity->getData();
@@ -1710,10 +1730,6 @@ SQL;
     $entity->setId($newid);
     $entity->synchronized();
 
-    if ($entity->hasIndex())
-      $this->searchIndexer->updateSearchIndexForEntity($entity, true);
-
-
     if ($handleArray) {
       $this->addToPool($entityKey, $entity->getId(), $entity);
     }
@@ -1723,8 +1739,27 @@ SQL;
         $value->setEntity($entity);
         $value->save();
       }
+    } 
+    
+    $postSave = $entity->getPostSave();
+    foreach ($postSave as /* @var Entity $postEntiy */ $postEntiy) {
+      // we asume that the entity is allready appended
+      
+      if(is_array($postEntiy)){
+          
+          $this->save($postEntiy[0]);
+          $entity->setData($postEntiy[1],$postEntiy[0]);
+          
+      } else{
+          
+          $this->save($postEntiy);
+      }
     }
+    
 
+    if ($entity->hasIndex())
+        $this->searchIndexer->updateSearchIndexForEntity($entity, true);
+    
     return $entity;
 
   }//end public function insertIfNotExists */
@@ -1778,8 +1813,24 @@ SQL;
     $preSave = $entity->getPreSave();
     foreach ($preSave as /* @var Entity $postEntiy */ $preEntiy) {
       // we asume that the entity is allready appended
-      Debug::console('Presave update '.get_class($preEntiy));
-      $this->save($preEntiy);
+      if (is_array($preEntiy)) {
+          
+        $this->save($preEntiy[0]);
+        if($preEntiy[2]){
+            $entity->setData($preEntiy[1],(int)(string)$preEntiy[0]->getData($preEntiy[2]));
+        } else {
+            $entity->setData($preEntiy[1],$preEntiy[0]->getId());
+        }
+          
+      } else {
+          Debug::console('Presave update '.get_class($preEntiy));
+          $this->save($preEntiy);
+      }
+    }
+    
+    // was passiert wenn in presave die entity gespeichert wird?
+    if($entity->getId()&&$entity->getSynchronized()){
+        return $entity;     
     }
 
     $keyVal = $entity->getData();
@@ -1837,8 +1888,6 @@ SQL;
     $entity->setId($newid);
     $entity->synchronized();
 
-    if ($entity->hasIndex())
-      $this->searchIndexer->updateSearchIndexForEntity($entity, true);
 
 
     $this->addToPool($entityKey, $entity->getId(), $entity);
@@ -1853,8 +1902,25 @@ SQL;
     $postSave = $entity->getPostSave();
     foreach ($postSave as /* @var Entity $postEntiy */ $postEntiy) {
       // we asume that the entity is allready appended
-      $this->save($postEntiy);
+      
+      if(is_array($postEntiy)){
+          
+          $this->save($postEntiy[0]);
+          $entity->setData($postEntiy[1],$postEntiy[0]);
+          
+      } else{
+          
+          $this->save($postEntiy);
+      }
     }
+    
+    if(!$entity->getSynchronized()){
+        $this->update($entity);
+    }
+    
+    if ($entity->hasIndex())
+        $this->searchIndexer->updateSearchIndexForEntity($entity, true);
+    
 
     return $entity;
 
@@ -1948,14 +2014,26 @@ SQL;
     if (is_object($entity)) {
 
       if ($entity instanceof Entity) {
+          
         if ($entity->getSynchronized())
           return $entity;
 
         $preSave = $entity->getPreSave();
         foreach ($preSave as /* @var Entity $postEntiy */ $preEntiy) {
           // we asume that the entity is allready appended
-          Debug::console('Presave update '.get_class($preEntiy));
-          $this->save($preEntiy);
+           if (is_array($preEntiy)) {
+          
+            $this->save($preEntiy[0]);
+            if($preEntiy[2]){
+                $entity->setData($preEntiy[1],(int)(string)$preEntiy[0]->getData($preEntiy[2]));
+            } else {
+                $entity->setData($preEntiy[1],$preEntiy[0]->getId());
+            }
+              
+          } else {
+              Debug::console('Presave update '.get_class($preEntiy));
+              $this->save($preEntiy);
+          }
         }
 
         $id = $entity->getId();
@@ -2022,8 +2100,17 @@ SQL;
 
       $postSave = $entity->getPostSave();
       foreach ($postSave as /* @var Entity $postEntiy */ $postEntiy) {
-        // we assume that the entity is allready appended
-        $this->save($postEntiy);
+          
+          // we asume that the entity is allready appended
+          if(is_array($postEntiy)){
+              
+              $this->save($postEntiy[0]);
+              $entity->setData($postEntiy[1],$postEntiy[0]);
+              
+          } else{
+              
+              $this->save($postEntiy);
+          }
       }
 
       if ($entity->hasIndex())
