@@ -61,7 +61,12 @@ class LibFlowErrorHandler extends Pbase // wird nicht von Controller abgeleitet 
     ) {
 
       $response->sendHeader("X-error-message: ".urlencode($messageText.' '.$errorCode));
-      $response->addError($messageText);
+      
+      if(DEBUG){
+        $response->addError((string)$error);
+      } else {
+        $response->addError($messageText);
+      }
 
     } elseif ($response->tpl->isType(View::DOCUMENT)) {
 

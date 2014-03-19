@@ -53,9 +53,10 @@ class InvalidRequest_Exception extends WebfrapUser_Exception
     $response = Webfrap::$env->getResponse();
 
     if (is_int($debugMessage))
-      $response->setStatus($debugMessage);
-    else
-      $response->setStatus($errorKey);
+      $errorKey = $debugMessage;
+        
+        
+    $response->setStatus($errorKey);
 
     if (is_object($message)) {
 
@@ -73,6 +74,7 @@ class InvalidRequest_Exception extends WebfrapUser_Exception
         $response->writeLn($debugMessage);
 
       Error::addException($debugMessage, $this);
+      
     } else {
       if (DEBUG && 'Invalid Request' != $debugMessage && !is_numeric($debugMessage) || !$message)
         parent::__construct($debugMessage);

@@ -83,13 +83,15 @@ class CrudFormValidator
       $this->lastErrors = $filter->getErrorMessages();
   
       if ($this->lastErrors) {
+          
           if ($publishErrors ) {
               $response = $this->getResponse();
               $response->addError($this->lastErrors);
           }
           
           throw new InvalidRequest_Exception(
-  	         'One or more invalid values'         
+  	         'One or more invalid values',
+             'One or more invalid values'
           );
       }
       

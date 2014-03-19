@@ -63,7 +63,7 @@ class LibMessageMail
   /**
    * Das New Line Format das beim versenden verwendet wird   *
    */
-  const NLB = "\n";
+  const NLB = "\r\n";
 
   /**
    * @var string
