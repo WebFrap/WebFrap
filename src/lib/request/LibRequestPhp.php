@@ -30,6 +30,24 @@ class LibRequestPhp
    * @var string
    */
   public $type = 'http';
+  
+  /**
+   * Der $_GET array
+   * @var array
+   */
+  public $params = null;
+
+  /**
+   * Der $_POST array
+   * @var string
+   */
+  public $data = null;
+
+  /**
+   * Der $_FILES array
+   * @var string
+   */
+  public $files = null;
 
   /**
    *
@@ -73,6 +91,10 @@ class LibRequestPhp
       mb_parse_str(file_get_contents("php://input"),$_POST);
     }
 
+    $this->params = $_GET;
+    $this->data = isset($_POST)?$_POST:array();
+    $this->files = isset($_FILES)?$_FILES:array();
+    
     /*
     if (false) {
       Debug::console('Data URL' , $_SERVER['REQUEST_URI']);

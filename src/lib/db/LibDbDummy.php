@@ -464,6 +464,16 @@ class LibDbDummy extends LibDbConnection
     // TODO Auto-generated method stub
 
   }
+  
+    /* (non-PHPdoc)
+     * @see LibDbConnection::addSlashes()
+     */
+    public function addSlashes($value)
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
  // end public function addSlashes($value)
 
 } //end class DbDummy

@@ -2007,6 +2007,8 @@ SQL;
    * @param int $id
    * @param array $data
    * @return Entity
+   * 
+   * @throws LibDb_Exception
    */
   public function update($entity , $id = null , $data = array())
   {
@@ -2031,7 +2033,6 @@ SQL;
             }
               
           } else {
-              Debug::console('Presave update '.get_class($preEntiy));
               $this->save($preEntiy);
           }
         }
@@ -2061,7 +2062,7 @@ SQL;
     } else {
 
       if (!$id) {
-        throw new LibDb_Exception('Update got no id');
+        throw new LibDb_Exception('Tried to update an entity with no id. Maybe you should insert it first?');
       }
 
       // muss ein array sein
@@ -2072,27 +2073,15 @@ SQL;
 
     }
 
-    Debug::console('KEYVAL '.$tableName.' '.$objid, $keyVal);
-
-    try {
-      if (isset($keyVal['rowid']))
+    
+    if (isset($keyVal['rowid']))
         unset($keyVal['rowid']);
 
-
-      $sqlstring = $this->sqlBuilder->buildUpdate($keyVal , $tableName, 'rowid', $objid);
-
-      // $values = array(), $table = null , $pk = null , $id = null
-
-      if (!$this->db->update($sqlstring)) {
-        Error::report('Failed to update Entity');
-
-        return null;
-      }
-
-    } catch (LibDb_Exception $exc) {
-      return null;
-    }
-
+    
+    $sqlstring = $this->sqlBuilder->buildUpdate($keyVal , $tableName, 'rowid', $objid);
+    
+    /** @throws LibDb_Exception */
+    $this->db->update($sqlstring);
 
     if (is_object($entity)) {
 
