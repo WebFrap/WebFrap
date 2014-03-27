@@ -1438,24 +1438,61 @@ SQL;
 
   /**
    * @param string $entityKey
+   * @param string $where
+   *
+   * @return array<int>
+   */
+  public function getGroupedIds($entityKey,  $where = null)
+  {
+  
+      $criteria = $this->newCriteria();
+  
+      $criteria->select(array('rowid','access_key'))
+      ->from($this->getTableName($entityKey))
+      ->where($where);
+      
+      $tmp = $this->select($criteria)->getAll();
+      $data = array();
+      foreach($tmp as $row){
+          $data[$row['rowid']] = $row['access_key'];
+      }
+  
+      return $data;
+  
+  }//end public function getIds */
+  
+  /**
+   * @param string $entityKey
    * @param array int
    *
    * @return array<int>
    */
-  public function getIdsByKeys($entityKey, array $keys)
+  public function getIdsByKeys($entityKey, array $keys, $groupByKey = false)
   {
 
     if (!$keys)
       return array();
 
-    return $this->getIds(
-      $entityKey,
-      "access_key IN('"
-        .implode(
-          "', '",
-          $keys
-        )."')"
-    );
+    if ($groupByKey) {
+        return $this->getGroupedIds(
+            $entityKey,
+            "access_key IN('"
+            .implode(
+                "', '",
+                $keys
+            )."')"
+        );
+    } else {
+        return $this->getIds(
+            $entityKey,
+            "access_key IN('"
+            .implode(
+                "', '",
+                $keys
+            )."')"
+        );
+    }
+
 
   }//end public function getIdsByKeys */
 
