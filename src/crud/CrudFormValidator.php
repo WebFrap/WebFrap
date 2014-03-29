@@ -101,6 +101,7 @@ class CrudFormValidator extends BaseChild
         );
         
         $data = $filter->getData();
+
         $entity->addData($data);
         
         $this->lastErrors = $filter->getErrorMessages();
@@ -229,6 +230,7 @@ class CrudFormValidator extends BaseChild
         } // end else
         
         return $filter;
+        
     } // end public function checkFormInput */
     
     /**

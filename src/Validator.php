@@ -554,7 +554,7 @@ class Validator
    * @param int $minSize
    * @return String
    */
-  public function addRaw($key, $value, $notNull = false, $maxSize = null, $minSize = null  )
+  public function addRaw($key, $value, $notNull = false, $maxSize = null, $minSize = null)
   {
 
     if (!$notNull and trim($value) == '') {
@@ -564,7 +564,7 @@ class Validator
       return false;
     }
 
-    $this->data[$key] = stripslashes($value);
+    $this->data[$key] = $this->checkRaw($value);
 
     if ($notNull and trim($value) == '') {
       $this->invalid[$key] = 'emtpy';
@@ -594,6 +594,43 @@ class Validator
 
   }//end public function addRaw
 
+  /**
+   * @param string $value
+   * @param string $key
+   * @return string
+   * 
+   * @throws InvalidParam_Exception
+   */
+  public function checkRaw($value, $required = false, $key = null)
+  {
+      
+      if ($required) {
+          
+          if($key){
+
+              if(!isset($value[$key])){
+                  return false;
+              }
+
+              if(''==trim($value[$key])){
+                  return false;
+              }
+              
+          } else {
+              if(''==trim($value)){
+                  return false;
+              }
+          }
+      } 
+      
+      if ($key) {
+          return isset($value[$key])?  stripslashes($value[$key]) : false;
+      } else {
+          return stripslashes($value);
+      }
+      
+  }//end public function checkRaw */
+  
   /**
    * Warning will deliver unfilterd Userinput
    * Only Use this if you really know what you do!!
@@ -631,6 +668,11 @@ class Validator
 
   }//end public function addBitmask
 
+  public function checkBitmask()
+  {
+      
+  }
+  
   /**
    *
    * @param string $key
@@ -691,13 +733,14 @@ class Validator
     if (!$notNull and trim($value) == '') {
       $this->data[$key] = null;
       $this->invalid[$key] = false;
-
       return false;
     }
+    
+    $this->data[$key] = $this->checkInt($value);
 
-    $this->data[$key] = (int) $value;
-
-    if (!is_numeric($value)) {
+    if (is_bool($this->data[$key])) {
+        
+      $this->data[$key] = null;
       $this->invalid[$key] = 'wrong';
 
       if(Log::$levelDebug)
@@ -709,7 +752,6 @@ class Validator
     if ($maxSize) {
       if ($this->data[$key] > $maxSize) {
         $this->invalid[$key] = 'max';
-
         return 'max';
       }
     }
@@ -717,7 +759,6 @@ class Validator
     if ($minSize) {
       if ($this->data[$key] < $minSize) {
         $this->invalid[$key] = 'min';
-
         return 'min';
       }
     }
@@ -728,6 +769,26 @@ class Validator
 
   }//end function addInt
 
+  /**
+   * @param string $value
+   * @param boolean $required
+   * @param string $key
+   */
+  public function checkInt($value, $required = false, $key = null)
+  {
+      
+      if($key){
+          $value = isset($value[$key])?$value[$key]:null;
+      }
+      
+      if ($required&&''==trim($value)) {
+          return false;
+      }
+      
+      return filter_var($value, FILTER_SANITIZE_NUMBER_INT); 
+      
+  }//end public function checkInt */
+  
   /**
    * @param string $key
    * @param scalar $value
@@ -776,6 +837,26 @@ class Validator
     return false;
 
   }//end function addSmallint
+  
+  /**
+   * @param string $value
+   * @param boolean $required
+   * @param string $key
+   */
+  public function checkSmallint($value, $required = false, $key = null)
+  {
+  
+      if($key){
+          $value = isset($value[$key])?$value[$key]:null;
+      }
+  
+      if ($required&&''==trim($value)) {
+          return false;
+      }
+  
+      return filter_var($value, FILTER_SANITIZE_NUMBER_INT);
+  
+  }//end public function checkSmallint */
 
   /**
    * @param string $key
@@ -825,6 +906,26 @@ class Validator
     return false;
 
   }//end function addBigInt
+  
+  /**
+   * @param string $value
+   * @param boolean $required
+   * @param string $key
+   */
+  public function checkBigint($value, $required = false, $key = null)
+  {
+  
+      if($key){
+          $value = isset($value[$key])?$value[$key]:null;
+      }
+  
+      if ($required&&''==trim($value)) {
+          return false;
+      }
+  
+      return filter_var($value, FILTER_SANITIZE_NUMBER_INT);
+  
+  }//end public function checkBigint */
 
   /**
    * check if the value is a valid EID  Entity id:
@@ -846,7 +947,7 @@ class Validator
       return false;
     }
 
-    $this->data[$key] = (int) $value;
+    $this->data[$key] = (int)$value;
 
     if (!ctype_digit($value)) {
       $this->invalid[$key] = 'wrong';
@@ -884,6 +985,26 @@ class Validator
     return false;
 
   }//end public function addEid */
+  
+  /**
+   * @param string $value
+   * @param boolean $required
+   * @param string $key
+   */
+  public function checkEid($value, $required = false, $key = null)
+  {
+  
+      if($key){
+          $value = isset($value[$key])?$value[$key]:null;
+      }
+  
+      if ($required&&''==trim($value)) {
+          return false;
+      }
+  
+      return filter_var($value, FILTER_SANITIZE_NUMBER_INT);
+  
+  }//end public function checkEid */
 
   /**
    * @param string $key
@@ -904,7 +1025,7 @@ class Validator
 
     $formatter = LibFormatterNumeric::getActive();
 
-    $this->data[$key] = (float) $formatter->formatToEnglish($value);
+    $this->data[$key] = (float)$formatter->formatToEnglish($value);
 
     if ($notNull) {
       if (trim($value) == ''  ) {
@@ -933,6 +1054,27 @@ class Validator
     return false;
 
   }//end function addNumeric */
+  
+  /**
+   * @param string $value
+   * @param boolean $required
+   * @param string $key
+   */
+  public function checkNumeric($value, $required = false, $key = null)
+  {
+  
+      if($key){
+          $value = isset($value[$key])?$value[$key]:null;
+      }
+  
+      if ($required&&''==trim($value)) {
+          return false;
+      }
+      
+      $formatter = LibFormatterNumeric::getActive();
+      return (float)$formatter->formatToEnglish($value);
+    
+  }//end public function checkNumeric */
 
   /**
    * @param string $key
@@ -1154,7 +1296,42 @@ class Validator
     return false;
 
   }//end function addHtml
-
+  
+  /**
+   * @param string $value
+   * @return string
+   */
+  public function checkHtml($value)
+  {
+      
+      $sanitizer = LibSanitizer::getHtmlSanitizer();
+      $purify = new LibVendorHtmlpurifier_ConfigSave();
+      $sanitizer->config = $purify->getConfig();
+      
+      return $sanitizer->purify($value);
+      
+  }//end public function checkHtml */
+  
+  /**
+   * @param string $value
+   * @param boolean $required
+   * @param string $key
+   */
+  public function checkPlaintext($value, $required = false, $key = null)
+  {
+      
+      if ($key) {
+          $value = isset($value[$key])?$value[$key]:null;
+      }
+      
+      if ($required &&''==trim($value)) {
+          return false;
+      }
+      
+      return strip_tags($value); 
+      
+  }//end public function checkPlaintext */
+  
   /**
    * @param string $key
    * @param scalar $value
@@ -1202,6 +1379,21 @@ class Validator
     return false;
 
   }
+  
+  /**
+   * @param string $value
+   * @return string
+   */
+  public function checkHtmlPublish($value)
+  {
+  
+      $sanitizer = LibSanitizer::getHtmlSanitizer();
+      $purify = new LibVendorHtmlpurifier_ConfigPublish();
+      $sanitizer->config = $purify->getConfig();
+  
+      return $sanitizer->purify($value);
+  
+  }//end public function checkHtmlPublish */
 
   /**
    * @param string $key
@@ -1250,6 +1442,21 @@ class Validator
     return false;
 
   }
+  
+  /**
+   * @param string $value
+   * @return string
+   */
+  public function checkHtmlFull($value)
+  {
+  
+      $sanitizer = LibSanitizer::getHtmlSanitizer();
+      $purify = new LibVendorHtmlpurifier_ConfigFull();
+      $sanitizer->config = $purify->getConfig();
+  
+      return $sanitizer->purify($value);
+  
+  }//end public function checkHtmlFull */
 
   /**
    * @param string $key
@@ -1849,6 +2056,33 @@ class Validator
   }//end function addCname
 
   /**
+   * @param string $value
+   * @param boolean $required
+   * @param string $key
+   */
+  public function checkCname($value, $required = false, $key = null)
+  {
+      
+      if($key){
+          $value = isset($value[$key])?$value[$key]:null;
+      }
+      
+      if ($required&&''==trim($value)) {
+          return false;
+      }
+      
+      $testVal = str_replace('_','',$value);
+
+      // musn't start with a number
+      if (!ctype_alnum($testVal)) {
+          return false;
+      }
+  
+      return $value;
+  
+  }//end public function checkCname */
+  
+  /**
    * @param string $key
    * @param scalar $value
    * @param boolean $notNull
@@ -1907,6 +2141,32 @@ class Validator
 
   }//end function addCkey
 
+  /**
+   * @param string $value
+   * @param boolean $required
+   * @param string $key
+   */
+  public function checkCkey($value, $required = false, $key = null)
+  {
+  
+      if($key){
+          $value = isset($value[$key])?$value[$key]:null;
+      }
+  
+      if ($required&&''==trim($value)) {
+          return false;
+      }
+  
+      $testVal = str_replace(array('_','-') ,array('',''),$value);
+  
+      // musn't start with a number
+      if (!ctype_alnum($testVal)) {
+          return false;
+      }
+  
+      return $value;
+  
+  }//end public function checkCkey */
 
   /**
    * @param string $key

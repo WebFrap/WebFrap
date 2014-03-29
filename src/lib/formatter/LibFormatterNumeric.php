@@ -204,6 +204,7 @@ class LibFormatterNumeric
       }
 
     } else {
+        
       $num = '';
 
       foreach ($rawMatches as $match) {
@@ -253,8 +254,7 @@ class LibFormatterNumeric
     if (is_null($numeric))
      $numeric = $this->numericEnglish;
 
-    return number_format
-    (
+    return number_format(
       $this->numericEnglish ,
       $this->size,
       $this->separatorDec ,
