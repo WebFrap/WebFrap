@@ -54,8 +54,10 @@ abstract class LibImageThumbAdapter
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * Enter description here...
-   *
+   * @param string $origName
+   * @param string $thumbName
+   * @param string $maxWidth
+   * @param string $maxHeight
    */
   public function __construct($origName = null, $thumbName = null, $maxWidth = null, $maxHeight = null)
   {
@@ -83,8 +85,7 @@ abstract class LibImageThumbAdapter
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * Enter description here...
-   *
+   * @param string $origName
    */
   public function setOrigname($origName)
   {
@@ -92,9 +93,8 @@ abstract class LibImageThumbAdapter
 
   }//end public function setOrigname
 
-    /**
-   * Enter description here...
-   *
+  /**
+   * @param string $thumbName
    */
   public function setThumbName($thumbName)
   {
@@ -103,8 +103,7 @@ abstract class LibImageThumbAdapter
   }//end public function setThumbName
 
   /**
-   * Enter description here...
-   *
+   * @param string $maxHeight
    */
   public function setMaxHeight($maxHeight)
   {
@@ -113,8 +112,7 @@ abstract class LibImageThumbAdapter
   }//end public function setMaxHeight
 
   /**
-   * Enter description here...
-   *
+   * @param string $maxWidth
    */
   public function setMaxWidth($maxWidth)
   {
@@ -127,8 +125,6 @@ abstract class LibImageThumbAdapter
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * Enter description here...
-   *
    */
   abstract public function genThumb();
 
