@@ -31,12 +31,18 @@
  */
 class Context
 {
+    
+    /**
+     * Flag ob der Request ok ist
+     * @var boolean
+     */
+    public $isValidRequest = true;
 
-  /**
-   * a container with the acl informations in this context
-   * @var LibAclPermission
-   */
-  public $access = null;
+   /**
+    * a container with the acl informations in this context
+    * @var LibAclPermission
+    */
+    public $access = null;
 
   /**
    * startpunkt des pfades für die acls
@@ -108,7 +114,7 @@ class Context
   protected $actionExt = null;
 
   /**
-   * @var string
+   * @var LibRequestHttp
    */
   protected $request = null;
 
@@ -177,6 +183,16 @@ class Context
     $this->request = $request;
 
   }//end public function setRequest */
+
+  /**
+   * @return LibRequestHttp
+   */
+  public function getRequest()
+  {
+
+    return $this->request;
+
+  }//end public function getRequest */
 
   /**
    * @param LibRequestHttp $request
@@ -540,7 +556,6 @@ class Context
 
       if ($id) {
         Debug::console('got post rowid: '.$id);
-
         return $id;
       }
     }
@@ -553,7 +568,6 @@ class Context
 
         if ($id) {
           Debug::console('got post rowid: '.$id);
-
           return $id;
         }
       }
