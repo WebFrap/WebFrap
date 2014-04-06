@@ -26,27 +26,25 @@ abstract class LibImageThumbAdapter
 //////////////////////////////////////////////////////////////////////////////*/
 
   /**
-   * @var array
+   * Original Name des Bildes
+   * @var string
    */
   public $origName = null;
 
   /**
-   * Enter description here...
-   *
-   * @var int
+   * Name des späteren thumbs
+   * @var string
    */
   public $thumbName = null;
 
   /**
-   * Enter description here...
-   *
+   * die maximale höhe
    * @var int
    */
   public $maxHeight = 100;
 
   /**
-   * Enter description here...
-   *
+   * die maximale breite
    * @var int
    */
   public $maxWidth = 100;
