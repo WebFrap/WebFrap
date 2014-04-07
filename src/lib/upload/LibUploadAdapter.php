@@ -377,7 +377,7 @@ abstract class LibUploadAdapter
 
         if (!$newPath) {
             if (!$this->newpath) {
-                $this->newpath = PATH_UPLOADS . 'attachments/';
+                $this->newpath = PATH_UPLOADS.'attachments/';
             }
         } else {
             $this->newpath = $newPath;
@@ -388,29 +388,30 @@ abstract class LibUploadAdapter
         }
 
         if (is_null($this->newname)) {
-            $newName = $this->newpath . '/' . $this->oldname;
+            $newName = $this->newpath.'/'.$this->oldname;
         } else {
-            $newName = $this->newpath . '/' . $this->newname;
+            $newName = $this->newpath.'/'.$this->newname;
         }
 
         // Wenn der Ordner nicht existiert, einfach versuchen zu erstellen
         if (!is_dir($this->newpath)) {
             if (!SFilesystem::mkdir($this->newpath)) {
-                throw new LibUploadException('Failed to create target folder: ' . $this->newpath);
+                throw new LibUploadException('Failed to create target folder: '.$this->newpath);
             }
         }
 
         if (!is_writeable($this->newpath)) {
-            throw new LibUploadException('Target Folder: ' . $this->newpath . ' ist not writeable');
+            throw new LibUploadException('Target Folder: '.$this->newpath.' ist not writeable');
         }
 
         if (!copy($this->tmpname, $newName)) {
-            throw new LibUploadException('Was not able to copy the file ' . $this->tmpname . ' to the new target: ' . $newName);
+            throw new LibUploadException('Was not able to copy the file '.$this->tmpname.' to the new target: '.$newName);
         }
 
         $this->copies[] = $newName;
 
         return $newName;
+        
     } //end public function copy */
 
 
@@ -422,9 +423,10 @@ abstract class LibUploadAdapter
 
         foreach ($this->copies as $copy) {
             if (!unlink($copy)) {
-                Error::addError('Failed to clean: ' . $copy);
+                Error::addError('Failed to clean: '.$copy);
             }
         }
     } //end public function clean */
+    
 } // end abstract class LibUploadAdapter
 

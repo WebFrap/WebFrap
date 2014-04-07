@@ -158,7 +158,7 @@ class LibDbOrm
     $className = 'LibParserSql'.ucfirst($dbType);
     $this->sqlBuilder = new $className('orm_'.$dbType, $db);
 
-      $this->searchIndexer = new LibSearchDb_EntityIndex($this);
+    $this->searchIndexer = new LibSearchDb_EntityIndex($this);
 
   }//end public function __construct */
 

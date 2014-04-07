@@ -110,8 +110,14 @@ class LibImageThumbGd extends LibImageThumbAdapter
     } // end public function genThumb
     
     /**
+     * @param string $fileName
+     * @param string $newName
+     * @param int $maxWidth
+     * @param int $maxHeight
+     * @throws LibImage_Exception
+     * @return boolean
      */
-    public function resize($fileName, $newName = null, $maxWidth = null, $maxHeight = null)
+    public function resize($newName = null, $maxWidth = null, $maxHeight = null)
     {
         if ($maxWidth) {
             $this->maxWidth = $maxWidth;
@@ -123,7 +129,7 @@ class LibImageThumbGd extends LibImageThumbAdapter
         
         try {
             
-            $imgData = $this->openImage($fileName);
+            $imgData = $this->openImage($this->origName);
             
             // Errechnen der neuen Größe
             if ($imgData->width > $imgData->height) {
