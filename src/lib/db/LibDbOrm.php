@@ -1388,7 +1388,7 @@ SQL;
    *
    * @return array
    */
-  public function getField($entityKey, $id , $fieldName)
+  public function getField($entityKey, $id, $fieldName)
   {
     if (is_numeric($id) && $obj = $this->getFromPool($entityKey, $id))
       return $obj->getData($fieldName);

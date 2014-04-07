@@ -15,6 +15,11 @@
 *
 *******************************************************************************/
 
+// include password compat lib if not exists
+if(!function_exists('password_hash')){
+    include PATH_ROOT.'WebFrap_Vendor/vendor/password/password.php';
+}
+
 /**
  * @package WebFrap
  * @subpackage tech_core
@@ -30,8 +35,10 @@ class SEncrypt
    */
   public static function passwordHash($value, $mainSalt = '', $dynSalt = '')
   {
-    return sha1($mainSalt.$dynSalt.$value);
+    //return sha1($mainSalt.$dynSalt.$value);
 
+    return password_hash($mainSalt.$dynSalt.$value, PASSWORD_BCRYPT, array("cost" => 20));
+    
   }//end public static function passwordHash */
 
   /**
