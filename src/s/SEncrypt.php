@@ -36,10 +36,22 @@ class SEncrypt
   public static function passwordHash($value, $mainSalt = '', $dynSalt = '')
   {
     //return sha1($mainSalt.$dynSalt.$value);
-
-    return password_hash($mainSalt.$dynSalt.$value, PASSWORD_BCRYPT, array("cost" => 20));
+    return password_hash($mainSalt.$dynSalt.$value, PASSWORD_BCRYPT, array("cost" => 10));
     
   }//end public static function passwordHash */
+  
+  /**
+   * wrapper method for password encryption
+   *
+   * @param string $password
+   * @return string $hash
+   */
+  public static function passwordVerify($password, $hash)
+  {
+      //return sha1($mainSalt.$dynSalt.$value);
+      return password_verify($password, $hash);
+  
+  }//end public static function passwordVerify */
 
   /**
    * @return string

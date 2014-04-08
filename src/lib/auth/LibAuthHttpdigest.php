@@ -64,7 +64,7 @@ class LibAuthHttpauth extends LibAuthApdapter
       $httpRequest = Request::getActive();
 
     $username = $httpRequest->server('PHP_AUTH_USER', Validator::TEXT);
-    $password = $httpRequest->server('PHP_AUTH_PW', Validator::PASSWORD);
+    $password = $httpRequest->server('PHP_AUTH_PW', Validator::TEXT);
 
     // if one of both is empty
     if (! $username || ! $password)

@@ -1252,7 +1252,8 @@ class User extends BaseChild
       $id,
       array(
         'password' =>  SEncrypt::passwordHash($pwd),
-        'change_pwd' =>  ''
+        'change_pwd' =>  '',
+        'password_upgrade_req' => 'f'
       )
     );
 

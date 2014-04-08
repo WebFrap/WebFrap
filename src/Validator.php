@@ -1995,7 +1995,6 @@ class Validator
     return false;
 
   }//end function addPassword
-
   /**
    * @param string $key
    * @param scalar $value

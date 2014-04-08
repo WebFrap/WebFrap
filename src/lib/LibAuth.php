@@ -147,6 +147,7 @@ class LibAuth extends BaseChild
 
       if (!$auth->fetchLoginData($this))
         return false;
+      
     } else {
       $this->username = $username;
       $this->password = $password;

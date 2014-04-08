@@ -63,7 +63,7 @@ class LibAuthHttpget extends LibAuthApdapter
       $httpRequest = Request::getActive();
 
     $username = $httpRequest->param('name'    , Validator::TEXT      );
-    $password = $httpRequest->param('passwd'  , Validator::PASSWORD  );
+    $password = $httpRequest->param('passwd'  , Validator::TEXT  );
 
     // if one of both is empty
     if (!$username || !$password)

@@ -42,7 +42,6 @@ class LibVerificationSql extends LibVerificationAdapter
 
     if (!$this->nopwd && '' == trim($password)) {
       Message::addError(I18n::s('Got no password', 'wbf.message'));
-
       return false;
     }
 
@@ -73,9 +72,18 @@ class LibVerificationSql extends LibVerificationAdapter
 
     $dbPwd = $role->getData('password') ;
 
-    if ($dbPwd != $password) {
-      Message::addError(I18n::s('Invalid password', 'wbf.message'));
 
+    if('t'==$role->password_upgrade_req){
+        if(sha1($password)==$dbPwd){
+            $role->password_upgrade_req = false;
+            $dbPwd = SEncrypt::passwordHash($password);
+            $role->password = $dbPwd;
+            $orm->save($role);
+        }
+    }
+    
+    if (!SEncrypt::passwordVerify($password, $dbPwd)) {
+      Message::addError(I18n::s('Invalid password', 'wbf.message'));
       return false;
     }
 
