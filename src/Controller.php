@@ -609,10 +609,8 @@ abstract class Controller extends BaseChild
              if (isset($this->options[$methodeKey]['ssl'])) {
 
                if ($this->options[$methodeKey]['ssl'] && !$request->isSecure()) {
-                 throw new InvalidRequest_Exception
-                 (
-                   $response->i18n->l
-                   (
+                 throw new InvalidRequest_Exception(
+                   $response->i18n->l(
                      'This resource can only be accessed with a secure ssl connection.',
                      'wbf.message'
                    ),
@@ -1080,6 +1078,18 @@ abstract class Controller extends BaseChild
         }
         case View::MODAL: {
           $view = $tplEngine->loadView($class.'_Modal'  );
+
+          if ($displayMethod && !method_exists ($view, $displayMethod))
+            return $this->handleNonexistingView($throwError, $displayMethod);
+
+          $view->setRequest($request);
+          $view->setResponse($this->response);
+
+          return $view;
+          break;
+        }
+        case View::OVERLAY: {
+          $view = $tplEngine->loadView($class.'_Overlay'  );
 
           if ($displayMethod && !method_exists ($view, $displayMethod))
             return $this->handleNonexistingView($throwError, $displayMethod);

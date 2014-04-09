@@ -448,6 +448,19 @@ class LibResponseHttp extends LibResponse
           return $view;
           break;
         }
+        case View::OVERLAY: {
+
+          $view = $tplEngine->loadView($class.'_Overlay'  );
+
+          if ($displayMethod && !method_exists ($view, $displayMethod))
+            return $this->handleNonexistingView($throwError, $displayMethod, $viewType.':: '.$class.'_Overlay');
+
+          $view->setRequest($request);
+          $view->setResponse($this);
+
+          return $view;
+          break;
+        }
         case View::FRONTEND: {
 
           $view = $tplEngine->loadView($class.'_Frontend');
