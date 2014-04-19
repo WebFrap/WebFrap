@@ -30,31 +30,31 @@ abstract class LibUploadAdapter
     * identifikationsname im FILES Array
     * @var string
     */
-    protected $ident = null;
+    public $ident = null;
 
    /**
     *  Der ursprüngliche Name der Datei vor dem hochladen
     * @var string
     */
-    protected $oldname = null;
+    public $oldname = null;
 
    /**
     *  Der Name der Tempdatei in der das Bild gespeichert wurde
     * @var string
     */
-    protected $tmpname = null;
+    public $tmpname = null;
 
    /**
     *  Der neue Name den das Bild bekommen soll
     * @var string
     */
-    protected $newname = null;
+    public $newname = null;
 
    /**
     *  Der Ordner in den das Bild kopiert oder verschoben werden soll
     * @var string
     */
-    protected $newpath = null;
+    public $newpath = null;
 
    /**
     *  Typ der Hochgeladenen Datei
@@ -66,19 +66,25 @@ abstract class LibUploadAdapter
     *  Größe der hochgeladenen Datei
     * @var string
     */
-    protected $size = null;
+    public $size = null;
 
    /**
     *  Maximal erlaubte Dateigröße
     * @var int
     */
-    protected $maxSize = null;
+    public $maxSize = null;
 
    /**
     *  Potentielle Fehlermeldungen
     *  @var string
     */
-    protected $error = null;
+    public $error = null;
+
+   /**
+    * Metadaten der Datei
+    * @var string
+    */
+    protected $fileData = array();
 
    /**
     *  List der Kopien die erstellt wurden
@@ -116,7 +122,8 @@ abstract class LibUploadAdapter
         $this->newpath = $newpath;
         $this->newname = $newname;
         $this->maxSize = ($maxSize != null) ? ($maxSize * 1024) : null;
-    } // end public function __construct($ident , $newpath = null , $newname = null , $maxSize = null)
+        
+    } // end public function __construct */
 
 
    /**
@@ -127,17 +134,18 @@ abstract class LibUploadAdapter
 
         if (file_exists($this->tmpname))
             unlink($this->tmpname);
+        
     } // end public function __destruct()
 
 
    /**
-    *
-    *  Enter description here ...
+    * @return string
     */
     public function __toString()
     {
 
         return $this->getFileName();
+        
     } //end public function __toString */
 
 
@@ -191,6 +199,21 @@ abstract class LibUploadAdapter
         } else {
             return $this->oldname;
         }
+    } // end public function getFileName */
+    
+    /**
+     *  Abfragen des neuen Dateinamens
+     *
+     *  @param string $name
+     *  @return void
+     */
+    public function getEnding()
+    {
+    
+        $tmp = explode('.', $this->oldname);
+        return $tmp[(count($tmp)-1)];
+        
+        
     } // end public function getFileName */
 
 
