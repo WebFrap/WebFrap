@@ -57,6 +57,7 @@ class Manager extends BaseChild
   	}
 
     $this->env = $env;
+    $this->init();
 
   } //end public function __construct */
 
@@ -97,5 +98,12 @@ class Manager extends BaseChild
 
   }//end public static get */
 
+  /**
+   * leere init
+   */
+  protected function init()
+  {
+      
+  }
 
 }// end class Manager
