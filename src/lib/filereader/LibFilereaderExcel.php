@@ -19,7 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-class LibFilereaderCsv extends LibFilereader
+class LibFilereaderExcel extends LibFilereader
 {
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -36,12 +36,6 @@ class LibFilereaderCsv extends LibFilereader
    * @var array
    */
   public $pos = 0;
-
-  /**
-   * Position ab welcher gelesen werden soll
-   * @var int
-   */
-  public $startPos = 0;
 
   /**
    *
@@ -67,24 +61,13 @@ class LibFilereaderCsv extends LibFilereader
 
   /**
    * @param string $filename
-   * @throws Io_Exception
-   */
-  public function open($filename)
-  {
-  
-      if (!$this->resource = fopen($filename , 'r')) {
-          throw new Io_Exception('failed to open csv resource: '.$filename);
-      }
-  
-  }//end public function open */
-
-  /**
-   * @param string $filename
    */
   public function load($filename)
   {
 
-    $this->open($filename);
+    if (!$this->resource = fopen($filename , 'r')) {
+      throw new Io_Exception('failed to open csv resource: '.$filename);
+    }
 
   }//end public function load */
 
@@ -98,23 +81,6 @@ class LibFilereaderCsv extends LibFilereader
      fclose($this->resource);
 
   }//end public function close
-  
-
-
-  /**
-   * Rückgabe der ersten Zeile
-   */
-  public function firstLine()
-  {
-        fseek($this->resource, 0);
-        $data = fgetcsv($this->resource, 0, $this->delimiter, $this->enclosure, $this->escape);
-        
-        if($this->pos)
-            fseek($this->resource, $this->pos);
-        
-        return $data;
-  
-  }//end public function firstLine */
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Interface: Iterator
@@ -170,5 +136,5 @@ class LibFilereaderCsv extends LibFilereader
 
   }//end public function valid */
 
-} // end class LibFilesystemFile
+} // end class LibFilereaderExcel
 

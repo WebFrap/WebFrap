@@ -19,8 +19,7 @@
  * @package WebFrap
  * @subpackage tech_core
  */
-abstract class LibFilereader
-  implements Iterator
+abstract class LibFilereader implements Iterator
 {
 //////////////////////////////////////////////////////////////////////////////*/
 // Attributes
