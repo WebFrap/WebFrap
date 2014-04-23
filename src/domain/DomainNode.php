@@ -162,6 +162,13 @@ class DomainNode
   public $domainI18n = null;
 
   /**
+   * Das (FA) Icon
+   * @example icon-cog
+   * @var string
+   */
+  public $icon = null;
+
+  /**
    * @var [DomainNode]
    */
   private static $pool = array();
