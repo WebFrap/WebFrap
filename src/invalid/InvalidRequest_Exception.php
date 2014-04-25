@@ -41,13 +41,11 @@ class InvalidRequest_Exception extends WebfrapUser_Exception
    * @param string $debugMessage
    * @param int $errorKey
    */
-  public function __construct
-  (
+  public function __construct(
     $message = 'Sorry, this request was invalid.',
     $debugMessage = 'Invalid Request',
     $errorKey = Response::BAD_REQUEST
-  )
-  {
+  ) {
 
     $request = Webfrap::$env->getRequest();
     $response = Webfrap::$env->getResponse();
@@ -76,6 +74,7 @@ class InvalidRequest_Exception extends WebfrapUser_Exception
       Error::addException($debugMessage, $this);
       
     } else {
+        
       if (DEBUG && 'Invalid Request' != $debugMessage && !is_numeric($debugMessage) || !$message)
         parent::__construct($debugMessage);
       else
