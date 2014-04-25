@@ -181,7 +181,7 @@ class LibDbPostgresql extends LibDbConnection
         }
         
         if (! $this->result = pg_query($this->connectionWrite, $sql)) {
-            throw new LibDb_Exception('Insert failed', 'DB Response: '.pg_last_error($this->connectionWrite), Response::INTERNAL_ERROR, $sql, $this->counter);
+            throw new LibDb_Exception('Insert failed DB Response: '.pg_last_error($this->connectionWrite).' '.$sql , 'DB Response: '.pg_last_error($this->connectionWrite), Response::INTERNAL_ERROR, $sql, $this->counter);
         }
         
         // das kann passieren, wenn eine insert if not exists query läuft
@@ -197,7 +197,7 @@ class LibDbPostgresql extends LibDbConnection
             throw new LibDb_Exception('Failed to receive a new id', 'No Db Result: '.pg_last_error($this->connectionWrite), Response::INTERNAL_ERROR, $sqlstring, $this->counter);
         }
         
-        if (! $row = pg_fetch_row($this->result)) {
+        if (!$row = pg_fetch_row($this->result)) {
             throw new LibDb_Exception(I18n::s('wbf.error.DBFailedToGetNewId'));
         }
         
@@ -231,6 +231,7 @@ class LibDbPostgresql extends LibDbConnection
         $row = pg_fetch_row($this->result);
         
         return $row[0];
+        
     } // end public function nextVal */
     
     /**
