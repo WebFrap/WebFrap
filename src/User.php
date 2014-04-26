@@ -867,7 +867,12 @@ class User extends BaseChild
     if ($authRole->profile) {
       $this->profileName = $authRole->profile;
       $this->profiles[$authRole->profile] = SParserString::subToName($this->profileName);
+      
+
+      Log::debug('got profile '.$authRole->profile);
+      
     }
+    
 
     if (Webfrap::classExists('CorePerson_Entity')) {
       if ($person = $orm->get('CorePerson', $authRole->id_person))
