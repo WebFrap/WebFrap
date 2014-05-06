@@ -59,6 +59,12 @@ class Validator
    * Validatormapping
    * @var string
    */
+  const EID_CMS = 'EidCms';
+
+  /**
+   * Validatormapping
+   * @var string
+   */
   const NUMERIC = 'Numeric';
 
   /**
@@ -985,6 +991,66 @@ class Validator
     return false;
 
   }//end public function addEid */
+  
+
+  /**
+   * check if the value is a valid EID  Entity id:
+   *
+   * must be a int and bigger than 0
+   *
+   * @param string $key
+   * @param scalar $value
+   * @param boolean $notNull
+   * @param int $maxSize
+   * @param int $minSize
+   */
+  public function addEidCms($key, $value, $notNull = false, $maxSize = null, $minSize = null   )
+  {
+      
+      if (!$notNull and trim($value) == '') {
+          
+          $this->data[$key] = null;
+          $this->invalid[$key] = false;
+          return false;
+      }
+  
+      $tmp = explode('-', $value);
+      
+      $this->data[$key] = $value = (int)$tmp[0];
+  
+      if (!ctype_digit($value)) {
+          
+          $this->invalid[$key] = 'wrong';
+          if(Log::$levelDebug)
+              Log::debug('Invalid Value for eid key '.$key);
+  
+          return 'wrong';
+      }
+  
+      if (0 > $value) {
+          $this->invalid[$key] = 'wrong';
+          return 'wrong';
+      }
+  
+      if ($maxSize) {
+          if ($this->data[$key] > $maxSize) {
+              $this->invalid[$key] = 'max';
+              return 'max';
+          }
+      }
+  
+      if ($minSize) {
+          if ($this->data[$key] < $minSize) {
+              $this->invalid[$key] = 'min';
+              return 'min';
+          }
+      }
+  
+      $this->invalid[$key] = false;
+  
+      return false;
+  
+  }//end public function addEidCms */
   
   /**
    * @param string $value
