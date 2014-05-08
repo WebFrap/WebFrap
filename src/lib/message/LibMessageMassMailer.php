@@ -38,16 +38,22 @@ class LibMessageMassMailer
   protected $subject = null;
 
   /**
+   * the mail Subject
+   * @var string
+   */
+  protected $header = null;
+  
+  /**
    * Plain Text template
    * @var string
    */
-  protected $plainText = null;
+  protected $plainContent = null;
 
   /**
    * Html Text template
    * @var string
    */
-  protected $htmlText = null;
+  protected $htmlContent = null;
 
   /**
    * Liste der anzuhängenden Dateien
@@ -60,6 +66,18 @@ class LibMessageMassMailer
    * @var array<string>
    */
   protected $embedded = array();
+
+  /**
+   * Gecachte attachments
+   * @var array<string>
+   */
+  protected $attachmentCache = array();
+
+  /**
+   * gecachte embdeded files
+   * @var array<string>
+   */
+  protected $embeddedCache = array();
   
   /**
    * Mail boundary
@@ -75,45 +93,48 @@ class LibMessageMassMailer
    * Der mime Type der Message   *
    * @var string
    */
-  protected $mimeType = '1.0';
+  public $mimeType = '1.0';
 
   /**
    * Die Absender Addresse
    * @var string
    */
-  protected $sender = null;
+  public $sender = null;
 
   /**
    * @var string
    */
-  protected $replyTo = null;
+  public $replyTo = null;
 
   /**
-   * Enter description here...
-   *
    * @var string
    */
-  protected $contentType = 'text/html';
+  public $userAgent = 'Webfrap';
+
+  /**
+   * @var string
+   */
+  public $contentType = 'text/html';
 
   /**
    * Mail Charset
    *
    * @var string
    */
-  protected $charset = 'ISO-8859-1';
+  public $charset = 'ISO-8859-1';
 
   /**
    * set the x Priority
    *
    * @var string
    */
-  protected $xPriority = '3 (Normal)';
+  public $xPriority = '3 (Normal)';
 
   /**
    * the return Path for the Mail
    * @var string
    */
-  protected $returnPath = null;
+  public $returnPath = null;
 
   /**
    * the importance of the mail
@@ -126,13 +147,19 @@ class LibMessageMassMailer
    *
    * @var string
    */
-  protected $importance = 'normal';
+  public $importance = 'normal';
 
   /**
    * Message Logger..
    * @var LibMessageLogger
    */
-  protected $logger = null;
+  public $logger = null;
+
+  /**
+   * Render Object
+   * @var CmsRenderContent_Renderer
+   */
+  public $renderer = null;
 
 /*//////////////////////////////////////////////////////////////////////////////
 // Getter and Setter
@@ -190,28 +217,34 @@ class LibMessageMassMailer
    * @param string $fileName
    * @param string $attach
    * @param string $boundary
+   * @throws LibMessage_Exception
+   * 
+   * @return string
    */
-  protected function buildAttachement($fileName, $attach, $boundary  )
+  protected function buildAttachement($fileName, $attach, $boundary)
   {
 
+    if (isset($this->attachmentCache[$fileName])) {
+      return $this->attachmentCache[$fileName];
+    }
+      
     if (!is_readable($attach)) {
-      Error::report(
+      throw new LibMessage_Exception(
         'Tried to send nonreadable file: '.$attach.' by mail'
       );
-
-      return '';
     }
 
     $mimeType = SFiles::getMimeType($fileName);
 
-    $attachment = '--'.$boundary.self::NLB;
-    $attachment .= 'Content-Type: '.$mimeType.'; name="'.$fileName.'"'.self::NLB;
-    $attachment .= 'Content-Transfer-Encoding: base64'.self::NLB;
-    //$header .= 'Content-Disposition: attachment; filename="'.$fileName.'"'.self::NL.self::NL;
-    $attachment .= 'Content-Disposition: attachment; filename="'.$fileName.'"'.self::NLB.self::NLB;
+    $attachment = '--'.$boundary.NLB;
+    $attachment .= 'Content-Type: '.$mimeType.'; name="'.$fileName.'"'.NLB;
+    $attachment .= 'Content-Transfer-Encoding: base64'.NLB;
+    //$header .= 'Content-Disposition: attachment; filename="'.$fileName.'"'.NL.NL;
+    $attachment .= 'Content-Disposition: attachment; filename="'.$fileName.'"'.NLB.NLB;
     $attachment .= chunk_split(base64_encode(SFiles::read($attach)));
 
-    return $attachment;
+    $this->attachmentCache[$fileName] = $attachment;
+    return $this->attachmentCache[$fileName];
 
   }//end protected function buildAttachement */
 
@@ -219,13 +252,18 @@ class LibMessageMassMailer
    * @param string $fileName
    * @param string $attach
    * @param string $boundary
+   * @throws LibMessage_Exception
    * @return string
    */
   protected function buildEmbeddedResource($fileName , $attach , $boundary  )
   {
 
+    if(isset($this->embeddedCache[$fileName])){
+      return $this->embeddedCache[$fileName];
+    }
+      
     if (!is_readable($attach)) {
-      Error::report(
+      throw new LibMessage_Exception(
         'Tried to send nonreadable file: '.$attach.' by mail'
       );
       return '';
@@ -233,26 +271,63 @@ class LibMessageMassMailer
 
     $mimeType = SFiles::getMimeType($fileName);
 
-    $attachment = '--'.$boundary.self::NLB;
-    $attachment .= 'Content-Type: '.$mimeType.'; name="'.$fileName.'"'.self::NLB;
-    $attachment .= 'Content-Transfer-Encoding: base64'.self::NLB;
-    //$header .= 'Content-Disposition: attachment; filename="'.$fileName.'"'.self::NL.self::NL;
-    //$attachment .= 'Content-ID: <embeded@'.$fileName.'>'.self::NLB.self::NLB;
-    $attachment .= 'Content-ID: <embeded@'.$fileName.'>'.self::NLB.self::NLB;
+    $attachment = '--'.$boundary.NLB;
+    $attachment .= 'Content-Type: '.$mimeType.'; name="'.$fileName.'"'.NLB;
+    $attachment .= 'Content-Transfer-Encoding: base64'.NLB;
+    //$header .= 'Content-Disposition: attachment; filename="'.$fileName.'"'.NL.NL;
+    //$attachment .= 'Content-ID: <embeded@'.$fileName.'>'.NLB.NLB;
+    $attachment .= 'Content-ID: <embeded@'.$fileName.'>'.NLB.NLB;
     $attachment .= chunk_split(base64_encode(SFiles::read($attach)));
 
     //embedd with: <img src="cid:embeded@news" width="120" >
-    return $attachment;
+    $this->embeddedCache[$fileName] =$attachment;
+    return $this->embeddedCache[$fileName];
 
   }//end protected function buildAttachement */
 
   /**
-   * 
+   * @throws LibMessage_Exception
    */
   public function prepareMail()
   {
       
+      // unique boundary definieren
       $this->boundary = 'boundary-'.strtoupper(md5(uniqid(time())));
+      
+      // vorladen der attachments
+      // so können wir init exceptions abfangen
+      foreach ($this->attachment as $fileName => $attach) {
+          $this->buildAttachement($fileName, $attach, $this->boundary);
+      }
+      
+      foreach ($this->embedded as $fileName => $attach) {
+          $this->buildEmbeddedResource($fileName, $attach, $this->boundary);
+      }
+      
+      
+      // Header
+      $this->header = 'From: '.htmlspecialchars_decode($this->sender).NL;
+      
+      if ($this->replyTo) {
+          $this->header .= 'Reply-To:'.htmlspecialchars_decode($this->replyTo).NL;
+      }
+      
+      $this->header .= 'User-Agent: '.$this->userAgent.NL;
+      
+      if ($this->returnPath) {
+          $this->header .= 'Return-Path: <'.$this->returnPath.'>'.NL;
+      }
+      
+      if ($this->importance) {
+          $this->header .= 'Importance: '.$this->importance.NL;
+      }
+      
+      if ($this->xPriority) {
+          $this->header .= 'X-Priority: '.$this->xPriority.NL;
+      }
+      
+      $this->header .= 'MIME-Version: '.$this->mimeType.NL;
+      $this->header .= 'Content-Type: Multipart/Mixed; boundary="'.$this->boundary.'"'.NL;
       
   }// public function prepareMail */
   
@@ -265,63 +340,37 @@ class LibMessageMassMailer
   {
     // ohne adresse geht halt nix
     if (!$receiverData->address) {
+      // das sollte eigentlich nicht passieren
       throw new LibMessage_Exception('Missing E-Mail Address');
     }
 
-    $boundary = 'boundary-'.strtoupper(md5(uniqid(time())));
-
-    if ($this->view) {
-      $message = utf8_decode($this->view->build());
-    } else {
-      $message = !is_null($this->htmlText)?$this->htmlText:$this->plainText;
+    $body = 'This is a multi-part message in MIME format'.NL;
+    
+    if($this->plainContent){
+        $body .= '--'.$this->boundary.NL;
+        $body .= 'Content-Type: text/plain; charset="'.$this->charset.'"'.NL;
+        $body .= 'Content-Transfer-Encoding:  7bit'.NL;
+        $body .= 'Content-Disposition: inline'.NL.NL;
+        $body .= $this->renderer->compile($this->plainContent,$receiverData->vars).NL.NL;
     }
-
-    if ($this->htmlText || $this->view) {
-      $contentType = 'text/html';
-    } else {
-      $contentType = 'text/plain';
+    
+    if($this->htmlContent){
+        $body .= '--'.$this->boundary.NL;
+        $body .= 'Content-Type: text/html; charset="'.$this->charset.'"'.NL;
+        $body .= 'Content-Transfer-Encoding:  7bit'.NL;
+        $body .= 'Content-Disposition: inline'.NL.NL;
+        $body .= $this->renderer->compile($this->htmlContent,$receiverData->vars).NL.NL;
     }
-
-    // Header
-    $header = 'From: '.htmlspecialchars_decode($this->sender).self::NL;
-
-    if ($this->replyTo) {
-      $header .= 'Reply-To:'.htmlspecialchars_decode($this->replyTo).self::NL;
-    }
-
-    $header .= 'User-Agent: WebFrap'.self::NL;
-
-    if ($this->returnPath) {
-      $header .= 'Return-Path: <'.$this->returnPath.'>'.self::NL;
-    }
-
-    if ($this->importance) {
-      $header .= 'Importance: '.$this->importance.self::NL;
-    }
-
-    if ($this->xPriority) {
-      $header .= 'X-Priority: '.$this->xPriority.self::NL;
-    }
-
-    $header .= 'MIME-Version: '.$this->mimeType.self::NL;
-    $header .= 'Content-Type: Multipart/Mixed; boundary="'.$boundary.'"'.self::NL;
-
-    $body = 'This is a multi-part message in MIME format'.self::NL;
-    $body .= '--'.$boundary.self::NL;
-    $body .= 'Content-Type: '.$contentType.'; charset="'.$this->charset.'"'.self::NL;
-    $body .= 'Content-Transfer-Encoding:  7bit'.self::NL;
-    $body .= 'Content-Disposition: inline'.self::NL.self::NL;
-    $body .= $message.self::NL.self::NL;
-
+    
     foreach ($this->attachment as $fileName => $attach) {
-      $body .= $this->buildAttachement($fileName, $attach, $boundary).self::NL;
+      $body .= $this->buildAttachement($fileName, $attach, $this->boundary).NL;
     }
 
     foreach ($this->embedded as $fileName => $attach) {
-      $body .= $this->buildEmbeddedResource($fileName, $attach, $boundary).self::NL;
+      $body .= $this->buildEmbeddedResource($fileName, $attach, $this->boundary).NL;
     }
 
-    $body .= '--'.$boundary.'--';
+    $body .= '--'.$this->boundary.'--';
 
     /*
     Message::addMessage
@@ -333,21 +382,24 @@ class LibMessageMassMailer
     if(
       !mail(
         $address,
-        $this->subject,
+        $receiverData->subject,
         $body,
         $header
       )
     ) {
       
-      Error::report(
-        'Failed to send Mail to'.$address
+
+        $logger = $this->getLogger();
+        $logger->logMessage($address, $receiverData->subject, false);
+        
+      throw new LibMessage_Exception(
+        'Failed to send Mail to '.$address
       );
 
-      return false;
     } else {
 
       $logger = $this->getLogger();
-      $logger->logMessage($address, $this->subject);
+      $logger->logMessage($address, $receiverData->subject);
 
       return true;
     }
@@ -372,8 +424,8 @@ class LibMessageMassMailer
   {
 
     $this->subject = null;
-    $this->plainText = null;
-    $this->htmlText = null;
+    $this->plainContent = null;
+    $this->htmlContent = null;
 
   }//end public function cleanData */
 
