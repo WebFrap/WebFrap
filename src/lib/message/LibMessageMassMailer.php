@@ -47,25 +47,25 @@ class LibMessageMassMailer
    * Plain Text template
    * @var string
    */
-  protected $plainContent = null;
+  public $plainContent = null;
 
   /**
    * Html Text template
    * @var string
    */
-  protected $htmlContent = null;
+  public $htmlContent = null;
 
   /**
    * Liste der anzuhängenden Dateien
    * @var array<string>
    */
-  protected $attachment = array();
+  public $attachment = array();
 
   /**
    * Liste der zu embededten Dateien
    * @var array<string>
    */
-  protected $embedded = array();
+  public $embedded = array();
 
   /**
    * Gecachte attachments
@@ -171,19 +171,11 @@ class LibMessageMassMailer
    * @param LibMessageLogger $logger
    */
   public function __construct(
-    $sender = null,
     $logger = null
   ){
 
 
-    if ($sender) {
-      $this->sender = $this->encode($sender);
-    } elseif ($defSender = Conf::status('app.sender')) {
-      $this->sender = $defSender;
-    } else {
-      //todo no server name in cli... has to be maintained in the conf
-      $this->sender = 'WebFrap Mail API <do_not_reply@'.$_SERVER['SERVER_NAME'].'>';
-    }
+
 
     $this->logger = $logger;
 
@@ -255,7 +247,7 @@ class LibMessageMassMailer
    * @throws LibMessage_Exception
    * @return string
    */
-  protected function buildEmbeddedResource($fileName , $attach , $boundary  )
+  protected function buildEmbeddedResource($fileName , $attach , $boundary)
   {
 
     if(isset($this->embeddedCache[$fileName])){
@@ -286,10 +278,37 @@ class LibMessageMassMailer
   }//end protected function buildAttachement */
 
   /**
+   * @param string $sender
+   * @param string $subject
+   * @param string $htmlContent
+   * @param string $plainContent
+   * @param array $attachments
+   * @param array $embeds
    * @throws LibMessage_Exception
    */
-  public function prepareMail()
-  {
+  public function prepareMail(
+      $sender,
+      $subject,
+      $htmlContent,
+      $plainContent = null,
+      $attachments = array(),
+      $embeds = array()
+  ){
+      
+      if ($sender) {
+          $this->sender = $this->encode($sender);
+      } elseif ($defSender = Conf::status('app.sender')) {
+          $this->sender = $defSender;
+      } else {
+          //todo no server name in cli... has to be maintained in the conf
+          $this->sender = 'WebFrap Mail API <do_not_reply@'.$_SERVER['SERVER_NAME'].'>';
+      }
+      
+      $this->subject = $subject;
+      $this->htmlContent = $htmlContent;
+      $this->plainContent = $plainContent;
+      $this->attachment = $attachments;
+      $this->embedded = $embeds;
       
       // unique boundary definieren
       $this->boundary = 'boundary-'.strtoupper(md5(uniqid(time())));
@@ -333,13 +352,13 @@ class LibMessageMassMailer
   
   /**
    * Senden der Nachricht
-   * @param string $receiverData
+   * @param LibMessageReceiver $receiver
    * @return boolean
    */
-  public function send($receiverData)
+  public function send($receiver)
   {
     // ohne adresse geht halt nix
-    if (!$receiverData->address) {
+    if (!$receiver->address) {
       // das sollte eigentlich nicht passieren
       throw new LibMessage_Exception('Missing E-Mail Address');
     }
@@ -351,7 +370,7 @@ class LibMessageMassMailer
         $body .= 'Content-Type: text/plain; charset="'.$this->charset.'"'.NL;
         $body .= 'Content-Transfer-Encoding:  7bit'.NL;
         $body .= 'Content-Disposition: inline'.NL.NL;
-        $body .= $this->renderer->compile($this->plainContent,$receiverData->vars).NL.NL;
+        $body .= $this->renderer->compile($this->plainContent,$receiver->vars).NL.NL;
     }
     
     if($this->htmlContent){
@@ -359,7 +378,7 @@ class LibMessageMassMailer
         $body .= 'Content-Type: text/html; charset="'.$this->charset.'"'.NL;
         $body .= 'Content-Transfer-Encoding:  7bit'.NL;
         $body .= 'Content-Disposition: inline'.NL.NL;
-        $body .= $this->renderer->compile($this->htmlContent,$receiverData->vars).NL.NL;
+        $body .= $this->renderer->compile($this->htmlContent,$receiver->vars).NL.NL;
     }
     
     foreach ($this->attachment as $fileName => $attach) {
@@ -382,15 +401,14 @@ class LibMessageMassMailer
     if(
       !mail(
         $address,
-        $receiverData->subject,
+        $receiver->subject,
         $body,
         $header
       )
     ) {
       
-
         $logger = $this->getLogger();
-        $logger->logMessage($address, $receiverData->subject, false);
+        $logger->logMessage($address, $receiver->subject, false);
         
       throw new LibMessage_Exception(
         'Failed to send Mail to '.$address
@@ -399,7 +417,7 @@ class LibMessageMassMailer
     } else {
 
       $logger = $this->getLogger();
-      $logger->logMessage($address, $receiverData->subject);
+      $logger->logMessage($address, $receiver->subject);
 
       return true;
     }

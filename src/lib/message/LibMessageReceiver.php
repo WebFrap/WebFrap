@@ -56,6 +56,12 @@ class LibMessageReceiver implements IReceiver
    */
   public $address = null;
 
+  /**
+   * Liste mit Variablen für die Custom mail
+   * @var array
+   */
+  public $vars = array();
+
 /*//////////////////////////////////////////////////////////////////////////////
 // Attributes
 //////////////////////////////////////////////////////////////////////////////*/
@@ -64,46 +70,57 @@ class LibMessageReceiver implements IReceiver
    * @param array $userData
    * @param string $address
    */
-  public function __construct($userData, $address = null)
+  public function __construct($userData, $address = null, $massMailing = false)
   {
-
-    if (is_array($userData)) {
-
-      if (isset($userData['userid'])) {
-        $this->id = $userData['userid'];
-      }
-
-      if (isset($userData['nickname'])) {
-        $this->nickname = $userData['nickname'];
-      }
-
-      if (isset($userData['firstname'])) {
-        $this->firstname = $userData['firstname'];
-      }
-
-      if (isset($userData['lastname'])) {
-        $this->lastname = $userData['lastname'];
-      }
-
-      if (isset($userData['title'])) {
-        $this->title = $userData['title'];
-      }
-
-      if (isset($userData['address'])) {
-        $this->address = $userData['address'];
-      }
-
+    
+    // mass mailings haben ein anderes interface
+    if ($massMailing) {
+        
+        $this->address = $address;
+        $this->vars = $userData;
+        
     } else {
-      $this->id = $userData->id;
-      $this->nickname = $userData->nickname;
-      $this->firstname = $userData->firstname;
-      $this->lastname = $userData->lastname;
-      $this->title = $userData->title;
+        
+        if (is_array($userData)) {
+        
+            if (isset($userData['userid'])) {
+                $this->id = $userData['userid'];
+            }
+        
+            if (isset($userData['nickname'])) {
+                $this->nickname = $userData['nickname'];
+            }
+        
+            if (isset($userData['firstname'])) {
+                $this->firstname = $userData['firstname'];
+            }
+        
+            if (isset($userData['lastname'])) {
+                $this->lastname = $userData['lastname'];
+            }
+        
+            if (isset($userData['title'])) {
+                $this->title = $userData['title'];
+            }
+        
+            if (isset($userData['address'])) {
+                $this->address = $userData['address'];
+            }
+        
+        } else {
+            $this->id = $userData->id;
+            $this->nickname = $userData->nickname;
+            $this->firstname = $userData->firstname;
+            $this->lastname = $userData->lastname;
+            $this->title = $userData->title;
+        }
+        
+        if ($address) {
+            $this->address = $address;
+        }
     }
+      
 
-    if ($address) {
-      $this->address = $address;
-    }
 
   }//end public function __construct */
 
