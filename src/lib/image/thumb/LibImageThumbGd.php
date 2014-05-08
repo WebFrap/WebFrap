@@ -152,7 +152,7 @@ class LibImageThumbGd extends LibImageThumbAdapter
             $path = pathinfo($newName);
             
             if (! file_exists($path['dirname'])) {
-                Fs::mkdir($path['dirname'], '0755');
+                SFilesystem::mkdir($path['dirname'], '0755');
             }
             
             if (! imagejpeg($thumb, $newName, 95)) {
