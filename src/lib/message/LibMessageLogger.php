@@ -69,7 +69,7 @@ class LibMessageLogger
    */
   public function __construct($db, $user)
   {
-
+    
     $this->db = $db;
     $this->user = $user;
 
@@ -83,16 +83,15 @@ class LibMessageLogger
    * @param string $address
    * @param string $title
    */
-  public function logMessage($address, $title)
+  public function logMessage($address, $title, $success = true)
   {
-
-    $this->db->orm->insert
-    (
+    
+    $this->db->orm->insert(
       'WbfsysMessageLog',
-      array
-      (
+      array(
         'title' => $title,
-        'email' => $address
+        'email' => $address,
+        'success' => ($success?'t':'f')
       )
     );
 
