@@ -20,6 +20,7 @@ error_reporting(E_ALL | E_STRICT);
 date_default_timezone_set("Europe/Berlin");
 
 define('NL', "\n");
+define('NLB', "\r\n");
 
 /**
  * Class CliBase
