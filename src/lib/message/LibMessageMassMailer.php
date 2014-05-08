@@ -252,22 +252,19 @@ class LibMessageMassMailer
   public function prepareMail()
   {
       
+      $this->boundary = 'boundary-'.strtoupper(md5(uniqid(time())));
+      
   }// public function prepareMail */
   
   /**
    * Senden der Nachricht
-   * @param string $address
+   * @param string $receiverData
    * @return boolean
    */
   public function send($receiverData)
   {
-    // Variables
-    if (!$address) {
-      $address = $this->address;
-    }
-
     // ohne adresse geht halt nix
-    if (!$address) {
+    if (!$receiverData->address) {
       throw new LibMessage_Exception('Missing E-Mail Address');
     }
 
