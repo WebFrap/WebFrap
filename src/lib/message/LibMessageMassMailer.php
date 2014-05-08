@@ -100,6 +100,12 @@ class LibMessageMassMailer
    * @var string
    */
   public $sender = null;
+  
+  /**
+   * parameter für den Versand von mails z.B auf webspaces
+   * @var string
+   */
+  public $mailParams = null;
 
   /**
    * @var string
@@ -173,9 +179,6 @@ class LibMessageMassMailer
   public function __construct(
     $logger = null
   ){
-
-
-
 
     $this->logger = $logger;
 
@@ -397,30 +400,56 @@ class LibMessageMassMailer
       "Send Message to Address: {$address} Subject: ".utf8_encode($this->subject)
     );
     */
-
-    if(
-      !mail(
-        $address,
-        $receiver->subject,
-        $body,
-        $header
-      )
-    ) {
-      
-        $logger = $this->getLogger();
-        $logger->logMessage($address, $receiver->subject, false);
+    
+    if( constant('WBF_MESSAGE_SEND') && WBF_MESSAGE_SEND == 'Stub'  ){
         
-      throw new LibMessage_Exception(
-        'Failed to send Mail to '.$address
-      );
+        
+        $mail = <<<MAIL
+<?xml version="1.0" encoding="UTF-8" ?>
+<mail>
+  <receiver>{$address}</receiver>
+  <subject>{$this->subject}</subject>
+  <body>{$body}</body>
+  <header>{$header}</header>
+</mail>
+        
+MAIL;
+        
+        SFiles::write(
+            PATH_GW.'tmp/messages/'.Webfrap::getRunId().'/'.$address.'.txt' ,
+            $mail
+        );
 
+        
     } else {
-
-      $logger = $this->getLogger();
-      $logger->logMessage($address, $receiver->subject);
-
-      return true;
+        
+        if(
+            !mail(
+                $address,
+                $this->subject,
+                $body,
+                $header,
+                $this->mailParams
+            )
+        ) {
+        
+            $logger = $this->getLogger();
+            $logger->logMessage($address, $this->subject, false);
+        
+            throw new LibMessage_Exception(
+                'Failed to send Mail to '.$address
+            );
+        
+        } else {
+        
+            $logger = $this->getLogger();
+            $logger->logMessage($address, $this->subject);
+        
+            return true;
+        }
     }
+
+
 
   }//end protected function send */
 
