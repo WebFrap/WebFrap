@@ -1163,9 +1163,13 @@ class Webfrap
    *
    * @return string
    */
-  public static function uniqid()
+  public static function uniqid($seed = null)
   {
-    return uniqid(mt_rand(), true);
+    if($seed){
+        return uniqid($seed, true);
+    } else {
+        return uniqid(mt_rand(), true);
+    }
   }//end public static function uniqid */
 
   /**
