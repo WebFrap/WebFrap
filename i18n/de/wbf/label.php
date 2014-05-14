@@ -45,7 +45,7 @@ $this->l['wbf.label']['Date End'] = 'Date End';
 $this->l['wbf.label']['Entries'] = 'Entries';
 $this->l['wbf.label']['Description'] = 'Description';
 $this->l['wbf.label']['Group'] = 'Group';
-$this->l['wbf.label']['Search by keyword'] = 'Search by keyword';
+$this->l['wbf.label']['Search by keyword'] = 'Suchbegriff eingeben';
 
 $this->l['wbf.label']['Contact all'] = 'Contact all';
 $this->l['wbf.label']['Rolebased Access'] = 'Rolebased Access';
